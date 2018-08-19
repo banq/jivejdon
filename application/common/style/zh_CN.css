@@ -1,0 +1,27 @@
+.zh_CN .icon_new_topic img { background-image: url(../images/zh_CN/post.gif); width: 82px; height: 25px; }
+.zh_CN .icon_reply img { background-image: url(../images/zh_CN/reply.gif); width: 82px; height: 25px; }
+.zh_CN .icon_reply_locked img { background-image: url(../images/zh_CN/reply_locked.gif); width: 82px; height: 25px; }
+.zh_CN .icon_quote img { background-image: url(../images/zh_CN/icon_quote.gif); width: 59px; height: 18px; }
+.zh_CN .icon_edit img { background-image: url(../images/zh_CN/icon_edit.gif); width: 59px; height: 18px; }
+.zh_CN .icon_profile img { background-image: url(../images/zh_CN/icon_profile.gif); width: 59px; height: 18px; }
+.zh_CN .icon_pm img { background-image: url(../images/zh_CN/icon_pm.gif); width: 59px; height: 18px; }
+
+th { font-size: 13px;}
+th.thhead,td.cathead { font-size: 15px;}
+
+.gen { font-size : 15px; }
+.genmed, .name { font-size : 15px; }
+.gensmall, .postdetails { font-size : 13px; color:#666666; }
+
+.mainmenu { font-size: 13px;}
+.cattitle { font-size: 13px; color:#000000;}
+.forumlink { font-size: 15px; }
+.nav, .topictitle { font-size:15px; }
+
+.postbody { font-size: 15px; }
+
+.postinfo { font-size: 13px; }
+
+input, textarea, select { font-size: 15px; }
+.moderator { font-size: 13px; }
+.admin { font-size: 13px; }

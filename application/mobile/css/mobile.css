@@ -1,0 +1,47 @@
+
+table,td,select,input,div {font-family: Verdana;font-size:12px;}
+body {
+	font-family: Verdana;
+	font-size:12px;
+	height:auto;
+	margin-top: 2px;
+}
+
+a:link, a:visited {
+  border-style: solid;
+  border-width: 5px;
+  border-color: transparent;
+  text-decoration : none;
+  color: #003366;
+  }
+a:hover {
+	text-decoration : none;
+	border-top-color: #CCC;
+	border-right-color: #CCC;
+	border-bottom-color: #CCC;
+	border-left-color: #CCC;
+	color: #003366;
+}
+
+
+/*CSS tres style pagination*/
+
+DIV.tres {
+	PADDING-RIGHT: 3px; PADDING-LEFT: 3px; FONT-WEIGHT: bold; FONT-SIZE: 12; PADDING-BOTTOM: 3px; MARGIN: 3px; PADDING-TOP: 3px; FONT-FAMILY: Arial, Helvetica, sans-serif;COLOR:olive; 
+}
+DIV.tres A {
+	BORDER-RIGHT: #d9d300 2px solid; PADDING-RIGHT: 3px; BORDER-TOP: #d9d300 2px solid; PADDING-LEFT: 3px; PADDING-BOTTOM: 2px; MARGIN: 2px; BORDER-LEFT: #d9d300 2px solid; COLOR: #fff; PADDING-TOP: 2px; BORDER-BOTTOM: #d9d300 2px solid; BACKGROUND-COLOR: #B08C0F; TEXT-DECORATION: none
+}
+DIV.tres A:hover {
+	BORDER-RIGHT: #ff0 2px solid; BORDER-TOP: #ff0 2px solid; BORDER-LEFT: #ff0 2px solid; COLOR: #000; BORDER-BOTTOM: #ff0 2px solid; BACKGROUND-COLOR: #ff0
+}
+DIV.tres A:active {
+	BORDER-RIGHT: #ff0 2px solid; BORDER-TOP: #ff0 2px solid; BORDER-LEFT: #ff0 2px solid; COLOR: #000; BORDER-BOTTOM: #ff0 2px solid; BACKGROUND-COLOR: #ff0
+}
+DIV.tres SPAN.current {
+	BORDER-RIGHT: #fff 2px solid; PADDING-RIGHT: 5px; BORDER-TOP: #fff 2px solid; PADDING-LEFT: 5px; FONT-WEIGHT: bold; PADDING-BOTTOM: 2px; MARGIN: 2px; BORDER-LEFT: #fff 2px solid; COLOR: #000; PADDING-TOP: 2px; BORDER-BOTTOM: #fff 2px solid
+}
+DIV.tres SPAN.disabled {
+	DISPLAY: none
+}
+

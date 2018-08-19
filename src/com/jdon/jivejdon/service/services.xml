@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE app PUBLIC "-//Jdon//DTD 2005 1.0 Framework//EN" "http://www.jdon.com/jdonframework.dtd">
+<!-- qucik manual http://www.jdon.com/jdonframework/threemin.htm 
+     english version: https://jdon.dev.java.net/steps.html -->
+
+<app>
+	
+	<services>
+        <!--  business services  start-->
+		<pojoService name="forumService"
+			class="com.jdon.jivejdon.service.imp.ForumServiceImp"/>
+			
+       <!-- replaced by annotation
+		<pojoService name="forumMessageService"
+			class="com.jdon.jivejdon.service.imp.message.ForumMessageShell"/>
+			
+
+		<component name="messageKernel"
+			class="com.jdon.jivejdon.service.imp.message.MessageKernel"/>
+			
+        <pojoService name="forumMessageQueryService"
+			class="com.jdon.jivejdon.service.imp.message.ForumMessageQueryServiceImp"/>
+			
+			-->
+	     
+		<pojoService name="uploadService"
+			class="com.jdon.jivejdon.service.imp.upload.UploadServiceShell"/>
+		
+		
+     	<pojoService name="accountService"
+			class="com.jdon.jivejdon.service.imp.account.AccountServiceShell"/>
+
+		<pojoService name="uploadInfoVOService" 
+			class="com.jdon.jivejdon.service.imp.upload.UploadInfoVOServiceImp">
+		</pojoService>
+			
+         <!--  business services  end-->
+		
+		
+	  
+		<!--  relation with the micro container  start-->
+		
+
+        <component name="sessionContextUtil"
+			class="com.jdon.jivejdon.service.util.SessionContextUtil"/>
+        <!--  relation with the micro container end -->					
+        			
+		
+        <!-- Tansaction JNDI   -->
+        <component name="jtaTransactionUtil"
+			class="com.jdon.jivejdon.service.util.JtaTransactionUtil">
+			 <!--<constructor value="JTA"/>  
+			    <constructor value="java:/TransactionManager"/> -->
+			  <constructor value="JDBC"/> 
+	        
+        </component>
+        		
+	</services>
+</app>

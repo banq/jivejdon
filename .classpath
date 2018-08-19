@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="doc/tomcat/jaas.jar"/>
+	<classpathentry kind="lib" path="lib/expires/xebia-servlet-extras-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/jdontree/treepattern.jar"/>
+	<classpathentry kind="lib" path="lib/jf/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/jf/cglib.jar" sourcepath="/jdonframework"/>
+	<classpathentry kind="lib" path="lib/jf/ehcache-1.6.2.jar"/>
+	<classpathentry kind="lib" path="lib/jf/jdom.jar"/>
+	<classpathentry kind="lib" path="lib/jf/picocontainer-1.2.jar" sourcepath="D:/javasource/JdonComponent/picocontainer-1.2-sources/src"/>
+	<classpathentry kind="lib" path="lib/jf/scannotation-1.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/jfa/jdon-struts1x.jar" sourcepath="D:/javasource/jdonaccessory/jdon-struts1x/src/main/java"/>
+	<classpathentry kind="lib" path="lib/junit3.8.1/ant-junit.jar"/>
+	<classpathentry kind="lib" path="lib/junit3.8.1/junit.jar"/>
+	<classpathentry kind="lib" path="lib/rsslib/rome-0.9.jar"/>
+	<classpathentry kind="lib" path="lib/time/ocpsoft-pretty-time-1.0.6.jar"/>
+	<classpathentry kind="lib" path="lib/transaction/jta-spec1_0_1.jar"/>
+	<classpathentry kind="lib" path="lib/upload/commons-fileupload-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/upload/commons-logging-api-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/urlrewrite/urlrewrite-3.2.0.jar"/>
+	<classpathentry kind="lib" path="searchlib/compass.jar" sourcepath="E:/opensource/compass-1.0.0/src/main/src"/>
+	<classpathentry kind="lib" path="searchlib/lucene-analyzers.jar"/>
+	<classpathentry kind="lib" path="searchlib/lucene-core.jar"/>
+	<classpathentry kind="lib" path="searchlib/lucene-highlighter.jar"/>
+	<classpathentry kind="lib" path="searchlib/lucene-snowball.jar"/>
+	<classpathentry kind="lib" path="servletlib/javax.servlet.jar"/>
+	<classpathentry kind="lib" path="servletlib/javax.servlet.jsp.jar"/>
+	<classpathentry kind="lib" path="servletlib/junit.jar"/>
+	<classpathentry kind="lib" path="strutslib/antlr-2.7.2.jar"/>
+	<classpathentry kind="lib" path="strutslib/bsf-2.3.0.jar"/>
+	<classpathentry kind="lib" path="strutslib/commons-beanutils-1.7.0.jar"/>
+	<classpathentry kind="lib" path="strutslib/commons-chain-1.1.jar"/>
+	<classpathentry kind="lib" path="strutslib/commons-digester-1.8.jar"/>
+	<classpathentry kind="lib" path="strutslib/commons-fileupload-1.1.1.jar"/>
+	<classpathentry kind="lib" path="strutslib/commons-io-1.1.jar"/>
+	<classpathentry kind="lib" path="strutslib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="strutslib/commons-validator-1.3.1.jar"/>
+	<classpathentry kind="lib" path="strutslib/jstl-1.0.2.jar"/>
+	<classpathentry kind="lib" path="strutslib/oro-2.0.8.jar"/>
+	<classpathentry kind="lib" path="strutslib/standard-1.0.2.jar"/>
+	<classpathentry kind="lib" path="strutslib/struts-core-1.3.8.jar" sourcepath="E:/opensource/struts-1.3.10/src/core/src/main/java"/>
+	<classpathentry kind="lib" path="strutslib/struts-el-1.3.8.jar"/>
+	<classpathentry kind="lib" path="strutslib/struts-extras-1.3.8.jar"/>
+	<classpathentry kind="lib" path="strutslib/struts-faces-1.3.8.jar"/>
+	<classpathentry kind="lib" path="strutslib/struts-mailreader-dao-1.3.8.jar"/>
+	<classpathentry kind="lib" path="strutslib/struts-scripting-1.3.8.jar"/>
+	<classpathentry kind="lib" path="strutslib/struts-taglib-1.3.8.jar" sourcepath="E:/opensource/struts-1.3.10/src/taglib/src/main/java"/>
+	<classpathentry kind="lib" path="strutslib/struts-tiles-1.3.8.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/javamail/email.jar"/>
+	<classpathentry kind="lib" path="lib/oauth/google/oauth-20100601.jar" sourcepath="E:/opensource/google-oauth/java/core/commons/src/main"/>
+	<classpathentry kind="lib" path="lib/oauth/google/oauth-consumer-20100601.jar" sourcepath="E:/opensource/google-oauth/java/core/consumer"/>
+	<classpathentry kind="lib" path="lib/oauth/google/oauth-httpclient3-20100601.jar"/>
+	<classpathentry kind="lib" path="lib/oauth/sina/weibo4j.jar" sourcepath="/weibo4j-oauth2/src"/>
+	<classpathentry kind="lib" path="lib/oauth/tecent/commons-lang-2.3.jar"/>
+	<classpathentry kind="lib" path="lib/oauth/tecent/httpclient-4.1.3.jar"/>
+	<classpathentry kind="lib" path="lib/oauth/tecent/httpclient-cache-4.1.3.jar"/>
+	<classpathentry kind="lib" path="lib/oauth/tecent/httpcore-4.1.4.jar"/>
+	<classpathentry kind="lib" path="lib/oauth/tecent/httpmime-4.1.3.jar"/>
+	<classpathentry kind="lib" path="lib/oauth/tecent/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="lib/oauth/tecent/tecentweibo.jar" sourcepath="/Java_SDK_v1.2.1/src"/>
+	<classpathentry kind="lib" path="lib/jf/log4j-api-2.0-beta3.jar"/>
+	<classpathentry kind="lib" path="lib/jf/log4j-core-2.0-beta3.jar"/>
+	<classpathentry kind="lib" path="lib/xmlrpc/xmlrpc-client-3.1.3.jar"/>
+	<classpathentry kind="lib" path="lib/xmlrpc/xmlrpc-common-3.1.3.jar"/>
+	<classpathentry kind="lib" path="lib/jf/guava-14.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/jf/jdonFramework.jar" sourcepath="/jdonframework"/>
+	<classpathentry kind="lib" path="lib/jfa/jdonAccessory.jar" sourcepath="/jdon-jdbc"/>
+	<classpathentry kind="lib" path="lib/jfa/jdon-jdbcTemp.jar" sourcepath="/jdon-jdbc"/>
+	<classpathentry kind="lib" path="lib/oauth/tecent/ezmorph-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/jf/commons-pool-1.6.jar"/>
+	<classpathentry kind="lib" path="lib/jf/disruptor-3.2.0.jar"/>
+	<classpathentry kind="lib" path="lib/xmlrpc/ws-commons-util-1.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/oauth/tecent/commons-collections-3.2.jar"/>
+	<classpathentry kind="lib" path="lib/mysql/mysql-connector-java-5.0.8-bin.jar"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>

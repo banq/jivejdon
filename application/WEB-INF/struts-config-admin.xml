@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "struts-config_1_2.dtd">
+
+<struts-config>
+ 
+  <form-beans>
+	  <form-bean type="com.jdon.jivejdon.presentation.form.FiltersForm" name="filtersForm"/>
+      <form-bean name="userListForm" type="com.jdon.strutsutil.ModelListForm"/>
+      <form-bean name="propertysForm" type="com.jdon.jivejdon.presentation.form.PropertysForm"/>
+     <form-bean name="tagForm" type="com.jdon.jivejdon.presentation.form.ThreadTagForm"/>
+     <form-bean name="keyListForm" type="com.jdon.strutsutil.ModelListForm"/>
+     <form-bean name="urlForm" type="com.jdon.jivejdon.presentation.sitemap.UrlForm" />
+     <form-bean name="urlListForm" type="com.jdon.strutsutil.ModelListForm"/>
+  </form-beans>
+  <global-forwards>
+    <forward name="admin" path="/admin/home.shtml"/>	  
+   </global-forwards>
+	
+  <action-mappings>
+	<action path="/admin/home" type="com.jdon.strutsutil.ForwardAction"
+	  scope="request" validate="false" >
+      <forward name="forward" path="/admin/home.jsp"/>		
+    </action>  
+	  
+   <action path="/admin/sidebar" type="com.jdon.jivejdon.presentation.action.admin.SidebarShowController"
+      scope="request" parameter="method"
+      validate="false">
+      <forward name="forum" path="/admin/sidebar_forum.jsp"/>
+      <forward name="system" path="/admin/sidebar_system.jsp"/>
+      <forward name="users" path="/admin/sidebar_users.jsp"/>	   
+    </action>
+	  
+	<action name="filtersForm" path="/admin/filters/filtersAction" type="com.jdon.jivejdon.presentation.action.admin.FiltersAction"
+	  scope="request" validate="false" parameter="method">
+      <forward name="forward" path="/admin/filters/filters.jsp"/>		
+    </action>  
+    
+    <action name="userListForm" path="/admin/user/userListAction" type="com.jdon.jivejdon.presentation.action.admin.UserListAction"
+	  scope="request" validate="false" >
+      <forward name="success" path="/admin/user/userList.jsp"/>		
+    </action>  
+    
+    <!--  administrator edit user -->
+        <!--  administrator edit user -->
+    <action name="accountForm" path="/admin/user/editAccountForm" type="com.jdon.strutsutil.ModelViewAction" scope="request"
+		validate="false">
+      <forward name="edit" path="/admin/user/editAccount.jsp" />
+    </action>
+    
+    <!--  administrator delete user -->
+    <action name="accountForm" path="/admin/user/removeAccountForm" type="com.jdon.strutsutil.ModelDispAction" scope="request"
+		validate="false">
+      <forward name="success" path="/admin/user/removeAccount.jsp" />
+    </action>
+        
+    <action name="accountForm" path="/admin/user/editSaveAccount" type="com.jdon.strutsutil.ModelSaveAction" scope="request"
+    	validate="true" input="/admin/user/editAccountForm.shtml">
+      <forward name="success" path="/admin/user/editSavePasswordassit.shtml" />
+      <forward name="failure" path="/admin/user/editAccountForm.shtml" />		
+    </action>
+    
+    <action  path="/admin/user/editSavePasswordassit" type="com.jdon.jivejdon.presentation.action.account.PasswordassitAction" scope="request"
+    	validate="false" >
+      <forward name="success" path="/admin/user/result.jsp" />
+      <forward name="failure" path="/admin/user/editAccountForm.shtml" />		
+    	
+    </action>
+    
+	  	  	   
+    <!-- user's all messages -->	  	  	  
+	<action path="/admin/user/userMessageList" type="com.jdon.jivejdon.presentation.action.admin.UserMessageListAction" 
+      name="messageListForm" scope="request" 
+      validate="false">
+		<forward name="success" path="/admin/user/userMessageList.jsp"/>
+	</action>
+	
+	<action path="/admin/user/deleteUserMessages" type="com.jdon.jivejdon.presentation.action.admin.MethodDispatchAction" 
+       parameter="method" scope="request"  validate="false">
+		 <forward name="deleteUserMessages" path="/admin/user/userMessageList.shtml"/>
+	</action>
+	
+	<action path="/admin/user/banIPAction" type="com.jdon.jivejdon.presentation.action.admin.BanIPAction" 
+       scope="request"  validate="false">
+		 <forward name="forward" path="/admin/user/userBanIPList.jsp"/>
+	</action>
+	
+	<!--  /update.shtml?service=accountService&method=update  -->
+	<action path="/admin/update" type="com.jdon.strutsutil.ServiceMethodSimpleAction"
+	  scope="request" validate="false" >
+      <forward name="success" path="/admin/home.jsp"/>		
+    </action>  
+    
+    <!--  /admin/doRebuildIndex.shtml?service=forumService&method=doRebuildIndex  -->
+    <action path="/admin/doRebuildIndex" type="com.jdon.strutsutil.ServiceMethodSimpleAction"
+	  scope="request" validate="false" >
+      <forward name="success" path="/admin/search/setup.jsp"/>		
+    </action>  
+    
+     <action name="propertysForm" path="/admin/search/HotKeysAction" type="com.jdon.jivejdon.presentation.action.admin.HotKeysAction" scope="request"
+		validate="false" parameter="method">
+      <forward name="forward" path="/admin/search/hotkeys.jsp" />
+    </action>
+    
+    <action path="/admin/tag/tagsList" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" 
+       name="tagsListForm" scope="request"  validate="false">
+		 <forward name="success" path="/admin/tag/tagsList.jsp"/>
+	</action>
+	
+	<action name="tagForm" path="/admin/tag/tagAction" type="com.jdon.strutsutil.ModelViewAction" scope="request"
+		validate="false">
+      <forward name="create" path="/admin/tag/tag.jsp" />
+      <forward name="edit" path="/admin/tag/tag.jsp" />
+    </action>
+	  
+    <action name="tagForm" path="/admin/tag/tagSaveAction" type="com.jdon.strutsutil.ModelSaveAction" scope="request"
+    	validate="true" input="/admin/tag/tagAction.shtml">
+      <forward name="success" path="/admin/tag/tagsList.shtml?count=100" />
+      <forward name="failure" path="/admin/tag/tagsList.shtml?count=100" />
+    </action>
+    
+   <action name="threadForm" path="/admin/tag/thread" type="com.jdon.strutsutil.ModelDispAction" scope="request"
+		validate="false">
+       <forward name="success" path="/admin/tag/threadTag.jsp" />	
+    </action>
+	  
+   <action path="/admin/tag/threadTagList" type="com.jdon.jivejdon.presentation.action.ThreadListAction"
+      name="threadListForm" scope="request" 
+      validate="false">
+      <forward name="success" path="/admin/tag/threadTagList.jsp"/>
+    </action>
+    
+    <action path="/admin/tag/savetags" type="com.jdon.jivejdon.presentation.action.tag.MethodDispatchAction" 
+       parameter="method" scope="request"  validate="false">
+		 <forward name="savetags" path="/admin/tag/savetagsResult.jsp"/>
+	</action>
+	
+	 <action path="/admin/inputSwitcher" type="com.jdon.jivejdon.presentation.action.admin.InputSwitcherAction" 
+        scope="request"  validate="false">
+		 <forward name="save" path="/admin/inputSwitcher.shtml?method=load"/>
+		 <forward name="load" path="/admin/inputSwitcher.jsp"/>
+	</action>
+   	  
+    <action path="/admin/stickyThread" type="com.jdon.jivejdon.presentation.action.StickyAction" scope="request"  validate="false" />
+  		  	  	  
+  		  	  	  
+  	<action  path="/admin/cachekeys" type="com.jdon.jivejdon.presentation.action.admin.CacheKeysAction" 
+      name="keyListForm" scope="request"  >
+		 <forward name="success" path="/admin/cachekeys.jsp"/>
+	</action>
+	
+	<action path="/admin/deleteCacheKey" type="com.jdon.jivejdon.presentation.action.admin.MethodDispatchAction" 
+       parameter="method" scope="request"  validate="false">
+		 <forward name="deleteCacheKey" path="/admin/cachekeys.shtml"/>
+	</action>
+	
+	<!-- sitemap -->
+	 <action name="urlForm" path="/admin/sitemap/urlAction" type="com.jdon.strutsutil.ModelViewAction"
+		scope="request" validate="false">
+      <forward name="create" path="/admin/sitemap/url.jsp" />
+      <forward name="edit" path="/admin/sitemap/url.jsp" />
+    </action>
+    <action name="urlForm" path="/admin/sitemap/urlSaveAction" type="com.jdon.strutsutil.ModelSaveAction"
+		scope="request" validate="true" input="/admin/sitemap/url.jsp">
+      <forward name="success" path="/admin/sitemap/result.jsp" />
+      <forward name="failure" path="/admin/sitemap/result.jsp" />
+    </action>
+        
+    <action name="urlForm" path="/message/urlSaveAction" type="com.jdon.strutsutil.ModelSaveAction"
+		scope="request" validate="true" input="/admin/sitemap/url.jsp">
+      <forward name="success" path="/admin/sitemap/result.jsp" />
+      <forward name="failure" path="/admin/sitemap/result.jsp" />
+    </action>        
+    <action name="urlListForm" path="/admin/sitemap/urlListAction" type="com.jdon.jivejdon.presentation.sitemap.UrlListAction" scope="request">
+      <forward name="success" path="/admin/sitemap/urlList.jsp" />
+    </action>
+	
+  </action-mappings>
+</struts-config>

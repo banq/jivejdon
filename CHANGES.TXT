@@ -1,0 +1,36 @@
+﻿==================================================================
+JiveJdon 4.8  (09/2012)
+==================================================================
+2012.Sep.11 (4.8)
+    * 当undeploy jivejdon时，自动清除所有内存中资源，除了CGILIB的$代理对象之外。
+      发出领域事件时传送的对象都必须是值对象，或者内部没有其他引用，否则该对象被CGILIB的$代理对象HOlde住后，
+      会影响其引用父对象的资源释放。
+      改写了AttachmentsVO MessagePropertiesVO之类需要懒加载，又需要更新自身与仓储的功能。
+      整个系统从读写分离两个角度理清，ForumMessage这样实体既可以作为前端输入数据的DTO，又可以作为后端仓储转换成
+      的实体对象，驻留在缓存中。
+
+
+2012.Augest.17 (4.7)
+    * ready for CDN,  超过expire时间检查服务器，服务器如果没有论坛更新，返回304
+      对于15天以内的帖子，expire时间为5M，每5分钟检查一次服务器，如果没有更新返回304
+   对于其他不常更新的内容，博客和RSS等，expire是一天，每一天检查服务器，如无更新返回304
+   节约带宽和服务器处理。
+
+2012.Augest.7 (4.7)
+* New Function:
+    ---------
+    * add Sina Weibo and Tecent Weibo account login directly.
+    
+    * add Sina Weibo and Tecent Weibo notify mode, when there is a new message,
+        it will be auto sent to User's weibo.
+        
+    
+    
+
+* Bug Fixes
+    ---------
+    * user register and forget password.
+
+    * others
+    
+     

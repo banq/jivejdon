@@ -1,0 +1,25 @@
+img { border: 0px; }
+
+
+.forumline { border: #707070 1px solid; }
+
+
+input.button, input.mainoption, input.liteoption, .inlineedit input { 
+	font-size: 11px; 
+	color: #000000; 
+	font-family: 
+	verdana, arial, helvetica, sans-serif; 
+	background: #ffffff none repeat-x scroll center top; 
+	background-image: url(../../images/button.gif);
+	cursor: pointer;
+}
+
+input.button:hover, input.mainoption:hover, input.liteoption:hover, .inlineedit input:hover {
+	background-image: url(../images/button_hover.gif);
+}
+
+.helpline { background-color: #f7f7f8; border: 0px; font-weight: bold; font-style: italic; color: green; }
+
+
+
+

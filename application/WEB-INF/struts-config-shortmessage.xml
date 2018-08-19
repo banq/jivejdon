@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "struts-config_1_2.dtd">
+
+<struts-config>
+
+  <form-beans>
+    <form-bean name="fromShortMessageForm"  type="com.jdon.jivejdon.presentation.form.ShortMessageForm"/>
+    <form-bean name="toShortMessageForm"  type="com.jdon.jivejdon.presentation.form.ShortMessageForm"/>
+    <form-bean name="shortMessageListForm" type="com.jdon.strutsutil.ModelListForm"/>	
+    <form-bean name="receiveListForm"    type="com.jdon.strutsutil.ModelListForm"/>	 
+    <form-bean name="sendListForm"    type="com.jdon.strutsutil.ModelListForm"/>	 
+    <form-bean name="draftListForm"    type="com.jdon.strutsutil.ModelListForm"/>	 	  	  	  
+  </form-beans>
+
+  <action-mappings>
+
+	<!-- shortmessage start -->
+	<action name = "fromShortMessageForm" path="/account/protected/shortmessageAction" 
+		type="com.jdon.strutsutil.ModelViewAction"
+		scope = "request" >
+		<forward name="create" path="/shortmessage/newshortmessage.jsp"/>
+		<forward name="edit" path="/shortmessage/newshortmessage.jsp"/>
+	</action>
+	<!-- in receive msg box -->
+	<action name = "toShortMessageForm" path="/account/protected/shortmsgInReceiveBoxAction" 
+		type="com.jdon.strutsutil.ModelDispAction"
+		scope = "request" >
+		<forward name="success" path="/shortmessage/receiveshortmessage.jsp"/>
+	</action>	
+	<!-- reply -->
+	<action  name = "toShortMessageForm" path="/account/protected/replyShortmessageAction"
+		type="com.jdon.strutsutil.ModelViewAction"
+		scope = "request">
+		<forward name="create" path="/shortmessage/replynewshortmessage.jsp"/>
+		<forward name="edit" path="/shortmessage/replynewshortmessage.jsp"/>
+	</action>
+	<action name = "toShortMessageForm" path="/account/protected/replyShortmessageSaveAction" 
+		type="com.jdon.strutsutil.ModelSaveAction"
+		scope = "request" 
+		validate="true" input="/shortmessage/result.jsp">
+		<forward name="success" path="/shortmessage/result.jsp"/>
+		<forward name="failure" path="/shortmessage/result.jsp"/>
+	</action>
+	<!-- in send box -->
+	<action name = "fromShortMessageForm" path="/account/protected/shortmsgInSendBoxAction" 
+		type="com.jdon.strutsutil.ModelDispAction"
+		scope = "request" >
+		<forward name="success" path="/shortmessage/sendshortmessage.jsp"/>
+	</action>
+	<!-- in draft box -->
+	<action name = "fromShortMessageForm" path="/account/protected/shortmsgInDraftBoxAction" 
+		type="com.jdon.strutsutil.ModelDispAction"
+		scope = "request" >
+		<forward name="success" path="/shortmessage/draftshortmessage.jsp"/>
+	</action>
+	
+	<!-- send  shortmessageSendAction.shtml?service=shortMessageService&method=sendShortMessage -->
+	<action path="/account/protected/shortmessageSendAction" 
+	type="com.jdon.strutsutil.ServiceMethodAction"
+     name="fromShortMessageForm" scope="request"  
+     validate="true" input="/shortmessage/result.jsp">
+     <forward name="sendShortMessage" path="/shortmessage/result.jsp"/>
+    </action>
+		
+	<action name = "fromShortMessageForm" path="/account/protected/drafSendAction" 
+		type="com.jdon.strutsutil.ServiceMethodAction"
+		scope = "request"
+		validate="true" input="/shortmessage/result.jsp">
+		<forward name="success" path="/shortmessage/result.jsp"/>
+		<forward name="failure" path="/shortmessage/result.jsp"/>
+	</action>
+	<!-- save -->
+	<action name = "fromShortMessageForm" path="/account/protected/shortmessageSaveAction" 
+		type="com.jdon.strutsutil.ModelSaveAction"
+		scope = "request" 
+		validate="true" input="/shortmessage/result.jsp">
+		<forward name="success" path="/shortmessage/result.jsp"/>
+		<forward name="failure" path="/shortmessage/result.jsp"/>
+	</action>
+	<!-- receive msg box -->
+	<action name="receiveListForm" path="/account/protected/receiveListAction" 
+		type="com.jdon.jivejdon.presentation.action.shortmessage.ReceiveBoxListAction"
+		scope="request">
+		<forward name="success" path="/shortmessage/receivebox.jsp"/>
+		<forward name="failure" path="/shortmessage/result.jsp"/>
+	</action>
+	<!-- send msg box -->
+	<action name="sendListForm" path="/account/protected/sendListAction" 
+		type="com.jdon.jivejdon.presentation.action.shortmessage.SendBoxListAction"
+		scope="request">
+		<forward name="success" path="/shortmessage/sendbox.jsp"/>
+		<forward name="failure" path="/shortmessage/result.jsp"/>
+	</action>
+	<!-- draft msg box -->
+	<action name="draftListForm" path="/account/protected/draftListAction" 
+		type="com.jdon.jivejdon.presentation.action.shortmessage.DraftBoxListAction"
+		scope="request">
+		<forward name="success" path="/shortmessage/draftbox.jsp"/>
+		<forward name="failure" path="/shortmessage/result.jsp"/>
+	</action>
+	<!-- delete -->
+	<action name="fromShortMessageForm" path="/account/protected/deletemsgAction" 
+		type="com.jdon.strutsutil.ModelSaveAction" scope="request"
+    	validate="true" input="/shortmessage/result.jsp">
+      <forward name="success" path="/shortmessage/result.jsp" />
+      <forward name="failure" path="/" />
+    </action>
+    
+    	<!-- delete user all  /account/protected/delAll.shtml?service=shortMessageService&method=deleteUserAllShortMessage -->
+	<action name="fromShortMessageForm" path="/account/protected/delAll" 
+		type="com.jdon.strutsutil.ServiceMethodSimpleAction" scope="request"
+    	validate="false">    	  
+      <forward name="success" path="/shortmessage/result.jsp" />
+      <forward name="failure" path="/" />
+    </action>
+    
+    
+    <!--  /shortmessage/checknewmessage.shtml?method=checkReceiveShortMessages -->
+    <action path="/shortmessage/checknewmessage" type="com.jdon.jivejdon.presentation.action.NewMsgCheckerAction" 
+        scope="request"  validate="false">
+		 <forward name="checkshortmsg" path="/shortmessage/newmessage.jsp"/>
+		 <forward name="checklobbymsg" path="/forum/newLobbymessage.jsp"/>
+	</action>
+	<!-- shortmessage end -->
+	
+	<action path="/forum/checknewmessage" type="com.jdon.jivejdon.presentation.action.NewMsgCheckerAction" 
+        scope="request"  validate="false">		 
+         <forward name="checkshortmsg" path="/shortmessage/newmessage.jsp"/>
+		 <forward name="checklobbymsg" path="/forum/newLobbymessage.jsp"/>
+	</action>
+	
+	<!-- /mobile -->
+	<action path="/mobile/checknewmessage" type="com.jdon.jivejdon.presentation.action.NewMsgCheckerAction" 
+        scope="request"  validate="false">
+		 <forward name="checkshortmsg" path="/mobile/message/newmessage.jsp"/>
+		 <forward name="checklobbymsg" path="/forum/newLobbymessage.jsp"/>
+	</action>
+	
+  </action-mappings>
+</struts-config>

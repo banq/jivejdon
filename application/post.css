@@ -1,0 +1,82 @@
+
+	
+/*-------------------- POST HEADLINE ----------------------*/
+div.linkblock:hover {background-color: #fff !important;background-repeat: repeat-x;}
+div.post-headline {
+	/* more  ... */
+	}
+
+div.post-headline h1,
+div.post-headline h2 {
+    margin: 0;
+    padding: 0;
+    /* more  ... */
+    }
+
+div.post-headline h1 a:link, 
+div.post-headline h1 a:visited, 
+div.post-headline h1 a:active,
+div.post-headline h2 a:link, 
+div.post-headline h2 a:visited, 
+div.post-headline h2 a:active {
+    /* more  ... */
+    }
+
+div.post-headline h1 a:hover,
+div.post-headline h2 a:hover {
+    /* more  ... */
+    }
+
+	
+/*-------------------- POST BYLINE ------------------------*/
+	
+div.post-byline {
+	/* more  ... */
+	}
+
+div.post-byline a:link, 
+div.post-byline a:visited, 
+div.post-byline a:active {
+	/* more  ... */
+	}
+
+div.post-byline a:hover {
+	/* more  ... */
+	}		
+		
+/*-------------------- POST FOOTER ------------------------*/
+	
+div.post-footer {
+	clear:both; 
+	display: block;
+	/* more  ... */
+	}
+
+div.post-footer a:link, 
+div.post-footer a:visited, 
+div.post-footer a:active {
+	/* more  ... */
+	}	
+
+div.post-footer a:hover {
+	/* more  ... */
+	}
+
+div.post-footer {
+	margin: 0;
+padding: 5px;
+background: #eeeeee;
+color: #666;
+line-height: 18px;	}
+ 
+div.post-footer a:link, 
+div.post-footer a:visited, 
+div.post-footer a:active {
+	color: #333;
+font-weight: normal;
+text-decoration: none;	}	
+ 
+div.post-footer a:hover {
+	color: #333;
+font-weight: normal;
+text-decoration: underline;	}	

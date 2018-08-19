@@ -1,0 +1,69 @@
+/* ---- ( iTunes CSS ) ---- */
+table { 
+	font: 80% Verdana, Arial, Helvetica, sans-serif;
+	color: #000;
+	text-align: left;
+	border-collapse: collapse;
+	border: 1px solid #666666;
+	border-top: none;	
+}
+table a {
+	text-decoration: underline;
+}
+table a:visited {
+	text-decoration: none;
+}
+tr.odd {
+	background-color: #ebf3ff;
+}
+tr a {
+	color: #000000;
+}
+tr:hover a {
+	color: #ffffff;
+}
+tr:hover, tr.odd:hover {
+	background-color: #3d80df;
+	color: #ffffff;
+}
+caption {
+	height: 45px;
+	line-height: 44px;
+	color: #60634E;
+	font-weight: bold;
+	text-align: center;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	margin-left: -1px;
+	background: #ffffff url(captop.jpg) repeat-x;
+	background-position: 50% top;
+	border-left: 2px solid #616161;
+	border-right: 2px solid #616161;
+}
+thead th {
+	font-size: 105%;
+	color: #000;
+	background: #ffffff url(tbar.gif) repeat-x;
+	height: 33px;
+}
+thead th:hover {
+	background: #ffffff url(tbov.gif) repeat-x;
+	
+}
+tr {
+	vertical-align: top;
+}
+tr,th,td {
+	padding: .75em;
+}
+td {
+	border-left: 1px solid #dadada;
+}
+tfoot tr {
+	background: #fff url(bbar.gif) repeat-x;
+}
+tfoot td, tfoot th{
+	color: #000;
+	border: 0px;
+}

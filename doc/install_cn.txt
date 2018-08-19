@@ -1,0 +1,281 @@
+﻿JiveJdon可安装任何JavaEE服务器中。基于JDK/JRE 1.6 以上版本。
+
+###################################################################################################
+数据库安装准备，这个步骤是所有步骤第一步：
+
+(1)下载MySQL/或其他数据库。
+
+(2)可以通过下载XAMPP(Apache + MySQL + PHPMySQLAdmin + Tomcat) 一次性下载安装MySQL：
+http://www.jdon.com/jivejdon/38671
+
+下载XAMPP(Apache PHP MySQL) 一站式软件下载，准备好MYSQL和管理PHPMyAdmin。
+运行setup_xampp.bat设置后，通过http://localhost/确认正常。
+http://localhost/phpmyadmin/为MySQL管理，可通过此界面将SQL导入。
+
+(3)SQL导入：
+首先通过数据库管理器SQLyog或PHPMyadmin建立两个数据库：jivejdon，security
+ JBoss 4.2以上版本必须两个数据库分开，不能合并。
+ddl目录/mysql_jivejdon.sql 导入===>数据库 jivejdon
+ddl/mysql_security.sql 导入==>数据库 security （以后专门用于SSO登录验证）
+
+如果你是使用tomcat，并且按照下面tomcat安装步骤，那么就只需要一个jivejdon，将两个SQL文件都导入jivejdon即可  
+  
+(4)任何涉及创建数据库的地方都选择Utf-8, phpMyadmin中创建jivejdon数据库时，都要选择utf-8-general-c  
+  
+以下步骤可以选择JBoss安装或Tomcat安装。JiveJdon 4.2以后缺省安装在Tomcat  
+
+（一）Tomcat环境安装
+
+下载Tomcat环境JiveJdon原始版作为参考
+http://www.jdon.com/jdonframework/download/apache-tomcat-6.0.26-jivejdon4.1.rar 
+
+Tomcat_JiveJdon部署说明
+
+部署前提：JDK1.6或者更高版本，mysql5.0或者更高版本
+
+参考doc/tomcat的相关配置文件
+(1)在Tomcat启动配置中加入授权JAAS配置。分windows catalina.bat和linux catalina.sh两个启动文件修改。
+
+在tomcat/bin/catalina.bat找到如下字符串：
+set JAVA_OPTS=%JAVA_OPTS%
+在其后面以后加入 -Djava.security.auth.login.config=%CATALINA_BASE%/conf/jaas.config
+整句应该如下：
+set JAVA_OPTS =%JAVA_OPTS% -Djava.security.auth.login.config=%CATALINA_BASE%/conf/jaas.config
+
+linux下的catalina.sh在找到如下字符串：
+JAVA_OPTS="$JAVA_OPTS
+在其后面以后加入-Djava.security.auth.login.config=$CATALINA_BASE/conf/jaas.config
+整句应该如下，注意双引号：
+JAVA_OPTS="$JAVA_OPTS -Djava.security.auth.login.config=$CATALINA_BASE/conf/jaas.config"
+
+
+
+注意：这一步骤很关键，如果发现多个，就多个加入，宁可多勿少。
+如果有报错：Cannot find message associated with key jaasRealm.unexpectedError
+java.lang.SecurityException: 无法定位登录配置
+大部分原因在此没有正确配置。
+
+为确保无误，可以搜寻"--- Execute The Requested Command ------------"
+catalina.bat中再加入：set JAVA_OPTS =%JAVA_OPTS% -Djava.security.auth.login.config=%CATALINA_BASE%/conf/jaas.config
+catalina.sh中再加入：JAVA_OPTS="$JAVA_OPTS -Djava.security.auth.login.config=$CATALINA_BASE/conf/jaas.config"
+
+
+
+(2)将mysql数据库JDBC驱动包如mysql-connector-java-5.0.8-bin.jar拷贝到 
+拷贝到tomcat/lib目录下，也也可以包jivejdon(WEB-INF/lib/*.jar)需要的所有*.jar包都拷贝其下。
+
+(3)配置JAAS数据源，在conf/server.xml的Host之前加入:
+        
+      <Realm
+		className="org.apache.catalina.realm.JAASRealm"
+		appName="JiveJdonRealm"
+		userClassNames="com.jdon.jivejdon.auth.jaas.User"
+		roleClassNames="com.jdon.jivejdon.auth.jaas.Role"/>
+
+      <!-- Define the default virtual host
+           Note: XML Schema validation will not work with Xerces 2.2.
+       -->
+      <Host name="localhost"  appBase="webapps"
+            unpackWARs="true" autoDeploy="true"
+            xmlValidation="false" xmlNamespaceAware="false">
+            
+
+(4)把doc/tomcat/conf/jaas.config拷贝到tomcat的conf目录下
+   确保jivejdon.war的WEB-INF/classes目录下存在jaas.properties
+   JAAS_DATASOURCE=java:comp/env/jdbc/JiveJdonDS
+   
+   数据源jdbc/JiveJdonDS名称和第3步配置是一致的，前缀java:comp/env是JavaEE标准规定通用前缀
+   
+(5)把doc/tomcat/lib下的jaas.jar拷贝到tomcat的lib目录下
+
+至此以上有关基于Tomcat容器认证授权的机制配置完成，下面是数据库源配置：
+
+(6)配置数据库源，将其中username和password改为你的数据库用户名和密码。
+有两种方式，选择其一：
+1.编辑jivejdon.war里WEB-INF/META-INF/context.xml，将其中username和password改为你的数据库用户名和密码
+2.在conf/context.xml中配置数据源Datasource:
+ <Resource name="jdbc/JiveJdonDS" 
+              auth="Container" 
+              type="javax.sql.DataSource"  
+              maxActive="100" 
+              maxIdle="30"    
+              maxWait="10000"   
+              username="root"       
+              password=""
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost/jivejdon?useUnicode=true&amp;characterEncoding=UTF-8" />
+              
+ <Resource name="jdbc/SecurityDS" 
+              auth="Container" 
+              type="javax.sql.DataSource"  
+              maxActive="100" 
+              maxIdle="30"    
+              maxWait="10000"   
+              username="root"       
+              password=""
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost/jivejdon?useUnicode=true&amp;characterEncoding=UTF-8" />      
+
+<!--  以上注意数据库的用户名和密码  下面是javaMail的JNDI配置，见web.xml和com/jdon/jivejdon/manager/manager.xml -->
+
+<Resource name="mail/Session" auth="Container"
+		type="javax.mail.Session"
+	  mail.smtp.host="smtp.gmail.com"
+    mail.smtp.port="587"
+    mail.smtp.auth="true"
+    mail.smtp.user="你的邮件@gmail.com"    
+		mail.smtp.starttls.enable="true"
+    mail.smtp.socketFactory.class="javax.net.ssl.SSLSocketFactory"    
+    mail.smtp.socketFactory.port="465"
+    password="你的密码" 
+    />                                    
+
+           
+(7)将jivejdon.war复制到Tomcat/webapps目录下，启动Tomcat的startup.bat：
+    使用http://localhost:8080/jivejdon/ 访问，注意不能是127.0.0.1 
+
+注意：如果使用XAMPP(http://www.jdon.com/jivejdon/38671)中tomcat
+注意其tomcat/jre下Java版本，JiveJdon必须是Jre1.6以上，可下载JDK1.6版本，用JRE
+目录覆盖其jre目录即可
+###################################################################################################
+（一）JBoss环境安装 :  JDK 5.0 + JBoss 4.0.5 + MySQL 4/5，
+1. 下载JBoss 
+
+
+2. 将数据表结构导入到数据库中，需要授权给用户，这里假定是banq,见下面mysql-ds.xml
+GRANT ALL PRIVILEGES ON *.* TO banq@localhost IDENTIFIED BY '225034ba或你自己的密码' WITH GRANT OPTION;
+
+  
+3. 配置JBoss, 从JiveJdon 4.5以后所有JAR已经在项目的WEB-INF/lib下，无需复制到JBOSS目录，本步骤无需
+    (1).配置struts,将strutslib/*.jar cpoy to jboss/server/default/lib
+    (2).配置JdonFramework, 将项目lib目录下jdonFramework.jar(还有辅助包aopalliance.jar/commons-pool-1.2.jar/jdom.jar/log4j.jar/picocontainer-1.1.jar
+       拷贝到jboss/server/default/lib，如果是非JBoss，参考JdonFramework安装手册安装JdonFramework      
+    (3) 配置Compass 将searchlib目录下包括子目录的所有jar包拷贝到jboss/server/default/lib目录下
+    (3).配置MySQLJDBC驱动jar包，将本项目lib/mysql-connector-javaxxx.jar拷贝到jboss/server/default/lib  5.1版本MySQL要用5.1
+    (4).修改 jbossweb-tomcat5sar/server.xml的conntector增加maxSavePostSize="-1" URIEncoding="UTF-8"
+
+4. 配置JBoss的Datasouce JNDI:
+   将本项目的mysql-ds.xml 拷贝到jboss/server/default/deploy,根据你数据库配置修改 mysql-ds.xml,
+   需要修改数据库的用户名和密码:
+    <user-name>你的数据库用户名</user-name>
+    <password>你的数据库密码</password>
+    
+   JiveJdon.war包中WEB-INF/jboss.web.xml中JNDI配置指向mysql-ds.xml的JNDI
+  
+   
+5. 配置JBoss的安全机制，
+    将下面配置加入jboss/server/default/conf/login-config.xml文件中
+       <application-policy name = "SecurityRealm">
+       <authentication>
+          <login-module code = "org.jboss.security.auth.spi.DatabaseServerLoginModule"  flag = "required">
+             <module-option name = "dsJndiName">java:/Security</module-option>
+             <module-option name="principalsQuery">SELECT password AS Password FROM user WHERE name = ?</module-option>
+             <module-option name="rolesQuery">SELECT RL.name AS Roles, 'Roles' AS RoleGroups FROM role as RL, user as U ,  users_roles as RU WHERE U.userid = RU.userid and RU.roleid = RL.roleid  and U.name = ?</module-option>
+                <module-option name="debug">true</module-option>
+              <module-option name="hashAlgorithm">MD5</module-option>
+              <module-option name="hashEncoding">hex</module-option>
+          </login-module>
+       </authentication>
+  </application-policy>    
+
+
+6.将目录_wars下的jivejdon.war拷贝到JBoss/server/default/deploy下，启动jBoss 
+http://localhost:8080/jivejdon
+
+  
+JBoss与Tomcat主要区别是JTA事务支持，保证数据库多个表操作严格一致性，通过下面步骤激活JTA操作：
+该步骤需要用winrar打开jivejdon.war，修改com.jdon.jivejdon.service.service.xml中的事务配置,因为tomcat不支持JTA，所以需要把JTA改成JDBC
+<!-- Tansaction JNDI   -->
+        <component name="jtaTransactionUtil"
+			class="com.jdon.jivejdon.service.util.JtaTransactionUtil">
+			 <constructor value="JTA"/> <!-- <constructor value="JDBC"/> -->
+	        <constructor value="java:/TransactionManager"/>
+        </component>
+
+###################################################################################################
+##########################################################################################################
+（三）运行配置
+browse: 
+http://localhost:8080/jivejdon/
+
+admin:
+http://localhost:8080/jivejdon/admin/
+username:admin
+password:admin
+
+起初设置要进入管理依据下面顺序安装下面过滤器:
+1 HTMLFilter HTMLFilter   
+2 CodeHighlighter CodeHighlighter
+3 TextStyle TextStyle        
+4 Newline Newline        
+5 URLConverter URLConverter        
+6 ImageFilter ImageFilter               
+7 Profanity Profanity        
+8 UploadImageFilter UploadImageFilter        
+9 UploadFileFilter UploadFileFilter 
+10 bodymasking
+11 hotkeys
+12 AuthorNameFormat
+13 QuoteRegexFilter
+note: 
+1.由于本体系统防止Spam,请将你的域名或IP加入web.xml的如下配置，否则IP会被禁止，可进入
+  数据库，删除setup表中的IP字段：
+     <param-name>referrer.domain.namePattern</param-name>
+			<param-value>.*(jdon.com|127.0.0.1|localhost|google).*</param-value> 
+			
+2.必要修改UploadImageFilter中的../imageShow.jsp等，改为绝对路径/jivejdon/imageShow.jsp
+3.如果进行性能并发测试，需要将WEB-INF/concurrentTest_myaspect.xml concurrentTest_web.xml
+替代myaspect.xml和web.xml 失效防止Spam功能。
+
+##############################################################################################
+（四）调试方法
+
+（1）运行中出现任何错误，一定要根据日志定位具体第一个错误。
+使用文本编辑器打开日志：tomcat/logs/jdon.log,搜索" ERROR "，找到错误行。然后将错误在论坛或google中搜索，
+一般能找到解决方法。
+
+如果想调试JiveJdon，希望输出大部分DEBUG日志，编辑log4j.properties中最后一行，原来只输出ERROR错误，改为DEBUG或INFO级别输出：
+原来是：#log4j.logger.com.jdon=DEBUG
+       log4j.logger.com.jdon=ERROR
+改为：  log4j.logger.com.jdon=DEBUG
+       #log4j.logger.com.jdon=ERROR
+至于如何编辑log4j.properties，可直接用winrar打开jivejdon.war，在WEB-INF/classes找到。       
+
+
+
+(2)断点调试方法：（适用weblogic glassfish websphere等服务器）
+在Eclipse的windows-show view中寻找Servers，选中Servers后，下方出现Server窗口，其中点击右键，选择new，
+新增一个JBoss/Tomcat server，告诉它你的JBoss/Tomcat所在目录即可。
+
+Server中中会多出一个你配置的服务器，点按选择Debug启动，这样，你在程序中设置的任何断点都可以在执行时中断，
+包括JF框架也是这样，你可以结合JF框架一起调试。
+
+(3)使用tomcat + eclipse的远程断点调试方法：
+1.tomcat 6已经提供了JPDA启动方式，只要命令行键入catalina.bat jpda start 就可以启动tomcat，端口8000提供远程调试。
+可将其做成debug.bat命令:
+
+2.启动eclipse，在run菜单下，选择open debug dialog，在弹出的对话框左边的菜单中选择“Remote Java Application”菜单，右键点击，选择“New”，基本参数不用变，端口是8000，在source 这个tab中，需要加入自己的项目，这样，断点暂停时能够指向源码具体一行。
+
+3.最后，debug启动，启动后平静，就表示正常。可以在程序中设定一个断点，然后，在浏览器中运行即可，必须注意的是，jivejdon使用ant的build.xml，为保证每次编译打包的JiveJdon.war正确部署到tomcat下，需要在JiveJdon项目目录下设置一下build.properties，如：
+deploy.dir=E:/training/apache-tomcat-6.0.26/webapps
+E:/training/apache-tomcat-6.0.26/就是你的tomcat目录。tomcat必须配置好运行环境，如何配置见下：
+
+道友断点调试讨论：
+http://www.jdon.com/jivejdon/38583
+
+(4)注意：因为本论坛内置了防爬虫攻击安全机制，为正常运行，需要将jivejdon.war中WEB-INF/web.xml中referrer.domain.name的值http://www.jdon.com/改为
+你的域名，或将referrer.test.name值改为http://127.0.0.1或http://localhost
+或到数据表setup中清除相应IP记录
+
+##############################################################################################
+（五）参考
+技术支持论坛: http://www.jdon.com/jivejdon/forum.jsp?forumId=61
+     
+没有接触过Java初学者；  http://www.jdon.com/jivejdon/33437.html  
+
+get方式乱码问题解决：jbossweb-tomcat5sar/server.xml的conntector增加maxSavePostSize="-1" URIEncoding="UTF-8"
+
+道友JiveJdon4 配置安装成功步骤： http://www.jdon.com/jivejdon/38522
+
+eclipse application_zh_CN.properties 中文编辑插件
+在eclipse的install new software输入http://propedit.sourceforge.jp/eclipse/updates/
