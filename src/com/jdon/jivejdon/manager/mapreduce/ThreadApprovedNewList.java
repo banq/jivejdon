@@ -77,7 +77,7 @@ public class ThreadApprovedNewList implements Startable {
 			}
 		};
 		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(task, 0,
-				60 * 60 * 12, TimeUnit.SECONDS);
+				60 * 60 * 24 * 30, TimeUnit.SECONDS);
 
 	}
 
@@ -180,12 +180,12 @@ public class ThreadApprovedNewList implements Startable {
 							i++;
 						}
 
-						// map to sort dignumber near 60 day
+						// map to sort dignumber near 120x100 day
 						Date threadDate = new Date(thread.getRootMessage()
 								.getModifiedDate2());
 						calendar.setTime(threadDate);
-						calendar.add(Calendar.HOUR, 2880);
-						if (thread.getRootMessage().getDigCount() > 1
+						calendar.add(Calendar.HOUR, 288000);
+						if (thread.getRootMessage().getDigCount() > 9
 								&& calendar.getTime().after(nowD)) {
 							threadDigList.addForumThread(thread);
 						}
