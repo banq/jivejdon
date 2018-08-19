@@ -151,7 +151,6 @@ public class ThreadApprovedNewList implements Startable {
 		List<Long> resultSorteds = new ArrayList(
 				approvedListSpec.getNeedCount());
 		final Date nowD = new Date();
-		final Calendar calendar = Calendar.getInstance();
 		try {
 			int i = 0;
 			int start = approvedListSpec.getCurrentStartBlock();
@@ -180,12 +179,13 @@ public class ThreadApprovedNewList implements Startable {
 							i++;
 						}
 
-						// map to sort dignumber near 120x100 day
+						// map to sort dignumber near 120x10 day
 						Date threadDate = new Date(thread.getRootMessage()
 								.getModifiedDate2());
+						Calendar calendar = Calendar.getInstance();
 						calendar.setTime(threadDate);
-						calendar.add(Calendar.HOUR, 288000);
-						if (thread.getRootMessage().getDigCount() > 9
+						calendar.add(Calendar.HOUR, 28800);
+						if (thread.getRootMessage().getDigCount() > 1
 								&& calendar.getTime().after(nowD)) {
 							threadDigList.addForumThread(thread);
 						}
