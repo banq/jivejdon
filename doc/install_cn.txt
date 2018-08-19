@@ -143,7 +143,7 @@ catalina.sh中再加入：JAVA_OPTS="$JAVA_OPTS -Djava.security.auth.login.confi
 
 
 2. 将数据表结构导入到数据库中，需要授权给用户，这里假定是banq,见下面mysql-ds.xml
-GRANT ALL PRIVILEGES ON *.* TO banq@localhost IDENTIFIED BY '225034ba或你自己的密码' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO banq@localhost IDENTIFIED BY '你自己的密码' WITH GRANT OPTION;
 
   
 3. 配置JBoss, 从JiveJdon 4.5以后所有JAR已经在项目的WEB-INF/lib下，无需复制到JBOSS目录，本步骤无需

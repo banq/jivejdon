@@ -1,9 +1,6 @@
 package com.jdon.jivejdon.util;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Properties;
+import com.jdon.jivejdon.manager.email.EmailHelper;
 
 import javax.mail.Address;
 import javax.mail.Authenticator;
@@ -19,8 +16,10 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 import javax.naming.InitialContext;
-
-import com.jdon.jivejdon.manager.email.EmailHelper;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Properties;
 
 /**
  * A task to send email.
@@ -40,17 +39,6 @@ public class EmailTask extends Thread {
 	public EmailTask(String JAVAMAIL_JNDINAME) {
 		this();
 		this.JAVAMAIL_JNDINAME = JAVAMAIL_JNDINAME;
-	}
-
-	private void init() {
-		// jboss JAVAMAIL_JNDINAME in server/default/deploy/mail-service.xml
-		// such as : java:/Mail
-		try {
-			InitialContext ic = new InitialContext();
-			session = (Session) ic.lookup(JAVAMAIL_JNDINAME);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**
@@ -90,6 +78,29 @@ public class EmailTask extends Thread {
 		messages = new LinkedList();
 	}
 
+	public static void main(String[] args) {
+		EmailTask emailTask = new EmailTask("smtp.163.net", "25", "true", "banq@163.net", "XX",
+				"banq@163.net");
+
+		emailTask.addMessage("banq", "banq@163.com", "banq", "banq@sina.com", "水水水 ", "pp【4楼 " +
+				"水水水】:ss... www.sina.com", EmailTask.HTML_FORMAT);
+
+		Thread thread = new Thread(emailTask);
+		thread.start();
+
+	}
+
+	private void init() {
+		// jboss JAVAMAIL_JNDINAME in server/default/deploy/mail-service.xml
+		// such as : java:/Mail
+		try {
+			InitialContext ic = new InitialContext();
+			session = (Session) ic.lookup(JAVAMAIL_JNDINAME);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * Runs the task, which sends all email messages that have been queued.
 	 */
@@ -116,7 +127,7 @@ public class EmailTask extends Thread {
 	/**
 	 * Factory method to add a JavaMail message object to the internal list of
 	 * messages.
-	 * 
+	 *
 	 * @param message
 	 *            a message to send.
 	 */
@@ -127,14 +138,14 @@ public class EmailTask extends Thread {
 	/**
 	 * Factory method to add a message by specifying its fields.
 	 * <p>
-	 * 
+	 *
 	 * To use more advanced message features, use the
 	 * <code>addMessage(Message message)</code> method.
 	 * <p>
-	 * 
+	 *
 	 * If parts of the message are invalid (ie, the toEmail is null) the message
 	 * won't be sent.
-	 * 
+	 *
 	 * @param toName
 	 *            the name of the recipient of this email.
 	 * @param toEmail
@@ -196,23 +207,13 @@ public class EmailTask extends Thread {
 	 * Factory method to return a blank JavaMail message. You should use the
 	 * object returned and set desired message properties. When done, pass the
 	 * object to the addMessage(Message) method.
-	 * 
+	 *
 	 * @return A new JavaMail message.
 	 */
 	public MimeMessage createMessage() {
 		if (session == null)
 			init();
 		return new MimeMessage(session);
-	}
-
-	public static void main(String[] args) {
-		EmailTask emailTask = new EmailTask("smtp.163.net", "25", "true", "banq@163.net", "22-50-34-ba", "banq@163.net");
-
-		emailTask.addMessage("banq", "banq@163.com", "banq", "banq@sina.com", "水水水 ", "pp【4楼 水水水】:ss... www.sina.com", EmailTask.HTML_FORMAT);
-
-		Thread thread = new Thread(emailTask);
-		thread.start();
-
 	}
 
 	private class SMTPAuthenticator extends Authenticator {
