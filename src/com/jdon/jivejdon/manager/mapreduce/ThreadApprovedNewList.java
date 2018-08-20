@@ -29,7 +29,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -171,24 +170,26 @@ public class ThreadApprovedNewList implements Startable {
 								.getUserIdLong();
 						final Account account = accountService
 								.getAccount(userId);
+					
 						if (approvedListSpec.isApproved(thread, account)
 								&& i < approvedListSpec.getNeedCount()) {
 							resultSorteds.add(thread.getThreadId());
 							// map to sort account
 							authorList.addAuthor(account);
+							threadDigList.addForumThread(thread);
 							i++;
 						}
 
 						// map to sort dignumber near 120x10 day
-						Date threadDate = new Date(thread.getRootMessage()
-								.getModifiedDate2());
-						Calendar calendar = Calendar.getInstance();
-						calendar.setTime(threadDate);
-						calendar.add(Calendar.HOUR, 28800);
-						if (thread.getRootMessage().getDigCount() > 1
-								&& calendar.getTime().after(nowD)) {
-							threadDigList.addForumThread(thread);
-						}
+//						Date threadDate = new Date(thread.getRootMessage()
+//								.getModifiedDate2());
+//						Calendar calendar = Calendar.getInstance();
+//						calendar.setTime(threadDate);
+//						calendar.add(Calendar.HOUR, 28800);
+//						if (thread.getRootMessage().getDigCount() > 1
+//								&& calendar.getTime().after(nowD)) {
+//							threadDigList.addForumThread(thread);
+//						}
 
 						if (i >= approvedListSpec.getNeedCount()) {
 							approvedListSpec.setCurrentIndicator(threadId);

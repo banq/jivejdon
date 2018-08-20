@@ -15,6 +15,9 @@
  */
 package com.jdon.jivejdon.manager.mapreduce;
 
+import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.service.ForumMessageQueryService;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -23,19 +26,14 @@ import java.util.List;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.service.ForumMessageQueryService;
-
 public class ThreadDigList {
 
-	public final static int DigsListMAXSize = 15;
+	public final static int DigsListMAXSize = 30;
 
 	private final ConcurrentHashMap<Long, Integer> digsCount;
-
+	private final ForumMessageQueryService forumMessageQueryService;
 	private Collection<ForumThread> sortedDigThreads = Collections
 			.unmodifiableList(Collections.EMPTY_LIST);
-
-	private final ForumMessageQueryService forumMessageQueryService;
 
 	public ThreadDigList(ForumMessageQueryService forumMessageQueryService) {
 		this.digsCount = new ConcurrentHashMap();
@@ -62,6 +60,7 @@ public class ThreadDigList {
 
 		}
 		sortedDigThreads = Collections.unmodifiableList(newThreads);
+		digsCount.clear();
 
 	}
 

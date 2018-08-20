@@ -15,6 +15,9 @@
  */
 package com.jdon.jivejdon.manager.mapreduce;
 
+import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.service.AccountService;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -23,18 +26,14 @@ import java.util.List;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.jdon.jivejdon.model.Account;
-import com.jdon.jivejdon.service.AccountService;
-
 public class AuthorList {
 
 	public final static int AuthorsListMAXSize = 15;
 
 	private final ConcurrentHashMap<Long, Integer> authors;
-
-	private Collection<Account> sortedauthors = Collections.unmodifiableList(Collections.EMPTY_LIST);
-
 	private final AccountService accountService;
+	private Collection<Account> sortedauthors = Collections.unmodifiableList(Collections
+			.EMPTY_LIST);
 
 	public AuthorList(AccountService accountService) {
 		this.accountService = accountService;
@@ -63,6 +62,7 @@ public class AuthorList {
 
 		}
 		sortedauthors = Collections.unmodifiableList(newAcounts);
+		authors.clear();
 	}
 
 	public Collection<Account> getAuthors() {
