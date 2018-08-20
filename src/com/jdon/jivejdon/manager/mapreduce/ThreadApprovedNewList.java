@@ -46,10 +46,11 @@ public class ThreadApprovedNewList implements Startable {
 	public final static String NAME = "threadApprovedNewList";
 	private final static Logger logger = LogManager
 			.getLogger(ThreadApprovedNewList.class);
+	//key is start of one page,
 	public final Map<Integer, Collection<Long>> approvedThreadList;
 	// author sort map
 	private final AuthorList authorList;
-	// dig sort map
+	// dig sort map, start is more greater, the dig collection is more greater.
 	private final ThreadDigList threadDigList;
 	private final ForumMessageQueryService forumMessageQueryService;
 	private final AccountService accountService;

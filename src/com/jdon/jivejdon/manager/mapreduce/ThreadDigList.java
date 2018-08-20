@@ -60,7 +60,7 @@ public class ThreadDigList {
 
 		}
 		sortedDigThreads = Collections.unmodifiableList(newThreads);
-		digsCount.clear();
+		//digsCount.clear();
 
 	}
 

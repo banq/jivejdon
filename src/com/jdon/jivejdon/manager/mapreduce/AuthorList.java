@@ -62,7 +62,7 @@ public class AuthorList {
 
 		}
 		sortedauthors = Collections.unmodifiableList(newAcounts);
-		authors.clear();
+		//authors.clear();
 	}
 
 	public Collection<Account> getAuthors() {
