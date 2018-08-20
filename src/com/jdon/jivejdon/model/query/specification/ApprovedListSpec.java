@@ -8,7 +8,7 @@ import java.util.Collection;
 
 public class ApprovedListSpec extends ThreadListSpec {
 
-	private int needCount = 30;
+	private final int needCount = 10000;
 	private long currentIndicator = 0;
 	private int currentStartBlock = 0;
 	private int currentStartPage = 0;
@@ -68,9 +68,9 @@ public class ApprovedListSpec extends ThreadListSpec {
 		return needCount;
 	}
 
-	public void setNeedCount(int needCount) {
-		this.needCount = needCount;
-	}
+//	public void setNeedCount(int needCount) {
+//		this.needCount = needCount;
+//	}
 
 	public long getCurrentIndicator() {
 		return currentIndicator;
