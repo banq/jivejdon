@@ -39,15 +39,12 @@ function viewcount(threadId, sId)
 			
 <center> <h3>推荐热点精华</h3> </center>
 
-<div class="tres" >        
-     符合查询主题共有<b><bean:write name="threadListForm" property="allCount"/></b>贴  
+          <div class="pagination">
 <MultiPagesREST:pager actionFormName="threadListForm" page="/approval" >
 <MultiPagesREST:prev name=" 上一页 " />
-<MultiPagesREST:index displayCount="3" />
 <MultiPagesREST:next  name=" 下一页 " />
-</MultiPagesREST:pager> 
-
-      </div>
+</MultiPagesREST:pager>
+          </div>
 
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
@@ -109,16 +106,14 @@ function viewcount(threadId, sId)
 </script>
 </div>
 
-<div class="tres" >        
-     符合查询主题共有<b><bean:write name="threadListForm" property="allCount"/></b>贴  
-<MultiPagesREST:pager actionFormName="threadListForm" page="/approval" >
-<MultiPagesREST:prev name=" 上一页 " />
-<MultiPagesREST:index displayCount="3" />
-<MultiPagesREST:next  name=" 下一页 " />
-</MultiPagesREST:pager> 
+          <div class="pagination">
+            <MultiPagesREST:pager actionFormName="threadListForm" page="/approval">
+              <MultiPagesREST:prev name=" 上一页 "/>
+              <MultiPagesREST:next name=" 下一页 "/>
+            </MultiPagesREST:pager>
+          </div>
 
-      </div>
-   
+
         </div>
       </div>  
       <!-- /////////////////右边 -->

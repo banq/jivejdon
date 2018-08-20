@@ -8,7 +8,8 @@ import java.util.Collection;
 
 public class ApprovedListSpec extends ThreadListSpec {
 
-	private final int needCount = 10000;
+	//this value is display count on one page
+	private final int needCount = 15;
 	private long currentIndicator = 0;
 	private int currentStartBlock = 0;
 	private int currentStartPage = 0;

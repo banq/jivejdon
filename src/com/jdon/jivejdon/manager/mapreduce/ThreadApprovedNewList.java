@@ -57,6 +57,7 @@ public class ThreadApprovedNewList implements Startable {
 	// private Cache approvedThreadList = new LRUCache("approvedCache.xml");
 	private ApprovedListSpec approvedListSpec;
 	private boolean refresh;
+	private int maxStart = -1;
 
 	public ThreadApprovedNewList(
 			ForumMessageQueryService forumMessageQueryService,
@@ -98,6 +99,11 @@ public class ThreadApprovedNewList implements Startable {
 	}
 
 	public Collection<Long> getApprovedThreads(int start) {
+		if (maxStart != -1 && start > maxStart) {
+			return new ArrayList<>();
+		}
+		if (start % approvedListSpec.getNeedCount() != 0)
+			return new ArrayList<>();
 		if (approvedThreadList.containsKey(start)) {
 			return approvedThreadList.get(start);
 		}
@@ -108,6 +114,7 @@ public class ThreadApprovedNewList implements Startable {
 			return null;
 		}
 		return appendList(start, approvedListSpec);
+
 	}
 
 	public ThreadDigList getThreadDigList() {
@@ -138,6 +145,12 @@ public class ThreadApprovedNewList implements Startable {
 		while (i < start + count) {
 			resultSorteds = loadApprovedThreads(approvedListSpec);
 			approvedThreadList.put(i, resultSorteds);
+			if (resultSorteds.size() < approvedListSpec.getNeedCount()) {
+				if (maxStart == -1) {
+					maxStart = i;
+					break;
+				}
+			}
 			i = i + count;
 		}
 		if (i > approvedListSpec.getCurrentStartPage())
@@ -171,7 +184,7 @@ public class ThreadApprovedNewList implements Startable {
 								.getUserIdLong();
 						final Account account = accountService
 								.getAccount(userId);
-					
+
 						if (approvedListSpec.isApproved(thread, account)
 								&& i < approvedListSpec.getNeedCount()) {
 							resultSorteds.add(thread.getThreadId());
@@ -213,4 +226,10 @@ public class ThreadApprovedNewList implements Startable {
 		return refresh;
 	}
 
+	public int getMaxSize() {
+		if (maxStart != -1)
+			return maxStart + approvedListSpec.getNeedCount();
+		else
+			return maxStart;
+	}
 }
