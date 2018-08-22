@@ -75,10 +75,11 @@ public class ThreadApprovedNewList implements Startable {
 		Runnable task = new Runnable() {
 			public void run() {
 				init();
+				getApprovedThreads(150);
 			}
 		};
 		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(task, 0,
-				60 * 60 * 24 * 30, TimeUnit.SECONDS);
+				60 * 60 * 12, TimeUnit.SECONDS);
 
 	}
 
@@ -96,6 +97,7 @@ public class ThreadApprovedNewList implements Startable {
 		resultSort.setOrder_DESCENDING();
 		approvedListSpec.setResultSort(resultSort);
 		refresh = true;
+		maxStart = -1;
 	}
 
 	public Collection<Long> getApprovedThreads(int start) {

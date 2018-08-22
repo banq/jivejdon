@@ -26,12 +26,12 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	protected boolean isGoodBlog(ForumThread thread, Account account) {
-		return (hasTags(thread, 1) && isGoodAuthor(account, 50) && isDigged(
+		return (hasTags(thread, 1) && isGoodAuthor(account, 2) && isDigged(
 				thread, 1));
 	}
 
 	protected boolean isExcelledDiscuss(ForumThread thread) {
-		return (hasTags(thread, 2) && isDigged(thread, 2) && hasReply(thread, 1));
+		return (hasTags(thread, 1) && hasReply(thread, 2));
 
 	}
 
