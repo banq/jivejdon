@@ -4,9 +4,8 @@
 <file name="taggedThreadList.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131756209089034192" remote="131756209160000000" Dst="0" />
 <file name="authorList.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131749829716823732" remote="131749829740000000" Dst="0" />
 <file name="hotThreadView.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131749829789133073" remote="131749829820000000" Dst="0" />
-<file name="messageListBody.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131749829928368196" remote="131749829950000000" Dst="0" />
 <file name="queryInputView.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131749845995002440" remote="131749846000000000" Dst="0" />
-<file name="searchThreadResult.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131749830228532383" remote="131749830280000000" Dst="0" />
+<file name="searchThreadResult.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131794061474084863" remote="131794061680000000" Dst="0" />
 <file name="tagsList.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131749830382935650" remote="131749830410000000" Dst="0" />
 <file name="userMessageView.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131749830445831874" remote="131749830480000000" Dst="0" />
 <file name="searchInputView.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131749843617606272" remote="131749846090000000" Dst="0" />
@@ -14,4 +13,5 @@
 <file name="smurlList.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131757468667965473" remote="131757468750000000" Dst="0" />
 <file name="tagThreads.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131757464090944025" remote="131757464150000000" Dst="0" />
 <file name="threadDigList.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131757484622165434" remote="131757484680000000" Dst="0" />
+<file name="searchMessageResult.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131794061108669671" remote="131794061220000000" Dst="0" />
 </dwsync>

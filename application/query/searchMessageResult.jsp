@@ -1,7 +1,7 @@
 <%@ taglib uri="struts-logic" prefix="logic" %>
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>
-<%@ taglib uri="/WEB-INF/MultiPages.tld" prefix="MultiPages" %>
+<%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 
@@ -81,11 +81,11 @@
 
         <div class="tres">
             <MultiPagesREST:pager actionFormName="messageListForm"
-                                  page="/messages">
+                                  page="/query/searchAction.shtml">
                 <MultiPagesREST:prev name=" 上一页 "/>
-                <MultiPagesREST:index displayCount="3"/>
+               
                 <MultiPagesREST:next name=" 下一页 "/>
-            </MultiPagesREST:pager>
+             </MultiPagesREST:pager>
 
         </div>
 
@@ -186,13 +186,12 @@
         </table>
 
         <div class="tres">
-            <MultiPagesREST:pager
-                    actionFormName="messageListForm"
-                    page="/messages">
+            <MultiPagesREST:pager actionFormName="messageListForm"
+                                  page="/query/searchAction.shtml">
                 <MultiPagesREST:prev name=" 上一页 "/>
-                <MultiPagesREST:index displayCount="3"/>
+               
                 <MultiPagesREST:next name=" 下一页 "/>
-            </MultiPagesREST:pager>
+             </MultiPagesREST:pager>
 
         </div>
 

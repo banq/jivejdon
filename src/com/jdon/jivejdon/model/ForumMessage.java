@@ -15,15 +15,6 @@
  */
 package com.jdon.jivejdon.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-
-import org.compass.annotations.Searchable;
-import org.compass.annotations.SearchableComponent;
-import org.compass.annotations.SearchableId;
-import org.compass.annotations.SearchableReference;
-
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
 import com.jdon.annotation.model.OnCommand;
@@ -41,6 +32,14 @@ import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.model.proptery.MessagePropertysVO;
 import com.jdon.jivejdon.model.reblog.ReBlogVO;
+import org.compass.annotations.Searchable;
+import org.compass.annotations.SearchableComponent;
+import org.compass.annotations.SearchableId;
+import org.compass.annotations.SearchableReference;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * 
@@ -55,44 +54,28 @@ import com.jdon.jivejdon.model.reblog.ReBlogVO;
 @Searchable
 public class ForumMessage extends ForumModel implements Cloneable {
 	private static final long serialVersionUID = 1L;
-
-	@SearchableId
-	private Long messageId;
-
-	private String creationDate;
-
-	private long modifiedDate;
-
-	private Account account; // owner
-
-	private Account operator; // operator this message,maybe Admin or others;
-
-	private volatile ForumThread forumThread;
-
-	@SearchableReference
-	private Forum forum;
-
-	@SearchableComponent
-	private MessageVO messageVO;
-
-	private Collection outFilters;
-
-	private boolean replyNotify;
-
-	private AttachmentsVO attachmentsVO;
-
-	private MessagePropertysVO messagePropertysVO;
-
-	private ReBlogVO reBlogVO;
-
 	@Inject
 	public LazyLoaderRole lazyLoaderRole;
-
 	@Inject
 	public MessageEventSourcingRole eventSourcing;
-
 	@Inject
 	public ShortMPublisherRole shortMPublisherRole;
+	@SearchableId
+	private Long messageId;
+	private String creationDate;
+	private long modifiedDate;
+	private Account account; // owner
+	private Account operator; // operator this message,maybe Admin or others;
+	private volatile ForumThread forumThread;
+	@SearchableReference
+	private Forum forum;
+	@SearchableComponent
+	private MessageVO messageVO;
+	private Collection outFilters;
+	private boolean replyNotify;
+	private AttachmentsVO attachmentsVO;
+	private MessagePropertysVO messagePropertysVO;
+	private ReBlogVO reBlogVO;
 
 	// created from repository that will be in memory, it is Entity
 	public ForumMessage(Long messageId) {
@@ -153,12 +136,14 @@ public class ForumMessage extends ForumModel implements Cloneable {
 				return;
 			if (this.messageVO.isFiltered())
 				return;
-			Iterator iter = outFilters.iterator();
-			while (iter.hasNext()) {
-				MessageRenderSpecification mrs = ((MessageRenderSpecification) iter.next());
-				mrs.render(this);
+			synchronized (this) {
+				Iterator iter = outFilters.iterator();
+				while (iter.hasNext()) {
+					MessageRenderSpecification mrs = ((MessageRenderSpecification) iter.next());
+					mrs.render(this);
+				}
+				messageVO.setFiltered(true);
 			}
-			messageVO.setFiltered(true);
 		} catch (Exception e) {
 			System.err.print(" applyFilters error:" + e + getMessageId());
 		}
@@ -166,6 +151,10 @@ public class ForumMessage extends ForumModel implements Cloneable {
 
 	public MessageVO getMessageVO() {
 		return messageVO;
+	}
+
+	public void setMessageVO(MessageVO messageVO) {
+		this.messageVO = messageVO;
 	}
 
 	public MessageVO getMessageVOClone() throws Exception {
@@ -177,10 +166,6 @@ public class ForumMessage extends ForumModel implements Cloneable {
 		messageVO = (MessageVO) em.getBlockEventResult();
 		setMessageVO(messageVO);
 		em.clear();
-	}
-
-	public void setMessageVO(MessageVO messageVO) {
-		this.messageVO = messageVO;
 	}
 
 	/**
@@ -300,15 +285,11 @@ public class ForumMessage extends ForumModel implements Cloneable {
 		this.attachmentsVO = attachmentsVO;
 	}
 
-	public void setMessagePropertysVO(MessagePropertysVO messagePropertysVO) {
-		this.messagePropertysVO = messagePropertysVO;
-	}
-
 	/**
 	 * this mesages is masked by admin
-	 * 
+	 *
 	 * @param forumMessage
-	 * 
+	 *
 	 * @return boolean
 	 */
 	public boolean isMasked() {
@@ -326,16 +307,16 @@ public class ForumMessage extends ForumModel implements Cloneable {
 		return creationDate;
 	}
 
-	public String getCreationDateForDay() {
-		return creationDate.substring(2, 16);
-	}
-
 	/**
 	 * @param creationDate
 	 *            The creationDate to set.
 	 */
 	public void setCreationDate(String creationDate) {
 		this.creationDate = creationDate;
+	}
+
+	public String getCreationDateForDay() {
+		return creationDate.substring(2, 16);
 	}
 
 	/**
@@ -362,6 +343,13 @@ public class ForumMessage extends ForumModel implements Cloneable {
 		return Constants.getDefaultDateTimeDisp(modifiedDate);
 	}
 
+	/**
+	 * @param modifiedDate The modifiedDate to set.
+	 */
+	public void setModifiedDate(long modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+
 	public String getModifiedDate3() {
 		if (modifiedDate == 0)
 			return "";
@@ -370,14 +358,6 @@ public class ForumMessage extends ForumModel implements Cloneable {
 
 	public long getModifiedDate2() {
 		return modifiedDate;
-	}
-
-	/**
-	 * @param modifiedDate
-	 *            The modifiedDate to set.
-	 */
-	public void setModifiedDate(long modifiedDate) {
-		this.modifiedDate = modifiedDate;
 	}
 
 	/**
@@ -410,12 +390,12 @@ public class ForumMessage extends ForumModel implements Cloneable {
 		this.forum = forum;
 	}
 
-	public void setOutFilters(Collection outFilters) {
-		this.outFilters = outFilters;
-	}
-
 	public Collection getOutFilters() {
 		return outFilters;
+	}
+
+	public void setOutFilters(Collection outFilters) {
+		this.outFilters = outFilters;
 	}
 
 	public Object clone() throws CloneNotSupportedException {
@@ -435,6 +415,10 @@ public class ForumMessage extends ForumModel implements Cloneable {
 		return messagePropertysVO;
 	}
 
+	public void setMessagePropertysVO(MessagePropertysVO messagePropertysVO) {
+		this.messagePropertysVO = messagePropertysVO;
+	}
+
 	public void preloadWhenView() {
 		getMessagePropertysVO().preload();
 		getAttachment().preloadUploadFileDatas();// preload img
@@ -446,12 +430,12 @@ public class ForumMessage extends ForumModel implements Cloneable {
 		eventSourcing.saveMessageProperties(new MessagePropertiesUpdatedEvent(this.messageId, getMessagePropertysVO().getPropertys()));
 	}
 
-	public void setReplyNotify(boolean replyNotify) {
-		this.replyNotify = replyNotify;
-	}
-
 	public boolean isReplyNotify() {
 		return replyNotify;
+	}
+
+	public void setReplyNotify(boolean replyNotify) {
+		this.replyNotify = replyNotify;
 	}
 
 	public String getPostip() {

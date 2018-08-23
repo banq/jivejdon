@@ -1,7 +1,7 @@
 <%@ taglib uri="struts-logic" prefix="logic" %>
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>
-<%@ taglib uri="/WEB-INF/MultiPages.tld" prefix="MultiPages" %>
+<%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 
@@ -71,16 +71,13 @@
     <logic:greaterThan name="messageListForm" property="allCount" value="0">
         <div class="tres">
 
-            有<b><bean:write name="messageListForm"
-                            property="allCount"/></b>贴
-
-            <MultiPages:pager actionFormName="messageListForm"
+            <MultiPagesREST:pager actionFormName="messageListForm"
                               page="/query/searchThreadAction.shtml"
                               paramId="query" paramName="query">
-                <MultiPages:prev name=" 上一页 "/>
-                <MultiPages:index displayCount="3"/>
-                <MultiPages:next name=" 下一页 "/>
-            </MultiPages:pager>
+                <MultiPagesREST:prev name=" 上一页 "/>
+             
+                <MultiPagesREST:next name=" 下一页 "/>
+            </MultiPagesREST:pager>
           
         </div>
 
@@ -116,12 +113,10 @@
                     <td><bean:define id="rootMessage" name="forumThread"
                                      property="rootMessage"></bean:define>
                         <logic:notEmpty name="rootMessage" property="account">
-                            <a
-                                    href='<%=request.getContextPath()%>/blog/<bean:write name="rootMessage" property="account.username"/>'
-                                    target="_blank">
+                          
                                 <bean:write name="rootMessage"
                                             property="account.username"/>
-                            </a>
+                          
                         </logic:notEmpty>
                     </td>
                     <td><bean:write name="forumThread"
@@ -135,18 +130,14 @@
 
 
         <div class="tres">
-            有<b><bean:write name="messageListForm"
-                            property="allCount"/></b>贴
-            <a href="JavaScript:void(0);"
-               onmouseover="loadWLJSWithP(this, initTooltipWL)"
-               class="tooltip html_tooltip_content_go">Go</a>
-            <MultiPages:pager actionFormName="messageListForm"
+           
+            <MultiPagesREST:pager actionFormName="messageListForm"
                               page="/query/searchThreadAction.shtml"
                               paramId="query" paramName="query">
-                <MultiPages:prev name=" 上一页 "/>
-                <MultiPages:index displayCount="3"/>
-                <MultiPages:next name=" 下一页 "/>
-            </MultiPages:pager>
+                <MultiPagesREST:prev name=" 上一页 "/>
+              
+                <MultiPagesREST:next name=" 下一页 "/>
+            </MultiPagesREST:pager>
         </div>
 
 
