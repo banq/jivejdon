@@ -1,7 +1,7 @@
 <%@ taglib uri="struts-logic" prefix="logic" %>
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>
-<%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
+<%@ taglib uri="/WEB-INF/MultiPages.tld" prefix="MultiPages" %>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 
@@ -71,13 +71,13 @@
     <logic:greaterThan name="messageListForm" property="allCount" value="0">
         <div class="tres">
 
-            <MultiPagesREST:pager actionFormName="messageListForm"
-                              page="/query/searchThreadAction.shtml"
-                              paramId="query" paramName="query">
-                <MultiPagesREST:prev name=" 上一页 "/>
-             
-                <MultiPagesREST:next name=" 下一页 "/>
-            </MultiPagesREST:pager>
+          <MultiPages:pager actionFormName="messageListForm"
+                            page="/query/searchThreadAction.shtml"
+                            paramId="query" paramName="query">
+            <MultiPages:prev name=" 上一页 "/>
+
+            <MultiPages:next name=" 下一页 "/>
+          </MultiPages:pager>
           
         </div>
 
@@ -130,14 +130,14 @@
 
 
         <div class="tres">
-           
-            <MultiPagesREST:pager actionFormName="messageListForm"
-                              page="/query/searchThreadAction.shtml"
-                              paramId="query" paramName="query">
-                <MultiPagesREST:prev name=" 上一页 "/>
-              
-                <MultiPagesREST:next name=" 下一页 "/>
-            </MultiPagesREST:pager>
+
+          <MultiPages:pager actionFormName="messageListForm"
+                            page="/query/searchThreadAction.shtml"
+                            paramId="query" paramName="query">
+            <MultiPages:prev name=" 上一页 "/>
+
+            <MultiPages:next name=" 下一页 "/>
+          </MultiPages:pager>
         </div>
 
 

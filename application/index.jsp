@@ -114,7 +114,9 @@
 				<div class="widget">
 					    <div class="wid-vid">
 							<ul>
-							  <div id="newList"></div>   
+  <jsp:include page="/query/threadNewList.shtml" flush="true">   
+	<jsp:param name="count" value="20"/>
+  </jsp:include>   
 							</ul>
 							</div>
 				</div>
@@ -125,7 +127,7 @@
 							<ul>
 							  
   <jsp:include page="/query/urlListAction.shtml" flush="true">   
-	<jsp:param name="count" value="15"/>
+	<jsp:param name="count" value="20"/>
   </jsp:include>
 							</ul>
 							</div>
@@ -168,7 +170,6 @@
 <%@ include file="../account/loginAJAX.jsp" %>
 <script>   
 	 new Ajax.Updater('digList', '/query/threadDigList.shtml?count=20', { method: 'get' });
-	 new Ajax.Updater('newList', '/query/threadNewList.shtml?count=20', { method: 'get' });
      new Ajax.Updater('poplist', '/query/popularlist.shtml?count=11&dateRange=180', { method: 'get' });
 </script> 	
 

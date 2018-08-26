@@ -86,7 +86,7 @@ body.sub-page .logo {margin: 110px 0 80px; fixed; padding: 30px 0 50px;}
 #menu .dropdown-menu {background-color: #fff;border:none;}
 #menu ul.nav .dropdown-menu li a{color: #000;font-weight: bold;border-radius: 5px !important;}
 #menu ul.nav .dropdown-menu li a:hover{color: #fff;background-color: #000;}
-#menu .dropdown-inner {display: table;}
+#menu .dropdown-inner {display: table;background-color: #fff;}
 #menu .dropdown-inner ul {display: table-cell;}
 #menu .dropdown-inner a {min-width: 160px;display: block;padding: 3px 20px;clear: both;line-height: 20px;color: #000;font-size: 14px;margin: 0 5px;}
 #menu li.dropdown:hover>a, #menu li.dropdown:focus>a, #menu li.dropdown:active>a{background: #fff;color: #000;}
