@@ -48,43 +48,8 @@ pageContext.setAttribute("title", titleStr);
           </div>
 
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
-<div class="linkblock">
-	
-<bean:define id="forumMessage" name="forumThread" property="rootMessage" />	
-  
-	<div class="post-headline">          
-      	  <bean:define id="body" name="forumMessage" property="messageVO.body" />
-      	  <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>" target="_blank"><h3><bean:write name="forumThread" property="name" /></h3></a>
-   </div> 
-   
-   <div class="post-byline">   
-      <p>
-    <span class="tpc_content">
-        <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[80]" />..
-    </span>            
-      </p>                  
-   </div>
-    			
-    <div class="post-footer">
-                <a href="<%=request.getContextPath()%>/blog/<bean:write name="forumThread" property="rootMessage.account.username"/>" class="smallgray"> <b><bean:write name="forumThread" property="rootMessage.account.username" /></b></a>
-            &nbsp;
-            <bean:define id="cdate" name="forumThread" property="creationDate" ></bean:define>            
-            <%String cdateS = (String)pageContext.getAttribute("cdate"); %>
-    <%=cdateS.substring(0, 11) %>   
-    &nbsp;<a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId" />">
-    <bean:write name="forumThread" property="state.messageCount" />回</a>    
-    &nbsp;
-    <bean:write name="forumThread" property="viewCount" />阅
-     &nbsp;
-     <logic:notEqual name="forumMessage" property="digCount" value="0">
-              <bean:write name="forumMessage" property="digCount"/>赞
-     </logic:notEqual>   
-
-    </div>
-        
- </div>              	
- <p></p>
-    </logic:iterate>
+<%@ include file="threadListCore.jsp" %>
+</logic:iterate>
 	<div>
 	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- 自动调整尺寸 -->
