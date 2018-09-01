@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
    <title>解道jdon - 企业级软件架构解决之道</title>
    <meta name="Description" content="有关企业软件的业务建模、软件架构设计、编程技术等方面的探索、分享和交流"/>
-   <meta name="Keywords" content="编程,设计,架构,开发,分析,教程,领域驱动设计,web框架,设计模式,数据库,大数据,性能,面向对象,函数编程,培训,EDA,SOA,JEE,j2ee,web,android,erp,Java,JavaEE,DDD,CQRS,EventSourcing,javascript,分布式,微服务,Reactive,扩展性,scalable" />
+   <meta name="Keywords" content="编程,设计,架构,开发,分析,教程,领域驱动设计,web框架,设计模式,数据库,大数据,java性能,面向对象,函数编程,java培训,EDA,SOA,JEE,j2ee,web,android,Java,JavaEE,DDD,CQRS,EventSourcing,javascript,分布式,微服务,Reactive,扩展性,scalable,Spring,node.js" />
 	 <meta name="domain_verify" content="pmrgi33nmfuw4ir2ejvgi33ofzrw63jcfqrgo5ljmqrduirtmu2wczlcgvrtomzyha2dcylfhfqtmntemmydezbvme4gmmrugarcyitunfwwku3bozsseorrgq2dmmjrgu4teobrgqzh2">
 	<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap" />
     <link rel="alternate" type="application/rss+xml" title="解道订阅" href="/rss" />
@@ -164,13 +164,14 @@
 	</div>
 	
 <%@ include file="./common/IncludeBottomBody.jsp" %> 
-
-<script  type="text/javascript" src="/common/login.js"></script>
-<script type="text/javascript" src="/common/js/prototype.js"></script>	
 <%@ include file="../account/loginAJAX.jsp" %>
 <script>   
-	 new Ajax.Updater('digList', '/query/threadDigList.shtml?count=20', { method: 'get' });
+$LAB
+.script("https://cdn.jdon.com/common/js/prototype.js").wait()
+.wait(function(){
+	new Ajax.Updater('digList', '/query/threadDigList.shtml?count=20', { method: 'get' });
      new Ajax.Updater('poplist', '/query/popularlist.shtml?count=11&dateRange=180', { method: 'get' });
+});  
 </script> 	
 
 </body>

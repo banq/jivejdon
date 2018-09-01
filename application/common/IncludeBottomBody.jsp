@@ -1,14 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-		
-	<!-- jQuery and Modernizr-->
-	<script src="/js/jquery-2.1.1.js"></script>
-	
-	<!-- Core JavaScript Files -->  	 
-    <script src="/js/bootstrap.min.js"></script>
-	
-	<div id="to_top" style="display:block; width:20px; height:20px;position:fixed;  bottom:50px; right:40px; border-radius:10px 10px 10px 10px;   text-decoration:none;" onClick="document.documentElement.scrollTop = document.body.scrollTop =0"><a href="#" title="返回顶部"><i class="fa fa-arrow-circle-up"></i></a></div>
-
 	<footer>
 		<div class="wrap-footer">
 			<div class="container">
@@ -31,12 +22,15 @@
 							<a href="/tags/395">Java学习</a>
 							<a href="/tags/17268">EventSourcing</a>
 							<a href="/tags/25407">微服务</a>
-							<a href="/tags/35751">SpringCloud</a>
-							<a href="/tags/1093">分布式事务</a>
-							<a href="/tags/3424">Java实用系统开发指南</a>
+							<a href="/springboot.html">Spring Boot</a>
 							<a href="/tags/20358">Saga</a>
 							<a href="/tags/14594">Actor</a>
 							<a href="/tags/24484">Reactive</a>
+							<a href="/tags/210">数据库</a>
+							<a href="/agile.html">敏捷</a>
+							<a href="/workflow-bpm.html">工作流</a>
+							<a href="/tags/1159">算法</a>
+							<a href="/tags/1093">分布式事务</a>
 						</div>
 					</div>
 					<div class="col-md-4 col-footer footer-3">
@@ -59,4 +53,12 @@
 		</div>
 	</footer>
 	<!-- Footer -->
+
+	<!-- jQuery and Modernizr-->
+	<script src="https://cdn.jdon.com/js/jquery-2.1.1.js"></script>
 	
+	<!-- Core JavaScript Files -->  	 
+    <script src="https://cdn.jdon.com/js/bootstrap.min.js"></script>
+	
+	<div id="to_top" style="display:block; width:20px; height:20px;position:fixed;  bottom:50px; right:40px; border-radius:10px 10px 10px 10px;   text-decoration:none;" onClick="document.documentElement.scrollTop = document.body.scrollTop =0"><a href="#" title="返回顶部"><i class="fa fa-arrow-circle-up"></i></a></div>
+
