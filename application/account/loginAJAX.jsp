@@ -4,7 +4,7 @@
 <script>
 var loggedURL = '<%=request.getContextPath()%>/account/protected/logged.jsp';
 </script>
-<script src="/common/login.js"></script>
+<script src="https://cdn.jdon.com/common/login.js"></script>
 
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 <div id="loginAJAX" style="display:none" align="center">

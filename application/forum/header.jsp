@@ -13,11 +13,11 @@
 	<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap" />
 <link rel="alternate" type="application/rss+xml" title="解道订阅" href="/rss" />
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/js/bootstrap.min.css"  type="text/css">
+    <link rel="stylesheet" href="https://cdn.jdon.com/js/bootstrap.min.css"  type="text/css">
 	<!-- Custom Fonts -->
-    <link rel="stylesheet" href="/js/font-awesome-4.4.0/css/font-awesome.min.css"  type="text/css">
+    <link rel="stylesheet" href="https://cdn.jdon.com/js/font-awesome-4.4.0/css/font-awesome.min.css"  type="text/css">
 	<!-- Custom CSS -->
-    <link rel="stylesheet" href="/js/style.css">
+    <link rel="stylesheet" href="https://cdn.jdon.com/js/style.css">
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

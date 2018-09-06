@@ -17,11 +17,11 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCache(expire, modelLastModified
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty></title>
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/js/bootstrap.min.css"  type="text/css">
+    <link rel="stylesheet" href="https://cdn.jdon.com/js/bootstrap.min.css"  type="text/css">
 	<!-- Custom Fonts -->
-    <link rel="stylesheet" href="/js/font-awesome-4.4.0/css/font-awesome.min.css"  type="text/css">
+    <link rel="stylesheet" href="https://cdn.jdon.com/js/font-awesome-4.4.0/css/font-awesome.min.css"  type="text/css">
 	<!-- Custom CSS -->
-    <link rel="stylesheet" href="/js/style.css">
+    <link rel="stylesheet" href="https://cdn.jdon.com/js/style.css">
 		
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
