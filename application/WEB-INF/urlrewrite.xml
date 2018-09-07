@@ -187,15 +187,15 @@
 
     <rule>
         <from>^/tags$</from>
-        <to>/query/tagsList.shtml?count=50</to>
+        <to>/query/tagsList.shtml?count=15</to>
     </rule>
     <rule>
         <from>^/tags/p$</from>
-        <to>/query/tagsList.shtml?count=50</to>
+        <to>/query/tagsList.shtml?count=15</to>
     </rule>
     <rule>
         <from>^/tags/p/([0-9]+)$</from>
-        <to>/query/tagsList.shtml?count=50&amp;start=$1</to>
+        <to>/query/tagsList.shtml?count=15&amp;start=$1</to>
     </rule>
     <rule>
         <from>^/tags/([0-9]+)$</from>

@@ -62,8 +62,9 @@ pageContext.setAttribute("title", titleStr);
 				<div class="box">	
 			 <logic:empty name="forum" property="forumId">
 					<ul class="nav nav-tabs">
-  <li class="active"><a href="#">按时间排序</a></li>
-  <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">按回复数排</a></li>
+  <li class="active"><a href="#">时间</a></li>
+  <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">回复数</a></li>
+  <li><a href="<%=request.getContextPath()%>/approval">点赞</a></li>				
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml">更多查询</a></li> 
 	               <div class="tres" style="float: right;">
      

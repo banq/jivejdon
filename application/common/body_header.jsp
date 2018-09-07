@@ -10,14 +10,14 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6">
-					  <a href="/"><img src="/simgs/jdon100.png" width="100" height="40"  alt=""/></a>
+					  <a href="/"><img src="https://cdn.jdon.com/simgs/jdon100.png" width="100" height="40"  alt=""/></a>
 				</div>
 				<div class="col-md-6">
 					<ul class="list-inline top-link link">
 						 <logic:present name="principal" ><i class="smallgray"> 欢迎<bean:write name="principal" /></i> </logic:present>
 				        <li><a href="/forum"><i class="fa fa-home"></i>道场</a></li>
 						<li><a href="/threads"><i class="fa fa-list-ul"></i>最新</a></li>
-						<li><a href="/approval/15"><i class="fa fa-star-half-full"></i>推荐</a></li>
+						<li><a href="/tags"><i class="fa fa-star-half-full"></i>推荐</a></li>
 						<li><a href="/followus.html"><i class="fa fa-feed"></i>订阅</a></li>
 						 <logic:notPresent name="principal" >
 							 <li><html:link page="/account/newAccountForm.shtml"><i class="fa fa-user-secret"></i>注册</html:link></li>

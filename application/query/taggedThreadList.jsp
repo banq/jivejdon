@@ -31,22 +31,11 @@ pageContext.setAttribute("title", titleStr);
             <bean:write  name="TITLE"/>
             </h3>
       </logic:notEmpty>
-        <a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=2&subscribeId=<bean:write name="tagID" /> " target="_blank"  rel="nofollow">
-        <img src="/images/user_add.gif" width="18" height="18" alt="关注本标签 有新回复自动通知我" border="0" />
-        订阅</a> <span id='count_<bean:write name="tagID" />'></span>     
+        <a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=2&subscribeId=<bean:write name="tagID" /> " target="_blank"  rel="nofollow"><i class="fa fa-heart"></i></a>     
         &nbsp;&nbsp;
         <a href="<%=request.getContextPath()%>/tags">更多分类</a>
       </center>
-      <div class="tres" > 符合查询主题贴共有<b>
-            <bean:write name="threadListForm" property="allCount"/>
-            </b>贴
-            <MultiPagesREST:pager actionFormName="threadListForm" page="/tags"  paramId="tagID" paramName="tagID" >
-              <MultiPagesREST:prev name=" 上一页 " />
-              <MultiPagesREST:index displayCount="3" />
-              <MultiPagesREST:next  name=" 下一页 " />
-            </MultiPagesREST:pager>
-          </div>
-
+     
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
 <%@ include file="threadListCore.jsp" %>
 </logic:iterate>
@@ -62,7 +51,7 @@ pageContext.setAttribute("title", titleStr);
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 	</div>
-	<div class="tres" > 符合查询主题共有<b>
+	<div class="tres" > 共有<b>
             <bean:write name="threadListForm" property="allCount"/>
             </b>贴
             <MultiPagesREST:pager actionFormName="threadListForm" page="/tags"  paramId="tagID" paramName="tagID" >
