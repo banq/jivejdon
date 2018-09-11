@@ -9,105 +9,65 @@ Configuration steps:
 
 environment : at least JDK 5.0 + JBoss 4.0.5 + MySQL 4/other databases
 
-MySQL JDBC configuration: 
+Tomcat configuration:
+1.MySQL JDBC configuration:
   populate all databases in ddl directory.
-  there are two database: jive  and security
-  mysql_forum.sql/mysql_user.sql ==> jive
-  mysql_auth.sql ==> security
 
-      
-JBoss configuration:
-1. copy strutslib/*.jar  to jboss/server/default/lib
-2. copy lib/*.jar  to jboss/server/default/lib
-3. config datasource:
-   copy mysql-ds.xml to jboss/server/default/deploy, and edit the mysql-ds.xml,
-   modify the user-name and password for the database.   
-  
-  mysql-ds.xml configuration sample:
-   
- <local-tx-datasource>
-    <jndi-name>JiveJdonDS</jndi-name>
-    <connection-url>jdbc:mysql://localhost:3306/jive?useUnicode=true&amp;characterEncoding=UTF-8</connection-url>
-    <driver-class>com.mysql.jdbc.Driver</driver-class>
-    <user-name>root</user-name>
-    <password></password>
-    <min-pool-size>5</min-pool-size>
-    <max-pool-size>20</max-pool-size>    
- </local-tx-datasource>
-   
- <local-tx-datasource>
-    <jndi-name>Security</jndi-name>
-    <connection-url>jdbc:mysql://localhost:3306/security?useUnicode=true&amp;characterEncoding=UTF-8</connection-url>
-    <driver-class>com.mysql.jdbc.Driver</driver-class>
-    <user-name>root</user-name>
-    <password></password>
-    <min-pool-size>2</min-pool-size>
-    <max-pool-size>20</max-pool-size>    
-  </local-tx-datasource>   
-   
-  in above configurations, the "jndi-name" values are  JiveJdonDS and Security.
-  these two JNDI names  must  be equals to the configuration  the jdonframework.xml of jivejdon3.
-  
-  there are such configurations in dao.xml:
-  
-  <component name="jdbcTempSource"
-			class="com.jdon.jivejdon.dao.sql.JdbcTempSource">
-	        <constructor value="java:/JiveJdonDS"/>
-        </component>
+2. add mysql-connector-java-5.0.8-bin.jar to tomcat\lib
+copy jivejdon/doc/tomcat/lib/jaas.jar to tomcat\lib
+copy jivejdon\doc\tomcat\conf\jaas.config to your tomcat\conf
 
-	<component name="jdbcTempSSOSource"
-			class="com.jdon.jivejdon.dao.sql.JdbcTempSSOSource">
-    <constructor value="java:/Security"/>
-        </component>
-        
-   "java:/JiveJdonDS" and "java:/Security" are the "jndi-name" values im mysql-ds.xml,
-   "java:/" is the special syntax of JBoss JNDI.
-   
-4. confiure the JBoss JAAS, if you use Weblogic or other J2EE application servers, please refer their manuals.
-   (refrence: http://www.informit.com/articles/article.asp?p=389111&seqNum=1&rl=1
-   Tomcat Database Realm Authentication http://www.onjava.com/pub/a/onjava/2002/06/12/form.html
-   http://tomcat.apache.org/tomcat-5.0-doc/realm-howto.html)
-   (1)add below configuration lines to jboss/server/default/conf/login-config.xml
-        <application-policy name = "SecurityRealm">
-       <authentication>
-          <login-module code = "org.jboss.security.auth.spi.DatabaseServerLoginModule"  flag = "required">
-             <module-option name = "dsJndiName">java:/Security</module-option>
-             <module-option name="principalsQuery">SELECT password AS Password FROM user WHERE name = ?</module-option>
-             <module-option name="rolesQuery">SELECT RL.name AS Roles, 'Roles' AS RoleGroups FROM role as RL, user as U ,  users_roles as RU WHERE U.userid = RU.userid and RU.roleid = RL.roleid  and U.name = ?</module-option>
-                <module-option name="debug">true</module-option>
-              <module-option name="hashAlgorithm">MD5</module-option>
-              <module-option name="hashEncoding">hex</module-option>
-          </login-module>
-       </authentication>
-  </application-policy>    
+3.create a file named debug.bat in tomcat/bin, add two lines：
 
-  note: the "dsJndiName" value must be equal to the  "jndi-name" value of the mysql-ds.xml
-  
-   (2) ensure the "application-policy name" value :SecurityRealm is equals to the
-      value that configured in jboss-web.xml of jivejdon3, sucha as:
-   
-   <jboss-web>
-      <security-domain>java:/jaas/SecurityRealm</security-domain>
-      <context-root>jivejdon3</context-root>
-    </jboss-web>
-    "java:/jaas/" is the special syntax of JBoss security realm.
-  
-5. JTA JNDI in services.xml, if you not use JBoss, please change JTA JNDI name
- <component name="jtaTransactionUtil"
-			class="com.jdon.jivejdon.service.util.JtaTransactionUtil">
-	        <constructor value="java:/TransactionManager"/>
- </component>        
+ set JAVA_OPTS=-XX:+UseStringCache   -Djava.security.auth.login.config=../conf/jaas.config
+ catalina.bat jpda start
 
-  
-browse: 
-http://localhost:8080/jivejdon/
+4. add below lines  before "Host" in conf/server.xml:
+
+      <Realm
+		className="org.apache.catalina.realm.JAASRealm"
+		appName="JiveJdonRealm"
+		userClassNames="com.jdon.jivejdon.auth.jaas.User"
+		roleClassNames="com.jdon.jivejdon.auth.jaas.Role"/>
+
+5. open tomcat/conf/context.xml, add lines:
+<Resource name="jdbc/JiveJdonDS"
+              auth="Container"
+              type="javax.sql.DataSource"
+              maxActive="100"
+              maxIdle="30"
+              maxWait="10000"
+              username="root"
+              password="root"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost/jivejdon?useUnicode=true&amp;characterEncoding=UTF-8" />
+
+
+<Resource name="mail/Session" auth="Container"
+		type="javax.mail.Session"
+	  mail.smtp.host="smtp.gmail.com"
+    mail.smtp.port="587"
+    mail.smtp.auth="true"
+    mail.smtp.user="sss@gmail.com"
+		mail.smtp.starttls.enable="true"
+    mail.smtp.socketFactory.class="javax.net.ssl.SSLSocketFactory"
+    mail.smtp.socketFactory.port="465"
+    password=""
+    />
+
+6. copy jivejdon.war to Tomcat/webapps，start debug.bat：
+       http://localhost:8080/
+
+###############################################################
 
 admin:
-http://localhost:8080/jivejdon/admin/
+http://localhost:8080/admin/
 username:admin
 password:admin
 
-at first must intall 4 filters in admin:
+setup:
+
+intall 4 filters in admin:
 1 HTMLFilter HTMLFilter
 2 CodeHighlighter 
 3 TextStyle TextStyle        
@@ -116,4 +76,4 @@ at first must intall 4 filters in admin:
 6 ImageFilter ImageFilter        
 7 CodeHighlighter 
 
-qucik manual english version for jdonframework: https://www.jdon.org 
+
