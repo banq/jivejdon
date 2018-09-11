@@ -13,9 +13,10 @@ Tomcat configuration:
 1.MySQL JDBC configuration:
   populate all databases in ddl directory.
 
-2. add mysql-connector-java-5.0.8-bin.jar to tomcat\lib
+2.
 copy jivejdon/doc/tomcat/lib/jaas.jar to tomcat\lib
-copy jivejdon\doc\tomcat\conf\jaas.config to your tomcat\conf
+copy jivejdon/doc/tomcat/conf/jaas.config to your tomcat\conf
+copy jivejdon/lib/mysql/mysql-connector-java-5.0.8-bin.jar to your tomcat/lib
 
 3.create a file named debug.bat in tomcat/bin, add two lines：
 

@@ -11,15 +11,16 @@ ddl目录下SQL 导入数据库 jivejdon
 
 (3)任何涉及创建数据库的地方都选择Utf-8, phpMyadmin中创建jivejdon数据库时，都要选择utf-8-general-c
 
-
+#######################################################################################
 （一）Tomcat环境安装
 
 部署前提：JDK1.6或者更高版本，mysql5.0或者更高版本
 
 (1)把jivejdon/doc/tomcat/lib下的jaas.jar拷贝到tomcat的lib目录下
 把doc\tomcat\conf\jaas.config复制到tomcat/conf下
+将\lib\mysql\mysql-connector-java-5.0.8-bin.jar mysql数据库JDBC驱动包拷贝到tomcat/lib下。
 
-(1)在Tomcat启动配置中加入授权JAAS配置。
+(2)在Tomcat启动配置中加入授权JAAS配置。
 在tomcat/bin目录建立一个debug.bat，将下面两行加入：
 set JAVA_OPTS=-XX:+UseStringCache   -Djava.security.auth.login.config=../conf/jaas.config
 catalina.bat jpda start
@@ -29,9 +30,6 @@ catalina.bat jpda start
 如果有报错：Cannot find message associated with key jaasRealm.unexpectedError
 java.lang.SecurityException: 无法定位登录配置
 大部分原因在此没有正确配置。
-
-(2)将mysql数据库JDBC驱动包如mysql-connector-java-5.0.8-bin.jar拷贝到 
-拷贝到tomcat/lib目录下，也也可以包jivejdon(WEB-INF/lib/*.jar)需要的所有*.jar包都拷贝其下。
 
 (3)配置JAAS数据源，在conf/server.xml的Host之前加入:
         
@@ -44,7 +42,7 @@ java.lang.SecurityException: 无法定位登录配置
 
 至此以上有关基于Tomcat容器认证授权的机制配置完成，下面是数据库源配置：
 
-(6)配置数据库源，在tomcat/conf/context.xml中配置数据源Datasource:
+(4)配置数据库源，在tomcat/conf/context.xml中配置数据源Datasource:
  <Resource name="jdbc/JiveJdonDS" 
               auth="Container" 
               type="javax.sql.DataSource"  
@@ -69,7 +67,7 @@ java.lang.SecurityException: 无法定位登录配置
     />                                    
 
            
-(7)将jivejdon.war复制到Tomcat/webapps目录下，启动debug.bat：
+(5)将jivejdon.war复制到Tomcat/webapps目录下，启动debug.bat：
     http://localhost:8080/
 
 ##########################################################################################################
