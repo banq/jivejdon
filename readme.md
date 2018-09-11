@@ -12,6 +12,10 @@ DDD Aggregation Model
 ![avatar](./doc/DomainModel.png)
 
 
+Clean architecture
+--------------------------------------
+![avatar](https://github.com/ddd-by-examples/factory/raw/master/hexagon.png)
+
 
 Install
 ------------------------------------
