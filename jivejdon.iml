@@ -759,5 +759,13 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="xebia-servlet-extras-1.0.4" level="project" />
+    <orderEntry type="library" name="email" level="project" />
+    <orderEntry type="library" name="treepattern" level="project" />
+    <orderEntry type="library" name="jdonFramework" level="project" />
+    <orderEntry type="library" name="jdon-jdbcTemp" level="project" />
+    <orderEntry type="library" name="ws-commons-util-1.0.2" level="project" />
+    <orderEntry type="library" name="rome-0.9" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-5.0.8-bin" level="project" />
   </component>
 </module>

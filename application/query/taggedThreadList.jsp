@@ -16,7 +16,7 @@ String titleStr = (String)request.getAttribute("TITLE");
 pageContext.setAttribute("title", titleStr);
 %>
       <%@ include file="../common/IncludeTop.jsp" %>
-
+		 
 	<!-- /////////////////////////////////////////Content -->
 <div id="page-content" class="single-page container">
     <div class="row">
@@ -33,7 +33,10 @@ pageContext.setAttribute("title", titleStr);
       </logic:notEmpty>
         <a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=2&subscribeId=<bean:write name="tagID" /> " target="_blank"  rel="nofollow"><i class="fa fa-heart"></i></a>     
         &nbsp;&nbsp;
+		<a href="<%=request.getContextPath()%>/rss?tagId=<bean:write name="tagID" />"><i class="fa fa-feed"></i></a>
+		 &nbsp;&nbsp;
         <a href="<%=request.getContextPath()%>/tags">更多分类</a>
+		  
       </center>
      
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
@@ -103,6 +106,15 @@ pageContext.setAttribute("title", titleStr);
      data-ad-slot="7669317912"></ins>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+	   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 推荐贴右侧300x600 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="3352261515"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
 </script>
               </div>
         </div>

@@ -114,7 +114,7 @@ function viewcount(threadId, sId)
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-				    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- 推荐贴右侧300x600 -->
 <ins class="adsbygoogle"
      style="display:inline-block;width:300px;height:600px"

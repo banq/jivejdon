@@ -16,20 +16,6 @@
  */
 package com.jdon.jivejdon.presentation.servlet;
 
-import java.io.IOException;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.Constants;
@@ -64,6 +50,19 @@ import com.sun.syndication.feed.synd.SyndEntryImpl;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.SyndFeedOutput;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 public class RSSGenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -142,17 +141,17 @@ public class RSSGenServlet extends HttpServlet {
 		//	if (needMessages != null && needMessages.equals("on")) {
 		//		List<SyndEntrySorted> entries = addMessages(request, url);
 		//		feed.setEntries(entries);
-		//	} else if (tagId != null) {
-		//		List<SyndEntrySorted> entries = addTags(request, url, tagId);
-		//		feed.setEntries(entries);
+			if (tagId != null) {
+				List<SyndEntrySorted> entries = addTags(request, url, tagId);
+				feed.setEntries(entries);
 
-		//		ThreadTag tag = getTag(request, tagId);
-		//		if (tag != null) {
-		//			feed.setTitle(tag.getTitle());
-		//			feed.setLink(url + "/tags/" + tag.getTagID());
-		//			feed.setDescription(tag.getTitle());
-		//		}
-		//	} else {
+				ThreadTag tag = getTag(request, tagId);
+				if (tag != null) {
+					feed.setTitle(tag.getTitle());
+					feed.setLink(url + "/tags/" + tag.getTagID());
+					feed.setDescription(tag.getTitle());
+				}
+			} else {
 				// it is threads
 				List<SyndEntrySorted> entries = addThreads(request, url);				
 			//	String username = request.getParameter("username");
@@ -169,7 +168,7 @@ public class RSSGenServlet extends HttpServlet {
 					Collections.reverse(entries);
 					feed.setEntries(entries.subList(0, 10));
 				//}
-			//}
+			}
 
 			response.setCharacterEncoding("UTF-8");
 			Writer writer = response.getWriter();
