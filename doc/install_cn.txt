@@ -97,7 +97,23 @@ note:
 1.由于本体系统防止Spam,请将你的域名或IP加入web.xml的如下配置，否则IP会被禁止，可进入
   数据库，删除setup表中的IP字段：
      <param-name>referrer.domain.namePattern</param-name>
-			<param-value>.*(jdon.com|127.0.0.1|localhost|google).*</param-value> 
+			<param-value>.*(jdon.com|127.0.0.1|localhost|google).*</param-value>
+
+或者直接失效这个功能，在web.xml中去除下面：
+<filter-mapping>
+			<filter-name>spamFilterRefer</filter-name>
+			<url-pattern>*.shtml</url-pattern>
+		</filter-mapping>
+		<filter-mapping>
+			<filter-name>spamFilterRefer</filter-name>
+			<url-pattern>*.jsp</url-pattern>
+		</filter-mapping>
+
+		<!--  spamFilterTooFreq -->
+		<filter-mapping>
+			<filter-name>spamFilterTooFreq</filter-name>
+			<url-pattern>*.shtml</url-pattern>
+		</filter-mapping>
 			
 2.必要修改UploadImageFilter中的../imageShow.jsp等，改为绝对路径/jivejdon/imageShow.jsp
 3.如果进行性能并发测试，需要将WEB-INF/concurrentTest_myaspect.xml concurrentTest_web.xml

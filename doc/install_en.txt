@@ -77,4 +77,21 @@ intall 4 filters in admin:
 6 ImageFilter ImageFilter        
 7 CodeHighlighter 
 
+disable spamFilterRefer, delete these lines in web.xml:
+
+<filter-mapping>
+			<filter-name>spamFilterRefer</filter-name>
+			<url-pattern>*.shtml</url-pattern>
+		</filter-mapping>
+		<filter-mapping>
+			<filter-name>spamFilterRefer</filter-name>
+			<url-pattern>*.jsp</url-pattern>
+		</filter-mapping>
+
+		<!--  spamFilterTooFreq -->
+		<filter-mapping>
+			<filter-name>spamFilterTooFreq</filter-name>
+			<url-pattern>*.shtml</url-pattern>
+		</filter-mapping>
+
 
