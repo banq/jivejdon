@@ -9,32 +9,27 @@
 	<nav id="top">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6">
-					  <a href="/"><img src="https://cdn.jdon.com/simgs/jdon100.png" width="100" height="40"  alt=""/></a>
-				</div>
-				<div class="col-md-6">
-					<ul class="list-inline top-link link">
-						 <logic:present name="principal" ><i class="smallgray"> 欢迎<bean:write name="principal" /></i> </logic:present>
-				        <li><a href="/forum"><i class="fa fa-home"></i>道场</a></li>
-						<li><a href="/threads"><i class="fa fa-list-ul"></i>最新</a></li>
-						<li><a href="/tags"><i class="fa fa-star-half-full"></i>推荐</a></li>
-						<li><a href="/followus.html"><i class="fa fa-feed"></i>订阅</a></li>
-						 <logic:notPresent name="principal" >
-							 <li><html:link page="/account/newAccountForm.shtml"><i class="fa fa-user-secret"></i>注册</html:link></li>
-                         </logic:notPresent>
+                <div class="col-md-12 ">
+                    <a href="/"><img src="https://cdn.jdon.com/simgs/jdon100.png" width="100" height="40"/></a>
+                    <span class="list-inline top-link link" style="float:right;">
+					    <logic:present name="principal" ><i class="smallgray"> 欢迎<bean:write name="principal" /></i> </logic:present>
+				        <a href="/forum"><i class="fa fa-home"></i>道场</a>
+						<a href="/threads"><i class="fa fa-list-ul"></i>最新</a>
+						<a href="/tags"><i class="fa fa-star-half-full"></i>推荐</a>
+						<a href="/followus.html"><i class="fa fa-feed"></i>订阅</a>	
                          <logic:notPresent name="principal" >
-							 <li><a href="javascript:void(0);" onclick='loadWLJS(loginW)'><i class="fa fa-sign-in"></i>登陆 </a></li>
+							 <a href="javascript:void(0);" onclick='loadWLJS(loginW)'><i class="fa fa-sign-in"></i>登陆 </a>
 						</logic:notPresent>
 						<logic:present name="principal" > 
-							<li><a href="<%=request.getContextPath()%>/message/post.jsp"><i class=" fa fa-share-square"></i>发布</a></li>
+							<a href="<%=request.getContextPath()%>/message/post.jsp"><i class=" fa fa-share-square"></i>发布</a>
 						</logic:present>
                         <logic:present name="principal" > 
-							<li><a href="<%=request.getContextPath()%>/blog/<bean:write name="principal"/>"><i class="fa fa-newspaper-o"></i>博客</a></li>
+							<a href="<%=request.getContextPath()%>/blog/<bean:write name="principal"/>"><i class="fa fa-newspaper-o"></i>博客</a>
 						</logic:present>
                        <logic:present name="principal" >
-						   <li><html:link page="/jasslogin?logout"><i class="fa fa-sign-out"></i>退出 </html:link></li>
+						   <html:link page="/jasslogin?logout"><i class="fa fa-sign-out"></i>退出 </html:link>
                         </logic:present>
-					</ul>
+                    </span>
 				</div>
 			</div>
 		</div>
@@ -112,7 +107,7 @@
 								<li><a href="/idea/nodejs/">Node.js</a></li>
 								<li><a href="/js.html">Javascript</a></li>
 								<li><a href="/artichect/docker.html">Docker</a></li>
-								<li><a href="/colorUML.html">四色原型</a></li>
+								<li><a href="/colorUML.html">业务分析设计</a></li>
 							</ul>
 						</div>
 					</div>

@@ -1,12 +1,3 @@
-<%          
-int expire = 1 * 60 * 60;
-
-long modelLastModifiedDate = com.jdon.jivejdon.presentation.action.util.ForumUtil.getForumsLastModifiedDate(this.getServletContext()).getModifiedDate2();
-if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
-	return ;
-}
-
-%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>

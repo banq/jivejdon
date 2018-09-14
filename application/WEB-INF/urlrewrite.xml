@@ -187,7 +187,7 @@
 
     <rule>
         <from>^/tags$</from>
-        <to>/query/tagsList.shtml?count=15</to>
+        <to>/query/tagsList.shtml?count=6</to>
     </rule>
     <rule>
         <from>^/tags/p$</from>
@@ -195,7 +195,7 @@
     </rule>
     <rule>
         <from>^/tags/p/([0-9]+)$</from>
-        <to>/query/tagsList.shtml?count=15&amp;start=$1</to>
+        <to>/query/tagsList.shtml?count=6&amp;start=$1</to>
     </rule>
     <rule>
         <from>^/tags/([0-9]+)$</from>

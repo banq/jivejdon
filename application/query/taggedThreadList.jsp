@@ -27,9 +27,7 @@ pageContext.setAttribute("title", titleStr);
 			
        <center>
         <logic:notEmpty  name="TITLE">
-        <h3>
-            <bean:write  name="TITLE"/>
-            </h3>
+        <h3>#<bean:write  name="TITLE"/></h3>
       </logic:notEmpty>
         <a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=2&subscribeId=<bean:write name="tagID" /> " target="_blank"  rel="nofollow"><i class="fa fa-heart"></i></a>     
         &nbsp;&nbsp;

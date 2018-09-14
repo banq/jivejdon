@@ -1,7 +1,8 @@
 <%@ taglib uri="struts-logic" prefix="logic" %>
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%-- 这里是因为被tagsList.jsp的bean:include调用，只能是gbk，不能为正常utf-8，否则乱码 --%>    
+<%@ page contentType="text/html; charset=utf-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <% 

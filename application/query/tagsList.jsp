@@ -29,10 +29,11 @@
 
 <script type="text/javascript" src="https://cdn.jdon.com/common/js/prototype.js"></script>
 
+    
 <div class="box">
 	
 <div class="col-md-4">
-<logic:iterate id="threadTag" name="tagsListForm" property="list"  length="5">
+<logic:iterate id="threadTag" name="tagsListForm" property="list"  length="2">
 <div class="box">	
  <div class="linkblock">	
 	<div>
@@ -53,13 +54,9 @@
 		</a>
 	</div>
 	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' style="width:300px; border:none; overflow:hidden;">
-								  
-  <jsp:include page="/query/tt.shtml" flush="true">   
-	<jsp:param name="tagID" value="${threadTag.tagID}"/>
-	<jsp:param name="start" value="0"/>
-	<jsp:param name="count" value="15"/>
-  </jsp:include>
-	
+     <script>
+        new Ajax.Updater('ajax_tagID=<bean:write name="threadTag" property="tagID"/>', '/query/tt/${threadTag.tagID}', { method: 'get' });
+        </script> 
 	</div>	
 </div>  
 </div>
@@ -67,7 +64,7 @@
 </div>
 
 <div class="col-md-4">
-<logic:iterate id="threadTag" name="tagsListForm" property="list"  length="5" offset="5">
+<logic:iterate id="threadTag" name="tagsListForm" property="list"  length="2" offset="2">
 <div class="box">	
  <div class="linkblock">	
 	<div>
@@ -88,13 +85,10 @@
  </a>
 	</div>
 	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' style="width:300px; border:none; overflow:hidden;">
-									  
-  <jsp:include page="/query/tt.shtml" flush="true">   
-	<jsp:param name="tagID" value="${threadTag.tagID}"/>
-	<jsp:param name="start" value="0"/>
-	<jsp:param name="count" value="15"/>
-  </jsp:include>
-		
+       <script>
+        new Ajax.Updater('ajax_tagID=<bean:write name="threadTag" property="tagID"/>', '/query/tt/${threadTag.tagID}', { method: 'get' });
+        </script> 
+     
 	</div>	
 </div>  
 </div>
@@ -103,7 +97,7 @@
 
 
 <div class="col-md-4">
-<logic:iterate id="threadTag" name="tagsListForm" property="list"  length="5" offset="10">
+<logic:iterate id="threadTag" name="tagsListForm" property="list"  length="2" offset="4">
 <div class="box">	
  <div class="linkblock">	
 	<div>
@@ -124,13 +118,9 @@
  </a>
 	</div>
 	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' style="width:300px; border:none; overflow:hidden;">
-									  
-  <jsp:include page="/query/tt.shtml" flush="true">   
-	<jsp:param name="tagID" value="${threadTag.tagID}"/>
-	<jsp:param name="start" value="0"/>
-	<jsp:param name="count" value="15"/>
-  </jsp:include>
-		
+        <script>
+        new Ajax.Updater('ajax_tagID=<bean:write name="threadTag" property="tagID"/>', '/query/tt/${threadTag.tagID}', { method: 'get' });
+        </script> 
 	</div>	
 </div>  
 </div>

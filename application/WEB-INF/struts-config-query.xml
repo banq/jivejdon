@@ -115,11 +115,11 @@
        name="threadListForm" scope="request"  validate="false">
 		 <forward name="success" path="/query/others/tt.jsp"/>
 	</action>
-
-      <action path="/query/tagThreads" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction"
+  
+    <action path="/query/tagThreads" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction"
               name="threadListForm" scope="request"  validate="false">
           <forward name="success" path="/query/tagThreads.jsp"/>
-      </action>
+    </action>
 	
 	<action path="/query/tl" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" 
        name="tagsListForm" scope="request"  validate="false">
