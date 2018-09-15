@@ -39,16 +39,6 @@
               </div>
             </logic:equal>
 
-            <logic:equal name="forumMessage" property="root" value="true">
-              <div class="post_titletag">
-                <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">
-                  <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag">
-                    #<bean:write name="threadTag" property="title"/>
-                  </a> &nbsp;&nbsp;&nbsp;&nbsp;
-                </logic:iterate>
-              </div>
-            </logic:equal>
-
             <div class="post_title2">
               <div class="post_titleauthor info">
                 <logic:notEmpty name="forumMessage" property="account">
@@ -97,6 +87,15 @@
               </div>
             </div>
 
+            <logic:equal name="forumMessage" property="root" value="true">
+              <div class="post_titletag">
+                <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">
+                  <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag">
+                    #<bean:write name="threadTag" property="title"/>
+                  </a> &nbsp;&nbsp;&nbsp;&nbsp;
+                </logic:iterate>
+              </div>
+            </logic:equal>      
           </div>
         </div>
         <div class="post_body">
