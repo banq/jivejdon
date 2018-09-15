@@ -122,13 +122,15 @@
               </a></div>
               </logic:iterate>
               </logic:notEmpty>
+              <logic:equal name="forumMessage" property="root" value="true">    
               <div class="post_titletag">
                 <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">
                   <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag">
                     #<bean:write name="threadTag" property="title"/>
                   </a> &nbsp;&nbsp;&nbsp;&nbsp;
                 </logic:iterate>
-              </div>
+                </div>
+              </logic:equal>
 <p></p>
 </div>
 <logic:equal name="forumMessage" property="root" value="true">
