@@ -247,3 +247,8 @@ create table sitemap (
 	creationDate    varchar (15) not null,
 	PRIMARY KEY id (id) 
 );
+
+
+INSERT INTO `jiveforum` VALUES ('101', '1', '11', '0', '0', '0', '0', '001537193648828', '001537193648828');
+INSERT INTO `jivemessage` VALUES ('101', '101', '1', '101', '1', 'aa', 'bb', '1', '1', '1537195463805', '1537195463805');
+INSERT INTO `jivethread` VALUES ('1', '101', '101', '1', '1', '1537195463805', '1537195463805');
