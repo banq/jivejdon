@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="treepattern">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jdontree/treepattern.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/jdontree/treepattern.jar!/" />
+    </SOURCES>
+  </library>
+</component>
