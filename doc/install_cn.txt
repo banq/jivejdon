@@ -14,7 +14,7 @@ ddl目录下SQL 导入数据库 jivejdon
 #######################################################################################
 （一）Tomcat环境安装
 
-部署前提：JDK1.6或者更高版本，mysql5.0或者更高版本
+部署前提：JDK1.6以上更高版本，mysql5.0或者更高版本
 
 (1)把jivejdon/doc/tomcat/lib下的jaas.jar拷贝到tomcat的lib目录下
 把doc\tomcat\conf\jaas.config复制到tomcat/conf下
@@ -78,28 +78,9 @@ http://localhost:8080/admin/
 username:admin
 password:admin
 
-设置：
-起初设置要进入管理依据下面顺序安装下面过滤器:
-1 HTMLFilter HTMLFilter   
-2 CodeHighlighter CodeHighlighter
-3 TextStyle TextStyle        
-4 Newline Newline        
-5 URLConverter URLConverter        
-6 ImageFilter ImageFilter               
-7 Profanity Profanity        
-8 UploadImageFilter UploadImageFilter        
-9 UploadFileFilter UploadFileFilter 
-10 bodymasking
-11 hotkeys
-12 AuthorNameFormat
-13 QuoteRegexFilter
-note: 
-1.由于本体系统防止Spam,请将你的域名或IP加入web.xml的如下配置，否则IP会被禁止，可进入
-  数据库，删除setup表中的IP字段：
-     <param-name>referrer.domain.namePattern</param-name>
-			<param-value>.*(jdon.com|127.0.0.1|localhost|google).*</param-value>
+note:
 
-或者直接失效这个功能，在web.xml中去除下面：
+1. 如果出现JSP无法正常显示， 400错误，直接失效这个功能，在web.xml中去除下面：
 <filter-mapping>
 			<filter-name>spamFilterRefer</filter-name>
 			<url-pattern>*.shtml</url-pattern>
@@ -114,10 +95,30 @@ note:
 			<filter-name>spamFilterTooFreq</filter-name>
 			<url-pattern>*.shtml</url-pattern>
 		</filter-mapping>
-			
-2.必要修改UploadImageFilter中的../imageShow.jsp等，改为绝对路径/jivejdon/imageShow.jsp
-3.如果进行性能并发测试，需要将WEB-INF/concurrentTest_myaspect.xml concurrentTest_web.xml
+
+由于本体系统防止Spam,请将你的域名或IP加入web.xml的如下配置，否则IP会被禁止，可进入
+  数据库，删除setup表中的IP字段：
+     <param-name>referrer.domain.namePattern</param-name>
+			<param-value>.*(jdon.com|127.0.0.1|localhost|google).*</param-value>
+
+如果进行性能并发测试，需要将WEB-INF/concurrentTest_myaspect.xml concurrentTest_web.xml
 替代myaspect.xml和web.xml 失效防止Spam功能。
+
+设置：
+起初设置要进入管理依据下面顺序安装下面过滤器:
+1 HTMLFilter HTMLFilter
+2 CodeHighlighter CodeHighlighter
+3 TextStyle TextStyle
+4 Newline Newline
+5 URLConverter URLConverter
+6 ImageFilter ImageFilter
+7 Profanity Profanity
+8 UploadImageFilter UploadImageFilter
+9 UploadFileFilter UploadFileFilter
+10 bodymasking
+11 hotkeys
+12 AuthorNameFormat
+13 QuoteRegexFilter
 
 ##############################################################################################
 （四）调试方法
