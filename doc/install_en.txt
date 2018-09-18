@@ -5,10 +5,6 @@ other application, such as : e-commerce or ERP or CRM...
 
 let's enjoy it:
 
-Configuration steps:
-
-environment : at least JDK 5.0 + JBoss 4.0.5 + MySQL 4/other databases
-
 Tomcat configuration:
 1.MySQL JDBC configuration:
   populate all databases in ddl directory.
@@ -59,25 +55,8 @@ copy jivejdon/lib/mysql/mysql-connector-java-5.0.8-bin.jar to your tomcat/lib
 6. copy jivejdon.war to Tomcat/webapps，start debug.bat：
        http://localhost:8080/
 
-###############################################################
 
-admin:
-http://localhost:8080/admin/
-username:admin
-password:admin
-
-setup:
-
-intall 4 filters in admin:
-1 HTMLFilter HTMLFilter
-2 CodeHighlighter 
-3 TextStyle TextStyle        
-4 Newline Newline        
-5 URLConverter URLConverter        
-6 ImageFilter ImageFilter        
-7 CodeHighlighter 
-
-disable spamFilterRefer, delete these lines in web.xml:
+7. if there are 400 errors: disable spamFilterRefer, delete these lines in web.xml:
 
 <filter-mapping>
 			<filter-name>spamFilterRefer</filter-name>
@@ -94,4 +73,21 @@ disable spamFilterRefer, delete these lines in web.xml:
 			<url-pattern>*.shtml</url-pattern>
 		</filter-mapping>
 
+###############################################################
+
+admin:
+http://localhost:8080/admin/
+username:admin
+password:admin
+
+setup:
+
+intall 4 filters in admin:
+1 HTMLFilter HTMLFilter
+2 CodeHighlighter
+3 TextStyle TextStyle
+4 Newline Newline
+5 URLConverter URLConverter
+6 ImageFilter ImageFilter
+7 CodeHighlighter
 
