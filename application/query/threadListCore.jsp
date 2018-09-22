@@ -10,8 +10,8 @@
         <div class="col-sm-12">
        <div class="box">
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
-              <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>" target="_blank" >
-             <h3  class="vid-name"><bean:write name="forumThread" property="name" /></h3></a>      
+              
+             <h3  class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>" target="_blank" ><bean:write name="forumThread" property="name" /></a></h3>     
       
          <div class="info">			 
               <span><i class="fa fa-calendar"></i>
@@ -37,7 +37,7 @@
               <div class="thumbn">
            
        <logic:notEmpty name="forumMessage" property="messageVO.thumbnailUrl">
-          <img  src="<bean:write name="forumMessage" property="messageVO.thumbnailUrl"/>" border='0' class="thumbnail" height="150" />
+          <img  src="<bean:write name="forumMessage" property="messageVO.thumbnailUrl"/>" border='0' class="thumbnail"/>
        </logic:notEmpty>
               </div>
               <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>" target="_blank" class="smallgray">详细</a></p>

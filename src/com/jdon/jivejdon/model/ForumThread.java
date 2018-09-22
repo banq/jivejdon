@@ -53,9 +53,15 @@ import java.util.concurrent.atomic.AtomicReference;
 @Model
 public class ForumThread extends ForumModel {
 	private static final long serialVersionUID = 1L;
-
+	@Inject
+	public LazyLoaderRole lazyLoaderRole;
+	@Inject
+	public SubPublisherRoleIF subPublisherRole;
+	@Inject
+	public LobbyPublisherRoleIF lobbyPublisherRole;
+	@Inject
+	public MessageEventSourcingRole eventSourcing;
 	private Long threadId;
-
 	/**
 	 * the subject of the root message of the thread. This is a convenience
 	 * method equivalent to <code>getRootMessage().getSubject()</code>.
@@ -64,17 +70,12 @@ public class ForumThread extends ForumModel {
 	 * message.
 	 */
 	private String name;
-
 	// same as rootMessage's creationDate
 	private String creationDate;
-
 	// contain some abstract properties
 	private Collection propertys;
-
 	private ThreadTagsVO threadTagsVO;
-
 	private volatile Forum forum;
-
 	/**
 	 * the root message of a thread. The root message is a special first
 	 * message
@@ -82,27 +83,11 @@ public class ForumThread extends ForumModel {
 	 * messages in the thread are children of the root message.
 	 */
 	private volatile ForumMessage rootMessage;
-
 	private volatile AtomicReference<ForumThreadState> state;
-
 	// update mutable
 	private volatile ViewCounter viewCounter;
-
 	// update mutable
 	private volatile ForumThreadTreeModel forumThreadTreeModel;
-
-	@Inject
-	public LazyLoaderRole lazyLoaderRole;
-
-	@Inject
-	public SubPublisherRoleIF subPublisherRole;
-
-	@Inject
-	public LobbyPublisherRoleIF lobbyPublisherRole;
-
-	@Inject
-	public MessageEventSourcingRole eventSourcing;
-
 	@Inject
 	private ForumThreadStateFactory threadStateManager;
 
@@ -181,15 +166,15 @@ public class ForumThread extends ForumModel {
 		return name;
 	}
 
-	public String getShortname() {
-		return StringUtil.shorten(name);
-	}
-
 	/**
 	 * @param name The name to set.
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getShortname() {
+		return StringUtil.shorten(name);
 	}
 
 	/**
@@ -234,7 +219,7 @@ public class ForumThread extends ForumModel {
 		this.state.lazySet(state);
 	}
 
-	public Collection getTags() {
+	public Collection<ThreadTag> getTags() {
 		return this.threadTagsVO.getTags();
 	}
 

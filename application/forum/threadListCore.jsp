@@ -10,11 +10,10 @@
                    property="list">
        <bean:define id="forumMessage" name="forumThread"
                              property="rootMessage"></bean:define>
-      	<a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>" class="list-group-item" target="_blank">
-		<h4 class="list-group-item-heading">
+      	 <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>" class="list-group-item" target="_blank">
+		<h3 class="list-group-item-heading">        
 			<bean:write name="forumThread" property="name"/>
-		</h4>
-		
+		</h3>
 		<p class="list-group-item-text smallgray">       	
 			    <span class="fa fa-user">
 					<bean:write name="forumMessage" property="account.username"/>
@@ -55,6 +54,7 @@
             </logic:greaterThan>
 		  
 	    </p>
+        </a>
     </logic:iterate>
 
 </div>

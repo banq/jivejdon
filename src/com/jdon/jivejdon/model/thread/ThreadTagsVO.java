@@ -15,18 +15,17 @@
  */
 package com.jdon.jivejdon.model.thread;
 
-import java.util.Collection;
-
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.ThreadTag;
 import com.jdon.jivejdon.model.subscription.event.TagSubscribedNotifyEvent;
 
-public class ThreadTagsVO {
+import java.util.Collection;
 
-	private ForumThread forumThread;
+public class ThreadTagsVO {
 
 	// same as rooMessage 's tags, but this is Collection
 	private final Collection tags;
+	private ForumThread forumThread;
 
 	public ThreadTagsVO(ForumThread forumThread, Collection tags) {
 		super();
@@ -34,7 +33,7 @@ public class ThreadTagsVO {
 		this.tags = tags;
 	}
 
-	public Collection getTags() {
+	public Collection<ThreadTag> getTags() {
 		return tags;
 	}
 
