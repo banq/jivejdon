@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="aopalliance-1.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jf/aopalliance-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jf/cglib-3.2.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jf/commons-pool-1.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jf/disruptor-3.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jf/ehcache-1.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jf/guava-23.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jf/javassist-3.23.1-GA.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jf/jdom.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jf/jdonframework-6.9-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jf/log4j-api-2.11.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jf/log4j-core-2.11.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jf/picocontainer-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jf/scannotation-1.0.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

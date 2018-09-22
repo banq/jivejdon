@@ -1,8 +1,6 @@
 <component name="libraryTable">
   <library name="jdonFramework">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/jf/jdonFramework.jar!/" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
     <SOURCES />
   </library>

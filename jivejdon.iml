@@ -767,5 +767,6 @@
     <orderEntry type="library" name="ws-commons-util-1.0.2" level="project" />
     <orderEntry type="library" name="rome-0.9" level="project" />
     <orderEntry type="library" name="mysql-connector-java-5.0.8-bin" level="project" />
+    <orderEntry type="library" name="aopalliance-1.0" level="project" />
   </component>
 </module>

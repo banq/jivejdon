@@ -2,7 +2,6 @@ package com.jdon.jivejdon.manager.mapreduce;
 
 import com.jdon.annotation.Component;
 import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.model.ThreadTag;
 import com.jdon.jivejdon.service.ForumMessageQueryService;
 
 import java.util.Collection;
@@ -66,9 +65,8 @@ public class HomepageListSolver {
 
 	private double algorithm(ForumThread thread) {
 		int tagsCount = 0;
-		for (ThreadTag tag : thread.getTags()) {
-			tagsCount = tagsCount + tag.getAssonum();
-		}
+		tagsCount = tagsCount + thread.getTags().stream().mapToInt(tag -> tag.getAssonum()).sum();
+
 		if (thread.getTags().size() > 3) {
 			tagsCount = tagsCount * 3;
 		}
