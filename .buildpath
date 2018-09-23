@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<buildpath>
-	<buildpathentry kind="src" path="src"/>
-	<buildpathentry kind="con" path="org.eclipse.dltk.mod.launching.INTERPRETER_CONTAINER"/>
-	<buildpathentry kind="con" path="org.ebayopensource.vjet.eclipse.core.SDK_CONTAINER/DEFUALT_SDK"/>
-	<buildpathentry kind="lib" path="strutslib/commons-validator-1.3.1.jar"/>
-</buildpath>

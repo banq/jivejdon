@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "struts-config_1_2.dtd">
+
+<struts-config>
+  <global-forwards>   	 
+    <forward name="index" path="/forum/forumList.shtml"/>	  
+    <forward name="thread" path="/forum/messageList.shtml"/>	  
+    <forward name="forum" path="/forum/threadList.shtml"/>	
+    <forward name="sign" path="/account/sign.shtml"/>	
+    <forward name="hotlist" path="/query/popularlist.shtml"/>
+    <forward name="profile" path="/account/accountProfile.shtml"/>	  	
+    <forward name="usermessages" path="/query/threadViewQuery.shtml?queryType=userMessageQueryAction"/>	
+    <forward name="shortmessage" path="/shortmessage/shortmessage.jsp"></forward>
+  </global-forwards>
+    
+  <message-resources parameter="application" null="false" /> 
+  
+  <plug-in className="com.jdon.strutsutil.InitPlugIn">
+    <set-property property="modelmapping-config"  
+    value="com.jdon.jivejdon.model.models.xml" />
+  </plug-in>
+  <plug-in className="com.jdon.strutsutil.InitPlugIn">
+    <set-property property="modelmapping-config"  
+    value="com.jdon.jivejdon.model.others.models.xml" />
+  </plug-in>
+  <plug-in className="com.jdon.strutsutil.InitPlugIn">
+    <set-property property="modelmapping-config"  
+    value="com.jdon.jivejdon.manager.managers.xml" />
+  </plug-in>
+  <plug-in className="com.jdon.strutsutil.InitPlugIn">
+    <set-property property="modelmapping-config"  
+    value="com.jdon.jivejdon.repository.repository.xml" />
+  </plug-in>
+  <plug-in className="com.jdon.strutsutil.InitPlugIn">
+    <set-property property="modelmapping-config"  
+    value="com.jdon.jivejdon.repository.dao.daos.xml" />
+  </plug-in>  
+  <plug-in className="com.jdon.strutsutil.InitPlugIn">
+    <set-property property="modelmapping-config"  
+    value="com.jdon.jivejdon.service.services.xml" />
+  </plug-in>
+
+ 
+</struts-config>

@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.jdon</groupId>
+    <artifactId>jivejdon</artifactId>
+    <version>1.0</version>
+    <packaging>war</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <repositories>
+
+        <repository>
+            <id>jdon-struts1x</id>
+            <url>https://github.com/banq/jdon-mvn-repo/raw/master/releases</url>
+        </repository>
+        <repository>
+            <id>jdonaccessory</id>
+            <url>https://github.com/banq/jdon-mvn-repo/raw/master/releases</url>
+        </repository>
+        <repository>
+            <id>jdon-jdbcTemp</id>
+            <url>https://github.com/banq/jdon-mvn-repo/raw/master/releases</url>
+        </repository>
+        <repository>
+            <id>jdon-treepattern</id>
+            <url>https://github.com/banq/jdon-mvn-repo/raw/master/releases</url>
+        </repository>
+        <repository>
+            <id>weibo4j</id>
+            <url>https://github.com/banq/jdon-mvn-repo/raw/master/releases</url>
+        </repository>
+        <repository>
+            <id>tecentweibo</id>
+            <url>https://github.com/banq/jdon-mvn-repo/raw/master/releases</url>
+        </repository>
+        <repository>
+            <id>compass</id>
+            <url>https://github.com/banq/jdon-mvn-repo/raw/master/releases</url>
+        </repository>
+        <repository>
+            <id>lucene</id>
+            <url>https://github.com/banq/jdon-mvn-repo/raw/master/releases</url>
+        </repository>
+        <repository>
+            <id>urlrewrite</id>
+            <url>https://github.com/banq/jdon-mvn-repo/raw/master/releases</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jdon</groupId>
+            <artifactId>jdonframework</artifactId>
+            <version>6.9</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.compass-project/compass -->
+        <!-- https://mvnrepository.com/artifact/compass/compass -->
+        <!-- https://mvnrepository.com/artifact/compass/compass -->
+        <dependency>
+            <groupId>compass</groupId>
+            <artifactId>compass</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-core -->
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-core</artifactId>
+            <version>1.9.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/lucene/lucene-analyzers -->
+        <dependency>
+            <groupId>lucene</groupId>
+            <artifactId>lucene-analyzers</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-highlighter -->
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-highlighter</artifactId>
+            <version>1.9.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-snowball -->
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-snowball</artifactId>
+            <version>1.9.1</version>
+        </dependency>
+
+       
+        <dependency>
+            <groupId>com.jdon</groupId>
+            <artifactId>jdon-struts1x</artifactId>
+            <version>6.6.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jdon</groupId>
+            <artifactId>jdonaccessory</artifactId>
+            <version>6.6.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jdon</groupId>
+            <artifactId>jdon-jdbcTemp</artifactId>
+            <version>6.6.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jdon</groupId>
+            <artifactId>jdon-treepattern</artifactId>
+            <version>6.6.4</version>
+        </dependency>
+        <dependency>
+            <groupId>weibo4j</groupId>
+            <artifactId>weibo4j</artifactId>
+            <version>6.6.4</version>
+        </dependency>
+        <dependency>
+            <groupId>tecentweibo</groupId>
+            <artifactId>tecentweibo</artifactId>
+            <version>6.6.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tuckey</groupId>
+            <artifactId>urlrewrite</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.struts/struts-core -->
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts-core</artifactId>
+            <version>1.3.8</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.struts/struts-tiles -->
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts-tiles</artifactId>
+            <version>1.3.8</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.struts/struts-taglib -->
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts-taglib</artifactId>
+            <version>1.3.8</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.struts/struts-el -->
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts-el</artifactId>
+            <version>1.3.8</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.struts/struts-extras -->
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts-extras</artifactId>
+            <version>1.3.8</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/jstl/jstl -->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.servlet.jsp/jsp-api -->
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.2</version>
+
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.ocpsoft/ocpsoft-pretty-time -->
+        <dependency>
+            <groupId>com.ocpsoft</groupId>
+            <artifactId>ocpsoft-pretty-time</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>social-sdk</artifactId>
+            <version>0.0.5</version>
+        </dependency>
+        -->
+        <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+
+        <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4</version>
+            <scope>provided</scope>
+
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.transaction/javax.transaction-api -->
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>javax.transaction-api</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/net.oauth.core/oauth -->
+        <dependency>
+            <groupId>net.oauth.core</groupId>
+            <artifactId>oauth</artifactId>
+            <version>20100527</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/net.oauth.core/oauth-consumer -->
+        <dependency>
+            <groupId>net.oauth.core</groupId>
+            <artifactId>oauth-consumer</artifactId>
+            <version>20100527</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/net.oauth.core/oauth-httpclient3 -->
+        <dependency>
+            <groupId>net.oauth.core</groupId>
+            <artifactId>oauth-httpclient3</artifactId>
+            <version>20090617</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.xmlrpc/xmlrpc-client -->
+        <dependency>
+            <groupId>org.apache.xmlrpc</groupId>
+            <artifactId>xmlrpc-client</artifactId>
+            <version>3.1.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/rome/rome -->
+        <dependency>
+            <groupId>rome</groupId>
+            <artifactId>rome</artifactId>
+            <version>0.9</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging-api -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging-api</artifactId>
+            <version>1.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/fr.xebia.web.extras/xebia-servlet-extras -->
+        <dependency>
+            <groupId>fr.xebia.web.extras</groupId>
+            <artifactId>xebia-servlet-extras</artifactId>
+            <version>1.0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.5.2</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <configuration>
+                    <aggregate>true</aggregate>
+                    <charset>UTF-8</charset>
+                    <encoding>UTF-8</encoding>
+                    <docencoding>UTF-8</docencoding>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <warSourceDirectory>application</warSourceDirectory>
+                    <warName>ROOT</warName>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

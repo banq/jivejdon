@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "struts-config_1_2.dtd">
+
+<struts-config>
+  <form-beans>
+    <form-bean name="upLoadFileForm"      type="com.jdon.jivejdon.presentation.form.UpLoadFileForm" />
+    <form-bean name="upLoadFileListForm"  type="com.jdon.strutsutil.ModelListForm"/>
+    <form-bean name="accountFaceFileForm" type="com.jdon.jivejdon.presentation.form.AccountFaceFileForm"/>	  	  	  	  
+  </form-beans>
+  <global-forwards>
+    <forward name="imageShow" path="/img/uploadShowAction.shtml"/>	  
+    <forward name="uploadDL" path="/img/uploadShowAction.shtml"/>	  
+  </global-forwards>		
+  <action-mappings>
+  
+    <!--  upload view  -->
+    <action name="upLoadFileForm" path="/message/upload/uploadAction" scope="request" type="com.jdon.strutsutil.ModelViewAction" validate="false">
+      <forward name="create" path="/message/upload/uploadListAction.shtml" />
+    </action>
+   <action path="/message/upload/uploadListAction" type="com.jdon.jivejdon.presentation.action.UploadFileListAction"
+      name="upLoadFileListForm" scope="request" 
+      validate="false">
+      <forward name="success" path="/message/upload/upload.jsp"/>
+    </action>	  	  	  
+    <!--  upload  view -->
+    
+    <action name="upLoadFileForm" path="/message/upload/saveUploadAction" scope="request" type="com.jdon.strutsutil.ModelSaveAction" 
+		validate="true" input="/message/upload/result.jsp">
+      <forward name="success" path="/message/upload/result.jsp" />
+      <forward name="failure" path="/message/upload/result.jsp" />
+    </action>	  
+    
+     <action path="/img/uploadShowAction" type="com.jdon.jivejdon.presentation.action.UploadShowAction" validate="false" />
+     
+      <action path="/img/accountFaceShowAction" type="com.jdon.jivejdon.presentation.action.account.AccountFaceShowAction" validate="false" />
+     
+      <!-- upload user face -->
+	 <action name="accountFaceFileForm" path="/account/protected/upload/uploadUserFaceAction" scope="request" type="com.jdon.strutsutil.ModelViewAction" validate="false">
+      <forward name="create" path="/account/protected/upload/uploadUserFace.jsp" />
+    </action>
+	 
+	 <action name="accountFaceFileForm" path="/account/protected/upload/saveUserFaceAction" scope="request" type="com.jdon.strutsutil.ModelSaveAction" 
+		validate="true" input="/account/protected/upload/result.jsp">
+      <forward name="success" path="/account/protected/upload/result.jsp" />
+      <forward name="failure" path="/account/protected/upload/result.jsp" />
+    </action>	    	  	  
+    
+    <!-- show upload user face in struts-config-upload uploadShowAction-->
+   
+  </action-mappings>
+  <controller locale="false"  maxFileSize="150K" />
+   
+</struts-config>

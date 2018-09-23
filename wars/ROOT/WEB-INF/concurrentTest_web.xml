@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+	<display-name>JiveJdon3.0</display-name>
+	<description>A forum with Jdon Framework</description>
+	<context-param>
+		<param-name>aspectConfigure</param-name>
+		<param-value>/WEB-INF/myaspect.xml</param-value>
+	</context-param>
+	<filter>
+		<filter-name>Set Character Encoding</filter-name>
+		<filter-class>
+			com.jdon.util.SetCharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>ignore</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	
+	<filter>
+		<filter-name>rewriteFilter</filter-name>
+		<filter-class>
+			org.tuckey.web.filters.urlrewrite.UrlRewriteFilter
+		</filter-class>
+	</filter>
+	<filter>
+		<filter-name>DisableUrlSessionFilter</filter-name>
+		<filter-class>
+			com.jdon.jivejdon.presentation.filter.DisableUrlSessionFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Set Character Encoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>	
+	
+	<filter-mapping>
+		<filter-name>rewriteFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>DisableUrlSessionFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<listener>
+		<listener-class>
+			com.jdon.jivejdon.presentation.listener.UserCounterListener
+		</listener-class>
+	</listener>
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>
+			org.apache.struts.action.ActionServlet
+		</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>
+				/WEB-INF/struts-config.xml,/WEB-INF/struts-config-account.xml,/WEB-INF/struts-config-forum.xml,/WEB-INF/struts-config-message.xml,/WEB-INF/struts-config-query.xml,/WEB-INF/struts-config-admin.xml,/WEB-INF/struts-config-upload.xml,/WEB-INF/struts-config-shortmessage.xml,/WEB-INF/struts-config-blog.xml,/WEB-INF/struts-config-mobile.xml,/WEB-INF/struts-config-subscription.xml
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>2</param-value>
+		</init-param>
+		<init-param>
+			<param-name>detail</param-name>
+			<param-value>2</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>jasslogin</servlet-name>
+		<servlet-class>
+			com.jdon.security.web.LoginServlet
+		</servlet-class>
+		<init-param>
+			<param-name>login</param-name>
+			<param-value>/account/login.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>logout</param-name>
+			<param-value>/account/logout.jsp</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>RSSGenServlet</servlet-name>
+		<servlet-class>
+			com.jdon.jivejdon.presentation.servlet.RSSGenServlet
+		</servlet-class>
+		<init-param>
+			<param-name>title</param-name>
+			<param-value> J道jdon.com </param-value>
+		</init-param>
+		<init-param>
+			<param-name>description</param-name>
+			<param-value> 高手云集，真知灼见 手机WAP浏览:http://wap.feedsky.com/jdon </param-value>
+		</init-param>
+		<init-param>
+			<param-name>item.link</param-name>
+			<param-value>/forum/messageList.shtml?thread=#(threadId)#&amp;message=#(messageId)#</param-value>
+		</init-param>
+	</servlet>	
+     <servlet>
+        <servlet-name>dwr-invoker</servlet-name>
+        <display-name>DWR Servlet</display-name>
+        <servlet-class>uk.ltd.getahead.dwr.DWRServlet</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>logLevel</param-name>
+            <param-value>WARN</param-value>
+        </init-param>
+    </servlet>
+    
+	<servlet-mapping>
+		<servlet-name>RSSGenServlet</servlet-name>
+		<url-pattern>/rss</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.shtml</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>jasslogin</servlet-name>
+		<url-pattern>/jasslogin</url-pattern>
+	</servlet-mapping>
+	 <servlet-mapping>
+        <servlet-name>dwr-invoker</servlet-name>
+        <url-pattern>/dwr/*</url-pattern>
+    </servlet-mapping>
+	<session-config>
+		<session-timeout>15</session-timeout>
+	</session-config>
+	<error-page>
+		<error-code>400</error-code>
+		<location>/</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/login</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/login</location>
+	</error-page>
+
+	<error-page>
+		<error-code>500</error-code>
+		<location>/common/permError.jsp?error=500</location>
+	</error-page>
+
+	<taglib>
+		<taglib-uri>struts-bean</taglib-uri>
+		<taglib-location>/WEB-INF/tld/struts-bean.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>struts-html</taglib-uri>
+		<taglib-location>/WEB-INF/tld/struts-html.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>struts-logic</taglib-uri>
+		<taglib-location>/WEB-INF/tld/struts-logic.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>/WEB-INF/MultiPages.tld</taglib-uri>
+		<taglib-location>/WEB-INF/tld/MultiPages.tld</taglib-location>
+	</taglib>
+	<security-constraint>
+		<display-name>admin security</display-name>
+		<web-resource-collection>
+			<web-resource-name>Admin input</web-resource-name>
+			<url-pattern>/admin/*</url-pattern>
+		</web-resource-collection>
+		<web-resource-collection>
+			<web-resource-name>forum admin</web-resource-name>
+			<url-pattern>/forum/admin/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>Admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<security-constraint>
+		<display-name>User security</display-name>
+		<web-resource-collection>
+			<web-resource-name>User post message</web-resource-name>
+			<url-pattern>/message/*</url-pattern>
+		</web-resource-collection>
+		<web-resource-collection>
+			<web-resource-name>User register</web-resource-name>
+			<url-pattern>/account/protected/*</url-pattern>
+		</web-resource-collection>
+		<web-resource-collection>
+			<web-resource-name>User shotmessage</web-resource-name>
+			<url-pattern>/shortmessage/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>User</role-name>
+			<role-name>Admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/jasslogin</form-login-page>
+			<form-error-page>/account/login_error.jsp</form-error-page>
+		</form-login-config>
+	</login-config>
+	<security-role>
+		<description>administrator</description>
+		<role-name>Admin</role-name>
+	</security-role>
+	<security-role>
+		<description>register user</description>
+		<role-name>User</role-name>
+	</security-role>
+</web-app>

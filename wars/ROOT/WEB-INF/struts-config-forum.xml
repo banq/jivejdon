@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "struts-config_1_2.dtd">
+
+<struts-config>
+
+  <form-beans>
+    <form-bean name="forumForm" type="com.jdon.jivejdon.presentation.form.ForumForm"/>
+    <form-bean name="feedForm" type="com.jdon.jivejdon.presentation.form.feed.FeedForm"/>
+    <form-bean name="forumListForm" type="com.jdon.strutsutil.ModelListForm"/>	  
+    <form-bean name="imageInfoForm" type="com.jdon.jivejdon.presentation.form.ImageInfoForm"/>
+    <form-bean name="imageListForm" type="com.jdon.strutsutil.ModelListForm"/>     
+  </form-beans>
+
+  <action-mappings>
+     <!--  index.jsp   -->
+    <action path="/forum/forumList" type="com.jdon.jivejdon.presentation.action.ForumListAction"
+      name="forumListForm" scope="request" 
+      validate="false">
+      <forward name="success" path="/forum/forumList.jsp"/>
+    </action>
+    
+
+  <action path="/forum/admin/forumList" type="com.jdon.jivejdon.presentation.action.ForumListAction"
+      name="forumListForm" scope="request" 
+      validate="false">
+      <forward name="success" path="/forum/admin/forumList.jsp"/>
+    </action>
+	  	  	  
+   <action name="forumForm" path="/forum/admin/forumAction" type="com.jdon.strutsutil.ModelViewAction" scope="request"
+		validate="false">
+      <forward name="create" path="/forum/admin/forum.jsp" />
+      <forward name="edit" path="/forum/admin/forum.jsp" />
+    </action>
+	  
+    <action name="forumForm" path="/forum/admin/forumSaveAction" type="com.jdon.strutsutil.ModelSaveAction" scope="request"
+    	validate="true" input="/forum/admin/forumAction.shtml">
+      <forward name="success" path="/forum/admin/forumList.shtml" />
+      <forward name="failure" path="/forum/admin/forumAction.shtml" />
+    </action>
+    
+	<action name="imageListForm" path="/forum/admin/imageAction" type="com.jdon.jivejdon.presentation.action.admin.ImageListAction" 
+		scope="request"
+		validate="false">
+      <forward name="success" path="/forum/admin/imageList.jsp" />
+    </action>
+    
+   <action name="imageListForm" path="/forum/imagesSlide" type="com.jdon.jivejdon.presentation.action.ImageSlideAction" 
+		scope="request"
+		validate="false">
+      <forward name="success" path="/imagesSlide.jsp" />
+    </action>
+    
+    <action name="imageInfoForm" path="/forum/admin/imageSaveAction" type="com.jdon.strutsutil.ModelSaveAction" scope="request"
+    	validate="true" input="/forum/admin/imageAction.shtml">
+      <forward name="success" path="/forum/admin/imageAction.shtml" />
+      <forward name="failure" path="/forum/admin/imageAction.shtml" />
+    </action>
+    
+   
+    <action path="/forum/forumListJSON" type="com.jdon.jivejdon.presentation.action.ForumListAction"
+      name="forumListForm" scope="request" 
+      validate="false">
+      <forward name="success" path="/forum/forumListJSON.jsp"/>
+    </action>	
+    
+    <action name="feedForm" path="/forum/feed/feedbackAction" type="com.jdon.strutsutil.ServiceMethodAction"
+	  scope="request" validate="true" input="/forum/feed/feedback.jsp" >
+      <forward name="send" path="/forum/feed/result.jsp"/>		
+    </action>
+    
+    
+    
+    
+   
+    
+  </action-mappings>
+</struts-config>

@@ -1,0 +1,129 @@
+.dp-highlighter {
+	FONT-SIZE: 12px; MARGIN: 18px 0px; OVERFLOW: auto; WIDTH: 99%; PADDING-TOP: 1px; FONT-FAMILY: "Consolas", "Courier New", Courier, mono, serif; BACKGROUND-COLOR: #e7e5dc
+}
+.dp-highlighter OL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-TOP-STYLE: none; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+.dp-highlighter OL LI {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-TOP-STYLE: none; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+.dp-highlighter OL LI SPAN {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-TOP-STYLE: none; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+.dp-highlighter A {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: none transparent scroll repeat 0% 0%; PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-TOP-STYLE: none; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+.dp-highlighter A:hover {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: none transparent scroll repeat 0% 0%; PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-TOP-STYLE: none; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+.dp-highlighter .bar {
+	PADDING-LEFT: 45px
+}
+.collapsed.dp-highlighter .bar {
+	PADDING-LEFT: 0px
+}
+.nogutter.dp-highlighter .bar {
+	PADDING-LEFT: 0px
+}
+.dp-highlighter OL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px 0px 1px 45px; COLOR: #5c5c5c; PADDING-TOP: 0px; LIST-STYLE-TYPE: decimal; BACKGROUND-COLOR: #fff
+}
+.nogutter.dp-highlighter OL {
+	MARGIN-LEFT: 0px! important; LIST-STYLE-TYPE: none! important
+}
+.nogutter.dp-highlighter OL LI {
+	MARGIN-LEFT: 0px! important; LIST-STYLE-TYPE: none! important
+}
+.dp-highlighter OL LI {
+	PADDING-RIGHT: 3px! important; PADDING-LEFT: 10px! important; LIST-STYLE-POSITION: outside! important; PADDING-BOTTOM: 0px! important; MARGIN: 0px; BORDER-LEFT: #6ce26c 3px solid; COLOR: #5c5c5c; LINE-HEIGHT: 14px; PADDING-TOP: 0px! important; BACKGROUND-COLOR: #f8f8f8
+}
+.dp-highlighter .columns DIV {
+	PADDING-RIGHT: 3px! important; PADDING-LEFT: 10px! important; LIST-STYLE-POSITION: outside! important; PADDING-BOTTOM: 0px! important; MARGIN: 0px; BORDER-LEFT: #6ce26c 3px solid; COLOR: #5c5c5c; LINE-HEIGHT: 14px; PADDING-TOP: 0px! important; BACKGROUND-COLOR: #f8f8f8
+}
+.nogutter.dp-highlighter OL LI {
+	BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px
+}
+.nogutter.dp-highlighter .columns DIV {
+	BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px
+}
+.dp-highlighter .columns {
+	OVERFLOW: hidden; WIDTH: 100%; COLOR: gray; BACKGROUND-COLOR: #f8f8f8
+}
+.dp-highlighter .columns DIV {
+	PADDING-BOTTOM: 5px
+}
+.dp-highlighter OL LI.alt {
+	BACKGROUND-COLOR: #fff
+}
+.dp-highlighter OL LI SPAN {
+	COLOR: black
+}
+.collapsed.dp-highlighter OL {
+	MARGIN: 0px
+}
+.collapsed.dp-highlighter OL LI {
+	DISPLAY: none
+}
+.printing.dp-highlighter {
+	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+.printing.dp-highlighter .tools {
+	DISPLAY: none! important
+}
+.printing.dp-highlighter LI {
+	DISPLAY: list-item! important
+}
+.dp-highlighter .tools {
+	PADDING-RIGHT: 8px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; FONT: 9px Verdana, Geneva, Arial, Helvetica, sans-serif; BORDER-LEFT: #6ce26c 3px solid; COLOR: silver; PADDING-TOP: 3px; BACKGROUND-COLOR: #f8f8f8
+}
+.nogutter.dp-highlighter .tools {
+	BORDER-LEFT-WIDTH: 0px
+}
+.collapsed.dp-highlighter .tools {
+	BORDER-BOTTOM-WIDTH: 0px
+}
+.dp-highlighter .tools A {
+	FONT-SIZE: 9px; COLOR: #a0a0a0; MARGIN-RIGHT: 10px; TEXT-DECORATION: none
+}
+.dp-highlighter .tools A:hover {
+	COLOR: red; TEXT-DECORATION: underline
+}
+.dp-about {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; COLOR: #333; PADDING-TOP: 0px; BACKGROUND-COLOR: #fff
+}
+.dp-about TABLE {
+	FONT-SIZE: 11px; WIDTH: 100%; FONT-FAMILY: Tahoma, Verdana, Arial, sans-serif! important; HEIGHT: 100%
+}
+.dp-about TD {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; VERTICAL-ALIGN: top; PADDING-TOP: 10px
+}
+.dp-about .copy {
+	BORDER-BOTTOM: #aca899 1px solid; HEIGHT: 95%
+}
+.dp-about .title {
+	FONT-WEIGHT: bold; COLOR: red
+}
+.dp-about .para {
+	MARGIN: 0px 0px 4px
+}
+.dp-about .footer {
+	BORDER-TOP: #fff 1px solid; COLOR: #333; BACKGROUND-COLOR: #eceadb; TEXT-ALIGN: right
+}
+.dp-about .close {
+	FONT-SIZE: 11px; WIDTH: 60px; COLOR: #333; FONT-FAMILY: Tahoma, Verdana, Arial, sans-serif! important; HEIGHT: 22px; BACKGROUND-COLOR: #eceadb
+}
+.dp-highlighter .comment {
+	COLOR: #008200
+}
+.dp-highlighter .comments {
+	COLOR: #008200
+}
+.dp-highlighter .string {
+	COLOR: blue
+}
+.dp-highlighter .keyword {
+	FONT-WEIGHT: bold; COLOR: #069
+}
+.dp-highlighter .preprocessor {
+	COLOR: gray
+}

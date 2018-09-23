@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "struts-config_1_2.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="subscriptionForm"
+			type="com.jdon.jivejdon.presentation.form.SubscriptionForm" />
+		<form-bean name="subscriptionListForm" type="com.jdon.strutsutil.ModelListForm" />
+	</form-beans>
+
+
+	<action-mappings>
+
+		<action name="accountProfileForm" path="/account/protected/sub/index"
+			type="com.jdon.jivejdon.presentation.action.account.AccountProfileAction" scope="request" validate="false">
+			<forward name="successlogin" path="/account/protected/sub/default.jsp" />			
+		</action>
+		
+		<action path="/account/protected/sub/subForumList"
+			type="com.jdon.jivejdon.presentation.action.sub.SubForumListAction"
+			name="subscriptionListForm" scope="request" validate="false">
+			<forward name="success" path="/account/protected/sub/subForumList.jsp" />
+		</action>
+		
+		<action path="/account/protected/sub/subThreadList"
+			type="com.jdon.jivejdon.presentation.action.sub.SubThreadListAction"
+			name="subscriptionListForm" scope="request" validate="false">
+			<forward name="success" path="/account/protected/sub/subThreadList.jsp" />
+		</action>
+		
+
+		<action path="/account/protected/sub/subTagList"
+			type="com.jdon.jivejdon.presentation.action.sub.SubTagListAction" name="subscriptionListForm"
+			scope="request" validate="false">
+			<forward name="success" path="/account/protected/sub/subTagList.jsp" />
+		</action>
+		
+		<action path="/account/protected/sub/subAccountList"
+			type="com.jdon.jivejdon.presentation.action.sub.SubAccountListAction" name="subscriptionListForm"
+			scope="request" validate="false">
+			<forward name="success" path="/account/protected/sub/subAccountList.jsp" />
+		</action>
+
+
+		<action name="subscriptionForm" path="/account/protected/sub/subAction"
+			type="com.jdon.strutsutil.ModelViewAction" scope="request" validate="false">
+			<forward name="create" path="/account/protected/sub/sub.jsp" />
+			<forward name="edit" path="/account/protected/sub/sub.jsp" />
+		</action>
+
+		<action name="subscriptionForm" path="/account/protected/sub/subSaveAction"
+			type="com.jdon.strutsutil.ModelSaveAction" scope="request" validate="true"
+			input="/account/protected/sub/result.jsp">
+			<forward name="success" path="/account/protected/sub/result.jsp" />
+			<forward name="failure" path="/account/protected/sub/result.jsp" />
+		</action>
+
+<!--  /account/protected/sub/checkSub.shtml?service=subscriptionService&method=checkSubscription&id=xxx  -->
+     <action name="messageForm" path="/account/protected/sub/checkSub" type="com.jdon.jivejdon.presentation.action.util.ServiceMethodSimpleAction" scope="request"
+		validate="false">
+       <forward name="success" path="/account/protected/sub/checkSub.jsp" />	
+    </action>
+       
+<!--  /account/protected/sub/delSub.shtml?service=subscriptionService&method=deleteSubscription&id=xxx  -->
+     <action name="messageForm" path="/account/protected/sub/delSub" type="com.jdon.jivejdon.presentation.action.util.ServiceMethodSimpleAction" scope="request"
+		validate="false">
+       <forward name="success" path="/account/protected/sub/result.jsp" />	
+    </action>              
+
+       <!-- interest -->
+       <action name="accountProfileForm" path="/social/interest"
+			type="com.jdon.jivejdon.presentation.action.account.AccountProfileAction" scope="request" validate="false">
+			<forward name="successlogin" path="/social/interest.jsp" />			
+		</action>
+       
+		<action path="/social/subForumList"
+			type="com.jdon.jivejdon.presentation.action.sub.SubForumListAction"
+			name="subscriptionListForm" scope="request" validate="false">
+			<forward name="success" path="/social/sub/subForumList.jsp" />
+		</action>
+		
+		<action path="/social/subThreadList"
+			type="com.jdon.jivejdon.presentation.action.sub.SubThreadListAction"
+			name="subscriptionListForm" scope="request" validate="false">
+			<forward name="success" path="/social/sub/subThreadList.jsp" />
+		</action>
+		
+
+		<action path="/social/subTagList"
+			type="com.jdon.jivejdon.presentation.action.sub.SubTagListAction" name="subscriptionListForm"
+			scope="request" validate="false">
+			<forward name="success" path="/social/sub/subTagList.jsp" />
+		</action>
+		
+		<action path="/social/subAccountList"
+			type="com.jdon.jivejdon.presentation.action.sub.SubAccountListAction" name="subscriptionListForm"
+			scope="request" validate="false">
+			<forward name="success" path="/social/sub/subAccountList.jsp" />
+		</action>
+    <!-- interest -->
+       
+	</action-mappings>
+</struts-config>
