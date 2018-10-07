@@ -22,7 +22,7 @@
 .xb4 {height:2px; margin:0 1px;}
 
 .xboxcontent {display:block; background:#eee; border:0 solid #ccc; border-width:0 1px; padding:10px ;min-height:30px}
-#info {width:520px;  padding:10px 20px; background:#fff; border:1px solid #ddd; border-radius:3px; box-shadow:0 15px 10px -15px rgba(0,0,0,0.4);}
+#info { padding:10px 20px; background:#fff; border:1px solid #ddd; border-radius:3px; box-shadow:0 15px 10px -15px rgba(0,0,0,0.4);}
 
 .messageListAll{
   margin:0 auto;

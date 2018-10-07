@@ -15,16 +15,6 @@
  */
 package com.jdon.jivejdon.repository.dao.sql;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeSet;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.query.QueryCriteria;
 import com.jdon.jivejdon.model.query.QuerySpecification;
@@ -35,6 +25,15 @@ import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
 import com.jdon.jivejdon.repository.dao.MessageQueryDao;
 import com.jdon.model.query.block.Block;
 import com.jdon.treepatterns.model.TreeModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeSet;
 
 /**
  * 
@@ -201,7 +200,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 	public PageIterator getMessages(int start, int count) {
 		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from jiveMessage  ";
 
-		String GET_ALL_ITEMS = "select messageID  from jiveMessage where parentMessageID IS NOT NULL  ORDER BY creationDate DESC";
+		String GET_ALL_ITEMS = "select messageID  from jiveMessage ORDER BY creationDate DESC";
 
 		Collection params = new ArrayList(1);
 		return messagePageIteratorSolver.getPageIteratorSolver("getMessages").getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, params, start,

@@ -47,7 +47,9 @@ public class AuthorList {
 
 	}
 
-	public void populate() {
+
+	public Collection<Account> getAuthors() {
+
 		TreeMap<Long, Integer> sorted_map = createTreeMap();
 		sorted_map.putAll(authors);
 
@@ -61,12 +63,8 @@ public class AuthorList {
 			i++;
 
 		}
-		sortedauthors = Collections.unmodifiableList(newAcounts);
-		//authors.clear();
-	}
+		return Collections.unmodifiableList(newAcounts);
 
-	public Collection<Account> getAuthors() {
-		return sortedauthors;
 	}
 
 	public TreeMap<Long, Integer> createTreeMap() {

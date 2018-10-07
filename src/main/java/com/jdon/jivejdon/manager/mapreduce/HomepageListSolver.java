@@ -70,8 +70,8 @@ public class HomepageListSolver {
 		if (thread.getTags().size() > 3) {
 			tagsCount = tagsCount * 3;
 		}
-		double p = tagsCount * 0.5 + thread.getState().getMessageCount() * 0.3 +
-				thread.getRootMessage().getDigCount() * 0.1 + thread.getViewCount() * 0.1;
+		double p = (tagsCount + thread.getViewCount()) * (thread.getState()
+				.getMessageCount() + 1) * thread.getRootMessage().getDigCount();
 
 		double t = System.currentTimeMillis() - thread.getState().getModifiedDate2() + 1000;
 

@@ -6,6 +6,12 @@
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
+<%
+String thumbpics = "/simgs/thumb2/1.jpg,/simgs/thumb2/2.jpg,/simgs/thumb2/3.jpg,/simgs/thumb2/4.jpg,/simgs/thumb2/5.jpg,/simgs/thumb2/6.jpg,/simgs/thumb2/7.jpg,/simgs/thumb2/8.jpg";   
+String[] thumbs = thumbpics.split(",");
+int indexI = (int) (Math.random() * thumbs.length);
+
+%>
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='1' >
@@ -18,7 +24,7 @@
             <div class="zoom-container">
 				<div>
        <logic:notEmpty name="forumMessage" property="messageVO.thumbnailUrl">
-          <img  src="<bean:write name="forumMessage" property="messageVO.thumbnailUrl"/>" border='0' width="600"/>
+          <img src="<%=thumbs[indexI]%>" border='0' width="600"/>
        </logic:notEmpty>
                </div>
 			</div>

@@ -28,11 +28,11 @@ public class ThreadApprovedNewListAction extends ModelListAction {
 	}
 
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
-		if (start >= 150 || start % count != 0)
+		if (start >= ThreadApprovedNewList.maxSize || start % count != 0)
 			return new PageIterator();
 
 		Collection<Long> list = getThreadApprovedNewList().getApprovedThreads(start);
-		int maxSize = 150;
+		int maxSize = ThreadApprovedNewList.maxSize;
 		if (getThreadApprovedNewList().getMaxSize() != -1) {
 			maxSize = getThreadApprovedNewList().getMaxSize();
 		}

@@ -38,6 +38,7 @@ pageContext.setAttribute("title", titleStr);
 %>
 <%@ include file="../common/IncludeTop.jsp" %>
 <link rel="alternate" type="application/rss+xml" title="<bean:write name="title" /> " href="/rss" /> 
+<meta http-equiv="refresh" content="3600">
 <script>
  if(top !== self) top.location = self.location;
   contextpath = "<%=request.getContextPath()%>";
@@ -63,8 +64,8 @@ pageContext.setAttribute("title", titleStr);
 			 <logic:empty name="forum" property="forumId">
 					<ul class="nav nav-tabs">
   <li class="active"><a href="#">时间</a></li>
-  <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">回复数</a></li>
-  <li><a href="<%=request.getContextPath()%>/approval">点赞</a></li>				
+  <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">回复</a></li>
+  <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">点赞</a></li>				
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml">更多查询</a></li> 
 	               <div class="tres" style="float: right;">
      
@@ -85,19 +86,13 @@ pageContext.setAttribute("title", titleStr);
          有<b>
         <bean:write name="threadListForm" property="allCount"/>
         </b>贴
-        <div id="tooltip_content_go"  style="display:none">
-          <div class="tooltip_content">
-            <div class="title">前往下页:</div>
-            <div class="form">
-              <input type="text" style="width: 50px;" id="pageToGo">
-              <input type="button" value=" Go " onClick="goToAnotherPage('<html:rewrite page="/forum.jsp" paramId="forum" paramName="forum" paramProperty="forumId"/>','<bean:write name="threadListForm" property="count" />');" > </div>
-          </div>
-        </div>
+     
       </div>
 	</ul>          
-                   <%@ include file="threadListCore.jsp" %>
+    
+   <%@ include file="threadListCore.jsp" %>
       
-	    	         <div class="tres">
+	<div class="tres">
                     <logic:empty name="forum" property="forumId">
                       <MultiPagesREST:pager actionFormName="threadListForm" page="/threads" >
                         <MultiPagesREST:prev name=" 上一页 " />

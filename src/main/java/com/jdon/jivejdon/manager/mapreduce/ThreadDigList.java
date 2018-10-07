@@ -15,6 +15,7 @@
  */
 package com.jdon.jivejdon.manager.mapreduce;
 
+import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.service.ForumMessageQueryService;
 
@@ -23,69 +24,73 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.TreeMap;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.TreeSet;
 
 public class ThreadDigList {
 
 	public final static int DigsListMAXSize = 30;
 
-	private final ConcurrentHashMap<Long, Integer> digsCount;
+
+	private final TreeSet<ForumThread> sorted_set;
 	private final ForumMessageQueryService forumMessageQueryService;
-	private Collection<ForumThread> sortedDigThreads = Collections
-			.unmodifiableList(Collections.EMPTY_LIST);
 
 	public ThreadDigList(ForumMessageQueryService forumMessageQueryService) {
-		this.digsCount = new ConcurrentHashMap();
 		this.forumMessageQueryService = forumMessageQueryService;
+		this.sorted_set = createTreeList();
 	}
 
 	public void addForumThread(ForumThread forumThread) {
-		digsCount.put(forumThread.getThreadId(), forumThread.getRootMessage()
-				.getDigCount());
+		sorted_set.add(forumThread);
 	}
 
-	public void populate() {
-		TreeMap<Long, Integer> sorted_map = createTreeMap();
-		sorted_map.putAll(digsCount);
+
+	public PageIterator getPageIterator(int start, int count) {
+
+		List<ForumThread> threads = new ArrayList<>(sorted_set);
+		List pageIds = new ArrayList(threads.size());
+		for (int i = start; i < start + count; i++) {
+			if (i < threads.size()) {
+				pageIds.add(threads.get(i).getThreadId());
+			} else
+				break;
+		}
+		return new PageIterator(sorted_set.size(), pageIds.toArray());
+	}
+
+	public Collection<ForumThread> getDigs() {
 
 		List newThreads = new ArrayList();
 		int i = 0;
-		for (Long threadId : sorted_map.keySet()) {
-			newThreads.add(forumMessageQueryService.getThread(threadId));
+		for (ForumThread thread : sorted_set) {
+			newThreads.add(thread);
 			if (i > DigsListMAXSize) {
 				break;
 			}
 			i++;
 
 		}
-		sortedDigThreads = Collections.unmodifiableList(newThreads);
-		//digsCount.clear();
-
+		return Collections.unmodifiableList(newThreads);
 	}
 
-	public Collection<ForumThread> getDigs() {
-		return sortedDigThreads;
-	}
-
-	private TreeMap<Long, Integer> createTreeMap() {
-		return new TreeMap(new Comparator() {
+	private TreeSet<ForumThread> createTreeList() {
+		return new TreeSet(new Comparator() {
 			public int compare(Object num1, Object num2) {
 				if (num1 == num2)
 					return 0;
-				Long thread1 = (Long) num1;
-				Long thread2 = (Long) num2;
+				Integer thread1Count = ((ForumThread) num1).getRootMessage()
+						.getDigCount();
+				Integer thread2Count = ((ForumThread) num2).getRootMessage()
+						.getDigCount();
 
-				int thread1Count = digsCount.get(thread1);
-				int thread2Count = digsCount.get(thread2);
+
 				if (thread1Count > thread2Count)
 					return -1; // returning the first object
 				else if (thread1Count < thread2Count)
 					return 1;
 				else if (thread1Count == thread2Count) {
-					if (thread1 > thread2)
+					if (((ForumThread) num1).getThreadId() > ((ForumThread) num2).getThreadId())
 						return -1;
-					else if (thread1 < thread2)
+					else
 						return 1;
 				}
 				return 0;

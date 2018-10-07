@@ -8,6 +8,7 @@
 <bean:define id="title"  value="软件分析建模与架构设计社区" />
 <%@ include file="../common/IncludeTop.jsp" %>
 <link rel="alternate" type="application/rss+xml" title="<bean:write name="title" />" href="/rss/messages" />
+<meta http-equiv="refresh" content="3600">
 <script>
  if(top !== self) top.location = self.location;
   contextpath = "<%=request.getContextPath()%>";

@@ -43,6 +43,8 @@ import java.util.concurrent.TimeUnit;
  */
 @Component("threadApprovedNewList")
 public class ThreadApprovedNewList implements Startable {
+
+	public final static int maxSize = 15000;
 	public final static String NAME = "threadApprovedNewList";
 	private final static Logger logger = LogManager
 			.getLogger(ThreadApprovedNewList.class);
@@ -75,7 +77,7 @@ public class ThreadApprovedNewList implements Startable {
 		Runnable task = new Runnable() {
 			public void run() {
 				init();
-				getApprovedThreads(150);
+				getApprovedThreads(maxSize);
 			}
 		};
 		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(task, 60 * 60 * 12,
@@ -216,8 +218,6 @@ public class ThreadApprovedNewList implements Startable {
 				}
 				start = start + count;
 			}
-			threadDigList.populate();
-			authorList.populate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

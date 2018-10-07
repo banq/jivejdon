@@ -16,7 +16,7 @@
 				        <a href="/forum"><i class="fa fa-home"></i>道场</a>
 						<a href="/threads"><i class="fa fa-list-ul"></i>最新</a>
 						<a href="/tags"><i class="fa fa-star-half-full"></i>推荐</a>
-						<a href="/followus.html"><i class="fa fa-feed"></i>订阅</a>	
+						<a href="/forum/messageListAll"><i class="fa fa-feed"></i>订阅</a>	
                          <logic:notPresent name="principal" >
 							 <a href="javascript:void(0);" onclick='loadWLJS(loginW)'><i class="fa fa-sign-in"></i>登陆 </a>
 						</logic:notPresent>

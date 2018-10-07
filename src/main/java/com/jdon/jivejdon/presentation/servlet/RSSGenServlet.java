@@ -138,9 +138,7 @@ public class RSSGenServlet extends HttpServlet {
 
 			String needMessages = request.getParameter("messages");
 			String tagId = request.getParameter("tagId");
-		//	if (needMessages != null && needMessages.equals("on")) {
-		//		List<SyndEntrySorted> entries = addMessages(request, url);
-		//		feed.setEntries(entries);
+
 			if (tagId != null) {
 				List<SyndEntrySorted> entries = addTags(request, url, tagId);
 				feed.setEntries(entries);
@@ -347,44 +345,6 @@ public class RSSGenServlet extends HttpServlet {
 		return forumMessageService.getMessage(key);
 	}
 
-	private List<SyndEntrySorted> addMessages(HttpServletRequest request, String url) {
-		String startS = request.getParameter("start");
-		if (UtilValidate.isEmpty(startS)) {
-			startS = "0";
-		}
-		int start = Integer.parseInt(startS);
-
-		String countS = request.getParameter("count");
-		if (UtilValidate.isEmpty(countS)) {
-			countS = "5";
-		}
-		int count = Integer.parseInt(countS);
-
-		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService",
-				this.getServletContext());
-
-		PageIterator pi = new PageIterator();
-		if (request.getParameter("username") != null) {
-			MultiCriteria queryCriteria = new MultiCriteria();
-			Account account = this.getAccount(request, request.getParameter("username"));
-			if (account != null)
-				queryCriteria.setUserID(account.getUserId());
-			pi = forumMessageQueryService.getMessages(queryCriteria, start, count);
-		} else {
-			pi = forumMessageQueryService.getMessages(start, count);
-		}
-
-		List<SyndEntrySorted> entries = new ArrayList<SyndEntrySorted>();
-		while (pi.hasNext()) {
-			Long messageId = (Long) pi.next();
-			ForumMessage message = getForumMessage(request, messageId);
-			if (message != null)
-				addMessage(url, entries, message, request);
-		}
-
-		return entries;
-
-	}
 
 	private void addMessage(String url, List<SyndEntrySorted> entries, ForumMessage message, HttpServletRequest request) {
 		try {
