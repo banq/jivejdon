@@ -30,6 +30,7 @@ public class PostThreadEventHandler implements EventBusHandler {
 
 	public void refresh(Long forumMessageId) {
 		ForumMessage forumMessage = forumAbstractFactory.getMessage(forumMessageId);
+		messagePageIteratorSolver.clearPageIteratorSolver("getMessages");
 		messagePageIteratorSolver.clearPageIteratorSolver("getThreads");
 		messagePageIteratorSolver.clearPageIteratorSolver(forumMessage.getForum().getForumId().toString());
 		messagePageIteratorSolver.clearPageIteratorSolver(forumMessage.getAccount().getUserId());

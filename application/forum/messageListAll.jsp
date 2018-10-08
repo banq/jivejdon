@@ -6,16 +6,14 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<bean:define id="title" value=" 一览 "/>
+<bean:define id="title" value=" 流贴 "/>
 <%@ include file="../common/IncludeTop.jsp" %>
-
+<meta http-equiv="refresh" content="3600">
 <script>
     if (top !== self) top.location = self.location;
     contextpath = "<%=request.getContextPath()%>";
 </script>
-<script language="javascript"
-        src="<html:rewrite page="/forum/js/threadList.js"/>"></script>
-<link href="<html:rewrite page="/forum/css/mListAll_css.jsp"/>" rel="stylesheet"
+<link href="<html:rewrite page="/common/mListAll.css"/>" rel="stylesheet"
       type="text/css"/>
 
 
@@ -64,14 +62,20 @@
 
                 </logic:iterate>
         </div>
+    <div class="box">
+     <div class="tres">
+    <MultiPagesREST:pager actionFormName="messageListForm" page="/forum/messageListAll" >
+                        <MultiPagesREST:prev name=" 上一页 " />
+                        <MultiPagesREST:index displayCount="3" />
+                        <MultiPagesREST:next  name=" 下一页 " />
+     </MultiPagesREST:pager>
+          
 
+        </div>
+    </div>
     </div>
   
 </div>
-
-
-
-                    
 
 
 <%@include file="../common/IncludeBottom.jsp" %>

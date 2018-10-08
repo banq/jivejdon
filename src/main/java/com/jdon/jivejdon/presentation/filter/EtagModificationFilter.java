@@ -16,7 +16,10 @@
  */
 package com.jdon.jivejdon.presentation.filter;
 
-import java.io.IOException;
+import com.jdon.jivejdon.model.ForumMessage;
+import com.jdon.jivejdon.presentation.action.util.ForumUtil;
+import com.jdon.jivejdon.util.ToolsUtil;
+import com.jdon.util.UtilValidate;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -27,11 +30,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.presentation.action.util.ForumUtil;
-import com.jdon.jivejdon.util.ToolsUtil;
-import com.jdon.util.UtilValidate;
+import java.io.IOException;
 
 /**
  * check if modified in all forums, if no, return 304;
@@ -52,7 +51,7 @@ import com.jdon.util.UtilValidate;
  */
 public class EtagModificationFilter implements Filter {
 
-	private int default_expireSeconds = 5 * 24 * 60 * 60;
+	private int default_expireSeconds = 1 * 24 * 60 * 60;
 	
 	private ServletContext servletContext= null;
 

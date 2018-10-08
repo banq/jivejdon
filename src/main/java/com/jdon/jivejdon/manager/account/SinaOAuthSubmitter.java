@@ -107,7 +107,7 @@ public class SinaOAuthSubmitter {
 
 	public void update(AccessToken access, String content) throws Exception {
 		try {
-
+			content = content + " http://";
 			Response rs = client.post(oAuthParamVO.baseURL + "statuses/share" +
 							".json",
 					new PostParameter[]{new PostParameter(
