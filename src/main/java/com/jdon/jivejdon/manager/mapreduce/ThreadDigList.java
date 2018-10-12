@@ -30,8 +30,7 @@ public class ThreadDigList {
 
 	public final static int DigsListMAXSize = 30;
 
-
-	private final TreeSet<ForumThread> sorted_set;
+	private final TreeSet<Long> sorted_set;
 	private final ForumMessageQueryService forumMessageQueryService;
 
 	public ThreadDigList(ForumMessageQueryService forumMessageQueryService) {
@@ -40,17 +39,16 @@ public class ThreadDigList {
 	}
 
 	public void addForumThread(ForumThread forumThread) {
-		sorted_set.add(forumThread);
+		sorted_set.add(forumThread.getThreadId());
 	}
 
 
 	public PageIterator getPageIterator(int start, int count) {
-
-		List<ForumThread> threads = new ArrayList<>(sorted_set);
+		List<Long> threads = new ArrayList<>(sorted_set);
 		List pageIds = new ArrayList(threads.size());
 		for (int i = start; i < start + count; i++) {
 			if (i < threads.size()) {
-				pageIds.add(threads.get(i).getThreadId());
+				pageIds.add(threads.get(i));
 			} else
 				break;
 		}
@@ -61,7 +59,8 @@ public class ThreadDigList {
 
 		List newThreads = new ArrayList();
 		int i = 0;
-		for (ForumThread thread : sorted_set) {
+		for (Long threadId : sorted_set) {
+			ForumThread thread = forumMessageQueryService.getThread(threadId);
 			newThreads.add(thread);
 			if (i > DigsListMAXSize) {
 				break;
@@ -72,23 +71,22 @@ public class ThreadDigList {
 		return Collections.unmodifiableList(newThreads);
 	}
 
-	private TreeSet<ForumThread> createTreeList() {
-		return new TreeSet(new Comparator() {
-			public int compare(Object num1, Object num2) {
-				if (num1 == num2)
+	private TreeSet<Long> createTreeList() {
+		return new TreeSet(new Comparator<Long>() {
+			public int compare(Long threadId1, Long threadId2) {
+				if (threadId1 == threadId2)
 					return 0;
-				Integer thread1Count = ((ForumThread) num1).getRootMessage()
-						.getDigCount();
-				Integer thread2Count = ((ForumThread) num2).getRootMessage()
-						.getDigCount();
-
+				ForumThread thread1 = forumMessageQueryService.getThread(threadId1);
+				ForumThread thread2 = forumMessageQueryService.getThread(threadId2);
+				Integer thread1Count = thread1.getRootMessage().getDigCount();
+				Integer thread2Count = thread2.getRootMessage().getDigCount();
 
 				if (thread1Count > thread2Count)
 					return -1; // returning the first object
 				else if (thread1Count < thread2Count)
 					return 1;
 				else if (thread1Count == thread2Count) {
-					if (((ForumThread) num1).getThreadId() > ((ForumThread) num2).getThreadId())
+					if (threadId1 > threadId2)
 						return -1;
 					else
 						return 1;

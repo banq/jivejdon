@@ -7,10 +7,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <%
-String thumbpics = "/simgs/thumb2/1.jpg,/simgs/thumb2/2.jpg,/simgs/thumb2/3.jpg,/simgs/thumb2/4.jpg,/simgs/thumb2/5.jpg,/simgs/thumb2/6.jpg,/simgs/thumb2/7.jpg,/simgs/thumb2/8.jpg";   
-String[] thumbs = thumbpics.split(",");
-int indexI = (int) (Math.random() * thumbs.length);
-
+int indexI = (int) (Math.random() * 8);
 %>
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
@@ -24,7 +21,7 @@ int indexI = (int) (Math.random() * thumbs.length);
             <div class="zoom-container">
 				<div>
        <logic:notEmpty name="forumMessage" property="messageVO.thumbnailUrl">
-          <img src="<%=thumbs[indexI]%>" border='0' width="600"/>
+          <img src="https://cdn.jdon.com/simgs/thumb2/<%=indexI%>.jpg" border='0' width="600"/>
        </logic:notEmpty>
                </div>
 			</div>

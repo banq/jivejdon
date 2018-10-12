@@ -84,6 +84,19 @@
 						</ul>						
 					</div>
 				</div>
+                	<!---- Start Widget ---->
+				<div class="widget wid-post">
+                    <div class="info">
+                    <a href="/tags/33014">#无服务器</a>
+                     &nbsp;&nbsp; <a href="/tags/35688">#服务网格</a>
+                    &nbsp;&nbsp; <a href="/tags/33441">#区块链</a>
+                    &nbsp;&nbsp; <a href="/tags/20358">#saga分布式事务</a>
+                    &nbsp;&nbsp; <a href="/tags/36064">#java11</a>
+                    &nbsp;&nbsp; <a href="/tags/34038">#SpringBoot</a>
+                    &nbsp;&nbsp; <a href="/tags/30969">#kafka</a>      
+                    &nbsp;&nbsp; <a href="/tags/33426">#API</a>
+                </div>     
+                </div>
 				<!---- Start Widget ---->
 				<div class="widget wid-post">
 					<div class="heading"></div>
@@ -167,10 +180,15 @@
 <%@ include file="../account/loginAJAX.jsp" %>
 <script>   
 $LAB
-.script("https://cdn.jdon.com/common/js/prototype.js").wait()
+.script("https://cdn.jdon.com/js/index.js").wait()
 .wait(function(){
-	new Ajax.Updater('digList', '/query/threadDigList.shtml?count=20', { method: 'get' });
-     new Ajax.Updater('poplist', '/query/popularlist.shtml?count=11&dateRange=180', { method: 'get' });
+     load('/query/threadDigList.shtml?count=20', function(xhr) {
+  	       document.getElementById("digList").innerHTML = xhr.responseText;
+			});
+     load('/query/popularlist.shtml?count=11&dateRange=180', function(xhr) {
+  	       document.getElementById("poplist").innerHTML = xhr.responseText;
+			});
+	
 });  
 </script> 	
 

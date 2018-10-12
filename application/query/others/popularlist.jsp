@@ -7,7 +7,8 @@
 <% 
 com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(6 * 60 * 60, request, response);
 %>
-<b>热文</b>
+<b></b>
+<a href="<%=request.getContextPath()%>/forum/maxPopThreads"><b>热文</b></a>
 <div class="important" >
 <bean:parameter id="count" name="count" value="8"/>
 <%

@@ -7,7 +7,7 @@
 <% 
 com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(6 * 60 * 60, request, response);
 %>
-<b>教程</b>
+<a href="<%=request.getContextPath()%>/course.html"><b>教程</b></a>
 <div class="important" >
 <bean:parameter id="count" name="count" value="8"/>
 <%
