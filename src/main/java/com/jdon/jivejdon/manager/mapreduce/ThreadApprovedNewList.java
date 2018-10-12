@@ -24,6 +24,7 @@ import com.jdon.jivejdon.model.query.ResultSort;
 import com.jdon.jivejdon.model.query.specification.ApprovedListSpec;
 import com.jdon.jivejdon.service.AccountService;
 import com.jdon.jivejdon.service.ForumMessageQueryService;
+import com.jdon.jivejdon.service.TagService;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -63,13 +64,13 @@ public class ThreadApprovedNewList implements Startable {
 
 	public ThreadApprovedNewList(
 			ForumMessageQueryService forumMessageQueryService,
-			AccountService accountService) {
+			AccountService accountService, TagService tagService) {
 		approvedThreadList = new HashMap();
 		approvedListSpec = new ApprovedListSpec();
 		this.forumMessageQueryService = forumMessageQueryService;
 		this.accountService = accountService;
 		this.authorList = new AuthorList(accountService);
-		this.threadDigList = new ThreadDigList(forumMessageQueryService);
+		this.threadDigList = new ThreadDigList(forumMessageQueryService, tagService);
 	}
 
 	public void start() {
@@ -100,6 +101,8 @@ public class ThreadApprovedNewList implements Startable {
 		approvedListSpec.setResultSort(resultSort);
 		refresh = true;
 		maxStart = -1;
+		threadDigList.clear();
+		authorList.clear();
 	}
 
 	public Collection<Long> getApprovedThreads(int start) {

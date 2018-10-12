@@ -15,21 +15,19 @@
  */
 package com.jdon.jivejdon.presentation.action.query;
 
-import java.util.Collection;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.manager.mapreduce.ThreadApprovedNewList;
 import com.jdon.jivejdon.manager.mapreduce.ThreadDigList;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.strutsutil.ModelListForm;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Collection;
 
 public class ThreadDigListAction extends Action {
 

@@ -84,18 +84,11 @@
 						</ul>						
 					</div>
 				</div>
-                	<!---- Start Widget ---->
+                	<!---- Start tags ---->
 				<div class="widget wid-post">
                     <div class="info">
-                    <a href="/tags/33014">#无服务器</a>
-                     &nbsp;&nbsp; <a href="/tags/35688">#服务网格</a>
-                    &nbsp;&nbsp; <a href="/tags/33441">#区块链</a>
-                    &nbsp;&nbsp; <a href="/tags/20358">#saga分布式事务</a>
-                    &nbsp;&nbsp; <a href="/tags/36064">#java11</a>
-                    &nbsp;&nbsp; <a href="/tags/34038">#SpringBoot</a>
-                    &nbsp;&nbsp; <a href="/tags/30969">#kafka</a>      
-                    &nbsp;&nbsp; <a href="/tags/33426">#API</a>
-                </div>     
+                      <jsp:include page="/query/tagHotList.shtml" flush="true"></jsp:include>  
+                    </div>     
                 </div>
 				<!---- Start Widget ---->
 				<div class="widget wid-post">

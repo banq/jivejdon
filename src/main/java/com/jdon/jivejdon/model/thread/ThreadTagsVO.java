@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 package com.jdon.jivejdon.model.thread;
 
@@ -24,7 +24,7 @@ import java.util.Collection;
 public class ThreadTagsVO {
 
 	// same as rooMessage 's tags, but this is Collection
-	private final Collection tags;
+	private final Collection<ThreadTag> tags;
 	private ForumThread forumThread;
 
 	public ThreadTagsVO(ForumThread forumThread, Collection tags) {
@@ -42,7 +42,8 @@ public class ThreadTagsVO {
 			ThreadTag tag = (ThreadTag) o;
 			if (!lasttags.contains(tag))
 				// changeTags will notify subscription
-				this.forumThread.subPublisherRole.subscriptionNotify(new TagSubscribedNotifyEvent(tag.getTagID(), forumThread.getThreadId()));
+				this.forumThread.subPublisherRole.subscriptionNotify(new TagSubscribedNotifyEvent
+						(tag.getTagID(), forumThread.getThreadId()));
 		}
 	}
 

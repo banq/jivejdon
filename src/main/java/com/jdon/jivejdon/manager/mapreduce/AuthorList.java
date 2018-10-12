@@ -32,12 +32,15 @@ public class AuthorList {
 
 	private final ConcurrentHashMap<Long, Integer> authors;
 	private final AccountService accountService;
-	private Collection<Account> sortedauthors = Collections.unmodifiableList(Collections
-			.EMPTY_LIST);
+
 
 	public AuthorList(AccountService accountService) {
 		this.accountService = accountService;
 		this.authors = new ConcurrentHashMap();
+	}
+
+	public void clear() {
+		authors.clear();
 	}
 
 	public void addAuthor(Account account) {
@@ -68,22 +71,23 @@ public class AuthorList {
 	}
 
 	public TreeMap<Long, Integer> createTreeMap() {
-		return new TreeMap(new Comparator() {
-			public int compare(Object num1, Object num2) {
-				Long userId1 = (Long) num1;
-				Long userId2 = (Long) num2;
-
+		return new TreeMap<Long, Integer>(new Comparator<Long>() {
+			public int compare(Long userId1, Long userId2) {
+				if (userId1.longValue() == userId1.longValue())
+					return 0;
 				Account account1 = accountService.getAccount(userId1);
 				Account account2 = accountService.getAccount(userId2);
 				if (account1.getMessageCount() > account2.getMessageCount()) {
 					return -1; // returning the first object
 				} else if (account1.getMessageCount() < account2.getMessageCount()) {
 					return 1;
+				} else {
+					if (userId1.longValue() > userId2.longValue())
+						return -1;
+					else
+						return 1;
 				}
-				return 0;
 			}
-
 		});
-
 	}
 }
