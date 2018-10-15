@@ -1,4 +1,5 @@
 <%@ page session="false"  %>
+<%@page isELIgnored="false" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="struts-logic" prefix="logic" %>
 <%@ taglib uri="struts-bean" prefix="bean" %>
@@ -89,7 +90,14 @@ com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(0, request, response);
 						</div>
 					</div>
 				</div>
-			   <div class="box">
+			 <div class="box">
+  <jsp:include page="../message/messagePostReply2.jsp" flush="true">   
+    <jsp:param name="forumId" value="${forumThread.forum.forumId}"/>
+	<jsp:param name="pmessageId" value="${forumThread.rootMessage.messageId}"/>
+    <jsp:param name="parentMessageSubject" value="${forumThread.name}"/>
+  </jsp:include>   
+              </div>
+               <div class="box">
 					<div class="box-header header-natural">
 					</div>
 					<div class="box-content">
@@ -173,8 +181,7 @@ com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(0, request, response);
     
 <script> 
 $LAB
-.script("https://cdn.jdon.com/common/js/prototype.js").wait()
-.script("https://cdn.jdon.com/common/messageList4.js").wait()
+.script("/common/messageList5.js")
 .wait(function(){
 	//below need prototype.js
 	 var sId = "";
@@ -184,27 +191,33 @@ $LAB
 	 viewcount('<bean:write name="forumThread" property="threadId" />', sId);
 	 //stickyList();
 	
-	 <logic:notEmpty name="forumThread" property="tags">
-	    ajaxcrossdomain();
-	 </logic:notEmpty>
 	
+	 
+    window.onload = function() {    
+    	
     <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">
         tagthreads(10,160,10,<bean:write name="threadTag" property="tagID"/>);
    </logic:iterate>
-	 
-	 if (isDisplayNeedLoad('approved')){
-	    approveList();
-	 }else{ 	 
-	   Event.observe(window, 'scroll', function() {
-			setTimeout(function(){
-			 if (isDisplayNeedLoad('approved')){	
-						    approveList();
-	         }			
-			},1500);
-	   });
-	 }	
+    }
+
+   var hasDisplayNeedLoad = false;
+    window.onscroll = function(ev) {
+    if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+         if (!hasDisplayNeedLoad){
+            approveList(); 
+             hasDisplayNeedLoad = true;
+          }
+       
+       }
+     };
+	  
+
+    
 });      
 </script> 
 
 <%@include file="footer.jsp"%>
 </logic:empty>
+    
+    
+    

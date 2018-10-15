@@ -48,7 +48,7 @@ var uploadW;
    
   function appendUploadUrl(){
       if (saveS == null) return;
-      saveS =  $F("formBody") + "\n" + saveS;      	 
+      saveS = document.getElementById("formBody").value + "\n" + saveS;      	 
       Form.Element.setValue("formBody", saveS);
    }
    
@@ -59,10 +59,10 @@ var uploadW;
       {
         var ind = i + 1;
       	var inst = '[img index=' + ind + ']';      	
-        insimag = insimag + '<a href="javascript:void(0);" onClick=\'insertString($("formBody"),"'+inst+'")\' title="插入第'+ ind +'个图片" > ' +
-             $('insertImage').innerHTML + '</a> ';
+        insimag = insimag + '<a href="javascript:void(0);" onClick=\'insertString(document.getElementById("formBody"),"'+inst+'")\' title="插入第'+ ind +'个图片" > ' +
+             document.getElementById("insertImage").innerHTML + '</a> ';
       }                   
-      $("attachsize").innerHTML = "有"+ attcount +"个附件:" + insimag;
+      document.getElementById("attachsize").innerHTML = "有"+ attcount +"个附件:" + insimag;
    }
    
    
@@ -82,7 +82,7 @@ var myalertD=function(errorM){
     
 
   function tag(theTag) {
-    var e = $("formBody");        
+    var e = document.getElementById("formBody");        
     if (theTag == 'b') {
       insertString(e,"[b][/b]");        
     } else if (theTag == 'i') {
@@ -124,15 +124,10 @@ var myalertD=function(errorM){
       
       var body = theForm.body.value.replace(/(^\s*)|(\s*$)/g, ""); 
       var subject = theForm.subject.value.replace(/(^\s*)|(\s*$)/g, ""); 
-      if ((body  != "") && (subject  != "")){          
-           if ((body.length  < 58190)){
-        	   formSubmitcheck = true;
-           }else{                   
-        	   alert('请发言内容长度必须小于8192字节' );
-        	   formSubmitcheck = false;
-           }         
+      if (subject.length  !== 0){          
+           formSubmitcheck = true;
       }else{
-    	  alert("请输入发言标题和发言内容！");
+    	  alert("请输入发言标题" );
     	  formSubmitcheck = false;
       }              
       return formSubmitcheck;      
@@ -140,9 +135,9 @@ var myalertD=function(errorM){
 
    var bodyLength = 0;
    function copyBody(){
-       if ($('formBody').value != ""){
-          if ($('formBody').value.length != bodyLength){
-             bodyLength = $('formBody').value.length;
+       if (document.getElementById('formBody').value != ""){
+          if (document.getElementById('formBody').value.length != bodyLength){
+             bodyLength = document.getElementById('formBody').value.length;
               saveCache('formBody');
           }
        }        

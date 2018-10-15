@@ -11,14 +11,23 @@
 <meta http-equiv="content-language" content="zh-CN" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="/common/jivejdon5.css"  type="text/css">
+ <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://cdn.jdon.com/js/bootstrap.min.css"  type="text/css">
+	<!-- Custom Fonts -->
+    <link rel="stylesheet" href="https://cdn.jdon.com/js/font-awesome-4.4.0/css/font-awesome.min.css"  type="text/css">
+	<!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdn.jdon.com/js/style.css">
+
 <title>享道</title>
+<%-- 
 <%@ include file="/common/security.jsp" %>
 <%@ include file="/common/headerBody.jsp" %>
 <script type="text/javascript" src="/common/js/prototype.js"></script>
+--%>
 </head>
-<%@ include file="/account/loginAJAX.jsp" %>
 <body>
+<%@ include file="/account/loginAJAX.jsp" %>
+
 <%
 String subject = "";
 if (request.getParameter("subject") != null){
@@ -45,10 +54,11 @@ if (request.getParameter("url") != null)
 </center>
 <script>
 
-$('replySubject').value='<%=subject%>';
-$('formBody').setAttribute("cols", "60");
-$('formBody').setAttribute("rows", "12"); 
-$('formBody').value='[url=<%=url%>]<%=subject%>[/url]';
+document.getElementById('replySubject').value='<%=subject%>';
+//document.getElementById('formBody').setAttribute("cols", "60");
+//document.getElementById('formBody').setAttribute("rows", "12"); 
+//document.getElementById('formBody').value='[url=<%=url%>]<%=subject%>[/url]';
+document.getElementById('formBody').value='<%=url%>';
 </script>
 
 </body>

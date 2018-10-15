@@ -2,7 +2,7 @@ package com.jdon.jivejdon.presentation.action.query;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.manager.mapreduce.ThreadApprovedNewList;
-import com.jdon.jivejdon.manager.mapreduce.ThreadDigList;
+import com.jdon.jivejdon.manager.mapreduce.ThreadTagList;
 import com.jdon.jivejdon.model.ThreadTag;
 import com.jdon.strutsutil.ModelListForm;
 import org.apache.struts.action.Action;
@@ -31,8 +31,8 @@ public class ThreadTagHotListAction extends Action {
 			request, HttpServletResponse response) throws Exception {
 
 		ModelListForm tagsListForm = (ModelListForm) form;
-		ThreadDigList threadDigList = getThreadApprovedNewList().getThreadDigList();
-		Collection<ThreadTag> tagThreads = threadDigList.getThreadTags();
+		ThreadTagList threadTagList = getThreadApprovedNewList().getThreadTagList();
+		Collection<ThreadTag> tagThreads = threadTagList.getThreadTags();
 		tagsListForm.setList(tagThreads);
 		tagsListForm.setAllCount(tagThreads.size());
 		return mapping.findForward("success");

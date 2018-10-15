@@ -11,34 +11,33 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 package com.jdon.jivejdon.model.message.output.emotion;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * A ForumMessageFilter that converts ASCII emoticons into image equivalents.
  * This filter should only be run after any HTML stripping filters.
  * <p>
- * 
+ * <p>
  * The filter must be configured with information about where the image files
  * are located. A table containing all the supported emoticons with their ASCII
  * representations and image file names is as follows:
  * <p>
- * 
+ *
  * <table border=1>
  * <tr>
  * <td><b>Emotion</b></td>
  * <td><b>ASCII</b></td>
  * <td><b>Image</b></td>
  * </tr>
- * 
+ *
  * <tr>
  * <td>Happy</td>
  * <td>:) or :-)</td>
@@ -120,40 +119,39 @@ import com.jdon.jivejdon.model.message.MessageVO;
  * <td>plain.gif</td>
  * </tr>
  * </table>
- * 
+ * <p>
  * Note: special thanks to August Harrison for implementing an earlier version
  * of this filter.
  */
 public class Emoticon implements MessageRenderSpecification {
 	private final static Logger logger = LogManager.getLogger(Emoticon.class);
 
-	private static String imageHappy = "happy.gif";
-	private static String imageSad = "sad.gif";
-	private static String imageGrin = "grin.gif";
-	private static String imageLove = "love.gif";
+	private static String imageHappy = "regular_smile.png";
+	private static String imageSad = "sad_smile.png";
+	private static String imageGrin = "teeth_smile.png";
+	private static String imageLove = "kiss.png";
 	private static String imageMischief = "mischief.gif";
-	private static String imageCool = "cool.gif";
+	private static String imageCool = "shades_smile.png";
 	private static String imageDevil = "devil.gif";
-	private static String imageSilly = "silly.gif";
+	private static String imageSilly = "tongue_smile.png";
 	private static String imageAngry = "angry.gif";
-	private static String imageLaugh = "laugh.gif";
-	private static String imageWink = "wink.gif";
+	private static String imageLaugh = "embarrassed_smile.png";
+	private static String imageWink = "wink_smile.png";
 	private static String imageBlush = "blush.gif";
-	private static String imageCry = "cry.gif";
-	private static String imageConfused = "confused.gif";
-	private static String imageShocked = "shocked.gif";
-	private static String imagePlain = "plain.gif";
+	private static String imageCry = "cry_smile.png";
+	private static String imageConfused = "whatchutalkingabout_smile.png";
+	private static String imageShocked = "omg_smile.png";
+	private static String imagePlain = "whatchutalkingabout_smile.png";
 
-	private String imageURL = "images/emoticons";
+	private String imageURL = "common\\ckeditor\\plugins\\smiley\\images";
 	private boolean filteringSubject = false;
 	private boolean filteringBody = true;
 
 	/**
 	 * Clones a new filter that will have the same properties and that will wrap
 	 * around the specified message.
-	 * 
-	 * @param message
-	 *            the ForumMessage to wrap the new filter around.
+	 *
+	 * @param message the ForumMessage to wrap the new filter around.
 	 */
 	public ForumMessage render(ForumMessage message) {
 		try {
@@ -173,7 +171,7 @@ public class Emoticon implements MessageRenderSpecification {
 	/**
 	 * Returns the base URL for emoticon images. This can be specified as an
 	 * absolute or relative path.
-	 * 
+	 *
 	 * @return the base URL for smiley images.
 	 */
 	public String getImageURL() {
@@ -183,9 +181,8 @@ public class Emoticon implements MessageRenderSpecification {
 	/**
 	 * Sets the base URL for emoticon images. This can be specified as an
 	 * absolute or relative path.
-	 * 
-	 * @param imageURL
-	 *            the base URL for emoticon images.
+	 *
+	 * @param imageURL the base URL for emoticon images.
 	 */
 	public void setImageURL(String imageURL) {
 		if (imageURL != null && imageURL.length() > 0) {
@@ -198,7 +195,7 @@ public class Emoticon implements MessageRenderSpecification {
 
 	/**
 	 * Returns true if filtering on the subject is enabled.
-	 * 
+	 *
 	 * @return true if filtering on the subject is enabled.
 	 */
 	public boolean isFilteringSubject() {
@@ -207,9 +204,8 @@ public class Emoticon implements MessageRenderSpecification {
 
 	/**
 	 * Enables or disables filtering on the subject.
-	 * 
-	 * @param filteringSubject
-	 *            toggle value for filtering on subject.
+	 *
+	 * @param filteringSubject toggle value for filtering on subject.
 	 */
 	public void setFilteringSubject(boolean filteringSubject) {
 		this.filteringSubject = filteringSubject;
@@ -217,7 +213,7 @@ public class Emoticon implements MessageRenderSpecification {
 
 	/**
 	 * Returns true if filtering on the body is enabled.
-	 * 
+	 *
 	 * @return true if filtering on the body is enabled.
 	 */
 	public boolean isFilteringBody() {
@@ -226,9 +222,8 @@ public class Emoticon implements MessageRenderSpecification {
 
 	/**
 	 * Enables or disables filtering on the body.
-	 * 
-	 * @param filteringBody
-	 *            toggle value for filtering on body.
+	 *
+	 * @param filteringBody toggle value for filtering on body.
 	 */
 	public void setFilteringBody(boolean filteringBody) {
 		this.filteringBody = filteringBody;
@@ -245,11 +240,10 @@ public class Emoticon implements MessageRenderSpecification {
 
 	/**
 	 * Converts any ASCII emoticons into image equivalents.
-	 * 
-	 * @param input
-	 *            the text to be converted.
+	 *
+	 * @param input the text to be converted.
 	 * @return the input string with the ASCII emoticons replaced with the image
-	 *         tags.
+	 * tags.
 	 */
 	private String convertEmoticons(String input) {
 		// Check if the string is null or zero length or if filter is not
@@ -295,104 +289,139 @@ public class Emoticon implements MessageRenderSpecification {
 			imgTag = null;
 
 			switch (chars[i = index]) {
-			default:
-				break;
-			case ']':
-				// "]:)"
-				if (i < len2 && chars[++i] == ':' && chars[++i] == ')')
-					imgTag = imgDevil == null ? imgDevil = buildURL(imageDevil) : imgDevil;
-				break;
-			case ':':
-				switch (chars[++i]) {
 				default:
 					break;
-				case ')':
-					// ":)"
-					imgTag = imgHappy == null ? imgHappy = buildURL(imageHappy) : imgHappy;
+				case ']':
+					// "]:)"
+					if (i < len2 && chars[++i] == ':' && chars[++i] == ')')
+						imgTag = imgDevil == null ? imgDevil = buildURL(imageDevil) : imgDevil;
 					break;
-				case '-':
-					// ":-)"
-					if (i < len1 && chars[++i] == ')')
-						imgTag = imgHappy == null ? imgHappy = buildURL(imageHappy) : imgHappy;
-					// ":-("
-					else if (chars[i] == '(')
-						imgTag = imgSad == null ? imgSad = buildURL(imageSad) : imgSad;
+				case ':':
+					switch (chars[++i]) {
+						default:
+							break;
+						case ')':
+							// ":)"
+							imgTag = imgHappy == null ? imgHappy = buildURL(imageHappy) : imgHappy;
+							break;
+						case '-':
+							// ":-)"
+							if (i < len1 && chars[++i] == ')')
+								imgTag = imgHappy == null ? imgHappy = buildURL(imageHappy) :
+										imgHappy;
+								// ":-("
+							else if (chars[i] == '(')
+								imgTag = imgSad == null ? imgSad = buildURL(imageSad) : imgSad;
+							else if (chars[i] == 'o')
+								imgTag = imgShocked == null ? imgShocked = buildURL(imageShocked)
+										: imgShocked;
+							break;
+						case '(':
+							// ":("
+							imgTag = imgSad == null ? imgSad = buildURL(imageSad) : imgSad;
+							break;
+						case 'D':
+							// ":D"
+							imgTag = imgGrin == null ? imgGrin = buildURL(imageGrin) : imgGrin;
+							break;
+						case 'x':
+							// ":x"
+							imgTag = imgLove == null ? imgLove = buildURL(imageLove) : imgLove;
+							break;
+						case 'p':
+							// ":p"
+							imgTag = imgSilly == null ? imgSilly = buildURL(imageSilly) : imgSilly;
+							break;
+						case 'P':
+							// ":P"
+							imgTag = imgSilly == null ? imgSilly = buildURL(imageSilly) : imgSilly;
+							break;
+						case '*':
+							// ":*)"
+							imgTag = imgLaugh == null ? imgLaugh = buildURL(imageLaugh) : imgLaugh;
+							break;
+						case '^':
+							// ":^O"
+							if (i < len1 && chars[++i] == 'O')
+								imgTag = imgLaugh == null ? imgLaugh = buildURL(imageLaugh) :
+										imgLaugh;
+							break;
+						case '8':
+							// ":8}"
+							if (i < len1 && chars[++i] == '}')
+								imgTag = imgBlush == null ? imgBlush = buildURL(imageBlush) :
+										imgBlush;
+							break;
+						case '_':
+							// ":_|"
+							if (i < len1 && chars[++i] == '|')
+								imgTag = imgCry == null ? imgCry = buildURL(imageCry) : imgCry;
+							else if (i < len1 && chars[++i] == '*')
+								imgTag = imgLove == null ? imgLove = buildURL(imageLove) : imgLove;
+							break;
+
+						case 'O':
+							// ":O"
+							imgTag = imgShocked == null ? imgShocked = buildURL(imageShocked) :
+									imgShocked;
+							break;
+						case '|':
+							// ":|"
+							imgTag = imgPlain == null ? imgPlain = buildURL(imagePlain) : imgPlain;
+							break;
+
+					}
 					break;
-				case '(':
-					// ":("
-					imgTag = imgSad == null ? imgSad = buildURL(imageSad) : imgSad;
+				case ';':
+					switch (chars[++i]) {
+						default:
+							break;
+						case ')':
+							// ";)"
+							imgTag = imgWink == null ? imgWink = buildURL(imageWink) : imgWink;
+							break;
+						case '(':
+							// ";("
+							imgTag = imgCry == null ? imgCry = buildURL(imageCry) : imgCry;
+							break;
+						case '-':
+							// ";-)"
+							if (i < len1 && chars[++i] == ')')
+								imgTag = imgWink == null ? imgWink = buildURL(imageWink) : imgWink;
+							break;
+						case '\\':
+							// ";\\"
+							imgTag = imgMischief == null ? imgMischief = buildURL(imageMischief) :
+									imgMischief;
+							break;
+					}
 					break;
-				case 'D':
-					// ":D"
-					imgTag = imgGrin == null ? imgGrin = buildURL(imageGrin) : imgGrin;
+				case 'B':
+					// "B-)"
+					if (i < len2 && chars[++i] == '-' && chars[++i] == ')')
+						imgTag = imgCool == null ? imgCool = buildURL(imageCool) : imgCool;
 					break;
-				case 'x':
-					// ":x"
-					imgTag = imgLove == null ? imgLove = buildURL(imageLove) : imgLove;
-					break;
-				case 'p':
-					// ":p"
-					imgTag = imgSilly == null ? imgSilly = buildURL(imageSilly) : imgSilly;
-					break;
-				case '^':
-					// ":^O"
-					if (i < len1 && chars[++i] == 'O')
-						imgTag = imgLaugh == null ? imgLaugh = buildURL(imageLaugh) : imgLaugh;
-					break;
-				case '8':
-					// ":8}"
-					if (i < len1 && chars[++i] == '}')
+				case 'o':
+					// "o:)
+					if (i < len2 && chars[++i] == ':' && chars[++i] == ')')
 						imgTag = imgBlush == null ? imgBlush = buildURL(imageBlush) : imgBlush;
 					break;
-				case '_':
-					// ":_|"
-					if (i < len1 && chars[++i] == '|')
-						imgTag = imgCry == null ? imgCry = buildURL(imageCry) : imgCry;
+				case '8':
+					// "8-)
+					if (i < len2 && chars[++i] == '-' && chars[++i] == ')')
+						imgTag = imgCool == null ? imgCool = buildURL(imageCool) : imgCool;
 					break;
-				case 'O':
-					// ":O"
-					imgTag = imgShocked == null ? imgShocked = buildURL(imageShocked) : imgShocked;
+				case 'X':
+					// "X-("
+					if (i < len2 && chars[++i] == '-' && chars[++i] == '(')
+						imgTag = imgAngry == null ? imgAngry = buildURL(imageAngry) : imgAngry;
 					break;
-				case '|':
-					// ":|"
-					imgTag = imgPlain == null ? imgPlain = buildURL(imagePlain) : imgPlain;
+				case '?':
+					// "?:|"
+					if (i < len2 && chars[++i] == ':' && chars[++i] == '|')
+						imgTag = imgConfused == null ? imgConfused = buildURL(imageConfused) :
+								imgConfused;
 					break;
-				}
-				break;
-			case ';':
-				switch (chars[++i]) {
-				default:
-					break;
-				case ')':
-					// ";)"
-					imgTag = imgWink == null ? imgWink = buildURL(imageWink) : imgWink;
-					break;
-				case '-':
-					// ";-)"
-					if (i < len1 && chars[++i] == ')')
-						imgTag = imgWink == null ? imgWink = buildURL(imageWink) : imgWink;
-					break;
-				case '\\':
-					// ";\\"
-					imgTag = imgMischief == null ? imgMischief = buildURL(imageMischief) : imgMischief;
-					break;
-				}
-				break;
-			case 'B':
-				// "B-)"
-				if (i < len2 && chars[++i] == '-' && chars[++i] == ')')
-					imgTag = imgCool == null ? imgCool = buildURL(imageCool) : imgCool;
-				break;
-			case 'X':
-				// "X-("
-				if (i < len2 && chars[++i] == '-' && chars[++i] == '(')
-					imgTag = imgAngry == null ? imgAngry = buildURL(imageAngry) : imgAngry;
-				break;
-			case '?':
-				// "?:|"
-				if (i < len2 && chars[++i] == ':' && chars[++i] == '|')
-					imgTag = imgConfused == null ? imgConfused = buildURL(imageConfused) : imgConfused;
-				break;
 			}
 
 			// if we found one, replace

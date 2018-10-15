@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE app PUBLIC "-//Jdon//DTD 2005 1.0 Framework//EN" "http://www.jdon.com/jdonframework.dtd">
+<!-- qucik manual http://www.jdon.com/jdonframework/threemin.htm 
+     english version: https://jdon.dev.java.net/steps.html -->
+
+<app>
+	<models>
+		<model key="username"
+			class="com.jdon.jivejdon.model.Account">
+			<actionForm name="accountForm"/>
+			<handler>
+				<service ref="accountService">
+					<initMethod   name="initAccount"/>
+					<getMethod    name="getLoginAccountByName"/>
+					<createMethod name="createAccount"/>
+					<updateMethod name="updateAccount"/>
+					<deleteMethod name="deleteAccount"/>
+				</service>
+			</handler>
+		</model>
+		
+		<model key="forumId"
+			class="com.jdon.jivejdon.model.Forum">
+			<actionForm name="forumForm"/>
+			<handler>
+				<service ref="forumService">
+					<getMethod    name="getForum"/>
+					<createMethod name="createForum"/>
+					<updateMethod name="updateForum"/>
+					<deleteMethod name="deleteForum"/>
+				</service>
+			</handler>
+		</model>
+		<model key="messageId"
+			class="com.jdon.jivejdon.model.ForumMessage">
+			<actionForm name="messageForm"/>
+			<handler>
+				<service ref="forumMessageService">
+					<initMethod   name="initMessage"/>
+					<getMethod    name="findMessage"/>
+					<createMethod name="createTopicMessage"/>
+					<updateMethod name="updateMessage"/>
+					<deleteMethod name="deleteMessage"/>
+				</service>
+			</handler>
+		</model>
+		<model key="messageId"
+			class="com.jdon.jivejdon.model.ForumMessageReply">
+			<actionForm name="messageReplyForm"/>
+			<handler>
+				<service ref="forumMessageService">
+					<initMethod   name="initReplyMessage"/>
+					<getMethod    name="findMessage"/>
+					<createMethod name="createReplyMessage"/>
+					<!-- no need update/delete, instead of above configure
+					<updateMethod name="updateMessage"/>
+					<deleteMethod name="deleteMessage"/>
+						-->
+				</service>
+			</handler>
+		</model>		
+		<model key="threadId"
+			class="com.jdon.jivejdon.model.ForumThread">
+			<actionForm name="threadForm"/>
+			<handler>
+				<service ref="forumMessageService">
+					<getMethod    name="getThread"/>
+				</service>
+			</handler>
+		</model>
+		 <model class="com.jdon.jivejdon.model.attachment.UploadFile" key="id">
+           <actionForm name="upLoadFileForm" />
+			<handler>
+               <service ref="uploadService">					
+					<createMethod name="saveUploadFile"/>
+					<deleteMethod name="removeUploadFile"/>
+				</service>
+			</handler>
+        </model>		
+        
+        <model class="com.jdon.jivejdon.model.attachment.UploadFile" key="id">
+           <actionForm name="accountFaceFileForm" />
+			<handler>
+               <service ref="uploadService">					
+					<createMethod name="saveAccountFaceFile"/>
+				</service>
+			</handler>
+        </model>
+        
+        <model key="imageId" class="com.jdon.jivejdon.model.attachment.UploadInfoVO">
+        	<actionForm name="imageInfoForm"/>
+        	<handler>
+        		<service ref="uploadInfoVOService">
+        			<getMethod    name="getUploadInfoVO"/>
+        			<deleteMethod name="deleteUpload"/>        			
+        		</service>
+        	</handler>
+        </model>		
+        
+        <model key="msgId"
+			class="com.jdon.jivejdon.model.FromShortMessage">
+			<actionForm name="fromShortMessageForm"/>
+			<handler>
+				<service ref="shortMessageService">				
+					<getMethod    name="getFromShortMessage"/>
+					<createMethod name="saveShortMessage"/>
+					<updateMethod name="updateShortMessage"/>
+					<deleteMethod name="deleteShortMessage"/>
+				</service>
+			</handler>
+		</model>			
+		
+		<model key="msgId"
+			class="com.jdon.jivejdon.model.ToShortMessage">
+			<actionForm name="toShortMessageForm"/>
+			<handler>
+				<service ref="shortMessageService">
+				     <initMethod   name="initShortMessage"/>				     
+					<getMethod    name="getToShortMessage"/>
+					<createMethod name="saveShortMessage"/>
+					<updateMethod name="updateShortMessage"/>
+				</service>
+			</handler>
+		</model>		
+			
+		<model key="tagID"
+			class="com.jdon.jivejdon.model.ThreadTag">
+			<actionForm name="tagForm"/>
+			<handler>
+				<service ref="othersService">
+					<getMethod    name="getThreadTag"/>
+					<updateMethod name="updateThreadTag"/>
+					<deleteMethod name="deleteThreadTag"/>
+				</service>
+			</handler>
+		</model>		
+		
+		<model key="subscriptionId"
+			class="com.jdon.jivejdon.model.subscription.Subscription">
+			<actionForm name="subscriptionForm"/>
+			<handler>
+				<service ref="subscriptionService">
+				    <initMethod   name="initSubscription"/>
+					<getMethod    name="getSubscription"/>
+					<createMethod name="createSubscription"/>
+					<updateMethod name="updateSubscription"/>
+					<deleteMethod name="deleteSubscription"/>					
+				</service>
+			</handler>
+		</model>			
+		
+		<model key="email"
+			class="com.jdon.jivejdon.model.feed.Feed">
+			<actionForm name="feedForm"/>
+			<handler>
+				<service ref="feedEmailSender">					
+				</service>
+			</handler>
+		</model>
+		
+		<model key="urlId"
+			class="com.jdon.jivejdon.manager.sitemap.Url">
+			<actionForm name="urlForm"/>
+			<handler>
+				<service ref="sitemapService">		
+					<getMethod    name="getUrl"/>
+					<createMethod name="addUrl"/>
+					<updateMethod name="updateUrl"/>
+					<deleteMethod name="deleteUrl"/>							
+				</service>
+			</handler>
+		</model>
+	</models>
+	
+</app>

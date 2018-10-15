@@ -110,7 +110,7 @@ response.setDateHeader("Expires", 0);
 
 
 <html:form action="/message/upload/saveUploadAction.shtml" enctype="multipart/form-data"
- onsubmit="return uploadValid($F('uploadFile'))"
+ onsubmit="return uploadValid(document.getElementById('uploadFile'))"
  target="target_upload">
 
 <input type="hidden" name="action" value="create" />
@@ -119,16 +119,12 @@ response.setDateHeader("Expires", 0);
 
 <html:hidden property="parentId" />
 <html:hidden property="parentName" />
-<center><input id="submitButton" type="button" value="全部上传完成按此关闭本窗口" class="Button" onClick="closeThisWindow()"></center>
 <br>
 本地附件:<html:file property="theFile" size="30" styleId="uploadFile"/> 
 <html:submit property="submit" value="上传"/>
 <br>
-附件描述:<html:text property="description" size="30" />
+<center><input id="submitButton" type="button" value="关闭本窗口" class="Button" onClick="closeThisWindow()"></center>
 <br>
-网上附件:<html:text property="theFileUrl" size="30" value="http://"  styleId="theFileUrl"/>
-
-
 
 <SCRIPT language = "Javascript">
 <!--
@@ -162,21 +158,11 @@ function closeThisWindow(){
 
 function urlAction(){
     var saveS = "";
-    var theFile = $F('theFileUrl');
-      
-    if ( (theFile != null) && (theFile.toLowerCase().indexOf("http") > -1 )){
-	     if (isImage(theFile)){
-    	   saveS="[img]"+theFile+"[/img]";
-	     }else{
-	      if (theFile != "http://")
-             saveS="[url="+theFile+"]"+theFile+"[/url]";
-       }
-     } 
-     return saveS;
+   
 }
 
 function uploadValid(field){
-	if (field.toLowerCase().indexOf("http://") > -1){
+	if (field.value.indexOf("http") > -1){
         myalert("必须提供你硬盘上文件上传");
          return false;
 	}
@@ -195,7 +181,7 @@ function uploadValid(field){
 
 function isAuth(field){
   <logic:iterate id="fileType" name="upLoadFileForm" property="fileTypes" >
-     if (field.toLowerCase().indexOf(".<bean:write name="fileType"/>") > -1){
+     if (field.value.indexOf(".<bean:write name="fileType"/>") > -1){
          return true;
      }
      
@@ -208,7 +194,7 @@ function isImage(field){
         return false;  
      }
      <logic:iterate id="imageType" name="upLoadFileForm" property="imagesTypes" >
-     if (field.toLowerCase().indexOf(".<bean:write name="imageType"/>") > -1){
+     if (field.value.indexOf(".<bean:write name="imageType"/>") > -1){
          return true;
      }
      
@@ -225,9 +211,9 @@ function isImage(field){
   <bean:write name="fileType"/>,
 </logic:iterate> 
 <br>
-2.完成后必须按"关闭窗口"，否则无效。
+2.完成后必须按<input id="submitButton" type="button" value="关闭本窗口" class="Button" onClick="closeThisWindow()">，否则无效。
 <br>
-3.图片需要插入文中，语法是[img index=顺序号]，顺序号是顶部图片列表从上而下1、2、3数字 。
+3.图片插入语法是[img index=顺序号]，顺序号是顶部图片1、2、3数字,如[img index=1] 。
 
  
 </div>

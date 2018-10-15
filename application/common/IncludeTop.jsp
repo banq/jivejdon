@@ -20,9 +20,6 @@
         <script src="/js/html5shiv.min.js></script>
         <script src="/js/respond.min.js"></script>
     <![endif]-->
-	<%@ include file="./headerBody.jsp" %>
-    <%@ include file="security.jsp" %>
-    <%@ include file="loginAccount.jsp" %>
 	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({
@@ -31,6 +28,7 @@
      });
 </script>
 </head>
+<body>
 <%@ include file="../account/loginAJAX.jsp" %>
 <%@ include file="./body_header.jsp" %>
 <div id="page-content" class="single-page container">

@@ -4,6 +4,13 @@ var startDiaglog = false;
 var scontent;
 
 function openInfoDiag(content) {  
+    if (typeof(Dialog) == 'undefined') 
+       loadWLJSWithP(content, openInfoDiag2);
+    else
+       openInfoDiag2(content);
+}
+
+function openInfoDiag2(content) {  
       scontent = content;       
       Dialog.info(scontent + "  计时：" +  timeout + " 秒   ",
                {width:260, height:150, showProgress: true});

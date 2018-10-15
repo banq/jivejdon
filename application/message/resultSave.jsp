@@ -18,7 +18,6 @@
     </logic:notEmpty>
 </logic:notEmpty>
 
-<script type="text/javascript"  src="/common/js/prototype.js"></script>
 
 <html:errors />
 
@@ -67,10 +66,13 @@
 		 <html:errors />
     </span>
     <script>
-        if (window.top.setDiagInfo)
-            window.top.setDiagInfo( document.getElementById("errors").innerHTML.replace(/\'/g,'') );
-        else
-            alert( document.getElementById("errors").innerHTML.replace(/\'/g,'') );
+    var errInfo = document.getElementById("errors").innerHTML.replace(/\'/g,'');
+    if (window.top.setDiagInfo)
+        window.top.setDiagInfo(errInfo);
+    else{
+        window.top.loadWLJSWithP(errInfo, window.top.setDiagInfo);
+    }
+     window.top.alert(errInfo);
 
     </script>
 </logic:messagesPresent>

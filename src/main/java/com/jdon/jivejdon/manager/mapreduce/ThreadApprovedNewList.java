@@ -55,6 +55,7 @@ public class ThreadApprovedNewList implements Startable {
 	private final AuthorList authorList;
 	// dig sort map, start is more greater, the dig collection is more greater.
 	private final ThreadDigList threadDigList;
+	private final ThreadTagList threadTagList;
 	private final ForumMessageQueryService forumMessageQueryService;
 	private final AccountService accountService;
 	// private Cache approvedThreadList = new LRUCache("approvedCache.xml");
@@ -70,7 +71,8 @@ public class ThreadApprovedNewList implements Startable {
 		this.forumMessageQueryService = forumMessageQueryService;
 		this.accountService = accountService;
 		this.authorList = new AuthorList(accountService);
-		this.threadDigList = new ThreadDigList(forumMessageQueryService, tagService);
+		this.threadDigList = new ThreadDigList(forumMessageQueryService);
+		this.threadTagList = new ThreadTagList(tagService);
 	}
 
 	public void start() {
@@ -103,6 +105,11 @@ public class ThreadApprovedNewList implements Startable {
 		maxStart = -1;
 		threadDigList.clear();
 		authorList.clear();
+		threadTagList.clear();
+	}
+
+	public ThreadTagList getThreadTagList() {
+		return threadTagList;
 	}
 
 	public Collection<Long> getApprovedThreads(int start) {
@@ -200,17 +207,7 @@ public class ThreadApprovedNewList implements Startable {
 							threadDigList.addForumThread(thread);
 							i++;
 						}
-
-						// map to sort dignumber near 120x10 day
-//						Date threadDate = new Date(thread.getRootMessage()
-//								.getModifiedDate2());
-//						Calendar calendar = Calendar.getInstance();
-//						calendar.setTime(threadDate);
-//						calendar.add(Calendar.HOUR, 28800);
-//						if (thread.getRootMessage().getDigCount() > 1
-//								&& calendar.getTime().after(nowD)) {
-//							threadDigList.addForumThread(thread);
-//						}
+						threadTagList.addForumThread(thread);
 
 						if (i >= approvedListSpec.getNeedCount()) {
 							approvedListSpec.setCurrentIndicator(threadId);

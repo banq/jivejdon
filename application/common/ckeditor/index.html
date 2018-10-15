@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
+-->
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CKEditor Sample</title>
+	<script src="ckeditor.js"></script>
+	<script src="sample.js"></script>
+</head>
+<body id="main">
+
+<main>
+
+		<form action="http://localhost:8080/message/messageSaveAction.shtml" method="post">
+		<input type="text" name="subject" value="sssssssssss">
+		<input type="hidden" name="action" value="create">
+		
+		<input type="hidden" name="forum.forumId" value="101">
+			<div>
+				<textarea id="formBody" style="height:300px;width:600px;" name="body">
+					
+
+				</textarea>
+   <input type="submit" name="提交">
+
+
+<script>
+	initSample();
+</script>
+
+</body>
+</html>

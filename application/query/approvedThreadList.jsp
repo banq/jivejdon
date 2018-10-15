@@ -7,7 +7,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <%
-int indexI = (int) (Math.random() * 8);
+int indexI = 1+ (int) (Math.random() * 10);
 %>
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 

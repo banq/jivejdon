@@ -17,17 +17,13 @@ package com.jdon.jivejdon.manager.mapreduce;
 
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.model.ThreadTag;
 import com.jdon.jivejdon.service.ForumMessageQueryService;
-import com.jdon.jivejdon.service.TagService;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public class ThreadDigList {
@@ -39,19 +35,12 @@ public class ThreadDigList {
 	private final static int TAGSLIST_SIZE = 10;
 	private final TreeSet<Long> sortedAll;
 	private final TreeSet<Long> sortedWindows;
-	private final ConcurrentHashMap<Long, Integer> tags_countWindows;
-	private final List<ThreadTag> tags_cachedWindows;
 	private final ForumMessageQueryService forumMessageQueryService;
-	private final TagService tagService;
 
-	public ThreadDigList(ForumMessageQueryService forumMessageQueryService, TagService
-			tagService) {
+	public ThreadDigList(ForumMessageQueryService forumMessageQueryService) {
 		this.forumMessageQueryService = forumMessageQueryService;
-		this.tagService = tagService;
 		this.sortedAll = createTreeList();
 		this.sortedWindows = createTreeList();
-		this.tags_countWindows = new ConcurrentHashMap();
-		this.tags_cachedWindows = new ArrayList<>(TAGSLIST_SIZE);
 		;
 	}
 
@@ -61,18 +50,9 @@ public class ThreadDigList {
 		long daysBetween = (nowDate.getTime() - mDate.getTime() + 1000000) / (60 * 60 * 24 * 1000);
 		if (daysBetween < TIME_WINDOWS) {
 			sortedWindows.add(forumThread.getThreadId());
-			addTagsSorting(forumThread);
 		}
 		sortedAll.add(forumThread.getThreadId());
 	}
-
-	private void addTagsSorting(ForumThread forumThread) {
-		for (ThreadTag threadTag : forumThread.getTags()) {
-			tags_countWindows.merge(threadTag.getTagID(), 1, (oldValue, one) -> oldValue +
-					one);
-		}
-	}
-
 
 	public PageIterator getPageIterator(int start, int count) {
 		List<Long> threads = sortedAll.stream().skip(start).limit(count).collect(Collectors.toList
@@ -87,21 +67,10 @@ public class ThreadDigList {
 
 	}
 
-	public Collection<ThreadTag> getThreadTags() {
-		if (tags_cachedWindows.isEmpty()) {
-			TreeSet<Long> tagIds = new TreeSet<Long>(new ThreadTagComparator(tags_countWindows));
-			tagIds.addAll(tags_countWindows.keySet());
-			tags_cachedWindows.addAll(tagIds.stream().limit(TAGSLIST_SIZE).map(tagId -> tagService
-					.getThreadTag(tagId)).collect(Collectors.toList()));
-		}
-		return tags_cachedWindows;
-	}
 
 	public void clear() {
 		sortedAll.clear();
 		sortedWindows.clear();
-		tags_countWindows.clear();
-		tags_cachedWindows.clear();
 	}
 
 	private TreeSet<Long> createTreeList() {

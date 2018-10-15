@@ -64,25 +64,25 @@
         <action name="messageReplyForm" path="/forum/messageReplyAction"
                 type="com.jdon.strutsutil.ModelViewAction" scope="request"
                 validate="false">
-            <forward name="create" path="/forum/messagePostReply.jsp"/>
-            <forward name="edit" path="/forum/messagePostReply.jsp"/>
+            <forward name="create" path="/message/messagePostReply.jsp"/>
+            <forward name="edit" path="/message/messagePostReply.jsp"/>
         </action>
 
 
         <action name="messageReplyForm" path="/message/messageReplySaveAction"
                 type="com.jdon.jivejdon.presentation.action.message.ReBlogAction" scope="request"
-                validate="true" input="/message/resultSave.jsp">
-            <forward name="success" path="/message/resultSave.jsp"/>
-            <forward name="failure" path="/message/resultSave.jsp"/>
+                validate="true" input="/message/resultSave2.jsp">
+            <forward name="success" path="/message/resultSave2.jsp"/>
+            <forward name="failure" path="/message/resultSave2.jsp"/>
             <forward name="onlyreply" path="/message/messageReplySaveAction2.shtml"/>
         </action>
 
 
         <action name="messageReplyForm" path="/message/messageReplySaveAction2"
                 type="com.jdon.strutsutil.ModelSaveAction" scope="request"
-                validate="true" input="/message/resultSave.jsp">
-            <forward name="success" path="/message/resultSave.jsp"/>
-            <forward name="failure" path="/message/resultSave.jsp"/>
+                validate="true" input="/message/resultSave2.jsp">
+            <forward name="success" path="/message/resultSave2.jsp"/>
+            <forward name="failure" path="/message/resultSave2.jsp"/>
         </action>
 
         <!-- message delete -->

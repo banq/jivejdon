@@ -105,20 +105,23 @@ note:
 替代myaspect.xml和web.xml 失效防止Spam功能。
 
 设置：
-起初设置要进入管理依据下面顺序安装下面过滤器:
-1 HTMLFilter HTMLFilter
-2 CodeHighlighter CodeHighlighter
-3 TextStyle TextStyle
-4 Newline Newline
-5 URLConverter URLConverter
-6 ImageFilter ImageFilter
-7 Profanity Profanity
-8 UploadImageFilter UploadImageFilter
-9 UploadFileFilter UploadFileFilter
-10 bodymasking
-11 hotkeys
-12 AuthorNameFormat
-13 QuoteRegexFilter
+起初设置要进入管理依据下面顺序安装下面过滤器 ,如果没有，添加过滤器类名，包括包名类名：com.jdon.jivejdon.model.message.output.html.ListStyle:
+1.  HTMLFilter
+2 	ListStyle
+3 	CodeHighlighter
+4 	TextStyle
+5 	Newline
+6 	URLConverter
+7 	ImageFilter
+8 	Profanity
+9 	UploadImageFilter
+10 	Bodymasking
+11 	UploadFileFilter
+12 	HotKeysFilter
+13 	AuthorNameFormat
+14 	QuoteRegexFilter
+15 	FontStyle
+
 
 ##############################################################################################
 （四）调试方法

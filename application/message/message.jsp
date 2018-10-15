@@ -8,76 +8,40 @@
 <bean:define id="forum" name="messageForm" property="forum"  />
 <logic:notEmpty name="forum">
 <bean:define id="title" name="forum" property="name" />
-<%@ include file="messageHeader.jsp" %>
-<link rel="stylesheet" href="/common/jivejdon5.css"  type="text/css">
+<%@ include file="../common/IncludeTop.jsp" %>
+<%
+response.setHeader("Pragma", "No-cache");
+response.setHeader("Cache-Control", "no-cache");
+response.setDateHeader("Expires", 0);
+response.setStatus(HttpServletResponse.SC_OK);
+%>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="0">   
 
-<!-- jQuery and Modernizr-->
-<script src="/js/jquery-2.1.1.js"></script>
-<script>
- 
- 
- var $j = jQuery.noConflict();
-// $j is now an alias to the jQuery function; creating the new alias is optional.
-
-    
-      $j(function() {
-         
-    // get initial top offset of navigation 
-    var floating_navigation_offset_top = $j('#textassit').offset().top;
-             
-    // define the floating navigation function
-    var floating_navigation = function(){
-                // current vertical position from the top
-        var scroll_top = $j(window).scrollTop(); 
-         
-        // if scrolled more than the navigation, change its 
-                // position to fixed to float to top, otherwise change 
-                // it back to relative
-        if (scroll_top > floating_navigation_offset_top) { 
-            $j('#textassit').css({ 'position': 'fixed', 'top':0});
-        } else {
-            $j('#textassit').css({ 'position': 'relative' }); 
-        }   
-    };
-     
-    // run function on load
-    floating_navigation();
-     
-    // run function every time you scroll
-    $j(window).scroll(function() {
-         floating_navigation();
-    });
- 
-});
-
-</script>
-<table cellpadding="0" cellspacing="0" border="0" width="971" align="center">
-<tr><td><html:img page="/images/blank.gif" width="1" height="10" border="0" alt=""/></td></tr>
-</table>
-
-<div align="center">
-
+<div class="box">
+<div class="comment">
 <iframe id='target_new' name='target_new' src='' style='display: none'></iframe>
 
 <html:form action="/message/messageSaveAction.sthml" method="post" target="target_new" styleId="messageNew" onsubmit="return checkPost(this);" >
+
 <html:hidden property="action" />
 <html:hidden property="messageId" />
 <html:hidden property="forumThread.threadId" />
 
-
-<table cellpadding="4" cellspacing="0" border="0" width="971" align="center">
-
-<tr>
-	<td  width="50" align="right">在 </td>
-	<td align="left"> 
-     <html:select name="messageForm" property="forum.forumId" styleId="forumId_select">
+<div class="row">
+	<div class="col-md-6">       
+        <div class="form-group">    
+     <html:select name="messageForm" styleClass="form-control" property="forum.forumId" styleId="forumId_select">
        <html:option value="">请选择</html:option>
        <html:optionsCollection name="forums" value="forumId" label="name"/>       
      </html:select>
-    中操作帖.</td>
-</tr>
-</table>
-
+  
+        </div>
+    </div>
+    <div class="col-md-6">
+    </div>
+</div>
 <logic:equal name="messageForm" property="authenticated"  value="false">
  <center>  <h2><font color="red" >对不起，现在没有权限操作本帖。</font> </h2></center>
 </logic:equal>   
@@ -88,25 +52,21 @@
      <jsp:param name="reply" value="false"/>   
  </jsp:include> 
  
-<table cellpadding="2" cellspacing="0" border="0" width="971" align="center">
-<tr>
- <td width="50">&nbsp;</td>
- <td align="left">
-     提交时自动拷贝以上内容到剪贴板 Ctrl+V可取出；
-    <br>
-    <input type="submit" value=" 确定 Ctrl+Enter " name="formButton" id="formSubmitButton" tabindex="3"> 
-    <logic:equal name="reply" value="false">
-       如有回复通知我<input type="checkbox" name="replyNotify" checked="checked">
-    </logic:equal> 	
- </td>
-</tr>
-</table> 
+
+<div class="row">
+	<div class="col-md-12">       
+        <div class="form-group"> 
+              <button type="submit" class="btn btn-4 btn-block" name="formButton" id="formSubmitButton">发布</button>
+        </div>
+      </div>
+</div>
 
 <script>
 function loadPostjs(){
   if (typeof(openInfoDiag) == 'undefined') {
     $LAB
-     .script('/common/messageEdit.js').wait()
+     .script('/common/js/prototype.js').wait()
+     .script('/common/messageEdit.js')
      .wait(function(){
          setObserve();
      
@@ -148,8 +108,6 @@ function changeAction(myform, newAction){
 	return oldformAction;
 }
 
-
-
 function notify(){	
 	var oldformAction = changeAction(document.messageForm, "<%=request.getContextPath()%>/message/messageSaveAction2.shtml");
 	document.messageForm.submit();
@@ -157,6 +115,7 @@ function notify(){
 	changeAction(document.messageForm, oldformAction);
 }
 notify();
+loadPostjs();
 </script>
 
 
@@ -190,7 +149,7 @@ notify();
 
 </html:form>
 </div>
-
+</div>
 
 </logic:notEmpty>
 </logic:notEmpty>

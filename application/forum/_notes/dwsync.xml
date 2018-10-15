@@ -9,7 +9,6 @@
 <file name="stickyThreadList.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131750783410736526" remote="131750783880000000" Dst="0" />
 <file name="threadList.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131753976439262491" remote="131753976610000000" Dst="0" />
 <file name="threadListCore.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131749827830325998" remote="131749827860000000" Dst="0" />
-<file name="messagePostReply.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131749843588492914" remote="131749845090000000" Dst="0" />
 <file name="newLastMessageNotfier.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131749843598098458" remote="131749845270000000" Dst="0" />
 <file name="newLobbymessage.jsp" server="www.jdon.com:7788//home/jdon/tomcat/webapps/ROOT/" local="131749843598509713" remote="131749845330000000" Dst="0" />
 </dwsync>

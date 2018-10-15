@@ -82,12 +82,21 @@ password:admin
 
 setup:
 
-intall 4 filters in admin:
-1 HTMLFilter HTMLFilter
-2 CodeHighlighter
-3 TextStyle TextStyle
-4 Newline Newline
-5 URLConverter URLConverter
-6 ImageFilter ImageFilter
-7 CodeHighlighter
+intall filters in admin, if no ,add it,such as com.jdon.jivejdon.model.message.output.html.ListStyle:
+1.  HTMLFilter
+2 	ListStyle
+3 	CodeHighlighter
+4 	TextStyle
+5 	Newline
+6 	URLConverter
+7 	ImageFilter
+8 	Profanity
+9 	UploadImageFilter
+10 	Bodymasking
+11 	UploadFileFilter
+12 	HotKeysFilter
+13 	AuthorNameFormat
+14 	QuoteRegexFilter
+15 	FontStyle
+
 

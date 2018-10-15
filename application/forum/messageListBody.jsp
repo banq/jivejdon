@@ -53,8 +53,6 @@
                     <bean:define id="cdate" name="forumThread" property="creationDate"></bean:define>
                     <%String cdateS = (String) pageContext.getAttribute("cdate"); %><%=cdateS.substring(2, 11) %>
                   <span></span>
-                  <a href="javascript:void(0);" onclick="loadWLJSWithP('<bean:write name="forumMessage" property="messageId"/>',loadWPostjs)">
-                    <i class="fa fa-commenting-o"></i> </a>
                </logic:equal>
 	  
               </div>

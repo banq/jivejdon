@@ -3,7 +3,7 @@
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ taglib uri="/WEB-INF/MultiPages.tld" prefix="MultiPages" %>
 <%@ page session="false" %>
-
+<%@ page trimDirectiveWhitespaces="true" %>
 <%  com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(5 *  60 * 60, request, response);
 %>
 

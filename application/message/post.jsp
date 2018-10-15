@@ -8,7 +8,7 @@ com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(5 * 24 * 60 * 60, request, respo
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!--  deirectly call this :/forum/post.jsp -->
 <%@ include file="../common/IncludeTop.jsp" %>
-<link rel="stylesheet" href="/common/jivejdon5.css"  type="text/css">
+
 <a name="post"></a>
 <jsp:include page="threadPost.jsp" flush="true">   
    <jsp:param name="forumId">
@@ -36,5 +36,7 @@ if (request.getParameter("tag") != null){
 }
 %>
 <p><br><br>
-</body>
-</html>
+<%-- 不能使用，里面有jquery.js对autoComplete影响 
+<%@ include file="../common/IncludeBottom.jsp" %>
+--%>
+    </body></html>

@@ -36,5 +36,8 @@ function loadAcJS(thisId){
       ac(thisId,contextpath);
 }
 function popList(){
-    new Ajax.Updater('poplist', contextpath+'/query/popularlist.shtml?count=15&dateRange=360', { method: 'get' });
+     load(getContextPath() +'/query/popularlist.shtml?count=15&dateRange=360', function(xhr) {
+  	       document.getElementById('poplist').innerHTML = xhr.responseText;
+			});
+   
 }   
