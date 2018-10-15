@@ -85,6 +85,6 @@
             class="tooltip html_tooltip_content_<bean:write name="forumThread" property="threadId"/>">
              <bean:write name="forumThread" property="name"/></span></b></a>
 </div>
-
+<%--  jquery prototype
 <%@include file="../../common/IncludeBottom.jsp"%>
-
+--%>

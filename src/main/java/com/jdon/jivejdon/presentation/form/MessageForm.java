@@ -15,14 +15,6 @@
  */
 package com.jdon.jivejdon.presentation.form;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts.action.ActionMapping;
-
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
@@ -30,21 +22,24 @@ import com.jdon.jivejdon.model.attachment.AttachmentsVO;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.util.StringUtil;
 import com.jdon.util.UtilValidate;
+import org.apache.struts.action.ActionMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
  * 
  */
 public class MessageForm extends BaseForm {
+	public final static int subjectMaxLength = 50;
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
-
-	private int bodyMaxLength = 58190;
-
-	public final static int subjectMaxLength = 50;
-
+	private int bodyMaxLength = 20480;
 	private Long messageId;
 
 	private String creationDate;
@@ -329,10 +324,10 @@ public class MessageForm extends BaseForm {
 
 	public void doValidate(ActionMapping mapping, HttpServletRequest request, List errors) {
 		if (getMethod() == null || !getMethod().equalsIgnoreCase("delete")) {
-			if(addErrorIfStringEmpty(errors, "need subject", this.getSubject
+			if (addErrorIfStringEmpty(errors, "subject.required", this.getSubject
                     ()))
 			    return;
-            if(addErrorIfStringEmpty(errors, "need body", getBody()))
+			if (addErrorIfStringEmpty(errors, "body.required", getBody()))
                 return;
 
 			if (this.getParentMessage() == null)
