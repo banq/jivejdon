@@ -39,7 +39,7 @@ public class MessageForm extends BaseForm {
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	private int bodyMaxLength = 20480;
+	private int bodyMaxLength = 58190;
 	private Long messageId;
 
 	private String creationDate;

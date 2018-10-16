@@ -6,35 +6,11 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <script src="/common/form.js"></script>
-<script>
-function openUploadWindowStart(url){
-    <logic:notPresent name="principal" > 
-	  if (typeof(logged) != 'undefined') {
-		  if (logged){
-	        loadWLJSWithP(url, openUploadWindow);       
-		  }else{
-            myalert("只有登录后才能打开上传页面");
-            return;			   			  
-		  }
-	  }
-	    
-    </logic:notPresent>     
-    <logic:present name="principal" >       
-      loadWLJSWithP(url, openUploadWindow);       
-    </logic:present>     
-    
- }
-
-//-->
-</script>
-
+<script src="../common/ckeditor/ckeditor.js"></script>
 <div class="box"> 
 <div class="row">
 	<div class="col-md-12">       
         <div class="form-group"> 
-<script src="../common/ckeditor/ckeditor.js"></script>
-<script src="../common/ckeditor/sample.js"></script>
- 
    <html:text styleClass="form-control" property="subject" styleId="replySubject" size="80" maxlength="80" tabindex="5" onkeydown="releaseKeyboard()" />
         </div>
     </div>
@@ -44,15 +20,32 @@ function openUploadWindowStart(url){
 	<div class="col-md-12">       
         <div class="form-group"> 
 	<html:textarea styleClass="form-control" property="body" cols="100" rows="40"  styleId="formBody" tabindex="6" onkeydown="releaseKeyboard()"></html:textarea>
-	
-<script>
-	initSample();
-</script>
+
         </div>
     </div>
 </div>
 
-
+	
+<script>
+    CKEDITOR.replace( 'formBody', {
+        height: 480,
+        language: 'zh-cn',
+        extraPlugins: 'bbcode,base64image',  
+ 	// Remove unused plugins.
+        removePlugins: 'filebrowser,format,horizontalrule,pastetext,pastefromword,scayt,showborderstable,tabletools,tableselection,wsc',
+					// Remove unused buttons.
+        removeButtons: 'Table,paragraph,Anchor,BGColor,Font,Strike,Subscript,Superscript',
+					// Width and height are not supported in the BBCode format, so object resizing is disabled.
+		disableObjectResizing: true,
+                
+        toolbar :
+            [
+                 [ 'Bold', 'Italic', 'Underline', 'Image','base64image','Styles','NumberedList','BulletedList','CodeSnippet','Link','Unlink','Maximize','Source' ]
+            ]
+            } );
+    
+</script>
+    
 <div class="row">
 <!--  autocomplete.js -->
 <link rel="stylesheet" href="/common/jivejdon5.css"  type="text/css">

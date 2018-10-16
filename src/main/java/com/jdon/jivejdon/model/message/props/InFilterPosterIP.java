@@ -15,15 +15,15 @@
  */
 package com.jdon.jivejdon.model.message.props;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import com.jdon.jivejdon.model.Account;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.util.Debug;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Manage the properties of a ForumMessage
@@ -59,8 +59,8 @@ public class InFilterPosterIP implements MessageRenderSpecification {
 		long now = System.currentTimeMillis();
 		String displayDateTime = dateTime_formatter.format(new Date(now));
 
-		buffer.append("[该贴被").append(modifier.getUsername());
-		buffer.append("于").append(displayDateTime).append("修改过]");
+//		buffer.append("[该贴被").append(modifier.getUsername());
+//		buffer.append("于").append(displayDateTime).append("修改过]");
 		return buffer.toString().intern();
 	}
 

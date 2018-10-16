@@ -32,12 +32,10 @@ public class HomepageListSolver {
 
 
 	private TreeMap<ForumThread, Long> createHomeTreeMap() {
-		return new TreeMap(new Comparator() {
-			public int compare(Object num1, Object num2) {
-				if (num1 == num2)
+		return new TreeMap<ForumThread, Long>(new Comparator<ForumThread>() {
+			public int compare(ForumThread thread1, ForumThread thread2) {
+				if (thread1.getThreadId().longValue() == thread2.getThreadId().longValue())
 					return 0;
-				ForumThread thread1 = (ForumThread) num1;
-				ForumThread thread2 = (ForumThread) num2;
 
 				double countRs1 = algorithm(thread1);
 				double countRs2 = algorithm(thread2);
@@ -75,7 +73,7 @@ public class HomepageListSolver {
 
 		double t = System.currentTimeMillis() - thread.getState().getModifiedDate2() + 1000;
 
-		double G = 10;
+		double G = 5;
 		double tg = Math.pow(t, G);
 		return p / (tg + 1);
 	}

@@ -13,7 +13,7 @@ h5{font-size:16px}
 h6{font-size:15px}
 h1,h2,h3,h4,h5,h6{color:#111;font-weight:600;font-family:Roboto,sans-serif}
 p{margin:0 0 20px}
-a{color:#7DC314;-webkit-transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;transition:all .2s ease-in-out}
+a{color:#30A87C;-webkit-transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;transition:all .2s ease-in-out}
 a:focus,a:hover{color:#000;text-decoration:none}
 .center{margin:0 auto;text-align:center}
 .f-right{float:right}
@@ -129,7 +129,7 @@ ul.pagination li a{color:#444}
 .widget.wid-vid ul a:focus,.widget.wid-vid ul a:hover{border-top:none;border-right:none;border-left:none;background:0 0}
 .widget.wid-vid ul li{border-bottom:1px solid transparent}
 .widget.wid-vid ul li:hover{border-bottom:1px solid #FD0005}
-.widget.wid-vid ul li+:hover{border-bottom:1px solid #7DC314}
+.widget.wid-vid ul li+:hover{border-bottom:1px solid #30A87C}
 .widget.wid-vid ul li+li+:hover{border-bottom:1px solid #966B20}
 .widget.wid-vid .post{margin-top:12px}
 .widget.wid-vid .post img{float:left;display:inline-block;max-width:105px}
@@ -150,7 +150,7 @@ ul.pagination li a{color:#444}
 .widget.wid-tweet .tweet-item{padding:5px;border-bottom:1px solid #ddd}
 .widget.wid-tweet .tweet-item:last-child{padding:5px 0 0;border-bottom:none}
 .widget.wid-tags a{padding:1px 10px;border:1px solid #333;color:#333;text-transform:capitalize;font-size:14px;line-height:2.2}
-.widget.wid-tags a:hover{border:1px solid #999;color:#7DC314}
+.widget.wid-tags a:hover{border:1px solid #999;color:#30A87C}
 .box-facebook,.box-google,.box-twitter{padding:15px;width:95px;height:95px;color:#fff;text-align:center}
 .box-facebook:hover,.box-google:hover,.box-twitter:hover{background-color:#000}
 .box-facebook{background-color:#3B5998}
@@ -178,7 +178,7 @@ footer .footer-1 img{margin-bottom:10px;max-width:140px}
 footer .footer-1 p{margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid #444}
 footer .footer-1 input[type=text]{display:block;margin:10px 0;padding:5px 10px 0;width:100%;height:40px;outline:medium none;border:2px solid #E7E7E7;border:2px solid #444;background-color:transparent;color:#999;font-size:14px;line-height:1.2}
 footer .footer-2 a{padding:1px 10px;border:1px solid #999;color:#999;text-transform:capitalize;font-size:14px;line-height:2.2}
-footer .footer-2 a:hover{color:#7DC314}
+footer .footer-2 a:hover{color:#30A87C}
 footer .footer-3 ul{padding:0}
 footer .footer-3 ul li{margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #444;list-style:none}
 footer .footer-3 ul li:last-child{border-bottom:none}
@@ -186,7 +186,6 @@ footer .footer-3 ul li a{color:#999}
 footer .footer-3 ul li a:hover{color:#666}
 .contact h2{padding-top:20px;text-align:center;letter-spacing:3px;font-weight:500;font-size:19px}
 #contact_form{padding:25px}
-
 
 #ff label{display:block;margin:px 0;font-weight:700;cursor:pointer}
 #ff input{display:block;margin:5px 0 25px 0;padding:10px;width:100%;color:#000}
@@ -210,8 +209,8 @@ footer .footer-3 ul li a:hover{color:#666}
 .btn-2{padding:3px 8px}
 .btn-3{background-color:#444;color:#FADA1A;font-weight:700}
 .btn-3:hover{background-color:#fff;color:#000}
-.article{color:#444;font:400 15px/1.8 "Microsoft YaHei",Rajdhani,Play,Helvetica Neue,Helvetica,Helvetica,Arial,sans-serif;line-height:1.8em;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-.tpc_content{color:#444;font:400 15px/1.8 "Microsoft YaHei",Rajdhani,Play,Helvetica Neue,Helvetica,Helvetica,Arial,sans-serif;line-height:1.8em;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.article{color:#444;font-family: "Helvetica Neue",Helvetica,Verdana,Rajdhani,Arial,sans-serif;font-weight: 300;font-style: normal;font-size: 15px;line-height: 1.7;letter-spacing: 0.5px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.tpc_content{color:#444;font-family: "Helvetica Neue",Helvetica,Verdana,Rajdhani,Arial,sans-serif;font-weight: 300;font-style: normal;font-size: 15px;line-height: 1.7;letter-spacing: 0.5px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 DIV.diggArea{margin:0 auto;background-repeat:no-repeat;WIDTH:45px;HEIGHT:53px;BACKGROUND:url(/images/dig.png)}
 .diggArea .diggNum{margin:0 auto;padding-top:5px;padding-right:0;padding-bottom:0;padding-left:0;DISPLAY:block;COLOR:#a200ff;FONT-WEIGHT:lighter;FONT-SIZE:16px;WIDTH:45px;FONT-FAMILY:Georgia;HEIGHT:30px;TEXT-ALIGN:center}
 .diggArea .top8{margin:0 auto;padding-top:0}

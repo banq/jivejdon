@@ -181,6 +181,8 @@ $LAB
      load('/query/popularlist.shtml?count=11&dateRange=180', function(xhr) {
   	       document.getElementById("poplist").innerHTML = xhr.responseText;
 			});
+
+     document.getElementById("home-thumbnai").src="https://cdn.jdon.com/simgs/thumb2/<%=1+ (int) (Math.random() * 10)%>.jpg";
 	
 });  
 </script> 	

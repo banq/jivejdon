@@ -41,20 +41,19 @@
 
             <div class="post_title2">
               <div class="post_titleauthor info">
+               <logic:equal name="forumMessage" property="root" value="true">
+                    <i class="fa fa-calendar"></i>
+                    <bean:define id="cdate" name="forumThread" property="creationDate"></bean:define>
+                    <%String cdateS = (String) pageContext.getAttribute("cdate"); %><%=cdateS.substring(2, 11) %>
+                  <span></span>
+                </logic:equal>
+				<span></span>  
                 <logic:notEmpty name="forumMessage" property="account">
 					<i class="fa fa-user"></i>
 				  <a href='<%=request.getContextPath()%>/blog/<bean:write name="forumMessage" property="account.username"/>' class="smallgray">
                     <bean:write name="forumMessage" property="account.username"/>
                   </a>
-                </logic:notEmpty>
-				  <span></span>  
-			    <logic:equal name="forumMessage" property="root" value="true">
-                    <i class="fa fa-calendar"></i>
-                    <bean:define id="cdate" name="forumThread" property="creationDate"></bean:define>
-                    <%String cdateS = (String) pageContext.getAttribute("cdate"); %><%=cdateS.substring(2, 11) %>
-                  <span></span>
-               </logic:equal>
-	  
+                </logic:notEmpty>      
               </div>
 
               <logic:equal name="forumMessage" property="root" value="false">

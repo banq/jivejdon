@@ -6,9 +6,6 @@
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-<%
-int indexI = 1+ (int) (Math.random() * 10);
-%>
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='1' >
@@ -20,9 +17,7 @@ int indexI = 1+ (int) (Math.random() * 10);
        <div class="box">
             <div class="zoom-container">
 				<div>
-       <logic:notEmpty name="forumMessage" property="messageVO.thumbnailUrl">
-          <img src="https://cdn.jdon.com/simgs/thumb2/<%=indexI%>.jpg" border='0' width="600"/>
-       </logic:notEmpty>
+                <img id="home-thumbnai" src="" border='0' class="thumbnail"/>
                </div>
 			</div>
              <bean:define id="body" name="forumMessage" property="messageVO.body" />

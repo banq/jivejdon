@@ -26,13 +26,13 @@ public class ListStyle implements MessageRenderSpecification {
 	}
 
 	private String convertTags(String input) {
-		String parentTagRegx = "\\[list\\](.*?)\\[\\/list\\]";
+		String parentTagRegx = "\\[list\\](.*?)\\[\\/list\\]([\n]*)";
 		String parentHtml = "ul";
 		String childHtml = "li";
 		String childTagRex = "\\[\\*\\](.*?)";
 		input = ToolsUtil.convertTags(input, parentTagRegx, parentHtml, childTagRex, childHtml);
 
-		parentTagRegx = "\\[list=1\\](.*?)\\[\\/list\\]";
+		parentTagRegx = "\\[list=1\\](.*?)\\[\\/list\\]([\n]*)";
 		childTagRex = "\\[\\*\\](.*?)";
 		parentHtml = "ol";
 		input = ToolsUtil.convertTags(input, parentTagRegx, parentHtml, childTagRex, childHtml);
