@@ -11,17 +11,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 package com.jdon.jivejdon.presentation.form;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts.action.ActionMapping;
 
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
@@ -30,10 +22,15 @@ import com.jdon.jivejdon.model.attachment.AttachmentsVO;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.util.StringUtil;
 import com.jdon.util.UtilValidate;
+import org.apache.struts.action.ActionMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
- * 
  */
 public class MessageForm extends BaseForm {
 	public final static int subjectMaxLength = 50;
@@ -57,7 +54,8 @@ public class MessageForm extends BaseForm {
 	private ForumMessage parentMessage;
 
 	// for upload files
-	private AttachmentsVO attachment;;
+	private AttachmentsVO attachment;
+	;
 
 	private boolean authenticated = true;// default true
 
@@ -94,8 +92,7 @@ public class MessageForm extends BaseForm {
 	}
 
 	/**
-	 * @param account
-	 *            The account to set.
+	 * @param account The account to set.
 	 */
 	public void setAccount(com.jdon.jivejdon.model.Account account) {
 		this.account = account;
@@ -109,8 +106,7 @@ public class MessageForm extends BaseForm {
 	}
 
 	/**
-	 * @param creationDate
-	 *            The creationDate to set.
+	 * @param creationDate The creationDate to set.
 	 */
 	public void setCreationDate(String creationDate) {
 		this.creationDate = creationDate;
@@ -124,8 +120,7 @@ public class MessageForm extends BaseForm {
 	}
 
 	/**
-	 * @param messageId
-	 *            The messageId to set.
+	 * @param messageId The messageId to set.
 	 */
 	public void setMessageId(Long messageId) {
 		this.messageId = messageId;
@@ -139,8 +134,7 @@ public class MessageForm extends BaseForm {
 	}
 
 	/**
-	 * @param modifiedDate
-	 *            The modifiedDate to set.
+	 * @param modifiedDate The modifiedDate to set.
 	 */
 	public void setModifiedDate(String modifiedDate) {
 		this.modifiedDate = modifiedDate;
@@ -154,8 +148,7 @@ public class MessageForm extends BaseForm {
 	}
 
 	/**
-	 * @param rewardPoints
-	 *            The rewardPoints to set.
+	 * @param rewardPoints The rewardPoints to set.
 	 */
 	public void setRewardPoints(int rewardPoints) {
 		messageVO.setRewardPoints(rewardPoints);
@@ -169,8 +162,7 @@ public class MessageForm extends BaseForm {
 	}
 
 	/**
-	 * @param parentMessage
-	 *            The parentMessage to set.
+	 * @param parentMessage The parentMessage to set.
 	 */
 	public void setParentMessage(ForumMessage parentMessage) {
 		this.parentMessage = parentMessage;
@@ -200,8 +192,7 @@ public class MessageForm extends BaseForm {
 	}
 
 	/**
-	 * @param forumThread
-	 *            The forumThread to set.
+	 * @param forumThread The forumThread to set.
 	 */
 	public void setForumThread(ForumThread forumThread) {
 		this.forumThread = forumThread;
@@ -215,8 +206,7 @@ public class MessageForm extends BaseForm {
 	}
 
 	/**
-	 * @param forum
-	 *            The forum to set.
+	 * @param forum The forum to set.
 	 */
 	public void setForum(Forum forum) {
 		this.forum = forum;
@@ -259,7 +249,8 @@ public class MessageForm extends BaseForm {
 	}
 
 	public boolean isRoot() {
-		if (this.forumThread.getRootMessage().getMessageId().longValue() == this.messageId.longValue())
+		if (this.forumThread.getRootMessage().getMessageId().longValue() == this.messageId
+				.longValue())
 			return true;
 		else
 			return false;
@@ -284,7 +275,7 @@ public class MessageForm extends BaseForm {
 	/**
 	 * donot need get method, upload is in uploadService.getAllUploadFiles
 	 * public AttachmentsVO getAttachment() { return attachment; }
-	 * 
+	 *
 	 * @return
 	 */
 
@@ -326,11 +317,11 @@ public class MessageForm extends BaseForm {
 
 	public void doValidate(ActionMapping mapping, HttpServletRequest request, List errors) {
 		if (getMethod() == null || !getMethod().equalsIgnoreCase("delete")) {
-			if(addErrorIfStringEmpty(errors, "need subject", this.getSubject
-                    ()))
-			    return;
-            if(addErrorIfStringEmpty(errors, "need body", getBody()))
-                return;
+			if (addErrorIfStringEmpty(errors, "need subject", this.getSubject
+					()))
+				return;
+			if (addErrorIfStringEmpty(errors, "need body", getBody()))
+				return;
 
 			if (this.getParentMessage() == null)
 				if (this.getForum() == null || this.getForum().getForumId() == null) {
@@ -351,7 +342,7 @@ public class MessageForm extends BaseForm {
 				return;
 			}
 			if ((getBody() != null) && (getBody().length() >= bodyMaxLength)) {
-				errors.add("body.sizeerror" );
+				errors.add("body.sizeerror");
 				return;
 			}
 		}
