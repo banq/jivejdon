@@ -4,5 +4,8 @@
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="jivejdon" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

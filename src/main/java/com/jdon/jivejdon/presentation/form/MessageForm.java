@@ -15,6 +15,14 @@
  */
 package com.jdon.jivejdon.presentation.form;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionMapping;
+
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
@@ -22,12 +30,6 @@ import com.jdon.jivejdon.model.attachment.AttachmentsVO;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.util.StringUtil;
 import com.jdon.util.UtilValidate;
-import org.apache.struts.action.ActionMapping;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -324,10 +326,10 @@ public class MessageForm extends BaseForm {
 
 	public void doValidate(ActionMapping mapping, HttpServletRequest request, List errors) {
 		if (getMethod() == null || !getMethod().equalsIgnoreCase("delete")) {
-			if (addErrorIfStringEmpty(errors, "subject.required", this.getSubject
+			if(addErrorIfStringEmpty(errors, "need subject", this.getSubject
                     ()))
 			    return;
-			if (addErrorIfStringEmpty(errors, "body.required", getBody()))
+            if(addErrorIfStringEmpty(errors, "need body", getBody()))
                 return;
 
 			if (this.getParentMessage() == null)

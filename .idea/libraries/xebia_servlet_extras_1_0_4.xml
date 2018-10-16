@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="xebia-servlet-extras-1.0.4">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/expires/xebia-servlet-extras-1.0.4.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
