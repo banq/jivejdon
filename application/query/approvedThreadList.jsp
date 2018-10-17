@@ -10,6 +10,7 @@
 
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='1' >
     <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
+  <bean:define id="thumbthreadId" name="forumThread" property="threadId" toScope="application"/>
      <div class="box"> 
   <div class="linkblock" itemscope itemtype="http://schema.org/BlogPosting">
   <div class="row">
@@ -17,7 +18,7 @@
        <div class="box">
             <div class="zoom-container">
 				<div>
-                <img id="home-thumbnai" src="" border='0' class="thumbnail"/>
+                  <img id="home-thumbnai" src="" border='0' class="thumbnail"/>
                </div>
 			</div>
              <bean:define id="body" name="forumMessage" property="messageVO.body" />

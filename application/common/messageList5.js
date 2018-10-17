@@ -18,7 +18,7 @@ function openInfoDiag2(content) {
    
 function infoTimeOut() {  
       if (startDiaglog){
-         if (timeout > 4)
+         if (timeout > 2)
             infoDiagClose();
          else
             timeout++;  

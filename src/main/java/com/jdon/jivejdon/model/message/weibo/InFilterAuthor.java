@@ -15,14 +15,13 @@
  */
 package com.jdon.jivejdon.model.message.weibo;
 
-import java.util.Collection;
-
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.event.ATUserNotifiedEvent;
 import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.output.weibo.AuthorNameFormat;
-import com.jdon.jivejdon.model.message.props.InFilterPosterIP;
 import com.jdon.util.Debug;
+
+import java.util.Collection;
 
 /**
  * pick up
@@ -35,7 +34,7 @@ import com.jdon.util.Debug;
  */
 
 public class InFilterAuthor implements MessageRenderSpecification {
-	private final static String module = InFilterPosterIP.class.getName();
+	private final static String module = InFilterAuthor.class.getName();
 
 	public ForumMessage render(ForumMessage message) {
 		try {

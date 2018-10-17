@@ -15,12 +15,6 @@
  */
 package com.jdon.jivejdon.repository.builder;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-
-import org.apache.logging.log4j.*;
-
 import com.jdon.jivejdon.Constants;
 import com.jdon.jivejdon.manager.MessageDeletor;
 import com.jdon.jivejdon.model.Forum;
@@ -36,6 +30,12 @@ import com.jdon.jivejdon.repository.dao.MessageDaoFacade;
 import com.jdon.jivejdon.repository.dao.PropertyDao;
 import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.treepatterns.TreeVisitor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Kernel of Message business operations
@@ -47,12 +47,9 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	private final static Logger logger = LogManager.getLogger(MessageRepositoryDao.class);
 
 	protected ForumFactory forumBuilder;
-
-	private TagRepository tagRepository;
-
 	protected UploadRepository uploadRepository;
-
 	protected PropertyDao propertyDao;
+	private TagRepository tagRepository;
 
 	public MessageRepositoryDao(MessageDaoFacade messageDaoFacade, ForumFactory forumBuilder, ContainerUtil containerUtil,
 			TagRepository tagRepository, UploadRepository uploadRepository, PropertyDao propertyDao) {
@@ -84,10 +81,10 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 			}
 			forumMessagePostDTO.setForum(forum);
 
-			ForumThread forumThread = super.createThread(forumMessagePostDTO);
+			ForumThread forumThread = super.initThread(forumMessagePostDTO);
 			forumMessagePostDTO.setForumThread(forumThread);
 			messageDaoFacade.getMessageDao().createMessage(forumMessagePostDTO);
-
+			super.createThread(forumThread);
 			uploadRepository.saveAllUploadFiles(forumMessagePostDTO.getMessageId().toString(), forumMessagePostDTO.getAttachment().getUploadFiles());
 
 			propertyDao.saveProperties(Constants.MESSAGE, forumMessagePostDTO.getMessageId(), forumMessagePostDTO.getMessagePropertysVO()

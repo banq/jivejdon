@@ -26,8 +26,9 @@ public class FontStyle implements MessageRenderSpecification {
 	}
 
 	private String convertTags(String input) {
-		String parentTagRegx = "\\[color=#[A-Za-z0-9]*\\](.*?)\\[\\/color\\]";
+		String parentTagRegx = "\\[[\\/=#! \\w]*color[=#! \\w]*\\](.*?)";
 		String parentHtml = "";
+
 		String childTagRex = "";
 		String childHtml = "";
 		input = ToolsUtil.convertTags(input, parentTagRegx, parentHtml, childTagRex, childHtml);

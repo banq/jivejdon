@@ -136,7 +136,9 @@ public abstract class MessageDaoSql implements MessageDao {
 	public void createMessage(ForumMessage forumMessage) throws Exception {
 		logger.debug("enter createTopicMessage for id:" + forumMessage.getMessageId());
 		// differnce with createRpleyMessage: parentMessageID,
-
+		MessageVO messageVO = forumMessage.getMessageVO();
+		if (messageVO.getSubject().length() == 0 || messageVO.getBody().length() == 0)
+			return;
 		String INSERT_MESSAGE = "INSERT INTO jiveMessage(messageID, threadID, forumID, "
 				+ "userID, subject, body, modValue, rewardPoints, creationDate, modifiedDate) " +
 				"VALUES(?,?,?,?,?,?,?,?,?,?)";
@@ -145,7 +147,7 @@ public abstract class MessageDaoSql implements MessageDao {
 		queryParams.add(forumMessage.getForumThread().getThreadId());
 		queryParams.add(forumMessage.getForum().getForumId());
 		queryParams.add(forumMessage.getAccount().getUserId());
-		MessageVO messageVO = forumMessage.getMessageVO();
+
 		queryParams.add(messageVO.getSubject());
 		queryParams.add(messageVO.getBody());
 		queryParams.add(new Integer(0));

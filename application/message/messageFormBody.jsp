@@ -11,7 +11,7 @@
 <div class="row">
 	<div class="col-md-12">       
         <div class="form-group"> 
-   <html:text styleClass="form-control" property="subject" styleId="replySubject" size="80" maxlength="80" tabindex="5" onkeydown="releaseKeyboard()" />
+   <html:text styleClass="form-control" property="subject" styleId="replySubject" size="80" maxlength="80" tabindex="5" />
         </div>
     </div>
 </div>
@@ -19,7 +19,7 @@
 <div class="row">
 	<div class="col-md-12">       
         <div class="form-group"> 
-	<html:textarea styleClass="form-control" property="body" cols="100" rows="40"  styleId="formBody" tabindex="6" onkeydown="releaseKeyboard()"></html:textarea>
+	<html:textarea styleClass="form-control" property="body" cols="100" rows="40"  styleId="formBody" tabindex="6" ></html:textarea>
 
         </div>
     </div>
@@ -30,7 +30,7 @@
     CKEDITOR.replace( 'formBody', {
         height: 480,
         language: 'zh-cn',
-        extraPlugins: 'bbcode,base64image',  
+        extraPlugins: 'bbcode,base64image,autosave',  
  	// Remove unused plugins.
         removePlugins: 'filebrowser,format,horizontalrule,pastetext,pastefromword,scayt,showborderstable,tabletools,tableselection,wsc',
 					// Remove unused buttons.

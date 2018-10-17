@@ -15,14 +15,6 @@
  */
 package com.jdon.jivejdon.presentation.form;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts.action.ActionMapping;
-
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
@@ -30,6 +22,15 @@ import com.jdon.jivejdon.model.attachment.AttachmentsVO;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.util.StringUtil;
 import com.jdon.util.UtilValidate;
+import org.apache.struts.action.ActionMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -41,7 +42,7 @@ public class MessageForm extends BaseForm {
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	private int bodyMaxLength = 58190;
+	private int bodyMaxLength = 81900;
 	private Long messageId;
 
 	private String creationDate;
@@ -355,5 +356,23 @@ public class MessageForm extends BaseForm {
 				return;
 			}
 		}
+	}
+
+	public String esacpeUtf(String input) {
+		String utf8tweet = "";
+		try {
+			byte[] utf8Bytes = input.getBytes("UTF-8");
+
+			utf8tweet = new String(utf8Bytes, "UTF-8");
+
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		Pattern unicodeOutliers = Pattern.compile("[^\\x00-\\x7F]",
+				Pattern.UNICODE_CASE | Pattern.CANON_EQ
+						| Pattern.CASE_INSENSITIVE);
+		Matcher unicodeOutlierMatcher = unicodeOutliers.matcher(utf8tweet);
+
+		return unicodeOutlierMatcher.replaceAll(" ");
 	}
 }

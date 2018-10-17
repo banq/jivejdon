@@ -15,21 +15,14 @@
  */
 package com.jdon.jivejdon.repository;
 
-import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 
 import java.util.List;
 
 public interface ThreadRepository {
 
-	/**
-	 * create a new Thread, this is for topic message
-	 *
-	 * @param rootForumMessage
-	 * @return
-	 * @throws Exception
-	 */
-	public abstract ForumThread createThread(ForumMessage rootForumMessage) throws Exception;
+	
+	public void createThread(ForumThread forumThread) throws Exception;
 
 	public abstract void updateThread(ForumThread thread) throws Exception;
 

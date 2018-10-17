@@ -171,6 +171,17 @@
 	
 <%@ include file="./common/IncludeBottomBody.jsp" %> 
 <%@ include file="../account/loginAJAX.jsp" %>
+<%
+  String mythreadId = "";
+  if (application.getAttribute("thumbthreadId") != null) {
+    mythreadId = ((Long) application.getAttribute("thumbthreadId")).toString();
+  }
+  Integer homethumbnai = (Integer) application.getAttribute(mythreadId);
+  if (homethumbnai == null) {
+    homethumbnai = 1 + (int) (Math.random() * 10);
+    application.setAttribute(mythreadId, homethumbnai);
+  }
+%>
 <script>   
 $LAB
 .script("https://cdn.jdon.com/js/index.js").wait()
@@ -182,7 +193,7 @@ $LAB
   	       document.getElementById("poplist").innerHTML = xhr.responseText;
 			});
 
-     document.getElementById("home-thumbnai").src="https://cdn.jdon.com/simgs/thumb2/<%=1+ (int) (Math.random() * 10)%>.jpg";
+    document.getElementById("home-thumbnai").src = "https://cdn.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
 	
 });  
 </script> 	

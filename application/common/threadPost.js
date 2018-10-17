@@ -20,7 +20,7 @@ function openInfoDiag2(content) {
 function infoTimeOut() {  
       if (startDiaglog){
     	  //发完贴计时5秒刷新。
-         if (timeout > 4)
+         if (timeout > 1)
             infoDiagClose();
          else
             timeout++;  

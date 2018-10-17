@@ -31,7 +31,7 @@ var initSample = ( function() {
 		if ( wysiwygareaAvailable ) {
 			CKEDITOR.replace( 'formBody', {
                language: 'zh-cn',
-            extraPlugins: 'bbcode,base64image',  
+            extraPlugins: 'bbcode,base64image,autosave',  
  	// Remove unused plugins.
 					removePlugins: 'filebrowser,format,horizontalrule,pastetext,pastefromword,scayt,showborderstable,tabletools,tableselection,wsc',
 					// Remove unused buttons.

@@ -189,30 +189,15 @@ $LAB
 	    sId = '<bean:write name="forumThread" property="state.lastPost.modifiedDate2" />';
 	 </logic:notEmpty>
 	 viewcount('<bean:write name="forumThread" property="threadId" />', sId);
-	 //stickyList();
-	
-	
 	 
     window.onload = function() {    
     	
     <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">
         tagthreads(10,160,10,<bean:write name="threadTag" property="tagID"/>);
    </logic:iterate>
+        approveList(); 
     }
 
-   var hasDisplayNeedLoad = false;
-    window.onscroll = function(ev) {
-    if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
-         if (!hasDisplayNeedLoad){
-            approveList(); 
-             hasDisplayNeedLoad = true;
-          }
-       
-       }
-     };
-	  
-
-    
 });      
 </script> 
 

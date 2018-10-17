@@ -8,7 +8,6 @@ import com.jdon.jivejdon.repository.dao.MessageDaoFacade;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,26 +20,21 @@ public class ThreadRepositoryDao implements ThreadRepository {
 		this.messageDaoFacade = messageDaoFacade;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.jdon.jivejdon.repository.ThreadRepository#createThread(com.jdon.jivejdon.model
-	 * .ForumMessage)
-	 */
-	public ForumThread createThread(ForumMessage rootForumMessage) throws Exception {
+	public ForumThread initThread(ForumMessage rootForumMessage) throws Exception {
 		logger.debug(" createThread");
 		ForumThread forumThread = new ForumThread(rootForumMessage);
-		try {
-			Long tIDInt = messageDaoFacade.getSequenceDao().getNextId(Constants.THREAD);
+		Long tIDInt = messageDaoFacade.getSequenceDao().getNextId(Constants.THREAD);
 
-			forumThread.setThreadId(tIDInt);
-			forumThread.setForum(rootForumMessage.getForum());
-			forumThread.setName(rootForumMessage.getMessageVO().getSubject());
-			messageDaoFacade.getMessageDao().createThread(forumThread);
-		} catch (SQLException e) {
-			logger.error(e);
-			throw new Exception(e);
+		forumThread.setThreadId(tIDInt);
+		forumThread.setForum(rootForumMessage.getForum());
+		forumThread.setName(rootForumMessage.getMessageVO().getSubject());
 
-		}
 		return forumThread;
+	}
+
+	@Override
+	public void createThread(ForumThread forumThread) throws Exception {
+		messageDaoFacade.getMessageDao().createThread(forumThread);
 	}
 
 	/* (non-Javadoc)

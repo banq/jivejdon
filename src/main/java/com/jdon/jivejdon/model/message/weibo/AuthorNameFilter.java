@@ -15,13 +15,13 @@
  */
 package com.jdon.jivejdon.model.message.weibo;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.util.StringUtil;
 import com.jdon.util.UtilValidate;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class AuthorNameFilter {
 	public final static String PRE_AUTHOR = "@";
@@ -44,14 +44,16 @@ public class AuthorNameFilter {
                 return null;
             }
 
-            //20个字符以内@生效
-			if (messageVO.getSubject().indexOf(PRE_AUTHOR) < 20) {
-				String sbuff = messageVO.getSubject().substring(messageVO.getSubject().indexOf(PRE_AUTHOR));
-				String[] sas = sbuff.split("(?i)[^a-zA-Z0-9\u4E00-\u9FA5]");
-				if (sas.length >= 2 && !UtilValidate.isEmpty(sas[1]) && UtilValidate.isAlphanumeric(sas[1])) {
-					toUsernames.add(sas[1]);
-				}
-			}
+//            //20个字符以内@生效
+//			if (messageVO.getSubject().indexOf(PRE_AUTHOR) < 20) {
+//				String sbuff = messageVO.getSubject().substring(messageVO.getSubject().indexOf
+// (PRE_AUTHOR));
+//				String[] sas = sbuff.split("(?i)[^a-zA-Z0-9\u4E00-\u9FA5]");
+//				if (sas.length >= 2 && !UtilValidate.isEmpty(sas[1]) && UtilValidate
+// .isAlphanumeric(sas[1])) {
+//					toUsernames.add(sas[1]);
+//				}
+//			}
 
 			String messagebody = messageVO.getBody();
 			int SPECIAL_PRE_AUTHOR_index = messagebody.indexOf(SPECIAL_PRE_AUTHOR);
@@ -63,7 +65,7 @@ public class AuthorNameFilter {
 			}
 
 			int PRE_AUTHOR_index = messagebody.indexOf(PRE_AUTHOR);
-			if (PRE_AUTHOR_index == -1 || PRE_AUTHOR_index > messagebody.indexOf("[code]")) {
+			if (PRE_AUTHOR_index == -1 || messagebody.matches("(.*)\\[(.*)@(.*)\\](.*)")) {
 				return toUsernames;
 			}
 			// escape special ascii

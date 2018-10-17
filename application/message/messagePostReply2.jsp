@@ -30,7 +30,7 @@
 <input type="hidden" name="onlyreblog" id="onlyreblog" value="" />
 
 		
-        <input type="text" name="subject" class="form-control" maxlength="80" size="80" tabindex="5" value="<bean:write name="parentMessageSubject"  />" onkeydown="releaseKeyboard()" onFocus="loadCkeditJS()" id="replySubject" />
+        <input type="hidden" name="subject" class="form-control" maxlength="80" size="80" tabindex="5" value="<bean:write name="parentMessageSubject"  />"  onFocus="loadCkeditJS()" id="replySubject" />
     </div>
   </div>
 
@@ -40,7 +40,7 @@
 	<div class="col-md-12">
        
 		<div class="form-group">
-          <textarea name="body" tabindex="6" cols="45" rows="9" onFocus="loadCkeditJS()" onkeydown="releaseKeyboard()"  id="formBody" class="form-control"></textarea>
+          <textarea name="body" tabindex="6" cols="45" rows="9" onFocus="loadCkeditJS()" id="formBody" class="form-control"></textarea>
         </div>
 
    

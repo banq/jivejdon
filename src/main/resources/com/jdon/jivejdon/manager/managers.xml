@@ -61,6 +61,7 @@
 		<!-- message input  filter -->
 		<component name="inFilterManager"
 			class="com.jdon.jivejdon.manager.filter.InFilterManager">
+            <constructor value="com.jdon.jivejdon.model.message.weibo.EscapeUTFInFIlter"/>
 			<constructor value="com.jdon.jivejdon.model.message.props.InFilterPosterIP" />
 			<constructor value="com.jdon.jivejdon.model.message.weibo.InFilterAuthor" />	
 		</component>
