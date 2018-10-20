@@ -15,12 +15,6 @@
  */
 package com.jdon.jivejdon.service.imp.message;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jdon.annotation.Service;
 import com.jdon.annotation.intercept.Poolable;
 import com.jdon.annotation.intercept.SessionContextAcceptable;
@@ -45,6 +39,11 @@ import com.jdon.jivejdon.service.ForumMessageService;
 import com.jdon.jivejdon.service.UploadService;
 import com.jdon.jivejdon.service.util.SessionContextUtil;
 import com.jdon.util.UtilValidate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * ForumMessageShell is the shell of ForumMessage core implementions.
@@ -59,24 +58,17 @@ import com.jdon.util.UtilValidate;
 @Service("forumMessageService")
 public class ForumMessageShell implements ForumMessageService {
 	private final static Logger logger = LogManager.getLogger(ForumMessageShell.class);
-
-	protected SessionContext sessionContext;
-
-	protected SessionContextUtil sessionContextUtil;
-
-	protected ResourceAuthorization resourceAuthorization;
-
 	protected final InFilterManager inFilterManager;
-
-	private RenderingFilterManager renderingFilterManager;
-
+	private final ThreadManagerContext threadManagerContext;
+	protected SessionContext sessionContext;
+	protected SessionContextUtil sessionContextUtil;
+	protected ResourceAuthorization resourceAuthorization;
 	protected MessageKernelIF messageKernel;
 
 	protected UploadService uploadService;
 
 	protected ForumFactory forumBuilder;
-
-	private final ThreadManagerContext threadManagerContext;
+	private RenderingFilterManager renderingFilterManager;
 
 	public ForumMessageShell(SessionContextUtil sessionContextUtil, ResourceAuthorization messageServiceAuth, InFilterManager inFilterManager,
 			MessageKernelIF messageKernel, UploadService uploadService, ForumFactory forumBuilder, RenderingFilterManager renderingFilterManager,
@@ -113,11 +105,11 @@ public class ForumMessageShell implements ForumMessageService {
 		ForumMessage forumMessagePostDTO = (ForumMessage) em.getModelIF();
 		if (!prepareCreate(forumMessagePostDTO))
 			return null;
+		if (forumBuilder.getForum(forumMessagePostDTO.getForum().getForumId()) == null)
+			return null;
 		Long mIDInt = forumBuilder.getNextId(Constants.MESSAGE);
 		try {
-
 			forumMessagePostDTO.setMessageId(mIDInt);
-
 			// upload
 			Collection uploads = uploadService.loadAllUploadFilesOfMessage(mIDInt, sessionContext);
 			AttachmentsVO attachmentsVO = new AttachmentsVO(mIDInt, uploads);
@@ -133,7 +125,8 @@ public class ForumMessageShell implements ForumMessageService {
 
 			inFilterManager.applyFilters(forumMessagePostDTO);
 
-			if (!UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getBody())) {
+			if (!UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getBody()) ||
+					!UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getSubject())) {
 				threadManagerContext.post(forumMessagePostDTO);
 			}
 

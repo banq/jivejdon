@@ -29,9 +29,15 @@ var initSample = ( function() {
 
 		// Depending on the wysiwygarea plugin availability initialize classic or inline editor.
 		if ( wysiwygareaAvailable ) {
+            CKEDITOR.stylesSet.add( 'my_styles', [
+				    // Block-level styles
+				    { name: '代码格式', element: 'code', styles: {  } },
+	        ] );   
 			CKEDITOR.replace( 'formBody', {
                language: 'zh-cn',
-            extraPlugins: 'bbcode,base64image,autosave',  
+                stylesSet:'my_styles',
+                pasteFilter: 'p b br i ul ol li; img[!src, alt]; a[!href]',
+            extraPlugins: 'bbcode,base64image,autosave,fixed',  
  	// Remove unused plugins.
 					removePlugins: 'filebrowser,format,horizontalrule,pastetext,pastefromword,scayt,showborderstable,tabletools,tableselection,wsc',
 					// Remove unused buttons.
@@ -41,7 +47,7 @@ var initSample = ( function() {
                 
             toolbar :
             [
-                 [ 'Bold', 'Italic', 'Underline', 'Image','base64image','Styles','Link','Unlink','Source' ]
+                 [ 'Bold', 'Italic', 'Underline', 'Image','base64image','Styles','NumberedList','BulletedList','Link','Unlink','Maximize','Source'  ]
             ]
             } );
 		} else {

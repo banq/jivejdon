@@ -15,6 +15,11 @@
     
 <html:form action="/message/messageSaveAction.sthml" method="post" target="target_new" styleId="messageNew"  onsubmit="return checkPost(this);" >
 
+<jsp:include page="messageFormBody.jsp" flush="true">   
+     <jsp:param name="reply" value="false"/>   
+</jsp:include> 
+
+    
 <div class="row">
 	<div class="col-md-6">       
         <div class="form-group">            
@@ -32,10 +37,7 @@
     <div class="col-md-6">
     </div>
 </div>
-<jsp:include page="messageFormBody.jsp" flush="true">   
-     <jsp:param name="reply" value="false"/>   
-</jsp:include> 
-
+    
 
 <div class="row">
 	<div class="col-md-12">       
@@ -88,8 +90,8 @@ if (formBody != null)
 </script>
 
 <script>
-var pars = "";
- load(getContextPath() +'/forum/forumListJSON.shtml', function(xhr) {
+window.onload = function() {    
+     load(getContextPath() +'/forum/forumListJSON.shtml', function(xhr) {
      var dataArray = JSON.parse(xhr.responseText);  
          for (var i in dataArray){  
             var optn = document.createElement('option');
@@ -98,7 +100,9 @@ var pars = "";
            document.getElementById('forumId_select').options.add(optn);
          
         }  
-});
-loadPostjs();
+    });
+    loadPostjs();
+}
+
 </script>    
 

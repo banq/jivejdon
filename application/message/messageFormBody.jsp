@@ -7,6 +7,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <script src="/common/form.js"></script>
 <script src="../common/ckeditor/ckeditor.js"></script>
+<script src="../common/ckeditor/sample.js"></script>
 <div class="box"> 
 <div class="row">
 	<div class="col-md-12">       
@@ -24,26 +25,9 @@
         </div>
     </div>
 </div>
-
-	
 <script>
-    CKEDITOR.replace( 'formBody', {
-        height: 480,
-        language: 'zh-cn',
-        extraPlugins: 'bbcode,base64image,autosave',  
- 	// Remove unused plugins.
-        removePlugins: 'filebrowser,format,horizontalrule,pastetext,pastefromword,scayt,showborderstable,tabletools,tableselection,wsc',
-					// Remove unused buttons.
-        removeButtons: 'Table,paragraph,Anchor,BGColor,Font,Strike,Subscript,Superscript',
-					// Width and height are not supported in the BBCode format, so object resizing is disabled.
-		disableObjectResizing: true,
-                
-        toolbar :
-            [
-                 [ 'Bold', 'Italic', 'Underline', 'Image','base64image','Styles','NumberedList','BulletedList','CodeSnippet','Link','Unlink','Maximize','Source' ]
-            ]
-            } );
-    
+    initSample();
+    CKEDITOR.config.height = 480;
 </script>
     
 <div class="row">

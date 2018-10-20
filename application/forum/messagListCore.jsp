@@ -189,13 +189,13 @@ $LAB
 	    sId = '<bean:write name="forumThread" property="state.lastPost.modifiedDate2" />';
 	 </logic:notEmpty>
 	 viewcount('<bean:write name="forumThread" property="threadId" />', sId);
-	 
+     approveList(); 
     window.onload = function() {    
     	
     <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">
         tagthreads(10,160,10,<bean:write name="threadTag" property="tagID"/>);
    </logic:iterate>
-        approveList(); 
+       
     }
 
 });      
