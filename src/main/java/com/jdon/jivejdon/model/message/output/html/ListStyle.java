@@ -26,16 +26,32 @@ public class ListStyle implements MessageRenderSpecification {
 	}
 
 	private String convertTags(String input) {
-		String parentTagRegx = "\\[list\\](.*?)\\[\\/list\\]([\n]*)";
-		String parentHtml = "ul";
-		String childHtml = "li";
-		String childTagRex = "\\[\\*\\](.*?)";
-		input = ToolsUtil.convertTags(input, parentTagRegx, parentHtml, childTagRex, childHtml);
-
-		parentTagRegx = "\\[list=1\\](.*?)\\[\\/list\\]([\n]*)";
-		childTagRex = "\\[\\*\\](.*?)";
-		parentHtml = "ol";
-		input = ToolsUtil.convertTags(input, parentTagRegx, parentHtml, childTagRex, childHtml);
+		input = convertOLTag(input);
+		input = convertULTag(input);
 		return input;
+	}
+
+	private String convertULTag(String s) {
+		String parentTagRegx = "\\[list\\]([\n]*)";
+		String parentHtml = "<ul>";
+		s = ToolsUtil.convertTags(s, parentTagRegx, parentHtml);
+
+		parentTagRegx = "([\n]*)\\[\\*\\](.*?)([\n]*)";
+		parentHtml = "<li>";
+		s = ToolsUtil.convertTags(s, parentTagRegx, parentHtml);
+
+		parentTagRegx = "([\n]*)\\[\\/list\\]";
+		parentHtml = "</ul>";
+		s = ToolsUtil.convertTags(s, parentTagRegx, parentHtml);
+		return s;
+	}
+
+	private String convertOLTag(String s) {
+		String parentTagRegx = "\\[list=1\\](.*?)\\[\\/list\\]([\n]*)";
+		String parentHtml = "ol";
+		String childTagRex = "\\[\\*\\](.*?)";
+		String childHtml = "li";
+		s = ToolsUtil.convertTags(s, parentTagRegx, parentHtml, childTagRex, childHtml);
+		return s;
 	}
 }

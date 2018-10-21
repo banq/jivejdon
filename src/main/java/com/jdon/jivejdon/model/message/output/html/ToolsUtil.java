@@ -74,4 +74,16 @@ public class ToolsUtil {
 		return input;
 	}
 
+	public static String convertTags(String input, String parentTagRegx, String phtml) {
+		// Check if the string is null or zero length -- if so, return what was
+		// sent in.
+		if (input == null || input.length() == 0)
+			return input;
+
+		Matcher matcher = Pattern.compile(parentTagRegx, Pattern.CASE_INSENSITIVE | Pattern.DOTALL)
+				.matcher(input);
+		input = matcher.replaceAll(phtml);
+
+		return input;
+	}
 }
