@@ -57,12 +57,25 @@ public class URLConverter implements MessageRenderSpecification {
 	public ForumMessage render(ForumMessage message) {
 		try {
 			MessageVO messageVO = message.getMessageVO();
-			if (!messageVO.isFiltered())
-				messageVO.setBody(convertURL(messageVO.getBody()));
+			if (!messageVO.isFiltered()) {
+				String s = convertURL(messageVO.getBody());
+				s = convertUrlNull(s);
+				messageVO.setBody(s);
+			}
 		} catch (Exception e) {
 			Debug.logError("" + e, module);
 		}
 		return message;
+	}
+
+	private String convertUrlNull(String s) {
+		String parentTagRegx = "\\[url\\](.*?)\\[\\/url\\]";
+		String parentHtml = "a";
+
+		String childTagRex = "";
+		String childHtml = "";
+		s = ToolsUtil.convertTags(s, parentTagRegx, parentHtml, childTagRex, childHtml);
+		return s;
 	}
 
 	// OTHER METHODS//

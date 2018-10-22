@@ -63,7 +63,19 @@ public class SinaOAuthSubmitter {
 		String code = br.readLine();
 		Log.logInfo("code: " + code);
 		try {
-			System.out.println(oauth.getAccessTokenByCode(code));
+			String token = oauth.getAccessTokenByCode(code).getAccessToken();
+			System.out.println("############token=" + token);
+			HttpClient client = new HttpClient();
+			Response rs = client.post("https://api.weibo.com/2/statuses/share" +
+							".json",
+					new PostParameter[]{new PostParameter(
+							"status", "【SpringBoot 2的普通servlet与WebFlux性能对比】:  Spring-boot 2.0  " +
+							"最近" +
+							" " +
+							"发布，每个人都对新功能和改进感到兴奋。Spring 5引入了W https://jdon.com/50407")}, token);
+			Status status = new Status(rs);
+			System.out.println("############status=" + status);
+
 		} catch (WeiboException e) {
 			if (401 == e.getStatusCode()) {
 				Log.logInfo("Unable to get the access token.");
@@ -107,7 +119,7 @@ public class SinaOAuthSubmitter {
 
 	public void update(AccessToken access, String content) throws Exception {
 		try {
-			content = content + " http://";
+//			content = content + " https://jdon.com";
 			Response rs = client.post(oAuthParamVO.baseURL + "statuses/share" +
 							".json",
 					new PostParameter[]{new PostParameter(

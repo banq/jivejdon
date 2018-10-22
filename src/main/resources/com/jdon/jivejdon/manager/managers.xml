@@ -118,7 +118,7 @@
 			<constructor value="您好：您索要的jdon.com网站登陆用户和密码如下：" />
 			<constructor value="Jdon.com --- 专业的软件架构之道" />
 			<constructor value="Jdon.com" />
-			<constructor value="jdonmon@163.com" />
+            <constructor value="banq@163.com"/>
 		</component>
 		<!-- forget password send mail by JavaMail end   -->
 
@@ -133,7 +133,7 @@
 			<constructor
 				value="https://www.jdon.com/account/emailValidate.shtml?Referer=https://www.jdon.com&amp;method=emailValidate" />
 			<constructor value="jdon.com" />
-			<constructor value="jdonmon@163.com" />
+            <constructor value="banq@163.com"/>
 		</component>
 		
 		
@@ -166,7 +166,7 @@
 		<component name="tagNotifyMessage"
 			class="com.jdon.jivejdon.model.subscription.messsage.TagNotifyMessage">
 			<constructor value="您关注的标签有新主题 " />
-			<constructor value="https://www.jdon.com/tags/tagId" />
+            <constructor value="https://jdon.com/tags/tagId"/>
 			<constructor value="admin" />
 		</component>
 
@@ -174,21 +174,21 @@
 			class="com.jdon.jivejdon.model.subscription.messsage.ThreadNotifyMessage">
 			<constructor value=" 您关注的主题贴有新回复  " />
 			<constructor
-                    value="https://www.jdon.com/nav/threadId/messageId#messageId" />
+                    value="https://jdon.com/nav/threadId/messageId#messageId"/>
 			<constructor value="admin" />
 		</component>
 		
 		<component name="forumNotifyMessage"
 			class="com.jdon.jivejdon.model.subscription.messsage.ForumNotifyMessage">
 			<constructor value="您关注的论坛有新贴 " />
-			<constructor value="https://www.jdon.com/threadId" />
+            <constructor value="https://jdon.com/threadId"/>
 			<constructor value="admin" />
 		</component>
 		
 		<component name="accountNotifyMessage"
 			class="com.jdon.jivejdon.model.subscription.messsage.AccountNotifyMessage">
 			<constructor value="您关注的作者有新主题贴   " />
-			<constructor value="https://www.jdon.com/threadId" />
+            <constructor value="https://jdon.com/threadId"/>
 			<constructor value="admin" />
 		</component>
 		

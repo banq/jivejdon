@@ -50,8 +50,12 @@ public class ToolsUtil {
 			Matcher m = p.matcher(matcher.group(1));
 			String cleanS = m.replaceAll("");
 
-			if (parentHtml.length() != 0)
-				sb.append("<" + parentHtml + ">");
+			if (parentHtml.length() != 0) {
+				if (parentHtml.equalsIgnoreCase("a"))
+					sb.append("<a href=" + matcher.group(1) + ">");
+				else
+					sb.append("<" + parentHtml + ">");
+			}
 			String childhtmlBegin = "";
 			String childhtmlEnd = "";
 			if (childHtml.length() != 0) {
