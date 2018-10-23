@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<aspect>
-
-  <interceptor name="jivejdon_permissionInterceptor" class="com.jdon.jivejdon.auth.PermissionInterceptor" pointcut="pojoServices" />
-  <!-- when running jmeter, mask this line--> 
-  <interceptor name="jivejdon_IPInterceptor" class="com.jdon.jivejdon.auth.CUDInputInterceptor" pointcut="pojoServices" />
-	
-</aspect>
