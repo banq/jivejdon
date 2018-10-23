@@ -29,12 +29,82 @@ import com.jdon.util.Debug;
 public class Newline implements MessageRenderSpecification {
 	private final static String module = Newline.class.getName();
 
-	private static final char[] BR_TAG = "<BR>".toCharArray();
+	private static final char[] BR_TAG = "<p class=\"indent\">".toCharArray();
+
+	/**
+	 * Finds out whether a given index position resides within any boundaries of
+	 * a set of index boundaries.
+	 *
+	 * @param index      the index position to be tested.
+	 * @param boundaries the table containing a set of boundaries.
+	 * @return true if index resides within at least one boundary, false
+	 * otherwise.
+	 */
+	private static boolean notInCodeSection(int index, int[][] boundaries) {
+		if (boundaries == null) {
+			return true;
+		} else {
+			boolean notInCodeSection = true;
+			int i = 0;
+			while (i < boundaries.length) {
+				// if in a code section
+				if (index >= boundaries[i][0] && index <= boundaries[i][1]) {
+					return false;
+				} else {
+					i++;
+					continue;
+				}
+			}
+			return notInCodeSection;
+		}
+	}
+
+	/**
+	 * Records the index positions of [code][/code] sections
+	 *
+	 * @param input the text to be filtered.
+	 * @return a table containing the index positions of code sections
+	 */
+	private static int[][] recordCodeIndeces(String input) {
+		int[][] codeIndeces;
+		int count;
+		int oldend;
+		int i, j;
+
+		count = 0;
+		oldend = 0;
+		i = j = 0;
+
+		// first figure out how many pairs of [code][/code] there are
+		while (((i = input.indexOf("[code]", oldend)) >= 0) && ((j = input.indexOf("[/code]", i +
+				6)) >= 0)) {
+			count++;
+			oldend = j + 7;
+		}
+
+		oldend = 0;
+		codeIndeces = new int[count][2];
+		i = j = 0;
+		int x = 0;
+		// int y = 0;
+
+		// record code index positions
+		while (((i = input.indexOf("[code]", oldend)) >= 0) && ((j = input.indexOf("[/code]", i +
+				6)) >= 0)) {
+			codeIndeces[x][0] = i;
+			// y++;
+			codeIndeces[x][1] = j;
+			x++;
+			// y--;
+			oldend = j + 7;
+		}
+		return codeIndeces;
+	}
 
 	/**
 	 * Clones a new filter that will have the same properties and that will wrap
 	 * around the specified message.
-	 * 
+	 *
 	 * @param message
 	 *            the ForumMessage to wrap the new filter around.
 	 */
@@ -53,7 +123,7 @@ public class Newline implements MessageRenderSpecification {
 	 * Replaces newline characters with the HTML equivalent. This method works
 	 * around the code filter, allowing copy and paste actions to be
 	 * successfully performed.
-	 * 
+	 *
 	 * @param input
 	 *            the text to be converted.
 	 * @return the input string with newline characters replaced with HTML
@@ -104,76 +174,5 @@ public class Newline implements MessageRenderSpecification {
 		// Add whatever chars are left to buffer.
 		buf.append(chars, cur, len - cur);
 		return buf.toString().intern();
-	}
-
-	/**
-	 * Finds out whether a given index position resides within any boundaries of
-	 * a set of index boundaries.
-	 * 
-	 * @param index
-	 *            the index position to be tested.
-	 * @param boundaries
-	 *            the table containing a set of boundaries.
-	 * @return true if index resides within at least one boundary, false
-	 *         otherwise.
-	 */
-	private static boolean notInCodeSection(int index, int[][] boundaries) {
-		if (boundaries == null) {
-			return true;
-		} else {
-			boolean notInCodeSection = true;
-			int i = 0;
-			while (i < boundaries.length) {
-				// if in a code section
-				if (index >= boundaries[i][0] && index <= boundaries[i][1]) {
-					return false;
-				} else {
-					i++;
-					continue;
-				}
-			}
-			return notInCodeSection;
-		}
-	}
-
-	/**
-	 * Records the index positions of [code][/code] sections
-	 * 
-	 * @param input
-	 *            the text to be filtered.
-	 * @return a table containing the index positions of code sections
-	 */
-	private static int[][] recordCodeIndeces(String input) {
-		int[][] codeIndeces;
-		int count;
-		int oldend;
-		int i, j;
-
-		count = 0;
-		oldend = 0;
-		i = j = 0;
-
-		// first figure out how many pairs of [code][/code] there are
-		while (((i = input.indexOf("[code]", oldend)) >= 0) && ((j = input.indexOf("[/code]", i + 6)) >= 0)) {
-			count++;
-			oldend = j + 7;
-		}
-
-		oldend = 0;
-		codeIndeces = new int[count][2];
-		i = j = 0;
-		int x = 0;
-		// int y = 0;
-
-		// record code index positions
-		while (((i = input.indexOf("[code]", oldend)) >= 0) && ((j = input.indexOf("[/code]", i + 6)) >= 0)) {
-			codeIndeces[x][0] = i;
-			// y++;
-			codeIndeces[x][1] = j;
-			x++;
-			// y--;
-			oldend = j + 7;
-		}
-		return codeIndeces;
 	}
 }

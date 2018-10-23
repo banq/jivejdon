@@ -16,7 +16,7 @@
 	  <!--  create new user -->
     <action name="accountForm" path="/account/newAccountForm" type="com.jdon.strutsutil.ModelViewAction" scope="request"
 		validate="false">
-      <forward name="create" path="/account/newPasswordassitView.shtml" />
+        <forward name="create" path="/account/NewAccountForm.jsp"/>
     </action>
     
       <action  path="/account/newPasswordassitView" type="com.jdon.jivejdon.presentation.action.account.PasswordassitAction" scope="request"
@@ -27,7 +27,7 @@
 	  
     <action name="accountForm" path="/account/newAccount" type="com.jdon.strutsutil.ModelSaveAction" scope="request"
     	validate="true" input="/account/result.jsp">
-      <forward name="success" path="/account/newPasswordassit.shtml" />
+        <forward name="success" path="/account/protected/autologin.jsp"/>
       <forward name="failure" path="/account/result.jsp" />
     </action>
     

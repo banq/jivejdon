@@ -101,8 +101,8 @@
                 <bean:write name="messageFrom" property="forumThread.name"/>
               </a></div>
               </logic:present>
-              <h1 class="tpc_content"
-                  id='body_<bean:write name="forumMessage" property="messageId"/>'>
+             <h1 class="tpc_content"
+                  id='body_<bean:write name="forumMessage" property="messageId"/>'><p class="indent">
                 <bean:write name="forumMessage" property="messageVO.body" filter="false"/>
               </h1>
               <logic:notEmpty name="forumMessage" property="reBlogVO.messageTos">

@@ -39,7 +39,7 @@ var initSample = ( function() {
                 pasteFilter: 'b i ul ol li; img[!src, alt]; a[!href]',
             extraPlugins: 'bbcode,base64image,autosave,fixed',  
  	// Remove unused plugins.
-					removePlugins: 'filebrowser,format,horizontalrule,pastetext,pastefromword,scayt,showborderstable,tabletools,tableselection,wsc',
+					removePlugins: 'filebrowser,format,horizontalrule,pastetext,pastefromword,scayt,showborderstable,tabletools,tableselection,wsc,smiley',
 					// Remove unused buttons.
 					removeButtons: 'Table,paragraph,List,Anchor,BGColor,Font,Strike,Subscript,Superscript',
 					// Width and height are not supported in the BBCode format, so object resizing is disabled.

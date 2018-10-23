@@ -15,18 +15,14 @@
  */
 package com.jdon.jivejdon.presentation.form;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import com.jdon.model.ModelForm;
 import org.apache.commons.validator.EmailValidator;
 import org.apache.struts.action.ActionMapping;
 
-import com.jdon.model.ModelForm;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author <a href="mailto:banq@163.com">banq </a>
@@ -61,20 +57,20 @@ public class AccountForm extends BaseForm {
 		return email;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public String getPassword2() {
-		return password2;
-	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getPassword2() {
+		return password2;
 	}
 
 	public void setPassword2(String password2) {
@@ -149,10 +145,18 @@ public class AccountForm extends BaseForm {
 //                return;
 //            }
 
-            if (!SkinUtils.verifyQQMobileNumber(request, registerCode)) {
-                errors.add("registerCode  dismatch");
-                return;
-            }
+			if (ModelForm.CREATE_STR.equals(getAction())) {
+				if (!SkinUtils.verifyQQMobileNumber(request, registerCode)) {
+					errors.add("registerCode.dismatch");
+					return;
+				}
+			} else if (ModelForm.EDIT_STR.equals(getAction())) {
+				if (!SkinUtils.verifyRegisterCode(registerCode, request)) {
+					errors.add("registerCode.dismatch");
+					return;
+				}
+			}
+
 
 			if (ModelForm.CREATE_STR.equals(getAction())) {
 				// evening shut up
@@ -200,13 +204,13 @@ public class AccountForm extends BaseForm {
 			}
 
 
-			if (ModelForm.CREATE_STR.equals(getAction())) {
-				if (!SkinUtils.verifyProblemAnswer(getAns(), request)) {
-					errors.add("answer is not correct");
-					return;
-
-				}
-			}
+//			if (ModelForm.CREATE_STR.equals(getAction())) {
+//				if (!SkinUtils.verifyProblemAnswer(getAns(), request)) {
+//					errors.add("answer is not correct");
+//					return;
+//
+//				}
+//			}
 
 		}
 

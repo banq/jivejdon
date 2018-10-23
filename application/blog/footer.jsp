@@ -2,9 +2,7 @@
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<div class="foot">
-<%@include file="../../common/IncludeBottomBody.jsp"%>
-</div> 
+
  
 <script>
 function openShortmessageWindow(name, url){

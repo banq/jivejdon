@@ -1,5 +1,5 @@
 body{background:url(/simgs/bg2.png) fixed;color:#666;font-weight:400;font-size:15px;font-family:'Ek Mukta',sans-serif;line-height:1.6em}
-body,html{margin:0;padding:0;width:100%}
+body,html{margin:0;padding:0;width:100%;word-wrap:break-word}
 ::-moz-selection{background:#000;color:#fff;text-shadow:none}
 ::selection{background:#000;color:#fff;text-shadow:none}
 html{ -webkit-text-size-adjust:none}
@@ -13,6 +13,7 @@ h5{font-size:14px}
 h6{font-size:14px}
 h1,h2,h3,h4,h5,h6{color:#111;font-weight:600;font-family:Roboto,sans-serif}
 p{margin:0 0 20px}
+.indent{text-indent: 40px}
 a{color:#30A87C;-webkit-transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;transition:all .2s ease-in-out}
 a:focus,a:hover{color:#000;text-decoration:none}
 .bige20 {font-size: 24px;}

@@ -55,10 +55,9 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCache(expire, modelLastModified
     String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
 %>
 <link rel="canonical" href="<%=domainUrl %>/blog/<bean:write name="accountProfileForm" property="account.username"/>" />
-<meta http-equiv="mobile-agent" content="format=xhtml; url=<%=domainUrl %>/mobile/blog/<bean:write name="accountProfileForm" property="account.username"/>" />
-<link rel="alternate" href="<%=domainUrl %>/mobile/blog/<bean:write name="accountProfileForm" property="account.username"/>" />
-<%@ include file="../../common/headerBody.jsp" %>
+<link href="/common/jivejdon5.css" rel="stylesheet" type="text/css" />
 <link href="/common/blog/themes/default/style/blog.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="https://cdn.jdon.com/common/js/prototype.js"></script>
 <script type="text/javascript" src="<html:rewrite page="/account/protected/js/account.jsp"/>"></script>
 <script >
 

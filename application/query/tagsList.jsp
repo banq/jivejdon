@@ -26,10 +26,6 @@
 <logic:present name="tagsListForm">
 <logic:greaterThan name="tagsListForm" property="allCount" value="0">
 
-
-<script type="text/javascript" src="https://cdn.jdon.com/common/js/prototype.js"></script>
-
-    
 <div class="box">
 	
 <div class="col-md-4">
@@ -55,7 +51,9 @@
 	</div>
 	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' style="width:300px; border:none; overflow:hidden;">
      <script>
-        new Ajax.Updater('ajax_tagID=<bean:write name="threadTag" property="tagID"/>', '/query/tt/${threadTag.tagID}', { method: 'get' });
+         load('/query/tt/${threadTag.tagID}', function(xhr) {
+  	       document.getElementById('ajax_tagID=<bean:write name="threadTag" property="tagID"/>').innerHTML = xhr.responseText;
+         });
         </script> 
 	</div>	
 </div>  
@@ -86,7 +84,9 @@
 	</div>
 	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' style="width:300px; border:none; overflow:hidden;">
        <script>
-        new Ajax.Updater('ajax_tagID=<bean:write name="threadTag" property="tagID"/>', '/query/tt/${threadTag.tagID}', { method: 'get' });
+          load('/query/tt/${threadTag.tagID}', function(xhr) {
+  	       document.getElementById('ajax_tagID=<bean:write name="threadTag" property="tagID"/>').innerHTML = xhr.responseText;
+         });
         </script> 
      
 	</div>	
@@ -119,7 +119,9 @@
 	</div>
 	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' style="width:300px; border:none; overflow:hidden;">
         <script>
-        new Ajax.Updater('ajax_tagID=<bean:write name="threadTag" property="tagID"/>', '/query/tt/${threadTag.tagID}', { method: 'get' });
+        load('/query/tt/${threadTag.tagID}', function(xhr) {
+  	       document.getElementById('ajax_tagID=<bean:write name="threadTag" property="tagID"/>').innerHTML = xhr.responseText;
+         });
         </script> 
 	</div>	
 </div>  

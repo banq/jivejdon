@@ -21,9 +21,18 @@
                
 			 
 		     <span class="fa fa-calendar">
-                <bean:define id="cdate" name="forumThread" property="creationDate" ></bean:define>
-        <%String cdateS = (String)pageContext.getAttribute("cdate"); %><%=cdateS.substring(2, 11) %>
+               <bean:write name="forumMessage" property="modifiedDate3"/>
               </span>
+            
+            <%
+             com.jdon.jivejdon.model.ForumThread thread = (com.jdon.jivejdon.model.ForumThread)pageContext.getAttribute("forumThread");
+             int bodylength = thread.getRootMessage().getMessageVO().getBody().length();
+             java.text.DecimalFormat df  = new java.text.DecimalFormat("#.000");
+             int bl = bodylength/1024;
+             if (bl >0){
+             %>
+               <span class="fa fa-print"> <%=bl %>k </span>
+             <% }%>
 			
 			 <logic:notEqual name="forumThread" property="state.messageCount" value="0">
               <span><i class="fa fa-comment"></i> <bean:write name="forumThread" property="state.messageCount" />

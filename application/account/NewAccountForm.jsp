@@ -13,7 +13,6 @@ if (errorBlocker.checkRate(request.getRemoteAddr(), 3)){
 	return;
 }
 %>
-
 <bean:define id="title"  value=" 用户注册" />
 <%@ include file="../common/IncludeTop.jsp" %>
 <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
@@ -24,8 +23,9 @@ response.setHeader("Cache-Control", "no-cache");
 response.setDateHeader("Expires", 0);
 %>
 
-<h3 align="center">用户注册</h3>
-<div align="center">
+<div class="box">
+<h2 class="text-center">注册</h2>
+<div class="text-center">
   
 	直接登录：<a href="<%=request.getContextPath()%>/account/oauth/sinaCallAction.shtml"  target="_blank" >
                           <img src='/images/sina.png' width="13" height="13" alt="登录" border="0" />新浪微博
@@ -37,207 +37,76 @@ response.setDateHeader("Expires", 0);
 <%
 Calendar startingCalendar = Calendar.getInstance();
 startingCalendar.setTime(new Date());
-if (startingCalendar.get(Calendar.HOUR_OF_DAY) < 10 || startingCalendar.get(Calendar.HOUR_OF_DAY) > 23) {
+if (startingCalendar.get(Calendar.HOUR_OF_DAY) < 7 || startingCalendar.get(Calendar.HOUR_OF_DAY) > 24) {
 	out.println("<p><br> 为防止夜晚有人溜进来贴小广告，暂时关闭注册，工作时间正常开放，谢谢。<br>可用新浪微博 腾讯微博和google帐号直接登入。");
 	return;
 }
 	
 %>	
-<html:form action="/account/newAccount.shtml" method="post" onsubmit="return Juge(this);">
+</div>
+
+<div class="box">
+     <div class="row">
+<html:form styleClass="form-horizontal col-md-offset-4 col-md-4" action="/account/newAccount.shtml" method="post" onsubmit="return Juge(this);">
 
 <html:hidden name="accountForm" property="action" value="create" />
 <input type="hidden" name="actionType" value="createSave"/>
 <html:hidden property="userId" />
 
-<script>
-<!--
+   <div class="form-group">
+        <label class="col-sm-2 control-label">用户</label>
+        <div class="col-sm-10">
+            <input name="username" maxlength="15" placeholder="只能是英文字符或数字组合" value="" onblur="checkUsername()" id="username" class="form-control" type="text">
+            <span id="usernameCheck" class="smallgray"></span>          
+        </div>
+    </div>
 
-function Juge(theForm)
-{
-   var myRegExp = /\S+\w+\@[.\w]+/;
-   if (!myRegExp.test(theForm.email.value)) {
-		alert("请输入正确的Email");
-		theForm.email.focus();
-		return false;
-  }
-   myRegExp = /\S+[a-z0-9.]*$/gi;
-   if (!myRegExp.test(theForm.username.value)) {
-		alert("用户名必须为英文与数字组合");
-		theForm.username.focus();
-		return false;
-  }
-   myRegExp = /\S+[a-z0-9.]*$/gi;
-   if (!myRegExp.test(theForm.password.value)) {
-		alert("密码必须为英文与数字组合");
-		theForm.password.focus();
-		return false;
-   }
-     
-  if (theForm.password.value != theForm.password2.value)
-  {
-     alert("两次密码不一致！");
-     theForm.password.focus();
-     return (false);
-  }
-  
-   myRegExp = /\S+[0-9.]*$/gi;
-   if (!myRegExp.test(theForm.registerCode.value)) {
-		alert("验证码必须填入数字");
-		theForm.registerCode.focus();
-		return false;
-   }
-   
-     myRegExp = /\S+[0-9.]*$/gi;
-   if (!myRegExp.test(theForm.ans.value)) {
-		alert("答案数字必须填入数字");
-		theForm.ans.focus();
-		return false;
-   }
-   
-   
+    <div class="form-group">
+        <label class="col-sm-2 control-label">密码</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="password" name="password" value="" maxlength="30"/>
+        </div>
+    </div>
 
-}
+    <div class="form-group">
+        <label class="col-sm-2 control-label">确认</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="password" name="password2" value="" maxlength="30"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">邮箱</label>
+        <div class="col-sm-10">
+            <input placeholder="请用QQ或163信箱" class="form-control" name="email" maxlength="30" value="" onblur="checkEmail()" id="email" type="text">
+            <span id="emailCheck" class="smallgray"></span> 
+        </div>
+    </div>               
+    <input name="emailVisible" value="" type="hidden">
+              
+    <div class="form-group">
+        <label class="col-sm-2 control-label">手机</label>
+        <div class="col-sm-5">
+             <input class="form-control" type="text" id="phoneNumber" size="15">
+        </div>
+         <div class="col-sm-5">
+            <input class="form-control" type="button" id="btn" value="发送验证码" onclick="sendSMS(this)" /> 
+        </div>
+    </div>      
 
-function checkUsername(){	
-	   myRegExp = /\S+[a-z0-9.]*$/gi;
-   if (!myRegExp.test(document.getElementById("username").value)) {
-		  alert("用户名必须为英文与数字组合");		  
-		  return;
-		}
+    <div class="form-group">
+        <label class="col-sm-2 control-label">验证</label>
+        <div class="col-sm-10">
+             <input class="form-control" type="text" id="registerCode" name="registerCode" size="8" >
+        </div>
+    </div>    
 
-	  var pars = "username=" +  document.getElementById("username").value + "&sessionId=<%=request.getSession().getId()%>";
-    new Ajax.Updater('usernameCheck', '<%=request.getContextPath()%>/account/checkUser.jsp', { method: 'get', parameters: pars  });
-	
-}
-
-function checkEmail(){	
-	  var pars = "email=" +  document.getElementById("email").value + "&sessionId=<%=request.getSession().getId()%>";
-     new Ajax.Updater('emailCheck', '<%=request.getContextPath()%>/account/checkUser.jsp', { method: 'get', parameters: pars  });
-}
-
-<%
-HttpSession session1 = request.getSession();
-String SMSCODE = UUID.randomUUID().toString().substring(0,6);
-session1.setAttribute("SMSCODE",SMSCODE);
-%>
-var countdown=60;
-function sendSMS(val) {
-    var pn = document.getElementById("phoneNumber").value ;
-	 myRegExp = /\S+[0-9.]*$/gi;
-    if(!myRegExp.test(pn) ){
-        alert("请输入手机号码！");
-        return;
-    }
-    var pars = "phoneNumber=" + pn;
-    new Ajax.Updater('smsStatus',
-        '<%=request.getContextPath()%>/account/qqsms.jsp', { method: 'get',
-            parameters: pars  });
-    settime(val)
-}
-
-function settime(val) {
-    if (countdown == 0) {
-        val.removeAttribute("disabled");
-        val.value="获取验证码";
-        countdown = 60;
-        return;
-    } else {
-        val.setAttribute("disabled", true);
-        val.value="等待(" + countdown + ")";
-        countdown--;
-    }
-    setTimeout(function() {
-        settime(val)
-    },1000)
-}
-
-
-window.callback = function(res){
-    console.log(res)
-    // res（未通过验证）= {ret: 1, ticket: null}
-    // res（验证成功） = {ret: 0, ticket: "String", randstr: "String"}
-    if(res.ret === 0){
-      
-		document.getElementById("registerCode").value=res.ticket;
-		document.getElementById("randstr").value=res.randstr;
-		//alert(document.getElementById("registerCode").value)   // 票据
-		//alert(document.getElementById("randstr").value)   // 票据
-		verified = true;
-    }
-}
--->
-</script>    
-
-
-<table bgcolor="#cccccc"
- cellspacing="0" cellpadding="0" border="0" width="500" align="center">
-<tr><td>
-<table bgcolor="#cccccc"
- cellspacing="1" cellpadding="3" border="0" width="100%">
-<tr bgcolor="#FFFFCC">
- <td>
- <font class=p3 
-     color="#000000">
- <b>注册资料</b>
- </font>
- </td>
-</tr>
-<tr bgcolor="#ffffff">
- <td align="center">
- <table border="0" cellpadding="3" cellspacing="0"  >
-                 <tr>
-                     <th align="right">用户名:</th>
-                     <td align="left"><html:text property="username" maxlength="15" styleId="username"  onblur="checkUsername()" />
-                      <span class="small2" id="usernameCheck">(英文字符或数字)</span>
-                     </td>
-  
-                </tr>
-                 <tr>
-                     <th align="right">密码:</th>
-                     <td align="left"><input type="password" name="password" value="" maxlength="30"/></td>
-                 </tr>
-                 <tr>
-                     <th align="right">确认密码:</th>
-                     <td align="left"><input type="password" name="password2" value="" maxlength="30"/></td>
-                 </tr>
-  
-
-                 <tr>
-                     <th align="right">密码问题:</th>
-                     <td align="left"><input type="text" name="passwdtype" value="<bean:write name="passwordassitVO" property="passwdtype"/>" maxlength="30"/></td>
-                 </tr>
-                 <tr>
-                     <th align="right">密码答案:</th>
-                     <td align="left"><input type="text" name="passwdanswer" value="<bean:write name="passwordassitVO" property="passwdanswer"/>" maxlength="30"/></td>
-                 </tr>
-  
-                <tr>
-                    <th align="right">Email:
-                    </th>
-                    <td align="left">
-                    <html:text property="email" maxlength="30" onblur="checkEmail()" styleId="email" />
-                    <span class="small2" id="emailCheck">请用QQ或163信箱</span>
-                    <br>
-                    <html:checkbox property="emailVisible"  ><span class="small2">公开</span></html:checkbox>
-                    
-                    </td>
-                 </tr>
-          
-                  <tr>
-                     <th align="right">手机号:</th>
-                     <td align="left">
-                         <input type="text" id="phoneNumber" size="15">
-                        <input type="button" id="btn" value="发送验证码" onclick="sendSMS(this)" /> 
-                        <span class="small2" id="smsStatus"></span>
-                    </td>
-                 </tr>
-                    <tr>
-                     <th align="right">验证码:</th>
-                     <td align="left">
-                       <input type="text" id="registerCode" name="registerCode" size="8" >
-                     
-                    </td>
-                 </tr>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default login ">确认</button>
+        </div>
+    </div>
+           
+               
              <%-- 
                      <tr>
                      <th align="right">验证码:</th>
@@ -256,7 +125,7 @@ window.callback = function(res){
                      
                     </td>
                  </tr>
-                --%>
+               
 <%@page import="com.jdon.jivejdon.presentation.form.SkinUtils"%>
 
 <%
@@ -332,10 +201,10 @@ boolean isTrue = SkinUtils.saveProblemAnswer(ans, request);
 </td></tr>
 </table>
 
-
+ --%>
 
 </html:form>
-
+</div>
   
 </div>
 
@@ -345,5 +214,129 @@ boolean isTrue = SkinUtils.saveProblemAnswer(ans, request);
 --%>
 
 
+<script>
+<!--
+
+function Juge(theForm)
+{
+   var myRegExp = /\S+\w+\@[.\w]+/;
+   if (!myRegExp.test(theForm.email.value)) {
+		alert("请输入正确的Email");
+		theForm.email.focus();
+		return false;
+  }
+   myRegExp = /\S+[a-z0-9.]*$/gi;
+   if (!myRegExp.test(theForm.username.value)) {
+		alert("用户名必须为英文与数字组合");
+		theForm.username.focus();
+		return false;
+  }
+   myRegExp = /\S+[a-z0-9.]*$/gi;
+   if (!myRegExp.test(theForm.password.value)) {
+		alert("密码必须为英文与数字组合");
+		theForm.password.focus();
+		return false;
+   }
+     
+  if (theForm.password.value != theForm.password2.value)
+  {
+     alert("两次密码不一致！");
+     theForm.password.focus();
+     return (false);
+  }
+  
+   myRegExp = /\S+[0-9.]*$/gi;
+   if (!myRegExp.test(theForm.registerCode.value)) {
+
+		alert("验证码必须填入数字");
+		theForm.registerCode.focus();
+		return false;
+   }
+   
+     myRegExp = /\S+[0-9.]*$/gi;
+   if (!myRegExp.test(theForm.ans.value)) {
+		alert("答案数字必须填入数字");
+		theForm.ans.focus();
+		return false;
+   }
+   
+   
+
+}
+
+function checkUsername(){	
+	   myRegExp = /\S+[a-z0-9.]*$/gi;
+   if (!myRegExp.test(document.getElementById("username").value)) {
+		  alert("用户名必须为英文与数字组合");		  
+		  return;
+		}
+
+	  var pars = "username=" +  document.getElementById("username").value + "&sessionId=<%=request.getSession().getId()%>";
+    load('<%=request.getContextPath()%>/account/checkUser.jsp?'+ pars, function(xhr) {
+  	       document.getElementById('usernameCheck').innerHTML = xhr.responseText;
+         });
+	
+}
+
+function checkEmail(){	
+	  var pars = "email=" +  document.getElementById("email").value + "&sessionId=<%=request.getSession().getId()%>";
+        load('<%=request.getContextPath()%>/account/checkUser.jsp?'+ pars, function(xhr) {
+  	       document.getElementById('emailCheck').innerHTML = xhr.responseText;
+         });
+}
+
+<%
+HttpSession session1 = request.getSession();
+String SMSCODE = UUID.randomUUID().toString().substring(0,6);
+session1.setAttribute("SMSCODE",SMSCODE);
+%>
+var countdown=60;
+function sendSMS(val) {
+    var pn = document.getElementById("phoneNumber").value ;
+	 myRegExp = /\S+[0-9.]*$/gi;
+    if(!myRegExp.test(pn) ){
+        alert("请输入手机号码！");
+        return;
+    }
+    var pars = "phoneNumber=" + pn;
+    load('<%=request.getContextPath()%>/account/qqsms.jsp?'+ pars, function(xhr) {
+  	       document.getElementById('smsStatus').innerHTML = xhr.responseText;
+         });
+    
+    settime(val)
+}
+
+function settime(val) {
+    if (countdown == 0) {
+        val.removeAttribute("disabled");
+        val.value="获取验证码";
+        countdown = 60;
+        return;
+    } else {
+        val.setAttribute("disabled", true);
+        val.value="等待(" + countdown + ")";
+        countdown--;
+    }
+    setTimeout(function() {
+        settime(val)
+    },1000)
+}
+
+
+window.callback = function(res){
+    console.log(res)
+    // res（未通过验证）= {ret: 1, ticket: null}
+    // res（验证成功） = {ret: 0, ticket: "String", randstr: "String"}
+    if(res.ret === 0){
+      
+		document.getElementById("registerCode").value=res.ticket;
+		document.getElementById("randstr").value=res.randstr;
+		//alert(document.getElementById("registerCode").value)   // 票据
+		//alert(document.getElementById("randstr").value)   // 票据
+		verified = true;
+    }
+}
+-->
+</script>    
 
 <%@include file="../common/IncludeBottom.jsp"%>

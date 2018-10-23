@@ -32,9 +32,8 @@
     
 <div class="row">
 <!--  autocomplete.js -->
-<link rel="stylesheet" href="/common/jivejdon5.css"  type="text/css">
-	<script>
-	
+<link rel="stylesheet" href="/common/js/styles/autocomplete.css"  type="text/css">
+<script>
 function loadAcJS(thisId){
   if (typeof(ac) == 'undefined') {
      $LAB
