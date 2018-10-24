@@ -1,5 +1,5 @@
 Testsuite: com.jdon.jivejdon.model.realtime.NotificationLocatorTest
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 sec
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
 
 Testcase: testAddNotification took 0 sec
 Testcase: testCheckNotification took 0 sec

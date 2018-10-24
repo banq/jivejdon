@@ -13,7 +13,7 @@ h5{font-size:14px}
 h6{font-size:14px}
 h1,h2,h3,h4,h5,h6{color:#111;font-weight:600;font-family:Roboto,sans-serif}
 p{margin:0 0 20px}
-.indent{text-indent: 40px}
+.indent{text-indent: 30px}
 a{color:#30A87C;-webkit-transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;transition:all .2s ease-in-out}
 a:focus,a:hover{color:#000;text-decoration:none}
 .bige20 {font-size: 24px;}
@@ -211,15 +211,15 @@ footer .footer-3 ul li a:hover{color:#666}
 .btn-2{padding:3px 8px}
 .btn-3{background-color:#444;color:#FADA1A;font-weight:700}
 .btn-3:hover{background-color:#fff;color:#000}
-.article{color:#000;font-family: Merriweather, Georgia, serif;font-weight: 300;font-style: normal;font-size: 1.8rem;line-height: 1.9;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-.tpc_content{color:#000;font-family: Merriweather, Georgia, serif;font-weight: 300;font-style: normal;font-size: 1.8rem;line-height: 1.9;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.article{color:#000;font-family: Merriweather, Georgia, serif;font-weight: 500;font-style: normal;font-size: 1.6rem;line-height: 1.8;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.tpc_content{color:#000;font-family: Merriweather, Georgia, serif;font-weight: 500;font-style: normal;font-size: 1.6rem;line-height: 1.8;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 DIV.diggArea{margin:0 auto;background-repeat:no-repeat;WIDTH:45px;HEIGHT:53px;BACKGROUND:url(/images/dig.png)}
 .diggArea .diggNum{margin:0 auto;padding-top:5px;padding-right:0;padding-bottom:0;padding-left:0;DISPLAY:block;COLOR:#a200ff;FONT-WEIGHT:lighter;FONT-SIZE:16px;WIDTH:45px;FONT-FAMILY:Georgia;HEIGHT:30px;TEXT-ALIGN:center}
 .diggArea .top8{margin:0 auto;padding-top:0}
 .diggArea .diggLink{DISPLAY:block;WIDTH:45px;COLOR:#999;TEXT-ALIGN:center}
 #subbox{width:80px}
 #subbox span{float:left;display:block;overflow:hidden;width:56px;text-overflow:ellipsis;white-space:nowrap}
-.linkblock{padding:5px 15px;border:1px solid #ddd;border-radius:3px;background:#fff;box-shadow:0 15px 10px -15px rgba(0,0,0,.4)}
+.linkblock{overflow:hidden;text-overflow:ellipsis;word-break: break-all; white-space: normal;padding:5px 15px;border:1px solid #ddd;border-radius:3px;background:#fff;box-shadow:0 15px 10px -15px rgba(0,0,0,.4)}
 .frame-yy{float:left;padding:10px;width:100%;border:1px solid #ddd;border-radius:3px;background:#fff;box-shadow:0 15px 10px -15px rgba(0,0,0,.4)}
 .important{overflow:hidden;margin:0;padding:8px;border:1px solid #ddd;border-radius:3px;background-color:#F7F7F7;box-shadow:0 15px 10px -15px rgba(0,0,0,.4);text-overflow:ellipsis;white-space:nowrap}
 .important a{color:#888;text-decoration:none;line-height:23px}

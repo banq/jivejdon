@@ -28,7 +28,7 @@ import com.jdon.util.Debug;
  */
 public class Newline implements MessageRenderSpecification {
 	private final static String module = Newline.class.getName();
-
+	private static final char[] P_TAG = "<p>".toCharArray();
 	private static final char[] BR_TAG = "<p class=\"indent\">".toCharArray();
 
 	/**
@@ -111,8 +111,11 @@ public class Newline implements MessageRenderSpecification {
 	public ForumMessage render(ForumMessage message) {
 		try {
 			MessageVO messageVO = message.getMessageVO();
-			if (!messageVO.isFiltered())
-				messageVO.setBody(convertNewlinesAroundCode(messageVO.getBody()));
+			if (!messageVO.isFiltered()) {
+				String s = messageVO.getBody();
+				s = ToolsUtil.convertTags(s, "\n\\[", new String(P_TAG) + "\\[");
+				messageVO.setBody(convertNewlinesAroundCode(s));
+			}
 		} catch (Exception e) {
 			Debug.logError("" + e, module);
 		}

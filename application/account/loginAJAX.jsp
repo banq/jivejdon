@@ -69,7 +69,7 @@ var loggedURL = '<%=request.getContextPath()%>/account/protected/logged.jsp';
         <td align="center" colspan="5"><a href="<%=request.getContextPath()%>/account/newAccountForm.shtml"  target="_blank" > 新用户注册 </a> <a href="<%=request.getContextPath()%>/account/forgetPasswd.jsp" target="_blank"> 忘记密码? </a></td>
       </tr>
       <tr>
-        <td align="center" colspan="5"><a href="<%=request.getContextPath()%>/account/oauth/sinaCallAction.shtml"  target="_blank" >新浪微博 </a> <a href="<%=request.getContextPath()%>/account/oauth/tecentCallAction.shtml" target="_blank">腾讯微博 </a></td>
+        <td align="center" colspan="5"><a href="<%=request.getContextPath()%>/account/oauth/sinaCallAction.shtml"  target="_blank" >新浪微博 </a> </td>
       </tr>
     </table>
   </div>

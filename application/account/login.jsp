@@ -99,9 +99,6 @@ try{
       <a href="<%=request.getContextPath()%>/account/oauth/sinaCallAction.shtml"  target="_blank" >
                           <img src='/images/sina.png' width="16" height="16" alt="登录" border="0" />新浪微博
                     </a>
-    <a href="<%=request.getContextPath()%>/account/oauth/tecentCallAction.shtml" target="_blank">
-                          <img src='/images/qq.gif' width="16" height="16" alt="登录" border="0" />腾讯微博
-                    </a>
 
 	</td>	
   </tr>

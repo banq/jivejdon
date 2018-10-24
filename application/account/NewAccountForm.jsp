@@ -30,15 +30,12 @@ response.setDateHeader("Expires", 0);
 	直接登录：<a href="<%=request.getContextPath()%>/account/oauth/sinaCallAction.shtml"  target="_blank" >
                           <img src='/images/sina.png' width="13" height="13" alt="登录" border="0" />新浪微博
                     </a>
-    <a href="<%=request.getContextPath()%>/account/oauth/tecentCallAction.shtml" target="_blank">
-                          <img src='/images/qq.gif' width="13" height="13" alt="登录" border="0" />腾讯微博
-                    </a>
 
 <%
 Calendar startingCalendar = Calendar.getInstance();
 startingCalendar.setTime(new Date());
 if (startingCalendar.get(Calendar.HOUR_OF_DAY) < 7 || startingCalendar.get(Calendar.HOUR_OF_DAY) > 24) {
-	out.println("<p><br> 为防止夜晚有人溜进来贴小广告，暂时关闭注册，工作时间正常开放，谢谢。<br>可用新浪微博 腾讯微博和google帐号直接登入。");
+	out.println("<p><br> 为防止夜晚有人溜进来贴小广告，暂时关闭注册，工作时间正常开放，谢谢。<br>可用新浪微博 直接登入。");
 	return;
 }
 	

@@ -43,11 +43,11 @@
 <p>发表评论回复时，有三个按钮：评论，评论且转发，转发，功能是：评论是平常回复评论；转发是将当前内容作为主题文章发表，然后在被评论的帖子中自动插入一条指向这篇新主题的连接。类似微博的转发和评论。
 <p>一旦帖子被回复就不能修改和删除，如果还是希望修改请联系管理员。
 <p>为防止垃圾广告，新用户一个小时内只能发一个贴，一小时后限制取消。
-<p>支持新浪微博 腾讯微博和谷歌帐号直接登入，用户名和密码自动生成，如果你修改了用户名，下次只能用该用户名登录，如果再次用微博等帐号登入，原来用户名密码将又被系统重新生成。
+<p>支持新浪微博直接登入，用户名和密码自动生成，如果你修改了用户名，下次只能用该用户名登录，如果再次用微博等帐号登入，原来用户名密码将又被系统重新生成。
 <p>本系统只根据屏幕分辨率决定网页样式，手机等小于1024x768的浏览器将自动跳到/mobile/*的移动页面，通过移动页面可以用触摸屏左右滑动如PPT翻看主贴和回帖。
 <p>社交媒体：
 <p><a href="http://weibo.com/ijdon" target="_blank">新浪微博：@解道jdon weibo.com/ijdon</a>
-<p><a href="http://t.qq.com/jivejdon" target="_blank">腾讯微博：@解道jdon (t.qq.com/jivejdon)</a></p>
+</p>
 <p><a href="https://twitter.com/jdon_com" target="_blank">twitter：@解道jdon twitter.com/jdon_com</a></p>
 <p><a href="https://www.facebook.com/jivejdon" target="_blank">facebook (www.facebook.com/jivejdon)</a></p>
 <p><a href="https://plus.google.com/116094370628352950016" target="_blank" rel="publisher">Google+</a></p><p></td></tr></table>

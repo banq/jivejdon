@@ -72,20 +72,10 @@ pageContext.setAttribute("role", role);
 新浪微博
 </li>
 </logic:equal>
-<logic:equal name="role" value="TecentUser">
-<li>
-<html:radio name="subscriptionForm" property="notifymode" value="tecentweibo"  />
-腾讯微博
-</li>
-</logic:equal>
 <logic:equal name="role" value="User">
 <li>
-<html:radio name="subscriptionForm" property="notifymode" value="tecentweibo"  />
-腾讯微博
-</li>
-<li>
 <html:radio name="subscriptionForm" property="notifymode" value="sinaweibo"  />
-新浪微博(只提供OAuth2.0，故需要每周用微博帐号登录本站授权一次)
+新浪微博(只提供OAuth2.0，)
 </li>
 </logic:equal>
 

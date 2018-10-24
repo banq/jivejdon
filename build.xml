@@ -69,7 +69,7 @@
 				<delete dir="${classes.dir}" />		 	
 		
 		<delete file="${deploy.dir}/${warname}.war" />		
-		<delete file="${dist.dir}/${warname}.war" />				
+				
 		
 	</target>
 
@@ -153,7 +153,7 @@
 			
 
 		</copy>
-		<mkdir dir="${dist.dir}"/>
+		
 		<jar destfile="${dist.dir}/${warname}.war">
 			<fileset dir="${devwebapp}">
 				<include name="**/*" />
