@@ -93,10 +93,10 @@ public class CUDInputInterceptor implements MethodInterceptor {
 		if (!methodNameNow.contains("create") && !methodNameNow.contains("update") && !methodNameNow.contains("delete"))
 			return invocation.proceed();
 
-		if (isInputPermit(invocation)) {
-			logger.error(Constants.INPUT_PERMITTED);
-			return null;
-		}
+//		if (isInputPermit(invocation)) {
+//			logger.error(Constants.INPUT_PERMITTED);
+//			return null;
+//		}
 
 		Account account = sessionContextUtil.getLoginAccount(sessionContext);
 		if (IPIsAllowed(methodNameNow, account))
