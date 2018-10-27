@@ -119,7 +119,7 @@ body.sub-page .logo{margin:110px 0 80px;padding:30px 0 50px}
 .rating{font-size:14px;line-height:1.2}
 ul.pagination{margin:42px auto 25px}
 ul.pagination li a{color:#444}
-.widget{padding:10px 20px;background:#fff}
+.widget{overflow:hidden;text-overflow:ellipsis;word-break: break-all;padding:10px 20px;background:#fff}
 .widget:after,.widget:before{clear:both;display:block;visibility:hidden;width:0;height:0;content:'\0020'}
 .widget ul{margin:0;padding:0;list-style:none}
 .widget ul li{overflow:hidden;list-style:none;text-overflow:ellipsis;white-space:nowrap}
@@ -211,8 +211,8 @@ footer .footer-3 ul li a:hover{color:#666}
 .btn-2{padding:3px 8px}
 .btn-3{background-color:#444;color:#FADA1A;font-weight:700}
 .btn-3:hover{background-color:#fff;color:#000}
-.article{color:#000;font-family: Merriweather, Georgia, serif;font-weight: 500;font-style: normal;font-size: 1.6rem;line-height: 1.8;letter-spacing: -0.5px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-.tpc_content{color:#000;font-family: Merriweather, Georgia, serif;font-weight: 500;font-style: normal;font-size: 1.6rem;line-height: 1.8;letter-spacing: -0.5px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.article{color:#000;font-family: 'Segoe UI',SegoeUI,'Microsoft YaHei',微软雅黑,"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight: 400;font-style: normal;font-size: 1.6rem;line-height: 1.8;letter-spacing: -0.2px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.tpc_content{color:#000;font-family: 'Segoe UI',SegoeUI,'Microsoft YaHei',微软雅黑,"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight: 400;font-style: normal;font-size: 1.6rem;line-height: 1.8;letter-spacing: -0.2px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 DIV.diggArea{margin:0 auto;background-repeat:no-repeat;WIDTH:45px;HEIGHT:53px;BACKGROUND:url(/images/dig.png)}
 .diggArea .diggNum{margin:0 auto;padding-top:5px;padding-right:0;padding-bottom:0;padding-left:0;DISPLAY:block;COLOR:#a200ff;FONT-WEIGHT:lighter;FONT-SIZE:16px;WIDTH:45px;FONT-FAMILY:Georgia;HEIGHT:30px;TEXT-ALIGN:center}
 .diggArea .top8{margin:0 auto;padding-top:0}

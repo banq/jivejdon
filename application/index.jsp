@@ -6,6 +6,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%          
     com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(30 * 60, request, response);
+	
 %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
@@ -172,13 +173,17 @@
 <%@ include file="./common/IncludeBottomBody.jsp" %> 
 <%@ include file="../account/loginAJAX.jsp" %>
 <%
+	String imagesize = "1";
+		if (request.getParameter("imagesize") != null)
+		    imagesize = request.getParameter("imagesize");
+
   String mythreadId = "";
   if (application.getAttribute("thumbthreadId") != null) {
     mythreadId = ((Long) application.getAttribute("thumbthreadId")).toString();
   }
   Integer homethumbnai = (Integer) application.getAttribute(mythreadId);
   if (homethumbnai == null) {
-    homethumbnai = 1 + (int) (Math.random() * 10);
+    homethumbnai = 1 + (int) (Math.random() * Integer.parseInt(imagesize));
     application.setAttribute(mythreadId, homethumbnai);
   }
 %>

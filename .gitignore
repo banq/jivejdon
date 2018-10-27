@@ -54,6 +54,7 @@ report/TEST-com.jdon.jivejdon.model.realtime.NotificationLocatorTest.txt
 .classpath
 .factorypath
 .project
+.report
 .settings/org.eclipse.jdt.apt.core.prefs
 .settings/org.eclipse.core.resources.prefs
 .settings/org.eclipse.jdt.core.prefs
@@ -75,3 +76,6 @@ classes/com/jdon/jivejdon/repository/builder/ThreadRepositoryDao.class
 classes/com/jdon/jivejdon/repository/dao/sql/MessageDaoSql.class
 classes/com/jdon/jivejdon/service/imp/message/ForumMessageShell.class
 doc/tomcat/lib/jaas.jar
+report/TEST-com.jdon.jivejdon.model.realtime.NotificationLocatorTest.txt
+doc/tomcat/lib/jaas.jar
+report/TEST-com.jdon.jivejdon.repository.search.CompassTest.txt
