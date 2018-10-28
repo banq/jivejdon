@@ -140,12 +140,10 @@ function saveCache(objId){
   }catch(e){}	
 }
 
+ 
  var formSubmitcheck = false;      
  function checkPost(theForm) {
-           
-      saveCache('formBody');
-      closeCopy();
-      
+  
       if (document.getElementById('forumId_select') != null
         && document.getElementById('forumId_select').value == ""){
     	  alert("页面forum错误，请拷贝备份你的发言后，重新刷新本页");
@@ -156,9 +154,8 @@ function saveCache(objId){
       var body = theForm.body.value.replace(/(^\s*)|(\s*$)/g, ""); 
       var subject = theForm.subject.value.replace(/(^\s*)|(\s*$)/g, ""); 
       if (subject  != ""){          
-         
-        	   formSubmitcheck = true;
-         
+          formSubmitcheck = true;
+          theForm.formButton.disabled=true;
       }else{
     	  alert("请输入发言标题和发言内容！" +subject + " " + body);
     	  formSubmitcheck = false;

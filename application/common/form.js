@@ -10,110 +10,10 @@ function saveCache(objId){
   }catch(e){}	
 }
 
-var uploadW;
-  function openUploadWindow(url){
-   if (typeof(TooltipManager) == 'undefined') 
-       loadWLJS(nof);
-       
-    if (uploadW == null) {
-       uploadW = new Window({className: "mac_os_x", width:450, height:300, title: " Upload ", closable: false}); 
-       uploadW.setURL(url);
-       uploadW.showCenter();
-	
-	    
-	   var myObserver = {
-        onClose: function(eventName, myuploadW) {    	  
-          if (myuploadW == uploadW){        	
-            appendUploadUrl();
-            appendUploadAttach();
-            uploadW = null;
-            Windows.removeObserver(this);
-          }
-         }
-        }
-        Windows.addObserver(myObserver);
-    } else
-	  uploadW.showCenter();
-   }     
-   
-   var saveS;
-   var attcount;
-   function killUploadWindow(surl, attcount){
-      this.saveS = surl;
-      this.attcount = attcount;      
-      if (uploadW != null){  
-           uploadW.close();  //this will  enable  appendUploadUrl() or   appendUploadAttach()                    
-     }
-   }
-   
-  function appendUploadUrl(){
-      if (saveS == null) return;
-      saveS = document.getElementById("formBody").value + "\n" + saveS;      	 
-      Form.Element.setValue("formBody", saveS);
-   }
-   
-   function appendUploadAttach(){
-      if (attcount == null) return;
-      var insimag = "";
-      for (i = 0; i < attcount; i++)
-      {
-        var ind = i + 1;
-      	var inst = '[img index=' + ind + ']';      	
-        insimag = insimag + '<a href="javascript:void(0);" onClick=\'insertString(document.getElementById("formBody"),"'+inst+'")\' title="插入第'+ ind +'个图片" > ' +
-             document.getElementById("insertImage").innerHTML + '</a> ';
-      }                   
-      document.getElementById("attachsize").innerHTML = "有"+ attcount +"个附件:" + insimag;
-   }
-   
-   
-  function myalert(errorM){
-        if (errorM == null) return;
-        alert(errorM);
-        //loadWLJSWithP(errorM, myalertD);
-  }
-  
-var myalertD=function(errorM){
-    Dialog.closeInfo();    
-    Dialog.alert(errorM,
-               {width:260, height:150, okLabel: " 确定 "});
-}  
-  
-  
-    
 
-  function tag(theTag) {
-    var e = document.getElementById("formBody");        
-    if (theTag == 'b') {
-      insertString(e,"[b][/b]");        
-    } else if (theTag == 'i') {
-        insertString(e,"[i][/i]");
-    } else if (theTag == 'u') {
-        insertString(e,"[u][/u]");        
-    } else if (theTag == 'code') {
-        insertString(e,"\n[code]\n// [/code]");
-    } else if (theTag == 'image') {
-        var url = prompt("请输入一个图片的URL","http://");
-        if (url != null) {
-            insertString(e,"[img]" + url + "[/img]");
-        }
-    } else if (theTag == 'url') {
-        var url = prompt("请输入链接的URL","http://");
-        var text = prompt("请输入链接文本");
-        if (url != null) {
-            if (text != null) {
-                insertString(e, "[url=" + url + "]" + text + "[/url]");
-            } else {
-                insertString(e, "[url]" + url + "[/url]");
-            }
-        }
-    }
-   }
-
-  var formSubmitcheck = false;      
+  var formSubmitcheck = false;     
+  var subjectold = "";
   function checkPost(theForm) {
-           
-      saveCache('formBody');
-      closeCopy();
       
       if (document.getElementById('forumId_select') != null
         && document.getElementById('forumId_select').value == ""){
@@ -124,8 +24,13 @@ var myalertD=function(errorM){
       
       var body = theForm.body.value.replace(/(^\s*)|(\s*$)/g, ""); 
       var subject = theForm.subject.value.replace(/(^\s*)|(\s*$)/g, ""); 
-      if (subject.length  !== 0){          
-           formSubmitcheck = true;
+      if (subject.length  !== 0){       
+          if (subjectold != subject){
+            formSubmitcheck = true;
+            theForm.formButton.disabled=true;
+          }else 
+            alert("发音重复" );
+            subjectold = subject;
       }else{
     	  alert("请输入发言标题" );
     	  formSubmitcheck = false;
@@ -149,10 +54,7 @@ var myalertD=function(errorM){
            timedCopy = setInterval(copyBody, timeout);
    }
    
-   function closeCopy(){
-      clearInterval(timedCopy);
-      timedCopy = null;
-   }
+  
    
 
 function insertAtCursor(myField, myValue) {

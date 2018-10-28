@@ -14,7 +14,6 @@
 <logic:notEmpty name="messageReplyForm">
     <logic:notEmpty name="messageReplyForm" property="messageId">
         <bean:define id="messageId" name="messageReplyForm" property="messageId"  />
-        <bean:define id="threadId" name="messageReplyForm" property="forumThread.threadId"  />
         <bean:define id="action" name="messageReplyForm" property="action"  />
     </logic:notEmpty>
 </logic:notEmpty>
@@ -32,7 +31,7 @@
              if (window.top.setDiagInfo)
                     window.top.setDiagInfo(" 帖子保存成功 ");
                 ///nav/messageId   if there is not forumThreadId, it can be skip.
-                window.top.location.href = '<%=request.getContextPath()%>/<bean:write name="threadId" />?'+ Math.round(Math.random() * 10000);
+                window.top.location.href = '<%=request.getContextPath()%>/nav/<bean:write name="messageId" />/<bean:write name="messageId" />#<bean:write name="messageId" />?'+ Math.round(Math.random() * 10000);
         
               
                 
