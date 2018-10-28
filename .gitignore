@@ -36,7 +36,7 @@ report
 searchlib
 servletlib
 strutslib
-doc/tomcat/lib/
+doc/tomcat/lib/jaas.jar
 classes/com/jdon/jivejdon/manager/account/SinaOAuthSubmitter.class
 classes/com/jdon/jivejdon/repository/ThreadRepository.class
 classes/com/jdon/jivejdon/manager/account/SinaOAuthSubmitter.class
@@ -79,3 +79,8 @@ doc/tomcat/lib/jaas.jar
 report/TEST-com.jdon.jivejdon.model.realtime.NotificationLocatorTest.txt
 doc/tomcat/lib/jaas.jar
 report/TEST-com.jdon.jivejdon.repository.search.CompassTest.txt
+/doc/tomcat/lib/jaas.jar
+.settings/
+application/blog/js/
+src/main/java/com/jdon/jivejdon/manager/throttle/img/
+src/test/

@@ -26,7 +26,7 @@ public class NewUserThrottleConf {
 
 	private int interval = 60000; // milliseconds
 
-	private int newUserThreshold = 86400; // 1 day 1x24x60x60 seconds
+	private int newUserThreshold = 3600; // 1 day 1x24x60x60 seconds
 
 	private int timeLimitS;
 

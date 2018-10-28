@@ -16,13 +16,6 @@
  */
 package com.jdon.jivejdon.auth;
 
-import java.lang.reflect.Method;
-
-import org.aopalliance.intercept.MethodInterceptor;
-import org.aopalliance.intercept.MethodInvocation;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jdon.container.access.TargetMetaRequest;
 import com.jdon.container.access.TargetMetaRequestsHolder;
 import com.jdon.container.visitor.data.SessionContext;
@@ -33,6 +26,12 @@ import com.jdon.jivejdon.manager.filter.InputSwitcherIF;
 import com.jdon.jivejdon.manager.throttle.post.Throttler;
 import com.jdon.jivejdon.model.Account;
 import com.jdon.jivejdon.service.util.SessionContextUtil;
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.lang.reflect.Method;
 
 /**
  * web-inf/myaspect.xml
@@ -93,10 +92,10 @@ public class CUDInputInterceptor implements MethodInterceptor {
 		if (!methodNameNow.contains("create") && !methodNameNow.contains("update") && !methodNameNow.contains("delete"))
 			return invocation.proceed();
 
-//		if (isInputPermit(invocation)) {
-//			logger.error(Constants.INPUT_PERMITTED);
-//			return null;
-//		}
+		if (isInputPermit(invocation)) {
+			logger.error(Constants.INPUT_PERMITTED);
+			return null;
+		}
 
 		Account account = sessionContextUtil.getLoginAccount(sessionContext);
 		if (IPIsAllowed(methodNameNow, account))
@@ -132,7 +131,7 @@ public class CUDInputInterceptor implements MethodInterceptor {
 			return isAllowed;
 
 		if (methodNameNow.contains("create")) {
-			if (methodNameNow.contains("createTopicMessage") || methodNameNow.contains("createReplyMessage"))
+			if (methodNameNow.contains("createTopicMessage"))
 				isAllowed = throttler.checkPostValidate(account);
 			else
 				isAllowed = throttler.checkValidate(account);

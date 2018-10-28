@@ -82,11 +82,12 @@
 		
 		<component name="newUserThrottleConf"
 			class="com.jdon.jivejdon.manager.throttle.post.NewUserThrottleConf">
-			<constructor value="1" />       <!-- register limit for post.ThrottleManager-->
-			<constructor value="86400" />    	<!-- second -->
-			<constructor value="86400" />     <!-- second who that register time is leass than 1 day is a new User -->
-			<constructor value="8" />   <!--  time  limit start hour -->
-			<constructor value="21" />    <!--  time  limit end  hour -->
+            <constructor value="3"/>       <!-- register limit for post.ThrottleManager-->
+            <constructor value="3600"/>        <!-- second -->
+            <constructor value="3600"/>     <!-- second who that register time is leass than 1 day
+			is a new User -->
+            <constructor value="1"/>   <!--  time  limit start hour -->
+            <constructor value="2"/>    <!--  time  limit end  hour -->
 		</component>
 		
 		<component name="hitConf"
