@@ -173,10 +173,10 @@
 <%@ include file="./common/IncludeBottomBody.jsp" %> 
 <%@ include file="../account/loginAJAX.jsp" %>
 <%
-	String imagesize = "1";
+	String imagesize = "10";
 		if (request.getParameter("imagesize") != null)
 		    imagesize = request.getParameter("imagesize");
-
+  System.err.println("##" + imagesize);
   String mythreadId = "";
   if (application.getAttribute("thumbthreadId") != null) {
     mythreadId = ((Long) application.getAttribute("thumbthreadId")).toString();
