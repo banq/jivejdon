@@ -51,43 +51,6 @@
   <div id="textassit2" style="display:none"></div>
 </div>  
     
-<script>
-function loadPostjs(){
-  if (typeof(openInfoDiag) == 'undefined') {
-     $LAB
-     .script('/common/js/prototype.js')
-     .script('/common/threadPost.js').wait()
-     .wait(function(){
-         setObserve();
-     })              
-  }else
-     setObserve();
-}
-
-
-    
-function setObserve(){
- if(typeof(Ajax) != "undefined"){
-      $('messageNew').observe("submit", callbackSubmit);
-  }   
-}
-
-function loadCache(objId){
- try{
-  	if(window.localStorage){  		
-  	   return window.localStorage.getItem(objId);
-	  }else if (window.clipboardData) { 	  	
-      return(window.clipboardData.getData(objId));   	   
-   } 
-   }catch(e){}		
-}
-var formBody = loadCache('formBody');
-if (formBody != null)
-    document.getElementById('formBody').value = formBody;
-
-
-
-</script>
 
 <script>
 window.onload = function() {    
@@ -101,8 +64,15 @@ window.onload = function() {
          
         }  
     });
-    loadPostjs();
 }
+function forwardNewPage(fmainurl, fmainPars, anchor){  
+     // infoDiagClose();       
+      var url = fmainurl + fmainPars + "#" + anchor;   
+     // window.alert("url=" + url);    
+      window.location.href =  url;
+      
+}
+
 
 </script>    
 
