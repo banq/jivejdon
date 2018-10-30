@@ -181,7 +181,7 @@ com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(0, request, response);
     
 <script> 
 $LAB
-.script("/common/messageList5.js")
+.script("https://cdn.jdon.com/common/messageList5.js")
 .wait(function(){
 	//below need prototype.js
 	 var sId = "";

@@ -13,7 +13,7 @@ h5{font-size:14px}
 h6{font-size:14px}
 h1,h2,h3,h4,h5,h6{color:#111;font-weight:600;font-family:Roboto,sans-serif}
 p{margin:0 0 20px}
-.indent{text-indent: 30px}
+.indent{text-indent: 0px}
 a{color:#30A87C;-webkit-transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;transition:all .2s ease-in-out}
 a:focus,a:hover{color:#000;text-decoration:none}
 .bige20 {font-size: 24px;}
@@ -85,8 +85,10 @@ body.sub-page .logo{margin:110px 0 80px;padding:30px 0 50px}
 #page-content.archive-page,#page-content.index-page,#page-content.single-page{margin-top:20px}
 .archive-page .box .zoom-container{float:left;display:inline-block;margin-right:5px;max-width:250px}
 .featured{padding:15px;border:1px solid #ddd;background-color:#fff}
-.box{padding:20px 20px 10px;background-color:#fff}
-.box:last-child{padding:20px 20px 5px}
+.box{padding:15px 20px 10px;background-color:#fff}
+@media (max-width: 768px) {
+ .box{padding:15px 10px 5px}
+}
 .box:after,.box:before{clear:both;display:block;visibility:hidden;width:0;height:0;content:'\0020'}
 .box .info{margin:5px 0 10px 0}
 .box .info a{border-bottom:1px solid #000;box-shadow:inset 0 -1px 0 #000;color:#000;transition:all ease 150ms}

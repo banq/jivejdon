@@ -26,6 +26,7 @@ hs_err_pid*
 
 #idea
 .idea
+.vscode
 .iml
 jivejdon.iml
 target
