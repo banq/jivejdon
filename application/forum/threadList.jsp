@@ -12,7 +12,12 @@
   %>
 </logic:empty>
 <bean:define id="forum" name="threadListForm" property="oneModel"/>
-<bean:define id="title" name="forum" property="name" />
+<logic:empty name="forum" property="name">
+<bean:define id="title" value="最新列表"/>
+</logic:empty>
+<logic:notEmpty name="forum" property="name">
+<bean:define id="title" name="forum" property="name"/>
+</logic:notEmpty>
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
 <bean:define id="lastModifiedDate" name="forum" property="modifiedDate2"/>

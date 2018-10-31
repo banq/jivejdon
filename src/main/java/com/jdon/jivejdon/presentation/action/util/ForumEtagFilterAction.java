@@ -44,7 +44,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ForumEtagFilterAction extends Action {
 	public final static String NEWLASMESSAGE = "NEWLASMESSAGE";
-	private final static int expire = 6 * 60 * 60;
+	private final static int expire = 1 * 60 * 60;
 
 	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {

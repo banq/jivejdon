@@ -85,3 +85,4 @@ report/TEST-com.jdon.jivejdon.repository.search.CompassTest.txt
 application/blog/js/
 src/main/java/com/jdon/jivejdon/manager/throttle/img/
 src/test/
+log-camel-lsp.out

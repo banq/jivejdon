@@ -117,7 +117,7 @@ public class ThreadListAction extends ModelListAction {
 		Forum forum = null;
 		if ((forumId == null) || !UtilValidate.isInteger(forumId) || forumId.length()>10) {
 			forum = new Forum();
-			forum.setName("ThreadListAction");
+			forum.setName("");
 		} else {
 			forum = getForumService().getForum(new Long(forumId));
 		}
