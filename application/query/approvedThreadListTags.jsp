@@ -5,6 +5,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
 
+<div class="box">
 <div class="col-md-4">
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length="2" >
 <div class="linkblock">	
@@ -47,3 +48,4 @@
 </logic:iterate>
 	</div>
 
+</div>
