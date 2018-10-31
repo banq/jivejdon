@@ -15,20 +15,19 @@
  */
 package com.jdon.jivejdon.presentation.action.util;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.service.ForumService;
 import com.jdon.jivejdon.util.ToolsUtil;
 import com.jdon.util.UtilValidate;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * for struts-config.xml
@@ -45,6 +44,7 @@ import com.jdon.util.UtilValidate;
  */
 public class ForumEtagFilterAction extends Action {
 	public final static String NEWLASMESSAGE = "NEWLASMESSAGE";
+	private final static int expire = 6 * 60 * 60;
 
 	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -64,7 +64,6 @@ public class ForumEtagFilterAction extends Action {
 		}
 		if (lastpost == null)
 			return actionMapping.findForward("success");
-		int expire = 24 * 60 * 60;
 		long modelLastModifiedDate = lastpost.getModifiedDate2();
 		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
 			return null;

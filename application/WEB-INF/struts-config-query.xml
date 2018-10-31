@@ -205,7 +205,7 @@
         </action>
 
         <action path="/query/threadApprovedTagsList2"
-                type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedNewListAction"
+                type="com.jdon.jivejdon.presentation.action.query.ApprovedAction"
                 name="threadListForm" scope="request"
                 validate="false">
             <forward name="success" path="/query/approvedThreadListTags.jsp"/>

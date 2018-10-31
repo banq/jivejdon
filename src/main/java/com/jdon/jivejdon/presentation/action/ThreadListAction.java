@@ -15,11 +15,6 @@
  */
 package com.jdon.jivejdon.presentation.action;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
-
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.Forum;
@@ -33,6 +28,10 @@ import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
 import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -41,11 +40,19 @@ import com.jdon.util.UtilValidate;
 public class ThreadListAction extends ModelListAction {
 	private final static String module = ThreadListAction.class.getName();
 	private ForumMessageQueryService forumMessageQueryService;
+	private ForumService forumService;
 
 	public ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
 			forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService", this.servlet.getServletContext());
 		return forumMessageQueryService;
+	}
+
+	public ForumService getForumService() {
+		if (forumService == null)
+			forumService = (ForumService) WebAppUtil.getService("forumService", this.servlet
+					.getServletContext());
+		return forumService;
 	}
 
 	/*
@@ -56,8 +63,6 @@ public class ThreadListAction extends ModelListAction {
 	 * .HttpServletRequest, int, int)
 	 */
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
-		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService",
-				this.servlet.getServletContext());
 		String forumId = request.getParameter("forum");
 
 		ThreadListSpec threadListSpec = null;
@@ -80,9 +85,10 @@ public class ThreadListAction extends ModelListAction {
 		if (forumId == null)
 			forumId = request.getParameter("forumId");
 		if ((forumId == null) || !UtilValidate.isInteger(forumId) || forumId.length()>10) {
-			return forumMessageQueryService.getThreads(start, count, threadListSpec);
+			return getForumMessageQueryService().getThreads(start, count, threadListSpec);
 		} else
-			return forumMessageQueryService.getThreads(new Long(forumId), start, count, resultSort);
+			return getForumMessageQueryService().getThreads(new Long(forumId), start, count,
+					resultSort);
 	}
 
 	/*
@@ -104,7 +110,6 @@ public class ThreadListAction extends ModelListAction {
 
 	public void customizeListForm(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, ModelListForm modelListForm)
 			throws Exception {
-		ForumService forumService = (ForumService) WebAppUtil.getService("forumService", this.servlet.getServletContext());
 		String forumId = request.getParameter("forum");
 		if (forumId == null)
 			forumId = request.getParameter("forumId");
@@ -112,9 +117,9 @@ public class ThreadListAction extends ModelListAction {
 		Forum forum = null;
 		if ((forumId == null) || !UtilValidate.isInteger(forumId) || forumId.length()>10) {
 			forum = new Forum();
-			forum.setName("主题总表");
+			forum.setName("ThreadListAction");
 		} else {
-			forum = forumService.getForum(new Long(forumId));
+			forum = getForumService().getForum(new Long(forumId));
 		}
 		if (forum == null)
 			throw new Exception("forum is null forumid=" + forumId);
