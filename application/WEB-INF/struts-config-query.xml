@@ -181,6 +181,13 @@
             <forward name="success" path="/query/approvedThreadList.jsp"/>
         </action>
 
+        <action path="/query/threadApprovedNewList3"
+                type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedHomeListAction"
+                name="threadListForm" scope="request"
+                validate="false">
+            <forward name="success" path="/query/approvedThreadList3.jsp"/>
+        </action>
+
         <!-- from next page  reference in homepage   -->
         <action path="/query/approvedListOther"
                 type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedNewListAction"

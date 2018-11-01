@@ -56,20 +56,4 @@
 </div>
 </div>
 </logic:iterate>
-    
-<logic:iterate indexId="i" id="forumThread" name="threadListForm" property="list"  offset="1" >
- <%@ include file="threadListCore.jsp" %>
-</logic:iterate>
-    
 
-<table cellpadding="3" cellspacing="0" border="0" width="100%">
-  <tr>
-    <td class="smallgray" align="center"><div class="tres" >
-        <MultiPagesREST:pager actionFormName="threadListForm" page="/approval" >
-          <MultiPagesREST:prev name=" 上一页 " />
-          <MultiPagesREST:index displayCount="3" />
-          <MultiPagesREST:next  name=" 下一页 " />
-        </MultiPagesREST:pager>
-      </div></td>
-  </tr>
-</table>

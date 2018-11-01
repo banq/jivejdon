@@ -49,9 +49,10 @@
 		<div class="row">
 			<div id="main-content" class="col-md-8">
 				<div class="box">
-					<jsp:include page="/query/threadApprovedNewList.shtml?count=15" flush="true"></jsp:include>
-              </div>
-				 <div class="box">
+          <jsp:include page="/query/threadApprovedNewList2.shtml?count=1" flush="true"></jsp:include>
+          <span id="threadApprovedNewListOthers"></span>
+        </div>
+        <div class="box">
 					<div class="box-header header-natural">
 					</div>
 					<div class="box-content">
@@ -118,9 +119,7 @@
 				<div class="widget">
 					    <div class="wid-vid">
 							<ul>
-  <jsp:include page="/query/threadNewList.shtml" flush="true">   
-	<jsp:param name="count" value="20"/>
-  </jsp:include>   
+                <div id="threadNewList"></div>
 							</ul>
 							</div>
 				</div>
@@ -129,10 +128,7 @@
 				<div class="widget">
 					    <div class="wid-vid">
 							<ul>
-							  
-  <jsp:include page="/query/urlListAction.shtml" flush="true">   
-	<jsp:param name="count" value="20"/>
-  </jsp:include>
+                <div id="urllist"></div>
 							</ul>
 							</div>
 				</div>
@@ -192,15 +188,22 @@
 $LAB
 .script("https://cdn.jdon.com/js/index.js").wait()
 .wait(function(){
-     load('/query/threadDigList.shtml?count=20', function(xhr) {
+    load('/query/threadApprovedNewList3.shtml?count=15', function (xhr) {
+        document.getElementById("threadApprovedNewListOthers").innerHTML = xhr.responseText;
+    });
+    load('/query/threadDigList.shtml?count=20', function (xhr) {
   	       document.getElementById("digList").innerHTML = xhr.responseText;
 			});
-     load('/query/popularlist.shtml?count=11&dateRange=180', function(xhr) {
+    load('/query/popularlist.shtml?count=20&dateRange=180', function (xhr) {
   	       document.getElementById("poplist").innerHTML = xhr.responseText;
 			});
-
+    load('/query/urlListAction.shtml?count=20', function (xhr) {
+        document.getElementById("urllist").innerHTML = xhr.responseText;
+    });
+    load('/query/threadNewList.shtml?count=20', function (xhr) {
+        document.getElementById("threadNewList").innerHTML = xhr.responseText;
+    });
     document.getElementById("home-thumbnai").src = "https://cdn.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
-	
 });  
 </script> 	
 
