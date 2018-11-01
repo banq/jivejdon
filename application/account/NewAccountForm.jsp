@@ -2,9 +2,8 @@
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@page import="java.util.*"%>
-<%@page import="com.jdon.controller.WebAppUtil,
-com.jdon.jivejdon.manager.block.ErrorBlockerIF,com.jdon.jivejdon.manager.email.*"%>
+<%@page import="com.jdon.jivejdon.manager.block.ErrorBlockerIF"%>
+<%@page import="java.util.UUID"%>
 <%
 ErrorBlockerIF errorBlocker = (ErrorBlockerIF)
         WebAppUtil.getComponentInstance("errorBlocker",
@@ -31,15 +30,15 @@ response.setDateHeader("Expires", 0);
                           <img src='/images/sina.png' width="13" height="13" alt="登录" border="0" />新浪微博
                     </a>
 
-<%
-Calendar startingCalendar = Calendar.getInstance();
-startingCalendar.setTime(new Date());
-if (startingCalendar.get(Calendar.HOUR_OF_DAY) < 7 || startingCalendar.get(Calendar.HOUR_OF_DAY) > 24) {
-	out.println("<p><br> 为防止夜晚有人溜进来贴小广告，暂时关闭注册，工作时间正常开放，谢谢。<br>可用新浪微博 直接登入。");
-	return;
-}
-	
-%>	
+  <%--<%--%>
+  <%--Calendar startingCalendar = Calendar.getInstance();--%>
+  <%--startingCalendar.setTime(new Date());--%>
+  <%--if (startingCalendar.get(Calendar.HOUR_OF_DAY) < 7 || startingCalendar.get(Calendar.HOUR_OF_DAY) > 24) {--%>
+  <%--out.println("<p><br> 为防止夜晚有人溜进来贴小广告，暂时关闭注册，工作时间正常开放，谢谢。<br>可用新浪微博 直接登入。");--%>
+  <%--return;--%>
+  <%--}--%>
+  <%----%>
+  <%--%>	--%>
 </div>
 
 <div class="box">

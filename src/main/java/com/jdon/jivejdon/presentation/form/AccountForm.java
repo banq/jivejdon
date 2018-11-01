@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 package com.jdon.jivejdon.presentation.form;
 
@@ -20,18 +20,15 @@ import org.apache.commons.validator.EmailValidator;
 import org.apache.struts.action.ActionMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
  * @author <a href="mailto:banq@163.com">banq </a>
- * 
  */
 public class AccountForm extends BaseForm {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -47,7 +44,7 @@ public class AccountForm extends BaseForm {
 
 	private String registerCode;
 
-    private String randstr;
+	private String randstr;
 
 	private boolean emailVisible;
 
@@ -109,8 +106,7 @@ public class AccountForm extends BaseForm {
 	}
 
 	/**
-	 * @param emailVisible
-	 *            The emailVisible to set.
+	 * @param emailVisible The emailVisible to set.
 	 */
 	public void setEmailVisible(boolean emailVisible) {
 		this.emailVisible = emailVisible;
@@ -124,20 +120,20 @@ public class AccountForm extends BaseForm {
 		this.ans = ans;
 	}
 
-    public String getRandstr() {
-        return randstr;
-    }
+	public String getRandstr() {
+		return randstr;
+	}
 
-    public void setRandstr(String randstr) {
-        this.randstr = randstr;
-    }
+	public void setRandstr(String randstr) {
+		this.randstr = randstr;
+	}
 
-    public void doValidate(ActionMapping mapping, HttpServletRequest request, List errors) {
+	public void doValidate(ActionMapping mapping, HttpServletRequest request, List errors) {
 
 
-		if ((getAction() == null) ||  getAction().length() ==0 || ModelForm
-                .EDIT_STR.equals(getAction())
-                || ModelForm.CREATE_STR.equals(getAction())) {
+		if ((getAction() == null) || getAction().length() == 0 || ModelForm
+				.EDIT_STR.equals(getAction())
+				|| ModelForm.CREATE_STR.equals(getAction())) {
 
 //            if (!SkinUtils.verifyQQRegisterCode(registerCode, randstr,
 //                    request.getRemoteAddr())) {
@@ -160,24 +156,24 @@ public class AccountForm extends BaseForm {
 
 			if (ModelForm.CREATE_STR.equals(getAction())) {
 				// evening shut up
-				Calendar startingCalendar = Calendar.getInstance();
-				startingCalendar.setTime(new Date());
-				if (startingCalendar.get(Calendar.HOUR_OF_DAY) < 8 ||
-                        startingCalendar.get(Calendar.HOUR_OF_DAY) > 23) {
-					errors.add("close...");
-				}
+//				Calendar startingCalendar = Calendar.getInstance();
+//				startingCalendar.setTime(new Date());
+//				if (startingCalendar.get(Calendar.HOUR_OF_DAY) < 8 ||
+//                        startingCalendar.get(Calendar.HOUR_OF_DAY) > 23) {
+//					errors.add("close...");
+//				}
 			}
 
 			if (addErrorIfStringEmpty(errors, "username.required", getUsername
-                    ()))
-			    return;
+					()))
+				return;
 
-            if (addErrorIfStringEmpty(errors, "password.required",
-                    getPassword()))
-                return;
+			if (addErrorIfStringEmpty(errors, "password.required",
+					getPassword()))
+				return;
 
-			if(addErrorIfStringEmpty(errors, "email.required", getEmail()))
-                return;
+			if (addErrorIfStringEmpty(errors, "email.required", getEmail()))
+				return;
 
 			if (getPassword() != null && getPassword().length() > 0) {
 				if (!getPassword().equals(getPassword2())) {
@@ -185,20 +181,20 @@ public class AccountForm extends BaseForm {
 					return;
 				}
 			}
-			if(addErrorIfStringEmpty(errors, "email.emailcheck", getEmail()))
-                return;
+			if (addErrorIfStringEmpty(errors, "email.emailcheck", getEmail()))
+				return;
 
 			if (this.getUsername() != null && this.getUsername().length() > 20) {
 				errors.add("username.toolong");
 				return;
 			}
 
-            if (!getUsername().matches("(\\w+|\\d+)")) {
-                errors.add("username.alphanumeric");
-                return;
-            }
+			if (!getUsername().matches("(\\w+|\\d+)")) {
+				errors.add("username.alphanumeric");
+				return;
+			}
 
-            if (!EmailValidator.getInstance().isValid(this.getEmail())) {
+			if (!EmailValidator.getInstance().isValid(this.getEmail())) {
 				errors.add("email.emailcheck");
 				return;
 			}
