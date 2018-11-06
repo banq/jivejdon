@@ -1,14 +1,5 @@
 package com.jdon.jivejdon.presentation.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.logging.log4j.*;
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.presentation.form.MessageListForm;
@@ -16,6 +7,15 @@ import com.jdon.jivejdon.service.ForumMessageQueryService;
 import com.jdon.jivejdon.service.ForumMessageService;
 import com.jdon.strutsutil.FormBeanUtil;
 import com.jdon.util.UtilValidate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * <%-- (urlrewrite.xml)/nav/([0-9]+)/([0-9]+) == > /forum/messageNavList.shtml
@@ -64,6 +64,7 @@ public class MessageListNavAction extends Action {
 		messageListForm.setStart(start);// diaplay
 		request.setAttribute("start", start);
 		request.setAttribute("threadId", threadId);
+		request.setAttribute("messageId", new Long(messageId));
 		return mapping.findForward("success");
 
 	}

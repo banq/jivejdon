@@ -141,7 +141,8 @@ function saveCache(objId){
 }
 
  
- var formSubmitcheck = false;      
+ var formSubmitcheck = false;  
+var subjectold = "";
  function checkPost(theForm) {
   
       if (document.getElementById('forumId_select') != null
@@ -154,8 +155,12 @@ function saveCache(objId){
       var body = theForm.body.value.replace(/(^\s*)|(\s*$)/g, ""); 
       var subject = theForm.subject.value.replace(/(^\s*)|(\s*$)/g, ""); 
       if (subject  != ""){          
-          formSubmitcheck = true;
-          theForm.formButton.disabled=true;
+          if (subjectold != subject){
+            formSubmitcheck = true;
+            theForm.formButton.disabled=true;
+          }else 
+            alert("发言重复" );
+          subjectold = subject;
       }else{
     	  alert("请输入发言标题和发言内容！" +subject + " " + body);
     	  formSubmitcheck = false;

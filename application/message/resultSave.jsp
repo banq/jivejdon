@@ -19,8 +19,6 @@
 </logic:notEmpty>
 
 
-<html:errors />
-
 <logic:messagesNotPresent>
     <logic:empty name="errors">
         <logic:notEqual name="action" value="delete">
@@ -57,22 +55,19 @@
 </logic:messagesNotPresent>
 
 <logic:messagesPresent>
-   <span id="errors">
-     <logic:present name="errors">
-         <logic:iterate id="error" name="errors">
-             <BR><bean:write name="error" />
-         </logic:iterate>
-     </logic:present>
-		 <html:errors />
-    </span>
+   <logic:present name="errors">
+      <span id="errors">
+         	 <html:errors />
+         </span>
+    </logic:present>
     <script>
-    var errInfo = document.getElementById("errors").innerHTML.replace(/\'/g,'');
-    if (window.top.setDiagInfo)
-        window.top.setDiagInfo(errInfo);
+    var errInfo = document.getElementById("errors").innerHTML.replace(/<\/?.+?>/g,'').replace(/ /g,"");
+    if (window.top.openInfoDiag)
+        window.top.openInfoDiag(errInfo);
     else{
-        window.top.loadWLJSWithP(errInfo, window.top.setDiagInfo);
+        window.top.alert(errInfo);
     }
-     window.top.alert(errInfo);
+    window.top.document.getElementById("formSubmitButton").disabled=false;    
 
     </script>
 </logic:messagesPresent>

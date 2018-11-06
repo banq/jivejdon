@@ -330,25 +330,25 @@ public class MessageForm extends BaseForm {
 			if(addErrorIfStringEmpty(errors, "need subject", this.getSubject
                     ()))
 			    return;
-            if(addErrorIfStringEmpty(errors, "need body", getBody()))
+			if (addErrorIfStringEmpty(errors, "need.body", getBody()))
                 return;
 
 			if (this.getParentMessage() == null)
 				if (this.getForum() == null || this.getForum().getForumId() == null) {
-					errors.add("need forum");
+					errors.add("need.forum");
 					return;
 				}
 			if (UtilValidate.isEmpty(this.getSubject()) || UtilValidate.isEmpty(this.getBody())) {
-				errors.add("subject or body is null");
+				errors.add("subject.or.body.is.null");
 				return;
 			}
 			if (UtilValidate.isEmpty(this.getSubject().replaceAll("[^\\p{L}\\p{N}]", ""))
 					|| UtilValidate.isEmpty(this.getBody().replaceAll("[^\\p{L}\\p{N}]", ""))) {
-				errors.add("subject or body is null");
+				errors.add("subject.or.body.is.null");
 				return;
 			}
 			if ((this.getSubject() != null) && (this.getSubject().length() > subjectMaxLength)) {
-				errors.add("subject length too long");
+				errors.add("subject.length.too.long");
 				return;
 			}
 			if ((getBody() != null) && (getBody().length() >= bodyMaxLength)) {

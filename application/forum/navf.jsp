@@ -6,12 +6,14 @@
 <% 
 int start = ((Integer)request.getAttribute("start")).intValue();
 long threadId = ((Long)request.getAttribute("threadId")).longValue();
+long messageId = ((Long)request.getAttribute("messageId")).longValue();
+
 
 String url = request.getContextPath();
 if (start == 0)
-    url = url + "/forum/messageList.shtml?thread=" + threadId ;
+    url = url + "/forum/messageList.shtml?thread=" + threadId + "&messageId=" + messageId;
 else
-	url = url + "/forum/messageList.shtml?thread=" + threadId + "&start=" + start;
+	url = url + "/forum/messageList.shtml?thread=" + threadId + "&start=" + start + "&messageId=" + messageId;
 
 Enumeration e = request.getParameterNames();
 while (e.hasMoreElements()) {            
