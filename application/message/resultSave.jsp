@@ -27,7 +27,7 @@
 
             <script>
                 ///nav/messageId   if there is not forumThreadId, it can be skip.
-                var fmainurl = '<%=request.getContextPath()%>/nav/<bean:write name="messageId" />/<bean:write name="messageId" />';
+                var fmainurl = '<%=request.getContextPath()%>/nav/<bean:write name="messageId" />/<bean:write name="messageId" />' + '?' + Math.round(Math.random() * 10000);
                 var fmainPars = ''
                 var anchor = '<bean:write name="messageId" />';
                 if (window.top.setDiagInfo)
