@@ -5,7 +5,10 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-
+<%          
+    com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(30 * 60, request, response);
+	
+%>
 <logic:iterate indexId="i" id="forumThread" name="threadListForm" property="list" offset="1">
   <%@ include file="threadListCore.jsp" %>
 </logic:iterate>
