@@ -37,7 +37,7 @@ var initSample = ( function() {
                language: 'zh-cn',
                 stylesSet:'my_styles',
                 pasteFilter: 'b i ul ol li; img[!src, alt]; a[!href]',
-            extraPlugins: 'bbcode,base64image,autosave',  
+            extraPlugins: 'bbcode,base64image,autosave,autogrow',  
  	// Remove unused plugins.
 					removePlugins: 'filebrowser,format,horizontalrule,pastetext,pastefromword,scayt,showborderstable,tabletools,tableselection,wsc,smiley',
 					// Remove unused buttons.

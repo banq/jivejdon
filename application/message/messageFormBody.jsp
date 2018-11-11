@@ -27,7 +27,7 @@
 </div>
 <script>
     initSample();
-    CKEDITOR.config.height = 480;
+    // CKEDITOR.config.height = 480;
 </script>
     
 <div class="row">
