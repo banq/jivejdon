@@ -28,7 +28,7 @@
 <script>
     initSample();
     // CKEDITOR.config.height = 480;
-    config.autoGrow_minHeight = 480;
+      CKEDITOR.config.autoGrow_minHeight = 480;
 </script>
     
 <div class="row">
