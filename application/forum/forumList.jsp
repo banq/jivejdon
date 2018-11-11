@@ -58,13 +58,7 @@
   
                            <br>
                     <span class="home_content" >作者:</span>
-                    <logic:equal name="messageForm" property="root" value="true">
-                       <a href='<%=request.getContextPath()%>/<bean:write name="messageForm" property="forumThread.threadId" />' >                    
-                    </logic:equal>
-                    <logic:equal name="messageForm" property="root" value="false">
-                       <a href='<%=request.getContextPath()%>/nav/<bean:write name="messageForm" property="forumThread.threadId" />/<bean:write name="messageForm" property="messageId" />#<bean:write name="messageForm" property="messageId" />'  rel="nofollow"> 
-                    </logic:equal>
-                    
+    <a href='<%=request.getContextPath()%>/<bean:write name="messageForm" property="forumThread.threadId"/>' >
                     <span  class='Users ajax_userId=<bean:write name="messageForm" property="account.userId"/>' >
                     <bean:write name="messageForm" property="account.username" /></span></a>                       
                         

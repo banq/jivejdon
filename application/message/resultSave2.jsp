@@ -21,14 +21,13 @@
 <logic:messagesNotPresent>
     <logic:empty name="errors">
         <logic:notEqual name="action" value="delete">
-         帖子保存成功，<a href='<%=request.getContextPath()%>/nav/<bean:write name="messageId" />/<bean:write name="messageId" />#<bean:write name="messageId" />'
+          帖子保存成功，<a href='<%=request.getContextPath()%>/forum/messageNavList.shtml?message=<bean:write name="messageId"/>'
             >按这里返回所发帖子</a>
 
             <script>
              if (window.top.setDiagInfo)
                     window.top.setDiagInfo(" 帖子保存成功 ");
-                ///nav/messageId   if there is not forumThreadId, it can be skip.
-                window.top.location.href = '<%=request.getContextPath()%>/nav/<bean:write name="messageId" />/<bean:write name="messageId" />#<bean:write name="messageId" />';
+             window.top.location.href = '<%=request.getContextPath()%>/forum/messageNavList.shtml?message=<bean:write name="messageId" />';
         
               
                 

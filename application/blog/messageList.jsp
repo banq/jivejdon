@@ -38,13 +38,9 @@
 
   
        <div class="b_content_title2">
-       <logic:equal name="forumMessage" property="root" value="true">
-              <a href='<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId" />' target="_blank">                    
-       </logic:equal>
-       <logic:equal name="forumMessage" property="root" value="false">
-             <a href='<%=request.getContextPath()%>/nav/<bean:write name="forumThread" property="threadId" />/<bean:write name="forumMessage" property="messageId" />#<bean:write name="forumMessage" property="messageId" />' target="_blank" rel="nofollow"> 
-       </logic:equal>       
-         <bean:write name="forumMessage" property="messageVO.subject"/>
+         <a href='<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId" />' target="_blank">
+
+           <bean:write name="forumMessage" property="messageVO.subject"/>
         </a>
         <span>(<bean:write name="forumMessage" property="modifiedDate3" />)</span>
         </div>

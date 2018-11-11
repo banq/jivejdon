@@ -136,7 +136,7 @@
 			<init-param>
 				<param-name>config</param-name>
 				<param-value>
-					/WEB-INF/struts-config.xml,/WEB-INF/struts-config-account.xml,/WEB-INF/struts-config-forum.xml,/WEB-INF/struts-config-message.xml,/WEB-INF/struts-config-query.xml,/WEB-INF/struts-config-admin.xml,/WEB-INF/struts-config-upload.xml,/WEB-INF/struts-config-shortmessage.xml,/WEB-INF/struts-config-blog.xml,/WEB-INF/struts-config-mobile.xml,/WEB-INF/struts-config-subscription.xml,/WEB-INF/struts-config-oauth.xml
+                    /WEB-INF/struts-config.xml,/WEB-INF/struts-config-account.xml,/WEB-INF/struts-config-forum.xml,/WEB-INF/struts-config-message.xml,/WEB-INF/struts-config-query.xml,/WEB-INF/struts-config-admin.xml,/WEB-INF/struts-config-upload.xml,/WEB-INF/struts-config-shortmessage.xml,/WEB-INF/struts-config-blog.xml,/WEB-INF/struts-config-subscription.xml,/WEB-INF/struts-config-oauth.xml
 				</param-value>
 			</init-param>
 			<init-param>

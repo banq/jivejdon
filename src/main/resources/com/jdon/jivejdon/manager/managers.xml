@@ -175,7 +175,7 @@
 			class="com.jdon.jivejdon.model.subscription.messsage.ThreadNotifyMessage">
 			<constructor value=" 您关注的主题贴有新回复  " />
 			<constructor
-                    value="https://jdon.com/nav/threadId/messageId#messageId"/>
+                    value="https://jdon.com/threadId"/>
 			<constructor value="admin" />
 		</component>
 		
@@ -212,13 +212,15 @@
 			<constructor value="300" /> <!-- notification lifecycle seconds   -->
 			<constructor value="ZH" /><!-- Date time Locale -->			
 			<constructor value="发了新帖 " />
-		     <constructor value="&lt;a href='/nav/threadId/messageId#messageId' target='_blank' onclick='window.top.disablePopUPWithID(notificationId,scopeSeconds)'  &gt; subject &lt;/a&gt;" />
+            <constructor
+                    value="&lt;a href='/threadId' target='_blank' onclick='window.top.disablePopUPWithID(notificationId,scopeSeconds)'  &gt; subject &lt;/a&gt;"/>
 		</component>
 		
 		<component name="weiBoShortMessageParams"
 			class="com.jdon.jivejdon.manager.shortmessage.WeiBoShortMessageParams">
 			<constructor value="有贴提到你：" />
-    	    <constructor value="在 &lt;a href=/nav/messageId/messageId#messageId target=_blank   &gt; subject &lt;/a&gt; 帖子中提到了你，去看看吧。" />
+            <constructor
+                    value="在 &lt;a href=/forum/messageNavList.shtml?message=messageId target=_blank   &gt; subject &lt;/a&gt; 帖子中提到了你，去看看吧。"/>
 		</component>
 		
 		<component name="sinaOAuthParamVO"

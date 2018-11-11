@@ -22,12 +22,12 @@
 <logic:messagesNotPresent>
     <logic:empty name="errors">
         <logic:notEqual name="action" value="delete">
-            帖子保存成功，<a href='<%=request.getContextPath()%>/nav/<bean:write name="messageId" />/<bean:write name="messageId" />#<bean:write name="messageId" />'
+            帖子保存成功，<a href='<%=request.getContextPath()%>/forum/messageNavList.shtml?message=<bean:write name="messageId" />'
             >按这里返回所发帖子</a>
 
             <script>
-                ///nav/messageId   if there is not forumThreadId, it can be skip.
-                var fmainurl = '<%=request.getContextPath()%>/nav/<bean:write name="messageId" />/<bean:write name="messageId" />' + '?' + Math.round(Math.random() * 10000);
+                
+                var fmainurl = '<%=request.getContextPath()%>/forum/messageNavList.shtml?message=<bean:write name="messageId" />' + '&' + Math.round(Math.random() * 10000);
                 var fmainPars = ''
                 var anchor = '<bean:write name="messageId" />';
                 if (window.top.setDiagInfo)

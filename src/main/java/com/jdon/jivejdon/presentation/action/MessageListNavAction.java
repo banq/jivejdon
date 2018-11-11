@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <%-- (urlrewrite.xml)/nav/([0-9]+)/([0-9]+) == > /forum/messageNavList.shtml
+ * <%-- /forum/messageNavList.shtml
  * == > MessageListNavAction ==> navf.jsp ==> (urlrewrite.xml)/([0-9]+)/([0-9]+)
  * --%>
  * 

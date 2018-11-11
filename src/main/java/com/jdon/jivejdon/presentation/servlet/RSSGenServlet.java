@@ -382,20 +382,10 @@ public class RSSGenServlet extends HttpServlet {
 	}
 
 	private String getItemLink(String url, ForumMessage message, HttpServletRequest request) {
-		if (message.isRoot()) {
-			if (request.getParameter("mobile") != null) {
-				String relativeLink = "/mobile/" + message.getForumThread().getThreadId().toString();
-				return url + relativeLink;
 
-			} else {
 				String relativeLink = "/" + message.getForumThread().getThreadId().toString();
 				return url + relativeLink;
-			}
-
-		} else {
-			String relativeLink = "/nav/" + message.getForumThread().getThreadId().toString() + "/" + message.getMessageId().toString();
-			return url + relativeLink + "#" + message.getMessageId();
-		}
+		
 	}
 
 	public void destroy() {

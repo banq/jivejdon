@@ -93,14 +93,6 @@
         <div class="post_body">
           <div class="post_bodyin">
             <div class="post_body_content">
-              <logic:present name="forumMessage" property="reBlogVO.messageFrom">
-                <bean:define id="messageFrom" name="forumMessage" property="reBlogVO.messageFrom"/>
-              <div class="reblogfrom"> 转自:<a
-                  href="<%=request.getContextPath()%>/nav/<bean:write name="messageFrom" property="messageId"/>/<bean:write name="messageFrom" property="messageId"/>#<bean:write name="messageFrom" property="messageId"/>"
-                  rel="nofollow">
-                <bean:write name="messageFrom" property="forumThread.name"/>
-              </a></div>
-              </logic:present>
              <h1 class="tpc_content"
                   id='body_<bean:write name="forumMessage" property="messageId"/>'><p class="indent">
                 <bean:write name="forumMessage" property="messageVO.body" filter="false"/>

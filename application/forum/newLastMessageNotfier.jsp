@@ -12,8 +12,7 @@
 <center>
 自从您上次访问以来有了更新
 <br>
-<a href='<%=request.getContextPath()%>/nav/<bean:write name="NEWLASMESSAGE" 
-        property="forumThread.threadId" />/<bean:write name="NEWLASMESSAGE" property="messageId"/>#<bean:write name="NEWLASMESSAGE" property="messageId" />'>按这里</a>
+  <a href='<%=request.getContextPath()%>/<bean:write name="NEWLASMESSAGE" property="forumThread.threadId" />'>按这里</a>
 
 <br><br>本窗口1分钟后消失        
         

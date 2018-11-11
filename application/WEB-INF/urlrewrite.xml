@@ -50,10 +50,7 @@
         <from>^/thread/([0-9]+)/0$</from>
         <to type="permanent-redirect">../$1</to>
     </rule>
-    <rule>
-        <from>^/thread/([0-9]+)(.*)message=([0-9]+)$</from>
-        <to type="permanent-redirect">../nav/$1/$3</to>
-    </rule>
+
 
     <!--  old thread /thread -->
     <rule>
@@ -176,20 +173,6 @@
         <to>/forum/messageList.shtml?thread=$1&amp;start=$2</to>
     </rule>
 
-    <rule><!--  /forum/navf.jsp -->
-        <from>^/([0-9]+)/([0-9]+)/([a-z]+)$</from>
-        <to>/message/messageSaveList.shtml?thread=$1&amp;start=$2&amp;$3=$3</to>
-    </rule>
-
-    <rule>
-        <from>^/nav/([0-9]+)/([0-9]+)$</from>
-        <to>/forum/messageNavList.shtml?thread=$1&amp;message=$2</to>
-    </rule>
-
-    <rule>
-        <from>^/nav/([0-9]+)/([0-9]+)/([a-z]+)$</from>
-        <to>/forum/messageNavList.shtml?thread=$1&amp;message=$2&amp;$3=$3</to>
-    </rule>
 
     <!-- tags -->
 
