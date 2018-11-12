@@ -12,6 +12,7 @@ if ( CKEDITOR.env.ie && CKEDITOR.env.version < 9 )
 // unless user specified own height.
 CKEDITOR.config.height = 250;
 CKEDITOR.config.width = 'auto';
+CKEDITOR.config.toolbarLocation= 'bottom';
 
 var initSample = ( function() {
 	var wysiwygareaAvailable = isWysiwygareaAvailable(),
