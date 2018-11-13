@@ -52,7 +52,7 @@ java.lang.SecurityException: 无法定位登录配置
               username="root"       
               password="root"
               driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost/jivejdon?useUnicode=true&amp;characterEncoding=UTF-8" />
+              url="jdbc:mysql://localhost/jivejdon?useUnicode=true&amp;characterEncoding=UTF-8&amp;rewriteBatchedStatements=true" />
 
 <Resource name="mail/Session" auth="Container"
 		type="javax.mail.Session"

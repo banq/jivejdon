@@ -37,7 +37,7 @@ copy jivejdon/lib/mysql/mysql-connector-java-5.0.8-bin.jar to your tomcat/lib
               username="root"
               password="root"
               driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost/jivejdon?useUnicode=true&amp;characterEncoding=UTF-8" />
+              url="jdbc:mysql://localhost/jivejdon?useUnicode=true&amp;characterEncoding=UTF-8&amp;rewriteBatchedStatements=true" />
 
 
 <Resource name="mail/Session" auth="Container"

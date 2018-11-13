@@ -41,7 +41,7 @@
               username="root"       
               password=""
               driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost/jivejdon?useUnicode=true&amp;characterEncoding=UTF-8" />
+              url="jdbc:mysql://localhost/jivejdon?useUnicode=true&amp;characterEncoding=UTF-8&amp;rewriteBatchedStatements=true" />
               
   <Resource name="jdbc/SecurityDS" 
               auth="Container" 
