@@ -12,11 +12,8 @@
 <link rel="stylesheet" href="/common/jivejdon5.css"  type="text/css">
 
     <bean:define id="ForumMessage" name="threadForm" property="rootMessage"  />
-<table cellpadding="0" cellspacing="0" border="0" width="971" align="center">
-<tr><td><html:img page="/images/blank.gif" width="1" height="10" border="0" alt=""/></td></tr>
-</table>
 
-<div align="center">
+<div class="col-md-offset-4 col-md-4">
 
 <html:form action="/message/updateAction.shtml" method="post" >
 <html:hidden property="threadId" />
@@ -30,11 +27,11 @@
 
 <logic:equal name="threadForm" property="authenticated"
              value="true">
-
-    标题：<html:text  property="name" styleId="replySubject" size="40"
+<p>
+    标题：<html:text  property="name" styleId="replySubject" size="80"
                  maxlength="40"  />
-    <input type="submit" value=" 确定 Ctrl+Enter "/>
-
+  <p>  <input type="submit" value=" 确定 Ctrl+Enter "/>
+<p><p><p>
 
 </logic:equal>   
 
