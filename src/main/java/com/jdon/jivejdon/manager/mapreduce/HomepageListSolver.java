@@ -21,8 +21,8 @@ public class HomepageListSolver {
 	}
 
 	public Collection<Long> getList() {
-		TreeMap<ForumThread, Long> sorted_map = new TreeMap<ForumThread, Long>(new
-				HomePageComparator());
+//		TreeMap<ForumThread, Long> sorted_map = new TreeMap<ForumThread, Long>(new
+//				HomePageComparator());
 		Collection<Long> list = threadApprovedNewList.getApprovedThreads(0);
 		return list.stream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
 						.getThread(threadId), threadId -> threadId, (e1, e2) -> e1, // Merge
