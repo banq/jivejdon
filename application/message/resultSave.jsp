@@ -27,7 +27,7 @@
 
             <script>
                 
-                var fmainurl = '<%=request.getContextPath()%>/forum/messageNavList.shtml?message=<bean:write name="messageId" />' + '&' + Math.round(Math.random() * 10000);
+                var fmainurl = '<%=request.getContextPath()%>/forum/messageNavList.shtml?message=<bean:write name="messageId" />';
                 var fmainPars = ''
                 var anchor = '<bean:write name="messageId" />';
                 if (window.top.setDiagInfo)

@@ -4,6 +4,7 @@
 <%--  /forum/messageNavList.shtml  == > MessageListNavAction ==>navf.jsp ==> (urlrewrite.xml)/([0-9]+)/([0-9]+) --%>
 <meta name="robots" content="nofollow"> 
 <% 
+com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(1, request, response);
 int start = ((Integer)request.getAttribute("start")).intValue();
 long threadId = ((Long)request.getAttribute("threadId")).longValue();
 long messageId = ((Long)request.getAttribute("messageId")).longValue();
@@ -22,6 +23,7 @@ while (e.hasMoreElements()) {
                url = url + "&" + paramName + "=" + request.getParameter(paramName);
             
 }
+url = url + "&ver=" + java.util.UUID.randomUUID().toString();
 %>
 <% 
 response.setStatus(301);

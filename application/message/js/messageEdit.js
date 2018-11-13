@@ -44,7 +44,7 @@ function forwardNewPage(fmainurl, fmainPars, anchor){
       infoDiagClose();         
       $('formBody').value = ""; //clear input                         
       clearCache('formBody');
-      var url = fmainurl + "/nocache" +fmainPars + "#" + anchor;
+      var url = fmainurl ;
       window.location.href =  url;
       
 }
