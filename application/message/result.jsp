@@ -19,13 +19,8 @@
 <bean:define id="action" name="messageReplyForm" property="action"  />
 </logic:notEmpty>
 
-<table cellpadding="0" cellspacing="0" border="0"  align="center">
-<tr>
-    <td valign="top" > 
-    
-    <p>
-    <html:errors />
-
+<div class="col-md-offset-4 col-md-4">
+<html:errors />
    <logic:messagesNotPresent>
     <logic:empty name="errors">
      <br><br>
@@ -51,15 +46,9 @@
         </logic:notEmpty>     
     </logic:empty>
   </logic:messagesNotPresent>
-    </td>
-</tr>
-<tr>
-    <td valign="top" > 
-    <br><br><br><p><html:link page="/">按这里返回首页</html:link>
-    </td>
-</tr>
-</table>
-
+ <p><html:link page="/">按这里返回首页</html:link>
+ 
+ </div>
 
 <%@include file="../common/IncludeBottom.jsp"%> 
 
