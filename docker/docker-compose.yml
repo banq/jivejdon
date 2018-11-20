@@ -1,0 +1,21 @@
+version: '3'
+services:
+    maven:
+        container_name: maven-container
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:    
+            - C:/Users/banq/.m2/settings.xml:/root/.m2/settings.xml
+
+    tomcat:
+        container_name: tomcat-container
+        build:
+            context: .
+            dockerfile: Dockerfile_tc
+        ports:
+           - "8080:8080"
+        volumes:
+           - ./target/ROOT.war:/usr/local/tomcat/webapps/ROOT.war
+        environment:
+           - "JAVA_OPTS=-Djava.security.auth.login.config=../conf/jaas.config"

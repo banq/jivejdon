@@ -22,7 +22,7 @@ ddl目录下SQL 导入数据库 jivejdon
 
 (2)在Tomcat启动配置中加入授权JAAS配置。
 在tomcat/bin目录建立一个debug.bat，将下面两行加入：
-set JAVA_OPTS=-XX:+UseStringCache   -Djava.security.auth.login.config=../conf/jaas.config
+set JAVA_OPTS=-XX:+UseStringCache -Djava.security.auth.login.config=../conf/jaas.config
 catalina.bat jpda start
 
 第一行是启用tomcat/conf/jaas.config（该文件在jivejdon项目的doc\tomcat\conf下，复制到tomcat/conf下），也就是启用tomcat容器安全。
