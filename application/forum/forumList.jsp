@@ -5,7 +5,7 @@
 <%@ taglib uri="/WEB-INF/MultiPages.tld" prefix="MultiPages" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<bean:define id="title"  value="软件分析建模与架构设计社区" />
+<bean:define id="title"  value="编程道场Coding Dojos" />
 <%@ include file="../common/IncludeTop.jsp" %>
 <link rel="alternate" type="application/rss+xml" title="<bean:write name="title" />" href="/rss/messages" />
 <meta http-equiv="refresh" content="3600">

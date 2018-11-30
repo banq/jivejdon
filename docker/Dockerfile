@@ -5,4 +5,4 @@ RUN git clone https://github.com/banq/jivejdon.git
 # Create app directory
 WORKDIR jivejdon
 
-RUN mvn install
+RUN mvn package
