@@ -1,31 +1,20 @@
-version: '3'
-services:
-    maven:
-        container_name: maven-container
-        build:
-            context: .
-            dockerfile: Dockerfile
-        links:
-            - tomcat
-        volumes:
-            - ./target/
-    db:
-        image: mysql
-        command: --default-authentication-plugin=mysql_native_password
-        restart: always
-        environment:
-            MYSQL_ROOT_PASSWORD: example
-    tomcat:
-        container_name: tomcat-container
-        build:
-            context: .
-            dockerfile: Dockerfile_tc
-        ports:
-            - "8080:8080"
-        volumes:
-            - ./target/ROOT.war:/usr/local/tomcat/webapps/ROOT.war
-            
-        environment:
-            - "JAVA_OPTS=-Djava.security.auth.login.config=../conf/jaas.config"
+version: "3.3"
 
-        
+services:
+
+  mavenjivejdon:
+     build:
+        context: .
+        dockerfile: Dockerfile_maven 
+
+  database:
+     build:
+        context: .
+        dockerfile: Dockerfile_mysql 
+   
+
+  webserver:
+      build:
+        context: .
+        dockerfile: Dockerfile_tomcat 
+   

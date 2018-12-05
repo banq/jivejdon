@@ -1,0 +1,8 @@
+#
+# Build the app using maven in a container
+#
+FROM maven:latest AS devenv
+RUN git clone https://github.com/banq/jivejdon.git
+# Create app directory
+WORKDIR /jivejdon
+RUN mvn package

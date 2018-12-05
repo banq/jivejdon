@@ -40,8 +40,8 @@
             removeAbandoned="true" removeAbandonedTimeout="60"
              testOnBorrow="true" testOnReturn="false" testWhileIdle="true"
               timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource"
-               url="jdbc:mysql://127.0.0.1/jivejdon?useUnicode=true&amp;characterEncoding=UTF-8&amp;rewriteBatchedStatements=true"
-                username="root" password="example" validationInterval="30000" validationQuery="SELECT 1"/>  
+               url="jdbc:mysql://database:3306/jivejdon?useUnicode=true&amp;characterEncoding=UTF-8&amp;rewriteBatchedStatements=true"
+                username="test" password="test" validationInterval="30000" validationQuery="SELECT 1"/>  
 
 
 
