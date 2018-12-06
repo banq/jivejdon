@@ -36,6 +36,8 @@
 <link rel="stylesheet" href="/common/js/styles/autocomplete.css"  type="text/css">
 <script>
 function loadAcJS(thisId){
+  if(document.getElementById(thisId).value) 
+      return;  
   if (typeof(ac) == 'undefined') {
      $LAB
      .script('/common/js/prototype.js')
