@@ -1,28 +1,29 @@
 
 #
 # deploy application to tomcat
-#
+
 FROM tomcat:8-jre8
 
-ADD tomcat/context.xml $CATALINA_HOME/conf/
-ADD tomcat/server.xml $CATALINA_HOME/conf/
+ADD tomcat/context.xml /usr/local/tomcat/conf/
+ADD tomcat/server.xml /usr/local/tomcat/conf/
 
-# ADD tomcat/catalina.sh $CATALINA_HOME/bin/
-ADD tomcat/run.sh $CATALINA_HOME/bin/run.sh
-RUN chmod +x $CATALINA_HOME/bin/run.sh
 
-# add MySQL JDBC driver jar
-ADD tomcat/mysql-connector-java-5.1.36-bin.jar $CATALINA_HOME/lib/
+# # add MySQL JDBC driver jar
+ADD tomcat/mysql-connector-java-5.1.36-bin.jar /usr/local/tomcat/lib/
 
-# create mount point for volume with application
-WORKDIR $CATALINA_HOME/webapps/
-COPY --from=devenv /jivejdon/target/ROOT.war .
+# # create mount point for volume with application
+#WORKDIR /usr/local/tomcat/webapps/
+#COPY --from=devenv /jivejdon/target/ROOT.war .
 
-# add tomcat jpda debugging environmental variables
-#ENV JPDA_OPTS="-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n"
+# # add tomcat jpda debugging environmental variables
+ENV JPDA_OPTS="-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n"
 ENV JPDA_ADDRESS="8000"
 ENV JPDA_TRANSPORT="dt_socket"
 
-# start tomcat7 with remote debugging
-EXPOSE 8080
-CMD ["run.sh"]
+# # start tomcat with remote debugging
+ EXPOSE 8080
+
+ WORKDIR /usr/local/tomcat/bin
+ RUN ls -l
+ RUN JAVA_OPTS="-XX:+UseStringCache   -Djava.security.auth.login.config=../conf/jaas.config"
+ RUN catalina.sh jpda run &

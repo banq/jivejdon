@@ -1,6 +1,5 @@
 USE `jivejdon`;
 
-
 CREATE TABLE jiveForum (
   forumID               BIGINT NOT NULL,
   name                  VARCHAR(255) UNIQUE NOT NULL,
@@ -251,9 +250,10 @@ create table sitemap (
 );
 
 
-INSERT INTO `jiveforum` VALUES ('101', '1', '11', '0', '0', '0', '0', '001537193648828', '001537193648828');
-INSERT INTO `jivemessage` VALUES ('101', '101', '1', '101', '1', 'aa', 'bb', '1', '1', '1537195463805', '1537195463805');
-INSERT INTO `jivethread` VALUES ('1', '101', '101', '1', '1', '1537195463805', '1537195463805');
+
+INSERT INTO `jiveForum` VALUES ('101', '1', '11', '0', '0', '0', '0', '001537193648828', '001537193648828');
+INSERT INTO `jiveMessage` VALUES ('101', '101', '1', '101', '1', 'aa', 'bb', '1', '1', '1537195463805', '1537195463805');
+INSERT INTO `jiveThread` VALUES ('1', '101', '101', '1', '1', '1537195463805', '1537195463805');
 
 
 

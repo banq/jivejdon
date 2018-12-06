@@ -1,20 +1,21 @@
 version: "3.3"
-
 services:
-
-  mavenjivejdon:
-     build:
-        context: .
-        dockerfile: Dockerfile_maven 
-
-  database:
-     build:
-        context: .
-        dockerfile: Dockerfile_mysql 
-   
-
-  webserver:
+   jivejdondb:
+      image: mysql
+      ports:
+        - "3306:3306"
+      environment:
+       MYSQL_ROOT_PASSWORD: root
+       MYSQL_DATABASE: jivejdon
+       MYSQL_USER: test
+       MYSQL_PASSWORD: test
+      volumes:
+        - /mysql:/docker-entrypoint-initdb.d     
+   jivejdon:
+      depends_on:
+       - jivejdondb
       build:
         context: .
-        dockerfile: Dockerfile_tomcat 
+      volumes:
+        - ./target/ROOT.war:/usr/local/tomcat/webapps/ROOT.war   
    
