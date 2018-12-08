@@ -16,7 +16,6 @@
  */
 package com.jdon.jivejdon.presentation.filter;
 
-import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.presentation.action.util.ForumUtil;
 import com.jdon.jivejdon.util.ToolsUtil;
 import com.jdon.util.UtilValidate;
@@ -57,8 +56,7 @@ public class EtagModificationFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-		ForumMessage lastpost = ForumUtil.getForumsLastModifiedDate(servletContext);
-		long modelLastModifiedDate = lastpost.getModifiedDate2();
+		long modelLastModifiedDate = ForumUtil.getForumsLastModifiedDate(servletContext);
 		if (!ToolsUtil.checkHeaderCache(default_expireSeconds, modelLastModifiedDate, (HttpServletRequest) request, (HttpServletResponse) response)) {
 			return;
 		}

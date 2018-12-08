@@ -15,40 +15,37 @@
  */
 package com.jdon.jivejdon.presentation.action.util;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.model.Forum;
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.service.ForumService;
+import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.model.query.ResultSort;
+import com.jdon.jivejdon.model.query.specification.ThreadListSpec;
+import com.jdon.jivejdon.service.ForumMessageQueryService;
+
+import javax.servlet.ServletContext;
 
 public class ForumUtil {
 
 
-	public static ForumMessage getForumsLastModifiedDate(ServletContext sc) {
-		Collection<Long> listF = new ArrayList();
-		Map<Long, ForumMessage> maps = new HashMap();
+	public static long getForumsLastModifiedDate(ServletContext sc) {
+		long restult = System.currentTimeMillis();
 		try {
-			ForumService forumService = (ForumService) WebAppUtil.getService("forumService", sc);
-			PageIterator pageIterator = forumService.getForums(0, 10);
-			while (pageIterator.hasNext()) {
-				Forum forum = forumService.getForum((Long) pageIterator.next());
-				listF.add(forum.getForumState().getLastPost().getMessageId());
-				maps.put(forum.getForumState().getLastPost().getMessageId(), forum.getForumState().getLastPost());
+			ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService)
+					WebAppUtil.getService("forumMessageQueryService", sc);
+			ResultSort resultSort = new ResultSort();
+			resultSort.setOrder_DESCENDING();
+			ThreadListSpec threadListSpec = new ThreadListSpec();
+			threadListSpec.setResultSort(resultSort);
+			PageIterator pageIterator = forumMessageQueryService.getThreads(0, 1,
+					threadListSpec);
+			if (pageIterator.hasNext()) {
+				ForumThread thread = forumMessageQueryService.getThread((Long) pageIterator.next
+						());
+				restult = thread.getCreationDate2();
 			}
-			return maps.get(Collections.max(listF));
 		} catch (Exception ex) {
 		}
-		return null;
-
+		return restult;
 	}
 
 }

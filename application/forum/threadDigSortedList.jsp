@@ -28,7 +28,7 @@ String titleStr = (String)pageContext.getAttribute("title");
 if (currentPageNo > 1){
 	titleStr = titleStr + "  - 第"+ currentPageNo + "页";
 	int expire =5 * 24 * 60 *60;
-	long modelLastModifiedDate = com.jdon.jivejdon.presentation.action.util.ForumUtil.getForumsLastModifiedDate(this.getServletContext()).getModifiedDate2();
+  long modelLastModifiedDate = com.jdon.jivejdon.presentation.action.util.ForumUtil.getForumsLastModifiedDate(this.getServletContext());
 	if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
 		return ;
 	}

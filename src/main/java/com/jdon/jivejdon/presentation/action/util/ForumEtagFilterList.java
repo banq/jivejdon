@@ -15,20 +15,16 @@
  */
 package com.jdon.jivejdon.presentation.action.util;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.service.ForumService;
+import com.jdon.jivejdon.util.ToolsUtil;
+import com.jdon.strutsutil.ModelListAction;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.model.Forum;
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.service.ForumService;
-import com.jdon.jivejdon.util.ToolsUtil;
-import com.jdon.strutsutil.ModelListAction;
-import com.jdon.util.UtilValidate;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * ThreadPopularAction extends ForumEtagFilterList
@@ -46,20 +42,9 @@ public abstract class ForumEtagFilterList extends ModelListAction {
 		if (forumId == null)
 			forumId = request.getParameter("forumId");
 
-		ForumMessage lastpost = null;
-		if ((forumId == null) || !UtilValidate.isInteger(forumId)) {
-			lastpost = ForumUtil.getForumsLastModifiedDate(this.servlet.getServletContext());
-		} else {
-			Forum forum = forumService.getForum(new Long(forumId));
-			if (forum == null)
-				return super.execute(actionMapping, actionForm, request, response);
-			lastpost = forum.getForumState().getLastPost();
-		}
-		if (lastpost == null)
-			return super.execute(actionMapping, actionForm, request, response);
-
 		int expire = 24 * 60 * 60;
-		long modelLastModifiedDate = lastpost.getModifiedDate2();
+		long modelLastModifiedDate = ForumUtil.getForumsLastModifiedDate(this.servlet
+				.getServletContext());
 		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
 			return null;
 		}

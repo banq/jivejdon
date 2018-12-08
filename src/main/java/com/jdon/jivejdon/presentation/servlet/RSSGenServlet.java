@@ -89,8 +89,7 @@ public class RSSGenServlet extends HttpServlet {
 
 	protected boolean checkModifiedEtagFilter(HttpServletRequest request, HttpServletResponse response) {
 		int expire = 24 * 60 * 60;
-		ForumMessage lastpost = ForumUtil.getForumsLastModifiedDate(this.getServletContext());
-		long modelLastModifiedDate = lastpost.getModifiedDate2();
+		long modelLastModifiedDate = ForumUtil.getForumsLastModifiedDate(this.getServletContext());
 		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
 			return false;
 		}

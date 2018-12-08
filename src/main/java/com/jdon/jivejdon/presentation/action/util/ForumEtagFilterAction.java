@@ -16,11 +16,8 @@
 package com.jdon.jivejdon.presentation.action.util;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.model.Forum;
-import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.service.ForumService;
 import com.jdon.jivejdon.util.ToolsUtil;
-import com.jdon.util.UtilValidate;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -53,18 +50,8 @@ public class ForumEtagFilterAction extends Action {
 		if (forumId == null)
 			forumId = request.getParameter("forumId");
 
-		ForumMessage lastpost = null;
-		if ((forumId == null) || !UtilValidate.isInteger(forumId)) {
-			lastpost = ForumUtil.getForumsLastModifiedDate(this.servlet.getServletContext());
-		} else {
-			Forum forum = forumService.getForum(new Long(forumId));
-			if (forum == null)
-				return actionMapping.findForward("success");
-			lastpost = forum.getForumState().getLastPost();
-		}
-		if (lastpost == null)
-			return actionMapping.findForward("success");
-		long modelLastModifiedDate = lastpost.getModifiedDate2();
+		long modelLastModifiedDate = ForumUtil.getForumsLastModifiedDate(this.servlet
+				.getServletContext());
 		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
 			return null;
 		}

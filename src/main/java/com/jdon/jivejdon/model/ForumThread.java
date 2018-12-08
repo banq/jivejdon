@@ -90,6 +90,8 @@ public class ForumThread extends ForumModel {
 	private volatile ForumThreadTreeModel forumThreadTreeModel;
 	@Inject
 	private ForumThreadStateFactory threadStateManager;
+	private long creationDate2;
+
 
 	/**
 	 * normal can be cached reused
@@ -124,6 +126,14 @@ public class ForumThread extends ForumModel {
 	 */
 	public void setCreationDate(String creationDate) {
 		this.creationDate = creationDate;
+	}
+
+	public long getCreationDate2() {
+		return creationDate2;
+	}
+
+	public void setCreationDate2(long creationDate) {
+		this.creationDate2 = creationDate;
 	}
 
 	/**

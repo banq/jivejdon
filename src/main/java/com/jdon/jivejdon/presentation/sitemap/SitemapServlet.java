@@ -15,25 +15,6 @@
  */
 package com.jdon.jivejdon.presentation.sitemap;
 
-import java.io.CharArrayWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.TreeMap;
-
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.manager.sitemap.Sitemap;
@@ -53,6 +34,23 @@ import com.jdon.jivejdon.presentation.action.util.ForumUtil;
 import com.jdon.jivejdon.service.ForumMessageQueryService;
 import com.jdon.jivejdon.util.ToolsUtil;
 import com.jdon.util.UtilValidate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.CharArrayWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.TreeMap;
 
 public class SitemapServlet extends HttpServlet {
 	private static final int expire = 24 * 60 * 60;
@@ -323,7 +321,7 @@ public class SitemapServlet extends HttpServlet {
 	protected void service(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		long modelLastModifiedDate = ForumUtil.getForumsLastModifiedDate(
-				this.getServletContext()).getModifiedDate2();
+				this.getServletContext());
 		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request,
 				response)) {
 			return;

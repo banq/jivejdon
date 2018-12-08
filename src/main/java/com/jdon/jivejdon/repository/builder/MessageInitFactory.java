@@ -16,8 +16,6 @@
  */
 package com.jdon.jivejdon.repository.builder;
 
-import java.util.Map;
-
 import com.jdon.jivejdon.Constants;
 import com.jdon.jivejdon.model.Account;
 import com.jdon.jivejdon.model.Forum;
@@ -26,6 +24,8 @@ import com.jdon.jivejdon.model.ForumMessageReply;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.auth.Role;
 import com.jdon.jivejdon.model.message.MessageVO;
+
+import java.util.Map;
 
 public class MessageInitFactory {
 
@@ -116,6 +116,7 @@ public class MessageInitFactory {
 			String saveDateTime = ((String) map.get("creationDate")).trim();
 			String displayDateTime = constants.getDateTimeDisp(saveDateTime);
 			forumThread.setCreationDate(displayDateTime);
+			forumThread.setCreationDate2(Long.parseLong(saveDateTime));
 
 			// forumThread.setPropertys(propertyDaoSql.getAllPropertys(Constants.THREAD,
 			// threadId));
