@@ -18,7 +18,7 @@ function onlinesInf(contextPath){
 
 function ac(id, contextPath){
      var options = {
-		      script: contextPath+'/query/tags.shtml?method=tags&',
+         script: contextPath + '/message/tags.shtml?method=tags&',
 		      varname:'q',
 		      json:true,
 		      shownoresults:true,

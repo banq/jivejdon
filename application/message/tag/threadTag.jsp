@@ -16,7 +16,7 @@
 
 <script>
     var options = {
-        script: '<%=request.getContextPath()%>/query/tags.shtml?method=tags&',
+        script: '<%=request.getContextPath()%>/message/tags.shtml?method=tags&',
         varname: 'q',
         json: true,
         shownoresults: true,

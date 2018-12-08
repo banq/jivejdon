@@ -94,7 +94,7 @@
             <forward name="success" path="/query/others/threadLastPostView.jsp"/>
         </action>
 
-        <action path="/query/tags"
+        <action path="/message/tags"
                 type="com.jdon.jivejdon.presentation.action.tag.MethodDispatchAction"
                 parameter="method">
             <forward name="tags" path="/query/others/tags.jsp"/>

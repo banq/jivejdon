@@ -32,7 +32,7 @@ public class MethodDispatchAction extends DispatchAction {
 		String q = request.getParameter("query");
 		if (UtilValidate.isEmpty(q))
 			q = request.getParameter("q");
-		if (UtilValidate.isEmpty(q))
+		if (UtilValidate.isEmpty(q) || q.indexOf("%20") != -1)
 			return mapping.findForward("tags");
 		if (q.length() > 10)
 			return mapping.findForward("tags");
