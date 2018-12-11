@@ -120,11 +120,11 @@ function loginW2(fromForm) {
               return true;
            }
          fromFormName = fromForm;
-  	     if (typeof(Dialog) != "undefined"){
+  	      if (typeof(Dialog) != "undefined")
   		     logindiag();
-         }else{
+         else
             loadWLJS(logindiag);
-         }
+         
              
   		
   	}
