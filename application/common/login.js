@@ -122,8 +122,10 @@ function loginW2(fromForm) {
          fromFormName = fromForm;
   	     if (typeof(Dialog) != "undefined"){
   		     logindiag();
-         }else
-             alert("no load window_def.js");
+         }else{
+            loadWLJS(logindiag);
+         }
+             
   		
   	}
 
