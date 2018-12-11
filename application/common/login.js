@@ -124,6 +124,7 @@ function loginW2(fromForm) {
   		     logindiag();
          else
             loadWLJS(logindiag);
+            
   	}
 
 function logindiag(){
