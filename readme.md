@@ -6,10 +6,13 @@ Jivejdon is a full DDD example powered by [jdonframework](https://github.com/ban
 running  for over ten years
 at: [https://www.jdon.com/forum](https://www.jdon.com/forum)
 
+Use Case
+------------------------------------
+![avatar](./doc/usecase.png)
 
 DDD Aggregate Model
 ------------------------------------
-![avatar](./doc/DomainModel.png)
+![avatar](./doc/aggregates.png)
 
 
 Clean architecture
