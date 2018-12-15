@@ -17,7 +17,7 @@ DDD Aggregate Model
 
 Clean architecture
 --------------------------------------
-![avatar](https://github.com/ddd-by-examples/factory/raw/master/hexagon.png)
+![avatar](./doc/clean.png)
 
 
 Install
