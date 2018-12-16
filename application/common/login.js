@@ -6,230 +6,177 @@
 
 function GetXmlHttpObject()
 {
-    var A=null; 
-    try { 
-        A=new ActiveXObject("Msxml2.XMLHTTP"); 
-    } 
-    catch(e) { 
-        try { 
-            A=new ActiveXObject("Microsoft.XMLHTTP"); 
-        } 
-        catch(oc) { 
-            A=null; 
-        } 
-    }  
-    if ( !A && typeof XMLHttpRequest != "undefined" ) { 
-        A=new XMLHttpRequest(); 
-    } 
-     return A; 
+    var A = null;
+    try {
+        A = new ActiveXObject("Msxml2.XMLHTTP");
+    }
+    catch (e) {
+        try {
+            A = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        catch (oc) {
+            A = null;
+        }
+    }
+    if (!A && typeof XMLHttpRequest != "undefined") {
+        A = new XMLHttpRequest();
+    }
+    return A;
 }
 
 
-	function load(url, callback) {
-		var xhr =GetXmlHttpObject();
-		xhr.onreadystatechange = ensureReadiness;
-		function ensureReadiness() {
-			if(xhr.readyState < 4) {
-				return;
-			}
-			
-			if(xhr.status !== 200) {
-				return;
-			}
+function load(url, callback) {
+    var xhr = GetXmlHttpObject();
+    xhr.onreadystatechange = ensureReadiness;
 
-			// all is well	
-			if(xhr.readyState === 4) {
-				callback(xhr);
-			}			
-		}
-		
-		xhr.open('GET', url, true);
-		//xhr.setRequestHeader('Referer', window.location.href);
-		xhr.setRequestHeader('X-Requested-With','XMLHttpRequest');
-		xhr.send('');
-	
-	}
+    function ensureReadiness() {
+        if (xhr.readyState < 4) {
+            return;
+        }
 
-function loadPrototypeJS(myfunc){
-  if (typeof(AJAX) == 'undefined') {
-     $LAB
-     .script('/common/js/prototype.js')
-     .wait(function(){
-          myfunc();          
-     })     
-  }else
-     myfunc()
+        if (xhr.status !== 200) {
+            return;
+        }
+
+        // all is well
+        if (xhr.readyState === 4) {
+            callback(xhr);
+        }
+    }
+
+    xhr.open('GET', url, true);
+    //xhr.setRequestHeader('Referer', window.location.href);
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.send('');
+
 }
 
 var fromFormName ;
 var logged = false;
-    
+
 function setLogged(){
-  	    logged = true;
-  	    if (typeof(isLogin) != "undefined")
-  	       isLogin = true;
+    logged = true;
+    if (typeof(isLogin) != "undefined")
+        isLogin = true;
 }
 
 function getContextPath(){
-  if (document.getElementById('contextPath') == null){
-     alert("no contextPath");
-     return null;
-  }
-   return document.getElementById('contextPath').value;  
+    if (document.getElementById('contextPath') == null) {
+        alert("no contextPath");
+        return null;
+    }
+    return document.getElementById('contextPath').value;
 }
 
-
-function loadWLJS(myfunc){
-  if (typeof(TooltipManager) == 'undefined') {     
-     $LAB
-     .script('/common/js/prototype.js').wait()
-     .script('/common/js/window_def.js')
-     .wait(function(){
-          myfunc();          
-     })    
-  }else
-     myfunc();
-}
-
-var nof = function(){
-}
-
-function loadWLJSWithP(param,myfunc){
-  if (typeof(TooltipManager) == 'undefined') {     
-     $LAB
-     .script('/common/js/prototype.js').wait()
-     .script('/common/js/window_def.js')
-     .wait(function(){
-          myfunc(param);          
-     })    
-  }else
-     myfunc(param);
+//login.jsp action
+function callLogin() {
+    loginW('messageReply');
 }
 //登录入口
-function loginW(fromForm) {  	    
-         if (typeof(isLogin) == "undefined" || typeof(Dialog) == "undefined")
-              loadWLJSWithP(fromForm,loginW2);
-         else
-              loginW2(fromForm);  		
+function loginW(fromForm) {
+    if (typeof(isLogin) != "undefined")
+        if (isLogin) {//isLogin
+            setLogged()
+            window.location.reload();
+            return true;
+        }
+    fromFormName = fromForm;
+    document.getElementById("subbtn").type = "button";
+    document.getElementById("subbtn").onclick = function () {
+        subLoging()
+    };
+    $('#login').modal({
+        keyboard: true
+    })
 }
-function loginW2(fromForm) {  	                  
-         if (typeof(isLogin) != "undefined")
-           if (isLogin) {//isLogin 
-              setLogged()            
-              window.location.reload();
-              return true;
-           }
-         fromFormName = fromForm;
-  	      if (typeof(Dialog) != "undefined")
-  		     logindiag();
-         else
-            loadWLJS(logindiag);
-  	}
 
-function logindiag(){
-     Dialog.confirm($('loginAJAX').innerHTML, {className:"mac_os_x", width:350, height:180,
-                                      okLabel: " 登录 ", cancelLabel: " 关闭窗口 ",
-                                      onOk:function(win){    
-                                          $('login_error_msg').innerHTML='';                                      
-                                          login();                                      
-                                          if (!logged){                     
-                                            delloginCookies();                       
-                                            $('login_error_msg').innerHTML=' 用户或密码错误 ';
-                                            $('login_error_msg').show();                                        
-                                            Windows.focusedWindow.updateHeight();
-                                            new Effect.Shake(Windows.focusedWindow.getId());
-                                            return false;
-                                          }else
-                                            return true;                                            
-                                      
-                                	}});
-} 
-  	
-  	function delloginCookies(){  	    
-    	eraseCookie("rememberMe");
-  	  	eraseCookie("username");
-   		eraseCookie("password");   		
-  	}
-  	
-  	function login(){
-	   var pars  = "j_username=" + $('j_username').value + "&j_password=" + $('j_password').value;
-	   if ($('rememberMe').checked){
-	      pars = pars + "&rememberMe=" + $('rememberMe').value;
-	   }
-       new Ajax.Request(loggedURL, 
-  	    {method: 'get', parameters: pars, asynchronous: false, onComplete: showResponse});  	   
-  	}
-  	
-  	function showResponse(transport) { 
-  	  	
-         var response = transport.responseText;
-         if (response.indexOf("if(setLogged)setLogged()")   >=0)
-			setLogged();
-         if (logged){
-            if (fromFormName != null){      
-              goAfterLogged(fromFormName);              
-            }else{
-              window.location.reload();
-            }         
-         }
-  	 }
-  
+function subLoging() {
+    var j_username = document.getElementById("j_username").value;
+    var j_password = document.getElementById("j_password").value;
+    if (j_username == "" || j_password == "") return;
+
+    $.ajax({
+        url: '/account/protected/logged.jsp?j_username=' + j_username + '&j_password=' + j_password,
+        success: function (response) {
+            if (response.indexOf("if(setLogged)setLogged()") >= 0)
+                setLogged();
+            else
+                alert("登录错误 ");
+            if (logged)
+                if (fromFormName != null) {
+                    document.getElementById(fromFormName).submit();
+                } else
+                    window.location.reload();
+        },
+        error: function (request, error) {
+            alert("登录错误 ");
+        }
+    });
+};
+
+
+function delloginCookies() {
+    eraseCookie("rememberMe");
+    eraseCookie("username");
+    eraseCookie("password");
+}
+
 
 function createCookie(name,value,seconds) {
-	var dt = new Date();
-	if (seconds) 
-		dt.setTime(dt.getTime()+(seconds*1000));
-	else
-		dt.setTime(dt.getTime()-10000);
+    var dt = new Date();
+    if (seconds)
+        dt.setTime(dt.getTime() + (seconds * 1000));
+    else
+        dt.setTime(dt.getTime() - 10000);
 
-	var expires = "; expires=" + dt.toGMTString();
-	document.cookie = name + "=" + value + expires + "; path=/";
-}  
+    var expires = "; expires=" + dt.toGMTString();
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
 
 function readCookie(name) {
-	var nameEQ = name + "=";
-	var ca = document.cookie.split(';');
-	for(var i=0;i < ca.length;i++) {
-		var c = ca[i];
-		while (c.charAt(0)==' ') c = c.substring(1,c.length);
-		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-	}
-	return null;
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
 }
 
 function eraseCookie(name) {
-	createCookie(name,"",-1);
+    createCookie(name, "", -1);
 }
 
 
 function shareto(id){
-	
-var url=encodeURIComponent(window.top.document.location.href);
-var title=encodeURIComponent(window.top.document.title);
-var _gaq = _gaq || [];
 
-if(id=="fav"){
-addBookmark(document.title);
-return;
-}else if(id=="weixin"){
-_gaq.push(['_trackEvent', 'SocialShare', 'Share', 'weixin', 1]);
-window.open(getContextPath()+'/common/barcode.jsp?fullurl='+window.top.document.location.href,'newwindow','height=300,width=300,top=0,left=0,toolbar=no,menubar=no,location=no, status=no');
-return;
-}else if(id=="qzone"){
-_gaq.push(['_trackEvent', 'SocialShare', 'Share', 'QZone', 1]);
-window.open(' http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+url+"&title="+title);
-return;
-}else if(id=="sina"){
-_gaq.push(['_trackEvent', 'SocialShare', 'Share', 'SinaT', 1]);
-window.open(" http://service.weibo.com/share/share.php?url="+url+"&appkey=2879276008&title="+title,"_blank","width=615,height=505");
-return;
-}else if(id=="googlebuzz"){
-_gaq.push(['_trackEvent', 'SocialShare', 'Share', 'GoogleBuzz', 1]);
-window.open(' https://plus.google.com/share?url='+url,'_blank');
-return;
-}else if(id=="mail"){
-_gaq.push(['_trackEvent', 'SocialShare', 'Share', 'Mail', 1]);
-window.open('mailto:?subject='+title+'&body='+encodeURIComponent('这是我看到了一篇很不错的文章，分享给你看看！\r\n\r\n')+title+encodeURIComponent('\r\n')+url);
-return;
-}
+    var url = encodeURIComponent(window.top.document.location.href);
+    var title = encodeURIComponent(window.top.document.title);
+    var _gaq = _gaq || [];
+
+    if (id == "fav") {
+        addBookmark(document.title);
+        return;
+    } else if (id == "weixin") {
+        _gaq.push(['_trackEvent', 'SocialShare', 'Share', 'weixin', 1]);
+        window.open(getContextPath() + '/common/barcode.jsp?fullurl=' + window.top.document.location.href, 'newwindow', 'height=300,width=300,top=0,left=0,toolbar=no,menubar=no,location=no, status=no');
+        return;
+    } else if (id == "qzone") {
+        _gaq.push(['_trackEvent', 'SocialShare', 'Share', 'QZone', 1]);
+        window.open(' http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + url + "&title=" + title);
+        return;
+    } else if (id == "sina") {
+        _gaq.push(['_trackEvent', 'SocialShare', 'Share', 'SinaT', 1]);
+        window.open(" http://service.weibo.com/share/share.php?url=" + url + "&appkey=2879276008&title=" + title, "_blank", "width=615,height=505");
+        return;
+    } else if (id == "googlebuzz") {
+        _gaq.push(['_trackEvent', 'SocialShare', 'Share', 'GoogleBuzz', 1]);
+        window.open(' https://plus.google.com/share?url=' + url, '_blank');
+        return;
+    } else if (id == "mail") {
+        _gaq.push(['_trackEvent', 'SocialShare', 'Share', 'Mail', 1]);
+        window.open('mailto:?subject=' + title + '&body=' + encodeURIComponent('这是我看到了一篇很不错的文章，分享给你看看！\r\n\r\n') + title + encodeURIComponent('\r\n') + url);
+        return;
+    }
 }
