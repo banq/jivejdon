@@ -18,7 +18,7 @@
 						<a href="/tags"><i class="fa fa-star-half-full"></i>推荐</a>
 						<a href="/followus.html"><i class="fa fa-feed"></i>订阅</a>	
                          <logic:notPresent name="principal" >
-							 <a href="/account/login.jsp"><i class="fa fa-sign-in"></i>登陆 </a>
+							 <a href="/account/protected/loginhome.jsp"><i class="fa fa-sign-in"></i>登陆 </a>
 						</logic:notPresent>
 						<logic:present name="principal" > 
 							<a href="<%=request.getContextPath()%>/message/post.jsp"><i class=" fa fa-share-square"></i>发布</a>

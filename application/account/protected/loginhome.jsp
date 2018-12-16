@@ -3,7 +3,7 @@
 <%
     String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
     domainUrl = domainUrl + request.getContextPath();
-domainUrl = domainUrl + "/forum.jsp?Referer=" + domainUrl;
+domainUrl = domainUrl + "/forum/?";
 response.sendRedirect(domainUrl);
 return;
 %>
