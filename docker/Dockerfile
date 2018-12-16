@@ -1,7 +1,7 @@
 #
 # Build the app using maven in a container
 #
-FROM maven:latest AS devenv
+FROM maven:3-jdk-8-alpine AS devenv
 RUN git clone https://github.com/banq/jivejdon.git
 # Create app directory
 WORKDIR /jivejdon
@@ -27,7 +27,7 @@ RUN mvn package
 #
 # deploy application to tomcat
 
-FROM tomcat:8-jre8
+FROM tomcat:8.5-jre8-alpine
 
 ADD tomcat/context.xml /usr/local/tomcat/conf/
 ADD tomcat/server.xml /usr/local/tomcat/conf/
