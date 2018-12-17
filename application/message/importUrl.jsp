@@ -17,7 +17,11 @@
     <link rel="stylesheet" href="https://cdn.jdon.com/js/font-awesome-4.4.0/css/font-awesome.min.css"  type="text/css">
 	<!-- Custom CSS -->
     <link rel="stylesheet" href="https://cdn.jdon.com/js/style.css">
+  <!-- jQuery and Modernizr-->
+  <script src="https://cdn.jdon.com/js/jquery-2.1.1.min.js"></script>
 
+  <!-- Core JavaScript Files -->
+  <script src="https://cdn.jdon.com/js/bootstrap.min.js"></script>
 <title>享道</title>
 <%-- 
 <%@ include file="/common/security.jsp" %>
