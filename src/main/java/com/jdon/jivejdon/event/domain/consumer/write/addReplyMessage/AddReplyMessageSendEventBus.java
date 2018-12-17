@@ -34,7 +34,7 @@ import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
  */
 @Consumer("addReplyMessage")
 public class AddReplyMessageSendEventBus implements DomainEventHandler {
-	private EventBusHandler eventBusHandler;
+	private final EventBusHandler eventBusHandler;
 
 	public AddReplyMessageSendEventBus(ForumFactory forumFactory, MessagePageIteratorSolver messagePageIteratorSolver) {
 		eventBusHandler = new AddReplyMessageEventHandler(forumFactory, messagePageIteratorSolver);

@@ -15,9 +15,6 @@
  */
 package com.jdon.jivejdon.event.domain.consumer.write.addReplyMessage;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
@@ -26,6 +23,8 @@ import com.jdon.jivejdon.event.domain.consumer.write.updatemessage.MessageSaveLi
 import com.jdon.jivejdon.model.ForumMessageReply;
 import com.jdon.jivejdon.model.event.ReplyMessageCreatedEvent;
 import com.jdon.jivejdon.repository.ForumFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * topic addReplyMessage has three DomainEventHandlers: AddReplyMessage;
@@ -42,8 +41,8 @@ import com.jdon.jivejdon.repository.ForumFactory;
 public class AddReplyMessage implements DomainEventHandler {
 	private final static Logger logger = LogManager.getLogger(MessageSaveListener.class);
 
-	protected MessageTransactionPersistence messageTransactionPersistence;
-	protected ForumFactory forumAbstractFactory;
+	protected final MessageTransactionPersistence messageTransactionPersistence;
+	protected final ForumFactory forumAbstractFactory;
 
 	public AddReplyMessage(MessageTransactionPersistence messageTransactionPersistence, ForumFactory forumAbstractFactory) {
 		super();

@@ -34,7 +34,7 @@ import com.jdon.jivejdon.repository.search.MessageSearchRepository;
 @Consumer("addReplyMessage")
 public class AddReplyMessageSearchFile implements DomainEventHandler {
 
-	private MessageSearchRepository messageSearchRepository;
+	private final MessageSearchRepository messageSearchRepository;
 
 	public AddReplyMessageSearchFile(MessageSearchRepository messageSearchRepository) {
 		super();

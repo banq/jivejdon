@@ -33,7 +33,7 @@ import com.jdon.jivejdon.util.ContainerUtil;
 @Consumer("addReplyMessage")
 public class AddReplyMessageZ implements DomainEventHandler {
 
-	protected ContainerUtil containerUtil;
+	protected final ContainerUtil containerUtil;
 
 	public AddReplyMessageZ(ContainerUtil containerUtil) {
 		super();

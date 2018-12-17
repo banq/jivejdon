@@ -11,15 +11,29 @@ import com.qiniu.http.Response;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.Configuration;
 import com.qiniu.util.Auth;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Arrays;
 
 
 @Consumer("postThread")
 public class CDNRefreshListener implements DomainEventHandler {
-	String fileurl = "query/approved";
+	private final static Logger logger = LogManager.getLogger(CDNRefreshListener.class);
+
+	private final CDNRefreshUrls cdnRefreshUrls;
+
+
+	public CDNRefreshListener(CDNRefreshUrls cdnRefreshUrls) {
+		this.cdnRefreshUrls = cdnRefreshUrls;
+	}
 
 	@Override
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
+		Arrays.stream(cdnRefreshUrls.getUrls()).forEach(this::refreshCDN);
+	}
 
+	private void refreshCDN(String fileurl) {
 		//设置需要操作的账号的AK和SK
 		String accessKey = "axCnOZ5hHeMMJLejjKhh7O56JdxAGpmEgY11G3EB";
 		String secretKey = "sGSeH06-V2jiW3gKqzq7R0Rg0ZpJ576G_laLL2AK";
@@ -40,24 +54,23 @@ public class CDNRefreshListener implements DomainEventHandler {
 			//捕获异常信息
 			Response r = e.response;
 			System.out.println(r.toString());
-
+			logger.error("cdn delete error=" + r.toString());
 		}
 
 		CdnManager cdn = new CdnManager(auth);
 		//待刷新的链接列表
 		String[] urls = new String[]{
 				"https://cdn.jdon.com/" + fileurl,
-
-
 				//....
 		};
 		try {
 			//单次方法调用刷新的链接不可以超过100个
 			CdnResult.RefreshResult result = cdn.refreshUrls(urls);
-			System.out.println(" cdn refresh" + result.code);
+			logger.debug(" cdn refresh" + result.code);
 			//获取其他的回复内容
 		} catch (QiniuException e) {
 			System.err.println(e.response.toString());
+			logger.error("cdn refres error=" + e.response.toString());
 		}
 	}
 }
