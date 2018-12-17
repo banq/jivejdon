@@ -32,7 +32,7 @@ function tagthreads(length, tablewidth, count, tagID) {
 }
 
 function approveList() {
-    load(getContextPath() + '/query/approved', function (xhr) {
+    load('//cdn.jdon.com/query/approved', function (xhr) {
         document.getElementById('approved').innerHTML = xhr.responseText;
     });
 

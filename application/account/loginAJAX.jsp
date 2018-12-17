@@ -40,7 +40,7 @@
 <script>
     var loggedURL = '<%=request.getContextPath()%>/account/protected/logged.jsp';
 </script>
-<script src="/common/login.js"></script>
+<script src="//cdn.jdon.com/common/login2.js"></script>
 
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 

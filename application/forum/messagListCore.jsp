@@ -181,9 +181,8 @@
 
   <script>
       $LAB
-          .script("/common/messageList5.js")
+          .script("//cdn.jdon.com/common/messageList6.js")
           .wait(function () {
-              //below need prototype.js
               var sId = "";
               <logic:notEmpty name="forumThread" property="state.lastPost">
               sId = '<bean:write name="forumThread" property="state.lastPost.modifiedDate2" />';
@@ -191,13 +190,10 @@
               viewcount('<bean:write name="forumThread" property="threadId" />', sId);
               approveList();
               window.onload = function () {
-
                   <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">
                   tagthreads(10, 160, 10, <bean:write name="threadTag" property="tagID"/>);
                   </logic:iterate>
-
               }
-
           });
   </script>
 
