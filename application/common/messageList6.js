@@ -173,8 +173,8 @@ var lazyloaded = false;
 function loadCkeditJS() {
     if (lazyloaded) return;
     $LAB
-        .script("/common/ckeditor/ckeditor.js").wait()
-        .script("/common/ckeditor/sample.js")
+        .script("//cdn.jdon.com/common/ckeditor/ckeditor.js").wait()
+        .script("//cdn.jdon.com/common/ckeditor/sample.js")
         .wait(function () {
             initSample();
             lazyloaded = true;
