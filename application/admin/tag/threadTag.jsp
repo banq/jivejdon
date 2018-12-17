@@ -9,28 +9,11 @@
 
 <bean:define id="title"  value=" 添加标签" />
 <%@ include file="../header.jsp" %>
-<script>
-	 var options = {
-       script: '<%=request.getContextPath()%>/message/tags.shtml?method=tags&',
-		      varname:'q',
-		      json:true,
-		      shownoresults:true,
-		      maxresults:16,
-		      callback: function (obj) { 
-		               $('json_info').update('' ); 
-		      }
-     		};
+<!-- jQuery and Modernizr-->
+<script src="https://cdn.jdon.com/js/jquery-2.1.1.min.js"></script>
 
-
-	
-		function ac(id){
-	    	new AutoComplete(id,options);
-		}
-		
-		
-			
-	</script>
-<span id='json_info'></span>
+<!-- Core JavaScript Files -->
+<script src="https://cdn.jdon.com/js/bootstrap.min.js"></script>
 
  <form action="<%=request.getContextPath()%>/admin/tag/thread.shtml" method="post" >
    帖子编号：<input name="threadId" type="text">   
@@ -46,11 +29,11 @@
        
         
 	<input type="hidden" name="threadId" value="<bean:write name="forumThread" property="threadId" />"/>
-	<input  type="text" name="tagTitle" size="13" maxlength="25" id="searchV0_<bean:write name="forumThread" property="threadId" />" onfocus="javascript:ac(this.id)" value='' />
-	<input  type="text" name="tagTitle" size="13" maxlength="25" id="searchV1_<bean:write name="forumThread" property="threadId" />" onfocus="javascript:ac(this.id)"   value=''/>
-	<br>	
-    <input  type="text" name="tagTitle" size="13" maxlength="25" id="searchV2_<bean:write name="forumThread" property="threadId" />" onfocus="javascript:ac(this.id)"  value=''/>
-    <input  type="text" name="tagTitle" size="13" maxlength="25" id="searchV3_<bean:write name="forumThread" property="threadId" />" onfocus="javascript:ac(this.id)"  value=''/>
+          <input type="text" name="tagTitle" size="13" maxlength="25" id="searchV0_<bean:write name="forumThread" property="threadId" />" onfocus="javascript:loadAcJS(this.id)" value=''/>
+          <input type="text" name="tagTitle" size="13" maxlength="25" id="searchV1_<bean:write name="forumThread" property="threadId" />" onfocus="javascript:loadAcJS(this.id)" value=''/>
+          <br>
+          <input type="text" name="tagTitle" size="13" maxlength="25" id="searchV2_<bean:write name="forumThread" property="threadId" />" onfocus="javascript:loadAcJS(this.id)" value=''/>
+          <input type="text" name="tagTitle" size="13" maxlength="25" id="searchV3_<bean:write name="forumThread" property="threadId" />" onfocus="javascript:loadAcJS(this.id)" value=''/>
      <br> <html:submit>提交</html:submit>
     </form>		
          <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="i">
@@ -68,6 +51,21 @@
               <br>
              <bean:write name="forumThread" property="rootMessage.messageVO.body" filter="false" />
 
-<%@include file="../footer.jsp"%>
+<link rel="stylesheet" href="/common/autocomplete/jquery-ui.css" type="text/css">
+<script src="/common/autocomplete/jquery-ui.js"></script>
+<script>
+    function loadAcJS(thisId) {
+        if (document.getElementById(thisId).value)
+            return;
+        $("#" + thisId).autocomplete({
+            source: "/message/tags.shtml?method=tags",
+            minLength: 1,
+            autoFocus: false,
+            delay: 500
+        });
+
+    }
+</script>
+<%@include file="../footer.jsp" %>
 
 

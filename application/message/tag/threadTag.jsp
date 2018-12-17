@@ -9,31 +9,14 @@
 
 <bean:define id="title" value=" 添加标签"/>
 <%@ include file="../messageHeader.jsp" %>
-<link rel="stylesheet" href="/common/jivejdon5.css" type="text/css">
-<script type="text/javascript" src="/common/js/prototype.js"></script>
-<script language="javascript" src="/common/js/autocomplete.js"></script>
+<!-- jQuery and Modernizr-->
+<script src="https://cdn.jdon.com/js/jquery-2.1.1.min.js"></script>
+
+<!-- Core JavaScript Files -->
+<script src="https://cdn.jdon.com/js/bootstrap.min.js"></script>
+
 <bean:define id="ForumMessage" name="threadForm" property="rootMessage"/>
 
-<script>
-    var options = {
-        script: '<%=request.getContextPath()%>/message/tags.shtml?method=tags&',
-        varname: 'q',
-        json: true,
-        shownoresults: true,
-        maxresults: 16,
-        callback: function (obj) {
-            $('json_info').update('');
-        }
-    };
-
-
-    function ac(id) {
-        new AutoComplete(id, options);
-    }
-
-
-</script>
-<span id='json_info'></span>
 
 <br><br>
 <div align="center">
@@ -56,18 +39,18 @@
 
 	
 	<input type="text" name="tagTitle" size="13" maxlength="25"
-           id="searchV_0"
-           onfocus="javascript:ac(this.id)" value=''/>
+         id="searchV_0"
+         onfocus="javascript:loadAcJS(this.id)" value=''/>
     <input type="text" name="tagTitle" size="13" maxlength="25"
            id="searchV_1"
-           onfocus="javascript:ac(this.id)" value=''/>
+           onfocus="javascript:loadAcJS(this.id)" value=''/>
     <br>
     <input type="text" name="tagTitle" size="13" maxlength="25"
            id="searchV_2"
-           onfocus="javascript:ac(this.id)" value=''/>
+           onfocus="javascript:loadAcJS(this.id)" value=''/>
     <input type="text" name="tagTitle" size="13" maxlength="25"
            id="searchV_3"
-           onfocus="javascript:ac(this.id)" value=''/>
+           onfocus="javascript:loadAcJS(this.id)" value=''/>
     <br> <html:submit>提交</html:submit>
 </form>
 <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="i">
@@ -85,6 +68,20 @@
             class="tooltip html_tooltip_content_<bean:write name="forumThread" property="threadId"/>">
              <bean:write name="forumThread" property="name"/></span></b></a>
 </div>
-<%--  jquery prototype
-<%@include file="../../common/IncludeBottom.jsp"%>
---%>
+
+
+<link rel="stylesheet" href="/common/autocomplete/jquery-ui.css" type="text/css">
+<script src="/common/autocomplete/jquery-ui.js"></script>
+<script>
+    function loadAcJS(thisId) {
+        if (document.getElementById(thisId).value)
+            return;
+       $("#" + thisId).autocomplete({
+            source: "/message/tags.shtml?method=tags",
+            minLength: 1,
+            autoFocus: false,
+            delay: 500
+        });
+    }
+</script>
+

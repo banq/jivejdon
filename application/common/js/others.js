@@ -16,19 +16,6 @@ function onlinesInf(contextPath){
     }catch(e){}
 }
 
-function ac(id, contextPath){
-     var options = {
-         script: contextPath + '/message/tags.shtml?method=tags&',
-		      varname:'q',
-		      json:true,
-		      shownoresults:true,
-		      maxresults:16,
-		      callback: function (obj) { 
-		      }
-     		};
-
-	    	new AutoComplete(id,options);
-}
  
 function overlay(curobj, subobjstr, opt_position){
 if (document.getElementById){

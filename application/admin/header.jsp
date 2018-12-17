@@ -14,11 +14,9 @@
 <bean:write name="title" />
 </title>
 <link rel="stylesheet" href="/common/jivejdon5.css" type="text/css" />
-<script type="text/javascript" src="/common/js/prototype.js"></script>
 <script>
 var contextPath = "<%=request.getContextPath()%>";
 </script>
-<script language="javascript" src="/common/js/autocomplete.js"></script>
 
 </head>
 <body bgcolor='#ffffff'>

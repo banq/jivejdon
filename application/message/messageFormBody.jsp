@@ -32,25 +32,6 @@
 </script>
     
 <div class="row">
-<!--  autocomplete.js -->
-<link rel="stylesheet" href="/common/js/styles/autocomplete.css"  type="text/css">
-<script>
-function loadAcJS(thisId){
-  if(document.getElementById(thisId).value) 
-      return;  
-  if (typeof(ac) == 'undefined') {
-     $LAB
-     .script('/common/js/prototype.js')
-     .script('/common/js/autocomplete.js')
-     .wait(function(){
-          ac(thisId,'<%=request.getContextPath()%>');
-     })     
-  }else
-      ac(thisId,'<%=request.getContextPath()%>');
-}
-		
-		
-	</script>
     <div class="col-md-3">       
         <div class="form-group"> 
 	<input class="form-control" type="text" name="tagTitle" size="15" maxlength="25" id="searchV_0" onfocus="javascript:loadAcJS(this.id)" value='' />
@@ -86,4 +67,19 @@ function loadAcJS(thisId){
     </div>
 </div>
 </div>
-   
+<!-- at first load jquery , cannot load jquery twice -->
+<link rel="stylesheet" href="/common/autocomplete/jquery-ui.css" type="text/css">
+<script src="/common/autocomplete/jquery-ui.js"></script>
+<script>
+    function loadAcJS(thisId) {
+        if (document.getElementById(thisId).value)
+            return;
+        $("#" + thisId).autocomplete({
+            source: "/message/tags.shtml?method=tags",
+            minLength: 1,
+            autoFocus: false,
+            delay: 500
+        });
+
+    }
+</script>

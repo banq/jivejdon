@@ -9,6 +9,11 @@
 <logic:notEmpty name="forum">
 <bean:define id="title" name="forum" property="name" />
 <%@ include file="../common/IncludeTop.jsp" %>
+  <!-- jQuery and Modernizr-->
+  <script src="https://cdn.jdon.com/js/jquery-2.1.1.min.js"></script>
+
+  <!-- Core JavaScript Files -->
+  <script src="https://cdn.jdon.com/js/bootstrap.min.js"></script>
 <%
 response.setHeader("Pragma", "No-cache");
 response.setHeader("Cache-Control", "no-cache");
@@ -154,6 +159,4 @@ loadPostjs();
 </logic:notEmpty>
 </logic:notEmpty>
 
-
-<%@include file="../common/IncludeBottom.jsp"%> 
 

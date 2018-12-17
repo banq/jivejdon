@@ -14,8 +14,11 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCache(expire, modelLastModified
 %>
 
 <%@ page contentType="application/json; charset=UTF-8" %>
-{ "results": [<logic:iterate id="threadTag" name="TAGS" indexId="i">
-	{ "value": "<bean:write name="threadTag" property="title" />", "info": ""},
-</logic:iterate>
-    {"value":"", "info": ""}]
-}
+[
+  <logic:iterate id="threadTag" name="TAGS" length="1" >
+  "<bean:write name="threadTag" property="title" />"
+  </logic:iterate>
+  <logic:iterate id="threadTag" name="TAGS" offset="1" >,
+  "<bean:write name="threadTag" property="title" />"
+  </logic:iterate>
+]

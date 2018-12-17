@@ -29,7 +29,7 @@ public class MethodDispatchAction extends DispatchAction {
 							  HttpServletResponse response) throws Exception {
 		Collection c = new ArrayList();
 		request.setAttribute("TAGS", c);
-		String q = request.getParameter("query");
+		String q = request.getParameter("term");
 		if (UtilValidate.isEmpty(q))
 			q = request.getParameter("q");
 		if (UtilValidate.isEmpty(q) || q.indexOf("%20") != -1)
