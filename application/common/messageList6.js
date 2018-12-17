@@ -18,7 +18,7 @@ function digMessage(id) {
 function tagthreads(length, tablewidth, count, tagID) {
 // window.onload = function() {
     $.ajax({
-        url: getContextPath() + '/query/tagThreads/' + tagID,
+        url: '//cdn.jdon.com/query/tagThreads/' + tagID,
         success: function (response) {
             $('#tagthreads_' + tagID).html(response);
         }
