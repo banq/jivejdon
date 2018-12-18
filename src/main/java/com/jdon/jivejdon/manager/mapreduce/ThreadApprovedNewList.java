@@ -22,7 +22,6 @@ import com.jdon.jivejdon.model.Account;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.query.ResultSort;
 import com.jdon.jivejdon.model.query.specification.ApprovedListSpec;
-import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.service.AccountService;
 import com.jdon.jivejdon.service.ForumMessageQueryService;
 import com.jdon.jivejdon.service.TagService;
@@ -57,7 +56,6 @@ public class ThreadApprovedNewList implements Startable {
 	// dig sort map, start is more greater, the dig collection is more greater.
 	private final ThreadDigList threadDigList;
 	private final ThreadTagList threadTagList;
-	private final ForumFactory forumFactory;
 	private final ForumMessageQueryService forumMessageQueryService;
 	private final AccountService accountService;
 	// private Cache approvedThreadList = new LRUCache("approvedCache.xml");
@@ -66,11 +64,10 @@ public class ThreadApprovedNewList implements Startable {
 	private int maxStart = -1;
 
 	public ThreadApprovedNewList(
-			ForumFactory forumFactory, ForumMessageQueryService forumMessageQueryService,
+			ForumMessageQueryService forumMessageQueryService,
 			AccountService accountService, TagService tagService) {
 		approvedThreadList = new HashMap();
 		approvedListSpec = new ApprovedListSpec();
-		this.forumFactory = forumFactory;
 		this.accountService = accountService;
 		this.authorList = new AuthorList(accountService);
 		this.threadDigList = new ThreadDigList(forumMessageQueryService);
@@ -197,7 +194,7 @@ public class ThreadApprovedNewList implements Startable {
 							|| approvedListSpec.getCurrentIndicator() == 0) {
 						final ForumThread thread = forumMessageQueryService
 								.getThread(threadId);
-						if (thread == null) continue;
+						// if (thread == null) continue;
 						Long userId = thread.getRootMessage().getAccount()
 								.getUserIdLong();
 						final Account account = accountService
