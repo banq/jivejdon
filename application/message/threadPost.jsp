@@ -15,12 +15,63 @@
     
 <html:form action="/message/messageSaveAction.sthml" method="post" target="target_new" styleId="messageNew"  onsubmit="return checkPost(this);" >
 
-<jsp:include page="messageFormBody.jsp" flush="true">   
-     <jsp:param name="reply" value="false"/>   
-</jsp:include> 
+  <jsp:include page="messageFormBody.jsp" flush="true">
+    <jsp:param name="reply" value="false"/>
+  </jsp:include>
 
-    
-<div class="row">
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <input class="form-control" type="text" name="tagTitle" size="15" maxlength="25" id="searchV_0" onfocus="javascript:loadAcJS(this.id)" value=''/>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <input class="form-control" type="text" name="tagTitle" size="15" maxlength="25" id="searchV_1" onfocus="javascript:loadAcJS(this.id)" value=''/>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <input class="form-control" type="text" name="tagTitle" size="15" maxlength="25" id="searchV_2" onfocus="javascript:loadAcJS(this.id)" value=''/>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+
+        <input class="form-control" type="text" name="tagTitle" size="15" maxlength="25" id="searchV_3" onfocus="javascript:loadAcJS(this.id)" value=''/>
+        <logic:notEmpty name="messageForm" property="forumThread.tags">
+          <logic:iterate id="threadTag" name="messageForm" property="forumThread.tags" indexId="i">
+            <script>
+                document.getElementById('searchV_<bean:write name="i"/>').value = '<bean:write name="threadTag" property="title" />'
+            </script>
+          </logic:iterate>
+        </logic:notEmpty>
+        <span id='json_info'></span>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- at first load jquery , cannot load jquery twice -->
+  <link rel="stylesheet" href="/common/autocomplete/jquery-ui.css" type="text/css">
+  <script src="/common/autocomplete/jquery-ui.js"></script>
+  <script>
+      function loadAcJS(thisId) {
+          if (document.getElementById(thisId).value)
+              return;
+          $("#" + thisId).autocomplete({
+              source: "/message/tags.shtml?method=tags",
+              minLength: 1,
+              autoFocus: false,
+              delay: 500
+          });
+
+      }
+  </script>
+
+  <div class="row">
 	<div class="col-md-6">       
         <div class="form-group">            
 <logic:notEmpty name="forumId">

@@ -66,66 +66,7 @@ response.setStatus(HttpServletResponse.SC_OK);
       </div>
 </div>
 
-<script>
-function loadPostjs(){
-  if (typeof(openInfoDiag) == 'undefined') {
-    $LAB
-     .script('/common/js/prototype.js').wait()
-     .script('/common/messageEdit.js')
-     .wait(function(){
-         setObserve();
-     
-     })      
-  }else
-     setObserve();
-       
-}
-
-function setObserve(){
- if(typeof(Ajax) != "undefined"){
-      $('messageNew').observe("submit", callbackSubmit);
-  }   
-}
-
-
-function hackAction(myform){
-	//hack <input type="hidden" name="action" value="edit"> for IE not work
-	var a=[];
-	for (var i = 0, p=myform.elements; i < p.length; i++)
-         if(p[i].name&&p[i].name.toLowerCase()=='action'){
-             a.push([p[i], p[i].name]);
-             p[i].removeAttribute('name', 0);
-          }
-	return a;
-}
-
-function recoverAction(a){
-	//recover hack
-	for (var i = 0; i < a.length; i++)
-         a[i][0].setAttribute('name', a[i][1], 0);	 
-}
-
-function changeAction(myform, newAction){
-	var a = hackAction(myform);
-	var oldformAction = myform.action;
-	myform.action = newAction;
-	recoverAction(a);
-	return oldformAction;
-}
-
-function notify(){	
-	var oldformAction = changeAction(document.messageForm, "<%=request.getContextPath()%>/message/messageSaveAction2.shtml");
-	document.messageForm.submit();
-		
-	changeAction(document.messageForm, oldformAction);
-}
-notify();
-loadPostjs();
-</script>
-
-
-
-<table cellpadding="4" cellspacing="0" border="0" width="400">
+  <table cellpadding="4" cellspacing="0" border="0" width="400">
 <tr>
 	<td width="20">&nbsp;</td>
   <logic:equal name="messageForm" property="action" value="edit">

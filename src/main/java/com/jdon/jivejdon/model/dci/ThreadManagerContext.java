@@ -23,11 +23,15 @@ import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.event.domain.producer.write.ThreadEventSourcingRoleImpl;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.event.MessageRemovedEvent;
-import com.jdon.jivejdon.model.event.TopicMessageCreatedEvent;
+import com.jdon.jivejdon.model.event.TopicMessageCreateCommand;
 import com.jdon.jivejdon.model.util.OneOneDTO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Component
 public class ThreadManagerContext implements Startable {
+	private final static Logger logger = LogManager.getLogger(ThreadManagerContext.class);
+
 	private final RoleAssigner roleAssinger;
 
 	private final UtilCache transactions;
@@ -64,12 +68,20 @@ public class ThreadManagerContext implements Startable {
 		// 1. create a root message of a new thread, topic message
 		ThreadEventSourcingRole eventSourcingRole = (ThreadEventSourcingRole) roleAssinger.assign(forumMessageInputDTO,
 				new ThreadEventSourcingRoleImpl());
-		DomainMessage domainMessage = eventSourcingRole.postTopicMessage(new TopicMessageCreatedEvent(forumMessageInputDTO));
+		DomainMessage domainMessage = eventSourcingRole.postTopicMessage(new
+				TopicMessageCreateCommand(forumMessageInputDTO));
 		transactions.put(forumMessageInputDTO.getMessageId(), domainMessage);
 
-		// 2.create a thread with the topic message
-		ThreadEventSourcingRole threadRole = (ThreadEventSourcingRole) roleAssinger.assign(forumMessageInputDTO, new ThreadEventSourcingRoleImpl());
-		threadRole.postThread(domainMessage);
+		if (!isTransactionOk(forumMessageInputDTO.getMessageId())) {
+			logger.error(" create message error: " + forumMessageInputDTO.getMessageId());
+			logger.error(" create message error subject:" + forumMessageInputDTO.getMessageVO()
+					.getSubject());
+		} else {
+			//2.post thread in memmory
+			ThreadEventSourcingRole threadRole = (ThreadEventSourcingRole) roleAssinger.assign
+					(forumMessageInputDTO, new ThreadEventSourcingRoleImpl());
+			threadRole.postThread(domainMessage);
+		}
 
 	}
 

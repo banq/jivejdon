@@ -24,18 +24,9 @@
         <logic:notEqual name="action" value="delete">
             帖子保存成功，<a href='<%=request.getContextPath()%>/forum/messageNavList.shtml?message=<bean:write name="messageId" />'
             >按这里返回所发帖子</a>
-
-            <script>
-                
-                var fmainurl = '<%=request.getContextPath()%>/forum/messageNavList.shtml?message=<bean:write name="messageId" />';
-                var fmainPars = ''
-                var anchor = '<bean:write name="messageId" />';
-                if (window.top.setDiagInfo)
-                    window.top.setDiagInfo(" <center><br><h4>\ 帖子保存成功 </h4> <br>由于缓存过几分钟可能才会生效  <br>请勿频繁发帖 ");
-                if (window.top.forwardNewPage){
-                    setTimeout("window.top.forwardNewPage(fmainurl, fmainPars, anchor)",1000);
-                }
-            </script>
+          <script>
+              window.top.location.href = '<%=request.getContextPath()%>/forum/messageNavList.shtml?message=<bean:write name="messageId" />';
+          </script>
 
 
         </logic:notEqual>

@@ -1,32 +1,31 @@
 package com.jdon.jivejdon.event.domain.consumer.write;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jdon.annotation.Component;
 import com.jdon.annotation.model.OnEvent;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumMessageReply;
 import com.jdon.jivejdon.model.event.MessageRemovedEvent;
-import com.jdon.jivejdon.model.event.TopicMessageCreatedEvent;
+import com.jdon.jivejdon.model.event.TopicMessageCreateCommand;
 import com.jdon.jivejdon.model.util.OneOneDTO;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.TagRepository;
 import com.jdon.jivejdon.repository.builder.MessageRepositoryDao;
 import com.jdon.jivejdon.service.util.JtaTransactionUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Component
 public class MessageTransactionPersistence {
 	private final static Logger logger = LogManager.getLogger(MessageTransactionPersistence.class);
 
-	protected JtaTransactionUtil jtaTransactionUtil;
-	protected MessageRepositoryDao messageRepository;
-	protected TagRepository tagRepository;
-	protected ForumFactory forumAbstractFactory;
+	private final JtaTransactionUtil jtaTransactionUtil;
+	private final MessageRepositoryDao messageRepository;
+	private final TagRepository tagRepository;
+	private final ForumFactory forumAbstractFactory;
 
 	public MessageTransactionPersistence(JtaTransactionUtil jtaTransactionUtil, MessageRepositoryDao messageRepository, TagRepository tagRepository,
-			ForumFactory forumAbstractFactory) {
+										 ForumFactory forumAbstractFactory) {
 		super();
 		this.jtaTransactionUtil = jtaTransactionUtil;
 		this.messageRepository = messageRepository;
@@ -34,22 +33,23 @@ public class MessageTransactionPersistence {
 		this.forumAbstractFactory = forumAbstractFactory;
 	}
 
-	@OnEvent("postTopicMessage")
-	public ForumMessage insertTopicMessage(TopicMessageCreatedEvent event) throws Exception {
+	@OnEvent("postTopicMessageCommand")
+	public ForumMessage insertTopicMessage(TopicMessageCreateCommand command) {
 		logger.debug("enter createTopicMessage");
-		ForumMessage forumMessagePostDTO = event.getForumMessageDTO();
+		ForumMessage forumMessagePostDTO = command.getForumMessageDTO();
 		try {
 			jtaTransactionUtil.beginTransaction();
 			messageRepository.createTopicMessage(forumMessagePostDTO);
 			logger.debug("createTopicMessage ok!");
 			jtaTransactionUtil.commitTransaction();
+			return forumMessagePostDTO;
 		} catch (Exception e) {
 			jtaTransactionUtil.rollback();
 			String error = e + " createTopicMessage forumMessageId=" + forumMessagePostDTO.getMessageId();
 			logger.error(error);
-			throw new Exception(error);
+			return null;
 		}
-		return forumMessagePostDTO;
+
 	}
 
 	public void insertReplyMessage(ForumMessageReply forumMessageReplyPostDTO) throws Exception {

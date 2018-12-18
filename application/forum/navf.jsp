@@ -23,7 +23,7 @@ while (e.hasMoreElements()) {
                url = url + "&" + paramName + "=" + request.getParameter(paramName);
             
 }
-url = url + "&ver=" + java.util.UUID.randomUUID().toString();
+  url = url + "&ver=" + java.util.UUID.randomUUID().toString() + "#" + messageId;
 %>
 <% 
 response.setStatus(301);

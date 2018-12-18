@@ -16,10 +16,6 @@
  */
 package com.jdon.jivejdon.repository.builder;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.Constants;
 import com.jdon.jivejdon.model.ForumThread;
@@ -28,6 +24,10 @@ import com.jdon.jivejdon.model.query.specification.TaggedThreadListSpec;
 import com.jdon.jivejdon.repository.TagRepository;
 import com.jdon.jivejdon.repository.dao.SequenceDao;
 import com.jdon.jivejdon.repository.dao.TagDao;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 public class TagRepositoryDao implements TagRepository {
 
@@ -168,7 +168,9 @@ public class TagRepositoryDao implements TagRepository {
 		Iterator iter = ids.iterator();
 		while (iter.hasNext()) {
 			Long tagID = (Long) iter.next();
-			tags.add(tagDao.getThreadTag(tagID));
+			ThreadTag tag = tagDao.getThreadTag(tagID);
+			if (tag != null)
+				tags.add(tag);
 		}
 		return tags;
 	}

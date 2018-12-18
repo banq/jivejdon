@@ -14,6 +14,7 @@ import com.qiniu.util.Auth;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.net.InetAddress;
 import java.util.Arrays;
 
 
@@ -30,6 +31,11 @@ public class CDNRefreshListener implements DomainEventHandler {
 
 	@Override
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
+		String clientIp = InetAddress.getLocalHost().getHostAddress();
+		if (clientIp.indexOf("192.168") != -1 || clientIp.indexOf("127.0.0.1") != -1) {
+			logger.error(clientIp + " is not server, so not send cdn refresh");
+			return;
+		}
 		Arrays.stream(cdnRefreshUrls.getUrls()).forEach(this::refreshCDN);
 	}
 

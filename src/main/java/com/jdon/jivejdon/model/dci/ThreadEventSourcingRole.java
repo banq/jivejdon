@@ -17,7 +17,7 @@ package com.jdon.jivejdon.model.dci;
 
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.model.event.MessageRemovedEvent;
-import com.jdon.jivejdon.model.event.TopicMessageCreatedEvent;
+import com.jdon.jivejdon.model.event.TopicMessageCreateCommand;
 import com.jdon.jivejdon.model.util.OneOneDTO;
 
 /**
@@ -25,7 +25,7 @@ import com.jdon.jivejdon.model.util.OneOneDTO;
  * com.jdon.jivejdon.domainevent.subscriber.write.ThreadRole
  * 
  * @author banq
- * @see ThreadRolele
+ *
  */
 public interface ThreadEventSourcingRole {
 
@@ -37,7 +37,7 @@ public interface ThreadEventSourcingRole {
 	 * .jdon.jivejdon.model.ForumMessage)
 	 */
 
-	DomainMessage postTopicMessage(TopicMessageCreatedEvent event);
+	DomainMessage postTopicMessage(TopicMessageCreateCommand command);
 
 	DomainMessage postReBlog(OneOneDTO oneOneDTO);
 

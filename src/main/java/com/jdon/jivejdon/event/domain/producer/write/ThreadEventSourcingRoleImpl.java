@@ -20,7 +20,7 @@ import com.jdon.annotation.model.Send;
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.model.dci.ThreadEventSourcingRole;
 import com.jdon.jivejdon.model.event.MessageRemovedEvent;
-import com.jdon.jivejdon.model.event.TopicMessageCreatedEvent;
+import com.jdon.jivejdon.model.event.TopicMessageCreateCommand;
 import com.jdon.jivejdon.model.util.OneOneDTO;
 
 @Introduce("message")
@@ -35,10 +35,11 @@ public class ThreadEventSourcingRoleImpl implements ThreadEventSourcingRole {
 	 */
 
 	@Override
-	@Send("postTopicMessage")
-	public DomainMessage postTopicMessage(TopicMessageCreatedEvent event) {
-		return new DomainMessage(event);
+	@Send("postTopicMessageCommand")
+	public DomainMessage postTopicMessage(TopicMessageCreateCommand command) {
+		return new DomainMessage(command);
 	}
+
 
 	@Override
 	@Send("postReBlog")
