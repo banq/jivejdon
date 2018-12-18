@@ -25,7 +25,7 @@ public class HomepageListSolver {
 //				HomePageComparator());
 		Collection<Long> list = threadApprovedNewList.getApprovedThreads(0);
 		return list.stream().collect(Collectors.toMap((threadId) -> forumFactory.getThread
-						(threadId).orElse(new ForumThread()), threadId -> threadId, (e1, e2) ->
+						(threadId).orElse(null), threadId -> threadId, (e1, e2) ->
 						e1, // Merge Function
 				() -> new TreeMap<ForumThread, Long>(new HomePageComparator()))).values();
 
