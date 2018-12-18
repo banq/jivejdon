@@ -24,6 +24,8 @@ import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.service.ForumMessageQueryService;
 
+import java.util.Optional;
+
 public interface MessageKernelIF {
 
 	/**
@@ -48,7 +50,7 @@ public interface MessageKernelIF {
 	 * @param threadId
 	 * @return
 	 */
-	public abstract ForumThread getThread(Long threadId) throws Exception;
+	public abstract Optional<ForumThread> getThread(Long threadId);
 
 	@Send("addreplyForumMessage")
 	public DomainMessage addreply(@Owner long threadId, @Receiver ForumMessage parentforumMessage, ForumMessage newForumMessageInputparamter);

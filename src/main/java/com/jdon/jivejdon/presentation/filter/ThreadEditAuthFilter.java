@@ -31,13 +31,13 @@ public class ThreadEditAuthFilter  extends Action {
 		}
 		if ((threadForm.getAction() != null) && (!threadForm.getAction().equals(MessageForm.CREATE_STR))) {
 			ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
-				ForumThread forumThread  = forumMessageService.getThread(new
+			ForumThread forumThread = forumMessageService.getThread(new
 						Long(threadForm.getThreadId()));
-			if (forumThread == null)
-				System.out.println("forumThread is null");;
-			boolean result = forumMessageService.checkIsAuthenticated
-					(forumThread.getRootMessage());
-			threadForm.setAuthenticated(result);
+			if (forumThread != null) {
+				boolean result = forumMessageService.checkIsAuthenticated
+						(forumThread.getRootMessage());
+				threadForm.setAuthenticated(result);
+			}
 		}
 		ForumService forumService = (ForumService) WebAppUtil.getService
 				("forumService", this.servlet.getServletContext());

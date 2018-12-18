@@ -16,15 +16,16 @@
  */
 package com.jdon.jivejdon.repository.builder;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.dao.SequenceDao;
 import com.jdon.jivejdon.util.ContainerUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Optional;
 
 public class ForumAbstractFactory implements ForumFactory {
 	private final static Logger logger = LogManager.getLogger(ForumAbstractFactory.class);
@@ -101,8 +102,14 @@ public class ForumAbstractFactory implements ForumFactory {
 	 * com.jdon.jivejdon.repository.builder.ForumFactory#getThread(java.lang
 	 * .Long)
 	 */
-	public ForumThread getThread(Long threadId) throws Exception {
-		return threadDirector.getThread(threadId);
+	public Optional<ForumThread> getThread(Long threadId) {
+		ForumThread forumThread = null;
+		try {
+			forumThread = threadDirector.getThread(threadId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Optional.ofNullable(forumThread);
 	}
 
 	/*

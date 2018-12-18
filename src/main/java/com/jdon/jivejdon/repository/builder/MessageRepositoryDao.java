@@ -36,6 +36,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 
 /**
  * Kernel of Message business operations
@@ -72,6 +73,7 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	 * .jdon.jivejdon.model.ForumMessage)
 	 */
 	public void createTopicMessage(ForumMessage forumMessagePostDTO) throws Exception {
+		ForumThread forumThread = super.initThread(forumMessagePostDTO);
 		try {
 			logger.debug(" enter service: createMessage ");
 			Forum forum = forumBuilder.getForum(forumMessagePostDTO.getForum().getForumId());
@@ -80,8 +82,6 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 				return;
 			}
 			forumMessagePostDTO.setForum(forum);
-
-			ForumThread forumThread = super.initThread(forumMessagePostDTO);
 			forumMessagePostDTO.setForumThread(forumThread);
 			messageDaoFacade.getMessageDao().createMessage(forumMessagePostDTO);
 			super.createThread(forumThread);
@@ -95,7 +95,16 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 			tagRepository.saveTagTitle(forumThread.getThreadId(), forumMessagePostDTO.getMessageVO().getTagTitle());
 
 		} catch (Exception e) {
-			String error = e + " createTopicMessage forumMessageId=" + forumMessagePostDTO.getMessageId();
+			try {
+				messageDaoFacade.getMessageDao().deleteThread(forumThread.getThreadId());
+			} finally {
+			}
+			try {
+				messageDaoFacade.getMessageDao().deleteMessage(forumMessagePostDTO.getMessageId());
+			} finally {
+			}
+			String error = e + " createTopicMessage forumMessageId=" + forumMessagePostDTO
+					.getMessageId();
 			logger.error(error);
 			throw new Exception(error);
 		}
@@ -185,12 +194,12 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 		Long key = delforumMessage.getMessageId();
 		logger.debug("deleteNode messageId =" + key);
 		try {
-			ForumThread forumThread = forumBuilder.getThread(delforumMessage.getForumThread().getThreadId());
-
+			Optional<ForumThread> forumThreadOptional = forumBuilder.getThread(delforumMessage
+					.getForumThread().getThreadId());
 			TreeVisitor messageDeletor = new MessageDeletor(this);
 			logger.debug(" begin to walk into tree, and delete them");
-			forumThread.acceptTreeModelVisitor(delforumMessage.getMessageId(), messageDeletor);
-
+			forumThreadOptional.get().acceptTreeModelVisitor(delforumMessage.getMessageId(),
+					messageDeletor);
 		} catch (Exception e) {
 			String error = e + " deleteMessageComposite forumMessageId=" + delforumMessage.getMessageId();
 			logger.error(error);

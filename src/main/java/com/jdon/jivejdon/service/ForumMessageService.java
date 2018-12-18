@@ -88,7 +88,7 @@ public interface ForumMessageService {
 	/**
 	 * for batch inquiry
 	 */
-	ForumThread getThread(Long id) throws Exception;
+	ForumThread getThread(Long id);
 
 	RenderingFilterManager getFilterManager();
 

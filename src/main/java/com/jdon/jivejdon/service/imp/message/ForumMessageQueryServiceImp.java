@@ -1,13 +1,5 @@
 package com.jdon.jivejdon.service.imp.message;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Iterator;
-import java.util.List;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jdon.annotation.Service;
 import com.jdon.annotation.Singleton;
 import com.jdon.controller.model.PageIterator;
@@ -27,6 +19,13 @@ import com.jdon.jivejdon.repository.dao.MessageQueryDao;
 import com.jdon.jivejdon.service.ForumMessageQueryService;
 import com.jdon.treepatterns.TreeVisitor;
 import com.jdon.treepatterns.visitor.TreeNodePicker;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
 
 @Singleton
 @Service("forumMessageQueryService")
@@ -251,12 +250,7 @@ public class ForumMessageQueryServiceImp implements ForumMessageQueryService {
 	}
 
 	public ForumThread getThread(Long threadId) {
-		try {
-			return forumBuilder.getThread(threadId);
-		} catch (Exception e) {
-			return null;
-		}
-
+		return forumBuilder.getThread(threadId).orElse(null);
 	}
 
 	/*

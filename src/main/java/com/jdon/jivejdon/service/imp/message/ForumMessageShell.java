@@ -44,6 +44,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 
 /**
  * ForumMessageShell is the shell of ForumMessage core implementions.
@@ -261,14 +262,14 @@ public class ForumMessageShell implements ForumMessageService {
 	public void updateThreadName(EventModel em) throws Exception{
 		ForumThread newforumThread = (ForumThread) em
 				.getModelIF();
-		ForumThread forumThread = messageKernel.getThread(newforumThread
+		Optional<ForumThread> forumThreadOptional = messageKernel.getThread(newforumThread
 				.getThreadId());
-		if (forumThread == null)
+		if (!forumThreadOptional.isPresent())
 			return;
-		if (!isAuthenticated(forumThread.getRootMessage())) {
+		if (!isAuthenticated(forumThreadOptional.get().getRootMessage())) {
 			return;
 		}
-		forumThread.updateName(newforumThread.getName());
+		forumThreadOptional.get().updateName(newforumThread.getName());
 	}
 
 	/**
@@ -392,11 +393,7 @@ public class ForumMessageShell implements ForumMessageService {
 	 * @return
 	 */
 	public ForumThread getThread(Long threadId) {
-		try {
-			return messageKernel.getThread(threadId);
-		} catch (Exception e) {
-			return null;
-		}
+		return messageKernel.getThread(threadId).orElse(null);
 	}
 
 	public RenderingFilterManager getFilterManager() {

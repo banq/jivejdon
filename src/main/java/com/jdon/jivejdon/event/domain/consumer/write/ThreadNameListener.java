@@ -9,6 +9,8 @@ import com.jdon.jivejdon.repository.builder.ForumAbstractFactory;
 import com.jdon.jivejdon.repository.builder.MessageRepositoryDao;
 import com.jdon.jivejdon.repository.builder.ThreadRepositoryDao;
 
+import java.util.Optional;
+
 @Consumer("saveName")
 public class ThreadNameListener implements DomainEventHandler {
 
@@ -31,9 +33,9 @@ public class ThreadNameListener implements DomainEventHandler {
 
 		ThreadNameSavedEvent es = (ThreadNameSavedEvent) event.getDomainMessage().getEventSource();
 		Long threadId = es.getThreadId();
-		ForumThread forumThread = forumAbstractFactory.getThread(threadId);
+		Optional<ForumThread> forumThreadOptional = forumAbstractFactory.getThread(threadId);
 		try {
-			threadRepositoryDao.updateThreadName(es.getName(), forumThread);
+			threadRepositoryDao.updateThreadName(es.getName(), forumThreadOptional.get());
 
 		} catch (Exception e) {
 			e.printStackTrace();

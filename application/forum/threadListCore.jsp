@@ -8,9 +8,10 @@
 
  <logic:iterate indexId="i" id="forumThread" name="threadListForm"
                    property="list">
-       <bean:define id="forumMessage" name="forumThread"
-                             property="rootMessage"></bean:define>
-      	 <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>" class="list-group-item" target="_blank">
+   <bean:define id="forumMessage" name="forumThread"
+                property="rootMessage"></bean:define>
+   <logic:notEmpty name="forumMessage" property="account">
+     <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>" class="list-group-item" target="_blank">
 		<h3 class="list-group-item-heading">        
 			<bean:write name="forumThread" property="name"/>
 		</h3>
@@ -64,7 +65,8 @@
 		  
 	    </p>
         </a>
-    </logic:iterate>
+   </logic:notEmpty>
+ </logic:iterate>
 
 </div>
 	

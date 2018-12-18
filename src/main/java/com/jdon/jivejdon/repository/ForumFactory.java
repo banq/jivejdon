@@ -19,6 +19,8 @@ import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 
+import java.util.Optional;
+
 public interface ForumFactory {
 
 	public abstract Forum getForum(Long forumId);
@@ -27,7 +29,7 @@ public interface ForumFactory {
 
 	public abstract ForumMessage getMessage(Long messageId);
 
-	public abstract ForumThread getThread(Long threadId) throws Exception;
+	public abstract Optional<ForumThread> getThread(Long threadId);
 
 	public abstract void reloadThreadState(ForumThread forumThread) throws Exception;
 

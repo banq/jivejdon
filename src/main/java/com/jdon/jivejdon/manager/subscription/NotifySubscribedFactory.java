@@ -39,6 +39,8 @@ import com.jdon.jivejdon.repository.AccountFactory;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.TagRepository;
 
+import java.util.Optional;
+
 @Component
 public class NotifySubscribedFactory {
 	private final ForumFactory forumAbstractFactory;
@@ -68,12 +70,14 @@ public class NotifySubscribedFactory {
 			Forum forum = forumAbstractFactory.getForum(((ForumSubscribedNotifyEvent) subscribedNotifyEvent).getForumId());
 			return new ForumNotifySubscribed(forum, forumNotifyMessageTemp, ((ForumSubscribedNotifyEvent) subscribedNotifyEvent).getForumMessage());
 		} else if (subscribedNotifyEvent instanceof ThreadSubscribedNotifyEvent) {
-			ForumThread thread = forumAbstractFactory.getThread(((ThreadSubscribedNotifyEvent) subscribedNotifyEvent).getThreadId());
-			return new ThreadNotifySubscribed(thread, threadNotifyMessageTemp);
+			Optional<ForumThread> forumThreadOptional = forumAbstractFactory.getThread((
+					(ThreadSubscribedNotifyEvent) subscribedNotifyEvent).getThreadId());
+			return new ThreadNotifySubscribed(forumThreadOptional.get(), threadNotifyMessageTemp);
 		} else if (subscribedNotifyEvent instanceof TagSubscribedNotifyEvent) {
-			ForumThread thread = forumAbstractFactory.getThread(((TagSubscribedNotifyEvent) subscribedNotifyEvent).getThreadId());
+			Optional<ForumThread> forumThreadOptional = forumAbstractFactory.getThread((
+					(TagSubscribedNotifyEvent) subscribedNotifyEvent).getThreadId());
 			ThreadTag tag = tagRepository.getThreadTag(((TagSubscribedNotifyEvent) subscribedNotifyEvent).getTagId());
-			return new TagNotifySubscribed(tag, thread, tagNotifyMessageTemp);
+			return new TagNotifySubscribed(tag, forumThreadOptional.get(), tagNotifyMessageTemp);
 		} else if (subscribedNotifyEvent instanceof AccountSubscribedNotifyEvent) {
 			Account account = accountFactory.getFullAccount(((AccountSubscribedNotifyEvent) subscribedNotifyEvent).getUserId());
 			ForumMessage message = forumAbstractFactory.getMessage(((AccountSubscribedNotifyEvent) subscribedNotifyEvent).getMessageId());

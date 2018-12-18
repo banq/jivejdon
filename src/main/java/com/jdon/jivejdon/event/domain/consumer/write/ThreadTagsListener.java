@@ -15,8 +15,6 @@
  */
 package com.jdon.jivejdon.event.domain.consumer.write;
 
-import java.util.Collection;
-
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
@@ -25,6 +23,9 @@ import com.jdon.jivejdon.model.event.ThreadTagsSavedEvent;
 import com.jdon.jivejdon.model.thread.ThreadTagsVO;
 import com.jdon.jivejdon.repository.TagRepository;
 import com.jdon.jivejdon.repository.builder.ForumAbstractFactory;
+
+import java.util.Collection;
+import java.util.Optional;
 
 @Consumer("saveTags")
 public class ThreadTagsListener implements DomainEventHandler {
@@ -43,15 +44,16 @@ public class ThreadTagsListener implements DomainEventHandler {
 
 		ThreadTagsSavedEvent es = (ThreadTagsSavedEvent) event.getDomainMessage().getEventSource();
 		Long threadId = es.getThreadId();
-		ForumThread forumThread = forumAbstractFactory.getThread(threadId);
+		Optional<ForumThread> forumThreadOptional = forumAbstractFactory.getThread(threadId);
+		if (!forumThreadOptional.isPresent()) return;
 		try {
 			String[] titles = (String[]) es.getTitles().toArray(new String[0]);
 			tagRepository.saveTagTitle(threadId, titles);
 
-			Collection newtags = tagRepository.getThreadTags(forumThread);
-			ThreadTagsVO threadTagsVO = new ThreadTagsVO(forumThread, newtags);
-			Collection lasttags = forumThread.getThreadTagsVO().getTags();
-			forumThread.setThreadTagsVO(threadTagsVO);
+			Collection newtags = tagRepository.getThreadTags(forumThreadOptional.get());
+			ThreadTagsVO threadTagsVO = new ThreadTagsVO(forumThreadOptional.get(), newtags);
+			Collection lasttags = forumThreadOptional.get().getThreadTagsVO().getTags();
+			forumThreadOptional.get().setThreadTagsVO(threadTagsVO);
 			threadTagsVO.subscriptionNotify(lasttags);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -17,12 +17,13 @@ package com.jdon.jivejdon.manager.mapreduce;
 
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.service.ForumMessageQueryService;
+import com.jdon.jivejdon.repository.ForumFactory;
 
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
@@ -35,10 +36,12 @@ public class ThreadDigList {
 	private final static int TAGSLIST_SIZE = 10;
 	private final TreeSet<Long> sortedAll;
 	private final TreeSet<Long> sortedWindows;
-	private final ForumMessageQueryService forumMessageQueryService;
+	private final ForumFactory forumFactory;
+	;
 
-	public ThreadDigList(ForumMessageQueryService forumMessageQueryService) {
-		this.forumMessageQueryService = forumMessageQueryService;
+
+	public ThreadDigList(ForumFactory forumFactory) {
+		this.forumFactory = forumFactory;
 		this.sortedAll = createTreeList();
 		this.sortedWindows = createTreeList();
 		;
@@ -62,8 +65,10 @@ public class ThreadDigList {
 
 	public Collection<ForumThread> getDigs() {
 		return sortedWindows.stream().limit(DigsListMAXSize).map
-				(forumMessageQueryService::getThread)
-				.collect(Collectors.toList());
+				(forumFactory::getThread).filter(Optional<ForumThread>::isPresent)
+				.map(Optional::get).collect(Collectors.toList());
+//						(Collectors.mapping(Optional::get, Collectors.toList()));
+		//.collect(Collectors.toList());
 
 	}
 
@@ -78,10 +83,12 @@ public class ThreadDigList {
 			public int compare(Long threadId1, Long threadId2) {
 				if (threadId1.longValue() == threadId2.longValue())
 					return 0;
-				ForumThread thread1 = forumMessageQueryService.getThread(threadId1);
-				ForumThread thread2 = forumMessageQueryService.getThread(threadId2);
-				int thread1Count = thread1.getRootMessage().getDigCount();
-				int thread2Count = thread2.getRootMessage().getDigCount();
+				Optional<ForumThread> thread1 = forumFactory.getThread(threadId1);
+				Optional<ForumThread> thread2 = forumFactory.getThread(threadId2);
+				if (!thread1.isPresent() || !thread2.isPresent())
+					return 0;
+				int thread1Count = thread1.get().getRootMessage().getDigCount();
+				int thread2Count = thread1.get().getRootMessage().getDigCount();
 
 				if (thread1Count > thread2Count)
 					return -1; // returning the first object

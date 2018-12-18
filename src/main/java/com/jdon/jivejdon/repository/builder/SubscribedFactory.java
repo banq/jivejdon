@@ -50,7 +50,8 @@ public class SubscribedFactory {
 			((ForumSubscribed) subscribed).setForum(forumAbstractFactory.getForum(subscribed.getSubscribeId()));
 		} else if (subscribeType == ThreadSubscribed.TYPE) {
 			try {
-				((ThreadSubscribed) subscribed).setForumThread(forumAbstractFactory.getThread(subscribed.getSubscribeId()));
+				((ThreadSubscribed) subscribed).setForumThread(forumAbstractFactory.getThread
+						(subscribed.getSubscribeId()).get());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

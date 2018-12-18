@@ -22,12 +22,13 @@ import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.dao.MessageQueryDao;
 import com.jdon.treepatterns.model.TreeModel;
 
+import java.util.Optional;
+
 @Component
 public class TreeModelFactory {
 
-	private final MessageQueryDao messageQueryDao;
-
 	protected final ForumFactory forumAbstractFactory;
+	private final MessageQueryDao messageQueryDao;
 
 	public TreeModelFactory(MessageQueryDao messageQueryDao, ForumFactory forumAbstractFactory) {
 		super();
@@ -37,10 +38,10 @@ public class TreeModelFactory {
 
 	@OnEvent("loadTreeModel")
 	public TreeModel loadTreeModel(Long threadId) {
-		ForumThread forumThread = null;
 		try {
-			forumThread = forumAbstractFactory.getThread(threadId);
-			return messageQueryDao.getTreeModel(forumThread.getThreadId(), forumThread.getRootMessage().getMessageId());
+			Optional<ForumThread> forumThreadOptional = forumAbstractFactory.getThread(threadId);
+			return messageQueryDao.getTreeModel(forumThreadOptional.get().getThreadId(),
+					forumThreadOptional.get().getRootMessage().getMessageId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

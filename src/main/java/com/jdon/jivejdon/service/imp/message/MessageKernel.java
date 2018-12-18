@@ -15,11 +15,6 @@
  */
 package com.jdon.jivejdon.service.imp.message;
 
-import java.util.regex.Pattern;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jdon.annotation.Component;
 import com.jdon.annotation.Introduce;
 import com.jdon.controller.events.EventModel;
@@ -33,6 +28,11 @@ import com.jdon.jivejdon.model.dci.ThreadManagerContext;
 import com.jdon.jivejdon.model.query.MultiCriteria;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.service.ForumMessageQueryService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Optional;
+import java.util.regex.Pattern;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -43,12 +43,9 @@ import com.jdon.jivejdon.service.ForumMessageQueryService;
 public class MessageKernel implements MessageKernelIF {
 	private final static Logger logger = LogManager.getLogger(MessageKernel.class);
 	private final static Pattern htmlEscape = Pattern.compile("\\<.*?\\>|<[^>]+");
-
-	protected ForumMessageQueryService forumMessageQueryService;
-
-	protected ForumFactory forumAbstractFactory;
-
 	private final ThreadManagerContext threadManagerContext;
+	protected ForumMessageQueryService forumMessageQueryService;
+	protected ForumFactory forumAbstractFactory;
 
 	public MessageKernel(ForumMessageQueryService forumMessageQueryService, ForumFactory forumAbstractFactory,
 			ThreadManagerContext threadManagerContext) {
@@ -155,7 +152,7 @@ public class MessageKernel implements MessageKernelIF {
 	 * lang.Long)
 	 */
 	@Override
-	public ForumThread getThread(Long threadId) throws Exception {
+	public Optional<ForumThread> getThread(Long threadId) {
 		logger.debug("enter getThread");
 		return forumAbstractFactory.getThread(threadId);
 

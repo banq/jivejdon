@@ -1,24 +1,22 @@
 package com.jdon.jivejdon.presentation.filter;
 
-import java.util.Collection;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.jdon.jivejdon.model.ForumThread;
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
+import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.presentation.form.MessageForm;
 import com.jdon.jivejdon.service.AccountService;
 import com.jdon.jivejdon.service.ForumMessageService;
 import com.jdon.jivejdon.service.ForumService;
 import com.jdon.util.Debug;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Collection;
 
 /**
  * the filter for Message edit Action,
@@ -43,13 +41,11 @@ public class MessageEditAuthFilter extends Action {
 			if (messageForm.getMessageId() != null)
 			 forumMessage = forumMessageService.getMessage(messageForm.getMessageId());
 			else if (messageForm.getForumThread().getThreadId() != null){
-				ForumThread forumThread  = forumMessageService.getThread(new
+				ForumThread forumThread = forumMessageService.getThread(new
 						Long(messageForm.getForumThread().getThreadId()));
-				forumMessage = forumMessageService.getMessage
-						(forumThread.getRootMessage().getMessageId());
+				if (forumThread != null)
+					forumMessage = forumThread.getRootMessage();
 			}
-			if (forumMessage == null)
-				System.out.println("forumMessage is null");;
 			boolean result = forumMessageService.checkIsAuthenticated(forumMessage);
 			messageForm.setAuthenticated(result);
 		}

@@ -16,13 +16,6 @@
  */
 package com.jdon.jivejdon.service.imp.tags;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.regex.Pattern;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jdon.annotation.Service;
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;
@@ -38,20 +31,23 @@ import com.jdon.jivejdon.repository.TagRepository;
 import com.jdon.jivejdon.service.TagService;
 import com.jdon.jivejdon.service.util.JtaTransactionUtil;
 import com.jdon.util.UtilValidate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Optional;
+import java.util.regex.Pattern;
 
 @Service("othersService")
 public class TagServiceImp implements TagService, Poolable {
 	private final static Logger logger = LogManager.getLogger(TagServiceImp.class);
-
-	private final HotKeysRepository hotKeysRepository;
-
-	private final TagRepository tagRepository;
-
-	private final MessageRepository messageRepository;
-
+	private final static Pattern illEscape = Pattern.compile
+			("[^\\/|^\\<|^\\>|^\\=|^\\?|^\\\\|^\\s|^\\(|^\\)|^\\{|^\\}|^\\[|^\\]|^\\+|^\\*]*");
 	protected final JtaTransactionUtil jtaTransactionUtil;
-
-	private final static Pattern illEscape = Pattern.compile("[^\\/|^\\<|^\\>|^\\=|^\\?|^\\\\|^\\s|^\\(|^\\)|^\\{|^\\}|^\\[|^\\]|^\\+|^\\*]*");
+	private final HotKeysRepository hotKeysRepository;
+	private final TagRepository tagRepository;
+	private final MessageRepository messageRepository;
 
 	public TagServiceImp(HotKeysRepository hotKeysFactory, TagRepository tagRepository, MessageRepository messageRepository,
 			JtaTransactionUtil jtaTransactionUtil) {
@@ -141,9 +137,10 @@ public class TagServiceImp implements TagService, Poolable {
 			return;
 		}
 		try {
-			ForumThread thread = messageRepository.getForumBuilder().getThread(threadId);
+			Optional<ForumThread> forumThreadOptional = messageRepository.getForumBuilder()
+					.getThread(threadId);
 			// this is update thread in memory cache
-			thread.changeTags(tagTitles);
+			forumThreadOptional.get().changeTags(tagTitles);
 		} catch (Exception e) {
 			logger.error(e);
 		}

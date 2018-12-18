@@ -80,15 +80,10 @@ public class MethodDispatchAction extends DispatchAction {
 		if (account == null) return isOK;
 		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService
 				("forumMessageService", request);
-
-		ForumThread forumThread = null;
-		try {
-			forumThread = forumMessageService.getThread(Long.parseLong(threadId));
-			isOK = forumMessageService.checkIsAuthenticated
-					(forumThread.getRootMessage());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		ForumThread forumThread = forumMessageService.getThread(Long.parseLong
+				(threadId));
+		if (forumThread != null)
+			isOK = forumMessageService.checkIsAuthenticated(forumThread.getRootMessage());
 		return isOK;
 	}
 }
