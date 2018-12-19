@@ -2,9 +2,11 @@ package com.jdon.jivejdon.presentation.action;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.model.ForumMessage;
+import com.jdon.jivejdon.model.ForumMessageReply;
 import com.jdon.jivejdon.presentation.form.MessageListForm;
 import com.jdon.jivejdon.service.ForumMessageQueryService;
 import com.jdon.jivejdon.service.ForumMessageService;
+import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.strutsutil.FormBeanUtil;
 import com.jdon.util.UtilValidate;
 import org.apache.logging.log4j.LogManager;
@@ -48,10 +50,21 @@ public class MessageListNavAction extends Action {
 			return mapping.findForward("failure");
 		}
 
+		//waiting until com.jdon.jivejdon.event.domain.consumer.write.addReplyMessage
+		// .AddReplyMessageZ add this mode to cache.
+		ContainerUtil containerUtil = (ContainerUtil) WebAppUtil
+				.getComponentInstance("containerUtil", this.servlet.getServletContext());
+		int waittimeout = 0;
+		while (!containerUtil.isInCache(messageId, ForumMessageReply.class) && waittimeout < 5) {
+			Thread.sleep((waittimeout++) * 100);
+		}
+
 		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", this.servlet.getServletContext());
 		ForumMessage forumMessage = forumMessageService.getMessage(Long.parseLong(messageId));
-		if (forumMessage == null)
+		if (forumMessage == null) {
+			logger.error(" not locate messageId = " + messageId);
 			return mapping.findForward("failure");
+		}
 
 		long threadId = forumMessage.getForumThread().getThreadId();
 
