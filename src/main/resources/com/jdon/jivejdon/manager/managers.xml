@@ -297,6 +297,10 @@
                    class="com.jdon.jivejdon.event.domain.consumer.write.postThread.CDNRefreshUrls">
             <constructor value="query/approved"/>
             <constructor value="rss"/>
+            <constructor value="query/threadDigList"/>
+            <constructor value="query/threadNewList"/>
+            <constructor value="query/popularList"/>
+            <constructor value="query/urlListAction"/>
         </component>
 			
 		</services>

@@ -242,15 +242,21 @@
     </rule>
 	<rule>
         <from>^/query/threadNewList$</from>
-        <to>/query/threadNewList.shtml?count=30</to>
+        <to>/query/threadNewList.shtml?count=20</to>
     </rule>
 	<rule>
         <from>^/query/popularList$</from>
-        <to>/query/popularlist.shtml?count=15&amp;dateRange=180</to>
+        <to>/query/popularlist.shtml?count=20&amp;dateRange=180</to>
     </rule>
-
-  
-
+	<rule>
+        <from>^/query/threadDigList$</from>
+        <to>/query/threadDigList.shtml?count=20</to>
+    </rule>    
+	<rule>
+        <from>^/query/urlListAction$</from>
+        <to>/query/urlListAction.shtml?count=20</to>
+    </rule>    
+    
     <!-- rss -->
     <rule>
         <from>^/rss$</from>

@@ -191,18 +191,19 @@ $LAB
     load('/query/threadApprovedNewList3.shtml?count=15', function (xhr) {
         document.getElementById("threadApprovedNewListOthers").innerHTML = xhr.responseText;
     });
-    load('/query/threadDigList.shtml?count=20', function (xhr) {
+    load('https://cdn.jdon.com/query/threadDigList', function (xhr) {
   	       document.getElementById("digList").innerHTML = xhr.responseText;
 			});
-    load('/query/popularlist.shtml?count=20&dateRange=180', function (xhr) {
+		load('https://cdn.jdon.com/query/threadNewList', function (xhr) {
+        document.getElementById("threadNewList").innerHTML = xhr.responseText;
+    });	
+    load('https://cdn.jdon.com/query/popularList', function (xhr) {
   	       document.getElementById("poplist").innerHTML = xhr.responseText;
 			});
-    load('/query/urlListAction.shtml?count=20', function (xhr) {
+    load('https://cdn.jdon.com/query/urlListAction', function (xhr) {
         document.getElementById("urllist").innerHTML = xhr.responseText;
     });
-    load('/query/threadNewList.shtml?count=20', function (xhr) {
-        document.getElementById("threadNewList").innerHTML = xhr.responseText;
-    });
+
     document.getElementById("home-thumbnai").src = "https://cdn.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
 });  
 </script> 	
