@@ -3,6 +3,9 @@ package com.jdon.jivejdon.manager.mapreduce;
 import java.util.Comparator;
 import java.util.Map;
 
+/**
+ * Hot Tag Comparator
+ */
 public class ThreadTagComparator implements Comparator<Long> {
 
 	private final Map<Long, Integer> tags_countWindows;
@@ -24,7 +27,7 @@ public class ThreadTagComparator implements Comparator<Long> {
 		else if (num1 < num2)
 			return 1;
 		else {
-			if (tagID1.longValue() > tagID1.longValue())
+			if (tagID1.longValue() > tagID2.longValue())
 				return -1;
 			else
 				return 1;

@@ -4,10 +4,13 @@ import com.jdon.jivejdon.model.ForumThread;
 
 import java.util.Comparator;
 
+/**
+ * Home page approve threads Comparator
+ */
 public class HomePageComparator implements Comparator<ForumThread> {
 	@Override
 	public int compare(ForumThread thread1, ForumThread thread2) {
-		
+
 		if (thread1.getThreadId().longValue() == thread2.getThreadId().longValue())
 			return 0;
 

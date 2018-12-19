@@ -12,6 +12,9 @@ import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
+/**
+ * Hot Tag such as #springboot #API ...
+ */
 public class ThreadTagList {
 
 	public final static int DigsListMAXSize = 30;

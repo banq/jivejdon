@@ -20,12 +20,14 @@ import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.service.ForumMessageQueryService;
 
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+/**
+ * Like or Give the thumbs-up
+ */
 public class ThreadDigList {
 
 	public final static int DigsListMAXSize = 30;
@@ -36,14 +38,11 @@ public class ThreadDigList {
 	private final TreeSet<Long> sortedAll;
 	private final TreeSet<Long> sortedWindows;
 	private final ForumMessageQueryService forumMessageQueryService;
-	;
-
 
 	public ThreadDigList(ForumMessageQueryService forumMessageQueryService) {
 		this.forumMessageQueryService = forumMessageQueryService;
-		this.sortedAll = createTreeList();
-		this.sortedWindows = createTreeList();
-		;
+		this.sortedAll = new TreeSet<>(new ThreadDigComparator(forumMessageQueryService));
+		this.sortedWindows = new TreeSet<>(new ThreadDigComparator(forumMessageQueryService));
 	}
 
 	public void addForumThread(ForumThread forumThread) {
@@ -72,33 +71,6 @@ public class ThreadDigList {
 	public void clear() {
 		sortedAll.clear();
 		sortedWindows.clear();
-	}
-
-	private TreeSet<Long> createTreeList() {
-		return new TreeSet<Long>(new Comparator<Long>() {
-			public int compare(Long threadId1, Long threadId2) {
-				if (threadId1.longValue() == threadId2.longValue())
-					return 0;
-				ForumThread thread1 = forumMessageQueryService.getThread(threadId1);
-				ForumThread thread2 = forumMessageQueryService.getThread(threadId2);
-				if (thread1 == null || thread2 == null)
-					return 0;
-				int thread1Count = thread1.getRootMessage().getDigCount();
-				int thread2Count = thread1.getRootMessage().getDigCount();
-
-				if (thread1Count > thread2Count)
-					return -1; // returning the first object
-				else if (thread1Count < thread2Count)
-					return 1;
-				else {
-					if (threadId1.longValue() > threadId2.longValue())
-						return -1;
-					else
-						return 1;
-				}
-			}
-
-		});
 	}
 
 

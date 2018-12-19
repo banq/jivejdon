@@ -38,7 +38,8 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * CQRS complex query using map reduce;
+ *
+ * prepare all approved thread list
  *
  * @author banq
  */
@@ -194,7 +195,7 @@ public class ThreadApprovedNewList implements Startable {
 							|| approvedListSpec.getCurrentIndicator() == 0) {
 						final ForumThread thread = forumMessageQueryService
 								.getThread(threadId);
-						// if (thread == null) continue;
+						if (thread == null) continue;
 						Long userId = thread.getRootMessage().getAccount()
 								.getUserIdLong();
 						final Account account = accountService

@@ -8,6 +8,9 @@ import java.util.Collection;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+/**
+ * Home page approve threads
+ */
 @Component("homepageListSolver")
 public class HomepageListSolver {
 
