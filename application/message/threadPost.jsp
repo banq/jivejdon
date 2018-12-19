@@ -43,7 +43,7 @@
         <logic:notEmpty name="messageForm" property="forumThread.tags">
           <logic:iterate id="threadTag" name="messageForm" property="forumThread.tags" indexId="i">
             <script>
-                document.getElementById('searchV_<bean:write name="i"/>').value = '<bean:write name="threadTag" property="title" />'
+                document.getElementById('searchV_<bean:write name="i"/>').value = '<bean:write name="threadTag" property="title" />';
             </script>
           </logic:iterate>
         </logic:notEmpty>

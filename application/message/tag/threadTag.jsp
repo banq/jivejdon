@@ -55,8 +55,7 @@
 </form>
 <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="i">
     <script>
-		  document.getElementById('searchV_<bean:write name="i"/>').value ='<bean:write name="threadTag" property="title" />' 
-      
+        document.getElementById('searchV_<bean:write name="i"/>').value = '<bean:write name="threadTag" property="title" />';
     </script>
 </logic:iterate>
 	</logic:equal>

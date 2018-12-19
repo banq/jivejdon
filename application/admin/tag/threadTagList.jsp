@@ -100,7 +100,7 @@
     </form>		
          <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="i">
              <script>
-             $('searchV<bean:write name="i"/>_<bean:write name="forumThread" property="threadId" />').value ='<bean:write name="threadTag" property="title" />'             
+                 document.getElementById('searchV<bean:write name="i"/>_<bean:write name="forumThread" property="threadId" />').value = '<bean:write name="threadTag" property="title" />';
              </script>
         </logic:iterate>
 
