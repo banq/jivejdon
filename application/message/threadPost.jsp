@@ -59,8 +59,6 @@
   <script src="/common/autocomplete/jquery-ui.js"></script>
   <script>
       function loadAcJS(thisId) {
-          if (document.getElementById(thisId).value)
-              return;
           $("#" + thisId).autocomplete({
               source: "/message/tags.shtml?method=tags",
               minLength: 1,
