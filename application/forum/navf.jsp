@@ -48,7 +48,7 @@ response.setHeader( "Connection", "close" );
 <html>
 <body>
 <script>
-    waitingDialog.show('回贴已经收到，请等待返回');
+    waitingDialog.show('回贴已经收到，正在跳转..');
     setTimeout(function () {
         window.top.location.href = '<%=url%>';
         waitingDialog.hide();
