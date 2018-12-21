@@ -17,6 +17,7 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionRedirect;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -75,12 +76,21 @@ public class MessageListNav2Action extends Action {
 					threadId);
 			return mapping.findForward("failure");
 		}
-		messageListForm.setStart(start);// diaplay
-		request.setAttribute("start", start);
-		request.setAttribute("threadId", threadId);
-		request.setAttribute("messageId", new Long(messageId));
-		return mapping.findForward("success");
 
+		if ((new Long(messageId)).longValue() == lastMessageId.longValue()) {
+			ActionRedirect redirect = new ActionRedirect(mapping.findForward("success"));
+			redirect.addParameter("thread", threadId);
+			redirect.addParameter("start", start);
+			redirect.addParameter("messageId", messageId);
+			redirect.setAnchor(messageId);
+			return redirect;
+		} else {//forward to /forum/navf2.jsp to waiting a minute until all ok
+			messageListForm.setStart(start);// diaplay
+			request.setAttribute("start", start);
+			request.setAttribute("threadId", threadId);
+			request.setAttribute("messageId", new Long(messageId));
+			return mapping.findForward("navf2");
+		}
 	}
 
 	/**

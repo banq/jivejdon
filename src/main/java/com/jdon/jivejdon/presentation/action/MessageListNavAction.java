@@ -12,6 +12,7 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionRedirect;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -54,7 +55,10 @@ public class MessageListNavAction extends Action {
 		request.setAttribute("start", 0);
 		request.setAttribute("threadId", threadId);
 		request.setAttribute("messageId", new Long(messageId));
-		return mapping.findForward("success");
+		ActionRedirect redirect = new ActionRedirect(mapping.findForward("success"));
+		redirect.addParameter("thread", threadId);
+		redirect.addParameter("messageId", messageId);
+		return redirect;
 
 	}
 

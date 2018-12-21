@@ -22,8 +22,7 @@
 <logic:messagesNotPresent>
     <logic:empty name="errors">
         <logic:notEqual name="action" value="delete">
-            帖子保存成功，<a href='<%=request.getContextPath()%>/forum/messageNavList.shtml?message=<bean:write name="messageId" />'
-            >按这里返回所发帖子</a>
+          帖子保存成功
           <script>
               window.top.location.href = '<%=request.getContextPath()%>/forum/messageNavList.shtml?message=<bean:write name="messageId" />';
           </script>

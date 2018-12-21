@@ -148,7 +148,7 @@
                 type="com.jdon.jivejdon.presentation.action.MessageListNavAction"
                 name="messageListForm" scope="request"
                 validate="false">
-            <forward name="success" path="/forum/navf.jsp"/>
+            <forward name="success" path="/forum/messageList.shtml"/>
             <forward name="failure" path="/forum/"/>
         </action>
 
@@ -156,7 +156,8 @@
                 type="com.jdon.jivejdon.presentation.action.MessageListNav2Action"
                 name="messageListForm" scope="request"
                 validate="false">
-            <forward name="success" path="/forum/navf2.jsp"/>
+            <forward name="success" path="/forum/messageList.shtml"/>
+            <forward name="navf2" path="/forum/navf2.jsp"/>
             <forward name="failure" path="/forum/"/>
         </action>
 
