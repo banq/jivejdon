@@ -1,13 +1,13 @@
 package com.jdon.jivejdon.service;
 
-import java.util.List;
-
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.query.QueryCriteria;
 import com.jdon.jivejdon.model.query.ResultSort;
 import com.jdon.jivejdon.model.query.specification.ThreadListSpec;
+
+import java.util.List;
 
 public interface ForumMessageQueryService {
 
@@ -58,8 +58,6 @@ public interface ForumMessageQueryService {
 	PageIterator searchThreads(String query, int start, int count);
 
 	PageIterator popularThreads(int popularThreadsWindow, int count);
-
-	int locateTheMessage(Long threadId, Long messageId, int count);
 
 	ForumThread getThread(Long threadId);
 

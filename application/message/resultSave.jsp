@@ -27,8 +27,6 @@
           <script>
               window.top.location.href = '<%=request.getContextPath()%>/forum/messageNavList.shtml?message=<bean:write name="messageId" />';
           </script>
-
-
         </logic:notEqual>
         <logic:equal name="action" value="delete">
             <bean:define id="title"  value=" 帖子删除成功" />

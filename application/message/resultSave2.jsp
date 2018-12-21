@@ -4,33 +4,19 @@
 <%@ taglib uri="/WEB-INF/MultiPages.tld" prefix="MultiPages" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<logic:notEmpty name="messageForm">
-    <logic:notEmpty name="messageForm" property="messageId">
-        <bean:define id="messageId" name="messageForm" property="messageId"  />
-        <bean:define id="action" name="messageForm" property="action"  />
-    </logic:notEmpty>
-</logic:notEmpty>
 
-<logic:notEmpty name="messageReplyForm">
-    <logic:notEmpty name="messageReplyForm" property="messageId">
-        <bean:define id="messageId" name="messageReplyForm" property="messageId"  />
-        <bean:define id="action" name="messageReplyForm" property="action"  />
-    </logic:notEmpty>
-</logic:notEmpty>
+<bean:define id="messageId" name="messageReplyForm" property="messageId"/>
+<bean:define id="pMessageId" name="messageReplyForm" property="parentMessage.messageId"/>
+<bean:define id="action" name="messageReplyForm" property="action"/>
+
 
 <logic:messagesNotPresent>
     <logic:empty name="errors">
         <logic:notEqual name="action" value="delete">
-          帖子保存成功，<a href='<%=request.getContextPath()%>/forum/messageNavList.shtml?message=<bean:write name="messageId"/>'
+          帖子保存成功，<a href='<%=request.getContextPath()%>/forum/messageNavList.shtml?pMessageId=<bean:write name="pMessageId"/>&messageId=<bean:write name="messageId"/>'
             >按这里返回所发帖子</a>
-
             <script>
-             if (window.top.setDiagInfo)
-                    window.top.setDiagInfo(" 帖子保存成功 ");
-             window.top.location.href = '<%=request.getContextPath()%>/forum/messageNavList.shtml?message=<bean:write name="messageId" />';
-        
-              
-                
+                window.top.location.href = '<%=request.getContextPath()%>/forum/messageNavList.shtml?pMessageId=<bean:write name="pMessageId"/>&messageId=<bean:write name="messageId"/>';
             </script>
         </logic:notEqual>
         <logic:equal name="action" value="delete">

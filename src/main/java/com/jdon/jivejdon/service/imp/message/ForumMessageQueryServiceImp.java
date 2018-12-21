@@ -344,23 +344,6 @@ public class ForumMessageQueryServiceImp implements ForumMessageQueryService {
 		return queryCriteria;
 	}
 
-	public int locateTheMessage(Long threadId, Long messageId, int count) {
-		int start = 0;
-		PageIterator pi = messageQueryDao.getMessages(threadId, start, count);
-
-		int allCount = pi.getAllCount();
-		while (start < allCount) {// loop all
-			while (pi.hasNext()) {
-				Long messageIdT = (Long) pi.next();
-				if (messageIdT.longValue() == messageId.longValue()) {
-					return start;
-				}
-			}
-			start = start + count;
-			pi = messageQueryDao.getMessages(threadId, start, count);
-		}
-		return -1;
-	}
 
 	public PageIterator getThreadListByUser(String userId, int start, int count) {
 		return messageQueryDao.getThreadListByUser(userId, start, count);
