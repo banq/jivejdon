@@ -95,7 +95,7 @@
             <version>1.9.1</version>
         </dependency>
 
-       
+
         <dependency>
             <groupId>com.jdon</groupId>
             <artifactId>jdon-struts1x</artifactId>
@@ -289,11 +289,7 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.5.2</version>
         </dependency>
-        <dependency>
-            <groupId>com.oath.cyclops</groupId>
-            <artifactId>cyclops</artifactId>
-            <version>10.0.1</version>
-        </dependency>
+   
         <!-- https://mvnrepository.com/artifact/com.github.qcloudsms/qcloudsms -->
         <dependency>
             <groupId>com.github.qcloudsms</groupId>
