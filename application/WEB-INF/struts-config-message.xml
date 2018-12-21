@@ -152,6 +152,14 @@
             <forward name="failure" path="/forum/"/>
         </action>
 
+        <action path="/forum/messageNavList2"
+                type="com.jdon.jivejdon.presentation.action.MessageListNav2Action"
+                name="messageListForm" scope="request"
+                validate="false">
+            <forward name="success" path="/forum/navf2.jsp"/>
+            <forward name="failure" path="/forum/"/>
+        </action>
+
         <!-- message List end  -->
 
         <action path="/forum/lastPost"

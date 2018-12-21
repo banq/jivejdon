@@ -13,10 +13,10 @@
 <logic:messagesNotPresent>
     <logic:empty name="errors">
         <logic:notEqual name="action" value="delete">
-          帖子保存成功，<a href='<%=request.getContextPath()%>/forum/messageNavList.shtml?pMessageId=<bean:write name="pMessageId"/>&messageId=<bean:write name="messageId"/>'
+          帖子保存成功，<a href='<%=request.getContextPath()%>/forum/messageNavList2.shtml?pMessageId=<bean:write name="pMessageId"/>&messageId=<bean:write name="messageId"/>'
             >按这里返回所发帖子</a>
             <script>
-                window.top.location.href = '<%=request.getContextPath()%>/forum/messageNavList.shtml?pMessageId=<bean:write name="pMessageId"/>&messageId=<bean:write name="messageId"/>';
+                window.top.location.href = '<%=request.getContextPath()%>/forum/messageNavList2.shtml?pMessageId=<bean:write name="pMessageId"/>&messageId=<bean:write name="messageId"/>';
             </script>
         </logic:notEqual>
         <logic:equal name="action" value="delete">

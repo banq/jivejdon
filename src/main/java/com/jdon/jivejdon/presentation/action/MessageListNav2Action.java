@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author banq
  */
-public class MessageListNavAction extends Action {
+public class MessageListNav2Action extends Action {
 	private final static Logger logger = LogManager.getLogger(MessageListNavAction.class);
 
 	/**
