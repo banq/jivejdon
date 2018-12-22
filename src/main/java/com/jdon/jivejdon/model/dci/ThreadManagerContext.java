@@ -65,6 +65,7 @@ public class ThreadManagerContext implements Startable {
 	}
 
 	public void post(ForumMessage forumMessageInputDTO) {
+
 		// 1. create a root message of a new thread, topic message
 		ThreadEventSourcingRole eventSourcingRole = (ThreadEventSourcingRole) roleAssinger.assign(forumMessageInputDTO,
 				new ThreadEventSourcingRoleImpl());
@@ -72,16 +73,12 @@ public class ThreadManagerContext implements Startable {
 				TopicMessageCreateCommand(forumMessageInputDTO));
 		transactions.put(forumMessageInputDTO.getMessageId(), domainMessage);
 
-		if (!isTransactionOk(forumMessageInputDTO.getMessageId())) {
-			logger.error(" create message error: " + forumMessageInputDTO.getMessageId());
-			logger.error(" create message error subject:" + forumMessageInputDTO.getMessageVO()
-					.getSubject());
-		} else {
-			//2.post thread in memmory
-			ThreadEventSourcingRole threadRole = (ThreadEventSourcingRole) roleAssinger.assign
+
+		//2.post thread in memmory
+		ThreadEventSourcingRole threadRole = (ThreadEventSourcingRole) roleAssinger.assign
 					(forumMessageInputDTO, new ThreadEventSourcingRoleImpl());
-			threadRole.postThread(domainMessage);
-		}
+		threadRole.postThread(domainMessage);
+
 
 	}
 

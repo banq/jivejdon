@@ -176,6 +176,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 	@OnCommand("addreplyForumMessage")
 	public void addChild(ForumMessageReply forumMessageReply) {
 		try {
+//			Thread.sleep(5000); test blocking async
 			// basic construct
 			forumMessageReply.setParentMessage(this);
 			forumMessageReply.setForumThread(this.getForumThread());
@@ -287,8 +288,6 @@ public class ForumMessage extends ForumModel implements Cloneable {
 
 	/**
 	 * this mesages is masked by admin
-	 *
-	 * @param forumMessage
 	 *
 	 * @return boolean
 	 */

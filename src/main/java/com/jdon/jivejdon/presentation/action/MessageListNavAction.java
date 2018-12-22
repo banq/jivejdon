@@ -1,9 +1,9 @@
 package com.jdon.jivejdon.presentation.action;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.model.ForumMessage;
+import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.presentation.form.MessageListForm;
-import com.jdon.jivejdon.service.ForumMessageService;
+import com.jdon.jivejdon.service.ForumService;
 import com.jdon.strutsutil.FormBeanUtil;
 import com.jdon.util.UtilValidate;
 import org.apache.logging.log4j.LogManager;
@@ -37,28 +37,33 @@ public class MessageListNavAction extends Action {
 		}
 
 		String messageId = request.getParameter("message");
-		if ((messageId == null) || (!UtilValidate.isInteger(messageId))) {
-			logger.error(" MessageListNavAction error : messageId is null");
+		String forumIds = request.getParameter("forum");
+		if ((messageId == null) || (!UtilValidate.isInteger(messageId)) || (forumIds == null)) {
+			logger.error(" MessageListNavAction error : message  or forum is null");
+			return mapping.findForward("failure");
+		}
+		ForumService forumService = (ForumService) WebAppUtil.getService("forumService", this
+				.servlet.getServletContext());
+		Forum forum = forumService.getForum(new Long(forumIds));
+		if (forum == null) {
+			logger.error(" MessageListNavAction error : not found forum =" + forumIds);
 			return mapping.findForward("failure");
 		}
 
-		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", this.servlet.getServletContext());
-		ForumMessage forumMessage = forumMessageService.getMessage(Long.parseLong(messageId));
-		if (forumMessage == null) {
-			logger.error(" MessageListNavAction error : not found forumMessage");
-			return mapping.findForward("failure");
+		Long lastMessageId = forum.getForumState().getLastPost().getMessageId();
+		Long threadId = forum.getForumState().getLastPost().getForumThread().getThreadId();
+		if (lastMessageId.longValue() >= (new Long(messageId)).longValue()) {
+			ActionRedirect redirect = new ActionRedirect(mapping.findForward("success"));
+			redirect.addParameter("thread", threadId);
+			redirect.addParameter("messageId", messageId);
+			return redirect;
+		} else {
+			messageListForm.setStart(0);// diaplay
+			request.setAttribute("start", 0);
+			request.setAttribute("forumId", new Long(forumIds));
+			request.setAttribute("messageId", new Long(messageId));
+			return mapping.findForward("navf");
 		}
-
-		long threadId = forumMessage.getForumThread().getThreadId();
-
-		messageListForm.setStart(0);// diaplay
-		request.setAttribute("start", 0);
-		request.setAttribute("threadId", threadId);
-		request.setAttribute("messageId", new Long(messageId));
-		ActionRedirect redirect = new ActionRedirect(mapping.findForward("success"));
-		redirect.addParameter("thread", threadId);
-		redirect.addParameter("messageId", messageId);
-		return redirect;
 
 	}
 

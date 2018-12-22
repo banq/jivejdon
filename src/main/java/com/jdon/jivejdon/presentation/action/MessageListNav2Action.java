@@ -48,8 +48,8 @@ public class MessageListNav2Action extends Action {
 			return mapping.findForward("failure");
 		}
 
-		String pMessageId = request.getParameter("pMessageId");
-		String messageId = request.getParameter("messageId");
+		String pMessageId = request.getParameter("pMessage");
+		String messageId = request.getParameter("message");
 		if ((pMessageId == null) || (!UtilValidate.isInteger(pMessageId)) || messageId == null) {
 			logger.error(" MessageListNavAction error : pMessageId or messageId is null");
 			return mapping.findForward("failure");
@@ -77,7 +77,7 @@ public class MessageListNav2Action extends Action {
 			return mapping.findForward("failure");
 		}
 
-		if ((new Long(messageId)).longValue() == lastMessageId.longValue()) {
+		if (lastMessageId.longValue() >= (new Long(messageId)).longValue()) {
 			ActionRedirect redirect = new ActionRedirect(mapping.findForward("success"));
 			redirect.addParameter("thread", threadId);
 			redirect.addParameter("start", start);
@@ -87,7 +87,7 @@ public class MessageListNav2Action extends Action {
 		} else {//forward to /forum/navf2.jsp to waiting a minute until all ok
 			messageListForm.setStart(start);// diaplay
 			request.setAttribute("start", start);
-			request.setAttribute("threadId", threadId);
+			request.setAttribute("pMessageId", new Long(pMessageId));
 			request.setAttribute("messageId", new Long(messageId));
 			return mapping.findForward("navf2");
 		}

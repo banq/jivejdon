@@ -6,15 +6,15 @@
 <%
   com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(1, request, response);
   int start = ((Integer) request.getAttribute("start")).intValue();
-  long threadId = ((Long) request.getAttribute("threadId")).longValue();
+  long pMessageId = ((Long) request.getAttribute("pMessageId")).longValue();
   long messageId = ((Long) request.getAttribute("messageId")).longValue();
 
 
   String url = request.getContextPath();
   if (start == 0)
-    url = url + "/forum/messageList.shtml?thread=" + threadId + "&messageId=" + messageId;
+    url = url + "/forum/messageNavList2.shtml?pMessage=" + pMessageId + "&message=" + messageId;
   else
-    url = url + "/forum/messageList.shtml?thread=" + threadId + "&start=" + start + "&messageId=" + messageId;
+    url = url + "/forum/messageNavList2.shtml?pMessage=" + pMessageId + "&start=" + start + "&message=" + messageId;
 
   Enumeration e = request.getParameterNames();
   while (e.hasMoreElements()) {

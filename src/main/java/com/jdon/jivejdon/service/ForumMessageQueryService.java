@@ -39,8 +39,6 @@ public interface ForumMessageQueryService {
 	 * get the thread collection include prev/current/next threads collection
 	 * 
 	 * @param currentThreadId
-	 * @param start
-	 * @param count
 	 * @return ListIterator
 	 */
 	List getThreadsPrevNext(Long currentThreadId);

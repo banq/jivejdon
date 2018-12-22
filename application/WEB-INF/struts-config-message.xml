@@ -117,6 +117,13 @@
             <forward name="success" path="/forum/messageList.jsp"/>
         </action>
 
+        <action path="/forum/messageForumList"
+                type="com.jdon.jivejdon.presentation.action.MessageForumListAction"
+                name="messageListForm" scope="request"
+                validate="false">
+            <forward name="success" path="/forum/messageList.jsp"/>
+        </action>
+
         <!-- All message List start  -->
 
         <action path="/forum/messageListAll"
@@ -149,6 +156,7 @@
                 name="messageListForm" scope="request"
                 validate="false">
             <forward name="success" path="/forum/messageList.shtml"/>
+            <forward name="navf" path="/forum/navf.jsp"/>
             <forward name="failure" path="/forum/"/>
         </action>
 

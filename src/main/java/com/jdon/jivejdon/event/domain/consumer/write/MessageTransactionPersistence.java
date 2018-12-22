@@ -38,6 +38,7 @@ public class MessageTransactionPersistence {
 		logger.debug("enter createTopicMessage");
 		ForumMessage forumMessagePostDTO = command.getForumMessageDTO();
 		try {
+//			Thread.sleep(5000); test async context
 			jtaTransactionUtil.beginTransaction();
 			messageRepository.createTopicMessage(forumMessagePostDTO);
 			logger.debug("createTopicMessage ok!");

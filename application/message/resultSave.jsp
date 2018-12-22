@@ -4,19 +4,10 @@
 <%@ taglib uri="/WEB-INF/MultiPages.tld" prefix="MultiPages" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<logic:notEmpty name="messageForm">
-    <logic:notEmpty name="messageForm" property="messageId">
-        <bean:define id="messageId" name="messageForm" property="messageId"  />
-        <bean:define id="action" name="messageForm" property="action"  />
-    </logic:notEmpty>
-</logic:notEmpty>
 
-<logic:notEmpty name="messageReplyForm">
-    <logic:notEmpty name="messageReplyForm" property="messageId">
-        <bean:define id="messageId" name="messageReplyForm" property="messageId"  />
-        <bean:define id="action" name="messageReplyForm" property="action"  />
-    </logic:notEmpty>
-</logic:notEmpty>
+<bean:define id="messageId" name="messageForm" property="messageId"/>
+<bean:define id="forum" name="messageForm" property="forum.forumId"/>
+<bean:define id="action" name="messageForm" property="action"/>
 
 
 <logic:messagesNotPresent>
@@ -24,7 +15,7 @@
         <logic:notEqual name="action" value="delete">
           帖子保存成功
           <script>
-              window.top.location.href = '<%=request.getContextPath()%>/forum/messageNavList.shtml?message=<bean:write name="messageId" />';
+              window.top.location.href = '<%=request.getContextPath()%>/forum/messageNavList.shtml?message=<bean:write name="messageId" />&forum=<bean:write name="forum" />';
           </script>
         </logic:notEqual>
         <logic:equal name="action" value="delete">

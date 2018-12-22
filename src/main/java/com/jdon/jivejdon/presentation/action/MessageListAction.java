@@ -15,11 +15,6 @@
  */
 package com.jdon.jivejdon.presentation.action;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
-
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.ForumMessage;
@@ -32,6 +27,10 @@ import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
 import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -117,7 +116,7 @@ public class MessageListAction extends ModelListAction {
 
 	}
 
-	private boolean[] getAuthedListForm(ActionForm actionForm, HttpServletRequest request) {
+	protected boolean[] getAuthedListForm(ActionForm actionForm, HttpServletRequest request) {
 		MessageListForm messageListForm = (MessageListForm) actionForm;
 		boolean[] authenticateds = new boolean[messageListForm.getList().size()];
 

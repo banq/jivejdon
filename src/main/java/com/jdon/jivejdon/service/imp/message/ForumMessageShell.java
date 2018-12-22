@@ -25,6 +25,7 @@ import com.jdon.jivejdon.auth.NoPermissionException;
 import com.jdon.jivejdon.auth.ResourceAuthorization;
 import com.jdon.jivejdon.manager.filter.InFilterManager;
 import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumMessageReply;
 import com.jdon.jivejdon.model.ForumThread;
@@ -106,7 +107,8 @@ public class ForumMessageShell implements ForumMessageService {
 		ForumMessage forumMessagePostDTO = (ForumMessage) em.getModelIF();
 		if (!prepareCreate(forumMessagePostDTO))
 			return null;
-		if (forumBuilder.getForum(forumMessagePostDTO.getForum().getForumId()) == null)
+		Forum forum = forumBuilder.getForum(forumMessagePostDTO.getForum().getForumId());
+		if (forum == null)
 			return null;
 		Long mIDInt = forumBuilder.getNextId(Constants.MESSAGE);
 		try {
