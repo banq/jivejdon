@@ -58,7 +58,6 @@ public class MessageListNavAction extends Action {
 			redirect.addParameter("messageId", messageId);
 			return redirect;
 		} else {
-			messageListForm.setStart(0);// diaplay
 			request.setAttribute("forumId", new Long(forumIds));
 			request.setAttribute("messageId", new Long(messageId));
 			return mapping.findForward("navf");

@@ -30,18 +30,6 @@ import javax.servlet.http.HttpServletResponse;
 public class MessageListNav2Action extends Action {
 	private final static Logger logger = LogManager.getLogger(MessageListNavAction.class);
 
-	public static void main(String[] args) {
-		int allCount = 1;
-		int count = 5;
-		while (true) {
-			int countcount = allCount / count;
-			int m = allCount % count;
-			System.out.printf("m=" + m);
-			allCount++;
-		}
-
-	}
-
 	/**
 	 * // Determine if we need to adjust the start index of the thread iterator.
 	 * // If we're passed a message ID, we need to show the thread page that //
@@ -78,11 +66,9 @@ public class MessageListNav2Action extends Action {
 		ForumThread thread = forumMessageParent.getForumThread();
 		long threadId = thread.getThreadId();
 		Long lastMessageId = thread.getState().getLastPost().getMessageId();
-
-		int start = locateTheMessage(new Long(threadId), lastMessageId, new Long(messageId),
-				messageListForm.getCount());
-
 		if (lastMessageId.longValue() >= (new Long(messageId)).longValue()) {
+			int start = locateTheMessage(new Long(threadId), lastMessageId, new Long(messageId),
+					messageListForm.getCount());
 			ActionRedirect redirect = new ActionRedirect(mapping.findForward("success"));
 			redirect.addParameter("thread", threadId);
 			redirect.addParameter("start", start);
@@ -90,7 +76,6 @@ public class MessageListNav2Action extends Action {
 			redirect.setAnchor(messageId);
 			return redirect;
 		} else {//forward to /forum/navf2.jsp to waiting a minute until all ok
-			messageListForm.setStart(start);// diaplay
 			request.setAttribute("pMessageId", new Long(pMessageId));
 			request.setAttribute("messageId", new Long(messageId));
 			return mapping.findForward("navf2");
@@ -105,12 +90,12 @@ public class MessageListNav2Action extends Action {
 				.getService("forumMessageQueryService", this.servlet.getServletContext());
 		PageIterator pi = forumMessageQueryService.getMessages(threadId, 0, count);
 		int allCount = pi.getAllCount();
-		int countcount = allCount / count;
+		int countdown = allCount / count;
 		int m = allCount % count;
 		if (m == 0)
-			return (--countcount) * count;
+			return (--countdown) * count;
 		else
-			return countcount * count;
+			return countdown * count;
 
 	}
 
