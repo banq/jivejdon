@@ -3,12 +3,10 @@ package com.jdon.jivejdon.presentation.action;
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumMessageReply;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.presentation.form.MessageListForm;
 import com.jdon.jivejdon.service.ForumMessageQueryService;
 import com.jdon.jivejdon.service.ForumMessageService;
-import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.strutsutil.FormBeanUtil;
 import com.jdon.util.UtilValidate;
 import org.apache.logging.log4j.LogManager;
@@ -31,6 +29,18 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class MessageListNav2Action extends Action {
 	private final static Logger logger = LogManager.getLogger(MessageListNavAction.class);
+
+	public static void main(String[] args) {
+		int allCount = 1;
+		int count = 5;
+		while (true) {
+			int countcount = allCount / count;
+			int m = allCount % count;
+			System.out.printf("m=" + m);
+			allCount++;
+		}
+
+	}
 
 	/**
 	 * // Determine if we need to adjust the start index of the thread iterator.
@@ -71,11 +81,6 @@ public class MessageListNav2Action extends Action {
 
 		int start = locateTheMessage(new Long(threadId), lastMessageId, new Long(messageId),
 				messageListForm.getCount());
-		if (start == -1) {
-			logger.error(" not locate lastMessageId = " + lastMessageId + " in threadId =" +
-					threadId);
-			return mapping.findForward("failure");
-		}
 
 		if (lastMessageId.longValue() >= (new Long(messageId)).longValue()) {
 			ActionRedirect redirect = new ActionRedirect(mapping.findForward("success"));
@@ -86,7 +91,6 @@ public class MessageListNav2Action extends Action {
 			return redirect;
 		} else {//forward to /forum/navf2.jsp to waiting a minute until all ok
 			messageListForm.setStart(start);// diaplay
-			request.setAttribute("start", start);
 			request.setAttribute("pMessageId", new Long(pMessageId));
 			request.setAttribute("messageId", new Long(messageId));
 			return mapping.findForward("navf2");
@@ -97,44 +101,17 @@ public class MessageListNav2Action extends Action {
 	 * by lastMessageId locate the new MessageId
 	 */
 	private int locateTheMessage(Long threadId, Long lastMessageId, Long messageId, int count) {
-		int start = 0;
 		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil
 				.getService("forumMessageQueryService", this.servlet.getServletContext());
-		PageIterator pi = forumMessageQueryService.getMessages(threadId, start, count);
+		PageIterator pi = forumMessageQueryService.getMessages(threadId, 0, count);
 		int allCount = pi.getAllCount();
-		int i = 1;
-		while (start < allCount) {// loop all
-			while (pi.hasNext()) {
-				Long messageIdT = (Long) pi.next();
-				if (messageIdT.longValue() == lastMessageId.longValue()) {
-					if (i == count || ((i + 1) == count && messageId.longValue() != lastMessageId
-							.longValue()))
-						return start++;
-					else
-						return start;
-				}
-			}
-			i++;
-			start = start + count;
-			pi = forumMessageQueryService.getMessages(threadId, start, count);
-		}
-		return -1;
-	}
+		int countcount = allCount / count;
+		int m = allCount % count;
+		if (m == 0)
+			return (--countcount) * count;
+		else
+			return countcount * count;
 
-	private void pollNewMessage(String messageId) {
-
-//		//waiting until com.jdon.jivejdon.event.domain.consumer.write.addReplyMessage
-//		// .AddReplyMessageZ add this mode to cache.
-		ContainerUtil containerUtil = (ContainerUtil) WebAppUtil
-				.getComponentInstance("containerUtil", this.servlet.getServletContext());
-		int waittimeout = 0;
-		while (!containerUtil.isInCache(messageId, ForumMessageReply.class) && waittimeout < 5) {
-			try {
-				Thread.sleep((waittimeout++) * 100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 
 }
