@@ -31,12 +31,12 @@ Docker:
 
 browser : http://192.168.99.100:8080
 
+
+Document
+------------------------------------
+
 english: [doc/install_en.txt](./doc/install_en.txt)
 
 chinese: [doc/install_cn.txt](./doc/install_cn.txt)
 
 
-Compile and Deploy
--------------------------------
-Please modify the value of 'deploy.dir' in build.properties, and then Run Ant:
-ant
