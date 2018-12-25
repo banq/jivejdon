@@ -46,7 +46,7 @@
         <init-param>
             <param-name>referrer.domain.namePattern</param-name>
             <param-value>
-                .*(http://127.0.0.1|http://localhost|https://www.jdon.com|http://www.jdon.com|http://10.0.2.2|http://110.76.43.83).*
+                .*(http://192.168|http://127.0.0.1|http://localhost|https://www.jdon.com|http://www.jdon.com|http://10.0.2.2|http://110.76.43.83).*
             </param-value>
         </init-param>
         <init-param><!-- exclude this robot -->
@@ -178,7 +178,7 @@
         </servlet-class>
         <init-param>
             <param-name>referrer.domain.namePattern</param-name>
-            <param-value>.*(jdon|localhost|127.0.0.1|110.76.43.83).*</param-value>
+            <param-value>.*(jdon|localhost|127.0.0.1|110.76.43.83|192.168).*</param-value>
         </init-param>
         <init-param>
             <param-name>referrer.robotCheck.userAgentPattern</param-name>

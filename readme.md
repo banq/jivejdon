@@ -22,6 +22,14 @@ Clean architecture
 
 Install
 ------------------------------------
+Docker:
+1. mvn package
+2. docker build -t jivejdonweb -f Dockerfile.db .
+3. docker build -t jivejdonweb -f Dockerfile.web .
+4. docker run  -p 8080:8080 jivejdonweb
+
+browser : http://192.168.99.100:8080
+
 english: [doc/install_en.txt](./doc/install_en.txt)
 
 chinese: [doc/install_cn.txt](./doc/install_cn.txt)

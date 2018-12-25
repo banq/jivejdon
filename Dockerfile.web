@@ -1,0 +1,38 @@
+
+FROM tomcat:8.5-jre8-alpine
+
+# add JNDI config 
+ADD docker/tomcat/context.xml /usr/local/tomcat/conf/
+
+#add jass lib and config
+ADD docker/tomcat/server.xml /usr/local/tomcat/conf/
+ADD docker/tomcat/jaas.config /usr/local/tomcat/conf/
+ADD docker/tomcat/jaas.jar /usr/local/tomcat/lib/
+
+#add javamail
+ADD docker/tomcat/activation.jar /usr/local/tomcat/lib/
+ADD docker/tomcat/email.jar      /usr/local/tomcat/lib/
+
+
+
+# # add MySQL JDBC driver jar
+ADD docker/tomcat/mysql-connector-java-5.1.36-bin.jar /usr/local/tomcat/lib/
+RUN rm -rf /usr/local/tomcat/webapps/
+ADD target/ROOT.war /usr/local/tomcat/webapps/
+# # create mount point for volume with application
+WORKDIR /usr/local/tomcat/webapps/
+
+
+# # add tomcat jpda debugging environmental variables
+ENV JPDA_OPTS="-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n"
+ENV JPDA_ADDRESS="8000"
+ENV JPDA_TRANSPORT="dt_socket"
+
+# # start tomcat with remote debugging
+ EXPOSE 8080 8000
+
+ WORKDIR /usr/local/tomcat/bin
+ RUN ls -l
+ RUN JAVA_OPTS="-XX:+UseStringCache   -Djava.security.auth.login.config=../conf/jaas.config"
+ CMD ["catalina.sh", "jpda", "run"] 
+
