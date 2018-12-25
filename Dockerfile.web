@@ -9,11 +9,8 @@ ADD docker/tomcat/server.xml /usr/local/tomcat/conf/
 ADD docker/tomcat/jaas.config /usr/local/tomcat/conf/
 ADD docker/tomcat/jaas.jar /usr/local/tomcat/lib/
 
-#add javamail
-ADD docker/tomcat/activation.jar /usr/local/tomcat/lib/
+#add javamail and activation.jar
 ADD docker/tomcat/email.jar      /usr/local/tomcat/lib/
-
-
 
 # # add MySQL JDBC driver jar
 ADD docker/tomcat/mysql-connector-java-5.1.36-bin.jar /usr/local/tomcat/lib/

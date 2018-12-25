@@ -24,9 +24,10 @@ Install
 ------------------------------------
 Docker:
 1. mvn package
-2. docker build -t jivejdonweb -f Dockerfile.db .
-3. docker build -t jivejdonweb -f Dockerfile.web .
-4. docker run  -p 8080:8080 jivejdonweb
+2. docker build -t jivejdondb -f Dockerfile.db .
+3. docker run  -p 3306:3306  -e MYSQL_ROOT_PASSWORD=123456 jivejdondb
+4. docker build -t jivejdonweb -f Dockerfile.web .
+5. docker run  -p 8080:8080 jivejdonweb
 
 browser : http://192.168.99.100:8080
 
