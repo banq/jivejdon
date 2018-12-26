@@ -48,7 +48,7 @@ public class HomePageComparator implements Comparator<ForumThread> {
 
 		double t = System.currentTimeMillis() - thread.getState().getModifiedDate2() + 1000;
 
-		double G = 5;
+		double G = 3;
 		double tg = Math.pow(t, G);
 		return p / (tg + 1);
 	}
