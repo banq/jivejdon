@@ -73,6 +73,8 @@ public class MessageListNav2Action extends Action {
 			redirect.addParameter("thread", threadId);
 			redirect.addParameter("start", start);
 			redirect.addParameter("messageId", messageId);
+			redirect.addParameter("nocache", "true");
+			redirect.addParameter("ver", java.util.UUID.randomUUID().toString());
 			redirect.setAnchor(messageId);
 			return redirect;
 		} else {//forward to /forum/navf2.jsp to waiting a minute until all ok

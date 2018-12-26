@@ -15,23 +15,21 @@
  */
 package com.jdon.jivejdon.presentation.action.util;
 
-import java.util.Calendar;
-import java.util.Date;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.service.ForumMessageQueryService;
 import com.jdon.jivejdon.util.ToolsUtil;
 import com.jdon.strutsutil.FormBeanUtil;
 import com.jdon.util.UtilValidate;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ThreadEtagFilter extends Action {
 	public final static String NEWLASMESSAGE = "NEWLASMESSAGE";
@@ -46,14 +44,15 @@ public class ThreadEtagFilter extends Action {
 	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		// browser cache expire time; default is one week
-		int expire = 5 * 24 * 60 * 60;
 		if (request.getParameter("nocache") != null) { // for just modified and
-			// view it
-			expire = 0;
+			response.setHeader("Pragma", "No-cache");
+			response.setHeader("Cache-Control", "no-cache");
+			response.setDateHeader("Expires", 0);
 			return actionMapping.findForward(FormBeanUtil.FORWARD_SUCCESS_NAME);
 		}
 
+		// browser cache expire time; default is one week
+		int expire = 5 * 24 * 60 * 60;
 		String threadId = request.getParameter("thread");
 		if ((threadId == null) || (!UtilValidate.isInteger(threadId)) || threadId.length()>10) {
 			response.sendError(404);
