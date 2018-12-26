@@ -20,13 +20,13 @@ import com.jdon.annotation.Component;
 import com.jdon.jivejdon.model.realtime.ForumMessageDTO;
 import com.jdon.jivejdon.model.realtime.Notification;
 import com.jdon.jivejdon.util.ThreadTimer;
+import com.jdon.jivejdon.util.ToolsUtil;
 import com.jdon.util.StringUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 
-import java.net.InetAddress;
 import java.net.URL;
 
 @Component("blogPingClient")
@@ -62,11 +62,7 @@ public class BlogPingClient {
 
 		public void run() {
 			try {
-				String clientIp = InetAddress.getLocalHost().getHostAddress();
-				if (clientIp.indexOf("192.168") != -1 || clientIp.indexOf("127.0.0.1") != -1) {
-					logger.error(clientIp + " is not server, so not send allPing");
-					return;
-				}
+				if (ToolsUtil.isDebug()) return;
 				for (int i = 0; i < blogPingServerUrl.getServiceUrl().length; i++) {
 					sendPing(notification, blogPingServerUrl.getServiceUrl()[i]);
 				}

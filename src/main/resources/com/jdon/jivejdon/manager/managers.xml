@@ -274,8 +274,8 @@
 
     <component name="threadTimer"
 			class="com.jdon.jivejdon.util.ThreadTimer">
-			<constructor value="180" /><!-- seconds -->
-		    <constructor value="20" /><!--  -->
+        <constructor value="1"/><!-- seconds -->
+        <constructor value="500"/><!--  -->
 	</component>    
     
 		<component name="blogPingTempParams"

@@ -15,10 +15,13 @@
  */
 package com.jdon.jivejdon.util;
 
+import com.jdon.util.UtilDateTime;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.net.UnknownHostException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -28,12 +31,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.jdon.util.UtilDateTime;
 
 /**
  * tools for this project.
@@ -45,6 +42,19 @@ public class ToolsUtil {
 	private static final long ROOT_PARENTMESSAGEID = 0;
 
 	private static final char[] zeroArray = "0000000000000000".toCharArray();
+	/**
+	 * Used by the hash method.
+	 */
+	private static MessageDigest digest = null;
+
+	public static boolean isDebug() throws UnknownHostException {
+		String clientIp = InetAddress.getLocalHost().getHostAddress();
+		if (clientIp.indexOf("192.168") != -1 || clientIp.indexOf("127.0.0.1") != -1) {
+			System.err.println(clientIp + " is not server, so not send allPing");
+			return true;
+		}
+		return false;
+	}
 
 	public static final String zeroPadString(String string, int length) {
 		if (string == null || string.length() > length) {
@@ -77,7 +87,7 @@ public class ToolsUtil {
 
 	/**
 	 * the String can be as the key of cache
-	 * 
+	 *
 	 * @param date
 	 * @return a long string with no Hour/Minute/Mills
 	 */
@@ -91,7 +101,7 @@ public class ToolsUtil {
 
 	/**
 	 * Converts a date String and a time String into a Date
-	 * 
+	 *
 	 * @param date
 	 *            The date String: YYYY-MM-DD
 	 * @param time
@@ -182,11 +192,6 @@ public class ToolsUtil {
 		}
 		return hourStr;
 	}
-
-	/**
-	 * Used by the hash method.
-	 */
-	private static MessageDigest digest = null;
 
 	public synchronized static final String hash(String data) {
 		if (digest == null) {

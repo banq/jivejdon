@@ -40,9 +40,9 @@ import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
 @Consumer("postThread")
 public class ThreadPostListener implements DomainEventHandler {
 
-	private ForumFactory forumFactory;
-	private RoleAssigner roleAssigner;
-	private EventBusHandler eventHandler;
+	private final ForumFactory forumFactory;
+	private final RoleAssigner roleAssigner;
+	private final EventBusHandler eventHandler;
 
 	public ThreadPostListener(RoleAssigner roleAssigner, ForumFactory forumFactory, MessagePageIteratorSolver messagePageIteratorSolver) {
 		super();
