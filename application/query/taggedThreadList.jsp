@@ -30,9 +30,8 @@ pageContext.setAttribute("title", titleStr);
         <h3>#<bean:write  name="TITLE"/></h3>
       </logic:notEmpty>
         <a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=2&subscribeId=<bean:write name="tagID" /> " target="_blank"  rel="nofollow"><i class="fa fa-heart"></i></a>     
-    <%--     &nbsp;&nbsp;
+       &nbsp;&nbsp;
 		<a href="//cdn.jdon.com/rss/tag/<bean:write name="tagID" />"><i class="fa fa-feed"></i></a>
-		--%> 
     &nbsp;&nbsp;
         <a href="<%=request.getContextPath()%>/tags">更多分类</a>
 		  

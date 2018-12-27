@@ -255,6 +255,17 @@ public class ForumThread extends ForumModel {
 		return false;
 	}
 
+	/**
+	 * after inserted into DB, change the state, so it is Eventually consistent;
+	 * in MessageListNav2Action, client will be waiting  until Eventually consistent!
+	 *
+	 * @param forumMessageReply
+	 */
+	public void changeState(ForumMessageReply forumMessageReply) {
+		this.threadStateManager.addNewMessage(this, forumMessageReply);
+		this.forum.addNewMessage(forumMessageReply);
+	}
+
 	public void addNewMessage(ForumMessage forumMessageParent,
 							  ForumMessageReply forumMessageReply) {
 		try {
@@ -263,8 +274,9 @@ public class ForumThread extends ForumModel {
 			forumMessageReply.setForumThread(this);
 
 			ForumMessage oldmessage = this.getState().getLastPost();
-			this.threadStateManager.addNewMessage(this, forumMessageReply);
-			this.forum.addNewMessage(forumMessageReply);
+			//removeed to changeState
+//			this.threadStateManager.addNewMessage(this, forumMessageReply);
+//			this.forum.addNewMessage(forumMessageReply);
 			getForumThreadTreeModel().addChildAction(forumMessageReply);
 
 			notifyLobby(forumMessageReply);

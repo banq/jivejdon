@@ -102,7 +102,7 @@
     
 
 <script>
-window.onload = function() {    
+
      load(getContextPath() +'/forum/forumListJSON.shtml', function(xhr) {
      var dataArray = JSON.parse(xhr.responseText);  
          for (var i in dataArray){  
@@ -113,7 +113,7 @@ window.onload = function() {
          
         }  
     });
-}
+
 function forwardNewPage(fmainurl, fmainPars, anchor){  
      // infoDiagClose();       
       var url = fmainurl + fmainPars + "#" + anchor;   

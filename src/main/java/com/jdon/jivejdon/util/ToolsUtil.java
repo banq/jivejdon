@@ -50,7 +50,7 @@ public class ToolsUtil {
 	public static boolean isDebug() throws UnknownHostException {
 		String clientIp = InetAddress.getLocalHost().getHostAddress();
 		if (clientIp.indexOf("192.168") != -1 || clientIp.indexOf("127.0.0.1") != -1) {
-			System.err.println(clientIp + " is not server, so not send allPing");
+			System.err.println(clientIp + " is not server, so not send");
 			return true;
 		}
 		return false;

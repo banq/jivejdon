@@ -48,5 +48,8 @@ public class AddReplyMessageZ implements DomainEventHandler {
 		forumMessageReply.finishDTO();
 		event.getDomainMessage().clear();
 		containerUtil.addModeltoCache(forumMessageReply.getMessageId(), forumMessageReply);
+		//update state for Eventually consistent so MessageListNav2Action can find its state has
+		// updated
+		forumMessageReply.getForumThread().changeState(forumMessageReply);
 	}
 }

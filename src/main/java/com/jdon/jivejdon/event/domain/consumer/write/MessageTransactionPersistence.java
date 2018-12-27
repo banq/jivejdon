@@ -53,6 +53,12 @@ public class MessageTransactionPersistence {
 
 	}
 
+	/**
+	 * called by @Consumer("addReplyMessage") in AddReplyMessage that is listerner.
+	 *
+	 * @param forumMessageReplyPostDTO
+	 * @throws Exception
+	 */
 	public void insertReplyMessage(ForumMessageReply forumMessageReplyPostDTO) throws Exception {
 		logger.debug("enter createReplyMessage");
 		if ((forumMessageReplyPostDTO.getParentMessage() == null) || (forumMessageReplyPostDTO.getParentMessage().getMessageId() == null)) {
@@ -60,6 +66,7 @@ public class MessageTransactionPersistence {
 			return;
 		}
 		try {
+//			Thread.sleep(5000);
 			jtaTransactionUtil.beginTransaction();
 			messageRepository.createReplyMessage(forumMessageReplyPostDTO);
 			logger.debug("createReplyMessage ok!");

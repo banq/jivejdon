@@ -30,12 +30,6 @@ import javax.servlet.http.HttpServletResponse;
 public class MessageListNav2Action extends Action {
 	private final static Logger logger = LogManager.getLogger(MessageListNavAction.class);
 
-	/**
-	 * // Determine if we need to adjust the start index of the thread iterator.
-	 * // If we're passed a message ID, we need to show the thread page that //
-	 * messageID is contained on. this method has not good performance. not
-	 * frequency call it
-	 */
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest
 			request, HttpServletResponse response) throws Exception {
 		MessageListForm messageListForm = (MessageListForm) FormBeanUtil.lookupActionForm(request,
@@ -65,6 +59,7 @@ public class MessageListNav2Action extends Action {
 
 		ForumThread thread = forumMessageParent.getForumThread();
 		long threadId = thread.getThreadId();
+		//AddReplyMessageZ will update state
 		Long lastMessageId = thread.getState().getLastPost().getMessageId();
 		if (lastMessageId.longValue() >= (new Long(messageId)).longValue()) {
 			int start = locateTheMessage(new Long(threadId), lastMessageId, new Long(messageId),
