@@ -66,7 +66,7 @@ public class MessageTransactionPersistence {
 			return;
 		}
 		try {
-//			Thread.sleep(5000);
+//			Thread.sleep(10000);
 			jtaTransactionUtil.beginTransaction();
 			messageRepository.createReplyMessage(forumMessageReplyPostDTO);
 			logger.debug("createReplyMessage ok!");
