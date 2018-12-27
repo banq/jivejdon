@@ -7,11 +7,11 @@
   String url = request.getContextPath() + "/forum/messageNavList.shtml?forum=" + forumId + "&message=" + messageId;
   url = url + "&ver=" + java.util.UUID.randomUUID().toString();
 %>
-<%--
-response.setStatus(301);
-  response.setHeader("Location", url);
-response.setHeader( "Connection", "close" );
---%>
+<%
+response.setHeader("Pragma", "No-cache");
+response.setHeader("Cache-Control", "no-cache");
+response.setDateHeader("Expires", 0);
+%>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
