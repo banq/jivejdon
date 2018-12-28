@@ -28,8 +28,6 @@ import org.apache.struts.action.ActionMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Calendar;
-import java.util.Date;
 
 public class ThreadEtagFilter extends Action {
 	public final static String NEWLASMESSAGE = "NEWLASMESSAGE";
@@ -51,8 +49,8 @@ public class ThreadEtagFilter extends Action {
 			return actionMapping.findForward(FormBeanUtil.FORWARD_SUCCESS_NAME);
 		}
 
-		// browser cache expire time; default is one day
-		int expire = 1 * 24 * 60 * 60;
+		// browser cache expire time; default is one hour
+		int expire = 1 * 60 * 60;
 		String threadId = request.getParameter("thread");
 		if ((threadId == null) || (!UtilValidate.isInteger(threadId)) || threadId.length()>10) {
 			response.sendError(404);
@@ -75,15 +73,15 @@ public class ThreadEtagFilter extends Action {
 		long modelLastModifiedDate = forumThread.getState().getModifiedDate2();
 
 		// in 15 days the message expire will be shorter;
-		Calendar c = Calendar.getInstance();
-		c.setTime(new Date(modelLastModifiedDate));
-		c.add(Calendar.DATE, 15);
-
-		Calendar tc = Calendar.getInstance();
-		tc.setTime(new Date());
-		if (c.after(tc)) {
-			expire = 24 * 60 * 60;
-		}
+//		Calendar c = Calendar.getInstance();
+//		c.setTime(new Date(modelLastModifiedDate));
+//		c.add(Calendar.DATE, 15);
+//
+//		Calendar tc = Calendar.getInstance();
+//		tc.setTime(new Date());
+//		if (c.after(tc)) {
+//			expire = 24 * 60 * 60;
+//		}
 
 		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
 			return null;// response is 304
