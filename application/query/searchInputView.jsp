@@ -17,8 +17,8 @@
     function loadAcJS(thisId) {
         if (typeof(ac) == 'undefined') {
             $LAB
-                .script('/common/js/prototype.js')
-                .script('/common/js/autocomplete.js')
+                .script('//cdn.jdon.com/common/js/prototype.js')
+                .script('//cdn.jdon.com/common/js/autocomplete.js')
                 .wait(function () {
                     ac(thisId, '<%=request.getContextPath()%>');
                 })
@@ -36,8 +36,8 @@
     <tbody>
     <tr>
         <td align="middle">
-            <html:form action="/message/searchThreadAction.shtml" method="post"
-                       styleClass="search" onsubmit="changeAction(this);">
+          <html:form action="/message/searchThreadAction.shtml" method="post"
+                     styleClass="search" onsubmit="changeAction(this);">
                 <input type="text" name="query"
                        value="<bean:write name="query"/>" id="queryId"
                        onfocus="javascript:loadAcJS(this.id)" size="40"/>

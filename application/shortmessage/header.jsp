@@ -20,8 +20,8 @@ response.setDateHeader("Expires", 0);
 </head>
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="stylesheet" href="<html:rewrite page="/shortmessage/shortmsg_css.jsp"/>"	type="text/css">
-<link rel="stylesheet" href="/common/jivejdon5.css" type="text/css" />
+<link rel="stylesheet" href="//cdn.jdon.com/common/jivejdon5.css" type="text/css" />
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<script language="javascript" src="/common/js/prototype.js"></script>
+<script language="javascript" src="//cdn.jdon.com/common/js/prototype.js"></script>
 
 <body >

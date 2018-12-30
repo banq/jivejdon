@@ -2,7 +2,7 @@
 function loadPrototypeJS(myfunc){
   if (typeof(AJAX) == 'undefined') {
      $LAB
-     .script('/common/js/prototype.js')
+     .script('//cdn.jdon.com/common/js/prototype.js')
      .wait(function(){
           myfunc();          
      })     

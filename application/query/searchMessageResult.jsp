@@ -14,9 +14,6 @@
 %>
 <%@ include file="../common/IncludeTop.jsp" %>
 
-<script type="text/javascript" src="/common/js/prototype.js"></script>
-<script language="javascript" src="/common/js/autocomplete.js"></script>
-
 <script type="text/JavaScript">
     function changeAction(theForm) {
 
@@ -26,17 +23,6 @@
             theForm.action = '<%=request.getContextPath()%>/message/searchAction.shtml'
 
         }
-    }
-
-    function loadAcJS(thisId) {
-        if (typeof(ac) == 'undefined') {
-            $LAB
-                .script('/common/js/autocomplete.js')
-                .wait(function () {
-                    ac(thisId, '<%=request.getContextPath()%>');
-                })
-        } else
-            ac(thisId, '<%=request.getContextPath()%>');
     }
 
 </script>
@@ -49,11 +35,10 @@
     <tbody>
     <tr>
         <td align="middle">
-            <html:form action="/message/searchThreadAction.shtml" method="post"
-                       styleClass="search" onsubmit="changeAction(this);">
+          <html:form action="/message/searchThreadAction.shtml" method="post"
+                     styleClass="search" onsubmit="changeAction(this);">
                 <input type="text" name="query"
-                       value="<bean:write name="query"/>" id="queryId"
-                       onfocus="javascript:loadAcJS(this.id)" size="40"/>
+                       value="<bean:write name="query"/>" id="queryId" size="40"/>
                 <html:submit value="道场搜索"/>
                 <input type="radio" name="view"/>查询主题(不包括回贴)
                 <input type="radio" name="view" checked="checked"/>查询帖
@@ -74,7 +59,7 @@
             contextpath = "<%=request.getContextPath()%>";
         </script>
         <script language="javascript"
-                src="<html:rewrite page="/forum/js/threadList.js"/>"></script>
+                src="//cdn.jdon.com/forum/js/threadList.js"></script>
         <link href="<html:rewrite page="/forum/css/mListAll_css.jsp"/>"
               rel="stylesheet"
               type="text/css"/>
