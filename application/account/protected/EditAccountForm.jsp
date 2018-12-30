@@ -10,10 +10,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>
 编辑注册资料
-</title> 
-<link rel="stylesheet" href="//cdn.jdon.com/common/jivejdon5.css" type="text/css" />
+</title>
+  <link rel="stylesheet" href="//cdn.jdon.com/common/jivejdon5.css" type="text/css"/>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<script type="text/javascript" src="//cdn.jdon.com/common/js/prototype.js"></script>
+  <script type="text/javascript" src="//cdn.jdon.com/common/js/prototype.js"></script>
 <body>
 <html:errors/>
 

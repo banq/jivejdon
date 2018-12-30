@@ -55,8 +55,8 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCache(expire, modelLastModified
     String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
 %>
 <link rel="canonical" href="<%=domainUrl %>/blog/<bean:write name="accountProfileForm" property="account.username"/>" />
-<link href="//cdn.jdon.com/common/jivejdon5.css" rel="stylesheet" type="text/css" />
-<link href="//cdn.jdon.com/common/blog/themes/default/style/blog.css" rel="stylesheet" type="text/css" />
+  <link href="//cdn.jdon.com/common/jivejdon5.css" rel="stylesheet" type="text/css"/>
+  <link href="//cdn.jdon.com/common/blog/themes/default/style/blog.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="https://cdn.jdon.com/common/js/prototype.js"></script>
 <script type="text/javascript" src="<html:rewrite page="/account/protected/js/account.jsp"/>"></script>
 <script >
@@ -118,7 +118,7 @@ var openPopUpBlogW = function(){
    </div> 
 </div> 
 <div class="headbar"> 
-   <div class="headbar_list1"><bean:write name="accountProfileForm" property="account.username"/></div> 
+   <div class="headbar_list1"><bean:write name="accountProfileForm" property="account.username"/></div>
 </div>
 <div class="menubar">
   <div class="menubar_left">
