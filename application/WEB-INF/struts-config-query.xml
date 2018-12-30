@@ -59,7 +59,7 @@
         </action>
 
         <!-- search threads  -->
-        <action path="/query/searchThreadAction"
+        <action path="/message/searchThreadAction"
                 type="com.jdon.jivejdon.presentation.action.query.SearchThreadAction"
                 name="messageListForm" scope="request"
                 validate="false">

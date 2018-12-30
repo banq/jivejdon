@@ -51,7 +51,7 @@
     <tbody>
     <tr>
         <td align="middle">
-            <html:form action="/query/searchThreadAction.shtml" method="post"
+            <html:form action="/message/searchThreadAction.shtml" method="post"
                        styleClass="search" onsubmit="changeAction(this);">
                 <input type="text" name="query"
                        value="<bean:write name="query"/>" id="queryId"
@@ -72,7 +72,7 @@
         <div class="tres">
 
           <MultiPages:pager actionFormName="messageListForm"
-                            page="/query/searchThreadAction.shtml"
+                            page="/message/searchThreadAction.shtml"
                             paramId="query" paramName="query">
             <MultiPages:prev name=" 上一页 "/>
 
@@ -132,7 +132,7 @@
         <div class="tres">
 
           <MultiPages:pager actionFormName="messageListForm"
-                            page="/query/searchThreadAction.shtml"
+                            page="/message/searchThreadAction.shtml"
                             paramId="query" paramName="query">
             <MultiPages:prev name=" 上一页 "/>
 

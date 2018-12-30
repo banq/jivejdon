@@ -49,7 +49,7 @@
     <tbody>
     <tr>
         <td align="middle">
-            <html:form action="/query/searchThreadAction.shtml" method="post"
+            <html:form action="/message/searchThreadAction.shtml" method="post"
                        styleClass="search" onsubmit="changeAction(this);">
                 <input type="text" name="query"
                        value="<bean:write name="query"/>" id="queryId"

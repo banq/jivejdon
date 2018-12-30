@@ -199,11 +199,11 @@
 
     <rule>
         <from>^/key/(\w+)$</from>
-        <to>/query/searchThreadAction.shtml?query=$1</to>
+        <to>/message/searchThreadAction.shtml?query=$1</to>
     </rule>
     <rule>
         <from casesensitive="false">^/tag/gb/(\w+)$</from>
-        <to>/query/searchThreadAction.shtml?useGBK=on&amp;query=$1</to>
+        <to>/message/searchThreadAction.shtml?useGBK=on&amp;query=$1</to>
     </rule>
     <rule>
         <from>^/query/hotkeys$</from>
