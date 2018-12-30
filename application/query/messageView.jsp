@@ -15,7 +15,7 @@
 
         <div class="tres">
             符合查询结果共有<b><bean:write name="messageListForm" property="allCount"/></b>贴
-            <MultiPages:pager actionFormName="messageListForm" page="/query/threadViewQuery.shtml" name="paramMaps">
+          <MultiPages:pager actionFormName="messageListForm" page="/message/threadViewQuery.shtml" name="paramMaps">
                 <MultiPages:prev name=" 上一页 "/>
                 <MultiPages:index displayCount="3"/>
                 <MultiPages:next name=" 下一页 "/>
@@ -114,8 +114,8 @@
             符合查询结果共有<b><bean:write name="messageListForm" property="allCount"/></b>贴
             <a href="JavaScript:void(0);" onmouseover="loadWLJSWithP(this, initTooltipWL)"
                class="tooltip html_tooltip_content_go">Go</a>
-            <MultiPages:pager actionFormName="messageListForm" page="/query/threadViewQuery.shtml"
-                              name="paramMaps">
+          <MultiPages:pager actionFormName="messageListForm" page="/message/threadViewQuery.shtml"
+                            name="paramMaps">
                 <MultiPages:prev name=" 上一页 "/>
                 <MultiPages:index displayCount="3"/>
                 <MultiPages:next name=" 下一页 "/>

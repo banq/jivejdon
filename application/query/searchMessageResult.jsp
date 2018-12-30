@@ -21,9 +21,9 @@
     function changeAction(theForm) {
 
         if (theForm.view[0].checked) {
-            theForm.action = '<%=request.getContextPath()%>/query/searchThreadAction.shtml'
+            theForm.action = '<%=request.getContextPath()%>/message/searchThreadAction.shtml'
         } else if (theForm.view[1].checked) {
-            theForm.action = '<%=request.getContextPath()%>/query/searchAction.shtml'
+            theForm.action = '<%=request.getContextPath()%>/message/searchAction.shtml'
 
         }
     }
@@ -81,8 +81,8 @@
 
         <div class="tres">
           <MultiPages:pager actionFormName="messageListForm"
-                            page="/query/searchAction.shtml"
-							paramId="query" paramName="query">
+                            page="/message/searchAction.shtml"
+                            paramId="query" paramName="query">
             <MultiPages:prev name=" 上一页 "/>
 
             <MultiPages:next name=" 下一页 "/>
@@ -188,8 +188,8 @@
 
         <div class="tres">
           <MultiPages:pager actionFormName="messageListForm"
-                            page="/query/searchAction.shtml"
-							paramId="query" paramName="query">
+                            page="/message/searchAction.shtml"
+                            paramId="query" paramName="query">
             <MultiPages:prev name=" 上一页 "/>
 
             <MultiPages:next name=" 下一页 "/>

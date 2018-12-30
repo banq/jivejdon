@@ -3,7 +3,7 @@
 <script type="text/javascript" src="/common/js/calendar.js"></script>
 <bean:parameter name="query" id="query" value=""/>
 
-<html:form action="/query/threadViewQuery.shtml" method="post" onsubmit="return loadWLJSWithP(this, checkPost);">
+<html:form action="/message/threadViewQuery.shtml" method="post" onsubmit="return loadWLJSWithP(this, checkPost);">
     <html:hidden name="queryForm" property="queryType" value="HOT2"/>
     <table class="table table-striped">
         <tbody>
@@ -36,7 +36,7 @@
 
 </html:form>
 <br>
-<html:form action="/query/threadViewQuery.shtml" method="post" onsubmit="return checkPost(this);">
+<html:form action="/message/threadViewQuery.shtml" method="post" onsubmit="return checkPost(this);">
     <html:hidden name="queryForm" property="queryType" value="messageQueryAction"/>
     <table class="table table-striped">
         <tbody>

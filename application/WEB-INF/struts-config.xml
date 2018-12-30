@@ -11,8 +11,9 @@
     <forward name="forum" path="/forum/threadList.shtml"/>	
     <forward name="sign" path="/account/sign.shtml"/>	
     <forward name="hotlist" path="/query/popularlist.shtml"/>
-    <forward name="profile" path="/account/accountProfile.shtml"/>	  	
-    <forward name="usermessages" path="/query/threadViewQuery.shtml?queryType=userMessageQueryAction"/>	
+      <forward name="profile" path="/account/accountProfile.shtml"/>
+      <forward name="usermessages"
+               path="/message/threadViewQuery.shtml?queryType=userMessageQueryAction"/>
     <forward name="shortmessage" path="/shortmessage/shortmessage.jsp"></forward>
   </global-forwards>
     

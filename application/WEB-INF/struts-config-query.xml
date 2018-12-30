@@ -13,9 +13,9 @@
         <form-bean name="listForm" type="com.jdon.strutsutil.ModelListForm"/>
     </form-beans>
 
-    <!-- jivejdon/query/threadViewQuery.shtml?dateRange=3650&messageReplyCountWindow=1&queryType=HOT1  -->
+    <!-- jivejdon/message/threadViewQuery.shtml?dateRange=3650&messageReplyCountWindow=1&queryType=HOT1  -->
     <action-mappings>
-        <action path="/query/threadViewQuery"
+        <action path="/message/threadViewQuery"
                 type="com.jdon.jivejdon.presentation.action.query.QueryViewAction"
                 name="queryForm" scope="request"
                 validate="false">
@@ -51,7 +51,7 @@
         </action>
 
         <!-- search message  -->
-        <action path="/query/searchAction"
+        <action path="/message/searchAction"
                 type="com.jdon.jivejdon.presentation.action.query.SearchAction"
                 name="messageListForm" scope="request"
                 validate="false">

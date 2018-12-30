@@ -2,8 +2,6 @@
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-
-
 <bean:define id="title"  value=" 用户登录" />
 <!doctype html>
 <html>
@@ -17,9 +15,7 @@
 </title>
 <link rel="stylesheet" href="https://cdn.jdon.com/common/jivejdon5.css" type="text/css" />
 <link rel="stylesheet" href="https://cdn.jdon.com/common/portlet.css" type="text/css">
-
-   
-
+</head>
 <script>
 try{
   if (window.parent.callLogin){
@@ -32,10 +28,7 @@ try{
      }
     }catch(e){}
 }
-
 </script>
-
-
 <table border="0" cellpadding="0" cellspacing="0" width="450" align='center'>
 <tr>
 <td>
@@ -104,13 +97,8 @@ try{
   </tr>
   
 </table>
-
-  
-
 </form>
 <p></p>
-
-
 </td>
 </tr>
 </table>
@@ -123,8 +111,6 @@ try{
 </td></tr></table>
 
 <script>
-
-
 function Juge(theForm)
 {  
  if (theForm.j_username.value == "")
@@ -141,9 +127,6 @@ function Juge(theForm)
   }
   
 }
-
-
 </script>    
-
 </body>
 </html>

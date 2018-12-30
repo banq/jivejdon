@@ -23,9 +23,9 @@
     function changeAction(theForm) {
 
         if (theForm.view[0].checked) {
-            theForm.action = '<%=request.getContextPath()%>/query/searchThreadAction.shtml'
+            theForm.action = '<%=request.getContextPath()%>/message/searchThreadAction.shtml'
         } else if (theForm.view[1].checked) {
-            theForm.action = '<%=request.getContextPath()%>/query/searchAction.shtml'
+            theForm.action = '<%=request.getContextPath()%>/message/searchAction.shtml'
 
         }
     }

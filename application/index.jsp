@@ -77,7 +77,7 @@
 					<div class="heading"></div>
 					<div class="content">
 						<ul class="list-inline">
-							<form role="form" class="form-horizontal" method="post" action="/query/searchAction.shtml">
+              <form role="form" class="form-horizontal" method="post" action="/message/searchAction.shtml">
 								<input type="text" placeholder="Search" value="" name="query" id="v_search" class="form-control">
 							</form>
 						</ul>						

@@ -121,14 +121,14 @@ var openPopUpBlogW = function(){
    <div class="headbar_list1"><bean:write name="accountProfileForm" property="account.username"/></div> 
 </div> 
 <div class="menubar"> 
-   <div class="menubar_left"> 
-      <ul class="menuitem"> 
-	     <li>  </li> 
-		 <li>博客空间</li> 
-		 <li>  </li> 
-	  </ul> 
-   </div> 
-<html:form action="/query/searchAction.shtml"  method="post" styleId="searchform" >
+   <div class="menubar_left">
+     <ul class="menuitem">
+       <li></li>
+       <li>博客空间</li>
+       <li></li>
+     </ul>
+   </div>
+  <html:form action="/message/searchAction.shtml" method="post" styleId="searchform">
     <div class="menubar_right">
     <input name="count" type="hidden" value="1"/>
    <input name="userId" type="hidden" value="<bean:write name="accountProfileForm" property="account.userId"/>"/>

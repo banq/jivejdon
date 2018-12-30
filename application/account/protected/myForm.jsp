@@ -70,8 +70,8 @@
                  </tr>      
     <tr>
       <td align="middle">
-        <html:link page="/query/threadViewQuery.shtml?queryType=userMessageQueryAction" paramId="user" paramName="accountForm"
-           paramProperty="userId">按这里查看我的发帖明细</html:link>                     
+        <html:link page="/message/threadViewQuery.shtml?queryType=userMessageQueryAction" paramId="user" paramName="accountForm"
+                   paramProperty="userId">按这里查看我的发帖明细</html:link>
       </td>
      </tr>      
     <tr>

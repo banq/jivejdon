@@ -50,7 +50,7 @@
 			<div class="title">前往下页:</div>
 			<div class="form">
 				<input type="text" style="width: 50px;" id="pageToGo">
-				<input type="button" value=" Go " onClick="goToAnotherPage('<html:rewrite page="/query/threadViewQuery.shtml"  />',
+        <input type="button" value=" Go " onClick="goToAnotherPage('<html:rewrite page="/message/threadViewQuery.shtml"/>',
 				<bean:write name="threadListForm" property="count" />);" />
 				
 			</div>

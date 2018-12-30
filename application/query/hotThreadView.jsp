@@ -17,8 +17,8 @@
         <div class="tres">
                 <%-- request.setAttribute("paramMaps", qForm.getParamMaps());  in ThreadQueryAction --%>
             符合查询主题贴共有<b><bean:write name="threadListForm" property="allCount"/></b>贴
-            <MultiPages:pager actionFormName="threadListForm" page="/query/threadViewQuery.shtml"
-                              name="paramMaps">
+          <MultiPages:pager actionFormName="threadListForm" page="/message/threadViewQuery.shtml"
+                            name="paramMaps">
                 <MultiPages:prev name=" 上一页 "/>
                 <MultiPages:index displayCount="3"/>
                 <MultiPages:next name=" 下一页 "/>
@@ -68,8 +68,8 @@
 
         <div class="tres">
             符合查询主题共有<b><bean:write name="threadListForm" property="allCount"/></b>贴
-            <MultiPages:pager actionFormName="threadListForm" page="/query/threadViewQuery.shtml"
-                              name="paramMaps">
+          <MultiPages:pager actionFormName="threadListForm" page="/message/threadViewQuery.shtml"
+                            name="paramMaps">
                 <a href="JavaScript:void(0);" class="tooltip html_tooltip_content_go">Go</a>
                 <MultiPages:prev name=" 上一页 "/>
                 <MultiPages:index displayCount="3"/>

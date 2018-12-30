@@ -15,8 +15,6 @@
  */
 package com.jdon.jivejdon.presentation.action.query;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.ForumThread;
@@ -28,8 +26,10 @@ import com.jdon.strutsutil.FormBeanUtil;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.util.Debug;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
- * ThreadQueryAction is call from Form by /query/threadViewQuery.shtml
+ * ThreadQueryAction is call from Form by /message/threadViewQuery.shtml
  * ThreadQueryAction important is in query date format. need queryForm but
  * ThreadHotAction donot need queryForm. int ThreadQueryAction. queryForm is not
  * created by it, queryForm is created by before action : QueryViewAction.
@@ -58,7 +58,9 @@ public class ThreadQueryAction extends ModelListAction {
 		Debug.logVerbose("enter ThreadQueryAction ....", module);
 		QueryForm qForm = (QueryForm) FormBeanUtil.lookupActionForm(request, "queryForm");
 		if (qForm == null) {
-			Debug.logError(" ThreadQueryForm is null, at first call /query/threadViewQuery.shtml :", module);
+			Debug.logError(" ThreadQueryForm is null, at first call /message/threadViewQuery" +
+					".shtml" +
+					" :", module);
 		}
 		// save queryCriteria for html:link multi params
 		request.setAttribute("paramMaps", qForm.getParamMaps());
