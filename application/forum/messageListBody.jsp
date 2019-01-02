@@ -25,7 +25,7 @@
             <logic:equal name="forumMessage" property="root" value="true">
               <div class="post_titlename">
                   <logic:notEmpty name="forumMessage" property="messageVO.linkUrl">
-                    <a href="<bean:write name="forumMessage" property="messageVO.linkUrl" filter="false"/>" target="_blank"><h1 class="bige20"><bean:write name="forumMessage" property="messageVO.subject"/>
+                    <a href="<bean:write name="forumMessage" property="messageVO.linkUrl" filter="false"/>" target="_blank" title="原始链接"><h1 class="bige20"><bean:write name="forumMessage" property="messageVO.subject"/>
                     </a>
                   </logic:notEmpty>
                   <logic:empty name="forumMessage" property="messageVO.linkUrl">
