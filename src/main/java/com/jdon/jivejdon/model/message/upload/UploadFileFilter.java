@@ -11,12 +11,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 package com.jdon.jivejdon.model.message.upload;
-
-import java.util.Collection;
-import java.util.Iterator;
 
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.attachment.UploadFile;
@@ -24,17 +21,17 @@ import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.util.Debug;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 /**
- * @author banq(http://www.jdon.com)
- * 
+ * @author banq(http : / / www.jdon.com)
  */
 public class UploadFileFilter implements MessageRenderSpecification {
+	public final static String DOWNLOAD_NAME = "dlname";
 	private final static String module = UploadFileFilter.class.getName();
-
 	// want ot modify it in admin
 	private String fileShowFileName = "../../uploadDL.jsp";
-
-	public final static String DOWNLOAD_NAME = "dlname";
 
 	public ForumMessage render(ForumMessage message) {
 		try {
@@ -49,9 +46,9 @@ public class UploadFileFilter implements MessageRenderSpecification {
 
 	/**
 	 * return the String:
-	 * 
+	 * <p>
 	 * [img]/imageShow.jsp?id=3464[/img]
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -91,7 +88,6 @@ public class UploadFileFilter implements MessageRenderSpecification {
 
 	// see com.jdon.jivejdon.presentation.action.UploadShowAction
 	private void append(StringBuilder sb, UploadFile uploadFile) {
-		// sb.append("[img]images/rar.gif[/img]");
 
 		sb.append("<a href=\"");
 		sb.append(fileShowFileName);
