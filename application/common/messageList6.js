@@ -39,7 +39,6 @@ function approveList() {
 }
 
 var timeout = 1;
-var startDiaglog = false;
 var scontent;
 
 

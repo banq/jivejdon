@@ -15,26 +15,6 @@ function hasNewPost(o,lastVisitDate){
 	  }
 }  
 
-
-function lastPost(forumId, messageId){
-
-   if (messageId == "" || forumId == "") return;	
-   var pars = 'messageId=' +messageId ;
-   new Ajax.Updater(forumId, contextpath+'/forum/lastPost.shtml', { method: 'get', parameters: pars });
-   
-}
-
-
-function loadAcJS(thisId){
-  if (typeof(ac) == 'undefined') {
-     $LAB
-     .script('/common/js/autocomplete.js')
-     .wait(function(){
-          ac(thisId,contextpath);
-     })     
-  }else
-      ac(thisId,contextpath);
-}
 function popList(){
      load(getContextPath() +'/query/popularlist.shtml?count=15&dateRange=360', function(xhr) {
   	       document.getElementById('poplist').innerHTML = xhr.responseText;

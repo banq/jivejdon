@@ -60,14 +60,6 @@
                 type="com.jdon.jivejdon.presentation.action.message.UploadShowAction"
                 validate="false"/>
 
-        <!-- view and saving for messagereply   creation  -->
-        <action name="messageReplyForm" path="/forum/messageReplyAction"
-                type="com.jdon.strutsutil.ModelViewAction" scope="request"
-                validate="false">
-            <forward name="create" path="/message/messagePostReply.jsp"/>
-            <forward name="edit" path="/message/messagePostReply.jsp"/>
-        </action>
-
 
         <action name="messageReplyForm" path="/message/messageReplySaveAction"
                 type="com.jdon.jivejdon.presentation.action.message.ReBlogAction" scope="request"

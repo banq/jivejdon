@@ -5,7 +5,7 @@
 <%@ taglib uri="struts-html" prefix="html" %>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
-<script src="/common/form.js"></script>
+<script src="//cdn.jdon.com/common/form.js"></script>
 <script src="//cdn.jdon.com/common/ckeditor/ckeditor.js"></script>
 <script src="//cdn.jdon.com/common/ckeditor/sample.js"></script>
 <div class="box">

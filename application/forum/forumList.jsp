@@ -13,7 +13,6 @@
  if(top !== self) top.location = self.location;
   contextpath = "<%=request.getContextPath()%>";
 </script> 
-<script type="text/javascript"  defer="defer" src="<%=request.getContextPath() %>/forum/js/forumList.js"/></script>  
 
 <!-- /////////////////////////////////////////Content -->
 <div id="page-content" class="single-page container">
@@ -103,13 +102,11 @@
 </div>
 
 
-<script type="text/javascript" defer="defer" >
-<!--  
-window.onload = function(){ 
-popList();
-
-}; 
-      
+<script type="text/javascript">
+    <!--
+    load(getContextPath() + '/query/popularlist.shtml?count=15&dateRange=360', function (xhr) {
+        document.getElementById('poplist').innerHTML = xhr.responseText;
+    });
 //-->
 </script>
 

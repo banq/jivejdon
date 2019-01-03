@@ -186,7 +186,6 @@
 %>
 <script>   
 $LAB
-.script("https://cdn.jdon.com/js/index.js").wait()
 .wait(function(){
     load('/query/threadApprovedNewList3.shtml?count=15', function (xhr) {
         document.getElementById("threadApprovedNewListOthers").innerHTML = xhr.responseText;

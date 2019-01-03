@@ -1,8 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-
-<link rel="stylesheet" href="/common/js/styles/autocomplete.css"  type="text/css">
-
 <script type="text/JavaScript">
     function changeAction(theForm) {
 
@@ -14,17 +11,6 @@
         }
     }
 
-    function loadAcJS(thisId) {
-        if (typeof(ac) == 'undefined') {
-            $LAB
-                .script('//cdn.jdon.com/common/js/prototype.js')
-                .script('//cdn.jdon.com/common/js/autocomplete.js')
-                .wait(function () {
-                    ac(thisId, '<%=request.getContextPath()%>');
-                })
-        } else
-            ac(thisId, '<%=request.getContextPath()%>');
-    }
 
 </script>
 
@@ -39,8 +25,7 @@
           <html:form action="/message/searchThreadAction.shtml" method="post"
                      styleClass="search" onsubmit="changeAction(this);">
                 <input type="text" name="query"
-                       value="<bean:write name="query"/>" id="queryId"
-                       onfocus="javascript:loadAcJS(this.id)" size="40"/>
+                       value="<bean:write name="query"/>" id="queryId" size="40"/>
                 <html:submit value="道场搜索"/>
                 <input type="radio" name="view" checked="checked"/>查询主题
                 <input type="radio" name="view"/>查询帖
