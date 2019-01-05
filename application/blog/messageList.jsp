@@ -20,7 +20,7 @@
 		     </span>
 		    </div> 
 		    <div class="title_right"> 
-		    <a href="<%=request.getContextPath()%>/message/post.jsp?to=<bean:write name="accountProfileForm" property="account.username"/>">
+		    <a href="<%=request.getContextPath()%>/message/post.jsp">
             <img src="/images/newtopic.gif" width="110" height="20" border="0" alt="发表新帖子" /></a></div> 
 		 </div> 
 		 <div class="content"> 	 
