@@ -118,7 +118,7 @@ function isImage(field){
 </SCRIPT>
 
 
-1.上传后刷新浏览器，可看出最新上传图片 <br/>
+1.上传后Ctrl-F5刷新浏览器可见最新图片 <br/>
 
 2.支持类型jpg,gif,png <br/>
 
