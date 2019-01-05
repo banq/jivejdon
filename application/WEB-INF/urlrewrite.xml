@@ -198,14 +198,6 @@
     </rule>
 
     <rule>
-        <from>^/key/(\w+)$</from>
-        <to>/message/searchThreadAction.shtml?query=$1</to>
-    </rule>
-    <rule>
-        <from casesensitive="false">^/tag/gb/(\w+)$</from>
-        <to>/message/searchThreadAction.shtml?useGBK=on&amp;query=$1</to>
-    </rule>
-    <rule>
         <from>^/query/hotkeys$</from>
         <to>/query/hotKeys.shtml?method=hotkeys</to>
     </rule>
