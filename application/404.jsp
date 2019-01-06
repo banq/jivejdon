@@ -1,13 +1,18 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@page isELIgnored="false" %>
 <%@page import="com.jdon.controller.WebAppUtil,
-com.jdon.jivejdon.manager.block.ErrorBlockerIF,com.jdon.jivejdon.manager.email.*"%>
+com.jdon.jivejdon.manager.block.ErrorBlockerIF,com.jdon.jivejdon.manager.email.EmailHelper" %>
+<%@ page import="com.jdon.jivejdon.manager.email.EmailVO" %>
 <%
 ErrorBlockerIF errorBlocker = (ErrorBlockerIF) WebAppUtil.getComponentInstance("errorBlocker", this.getServletContext());
 if (errorBlocker.checkRate(request.getRemoteAddr(), 4)){
-   String isSendMail=(String)this.getServletContext().getAttribute(request.getRemoteAddr()+"404");   if (isSendMail == null)
-	{
+  String isSendMail = (String) this.getServletContext().getAttribute(request.getRemoteAddr() + "404");
+  if (isSendMail == null) {%>
+<jsp:include page="/admin/user/BanIP.jsp" flush="true">
+</jsp:include>
+<%
 		EmailHelper emailHelper = (EmailHelper)WebAppUtil.getComponentInstance("emailHelper", this.getServletContext());
      	String subject = "404";     	
     	String body = "404 attack:" + request.getRemoteAddr() + " from url:" + request.getHeader("Referer") ;
