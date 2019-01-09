@@ -67,7 +67,6 @@ pageContext.setAttribute("title", titleStr);
        <div id="sidebar" class="col-md-4">
         <!---- Start Widget ---->
         <div class="widget wid-follow">
-          <div class="heading"></div>
           <div class="content">
             <ul class="list-inline">
               <form role="form" class="form-horizontal" method="post" action="/message/searchAction.shtml">
@@ -78,7 +77,6 @@ pageContext.setAttribute("title", titleStr);
         </div>
         <!---- Start Widget ---->
         <div class="widget wid-post">
-          <div class="heading"></div>
           <div class="content">
               <div class="post wrap-vid">
              <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

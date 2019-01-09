@@ -48,7 +48,6 @@ pageContext.setAttribute("title", titleStr);
  if(top !== self) top.location = self.location;
   contextpath = "<%=request.getContextPath()%>";
  </script> 
-<script language="javascript" src="<html:rewrite page="/forum/js/threadList.js"/>"></script> 
 
 	 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- 自动调整尺寸 -->
