@@ -33,7 +33,7 @@ public class ViewCounter {
 		if (this.viewCount != -1) return;
 		DomainMessage dm = this.thread.lazyLoaderRole.loadViewCount(thread.getThreadId());
 		try {
-			this.viewCount = 0;//flag it
+//			this.viewCount = 0;//flag it
 			Integer count = (Integer) dm.getEventResult();
 			if (count != null) {
 				this.viewCount = count;

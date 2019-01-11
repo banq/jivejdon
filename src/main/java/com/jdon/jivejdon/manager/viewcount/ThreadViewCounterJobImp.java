@@ -1,14 +1,5 @@
 package com.jdon.jivejdon.manager.viewcount;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jdon.annotation.Component;
 import com.jdon.container.pico.Startable;
 import com.jdon.jivejdon.Constants;
@@ -18,6 +9,14 @@ import com.jdon.jivejdon.model.proptery.ThreadPropertys;
 import com.jdon.jivejdon.model.thread.ViewCounter;
 import com.jdon.jivejdon.repository.dao.PropertyDao;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * a cache used for holding view count of ForumThread the data that in the cache
@@ -69,7 +68,8 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 		concurrentHashMap.clear();
 		for (long threadId : viewCounters.keySet()) {
 			ViewCounter viewCounter = viewCounters.get(threadId);
-			if (viewCounter.getViewCount() != viewCounter.getLastSavedCount()) {
+			if (viewCounter.getViewCount() != viewCounter.getLastSavedCount() && viewCounter
+					.getViewCount() != -1 && viewCounter.getViewCount() != 0) {
 				saveItem(viewCounter);
 				viewCounter.setLastSavedCount(viewCounter.getViewCount());
 			}

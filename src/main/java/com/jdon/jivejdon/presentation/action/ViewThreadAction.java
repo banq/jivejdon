@@ -4,6 +4,7 @@ import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.manager.throttle.hitkey.CustomizedThrottle;
 import com.jdon.jivejdon.manager.throttle.hitkey.HitKeyIF;
 import com.jdon.jivejdon.manager.throttle.hitkey.HitKeySame;
+import com.jdon.jivejdon.manager.viewcount.ThreadViewCounterJob;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.presentation.filter.SpamFilterTooFreq;
 import com.jdon.jivejdon.service.ForumMessageQueryService;
@@ -22,6 +23,7 @@ public class ViewThreadAction extends Action {
 
 	private CustomizedThrottle customizedThrottle;
 	private ForumMessageQueryService forumMessageQueryService;
+	private ThreadViewCounterJob threadViewCounterJob;
 
 	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm,
 								 HttpServletRequest request, HttpServletResponse response)
@@ -67,6 +69,7 @@ public class ViewThreadAction extends Action {
 			if (!thread.getState().lastPostIsNull())
 				if (Long.parseLong(sId) == thread.getState().getLastPost().getModifiedDate2()) {
 					thread.addViewCount();
+					getThreadViewCounterJob().checkViewCounter(thread);
 				}
 		} catch (Exception e) {
 			Debug.logError(" viewThread error:" + e);
@@ -82,7 +85,12 @@ public class ViewThreadAction extends Action {
 	}
 
 
-
+	public ThreadViewCounterJob getThreadViewCounterJob() {
+		if (threadViewCounterJob == null)
+			threadViewCounterJob = (ThreadViewCounterJob) WebAppUtil.getComponentInstance
+					("threadViewCounterJob", this.servlet.getServletContext());
+		return threadViewCounterJob;
+	}
 
 	private boolean isPermittedRobot(HttpServletRequest request, Pattern robotPattern) {
 		// if refer is null, 1. browser 2. google 3. otherspam
