@@ -203,8 +203,8 @@
 		
 		<component name="threadViewCountParameter"
 			class="com.jdon.jivejdon.manager.viewcount.ThreadViewCountParameter">
-            <constructor value="10"/>
-            <constructor value="10"/> <!-- 30*60s unit: s -->
+            <constructor value="1800"/>
+            <constructor value="1800"/> <!-- 30*60s unit: s -->
 		</component>
 		
 		<component name="contentFormatConverter"
