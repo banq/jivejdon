@@ -1,15 +1,5 @@
 package com.jdon.jivejdon.presentation.action;
 
-import java.util.regex.Pattern;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.manager.throttle.hitkey.CustomizedThrottle;
 import com.jdon.jivejdon.manager.throttle.hitkey.HitKeyIF;
@@ -18,6 +8,14 @@ import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.presentation.filter.SpamFilterTooFreq;
 import com.jdon.jivejdon.service.ForumMessageService;
 import com.jdon.util.UtilValidate;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.regex.Pattern;
 
 /**
  * response the ajax request for getting dig count
@@ -56,7 +54,7 @@ public class MessageDigAction extends Action {
 		Long key = Long.valueOf(messageId);
 		ForumMessage message = forumMessageService.getMessage(key);
 		// who has read can dig it.
-		if (message.getForumThread().getViewCounter().isContains(request.getRemoteAddr())) {
+//		if (message.getForumThread().getViewCounter().isContains(request.getRemoteAddr())) {
 			if (!message.getPostip().equals(request.getRemoteAddr()))
 			  message.messaegDigAction();
 			try {				
@@ -69,7 +67,7 @@ public class MessageDigAction extends Action {
 					response.getWriter().close();
 				}
 			}
-		}
+//		}
 		return null;
 	}
 

@@ -15,12 +15,12 @@
  */
 package com.jdon.jivejdon.model;
 
-import java.util.concurrent.atomic.AtomicLong;
-
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.model.subscription.SubscribedState;
 import com.jdon.jivejdon.model.subscription.subscribed.ThreadSubscribed;
 import com.jdon.jivejdon.model.util.OneOneDTO;
+
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * State is a Value Object, it is immutable. need a pattern to keep immutable.
@@ -29,17 +29,14 @@ import com.jdon.jivejdon.model.util.OneOneDTO;
  * 
  */
 public class ForumThreadState {
+	private final ForumThread forumThread;
 	/**
 	 * the number of messages in the thread. This includes the root message. So,
 	 * to find the number of replies to the root message, subtract one from the
 	 * answer of this method.
 	 */
 	private AtomicLong messageCount;
-
 	private ForumMessage lastPost;
-
-	private final ForumThread forumThread;
-
 	private SubscribedState subscribedState;
 
 	public ForumThreadState(ForumThread forumThread, ForumMessage lastPost, long messageCount) {
@@ -107,6 +104,10 @@ public class ForumThreadState {
 			loadinitState();
 		}
 		return lastPost;
+	}
+
+	public boolean lastPostIsNull() {
+		return lastPost == null ? true : false;
 	}
 
 	public ForumThread getForumThread() {

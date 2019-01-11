@@ -360,8 +360,8 @@ public class ForumThread extends ForumModel {
 		return forumThreadTreeModel;
 	}
 
-	public void addViewCount(String ip) {
-		viewCounter.addViewCount(ip);
+	public void addViewCount() {
+		viewCounter.addViewCount();
 	}
 
 	// return count

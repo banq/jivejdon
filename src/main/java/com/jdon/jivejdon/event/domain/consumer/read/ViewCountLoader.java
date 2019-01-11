@@ -15,25 +15,34 @@
  */
 package com.jdon.jivejdon.event.domain.consumer.read;
 
-import org.apache.logging.log4j.*;
-
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
 import com.jdon.jivejdon.event.domain.consumer.write.MessagePropertiesListener;
+import com.jdon.jivejdon.manager.viewcount.ThreadViewCounterJob;
+import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.Property;
 import com.jdon.jivejdon.model.proptery.ThreadPropertys;
+import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.dao.PropertyDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Consumer("loadViewCount")
 public class ViewCountLoader implements DomainEventHandler {
 	private final static Logger logger = LogManager.getLogger(MessagePropertiesListener.class);
 
 	private final PropertyDao propertyDao;
+	private final ThreadViewCounterJob threadViewCounterJob;
+	private final ForumFactory forumFactory;
 
-	public ViewCountLoader(PropertyDao propertyDao) {
+	public ViewCountLoader(PropertyDao propertyDao, ThreadViewCounterJob threadViewCounterJob,
+						   ForumFactory forumFactory) {
 		super();
 		this.propertyDao = propertyDao;
+		this.threadViewCounterJob = threadViewCounterJob;
+		this.forumFactory = forumFactory;
+
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
@@ -46,6 +55,8 @@ public class ViewCountLoader implements DomainEventHandler {
 			else
 				number = new Integer(0);
 
+			threadViewCounterJob.checkViewCounter(forumFactory.getThread(threadId).orElse(new
+					ForumThread()));
 			event.getDomainMessage().setEventResult(number);
 		} catch (Exception e) {
 			logger.error(e);

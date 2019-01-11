@@ -15,42 +15,31 @@
  */
 package com.jdon.jivejdon.model.thread;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.model.ForumThread;
 
 public class ViewCounter {
 
-	private AtomicInteger viewCount;
 	private final ForumThread thread;
+	private int viewCount = -1;
 	private int lastSavedCount;
-	private final int fixedSize = 5;
-	private final List lastViewIPDeque;
 
 	public ViewCounter(ForumThread thread) {
 		this.thread = thread;
-		this.viewCount = null;
 		this.lastSavedCount = -1;
-		this.lastViewIPDeque = new ArrayList(fixedSize);
 	}
 
-	private void loadinitCount() {
+	public void loadinitCount() {
+		if (this.viewCount != -1) return;
 		DomainMessage dm = this.thread.lazyLoaderRole.loadViewCount(thread.getThreadId());
-		Integer count;
 		try {
-			// synchronized (this) {
-			if (this.viewCount != null)
-				return;
-			count = (Integer) dm.getEventResult();
+			this.viewCount = 0;//flag it
+			Integer count = (Integer) dm.getEventResult();
 			if (count != null) {
-				this.viewCount = new AtomicInteger(count);
+				this.viewCount = count;
 				this.lastSavedCount = count;
 				dm.clear();
 			}
-			// }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -58,36 +47,15 @@ public class ViewCounter {
 	}
 
 	public int getViewCount() {
-		if (this.viewCount == null) {
+		if (this.viewCount == -1) {
 			loadinitCount();
 		}
-		if (this.viewCount != null)
-			return viewCount.intValue();
-		else
-			return -1;
+		return this.viewCount;
 	}
 
 	public void addViewCount() {
 		if (getViewCount() != -1)
-			viewCount.incrementAndGet();
-	}
-
-	public boolean isContains(String ip) {
-		return lastViewIPDeque.contains(ip);
-	}
-
-	public void addViewCount(String ip) {
-		if (!lastViewIPDeque.contains(ip)) {
-			addViewCount();
-			addLastViewIPDeque(ip);
-		}
-	}
-
-	private void addLastViewIPDeque(Object o) {
-		if (lastViewIPDeque.size() >= fixedSize) {
-			lastViewIPDeque.remove(fixedSize-1);
-		}
-		lastViewIPDeque.add(o);
+			viewCount++;
 	}
 
 	public long getLastSavedCount() {

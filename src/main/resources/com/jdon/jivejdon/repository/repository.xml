@@ -29,10 +29,10 @@
 
 
 		<component name="messageBuilder"
-			class="com.jdon.jivejdon.repository.builder.MessageBuilder"/>		
+                   class="com.jdon.jivejdon.repository.builder.MessageBuilder"/>
 
-		<component name="ThreadBuilder"
-			class="com.jdon.jivejdon.repository.builder.ThreadBuilder"/>		
+        <!--<component name="ThreadBuilder"-->
+        <!--class="com.jdon.jivejdon.repository.builder.ThreadBuilder"/>		-->
 
 		<component name="forumBuilder"
 			class="com.jdon.jivejdon.repository.builder.ForumBuilder"/>				

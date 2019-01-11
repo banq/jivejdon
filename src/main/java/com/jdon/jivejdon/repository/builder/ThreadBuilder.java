@@ -16,10 +16,6 @@
  */
 package com.jdon.jivejdon.repository.builder;
 
-import java.util.Collection;
-
-import org.apache.logging.log4j.*;
-
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumMessageReply;
@@ -30,6 +26,10 @@ import com.jdon.jivejdon.repository.TagRepository;
 import com.jdon.jivejdon.repository.dao.MessageDao;
 import com.jdon.jivejdon.repository.dao.MessageQueryDao;
 import com.jdon.jivejdon.repository.dao.PropertyDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Collection;
 
 public class ThreadBuilder {
 	private final static Logger logger = LogManager.getLogger(ThreadBuilder.class);
@@ -42,20 +42,18 @@ public class ThreadBuilder {
 
 	private final ForumThreadStateFactory forumThreadStateFactory;
 
-	private ForumAbstractFactory forumAbstractFactory;
+	private final ForumAbstractFactory forumAbstractFactory;
 
-	private PropertyDao propertyDao;
+	private final PropertyDao propertyDao;
 
 	public ThreadBuilder(MessageDao messageDao, TagRepository tagRepository, MessageQueryDao messageQueryDao, PropertyDao propertyDao,
-			ForumThreadStateFactory forumThreadStateFactory) {
+						 ForumThreadStateFactory forumThreadStateFactory, ForumAbstractFactory
+								 forumAbstractFactory) {
 		this.messageDao = messageDao;
 		this.tagRepository = tagRepository;
 		this.messageQueryDao = messageQueryDao;
 		this.propertyDao = propertyDao;
 		this.forumThreadStateFactory = forumThreadStateFactory;
-	}
-
-	public void setForumAbstractFactory(ForumAbstractFactory forumAbstractFactory) {
 		this.forumAbstractFactory = forumAbstractFactory;
 	}
 
@@ -86,8 +84,10 @@ public class ThreadBuilder {
 
 	public void buildProperties(ForumThread forumThread) {
 		try {
-			forumThread.setName(forumThread.getRootMessage().getMessageVO().getSubject());
+			//init viewcount
+			forumThread.getViewCounter().loadinitCount();
 
+			forumThread.setName(forumThread.getRootMessage().getMessageVO().getSubject());
 			Collection tags = tagRepository.getThreadTags(forumThread);
 			ThreadTagsVO threadTagsVO = new ThreadTagsVO(forumThread, tags);
 			forumThread.setThreadTagsVO(threadTagsVO);

@@ -19,7 +19,12 @@ package com.jdon.jivejdon.repository.builder;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.model.state.ForumThreadStateFactory;
 import com.jdon.jivejdon.repository.ForumFactory;
+import com.jdon.jivejdon.repository.TagRepository;
+import com.jdon.jivejdon.repository.dao.MessageDao;
+import com.jdon.jivejdon.repository.dao.MessageQueryDao;
+import com.jdon.jivejdon.repository.dao.PropertyDao;
 import com.jdon.jivejdon.repository.dao.SequenceDao;
 import com.jdon.jivejdon.util.ContainerUtil;
 import org.apache.logging.log4j.LogManager;
@@ -43,14 +48,17 @@ public class ForumAbstractFactory implements ForumFactory {
 
 	// define in manager.xml
 
-	public ForumAbstractFactory(MessageBuilder messageBuilder, ThreadBuilder threadBuilder, ForumBuilder forumBuilder, ContainerUtil containerUtil,
-			SequenceDao sequenceDao) {
+	public ForumAbstractFactory(MessageBuilder messageBuilder, ForumBuilder forumBuilder,
+								ContainerUtil containerUtil, SequenceDao sequenceDao, MessageDao
+										messageDao, TagRepository tagRepository, MessageQueryDao
+										messageQueryDao, PropertyDao propertyDao,
+								ForumThreadStateFactory forumThreadStateFactory) {
 		this.containerUtil = containerUtil;
 		this.messageBuilder = messageBuilder;
 		this.messageBuilder.setForumAbstractFactory(this);
 
-		this.threadBuilder = threadBuilder;
-		this.threadBuilder.setForumAbstractFactory(this);
+		this.threadBuilder = new ThreadBuilder(messageDao, tagRepository, messageQueryDao,
+				propertyDao, forumThreadStateFactory,  this);
 
 		this.forumBuilder = forumBuilder;
 

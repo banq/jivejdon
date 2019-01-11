@@ -163,22 +163,22 @@
 
         <!-- message List end  -->
 
-        <action path="/forum/lastPost"
-                type="com.jdon.jivejdon.presentation.action.MessageViewAction"
-                name="messageForm" scope="request"
-                validate="false">
-            <forward name="success" path="/forum/lastPost.jsp"/>
-        </action>
+        <!--<action path="/forum/lastPost"-->
+        <!--type="com.jdon.jivejdon.presentation.action.MessageViewAction"-->
+        <!--name="messageForm" scope="request"-->
+        <!--validate="false">-->
+        <!--<forward name="success" path="/forum/lastPost.jsp"/>-->
+        <!--</action>-->
 
         <action path="/query/updateDigCount"
                 type="com.jdon.jivejdon.presentation.action.MessageDigAction" scope="request"
                 validate="false"/>
 
-        <action path="/forum/stickyList"
-                type="com.jdon.jivejdon.presentation.action.StickyListAction"
-                scope="request" validate="false">
-            <forward name="success" path="/forum/stickyThreadList.jsp"/>
-        </action>
+        <!--<action path="/forum/stickyList"-->
+        <!--type="com.jdon.jivejdon.presentation.action.StickyListAction"-->
+        <!--scope="request" validate="false">-->
+        <!--<forward name="success" path="/forum/stickyThreadList.jsp"/>-->
+        <!--</action>-->
 
         <action path="/query/viewThread"
                 type="com.jdon.jivejdon.presentation.action.ViewThreadAction"
