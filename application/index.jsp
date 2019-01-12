@@ -183,8 +183,7 @@
   }
 %>
 <script>   
-$LAB
-.wait(function(){
+
     load('/query/threadApprovedNewList3.shtml?count=15', function (xhr) {
         document.getElementById("threadApprovedNewListOthers").innerHTML = xhr.responseText;
     });
@@ -202,7 +201,7 @@ $LAB
     });
 
     document.getElementById("home-thumbnai").src = "https://cdn.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
-});  
+
 </script> 	
 
 </body>

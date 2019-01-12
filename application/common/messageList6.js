@@ -18,7 +18,7 @@ function digMessage(id) {
 function tagthreads(length, tablewidth, count, tagID) {
 // window.onload = function() {
     $.ajax({
-        url: '//cdn.jdon.com/query/tagThreads/' + tagID,
+        url: 'https://cdn.jdon.com/query/tagThreads/' + tagID,
         success: function (response) {
             $('#tagthreads_' + tagID).html(response);
         }
@@ -32,28 +32,10 @@ function tagthreads(length, tablewidth, count, tagID) {
 }
 
 function approveList() {
-    load('//cdn.jdon.com/query/approved', function (xhr) {
+    load('https://cdn.jdon.com/query/approved', function (xhr) {
         document.getElementById('approved').innerHTML = xhr.responseText;
     });
-
 }
-
-var timeout = 1;
-var scontent;
-
-
-function saveCache(objId) {
-    try {
-        var o = document.getElementById(objId).value;
-        if (window.localStorage) {
-            window.localStorage.setItem(objId, o);
-        } else if (window.clipboardData) {
-            window.clipboardData.setData(objId, o);
-        }
-    } catch (e) {
-    }
-}
-
 
 var formSubmitcheck = false;
 var subjectold = "";
@@ -84,96 +66,12 @@ function checkPost(theForm) {
 }
 
 
-var bodyLength = 0;
-
-function copyBody() {
-    if (document.getElementById('formBody').value != "") {
-        if (document.getElementById('formBody').value.length != bodyLength) {
-            bodyLength = document.getElementById('formBody').value.length;
-            saveCache('formBody');
-        }
-    }
-}
-
-
-function chksubject(id) {
-    if (id == null) {
-        document.getElementById("reblog").value = "";
-        document.getElementById("onlyreblog").value = "";
-        return;
-    }
-    if (document.getElementById("parentMessageSubject").value == document.getElementById("replySubject").value) {
-        alert("转发的标题不能和现在标题一样，请修改");
-        return false;
-    }
-    document.getElementById(id).value = "on";
-    return true;
-}
-
-function loadCache(objId) {
-    try {
-        if (window.localStorage) {
-            return window.localStorage.getItem(objId);
-        } else if (window.clipboardData) {
-            return (window.clipboardData.getData(objId));
-        }
-    } catch (e) {
-    }
-}
-
-
-function clearCache(objId) {
-    try {
-        if (window.localStorage) {
-            window.localStorage.removeItem(objId);
-            window.localStorage.clear();
-        } else if (window.clipboardData) {
-            window.clipboardData.clearData();
-        }
-    } catch (e) {
-    }
-}
-
-//postreply2.js
-
-var timedCopy;
-
-function startCopy(timeout) {
-    if (timedCopy == null)
-        timedCopy = setInterval(copyBody, timeout);
-}
-
-function closeCopy() {
-    clearInterval(timedCopy);
-    timedCopy = null;
-}
-
-function releaseKeyboard() {
-
-    document.onkeydown = forumSubmit;
-    //auto backup body content
-    startCopy(120000);
-
-}
-
-function forumSubmit(event) {
-    var page;
-    event = event ? event : (window.event ? window.event : null);
-
-    if (event.keyCode == 13 && event.ctrlKey) {
-        document.getElementById("formSubmitButton").click();
-    } else return;
-
-}
-
-
 var lazyloaded = false;
-
 function loadCkeditJS() {
     if (lazyloaded) return;
     $LAB
-        .script("//cdn.jdon.com/common/ckeditor/ckeditor.js").wait()
-        .script("//cdn.jdon.com/common/ckeditor/sample.js")
+        .script("https://cdn.jdon.com/common/ckeditor/ckeditor.js").wait()
+        .script("https://cdn.jdon.com/common/ckeditor/sample.js")
         .wait(function () {
             initSample();
             lazyloaded = true;

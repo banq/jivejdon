@@ -176,11 +176,8 @@
 
   <%-- include LAB.js --%>
   <%@ include file="../account/loginAJAX.jsp" %>
-
+  <script src="https://cdn.jdon.com/common/messageList6.js"></script>
   <script>
-      $LAB
-          .script("//cdn.jdon.com/common/messageList6.js")
-          .wait(function () {
               var sId = "";
               <logic:notEmpty name="forumThread" property="state.lastPost">
               sId = '<bean:write name="forumThread" property="state.lastPost.modifiedDate2" />';
@@ -192,7 +189,6 @@
                   tagthreads(10, 160, 10, <bean:write name="threadTag" property="tagID"/>);
                   </logic:iterate>
               }
-          });
   </script>
 
   <%@include file="footer.jsp" %>
