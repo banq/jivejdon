@@ -11,7 +11,7 @@
    <bean:define id="forumMessage" name="forumThread"
                 property="rootMessage"></bean:define>
    <logic:notEmpty name="forumMessage" property="account">
-     <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>" class="list-group-item" target="_blank">
+     <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>" class="list-group-item">
 		<h3 class="list-group-item-heading">        
 			<bean:write name="forumThread" property="name"/>
 		</h3>
