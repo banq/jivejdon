@@ -10,8 +10,7 @@ ErrorBlockerIF errorBlocker = (ErrorBlockerIF) WebAppUtil.getComponentInstance("
 if (errorBlocker.checkRate(request.getRemoteAddr(), 4)){
   String isSendMail = (String) this.getServletContext().getAttribute(request.getRemoteAddr() + "404");
   if (isSendMail == null) {%>
-<jsp:include page="/admin/user/BanIP.jsp" flush="true">
-</jsp:include>
+<jsp:include page="/admin/user/BanIP.jsp" flush="true"/>
 <%
 		EmailHelper emailHelper = (EmailHelper)WebAppUtil.getComponentInstance("emailHelper", this.getServletContext());
      	String subject = "404";     	
