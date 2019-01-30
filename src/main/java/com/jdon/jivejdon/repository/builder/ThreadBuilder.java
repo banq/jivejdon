@@ -68,7 +68,8 @@ public class ThreadBuilder {
 			Long rootmessageId = forumThread.getRootMessage().getMessageId();
 			if ((rootForumMessage == null) || rootForumMessage instanceof ForumMessageReply
 					|| rootForumMessage.getMessageId().longValue() != rootmessageId.longValue()) {
-				rootForumMessage = forumAbstractFactory.messageDirector.getMessage(rootmessageId, forumThread, forum);
+				rootForumMessage = forumAbstractFactory.messageDirector.buildMessage
+						(rootmessageId, forumThread, forum);
 			}
 			forumThread.setRootMessage(rootForumMessage);
 			rootForumMessage.setForumThread(forumThread);
@@ -137,7 +138,8 @@ public class ThreadBuilder {
 			}
 			ForumMessage lastMessage = rootMessage;
 			if ((rootMessage == null) || (rootMessage.getMessageId().longValue() != lastMessageId.longValue()))
-				lastMessage = messageDirector.getMessage(lastMessageId, forumThread, forumThread.getForum());
+				lastMessage = messageDirector.buildMessage(lastMessageId, forumThread, forumThread
+						.getForum());
 			lastMessage.setForumThread(forumThread);
 
 			forumThreadStateFactory.init(forumThread, lastMessage);

@@ -16,14 +16,14 @@
  */
 package com.jdon.jivejdon.repository.builder;
 
-import org.apache.logging.log4j.*;
-
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.state.ForumStateFactory;
 import com.jdon.jivejdon.repository.HotKeysRepository;
 import com.jdon.jivejdon.repository.dao.ForumDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ForumBuilder {
 	private final static Logger logger = LogManager.getLogger(ForumBuilder.class);
@@ -81,7 +81,7 @@ public class ForumBuilder {
 				return;
 			}
 			if ((message == null) || (message.getMessageId().longValue() != lastMessageId.longValue()))
-				message = messageDirector.getMessage(lastMessageId, forumThread, forum);
+				message = messageDirector.buildMessage(lastMessageId, forumThread, forum);
 			this.forumStateFactory.init(forum, message);
 		} catch (Exception e) {
 			String error = e + " buildState forumMessageId=" + forum.getForumId();

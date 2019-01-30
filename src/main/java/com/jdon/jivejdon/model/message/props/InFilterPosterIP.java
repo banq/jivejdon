@@ -16,8 +16,7 @@
 package com.jdon.jivejdon.model.message.props;
 
 import com.jdon.jivejdon.model.Account;
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
+import com.jdon.jivejdon.model.message.MessageInputSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.util.Debug;
 
@@ -29,27 +28,26 @@ import java.util.Date;
  * Manage the properties of a ForumMessage
  * 
  * @author banq(http://www.jdon.com)
- * @see com.jdon.jivejdon.model.message.props.PropertyFilterManager
  */
-public class InFilterPosterIP implements MessageRenderSpecification {
+public class InFilterPosterIP implements MessageInputSpecification {
 	private final static String module = InFilterPosterIP.class.getName();
 
 	private DateFormat dateTime_formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-	public ForumMessage render(ForumMessage message) {
+	public MessageVO apply(MessageVO messageVO) {
 		try {
-			MessageVO messageVO = message.getMessageVO();
-			String newBody = applyFilteredBody(message);
-			messageVO.setBody(newBody);
+			String newBody = applyFilteredBody(messageVO);
+			messageVO = MessageVO.builder().subject(messageVO
+					.getSubject()).body(newBody).message(messageVO.getForumMessage())
+					.build();
 		} catch (Exception e) {
 			Debug.logError("" + e, module);
 		}
-		return message;
+		return messageVO;
 	}
 
-	public String applyFilteredBody(ForumMessage message) {
-		MessageVO messageVO = message.getMessageVO();
-		Account modifier = message.getOperator();
+	public String applyFilteredBody(MessageVO messageVO) {
+		Account modifier = messageVO.getForumMessage().getOperator();
 		if (modifier == null) {
 			Debug.logVerbose("poster is null ", module);
 			return messageVO.getBody();

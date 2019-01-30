@@ -92,7 +92,8 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 
 			// tag title can be updated between in thread with repository
 			// so it can be used in model ForumThread's changetags method
-			tagRepository.saveTagTitle(forumThread.getThreadId(), forumMessagePostDTO.getMessageVO().getTagTitle());
+			tagRepository.saveTagTitle(forumThread.getThreadId(), forumMessagePostDTO
+					.getTagTitle());
 
 		} catch (Exception e) {
 			try {

@@ -15,11 +15,11 @@
  */
 package com.jdon.jivejdon.model.attachment;
 
-import java.util.Collection;
-
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.event.domain.producer.read.LazyLoaderRole;
 import com.jdon.jivejdon.model.util.LazyLoader;
+
+import java.util.Collection;
 
 /**
  * upload files is a part of aggregation root.
@@ -46,7 +46,7 @@ public class AttachmentsVO extends LazyLoader {
 	}
 
 	// for be written
-	public AttachmentsVO(long messageId, Collection uploadFiles) {
+	public AttachmentsVO(long messageId, Collection<UploadFile> uploadFiles) {
 		super();
 		this.messageId = messageId;
 		this.uploadFiles = uploadFiles;
@@ -56,12 +56,7 @@ public class AttachmentsVO extends LazyLoader {
 		return messageId;
 	}
 
-	public void setUploadFiles(Collection uploadFiles) {
-		// this.uploadFiles = uploadFiles;
-		this.uploadFiles = uploadFiles;
-	}
-
-	public Collection getUploadFiles() {
+	public Collection<UploadFile> getUploadFiles() {
 		if (this.uploadFiles == null && lazyLoaderRole != null) {
 			// return result cannot be null, can be a ArrayList that isEmpty()
 			// blocked until return result, display attachement lifecycle is
@@ -69,6 +64,11 @@ public class AttachmentsVO extends LazyLoader {
 			this.uploadFiles = (Collection) super.loadBlockedResult();
 		}
 		return uploadFiles;
+	}
+
+	public void setUploadFiles(Collection<UploadFile> uploadFiles) {
+		// this.uploadFiles = uploadFiles;
+		this.uploadFiles = uploadFiles;
 	}
 
 	public void preloadUploadFileDatas() {

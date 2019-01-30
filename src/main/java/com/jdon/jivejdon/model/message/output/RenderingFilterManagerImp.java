@@ -15,6 +15,17 @@
  */
 package com.jdon.jivejdon.model.message.output;
 
+import com.jdon.jivejdon.manager.filter.OutFilterManager;
+import com.jdon.jivejdon.model.message.MessageRenderSpecification;
+import com.jdon.jivejdon.repository.dao.SetupDao;
+import com.jdon.jivejdon.util.BeanUtils;
+import com.jdon.jivejdon.util.XMLProperties;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.output.XMLOutputter;
+
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -23,17 +34,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.logging.log4j.*;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.output.XMLOutputter;
-
-import com.jdon.jivejdon.manager.filter.OutFilterManager;
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
-import com.jdon.jivejdon.repository.dao.SetupDao;
-import com.jdon.jivejdon.util.BeanUtils;
-import com.jdon.jivejdon.util.XMLProperties;
 
 /**
  * setup all filter into Database <component name="renderingFilterManager"
@@ -44,17 +44,12 @@ import com.jdon.jivejdon.util.XMLProperties;
  * 
  */
 public class RenderingFilterManagerImp implements RenderingFilterManager {
-	private final static Logger logger = LogManager.getLogger(RenderingFilterManagerImp.class);
-
-	private SetupDao setupDao;
-
 	public static final String[] DEFAULT_FILTER_CLASSES = new String[] { "com.jdon.jivejdon.model.message.output.html.TextStyle",
 			"com.jdon.jivejdon.model.message.output.html.Newline", };
-
-	private RenderingAvailableFilters renderingAvailableFilters;
-
+	private final static Logger logger = LogManager.getLogger(RenderingFilterManagerImp.class);
 	private static XMLProperties properties = null;
-
+	private SetupDao setupDao;
+	private RenderingAvailableFilters renderingAvailableFilters;
 	private String context;
 
 	private MessageRenderSpecification[] availableFilters = null;
@@ -64,7 +59,6 @@ public class RenderingFilterManagerImp implements RenderingFilterManager {
 	private OutFilterManager outFilterManager;
 
 	/**
-	 * @param filters
 	 */
 	public RenderingFilterManagerImp(SetupDao setupDao, RenderingAvailableFilters renderingAvailableFilters) {
 		this.setupDao = setupDao;

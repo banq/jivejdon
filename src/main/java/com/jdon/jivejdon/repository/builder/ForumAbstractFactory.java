@@ -100,7 +100,7 @@ public class ForumAbstractFactory implements ForumFactory {
 	 * .Long)
 	 */
 	public ForumMessage getMessage(Long messageId) {
-		return messageDirector.getMessage(messageId);
+		return messageDirector.buildMessage(messageId);
 	}
 
 	/*

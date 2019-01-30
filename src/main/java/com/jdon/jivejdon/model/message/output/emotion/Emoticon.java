@@ -15,7 +15,6 @@
  */
 package com.jdon.jivejdon.model.message.output.emotion;
 
-import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 import org.apache.logging.log4j.LogManager;
@@ -151,20 +150,13 @@ public class Emoticon implements MessageRenderSpecification {
 	 * Clones a new filter that will have the same properties and that will wrap
 	 * around the specified message.
 	 *
-	 * @param message the ForumMessage to wrap the new filter around.
 	 */
-	public ForumMessage render(ForumMessage message) {
-		try {
-			MessageVO messageVO = message.getMessageVO();
-			if (!messageVO.isFiltered()) {
-				messageVO.setSubject(convertEmoticons(messageVO.getSubject()));
-				messageVO.setBody(convertEmoticons(messageVO.getBody()));
-			}
-		} catch (Exception e) {
-			logger.error(e);
-		}
-		return message;
+	public MessageVO render(MessageVO messageVO) {
+		return MessageVO.builder().subject(convertEmoticons(messageVO.getSubject())
+		).body(convertEmoticons(messageVO.getBody())).message(messageVO.getForumMessage())
+				.build();
 	}
+
 
 	// FILTER PROPERTIES//
 

@@ -15,12 +15,6 @@
  */
 package com.jdon.jivejdon.auth;
 
-import java.lang.reflect.Method;
-
-import org.aopalliance.intercept.MethodInterceptor;
-import org.aopalliance.intercept.MethodInvocation;
-import org.apache.logging.log4j.*;
-
 import com.jdon.bussinessproxy.TargetMetaDef;
 import com.jdon.container.access.TargetMetaRequest;
 import com.jdon.container.access.TargetMetaRequestsHolder;
@@ -29,6 +23,12 @@ import com.jdon.controller.events.EventModel;
 import com.jdon.jivejdon.Constants;
 import com.jdon.jivejdon.model.auth.PermissionRule;
 import com.jdon.jivejdon.service.util.SessionContextUtil;
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.lang.reflect.Method;
 
 /**
  * Permission Interceptor
@@ -123,10 +123,6 @@ public class PermissionInterceptor implements MethodInterceptor {
 			EventModel em = (EventModel) arg;
 			em.setErrors(info);
 		}
-	}
-
-	public void finalize() {
-		this.targetMetaRequestsHolder.clear();
 	}
 
 }

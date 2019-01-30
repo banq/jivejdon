@@ -1,7 +1,6 @@
 package com.jdon.jivejdon.model.query;
 
 import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.message.MessageVO;
 
 public class MessageSearchSpec {
 
@@ -14,14 +13,16 @@ public class MessageSearchSpec {
 
 	private Long messageId;
 
-	private MessageVO messageVO;
+	private String subject;
+
+	private String body;
 
 	private int resultAllCount;
 
 	private boolean root;
 
 	public MessageSearchSpec() {
-		messageVO = new MessageVO();
+
 	}
 
 	public Long getMessageId() {
@@ -56,12 +57,19 @@ public class MessageSearchSpec {
 		this.root = root;
 	}
 
-	public MessageVO getMessageVO() {
-		return messageVO;
+	public String getSubject() {
+		return subject;
 	}
 
-	public void setMessageVO(MessageVO messageVO) {
-		this.messageVO = messageVO;
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 
+	public String getBody() {
+		return body;
+	}
+
+	public void setBody(String body) {
+		this.body = body;
+	}
 }

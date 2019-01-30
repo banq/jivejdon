@@ -31,7 +31,7 @@ public interface MessageDao {
 
 	ForumMessage getMessageCore(ModelKey modelKey);
 
-	MessageVO getMessageVOCore(Long messageId);
+	MessageVO getMessageVOCore(ForumMessage forumMessage);
 
 	void createMessage(ForumMessage forumMessage) throws Exception;
 

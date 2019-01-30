@@ -15,23 +15,21 @@
  */
 package com.jdon.jivejdon.model.message;
 
-import com.jdon.jivejdon.model.ForumMessage;
-
 /**
  * Specification pattern Message rendering Specification, Value Object.
- * 
- * The decorator of the ForumMessage. this decorator is used by message filter
- * display.
+ *
  * 
  * @author <a href="mailto:banq@163.com">banq</a>
  * 
  */
+
 public interface MessageRenderSpecification {
 
 	/**
 	 * render a new Value Object
 	 * 
 	 */
-	public abstract ForumMessage render(ForumMessage forumMessage);
+
+	public abstract MessageVO render(MessageVO messageVO);
 
 }

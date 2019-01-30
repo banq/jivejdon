@@ -15,17 +15,15 @@
  */
 package com.jdon.jivejdon.model.message.upload;
 
-import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.attachment.UploadFile;
 import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
-import com.jdon.util.Debug;
 
 import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * @author banq(http : / / www.jdon.com)
+ * @author banq
  */
 public class UploadFileFilter implements MessageRenderSpecification {
 	public final static String DOWNLOAD_NAME = "dlname";
@@ -33,29 +31,23 @@ public class UploadFileFilter implements MessageRenderSpecification {
 	// want ot modify it in admin
 	private String fileShowFileName = "../../uploadDL.jsp";
 
-	public ForumMessage render(ForumMessage message) {
-		try {
-			MessageVO messageVO = message.getMessageVO();
-			String newBody = appendTags(message);
-			messageVO.setBody(newBody);
-		} catch (Exception e) {
-			Debug.logError("" + e, module);
-		}
-		return message;
+	public MessageVO render(MessageVO messageVO) {
+		String newBody = appendTags(messageVO, messageVO.getForumMessage().getAttachment()
+				.getUploadFiles());
+		return MessageVO.builder().subject(messageVO.getSubject()).body(newBody).message
+				(messageVO.getForumMessage())
+				.build();
 	}
+
 
 	/**
 	 * return the String:
 	 * <p>
 	 * [img]/imageShow.jsp?id=3464[/img]
 	 *
-	 * @param str
-	 * @return
 	 */
-	public String appendTags(ForumMessage message) {
-		MessageVO messageVO = message.getMessageVO();
+	public String appendTags(MessageVO messageVO, Collection uploadFiles) {
 		String str = messageVO.getBody();
-		Collection uploadFiles = message.getAttachment().getUploadFiles();
 		if ((uploadFiles == null) || (uploadFiles.size() == 0)) {
 			return str;
 		}
@@ -77,7 +69,6 @@ public class UploadFileFilter implements MessageRenderSpecification {
 				attached = true;
 				append(attachString, uploadFile);
 			}
-
 		}
 
 		if (attached)

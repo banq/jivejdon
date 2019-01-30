@@ -15,14 +15,12 @@
  */
 package com.jdon.jivejdon.model.message.output.shield;
 
-import java.util.StringTokenizer;
-
+import com.jdon.jivejdon.model.message.MessageRenderSpecification;
+import com.jdon.jivejdon.model.message.MessageVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
-import com.jdon.jivejdon.model.message.MessageVO;
+import java.util.StringTokenizer;
 
 /**
  * A ForumMessageFilter that filters out user-specified profanity.
@@ -48,37 +46,31 @@ public class Profanity implements MessageRenderSpecification {
 	/**
 	 * Clones a new filter that will have the same properties and that will wrap
 	 * around the specified message.
-	 * 
-	 * @param message
-	 *            the ForumMessage to wrap the new filter around.
+	 *
 	 */
-	public ForumMessage render(ForumMessage message) {
+	public MessageVO render(MessageVO messageVO) {
 		if (words == null)
-			return message;
-		if (message.getMessageVO().isFiltered())
-			return message;
-		try {
-			MessageVO messageVO = message.getMessageVO();
-			String subject = messageVO.getSubject();
-			String body = messageVO.getBody();
-			boolean found = false;
-			for (int i = 0; i < words.length; i++) {
-				if (subject.indexOf(words[i]) != -1 || body.indexOf(words[i]) != -1) {
-					found = true;
-					break;
-				}
+			return messageVO;
+		String subject = messageVO.getSubject();
+		String body = messageVO.getBody();
+		boolean found = false;
+		for (int i = 0; i < words.length; i++) {
+			if (subject.indexOf(words[i]) != -1 || body.indexOf(words[i]) != -1) {
+				found = true;
+				break;
 			}
-			if (found) {
-				// messageVO.setSubject(filterProfanity(messageVO.getSubject()));
-				// messageVO.setBody(filterProfanity(messageVO.getBody()));
-				message.setMasked(true);
-				messageVO.setBody(Bodymasking.maskLocalization);
-				messageVO.setSubject(Bodymasking.maskLocalization);
-			}
-		} catch (Exception e) {
-			logger.error("render error:" + e + " messageId=" + message.getMessageId());
 		}
-		return message;
+		if (found) {
+			// messageVO.setSubject(filterProfanity(messageVO.getSubject()));
+			// messageVO.setBody(filterProfanity(messageVO.getBody()));
+//			message.setMasked(true);
+			return MessageVO.builder().subject(Bodymasking.maskLocalization).body
+					(Bodymasking.maskLocalization).message(messageVO.getForumMessage())
+					.build();
+
+		} else
+			return messageVO;
+
 	}
 
 	/**
@@ -116,8 +108,7 @@ public class Profanity implements MessageRenderSpecification {
 	/**
 	 * Sets the list of words to be filtered. Each word must seperated by a
 	 * comma.
-	 * 
-	 * @param the
+	 *
 	 *            comma delimited list of words to filter.
 	 */
 	public void setWordList(String wordList) {

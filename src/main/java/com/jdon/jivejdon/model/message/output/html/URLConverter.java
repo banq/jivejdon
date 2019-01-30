@@ -15,10 +15,8 @@
  */
 package com.jdon.jivejdon.model.message.output.html;
 
-import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
-import com.jdon.util.Debug;
 
 /**
  * A ForumMessageFilter that converts URL's to working HTML web links.
@@ -50,23 +48,16 @@ public class URLConverter implements MessageRenderSpecification {
 	/**
 	 * Clones a new filter that will have the same properties and that will wrap
 	 * around the specified message.
-	 * 
-	 * @param message
-	 *            the ForumMessage to wrap the new filter around.
+	 *
 	 */
-	public ForumMessage render(ForumMessage message) {
-		try {
-			MessageVO messageVO = message.getMessageVO();
-			if (!messageVO.isFiltered()) {
-				String s = convertURL(messageVO.getBody());
-				s = convertUrlNull(s);
-				messageVO.setBody(s);
-			}
-		} catch (Exception e) {
-			Debug.logError("" + e, module);
-		}
-		return message;
+	public MessageVO render(MessageVO messageVO) {
+		String s = convertURL(messageVO.getBody());
+		s = convertUrlNull(s);
+		return MessageVO.builder().subject(messageVO.getSubject()).body(s).message(messageVO
+				.getForumMessage())
+				.build();
 	}
+
 
 	private String convertUrlNull(String s) {
 		String parentTagRegx = "\\[url\\](.*?)\\[\\/url\\]";

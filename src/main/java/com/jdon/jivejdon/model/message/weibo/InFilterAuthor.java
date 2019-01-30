@@ -15,9 +15,9 @@
  */
 package com.jdon.jivejdon.model.message.weibo;
 
-import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.event.ATUserNotifiedEvent;
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
+import com.jdon.jivejdon.model.message.MessageInputSpecification;
+import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.model.message.output.weibo.AuthorNameFormat;
 import com.jdon.util.Debug;
 
@@ -33,22 +33,25 @@ import java.util.Collection;
  * 
  */
 
-public class InFilterAuthor implements MessageRenderSpecification {
+public class InFilterAuthor implements MessageInputSpecification {
 	private final static String module = InFilterAuthor.class.getName();
 
-	public ForumMessage render(ForumMessage message) {
+
+	public MessageVO apply(MessageVO messageVO) {
 		try {
 			AuthorNameFilter authorNameFilter = new AuthorNameFilter();
-			Collection<String> usernames = authorNameFilter.getUsernameFromBody(message);
+			Collection<String> usernames = authorNameFilter.getUsernameFromBody(messageVO);
 			if (usernames == null || usernames.isEmpty())
-				return message;
+				return messageVO;
 
-			message.shortMPublisherRole.notifyATUser(new ATUserNotifiedEvent(message.getAccount(), usernames, message.getMessageVO().getSubject(),
-					message.getMessageId()));
+			messageVO.getForumMessage().shortMPublisherRole.notifyATUser(new ATUserNotifiedEvent
+					(messageVO.getForumMessage().getAccount(),
+							usernames, messageVO.getSubject(),
+							messageVO.getForumMessage().getMessageId()));
 		} catch (Exception e) {
 			Debug.logError("" + e, module);
 		}
-		return message;
+		return messageVO;
 	}
 
 }

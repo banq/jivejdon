@@ -25,6 +25,7 @@ import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumMessageReply;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.dci.ThreadManagerContext;
+import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.model.query.MultiCriteria;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.service.ForumMessageQueryService;
@@ -102,7 +103,10 @@ public class MessageKernel implements MessageKernelIF {
 			forumMessageReply.setForum(pMessage.getForum());
 			forumMessageReply.setForumThread(pMessage.getForumThread());
 			String rsubject = htmlEscape.matcher(pMessage.getMessageVO().getSubject()).replaceAll("");
-			forumMessageReply.getMessageVO().setSubject(rsubject);
+			MessageVO messageVo = MessageVO.builder().subject(rsubject).body
+					(forumMessageReply.getMessageVO().getBody()).message(forumMessageReply)
+					.build();
+			forumMessageReply.setMessageVO(messageVo);
 		} catch (Exception e) {
 			logger.error(e);
 		}

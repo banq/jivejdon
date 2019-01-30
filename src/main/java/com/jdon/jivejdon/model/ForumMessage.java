@@ -24,11 +24,12 @@ import com.jdon.jivejdon.event.domain.producer.read.LazyLoaderRole;
 import com.jdon.jivejdon.event.domain.producer.write.MessageEventSourcingRole;
 import com.jdon.jivejdon.event.domain.producer.write.ShortMPublisherRole;
 import com.jdon.jivejdon.model.attachment.AttachmentsVO;
+import com.jdon.jivejdon.model.attachment.UploadFile;
 import com.jdon.jivejdon.model.event.MessagePropertiesUpdatedEvent;
 import com.jdon.jivejdon.model.event.MessageUpdatedEvent;
 import com.jdon.jivejdon.model.event.ReplyMessageCreatedEvent;
 import com.jdon.jivejdon.model.event.UploadFilesSavedEvent;
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
+import com.jdon.jivejdon.model.message.FilterPipleSpec;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.model.proptery.MessagePropertysVO;
 import com.jdon.jivejdon.model.reblog.ReBlogVO;
@@ -39,16 +40,28 @@ import org.compass.annotations.SearchableReference;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 /**
- * 
- * ForumMessage is a message in Forum.
- * 
- * ForumMessageDecorator is its child class.
- * 
+ * Aggregate Root + DTO
+ *
+ * 1. This model  is Aggregate Root Entity when being RootMessage in ForumThread.
+ * ForumThread is another Aggregate Root; in this system, there are two aggregate roots.
+ * like Car and Enginee!
+ *
+ * 2. this model act as data transfer object(DTO) that is from UI to domain.
+ *
+ * so this model acts two kinds of Actor in two diiferent flows:
+ * 1. In from repository to domain flow, It is aggregateRoot Entity;
+ * 2. In from domain to UI flow ,It is DTO;
+ *
+ *there are two construct methods in two flows.
+ * 1. using builder() and ForumModel's solid state when in first flow
+ * 2. using business special method such as addChild() and ForumModel's parameter state when in
+ * second flow!
+ *
+ *
  * @author <a href="mailto:banq@163.com">banq</a>
- * 
+ *
  */
 @Model
 @Searchable
@@ -62,6 +75,9 @@ public class ForumMessage extends ForumModel implements Cloneable {
 	public ShortMPublisherRole shortMPublisherRole;
 	@SearchableId
 	private Long messageId;
+	@SearchableComponent
+	private MessageVO messageVO;
+	private FilterPipleSpec filterPipleSpec;
 	private String creationDate;
 	private long modifiedDate;
 	private Account account; // owner
@@ -69,9 +85,8 @@ public class ForumMessage extends ForumModel implements Cloneable {
 	private volatile ForumThread forumThread;
 	@SearchableReference
 	private Forum forum;
-	@SearchableComponent
-	private MessageVO messageVO;
-	private Collection outFilters;
+	private String[] tagTitle;
+
 	private boolean replyNotify;
 	private AttachmentsVO attachmentsVO;
 	private MessagePropertysVO messagePropertysVO;
@@ -80,18 +95,19 @@ public class ForumMessage extends ForumModel implements Cloneable {
 	// created from repository that will be in memory, it is Entity
 	public ForumMessage(Long messageId) {
 		this.messageId = messageId;
-		this.messageVO = new MessageVO();
-
+		this.messageVO = MessageVO.builder().subject("").body("").message(this).build();
 	}
 
 	// created in UI, catch the messageForm's copy data, it is DTO.
 	public ForumMessage() {
-		this.setParameter(true);
-		this.messageVO = new MessageVO();
+		this.messageId = null;
+		this.setParameter(true);//this is a DTO parameter
+		this.messageVO = MessageVO.builder().subject("").body("").message(this).build();
 		this.account = new Account();
 		this.attachmentsVO = new AttachmentsVO(new Long(0), new ArrayList());
 		this.messagePropertysVO = new MessagePropertysVO(new Long(0), new ArrayList());
 	}
+
 
 	public void finishDTO() {
 		this.attachmentsVO = null;
@@ -130,24 +146,6 @@ public class ForumMessage extends ForumModel implements Cloneable {
 		return this.forumThread.isRoot(this);
 	}
 
-	public void applyFilters() {
-		try {
-			if (outFilters == null)
-				return;
-			if (this.messageVO.isFiltered())
-				return;
-			synchronized (this) {
-				Iterator iter = outFilters.iterator();
-				while (iter.hasNext()) {
-					MessageRenderSpecification mrs = ((MessageRenderSpecification) iter.next());
-					mrs.render(this);
-				}
-				messageVO.setFiltered(true);
-			}
-		} catch (Exception e) {
-			System.err.print(" applyFilters error:" + e + getMessageId());
-		}
-	}
 
 	public MessageVO getMessageVO() {
 		return messageVO;
@@ -157,10 +155,16 @@ public class ForumMessage extends ForumModel implements Cloneable {
 		this.messageVO = messageVO;
 	}
 
+
 	public MessageVO getMessageVOClone() throws Exception {
 		return (MessageVO) this.messageVO.clone();
 	}
 
+	/**
+	 * there are two kinds MessageVO;
+	 * 1. applied business rule filter
+	 * 2. original that saved in repository
+	 */
 	public void reloadMessageVOOrignal() {
 		DomainMessage em = lazyLoaderRole.reloadMessageVO(this.messageId);
 		messageVO = (MessageVO) em.getBlockEventResult();
@@ -170,7 +174,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 
 	/**
 	 * post a reply forumMessage
-	 * 
+	 *
 	 * @param forumMessageReply
 	 */
 	@OnCommand("addreplyForumMessage")
@@ -188,7 +192,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 
 			forumThread.addNewMessage(this, forumMessageReply);
 
-			forumMessageReply.setOutFilters(this.getOutFilters());
+//		    forumMessageReply.setOutFilters(this.getOutFilters());
 
 			// messagecount + 1
 			forumMessageReply.getAccount().updateMessageCount(1);
@@ -207,7 +211,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 
 	/**
 	 * doing after put a exist forumMessage
-	 * 
+	 *
 	 * @param newForumMessageInputparamter
 	 */
 	@OnCommand("updateForumMessage")
@@ -224,11 +228,9 @@ public class ForumMessage extends ForumModel implements Cloneable {
 					forumThread.moveForum(this, newForumMessageInputparamter.getForum());
 				}
 			}
-
 			// save this updated message to db
 			eventSourcing.saveMessage(new MessageUpdatedEvent(newForumMessageInputparamter));
-
-			this.applyFilters();
+//			this.applyFilters();
 		} catch (Exception e) {
 			System.err.print(" updateMessage error:" + e + this.messageId);
 		}
@@ -236,7 +238,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 
 	/**
 	 * merge the new into myself, include aggregation or association parts
-	 * 
+	 *
 	 * @param newForumMessageInputparamter
 	 * @throws Exception
 	 */
@@ -244,36 +246,43 @@ public class ForumMessage extends ForumModel implements Cloneable {
 		long now = System.currentTimeMillis();
 		setModifiedDate(now);
 
-		setOperator(newForumMessageInputparamter.getOperator());
-
 		// 1. aggregation
-		setMessageVO((MessageVO) newForumMessageInputparamter.getMessageVO().clone());
-
+		MessageVO newMessageVO = (MessageVO) newForumMessageInputparamter.getMessageVO().clone();
+		Account newAccount = newForumMessageInputparamter.getOperator();
 		// 2. association upload files
 		// send message that include a new value Object. not send a entity
 		// object such as this
-		Collection uploads = newForumMessageInputparamter.getAttachment().getUploadFiles();
+		Collection<UploadFile> uploads = newForumMessageInputparamter.getAttachment()
+				.getUploadFiles();
 		if (uploads != null) {
 			eventSourcing.saveUploadFiles(new UploadFilesSavedEvent(this.messageId, uploads));
-			// update memory
-			this.getAttachment().setUploadFiles(uploads);
+//			// update memory using builder
+//			this.getAttachment().setUploadFiles(uploads);
 		}
 
 		// 3. association message property
-		Collection props = newForumMessageInputparamter.getMessagePropertysVO().getPropertys();
-		this.getMessagePropertysVO().replacePropertys(props);
+		Collection<Property> props = newForumMessageInputparamter.getMessagePropertysVO()
+				.getPropertys();
+		//using builder
+//		this.getMessagePropertysVO().replacePropertys(props);
+
+		this.builder().messageCore(this).messageVO
+				(newMessageVO).forum
+				(this.forum).forumThread(this.forumThread)
+				.acount(newAccount).filterPipleSpec(this.filterPipleSpec)
+				.uploads(uploads).props(props).build();
+
 		// merge with old properties;
 		eventSourcing.saveMessageProperties(new MessagePropertiesUpdatedEvent(this.messageId, getMessagePropertysVO().getPropertys()));
+
 	}
 
 	public void updateMasked(boolean masked) {
 		this.getMessagePropertysVO().updateMasked(masked);
 		eventSourcing.saveMessageProperties(new MessagePropertiesUpdatedEvent(this.messageId, getMessagePropertysVO().getPropertys()));
-
 		this.getForumThread().updateMessage(this);
-
 		this.reloadMessageVOOrignal();
-		this.applyFilters();
+//		this.applyFilters();
 	}
 
 	public AttachmentsVO getAttachment() {
@@ -389,14 +398,6 @@ public class ForumMessage extends ForumModel implements Cloneable {
 		this.forum = forum;
 	}
 
-	public Collection getOutFilters() {
-		return outFilters;
-	}
-
-	public void setOutFilters(Collection outFilters) {
-		this.outFilters = outFilters;
-	}
-
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
@@ -451,4 +452,148 @@ public class ForumMessage extends ForumModel implements Cloneable {
 		this.reBlogVO = reBlogVO;
 	}
 
+	public String[] getTagTitle() {
+		return tagTitle;
+	}
+
+	public void setTagTitle(String[] tagTitle) {
+		this.tagTitle = tagTitle;
+	}
+
+	public FilterPipleSpec getFilterPipleSpec() {
+		return filterPipleSpec;
+	}
+
+	/**
+	 * if change filterPipleSpec, so means this message content become initial state.
+	 * need apply business rule filter again
+	 * <p>
+	 * calling this method  = this.setSolid(false)
+	 *
+	 * @param filterPipleSpec
+	 */
+	public void setFilterPipleSpec(FilterPipleSpec filterPipleSpec) {
+		this.filterPipleSpec = filterPipleSpec;
+	}
+
+
+	/**
+	 * lambdas builder pattern
+	 * <p>
+	 * lazy builder = only build messageVO -> forum -> forumThread -> account -> filterPipleSpec
+	 * eager builder = lazy builder + upload + messgaeProptery
+	 * <p>
+	 * this builder is from repository to aggregate;
+	 * another builder is from UI to aggregate, this model acts as
+	 * a DTO
+	 * </p>
+	 * <p>
+	 * lazy builder usage:
+	 * forumMessageCore.builder().messageCore("messageCore").messageVO
+	 * ("messageVO").forum
+	 * ("forum").forumThread("forumThread")
+	 * .acount("accountOptional.orElse(new Account())").filterPipleSpec("filterPipleSpec")
+	 * .uploads("null").props("null").build();
+	 *
+	 * @return
+	 */
+	public RequireMessageCore builder() {
+		return messageCore -> messageVO -> forum -> forumThread -> account -> filterPipleSpec
+				-> uploads -> properties -> new FinalStageVO(messageCore,
+				messageVO, forum, forumThread, account, filterPipleSpec, uploads, properties);
+	}
+
+	public void build(MessageVO messageVO, Forum
+			forum, ForumThread forumThread, Account account, FilterPipleSpec filterPipleSpec,
+					  Collection<UploadFile> uploads, Collection<Property> props) {
+		synchronized (this) {
+			this.setSolid(false);//begin to construt it
+			setAccount(account);
+			setForum(forum);
+			setForumThread(forumThread);
+			setFilterPipleSpec(filterPipleSpec);
+			if (uploads != null)
+				this.getAttachment().setUploadFiles(uploads);
+			if (props != null)
+				this.getMessagePropertysVO().replacePropertys(props);
+			else
+				//preload messageProperty
+				getMessagePropertysVO().preLoadPropertys();
+			//apply all filter specification , business rule!
+			setMessageVO(filterPipleSpec.applyFilters(messageVO));
+			this.setSolid(true);//construt end
+		}
+
+	}
+
+	@FunctionalInterface
+	public interface RequireMessageCore {
+		RequireMessageVO messageCore(ForumMessage messageCore);
+	}
+
+	@FunctionalInterface
+	public interface RequireMessageVO {
+		RequireForum messageVO(MessageVO messageVO);
+	}
+
+	@FunctionalInterface
+	public interface RequireForum {
+		RequireForumThread forum(Forum forum);
+	}
+
+
+	@FunctionalInterface
+	public interface RequireForumThread {
+		RequireAccount forumThread(ForumThread forumThread);
+	}
+
+	@FunctionalInterface
+	public interface RequireAccount {
+		RequireFilterPipleSpec acount(Account account);
+	}
+
+	@FunctionalInterface
+	public interface RequireFilterPipleSpec {
+		OptionsUploadFile filterPipleSpec(FilterPipleSpec filterPipleSpec);
+	}
+
+	@FunctionalInterface
+	public interface OptionsUploadFile {
+		OptionsProperties uploads(Collection<UploadFile> uploads);
+	}
+
+	@FunctionalInterface
+	public interface OptionsProperties {
+		FinalStageVO props(Collection<Property> props);
+	}
+
+	public class FinalStageVO {
+		private final ForumMessage messageCore;
+		private final MessageVO messageVO;
+		private final Account account;
+		private final Forum forum;
+		private final ForumThread forumThread;
+		private final FilterPipleSpec filterPipleSpec;
+		private final Collection<UploadFile> uploads;
+		private final Collection<Property> props;
+
+		public FinalStageVO(ForumMessage messageCore, MessageVO messageVO, Forum
+				forum, ForumThread forumThread, Account account, FilterPipleSpec filterPipleSpec,
+							Collection<UploadFile> uploads, Collection<Property> props) {
+			this.messageCore = messageCore;
+			this.messageVO = messageVO;
+			this.account = account;
+			this.forum = forum;
+			this.forumThread = forumThread;
+			this.filterPipleSpec = filterPipleSpec;
+			this.uploads = uploads;
+			this.props = props;
+		}
+
+		public ForumMessage build() {
+			messageCore.build(messageVO, forum, forumThread, account,
+					filterPipleSpec, uploads, props);
+			return messageCore;
+		}
+	}
 }

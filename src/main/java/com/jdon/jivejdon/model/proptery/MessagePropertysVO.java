@@ -15,13 +15,13 @@
  */
 package com.jdon.jivejdon.model.proptery;
 
-import java.util.Collection;
-import java.util.Iterator;
-
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.event.domain.producer.read.LazyLoaderRole;
 import com.jdon.jivejdon.model.Property;
 import com.jdon.jivejdon.model.util.LazyLoader;
+
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * 
@@ -42,7 +42,7 @@ public class MessagePropertysVO extends LazyLoader {
 
 	private LazyLoaderRole lazyLoaderRole;
 
-	private Collection propertys;
+	private Collection<Property> propertys;
 
 	// for read or load
 	public MessagePropertysVO(long messageId, LazyLoaderRole lazyLoaderRole) {
@@ -51,7 +51,7 @@ public class MessagePropertysVO extends LazyLoader {
 	}
 
 	// for be written
-	public MessagePropertysVO(long messageId, Collection propertys) {
+	public MessagePropertysVO(long messageId, Collection<Property> propertys) {
 		this.messageId = messageId;
 		this.propertys = propertys;
 	}
@@ -60,17 +60,13 @@ public class MessagePropertysVO extends LazyLoader {
 		return messageId;
 	}
 
-	public void setPropertys(Collection propertys) {
-		this.propertys = propertys;
-	}
-
-	public Collection getPropertys() {
+	public Collection<Property> getPropertys() {
 		if (this.propertys != null)
 			return this.propertys;
 
 		if (propertys == null && lazyLoaderRole != null) {
 			// synchronized (this) {
-			Collection propertys = (Collection) super.loadBlockedResult();
+			Collection<Property> propertys = (Collection) super.loadBlockedResult();
 			if (propertys != null)
 				this.propertys = propertys;
 			// }
@@ -78,6 +74,10 @@ public class MessagePropertysVO extends LazyLoader {
 			System.err.print("my god, how I was bornd?");
 		}
 		return propertys;
+	}
+
+	public void setPropertys(Collection<Property> propertys) {
+		this.propertys = propertys;
 	}
 
 	public void preLoadPropertys() {
@@ -133,7 +133,7 @@ public class MessagePropertysVO extends LazyLoader {
 		return Integer.parseInt(this.getPropertyValue(DIG_NUMBER));
 	}
 
-	public void replacePropertys(Collection newprops) {
+	public void replacePropertys(Collection<Property> newprops) {
 		Iterator iter = newprops.iterator();
 		while (iter.hasNext()) {
 			Property newproperty = (Property) iter.next();

@@ -15,9 +15,7 @@
  */
 package com.jdon.jivejdon.model.message.weibo;
 
-import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.message.MessageVO;
-import com.jdon.util.StringUtil;
 import com.jdon.util.UtilValidate;
 
 import java.util.ArrayList;
@@ -29,10 +27,9 @@ public class AuthorNameFilter {
 
 	public final static int maxCount = 10;
 
-	public Collection<String> getUsernameFromBody(ForumMessage message) {
+	public Collection<String> getUsernameFromBody(MessageVO messageVO) {
 		Collection<String> toUsernames = new ArrayList();
 		try {
-			MessageVO messageVO = message.getMessageVO();
 			if (messageVO.getBody().indexOf(PRE_AUTHOR) == -1 && messageVO.getSubject().indexOf(PRE_AUTHOR) == -1)
 				return null;
 
@@ -82,7 +79,8 @@ public class AuthorNameFilter {
 					String buff = body.substring(index);
 					String[] as = buff.split("(?i)[^a-zA-Z0-9\u4E00-\u9FA5]");
 					if (as.length >= 2 && !UtilValidate.isEmpty(as[1]) && UtilValidate.isAlphanumeric(as[1])) {
-						messageVO.setBody(StringUtil.replace(messageVO.getBody(), as[1], getAuthorURL(as[1])));
+//						messageVO.setBody(StringUtil.replace(messageVO.getBody(), as[1],
+// getAuthorURL(as[1])));
 						if (!toUsernames.contains(as[1]) && toUsernames.size() < maxCount)
 							toUsernames.add(as[1]);
 					}

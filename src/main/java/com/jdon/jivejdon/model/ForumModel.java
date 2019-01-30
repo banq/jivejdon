@@ -15,10 +15,20 @@
  */
 package com.jdon.jivejdon.model;
 
-import java.io.Serializable;
-
 import com.jdon.jivejdon.repository.EmbedIF;
 
+import java.io.Serializable;
+
+/**
+ * a Model acts two kinds of Actor in two diiferent flows:
+ * * 1. In from repository to domain flow, It is aggregateRoot Entity;
+ * * 2. In from domain to UI flow ,It is DTO;
+ * *
+ * *there are two construct methods in two flows.
+ * * 1. using builder() and ForumModel's solid state when in first flow
+ * * 2. using business special method such as addChild() and ForumModel's parameter state when in
+ * * second flow!
+ */
 public class ForumModel implements EmbedIF, Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -26,6 +36,7 @@ public class ForumModel implements EmbedIF, Serializable {
 	protected volatile boolean solid;
 
 	// it is a paramter from command if UI.
+	// if  Id  is null, this is a DTO
 	protected volatile boolean parameter;
 
 	/**
@@ -40,8 +51,6 @@ public class ForumModel implements EmbedIF, Serializable {
 	 * embedded other association sub object. so the model can not be used by
 	 * View client.
 	 * 
-	 * @param embedded
-	 *            The embedded to set.
 	 */
 	public void setSolid(boolean solid) {
 		this.solid = solid;
@@ -49,6 +58,7 @@ public class ForumModel implements EmbedIF, Serializable {
 			this.setParameter(false);
 	}
 
+	//not used
 	public boolean isParameter() {
 		return parameter;
 	}

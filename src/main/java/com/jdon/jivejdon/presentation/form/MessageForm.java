@@ -20,7 +20,6 @@ import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.attachment.AttachmentsVO;
 import com.jdon.jivejdon.model.message.MessageVO;
-import com.jdon.util.StringUtil;
 import com.jdon.util.UtilValidate;
 import org.apache.struts.action.ActionMapping;
 
@@ -71,13 +70,15 @@ public class MessageForm extends BaseForm {
 
 	private boolean replyNotify;
 
+	private String[] tagTitles;
+
 	// modify
 
 	/**
 	 * for initMessage of the ForumMessageService
 	 */
 	public MessageForm() {
-		messageVO = new MessageVO();
+		messageVO = MessageVO.builder().subject("").body("").message(null).build();
 
 		forum = new Forum(); // for parameter forum.forumId=xxx
 		forumThread = new ForumThread();
@@ -148,21 +149,6 @@ public class MessageForm extends BaseForm {
 	}
 
 	/**
-	 * @return Returns the rewardPoints.
-	 */
-	public int getRewardPoints() {
-		return messageVO.getRewardPoints();
-	}
-
-	/**
-	 * @param rewardPoints
-	 *            The rewardPoints to set.
-	 */
-	public void setRewardPoints(int rewardPoints) {
-		messageVO.setRewardPoints(rewardPoints);
-	}
-
-	/**
 	 * @return Returns the parentMessage.
 	 */
 	public ForumMessage getParentMessage() {
@@ -182,7 +168,8 @@ public class MessageForm extends BaseForm {
 	}
 
 	public void setBody(String body) {
-		messageVO.setBody(body);
+		messageVO = MessageVO.builder().subject(this.getSubject()).body(body).message(null)
+				.build();
 	}
 
 	public String getSubject() {
@@ -190,7 +177,8 @@ public class MessageForm extends BaseForm {
 	}
 
 	public void setSubject(String subject) {
-		messageVO.setSubject(subject);
+		messageVO = MessageVO.builder().subject(subject).body(this.getBody()).message(null)
+				.build();
 	}
 
 	/**
@@ -238,25 +226,26 @@ public class MessageForm extends BaseForm {
 	public void setMasked(boolean masked) {
 		this.masked = masked;
 	}
-
-	public String getTagTitles() {
-		if ((messageVO.getTagTitle() != null) && (messageVO.getTagTitle().length != 0)) {
-			return StringUtil.merge(messageVO.getTagTitle(), " ");
-		} else
-			return "";
-	}
-
-	public void setTagTitles(String tagTitles) {
-		if (!UtilValidate.isEmpty(tagTitles))
-			messageVO.setTagTitle(tagTitles.split("(\\s)+"));
-	}
+//
+//	public String getTagTitles() {
+//		if ((this.tagTitles != null) && (this.tagTitles.length != 0)) {
+//			return StringUtil.merge(this.tagTitles, " ");
+//		} else
+//			return "";
+//	}
+//
+//	public void setTagTitles(String tagTitle) {
+//		if (!UtilValidate.isEmpty(tagTitle))
+//			this.tagTitles = tagTitle.split("(\\s)+");
+//	}
 
 	public String[] getTagTitle() {
-		return messageVO.getTagTitle();
+
+		return this.tagTitles;
 	}
 
-	public void setTagTitle(String[] tagTitle) {
-		messageVO.setTagTitle(tagTitle);
+	public void setTagTitle(String[] tagTitles) {
+		this.tagTitles = tagTitles;
 	}
 
 	public boolean isRoot() {

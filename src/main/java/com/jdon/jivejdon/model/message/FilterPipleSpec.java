@@ -1,22 +1,49 @@
 package com.jdon.jivejdon.model.message;
 
-import java.util.Collection;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public final class FilterPipleVO {
+import java.util.Collection;
+import java.util.Iterator;
+
+/**
+ * piple pattern
+ * <p>
+ * apply business rule filter to MessageVO for display or other output format!
+ */
+public final class FilterPipleSpec {
+	private final static Logger logger = LogManager.getLogger(FilterPipleSpec.class);
 
 	private final Collection<MessageRenderSpecification> outFilters;
-	private final boolean isFiltered;
 
-	public FilterPipleVO(Collection<MessageRenderSpecification> outFilters, boolean isFiltered) {
+	public FilterPipleSpec(Collection<MessageRenderSpecification> outFilters) {
 		this.outFilters = outFilters;
-		this.isFiltered = isFiltered;
 	}
 
 	public Collection<MessageRenderSpecification> getOutFilters() {
 		return outFilters;
 	}
 
-	public boolean isFiltered() {
-		return isFiltered;
+
+	public boolean isReady() {
+		return (outFilters != null) ? true : false;
+	}
+
+	public MessageVO applyFilters(MessageVO messageVO) {
+		try {
+			if (!isReady()) {
+				logger.error("when build but outFilters is null");
+				return messageVO;
+			}
+			Iterator iter = outFilters.iterator();
+			while (iter.hasNext()) {
+				MessageRenderSpecification mrs = ((MessageRenderSpecification) iter
+						.next());
+				messageVO = mrs.render(messageVO);
+			}
+		} catch (Exception e) {
+			logger.error(" applyFilters error:" + e + messageVO);
+		}
+		return messageVO;
 	}
 }

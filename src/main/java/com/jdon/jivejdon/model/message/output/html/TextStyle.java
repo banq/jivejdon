@@ -15,10 +15,8 @@
  */
 package com.jdon.jivejdon.model.message.output.html;
 
-import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
-import com.jdon.util.Debug;
 
 /**
  * A ForumMessageFilter that replaces [b][/b] and [i][/i] tags with their HTML
@@ -36,31 +34,63 @@ public class TextStyle implements MessageRenderSpecification {
 	private boolean filteringBody = true;
 
 	/**
-	 * Clones a new filter that will have the same properties and that will wrap
-	 * around the specified message.
-	 * 
-	 * @param message
-	 *            the ForumMessage to wrap the new filter around.
+	 * Replaces all instances of oldString with newString in line with the added
+	 * feature that matches of newString in oldString ignore case. The count
+	 * paramater is set to the number of replaces performed.
+	 *
+	 * @param line      the String to search to perform replacements on
+	 * @param oldString the String that should be replaced by newString
+	 * @param newString the String that will replace all instances of oldString
+	 * @param count     a value that will be updated with the number of replaces
+	 *                  performed.
+	 * @return a String will all instances of oldString replaced by newString
 	 */
-	public ForumMessage render(ForumMessage message) {
-		try {
-			MessageVO messageVO = message.getMessageVO();
-			if (!messageVO.isFiltered()) {
-				messageVO.setSubject(convertTags(messageVO.getSubject()));
-				messageVO.setBody(convertTags(messageVO.getBody()));
-			}
-		} catch (Exception e) {
-			Debug.logError("" + e, module);
+	public static final String replaceIgnoreCase(String line, String oldString, String newString,
+												 int[] count) {
+		if (line == null) {
+			return null;
 		}
-		return message;
+		String lcLine = line.toLowerCase();
+		String lcOldString = oldString.toLowerCase();
+		int i = 0;
+		if ((i = lcLine.indexOf(lcOldString, i)) >= 0) {
+			int counter = 0;
+			char[] line2 = line.toCharArray();
+			char[] newString2 = newString.toCharArray();
+			int oLength = oldString.length();
+			StringBuilder buf = new StringBuilder(line2.length);
+			buf.append(line2, 0, i).append(newString2);
+			i += oLength;
+			int j = i;
+			while ((i = lcLine.indexOf(lcOldString, i)) > 0) {
+				counter++;
+				buf.append(line2, j, i - j).append(newString2);
+				i += oLength;
+				j = i;
+			}
+			buf.append(line2, j, line2.length - j);
+			count[0] = counter;
+			return buf.toString().intern();
+		}
+		return line;
 	}
 
-	// FILTER PROPERTIES//
+	/**
+	 * Clones a new filter that will have the same properties and that will wrap
+	 * around the specified message.
+	 *
+	 */
+	public MessageVO render(MessageVO messageVO) {
+		return MessageVO.builder().subject(convertTags(messageVO.getSubject())).body
+				(convertTags(messageVO.getBody())).message(messageVO.getForumMessage())
+				.build();
+	}
+
 
 	/**
 	 * Returns true if translation of [b][/b] tags to the HTML bold tag is
 	 * enabled.
-	 * 
+	 *
 	 * @return true if translation of [b][/b] tags is enabled.
 	 */
 	public boolean getBoldEnabled() {
@@ -69,7 +99,7 @@ public class TextStyle implements MessageRenderSpecification {
 
 	/**
 	 * Toggles translation of [b][/b] tags to the HTML bold tag.
-	 * 
+	 *
 	 * @param boldEnabled
 	 *            toggles translation of [b][/b] tags.
 	 */
@@ -80,7 +110,7 @@ public class TextStyle implements MessageRenderSpecification {
 	/**
 	 * Returns true if translation of [i][/i] tags to the HTML italic tag is
 	 * enabled.
-	 * 
+	 *
 	 * @return true if translation of [i][/i] tags is enabled.
 	 */
 	public boolean getItalicEnabled() {
@@ -89,7 +119,7 @@ public class TextStyle implements MessageRenderSpecification {
 
 	/**
 	 * Toggles translation of [i][/i] tags to the HTML italic tag.
-	 * 
+	 *
 	 * @param italicEnabled
 	 *            toggles translation of [i][/i] tags.
 	 */
@@ -100,7 +130,7 @@ public class TextStyle implements MessageRenderSpecification {
 	/**
 	 * Returns true if translation of [u][/u] tags to the HTML underline tag is
 	 * enabled.
-	 * 
+	 *
 	 * @return true if translation of [i][/i] tags is enabled.
 	 */
 	public boolean getUnderlineEnabled() {
@@ -109,7 +139,7 @@ public class TextStyle implements MessageRenderSpecification {
 
 	/**
 	 * Toggles translation of [u][/u] tags to the HTML underline tag.
-	 * 
+	 *
 	 * @param underlineEnabled
 	 *            toggles translation of [u][/u] tags.
 	 */
@@ -120,7 +150,7 @@ public class TextStyle implements MessageRenderSpecification {
 	/**
 	 * Returns true if translation of [pre][/pre] tags to the HTML preformat tag
 	 * is enabled.
-	 * 
+	 *
 	 * @return true if translation of [pre][/pre] tags is enabled.
 	 */
 	public boolean getPreformatEnabled() {
@@ -129,7 +159,7 @@ public class TextStyle implements MessageRenderSpecification {
 
 	/**
 	 * Toggles translation of [pre][/pre] tags to the HTML underline tag.
-	 * 
+	 *
 	 * @param preformatEnabled
 	 *            toggles translation of [pre][/pre] tags.
 	 */
@@ -139,7 +169,7 @@ public class TextStyle implements MessageRenderSpecification {
 
 	/**
 	 * Returns true if filtering on the subject is enabled.
-	 * 
+	 *
 	 * @return true if filtering on the subject is enabled.
 	 */
 	public boolean isFilteringSubject() {
@@ -148,7 +178,7 @@ public class TextStyle implements MessageRenderSpecification {
 
 	/**
 	 * Enables or disables filtering on the subject.
-	 * 
+	 *
 	 * @param filteringSubject
 	 *            toggle value for filtering on subject.
 	 */
@@ -158,7 +188,7 @@ public class TextStyle implements MessageRenderSpecification {
 
 	/**
 	 * Returns true if filtering on the body is enabled.
-	 * 
+	 *
 	 * @return true if filtering on the body is enabled.
 	 */
 	public boolean isFilteringBody() {
@@ -167,7 +197,7 @@ public class TextStyle implements MessageRenderSpecification {
 
 	/**
 	 * Enables or disables filtering on the body.
-	 * 
+	 *
 	 * @param filteringBody
 	 *            toggle value for filtering on body.
 	 */
@@ -178,7 +208,7 @@ public class TextStyle implements MessageRenderSpecification {
 	/**
 	 * This method takes a string which may contain [b][/b] and [i][/i] tags and
 	 * converts them to their HTML equivalents.
-	 * 
+	 *
 	 * @param input
 	 *            the text to be converted.
 	 * @return the input string with the [b][/b] and [i][/i] tags converted to
@@ -242,52 +272,6 @@ public class TextStyle implements MessageRenderSpecification {
 			}
 		}
 		return input;
-	}
-
-	/**
-	 * Replaces all instances of oldString with newString in line with the added
-	 * feature that matches of newString in oldString ignore case. The count
-	 * paramater is set to the number of replaces performed.
-	 * 
-	 * @param line
-	 *            the String to search to perform replacements on
-	 * @param oldString
-	 *            the String that should be replaced by newString
-	 * @param newString
-	 *            the String that will replace all instances of oldString
-	 * @param count
-	 *            a value that will be updated with the number of replaces
-	 *            performed.
-	 * 
-	 * @return a String will all instances of oldString replaced by newString
-	 */
-	public static final String replaceIgnoreCase(String line, String oldString, String newString, int[] count) {
-		if (line == null) {
-			return null;
-		}
-		String lcLine = line.toLowerCase();
-		String lcOldString = oldString.toLowerCase();
-		int i = 0;
-		if ((i = lcLine.indexOf(lcOldString, i)) >= 0) {
-			int counter = 0;
-			char[] line2 = line.toCharArray();
-			char[] newString2 = newString.toCharArray();
-			int oLength = oldString.length();
-			StringBuilder buf = new StringBuilder(line2.length);
-			buf.append(line2, 0, i).append(newString2);
-			i += oLength;
-			int j = i;
-			while ((i = lcLine.indexOf(lcOldString, i)) > 0) {
-				counter++;
-				buf.append(line2, j, i - j).append(newString2);
-				i += oLength;
-				j = i;
-			}
-			buf.append(line2, j, line2.length - j);
-			count[0] = counter;
-			return buf.toString().intern();
-		}
-		return line;
 	}
 
 }

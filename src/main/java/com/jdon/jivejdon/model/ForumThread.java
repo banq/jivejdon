@@ -24,6 +24,7 @@ import com.jdon.jivejdon.event.domain.producer.write.MessageEventSourcingRole;
 import com.jdon.jivejdon.model.event.MessageMovedEvent;
 import com.jdon.jivejdon.model.event.ThreadNameSavedEvent;
 import com.jdon.jivejdon.model.event.ThreadTagsSavedEvent;
+import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.model.realtime.ForumMessageDTO;
 import com.jdon.jivejdon.model.realtime.LobbyPublisherRoleIF;
 import com.jdon.jivejdon.model.realtime.Notification;
@@ -236,13 +237,13 @@ public class ForumThread extends ForumModel {
 	public void changeTags(String[] tagTitles) {
 		if (tagTitles == null || tagTitles.length == 0)
 			return;
-		getRootMessage().getMessageVO().setTagTitle(tagTitles);
+		getRootMessage().setTagTitle(tagTitles);
 		eventSourcing.saveTagTitles(new ThreadTagsSavedEvent(this.threadId,
 				Arrays.asList(tagTitles)));
 	}
 
 	public String[] getTagTitles() {
-		return getRootMessage().getMessageVO().getTagTitle();
+		return getRootMessage().getTagTitle();
 	}
 
 	public boolean isRoot(ForumMessage message) {
@@ -318,7 +319,7 @@ public class ForumThread extends ForumModel {
 
 		if (isRoot(forumMessage)) {
 			this.setRootMessage(forumMessage);
-			changeTags(forumMessage.getMessageVO().getTagTitle());
+			changeTags(forumMessage.getTagTitle());
 			this.setName(forumMessage.getMessageVO().getSubject());
 		}
 
@@ -328,7 +329,10 @@ public class ForumThread extends ForumModel {
 	}
 
 	public void updateName(String name) {
-		this.getRootMessage().getMessageVO().setSubject(name);
+		MessageVO messageVO = MessageVO.builder().subject(name).body(this
+				.getRootMessage().getMessageVO().getBody()).message(getRootMessage())
+				.build();
+		this.getRootMessage().setMessageVO(messageVO);
 		this.setName(name);
 		eventSourcing.saveName(new ThreadNameSavedEvent(this.getThreadId(),
 				name));
@@ -398,7 +402,7 @@ public class ForumThread extends ForumModel {
 			tagTitles[i] = tag.getTitle();
 			i++;
 		}
-		getRootMessage().getMessageVO().setTagTitle(tagTitles);
+		getRootMessage().setTagTitle(tagTitles);
 	}
 
 	public void addDig(ForumMessage message) {

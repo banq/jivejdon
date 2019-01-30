@@ -35,7 +35,7 @@ public class ReloadMessageVO implements DomainEventHandler {
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 		Long messageId = (Long) event.getDomainMessage().getEventSource();
 		ForumMessage forumMessage = forumAbstractFactory.getMessage(messageId);
-		MessageVO messageVO = forumAbstractFactory.messageDirector.getMessageVO(forumMessage.getMessageId());
+		MessageVO messageVO = forumAbstractFactory.messageDirector.getMessageVO(forumMessage);
 		event.getDomainMessage().setEventResult(messageVO);
 
 	}

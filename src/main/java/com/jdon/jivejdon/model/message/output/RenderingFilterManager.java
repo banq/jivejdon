@@ -45,7 +45,6 @@ public interface RenderingFilterManager {
      * Returns the ForumMessageFilter at the specified index.
      *
      * @return the filter at the specified index.
-     * @throws UnauthorizedException if not an admin.
      */
     public MessageRenderSpecification getFilter(int index) throws Exception;
 
@@ -53,7 +52,6 @@ public interface RenderingFilterManager {
      * Returns the count of currently active filters for the forum.
      *
      * @return a count of the currently active filters.
-     * @throws UnauthorizedException if not an admin.
      */
     public int getFilterCount() throws Exception;
 
@@ -61,7 +59,6 @@ public interface RenderingFilterManager {
      * Adds a new ForumMessageFilter to the end of the filter list.
      *
      * @param filter ForumMessageFilter to add to the filter list.
-     * @throws UnauthorizedException if not an admin.
      */
     public void addFilter(MessageRenderSpecification filter) throws Exception;
     
@@ -73,7 +70,6 @@ public interface RenderingFilterManager {
      *
      * @param filter ForumMessageFilter to add to the filter list.
      * @param index position in filter list to insert new filter.
-     * @throws UnauthorizedException if not an admin.
      */
     public void addFilter(MessageRenderSpecification filter, int index)
             throws Exception;
@@ -82,7 +78,6 @@ public interface RenderingFilterManager {
      * Removes a ForumMessageFilter at the specified index in the filter list.
      *
      * @param index position in filter list to remove filter from.
-     * @throws UnauthorizedException if not an admin.
      */
     public void removeFilter(int index) throws Exception;
 
@@ -93,11 +88,10 @@ public interface RenderingFilterManager {
      * method will expire the entire message cache so that cache consistency
      * is maintained.
      *
-     * @throws UnauthorizedException if not an admin.
      */
     public void saveFilters() throws Exception;
 
-
+	public OutFilterManager getOutFilterManager();
     public void setOutFilterManager(OutFilterManager outFilterManager);
     
    

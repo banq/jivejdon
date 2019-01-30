@@ -1,10 +1,5 @@
 package com.jdon.jivejdon.service.imp.upload;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import org.apache.logging.log4j.*;
-
 import com.jdon.annotation.intercept.Poolable;
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;
@@ -16,6 +11,11 @@ import com.jdon.jivejdon.model.message.upload.UploadHelper;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.UploadRepository;
 import com.jdon.jivejdon.service.UploadInfoVOService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * 
@@ -80,7 +80,7 @@ public class UploadInfoVOServiceImp implements UploadInfoVOService {
 		return pageIterator;
 	}
 
-	public Collection getUploadInfoVOs(int start, int count) {
+	public Collection<UploadInfoVO> getUploadInfoVOs(int start, int count) {
 		Collection list = new ArrayList();
 		String imageId = null;
 		try {

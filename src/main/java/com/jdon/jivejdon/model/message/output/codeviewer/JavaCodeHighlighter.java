@@ -15,15 +15,13 @@
  */
 package com.jdon.jivejdon.model.message.output.codeviewer;
 
+import com.jdon.jivejdon.model.message.MessageRenderSpecification;
+import com.jdon.jivejdon.model.message.MessageVO;
+import com.jdon.util.StringUtil;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
-
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
-import com.jdon.jivejdon.model.message.MessageVO;
-import com.jdon.util.Debug;
-import com.jdon.util.StringUtil;
 
 /**
  * A ForumMessageFilter that syntax highlights Java code appearing between
@@ -96,26 +94,12 @@ public class JavaCodeHighlighter implements MessageRenderSpecification {
 	 * Clones a new filter that will have the same properties and that will wrap
 	 * around the specified message.
 	 * 
-	 * @param message
-	 *            the ForumMessage to wrap the new filter around.
 	 */
-	public ForumMessage render(ForumMessage message) {
-		try {
-			MessageVO messageVO = message.getMessageVO();
-			if (!messageVO.isFiltered()) {
-				// if(true) {
-				if (applyTableSurround) {
-					messageVO.setBody(highlightCode(messageVO.getBody(), true));
-				} else {
-					messageVO.setBody(highlightCode(messageVO.getBody(), false));
-
-				}
-			}
-		} catch (Exception e) {
-			Debug.logError("" + e, module);
-		}
-
-		return message;
+	public MessageVO render(MessageVO messageVO) {
+		return MessageVO.builder().subject(messageVO.getSubject()).body
+				(highlightCode(messageVO.getBody(), applyTableSurround)).message(messageVO
+				.getForumMessage())
+				.build();
 	}
 
 	// FROM THE FORUMMESSAGE INTERFACE//

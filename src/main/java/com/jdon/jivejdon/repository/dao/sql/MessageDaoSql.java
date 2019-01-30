@@ -80,13 +80,13 @@ public abstract class MessageDaoSql implements MessageDao {
 		return forumMessage;
 	}
 
-	public MessageVO getMessageVOCore(Long messageId) {
-		logger.debug("enter MessageVO  for id:" + messageId);
+	public MessageVO getMessageVOCore(ForumMessage forumMessage) {
+		logger.debug("enter MessageVO  for id:" + forumMessage.getMessageId());
 		String LOAD_MESSAGE = "SELECT threadID, forumID, userID, subject, body, modValue, " +
 				"rewardPoints, "
 				+ "creationDate, modifiedDate, parentMessageID FROM jiveMessage WHERE messageID=?";
 		List queryParams = new ArrayList();
-		queryParams.add(messageId);
+		queryParams.add(forumMessage.getMessageId());
 
 		MessageVO messageVO = null;
 		try {
@@ -94,10 +94,11 @@ public abstract class MessageDaoSql implements MessageDao {
 			Iterator iter = list.iterator();
 			if (iter.hasNext()) {
 				Map map = (Map) iter.next();
-				messageVO = messageFactory.createMessageVOCore(messageId, map);
+				messageVO = messageFactory.createMessageVOCore(forumMessage.getMessageId(), map,
+						forumMessage);
 			}
 		} catch (Exception e) {
-			logger.error("messageId=" + messageId + " happend messageVO " + e);
+			logger.error("messageId=" + forumMessage.getMessageId() + " happend messageVO " + e);
 		}
 		return messageVO;
 	}
@@ -151,7 +152,8 @@ public abstract class MessageDaoSql implements MessageDao {
 		queryParams.add(messageVO.getSubject());
 		queryParams.add(messageVO.getBody());
 		queryParams.add(new Integer(0));
-		queryParams.add(new Integer(messageVO.getRewardPoints()));
+		//getRewardPoints
+		queryParams.add(new Integer(0));
 
 		long now = System.currentTimeMillis();
 		String saveDateTime = ToolsUtil.dateToMillis(now);
@@ -201,7 +203,8 @@ public abstract class MessageDaoSql implements MessageDao {
 			queryParams.add(messageVO.getSubject());
 			queryParams.add(messageVO.getBody());
 			queryParams.add(new Integer(0));
-			queryParams.add(new Integer(messageVO.getRewardPoints()));
+			//getRewardPoints
+			queryParams.add(new Integer(0));
 
 			long now = System.currentTimeMillis();
 			String saveDateTime = ToolsUtil.dateToMillis(now);
@@ -229,8 +232,10 @@ public abstract class MessageDaoSql implements MessageDao {
 		queryParams.add(forumThread.getForum().getForumId());
 		queryParams.add(forumThread.getRootMessage().getMessageId());
 		queryParams.add(new Integer(0));
-		MessageVO messageVO = forumThread.getRootMessage().getMessageVO();
-		queryParams.add(new Integer(messageVO.getRewardPoints()));
+//		MessageVO messageVO = forumThread.getRootMessage().getMessageVO();
+		//getRewardPoints
+		queryParams.add(new Integer(0));
+//		queryParams.add(new Integer(messageVO.getRewardPoints()));
 
 		long now = System.currentTimeMillis();
 		String saveDateTime = ToolsUtil.dateToMillis(now);
@@ -388,7 +393,9 @@ public abstract class MessageDaoSql implements MessageDao {
 		queryParams.add(messageVO.getSubject());
 		queryParams.add(messageVO.getBody());
 		queryParams.add(new Integer(0));
-		queryParams.add(new Integer(messageVO.getRewardPoints()));
+		//getRewardPoints
+		queryParams.add(new Integer(0));
+//		queryParams.add(new Integer(messageVO.getRewardPoints()));
 
 		long now = System.currentTimeMillis();
 		String saveDateTime = ToolsUtil.dateToMillis(now);

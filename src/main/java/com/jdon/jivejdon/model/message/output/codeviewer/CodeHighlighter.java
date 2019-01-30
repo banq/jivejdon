@@ -15,17 +15,15 @@
  */
 package com.jdon.jivejdon.model.message.output.codeviewer;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.StringReader;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.util.StringUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
 
 /**
  * A ForumMessageFilter that syntax highlights Java code appearing between
@@ -64,19 +62,13 @@ public class CodeHighlighter implements MessageRenderSpecification {
 	/**
 	 * Clones a new filter that will have the same properties and that will wrap
 	 * around the specified message.
-	 * 
-	 * @param message
+	 *
 	 *            the ForumMessage to wrap the new filter around.
 	 */
-	public ForumMessage render(ForumMessage message) {
-		try {
-			MessageVO messageVO = message.getMessageVO();
-			if (!messageVO.isFiltered())
-				messageVO.setBody(highlightCode(messageVO.getBody()));
-		} catch (Exception e) {
-			logger.error(e);
-		}
-		return message;
+	public MessageVO render(MessageVO messageVO) {
+		return MessageVO.builder().subject(messageVO.getSubject()).body(highlightCode
+				(messageVO.getBody())).message(messageVO.getForumMessage())
+				.build();
 	}
 
 	// OTHER METHODS//

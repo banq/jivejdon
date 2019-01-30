@@ -55,7 +55,7 @@ public class MessageInitFactory {
 				forumMessage.setAccount(createAnonymous());
 			}
 
-			MessageVO messageVO = createMessageVOCore(messageId, map);
+			MessageVO messageVO = createMessageVOCore(messageId, map, forumMessage);
 			forumMessage.setMessageVO(messageVO);
 
 			String saveDateTime = ((String) map.get("modifiedDate")).trim();
@@ -85,16 +85,17 @@ public class MessageInitFactory {
 		return forumMessage;
 	}
 
-	public MessageVO createMessageVOCore(Long messageId, Map map) {
-		MessageVO messageVO = new MessageVO();
+	public MessageVO createMessageVOCore(Long messageId, Map map, ForumMessage forumMessage) {
+		String subject = "";
+		String body = "";
 		try {
-			messageVO.setSubject((String) map.get("subject"));
-			messageVO.setBody((String) map.get("body"));
+			subject = (String) map.get("subject");
+			body = (String) map.get("body");
 		} catch (Exception e) {
-			System.err.println(e);
+			System.err.println("createMessageVOCore " + subject + " " + body + " error: " + e);
 		} finally {
 		}
-		return messageVO;
+		return MessageVO.builder().subject(subject).body(body).message(forumMessage).build();
 	}
 
 	public ForumThread createThreadCore(Long threadId, Map map) {

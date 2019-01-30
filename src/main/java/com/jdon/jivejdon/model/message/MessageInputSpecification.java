@@ -1,4 +1,6 @@
 package com.jdon.jivejdon.model.message;
 
-public class MessageInputSpecification {
+public interface MessageInputSpecification {
+
+	MessageVO apply(MessageVO messageVO);
 }

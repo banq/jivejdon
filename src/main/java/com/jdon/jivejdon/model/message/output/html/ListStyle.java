@@ -1,9 +1,7 @@
 package com.jdon.jivejdon.model.message.output.html;
 
-import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
-import com.jdon.util.Debug;
 
 /**
  * [list] [/list]  ===> [ul][/ul]
@@ -12,17 +10,10 @@ public class ListStyle implements MessageRenderSpecification {
 	private final static String module = ListStyle.class.getName();
 
 
-	@Override
-	public ForumMessage render(ForumMessage forumMessage) {
-		try {
-			MessageVO messageVO = forumMessage.getMessageVO();
-			if (!messageVO.isFiltered()) {
-				messageVO.setBody(convertTags(messageVO.getBody()));
-			}
-		} catch (Exception e) {
-			Debug.logError("" + e, module);
-		}
-		return forumMessage;
+	public MessageVO render(MessageVO messageVO) {
+		return MessageVO.builder().subject(messageVO.getSubject()).body(convertTags
+				(messageVO.getBody())).message(messageVO.getForumMessage())
+				.build();
 	}
 
 	private String convertTags(String input) {

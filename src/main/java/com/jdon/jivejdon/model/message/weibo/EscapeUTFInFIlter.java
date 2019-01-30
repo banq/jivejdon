@@ -1,10 +1,8 @@
 package com.jdon.jivejdon.model.message.weibo;
 
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
+import com.jdon.jivejdon.model.message.MessageInputSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.util.EmojiRegexUtil;
-import com.jdon.util.Debug;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,20 +10,16 @@ import java.util.regex.Pattern;
 /**
  * escape 😃  these utf-16, not fit for utf-8 mysql
  */
-public class EscapeUTFInFIlter implements MessageRenderSpecification {
+public class EscapeUTFInFIlter implements MessageInputSpecification {
 	private final static String module = EscapeUTFInFIlter.class.getName();
 
-	@Override
-	public ForumMessage render(ForumMessage forumMessage) {
-		try {
-			MessageVO messageVO = forumMessage.getMessageVO();
-			messageVO.setBody(esacpeUtf(messageVO.getBody()));
-			messageVO.setSubject(esacpeUtf(messageVO.getSubject()));
-			forumMessage.setMessageVO(messageVO);
-		} catch (Exception e) {
-			Debug.logError("" + e, module);
-		}
-		return forumMessage;
+
+	public MessageVO apply(MessageVO messageVO) {
+		return MessageVO.builder().subject(esacpeUtf(messageVO
+				.getSubject())).body(esacpeUtf(messageVO.getBody())).message(messageVO
+				.getForumMessage())
+				.build();
+
 	}
 
 	public String esacpeUtf(String input) {

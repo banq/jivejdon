@@ -1,51 +1,86 @@
 package com.jdon.jivejdon.model.message;
 
+import com.jdon.jivejdon.model.ForumMessage;
+import com.jdon.util.StringUtil;
+import org.compass.annotations.Searchable;
+import org.compass.annotations.SearchableProperty;
+
 import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.compass.annotations.Searchable;
-import org.compass.annotations.SearchableProperty;
-
-import com.jdon.util.StringUtil;
-
 /**
  * ForumMessage's value object
- * 
- * @author gateway
- * 
+ * created by MessageVOCreatedBuilder
+ *
+ *  there are two kinds MessageVO;
+ *  1. applied business rule filter in FilterPipleSpec
+ *  2. original that saved in repository
+ *
  */
 @Searchable(root = false)
-public class MessageVO implements Serializable, Cloneable {
+public final class MessageVO implements Serializable, Cloneable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private final static Pattern quoteEscape = Pattern.compile("\\[.*?\\](.*)\\[\\/.*?\\]");
 	private final static Pattern htmlEscape = Pattern.compile("\\<.*?\\>|<[^>]+");
-	private final static Pattern newlineEscape = Pattern.compile("\\<br\\>|\\<p\\>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern newlineEscape = Pattern.compile("\\<br\\>|\\<p\\>", Pattern
+			.CASE_INSENSITIVE);
 	private final static Pattern httpURLEscape = Pattern.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
 
-	@SearchableProperty
-	protected String subject;
+	private final static Pattern imgPattern = Pattern.compile("(<img\\b|(?!^)\\G)[^>]*?\\b" +
+			"(src|width|height)=([\"']?)([^\"]*)\\3");
+
+	private final ForumMessage forumMessage;
 
 	@SearchableProperty
-	protected String body;
+	private final String subject;
 
 	@SearchableProperty
-	private String[] tagTitle;
+	private final String body;
 
-	private int rewardPoints;
+	private final String linkUrl;
 
-	private volatile boolean isFiltered;
+	private final String thumbnailUrl;
 
-	private String linkUrl;
 
-	private String thumbnailUrl;
+	/**
+	 * only using builder pattern to create MessageVO!
+	 * <p>
+	 * MessageVO..builder().subject().body().message().build();
+	 *
+	 * @param subject
+	 * @param body
+	 * @param forumMessage
+	 */
+	private MessageVO(String subject, String body, ForumMessage forumMessage) {
+		this.forumMessage = forumMessage;
+		this.subject = subject;
+		Matcher matcher = imgPattern.matcher(body);
+		if (matcher.find()) {
+			thumbnailUrl = matcher.group(4);
+		} else
+			thumbnailUrl = "";
 
-	public MessageVO() {
+		matcher = httpURLEscape.matcher(body);
+		if (matcher.find()) {
+			linkUrl = matcher.group();
+			this.body = matcher.replaceAll("");
+		} else {
+			linkUrl = "";
+			this.body = body;
+		}
+
+	}
+
+	/**
+	 * build pattern entry
+	 *
+	 * @return
+	 */
+	public static RequireSubject builder() {
+		return subject -> body -> message -> new FinalStage(subject, body, message);
 	}
 
 	/**
@@ -62,59 +97,12 @@ public class MessageVO implements Serializable, Cloneable {
 		return body;
 	}
 
-	/**
-	 * @param body
-	 *            The body to set.
-	 */
-	public void setBody(String body) {
-		this.body = body;
-	}
-
-	/**
-	 * @param subject
-	 *            The subject to set.
-	 */
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-
-	/**
-	 * @return Returns the rewardPoints.
-	 */
-	public int getRewardPoints() {
-		return rewardPoints;
-	}
-
-	/**
-	 * @param rewardPoints
-	 *            The rewardPoints to set.
-	 */
-	public void setRewardPoints(int rewardPoints) {
-		this.rewardPoints = rewardPoints;
-	}
-
-	public String[] getTagTitle() {
-		return tagTitle;
-	}
-
-	public void setTagTitle(String[] tagTitle) {
-		this.tagTitle = tagTitle;
-	}
-
 	public String getShortBody(int length) {
-		if (getBody() != null) {
-			dealLinkUrl();
-			return shortenNoHTML(getBody(), length);
-		} else
-			return "";
+		return shortenNoHTML(getBody(), length);
 	}
 
 	public String getBodyText(int length) {
-		if (getBody() != null) {
-			dealLinkUrl();
-			return shortenNoHTMLText(getBody(), length);
-		} else
-			return "";
+		return shortenNoHTMLText(getBody(), length);
 	}
 
 	public String shortenNoHTML(String in, int length) {
@@ -132,40 +120,6 @@ public class MessageVO implements Serializable, Cloneable {
 		return StringUtil.shorten(noQuote, length);
 	}
 
-	private void dealLinkUrl() {
-		if (linkUrl != null)
-			return;
-		Matcher matcher = httpURLEscape.matcher(this.body);
-		if (matcher.find()) {
-			linkUrl = matcher.group();
-			body = matcher.replaceAll("");
-		} else
-			linkUrl = "";
-	}
-
-	public String getLinkUrl() {
-		if (linkUrl != null)
-			return linkUrl;
-
-		dealLinkUrl();
-		return linkUrl;
-	}
-
-	public boolean isFiltered() {
-		return isFiltered;
-	}
-
-	public void setFiltered(boolean isFiltered) {
-		this.isFiltered = isFiltered;
-	}
-
-	/**
-	 * add property to propertys;
-	 * 
-	 * @param propName
-	 * @param propValue
-	 */
-
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
@@ -174,8 +128,43 @@ public class MessageVO implements Serializable, Cloneable {
 		return thumbnailUrl;
 	}
 
-	public void setThumbnailUrl(String thumbnailUrl) {
-		this.thumbnailUrl = thumbnailUrl;
+	public String getLinkUrl() {
+		return linkUrl;
 	}
 
+	public ForumMessage getForumMessage() {
+		return forumMessage;
+	}
+
+	@FunctionalInterface
+	public interface RequireSubject {
+		RequireBody subject(String subject);
+	}
+
+	@FunctionalInterface
+	public interface RequireBody {
+		RequireForumMessage body(String body);
+	}
+
+	@FunctionalInterface
+	public interface RequireForumMessage {
+		FinalStage message(ForumMessage message);
+	}
+
+	public static class FinalStage {
+		private final String subject;
+		private final String body;
+		private final ForumMessage message;
+		// constructor
+
+		public FinalStage(String subject, String body, ForumMessage message) {
+			this.subject = subject;
+			this.body = body;
+			this.message = message;
+		}
+
+		public MessageVO build() {
+			return new MessageVO(subject, body, message);
+		}
+	}
 }

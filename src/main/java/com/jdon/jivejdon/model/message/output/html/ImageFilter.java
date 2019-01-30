@@ -15,13 +15,11 @@
  */
 package com.jdon.jivejdon.model.message.output.html;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
-import com.jdon.util.Debug;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A ForumMessageFilter that replaces to <img src=url></img>
@@ -30,15 +28,12 @@ import com.jdon.util.Debug;
 public class ImageFilter implements MessageRenderSpecification {
 	private final static String module = ImageFilter.class.getName();
 
-	public ForumMessage render(ForumMessage message) {
-		try {
-			MessageVO messageVO = message.getMessageVO();
-			messageVO.setBody(convertTags(messageVO));
-		} catch (Exception e) {
-			Debug.logError("" + e, module);
-		}
-		return message;
+	public MessageVO render(MessageVO messageVO) {
+		return MessageVO.builder().subject(messageVO.getSubject()).body(convertTags
+				(messageVO)).message(messageVO.getForumMessage())
+				.build();
 	}
+
 
 	private String convertTags(MessageVO messageVO) {
 		String str = messageVO.getBody();
@@ -56,7 +51,7 @@ public class ImageFilter implements MessageRenderSpecification {
 			m.appendReplacement(sb, "<img src=\"" + url + "\" border='0' >");
 			result = m.find();
 		}
-		messageVO.setThumbnailUrl(url);
+//		messageVO.setThumbnailUrl(url);
 		m.appendTail(sb);
 		return sb.toString();
 	}

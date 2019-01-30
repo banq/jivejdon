@@ -1,10 +1,12 @@
 package com.jdon.jivejdon.repository.search;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
+import com.jdon.container.pico.Startable;
+import com.jdon.jivejdon.model.ForumMessage;
+import com.jdon.jivejdon.model.ForumMessageReply;
+import com.jdon.jivejdon.model.message.MessageVO;
+import com.jdon.jivejdon.model.query.MessageSearchSpec;
+import com.jdon.jivejdon.repository.dao.sql.MessageUtilSQL;
+import com.jdon.jivejdon.util.ThreadTimer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.compass.annotations.config.CompassAnnotationsConfiguration;
@@ -18,20 +20,15 @@ import org.compass.core.config.CompassEnvironment;
 import org.compass.core.config.ConfigurationException;
 import org.compass.core.engine.SearchEngineException;
 
-import com.jdon.container.pico.Startable;
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumMessageReply;
-import com.jdon.jivejdon.model.message.MessageVO;
-import com.jdon.jivejdon.model.query.MessageSearchSpec;
-import com.jdon.jivejdon.repository.dao.sql.MessageUtilSQL;
-import com.jdon.jivejdon.util.ThreadTimer;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MessageSearchProxy implements Startable, MessageSearchRepository {
 	private final static Logger logger = LogManager.getLogger(MessageSearchProxy.class);
-	private Compass compass;
-
 	private final Map<Long, MessageSearchSpec> caches;
-
+	private Compass compass;
 	private MessageUtilSQL messageUtilSQL;
 
 	private ThreadTimer threadTimer;
@@ -98,7 +95,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.jdon.jivejdon.repository.search.MessageSearchRepository#createMessage
 	 * (com.jdon.jivejdon.model.ForumMessage)
@@ -128,7 +125,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.jdon.jivejdon.repository.search.MessageSearchRepository#
 	 * createMessageReply(com.jdon.jivejdon.model.ForumMessageReply)
 	 */
@@ -159,7 +156,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.jdon.jivejdon.repository.search.MessageSearchRepository#updateMessage
 	 * (com.jdon.jivejdon.model.ForumMessage)
@@ -176,12 +173,11 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 		CompassTransaction tx = null;
 		try {
 			ForumMessage messageS = (ForumMessage) session.load(ForumMessage.class, forumMessage.getMessageId());
-			MessageVO messageVO = new MessageVO();
 			MessageVO messageVOClone = forumMessage.getMessageVOClone();
-			messageVO.setSubject(messageVOClone.getSubject());
-			messageVO.setBody(messageVOClone.getBody());
-			messageVO.setTagTitle(messageVOClone.getTagTitle());
-			messageS.setMessageVO(messageVO);
+			MessageVO mVO = MessageVO.builder().subject(messageVOClone.getSubject())
+					.body(messageVOClone.getBody()).message(messageS)
+					.build();
+			messageS.setMessageVO(mVO);
 			tx = session.beginTransaction();
 			session.save(messageS);
 			tx.commit();
@@ -198,7 +194,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.jdon.jivejdon.repository.search.MessageSearchRepository#deleteMessage
 	 * (java.lang.Long)
@@ -229,14 +225,14 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.jdon.jivejdon.repository.search.MessageSearchRepository#find(java
 	 * .lang.String, int, int)
 	 */
 	public Collection find(String query, int start, int count) {
 		logger.debug("MessageSearchProxy.find");
-		Collection result = new ArrayList();
+		Collection<MessageSearchSpec> result = new ArrayList();
 		CompassSession session = compass.openSession();
 		CompassTransaction tx = null;
 		MessageSearchSpec messageSearchSpec = null;
@@ -255,12 +251,10 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 				messageSearchSpec = new MessageSearchSpec();
 				messageSearchSpec.setMessageId(smessage.getMessageId());
 
-				MessageVO mVO = new MessageVO();
 				String body = hits.highlighter(i).fragment("body");
-				mVO.setBody(body);
 				String subject = hits.highlighter(i).fragment("subject");
-				mVO.setSubject(subject);
-				messageSearchSpec.setMessageVO(mVO);
+				messageSearchSpec.setSubject(subject);
+				messageSearchSpec.setBody(body);
 
 				// String tagTitle[] =
 				// hits.highlighter(i).fragments("tagTitle");
@@ -284,7 +278,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.jdon.jivejdon.repository.search.MessageSearchRepository#
 	 * findThreadsAllCount(java.lang.String)
 	 */
@@ -311,7 +305,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.jdon.jivejdon.repository.search.MessageSearchRepository#findThread
 	 * (java.lang.String, int, int)
@@ -337,12 +331,10 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 				if (messageSearchSpec.isRoot()) {
 					messageSearchSpec.setMessageId(smessage.getMessageId());
 
-					MessageVO mVO = new MessageVO();
 					String body = hits.highlighter(i).fragment("body");
-					mVO.setBody(body);
 					String subject = hits.highlighter(i).fragment("subject");
-					mVO.setSubject(subject);
-					messageSearchSpec.setMessageVO(mVO);
+					messageSearchSpec.setSubject(subject);
+					messageSearchSpec.setBody(body);
 
 					messageSearchSpec.setResultAllCount(hits.getLength());
 					result.add(messageSearchSpec);
@@ -382,7 +374,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.jdon.jivejdon.repository.search.MessageSearchRepository#
 	 * getMessageSearchSpec(java.lang.Long)
 	 */

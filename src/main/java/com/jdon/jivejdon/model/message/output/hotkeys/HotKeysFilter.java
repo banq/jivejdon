@@ -16,17 +16,17 @@
  */
 package com.jdon.jivejdon.model.message.output.hotkeys;
 
-import java.util.Iterator;
-import java.util.regex.Pattern;
-
-import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.HotKeys;
 import com.jdon.jivejdon.model.Property;
 import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.util.Debug;
 
+import java.util.Iterator;
+import java.util.regex.Pattern;
+
 /**
+ * removing
  * replace hot keywords with HotKeys added by administrator
  * 
  * @author banq
@@ -39,21 +39,19 @@ public class HotKeysFilter implements MessageRenderSpecification {
 	// whitespace
 	private String suffix_regEx = "";
 
-	public ForumMessage render(ForumMessage forumMessage) {
-		MessageVO messageVO = forumMessage.getMessageVO();
-		if (!messageVO.isFiltered())
-			messageVO.setBody(applyFilteredBody(forumMessage));
-		return forumMessage;
+	//by pass
+	public MessageVO render(MessageVO messageVO) {
+		return messageVO;
 	}
+
 
 	/**
 	 * space + keyword + space will be replaced
 	 */
-	public String applyFilteredBody(ForumMessage forumMessage) {
-		MessageVO messageVO = forumMessage.getMessageVO();
+	public String applyFilteredBody(MessageVO messageVO) {
 		String body = messageVO.getBody();
 		try {
-			HotKeys hotKeys = forumMessage.getForum().getHotKeys();
+			HotKeys hotKeys = messageVO.getForumMessage().getForum().getHotKeys();
 			if (hotKeys == null)
 				return body;
 

@@ -15,14 +15,12 @@
  */
 package com.jdon.jivejdon.model.message.upload;
 
-import java.util.Collection;
-import java.util.Iterator;
-
-import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.attachment.UploadFile;
 import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
-import com.jdon.util.Debug;
+
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * @author banq(http://www.jdon.com)
@@ -45,38 +43,27 @@ public class UploadImageFilter implements MessageRenderSpecification {
 		imageShowUrl = imageShowFileName;
 	}
 
-	public ForumMessage render(ForumMessage message) {
-		try {
-			MessageVO messageVO = message.getMessageVO();
-			String newBody = appendTags(message);
-			messageVO.setBody(newBody);
-		} catch (Exception e) {
-			Debug.logError("" + e, module);
-		}
-		return message;
+	public MessageVO render(MessageVO messageVO) {
+		String newBody = appendTags(messageVO, messageVO.getForumMessage().getAttachment()
+				.getUploadFiles());
+		return MessageVO.builder().subject(messageVO.getSubject()).body(newBody).message
+				(messageVO.getForumMessage())
+				.build();
 	}
 
-	/**
-	 * return the String:
-	 * 
-	 * @param str
-	 * @return
-	 */
-	public String appendTags(ForumMessage message) {
-		MessageVO messageVO = message.getMessageVO();
+
+	public String appendTags(MessageVO messageVO, Collection uploadFiles) {
 		String str = messageVO.getBody();
-		Collection uploadFiles = message.getAttachment().getUploadFiles();
 		if ((uploadFiles == null) || (uploadFiles.size() == 0)) {
-			if (messageVO.getThumbnailUrl() == null || messageVO.getThumbnailUrl().length() == 0)
-				messageVO.setThumbnailUrl(this.getRandomDefaulThumb());
 			return str;
 		}
 
-		Iterator iter2 = uploadFiles.iterator();
-		if (iter2.hasNext()) {
-			UploadFile uploadFile = (UploadFile) iter2.next();
-			messageVO.setThumbnailUrl(imageShowUrl + "/" + uploadFile.getId() + "/" + uploadFile.getOid());
-		}
+//		Iterator iter2 = uploadFiles.iterator();
+//		if (iter2.hasNext()) {
+//			UploadFile uploadFile = (UploadFile) iter2.next();
+//			messageVO.setThumbnailUrl(imageShowUrl + "/" + uploadFile.getId() + "/" + uploadFile
+// .getOid());
+//		}
 
 		if (str.indexOf("[img index=") != -1) {
 			str = processImgEmbed(uploadFiles, str);
@@ -147,18 +134,18 @@ public class UploadImageFilter implements MessageRenderSpecification {
 		}
 		return null;
 	}
-
-	private String getRandomDefaulThumb() {
-		String[] thumbs = thumbpics.split(",");
-		if (thumbs == null || thumbs.length == 0) {
-			Debug.logError("please add default thumbs UploadImageFilter", module);
-			return "please add default thumbs UploadImageFilter";
-		}
-
-		int i = (int) (Math.random() * thumbs.length);
-		return thumbs[i];
-
-	}
+//
+//	private String getRandomDefaulThumb() {
+//		String[] thumbs = thumbpics.split(",");
+//		if (thumbs == null || thumbs.length == 0) {
+//			Debug.logError("please add default thumbs UploadImageFilter", module);
+//			return "please add default thumbs UploadImageFilter";
+//		}
+//
+//		int i = (int) (Math.random() * thumbs.length);
+//		return thumbs[i];
+//
+//	}
 
 	public String getThumbpics() {
 		return thumbpics;

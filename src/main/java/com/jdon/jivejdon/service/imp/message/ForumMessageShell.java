@@ -61,16 +61,14 @@ import java.util.Optional;
 public class ForumMessageShell implements ForumMessageService {
 	private final static Logger logger = LogManager.getLogger(ForumMessageShell.class);
 	protected final InFilterManager inFilterManager;
+	protected final SessionContextUtil sessionContextUtil;
+	protected final ResourceAuthorization resourceAuthorization;
+	protected final MessageKernelIF messageKernel;
+	protected final UploadService uploadService;
+	protected final ForumFactory forumBuilder;
 	private final ThreadManagerContext threadManagerContext;
+	private final RenderingFilterManager renderingFilterManager;
 	protected SessionContext sessionContext;
-	protected SessionContextUtil sessionContextUtil;
-	protected ResourceAuthorization resourceAuthorization;
-	protected MessageKernelIF messageKernel;
-
-	protected UploadService uploadService;
-
-	protected ForumFactory forumBuilder;
-	private RenderingFilterManager renderingFilterManager;
 
 	public ForumMessageShell(SessionContextUtil sessionContextUtil, ResourceAuthorization messageServiceAuth, InFilterManager inFilterManager,
 			MessageKernelIF messageKernel, UploadService uploadService, ForumFactory forumBuilder, RenderingFilterManager renderingFilterManager,
@@ -126,7 +124,8 @@ public class ForumMessageShell implements ForumMessageService {
 			MessagePropertysVO messagePropertysVO = new MessagePropertysVO(mIDInt, properties);
 			forumMessagePostDTO.setMessagePropertysVO(messagePropertysVO);
 
-			inFilterManager.applyFilters(forumMessagePostDTO);
+			forumMessagePostDTO.setMessageVO(inFilterManager.applyFilters
+					(forumMessagePostDTO.getMessageVO()));
 
 			if (!UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getBody()) ||
 					!UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getSubject())) {
@@ -168,7 +167,8 @@ public class ForumMessageShell implements ForumMessageService {
 			MessagePropertysVO messagePropertysVO = new MessagePropertysVO(mIDInt, properties);
 			forumMessageReplyPostDTO.setMessagePropertysVO(messagePropertysVO);
 
-			inFilterManager.applyFilters(forumMessageReplyPostDTO);
+			forumMessageReplyPostDTO.setMessageVO(inFilterManager.applyFilters
+					(forumMessageReplyPostDTO.getMessageVO()));
 
 			ForumMessage parentMessage = getMessage(forumMessageReplyPostDTO.getParentMessage().getMessageId());
 			if (parentMessage == null) {
@@ -248,8 +248,8 @@ public class ForumMessageShell implements ForumMessageService {
 			MessagePropertysVO messagePropertysVO = new MessagePropertysVO(newForumMessageInputparamter.getMessageId(), properties);
 			newForumMessageInputparamter.setMessagePropertysVO(messagePropertysVO);
 
-			inFilterManager.applyFilters(newForumMessageInputparamter);
-
+			newForumMessageInputparamter.setMessageVO(inFilterManager.applyFilters
+					(newForumMessageInputparamter.getMessageVO()));
 			// oldforumMessage.update(newForumMessageInputparamter);
 			messageKernel.update(oldforumMessage.getForumThread().getThreadId(), oldforumMessage, newForumMessageInputparamter);
 

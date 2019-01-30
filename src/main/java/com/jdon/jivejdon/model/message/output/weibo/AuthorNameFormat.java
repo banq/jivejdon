@@ -15,15 +15,13 @@
  */
 package com.jdon.jivejdon.model.message.output.weibo;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.model.message.weibo.InFilterAuthor;
-import com.jdon.util.Debug;
 import com.jdon.util.StringUtil;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 1.进入管理界面 /jivejdon/admin/
@@ -45,16 +43,12 @@ public class AuthorNameFormat implements MessageRenderSpecification {
 
 	private String authorURL = "<a href='/blog/#user#' target=_blank>#user#</a>";
 
-	public ForumMessage render(ForumMessage message) {
-		try {
-			MessageVO messageVO = message.getMessageVO();
-			if (!messageVO.isFiltered())
-				messageVO.setBody(convertTags(messageVO.getBody()));
-		} catch (Exception e) {
-			Debug.logError("" + e, module);
-		}
-		return message;
+	public MessageVO render(MessageVO messageVO) {
+		return MessageVO.builder().subject(messageVO.getSubject()).body(convertTags
+				(messageVO.getBody())).message(messageVO.getForumMessage())
+				.build();
 	}
+
 
 	private String convertTags(String str) {
 		if (str == null || str.length() == 0) {

@@ -22,7 +22,7 @@ import com.jdon.annotation.Model;
  * 
  */
 @Model
-public class ForumMessageReply extends ForumMessage {
+public final class ForumMessageReply extends ForumMessage {
 	private static final long serialVersionUID = 1L;
 
 	private ForumMessage parentMessage;
