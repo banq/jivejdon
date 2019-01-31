@@ -15,11 +15,12 @@
  */
 package com.jdon.jivejdon.util;
 
+import com.jdon.jivejdon.model.message.MessageVO;
+import com.jdon.util.StringUtil;
+
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
-
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
-import com.jdon.util.StringUtil;
+import java.util.function.Function;
 
 /**
  *
@@ -28,7 +29,8 @@ public class FiltersUtils {
 	private static final char[] LT_ENCODE = "&lt;".toCharArray();
 	private static final char[] GT_ENCODE = "&gt;".toCharArray();
 
-	public static String getPropertyHTML(MessageRenderSpecification filter, PropertyDescriptor descriptor) {
+	public static String getPropertyHTML(Function<MessageVO, MessageVO> filter, PropertyDescriptor
+			descriptor) {
 		// HTML of the customizer for this property
 		StringBuilder html = new StringBuilder(50);
 		// Get the name of the property (this becomes the name of the form

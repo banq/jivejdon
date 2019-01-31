@@ -16,10 +16,11 @@
  */
 package com.jdon.jivejdon.model.message.output.shield;
 
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.function.Function;
 
 /**
  * when first running, must config this class in managers.xml
@@ -27,12 +28,12 @@ import org.apache.logging.log4j.Logger;
  * @author banq
  * 
  */
-public class Bodymasking implements MessageRenderSpecification {
+public class Bodymasking implements Function<MessageVO, MessageVO> {
 	private final static Logger logger = LogManager.getLogger(Bodymasking.class);
 
 	public static String maskLocalization = "THIS MESSAGE HAS BEEN MASKED";
 
-	public MessageVO render(MessageVO messageVO) {
+	public MessageVO apply(MessageVO messageVO) {
 		if (messageVO.getForumMessage().isMasked())
 			return MessageVO.builder().subject(messageVO.getSubject()).body
 					(maskLocalization).message(messageVO.getForumMessage())

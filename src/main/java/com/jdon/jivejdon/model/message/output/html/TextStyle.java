@@ -15,15 +15,16 @@
  */
 package com.jdon.jivejdon.model.message.output.html;
 
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
+
+import java.util.function.Function;
 
 /**
  * A ForumMessageFilter that replaces [b][/b] and [i][/i] tags with their HTML
  * tag equivalents. This filter should only be run after any HTML stripping
  * filters are.
  */
-public class TextStyle implements MessageRenderSpecification {
+public class TextStyle implements Function<MessageVO, MessageVO> {
 	private final static String module = TextStyle.class.getName();
 
 	private boolean boldEnabled = true;
@@ -80,7 +81,7 @@ public class TextStyle implements MessageRenderSpecification {
 	 * around the specified message.
 	 *
 	 */
-	public MessageVO render(MessageVO messageVO) {
+	public MessageVO apply(MessageVO messageVO) {
 		return MessageVO.builder().subject(convertTags(messageVO.getSubject())).body
 				(convertTags(messageVO.getBody())).message(messageVO.getForumMessage())
 				.build();

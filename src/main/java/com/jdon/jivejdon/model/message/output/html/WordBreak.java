@@ -15,14 +15,15 @@
  */
 package com.jdon.jivejdon.model.message.output.html;
 
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
+
+import java.util.function.Function;
 
 /**
  * A ForumMessageFilter that converts newline characters into HTML &lt;br&gt;
  * tags. This filter should only be run after any HTML stripping filters.
  */
-public class WordBreak implements MessageRenderSpecification {
+public class WordBreak implements Function<MessageVO, MessageVO> {
 	private final static String module = WordBreak.class.getName();
 	int maxSubjectWordLength = 30;
 	int maxBodyWordLength = 8000;
@@ -65,7 +66,7 @@ public class WordBreak implements MessageRenderSpecification {
 	 * Clones a new filter that will have the same properties and that will wrap
 	 * around the specified message.
 	 */
-	public MessageVO render(MessageVO messageVO) {
+	public MessageVO apply(MessageVO messageVO) {
 		return MessageVO.builder().subject(createBreaks(messageVO.getSubject(),
 				maxSubjectWordLength)).body(createBreaks(messageVO.getBody(), maxBodyWordLength))
 				.message(messageVO.getForumMessage()).build();

@@ -15,10 +15,11 @@
  */
 package com.jdon.jivejdon.model.message.output.emotion;
 
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.function.Function;
 
 /**
  * A ForumMessageFilter that converts ASCII emoticons into image equivalents.
@@ -122,7 +123,7 @@ import org.apache.logging.log4j.Logger;
  * Note: special thanks to August Harrison for implementing an earlier version
  * of this filter.
  */
-public class Emoticon implements MessageRenderSpecification {
+public class Emoticon implements Function<MessageVO, MessageVO> {
 	private final static Logger logger = LogManager.getLogger(Emoticon.class);
 
 	private static String imageHappy = "regular_smile.png";
@@ -151,7 +152,7 @@ public class Emoticon implements MessageRenderSpecification {
 	 * around the specified message.
 	 *
 	 */
-	public MessageVO render(MessageVO messageVO) {
+	public MessageVO apply(MessageVO messageVO) {
 		return MessageVO.builder().subject(convertEmoticons(messageVO.getSubject())
 		).body(convertEmoticons(messageVO.getBody())).message(messageVO.getForumMessage())
 				.build();

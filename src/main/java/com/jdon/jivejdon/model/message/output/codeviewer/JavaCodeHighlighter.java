@@ -15,19 +15,19 @@
  */
 package com.jdon.jivejdon.model.message.output.codeviewer;
 
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.util.StringUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.function.Function;
 
 /**
  * A ForumMessageFilter that syntax highlights Java code appearing between
  * [code][/code] tags in the body of ForumMessage.
  */
-public class JavaCodeHighlighter implements MessageRenderSpecification {
+public class JavaCodeHighlighter implements Function<MessageVO, MessageVO> {
 	private final static String module = JavaCodeHighlighter.class.getName();
 
 	private String commentStart;
@@ -95,7 +95,7 @@ public class JavaCodeHighlighter implements MessageRenderSpecification {
 	 * around the specified message.
 	 * 
 	 */
-	public MessageVO render(MessageVO messageVO) {
+	public MessageVO apply(MessageVO messageVO) {
 		return MessageVO.builder().subject(messageVO.getSubject()).body
 				(highlightCode(messageVO.getBody(), applyTableSurround)).message(messageVO
 				.getForumMessage())

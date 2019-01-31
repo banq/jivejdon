@@ -15,14 +15,15 @@
  */
 package com.jdon.jivejdon.model.message.output.html;
 
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
+
+import java.util.function.Function;
 
 /**
  * A ForumMessageFilter that converts newline characters into HTML &lt;br&gt;
  * tags. This filter should only be run after any HTML stripping filters.
  */
-public class HTMLFilter implements MessageRenderSpecification {
+public class HTMLFilter implements Function<MessageVO, MessageVO> {
 	private final static String module = HTMLFilter.class.getName();
 
 	private static final char[] LT_ENCODE = "&lt;".toCharArray();
@@ -33,7 +34,7 @@ public class HTMLFilter implements MessageRenderSpecification {
 	 * around the specified message.
 	 * 
 	 */
-	public MessageVO render(MessageVO messageVO) {
+	public MessageVO apply(MessageVO messageVO) {
 		return MessageVO.builder().subject(escapeHTMLTags(messageVO.getSubject()))
 				.body(escapeHTMLTags(messageVO.getBody())).message(messageVO.getForumMessage())
 				.build();

@@ -16,22 +16,22 @@
 package com.jdon.jivejdon.model.message.upload;
 
 import com.jdon.jivejdon.model.attachment.UploadFile;
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.function.Function;
 
 /**
  * @author banq
  */
-public class UploadFileFilter implements MessageRenderSpecification {
+public class UploadFileFilter implements Function<MessageVO, MessageVO> {
 	public final static String DOWNLOAD_NAME = "dlname";
 	private final static String module = UploadFileFilter.class.getName();
 	// want ot modify it in admin
 	private String fileShowFileName = "../../uploadDL.jsp";
 
-	public MessageVO render(MessageVO messageVO) {
+	public MessageVO apply(MessageVO messageVO) {
 		String newBody = appendTags(messageVO, messageVO.getForumMessage().getAttachment()
 				.getUploadFiles());
 		return MessageVO.builder().subject(messageVO.getSubject()).body(newBody).message

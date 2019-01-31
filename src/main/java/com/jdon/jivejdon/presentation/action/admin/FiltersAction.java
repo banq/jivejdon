@@ -15,6 +15,22 @@
  */
 package com.jdon.jivejdon.presentation.action.admin;
 
+import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.model.message.MessageVO;
+import com.jdon.jivejdon.model.message.output.RenderingFilterManager;
+import com.jdon.jivejdon.presentation.form.FiltersForm;
+import com.jdon.jivejdon.service.ForumMessageService;
+import com.jdon.jivejdon.service.ForumService;
+import com.jdon.jivejdon.util.BeanUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.actions.DispatchAction;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.beans.BeanDescriptor;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -23,23 +39,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.logging.log4j.*;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.actions.DispatchAction;
-
-import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
-import com.jdon.jivejdon.model.message.output.RenderingFilterManager;
-import com.jdon.jivejdon.presentation.form.FiltersForm;
-import com.jdon.jivejdon.service.ForumMessageService;
-import com.jdon.jivejdon.service.ForumService;
-import com.jdon.jivejdon.util.BeanUtils;
+import java.util.function.Function;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -58,7 +58,8 @@ public class FiltersAction extends DispatchAction {
 
         try {
             RenderingFilterManager filterManager = getFilterManager(request);
-            MessageRenderSpecification[] availablefilters = filterManager.getAvailableFilters();
+			Function<MessageVO, MessageVO>[] availablefilters = filterManager
+					.getAvailableFilters();
 
             BeanDescriptor[] descriptors = new BeanDescriptor[availablefilters.length];
             List unInstalledDescriptors = new ArrayList(availablefilters.length);
@@ -72,7 +73,7 @@ public class FiltersAction extends DispatchAction {
             filtersForm.setAvailableDescriptors(descriptors);
             filtersForm.setUnInstalledDescriptors(unInstalledDescriptors);
 
-            MessageRenderSpecification[] filters = filterManager.getFilters();
+			Function<MessageVO, MessageVO>[] filters = filterManager.getFilters();
             descriptors = new BeanDescriptor[filters.length];
             for (int i = 0; i < filters.length; i++) {
                 BeanDescriptor descriptor = (Introspector.getBeanInfo(filters[i].getClass())).getBeanDescriptor();
@@ -93,7 +94,8 @@ public class FiltersAction extends DispatchAction {
         }
     }
 
-    private boolean isInstalledFilter(RenderingFilterManager filterManager, MessageRenderSpecification filter) {
+	private boolean isInstalledFilter(RenderingFilterManager filterManager, Function<MessageVO,
+			MessageVO> filter) {
         try {
             int filterCount = filterManager.getFilterCount();
             if (filter == null) {
@@ -104,7 +106,7 @@ public class FiltersAction extends DispatchAction {
             }
             String filterClassname = filter.getClass().getName();
             for (int i = 0; i < filterCount; i++) {
-                MessageRenderSpecification installedFilter = filterManager.getFilter(i);
+				Function<MessageVO, MessageVO> installedFilter = filterManager.getFilter(i);
                 if (filterClassname.equals(installedFilter.getClass().getName())) {
                     return true;
                 }
@@ -127,7 +129,8 @@ public class FiltersAction extends DispatchAction {
 
         RenderingFilterManager filterManager = getFilterManager(request);
         // Get the filter at the specified filter position
-        MessageRenderSpecification filter = filterManager.getFilter(filtersForm.getFilterIndex());
+		Function<MessageVO, MessageVO> filter = filterManager.getFilter(filtersForm.getFilterIndex
+				());
         // Remove it
         filterManager.removeFilter(filtersForm.getFilterIndex());
         // Re-add it based on the "direction" we're doing
@@ -175,7 +178,7 @@ public class FiltersAction extends DispatchAction {
 		RenderingFilterManager filterManager = getFilterManager(request);
 
 		// The filter we're working with
-		MessageRenderSpecification filter = filterManager.getFilter(filtersForm
+		Function<MessageVO, MessageVO> filter = filterManager.getFilter(filtersForm
 				.getFilterIndex());
 
 		// A map of name/value pairs. The names are the names of the bean
@@ -203,9 +206,10 @@ public class FiltersAction extends DispatchAction {
   			e.printStackTrace();
   		}
     }
-   
 
-    private Map getFilterPropertyValues(HttpServletRequest request, MessageRenderSpecification filter) {
+
+	private Map getFilterPropertyValues(HttpServletRequest request, Function<MessageVO, MessageVO>
+			filter) {
         // Map of filter property name/value pairs
         Map map = new HashMap();
         try {
@@ -230,7 +234,8 @@ public class FiltersAction extends DispatchAction {
         String classname = request.getParameter("classname");
         logger.debug(" classname =" + classname);
         try {
-            MessageRenderSpecification newFilter = (MessageRenderSpecification) (Class.forName(classname)).newInstance();
+			Function<MessageVO, MessageVO> newFilter = (Function<MessageVO, MessageVO>) (Class
+					.forName(classname)).newInstance();
             RenderingFilterManager filterManager = getFilterManager(request);
             filterManager.addFilter(newFilter);
             saveFilter(request);

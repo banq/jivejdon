@@ -15,9 +15,9 @@
  */
 package com.jdon.jivejdon.model.message.output.html;
 
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,10 +25,10 @@ import java.util.regex.Pattern;
  * A ForumMessageFilter that replaces to <img src=url></img>
  */
 
-public class ImageFilter implements MessageRenderSpecification {
+public class ImageFilter implements Function<MessageVO, MessageVO> {
 	private final static String module = ImageFilter.class.getName();
 
-	public MessageVO render(MessageVO messageVO) {
+	public MessageVO apply(MessageVO messageVO) {
 		return MessageVO.builder().subject(messageVO.getSubject()).body(convertTags
 				(messageVO)).message(messageVO.getForumMessage())
 				.build();

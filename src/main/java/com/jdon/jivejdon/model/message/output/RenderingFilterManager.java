@@ -16,7 +16,9 @@
 package com.jdon.jivejdon.model.message.output;
 
 import com.jdon.jivejdon.manager.filter.OutFilterManager;
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
+import com.jdon.jivejdon.model.message.MessageVO;
+
+import java.util.function.Function;
 
 
 /**
@@ -32,21 +34,21 @@ public interface RenderingFilterManager {
      * returns available ForumMessageFilter collection, except the used ones!
      * @return
      */
-    MessageRenderSpecification[] getAvailableFilters();
+	Function<MessageVO, MessageVO>[] getAvailableFilters();
     
     
     /**
      * returns the used ForumMessageFilter collection, except the available ones!
      * @return
      */
-    MessageRenderSpecification[] getFilters();
+	Function<MessageVO, MessageVO>[] getFilters();
     
     /**
      * Returns the ForumMessageFilter at the specified index.
      *
      * @return the filter at the specified index.
      */
-    public MessageRenderSpecification getFilter(int index) throws Exception;
+	public Function<MessageVO, MessageVO> getFilter(int index) throws Exception;
 
     /**
      * Returns the count of currently active filters for the forum.
@@ -60,7 +62,7 @@ public interface RenderingFilterManager {
      *
      * @param filter ForumMessageFilter to add to the filter list.
      */
-    public void addFilter(MessageRenderSpecification filter) throws Exception;
+	public void addFilter(Function<MessageVO, MessageVO> filter) throws Exception;
     
     
     void addFilterClass(String className) throws ClassNotFoundException, IllegalArgumentException ;
@@ -71,7 +73,7 @@ public interface RenderingFilterManager {
      * @param filter ForumMessageFilter to add to the filter list.
      * @param index position in filter list to insert new filter.
      */
-    public void addFilter(MessageRenderSpecification filter, int index)
+	public void addFilter(Function<MessageVO, MessageVO> filter, int index)
             throws Exception;
 
     /**

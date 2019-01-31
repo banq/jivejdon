@@ -16,7 +16,7 @@
 package com.jdon.jivejdon.model.message.output;
 
 import com.jdon.jivejdon.manager.filter.OutFilterManager;
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
+import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.repository.dao.SetupDao;
 import com.jdon.jivejdon.util.BeanUtils;
 import com.jdon.jivejdon.util.XMLProperties;
@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 /**
  * setup all filter into Database <component name="renderingFilterManager"
@@ -52,9 +53,9 @@ public class RenderingFilterManagerImp implements RenderingFilterManager {
 	private RenderingAvailableFilters renderingAvailableFilters;
 	private String context;
 
-	private MessageRenderSpecification[] availableFilters = null;
+	private Function<MessageVO, MessageVO>[] availableFilters = null;
 
-	private MessageRenderSpecification[] filters;
+	private Function<MessageVO, MessageVO>[] filters;
 
 	private OutFilterManager outFilterManager;
 
@@ -66,7 +67,7 @@ public class RenderingFilterManagerImp implements RenderingFilterManager {
 		initProperties();
 	}
 
-	public MessageRenderSpecification[] getAvailableFilters() {
+	public Function<MessageVO, MessageVO>[] getAvailableFilters() {
 		if (availableFilters == null) {
 			logger.debug("enter getAvailableFilters.. availableFilters not null");
 			// Load filter classes
@@ -77,25 +78,26 @@ public class RenderingFilterManagerImp implements RenderingFilterManager {
 					String className = properties.getProperty("filterClasses." + classNames[i]);
 					Class filterClass = Class.forName(className);
 					// Attempt a cast. If it fails, we'll skip this class.
-					MessageRenderSpecification filter = (MessageRenderSpecification) filterClass.newInstance();
+					Function<MessageVO, MessageVO> filter = (Function<MessageVO, MessageVO>)
+							filterClass.newInstance();
 					filterList.add(filter);
 				} catch (Exception e) {
 					logger.error(e);
 				}
 			}
-			availableFilters = new MessageRenderSpecification[filterList.size()];
+			availableFilters = new Function[filterList.size()];
 			for (int i = 0; i < availableFilters.length; i++) {
-				availableFilters[i] = (MessageRenderSpecification) filterList.get(i);
+				availableFilters[i] = (Function<MessageVO, MessageVO>) filterList.get(i);
 			}
 		}
 		return availableFilters;
 	}
 
-	public MessageRenderSpecification[] getFilters() {
+	public Function<MessageVO, MessageVO>[] getFilters() {
 		return filters;
 	}
 
-	public MessageRenderSpecification getFilter(int index) throws Exception {
+	public Function<MessageVO, MessageVO> getFilter(int index) throws Exception {
 
 		if (index < 0 || index > filters.length - 1) {
 			throw new IllegalArgumentException("Index " + index + " is not valid.");
@@ -107,20 +109,20 @@ public class RenderingFilterManagerImp implements RenderingFilterManager {
 		return filters.length;
 	}
 
-	public void addFilter(MessageRenderSpecification filter) throws Exception {
+	public void addFilter(Function<MessageVO, MessageVO> filter) throws Exception {
 		addFilter(filter, filters.length);
 	}
 
-	public void addFilter(MessageRenderSpecification filter, int index) throws Exception {
+	public void addFilter(Function<MessageVO, MessageVO> filter, int index) throws Exception {
 		logger.debug("enter addFilter, index=" + index);
 		ArrayList newFilters = new ArrayList(filters.length + 1);
 		for (int i = 0; i < filters.length; i++) {
 			newFilters.add(filters[i]);
 		}
 		newFilters.add(index, filter);
-		MessageRenderSpecification[] newArray = new MessageRenderSpecification[newFilters.size()];
+		Function<MessageVO, MessageVO>[] newArray = new Function[newFilters.size()];
 		for (int i = 0; i < newArray.length; i++) {
-			newArray[i] = (MessageRenderSpecification) newFilters.get(i);
+			newArray[i] = (Function<MessageVO, MessageVO>) newFilters.get(i);
 		}
 
 		// Finally, overwrite filters with the new array
@@ -136,9 +138,10 @@ public class RenderingFilterManagerImp implements RenderingFilterManager {
 			newFilters.add(filters[i]);
 		}
 		newFilters.remove(index);
-		MessageRenderSpecification[] newArray = new MessageRenderSpecification[newFilters.size()];
+		Function<MessageVO, MessageVO>[] newArray = new Function[newFilters
+				.size()];
 		for (int i = 0; i < newArray.length; i++) {
-			newArray[i] = (MessageRenderSpecification) newFilters.get(i);
+			newArray[i] = (Function<MessageVO, MessageVO>) newFilters.get(i);
 		}
 		// Finally, overwrite filters with the new array
 		filters = newArray;
@@ -177,14 +180,15 @@ public class RenderingFilterManagerImp implements RenderingFilterManager {
 		Class newClass = Class.forName(className);
 		try {
 			Object newFilter = newClass.newInstance();
-			if (!(newFilter instanceof MessageRenderSpecification)) {
+			if (!(newFilter instanceof Function)) {
 				throw new IllegalArgumentException("Class is not a ForumMessageFilter");
 			}
-			MessageRenderSpecification[] newFilters = new MessageRenderSpecification[availableFilters.length + 1];
+			Function<MessageVO, MessageVO>[] newFilters = new Function[availableFilters.length +
+					1];
 			for (int i = 0; i < newFilters.length - 1; i++) {
 				newFilters[i] = availableFilters[i];
 			}
-			newFilters[newFilters.length - 1] = (MessageRenderSpecification) newFilter;
+			newFilters[newFilters.length - 1] = (Function<MessageVO, MessageVO>) newFilter;
 			availableFilters = newFilters;
 			// Write out new classes names.
 			properties.deleteProperty("filterClasses");
@@ -232,12 +236,13 @@ public class RenderingFilterManagerImp implements RenderingFilterManager {
 		logger.debug("got the filterCount=" + filterCount);
 
 		// Load up all filters
-		filters = new MessageRenderSpecification[filterCount];
+		filters = new Function[filterCount];
 		for (int i = 0; i < filterCount; i++) {
 			try {
 				String filterContext = context + "filter" + i + ".";
 				String className = properties.getProperty(filterContext + "className");
-				filters[i] = (MessageRenderSpecification) Class.forName(className).newInstance();
+				filters[i] = (Function<MessageVO, MessageVO>) Class.forName(className)
+						.newInstance();
 
 				// Load filter properties.
 				String[] propNames = properties.getChildrenProperties(filterContext + "properties");

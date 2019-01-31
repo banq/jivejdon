@@ -16,17 +16,17 @@
 package com.jdon.jivejdon.model.message.upload;
 
 import com.jdon.jivejdon.model.attachment.UploadFile;
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.function.Function;
 
 /**
  * @author banq(http://www.jdon.com)
  * 
  */
-public class UploadImageFilter implements MessageRenderSpecification {
+public class UploadImageFilter implements Function<MessageVO, MessageVO> {
 	private final static String module = UploadImageFilter.class.getName();
 	// this imageShowUrl must modified if jivejdon is not default web name
 	private String imageShowUrl = "/jivejdon/img";
@@ -43,7 +43,7 @@ public class UploadImageFilter implements MessageRenderSpecification {
 		imageShowUrl = imageShowFileName;
 	}
 
-	public MessageVO render(MessageVO messageVO) {
+	public MessageVO apply(MessageVO messageVO) {
 		String newBody = appendTags(messageVO, messageVO.getForumMessage().getAttachment()
 				.getUploadFiles());
 		return MessageVO.builder().subject(messageVO.getSubject()).body(newBody).message

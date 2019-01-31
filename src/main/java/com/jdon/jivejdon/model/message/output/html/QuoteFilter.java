@@ -15,7 +15,6 @@
  */
 package com.jdon.jivejdon.model.message.output.html;
 
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.util.StringUtil;
 
@@ -26,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
+import java.util.function.Function;
 
 /**
  * A ForumMessageFilter that highlights quoted messages based upon the level of
@@ -33,7 +33,7 @@ import java.util.StringTokenizer;
  * 
  * @author Bruce Ritchie
  */
-public class QuoteFilter implements MessageRenderSpecification {
+public class QuoteFilter implements Function<MessageVO, MessageVO> {
 	private final static String module = QuoteFilter.class.getName();
 
 	private ArrayList quoteColors;
@@ -58,7 +58,7 @@ public class QuoteFilter implements MessageRenderSpecification {
 	 * around the specified message.
 	 *
 	 */
-	public MessageVO render(MessageVO messageVO) {
+	public MessageVO apply(MessageVO messageVO) {
 		return MessageVO.builder().subject(messageVO.getSubject()).body(parseQuotes
 				(messageVO.getBody())).message(messageVO.getForumMessage())
 				.build();

@@ -15,8 +15,9 @@
  */
 package com.jdon.jivejdon.model.message.output.html;
 
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
+
+import java.util.function.Function;
 
 /**
  * A ForumMessageFilter that converts URL's to working HTML web links.
@@ -27,7 +28,7 @@ import com.jdon.jivejdon.model.message.MessageVO;
  * <code>[url=path-of-url]descriptive text[/url]</code> the <code>[url]</code>
  * allows any path to be defined as link.
  */
-public class URLConverter implements MessageRenderSpecification {
+public class URLConverter implements Function<MessageVO, MessageVO> {
 	private final static String module = URLConverter.class.getName();
 
 	private boolean filteringSubject;
@@ -50,7 +51,7 @@ public class URLConverter implements MessageRenderSpecification {
 	 * around the specified message.
 	 *
 	 */
-	public MessageVO render(MessageVO messageVO) {
+	public MessageVO apply(MessageVO messageVO) {
 		String s = convertURL(messageVO.getBody());
 		s = convertUrlNull(s);
 		return MessageVO.builder().subject(messageVO.getSubject()).body(s).message(messageVO

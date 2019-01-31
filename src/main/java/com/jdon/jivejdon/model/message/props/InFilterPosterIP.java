@@ -16,20 +16,20 @@
 package com.jdon.jivejdon.model.message.props;
 
 import com.jdon.jivejdon.model.Account;
-import com.jdon.jivejdon.model.message.MessageInputSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.util.Debug;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.function.Function;
 
 /**
  * Manage the properties of a ForumMessage
  * 
  * @author banq(http://www.jdon.com)
  */
-public class InFilterPosterIP implements MessageInputSpecification {
+public class InFilterPosterIP implements Function<MessageVO, MessageVO> {
 	private final static String module = InFilterPosterIP.class.getName();
 
 	private DateFormat dateTime_formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");

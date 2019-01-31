@@ -1,10 +1,10 @@
 package com.jdon.jivejdon.model.message.output.quote;
 
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * Qutote filter is responsible for replacing the [quoto][/quote] tags in the
@@ -13,7 +13,7 @@ import java.util.List;
  * @author oojdon
  * 
  */
-public class QuoteRegexFilter implements MessageRenderSpecification {
+public class QuoteRegexFilter implements Function<MessageVO, MessageVO> {
 	private List<RegexFilter> filters = new ArrayList<RegexFilter>();
 
 	public QuoteRegexFilter() {
@@ -22,7 +22,7 @@ public class QuoteRegexFilter implements MessageRenderSpecification {
 		filters.add(new AuthorDateFilter());
 	}
 
-	public MessageVO render(MessageVO messageVO) {
+	public MessageVO apply(MessageVO messageVO) {
 		String body = messageVO.getBody();
 		for (RegexFilter filter : filters) {
 			body = filter.doFilter(body);

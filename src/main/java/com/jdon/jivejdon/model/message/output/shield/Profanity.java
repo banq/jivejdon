@@ -15,17 +15,17 @@
  */
 package com.jdon.jivejdon.model.message.output.shield;
 
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.StringTokenizer;
+import java.util.function.Function;
 
 /**
  * A ForumMessageFilter that filters out user-specified profanity.
  */
-public class Profanity implements MessageRenderSpecification {
+public class Profanity implements Function<MessageVO, MessageVO> {
 	private final static Logger logger = LogManager.getLogger(Profanity.class);
 
 	/**
@@ -48,7 +48,7 @@ public class Profanity implements MessageRenderSpecification {
 	 * around the specified message.
 	 *
 	 */
-	public MessageVO render(MessageVO messageVO) {
+	public MessageVO apply(MessageVO messageVO) {
 		if (words == null)
 			return messageVO;
 		String subject = messageVO.getSubject();

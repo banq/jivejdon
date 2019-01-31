@@ -1,6 +1,5 @@
 package com.jdon.jivejdon.manager.filter;
 
-import com.jdon.jivejdon.model.message.MessageInputSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,11 +7,12 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.function.Function;
 
 public class InFilterManager {
 	private final static Logger logger = LogManager.getLogger(InFilterManager.class);
 
-	private Collection inFilters;
+	private Collection<Function<MessageVO, MessageVO>> inFilters;
 
 	public InFilterManager(String[] inFilterClassNames) {
 		initFilters(inFilterClassNames);
@@ -23,7 +23,8 @@ public class InFilterManager {
 		try {
 			for (int i = 0; i < filters.length; i++) {
 				String className = filters[i];
-				inFilters.add((MessageInputSpecification) Class.forName(className).newInstance());
+				inFilters.add((Function<MessageVO, MessageVO>) Class.forName(className)
+						.newInstance());
 			}
 		} catch (InstantiationException e) {
 			e.printStackTrace();
@@ -46,7 +47,7 @@ public class InFilterManager {
 		try {
 			Iterator iter = inFilters.iterator();
 			while (iter.hasNext()) {
-				messageVO = ((MessageInputSpecification) iter.next()).apply(messageVO);
+				messageVO = ((Function<MessageVO, MessageVO>) iter.next()).apply(messageVO);
 			}
 		} catch (Exception e) {
 			logger.error(e);

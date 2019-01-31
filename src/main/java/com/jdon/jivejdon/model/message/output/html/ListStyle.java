@@ -1,16 +1,17 @@
 package com.jdon.jivejdon.model.message.output.html;
 
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
+
+import java.util.function.Function;
 
 /**
  * [list] [/list]  ===> [ul][/ul]
  */
-public class ListStyle implements MessageRenderSpecification {
+public class ListStyle implements Function<MessageVO, MessageVO> {
 	private final static String module = ListStyle.class.getName();
 
 
-	public MessageVO render(MessageVO messageVO) {
+	public MessageVO apply(MessageVO messageVO) {
 		return MessageVO.builder().subject(messageVO.getSubject()).body(convertTags
 				(messageVO.getBody())).message(messageVO.getForumMessage())
 				.build();

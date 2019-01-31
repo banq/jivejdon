@@ -5,22 +5,23 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.function.Function;
 
 /**
  * piple pattern
  * <p>
  * apply business rule filter to MessageVO for display or other output format!
  */
-public final class FilterPipleSpec {
+public final class FilterPipleSpec implements Function<MessageVO, MessageVO> {
 	private final static Logger logger = LogManager.getLogger(FilterPipleSpec.class);
 
-	private final Collection<MessageRenderSpecification> outFilters;
+	private final Collection<Function<MessageVO, MessageVO>> outFilters;
 
-	public FilterPipleSpec(Collection<MessageRenderSpecification> outFilters) {
+	public FilterPipleSpec(Collection<Function<MessageVO, MessageVO>> outFilters) {
 		this.outFilters = outFilters;
 	}
 
-	public Collection<MessageRenderSpecification> getOutFilters() {
+	public Collection<Function<MessageVO, MessageVO>> getOutFilters() {
 		return outFilters;
 	}
 
@@ -29,7 +30,7 @@ public final class FilterPipleSpec {
 		return (outFilters != null) ? true : false;
 	}
 
-	public MessageVO applyFilters(MessageVO messageVO) {
+	public MessageVO apply(MessageVO messageVO) {
 		try {
 			if (!isReady()) {
 				logger.error("when build but outFilters is null");
@@ -37,9 +38,9 @@ public final class FilterPipleSpec {
 			}
 			Iterator iter = outFilters.iterator();
 			while (iter.hasNext()) {
-				MessageRenderSpecification mrs = ((MessageRenderSpecification) iter
+				Function<MessageVO, MessageVO> mrs = ((Function<MessageVO, MessageVO>) iter
 						.next());
-				messageVO = mrs.render(messageVO);
+				messageVO = mrs.apply(messageVO);
 			}
 		} catch (Exception e) {
 			logger.error(" applyFilters error:" + e + messageVO);

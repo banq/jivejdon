@@ -18,11 +18,11 @@ package com.jdon.jivejdon.model.message.output.hotkeys;
 
 import com.jdon.jivejdon.model.HotKeys;
 import com.jdon.jivejdon.model.Property;
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.util.Debug;
 
 import java.util.Iterator;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 
 /**
@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
  * @author banq
  * 
  */
-public class HotKeysFilter implements MessageRenderSpecification {
+public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 	private final static String module = HotKeysFilter.class.getName();
 
 	private String prefix_regEx = "([\\u4e00-\\u9fa5]|[\\s])(?i)"; // chinese or
@@ -40,7 +40,7 @@ public class HotKeysFilter implements MessageRenderSpecification {
 	private String suffix_regEx = "";
 
 	//by pass
-	public MessageVO render(MessageVO messageVO) {
+	public MessageVO apply(MessageVO messageVO) {
 		return messageVO;
 	}
 

@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 package com.jdon.jivejdon.model;
 
@@ -43,25 +43,23 @@ import java.util.Collection;
 
 /**
  * Aggregate Root + DTO
- *
+ * <p>
  * 1. This model  is Aggregate Root Entity when being RootMessage in ForumThread.
  * ForumThread is another Aggregate Root; in this system, there are two aggregate roots.
  * like Car and Enginee!
- *
+ * <p>
  * 2. this model act as data transfer object(DTO) that is from UI to domain.
- *
+ * <p>
  * so this model acts two kinds of Actor in two diiferent flows:
  * 1. In from repository to domain flow, It is aggregateRoot Entity;
  * 2. In from domain to UI flow ,It is DTO;
- *
- *there are two construct methods in two flows.
+ * <p>
+ * there are two construct methods in two flows.
  * 1. using builder() and ForumModel's solid state when in first flow
  * 2. using business special method such as addChild() and ForumModel's parameter state when in
  * second flow!
  *
- *
  * @author <a href="mailto:banq@163.com">banq</a>
- *
  */
 @Model
 @Searchable
@@ -123,8 +121,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 	}
 
 	/**
-	 * @param account
-	 *            The account to set.
+	 * @param account The account to set.
 	 */
 	public void setAccount(com.jdon.jivejdon.model.Account account) {
 		this.account = account;
@@ -273,13 +270,15 @@ public class ForumMessage extends ForumModel implements Cloneable {
 				.uploads(uploads).props(props).build();
 
 		// merge with old properties;
-		eventSourcing.saveMessageProperties(new MessagePropertiesUpdatedEvent(this.messageId, getMessagePropertysVO().getPropertys()));
+		eventSourcing.saveMessageProperties(new MessagePropertiesUpdatedEvent(this.messageId,
+				getMessagePropertysVO().getPropertys()));
 
 	}
 
 	public void updateMasked(boolean masked) {
 		this.getMessagePropertysVO().updateMasked(masked);
-		eventSourcing.saveMessageProperties(new MessagePropertiesUpdatedEvent(this.messageId, getMessagePropertysVO().getPropertys()));
+		eventSourcing.saveMessageProperties(new MessagePropertiesUpdatedEvent(this.messageId,
+				getMessagePropertysVO().getPropertys()));
 		this.getForumThread().updateMessage(this);
 		this.reloadMessageVOOrignal();
 //		this.applyFilters();
@@ -316,8 +315,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 	}
 
 	/**
-	 * @param creationDate
-	 *            The creationDate to set.
+	 * @param creationDate The creationDate to set.
 	 */
 	public void setCreationDate(String creationDate) {
 		this.creationDate = creationDate;
@@ -335,8 +333,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 	}
 
 	/**
-	 * @param messageId
-	 *            The messageId to set.
+	 * @param messageId The messageId to set.
 	 */
 	public void setMessageId(Long messageId) {
 		this.messageId = messageId;
@@ -376,8 +373,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 	}
 
 	/**
-	 * @param forumThread
-	 *            The forumThread to set.
+	 * @param forumThread The forumThread to set.
 	 */
 	public void setForumThread(ForumThread forumThread) {
 		this.forumThread = forumThread;
@@ -391,8 +387,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 	}
 
 	/**
-	 * @param forum
-	 *            The forum to set.
+	 * @param forum The forum to set.
 	 */
 	public void setForum(Forum forum) {
 		this.forum = forum;
@@ -427,7 +422,8 @@ public class ForumMessage extends ForumModel implements Cloneable {
 	public void messaegDigAction() {
 		this.getMessagePropertysVO().addMessageDigCount();
 		this.forumThread.addDig(this);
-		eventSourcing.saveMessageProperties(new MessagePropertiesUpdatedEvent(this.messageId, getMessagePropertysVO().getPropertys()));
+		eventSourcing.saveMessageProperties(new MessagePropertiesUpdatedEvent(this.messageId,
+				getMessagePropertysVO().getPropertys()));
 	}
 
 	public boolean isReplyNotify() {
@@ -520,7 +516,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 				//preload messageProperty
 				getMessagePropertysVO().preLoadPropertys();
 			//apply all filter specification , business rule!
-			setMessageVO(filterPipleSpec.applyFilters(messageVO));
+			setMessageVO(filterPipleSpec.apply(messageVO));
 			this.setSolid(true);//construt end
 		}
 

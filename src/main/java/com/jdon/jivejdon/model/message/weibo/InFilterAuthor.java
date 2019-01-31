@@ -16,12 +16,12 @@
 package com.jdon.jivejdon.model.message.weibo;
 
 import com.jdon.jivejdon.model.event.ATUserNotifiedEvent;
-import com.jdon.jivejdon.model.message.MessageInputSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.model.message.output.weibo.AuthorNameFormat;
 import com.jdon.util.Debug;
 
 import java.util.Collection;
+import java.util.function.Function;
 
 /**
  * pick up
@@ -33,7 +33,7 @@ import java.util.Collection;
  * 
  */
 
-public class InFilterAuthor implements MessageInputSpecification {
+public class InFilterAuthor implements Function<MessageVO, MessageVO> {
 	private final static String module = InFilterAuthor.class.getName();
 
 

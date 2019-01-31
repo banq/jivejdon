@@ -15,8 +15,9 @@
  */
 package com.jdon.jivejdon.model.message.output.html;
 
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
 import com.jdon.jivejdon.model.message.MessageVO;
+
+import java.util.function.Function;
 
 /**
  * A ForumMessageFilter that converts newline characters into HTML &lt;br&gt;
@@ -24,7 +25,7 @@ import com.jdon.jivejdon.model.message.MessageVO;
  * filter should be run before the Java code filter, as "[" and "]" are escaped
  * to work around the TextStyle filter.
  */
-public class Newline implements MessageRenderSpecification {
+public class Newline implements Function<MessageVO, MessageVO> {
 	private final static String module = Newline.class.getName();
 	private static final char[] P_TAG = "<p>".toCharArray();
 	private static final char[] BR_TAG = "<p class=\"indent\">".toCharArray();
@@ -104,7 +105,7 @@ public class Newline implements MessageRenderSpecification {
 	 * around the specified message.
 	 *
 	 */
-	public MessageVO render(MessageVO messageVO) {
+	public MessageVO apply(MessageVO messageVO) {
 		String s = messageVO.getBody();
 		s = ToolsUtil.convertTags(s, "\n\\[", new String(P_TAG) + "\\[");
 		return MessageVO.builder().subject(messageVO.getSubject()).body

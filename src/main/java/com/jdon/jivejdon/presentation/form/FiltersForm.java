@@ -15,18 +15,17 @@
  */
 package com.jdon.jivejdon.presentation.form;
 
+import com.jdon.jivejdon.model.message.MessageVO;
+import org.apache.struts.action.ActionMapping;
+
+import javax.servlet.http.HttpServletRequest;
 import java.beans.BeanDescriptor;
 import java.beans.PropertyDescriptor;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts.action.ActionMapping;
-
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
+import java.util.function.Function;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -45,7 +44,7 @@ public class FiltersForm extends BaseForm {
 
 	private BeanDescriptor[] descriptors; // Installed filter's Descriptors
 
-	private MessageRenderSpecification[] filters; // Installed filters
+	private Function<MessageVO, MessageVO>[] filters; // Installed filters
 
 	private Map propertyDescriptors = new HashMap();
 
@@ -125,24 +124,23 @@ public class FiltersForm extends BaseForm {
 	/**
 	 * @return Returns the filters.
 	 */
-	public MessageRenderSpecification[] getFilters() {
+	public Function<MessageVO, MessageVO>[] getFilters() {
 		return filters;
 	}
 
-	public MessageRenderSpecification getFiltersIndexed(Integer index) {
-		return (MessageRenderSpecification) filters[index.intValue()];
-	}
-
-	public void setStringIndexed(int index, MessageRenderSpecification filter) {
-		filters[index] = filter;
-	}
-
 	/**
-	 * @param filters
-	 *            The filters to set.
+	 * @param filters The filters to set.
 	 */
-	public void setFilters(MessageRenderSpecification[] filters) {
+	public void setFilters(Function<MessageVO, MessageVO>[] filters) {
 		this.filters = filters;
+	}
+
+	public Function<MessageVO, MessageVO> getFiltersIndexed(Integer index) {
+		return (Function<MessageVO, MessageVO>) filters[index.intValue()];
+	}
+
+	public void setStringIndexed(int index, Function<MessageVO, MessageVO> filter) {
+		filters[index] = filter;
 	}
 
 	/**

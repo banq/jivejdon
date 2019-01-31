@@ -1,12 +1,13 @@
 package com.jdon.jivejdon.manager.filter;
 
-import com.jdon.jivejdon.model.message.MessageRenderSpecification;
+import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.model.message.output.RenderingFilterManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.function.Function;
 
 public class OutFilterManager {
 	private final static Logger logger = LogManager.getLogger(OutFilterManager.class);
@@ -21,7 +22,7 @@ public class OutFilterManager {
 		this.renderingFilterManager.setOutFilterManager(this);
 	}
 
-	public void initFilters(MessageRenderSpecification[] filters) {
+	public void initFilters(Function<MessageVO, MessageVO>[] filters) {
 		outFilters = new ArrayList();
 		for (int i = 0; i < filters.length; i++) {
 			outFilters.add(filters[i]);
