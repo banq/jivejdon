@@ -46,7 +46,7 @@
         <init-param>
             <param-name>referrer.domain.namePattern</param-name>
             <param-value>
-                .*(http://192.168|http://127.0.0.1|http://localhost|https://www.jdon.com|http://www.jdon.com|http://10.0.2.2|http://110.76.43.83).*
+                .*(http://192.168|http://127.0.0.1|http://localhost|https://www.jdon.com|http://www.jdon.com|http://c.jdon.com|http://110.76.43.83).*
             </param-value>
         </init-param>
         <init-param><!-- exclude this robot -->
