@@ -74,6 +74,11 @@ public final class MessageVO implements Serializable, Cloneable {
 
 	}
 
+	//used for compass lucene search
+	public MessageVO() {
+		this("", "", null);
+	}
+
 	/**
 	 * build pattern entry
 	 *

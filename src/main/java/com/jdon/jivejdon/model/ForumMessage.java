@@ -83,6 +83,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 	private volatile ForumThread forumThread;
 	@SearchableReference
 	private Forum forum;
+
 	private String[] tagTitle;
 
 	private boolean replyNotify;
