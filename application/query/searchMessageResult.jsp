@@ -140,9 +140,9 @@
                                 <div class="xboxcontent">
 
                                     <bean:write
-                                            name="messageSearchSpec"
-                                            property="messageVO.body"
-                                            filter="false"/>
+                                        name="messageSearchSpec"
+                                        property="body"
+                                        filter="false"/>
                                     <bean:define id="adIndex"
                                                  name="i"
                                                  toScope="request"/>

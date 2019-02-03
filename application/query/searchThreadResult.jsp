@@ -92,7 +92,7 @@
                                                           property="name"/></b></a>
                         <p>
                         <span class="tpc_content">
-                <bean:write name="messageSearchSpec" property="messageVO.body"
+                <bean:write name="messageSearchSpec" property="body"
                             filter="false"/>
              </span>
                     </td>
