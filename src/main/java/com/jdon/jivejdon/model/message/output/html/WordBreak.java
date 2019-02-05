@@ -67,9 +67,9 @@ public class WordBreak implements Function<MessageVO, MessageVO> {
 	 * around the specified message.
 	 */
 	public MessageVO apply(MessageVO messageVO) {
-		return MessageVO.builder().subject(createBreaks(messageVO.getSubject(),
+		return messageVO.builder().subject(createBreaks(messageVO.getSubject(),
 				maxSubjectWordLength)).body(createBreaks(messageVO.getBody(), maxBodyWordLength))
-				.message(messageVO.getForumMessage()).build();
+				.build();
 	}
 
 

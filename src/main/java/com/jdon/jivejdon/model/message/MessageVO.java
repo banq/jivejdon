@@ -56,12 +56,10 @@ public final class MessageVO implements Serializable, Cloneable {
 	}
 
 	/**
-	 * build pattern entry
-	 *
-	 * @return
+	 * build a messageVO
 	 */
-	public static RequireSubject builder() {
-		return subject -> body -> message -> new FinalStage(subject, body, message);
+	public RequireSubject builder() {
+		return subject -> body -> new MessageVOFinalStage(subject, body, getForumMessage());
 	}
 
 	/**
@@ -117,21 +115,16 @@ public final class MessageVO implements Serializable, Cloneable {
 
 	@FunctionalInterface
 	public interface RequireBody {
-		RequireForumMessage body(String body);
+		MessageVOFinalStage body(String body);
 	}
 
-	@FunctionalInterface
-	public interface RequireForumMessage {
-		FinalStage message(ForumMessage message);
-	}
-
-	public static class FinalStage {
+	public static class MessageVOFinalStage {
 		private final String subject;
 		private final String body;
 		private final ForumMessage message;
 		// constructor
 
-		public FinalStage(String subject, String body, ForumMessage message) {
+		public MessageVOFinalStage(String subject, String body, ForumMessage message) {
 			this.subject = subject;
 			this.body = body;
 			this.message = message;
@@ -141,5 +134,4 @@ public final class MessageVO implements Serializable, Cloneable {
 			return new MessageVO(subject, body, message);
 		}
 	}
-
 }

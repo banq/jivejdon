@@ -59,9 +59,8 @@ public class QuoteFilter implements Function<MessageVO, MessageVO> {
 	 *
 	 */
 	public MessageVO apply(MessageVO messageVO) {
-		return MessageVO.builder().subject(messageVO.getSubject()).body(parseQuotes
-				(messageVO.getBody())).message(messageVO.getForumMessage())
-				.build();
+		return messageVO.builder().subject(messageVO.getSubject()).body(parseQuotes
+				(messageVO.getBody())).build();
 	}
 
 

@@ -96,7 +96,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 	// created from repository that will be in memory, it is Entity
 	public ForumMessage(Long messageId) {
 		this.messageId = messageId;
-		this.messageVO = MessageVO.builder().subject("").body("").message(this).build();
+		this.messageVO = this.messageVOBuilder().subject("").body("").build();
 		this.messageUrlVO = new MessageUrlVO("", "");
 	}
 
@@ -104,7 +104,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 	public ForumMessage() {
 		this.messageId = null;
 		this.setParameter(true);//this is a DTO parameter
-		this.messageVO = MessageVO.builder().subject("").body("").message(this).build();
+		this.messageVO = this.messageVOBuilder().subject("").body("").build();
 		this.messageUrlVO = new MessageUrlVO("", "");
 		this.account = new Account();
 		this.attachmentsVO = new AttachmentsVO(new Long(0), new ArrayList());
@@ -154,7 +154,11 @@ public class ForumMessage extends ForumModel implements Cloneable {
 	}
 
 	public void setMessageVO(MessageVO messageVO) {
-		this.messageVO = messageVO;
+		if (messageVO.getForumMessage() == null || messageVO.getForumMessage() != this) {
+			this.messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO
+					.getBody()).build();
+		} else
+			this.messageVO = messageVO;
 	}
 
 
@@ -268,7 +272,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 		//using builder
 //		this.getMessagePropertysVO().replacePropertys(props);
 
-		this.builder().messageCore(this).messageVO
+		this.messageBuilder().messageCore(this).messageVO
 				(newMessageVO).forum
 				(this.forum).forumThread(this.forumThread)
 				.acount(newAccount).filterPipleSpec(this.filterPipleSpec)
@@ -505,7 +509,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 	 *
 	 * @return
 	 */
-	public RequireMessageCore builder() {
+	public RequireMessageCore messageBuilder() {
 		return messageCore -> messageVO -> forum -> forumThread -> account -> filterPipleSpec
 				-> uploads -> properties -> new FinalStageVO(messageCore,
 				messageVO, forum, forumThread, account, filterPipleSpec, uploads, properties);
@@ -528,10 +532,19 @@ public class ForumMessage extends ForumModel implements Cloneable {
 				//preload messageProperty
 				getMessagePropertysVO().preLoadPropertys();
 			//apply all filter specification , business rule!
+			messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO
+					.getBody()).build();
 			setMessageVO(filterPipleSpec.apply(messageVO));
 			this.setSolid(true);//construt end
 		}
 
+	}
+
+	/**
+	 * build a messageVO
+	 */
+	public RequireSubject messageVOBuilder() {
+		return subject -> body -> new MessageVO.MessageVOFinalStage(subject, body, this);
 	}
 
 	@FunctionalInterface
@@ -544,11 +557,11 @@ public class ForumMessage extends ForumModel implements Cloneable {
 		RequireForum messageVO(MessageVO messageVO);
 	}
 
+
 	@FunctionalInterface
 	public interface RequireForum {
 		RequireForumThread forum(Forum forum);
 	}
-
 
 	@FunctionalInterface
 	public interface RequireForumThread {
@@ -570,9 +583,20 @@ public class ForumMessage extends ForumModel implements Cloneable {
 		OptionsProperties uploads(Collection<UploadFile> uploads);
 	}
 
+
 	@FunctionalInterface
 	public interface OptionsProperties {
 		FinalStageVO props(Collection<Property> props);
+	}
+
+	@FunctionalInterface
+	public interface RequireSubject {
+		MessageVO.RequireBody subject(String subject);
+	}
+
+	@FunctionalInterface
+	public interface RequireBody {
+		MessageVO.MessageVOFinalStage body(String body);
 	}
 
 	public class FinalStageVO {

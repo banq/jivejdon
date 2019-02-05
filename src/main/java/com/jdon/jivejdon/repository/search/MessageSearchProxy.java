@@ -174,8 +174,8 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 		try {
 			ForumMessage messageS = (ForumMessage) session.load(ForumMessage.class, forumMessage.getMessageId());
 			MessageVO messageVOClone = forumMessage.getMessageVOClone();
-			MessageVO mVO = MessageVO.builder().subject(messageVOClone.getSubject())
-					.body(messageVOClone.getBody()).message(messageS)
+			MessageVO mVO = messageS.messageVOBuilder().subject(messageVOClone.getSubject())
+					.body(messageVOClone.getBody())
 					.build();
 			messageS.setMessageVO(mVO);
 			tx = session.beginTransaction();

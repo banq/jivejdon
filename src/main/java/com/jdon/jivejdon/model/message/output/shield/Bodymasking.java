@@ -35,9 +35,8 @@ public class Bodymasking implements Function<MessageVO, MessageVO> {
 
 	public MessageVO apply(MessageVO messageVO) {
 		if (messageVO.getForumMessage().isMasked())
-			return MessageVO.builder().subject(messageVO.getSubject()).body
-					(maskLocalization).message(messageVO.getForumMessage())
-					.build();
+			return messageVO.builder().subject(messageVO.getSubject()).body
+					(maskLocalization).build();
 		else
 			return messageVO;
 	}

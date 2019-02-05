@@ -15,9 +15,8 @@ public class EscapeUTFInFIlter implements Function<MessageVO, MessageVO> {
 
 
 	public MessageVO apply(MessageVO messageVO) {
-		return MessageVO.builder().subject(esacpeUtf(messageVO
-				.getSubject())).body(esacpeUtf(messageVO.getBody())).message(messageVO
-				.getForumMessage())
+		return messageVO.builder().subject(esacpeUtf(messageVO
+				.getSubject())).body(esacpeUtf(messageVO.getBody()))
 				.build();
 
 	}

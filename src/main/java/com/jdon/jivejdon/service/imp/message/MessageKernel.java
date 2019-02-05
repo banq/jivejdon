@@ -103,9 +103,8 @@ public class MessageKernel implements MessageKernelIF {
 			forumMessageReply.setForum(pMessage.getForum());
 			forumMessageReply.setForumThread(pMessage.getForumThread());
 			String rsubject = htmlEscape.matcher(pMessage.getMessageVO().getSubject()).replaceAll("");
-			MessageVO messageVo = MessageVO.builder().subject(rsubject).body
-					(forumMessageReply.getMessageVO().getBody()).message(forumMessageReply)
-					.build();
+			MessageVO messageVo = forumMessageReply.messageVOBuilder().subject(rsubject).body
+					(forumMessageReply.getMessageVO().getBody()).build();
 			forumMessageReply.setMessageVO(messageVo);
 		} catch (Exception e) {
 			logger.error(e);

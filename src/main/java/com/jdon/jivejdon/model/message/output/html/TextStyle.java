@@ -82,9 +82,8 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 	 *
 	 */
 	public MessageVO apply(MessageVO messageVO) {
-		return MessageVO.builder().subject(convertTags(messageVO.getSubject())).body
-				(convertTags(messageVO.getBody())).message(messageVO.getForumMessage())
-				.build();
+		return messageVO.builder().subject(convertTags(messageVO.getSubject())).body
+				(convertTags(messageVO.getBody())).build();
 	}
 
 

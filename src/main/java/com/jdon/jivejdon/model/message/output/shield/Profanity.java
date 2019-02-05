@@ -64,9 +64,8 @@ public class Profanity implements Function<MessageVO, MessageVO> {
 			// messageVO.setSubject(filterProfanity(messageVO.getSubject()));
 			// messageVO.setBody(filterProfanity(messageVO.getBody()));
 //			message.setMasked(true);
-			return MessageVO.builder().subject(Bodymasking.maskLocalization).body
-					(Bodymasking.maskLocalization).message(messageVO.getForumMessage())
-					.build();
+			return messageVO.builder().subject(Bodymasking.maskLocalization).body
+					(Bodymasking.maskLocalization).build();
 
 		} else
 			return messageVO;

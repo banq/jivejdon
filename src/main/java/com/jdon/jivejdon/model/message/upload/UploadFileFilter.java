@@ -34,8 +34,7 @@ public class UploadFileFilter implements Function<MessageVO, MessageVO> {
 	public MessageVO apply(MessageVO messageVO) {
 		String newBody = appendTags(messageVO, messageVO.getForumMessage().getAttachment()
 				.getUploadFiles());
-		return MessageVO.builder().subject(messageVO.getSubject()).body(newBody).message
-				(messageVO.getForumMessage())
+		return messageVO.builder().subject(messageVO.getSubject()).body(newBody)
 				.build();
 	}
 

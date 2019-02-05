@@ -92,7 +92,8 @@ public class CompassTest extends TestCase {
 		sb.append("无可非议，该解决方案能够迎合企业应用的高要求、高复杂度。所以该解决方案得到了广泛的认可，形成了潮流，出现了中间件开发和构件开发的概念。");
 		sb.append("中间件开发商按照J2EE规范进行容器开发，如WEBSPHERE 、WEBLOGIC 、JBOSS，构件开发商按J2EE规范专心开发业务构件，然后部署到中间件中形成应用");
 		String body = sb.toString();
-		MessageVO mo = MessageVO.builder().subject(subject).body(body).message(myMessage).build();
+		MessageVO mo = myMessage.messageVOBuilder().subject(subject).body(body)
+				.build();
 		myMessage.setMessageVO(mo);
 		session.save(myMessage);
 		tx.commit();
@@ -148,8 +149,8 @@ public class CompassTest extends TestCase {
 				ForumMessage messageS = (ForumMessage) session.load(ForumMessage.class, myMessage.getMessageId());
 				assertEquals(messageS.getMessageId(), myMessage.getMessageId());
 
-				MessageVO mo = MessageVO.builder().subject("new EJB3与EJB2架构对比")
-						.body(messageS.getMessageVO().getBody()).message(messageS)
+				MessageVO mo = messageS.messageVOBuilder().subject("new EJB3与EJB2架构对比")
+						.body(messageS.getMessageVO().getBody())
 						.build();
 				messageS.setMessageVO(mo);
 				// have to save it (no automatic persistance yet)

@@ -66,8 +66,8 @@ public class CodeHighlighter implements Function<MessageVO, MessageVO> {
 	 *            the ForumMessage to wrap the new filter around.
 	 */
 	public MessageVO apply(MessageVO messageVO) {
-		return MessageVO.builder().subject(messageVO.getSubject()).body(highlightCode
-				(messageVO.getBody())).message(messageVO.getForumMessage())
+		return messageVO.getForumMessage().messageVOBuilder().subject(messageVO.getSubject()).body
+				(highlightCode(messageVO.getBody()))
 				.build();
 	}
 

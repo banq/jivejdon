@@ -44,9 +44,8 @@ public class AuthorNameFormat implements Function<MessageVO, MessageVO> {
 	private String authorURL = "<a href='/blog/#user#' target=_blank>#user#</a>";
 
 	public MessageVO apply(MessageVO messageVO) {
-		return MessageVO.builder().subject(messageVO.getSubject()).body(convertTags
-				(messageVO.getBody())).message(messageVO.getForumMessage())
-				.build();
+		return messageVO.builder().subject(messageVO.getSubject()).body(convertTags
+				(messageVO.getBody())).build();
 	}
 
 

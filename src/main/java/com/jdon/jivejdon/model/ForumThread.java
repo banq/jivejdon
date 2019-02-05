@@ -329,8 +329,8 @@ public class ForumThread extends ForumModel {
 	}
 
 	public void updateName(String name) {
-		MessageVO messageVO = MessageVO.builder().subject(name).body(this
-				.getRootMessage().getMessageVO().getBody()).message(getRootMessage())
+		MessageVO messageVO = this.getRootMessage().messageVOBuilder().subject(name).body(this
+				.getRootMessage().getMessageVO().getBody())
 				.build();
 		this.getRootMessage().setMessageVO(messageVO);
 		this.setName(name);

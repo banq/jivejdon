@@ -28,8 +28,7 @@ public class QuoteRegexFilter implements Function<MessageVO, MessageVO> {
 			body = filter.doFilter(body);
 		}
 		body = body.replace("[/quote]", "</div>");
-		return MessageVO.builder().subject(messageVO.getSubject()).body(body).message(messageVO
-				.getForumMessage())
+		return messageVO.builder().subject(messageVO.getSubject()).body(body)
 				.build();
 	}
 

@@ -29,9 +29,8 @@ public class ImageFilter implements Function<MessageVO, MessageVO> {
 	private final static String module = ImageFilter.class.getName();
 
 	public MessageVO apply(MessageVO messageVO) {
-		return MessageVO.builder().subject(messageVO.getSubject()).body(convertTags
-				(messageVO)).message(messageVO.getForumMessage())
-				.build();
+		return messageVO.builder().subject(messageVO.getSubject()).body(convertTags
+				(messageVO)).build();
 	}
 
 

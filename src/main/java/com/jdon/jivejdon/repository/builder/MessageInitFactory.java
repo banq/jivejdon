@@ -95,7 +95,7 @@ public class MessageInitFactory {
 			System.err.println("createMessageVOCore " + subject + " " + body + " error: " + e);
 		} finally {
 		}
-		return MessageVO.builder().subject(subject).body(body).message(forumMessage).build();
+		return forumMessage.messageVOBuilder().subject(subject).body(body).build();
 	}
 
 	public ForumThread createThreadCore(Long threadId, Map map) {

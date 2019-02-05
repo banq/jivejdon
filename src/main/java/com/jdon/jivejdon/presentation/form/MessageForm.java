@@ -78,7 +78,7 @@ public class MessageForm extends BaseForm {
 	 * for initMessage of the ForumMessageService
 	 */
 	public MessageForm() {
-		messageVO = MessageVO.builder().subject("").body("").message(null).build();
+		messageVO = new MessageVO();
 
 		forum = new Forum(); // for parameter forum.forumId=xxx
 		forumThread = new ForumThread();
@@ -168,8 +168,7 @@ public class MessageForm extends BaseForm {
 	}
 
 	public void setBody(String body) {
-		messageVO = MessageVO.builder().subject(this.getSubject()).body(body).message(null)
-				.build();
+		messageVO = messageVO.builder().subject(this.getSubject()).body(body).build();
 	}
 
 	public String getSubject() {
@@ -177,8 +176,7 @@ public class MessageForm extends BaseForm {
 	}
 
 	public void setSubject(String subject) {
-		messageVO = MessageVO.builder().subject(subject).body(this.getBody()).message(null)
-				.build();
+		messageVO = messageVO.builder().subject(subject).body(this.getBody()).build();
 	}
 
 	/**

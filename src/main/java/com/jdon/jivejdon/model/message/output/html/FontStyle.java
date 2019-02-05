@@ -12,9 +12,8 @@ public class FontStyle implements Function<MessageVO, MessageVO> {
 	private final static String module = FontStyle.class.getName();
 
 	public MessageVO apply(MessageVO messageVO) {
-		return MessageVO.builder().subject(messageVO.getSubject()).body(convertTags
-				(messageVO.getBody())).message(messageVO.getForumMessage())
-				.build();
+		return messageVO.builder().subject(messageVO.getSubject()).body(convertTags
+				(messageVO.getBody())).build();
 	}
 
 

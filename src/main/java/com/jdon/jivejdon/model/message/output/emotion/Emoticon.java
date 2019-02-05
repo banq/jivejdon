@@ -153,9 +153,8 @@ public class Emoticon implements Function<MessageVO, MessageVO> {
 	 *
 	 */
 	public MessageVO apply(MessageVO messageVO) {
-		return MessageVO.builder().subject(convertEmoticons(messageVO.getSubject())
-		).body(convertEmoticons(messageVO.getBody())).message(messageVO.getForumMessage())
-				.build();
+		return messageVO.builder().subject(convertEmoticons(messageVO.getSubject())
+		).body(convertEmoticons(messageVO.getBody())).build();
 	}
 
 

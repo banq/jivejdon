@@ -35,9 +35,8 @@ public class HTMLFilter implements Function<MessageVO, MessageVO> {
 	 * 
 	 */
 	public MessageVO apply(MessageVO messageVO) {
-		return MessageVO.builder().subject(escapeHTMLTags(messageVO.getSubject()))
-				.body(escapeHTMLTags(messageVO.getBody())).message(messageVO.getForumMessage())
-				.build();
+		return messageVO.builder().subject(escapeHTMLTags(messageVO.getSubject()))
+				.body(escapeHTMLTags(messageVO.getBody())).build();
 	}
 
 	/**

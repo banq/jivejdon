@@ -54,8 +54,7 @@ public class URLConverter implements Function<MessageVO, MessageVO> {
 	public MessageVO apply(MessageVO messageVO) {
 		String s = convertURL(messageVO.getBody());
 		s = convertUrlNull(s);
-		return MessageVO.builder().subject(messageVO.getSubject()).body(s).message(messageVO
-				.getForumMessage())
+		return messageVO.builder().subject(messageVO.getSubject()).body(s)
 				.build();
 	}
 

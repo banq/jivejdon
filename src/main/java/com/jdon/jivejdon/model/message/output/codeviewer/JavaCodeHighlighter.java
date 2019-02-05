@@ -96,9 +96,8 @@ public class JavaCodeHighlighter implements Function<MessageVO, MessageVO> {
 	 * 
 	 */
 	public MessageVO apply(MessageVO messageVO) {
-		return MessageVO.builder().subject(messageVO.getSubject()).body
-				(highlightCode(messageVO.getBody(), applyTableSurround)).message(messageVO
-				.getForumMessage())
+		return messageVO.builder().subject(messageVO.getSubject()).body
+				(highlightCode(messageVO.getBody(), applyTableSurround))
 				.build();
 	}
 

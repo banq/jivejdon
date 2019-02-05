@@ -37,7 +37,7 @@ public class MessageDirector {
 
 	private final MessageBuilder messageBuilder;
 
-	private final Map nullmessages ;
+	private final Map nullmessages;
 
 
 	public MessageDirector(MessageBuilder messageBuilder) {
@@ -200,7 +200,7 @@ public class MessageDirector {
 
 		FilterPipleSpec filterPipleSpec = new FilterPipleSpec(messageBuilder
 				.getOutFilterManager().getOutFilters());
-		return forumMessageCore.builder().messageCore(forumMessageCore).messageVO
+		return forumMessageCore.messageBuilder().messageCore(forumMessageCore).messageVO
 				(forumMessageCore.getMessageVO()).forum
 				(forum).forumThread(forumThread)
 				.acount(accountOptional.orElse(new Account())).filterPipleSpec(filterPipleSpec)

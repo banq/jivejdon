@@ -37,9 +37,8 @@ public class InFilterPosterIP implements Function<MessageVO, MessageVO> {
 	public MessageVO apply(MessageVO messageVO) {
 		try {
 			String newBody = applyFilteredBody(messageVO);
-			messageVO = MessageVO.builder().subject(messageVO
-					.getSubject()).body(newBody).message(messageVO.getForumMessage())
-					.build();
+			messageVO = messageVO.builder().subject(messageVO
+					.getSubject()).body(newBody).build();
 		} catch (Exception e) {
 			Debug.logError("" + e, module);
 		}

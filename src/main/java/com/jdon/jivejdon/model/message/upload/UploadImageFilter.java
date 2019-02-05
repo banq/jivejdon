@@ -46,9 +46,7 @@ public class UploadImageFilter implements Function<MessageVO, MessageVO> {
 	public MessageVO apply(MessageVO messageVO) {
 		String newBody = appendTags(messageVO, messageVO.getForumMessage().getAttachment()
 				.getUploadFiles());
-		return MessageVO.builder().subject(messageVO.getSubject()).body(newBody).message
-				(messageVO.getForumMessage())
-				.build();
+		return messageVO.builder().subject(messageVO.getSubject()).body(newBody).build();
 	}
 
 
