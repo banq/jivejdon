@@ -19,7 +19,8 @@ package com.jdon.jivejdon.model.message.upload;
 import com.jdon.jivejdon.model.message.output.beanutil.FilterBeanInfo;
 
 public class UploadImageFilterBeanInfo extends FilterBeanInfo {
-	public static final String[] PROPERTY_NAMES = { "imageShowUrl", "imageShowInHtmlUrl", "imageShowFileName", "thumbpics" };
+	public static final String[] PROPERTY_NAMES = {"imageShowUrl", "imageShowInHtmlUrl",
+			"imageShowFileName"};
 
 	public UploadImageFilterBeanInfo() {
 		super();

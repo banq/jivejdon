@@ -30,6 +30,7 @@ import com.jdon.jivejdon.model.event.MessageUpdatedEvent;
 import com.jdon.jivejdon.model.event.ReplyMessageCreatedEvent;
 import com.jdon.jivejdon.model.event.UploadFilesSavedEvent;
 import com.jdon.jivejdon.model.message.FilterPipleSpec;
+import com.jdon.jivejdon.model.message.MessageUrlVO;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.model.proptery.MessagePropertysVO;
 import com.jdon.jivejdon.model.reblog.ReBlogVO;
@@ -75,6 +76,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 	private Long messageId;
 	@SearchableComponent
 	private MessageVO messageVO;
+	private MessageUrlVO messageUrlVO;
 	private FilterPipleSpec filterPipleSpec;
 	private String creationDate;
 	private long modifiedDate;
@@ -95,6 +97,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 	public ForumMessage(Long messageId) {
 		this.messageId = messageId;
 		this.messageVO = MessageVO.builder().subject("").body("").message(this).build();
+		this.messageUrlVO = new MessageUrlVO("", "");
 	}
 
 	// created in UI, catch the messageForm's copy data, it is DTO.
@@ -102,6 +105,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 		this.messageId = null;
 		this.setParameter(true);//this is a DTO parameter
 		this.messageVO = MessageVO.builder().subject("").body("").message(this).build();
+		this.messageUrlVO = new MessageUrlVO("", "");
 		this.account = new Account();
 		this.attachmentsVO = new AttachmentsVO(new Long(0), new ArrayList());
 		this.messagePropertysVO = new MessagePropertysVO(new Long(0), new ArrayList());
@@ -473,6 +477,13 @@ public class ForumMessage extends ForumModel implements Cloneable {
 		this.filterPipleSpec = filterPipleSpec;
 	}
 
+	public MessageUrlVO getMessageUrlVO() {
+		return messageUrlVO;
+	}
+
+	public void setMessageUrlVO(MessageUrlVO messageUrlVO) {
+		this.messageUrlVO = messageUrlVO;
+	}
 
 	/**
 	 * lambdas builder pattern

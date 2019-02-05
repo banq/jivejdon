@@ -24,11 +24,11 @@
           <div class="post_title">
             <logic:equal name="forumMessage" property="root" value="true">
               <div class="post_titlename">
-                  <logic:notEmpty name="forumMessage" property="messageVO.linkUrl">
-                    <a href="<bean:write name="forumMessage" property="messageVO.linkUrl" filter="false"/>" target="_blank" title="原始链接"><h1 class="bige20"><bean:write name="forumMessage" property="messageVO.subject"/>
+                <logic:notEmpty name="forumMessage" property="messageUrlVO.linkUrl">
+                  <a href="<bean:write name="forumMessage" property="messageUrlVO.linkUrl" filter="false"/>" target="_blank" title="原始链接"><h1 class="bige20"><bean:write name="forumMessage" property="messageVO.subject"/>
                     </a>
                   </logic:notEmpty>
-                  <logic:empty name="forumMessage" property="messageVO.linkUrl">
+                <logic:empty name="forumMessage" property="messageUrlVO.linkUrl">
                       <h1 class="bige20"><bean:write name="forumMessage" property="messageVO.subject"/></h1>
                   </logic:empty>
               </div>

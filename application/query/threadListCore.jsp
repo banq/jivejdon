@@ -35,9 +35,9 @@
             </div>
           <div class="wrap-vid">
               <div class="thumbn">
-           
-       <logic:notEmpty name="forumMessage" property="messageVO.thumbnailUrl">
-          <img  src="<bean:write name="forumMessage" property="messageVO.thumbnailUrl"/>" border='0' class="thumbnail"/>
+
+                <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">
+                  <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail"/>
        </logic:notEmpty>
               </div>
               <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>" target="_blank" class="smallgray">详细</a></p>

@@ -29,8 +29,8 @@ import java.util.function.Function;
 public class UploadImageFilter implements Function<MessageVO, MessageVO> {
 	private final static String module = UploadImageFilter.class.getName();
 	// this imageShowUrl must modified if jivejdon is not default web name
-	private String imageShowUrl = "/jivejdon/img";
-	private String imageShowInHtmlUrl = "/jivejdon/imageShowInHtml.jsp";
+	private String imageShowUrl = "/img";
+	private String imageShowInHtmlUrl = "/imageShowInHtml.jsp";
 	private String thumbpics = "/simgs/thumb/1.jpg,/simgs/thumb/2.jpg";
 
 	private UploadHelper uploadHelper = new UploadHelper();
@@ -134,18 +134,7 @@ public class UploadImageFilter implements Function<MessageVO, MessageVO> {
 		}
 		return null;
 	}
-//
-//	private String getRandomDefaulThumb() {
-//		String[] thumbs = thumbpics.split(",");
-//		if (thumbs == null || thumbs.length == 0) {
-//			Debug.logError("please add default thumbs UploadImageFilter", module);
-//			return "please add default thumbs UploadImageFilter";
-//		}
-//
-//		int i = (int) (Math.random() * thumbs.length);
-//		return thumbs[i];
-//
-//	}
+
 
 	public String getThumbpics() {
 		return thumbpics;

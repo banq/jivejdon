@@ -6,7 +6,6 @@ import org.compass.annotations.Searchable;
 import org.compass.annotations.SearchableProperty;
 
 import java.io.Serializable;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -27,10 +26,6 @@ public final class MessageVO implements Serializable, Cloneable {
 	private final static Pattern htmlEscape = Pattern.compile("\\<.*?\\>|<[^>]+");
 	private final static Pattern newlineEscape = Pattern.compile("\\<br\\>|\\<p\\>", Pattern
 			.CASE_INSENSITIVE);
-	private final static Pattern httpURLEscape = Pattern.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
-
-	private final static Pattern imgPattern = Pattern.compile("(<img\\b|(?!^)\\G)[^>]*?\\b" +
-			"(src|width|height)=([\"']?)([^\"]*)\\3");
 
 	private final ForumMessage forumMessage;
 
@@ -39,11 +34,6 @@ public final class MessageVO implements Serializable, Cloneable {
 
 	@SearchableProperty
 	private final String body;
-
-	private final String linkUrl;
-
-	private final String thumbnailUrl;
-
 
 	/**
 	 * only using builder pattern to create MessageVO!
@@ -57,21 +47,7 @@ public final class MessageVO implements Serializable, Cloneable {
 	private MessageVO(String subject, String body, ForumMessage forumMessage) {
 		this.forumMessage = forumMessage;
 		this.subject = subject;
-		Matcher matcher = imgPattern.matcher(body);
-		if (matcher.find()) {
-			thumbnailUrl = matcher.group(4);
-		} else
-			thumbnailUrl = "";
-
-		matcher = httpURLEscape.matcher(body);
-		if (matcher.find()) {
-			linkUrl = matcher.group();
-			this.body = matcher.replaceAll("");
-		} else {
-			linkUrl = "";
-			this.body = body;
-		}
-
+		this.body = body;
 	}
 
 	//used for compass lucene search
@@ -129,17 +105,10 @@ public final class MessageVO implements Serializable, Cloneable {
 		return super.clone();
 	}
 
-	public String getThumbnailUrl() {
-		return thumbnailUrl;
-	}
-
-	public String getLinkUrl() {
-		return linkUrl;
-	}
-
 	public ForumMessage getForumMessage() {
 		return forumMessage;
 	}
+
 
 	@FunctionalInterface
 	public interface RequireSubject {
@@ -172,4 +141,5 @@ public final class MessageVO implements Serializable, Cloneable {
 			return new MessageVO(subject, body, message);
 		}
 	}
+
 }

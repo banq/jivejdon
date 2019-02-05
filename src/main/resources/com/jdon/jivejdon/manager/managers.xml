@@ -54,6 +54,10 @@
                     value="com.jdon.jivejdon.model.message.output.html.ListStyle"/>
             <constructor
                     value="com.jdon.jivejdon.model.message.output.html.FontStyle"/>
+            <constructor
+                    value="com.jdon.jivejdon.model.message.output.linkurl.LinkUrlExtractor"/>
+            <constructor
+                    value="com.jdon.jivejdon.model.message.output.thumbnailUrl.ThumbnailExtractor"/>
 
 
         </component>
