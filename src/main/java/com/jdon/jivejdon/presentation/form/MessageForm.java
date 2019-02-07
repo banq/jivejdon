@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
  * 
  */
 public class MessageForm extends BaseForm {
-	public final static int subjectMaxLength = 50;
+	public final static int subjectMaxLength = 100;
 	/**
 	 *
 	 */

@@ -28,8 +28,8 @@
 <logic:equal name="threadForm" property="authenticated"
              value="true">
 <p>
-    标题：<html:text  property="name" styleId="replySubject" size="80"
-                 maxlength="40"  />
+    标题：<html:text property="name" styleId="replySubject" size="80"
+                  maxlength="100"/>
   <p>  <input type="submit" value=" 确定 Ctrl+Enter "/>
 <p><p><p>
 

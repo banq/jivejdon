@@ -117,10 +117,11 @@ note:
 9 	UploadImageFilter
 10 	Bodymasking
 11 	UploadFileFilter
-12 	HotKeysFilter
-13 	AuthorNameFormat
-14 	QuoteRegexFilter
-15 	FontStyle
+12 	AuthorNameFormat
+13 	QuoteRegexFilter
+14 	FontStyle
+15 com.jdon.jivejdon.model.message.output.linkurl.LinkUrlExtractor
+16 com.jdon.jivejdon.model.message.output.thumbnailUrl.ThumbnailExtractor
 
 
 ##############################################################################################

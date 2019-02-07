@@ -12,7 +12,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="form-group">
-      <html:text styleClass="form-control" property="subject" styleId="replySubject" size="80" maxlength="80" tabindex="5"/>
+      <html:text styleClass="form-control" property="subject" styleId="replySubject" size="80" maxlength="100" tabindex="5"/>
     </div>
   </div>
 </div>
