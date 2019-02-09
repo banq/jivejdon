@@ -106,7 +106,7 @@ Docker:
 4. docker build -t jivejdonweb -f Dockerfile.web .
 5. docker run  -p 8080:8080 jivejdonweb
 
-browser : http://192.168.99.100:8080
+browser : http://$DOCKER_HOST_IP:8080
 
 
 Document
