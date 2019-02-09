@@ -26,36 +26,7 @@
             <param-value>true</param-value>
         </init-param>
     </filter>
-    <filter>
-        <filter-name>SpamFilter</filter-name>
-        <filter-class>com.jdon.jivejdon.presentation.filter.SpamFilter</filter-class>
-    </filter>
-    <filter>
-        <filter-name>spamFilterTooFreq</filter-name>
-        <filter-class>com.jdon.jivejdon.presentation.filter.SpamFilterTooFreq</filter-class>
-        <init-param><!-- exclude this robot -->
-            <param-name>referrer.robotCheck.userAgentPattern</param-name>
-            <param-value>
-                .*(google|baidu|yahoo|bing|360|soso|msn|sogou|jike|haosou|bot|spider|qiniu).*
-            </param-value>
-        </init-param>
-    </filter>
-    <filter>
-        <filter-name>spamFilterRefer</filter-name>
-        <filter-class>com.jdon.jivejdon.presentation.filter.SpamFilterRefer</filter-class>
-        <init-param>
-            <param-name>referrer.domain.namePattern</param-name>
-            <param-value>
-                .*(http://192.168|http://127.0.0.1|http://localhost|https://www.jdon.com|http://www.jdon.com|http://c.jdon.com|http://110.76.43.83).*
-            </param-value>
-        </init-param>
-        <init-param><!-- exclude this robot -->
-            <param-name>referrer.robotCheck.userAgentPattern</param-name>
-            <param-value>.*(google|baidu|bing|qiniu).*</param-value>
-        </init-param>
-
-    </filter>
-
+   
     <filter>
         <filter-name>rewriteFilter</filter-name>
         <filter-class>
@@ -100,28 +71,7 @@
         <filter-name>Set Character Encoding</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    <!--	improve performance
-    <filter-mapping>
-        <filter-name>SpamFilter</filter-name>
-        <url-pattern>*.shtml</url-pattern>
-    </filter-mapping>
-     -->
-    <!-- spamFilterRefer-->
-    <filter-mapping>
-        <filter-name>spamFilterRefer</filter-name>
-        <url-pattern>*.shtml</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>spamFilterRefer</filter-name>
-        <url-pattern>*.jsp</url-pattern>
-    </filter-mapping>
-
-    <!--  spamFilterTooFreq -->
-    <filter-mapping>
-        <filter-name>spamFilterTooFreq</filter-name>
-        <url-pattern>*.shtml</url-pattern>
-    </filter-mapping>
-    <!-- rewriteFilter -->
+   
     <filter-mapping>
         <filter-name>rewriteFilter</filter-name>
         <url-pattern>/*</url-pattern>
