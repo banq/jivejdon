@@ -11,6 +11,6 @@
 	<!-- Custom CSS -->
     <link rel="stylesheet" href="https://cdn.jdon.com/js/style.css">
 <%@include file="../common/IncludeBottomBody.jsp"%>
-
+<script src="https://cdn.jdon.com/js/instant.js" type="module" integrity="sha384-6w2SekMzCkuMQ9sEbq0cLviD/yR2HfA/+ekmKiBnFlsoSvb/VmQFSi/umVShadQI"></script>
 </body>
 </html>
