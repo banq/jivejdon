@@ -9,7 +9,11 @@ if (errorBlocker.checkCount(request.getRemoteAddr(), 5)){
 	response.sendError(404);
     return;
 }
-if (!request.getParameter("id").matches("(\\w+|\\d+)")){
+  if (request.getParameter("oid") == null && request.getParameter("id") == null) {
+    response.sendError(404);
+    return;
+  }
+  if (!request.getParameter("id").matches("(\\w+|\\d+)")) {
 	response.sendError(404);
     return;	
 }
