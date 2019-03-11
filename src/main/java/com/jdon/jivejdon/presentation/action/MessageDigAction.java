@@ -53,13 +53,17 @@ public class MessageDigAction extends Action {
 
 		Long key = Long.valueOf(messageId);
 		ForumMessage message = forumMessageService.getMessage(key);
+		if (message == null) {
+			response.sendError(404);
+			return null;
+		}
 		// who has read can dig it.
 //		if (message.getForumThread().getViewCounter().isContains(request.getRemoteAddr())) {
-			if (!message.getPostip().equals(request.getRemoteAddr()))
+//			if (!message.getPostip().equals(request.getRemoteAddr()))
 			  message.messaegDigAction();
 			try {				
 				response.setContentType("text/html");
-				com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(60 * 60, request, response);
+//				com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(60 * 60, request, response);
 				response.getWriter().print(message.getDigCount());
 				response.getWriter().close();
 			} catch (Exception e) {
