@@ -166,6 +166,7 @@
     </div>
   </div>
   <div class="row">
+    <div class="col-md-12">
       <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <ins class="adsbygoogle"
      style="display:block"
@@ -175,6 +176,7 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>    
+      </div>
   </div>      
 </div>
 
