@@ -135,17 +135,20 @@
           </div>
         </div>
       </div>
-      <!-- Start Widget -->
+     <!-- Start Widget -->
       <div class="widget">
         <div class="wid-vid">
-          <ul>
-            <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">
-              <span id="tagthreads_<bean:write name="threadTag" property="tagID"/>"></span>
-            </logic:iterate>
-
-          </ul>
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="autorelaxed"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="7669317912"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
         </div>
-      </div>
+      </div>    
       <!-- Start Widget -->
       <div class="widget">
         <div class="wid-vid">
@@ -162,22 +165,19 @@
           </ul>
         </div>
       </div>
+      <!-- Start Widget -->
+      <div class="widget">
+        <div class="wid-vid">
+          <ul>
+            <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">
+              <span id="tagthreads_<bean:write name="threadTag" property="tagID"/>"></span>
+            </logic:iterate>
 
+          </ul>
+        </div>
+      </div>         
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="autorelaxed"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="7669317912"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>    
-      </div>
-  </div>      
+  </div>    
 </div>
 
 
