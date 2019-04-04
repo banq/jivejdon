@@ -34,6 +34,9 @@ String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
           enable_page_level_ads: true
      });
 </script>
+    <!--Start of FatChilli.media head code-->
+<script type="text/javascript" src="https://script.proadscdn.com/head.js"></script>
+<!--End of FatChilli.media head code-->
 </head>
 
 <%@ include file="../common/body_header.jsp" %>
