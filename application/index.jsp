@@ -39,9 +39,6 @@
           enable_page_level_ads: true
      });
   </script>
-  <!--Start of FatChilli.media head code-->
-<script type="text/javascript" src="https://script.proadscdn.com/head.js"></script>
-<!--End of FatChilli.media head code-->    
 </head>
 <body>
 <%@ include file="./common/body_header.jsp" %>
@@ -146,8 +143,14 @@
 					<!-- Start Widget urlList -->
 				<div class="widget">
 					    <div class="wid-vid">
-							<script src='https://www.googletagservices.com/tag/js/gpt.js'>
-  googletag.pubads().definePassback('/162717810/CN-jdon.com/300x600', [300, 600]).display();
+								   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 推荐贴右侧300x600 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="3352261515"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 							</div>
 				</div>
@@ -198,9 +201,6 @@
     document.getElementById("home-thumbnai").src = "https://cdn.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
 
 </script> 	
-<script src="https://cdn.jdon.com/js/instant.js" type="module" integrity="sha384-6w2SekMzCkuMQ9sEbq0cLviD/yR2HfA/+ekmKiBnFlsoSvb/VmQFSi/umVShadQI"></script>
-<!--FatChilli.media Sticky placement start-->
-<div id="proads_space_anchor_video_ad"></div>
-<!--FatChilli.media Sticky placement end-->    
+<script src="https://cdn.jdon.com/js/instant.js" type="module" integrity="sha384-6w2SekMzCkuMQ9sEbq0cLviD/yR2HfA/+ekmKiBnFlsoSvb/VmQFSi/umVShadQI"></script> 
 </body>
 </html>
