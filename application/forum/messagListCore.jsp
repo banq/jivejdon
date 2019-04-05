@@ -185,9 +185,8 @@
   <script>
               var sId = "";
               <logic:notEmpty name="forumThread" property="state.lastPost">
-              sId = '<bean:write name="forumThread" property="state.lastPost.modifiedDate2" />';
               </logic:notEmpty>
-              viewcount('<bean:write name="forumThread" property="threadId" />', sId);
+              viewcount('<bean:write name="forumThread" property="threadId" />', "");
               approveList();
               window.onload = function () {
                   <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">

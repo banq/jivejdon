@@ -60,17 +60,12 @@ public class ViewThreadAction extends Action {
 				return null;
 			}
 
-			String sId = request.getParameter("sId");
-			if (sId == null) {
-				((HttpServletResponse) response).sendError(404);
-				return null;
-			}
+
 			response.getWriter().close();
-			if (!thread.getState().lastPostIsNull())
-				if (Long.parseLong(sId) == thread.getState().getLastPost().getModifiedDate2()) {
+			if (!thread.getState().lastPostIsNull()) {
 					thread.addViewCount();
 					getThreadViewCounterJob().checkViewCounter(thread);
-				}
+			}
 		} catch (Exception e) {
 			Debug.logError(" viewThread error:" + e);
 		}
