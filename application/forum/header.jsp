@@ -35,7 +35,7 @@ String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
      });
 </script>
     <!--Start of FatChilli.media head code-->
-<script type="text/javascript" src="https://script.proadscdn.com/head.js"></script>
+<script async type="text/javascript" src="https://script.proadscdn.com/head.js"></script>
 <!--End of FatChilli.media head code-->
 </head>
 
