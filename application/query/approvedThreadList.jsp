@@ -20,14 +20,14 @@
 				<div>
                <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">
                   <logic:match name="forumMessage" property="messageUrlVO.thumbnailUrl" value="/simgs/thumb/">
-                    <img id="home-thumbnai" src="" border='0' class="thumbnail"/>
+                    <img id="home-thumbnai" src="" border='0' class="thumbnail" width="610"/>
                   </logic:match>
                   <logic:notMatch name="forumMessage" property="messageUrlVO.thumbnailUrl" value="/simgs/thumb/">
-                  <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail"/>
+                  <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail" width="610"/>
                   </logic:notMatch>
                </logic:notEmpty>
                <logic:empty name="forumMessage" property="messageUrlVO.thumbnailUrl">
-                  <img id="home-thumbnai" src="" border='0' class="thumbnail"/>
+                  <img id="home-thumbnai" src="" border='0' class="thumbnail" width="610"/>
                </logic:empty>
                   
             </div>

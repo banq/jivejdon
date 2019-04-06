@@ -15,7 +15,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>解道jdon - 企业级软件架构解决之道</title>
+  <title>解道jdon - 新技术架构的赋能者</title>
   <meta name="Description" content="有关企业软件的业务建模、软件架构设计、编程技术等方面的探索、分享和交流"/>
   <meta name="Keywords" content="编程,设计,架构,开发,分析,教程,领域驱动设计,web框架,设计模式,数据库,大数据,java性能,面向对象,函数编程,java培训,EDA,SOA,JEE,j2ee,web,android,Java,JavaEE,DDD,CQRS,EventSourcing,javascript,分布式,微服务,Reactive,扩展性,scalable,Spring,node.js" />
 	<meta name="domain_verify" content="pmrgi33nmfuw4ir2ejvgi33ofzrw63jcfqrgo5ljmqrduirtmu2wczlcgvrtomzyha2dcylfhfqtmntemmydezbvme4gmmrugarcyitunfwwku3bozsseorrgq2dmmjrgu4teobrgqzh2">
