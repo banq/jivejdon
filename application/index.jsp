@@ -197,8 +197,8 @@
     load('https://cdn.jdon.com/query/urlListAction', function (xhr) {
         document.getElementById("urllist").innerHTML = xhr.responseText;
     });
-
-    document.getElementById("home-thumbnai").src = "https://cdn.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
+    if(document.getElementById("home-thumbnai") != null)
+       document.getElementById("home-thumbnai").src = "https://cdn.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
 
 </script> 	
 <script src="https://cdn.jdon.com/js/instant.js" type="module" integrity="sha384-6w2SekMzCkuMQ9sEbq0cLviD/yR2HfA/+ekmKiBnFlsoSvb/VmQFSi/umVShadQI"></script> 

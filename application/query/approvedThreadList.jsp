@@ -18,8 +18,19 @@
        <div class="box">
             <div class="zoom-container">
 				<div>
+               <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">
+                  <logic:match name="forumMessage" property="messageUrlVO.thumbnailUrl" value="/simgs/thumb/">
+                    <img id="home-thumbnai" src="" border='0' class="thumbnail"/>
+                  </logic:match>
+                  <logic:notMatch name="forumMessage" property="messageUrlVO.thumbnailUrl" value="/simgs/thumb/">
+                  <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail"/>
+                  </logic:notMatch>
+               </logic:notEmpty>
+               <logic:empty name="forumMessage" property="messageUrlVO.thumbnailUrl">
                   <img id="home-thumbnai" src="" border='0' class="thumbnail"/>
-               </div>
+               </logic:empty>
+                  
+            </div>
 			</div>
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
