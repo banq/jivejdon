@@ -158,14 +158,6 @@
 			</div>
 		</div>
 	</div>
- <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://cdn.jdon.com/js/bootstrap.min.css"  type="text/css">
-	<!-- Custom Fonts -->
-    <link rel="stylesheet" href="https://cdn.jdon.com/js/font-awesome-4.4.0/css/font-awesome.min.css"  type="text/css">
-	<!-- Custom CSS -->
-    <link rel="stylesheet" href="https://cdn.jdon.com/js/style.css">	
-<%@ include file="./common/IncludeBottomBody.jsp" %> 
-<%@ include file="../account/loginAJAX.jsp" %>
 <%
 	String imagesize = "10";
 		if (request.getParameter("imagesize") != null)
@@ -181,7 +173,18 @@
   }
 %>
 <script>   
-
+    if(document.getElementById("home-thumbnai") != null)
+       document.getElementById("home-thumbnai").src = "https://cdn.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
+</script> 		
+ <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://cdn.jdon.com/js/bootstrap.min.css"  type="text/css">
+	<!-- Custom Fonts -->
+    <link rel="stylesheet" href="https://cdn.jdon.com/js/font-awesome-4.4.0/css/font-awesome.min.css"  type="text/css">
+	<!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdn.jdon.com/js/style.css">	
+<%@ include file="./common/IncludeBottomBody.jsp" %> 
+<%@ include file="../account/loginAJAX.jsp" %>
+<script>       
     load('/query/threadApprovedNewList3.shtml?count=15', function (xhr) {
         document.getElementById("threadApprovedNewListOthers").innerHTML = xhr.responseText;
     });
@@ -197,8 +200,6 @@
     load('https://cdn.jdon.com/query/urlListAction', function (xhr) {
         document.getElementById("urllist").innerHTML = xhr.responseText;
     });
-    if(document.getElementById("home-thumbnai") != null)
-       document.getElementById("home-thumbnai").src = "https://cdn.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
 
 </script> 	
 <script src="https://cdn.jdon.com/js/instant.js" type="module" integrity="sha384-6w2SekMzCkuMQ9sEbq0cLviD/yR2HfA/+ekmKiBnFlsoSvb/VmQFSi/umVShadQI"></script> 
