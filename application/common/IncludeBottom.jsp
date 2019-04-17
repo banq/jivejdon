@@ -8,5 +8,6 @@
 	</div>
 	</div>
 <%@include file="./IncludeBottomBody.jsp"%>
+
 </body>
 </html>
