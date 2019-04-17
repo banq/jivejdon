@@ -8,6 +8,5 @@
 	</div>
 	</div>
 <%@include file="./IncludeBottomBody.jsp"%>
-<script src="https://cdn.jdon.com/js/instant.js" type="module" integrity="sha384-6w2SekMzCkuMQ9sEbq0cLviD/yR2HfA/+ekmKiBnFlsoSvb/VmQFSi/umVShadQI"></script>
 </body>
 </html>
