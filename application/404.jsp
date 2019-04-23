@@ -45,10 +45,7 @@ if (errorBlocker.checkRate(request.getRemoteAddr(), 4)){
     document.write(window.location.href);
     </script>
     <br>在Jdon.com无法找到. 去除多余非法字符后再试试看
-    
-    <div style="width:400px;margin:0 auto;height:100px;">
-<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=2973712029525908931' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
-</div>
+ <br>可进入<a href="/message/threadViewQuery.shtml">查询页面</a>查找
     <a href="<%=request.getContextPath() %>/" class="btn">Jdon.com首页</a>
 </div>
 </center>
