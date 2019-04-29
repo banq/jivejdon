@@ -28,6 +28,7 @@ public class ViewThreadAction extends Action {
 	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm,
 								 HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+		response.getWriter().close();
 //		String requestType = request.getHeader("X-Requested-With");
 //		if (requestType == null || !requestType.equalsIgnoreCase("XMLHttpRequest")) {
 //			response.sendError(404);
@@ -61,7 +62,6 @@ public class ViewThreadAction extends Action {
 			}
 
 
-			response.getWriter().close();
 			if (!thread.getState().lastPostIsNull()) {
 					thread.addViewCount();
 					getThreadViewCounterJob().checkViewCounter(thread);
