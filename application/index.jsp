@@ -16,7 +16,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>解道jdon - 赋能企业软件硬核架构</title>
-  <meta name="Description" content="企业软件的业务建模、 分布式架构设计、最新编程技术等方面的溯源、布道与赋能"/>
+  <meta name="Description" content="领域建模、 分布式架构设计、最新编程架构与思想等方面的溯源、布道与赋能"/>
   <meta name="Keywords" content="架构设计,编程开发,建模分析,领域驱动设计,分布式架构,微服务,SOA,设计模式,大数据,云原生,面向对象,函数编程,java培训,SpringBoot,EDA,JEE,j2ee,web,JavaEE,DDD,CQRS,EventSourcing,javascript,Reactive,scalable,Spring,node.js" />
 	<meta name="domain_verify" content="pmrgi33nmfuw4ir2ejvgi33ofzrw63jcfqrgo5ljmqrduirtmu2wczlcgvrtomzyha2dcylfhfqtmntemmydezbvme4gmmrugarcyitunfwwku3bozsseorrgq2dmmjrgu4teobrgqzh2">
   <meta http-equiv="refresh" content="3600">
