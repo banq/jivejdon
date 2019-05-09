@@ -201,6 +201,7 @@
 
     <session-config>
         <session-timeout>5</session-timeout>
+        <tracking-mode>COOKIE</tracking-mode>
     </session-config>
     <error-page>
         <error-code>404</error-code>
