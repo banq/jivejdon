@@ -295,7 +295,7 @@ function sendSMS(val) {
         return;
     }
     var pars = "phoneNumber=" + pn;
-    load('<%=request.getContextPath()%>/account/qqsms.jsp?'+ pars, function(xhr) {
+    load('<%=request.getContextPath()%>/account/smsQQAction.shtml?' + pars, function (xhr) {
   	       document.getElementById('smsStatus').innerHTML = xhr.responseText;
          });
     

@@ -105,7 +105,12 @@
 	  scope="request" validate="false" >
       <forward name="updateAccountAttachment" path="/common/noresult.jsp"/>		
     </action>
- 
+
+      <action path="/account/smsQQAction"
+              type="com.jdon.jivejdon.presentation.action.account.SmsQQAction"
+              scope="request" validate="false">
+      </action>
+
   </action-mappings>
    <plug-in className="com.jdon.strutsutil.InitPlugIn">
     <set-property property="modelmapping-config"  value="com.jdon.jivejdon.auth.auths.xml" />
