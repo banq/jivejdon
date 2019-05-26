@@ -136,13 +136,6 @@
         </init-param>
     </servlet>
     <servlet>
-        <servlet-name>verifySpammer</servlet-name>
-        <servlet-class>
-            com.jdon.jivejdon.presentation.servlet.VerifySpammerAction
-        </servlet-class>
-
-    </servlet>
-    <servlet>
         <servlet-name>RSSGenServlet</servlet-name>
         <servlet-class>
             com.jdon.jivejdon.presentation.servlet.RSSGenServlet
@@ -185,10 +178,7 @@
         <servlet-name>RandomcodeServlet</servlet-name>
         <url-pattern>/account/registerCodeAction</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>verifySpammer</servlet-name>
-        <url-pattern>/verifySpammer</url-pattern>
-    </servlet-mapping>
+
 
     <servlet-mapping>
         <servlet-name>action</servlet-name>
