@@ -36,11 +36,7 @@ pageContext.setAttribute("title", titleStr);
         <a href="<%=request.getContextPath()%>/tags">更多分类</a>
 		  
       </center>
-     
-<logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
-<%@ include file="threadListCore.jsp" %>
-</logic:iterate>
-	<div>
+<div>
 	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- 自动调整尺寸 -->
 <ins class="adsbygoogle"
@@ -51,7 +47,10 @@ pageContext.setAttribute("title", titleStr);
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-	</div>
+	</div>     
+<logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
+<%@ include file="threadListCore.jsp" %>
+</logic:iterate>
 	<div class="tres" > 共有<b>
             <bean:write name="threadListForm" property="allCount"/>
             </b>贴
