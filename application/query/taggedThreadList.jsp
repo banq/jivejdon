@@ -36,18 +36,18 @@ pageContext.setAttribute("title", titleStr);
         <a href="<%=request.getContextPath()%>/tags">更多分类</a>
 		  
       </center>
-<div>
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 自动调整尺寸 -->
+      <div>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <ins class="adsbygoogle"
      style="display:block"
+     data-ad-format="fluid"
+     data-ad-layout-key="-ef+6k-30-ac+ty"
      data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="9040920314"
-     data-ad-format="auto"></ins>
+     data-ad-slot="4250528285"></ins>
 <script>
-(adsbygoogle = window.adsbygoogle || []).push({});
+     (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-	</div>     
+    	</div>     
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
 <%@ include file="threadListCore.jsp" %>
 </logic:iterate>
