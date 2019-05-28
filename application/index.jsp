@@ -50,6 +50,16 @@
 			<div id="main-content" class="col-md-8">
 				<div class="box">
           <jsp:include page="/query/threadApprovedNewList2.shtml?count=1" flush="true"></jsp:include>
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="fluid"
+     data-ad-layout-key="-ef+6k-30-ac+ty"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="4250528285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
           <span id="threadApprovedNewListOthers"></span>
         </div>
         <div class="box">
