@@ -116,6 +116,19 @@
               </logic:equal>
 <p></p>
 </div>
+<div>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 关键词推广 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="6351391093"
+     data-ad-format="link"
+     data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
 <logic:equal name="forumMessage" property="root" value="true">
   <div class=diggArea>
     <DIV class=diggNum id="digNumber_<bean:write name="forumMessage" property="messageId"/>">
