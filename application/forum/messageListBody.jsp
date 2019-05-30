@@ -116,6 +116,7 @@
               </logic:equal>
 <p></p>
 </div>
+<logic:equal name="forumMessage" property="root" value="true">
 <div>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- 关键词推广 -->
@@ -129,7 +130,6 @@
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 </div>
-<logic:equal name="forumMessage" property="root" value="true">
   <div class=diggArea>
     <DIV class=diggNum id="digNumber_<bean:write name="forumMessage" property="messageId"/>">
       <logic:notEqual name="forumMessage" property="digCount" value="0">
