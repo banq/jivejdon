@@ -219,9 +219,9 @@
     load('https://cdn.jdon.com/query/popularList', function (xhr) {
   	       document.getElementById("poplist").innerHTML = xhr.responseText;
 			});
-    load('https://cdn.jdon.com/query/urlListAction', function (xhr) {
-        document.getElementById("urllist").innerHTML = xhr.responseText;
-    });
+    // load('https://cdn.jdon.com/query/urlListAction', function (xhr) {
+    //     document.getElementById("urllist").innerHTML = xhr.responseText;
+    // });
 
 </script> 	
 </body>
