@@ -19,7 +19,10 @@
     <div class="box">
       <logic:equal name="forumMessage" property="root" value="false">
       <div class="frame-yy">
-        </logic:equal>
+      </logic:equal>
+      <div>
+      <a href="http://www.lubanjava.com/luban/index.html"><img src="https://cdn.jdon.com/simgs/forum/lubanjava.png" width="1024"></a>
+      </div>
         <div class="post_header">
           <div class="post_title">
             <logic:equal name="forumMessage" property="root" value="true">
