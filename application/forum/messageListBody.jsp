@@ -21,7 +21,8 @@
       <div class="frame-yy">
       </logic:equal>
       <logic:equal name="forumMessage" property="root" value="true"><div>
-      <a href="http://www.lubanjava.com/luban/index.html" target="_blank"><img src="https://cdn.jdon.com/simgs/forum/lubanjava.png" width="1024" height="100"></a>
+      <a href="
+http://www.lubanjava.com/luban/index.html?=jdon" target="_blank"><img src="https://cdn.jdon.com/simgs/forum/lubanjava.png" width="1024" height="100"></a>
       </div></logic:equal>
         <div class="post_header">
           <div class="post_title">
