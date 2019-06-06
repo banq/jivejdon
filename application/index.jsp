@@ -71,7 +71,11 @@
 <li><a href="/mx7mzW/61810.html" target="_blank">预算报告发布！2019年，钱将这么花/a></li>
 <li><a href="/mxuRyZ/957093.html" target="_blank">香港游泳健将杜敬谦去世 曾搭档孙杨出战全运会</a></li>
 </div>
-					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<div class="box"> 
+  <div class="linkblock">
+    <div class="row">
+        <div class="col-sm-12">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-format="fluid"
@@ -81,6 +85,10 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
+        </div>
+    </div>
+  </div>
+</div>
           <span id="threadApprovedNewListOthers"></span>
         </div>
         <div class="box">
