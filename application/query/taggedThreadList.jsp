@@ -36,8 +36,12 @@ pageContext.setAttribute("title", titleStr);
         <a href="<%=request.getContextPath()%>/tags">更多分类</a>
 		  
       </center>
-      <div>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+      <div class="box"> 
+       <div class="linkblock">
+         <div class="row">
+          <div class="col-sm-12">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-format="fluid"
@@ -47,7 +51,11 @@ pageContext.setAttribute("title", titleStr);
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-    	</div>     
+          </div>
+         </div>
+       </div>
+      </div>
+     	 
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
 <%@ include file="threadListCore.jsp" %>
 </logic:iterate>
