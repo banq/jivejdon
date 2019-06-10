@@ -22,7 +22,7 @@
       </logic:equal>
       <logic:equal name="forumMessage" property="root" value="true"><div>
       <a href="
-http://www.lubanjava.com/luban/index.html?=jdon" target="_blank"><img src="https://cdn.jdon.com/simgs/forum/luban.jpg"></a>
+http://www.lubanjava.com/luban/index.html?=jdon" target="_blank"><img src="https://cdn.jdon.com/simgs/forum/luban.gif"></a>
       </div></logic:equal>
         <div class="post_header">
           <div class="post_title">
