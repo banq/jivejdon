@@ -98,7 +98,7 @@ public class CUDInputInterceptor implements MethodInterceptor {
 		}
 
 		Account account = sessionContextUtil.getLoginAccount(sessionContext);
-		if (IPIsAllowed(methodNameNow, account))
+		if (IPIsAllowed(methodNameNow, account) && account.getMessageCount() > 10)
 			return invocation.proceed();
 		else {
 			errorBlockerIF.checkCount(account.getPostIP(), 5);
