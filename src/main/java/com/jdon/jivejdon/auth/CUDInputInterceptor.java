@@ -98,7 +98,7 @@ public class CUDInputInterceptor implements MethodInterceptor {
 		}
 
 		Account account = sessionContextUtil.getLoginAccount(sessionContext);
-		if (IPIsAllowed(methodNameNow, account) && account.getMessageCount() > 10)
+		if (IPIsAllowed(methodNameNow, account))
 			return invocation.proceed();
 		else {
 			errorBlockerIF.checkCount(account.getPostIP(), 5);
@@ -131,11 +131,10 @@ public class CUDInputInterceptor implements MethodInterceptor {
 			return isAllowed;
 
 		//	if (methodNameNow.contains("create")) {
-			if (methodNameNow.contains("createTopicMessage"))
+		if (methodNameNow.contains("createTopic")) {
+			if (account.getMessageCount() > 10)
 				isAllowed = throttler.checkPostValidate(account);
-				//		else
-				//			isAllowed = throttler.checkValidate(account);
-			else
+		} else
 			isAllowed = !throttler.isAbusive(account.getPostIP());
 		return isAllowed;
 	}
