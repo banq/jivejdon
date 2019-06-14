@@ -1,8 +1,6 @@
 package com.jdon.jivejdon.event.domain.consumer.write.postThread;
 
-import com.google.common.eventbus.Subscribe;
 import com.jdon.annotation.Component;
-import com.jdon.jivejdon.util.ThreadTimer;
 import com.jdon.jivejdon.util.ToolsUtil;
 import com.qiniu.cdn.CdnManager;
 import com.qiniu.cdn.CdnResult;
@@ -18,23 +16,16 @@ import org.apache.logging.log4j.Logger;
 @Component("cdnRefreshSubsciber")
 public class CDNRefreshSubsciber {
 	private final static Logger logger = LogManager.getLogger(CDNRefreshSubsciber.class);
-	private final ThreadTimer threadTimer;
 
-	public CDNRefreshSubsciber(ThreadTimer threadTimer) {
-		this.threadTimer = threadTimer;
+	public static void main(String[] args) {
+		CDNRefreshSubsciber cDNRefreshSubsciber = new CDNRefreshSubsciber();
+		cDNRefreshSubsciber.cdnRefresh("query/approved");
 	}
 
-	@Subscribe
 	public void cdnRefresh(String fileurl) {
-		try {
-			if (ToolsUtil.isDebug()) return;
-			refreshCDN(fileurl);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		CDNRefreshSender cDNRefreshSender = new CDNRefreshSender(fileurl);
+		cDNRefreshSender.start();
 	}
-
 
 	private void refreshCDN(String fileurl) {
 		//设置需要操作的账号的AK和SK
@@ -72,8 +63,27 @@ public class CDNRefreshSubsciber {
 			logger.debug(" cdn refresh" + result.code);
 			//获取其他的回复内容
 		} catch (QiniuException e) {
-			System.err.println(e.response.toString());
-			logger.error("cdn refres error=" + e.response.toString());
+			System.err.println(urls + e.response.toString());
+			logger.error("cdn refres url=" + urls + " error:" + e.response.toString());
 		}
+	}
+
+	class CDNRefreshSender extends Thread {
+		private final String fileurl;
+
+		CDNRefreshSender(String fileurl) {
+			this.fileurl = fileurl;
+		}
+
+
+		public void run() {
+			try {
+				if (ToolsUtil.isDebug()) return;
+				refreshCDN(fileurl);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 }
