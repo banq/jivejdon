@@ -14,12 +14,19 @@ public class CDNRefreshSubsciber {
 
 	public static void main(String[] args) {
 		CDNRefreshSubsciber cDNRefreshSubsciber = new CDNRefreshSubsciber();
-		cDNRefreshSubsciber.cdnRefresh("query/approved");
+		cDNRefreshSubsciber.cdnRefresh("rss");
+		System.out.println("qq");
 	}
 
 	public void cdnRefresh(String fileurl) {
-		CDNRefreshSender cDNRefreshSender = new CDNRefreshSender(fileurl);
-		cDNRefreshSender.start();
+		new Thread(() -> {
+			try {
+				//if (ToolsUtil.isDebug()) return;
+				refreshCDN(fileurl);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}).start();
 	}
 
 	private void refreshCDN(String fileurl) {
@@ -63,22 +70,4 @@ public class CDNRefreshSubsciber {
 		}
 	}
 
-	class CDNRefreshSender extends Thread {
-		private final String fileurl;
-
-		CDNRefreshSender(String fileurl) {
-			this.fileurl = fileurl;
-		}
-
-
-		public void run() {
-			try {
-				//if (ToolsUtil.isDebug()) return;
-				refreshCDN(fileurl);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-	}
 }
