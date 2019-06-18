@@ -16,14 +16,14 @@ function digMessage(id) {
 
 
 function tagthreads(length, tablewidth, count, tagID) {
-// window.onload = function() {
+ window.onload = function() {
     $.ajax({
         url: 'https://cdn.jdon.com/query/tagThreads/' + tagID,
         success: function (response) {
             $('#tagthreads_' + tagID).html(response);
         }
     });
-// }
+ }
 
 //    load(getContextPath() +'/query/tagThreads/'+tagID, function(xhr) {
 //  	       document.getElementById('tagthreads_'+tagID).innerHTML = xhr.responseText;
