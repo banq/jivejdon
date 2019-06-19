@@ -35,24 +35,6 @@ public class CDNRefreshSubsciber {
 		String secretKey = "sGSeH06-V2jiW3gKqzq7R0Rg0ZpJ576G_laLL2AK";
 		Auth auth = Auth.create(accessKey, secretKey);
 
-//		Zone z = Zone.zone0();
-//		Configuration c = new Configuration(z);
-
-//		//实例化一个BucketManager对象
-//		BucketManager bucketManager = new BucketManager(auth, c);
-//		//要测试的空间和key，并且这个key在你空间中存在
-//		String bucket = "cdnjdon";
-//		String key = fileurl;
-//		try {
-//			//调用delete方法移动文件
-//			bucketManager.delete(bucket, key);
-//		} catch (QiniuException e) {
-//			//捕获异常信息
-//			Response r = e.response;
-//			System.out.println("cdn delete error=" + fileurl + " error:" + r.toString());
-//			logger.error("cdn delete error=" + fileurl + " error:" + r.toString());
-//		}
-
 		CdnManager cdn = new CdnManager(auth);
 		//待刷新的链接列表
 		String[] urls = new String[]{
