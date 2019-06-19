@@ -18,13 +18,13 @@ public class ZCDNRefreshListener implements DomainEventHandler {
 
 	private final CDNRefreshUrls cdnRefreshUrls;
 	private final ForumFactory forumFactory;
-	private final CDNRefreshSubsciber cDNRefreshSubsciber;
+	private final CDNQiNiuRefreshSubsciber cDNQiNiuRefreshSubsciber;
 
 	public ZCDNRefreshListener(CDNRefreshUrls cdnRefreshUrls, ForumFactory forumFactory,
-							   CDNRefreshSubsciber cDNRefreshSubsciber) {
+							   CDNQiNiuRefreshSubsciber cDNQiNiuRefreshSubsciber) {
 		this.cdnRefreshUrls = cdnRefreshUrls;
 		this.forumFactory = forumFactory;
-		this.cDNRefreshSubsciber = cDNRefreshSubsciber;
+		this.cDNQiNiuRefreshSubsciber = cDNQiNiuRefreshSubsciber;
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class ZCDNRefreshListener implements DomainEventHandler {
 //			logger.error(clientIp + " is not server, so not send cdn refresh");
 //			return;
 //		}
-		Arrays.stream(cdnRefreshUrls.getUrls()).forEach(cDNRefreshSubsciber::cdnRefresh);
+		Arrays.stream(cdnRefreshUrls.getUrls()).forEach(cDNQiNiuRefreshSubsciber::cdnRefresh);
 
 		DomainMessage lastStepMessage = (DomainMessage) event.getDomainMessage().getEventSource();
 		Object lastStepOk = lastStepMessage.getBlockEventResult();
@@ -43,9 +43,9 @@ public class ZCDNRefreshListener implements DomainEventHandler {
 			ForumMessage forumMessage = (ForumMessage) lastStepOk;
 			forumMessage = forumFactory.getMessage(forumMessage.getMessageId());
 			forumMessage.getForumThread().getTags().stream().forEach(threadTag -> {
-				cDNRefreshSubsciber.cdnRefresh("query/tt/" + threadTag.getTagID());
-				cDNRefreshSubsciber.cdnRefresh("query/tagThreads/" + threadTag.getTagID());
-				cDNRefreshSubsciber.cdnRefresh("rss/tag/" + threadTag.getTagID());
+				cDNQiNiuRefreshSubsciber.cdnRefresh("query/tt/" + threadTag.getTagID());
+				cDNQiNiuRefreshSubsciber.cdnRefresh("query/tagThreads/" + threadTag.getTagID());
+				cDNQiNiuRefreshSubsciber.cdnRefresh("rss/tag/" + threadTag.getTagID());
 			});
 
 		}

@@ -9,12 +9,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Component("cdnRefreshSubsciber")
-public class CDNRefreshSubsciber {
-	private final static Logger logger = LogManager.getLogger(CDNRefreshSubsciber.class);
+public class CDNQiNiuRefreshSubsciber {
+	private final static Logger logger = LogManager.getLogger(CDNQiNiuRefreshSubsciber.class);
 
 	public static void main(String[] args) {
-		CDNRefreshSubsciber cDNRefreshSubsciber = new CDNRefreshSubsciber();
-		cDNRefreshSubsciber.cdnRefresh("rss");
+		CDNQiNiuRefreshSubsciber cDNQiNiuRefreshSubsciber = new CDNQiNiuRefreshSubsciber();
+		cDNQiNiuRefreshSubsciber.cdnRefresh("rss");
 		System.out.println("qq");
 	}
 
