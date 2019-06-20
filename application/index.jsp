@@ -51,8 +51,8 @@
 				<div class="box">
           <jsp:include page="/query/threadApprovedNewList2.shtml?count=1" flush="true"></jsp:include>
 					<div style="display:none">
- 
- </div>
+            <jsp:include page="/query/threadNewList.shtml?count=20" flush="true"></jsp:include>
+          </div>
 <div class="box"> 
   <div class="linkblock">
     <div class="row">
