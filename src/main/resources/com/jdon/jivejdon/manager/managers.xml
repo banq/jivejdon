@@ -305,6 +305,7 @@
             <constructor value="query/threadNewList"/>
             <constructor value="query/popularList"/>
             <constructor value="query/urlListAction"/>
+            <constructor value=""/>
         </component>
 			
 		</services>

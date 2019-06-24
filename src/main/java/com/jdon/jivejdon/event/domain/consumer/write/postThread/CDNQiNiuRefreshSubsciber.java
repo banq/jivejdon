@@ -18,7 +18,7 @@ public class CDNQiNiuRefreshSubsciber {
 
 	public static void main(String[] args) {
 		CDNQiNiuRefreshSubsciber cDNQiNiuRefreshSubsciber = new CDNQiNiuRefreshSubsciber();
-		cDNQiNiuRefreshSubsciber.cdnRefresh("query/approved");
+		cDNQiNiuRefreshSubsciber.cdnRefresh("");
 		System.out.println("qq");
 	}
 
