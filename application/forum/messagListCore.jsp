@@ -77,7 +77,17 @@
         </div>
         <div class="box-content">
           <div class="row">
-
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 关键词推广 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="6351391093"
+     data-ad-format="link"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
           </div>
         </div>
       </div>
