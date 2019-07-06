@@ -35,6 +35,13 @@ if (errorBlocker.checkRate(request.getRemoteAddr(), 4)){
     <title>该页无法找到404 ERROR</title>
     <link rel="stylesheet" type="text/css" href="//cdn.jdon.com/common/style/cmstop-error.css" media="all">
 </head>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-7573657117119544",
+          enable_page_level_ads: true
+     });
+  </script>
 <body class="body-bg">
 
 <center>

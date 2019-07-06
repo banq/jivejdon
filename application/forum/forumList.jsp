@@ -13,7 +13,9 @@
  if(top !== self) top.location = self.location;
   contextpath = "<%=request.getContextPath()%>";
 </script> 
-
+<div style="display:none">
+    <jsp:include page="/query/threadNewList.shtml?count=20" flush="true"></jsp:include>
+  </div>
 <!-- /////////////////////////////////////////Content -->
 <div id="page-content" class="single-page container">
 		<div class="row">
