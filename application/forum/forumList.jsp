@@ -13,9 +13,7 @@
  if(top !== self) top.location = self.location;
   contextpath = "<%=request.getContextPath()%>";
 </script> 
-<div style="display:none">
-    <jsp:include page="/query/threadNewList.shtml?count=20" flush="true"></jsp:include>
-  </div>
+
 <!-- /////////////////////////////////////////Content -->
 <div id="page-content" class="single-page container">
 		<div class="row">
@@ -92,7 +90,9 @@
 				<div class="widget">
 					    <div class="wid-vid">
 						   <ul>
-								 <div id="poplist"></div>    
+								 <div>
+                  <jsp:include page="/query/threadNewList.shtml?count=20" flush="true"></jsp:include>
+                 </div>    
 							</ul>
 							</div>
 				</div>
@@ -101,15 +101,6 @@
 	
 	   </div>
 </div>
-
-
-<script type="text/javascript">
-    <!--
-    load(getContextPath() + '/query/popularlist.shtml?count=15&dateRange=360', function (xhr) {
-        document.getElementById('poplist').innerHTML = xhr.responseText;
-    });
-//-->
-</script>
 
 
 <%@include file="../common/IncludeBottom.jsp"%> 
