@@ -284,6 +284,15 @@
             <forward name="success" path="/query/others/newlist.jsp"/>
         </action>
 
+        
+        <action path="/query/threadNewList2"
+                type="com.jdon.jivejdon.presentation.action.ThreadListAction"
+                name="threadListForm" scope="request"
+                validate="false">
+            <forward name="success" path="/query/others/newlist.jsp"/>
+        </action>
+
+
         <action path="/query/messageNewList"
                 type="com.jdon.jivejdon.presentation.action.MessageListAllAction"
                 name="messageListForm" scope="request"
