@@ -50,9 +50,29 @@
 			<div id="main-content" class="col-md-8">
 				<div class="box">
           <jsp:include page="/query/threadApprovedNewList2.shtml?count=1" flush="true"></jsp:include>
-					<div style="display:none">
-            <jsp:include page="/query/threadNewList2.shtml?count=20" flush="true"></jsp:include>
-          </div>
+				<div style="display:none">
+					<dt><a href="/iisLp101671/" target="_blank">中东部雨雪降温来袭 陕西等10省区降雪局部暴雪</a></dt>
+					<dt><a href="/iisos1P0402/" target="_blank">美舰过台湾海峡、蔡英文告洋状：国台办谈热点问题</a></dt>
+					<dt><a href="/iisYTGg7897/" target="_blank">补贴“断奶”后新能源车如何推广 不妨看看“柳州模式”</a></dt>
+					<dt><a href="/iis1vbW0428/" target="_blank">不戴防割手套让嫌疑人消除警惕</a></dt>
+					<dt><a href="/iis9os05089/" target="_blank">一线丨《流浪地球》首映刷屏了，它会是春节档最后的6063次“小慢车”：穿越秦岭61年 把千万游子带回家</a></dt>
+					<dt><a href="/iisezME6275/" target="_blank">外媒关注朝鲜艺术团乘专列抵京 将于26日和28日演出</a></dt>
+					<dt><a href="/iisLj4k8422/" target="_blank">沈石溪事件持续发酵 韩国将严查体育界暴力事件</a></dt>
+					<dt><a href="/iisPMb24443/" target="_blank">走近2022年北京冬奥会气象预报服务团队</a></dt>
+					<dt><a href="/iis769L7433/" target="_blank">江西高院二审公开审理丰城重大涉黑案 将择期宣判</a></dt>
+					<dt><a href="/iisdOyN6350/" target="_blank">厦门邮轮母港首迎144小时过境免签游客</a></dt>
+					<dt><a href="/iis9AR03226/" target="_blank">立功喜报送进门！这个年更有喜庆味儿</a></dt>
+					<dt><a href="/iisOAJ46802/" target="_blank">披上教育外衣 瞄准高校学生——教育分期贷“坑多多”</a></dt>
+					<dt><a href="/iisMh059412/" target="_blank">《求是》杂志发表总重要文章</a></dt>
+					<dt><a href="/iis0bIK2172/" target="_blank">被盗电瓶惊现闲鱼 民警联手失主抓获卖家</a></dt>
+					<dt><a href="/iisFGpv2014/" target="_blank">两会闭幕，奋斗必须时刻“在线”</a></dt>
+					<dt><a href="/iisQBhu2595/" target="_blank">日本启动西南四大基地 针对中国“预防围堵”</a></dt>
+					<dt><a href="/iis1hRE5731/" target="_blank">减轻学生负担本应得到欢迎 实施为何困难重重？</a></dt>
+					<dt><a href="/iiszpGT0047/" target="_blank">旱厕退休公厕上岗</a></dt>
+					<dt><a href="/iisrs7F0777/" target="_blank">“以房养老”试点四年不足百户参与 为何推向全国</a></dt>
+					<dt><a href="/iisKWhN5660/" target="_blank">中国4艘海警船进入钓鱼岛领海巡航 遭到日方监视</a></dt>
+					<dt><a href="/iisQS7f7339/" target="_blank">“以房养老”试点四年不足百户参与 为何推向全国</a></dt>
+                </div>
 <div class="box"> 
   <div class="linkblock">
     <div class="row">
@@ -129,7 +149,9 @@
 				<div class="widget">
 					    <div class="wid-vid">
 							<ul>
-                <div id="threadNewList"></div>
+                <div>
+					<jsp:include page="/query/threadNewList2.shtml?count=20" flush="true"></jsp:include>
+				</div>
 							</ul>
 							</div>
 				</div>
@@ -203,9 +225,9 @@
     load('https://cdn.jdon.com/query/threadDigList', function (xhr) {
   	       document.getElementById("digList").innerHTML = xhr.responseText;
 			});
-		load('https://cdn.jdon.com/query/threadNewList', function (xhr) {
-        document.getElementById("threadNewList").innerHTML = xhr.responseText;
-    });	
+	// 	load('https://cdn.jdon.com/query/threadNewList', function (xhr) {
+    //     document.getElementById("threadNewList").innerHTML = xhr.responseText;
+    // });	
     load('https://cdn.jdon.com/query/popularList', function (xhr) {
   	       document.getElementById("poplist").innerHTML = xhr.responseText;
 			});

@@ -32,6 +32,7 @@ if (errorBlocker.checkRate(request.getRemoteAddr(), 4)){
 <meta charset="utf-8">
 <meta http-equiv="content-language" content="zh-CN" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="refresh" content="60;url=”https://www.jdon.com" />
     <title>该页无法找到404 ERROR</title>
     <link rel="stylesheet" type="text/css" href="//cdn.jdon.com/common/style/cmstop-error.css" media="all">
 </head>
