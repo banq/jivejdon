@@ -51,6 +51,11 @@
 				<div class="box">
           <jsp:include page="/query/threadApprovedNewList2.shtml?count=1" flush="true"></jsp:include>
 				<div style="display:none">
+					<dt><a href="/iisgL0f5111/" target="_blank">新西兰枪击案嫌疑人曾在当地枪会进行射击训练</a></dt>
+<dt><a href="/iisgK0u9268/" target="_blank">北京市工地禁用袋装水泥</a></dt>
+<dt><a href="/iisSLIWMlYPMaZ/"   >法国“黄马甲”抢劫香榭丽舍商铺 警方已抓捕44人</a></dt>
+<dt><a href="/iisBODXKSTA8rW/"   >加强军队政治工作应对世界新格局 俄重建著名院校</a></dt>
+<dt><a href="/iisULHURVXBEu5/"   >构建跨界多元化生态补偿机制</a></dt>
 				    </div>
 <div class="box"> 
   <div class="linkblock">
