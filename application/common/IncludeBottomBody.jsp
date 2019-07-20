@@ -28,7 +28,7 @@
 							<a href="/tags/24484">Reactive</a>
 							<a href="/tags/210">数据库</a>
 							<a href="/agile.html">敏捷</a>
-							<a href="/workflow-bpm.html">工作流</a>
+							<a href="/tags/598">工作流</a>
 							<a href="/tags/1159">算法</a>
 							<a href="/tags/1093">分布式事务</a>
 						</div>
