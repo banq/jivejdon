@@ -13,7 +13,10 @@ String sessionId = request.getParameter("sessionId");
 if (sessionId == null || !sessionId.equals(request.getSession().getId())){
 	return;
 }
-
+String randstr = (String)request.getSession().getAttribute("randstr");
+if(randstr == null){
+	return;
+}
 String username = request.getParameter("username");
 if (username != null && username.length() != 0){
 	AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);

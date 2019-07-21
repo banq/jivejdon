@@ -129,11 +129,17 @@ public class AccountForm extends BaseForm {
 	}
 
 	public void doValidate(ActionMapping mapping, HttpServletRequest request, List errors) {
-
+        if(ModelForm.CREATE_STR.equals(getAction())){
+			String randstr = (String)request.getSession().getAttribute("randstr");
+			if(randstr == null){
+				return;
+			}
+		}
 
 		if ((getAction() == null) || getAction().length() == 0 || ModelForm
 				.EDIT_STR.equals(getAction())
 				|| ModelForm.CREATE_STR.equals(getAction())) {
+
 
 //            if (!SkinUtils.verifyQQRegisterCode(registerCode, randstr,
 //                    request.getRemoteAddr())) {

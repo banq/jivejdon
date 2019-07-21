@@ -7,6 +7,7 @@
 <struts-config>
   
   <form-beans>
+
     <form-bean name="accountForm" type="com.jdon.jivejdon.presentation.form.AccountForm"/>
     <form-bean name="accountProfileForm" type="com.jdon.jivejdon.presentation.form.AccountProfileForm"/>    
   </form-beans>
@@ -16,7 +17,7 @@
 	  <!--  create new user -->
     <action name="accountForm" path="/account/newAccountForm" type="com.jdon.strutsutil.ModelViewAction" scope="request"
 		validate="false">
-        <forward name="create" path="/account/NewAccountForm.jsp"/>
+        <forward name="create" path="/account/register.jsp"/>
     </action>
     
       <action  path="/account/newPasswordassitView" type="com.jdon.jivejdon.presentation.action.account.PasswordassitAction" scope="request"
@@ -106,7 +107,7 @@
       <forward name="updateAccountAttachment" path="/common/noresult.jsp"/>		
     </action>
 
-      <action path="/account/smsQQAction"
+      <action path="/account/smsVRAction"
               type="com.jdon.jivejdon.presentation.action.account.SmsQQAction"
               scope="request" validate="false">
       </action>

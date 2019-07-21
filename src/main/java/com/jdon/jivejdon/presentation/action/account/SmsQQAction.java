@@ -30,6 +30,20 @@ public class SmsQQAction extends Action {
 			return null;
 		}
 
+		String sessionId = request.getParameter("sessionId");
+		if (sessionId == null || !sessionId.equals(request.getSession().getId())){
+			errorBlocker.checkRate(request.getRemoteAddr(), 0);
+			logger.error("SmsQQAction sessionId:" + request.getRemoteAddr());
+			return null;
+		}
+
+		String randstr = (String)request.getSession().getAttribute("randstr");
+		if(randstr == null){
+			errorBlocker.checkRate(request.getRemoteAddr(), 0);
+			logger.error("SmsQQAction randstr:" + request.getRemoteAddr());
+			return null;
+		}
+
 
 		String phoneNumber = request.getParameter("phoneNumber");
 		if (phoneNumber == null || phoneNumber.length() == 0 || !UtilValidate.isInteger

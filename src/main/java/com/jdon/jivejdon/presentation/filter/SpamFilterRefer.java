@@ -15,26 +15,18 @@
  */
 package com.jdon.jivejdon.presentation.filter;
 
-import java.io.IOException;
-import java.util.regex.Pattern;
-
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.manager.block.ErrorBlockerIF;
 import com.jdon.util.UtilValidate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.regex.Pattern;
 
 /**
  * Ban clients that not refer from owner domain, or other spammer that not in
@@ -71,28 +63,12 @@ public class SpamFilterRefer implements Filter {
 				log.error("Error parsingreferrer.domain.namePattern value '" + domainPattern, e);
 			}
 		}
-
-		// check for possible robot pattern
-		String robotPatternStr = config.getInitParameter("referrer.robotCheck.userAgentPattern");
-		if (!UtilValidate.isEmpty(robotPatternStr)) {
-			// Parse the pattern, and store the compiled form.
-			try {
-				robotPattern = Pattern.compile(robotPatternStr);
-				config.getServletContext().setAttribute(SpamFilterTooFreq.BOTNAME, robotPattern);
-			} catch (Exception e) {
-				// Most likely a PatternSyntaxException; log and continue as if
-				// it is not set.
-				log.error("Error parsing referrer.robotCheck.userAgentPattern value '" + robotPatternStr + "'.  Robots will not be filtered. ", e);
-			}
-		}
-
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
-		if (!isPermittedReferer(httpRequest))
-			if (!isPermittedRobot(httpRequest)) {
+		if (!isPermittedReferer(httpRequest)){
 				log.debug("spammer, not permitted referer :" + httpRequest.getRequestURI() + " refer:" + httpRequest.getHeader("Referer")
 						+ " remote:" + httpRequest.getRemoteAddr());
 				disableSessionOnlines(httpRequest);

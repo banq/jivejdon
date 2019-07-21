@@ -27,27 +27,6 @@
         </init-param>
     </filter>
     <filter>
-        <filter-name>spamFilterRefer</filter-name>
-        <filter-class>com.jdon.jivejdon.presentation.filter.SpamFilterRefer</filter-class>
-        <init-param>
-            <param-name>referrer.domain.namePattern</param-name>
-            <param-value>.*(http://127.0.0.1|http://localhost|https://www.jdon.com).*</param-value>
-        </init-param>
-        <init-param><!-- exclude this robot -->
-            <param-name>referrer.robotCheck.userAgentPattern</param-name>
-            <param-value>.*(google|baidu|yahoo|bing|360|so|msn|sogou|jike|haosou).*</param-value>
-        </init-param>
-
-    </filter>
-    <filter-mapping>
-        <filter-name>spamFilterRefer</filter-name>
-        <url-pattern>*.shtml</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>spamFilterRefer</filter-name>
-        <url-pattern>*.jsp</url-pattern>
-    </filter-mapping>
-    <filter>
         <filter-name>rewriteFilter</filter-name>
         <filter-class>
             org.tuckey.web.filters.urlrewrite.UrlRewriteFilter
