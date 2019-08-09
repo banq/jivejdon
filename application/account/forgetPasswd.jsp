@@ -76,10 +76,10 @@ function Juge(theForm)
     <table>       
   <tr><td>
     
-    密码问题：</td><td><input type="text" name="passwdtype" value="<bean:write name="passwordassitVO" property="passwdtype"/>"/>
+    密码问题：</td><td><input type="text" name="passwdtype" value="<bean:write name="passwordassitVO" property="passwdtype"/>"/>(如无留空)
   </td></tr>
   <tr><td>
-    密码答案：</td><td><input type="text" name="passwdanswer" value=""/>(如果没有可不填)
+    密码答案：</td><td><input type="text" name="passwdanswer" value=""/>(如无留空)
   </td></tr>
   
 <tr><td>
