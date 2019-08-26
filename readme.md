@@ -15,9 +15,11 @@ DDD Aggregate Model
 
 ![avatar](./doc/aggregates2.png)
 [com.jdon.jivejdon.model.ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java) is the aggregate root, it is a rich model, all setter methods are "private":
+
 ![avatar](./doc/private-setter.png)
 
 but all datas out of domain is packed in a DTO anemic model, so business rules in the aggregate root entity will not leak outside domain. 
+
 ![avatar](./doc/richmodel.png)
 
 these DTO anemic models can alseo be packed in Command and Domain Events，so they be managed in DDD ubiquitous language.
