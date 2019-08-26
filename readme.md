@@ -14,6 +14,7 @@ DDD Aggregate Model
 ==============================
 
 ![avatar](./doc/aggregates2.png)
+
 [com.jdon.jivejdon.model.ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java) is the aggregate root, it is a rich model, all setter methods are "private":
 
 ![avatar](./doc/private-setter.png)
