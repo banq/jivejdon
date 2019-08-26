@@ -17,12 +17,9 @@
 package com.jdon.jivejdon.repository.builder;
 
 import com.jdon.jivejdon.Constants;
-import com.jdon.jivejdon.model.Account;
-import com.jdon.jivejdon.model.Forum;
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumMessageReply;
-import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.model.*;
 import com.jdon.jivejdon.model.auth.Role;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.message.MessageVO;
 
 import java.util.Map;
@@ -36,44 +33,92 @@ public class MessageInitFactory {
 		this.constants = constants;
 	}
 
-	public ForumMessage createMessageCore(Long messageId, Map map) {
-		ForumMessage forumMessage = null;
+//	public ForumMessage createMessageCore(Long messageId, Map map) {
+//		ForumMessage forumMessage = null;
+//		try {
+//			Long pID = (Long) map.get("parentMessageID");
+//			if (pID == null)
+//				forumMessage = new ForumMessage(messageId);
+//			else {
+//				forumMessage = new ForumMessageReply(messageId, new ForumMessage(pID));
+//			}
+//			Object o = map.get("userID");
+//			if (o != null) {
+//				com.jdon.jivejdon.model.Account account = new com.jdon.jivejdon.model.Account();
+//				account.setUserIdLong((Long) o);
+//				forumMessage.setAccount(account);
+//			} else {
+//				System.err.print("messageId=" + messageId + " no userID in DB");
+//				forumMessage.setAccount(createAnonymous());
+//			}
+//
+//			MessageVO messageVO = createMessageVOCore(messageId, map, forumMessage);
+//			forumMessage.setMessageVO(messageVO);
+//
+//			String saveDateTime = ((String) map.get("modifiedDate")).trim();
+//			String displayDateTime = constants.getDateTimeDisp(saveDateTime);
+//			forumMessage.setModifiedDate(Long.parseLong(saveDateTime));
+//
+//			saveDateTime = ((String) map.get("creationDate")).trim();
+//			displayDateTime = constants.getDateTimeDisp(saveDateTime);
+//			forumMessage.setCreationDate(displayDateTime);
+//			// get the formatter so later can transfer String to Date
+//
+//			ForumThread forumThread = new ForumThread();
+//			forumThread.setThreadId((Long) map.get("threadID"));
+//			forumMessage.setForumThread(forumThread);
+//
+//			Forum forum = new Forum();
+//			forum.setForumId((Long) map.get("forumID"));
+//			forumMessage.setForum(forum);
+//
+//			// lazy load
+//			// forumMessage.setPropertys(propertyDaoSql.getAllPropertys(Constants.MESSAGE,
+//			// messageId));
+//		} catch (Exception e) {
+//			System.err.println(e);
+//		} finally {
+//		}
+//		return forumMessage;
+//	}
+
+
+	public AnemicMessageDTO createAnemicMessage(Long messageId, Map map) {
+		AnemicMessageDTO messageCore = new AnemicMessageDTO(messageId);
 		try {
 			Long pID = (Long) map.get("parentMessageID");
-			if (pID == null)
-				forumMessage = new ForumMessage(messageId);
-			else {
-				forumMessage = new ForumMessageReply(messageId, new ForumMessage(pID));
-			}
+			messageCore.setParentMessage(new AnemicMessageDTO(pID));
+
 			Object o = map.get("userID");
 			if (o != null) {
 				com.jdon.jivejdon.model.Account account = new com.jdon.jivejdon.model.Account();
 				account.setUserIdLong((Long) o);
-				forumMessage.setAccount(account);
+				messageCore.setAccount(account);
 			} else {
 				System.err.print("messageId=" + messageId + " no userID in DB");
-				forumMessage.setAccount(createAnonymous());
+				messageCore.setAccount(createAnonymous());
 			}
 
-			MessageVO messageVO = createMessageVOCore(messageId, map, forumMessage);
-			forumMessage.setMessageVO(messageVO);
+			MessageVO messageVO = new MessageVO();
+			messageVO = messageVO.builder().subject((String) map.get("subject")).body((String) map.get("body")).build();
+			messageCore.setMessageVO(messageVO);
 
 			String saveDateTime = ((String) map.get("modifiedDate")).trim();
 			String displayDateTime = constants.getDateTimeDisp(saveDateTime);
-			forumMessage.setModifiedDate(Long.parseLong(saveDateTime));
+			messageCore.setModifiedDate(Long.parseLong(saveDateTime));
 
 			saveDateTime = ((String) map.get("creationDate")).trim();
 			displayDateTime = constants.getDateTimeDisp(saveDateTime);
-			forumMessage.setCreationDate(displayDateTime);
+			messageCore.setCreationDate(displayDateTime);
 			// get the formatter so later can transfer String to Date
 
 			ForumThread forumThread = new ForumThread();
 			forumThread.setThreadId((Long) map.get("threadID"));
-			forumMessage.setForumThread(forumThread);
+			messageCore.setForumThread(forumThread);
 
 			Forum forum = new Forum();
 			forum.setForumId((Long) map.get("forumID"));
-			forumMessage.setForum(forum);
+			messageCore.setForum(forum);
 
 			// lazy load
 			// forumMessage.setPropertys(propertyDaoSql.getAllPropertys(Constants.MESSAGE,
@@ -82,7 +127,7 @@ public class MessageInitFactory {
 			System.err.println(e);
 		} finally {
 		}
-		return forumMessage;
+		return messageCore;
 	}
 
 	public MessageVO createMessageVOCore(Long messageId, Map map, ForumMessage forumMessage) {
@@ -99,15 +144,12 @@ public class MessageInitFactory {
 	}
 
 	public ForumThread createThreadCore(Long threadId, Map map) {
-
 		ForumMessage rootforumMessage = new ForumMessage((Long) map.get("rootMessageID"));
-		ForumThread forumThread = new ForumThread(rootforumMessage);
-
-		try {
-			forumThread.setThreadId(threadId);
 
 			Forum forum = new Forum();
 			forum.setForumId((Long) map.get("forumID"));
+			ForumThread forumThread = new ForumThread(rootforumMessage, threadId,forum);
+
 			forumThread.setForum(forum);
 
 			// String saveDateTime = ((String) map.get("modifiedDate")).trim();
@@ -121,10 +163,7 @@ public class MessageInitFactory {
 
 			// forumThread.setPropertys(propertyDaoSql.getAllPropertys(Constants.THREAD,
 			// threadId));
-		} catch (Exception e) {
-			System.err.println(e);
-		} finally {
-		}
+
 		return forumThread;
 	}
 

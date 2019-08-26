@@ -34,16 +34,19 @@ import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
  */
 @Consumer("saveMessage")
 public class MessageSendEventBus implements DomainEventHandler {
-	private EventBusHandler eventBusHandler;
+	private final EventBusHandler eventBusHandler;
+	private final ForumFactory forumFactory;
 
 	public MessageSendEventBus(ForumFactory forumFactory, MessagePageIteratorSolver messagePageIteratorSolver) {
+		this.forumFactory = forumFactory;
 		eventBusHandler = new UpdateMessageEventHandler(forumFactory, messagePageIteratorSolver);
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 		// todo send to JMS or MQ
 		MessageUpdatedEvent es = (MessageUpdatedEvent) event.getDomainMessage().getEventSource();
-		eventBusHandler.refresh(es.getNewForumMessageInputparamter().getMessageId());
+		Long messageId = es.getNewForumMessageInputparamter().getMessageId();
+		eventBusHandler.refresh(this.forumFactory.getMessage(messageId));
 
 	}
 }

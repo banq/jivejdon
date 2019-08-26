@@ -16,6 +16,7 @@
 package com.jdon.jivejdon.model.dci;
 
 import com.jdon.domain.message.DomainMessage;
+import com.jdon.jivejdon.model.event.MessageRemoveCommand;
 import com.jdon.jivejdon.model.event.MessageRemovedEvent;
 import com.jdon.jivejdon.model.event.TopicMessageCreateCommand;
 import com.jdon.jivejdon.model.util.OneOneDTO;
@@ -41,10 +42,10 @@ public interface ThreadEventSourcingRole {
 
 	DomainMessage postReBlog(OneOneDTO oneOneDTO);
 
-	DomainMessage deleteMessage(MessageRemovedEvent event);
+	DomainMessage deleteMessage(MessageRemoveCommand event);
 
 	DomainMessage postThread(DomainMessage domainMessage);
 
-	DomainMessage delThread(DomainMessage domainMessage);
+	DomainMessage delThread(MessageRemovedEvent event);
 
 }

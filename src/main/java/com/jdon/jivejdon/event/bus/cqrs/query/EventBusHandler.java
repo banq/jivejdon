@@ -15,7 +15,9 @@
  */
 package com.jdon.jivejdon.event.bus.cqrs.query;
 
+import com.jdon.jivejdon.model.ForumMessage;
+
 public interface EventBusHandler {
 
-	public void refresh(Long forumMessageId);
+	public void refresh(ForumMessage forumMessage);
 }

@@ -18,11 +18,11 @@ package com.jdon.jivejdon.event.domain.consumer.write.delmessage;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.event.bus.cqrs.query.DelMessageEventHandler;
 import com.jdon.jivejdon.event.bus.cqrs.query.EventBusHandler;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.model.event.MessageRemovedEvent;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
 
@@ -41,26 +41,21 @@ public class RefreshThreadAction implements DomainEventHandler {
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
-		DomainMessage lastStepMessage = (DomainMessage) event.getDomainMessage().getEventSource();
-		Object lastStepOk = lastStepMessage.getBlockEventResult();
-		if (lastStepOk != null) {
-			Long delforumMessageId = (Long) lastStepOk;
-			reload(delforumMessageId);
-			// send to event bus to notify refresh view model
-			eventHandler.refresh(delforumMessageId);
-		}
+		MessageRemovedEvent messageRemovedEvent = (MessageRemovedEvent) event.getDomainMessage().getEventSource();
+		reload(messageRemovedEvent.getForumMessage());
+		// send to event bus to notify refresh view model
+		eventHandler.refresh(messageRemovedEvent.getForumMessage());
 
 	}
 
-	public void reload(Long delforumMessageId) {
+	public void reload(ForumMessage delforumMessage) {
 		try {
-			ForumMessage delforumMessage = forumAbstractFactory.getMessage(delforumMessageId);
 			// update memory
-			if (!delforumMessage.getForumThread().isRoot(delforumMessage)) {// this
+//			if (!delforumMessage.getForumThread().isRoot(delforumMessage)) {// this
 				// thread is be deleted only
 				ForumThread forumThread = delforumMessage.getForumThread();
 				this.forumAbstractFactory.reloadThreadState(forumThread);// refresh
-			} else
+//			} else
 				this.forumAbstractFactory.reloadhForumState(delforumMessage.getForum().getForumId());
 		} catch (Exception e) {
 			e.printStackTrace();

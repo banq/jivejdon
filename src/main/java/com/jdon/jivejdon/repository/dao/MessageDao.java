@@ -15,10 +15,9 @@
  */
 package com.jdon.jivejdon.repository.dao;
 
-import com.jdon.domain.model.cache.ModelKey;
 import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumMessageReply;
 import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.model.util.OneOneDTO;
 
@@ -28,16 +27,20 @@ import java.util.Collection;
  * @author <a href="mailto:banq@163.com">banq</a>
  */
 public interface MessageDao {
+//
+//	ForumMessage getMessageCore(ModelKey modelKey);
 
-	ForumMessage getMessageCore(ModelKey modelKey);
+	ForumMessage getForumMessageInjection(AnemicMessageDTO anemicMessageDTO);
+
+	public AnemicMessageDTO getAnemicMessage(Long messageId);
 
 	MessageVO getMessageVOCore(ForumMessage forumMessage);
 
-	void createMessage(ForumMessage forumMessage) throws Exception;
+	void createMessage(AnemicMessageDTO forumMessagePostDTO) throws Exception;
 
-	void createMessageReply(ForumMessageReply forumMessageReply) throws Exception;
+	void createMessageReply(AnemicMessageDTO forumMessageReply) throws Exception;
 
-	void updateMessage(ForumMessage forumMessage) throws Exception;
+	void updateMessage(AnemicMessageDTO forumMessage) throws Exception;
 
 	void deleteMessage(Long forumMessageId) throws Exception;
 

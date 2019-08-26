@@ -18,8 +18,11 @@ package com.jdon.jivejdon.event.domain.consumer.write.addReplyMessage;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
+import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumMessageReply;
 import com.jdon.jivejdon.model.event.ReplyMessageCreatedEvent;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.util.ContainerUtil;
 
 /**
@@ -34,22 +37,25 @@ import com.jdon.jivejdon.util.ContainerUtil;
 public class AddReplyMessageZ implements DomainEventHandler {
 
 	protected final ContainerUtil containerUtil;
+	protected final ForumFactory forumAbstractFactory;
 
-	public AddReplyMessageZ(ContainerUtil containerUtil) {
+	public AddReplyMessageZ(ContainerUtil containerUtil, ForumFactory forumAbstractFactory) {
 		super();
 		this.containerUtil = containerUtil;
+		this.forumAbstractFactory = forumAbstractFactory;
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 		ReplyMessageCreatedEvent es = (ReplyMessageCreatedEvent) event.getDomainMessage().getEventSource();
-		ForumMessageReply forumMessageReply = es.getForumMessageReplyDTO();
+		AnemicMessageDTO anemicMessageDTO = es.getForumMessageReplyDTO();
 		// change the forumMessageReply parameter DTO from commannd to like from
 		// repository
-		forumMessageReply.finishDTO();
+//		forumMessageReply.finishDTO();
 		event.getDomainMessage().clear();
-		containerUtil.addModeltoCache(forumMessageReply.getMessageId(), forumMessageReply);
+		ForumMessage forumMessageReply = forumAbstractFactory.getMessage(anemicMessageDTO.getMessageId());
+		containerUtil.addModeltoCache(anemicMessageDTO.getMessageId(), forumMessageReply);
 		//update state for Eventually consistent so MessageListNav2Action can find its state has
 		// updated
-		forumMessageReply.getForumThread().changeState(forumMessageReply);
+		forumMessageReply.getForumThread().changeState((ForumMessageReply) forumMessageReply);
 	}
 }

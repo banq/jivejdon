@@ -22,6 +22,7 @@ import com.jdon.controller.events.EventModel;
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.service.ForumMessageQueryService;
 
 import java.util.Optional;
@@ -31,9 +32,9 @@ public interface MessageKernelIF {
 	/**
 	 * get the full forum in forumMessage, and return it.
 	 */
-	public abstract ForumMessage initMessage(EventModel em);
+	public abstract AnemicMessageDTO initMessage(EventModel em);
 
-	public abstract ForumMessage initReplyMessage(EventModel em);
+	public abstract AnemicMessageDTO initReplyMessage(EventModel em);
 
 	/*
 	 * return a full ForumMessage need solve the relations with Forum
@@ -53,15 +54,15 @@ public interface MessageKernelIF {
 	public abstract Optional<ForumThread> getThread(Long threadId);
 
 	@Send("addreplyForumMessage")
-	public DomainMessage addreply(@Owner long threadId, @Receiver ForumMessage parentforumMessage, ForumMessage newForumMessageInputparamter);
+	public DomainMessage addreply(@Owner long threadId, @Receiver ForumMessage parentforumMessage, AnemicMessageDTO newForumMessageInputparamter);
 
 	@Send("updateForumMessage")
-	public DomainMessage update(@Owner long threadId, @Receiver ForumMessage oldforumMessage, ForumMessage newForumMessageInputparamter);
+	public DomainMessage update(@Owner long threadId, @Receiver ForumMessage oldforumMessage, AnemicMessageDTO newForumMessageInputparamter);
 
 	/*
 	 * delete a message and not inlcude its childern
 	 */
-	public abstract void deleteMessage(ForumMessage delforumMessage) throws Exception;
+	public abstract void deleteMessage(AnemicMessageDTO delforumMessage) throws Exception;
 
 	public abstract void deleteUserMessages(String username) throws Exception;
 

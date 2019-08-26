@@ -35,13 +35,16 @@ import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
 @Consumer("addReplyMessage")
 public class AddReplyMessageSendEventBus implements DomainEventHandler {
 	private final EventBusHandler eventBusHandler;
+	private final ForumFactory forumFactory;
 
 	public AddReplyMessageSendEventBus(ForumFactory forumFactory, MessagePageIteratorSolver messagePageIteratorSolver) {
+		this.forumFactory = forumFactory;
 		eventBusHandler = new AddReplyMessageEventHandler(forumFactory, messagePageIteratorSolver);
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 		ReplyMessageCreatedEvent es = (ReplyMessageCreatedEvent) event.getDomainMessage().getEventSource();
-		eventBusHandler.refresh(es.getForumMessageReplyDTO().getMessageId());
+		Long messageId = es.getForumMessageReplyDTO().getMessageId();
+		eventBusHandler.refresh(this.forumFactory.getMessage(messageId));
 	}
 }

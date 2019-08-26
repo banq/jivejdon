@@ -30,8 +30,7 @@ public class UpdateMessageEventHandler implements EventBusHandler {
 	}
 
 	@Override
-	public void refresh(Long forumMessageId) {
-		ForumMessage forumMessage = forumAbstractFactory.getMessage(forumMessageId);
+	public void refresh(ForumMessage forumMessage) {
 		messagePageIteratorSolver.clearPageIteratorSolver(forumMessage.getForumThread().getThreadId().toString());
 
 	}

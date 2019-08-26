@@ -4,42 +4,53 @@ import com.jdon.jivejdon.model.Account;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.attachment.AttachmentsVO;
+import com.jdon.jivejdon.model.proptery.MessagePropertysVO;
+import org.compass.annotations.Searchable;
+import org.compass.annotations.SearchableComponent;
+import org.compass.annotations.SearchableId;
+import org.compass.annotations.SearchableReference;
 
 /**
+ * ForumMessage DTO, it is a anemic model
  * used for presentation MessageForm
  * and for persistence MessageCore of jiveMessage database table
  */
-public class AnemicMessage {
+@Searchable
+public class AnemicMessageDTO {
+    @SearchableId
     private Long messageId;
     private String creationDate;
     private long modifiedDate;
     private ForumThread forumThread;
+    @SearchableReference
     private Forum forum;
     private Account account;
+    @SearchableComponent
     private MessageVO messageVO;
-    private AnemicMessage parentMessage;
+    private AnemicMessageDTO parentMessage;
     // for upload files
     private AttachmentsVO attachment;;
+    private MessagePropertysVO messagePropertysVO;
+    private Account operator; // operator this message,maybe Admin or others;
     private boolean authenticated = true;// default true
 
     // not let messageVo be Filtered , it should be save to DB.
     private boolean messageVOFiltered = true;
     private boolean masked;
     private boolean replyNotify;
-    private String[] tagTitles;
+    //for messageForm inject
+    private String[] tagTitle;
 
-    public AnemicMessage() {
+    public AnemicMessageDTO() {
         messageVO = new MessageVO();
 
         forum = new Forum(); // for parameter forum.forumId=xxx
         forumThread = new ForumThread();
         account = new Account();
-        parentMessage = new AnemicMessage();
-
         forumThread = new ForumThread();
     }
 
-    public AnemicMessage(Long messageId) {
+    public AnemicMessageDTO(Long messageId) {
        super();
        this.messageId = messageId;
     }
@@ -93,11 +104,11 @@ public class AnemicMessage {
         this.account = account;
     }
 
-    public AnemicMessage getParentMessage() {
+    public AnemicMessageDTO getParentMessage() {
         return parentMessage;
     }
 
-    public void setParentMessage(AnemicMessage parentMessage) {
+    public void setParentMessage(AnemicMessageDTO parentMessage) {
         this.parentMessage = parentMessage;
     }
 
@@ -149,13 +160,29 @@ public class AnemicMessage {
         this.replyNotify = replyNotify;
     }
 
-    public String[] getTagTitles() {
-        return tagTitles;
+    public String[] getTagTitle() {
+        return tagTitle;
     }
 
-    public void setTagTitles(String[] tagTitles) {
-        this.tagTitles = tagTitles;
+    public void setTagTitle(String[] tagTitle) {
+        this.tagTitle = tagTitle;
     }
 
 
+
+    public MessagePropertysVO getMessagePropertysVO() {
+        return messagePropertysVO;
+    }
+
+    public void setMessagePropertysVO(MessagePropertysVO messagePropertysVO) {
+        this.messagePropertysVO = messagePropertysVO;
+    }
+
+    public Account getOperator() {
+        return operator;
+    }
+
+    public void setOperator(Account operator) {
+        this.operator = operator;
+    }
 }

@@ -15,18 +15,18 @@
  */
 package com.jdon.jivejdon.model.event;
 
-import com.jdon.jivejdon.model.ForumMessageReply;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 
 public class ReplyMessageCreatedEvent {
 
-	private final ForumMessageReply forumMessageReplyDTO;
+	private final AnemicMessageDTO forumMessageReplyDTO;
 
-	public ReplyMessageCreatedEvent(ForumMessageReply forumMessageReplyDTO) {
+	public ReplyMessageCreatedEvent(AnemicMessageDTO forumMessageReplyDTO) {
 		super();
 		this.forumMessageReplyDTO = forumMessageReplyDTO;
 	}
 
-	public ForumMessageReply getForumMessageReplyDTO() {
+	public AnemicMessageDTO getForumMessageReplyDTO() {
 		return forumMessageReplyDTO;
 	}
 

@@ -15,16 +15,15 @@
  */
 package com.jdon.jivejdon.event.domain.consumer.write.updatemessage;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
 import com.jdon.jivejdon.event.domain.consumer.write.MessageTransactionPersistence;
-import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.event.MessageUpdatedEvent;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.repository.ForumFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Consumer("saveMessage")
 public class MessageSaveListener implements DomainEventHandler {
@@ -41,7 +40,7 @@ public class MessageSaveListener implements DomainEventHandler {
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 		MessageUpdatedEvent es = (MessageUpdatedEvent) event.getDomainMessage().getEventSource();
-		ForumMessage newForumMessageInputparamter = es.getNewForumMessageInputparamter();
+		AnemicMessageDTO newForumMessageInputparamter = es.getNewForumMessageInputparamter();
 		if (newForumMessageInputparamter == null)
 			return;
 		try {

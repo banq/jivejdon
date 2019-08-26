@@ -4,9 +4,9 @@ import com.jdon.annotation.Component;
 import com.jdon.annotation.model.OnEvent;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumMessageReply;
-import com.jdon.jivejdon.model.event.MessageRemovedEvent;
+import com.jdon.jivejdon.model.event.MessageRemoveCommand;
 import com.jdon.jivejdon.model.event.TopicMessageCreateCommand;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.util.OneOneDTO;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.TagRepository;
@@ -34,9 +34,9 @@ public class MessageTransactionPersistence {
 	}
 
 	@OnEvent("postTopicMessageCommand")
-	public ForumMessage insertTopicMessage(TopicMessageCreateCommand command) {
+	public AnemicMessageDTO insertTopicMessage(TopicMessageCreateCommand command) {
 		logger.debug("enter createTopicMessage");
-		ForumMessage forumMessagePostDTO = command.getForumMessageDTO();
+		AnemicMessageDTO forumMessagePostDTO = command.getForumMessageDTO();
 		try {
 //			Thread.sleep(5000);
 			jtaTransactionUtil.beginTransaction();
@@ -59,7 +59,7 @@ public class MessageTransactionPersistence {
 	 * @param forumMessageReplyPostDTO
 	 * @throws Exception
 	 */
-	public void insertReplyMessage(ForumMessageReply forumMessageReplyPostDTO) throws Exception {
+	public void insertReplyMessage(AnemicMessageDTO forumMessageReplyPostDTO) throws Exception {
 		logger.debug("enter createReplyMessage");
 		if ((forumMessageReplyPostDTO.getParentMessage() == null) || (forumMessageReplyPostDTO.getParentMessage().getMessageId() == null)) {
 			logger.error("parentMessage is null, this is not reply message!");
@@ -80,7 +80,7 @@ public class MessageTransactionPersistence {
 
 	}
 
-	public void updateMessage(ForumMessage newForumMessageInputparamter) throws Exception {
+	public void updateMessage(AnemicMessageDTO newForumMessageInputparamter) throws Exception {
 
 		logger.debug("enter updateMessage");
 		try {
@@ -131,7 +131,7 @@ public class MessageTransactionPersistence {
 	}
 
 	@OnEvent("deleteMessage")
-	public Long deleteMessage(MessageRemovedEvent event) throws Exception {
+	public Long deleteMessage(MessageRemoveCommand event) throws Exception {
 		logger.debug("enter deleteMessage");
 		Long messageId = event.getMessageId();
 		ForumMessage delforumMessage = forumAbstractFactory.getMessage(messageId);

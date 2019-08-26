@@ -15,11 +15,11 @@
  */
 package com.jdon.jivejdon.model.event;
 
-public class MessageRemovedEvent {
+public class MessageRemoveCommand {
 
 	private final long messageId;
 
-	public MessageRemovedEvent(long messageId) {
+	public MessageRemoveCommand(long messageId) {
 		super();
 		this.messageId = messageId;
 	}

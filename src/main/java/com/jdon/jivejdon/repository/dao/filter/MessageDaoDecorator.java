@@ -17,10 +17,11 @@ package com.jdon.jivejdon.repository.dao.filter;
 
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.pointcut.Around;
-import com.jdon.domain.model.cache.ModelKey;
 import com.jdon.jivejdon.Constants;
 import com.jdon.jivejdon.model.ForumMessage;
+import com.jdon.jivejdon.model.ForumMessageReply;
 import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.repository.builder.MessageInitFactory;
 import com.jdon.jivejdon.repository.dao.AccountDao;
 import com.jdon.jivejdon.repository.dao.PropertyDao;
@@ -51,9 +52,16 @@ public class MessageDaoDecorator extends MessageDaoSql {
 	 * active the cache
 	 */
 	@Around()
-	public ForumMessage getMessageCore(ModelKey modelKey) {
-		ForumMessage message = super.getMessageCore((Long) modelKey.getDataKey());
-		return message;
+	public ForumMessage getForumMessageInjection(AnemicMessageDTO anemicMessageDTO) {
+		if (anemicMessageDTO.getParentMessage() != null && anemicMessageDTO.getParentMessage().getMessageId() != null)
+			return  new ForumMessageReply(anemicMessageDTO.getMessageId(), new ForumMessage(anemicMessageDTO.getParentMessage().getMessageId()));
+		else
+			return new ForumMessage(anemicMessageDTO.getMessageId());
+	}
+
+
+	public AnemicMessageDTO getAnemicMessage(Long messageId) {
+		return  super.getAnemicMessage(messageId);
 	}
 
 	@Around()
@@ -61,9 +69,9 @@ public class MessageDaoDecorator extends MessageDaoSql {
 		return super.getThreadCore(threadId);
 	}
 
-	public void createMessage(ForumMessage forumMessage) throws Exception {
-		super.createMessage(forumMessage);// db
-		messageSearchProxy.createMessageTimer(forumMessage);//
+	public void createMessage(AnemicMessageDTO forumMessagePostDTO) throws Exception {
+		super.createMessage(forumMessagePostDTO);// db
+		messageSearchProxy.createMessageTimer(forumMessagePostDTO);//
 	}
 
 	/**

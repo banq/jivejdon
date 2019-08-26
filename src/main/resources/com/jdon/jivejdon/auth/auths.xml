@@ -13,7 +13,7 @@
 							
 				
         <component name="permissionXmlParser" class="com.jdon.jivejdon.auth.PermissionXmlParser" >
-		  <constructor value="com.jdon.jivejdon.model.auth.jivejdon_permission.xml"/>
+		  <constructor value="com.jdon.jivejdon.auth.jivejdon_permission.xml"/>
         </component>  
 	    <!--  business components  end-->		
 	

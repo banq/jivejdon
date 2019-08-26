@@ -26,6 +26,7 @@ import com.jdon.jivejdon.event.domain.producer.write.LobbyPublisherRole;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.ThreadTag;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.realtime.ForumMessageDTO;
 import com.jdon.jivejdon.model.realtime.LobbyPublisherRoleIF;
 import com.jdon.jivejdon.model.realtime.Notification;
@@ -57,7 +58,7 @@ public class ThreadPostListener implements DomainEventHandler {
 		Object lastStepOk = lastStepMessage.getBlockEventResult();
 		if (lastStepOk != null) {
 			// the forumMessage is input DTO
-			ForumMessage forumMessageInputDTO = (ForumMessage) lastStepOk;
+			AnemicMessageDTO forumMessageInputDTO = (AnemicMessageDTO) lastStepOk;
 			boolean isReplyNotifyForAuthor = forumMessageInputDTO.isReplyNotify();
 
 			// get the true forumMessage.
@@ -67,7 +68,7 @@ public class ThreadPostListener implements DomainEventHandler {
 			messageNotifyAction(isReplyNotifyForAuthor, forumMessage);
 
 			// if there is a event bus server, rewrite this code:
-			eventHandler.refresh(forumMessageInputDTO.getMessageId());
+			eventHandler.refresh(forumMessage);
 		}
 
 	}

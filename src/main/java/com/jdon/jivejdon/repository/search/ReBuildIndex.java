@@ -1,16 +1,16 @@
 package com.jdon.jivejdon.repository.search;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.ForumMessage;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
 import com.jdon.model.query.PageIteratorSolver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class ReBuildIndex implements Runnable {
 	private final static Logger logger = LogManager.getLogger(ReBuildIndex.class);
@@ -63,7 +63,13 @@ public class ReBuildIndex implements Runnable {
 			while (pi.hasNext()) {
 				Long messageId = (Long) pi.next();
 				ForumMessage message = forumAbstractFactory.getMessage(messageId);
-				addMessage(message);
+				AnemicMessageDTO anemicMessageDTO = new AnemicMessageDTO();
+				anemicMessageDTO.setMessageId(message.getMessageId());
+				anemicMessageDTO.setForum(message.getForum());
+				anemicMessageDTO.setAccount(message.getAccount());
+				anemicMessageDTO.setMessageVO(message.getMessageVO());
+				anemicMessageDTO.setForumThread(message.getForumThread());
+				addMessage(anemicMessageDTO);
 			}
 			if (found)
 				break;
@@ -74,7 +80,7 @@ public class ReBuildIndex implements Runnable {
 
 	}
 
-	private void addMessage(ForumMessage message) {
+	private void addMessage(AnemicMessageDTO message) {
 		try {
 			messageSearchProxy.createMessage(message);
 		} catch (Exception e) {

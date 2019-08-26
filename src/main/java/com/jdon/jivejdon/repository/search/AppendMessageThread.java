@@ -15,25 +15,24 @@
  */
 package com.jdon.jivejdon.repository.search;
 
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumMessageReply;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 
 public class AppendMessageThread extends Thread {
 
-	private ForumMessage forumMessage;
+	private AnemicMessageDTO forumMessage;
 
 	private MessageSearchProxy messageSearchProxy;
 
-	public AppendMessageThread(ForumMessage forumMessage) {
+	public AppendMessageThread(AnemicMessageDTO forumMessage) {
 		super();
 		this.forumMessage = forumMessage;
 	}
 
 	public void run() {
 		if (messageSearchProxy != null) {
-			if (forumMessage instanceof ForumMessageReply)
-				messageSearchProxy.createMessageReply((ForumMessageReply) forumMessage);
-			else
+//			if (forumMessage instanceof ForumMessageReply)
+//				messageSearchProxy.createMessageReply((ForumMessageReply) forumMessage);
+//			else
 				messageSearchProxy.createMessage(forumMessage);
 		}
 

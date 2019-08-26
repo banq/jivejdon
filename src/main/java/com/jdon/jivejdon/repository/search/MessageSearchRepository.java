@@ -15,22 +15,22 @@
  */
 package com.jdon.jivejdon.repository.search;
 
-import java.util.Collection;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumMessageReply;
+import java.util.Collection;
 
 public interface MessageSearchRepository {
 
-	public abstract void createMessage(ForumMessage forumMessage);
+	public abstract void createMessage(AnemicMessageDTO forumMessage);
 
-	public abstract void createMessageReply(ForumMessageReply forumMessageReply);
+//
+//	public abstract void createMessageReply(AnemicMessageDTO forumMessageReply);
 
-	public void createMessageTimer(ForumMessage forumMessage);
+	public void createMessageTimer(AnemicMessageDTO forumMessage);
 
-	public void createMessageReplyTimer(ForumMessageReply forumMessageReply);
+	public void createMessageReplyTimer(AnemicMessageDTO forumMessageReply);
 
-	public abstract void updateMessage(ForumMessage forumMessage);
+	public abstract void updateMessage(AnemicMessageDTO forumMessage);
 
 	public abstract void deleteMessage(Long forumMessageId);
 

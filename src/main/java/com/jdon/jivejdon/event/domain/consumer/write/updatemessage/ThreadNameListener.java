@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.event.domain.consumer.write;
+package com.jdon.jivejdon.event.domain.consumer.write.updatemessage;
 
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
@@ -11,6 +11,7 @@ import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
 import com.jdon.jivejdon.repository.builder.ForumAbstractFactory;
 import com.jdon.jivejdon.repository.builder.MessageRepositoryDao;
 import com.jdon.jivejdon.repository.builder.ThreadRepositoryDao;
+import com.jdon.jivejdon.util.ContainerUtil;
 
 import java.util.Optional;
 
@@ -25,12 +26,15 @@ public class ThreadNameListener implements DomainEventHandler {
 
 	private final EventBusHandler eventBusHandler;
 
+	protected final ContainerUtil containerUtil;
+
 	public ThreadNameListener(ThreadRepositoryDao threadRepositoryDao, MessageRepositoryDao
-			messageRepositoryDao, ForumAbstractFactory forumAbstractFactory, MessagePageIteratorSolver messagePageIteratorSolver) {
+			messageRepositoryDao, ForumAbstractFactory forumAbstractFactory, MessagePageIteratorSolver messagePageIteratorSolver, ContainerUtil containerUtil) {
 		super();
 		this.threadRepositoryDao = threadRepositoryDao;
 		this.messageRepositoryDao = messageRepositoryDao;
 		this.forumAbstractFactory = forumAbstractFactory;
+		this.containerUtil = containerUtil;
 		this.eventBusHandler = new UpdateMessageEventHandler( forumAbstractFactory, messagePageIteratorSolver);
 	}
 
@@ -41,7 +45,8 @@ public class ThreadNameListener implements DomainEventHandler {
 		Optional<ForumThread> forumThreadOptional = forumAbstractFactory.getThread(threadId);
 		try {
 			threadRepositoryDao.updateThreadName(es.getName(), forumThreadOptional.get());
-			eventBusHandler.refresh(forumThreadOptional.get().getRootMessage().getMessageId());
+			containerUtil.clearCache(forumThreadOptional.get().getRootMessage().getMessageId());
+			eventBusHandler.refresh(forumThreadOptional.get().getRootMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

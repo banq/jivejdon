@@ -16,6 +16,11 @@
 package com.jdon.jivejdon.model;
 
 import com.jdon.annotation.Model;
+import com.jdon.jivejdon.model.attachment.UploadFile;
+import com.jdon.jivejdon.model.message.FilterPipleSpec;
+import com.jdon.jivejdon.model.message.MessageVO;
+
+import java.util.Collection;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -50,11 +55,22 @@ public final class ForumMessageReply extends ForumMessage {
 	 * @param parentMessage
 	 *            The parentMessage to set.
 	 */
-	public void setParentMessage(ForumMessage parentMessage) {
+	private void setParentMessage(ForumMessage parentMessage) {
 		this.parentMessage = parentMessage;
 	}
 
 	public boolean isRoot() {
 		return false;
 	}
+
+	public void build(long messageId, MessageVO messageVO, Forum
+			forum, ForumThread forumThread, Account account, String creationDate, long modifiedDate , FilterPipleSpec filterPipleSpec,
+					  Collection<UploadFile> uploads, Collection<Property>
+							  props, ForumMessage parentMessage) {
+		super.build(messageId, messageVO, forum, forumThread, account,
+				creationDate,  modifiedDate, filterPipleSpec, uploads, props);
+		this.setParentMessage(parentMessage);
+
+	}
+
 }

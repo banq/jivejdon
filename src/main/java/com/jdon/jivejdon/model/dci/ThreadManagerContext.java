@@ -22,8 +22,10 @@ import com.jdon.domain.dci.RoleAssigner;
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.event.domain.producer.write.ThreadEventSourcingRoleImpl;
 import com.jdon.jivejdon.model.ForumMessage;
+import com.jdon.jivejdon.model.event.MessageRemoveCommand;
 import com.jdon.jivejdon.model.event.MessageRemovedEvent;
 import com.jdon.jivejdon.model.event.TopicMessageCreateCommand;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.util.OneOneDTO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -64,7 +66,7 @@ public class ThreadManagerContext implements Startable {
 		return false;
 	}
 
-	public void post(ForumMessage forumMessageInputDTO) {
+	public void post(AnemicMessageDTO forumMessageInputDTO) {
 
 		// 1. create a root message of a new thread, topic message
 		ThreadEventSourcingRole eventSourcingRole = (ThreadEventSourcingRole) roleAssinger.assign(forumMessageInputDTO,
@@ -90,11 +92,11 @@ public class ThreadManagerContext implements Startable {
 
 	public void delete(ForumMessage delforumMessage) {
 		ThreadEventSourcingRole eventSourcingRole = (ThreadEventSourcingRole) roleAssinger.assign(delforumMessage, new ThreadEventSourcingRoleImpl());
-		DomainMessage domainMessage = eventSourcingRole.deleteMessage(new MessageRemovedEvent(delforumMessage.getMessageId()));
+		DomainMessage domainMessage = eventSourcingRole.deleteMessage(new MessageRemoveCommand(delforumMessage.getMessageId()));
 		transactions.put(delforumMessage.getMessageId(), domainMessage);
 
 		ThreadEventSourcingRole threadRole = (ThreadEventSourcingRole) roleAssinger.assign(delforumMessage, new ThreadEventSourcingRoleImpl());
-		threadRole.delThread(domainMessage);
+		threadRole.delThread(new MessageRemovedEvent(delforumMessage));
 
 	}
 

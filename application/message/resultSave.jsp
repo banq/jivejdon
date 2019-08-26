@@ -6,16 +6,16 @@
 
 
 <bean:define id="messageId" name="messageForm" property="messageId"/>
-<bean:define id="forum" name="messageForm" property="forum.forumId"/>
 <bean:define id="action" name="messageForm" property="action"/>
 
 
 <logic:messagesNotPresent>
     <logic:empty name="errors">
         <logic:notEqual name="action" value="delete">
+
           帖子保存成功
           <script>
-              window.top.location.href = '<%=request.getContextPath()%>/forum/messageNavList.shtml?message=<bean:write name="messageId" />&forum=<bean:write name="forum" />';
+              window.top.location.href = '<%=request.getContextPath()%>/forum/messageNavList.shtml?message=<bean:write name="messageId" />&forum=<bean:write name="messageForm" property="forum.forumId" />';
           </script>
         </logic:notEqual>
         <logic:equal name="action" value="delete">

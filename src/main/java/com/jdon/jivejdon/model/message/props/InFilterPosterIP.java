@@ -15,7 +15,6 @@
  */
 package com.jdon.jivejdon.model.message.props;
 
-import com.jdon.jivejdon.model.Account;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.util.Debug;
 
@@ -46,13 +45,8 @@ public class InFilterPosterIP implements Function<MessageVO, MessageVO> {
 	}
 
 	public String applyFilteredBody(MessageVO messageVO) {
-		Account modifier = messageVO.getForumMessage().getOperator();
-		if (modifier == null) {
-			Debug.logVerbose("poster is null ", module);
-			return messageVO.getBody();
-		}
 		StringBuilder buffer = new StringBuilder(messageVO.getBody());
-		buffer.append("\n");
+//		buffer.append("\n");
 		long now = System.currentTimeMillis();
 		String displayDateTime = dateTime_formatter.format(new Date(now));
 

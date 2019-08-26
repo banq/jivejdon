@@ -1,20 +1,14 @@
 package com.jdon.jivejdon.repository.search;
 
 import com.jdon.container.pico.Startable;
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumMessageReply;
-import com.jdon.jivejdon.model.message.MessageVO;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.query.MessageSearchSpec;
 import com.jdon.jivejdon.repository.dao.sql.MessageUtilSQL;
 import com.jdon.jivejdon.util.ThreadTimer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.compass.annotations.config.CompassAnnotationsConfiguration;
-import org.compass.core.Compass;
-import org.compass.core.CompassException;
-import org.compass.core.CompassHits;
-import org.compass.core.CompassSession;
-import org.compass.core.CompassTransaction;
+import org.compass.core.*;
 import org.compass.core.config.CompassConfiguration;
 import org.compass.core.config.CompassEnvironment;
 import org.compass.core.config.ConfigurationException;
@@ -64,7 +58,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 			config.setSetting("compass.engine.highlighter.default.formatter.simple.pre", "<font color=CC0033>");
 			config.setSetting("compass.engine.highlighter.default.formatter.simple.post", "</font>");
 			config.setSetting("compass.engine.optimizer.schedule.period", "3600");
-			config.addClass(com.jdon.jivejdon.model.ForumMessage.class);
+			config.addClass(com.jdon.jivejdon.model.message.AnemicMessageDTO.class);
 			config.addClass(com.jdon.jivejdon.model.Forum.class);
 			config.addClass(com.jdon.jivejdon.model.message.MessageVO.class);
 			compass = config.buildCompass();
@@ -81,13 +75,13 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 		}
 	}
 
-	public void createMessageTimer(ForumMessage forumMessage) {
+	public void createMessageTimer(AnemicMessageDTO forumMessage) {
 		AppendMessageThread thread = new AppendMessageThread(forumMessage);
 		thread.setMessageSearchProxy(this);
 		threadTimer.offer(thread);
 	}
 
-	public void createMessageReplyTimer(ForumMessageReply forumMessageReply) {
+	public void createMessageReplyTimer(AnemicMessageDTO forumMessageReply) {
 		AppendMessageThread thread = new AppendMessageThread(forumMessageReply);
 		thread.setMessageSearchProxy(this);
 		threadTimer.offer(thread);
@@ -100,8 +94,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 	 * com.jdon.jivejdon.repository.search.MessageSearchRepository#createMessage
 	 * (com.jdon.jivejdon.model.ForumMessage)
 	 */
-	@Override
-	public void createMessage(ForumMessage forumMessage) {
+	public void createMessage(AnemicMessageDTO forumMessage) {
 		logger.debug("MessageSearchProxy.createMessage");
 		if (forumMessage == null) {
 			logger.error("forumMessage is null");
@@ -123,36 +116,37 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.jdon.jivejdon.repository.search.MessageSearchRepository#
-	 * createMessageReply(com.jdon.jivejdon.model.ForumMessageReply)
-	 */
-	@Override
-	public void createMessageReply(ForumMessageReply forumMessageReply) {
-		logger.debug("MessageSearchProxy.createMessageReply");
-		if (forumMessageReply == null) {
-			logger.error("forumMessageReply is null");
-			return;
-		}
 
-		CompassSession session = compass.openSession();
-		CompassTransaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			session.save(forumMessageReply);
-			tx.commit();
-		} catch (SearchEngineException ex) {
-
-		} catch (Exception ce) {
-			if (tx != null)
-				tx.rollback();
-			logger.error(ce);
-		} finally {
-			session.close();
-		}
-	}
+//	/*
+//	 * (non-Javadoc)
+//	 *
+//	 * @see com.jdon.jivejdon.repository.search.MessageSearchRepository#
+//	 * createMessageReply(com.jdon.jivejdon.model.ForumMessageReply)
+//	 */
+//	@Override
+//	public void createMessageReply(ForumMessageReply forumMessageReply) {
+//		logger.debug("MessageSearchProxy.createMessageReply");
+//		if (forumMessageReply == null) {
+//			logger.error("forumMessageReply is null");
+//			return;
+//		}
+//
+//		CompassSession session = compass.openSession();
+//		CompassTransaction tx = null;
+//		try {
+//			tx = session.beginTransaction();
+//			session.save(forumMessageReply);
+//			tx.commit();
+//		} catch (SearchEngineException ex) {
+//
+//		} catch (Exception ce) {
+//			if (tx != null)
+//				tx.rollback();
+//			logger.error(ce);
+//		} finally {
+//			session.close();
+//		}
+//	}
 
 	/*
 	 * (non-Javadoc)
@@ -161,8 +155,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 	 * com.jdon.jivejdon.repository.search.MessageSearchRepository#updateMessage
 	 * (com.jdon.jivejdon.model.ForumMessage)
 	 */
-	@Override
-	public void updateMessage(ForumMessage forumMessage) {
+	public void updateMessage(AnemicMessageDTO forumMessage) {
 		logger.debug("MessageSearchProxy.updateMessage");
 		if (forumMessage == null) {
 			logger.error("forumMessage is null");
@@ -172,12 +165,8 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 		CompassSession session = compass.openSession();
 		CompassTransaction tx = null;
 		try {
-			ForumMessage messageS = (ForumMessage) session.load(ForumMessage.class, forumMessage.getMessageId());
-			MessageVO messageVOClone = forumMessage.getMessageVOClone();
-			MessageVO mVO = messageS.messageVOBuilder().subject(messageVOClone.getSubject())
-					.body(messageVOClone.getBody())
-					.build();
-			messageS.setMessageVO(mVO);
+			AnemicMessageDTO messageS = (AnemicMessageDTO) session.load(AnemicMessageDTO.class, forumMessage.getMessageId());
+			messageS.setMessageVO(forumMessage.getMessageVO());
 			tx = session.beginTransaction();
 			session.save(messageS);
 			tx.commit();
@@ -211,7 +200,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 		CompassTransaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			ForumMessage messageS = (ForumMessage) session.load(ForumMessage.class, forumMessageId);
+			AnemicMessageDTO messageS = (AnemicMessageDTO) session.load(AnemicMessageDTO.class, forumMessageId);
 			session.delete(messageS);
 			tx.commit();
 		} catch (Exception ce) {
@@ -247,7 +236,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 
 			for (int i = start; i < end; i++) {
 				logger.debug("create  messageSearchSpec collection");
-				ForumMessage smessage = (ForumMessage) hits.data(i);
+				AnemicMessageDTO smessage = (AnemicMessageDTO) hits.data(i);
 				messageSearchSpec = new MessageSearchSpec();
 				messageSearchSpec.setMessageId(smessage.getMessageId());
 
@@ -326,7 +315,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 				if (i >= hits.getLength())
 					break;
 				logger.debug("create  messageSearchSpec collection");
-				ForumMessage smessage = (ForumMessage) hits.data(i);
+				AnemicMessageDTO smessage = (AnemicMessageDTO) hits.data(i);
 				messageSearchSpec = getMessageSearchSpec(smessage.getMessageId());
 				if (messageSearchSpec.isRoot()) {
 					messageSearchSpec.setMessageId(smessage.getMessageId());
@@ -362,7 +351,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 			if (i >= hits.getLength())
 				break;
 			logger.debug("create  messageSearchSpec collection");
-			ForumMessage smessage = (ForumMessage) hits.data(i);
+			AnemicMessageDTO smessage = (AnemicMessageDTO) hits.data(i);
 			messageSearchSpec = getMessageSearchSpec(smessage.getMessageId());
 			if (messageSearchSpec.isRoot()) {
 				j++;

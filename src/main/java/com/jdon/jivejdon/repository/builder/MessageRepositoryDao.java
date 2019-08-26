@@ -19,8 +19,8 @@ import com.jdon.jivejdon.Constants;
 import com.jdon.jivejdon.manager.MessageDeletor;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumMessageReply;
 import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.util.OneOneDTO;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.MessageRepository;
@@ -72,7 +72,7 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	 * com.jdon.jivejdon.repository.MessageRepository#createTopicMessage(com
 	 * .jdon.jivejdon.model.ForumMessage)
 	 */
-	public void createTopicMessage(ForumMessage forumMessagePostDTO) throws Exception {
+	public void createTopicMessage(AnemicMessageDTO forumMessagePostDTO) throws Exception {
 		ForumThread forumThread = super.initThread(forumMessagePostDTO);
 		try {
 			logger.debug(" enter service: createMessage ");
@@ -92,8 +92,7 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 
 			// tag title can be updated between in thread with repository
 			// so it can be used in model ForumThread's changetags method
-			tagRepository.saveTagTitle(forumThread.getThreadId(), forumMessagePostDTO
-					.getTagTitle());
+			tagRepository.saveTagTitle(forumThread.getThreadId(), forumMessagePostDTO.getTagTitle());
 
 		} catch (Exception e) {
 			try {
@@ -118,7 +117,7 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	 * com.jdon.jivejdon.repository.MessageRepository#createReplyMessage(com
 	 * .jdon.jivejdon.model.ForumMessageReply)
 	 */
-	public void createReplyMessage(ForumMessageReply forumMessageReplyPostDTO) throws Exception {
+	public void createReplyMessage(AnemicMessageDTO forumMessageReplyPostDTO) throws Exception {
 		try {
 			logger.debug(" enter service: createReplyMessage ....");
 
@@ -151,7 +150,7 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	 * com.jdon.jivejdon.repository.MessageRepository#updateMessage(com.jdon
 	 * .jivejdon.model.ForumMessage)
 	 */
-	public void updateMessage(ForumMessage newForumMessageInputparamter) throws Exception {
+	public void updateMessage(AnemicMessageDTO newForumMessageInputparamter) throws Exception {
 		logger.debug(" enter updateMessage id =" + newForumMessageInputparamter.getMessageId());
 		try {
 

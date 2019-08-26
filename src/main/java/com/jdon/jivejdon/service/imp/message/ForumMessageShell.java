@@ -24,15 +24,10 @@ import com.jdon.jivejdon.Constants;
 import com.jdon.jivejdon.auth.NoPermissionException;
 import com.jdon.jivejdon.auth.ResourceAuthorization;
 import com.jdon.jivejdon.manager.filter.InFilterManager;
-import com.jdon.jivejdon.model.Account;
-import com.jdon.jivejdon.model.Forum;
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumMessageReply;
-import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.model.Property;
+import com.jdon.jivejdon.model.*;
 import com.jdon.jivejdon.model.attachment.AttachmentsVO;
 import com.jdon.jivejdon.model.dci.ThreadManagerContext;
-import com.jdon.jivejdon.model.message.MessageVO;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.message.output.RenderingFilterManager;
 import com.jdon.jivejdon.model.proptery.MessagePropertysVO;
 import com.jdon.jivejdon.repository.ForumFactory;
@@ -71,7 +66,7 @@ public class ForumMessageShell implements ForumMessageService {
 	protected SessionContext sessionContext;
 
 	public ForumMessageShell(SessionContextUtil sessionContextUtil, ResourceAuthorization messageServiceAuth, InFilterManager inFilterManager,
-			MessageKernelIF messageKernel, UploadService uploadService, ForumFactory forumBuilder, RenderingFilterManager renderingFilterManager,
+							 MessageKernelIF messageKernel, UploadService uploadService, ForumFactory forumBuilder, RenderingFilterManager renderingFilterManager,
 			ThreadManagerContext threadManagerContext) {
 		this.sessionContextUtil = sessionContextUtil;
 		this.resourceAuthorization = messageServiceAuth;
@@ -102,7 +97,7 @@ public class ForumMessageShell implements ForumMessageService {
 	 * create Topic Message
 	 */
 	public Long createTopicMessage(EventModel em) throws Exception {
-		ForumMessage forumMessagePostDTO = (ForumMessage) em.getModelIF();
+        AnemicMessageDTO forumMessagePostDTO = (AnemicMessageDTO) em.getModelIF();
 		if (!prepareCreate(forumMessagePostDTO))
 			return null;
 		Forum forum = forumBuilder.getForum(forumMessagePostDTO.getForum().getForumId());
@@ -111,6 +106,7 @@ public class ForumMessageShell implements ForumMessageService {
 		Long mIDInt = forumBuilder.getNextId(Constants.MESSAGE);
 		try {
 			forumMessagePostDTO.setMessageId(mIDInt);
+			forumMessagePostDTO.setForum(forum);
 			// upload
 			Collection uploads = uploadService.loadAllUploadFilesOfMessage(mIDInt, sessionContext);
 			AttachmentsVO attachmentsVO = new AttachmentsVO(mIDInt, uploads);
@@ -145,7 +141,7 @@ public class ForumMessageShell implements ForumMessageService {
 	 * set the login account into the domain model
 	 */
 	public Long createReplyMessage(EventModel em) throws Exception {
-		ForumMessageReply forumMessageReplyPostDTO = (ForumMessageReply) em.getModelIF();
+        AnemicMessageDTO forumMessageReplyPostDTO = (AnemicMessageDTO) em.getModelIF();
 		if (UtilValidate.isEmpty(forumMessageReplyPostDTO.getMessageVO().getBody()))
 			return null;
 		if (!prepareCreate(forumMessageReplyPostDTO))
@@ -160,7 +156,8 @@ public class ForumMessageShell implements ForumMessageService {
 			forumMessageReplyPostDTO.setAttachment(attachmentsVO);
 
 			Account operator = sessionContextUtil.getLoginAccount(sessionContext);
-			// forumMessageReplyPostDTO.setOperator(operator);
+			forumMessageReplyPostDTO.setOperator(operator);
+            forumMessageReplyPostDTO.setAccount(operator);
 
 			Collection properties = new ArrayList();
 			properties.add(new Property(MessagePropertysVO.PROPERTY_IP, operator.getPostIP()));
@@ -186,7 +183,7 @@ public class ForumMessageShell implements ForumMessageService {
 		return mIDInt;
 	}
 
-	private boolean prepareCreate(ForumMessage forumMessage) throws Exception {
+	private boolean prepareCreate(AnemicMessageDTO forumMessage) throws Exception {
 		// the poster
 		com.jdon.jivejdon.model.Account account = sessionContextUtil.getLoginAccount(sessionContext);
 		if (account == null)
@@ -226,7 +223,7 @@ public class ForumMessageShell implements ForumMessageService {
 	 * 
 	 */
 	public void updateMessage(EventModel em) throws Exception {
-		ForumMessage newForumMessageInputparamter = (ForumMessage) em.getModelIF();
+        AnemicMessageDTO newForumMessageInputparamter = (AnemicMessageDTO) em.getModelIF();
 		try {
 			ForumMessage oldforumMessage = messageKernel.getMessage(newForumMessageInputparamter.getMessageId());
 			if (oldforumMessage == null)
@@ -237,7 +234,6 @@ public class ForumMessageShell implements ForumMessageService {
 			}
 			Account operator = sessionContextUtil.getLoginAccount(sessionContext);
 			newForumMessageInputparamter.setOperator(operator);
-			oldforumMessage.setOperator(operator);
 
 			Collection uploads = uploadService.loadAllUploadFilesOfMessage(oldforumMessage.getMessageId(), this.sessionContext);
 			AttachmentsVO attachmentsVO = new AttachmentsVO(newForumMessageInputparamter.getMessageId(), uploads);
@@ -262,8 +258,7 @@ public class ForumMessageShell implements ForumMessageService {
 	}
 
 	public void updateThreadName(EventModel em) throws Exception{
-		ForumThread newforumThread = (ForumThread) em
-				.getModelIF();
+		ForumThread newforumThread = (ForumThread) em.getModelIF();
 		Optional<ForumThread> forumThreadOptional = messageKernel.getThread(newforumThread
 				.getThreadId());
 		if (!forumThreadOptional.isPresent())
@@ -280,17 +275,18 @@ public class ForumMessageShell implements ForumMessageService {
 	 * 
 	 */
 	public void deleteMessage(EventModel em) throws Exception {
-		ForumMessage forumMessage = (ForumMessage) em.getModelIF();
-		forumMessage = messageKernel.getMessage(forumMessage.getMessageId());
+		AnemicMessageDTO anemicMessageDTO = (AnemicMessageDTO) em.getModelIF();
+		ForumMessage forumMessage = messageKernel.getMessage(anemicMessageDTO.getMessageId
+				());
 		if (forumMessage == null)
 			return;
 		if (!isAuthenticated(forumMessage)) {
 			em.setErrors(Constants.NOPERMISSIONS);
 			return;
 		}
-		em.setModelIF(forumMessage);
+//		em.setModelIF(forumMessage);
 		try {
-			messageKernel.deleteMessage(forumMessage);
+			messageKernel.deleteMessage(anemicMessageDTO);
 
 		} catch (Exception e) {
 			em.setErrors(Constants.ERRORS);
@@ -340,11 +336,11 @@ public class ForumMessageShell implements ForumMessageService {
 	/**
 	 * get the full forum in forumMessage, and return it.
 	 */
-	public ForumMessage initMessage(EventModel em) {
+	public AnemicMessageDTO initMessage(EventModel em) {
 		return messageKernel.initMessage(em);
 	}
 
-	public ForumMessage initReplyMessage(EventModel em) {
+	public AnemicMessageDTO initReplyMessage(EventModel em) {
 		return messageKernel.initReplyMessage(em);
 	}
 
@@ -361,22 +357,24 @@ public class ForumMessageShell implements ForumMessageService {
 	/**
 	 * find a Message for modify
 	 */
-	public ForumMessage findMessage(Long messageId) {
+	public AnemicMessageDTO findMessage(Long messageId) {
 		if (messageId == null)
 			return null;
 
 		logger.debug("enter ForumMessageShell's findMessage");
-		ForumMessage forumMessage = messageKernel.getMessage(messageId);
-		if (forumMessage == null)
+		ForumMessage message = messageKernel.getMessage(messageId);
+		if (message == null)
 			return null;
 		try {
-			ForumMessage newMessage = (ForumMessage) forumMessage.clone();
-			MessageVO messageVO = forumMessage.getMessageVOClone();
-			newMessage.setMessageVO(messageVO);
-			newMessage.reloadMessageVOOrignal();
-			// newMessage.setCacheable(false);
+			AnemicMessageDTO anemicMessageDTO = new AnemicMessageDTO();
+			anemicMessageDTO.setMessageId(message.getMessageId());
+			anemicMessageDTO.setForum(message.getForum());
+			anemicMessageDTO.setAccount(message.getAccount());
+			anemicMessageDTO.setMessageVO(message.getMessageVO());
+			anemicMessageDTO.setForumThread(message.getForumThread());
+
 			// after update must enable it see updateMessage;
-			return newMessage;
+			return anemicMessageDTO;
 		} catch (Exception e) {
 			logger.error(e);
 		}

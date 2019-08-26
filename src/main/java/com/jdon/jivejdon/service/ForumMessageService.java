@@ -19,6 +19,7 @@ import com.jdon.controller.events.EventModel;
 import com.jdon.jivejdon.auth.CUDInputInterceptor;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.message.output.RenderingFilterManager;
 
 /**
@@ -31,9 +32,9 @@ import com.jdon.jivejdon.model.message.output.RenderingFilterManager;
  */
 public interface ForumMessageService {
 
-	ForumMessage initMessage(EventModel em);
+    AnemicMessageDTO initMessage(EventModel em);
 
-	ForumMessage initReplyMessage(EventModel em);
+    AnemicMessageDTO initReplyMessage(EventModel em);
 
 	/**
 	 * has Authorization ; no cache Intercepts it, it is Called by message's
@@ -42,7 +43,7 @@ public interface ForumMessageService {
 	 * 
 	 * <getMethod name="findMessage"/>
 	 */
-	ForumMessage findMessage(Long messageId);
+	AnemicMessageDTO findMessage(Long messageId);
 
 	/**
 	 * no Authorization ; cache Intercepts it, Called by message List, not for
@@ -55,27 +56,16 @@ public interface ForumMessageService {
 	/**
 	 * no Authorization ; no cache Intercept equals getMessage, has full
 	 * propperties
-	 * 
-	 * @param messageId
-	 * @return
 	 */
 	ForumMessage findMessageWithPropterty(Long messageId);
 
 	/**
 	 * create a topic message, it is a root message
-	 * 
-	 * @param em
-	 * @return
-	 * @see CUDInputInterceptor
 	 */
 	Long createTopicMessage(EventModel em) throws Exception;
 
 	/**
 	 * create a reply message.
-	 * 
-	 * @param em
-	 * @return
-	 * @see CUDInputInterceptor
 	 */
 	Long createReplyMessage(EventModel em) throws Exception;
 
@@ -94,9 +84,6 @@ public interface ForumMessageService {
 
 	/**
 	 * check if forumMessage is Authenticated by current login user.
-	 * 
-	 * @param forumMessage
-	 * @return
 	 */
 	boolean checkIsAuthenticated(ForumMessage forumMessage);
 

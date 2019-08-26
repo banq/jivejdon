@@ -15,18 +15,18 @@
  */
 package com.jdon.jivejdon.model.event;
 
-import com.jdon.jivejdon.model.ForumMessage;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 
 public class MessageUpdatedEvent {
 
-	private final ForumMessage newForumMessageInputparamter;
+	private final AnemicMessageDTO newForumMessageInputparamter;
 
-	public MessageUpdatedEvent(ForumMessage newForumMessageInputparamter) {
+	public MessageUpdatedEvent(AnemicMessageDTO newForumMessageInputparamter) {
 		super();
 		this.newForumMessageInputparamter = newForumMessageInputparamter;
 	}
 
-	public ForumMessage getNewForumMessageInputparamter() {
+	public AnemicMessageDTO getNewForumMessageInputparamter() {
 		return newForumMessageInputparamter;
 	}
 

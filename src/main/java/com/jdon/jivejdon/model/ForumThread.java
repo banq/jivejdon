@@ -63,14 +63,7 @@ public class ForumThread extends ForumModel {
 	@Inject
 	public MessageEventSourcingRole eventSourcing;
 	private Long threadId;
-	/**
-	 * the subject of the root message of the thread. This is a convenience
-	 * method equivalent to <code>getRootMessage().getSubject()</code>.
-	 *
-	 * @return the name of the thread, which is the subject of the root
-	 * message.
-	 */
-	private String name;
+
 	// same as rootMessage's creationDate
 	private String creationDate;
 	// contain some abstract properties
@@ -99,9 +92,11 @@ public class ForumThread extends ForumModel {
 	 *
 	 * @param rootMessage
 	 */
-	public ForumThread(ForumMessage rootMessage) {
+	public ForumThread(ForumMessage rootMessage, Long tIDInt, Forum forum) {
 		this();
 		this.rootMessage = rootMessage;
+		this.threadId = tIDInt;
+		this.forum = forum;
 		this.state = new AtomicReference(new ForumThreadState(this));
 	}
 
@@ -113,11 +108,10 @@ public class ForumThread extends ForumModel {
 		this.propertys = new ArrayList();
 		this.state = new AtomicReference(new ForumThreadState(this));
 		this.viewCounter = new ViewCounter(this);
+		this.rootMessage = new ForumMessage();
 	}
 
-	/**
-	 * @return Returns the creationDate.
-	 */
+
 	public String getCreationDate() {
 		return creationDate;
 	}
@@ -137,28 +131,19 @@ public class ForumThread extends ForumModel {
 		this.creationDate2 = creationDate;
 	}
 
-	/**
-	 * forum maybe modified
-	 *
-	 * @return Returns the forum.
-	 */
 	public Forum getForum() {
 		return forum;
 	}
 
-	/**
-	 * @param forum The forum to set.
-	 */
+
 	public void setForum(Forum forum) {
 		this.forum = forum;
-		if (this.rootMessage != null) {
-			rootMessage.setForum(forum);
-		}
+//		if (this.rootMessage != null) {
+//			rootMessage.setForum(forum);
+//		}
 	}
 
-	/**
-	 * @return Returns the threadId.
-	 */
+
 	public Long getThreadId() {
 		return threadId;
 	}
@@ -170,52 +155,60 @@ public class ForumThread extends ForumModel {
 		this.threadId = threadId;
 	}
 
-	/**
-	 * @return Returns the name.
-	 */
+
 	public String getName() {
-		return name;
+		if (this.getRootMessage() == null){
+			System.err.println(" thread rootmessage is null" + threadId);
+			return "null";
+		}
+		return this.getRootMessage().getMessageVO().getSubject();
 	}
 
-	/**
-	 * @param name The name to set.
-	 */
-	public void setName(String name) {
-		this.name = name;
+	//from threadForm getName calling
+	public void setName(String name){
+		if (this.getRootMessage() == null){
+			setRootMessage(new ForumMessage());
+		}
+		MessageVO messageVO = this.getRootMessage().messageVOBuilder().subject(name).body(this
+				.getRootMessage().getMessageVO().getBody())
+				.build();
+		this.getRootMessage().setMessageVO(messageVO);
+
 	}
+
+	public void updateName(String name) {
+		MessageVO messageVO = this.getRootMessage().messageVOBuilder().subject(name).body(this
+				.getRootMessage().getMessageVO().getBody())
+				.build();
+		this.getRootMessage().setMessageVO(messageVO);
+		eventSourcing.saveName(new ThreadNameSavedEvent(this.getThreadId(),
+				name));
+	}
+
+
 
 	public String getShortname() {
-		return StringUtil.shorten(name);
+		return StringUtil.shorten(getName());
 	}
 
-	/**
-	 * @return Returns the propertys.
-	 */
 	public Collection getPropertys() {
 		return propertys;
 	}
 
-	/**
-	 * @param propertys The propertys to set.
-	 */
+
 	public void setPropertys(Collection propertys) {
 		this.propertys = propertys;
 	}
 
-	/**
-	 * @return Returns the rootMessage.
-	 */
 	public ForumMessage getRootMessage() {
 		return rootMessage;
 	}
 
-	/**
-	 * @param rootMessage The rootMessage to set.
-	 */
+
 	public void setRootMessage(ForumMessage rootMessage) {
 		if (rootMessage == null) return;
 		this.rootMessage = rootMessage;
-		this.rootMessage.setForumThread(this);
+//		this.rootMessage.setForumThread(this);
 	}
 
 	/**
@@ -270,9 +263,9 @@ public class ForumThread extends ForumModel {
 	public void addNewMessage(ForumMessage forumMessageParent,
 							  ForumMessageReply forumMessageReply) {
 		try {
-			forumMessageReply.setParentMessage(forumMessageParent);
-			forumMessageParent.setForumThread(this);
-			forumMessageReply.setForumThread(this);
+//			forumMessageReply.setParentMessage(forumMessageParent);
+//			forumMessageParent.setForumThread(this);
+//			forumMessageReply.setForumThread(this);
 
 			ForumMessage oldmessage = this.getState().getLastPost();
 			//removeed to changeState
@@ -301,26 +294,25 @@ public class ForumThread extends ForumModel {
 
 	}
 
-	public void moveForum(ForumMessage forumMessage, Forum newForum) {
+	public Forum moveForum(ForumMessage forumMessage, Forum newForum) {
 		if ((isRoot(forumMessage)) && (forumMessage.isLeaf())) {
 			DomainMessage dm = this.lazyLoaderRole.loadForum(newForum
 					.getForumId());
 			newForum = (Forum) dm.getBlockEventResult();
-			forumMessage.setForum(newForum);
+//			forumMessage.setForum(newForum);
 			setForum(newForum);
+
 			eventSourcing.moveMessage(new MessageMovedEvent(forumMessage
 					.getMessageId(), newForum.getForumId()));
 			dm.clear();
 		}
+		return newForum;
 	}
 
 	public void updateMessage(ForumMessage forumMessage) {
-		forumMessage.setForumThread(this);
-
 		if (isRoot(forumMessage)) {
 			this.setRootMessage(forumMessage);
 			changeTags(forumMessage.getTagTitle());
-			this.setName(forumMessage.getMessageVO().getSubject());
 		}
 
 		threadStateManager.updateMessage(this, forumMessage);
@@ -328,15 +320,6 @@ public class ForumThread extends ForumModel {
 
 	}
 
-	public void updateName(String name) {
-		MessageVO messageVO = this.getRootMessage().messageVOBuilder().subject(name).body(this
-				.getRootMessage().getMessageVO().getBody())
-				.build();
-		this.getRootMessage().setMessageVO(messageVO);
-		this.setName(name);
-		eventSourcing.saveName(new ThreadNameSavedEvent(this.getThreadId(),
-				name));
-	}
 
 	public boolean isLeaf(ForumMessage forumMessage) {
 		if (!this.isSolid()) {

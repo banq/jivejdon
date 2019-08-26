@@ -30,8 +30,7 @@ public class AddReplyMessageEventHandler implements EventBusHandler {
 	}
 
 	@Override
-	public void refresh(Long forumMessageId) {
-		ForumMessage forumMessage = forumAbstractFactory.getMessage(forumMessageId);
+	public void refresh(ForumMessage forumMessage) {
 		// send to JMS or MQ
 		// refresh the batch inquiry cache
 		messagePageIteratorSolver.clearPageIteratorSolver("getMessages");

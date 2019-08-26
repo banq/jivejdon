@@ -20,8 +20,8 @@ import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
 import com.jdon.jivejdon.event.domain.consumer.write.MessageTransactionPersistence;
 import com.jdon.jivejdon.event.domain.consumer.write.updatemessage.MessageSaveListener;
-import com.jdon.jivejdon.model.ForumMessageReply;
 import com.jdon.jivejdon.model.event.ReplyMessageCreatedEvent;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.repository.ForumFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -52,7 +52,7 @@ public class AddReplyMessage implements DomainEventHandler {
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 		ReplyMessageCreatedEvent es = (ReplyMessageCreatedEvent) event.getDomainMessage().getEventSource();
-		ForumMessageReply forumMessageReplyPostDTO = es.getForumMessageReplyDTO();
+		AnemicMessageDTO forumMessageReplyPostDTO = es.getForumMessageReplyDTO();
 
 		try {
 			messageTransactionPersistence.insertReplyMessage(forumMessageReplyPostDTO);

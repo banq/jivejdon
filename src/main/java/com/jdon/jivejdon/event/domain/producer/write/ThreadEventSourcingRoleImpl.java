@@ -19,6 +19,7 @@ import com.jdon.annotation.Introduce;
 import com.jdon.annotation.model.Send;
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.model.dci.ThreadEventSourcingRole;
+import com.jdon.jivejdon.model.event.MessageRemoveCommand;
 import com.jdon.jivejdon.model.event.MessageRemovedEvent;
 import com.jdon.jivejdon.model.event.TopicMessageCreateCommand;
 import com.jdon.jivejdon.model.util.OneOneDTO;
@@ -49,7 +50,7 @@ public class ThreadEventSourcingRoleImpl implements ThreadEventSourcingRole {
 
 	@Override
 	@Send("deleteMessage")
-	public DomainMessage deleteMessage(MessageRemovedEvent event) {
+	public DomainMessage deleteMessage(MessageRemoveCommand event) {
 		return new DomainMessage(event);
 	}
 
@@ -60,8 +61,8 @@ public class ThreadEventSourcingRoleImpl implements ThreadEventSourcingRole {
 	}
 
 	@Send("delThread")
-	public DomainMessage delThread(DomainMessage domainMessage) {
-		return new DomainMessage(domainMessage);
+	public DomainMessage delThread(MessageRemovedEvent event) {
+		return new DomainMessage(event);
 	}
 
 }

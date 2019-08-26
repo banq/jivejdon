@@ -15,19 +15,19 @@
  */
 package com.jdon.jivejdon.repository;
 
-import java.util.Collection;
-
 import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumMessageReply;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.util.OneOneDTO;
 import com.jdon.jivejdon.repository.dao.MessageDaoFacade;
+
+import java.util.Collection;
 
 public interface MessageRepository {
 
 	/*
 	 * create the topic message
 	 */
-	public abstract void createTopicMessage(ForumMessage forumMessage) throws Exception;
+	public abstract void createTopicMessage(AnemicMessageDTO forumMessage) throws Exception;
 
 	/**
 	 * the relation about creating reply forumMessage only need a parameter :
@@ -36,22 +36,21 @@ public interface MessageRepository {
 	 * parent message.
 	 * 
 	 */
-	public abstract void createReplyMessage(ForumMessageReply forumMessageReply) throws Exception;
+	public abstract void createReplyMessage(AnemicMessageDTO forumMessageReply) throws Exception;
 
 	/*
 	 * update the message, update the message's subject and body we must mark
 	 * the message that has been updated. there are two kinds of parameters: the
 	 * primary key /new entity data in DTO ForumMessage of the method patameter
 	 */
-	public abstract void updateMessage(ForumMessage forumMessage) throws Exception;
+	public abstract void updateMessage(AnemicMessageDTO forumMessage) throws Exception;
 
 	/**
 	 * 
 	 * Composite pattern
 	 * 
 	 * delete a node or its all childern and refresh the cache.
-	 * 
-	 * @param forumMessage
+	 *
 	 */
 	public abstract void deleteMessageComposite(ForumMessage delforumMessage) throws Exception;
 

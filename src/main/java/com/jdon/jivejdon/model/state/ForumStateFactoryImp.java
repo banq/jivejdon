@@ -43,7 +43,7 @@ public class ForumStateFactoryImp implements ForumStateFactory {
 			long newThreadCount = forumDao.getThreadCount(forum.getForumId());
 			ForumState forumState = new ForumState(forum, lastPost, newMessageCount, newThreadCount);
 			forum.setForumState(forumState);
-			lastPost.setForum(forum);
+//			lastPost.setForum(forum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -55,7 +55,7 @@ public class ForumStateFactoryImp implements ForumStateFactory {
 			long newMessageCount = forum.getForumState().addMessageCount();
 			ForumState forumState = new ForumState(forum, newLastPost, newMessageCount, forum.getForumState().getThreadCount());
 			forum.setForumState(forumState);
-			newLastPost.setForum(forum);
+//			newLastPost.setForum(forum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -67,7 +67,7 @@ public class ForumStateFactoryImp implements ForumStateFactory {
 			long newThreadCount = forum.getForumState().addThreadCount();
 			ForumState forumState = new ForumState(forum, newLastPost, newMessageCount, newThreadCount);
 			forum.setForumState(forumState);
-			newLastPost.setForum(forum);
+//			newLastPost.setForum(forum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -79,7 +79,7 @@ public class ForumStateFactoryImp implements ForumStateFactory {
 			ForumState forumState = new ForumState(forum, forumMessage, forum.getForumState().getMessageCount(), forum.getForumState()
 					.getThreadCount());
 			forum.setForumState(forumState);
-			forumMessage.setForum(forum);
+//			forumMessage.setForum(forum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

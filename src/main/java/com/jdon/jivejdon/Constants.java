@@ -15,13 +15,13 @@
  */
 package com.jdon.jivejdon;
 
+import com.ocpsoft.pretty.time.PrettyTime;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
-import com.ocpsoft.pretty.time.PrettyTime;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -72,7 +72,7 @@ public class Constants {
 		Constants.t = new PrettyTime(new Locale(mylocale));
 	}
 
-	public String getDateTimeDisp(String datetime) {
+	public static String getDateTimeDisp(String datetime) {
 		if ((datetime == null) || (datetime.equals("")))
 			return "";
 		long datel = Long.parseLong(datetime);

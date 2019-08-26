@@ -17,8 +17,8 @@ package com.jdon.jivejdon.repository.dao.sql;
 
 import com.jdon.jivejdon.Constants;
 import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumMessageReply;
 import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.model.util.OneOneDTO;
 import com.jdon.jivejdon.repository.builder.MessageInitFactory;
@@ -27,11 +27,7 @@ import com.jdon.jivejdon.util.ToolsUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -52,12 +48,36 @@ public abstract class MessageDaoSql implements MessageDao {
 		this.messageFactory = messageFactory;
 	}
 
-	/*
-	 * ForumMessage中包含的ForumThread Forum等对象只是包涵ID的空对象,完整对象需要 前台再行处理.
-	 *
-	 * @see com.jdon.jivejdon.dao.MessageDao#getMessage(java.lang.String)
-	 */
-	public ForumMessage getMessageCore(Long messageId) {
+//	/*
+//	 * ForumMessage中包含的ForumThread Forum等对象只是包涵ID的空对象,完整对象需要 前台再行处理.
+//	 *
+//	 * @see com.jdon.jivejdon.dao.MessageDao#getMessage(java.lang.String)
+//	 */
+//	public ForumMessage getMessageCore(Long messageId) {
+//		logger.debug("enter getMessage  for id:" + messageId);
+//		String LOAD_MESSAGE = "SELECT threadID, forumID, userID, subject, body, modValue, " +
+//				"rewardPoints, "
+//				+ "creationDate, modifiedDate, parentMessageID FROM jiveMessage WHERE messageID=?";
+//		List queryParams = new ArrayList();
+//		queryParams.add(messageId);
+//
+//		ForumMessage forumMessage = null;
+//		try {
+//			List list = jdbcTempSource.getJdbcTemp().queryMultiObject(queryParams, LOAD_MESSAGE);
+//			Iterator iter = list.iterator();
+//			if (iter.hasNext()) {
+//				Map map = (Map) iter.next();
+//				forumMessage = messageFactory.createMessageCore(messageId, map);
+//			}
+//		} catch (Exception e) {
+//			logger.error("messageId=" + messageId + " happend  " + e);
+//		}
+//		logger.debug("getMessage end");
+//		return forumMessage;
+//	}
+
+
+	public AnemicMessageDTO getAnemicMessage(Long messageId) {
 		logger.debug("enter getMessage  for id:" + messageId);
 		String LOAD_MESSAGE = "SELECT threadID, forumID, userID, subject, body, modValue, " +
 				"rewardPoints, "
@@ -65,18 +85,18 @@ public abstract class MessageDaoSql implements MessageDao {
 		List queryParams = new ArrayList();
 		queryParams.add(messageId);
 
-		ForumMessage forumMessage = null;
+		AnemicMessageDTO forumMessage = null;
 		try {
 			List list = jdbcTempSource.getJdbcTemp().queryMultiObject(queryParams, LOAD_MESSAGE);
 			Iterator iter = list.iterator();
 			if (iter.hasNext()) {
 				Map map = (Map) iter.next();
-				forumMessage = messageFactory.createMessageCore(messageId, map);
+				forumMessage = messageFactory.createAnemicMessage(messageId, map);
 			}
 		} catch (Exception e) {
-			logger.error("messageId=" + messageId + " happend  " + e);
+			logger.error("AnemicMessageDTO messageId=" + messageId + " happend  " + e);
 		}
-		logger.debug("getMessage end");
+		logger.debug("getAnemicMessage end");
 		return forumMessage;
 	}
 
@@ -134,20 +154,20 @@ public abstract class MessageDaoSql implements MessageDao {
 	 * topic message insert, no parentMessageID value,so the table's field
 	 * default value must be null
 	 */
-	public void createMessage(ForumMessage forumMessage) throws Exception {
-		logger.debug("enter createTopicMessage for id:" + forumMessage.getMessageId());
+	public void createMessage(AnemicMessageDTO forumMessagePostDTO) throws Exception {
+		logger.debug("enter createTopicMessage for id:" + forumMessagePostDTO.getMessageId());
 		// differnce with createRpleyMessage: parentMessageID,
-		MessageVO messageVO = forumMessage.getMessageVO();
+		MessageVO messageVO = forumMessagePostDTO.getMessageVO();
 		if (messageVO.getSubject().length() == 0 || messageVO.getBody().length() == 0)
 			return;
 		String INSERT_MESSAGE = "INSERT INTO jiveMessage(messageID, threadID, forumID, "
 				+ "userID, subject, body, modValue, rewardPoints, creationDate, modifiedDate) " +
 				"VALUES(?,?,?,?,?,?,?,?,?,?)";
 		List queryParams = new ArrayList();
-		queryParams.add(forumMessage.getMessageId());
-		queryParams.add(forumMessage.getForumThread().getThreadId());
-		queryParams.add(forumMessage.getForum().getForumId());
-		queryParams.add(forumMessage.getAccount().getUserId());
+		queryParams.add(forumMessagePostDTO.getMessageId());
+		queryParams.add(forumMessagePostDTO.getForumThread().getThreadId());
+		queryParams.add(forumMessagePostDTO.getForum().getForumId());
+		queryParams.add(forumMessagePostDTO.getAccount().getUserId());
 
 		queryParams.add(messageVO.getSubject());
 		queryParams.add(messageVO.getBody());
@@ -159,24 +179,21 @@ public abstract class MessageDaoSql implements MessageDao {
 		String saveDateTime = ToolsUtil.dateToMillis(now);
 		String displayDateTime = constants.getDateTimeDisp(saveDateTime);
 		queryParams.add(saveDateTime);
-		forumMessage.setCreationDate(displayDateTime);
-
 		queryParams.add(saveDateTime);
-		forumMessage.setModifiedDate(now);
 
 		try {
 			jdbcTempSource.getJdbcTemp().operate(queryParams, INSERT_MESSAGE);
 		} catch (Exception e) {
 			logger.error(e);
-			throw new Exception("messageId=" + forumMessage.getMessageId() + " happend " + e);
+			throw new Exception("messageId=" + forumMessagePostDTO.getMessageId() + " happend " + e);
 		}
 	}
 
-	public void createMessageReply(ForumMessageReply forumMessage) throws Exception {
+	public void createMessageReply(AnemicMessageDTO forumMessage) throws Exception {
 		logger.debug("enter createMessageReply for id:" + forumMessage.getMessageId());
 		try {
 			// differnce with createTopicMessage: parentMessageID,
-			if (this.getMessageCore(forumMessage.getParentMessage().getMessageId()) == null)
+			if (this.getAnemicMessage(forumMessage.getParentMessage().getMessageId()) == null)
 				throw new Exception(" this message=" + forumMessage.getMessageId() + "'s parent= "
 						+ forumMessage.getParentMessage().getMessageId()
 						+ " has deleted");
@@ -208,12 +225,8 @@ public abstract class MessageDaoSql implements MessageDao {
 
 			long now = System.currentTimeMillis();
 			String saveDateTime = ToolsUtil.dateToMillis(now);
-			String displayDateTime = constants.getDateTimeDisp(saveDateTime);
 			queryParams.add(saveDateTime);
-			forumMessage.setCreationDate(displayDateTime);
-
 			queryParams.add(saveDateTime);
-			forumMessage.setModifiedDate(now);
 
 			jdbcTempSource.getJdbcTemp().operate(queryParams, INSERT_MESSAGE);
 		} catch (Exception e) {
@@ -384,7 +397,7 @@ public abstract class MessageDaoSql implements MessageDao {
 	 * com.jdon.jivejdon.dao.MessageDao#updateMessage(com.jdon.jivejdon.model
 	 * .ForumMessage)
 	 */
-	public void updateMessage(ForumMessage forumMessage) throws Exception {
+	public void updateMessage(AnemicMessageDTO forumMessage) throws Exception {
 		String SAVE_MESSAGE = "";
 		SAVE_MESSAGE = "UPDATE jiveMessage SET  subject=?, body=?, modValue=?, " +
 				"rewardPoints=?, modifiedDate=? WHERE messageID=?";
@@ -401,7 +414,6 @@ public abstract class MessageDaoSql implements MessageDao {
 		String saveDateTime = ToolsUtil.dateToMillis(now);
 		String displayDateTime = constants.getDateTimeDisp(saveDateTime);
 		queryParams.add(saveDateTime);
-		forumMessage.setModifiedDate(now);
 
 		queryParams.add(forumMessage.getMessageId());
 		try {

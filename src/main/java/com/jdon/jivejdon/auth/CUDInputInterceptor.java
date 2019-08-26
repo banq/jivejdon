@@ -53,9 +53,6 @@ public class CUDInputInterceptor implements MethodInterceptor {
 
 	private final ErrorBlockerIF errorBlockerIF;
 
-	/**
-	 * @param permissionXmlParser
-	 */
 	public CUDInputInterceptor(Throttler throttler, TargetMetaRequestsHolder targetMetaRequestsHolder, SessionContextUtil sessionContextUtil,
 			InputSwitcherIF inputSwitcherIF, ErrorBlockerIF errorBlockerIF) {
 		this.throttler = throttler;

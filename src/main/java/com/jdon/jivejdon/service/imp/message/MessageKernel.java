@@ -22,9 +22,9 @@ import com.jdon.controller.model.PageIterator;
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumMessageReply;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.dci.ThreadManagerContext;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.model.query.MultiCriteria;
 import com.jdon.jivejdon.repository.ForumFactory;
@@ -56,16 +56,19 @@ public class MessageKernel implements MessageKernelIF {
 	}
 
 	/*
-	 * (non-Javadoc)
+	 * /message/message.jsp
+	 * before create a new post
+	 * in models.xml
+	 * AnemicMessageDTO will map to messageForm
 	 * 
 	 * @see
 	 * com.jdon.jivejdon.service.imp.message.MessageKernelIF#initMessage(com
 	 * .jdon.controller.events.EventModel)
 	 */
 	@Override
-	public ForumMessage initMessage(EventModel em) {
+	public AnemicMessageDTO initMessage(EventModel em) {
 		logger.debug(" enter service: initMessage ");
-		ForumMessage forumMessage = (ForumMessage) em.getModelIF();
+        AnemicMessageDTO forumMessage = (AnemicMessageDTO) em.getModelIF();
 		try {
 			if (forumMessage.getForum() == null) {
 				logger.error(" no Forum in this ForumMessage");
@@ -89,9 +92,9 @@ public class MessageKernel implements MessageKernelIF {
 	 * (com.jdon.controller.events.EventModel)
 	 */
 	@Override
-	public ForumMessage initReplyMessage(EventModel em) {
+	public AnemicMessageDTO initReplyMessage(EventModel em) {
 		logger.debug(" enter service: initReplyMessage ");
-		ForumMessageReply forumMessageReply = (ForumMessageReply) initMessage(em);
+        AnemicMessageDTO forumMessageReply = (AnemicMessageDTO) initMessage(em);
 		try {
 			Long pmessageId = forumMessageReply.getParentMessage().getMessageId();
 			if (pmessageId == null) {
@@ -99,11 +102,11 @@ public class MessageKernel implements MessageKernelIF {
 				return null;
 			}
 			ForumMessage pMessage = forumAbstractFactory.getMessage(pmessageId);
-			forumMessageReply.setParentMessage(pMessage);
+            forumMessageReply.setParentMessage(new AnemicMessageDTO(pmessageId));
 			forumMessageReply.setForum(pMessage.getForum());
 			forumMessageReply.setForumThread(pMessage.getForumThread());
 			String rsubject = htmlEscape.matcher(pMessage.getMessageVO().getSubject()).replaceAll("");
-			MessageVO messageVo = forumMessageReply.messageVOBuilder().subject(rsubject).body
+			MessageVO messageVo = pMessage.messageVOBuilder().subject(rsubject).body
 					(forumMessageReply.getMessageVO().getBody()).build();
 			forumMessageReply.setMessageVO(messageVo);
 		} catch (Exception e) {
@@ -161,11 +164,11 @@ public class MessageKernel implements MessageKernelIF {
 
 	}
 
-	public DomainMessage addreply(long threadId, ForumMessage paranetforumMessage, ForumMessage newForumMessageInputparamter) {
+	public DomainMessage addreply(long threadId, ForumMessage paranetforumMessage, AnemicMessageDTO newForumMessageInputparamter) {
 		return new DomainMessage(newForumMessageInputparamter);
 	}
 
-	public DomainMessage update(long threadId, ForumMessage oldforumMessage, ForumMessage newForumMessageInputparamter) {
+	public DomainMessage update(long threadId, ForumMessage oldforumMessage, AnemicMessageDTO newForumMessageInputparamter) {
 		return new DomainMessage(newForumMessageInputparamter);
 	}
 
@@ -180,8 +183,8 @@ public class MessageKernel implements MessageKernelIF {
 	 * .jdon.jivejdon.model.ForumMessage)
 	 */
 	@Override
-	public void deleteMessage(ForumMessage delforumMessage) throws Exception {
-		delforumMessage = this.getMessage(delforumMessage.getMessageId());
+	public void deleteMessage(AnemicMessageDTO beingdelforumMessage) throws Exception {
+        ForumMessage delforumMessage = this.getMessage(beingdelforumMessage.getMessageId());
 		if (delforumMessage != null)
 			this.threadManagerContext.delete(delforumMessage);
 
@@ -225,8 +228,9 @@ public class MessageKernel implements MessageKernelIF {
 			Long messageId = (Long) keys[i];
 			logger.debug("delete messageId =" + messageId);
 			ForumMessage message = getMessage(messageId);
-			if (message.getAccount().getUsername().equals(username)) {
-				deleteMessage(message);
+			if (message!= null
+					&& message.getAccount().getUsername().equals(username)) {
+					this.threadManagerContext.delete(message);
 			}
 		}
 	}

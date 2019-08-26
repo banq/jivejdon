@@ -72,7 +72,7 @@ public class ThreadBuilder {
 						(rootmessageId, forumThread, forum);
 			}
 			forumThread.setRootMessage(rootForumMessage);
-			rootForumMessage.setForumThread(forumThread);
+//			rootForumMessage.setForumThread(forumThread);
 
 			// only have rootMessage, so have thread
 			buildProperties(forumThread);
@@ -88,7 +88,6 @@ public class ThreadBuilder {
 			//init viewcount
 			forumThread.getViewCounter().loadinitCount();
 
-			forumThread.setName(forumThread.getRootMessage().getMessageVO().getSubject());
 			Collection tags = tagRepository.getThreadTags(forumThread);
 			ThreadTagsVO threadTagsVO = new ThreadTagsVO(forumThread, tags);
 			forumThread.setThreadTagsVO(threadTagsVO);
@@ -140,7 +139,7 @@ public class ThreadBuilder {
 			if ((rootMessage == null) || (rootMessage.getMessageId().longValue() != lastMessageId.longValue()))
 				lastMessage = messageDirector.buildMessage(lastMessageId, forumThread, forumThread
 						.getForum());
-			lastMessage.setForumThread(forumThread);
+//			lastMessage.setForumThread(forumThread);
 
 			forumThreadStateFactory.init(forumThread, lastMessage);
 

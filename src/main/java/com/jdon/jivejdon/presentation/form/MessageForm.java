@@ -16,9 +16,9 @@
 package com.jdon.jivejdon.presentation.form;
 
 import com.jdon.jivejdon.model.Forum;
-import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.attachment.AttachmentsVO;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.util.UtilValidate;
 import org.apache.struts.action.ActionMapping;
@@ -32,6 +32,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * UI model
  * @author <a href="mailto:banq@163.com">banq</a>
  * 
  */
@@ -44,17 +45,13 @@ public class MessageForm extends BaseForm {
 	private int bodyMaxLength = 81900;
 	private Long messageId;
 
-	private String creationDate;
-
-	private String modifiedDate;
-
 	private ForumThread forumThread;
 
 	private Forum forum;
 
 	private com.jdon.jivejdon.model.Account account;
 
-	private ForumMessage parentMessage;
+	private AnemicMessageDTO parentMessage;
 
 	// for upload files
 	private AttachmentsVO attachment;;
@@ -70,7 +67,7 @@ public class MessageForm extends BaseForm {
 
 	private boolean replyNotify;
 
-	private String[] tagTitles;
+	private String[] tagTitle;
 
 	// modify
 
@@ -83,83 +80,35 @@ public class MessageForm extends BaseForm {
 		forum = new Forum(); // for parameter forum.forumId=xxx
 		forumThread = new ForumThread();
 		account = new com.jdon.jivejdon.model.Account();
-		parentMessage = new ForumMessage();
-
+		parentMessage = new AnemicMessageDTO();
 		forumThread = new ForumThread();
 	}
 
-	/**
-	 * @return Returns the account.
-	 */
 	public com.jdon.jivejdon.model.Account getAccount() {
 		return account;
 	}
 
-	/**
-	 * @param account
-	 *            The account to set.
-	 */
+
 	public void setAccount(com.jdon.jivejdon.model.Account account) {
 		this.account = account;
 	}
 
-	/**
-	 * @return Returns the creationDate.
-	 */
-	public String getCreationDate() {
-		return creationDate;
-	}
 
-	/**
-	 * @param creationDate
-	 *            The creationDate to set.
-	 */
-	public void setCreationDate(String creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	/**
-	 * @return Returns the messageId.
-	 */
 	public Long getMessageId() {
 		return messageId;
 	}
 
-	/**
-	 * @param messageId
-	 *            The messageId to set.
-	 */
+
 	public void setMessageId(Long messageId) {
 		this.messageId = messageId;
 	}
 
-	/**
-	 * @return Returns the modifiedDate.
-	 */
-	public String getModifiedDate() {
-		return modifiedDate;
-	}
-
-	/**
-	 * @param modifiedDate
-	 *            The modifiedDate to set.
-	 */
-	public void setModifiedDate(String modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
-
-	/**
-	 * @return Returns the parentMessage.
-	 */
-	public ForumMessage getParentMessage() {
+	public AnemicMessageDTO getParentMessage() {
 		return parentMessage;
 	}
 
-	/**
-	 * @param parentMessage
-	 *            The parentMessage to set.
-	 */
-	public void setParentMessage(ForumMessage parentMessage) {
+
+	public void setParentMessage(AnemicMessageDTO parentMessage) {
 		this.parentMessage = parentMessage;
 	}
 
@@ -179,32 +128,22 @@ public class MessageForm extends BaseForm {
 		messageVO = messageVO.builder().subject(subject).body(this.getBody()).build();
 	}
 
-	/**
-	 * @return Returns the forumThread.
-	 */
+
 	public ForumThread getForumThread() {
 		return forumThread;
 	}
 
-	/**
-	 * @param forumThread
-	 *            The forumThread to set.
-	 */
+
 	public void setForumThread(ForumThread forumThread) {
 		this.forumThread = forumThread;
 	}
 
-	/**
-	 * @return Returns the forum.
-	 */
+
 	public Forum getForum() {
 		return forum;
 	}
 
-	/**
-	 * @param forum
-	 *            The forum to set.
-	 */
+
 	public void setForum(Forum forum) {
 		this.forum = forum;
 	}
@@ -239,11 +178,11 @@ public class MessageForm extends BaseForm {
 
 	public String[] getTagTitle() {
 
-		return this.tagTitles;
+		return this.tagTitle;
 	}
 
-	public void setTagTitle(String[] tagTitles) {
-		this.tagTitles = tagTitles;
+	public void setTagTitle(String[] tagTitle) {
+		this.tagTitle = tagTitle;
 	}
 
 	public boolean isRoot() {

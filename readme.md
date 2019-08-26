@@ -12,7 +12,16 @@ Use Case
 
 DDD Aggregate Model
 ==============================
-![avatar](./doc/aggregates.png)
+
+![avatar](./doc/aggregates2.png)
+[https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java](com.jdon.jivejdon.model.ForumMessage) is the aggregate root, it is a rich model, all setter methods are "private",such as:
+![avatar](./doc/private-setter.png)
+
+but all datas out of domain is packed in a DTO anemic model, so business rules in the aggregate root entity will not leak outside domain. 
+![avatar](./doc/richmodel.png)
+
+these DTO anemic models can alseo be packed in Command and Domain Events，so they be managed in DDD ubiquitous language.
+
 
 
 Clean architecture
@@ -21,19 +30,19 @@ Clean architecture
 
 Hexagonal_architecture:
 ``````
-OUTSIDE < - > transformer < - >（application < - > domain）
+OUTSIDE < - > transformer(DTO anemic model) < - >（application < - > domain）
 ``````
 
 in jivejdon:
 ``````
-View/Jsp(OUTSIDE) ---> models.xml(transfomer) ---> ForumMessage
+View/Jsp(OUTSIDE) ---> models.xml(transfomer/DTO anemic model) ---> ForumMessage
 ---->Domain Events -----> Repository
 ``````
 
-resource file models.xml is adapter, connect View/Action to Domain model:
+the resource file [https://github.com/banq/jivejdon/blob/master/src/main/resources/com/jdon/jivejdon/model/models.xml](models.xml) is a adapter, using AnemicMessageDTO transfom View/Action Form datas:
 ``````
 	<model key="messageId"
-			class="com.jdon.jivejdon.model.ForumMessage">
+			class="com.jdon.jivejdon.model.message.AnemicMessageDTO">
 			<actionForm name="messageForm"/>
 			<handler>
 				<service ref="forumMessageService">
@@ -47,7 +56,7 @@ resource file models.xml is adapter, connect View/Action to Domain model:
 		</model>
 ``````
 when update a message, the message.jsp will call updateMethod's value defined in models.xml;
-so it will actually call forumMessageService's updateMessage:
+so it will actually call [https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/service/imp/message/ForumMessageShell.java](forumMessageService) updateMessage method:
 
 ``````
 public interface ForumMessageService {
@@ -59,14 +68,13 @@ public interface ForumMessageService {
 
 forumMessageService will delegate to aggregate roots: ForumMessage(topic), ForumMessage has two
 types: Topic and Rely, one Topic is a root message and has many reply messages, all messages 
-compose a Thread(ForumThread)，ForumThread is a aggregate root entity too! there are two aggregate
- roots in jivejdon.
+compose one Thread(ForumThread)
  
- ForumMessage's update method:
+ [https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java](ForumMessage) update message method:
  
  ``````
  	@OnCommand("updateForumMessage")
- 	public void update(ForumMessage newForumMessageInputparamter) {
+ 	public void update(AnemicMessageDTO newForumMessageInputparamter) {
  		try {
  			merge(newForumMessageInputparamter);
  
@@ -79,9 +87,10 @@ compose a Thread(ForumThread)，ForumThread is a aggregate root entity too! ther
  					forumThread.moveForum(this, newForumMessageInputparamter.getForum());
  				}
  			}
+			 ....
  			// save this updated message to db
  			eventSourcing.saveMessage(new MessageUpdatedEvent(newForumMessageInputparamter));
- //			this.applyFilters();
+             ....
  		} catch (Exception e) {
  			System.err.print(" updateMessage error:" + e + this.messageId);
  		}
@@ -89,10 +98,9 @@ compose a Thread(ForumThread)，ForumThread is a aggregate root entity too! ther
 
  ``````
  @OnCommand("updateForumMessage") annotation is a command handler in pub-sub model,
- that is  from jdon frmaework. here it is a single-writer pattern, no blocked, no lock,
- high concurrent! any time there is a one thread calling this update method of a ForumMessage.
+ the annotation is from jdon frmaework, make this method executed in a single-writer pattern - no blocked, no lock, high concurrent. only one thread/process invoking this update method.
  
- "eventSourcing.saveMessage" will send a Domain Event to Infrastructure layer such as Repository.
+ "eventSourcing.saveMessage" will send a Domain Event to infrastructure layer such as Repository.
  
  
  

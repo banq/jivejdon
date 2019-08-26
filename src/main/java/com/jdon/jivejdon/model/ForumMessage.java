@@ -29,15 +29,12 @@ import com.jdon.jivejdon.model.event.MessagePropertiesUpdatedEvent;
 import com.jdon.jivejdon.model.event.MessageUpdatedEvent;
 import com.jdon.jivejdon.model.event.ReplyMessageCreatedEvent;
 import com.jdon.jivejdon.model.event.UploadFilesSavedEvent;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.message.FilterPipleSpec;
 import com.jdon.jivejdon.model.message.MessageUrlVO;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.model.proptery.MessagePropertysVO;
 import com.jdon.jivejdon.model.reblog.ReBlogVO;
-import org.compass.annotations.Searchable;
-import org.compass.annotations.SearchableComponent;
-import org.compass.annotations.SearchableId;
-import org.compass.annotations.SearchableReference;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -63,569 +60,482 @@ import java.util.Collection;
  * @author <a href="mailto:banq@163.com">banq</a>
  */
 @Model
-@Searchable
 public class ForumMessage extends ForumModel implements Cloneable {
-	private static final long serialVersionUID = 1L;
-	@Inject
-	public LazyLoaderRole lazyLoaderRole;
-	@Inject
-	public MessageEventSourcingRole eventSourcing;
-	@Inject
-	public ShortMPublisherRole shortMPublisherRole;
-	@SearchableId
-	private Long messageId;
-	@SearchableComponent
-	private MessageVO messageVO;
-	private MessageUrlVO messageUrlVO;
-	private FilterPipleSpec filterPipleSpec;
-	private String creationDate;
-	private long modifiedDate;
-	private Account account; // owner
-	private Account operator; // operator this message,maybe Admin or others;
-	private volatile ForumThread forumThread;
-	@SearchableReference
-	private Forum forum;
+    private static final long serialVersionUID = 1L;
+    @Inject
+    public LazyLoaderRole lazyLoaderRole;
+    @Inject
+    public MessageEventSourcingRole eventSourcing;
+    @Inject
+    public ShortMPublisherRole shortMPublisherRole;
 
-	private String[] tagTitle;
+    private Long messageId;
+    private MessageVO messageVO;
+    private MessageUrlVO messageUrlVO;
+    private FilterPipleSpec filterPipleSpec;
+    private String creationDate;
+    private long modifiedDate;
+    private Account account; // owner
+    private volatile ForumThread forumThread;
+    private Forum forum;
 
-	private boolean replyNotify;
-	private AttachmentsVO attachmentsVO;
-	private MessagePropertysVO messagePropertysVO;
-	private ReBlogVO reBlogVO;
+    private String[] tagTitle;
+    private AttachmentsVO attachmentsVO;
+    private MessagePropertysVO messagePropertysVO;
+    private ReBlogVO reBlogVO;
 
-	// created from repository that will be in memory, it is Entity
-	public ForumMessage(Long messageId) {
-		this.messageId = messageId;
-		this.messageVO = this.messageVOBuilder().subject("").body("").build();
-		this.messageUrlVO = new MessageUrlVO("", "");
-	}
+    // created from repository that will be in memory, it is Entity
+    public ForumMessage(Long messageId) {
+        this.messageId = messageId;
+        this.messageVO = this.messageVOBuilder().subject("").body("").build();
+        this.messageUrlVO = new MessageUrlVO("", "");
+    }
 
-	// created in UI, catch the messageForm's copy data, it is DTO.
-	public ForumMessage() {
-		this.messageId = null;
-		this.setParameter(true);//this is a DTO parameter
-		this.messageVO = this.messageVOBuilder().subject("").body("").build();
-		this.messageUrlVO = new MessageUrlVO("", "");
-		this.account = new Account();
-		this.attachmentsVO = new AttachmentsVO(new Long(0), new ArrayList());
-		this.messagePropertysVO = new MessagePropertysVO(new Long(0), new ArrayList());
-	}
+    // created in UI, catch the messageForm's copy data, it is DTO.
+    public ForumMessage() {
+        this.messageId = null;
+        this.setParameter(true);//this is a DTO parameter
+        this.messageVO = this.messageVOBuilder().subject("").body("").build();
+        this.messageUrlVO = new MessageUrlVO("", "");
+        this.account = new Account();
+        this.attachmentsVO = new AttachmentsVO(new Long(0), new ArrayList());
+        this.messagePropertysVO = new MessagePropertysVO(new Long(0), new ArrayList());
+    }
 
+    public static RequireMessageId messageBuilder() {
+        return messageId -> messageVO -> forum -> forumThread -> account -> creationDate ->modifiedDate-> filterPipleSpec
+                -> uploads -> properties -> new FinalStageVO(messageId, messageVO, forum, forumThread, account,  creationDate,  modifiedDate, filterPipleSpec, uploads, properties);
+    }
 
-	public void finishDTO() {
-		this.attachmentsVO = null;
-		this.messagePropertysVO = null;
-		this.setParameter(false);
-	}
+    public Account getAccount() {
+        return account;
+    }
 
-	/**
-	 * @return Returns the account.
-	 */
-	public Account getAccount() {
-		return account;
-	}
+    private void setAccount(com.jdon.jivejdon.model.Account account) {
+        this.account = account;
+    }
 
-	/**
-	 * @param account The account to set.
-	 */
-	public void setAccount(com.jdon.jivejdon.model.Account account) {
-		this.account = account;
-	}
+    public boolean isLeaf() {
+        return this.forumThread.isLeaf(this);
+    }
 
-	public Account getOperator() {
-		return operator;
-	}
+    public boolean isRoot() {
+        return this.forumThread.isRoot(this);
+    }
 
-	public void setOperator(Account operator) {
-		this.operator = operator;
-	}
+    public MessageVO getMessageVO() {
+        return messageVO;
+    }
 
-	public boolean isLeaf() {
-		return this.forumThread.isLeaf(this);
-	}
+    public void setMessageVO(MessageVO messageVO) {
+        if (messageVO.getForumMessage() == null || messageVO.getForumMessage() != this) {
+            this.messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO
+                    .getBody()).build();
+        } else
+            this.messageVO = messageVO;
+    }
 
-	public boolean isRoot() {
-		return this.forumThread.isRoot(this);
-	}
+    public MessageVO getMessageVOClone() throws Exception {
+        return (MessageVO) this.messageVO.clone();
+    }
 
+    /**
+     * there are two kinds MessageVO;
+     * 1. applied business rule filter
+     * 2. original that saved in repository
+     */
+    public void reloadMessageVOOrignal() {
+        DomainMessage em = lazyLoaderRole.reloadMessageVO(this.messageId);
+        messageVO = (MessageVO) em.getBlockEventResult();
+        setMessageVO(messageVO);
+        em.clear();
+    }
 
-	public MessageVO getMessageVO() {
-		return messageVO;
-	}
-
-	public void setMessageVO(MessageVO messageVO) {
-		if (messageVO.getForumMessage() == null || messageVO.getForumMessage() != this) {
-			this.messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO
-					.getBody()).build();
-		} else
-			this.messageVO = messageVO;
-	}
-
-
-	public MessageVO getMessageVOClone() throws Exception {
-		return (MessageVO) this.messageVO.clone();
-	}
-
-	/**
-	 * there are two kinds MessageVO;
-	 * 1. applied business rule filter
-	 * 2. original that saved in repository
-	 */
-	public void reloadMessageVOOrignal() {
-		DomainMessage em = lazyLoaderRole.reloadMessageVO(this.messageId);
-		messageVO = (MessageVO) em.getBlockEventResult();
-		setMessageVO(messageVO);
-		em.clear();
-	}
-
-	/**
-	 * post a reply forumMessage
-	 *
-	 * @param forumMessageReply
-	 */
-	@OnCommand("addreplyForumMessage")
-	public void addChild(ForumMessageReply forumMessageReply) {
-		try {
+    /**
+     * post a reply forumMessage
+     */
+    @OnCommand("addreplyForumMessage")
+    public void addChild(AnemicMessageDTO anemicMessageDTO) {
+        try {
 //			Thread.sleep(5000); test blocking async
-			// basic construct
-			forumMessageReply.setParentMessage(this);
-			forumMessageReply.setForumThread(this.getForumThread());
-			forumMessageReply.setForum(this.getForum());
+            // basic construct
+            ForumMessageReply forumMessageReply = new ForumMessageReply();
+            long modifiedDate = System.currentTimeMillis();
+            String creationDate = Constants.getDefaultDateTimeDisp(modifiedDate);
+            forumMessageReply = ForumMessageReply.messageBuilder()
+                    .messageId(anemicMessageDTO.getMessageId())
+                    .messageVO(anemicMessageDTO.getMessageVO())
+                    .forum(this.forum).forumThread(this.forumThread)
+                    .acount(anemicMessageDTO.getAccount())
+                    .creationDate(creationDate)
+                    .modifiedDate(modifiedDate)
+                    .filterPipleSpec(this.filterPipleSpec)
+                    .uploads(anemicMessageDTO.getAttachment().getUploadFiles())
+                    .props(anemicMessageDTO.getMessagePropertysVO().getPropertys())
+                    .build(forumMessageReply, this);
 
-			// in eventHandler, after saving to DB, this forumMessageReply will
-			// be saved to cache.
-			eventSourcing.addReplyMessage(new ReplyMessageCreatedEvent(forumMessageReply));
+            forumThread.addNewMessage(this, forumMessageReply);
+            forumMessageReply.getAccount().updateMessageCount(1);
+            anemicMessageDTO.setForumThread(this.forumThread);
+            anemicMessageDTO.setForum(this.forum);
+            eventSourcing.addReplyMessage(new ReplyMessageCreatedEvent(anemicMessageDTO));
+        } catch (Exception e) {
+            System.err.print(" addReplyMessage error:" + e + this.messageId);
+        }
+    }
 
-			forumThread.addNewMessage(this, forumMessageReply);
+    /**
+     * doing after put a exist forumMessage
+     *
+     * @param newForumMessageInputparamter
+     */
+    @OnCommand("updateForumMessage")
+    public void update(AnemicMessageDTO newForumMessageInputparamter) {
+        try {
+            merge(newForumMessageInputparamter);
 
-//		    forumMessageReply.setOutFilters(this.getOutFilters());
+            ForumThread forumThread = this.getForumThread();
+            forumThread.updateMessage(this);
 
-			// messagecount + 1
-			forumMessageReply.getAccount().updateMessageCount(1);
-
-			// no need here, the new forumMessageReply will be fetch from cache
-			// (messageDirector.getMessage)
-
-			// and then, in messageDirector.getMessage there will have a
-			// applyFilters.
-
-			// this.applyFilters();
-		} catch (Exception e) {
-			System.err.print(" addReplyMessage error:" + e + this.messageId);
-		}
-	}
-
-	/**
-	 * doing after put a exist forumMessage
-	 *
-	 * @param newForumMessageInputparamter
-	 */
-	@OnCommand("updateForumMessage")
-	public void update(ForumMessage newForumMessageInputparamter) {
-		try {
-			merge(newForumMessageInputparamter);
-
-			ForumThread forumThread = this.getForumThread();
-			forumThread.updateMessage(this);
-
-			if (newForumMessageInputparamter.getForum() != null) {
-				Long newforumId = newForumMessageInputparamter.getForum().getForumId();
-				if (newforumId != null && getForum().getForumId() != newforumId) {
-					forumThread.moveForum(this, newForumMessageInputparamter.getForum());
-				}
-			}
-			// save this updated message to db
-			eventSourcing.saveMessage(new MessageUpdatedEvent(newForumMessageInputparamter));
+            if (newForumMessageInputparamter.getForum() != null) {
+                Long newforumId = newForumMessageInputparamter.getForum().getForumId();
+                if (newforumId != null && getForum().getForumId() != newforumId) {
+                    Forum newForum = forumThread.moveForum(this, newForumMessageInputparamter.getForum());
+                    this.setForum(newForum);
+                }
+            }
+            // save this updated message to db
+            eventSourcing.saveMessage(new MessageUpdatedEvent(newForumMessageInputparamter));
 //			this.applyFilters();
-		} catch (Exception e) {
-			System.err.print(" updateMessage error:" + e + this.messageId);
-		}
-	}
+        } catch (Exception e) {
+            System.err.print(" updateMessage error:" + e + this.messageId);
+        }
+    }
 
-	/**
-	 * merge the new into myself, include aggregation or association parts
-	 *
-	 * @param newForumMessageInputparamter
-	 * @throws Exception
-	 */
-	private void merge(ForumMessage newForumMessageInputparamter) throws Exception {
-		long now = System.currentTimeMillis();
-		setModifiedDate(now);
+    /**
+     * merge the new into myself, include aggregation or association parts
+     *
+     * @param newForumMessageInputparamter
+     * @throws Exception
+     */
+    private void merge(AnemicMessageDTO newForumMessageInputparamter) throws Exception {
+        long now = System.currentTimeMillis();
+        setModifiedDate(now);
 
-		// 1. aggregation
-		MessageVO newMessageVO = (MessageVO) newForumMessageInputparamter.getMessageVO().clone();
-		Account newAccount = newForumMessageInputparamter.getOperator();
-		// 2. association upload files
-		// send message that include a new value Object. not send a entity
-		// object such as this
-		Collection<UploadFile> uploads = newForumMessageInputparamter.getAttachment()
-				.getUploadFiles();
-		if (uploads != null) {
-			eventSourcing.saveUploadFiles(new UploadFilesSavedEvent(this.messageId, uploads));
-//			// update memory using builder
-//			this.getAttachment().setUploadFiles(uploads);
-		}
+        // 1. aggregation
+        MessageVO newMessageVO = (MessageVO) newForumMessageInputparamter.getMessageVO().clone();
+        Account newAccount = newForumMessageInputparamter.getOperator();
+        // 2. association upload files
+        Collection<UploadFile> uploads = newForumMessageInputparamter.getAttachment()
+                .getUploadFiles();
+        if (uploads != null) {
+            eventSourcing.saveUploadFiles(new UploadFilesSavedEvent(this.messageId, uploads));
+        }
+        // 3. association message property
+        Collection<Property> props = newForumMessageInputparamter.getMessagePropertysVO()
+                .getPropertys();
+        ForumMessage.messageBuilder().messageId(this.getMessageId()).messageVO
+                (newMessageVO).forum
+                (this.forum).forumThread(this.forumThread)
+                .acount(newAccount).creationDate(this.creationDate).modifiedDate(now).filterPipleSpec(this.filterPipleSpec)
+                .uploads(uploads).props(props).build(this);
 
-		// 3. association message property
-		Collection<Property> props = newForumMessageInputparamter.getMessagePropertysVO()
-				.getPropertys();
-		//using builder
-//		this.getMessagePropertysVO().replacePropertys(props);
+        // merge with old properties;
+        eventSourcing.saveMessageProperties(new MessagePropertiesUpdatedEvent(this.messageId,
+                getMessagePropertysVO().getPropertys()));
 
-		this.messageBuilder().messageCore(this).messageVO
-				(newMessageVO).forum
-				(this.forum).forumThread(this.forumThread)
-				.acount(newAccount).filterPipleSpec(this.filterPipleSpec)
-				.uploads(uploads).props(props).build();
+    }
 
-		// merge with old properties;
-		eventSourcing.saveMessageProperties(new MessagePropertiesUpdatedEvent(this.messageId,
-				getMessagePropertysVO().getPropertys()));
+    public void updateMasked(boolean masked) {
+        this.getMessagePropertysVO().updateMasked(masked);
+        eventSourcing.saveMessageProperties(new MessagePropertiesUpdatedEvent(this.messageId,
+                getMessagePropertysVO().getPropertys()));
+        this.getForumThread().updateMessage(this);
+        this.reloadMessageVOOrignal();
+    }
 
-	}
+    public AttachmentsVO getAttachment() {
+        if (attachmentsVO == null)
+            attachmentsVO = new AttachmentsVO(this.messageId, this.lazyLoaderRole);
+        return attachmentsVO;
+    }
 
-	public void updateMasked(boolean masked) {
-		this.getMessagePropertysVO().updateMasked(masked);
-		eventSourcing.saveMessageProperties(new MessagePropertiesUpdatedEvent(this.messageId,
-				getMessagePropertysVO().getPropertys()));
-		this.getForumThread().updateMessage(this);
-		this.reloadMessageVOOrignal();
-//		this.applyFilters();
-	}
+    private void setAttachment(AttachmentsVO attachmentsVO) {
+        this.attachmentsVO = attachmentsVO;
+    }
 
-	public AttachmentsVO getAttachment() {
-		if (attachmentsVO == null)
-			attachmentsVO = new AttachmentsVO(this.messageId, this.lazyLoaderRole);
-		return attachmentsVO;
-	}
+    public boolean isMasked() {
+        return this.getMessagePropertysVO().isMasked();
+    }
 
-	public void setAttachment(AttachmentsVO attachmentsVO) {
-		this.attachmentsVO = attachmentsVO;
-	}
+    private void setMasked(boolean masked) {
+        getMessagePropertysVO().setMasked(masked);
+    }
 
-	/**
-	 * this mesages is masked by admin
-	 *
-	 * @return boolean
-	 */
-	public boolean isMasked() {
-		return this.getMessagePropertysVO().isMasked();
-	}
+    public String getCreationDate() {
+        return creationDate;
+    }
 
-	public void setMasked(boolean masked) {
-		getMessagePropertysVO().setMasked(masked);
-	}
+    private void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
+    }
 
-	/**
-	 * @return Returns the creationDate.
-	 */
-	public String getCreationDate() {
-		return creationDate;
-	}
+    public String getCreationDateForDay() {
+        return creationDate.substring(2, 16);
+    }
 
-	/**
-	 * @param creationDate The creationDate to set.
-	 */
-	public void setCreationDate(String creationDate) {
-		this.creationDate = creationDate;
-	}
+    public Long getMessageId() {
+        return messageId;
+    }
 
-	public String getCreationDateForDay() {
-		return creationDate.substring(2, 16);
-	}
+    private void setMessageId(Long messageId) {
+        this.messageId = messageId;
+    }
 
-	/**
-	 * @return Returns the messageId.
-	 */
-	public Long getMessageId() {
-		return messageId;
-	}
+    public String getModifiedDate() {
+        if (this.modifiedDate == 0)
+            return "";
+        return Constants.getDefaultDateTimeDisp(modifiedDate);
+    }
 
-	/**
-	 * @param messageId The messageId to set.
-	 */
-	public void setMessageId(Long messageId) {
-		this.messageId = messageId;
-	}
+    private void setModifiedDate(long modifiedDate) {
+        this.modifiedDate = modifiedDate;
+    }
 
-	/**
-	 * @return Returns the modifiedDate.
-	 */
-	public String getModifiedDate() {
-		if (this.modifiedDate == 0)
-			return "";
-		return Constants.getDefaultDateTimeDisp(modifiedDate);
-	}
+    public String getModifiedDate3() {
+        if (modifiedDate == 0)
+            return "";
+        return Constants.convertDataToPretty(modifiedDate);
+    }
 
-	/**
-	 * @param modifiedDate The modifiedDate to set.
-	 */
-	public void setModifiedDate(long modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
+    public long getModifiedDate2() {
+        return modifiedDate;
+    }
 
-	public String getModifiedDate3() {
-		if (modifiedDate == 0)
-			return "";
-		return Constants.convertDataToPretty(modifiedDate);
-	}
+    public ForumThread getForumThread() {
+        return forumThread;
+    }
 
-	public long getModifiedDate2() {
-		return modifiedDate;
-	}
+    private void setForumThread(ForumThread forumThread) {
+        this.forumThread = forumThread;
+    }
 
-	/**
-	 * @return Returns the forumThread.
-	 */
-	public ForumThread getForumThread() {
-		return forumThread;
-	}
+    public Forum getForum() {
+        return forum;
+    }
 
-	/**
-	 * @param forumThread The forumThread to set.
-	 */
-	public void setForumThread(ForumThread forumThread) {
-		this.forumThread = forumThread;
-	}
+    private void setForum(Forum forum) {
+        this.forum = forum;
+    }
 
-	/**
-	 * @return Returns the forum.
-	 */
-	public Forum getForum() {
-		return forum;
-	}
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 
-	/**
-	 * @param forum The forum to set.
-	 */
-	public void setForum(Forum forum) {
-		this.forum = forum;
-	}
+    public int getDigCount() {
+        return this.getMessagePropertysVO().getDigCount();
+    }
 
-	public Object clone() throws CloneNotSupportedException {
-		return super.clone();
-	}
+    public MessagePropertysVO getMessagePropertysVO() {
+        if (messagePropertysVO == null && lazyLoaderRole != null)
+            messagePropertysVO = new MessagePropertysVO(messageId, this.lazyLoaderRole);
+        else if (messagePropertysVO == null && lazyLoaderRole == null) {
+            System.err.print("my god, how I was bornd?");
+        }
+        return messagePropertysVO;
+    }
 
-	public int getDigCount() {
-		return this.getMessagePropertysVO().getDigCount();
-	}
+    public void preloadWhenView() {
+        getMessagePropertysVO().preload();
+        getAttachment().preloadUploadFileDatas();// preload img
+    }
 
-	public MessagePropertysVO getMessagePropertysVO() {
-		if (messagePropertysVO == null && lazyLoaderRole != null)
-			messagePropertysVO = new MessagePropertysVO(messageId, this.lazyLoaderRole);
-		else if (messagePropertysVO == null && lazyLoaderRole == null) {
-			System.err.print("my god, how I was bornd?");
-		}
-		return messagePropertysVO;
-	}
+    public void messaegDigAction() {
+        this.getMessagePropertysVO().addMessageDigCount();
+        this.forumThread.addDig(this);
+        eventSourcing.saveMessageProperties(new MessagePropertiesUpdatedEvent(this.messageId,
+                getMessagePropertysVO().getPropertys()));
+    }
 
-	public void setMessagePropertysVO(MessagePropertysVO messagePropertysVO) {
-		this.messagePropertysVO = messagePropertysVO;
-	}
+    public String getPostip() {
+        return this.getMessagePropertysVO().getPostip();
+    }
 
-	public void preloadWhenView() {
-		getMessagePropertysVO().preload();
-		getAttachment().preloadUploadFileDatas();// preload img
-	}
+    public ReBlogVO getReBlogVO() {
+        if (reBlogVO == null)
+            reBlogVO = new ReBlogVO(this.messageId, this.lazyLoaderRole);
+        return reBlogVO;
+    }
 
-	public void messaegDigAction() {
-		this.getMessagePropertysVO().addMessageDigCount();
-		this.forumThread.addDig(this);
-		eventSourcing.saveMessageProperties(new MessagePropertiesUpdatedEvent(this.messageId,
-				getMessagePropertysVO().getPropertys()));
-	}
+    public void setReBlogVO(ReBlogVO reBlogVO) {
+        this.reBlogVO = reBlogVO;
+    }
 
-	public boolean isReplyNotify() {
-		return replyNotify;
-	}
+    public String[] getTagTitle() {
+        return tagTitle;
+    }
 
-	public void setReplyNotify(boolean replyNotify) {
-		this.replyNotify = replyNotify;
-	}
+    public void setTagTitle(String[] tagTitle) {
+        this.tagTitle = tagTitle;
+    }
 
-	public String getPostip() {
-		return this.getMessagePropertysVO().getPostip();
-	}
+    private void setFilterPipleSpec(FilterPipleSpec filterPipleSpec) {
+        this.filterPipleSpec = filterPipleSpec;
+    }
 
-	public ReBlogVO getReBlogVO() {
-		if (reBlogVO == null)
-			reBlogVO = new ReBlogVO(this.messageId, this.lazyLoaderRole);
-		return reBlogVO;
-	}
+    public MessageUrlVO getMessageUrlVO() {
+        return messageUrlVO;
+    }
 
-	public void setReBlogVO(ReBlogVO reBlogVO) {
-		this.reBlogVO = reBlogVO;
-	}
+    public void setMessageUrlVO(MessageUrlVO messageUrlVO) {
+        this.messageUrlVO = messageUrlVO;
+    }
 
-	public String[] getTagTitle() {
-		return tagTitle;
-	}
-
-	public void setTagTitle(String[] tagTitle) {
-		this.tagTitle = tagTitle;
-	}
-
-	public FilterPipleSpec getFilterPipleSpec() {
-		return filterPipleSpec;
-	}
-
-	/**
-	 * if change filterPipleSpec, so means this message content become initial state.
-	 * need apply business rule filter again
-	 * <p>
-	 * calling this method  = this.setSolid(false)
-	 *
-	 * @param filterPipleSpec
-	 */
-	public void setFilterPipleSpec(FilterPipleSpec filterPipleSpec) {
-		this.filterPipleSpec = filterPipleSpec;
-	}
-
-	public MessageUrlVO getMessageUrlVO() {
-		return messageUrlVO;
-	}
-
-	public void setMessageUrlVO(MessageUrlVO messageUrlVO) {
-		this.messageUrlVO = messageUrlVO;
-	}
-
-	/**
-	 * lambdas builder pattern
-	 * <p>
-	 * lazy builder = only build messageVO -> forum -> forumThread -> account -> filterPipleSpec
-	 * eager builder = lazy builder + upload + messgaeProptery
-	 * <p>
-	 * this builder is from repository to aggregate;
-	 * another builder is from UI to aggregate, this model acts as
-	 * a DTO
-	 * </p>
-	 * <p>
-	 * lazy builder usage:
-	 * forumMessageCore.builder().messageCore("messageCore").messageVO
-	 * ("messageVO").forum
-	 * ("forum").forumThread("forumThread")
-	 * .acount("accountOptional.orElse(new Account())").filterPipleSpec("filterPipleSpec")
-	 * .uploads("null").props("null").build();
-	 *
-	 * @return
-	 */
-	public RequireMessageCore messageBuilder() {
-		return messageCore -> messageVO -> forum -> forumThread -> account -> filterPipleSpec
-				-> uploads -> properties -> new FinalStageVO(messageCore,
-				messageVO, forum, forumThread, account, filterPipleSpec, uploads, properties);
-	}
-
-	public void build(MessageVO messageVO, Forum
-			forum, ForumThread forumThread, Account account, FilterPipleSpec filterPipleSpec,
-					  Collection<UploadFile> uploads, Collection<Property> props) {
-		synchronized (this) {
-			this.setSolid(false);//begin to construt it
-			setAccount(account);
-			setForum(forum);
-			setForumThread(forumThread);
-			setFilterPipleSpec(filterPipleSpec);
-			if (uploads != null)
-				this.getAttachment().setUploadFiles(uploads);
-			if (props != null)
-				this.getMessagePropertysVO().replacePropertys(props);
-			else
-				//preload messageProperty
-				getMessagePropertysVO().preLoadPropertys();
-			//apply all filter specification , business rule!
-			messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO
-					.getBody()).build();
-			setMessageVO(filterPipleSpec.apply(messageVO));
-			this.setSolid(true);//construt end
-		}
-
-	}
-
-	/**
-	 * build a messageVO
-	 */
-	public RequireSubject messageVOBuilder() {
-		return subject -> body -> new MessageVO.MessageVOFinalStage(subject, body, this);
-	}
-
-	@FunctionalInterface
-	public interface RequireMessageCore {
-		RequireMessageVO messageCore(ForumMessage messageCore);
-	}
-
-	@FunctionalInterface
-	public interface RequireMessageVO {
-		RequireForum messageVO(MessageVO messageVO);
-	}
+    /**
+     * build a messageVO
+     */
+    public RequireSubject messageVOBuilder() {
+        return subject -> body -> new MessageVO.MessageVOFinalStage(subject, body, this);
+    }
 
 
-	@FunctionalInterface
-	public interface RequireForum {
-		RequireForumThread forum(Forum forum);
-	}
-
-	@FunctionalInterface
-	public interface RequireForumThread {
-		RequireAccount forumThread(ForumThread forumThread);
-	}
-
-	@FunctionalInterface
-	public interface RequireAccount {
-		RequireFilterPipleSpec acount(Account account);
-	}
-
-	@FunctionalInterface
-	public interface RequireFilterPipleSpec {
-		OptionsUploadFile filterPipleSpec(FilterPipleSpec filterPipleSpec);
-	}
-
-	@FunctionalInterface
-	public interface OptionsUploadFile {
-		OptionsProperties uploads(Collection<UploadFile> uploads);
-	}
+    @FunctionalInterface
+    public interface RequireMessageId {
+        RequireMessageVO messageId(long messageId);
+    }
 
 
-	@FunctionalInterface
-	public interface OptionsProperties {
-		FinalStageVO props(Collection<Property> props);
-	}
+    @FunctionalInterface
+    public interface RequireMessageVO {
+        RequireForum messageVO(MessageVO messageVO);
+    }
 
-	@FunctionalInterface
-	public interface RequireSubject {
-		MessageVO.RequireBody subject(String subject);
-	}
+    @FunctionalInterface
+    public interface RequireForum {
+        RequireForumThread forum(Forum forum);
+    }
 
-	@FunctionalInterface
-	public interface RequireBody {
-		MessageVO.MessageVOFinalStage body(String body);
-	}
+    @FunctionalInterface
+    public interface RequireForumThread {
+        RequireAccount forumThread(ForumThread forumThread);
+    }
 
-	public class FinalStageVO {
-		private final ForumMessage messageCore;
-		private final MessageVO messageVO;
-		private final Account account;
-		private final Forum forum;
-		private final ForumThread forumThread;
-		private final FilterPipleSpec filterPipleSpec;
-		private final Collection<UploadFile> uploads;
-		private final Collection<Property> props;
+    @FunctionalInterface
+    public interface RequireAccount {
+        RequireCreationDate acount(Account account);
+    }
 
-		public FinalStageVO(ForumMessage messageCore, MessageVO messageVO, Forum
-				forum, ForumThread forumThread, Account account, FilterPipleSpec filterPipleSpec,
-							Collection<UploadFile> uploads, Collection<Property> props) {
-			this.messageCore = messageCore;
-			this.messageVO = messageVO;
-			this.account = account;
-			this.forum = forum;
-			this.forumThread = forumThread;
-			this.filterPipleSpec = filterPipleSpec;
-			this.uploads = uploads;
-			this.props = props;
-		}
+    @FunctionalInterface
+    public interface RequireCreationDate {
+        RequireModifiedDate creationDate(String creationDate);
+    }
 
-		public ForumMessage build() {
-			messageCore.build(messageVO, forum, forumThread, account,
-					filterPipleSpec, uploads, props);
-			return messageCore;
-		}
-	}
+    @FunctionalInterface
+    public interface RequireModifiedDate {
+        RequireFilterPipleSpec modifiedDate(long modifiedDate);
+    }
+
+    @FunctionalInterface
+    public interface RequireFilterPipleSpec {
+        OptionsUploadFile filterPipleSpec(FilterPipleSpec filterPipleSpec);
+    }
+
+
+    @FunctionalInterface
+    public interface OptionsUploadFile {
+        OptionsProperties uploads(Collection<UploadFile> uploads);
+    }
+
+    @FunctionalInterface
+    public interface OptionsProperties {
+        FinalStageVO props(Collection<Property> props);
+    }
+
+    @FunctionalInterface
+    public interface RequireSubject {
+        MessageVO.RequireBody subject(String subject);
+    }
+
+    @FunctionalInterface
+    public interface RequireBody {
+        MessageVO.MessageVOFinalStage body(String body);
+    }
+
+
+
+    public static class FinalStageVO {
+        private final long messageId;
+        private final MessageVO messageVO;
+        private final Account account;
+        private final String creationDate;
+        private final long modifiedDate;
+        private final Forum forum;
+        private final ForumThread forumThread;
+        private final FilterPipleSpec filterPipleSpec;
+        private final Collection<UploadFile> uploads;
+        private final Collection<Property> props;
+
+        public FinalStageVO(long messageId, MessageVO messageVO, Forum
+                forum, ForumThread forumThread, Account account, String creationDate, long modifiedDate,FilterPipleSpec filterPipleSpec,
+                            Collection<UploadFile> uploads, Collection<Property> props) {
+            this.messageId = messageId;
+            this.messageVO = messageVO;
+            this.account = account;
+            this.creationDate = creationDate;
+            this.modifiedDate = modifiedDate;
+            this.forum = forum;
+            this.forumThread = forumThread;
+            this.filterPipleSpec = filterPipleSpec;
+            this.uploads = uploads;
+            this.props = props;
+        }
+
+        public ForumMessage build(ForumMessage forumMessage) {
+            forumMessage.build(messageId, messageVO, forum, forumThread, account,
+                    creationDate,  modifiedDate, filterPipleSpec, uploads, props);
+            return forumMessage;
+        }
+
+        public ForumMessageReply build(ForumMessageReply forumMessageRely,
+                                       ForumMessage parentForumMessage) {
+            forumMessageRely.build(messageId, messageVO, forum, forumThread, account,
+                    creationDate,  modifiedDate, filterPipleSpec, uploads,
+                    props, parentForumMessage);
+            return forumMessageRely;
+        }
+    }
+
+
+    public void build(long messageId, MessageVO messageVO, Forum
+            forum, ForumThread forumThread, Account account,String creationDate, long modifiedDate ,FilterPipleSpec filterPipleSpec,
+                      Collection<UploadFile> uploads, Collection<Property> props) {
+        if (this.isSolid()) return;
+        try {
+            synchronized (this) {
+                if (this.isSolid()) return;
+                setMessageId(messageId);
+                setAccount(account);
+                setCreationDate(creationDate);
+                setModifiedDate(modifiedDate);
+                setForum(forum);
+                setForumThread(forumThread);
+                setFilterPipleSpec(filterPipleSpec);
+                if (uploads != null)
+                    this.getAttachment().setUploadFiles(uploads);
+                if (props != null)
+                    this.getMessagePropertysVO().replacePropertys(props);
+                else
+                    //preload messageProperty
+                    getMessagePropertysVO().preLoadPropertys();
+                //apply all filter specification , business rule!
+                messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO
+                        .getBody()).build();
+                setMessageVO(filterPipleSpec.apply(messageVO));
+                this.setSolid(true);//construt end
+            }
+        } catch (Exception e) {
+            System.err.print("my god, how I was bornd?");
+        }
+
+    }
 }
