@@ -14,7 +14,7 @@ DDD Aggregate Model
 ==============================
 
 ![avatar](./doc/aggregates2.png)
-[https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java](com.jdon.jivejdon.model.ForumMessage) is the aggregate root, it is a rich model, all setter methods are "private",such as:
+[com.jdon.jivejdon.model.ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java) is the aggregate root, it is a rich model, all setter methods are "private":
 ![avatar](./doc/private-setter.png)
 
 but all datas out of domain is packed in a DTO anemic model, so business rules in the aggregate root entity will not leak outside domain. 
@@ -39,7 +39,7 @@ View/Jsp(OUTSIDE) ---> models.xml(transfomer/DTO anemic model) ---> ForumMessage
 ---->Domain Events -----> Repository
 ``````
 
-the resource file [https://github.com/banq/jivejdon/blob/master/src/main/resources/com/jdon/jivejdon/model/models.xml](models.xml) is a adapter, using AnemicMessageDTO transfom View/Action Form datas:
+the resource file [models.xml](https://github.com/banq/jivejdon/blob/master/src/main/resources/com/jdon/jivejdon/model/models.xml) is a adapter, using AnemicMessageDTO transfom View/Action Form datas:
 ``````
 	<model key="messageId"
 			class="com.jdon.jivejdon.model.message.AnemicMessageDTO">
@@ -56,7 +56,7 @@ the resource file [https://github.com/banq/jivejdon/blob/master/src/main/resourc
 		</model>
 ``````
 when update a message, the message.jsp will call updateMethod's value defined in models.xml;
-so it will actually call [https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/service/imp/message/ForumMessageShell.java](forumMessageService) updateMessage method:
+so it will actually call [forumMessageService](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/service/imp/message/ForumMessageShell.java) updateMessage method:
 
 ``````
 public interface ForumMessageService {
@@ -70,7 +70,7 @@ forumMessageService will delegate to aggregate roots: ForumMessage(topic), Forum
 types: Topic and Rely, one Topic is a root message and has many reply messages, all messages 
 compose one Thread(ForumThread)
  
- [https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java](ForumMessage) update message method:
+ [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java) update message method:
  
  ``````
  	@OnCommand("updateForumMessage")
