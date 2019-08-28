@@ -57,7 +57,7 @@ public interface MessageKernelIF {
 	@Send("postMessageCommand")
 	public DomainMessage post(@Owner long forumId, @Receiver Forum forum, AnemicMessageDTO forumMessageInputDTO) ;
 
-	@Send("addreplyForumMessage")
+	@Send("postReplyMessageCommand")
 	public DomainMessage addreply(@Owner long threadId, @Receiver ForumMessage parentforumMessage, AnemicMessageDTO newForumMessageInputparamter);
 
 	@Send("updateForumMessage")

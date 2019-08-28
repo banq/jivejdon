@@ -84,7 +84,7 @@ public class Forum extends ForumModel {
 	public ThreadEventSourcingRole eventSourcingRole;
 
 	@OnCommand("postMessageCommand")
-	public void topicMessagePost(AnemicMessageDTO anemicMessageDTO) {
+	public void postMessage(AnemicMessageDTO anemicMessageDTO) {
 		//fill the business rule for post a topic message
 		if (isRepeatedMessage(anemicMessageDTO)){
 			System.err.println("repeat message error: " + anemicMessageDTO.getMessageVO().getSubject());

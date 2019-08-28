@@ -160,7 +160,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
     /**
      * post a reply forumMessage
      */
-    @OnCommand("addreplyForumMessage")
+    @OnCommand("postReplyMessageCommand")
     public void addChild(AnemicMessageDTO anemicMessageDTO) {
         try {
 //			Thread.sleep(5000); test blocking async
