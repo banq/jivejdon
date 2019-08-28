@@ -2,11 +2,11 @@ package com.jdon.jivejdon.model.event;
 
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 
-public class TopicMessageCreateCommand {
+public class TopicMessagePostCommand {
 
 	private final AnemicMessageDTO forumMessageDTO;
 
-	public TopicMessageCreateCommand(AnemicMessageDTO forumMessageDTO) {
+	public TopicMessagePostCommand(AnemicMessageDTO forumMessageDTO) {
 		super();
 		this.forumMessageDTO = forumMessageDTO;
 	}
