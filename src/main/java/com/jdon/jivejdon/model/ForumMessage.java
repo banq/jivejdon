@@ -91,7 +91,8 @@ public class ForumMessage extends ForumModel implements Cloneable {
         this.messageUrlVO = new MessageUrlVO("", "");
     }
 
-    // created in UI, catch the messageForm's copy data, it is DTO.
+    // the forumThread using this for AnemicMessageDTO
+    // if create a ForumMessage, please using builder pattern!
     public ForumMessage() {
         this.messageId = null;
         this.setParameter(true);//this is a DTO parameter
@@ -149,6 +150,11 @@ public class ForumMessage extends ForumModel implements Cloneable {
         messageVO = (MessageVO) em.getBlockEventResult();
         setMessageVO(messageVO);
         em.clear();
+    }
+
+    public boolean isSubjectRepeated(String subject){
+        String lastSubject  = getMessageVO().getSubject();
+        return lastSubject.equals(subject)?true:false;
     }
 
     /**

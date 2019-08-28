@@ -62,6 +62,7 @@ public class ForumThread extends ForumModel {
 	public LobbyPublisherRoleIF lobbyPublisherRole;
 	@Inject
 	public MessageEventSourcingRole eventSourcing;
+
 	private Long threadId;
 
 	// same as rootMessage's creationDate
@@ -101,7 +102,7 @@ public class ForumThread extends ForumModel {
 	}
 
 	/**
-	 * temp object
+	 * DTO object, limited usage
 	 */
 	public ForumThread() {
 		this.threadTagsVO = new ThreadTagsVO(this, new ArrayList());

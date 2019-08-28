@@ -5,7 +5,7 @@ import com.jdon.annotation.model.OnEvent;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.event.MessageRemoveCommand;
-import com.jdon.jivejdon.model.event.TopicMessageCreateCommand;
+import com.jdon.jivejdon.model.event.PostTopicMessageCommand;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.util.OneOneDTO;
 import com.jdon.jivejdon.repository.ForumFactory;
@@ -34,7 +34,7 @@ public class MessageTransactionPersistence {
 	}
 
 	@OnEvent("postTopicMessageCommand")
-	public AnemicMessageDTO insertTopicMessage(TopicMessageCreateCommand command) {
+	public ForumMessage insertTopicMessage(PostTopicMessageCommand command) {
 		logger.debug("enter createTopicMessage");
 		AnemicMessageDTO forumMessagePostDTO = command.getForumMessageDTO();
 		try {
@@ -43,7 +43,7 @@ public class MessageTransactionPersistence {
 			messageRepository.createTopicMessage(forumMessagePostDTO);
 			logger.debug("createTopicMessage ok!");
 			jtaTransactionUtil.commitTransaction();
-			return forumMessagePostDTO;
+			return forumAbstractFactory.getMessage(forumMessagePostDTO.getMessageId());
 		} catch (Exception e) {
 			jtaTransactionUtil.rollback();
 			String error = e + " createTopicMessage forumMessageId=" + forumMessagePostDTO.getMessageId();

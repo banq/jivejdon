@@ -15,21 +15,26 @@
  */
 package com.jdon.jivejdon.model;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.concurrent.atomic.AtomicReference;
-
+import com.jdon.annotation.Model;
+import com.jdon.annotation.model.Inject;
+import com.jdon.annotation.model.OnCommand;
+import com.jdon.domain.message.DomainMessage;
+import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.event.domain.producer.read.LazyLoaderRole;
+import com.jdon.jivejdon.model.dci.ThreadEventSourcingRole;
+import com.jdon.jivejdon.model.event.PostTopicMessageCommand;
+import com.jdon.jivejdon.model.event.TopicMessagePostedEvent;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.model.state.ForumStateFactory;
+import com.jdon.jivejdon.model.subscription.SubPublisherRoleIF;
+import com.jdon.jivejdon.model.subscription.event.ForumSubscribedNotifyEvent;
 import org.compass.annotations.Searchable;
 import org.compass.annotations.SearchableId;
 import org.compass.annotations.SearchableProperty;
 
-import com.jdon.annotation.Model;
-import com.jdon.annotation.model.Inject;
-import com.jdon.jivejdon.Constants;
-import com.jdon.jivejdon.event.domain.producer.read.LazyLoaderRole;
-import com.jdon.jivejdon.model.state.ForumStateFactory;
-import com.jdon.jivejdon.model.subscription.SubPublisherRoleIF;
-import com.jdon.jivejdon.model.subscription.event.ForumSubscribedNotifyEvent;
+import java.util.Collection;
+import java.util.Date;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -40,7 +45,7 @@ import com.jdon.jivejdon.model.subscription.event.ForumSubscribedNotifyEvent;
 public class Forum extends ForumModel {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -74,6 +79,35 @@ public class Forum extends ForumModel {
 
 	@Inject
 	private ForumStateFactory forumStateManager;
+
+	@Inject
+	public ThreadEventSourcingRole eventSourcingRole;
+
+	@OnCommand("postMessageCommand")
+	public void topicMessagePost(AnemicMessageDTO anemicMessageDTO) {
+		//fill the business rule for post a topic message
+		if (isRepeatedMessage(anemicMessageDTO)){
+			System.err.println("repeat message error: " + anemicMessageDTO.getMessageVO().getSubject());
+			return;
+		}
+		DomainMessage domainMessage = eventSourcingRole.postTopicMessage(new
+				PostTopicMessageCommand(anemicMessageDTO));
+		ForumMessage rootForumMessage = (ForumMessage)domainMessage.getBlockEventResult();
+		if (rootForumMessage != null) {//make sure repostiory finish save new message
+			threadPosted(rootForumMessage);
+			eventSourcingRole.topicMessagePosted(new TopicMessagePostedEvent(rootForumMessage));
+		}
+	}
+
+	private boolean isRepeatedMessage(AnemicMessageDTO anemicMessageDTO){
+		return this.forumState.get().getLastPost().isSubjectRepeated(anemicMessageDTO.getMessageVO().getSubject())?true:false;
+
+	}
+
+	public void threadPosted(ForumMessage rootForumMessage) {
+		forumStateManager.addNewThread(this, rootForumMessage);
+		this.publisherRole.subscriptionNotify(new ForumSubscribedNotifyEvent(this.forumId, rootForumMessage));
+	}
 
 	public Forum() {
 		// init state
@@ -222,9 +256,6 @@ public class Forum extends ForumModel {
 		forumStateManager.updateMessage(this, forumMessage);
 	}
 
-	public void postThread(ForumMessage topicForumMessage) {
-		forumStateManager.addNewThread(this, topicForumMessage);
-		this.publisherRole.subscriptionNotify(new ForumSubscribedNotifyEvent(this.forumId, topicForumMessage));
-	}
+
 
 }

@@ -125,7 +125,7 @@ public class ForumMessageShell implements ForumMessageService {
 
 			if (!UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getBody()) ||
 					!UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getSubject())) {
-				threadManagerContext.post(forumMessagePostDTO);
+				messageKernel.post(forum.getForumId(), forum, forumMessagePostDTO);
 			}
 
 		} catch (Exception e) {

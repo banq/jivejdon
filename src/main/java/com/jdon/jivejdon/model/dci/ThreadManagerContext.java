@@ -16,73 +16,67 @@
 package com.jdon.jivejdon.model.dci;
 
 import com.jdon.annotation.Component;
-import com.jdon.cache.UtilCache;
-import com.jdon.container.pico.Startable;
 import com.jdon.domain.dci.RoleAssigner;
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.event.domain.producer.write.ThreadEventSourcingRoleImpl;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.event.MessageRemoveCommand;
 import com.jdon.jivejdon.model.event.MessageRemovedEvent;
-import com.jdon.jivejdon.model.event.TopicMessageCreateCommand;
-import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.util.OneOneDTO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Component
-public class ThreadManagerContext implements Startable {
+public class ThreadManagerContext{
 	private final static Logger logger = LogManager.getLogger(ThreadManagerContext.class);
 
 	private final RoleAssigner roleAssinger;
-
-	private final UtilCache transactions;
+//
+//	private final UtilCache transactions;
 
 	public ThreadManagerContext(RoleAssigner roleAssinger) {
 		super();
 		this.roleAssinger = roleAssinger;
-		this.transactions = new UtilCache(100, 30 * 60 * 1000, false);
+//		this.transactions = new UtilCache(100, 30 * 60 * 1000, false);
 	}
 
-	/**
-	 * until creating ok, Read can be execute.
-	 * 
-	 * @param messageId
-	 * @return
-	 */
-	public boolean isTransactionOk(Long messageId) {
-		if (transactions.size() == 0)
-			return true;
-		if (!transactions.containsKey(messageId)) {
-			return true;
-		}
-
-		DomainMessage message = (DomainMessage) transactions.get(messageId);
-		if (message.getBlockEventResult() != null) {
-			transactions.remove(messageId);
-			message.clear();
-			return true;
-		}
-		return false;
-	}
-
-	public void post(AnemicMessageDTO forumMessageInputDTO) {
-
-		// 1. create a root message of a new thread, topic message
-		ThreadEventSourcingRole eventSourcingRole = (ThreadEventSourcingRole) roleAssinger.assign(forumMessageInputDTO,
-				new ThreadEventSourcingRoleImpl());
-		DomainMessage domainMessage = eventSourcingRole.postTopicMessage(new
-				TopicMessageCreateCommand(forumMessageInputDTO));
-		transactions.put(forumMessageInputDTO.getMessageId(), domainMessage);
+//	/**
+//	 * until creating ok, Read can be execute.
+//	 *
+//	 * @param messageId
+//	 * @return
+//	 */
+//	public boolean isTransactionOk(Long messageId) {
+//		if (transactions.size() == 0)
+//			return true;
+//		if (!transactions.containsKey(messageId)) {
+//			return true;
+//		}
+//
+//		DomainMessage message = (DomainMessage) transactions.get(messageId);
+//		if (message.getBlockEventResult() != null) {
+//			transactions.remove(messageId);
+//			message.clear();
+//			return true;
+//		}
+//		return false;
+//	}
 
 
-		//2.post thread in memmory
-		ThreadEventSourcingRole threadRole = (ThreadEventSourcingRole) roleAssinger.assign
-					(forumMessageInputDTO, new ThreadEventSourcingRoleImpl());
-		threadRole.postThread(domainMessage);
+//
+//		// create a root message of a new thread, topic message
+//		ThreadEventSourcingRole eventSourcingRole = (ThreadEventSourcingRole) roleAssinger.assign(forumMessageInputDTO,
+//				new ThreadEventSourcingRoleImpl());
+//		eventSourcingRole.postTopicMessage(new PostTopicMessageCommand(forumMessageInputDTO));
+////		transactions.put(forumMessageInputDTO.getMessageId(), domainMessage);
+//
+//
+//		//2.post thread in memmory
+//		ThreadEventSourcingRole threadRole = (ThreadEventSourcingRole) roleAssinger.assign
+//					(forumMessageInputDTO, new ThreadEventSourcingRoleImpl());
+//		threadRole.postThread(domainMessage);
 
 
-	}
 
 	public void postReBlog(Long messageFromId, Long messageToId) {
 		ThreadEventSourcingRole eventSourcingRole = (ThreadEventSourcingRole) roleAssinger.assignRoleEvents(new ThreadEventSourcingRoleImpl());
@@ -93,23 +87,23 @@ public class ThreadManagerContext implements Startable {
 	public void delete(ForumMessage delforumMessage) {
 		ThreadEventSourcingRole eventSourcingRole = (ThreadEventSourcingRole) roleAssinger.assign(delforumMessage, new ThreadEventSourcingRoleImpl());
 		DomainMessage domainMessage = eventSourcingRole.deleteMessage(new MessageRemoveCommand(delforumMessage.getMessageId()));
-		transactions.put(delforumMessage.getMessageId(), domainMessage);
+//		transactions.put(delforumMessage.getMessageId(), domainMessage);
 
 		ThreadEventSourcingRole threadRole = (ThreadEventSourcingRole) roleAssinger.assign(delforumMessage, new ThreadEventSourcingRoleImpl());
 		threadRole.delThread(new MessageRemovedEvent(delforumMessage));
 
 	}
 
-	@Override
-	public void start() {
-		// TODO Auto-generated method stub
+//	@Override
+//	public void start() {
+//		// TODO Auto-generated method stub
+//
+//	}
 
-	}
-
-	@Override
-	public void stop() {
-		transactions.stop();
-
-	}
+//	@Override
+//	public void stop() {
+//		transactions.stop();
+//
+//	}
 
 }

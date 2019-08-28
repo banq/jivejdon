@@ -17,6 +17,8 @@ package com.jdon.jivejdon.service.imp.message;
 
 import com.jdon.annotation.Component;
 import com.jdon.annotation.Introduce;
+import com.jdon.annotation.model.Owner;
+import com.jdon.annotation.model.Receiver;
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.domain.message.DomainMessage;
@@ -129,10 +131,10 @@ public class MessageKernel implements MessageKernelIF {
 	@Override
 	public ForumMessage getMessage(Long messageId) {
 		logger.debug("enter MessageServiceImp's getMessage");
-		if (threadManagerContext.isTransactionOk(messageId))
+//		if (threadManagerContext.isTransactionOk(messageId))
 			return forumAbstractFactory.getMessage(messageId);
-		else
-			return null;
+//		else
+//			return null;
 	}
 
 	/*
@@ -144,10 +146,10 @@ public class MessageKernel implements MessageKernelIF {
 	 */
 	@Override
 	public ForumMessage getMessageWithPropterty(Long messageId) {
-		if (threadManagerContext.isTransactionOk(messageId))
+//		if (threadManagerContext.isTransactionOk(messageId))
 			return forumAbstractFactory.getMessageWithPropterty(messageId);
-		else
-			return null;
+//		else
+//			return null;
 	}
 
 	/*
@@ -162,6 +164,9 @@ public class MessageKernel implements MessageKernelIF {
 		logger.debug("enter getThread");
 		return forumAbstractFactory.getThread(threadId);
 
+	}
+	public DomainMessage post(@Owner long forumId, @Receiver Forum forum, AnemicMessageDTO forumMessageInputDTO) {
+		return new DomainMessage(forumMessageInputDTO);
 	}
 
 	public DomainMessage addreply(long threadId, ForumMessage paranetforumMessage, AnemicMessageDTO newForumMessageInputparamter) {

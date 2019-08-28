@@ -15,30 +15,30 @@
  */
 package com.jdon.jivejdon.event.domain.producer.write;
 
+import com.jdon.annotation.Component;
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.model.Send;
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.model.dci.ThreadEventSourcingRole;
 import com.jdon.jivejdon.model.event.MessageRemoveCommand;
 import com.jdon.jivejdon.model.event.MessageRemovedEvent;
-import com.jdon.jivejdon.model.event.TopicMessageCreateCommand;
+import com.jdon.jivejdon.model.event.PostTopicMessageCommand;
+import com.jdon.jivejdon.model.event.TopicMessagePostedEvent;
 import com.jdon.jivejdon.model.util.OneOneDTO;
 
+@Component
 @Introduce("message")
 public class ThreadEventSourcingRoleImpl implements ThreadEventSourcingRole {
 
-	/*
-	 * MessageTransactionPersistence OnEvent
-	 * 
-	 * @see
-	 * com.jdon.jivejdon.model.repository.RepositoryRoleIF#addTopicMessage(com
-	 * .jdon.jivejdon.model.ForumMessage)
-	 */
-
-	@Override
 	@Send("postTopicMessageCommand")
-	public DomainMessage postTopicMessage(TopicMessageCreateCommand command) {
+	public DomainMessage postTopicMessage(PostTopicMessageCommand command) {
 		return new DomainMessage(command);
+	}
+
+
+	@Send("topicMessagePostedEvent")
+	public DomainMessage topicMessagePosted(TopicMessagePostedEvent topicMessagePostedEvent) {
+		return new DomainMessage(topicMessagePostedEvent);
 	}
 
 

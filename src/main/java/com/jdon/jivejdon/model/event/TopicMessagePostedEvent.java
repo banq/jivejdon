@@ -17,17 +17,16 @@ package com.jdon.jivejdon.model.event;
 
 import com.jdon.jivejdon.model.ForumMessage;
 
-public class TopicMessageCreatedEvent {
+public class TopicMessagePostedEvent {
 
-	private final ForumMessage forumMessageDTO;
+	private final ForumMessage forumMessage;
 
-	public TopicMessageCreatedEvent(ForumMessage forumMessage) {
+	public TopicMessagePostedEvent( ForumMessage forumMessage) {
 		super();
-		this.forumMessageDTO = forumMessage;
+		this.forumMessage = forumMessage;
 	}
 
-	public ForumMessage getForumMessageDTO() {
-		return forumMessageDTO;
+	public ForumMessage getForumMessage() {
+		return forumMessage;
 	}
-
 }

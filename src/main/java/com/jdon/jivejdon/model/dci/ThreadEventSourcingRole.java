@@ -18,7 +18,8 @@ package com.jdon.jivejdon.model.dci;
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.model.event.MessageRemoveCommand;
 import com.jdon.jivejdon.model.event.MessageRemovedEvent;
-import com.jdon.jivejdon.model.event.TopicMessageCreateCommand;
+import com.jdon.jivejdon.model.event.PostTopicMessageCommand;
+import com.jdon.jivejdon.model.event.TopicMessagePostedEvent;
 import com.jdon.jivejdon.model.util.OneOneDTO;
 
 /**
@@ -30,15 +31,9 @@ import com.jdon.jivejdon.model.util.OneOneDTO;
  */
 public interface ThreadEventSourcingRole {
 
-	/*
-	 * MessageTransactionPersistence OnEvent
-	 * 
-	 * @see
-	 * com.jdon.jivejdon.model.repository.RepositoryRoleIF#addTopicMessage(com
-	 * .jdon.jivejdon.model.ForumMessage)
-	 */
+	DomainMessage postTopicMessage(PostTopicMessageCommand command);
 
-	DomainMessage postTopicMessage(TopicMessageCreateCommand command);
+	DomainMessage topicMessagePosted(TopicMessagePostedEvent topicMessagePostedEvent);
 
 	DomainMessage postReBlog(OneOneDTO oneOneDTO);
 

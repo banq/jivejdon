@@ -1,5 +1,6 @@
 package com.jdon.jivejdon.model.message;
 
+import com.jdon.annotation.Model;
 import com.jdon.jivejdon.model.Account;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumThread;
@@ -15,6 +16,7 @@ import org.compass.annotations.SearchableReference;
  * used for presentation MessageForm
  * and for persistence MessageCore of jiveMessage database table
  */
+@Model  //for edit , is a jdon-struts bug
 @Searchable
 public class AnemicMessageDTO {
     @SearchableId

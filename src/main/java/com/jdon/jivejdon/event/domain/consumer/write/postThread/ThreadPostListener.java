@@ -19,14 +19,13 @@ import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.dci.RoleAssigner;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.event.bus.cqrs.query.EventBusHandler;
 import com.jdon.jivejdon.event.bus.cqrs.query.PostThreadEventHandler;
 import com.jdon.jivejdon.event.domain.producer.write.LobbyPublisherRole;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.ThreadTag;
-import com.jdon.jivejdon.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.model.event.TopicMessagePostedEvent;
 import com.jdon.jivejdon.model.realtime.ForumMessageDTO;
 import com.jdon.jivejdon.model.realtime.LobbyPublisherRoleIF;
 import com.jdon.jivejdon.model.realtime.Notification;
@@ -38,7 +37,7 @@ import com.jdon.jivejdon.model.subscription.event.ThreadSubscribedCreateEvent;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
 
-@Consumer("postThread")
+@Consumer("topicMessagePostedEvent")
 public class ThreadPostListener implements DomainEventHandler {
 
 	private final ForumFactory forumFactory;
@@ -54,22 +53,10 @@ public class ThreadPostListener implements DomainEventHandler {
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
-		DomainMessage lastStepMessage = (DomainMessage) event.getDomainMessage().getEventSource();
-		Object lastStepOk = lastStepMessage.getBlockEventResult();
-		if (lastStepOk != null) {
-			// the forumMessage is input DTO
-			AnemicMessageDTO forumMessageInputDTO = (AnemicMessageDTO) lastStepOk;
-			boolean isReplyNotifyForAuthor = forumMessageInputDTO.isReplyNotify();
-
-			// get the true forumMessage.
-			ForumMessage forumMessage = forumFactory.getMessage(forumMessageInputDTO.getMessageId());
-			forumMessage.getForum().postThread(forumMessage);
-
-			messageNotifyAction(isReplyNotifyForAuthor, forumMessage);
-
+		TopicMessagePostedEvent topicMessagePostedEvent = (TopicMessagePostedEvent) event.getDomainMessage().getEventSource();
+		ForumMessage forumMessage = topicMessagePostedEvent.getForumMessage();
 			// if there is a event bus server, rewrite this code:
-			eventHandler.refresh(forumMessage);
-		}
+		eventHandler.refresh(forumMessage);
 
 	}
 

@@ -20,6 +20,7 @@ import com.jdon.annotation.model.Receiver;
 import com.jdon.annotation.model.Send;
 import com.jdon.controller.events.EventModel;
 import com.jdon.domain.message.DomainMessage;
+import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
@@ -52,6 +53,9 @@ public interface MessageKernelIF {
 	 * @return
 	 */
 	public abstract Optional<ForumThread> getThread(Long threadId);
+
+	@Send("postMessageCommand")
+	public DomainMessage post(@Owner long forumId, @Receiver Forum forum, AnemicMessageDTO forumMessageInputDTO) ;
 
 	@Send("addreplyForumMessage")
 	public DomainMessage addreply(@Owner long threadId, @Receiver ForumMessage parentforumMessage, AnemicMessageDTO newForumMessageInputparamter);
