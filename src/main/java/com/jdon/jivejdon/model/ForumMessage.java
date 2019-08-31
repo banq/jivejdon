@@ -128,12 +128,17 @@ public class ForumMessage extends ForumModel implements Cloneable {
         return messageVO;
     }
 
-    public void setMessageVO(MessageVO messageVO) {
+    private void setMessageVO(MessageVO messageVO) {
         if (messageVO.getForumMessage() == null || messageVO.getForumMessage() != this) {
             this.messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO
                     .getBody()).build();
         } else
             this.messageVO = messageVO;
+    }
+
+    public void updateSubject(String subject){
+        this.messageVO = this.messageVOBuilder().subject(subject).body(this.messageVO
+                .getBody()).build();
     }
 
     public MessageVO getMessageVOClone() throws Exception {

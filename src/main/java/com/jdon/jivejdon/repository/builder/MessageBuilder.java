@@ -43,7 +43,7 @@ public class MessageBuilder {
 
 	private ForumAbstractFactory forumAbstractFactory;
 
-	private OutFilterManager outFilterManager;
+	private final OutFilterManager outFilterManager;
 
 	public MessageBuilder(MessageDao messageDao, MessageQueryDao messageQueryDao, AccountFactory accountFactory, OutFilterManager outFilterManager) {
 		super();
@@ -65,18 +65,6 @@ public class MessageBuilder {
 		return messageDao.getAnemicMessage(id);
 
 	}
-
-//	public ForumMessage createCore(Long id) {
-//		ModelKey modelKey = new ModelKey(id, ForumMessageReply.class);
-//		Object result = messageDao.getMessageCore(modelKey);
-//		if (result != null && result instanceof ForumMessageReply)
-//			return (ForumMessageReply) result;
-//
-//		// if no reply message for this id, it should be rootmessage
-//		modelKey = new ModelKey(id, ForumMessage.class);
-//		return messageDao.getMessageCore(modelKey);
-//
-//	}
 
 	public MessageVO createMessageVO(ForumMessage forumMessage) {
 		return messageDao.getMessageVOCore(forumMessage);

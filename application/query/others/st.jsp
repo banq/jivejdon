@@ -89,7 +89,7 @@ String coutlength = (String)pageContext.getAttribute("count");
 <tr>
     <td class="smallgray">
       <div class="tres">
-        更多<html:link page="/message/searchThreadAction.shtml" paramId="query" paramName="query" target="_blank">按这里</html:link>
+        更多<html:link page="/message/searchAction.shtml" paramId="query" paramName="query" target="_blank">按这里</html:link>
      符合主题贴共有<b><bean:write name="messageListForm" property="allCount"/></b>贴 
    
     </td>

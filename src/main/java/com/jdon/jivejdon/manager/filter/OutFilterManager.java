@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Function;
 
+/**
+ * customzied filter
+ * configure in manager.xml
+ */
 public class OutFilterManager {
 	private final static Logger logger = LogManager.getLogger(OutFilterManager.class);
 

@@ -24,7 +24,6 @@ import com.jdon.jivejdon.event.domain.producer.write.MessageEventSourcingRole;
 import com.jdon.jivejdon.model.event.MessageMovedEvent;
 import com.jdon.jivejdon.model.event.ThreadNameSavedEvent;
 import com.jdon.jivejdon.model.event.ThreadTagsSavedEvent;
-import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.model.realtime.ForumMessageDTO;
 import com.jdon.jivejdon.model.realtime.LobbyPublisherRoleIF;
 import com.jdon.jivejdon.model.realtime.Notification;
@@ -170,18 +169,11 @@ public class ForumThread extends ForumModel {
 		if (this.getRootMessage() == null){
 			setRootMessage(new ForumMessage());
 		}
-		MessageVO messageVO = this.getRootMessage().messageVOBuilder().subject(name).body(this
-				.getRootMessage().getMessageVO().getBody())
-				.build();
-		this.getRootMessage().setMessageVO(messageVO);
-
+		this.getRootMessage().updateSubject(name);
 	}
 
 	public void updateName(String name) {
-		MessageVO messageVO = this.getRootMessage().messageVOBuilder().subject(name).body(this
-				.getRootMessage().getMessageVO().getBody())
-				.build();
-		this.getRootMessage().setMessageVO(messageVO);
+		this.getRootMessage().updateSubject(name);
 		eventSourcing.saveName(new ThreadNameSavedEvent(this.getThreadId(),
 				name));
 	}
@@ -389,6 +381,10 @@ public class ForumThread extends ForumModel {
 		getRootMessage().setTagTitle(tagTitles);
 	}
 
+	/**
+	 * all dig for reply messages add to root Message
+	 * @param message
+	 */
 	public void addDig(ForumMessage message) {
 		if (message.getMessageId() != rootMessage.getMessageId()) {
 			rootMessage.messaegDigAction();

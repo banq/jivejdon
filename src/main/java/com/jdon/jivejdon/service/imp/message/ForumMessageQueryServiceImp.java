@@ -142,6 +142,9 @@ public class ForumMessageQueryServiceImp implements ForumMessageQueryService {
 		return pi;
 	}
 
+	/**
+	 * not used
+	 */
 	public PageIterator searchThreads(String query, int start, int count) {
 		logger.debug("enter searchThreads");
 		PageIterator pi = new PageIterator();

@@ -58,7 +58,7 @@
             <forward name="success" path="/query/searchMessageResult.jsp"/>
         </action>
 
-        <!-- search threads  -->
+        <!-- search threads not used -->
         <action path="/message/searchThreadAction"
                 type="com.jdon.jivejdon.presentation.action.query.SearchThreadAction"
                 name="messageListForm" scope="request"
@@ -149,7 +149,7 @@
 
 
         <action path="/query/s"
-                type="com.jdon.jivejdon.presentation.action.query.SearchThreadAction"
+                type="com.jdon.jivejdon.presentation.action.query.SearchAction"
                 name="messageListForm" scope="request"
                 validate="false">
             <forward name="success" path="/query/others/st.jsp"/>
