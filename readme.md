@@ -86,7 +86,7 @@ compose one Thread(ForumThread)
  
  			if (newForumMessageInputparamter.getForum() != null) {
  				Long newforumId = newForumMessageInputparamter.getForum().getForumId();
- 				if (newforumId != null && getForum().getForumId() != newforumId) {
+ 				if (newforumId != null && getForum().getForumId().longValue() != newforumId.longValue()) {
  					forumThread.moveForum(this, newForumMessageInputparamter.getForum());
  				}
  			}

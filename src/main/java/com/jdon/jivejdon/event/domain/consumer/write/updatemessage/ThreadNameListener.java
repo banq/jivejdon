@@ -3,8 +3,7 @@ package com.jdon.jivejdon.event.domain.consumer.write.updatemessage;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.event.bus.cqrs.query.EventBusHandler;
-import com.jdon.jivejdon.event.bus.cqrs.query.UpdateMessageEventHandler;
+import com.jdon.jivejdon.event.bus.cqrs.query.CacheQueryRefresher;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.event.ThreadNameSavedEvent;
 import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
@@ -24,7 +23,7 @@ public class ThreadNameListener implements DomainEventHandler {
 
 	private final ForumAbstractFactory forumAbstractFactory;
 
-	private final EventBusHandler eventBusHandler;
+	private final CacheQueryRefresher cacheQueryRefresher;
 
 	protected final ContainerUtil containerUtil;
 
@@ -35,7 +34,7 @@ public class ThreadNameListener implements DomainEventHandler {
 		this.messageRepositoryDao = messageRepositoryDao;
 		this.forumAbstractFactory = forumAbstractFactory;
 		this.containerUtil = containerUtil;
-		this.eventBusHandler = new UpdateMessageEventHandler( forumAbstractFactory, messagePageIteratorSolver);
+		this.cacheQueryRefresher = new CacheQueryRefresher( forumAbstractFactory, messagePageIteratorSolver);
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
@@ -46,7 +45,7 @@ public class ThreadNameListener implements DomainEventHandler {
 		try {
 			threadRepositoryDao.updateThreadName(es.getName(), forumThreadOptional.get());
 			containerUtil.clearCache(forumThreadOptional.get().getRootMessage().getMessageId());
-			eventBusHandler.refresh(forumThreadOptional.get().getRootMessage());
+			cacheQueryRefresher.refresh(forumThreadOptional.get().getRootMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

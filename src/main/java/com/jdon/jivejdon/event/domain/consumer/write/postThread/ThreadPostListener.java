@@ -19,8 +19,7 @@ import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.dci.RoleAssigner;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.event.bus.cqrs.query.EventBusHandler;
-import com.jdon.jivejdon.event.bus.cqrs.query.PostThreadEventHandler;
+import com.jdon.jivejdon.event.bus.cqrs.query.CacheQueryRefresher;
 import com.jdon.jivejdon.event.domain.producer.write.LobbyPublisherRole;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
@@ -42,13 +41,13 @@ public class ThreadPostListener implements DomainEventHandler {
 
 	private final ForumFactory forumFactory;
 	private final RoleAssigner roleAssigner;
-	private final EventBusHandler eventHandler;
+	private final CacheQueryRefresher eventHandler;
 
 	public ThreadPostListener(RoleAssigner roleAssigner, ForumFactory forumFactory, MessagePageIteratorSolver messagePageIteratorSolver) {
 		super();
 		this.forumFactory = forumFactory;
 		this.roleAssigner = roleAssigner;
-		eventHandler = new PostThreadEventHandler(forumFactory, messagePageIteratorSolver);
+		eventHandler = new CacheQueryRefresher(forumFactory, messagePageIteratorSolver);
 
 	}
 

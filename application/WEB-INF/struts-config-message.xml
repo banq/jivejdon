@@ -30,16 +30,22 @@
         <action name="messageForm" path="/message/messageAction"
                 type="com.jdon.jivejdon.presentation.filter.MessageEditAuthFilter" scope="request"
                 validate="false">
-            <forward name="success" path="/message/messageAction2.shtml"/>
+            <forward name="create" path="/message/messageActionCreate.shtml"/>
+            <forward name="edit" path="/message/messageActionEdit.shtml"/>
+            <forward name="failure" path="/forum/"/>
         </action>
 
-        <action name="messageForm" path="/message/messageAction2"
+        <action name="messageForm" path="/message/messageActionCreate"
                 type="com.jdon.strutsutil.ModelViewAction" scope="request"
                 validate="false">
             <forward name="create" path="/message/message.jsp"/>
-            <forward name="edit" path="/message/message.jsp"/>
         </action>
 
+        <action name="messageForm" path="/message/messageActionEdit"
+                type="com.jdon.jivejdon.presentation.action.message.MessageEditViewAction" scope="request"
+                validate="false">
+            <forward name="edit" path="/message/message.jsp"/>
+        </action>
         <!-- saving for new topic message creation or message edition , from /forum/threadPost.jsp -->
         <action name="messageForm" path="/message/messageSaveAction"
                 type="com.jdon.strutsutil.ModelSaveAction" scope="request"

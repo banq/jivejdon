@@ -19,12 +19,12 @@ import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
 
-public class EventBusHandler {
+public class CacheQueryRefresher {
 
 	protected final ForumFactory forumAbstractFactory;
 	private final MessagePageIteratorSolver messagePageIteratorSolver;
 
-	public EventBusHandler(ForumFactory forumAbstractFactory, MessagePageIteratorSolver messagePageIteratorSolver) {
+	public CacheQueryRefresher(ForumFactory forumAbstractFactory, MessagePageIteratorSolver messagePageIteratorSolver) {
 		this.forumAbstractFactory = forumAbstractFactory;
 		this.messagePageIteratorSolver = messagePageIteratorSolver;
 	}

@@ -30,9 +30,9 @@ public interface MessageDao {
 //
 //	ForumMessage getMessageCore(ModelKey modelKey);
 
-	ForumMessage getForumMessageInjection(AnemicMessageDTO anemicMessageDTO);
+	ForumMessage getForumMessageInjection(Long messageId);
 
-	public AnemicMessageDTO getAnemicMessage(Long messageId);
+	AnemicMessageDTO getAnemicMessage(Long messageId);
 
 	MessageVO getMessageVOCore(ForumMessage forumMessage);
 

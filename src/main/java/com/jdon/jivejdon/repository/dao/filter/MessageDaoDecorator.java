@@ -52,13 +52,14 @@ public class MessageDaoDecorator extends MessageDaoSql {
 	 * active the cache
 	 */
 	@Around()
-	public ForumMessage getForumMessageInjection(AnemicMessageDTO anemicMessageDTO) {
+	public ForumMessage getForumMessageInjection(Long messageId) {
+		AnemicMessageDTO anemicMessageDTO = super.getAnemicMessage(messageId);
 		if (anemicMessageDTO.getParentMessage() != null && anemicMessageDTO.getParentMessage().getMessageId() != null)
-			return  new ForumMessageReply(anemicMessageDTO.getMessageId(), new ForumMessage(anemicMessageDTO.getParentMessage().getMessageId()));
+			return new ForumMessageReply();
 		else
-			return new ForumMessage(anemicMessageDTO.getMessageId());
-	}
+			return new ForumMessage(messageId);
 
+	}
 
 	public AnemicMessageDTO getAnemicMessage(Long messageId) {
 		return  super.getAnemicMessage(messageId);

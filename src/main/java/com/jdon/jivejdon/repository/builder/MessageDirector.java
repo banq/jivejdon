@@ -16,10 +16,7 @@
  */
 package com.jdon.jivejdon.repository.builder;
 
-import com.jdon.jivejdon.model.Account;
-import com.jdon.jivejdon.model.Forum;
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.model.*;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.message.FilterPipleSpec;
 import com.jdon.jivejdon.model.message.MessageVO;
@@ -109,6 +106,9 @@ public class MessageDirector {
 			logger.error("repeat no this message in database id=" + messageId);
 			return null;
 		}
+		ForumMessage forumMessage = this.messageBuilder.messageDao.getForumMessageInjection(messageId);
+		if (forumMessage.isSolid())//if from cache , it being build solid
+			return forumMessage;
 
 		final AnemicMessageDTO anemicMessageDTO = (AnemicMessageDTO) messageBuilder.createAnemicMessage(messageId);
 		if (anemicMessageDTO == null) {
@@ -116,49 +116,37 @@ public class MessageDirector {
 			logger.error("no this message in database id=" + messageId);
 			return null;
 		}
+		ForumMessage parentforumMessage = null;
+		if (anemicMessageDTO.getParentMessage() != null && anemicMessageDTO.getParentMessage().getMessageId() != null) {
+			parentforumMessage = buildMessage(anemicMessageDTO.getParentMessage().getMessageId(), forumThread, forum);
+		}
 
-		return fillFullCoreMessage(anemicMessageDTO, forumThread, forum);
-
-	}
-
-	private ForumMessage fillFullCoreMessage(AnemicMessageDTO anemicMessageDTO, ForumThread
-			forumThread, Forum forum) {
-		ForumMessage forumMessage = this.messageBuilder.messageDao.getForumMessageInjection(anemicMessageDTO);
-		try {
-            Optional<Account> accountOptional = messageBuilder.createAccount(anemicMessageDTO.getAccount());
-            if ((forum == null) || (forum.getForumId().longValue() != anemicMessageDTO.getForum()
-                    .getForumId().longValue())) {
-                try {
-                    forum = messageBuilder.getForumAbstractFactory().forumDirector.getForum
-                            (anemicMessageDTO.getForum().getForumId(), forumThread, forumMessage);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            Long threadId = anemicMessageDTO.getForumThread().getThreadId();
-            if ((forumThread == null) || (threadId.longValue() != forumThread.getThreadId().longValue
-                    ())) {
-                try {
-                    forumThread = messageBuilder.getForumAbstractFactory().threadDirector.getThread
-                            (threadId, forumMessage, forum);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            FilterPipleSpec filterPipleSpec = new FilterPipleSpec(messageBuilder
-                    .getOutFilterManager().getOutFilters());
-            forumMessage = ForumMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId()).messageVO
-                    (anemicMessageDTO.getMessageVO()).forum
-                    (forum).forumThread(forumThread)
-                    .acount(accountOptional.orElse(new Account())).creationDate(anemicMessageDTO.getCreationDate()).modifiedDate(anemicMessageDTO.getModifiedDate()).filterPipleSpec(filterPipleSpec)
-                    .uploads(null).props(null).build(forumMessage);
-        }catch (Exception e){
-            logger.error("fillFullCoreMessage error id=" + anemicMessageDTO.getMessageId());
-        }
-        return forumMessage;
+		Optional<Account> accountOptional = messageBuilder.createAccount(anemicMessageDTO.getAccount());
+		FilterPipleSpec filterPipleSpec = new FilterPipleSpec(messageBuilder.getOutFilterManager().getOutFilters());
+		if ((forum == null) || (forum.lazyLoaderRole == null) || (forum.getForumId().longValue() != anemicMessageDTO.getForum().getForumId().longValue())) {
+			forum = messageBuilder.getForumAbstractFactory().forumDirector.getForum(anemicMessageDTO.getForum().getForumId(), forumThread, forumMessage);
+		}
+		Long threadId = anemicMessageDTO.getForumThread().getThreadId();
+		if ((forumThread == null) || (forumThread.lazyLoaderRole == null) || (threadId.longValue() != forumThread.getThreadId().longValue())) {
+			forumThread = messageBuilder.getForumAbstractFactory().threadDirector.getThread(threadId, parentforumMessage!=null?null:forumMessage, forum);
+		}
+		if(parentforumMessage != null){
+			forumMessage = forumMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId()).messageVO
+					(anemicMessageDTO.getMessageVO()).forum
+					(forum).forumThread(forumThread)
+					.acount(accountOptional.orElse(new Account())).creationDate(anemicMessageDTO.getCreationDate()).modifiedDate(anemicMessageDTO.getModifiedDate()).filterPipleSpec(filterPipleSpec)
+					.uploads(null).props(null).build((ForumMessageReply) forumMessage, parentforumMessage);
+		}else{
+			forumMessage = forumMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId()).messageVO
+					(anemicMessageDTO.getMessageVO()).forum
+					(forum).forumThread(forumThread)
+					.acount(accountOptional.orElse(new Account())).creationDate(anemicMessageDTO.getCreationDate()).modifiedDate(anemicMessageDTO.getModifiedDate()).filterPipleSpec(filterPipleSpec)
+					.uploads(null).props(null).build(forumMessage);
+		}
+		return forumMessage;
 
 	}
+
+
 
 }

@@ -18,8 +18,7 @@ package com.jdon.jivejdon.event.domain.consumer.write.updatemessage;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.event.bus.cqrs.query.EventBusHandler;
-import com.jdon.jivejdon.event.bus.cqrs.query.UpdateMessageEventHandler;
+import com.jdon.jivejdon.event.bus.cqrs.query.CacheQueryRefresher;
 import com.jdon.jivejdon.model.event.MessageUpdatedEvent;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
@@ -34,19 +33,19 @@ import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
  */
 @Consumer("saveMessage")
 public class MessageSendEventBus implements DomainEventHandler {
-	private final EventBusHandler eventBusHandler;
+	private final CacheQueryRefresher cacheQueryRefresher;
 	private final ForumFactory forumFactory;
 
 	public MessageSendEventBus(ForumFactory forumFactory, MessagePageIteratorSolver messagePageIteratorSolver) {
 		this.forumFactory = forumFactory;
-		eventBusHandler = new UpdateMessageEventHandler(forumFactory, messagePageIteratorSolver);
+		cacheQueryRefresher = new CacheQueryRefresher(forumFactory, messagePageIteratorSolver);
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 		// todo send to JMS or MQ
 		MessageUpdatedEvent es = (MessageUpdatedEvent) event.getDomainMessage().getEventSource();
 		Long messageId = es.getNewForumMessageInputparamter().getMessageId();
-		eventBusHandler.refresh(this.forumFactory.getMessage(messageId));
+		cacheQueryRefresher.refresh(this.forumFactory.getMessage(messageId));
 
 	}
 }

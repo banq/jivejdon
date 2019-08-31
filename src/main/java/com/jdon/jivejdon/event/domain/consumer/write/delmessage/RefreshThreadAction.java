@@ -18,8 +18,7 @@ package com.jdon.jivejdon.event.domain.consumer.write.delmessage;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.event.bus.cqrs.query.DelMessageEventHandler;
-import com.jdon.jivejdon.event.bus.cqrs.query.EventBusHandler;
+import com.jdon.jivejdon.event.bus.cqrs.query.CacheQueryRefresher;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.event.MessageRemovedEvent;
@@ -31,12 +30,12 @@ public class RefreshThreadAction implements DomainEventHandler {
 
 	protected final ForumFactory forumAbstractFactory;
 
-	private EventBusHandler eventHandler;
+	private CacheQueryRefresher eventHandler;
 
 	public RefreshThreadAction(ForumFactory forumAbstractFactory, MessagePageIteratorSolver messagePageIteratorSolver) {
 		super();
 		this.forumAbstractFactory = forumAbstractFactory;
-		eventHandler = new DelMessageEventHandler(forumAbstractFactory, messagePageIteratorSolver);
+		eventHandler = new CacheQueryRefresher(forumAbstractFactory, messagePageIteratorSolver);
 
 	}
 

@@ -71,7 +71,7 @@ public class MessagePropertysVO extends LazyLoader {
 				this.propertys = propertys;
 			// }
 		} else if (propertys == null && lazyLoaderRole == null) {
-			System.err.print("my god, how I was bornd?");
+			System.err.print("my god, how propertys was bornd?");
 		}
 		return propertys;
 	}
@@ -197,6 +197,9 @@ public class MessagePropertysVO extends LazyLoader {
 
 	@Override
 	public DomainMessage getDomainMessage() {
+		if (lazyLoaderRole == null){
+			System.err.println("lazyLoaderRole is null for message="+this.messageId);
+		}
 		return lazyLoaderRole.loadMessageProperties(messageId);
 	}
 

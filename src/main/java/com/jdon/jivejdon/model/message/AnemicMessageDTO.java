@@ -1,6 +1,5 @@
 package com.jdon.jivejdon.model.message;
 
-import com.jdon.annotation.Model;
 import com.jdon.jivejdon.model.Account;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumThread;
@@ -16,7 +15,7 @@ import org.compass.annotations.SearchableReference;
  * used for presentation MessageForm
  * and for persistence MessageCore of jiveMessage database table
  */
-@Model  //for edit , is a jdon-struts bug
+//@Model  //for edit , is a jdon-struts bug
 @Searchable
 public class AnemicMessageDTO {
     @SearchableId
@@ -34,7 +33,7 @@ public class AnemicMessageDTO {
     private AttachmentsVO attachment;;
     private MessagePropertysVO messagePropertysVO;
     private Account operator; // operator this message,maybe Admin or others;
-    private boolean authenticated = true;// default true
+    private boolean authenticated ;// default false
 
     // not let messageVo be Filtered , it should be save to DB.
     private boolean messageVOFiltered = true;

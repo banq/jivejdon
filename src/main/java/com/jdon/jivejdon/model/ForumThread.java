@@ -166,9 +166,6 @@ public class ForumThread extends ForumModel {
 
 	//from threadForm getName calling
 	public void setName(String name){
-		if (this.getRootMessage() == null){
-			setRootMessage(new ForumMessage());
-		}
 		this.getRootMessage().updateSubject(name);
 	}
 
@@ -200,6 +197,10 @@ public class ForumThread extends ForumModel {
 
 	public void setRootMessage(ForumMessage rootMessage) {
 		if (rootMessage == null) return;
+		if (rootMessage instanceof ForumMessageReply){
+			System.err.println("root message must be ForumMessage threadId=" + this.threadId + " messageId="+rootMessage.getMessageId());
+			return;
+		}
 		this.rootMessage = rootMessage;
 //		this.rootMessage.setForumThread(this);
 	}
@@ -386,7 +387,7 @@ public class ForumThread extends ForumModel {
 	 * @param message
 	 */
 	public void addDig(ForumMessage message) {
-		if (message.getMessageId() != rootMessage.getMessageId()) {
+		if (message.getMessageId().longValue() != rootMessage.getMessageId().longValue()) {
 			rootMessage.messaegDigAction();
 		}
 

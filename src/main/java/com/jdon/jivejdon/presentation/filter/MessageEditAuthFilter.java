@@ -33,7 +33,7 @@ public class MessageEditAuthFilter extends Action {
 		com.jdon.jivejdon.model.Account account = accountService.getloginAccount();
 		if (account == null) {
 			messageForm.setAuthenticated(false);// only logined user can post
-			return mapping.findForward("success");
+			return mapping.findForward("failure");
 		}
 		if ((messageForm.getAction() != null) && (!messageForm.getAction().equals(MessageForm.CREATE_STR))) {
 			ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
@@ -52,7 +52,7 @@ public class MessageEditAuthFilter extends Action {
 		ForumService forumService = (ForumService) WebAppUtil.getService("forumService", this.servlet.getServletContext());
 		Collection<Forum> forums = forumService.getForums();
 		request.setAttribute("forums", forums);
-		return mapping.findForward("success");
+		return mapping.findForward(messageForm.getAction());
 	}
 
 	protected boolean beReblog() {

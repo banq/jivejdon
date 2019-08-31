@@ -18,8 +18,7 @@ package com.jdon.jivejdon.event.domain.consumer.write.addReplyMessage;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.event.bus.cqrs.query.AddReplyMessageEventHandler;
-import com.jdon.jivejdon.event.bus.cqrs.query.EventBusHandler;
+import com.jdon.jivejdon.event.bus.cqrs.query.CacheQueryRefresher;
 import com.jdon.jivejdon.model.event.ReplyMessageCreatedEvent;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
@@ -34,17 +33,17 @@ import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
  */
 @Consumer("addReplyMessage")
 public class AddReplyMessageSendEventBus implements DomainEventHandler {
-	private final EventBusHandler eventBusHandler;
+	private final CacheQueryRefresher cacheQueryRefresher;
 	private final ForumFactory forumFactory;
 
 	public AddReplyMessageSendEventBus(ForumFactory forumFactory, MessagePageIteratorSolver messagePageIteratorSolver) {
 		this.forumFactory = forumFactory;
-		eventBusHandler = new AddReplyMessageEventHandler(forumFactory, messagePageIteratorSolver);
+		cacheQueryRefresher = new CacheQueryRefresher(forumFactory, messagePageIteratorSolver);
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 		ReplyMessageCreatedEvent es = (ReplyMessageCreatedEvent) event.getDomainMessage().getEventSource();
 		Long messageId = es.getForumMessageReplyDTO().getMessageId();
-		eventBusHandler.refresh(this.forumFactory.getMessage(messageId));
+		cacheQueryRefresher.refresh(this.forumFactory.getMessage(messageId));
 	}
 }

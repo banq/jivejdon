@@ -366,12 +366,14 @@ public class ForumMessageShell implements ForumMessageService {
 		if (message == null)
 			return null;
 		try {
+			ForumMessage newMessage = (ForumMessage) message.clone();
+			newMessage.reloadMessageVOOrignal();
 			AnemicMessageDTO anemicMessageDTO = new AnemicMessageDTO();
-			anemicMessageDTO.setMessageId(message.getMessageId());
-			anemicMessageDTO.setForum(message.getForum());
-			anemicMessageDTO.setAccount(message.getAccount());
-			anemicMessageDTO.setMessageVO(message.getMessageVO());
-			anemicMessageDTO.setForumThread(message.getForumThread());
+			anemicMessageDTO.setMessageId(newMessage.getMessageId());
+			anemicMessageDTO.setForum(newMessage.getForum());
+			anemicMessageDTO.setAccount(newMessage.getAccount());
+			anemicMessageDTO.setMessageVO(newMessage.getMessageVO());
+			anemicMessageDTO.setForumThread(newMessage.getForumThread());
 
 			// after update must enable it see updateMessage;
 			return anemicMessageDTO;

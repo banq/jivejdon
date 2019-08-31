@@ -18,7 +18,6 @@ package com.jdon.jivejdon.repository.builder;
 
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumMessageReply;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.state.ForumThreadStateFactory;
 import com.jdon.jivejdon.model.thread.ThreadTagsVO;
@@ -66,8 +65,7 @@ public class ThreadBuilder {
 	public void buildRootMessage(ForumThread forumThread, ForumMessage rootForumMessage, Forum forum) throws Exception {
 		try {
 			Long rootmessageId = forumThread.getRootMessage().getMessageId();
-			if ((rootForumMessage == null) || rootForumMessage instanceof ForumMessageReply
-					|| rootForumMessage.getMessageId().longValue() != rootmessageId.longValue()) {
+			if ((rootForumMessage == null) || rootForumMessage.lazyLoaderRole == null) {
 				rootForumMessage = forumAbstractFactory.messageDirector.buildMessage
 						(rootmessageId, forumThread, forum);
 			}
