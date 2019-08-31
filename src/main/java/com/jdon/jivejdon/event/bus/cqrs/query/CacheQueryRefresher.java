@@ -19,19 +19,23 @@ import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
 
-public class PostThreadEventHandler implements EventBusHandler {
+public class EventBusHandler {
+
 	protected final ForumFactory forumAbstractFactory;
 	private final MessagePageIteratorSolver messagePageIteratorSolver;
 
-	public PostThreadEventHandler(ForumFactory forumAbstractFactory, MessagePageIteratorSolver messagePageIteratorSolver) {
+	public EventBusHandler(ForumFactory forumAbstractFactory, MessagePageIteratorSolver messagePageIteratorSolver) {
 		this.forumAbstractFactory = forumAbstractFactory;
 		this.messagePageIteratorSolver = messagePageIteratorSolver;
 	}
 
 	public void refresh(ForumMessage forumMessage) {
+		// send to JMS or MQ
+		// refresh the batch inquiry cache
 		messagePageIteratorSolver.clearPageIteratorSolver("getMessages");
 		messagePageIteratorSolver.clearPageIteratorSolver("getThreads");
 		messagePageIteratorSolver.clearPageIteratorSolver(forumMessage.getForum().getForumId().toString());
+		messagePageIteratorSolver.clearPageIteratorSolver(forumMessage.getForumThread().getThreadId().toString());
 		messagePageIteratorSolver.clearPageIteratorSolver(forumMessage.getAccount().getUserId());
 
 	}
