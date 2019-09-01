@@ -102,13 +102,18 @@ public abstract class MessageDaoSql implements MessageDao {
 
 	public Long getParentMessageId(Long messageId) {
 		logger.debug("enter isRoot  for id:" + messageId);
-		String LOAD_MESSAGE = "SELECT parentMessageID FROM jiveMessage WHERE messageID=?";
+		String LOAD_MESSAGE = "SELECT parentMessageID,threadID FROM jiveMessage WHERE messageID=?";
 		List queryParams = new ArrayList();
 		queryParams.add(messageId);
 
 		Long pmessageId = null;
 		try {
-			pmessageId = (Long)jdbcTempSource.getJdbcTemp().querySingleObject(queryParams, LOAD_MESSAGE);
+			List list = jdbcTempSource.getJdbcTemp().queryMultiObject(queryParams, LOAD_MESSAGE);
+			Iterator iter = list.iterator();
+			if (iter.hasNext()) {
+				Map map = (Map) iter.next();
+				pmessageId = (Long) map.get("parentMessageID");
+			}
 		} catch (Exception e) {
 			logger.error("isRoot messageId=" + messageId + " happend  " + e);
 		}

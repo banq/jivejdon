@@ -62,7 +62,7 @@ public class ForumThread extends ForumModel {
 	@Inject
 	public MessageEventSourcingRole eventSourcing;
 
-	private Long threadId;
+	private final Long threadId;
 
 	// same as rootMessage's creationDate
 	private String creationDate;
@@ -93,23 +93,25 @@ public class ForumThread extends ForumModel {
 	 * @param rootMessage
 	 */
 	public ForumThread(ForumMessage rootMessage, Long tIDInt, Forum forum) {
-		this();
 		this.rootMessage = rootMessage;
 		this.threadId = tIDInt;
 		this.forum = forum;
 		this.state = new AtomicReference(new ForumThreadState(this));
-	}
-
-	/**
-	 * DTO object, limited usage
-	 */
-	public ForumThread() {
 		this.threadTagsVO = new ThreadTagsVO(this, new ArrayList());
 		this.propertys = new ArrayList();
-		this.state = new AtomicReference(new ForumThreadState(this));
 		this.viewCounter = new ViewCounter(this);
-		this.rootMessage = new ForumMessage();
 	}
+
+//	/**
+//	 * DTO object, limited usage
+//	 */
+//	private ForumThread() {
+//		this.threadTagsVO = new ThreadTagsVO(this, new ArrayList());
+//		this.propertys = new ArrayList();
+////		this.state = new AtomicReference(new ForumThreadState(this));
+//		this.viewCounter = new ViewCounter(this);
+////		this.rootMessage = new ForumMessage();
+//	}
 
 
 	public String getCreationDate() {
@@ -147,14 +149,6 @@ public class ForumThread extends ForumModel {
 	public Long getThreadId() {
 		return threadId;
 	}
-
-	/**
-	 * @param threadId The threadId to set.
-	 */
-	public void setThreadId(Long threadId) {
-		this.threadId = threadId;
-	}
-
 
 	public String getName() {
 		if (this.getRootMessage() == null){

@@ -93,7 +93,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 
     // the forumThread using this for AnemicMessageDTO
     // if create a ForumMessage, please using builder pattern!
-    public ForumMessage() {
+    private ForumMessage() {
         this.messageId = null;
         this.setParameter(true);//this is a DTO parameter
         this.messageVO = this.messageVOBuilder().subject("").body("").build();

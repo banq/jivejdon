@@ -44,11 +44,10 @@ public class AnemicMessageDTO {
 
     public AnemicMessageDTO() {
         messageVO = new MessageVO();
-
-        forum = new Forum(); // for parameter forum.forumId=xxx
-        forumThread = new ForumThread();
-        account = new Account();
-        forumThread = new ForumThread();
+//
+//        forum = new Forum(); // for parameter forum.forumId=xxx
+//        account = new Account();
+//        forumThread = new ForumThread();
     }
 
     public AnemicMessageDTO(Long messageId) {

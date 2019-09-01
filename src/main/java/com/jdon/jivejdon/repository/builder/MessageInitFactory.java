@@ -112,14 +112,13 @@ public class MessageInitFactory {
 			messageCore.setCreationDate(displayDateTime);
 			// get the formatter so later can transfer String to Date
 
-			ForumThread forumThread = new ForumThread();
-			forumThread.setThreadId((Long) map.get("threadID"));
-			messageCore.setForumThread(forumThread);
-
 			Forum forum = new Forum();
 			forum.setForumId((Long) map.get("forumID"));
 			messageCore.setForum(forum);
 
+			Long threadId = (Long) map.get("threadID");
+			ForumThread forumThread = new ForumThread(null, threadId, forum);
+			messageCore.setForumThread(forumThread);
 			// lazy load
 			// forumMessage.setPropertys(propertyDaoSql.getAllPropertys(Constants.MESSAGE,
 			// messageId));

@@ -115,13 +115,13 @@ public class ReBlogAction extends Action {
 	protected Long createTopic(MessageForm messageReplyForm, HttpServletRequest request) throws Exception {
 		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
 
-		ForumMessage forumMessage = new ForumMessage();
+		AnemicMessageDTO anemicMessageDTO = new AnemicMessageDTO();
 		Long topicMessageId = null;
 		try {
-			formCopyToModelIF(messageReplyForm, forumMessage);
+			formCopyToModelIF(messageReplyForm, anemicMessageDTO);
 
 			EventModel em = new EventModel();
-			em.setModelIF(forumMessage);
+			em.setModelIF(anemicMessageDTO);
 			topicMessageId = forumMessageService.createTopicMessage(em);
 			if (em.getErrors() != null) {
 				throw new Exception(em.getErrors());

@@ -22,9 +22,6 @@ public class ThreadNotifySubscribed implements NotifySubscribed {
 		return forumThread.getThreadId();
 	}
 
-	public void setSubscribeId(Long subscribeId) {
-		forumThread.setThreadId(subscribeId);
-	}
 
 	public ForumThread getForumThread() {
 		return forumThread;

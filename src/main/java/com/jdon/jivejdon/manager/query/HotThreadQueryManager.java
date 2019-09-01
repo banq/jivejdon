@@ -1,27 +1,19 @@
 package com.jdon.jivejdon.manager.query;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jdon.container.pico.Startable;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.model.ForumThreadTemp;
 import com.jdon.jivejdon.model.query.HotThreadSpecification;
 import com.jdon.jivejdon.model.query.QueryCriteria;
 import com.jdon.jivejdon.repository.AccountFactory;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.dao.MessageQueryDao;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 public class HotThreadQueryManager implements Startable {
 	private final static Logger logger = LogManager.getLogger(HotThreadQueryManager.class);
@@ -95,11 +87,11 @@ public class HotThreadQueryManager implements Startable {
 		return resultSortedIDs;
 	}
 
-	private List createSortedIDs(QueryCriteria qc) {
+	private List<ThreadCompareVO> createSortedIDs(QueryCriteria qc) {
 		List resultSortedIDs = new ArrayList();
 		try {
 			Collection resultIDs = messageQueryDao.getThreads(qc);
-			List threads = new LinkedList();
+			List<ThreadCompareVO> threads = new LinkedList();
 			Iterator iter = resultIDs.iterator();
 			while (iter.hasNext()) {
 				Long threadId = (Long) iter.next();
@@ -110,10 +102,8 @@ public class HotThreadQueryManager implements Startable {
 																		// message
 					// construte a empty forumthread only include messageCount;
 					// we donot get a full forumThread, that will cost memory.
-					ForumThread forumThread = new ForumThreadTemp();
-					forumThread.setThreadId(threadId);
-					forumThread.getState().setMessageCount(messageCount);
-					threads.add(forumThread);
+					ThreadCompareVO threadCompareVO = new ThreadCompareVO(threadId, messageCount);
+					threads.add(threadCompareVO);
 				}
 			}
 			logger.debug(" found messageCount > " + qc.getMessageReplyCountWindow() + " size=" + threads.size());
@@ -122,8 +112,8 @@ public class HotThreadQueryManager implements Startable {
 			hotspec.sortByMessageCount(threads);
 			iter = threads.iterator();
 			while (iter.hasNext()) {
-				ForumThread thread = (ForumThread) iter.next();
-				resultSortedIDs.add(thread.getThreadId());
+				ThreadCompareVO threadCompareVO = (ThreadCompareVO) iter.next();
+				resultSortedIDs.add(threadCompareVO.getThreadId());
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

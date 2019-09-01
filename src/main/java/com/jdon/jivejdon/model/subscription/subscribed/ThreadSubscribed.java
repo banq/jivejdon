@@ -19,9 +19,6 @@ public class ThreadSubscribed implements Subscribed {
 		return subscribedId;
 	}
 
-	public void setSubscribeId(Long subscribeId) {
-		forumThread.setThreadId(subscribeId);
-	}
 
 	public ForumThread getForumThread() {
 		return forumThread;

@@ -76,12 +76,11 @@ public class MessageForm extends BaseForm {
 	 */
 	public MessageForm() {
 		messageVO = new MessageVO();
-
 		forum = new Forum(); // for parameter forum.forumId=xxx
-		forumThread = new ForumThread();
+		forumThread = new ForumThread(null,null, forum);
 		account = new com.jdon.jivejdon.model.Account();
 		parentMessage = new AnemicMessageDTO();
-		forumThread = new ForumThread();
+
 	}
 
 	public com.jdon.jivejdon.model.Account getAccount() {
