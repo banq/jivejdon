@@ -551,6 +551,8 @@ public class ForumMessage extends ForumModel implements Cloneable {
                     //preload messageProperty
                     getMessagePropertysVO().preLoadPropertys();
                 //apply all filter specification , business rule!
+                messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO
+                        .getBody()).build();
                 setMessageVO(filterPipleSpec.apply(messageVO));
                 this.setSolid(true);//construt end
             }

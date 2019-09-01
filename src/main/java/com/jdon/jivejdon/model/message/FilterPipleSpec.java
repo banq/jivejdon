@@ -31,20 +31,22 @@ public final class FilterPipleSpec implements Function<MessageVO, MessageVO> {
 	}
 
 	public MessageVO apply(MessageVO messageVO) {
-		try {
-			if (!isReady()) {
-				logger.error("when build but outFilters is null");
-				return messageVO;
-			}
-			Iterator iter = outFilters.iterator();
-			while (iter.hasNext()) {
-				Function<MessageVO, MessageVO> mrs = ((Function<MessageVO, MessageVO>) iter
-						.next());
-				messageVO = mrs.apply(messageVO);
-			}
-		} catch (Exception e) {
-			logger.error(" applyFilters error:" + e + messageVO);
-		}
+        if (!isReady()) {
+            logger.error("when build but outFilters is null");
+            return messageVO;
+        }
+        Iterator iter = outFilters.iterator();
+        while (iter.hasNext()) {
+            Function<MessageVO, MessageVO> mrs = ((Function<MessageVO, MessageVO>) iter
+                    .next());
+            try {
+                messageVO = mrs.apply(messageVO);
+            } catch (Exception e) {
+                logger.error(" applyFilters error1:" + e + messageVO.getForumMessage().getMessageId());
+                logger.error(" applyFilters error2:" + e + messageVO.getShortBody(5));
+                logger.error(" applyFilters error3:" + e + iter.getClass());
+            }
+        }
 		return messageVO;
 	}
 }
