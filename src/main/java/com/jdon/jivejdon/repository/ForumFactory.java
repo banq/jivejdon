@@ -33,7 +33,5 @@ public interface ForumFactory {
 
 	public abstract void reloadThreadState(ForumThread forumThread) throws Exception;
 
-	public abstract void reloadhForumState(Long forumId) throws Exception;
-
 	public Long getNextId(final int idType) throws Exception;
 }

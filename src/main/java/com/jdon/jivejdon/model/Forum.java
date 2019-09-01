@@ -25,7 +25,6 @@ import com.jdon.jivejdon.model.dci.ThreadEventSourcingRole;
 import com.jdon.jivejdon.model.event.PostTopicMessageCommand;
 import com.jdon.jivejdon.model.event.TopicMessagePostedEvent;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
-import com.jdon.jivejdon.model.state.ForumStateFactory;
 import com.jdon.jivejdon.model.subscription.SubPublisherRoleIF;
 import com.jdon.jivejdon.model.subscription.event.ForumSubscribedNotifyEvent;
 import org.compass.annotations.Searchable;
@@ -76,9 +75,9 @@ public class Forum extends ForumModel {
 
 	@Inject
 	public SubPublisherRoleIF publisherRole;
-
-	@Inject
-	private ForumStateFactory forumStateManager;
+//
+//	@Inject
+//	private ForumStateFactory forumStateManager;
 
 	@Inject
 	public ThreadEventSourcingRole eventSourcingRole;
@@ -105,13 +104,14 @@ public class Forum extends ForumModel {
 	}
 
 	public void threadPosted(ForumMessage rootForumMessage) {
-		forumStateManager.addNewThread(this, rootForumMessage);
+		forumState.get().addThreadCount();
+		forumState.get().setLastPost(rootForumMessage);
 		this.publisherRole.subscriptionNotify(new ForumSubscribedNotifyEvent(this.forumId, rootForumMessage));
 	}
 
 	public Forum() {
 		// init state
-		forumState = new AtomicReference(new ForumState(this, null, 0, 0));
+  	    forumState = new AtomicReference(new ForumState(this));
 	}
 
 	/**
@@ -176,62 +176,43 @@ public class Forum extends ForumModel {
 		return mdate.getTime();
 	}
 
-	/**
-	 * @param modifiedDate
-	 *            The modifiedDate to set.
-	 */
+
 	public void setModifiedDate(String modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
 
-	/**
-	 * @return Returns the name.
-	 */
+
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * @param name
-	 *            The name to set.
-	 */
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/**
-	 * @return Returns the propertys.
-	 */
+
 	public Collection getPropertys() {
 		return propertys;
 	}
 
-	/**
-	 * @param propertys
-	 *            The propertys to set.
-	 */
+
 	public void setPropertys(Collection propertys) {
 		this.propertys = propertys;
 	}
 
-	/**
-	 * @return Returns the forumState.
-	 */
+
 	public ForumState getForumState() {
 		try {
 			return forumState.get();
 		} finally {
 		}
 	}
-
-	/**
-	 * @param forumState
-	 *            The forumState to set.
-	 */
-	public void setForumState(ForumState forumState) {
-		if (forumState != null)
-			this.forumState.lazySet(forumState);
-	}
+//
+//	public void setForumState(ForumState forumState) {
+//		if (forumState != null)
+//			this.forumState.lazySet(forumState);
+//	}
 
 	public HotKeys getHotKeys() {
 		return hotKeys;
@@ -242,8 +223,8 @@ public class Forum extends ForumModel {
 	}
 
 	public void addNewMessage(ForumMessageReply forumMessageReply) {
-		ForumMessage oldmessage = this.getForumState().getLastPost();
-		forumStateManager.addNewMessage(this, forumMessageReply);
+		forumState.get().addMessageCount();
+		forumState.get().setLastPost(forumMessageReply);
 
 		// Date olddate = Constants.parseDateTime(oldmessage.getCreationDate());
 		// if (Constants.timeAfter(1, olddate)) {// a event per one hour
@@ -253,7 +234,7 @@ public class Forum extends ForumModel {
 	}
 
 	public void updateNewMessage(ForumMessage forumMessage) {
-		forumStateManager.updateMessage(this, forumMessage);
+		forumState.get().setLastPost(forumMessage);
 	}
 
 

@@ -27,7 +27,6 @@ import com.jdon.jivejdon.model.event.ThreadTagsSavedEvent;
 import com.jdon.jivejdon.model.realtime.ForumMessageDTO;
 import com.jdon.jivejdon.model.realtime.LobbyPublisherRoleIF;
 import com.jdon.jivejdon.model.realtime.Notification;
-import com.jdon.jivejdon.model.state.ForumThreadStateFactory;
 import com.jdon.jivejdon.model.subscription.SubPublisherRoleIF;
 import com.jdon.jivejdon.model.subscription.event.ThreadSubscribedNotifyEvent;
 import com.jdon.jivejdon.model.thread.ThreadTagsVO;
@@ -82,8 +81,7 @@ public class ForumThread extends ForumModel {
 	private volatile ViewCounter viewCounter;
 	// update mutable
 	private volatile ForumThreadTreeModel forumThreadTreeModel;
-	@Inject
-	private ForumThreadStateFactory threadStateManager;
+
 	private long creationDate2;
 
 
@@ -203,13 +201,10 @@ public class ForumThread extends ForumModel {
 	 * @return Returns the forumThreadState.
 	 */
 	public ForumThreadState getState() {
+
 		return state.get();
 	}
 
-	public void setState(ForumThreadState state) {
-		if (state == null) return;
-		this.state.lazySet(state);
-	}
 
 	public Collection<ThreadTag> getTags() {
 		return this.threadTagsVO.getTags();
@@ -243,22 +238,17 @@ public class ForumThread extends ForumModel {
 	 *
 	 * @param forumMessageReply
 	 */
-	public void changeState(ForumMessageReply forumMessageReply) {
-		this.threadStateManager.addNewMessage(this, forumMessageReply);
-		this.forum.addNewMessage(forumMessageReply);
+	private void changeState(ForumMessageReply forumMessageReply) {
+        this.state.get().setLastPost(forumMessageReply);
+        this.state.get().addMessageCount();
+        this.forum.addNewMessage(forumMessageReply);
 	}
 
 	public void addNewMessage(ForumMessage forumMessageParent,
 							  ForumMessageReply forumMessageReply) {
 		try {
-//			forumMessageReply.setParentMessage(forumMessageParent);
-//			forumMessageParent.setForumThread(this);
-//			forumMessageReply.setForumThread(this);
-
 			ForumMessage oldmessage = this.getState().getLastPost();
-			//removeed to changeState
-//			this.threadStateManager.addNewMessage(this, forumMessageReply);
-//			this.forum.addNewMessage(forumMessageReply);
+            changeState(forumMessageReply);
 			getForumThreadTreeModel().addChildAction(forumMessageReply);
 
 			notifyLobby(forumMessageReply);
@@ -303,7 +293,7 @@ public class ForumThread extends ForumModel {
 			changeTags(forumMessage.getTagTitle());
 		}
 
-		threadStateManager.updateMessage(this, forumMessage);
+		this.state.get().setLastPost(forumMessage);
 		this.forum.updateNewMessage(forumMessage);
 
 	}

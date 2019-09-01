@@ -84,6 +84,11 @@ public class LazyLoaderRole {
 		return new DomainMessage(threadId);
 	}
 
+	@Send("loadForumState")
+	public DomainMessage loadForumState(Long forumId) {
+		return new DomainMessage(forumId);
+	}
+
 	@Send("loadViewCount")
 	public DomainMessage loadViewCount(Long threadId) {
 		return new DomainMessage(threadId);

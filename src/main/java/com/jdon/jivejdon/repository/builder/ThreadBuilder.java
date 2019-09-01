@@ -19,7 +19,6 @@ package com.jdon.jivejdon.repository.builder;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.model.state.ForumThreadStateFactory;
 import com.jdon.jivejdon.model.thread.ThreadTagsVO;
 import com.jdon.jivejdon.repository.TagRepository;
 import com.jdon.jivejdon.repository.dao.MessageDao;
@@ -39,20 +38,16 @@ public class ThreadBuilder {
 
 	private final MessageQueryDao messageQueryDao;
 
-	private final ForumThreadStateFactory forumThreadStateFactory;
-
 	private final ForumAbstractFactory forumAbstractFactory;
 
 	private final PropertyDao propertyDao;
 
 	public ThreadBuilder(MessageDao messageDao, TagRepository tagRepository, MessageQueryDao messageQueryDao, PropertyDao propertyDao,
-						 ForumThreadStateFactory forumThreadStateFactory, ForumAbstractFactory
-								 forumAbstractFactory) {
+						 ForumAbstractFactory forumAbstractFactory) {
 		this.messageDao = messageDao;
 		this.tagRepository = tagRepository;
 		this.messageQueryDao = messageQueryDao;
 		this.propertyDao = propertyDao;
-		this.forumThreadStateFactory = forumThreadStateFactory;
 		this.forumAbstractFactory = forumAbstractFactory;
 	}
 
@@ -95,10 +90,10 @@ public class ThreadBuilder {
 		}
 	}
 
-	public void buildForum(ForumThread forumThread, ForumMessage rootForumMessage, Forum forum) throws Exception {
+	public void buildForum(ForumThread forumThread, Forum forum) throws Exception {
 		try {
 			if ((forum == null) || (forum.getForumId().longValue() != forumThread.getForum().getForumId().longValue())) {
-				forum = forumAbstractFactory.forumDirector.getForum(forumThread.getForum().getForumId(), forumThread, rootForumMessage);
+				forum = forumAbstractFactory.forumDirector.getForum(forumThread.getForum().getForumId());
 			}
 			forumThread.setForum(forum);
 		} catch (Exception e) {
@@ -124,31 +119,31 @@ public class ThreadBuilder {
 			throw new Exception(error);
 		}
 	}
+//
+//	public void buildState(ForumThread forumThread, ForumMessage rootMessage, MessageDirector messageDirector) throws Exception {
+//		try {
+//			logger.debug(" buildPartyState for forumThread=" + forumThread.getThreadId());
+//			Long lastMessageId = messageQueryDao.getLastPostMessageId(forumThread.getThreadId());
+//			if (lastMessageId == null) {
+//				logger.warn("maybe first running, not found lastMessageId for forumthreadId: " + forumThread.getThreadId());
+//				return;
+//			}
+//			ForumMessage lastMessage = rootMessage;
+//			if ((rootMessage == null) || (rootMessage.getMessageId().longValue() != lastMessageId.longValue()))
+//				lastMessage = messageDirector.buildMessage(lastMessageId, forumThread, forumThread
+//						.getForum());
+////			lastMessage.setForumThread(forumThread);
+//
+//			forumThreadStateFactory.init(forumThread, lastMessage);
+//
+//			logger.debug(" buildPartyState for forumThread=" + forumThread.getThreadId());
+//
+//		} catch (Exception e) {
+//			String error = e + " buildComponentState forumThreadId=" + forumThread.getThreadId();
+//			logger.error(error);
+//			throw new Exception(error);
+//		}
 
-	public void buildState(ForumThread forumThread, ForumMessage rootMessage, MessageDirector messageDirector) throws Exception {
-		try {
-			logger.debug(" buildPartyState for forumThread=" + forumThread.getThreadId());
-			Long lastMessageId = messageQueryDao.getLastPostMessageId(forumThread.getThreadId());
-			if (lastMessageId == null) {
-				logger.warn("maybe first running, not found lastMessageId for forumthreadId: " + forumThread.getThreadId());
-				return;
-			}
-			ForumMessage lastMessage = rootMessage;
-			if ((rootMessage == null) || (rootMessage.getMessageId().longValue() != lastMessageId.longValue()))
-				lastMessage = messageDirector.buildMessage(lastMessageId, forumThread, forumThread
-						.getForum());
-//			lastMessage.setForumThread(forumThread);
-
-			forumThreadStateFactory.init(forumThread, lastMessage);
-
-			logger.debug(" buildPartyState for forumThread=" + forumThread.getThreadId());
-
-		} catch (Exception e) {
-			String error = e + " buildComponentState forumThreadId=" + forumThread.getThreadId();
-			logger.error(error);
-			throw new Exception(error);
-		}
-
-	}
+//	}
 
 }

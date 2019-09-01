@@ -15,10 +15,12 @@
  */
 package com.jdon.jivejdon.model;
 
-import java.util.concurrent.atomic.AtomicLong;
-
+import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.model.subscription.SubscribedState;
 import com.jdon.jivejdon.model.subscription.subscribed.ForumSubscribed;
+import com.jdon.jivejdon.model.util.OneOneDTO;
+
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Forum State ValueObject this is a embeded class in Forum.
@@ -28,39 +30,40 @@ import com.jdon.jivejdon.model.subscription.subscribed.ForumSubscribed;
  * @author <a href="mailto:banq@163.com">banq</a>
  * 
  */
-public class ForumState {
-	private final AtomicLong threadCount;
+public class ForumState  {
+	private  AtomicLong threadCount;
 
 	/**
 	 * the number of messages in the thread. This includes the root message. So,
 	 * to find the number of replies to the root message, subtract one from the
 	 * answer of this method.
 	 */
-	private final AtomicLong messageCount;
+	private  AtomicLong messageCount;
 
-	private final ForumMessage lastPost;
+	private  ForumMessage lastPost;
 
 	private final Forum forum;
 
 	private SubscribedState subscribedState;
 
-	public ForumState(Forum forum, ForumMessage lastPost, long messageCount, long threadCount) {
+	public ForumState(Forum forum) {
 		super();
 		this.forum = forum;
-		this.lastPost = lastPost;
-		this.messageCount = new AtomicLong(messageCount);
-		this.threadCount = new AtomicLong(threadCount);
-
 	}
 
 	/**
 	 * @return Returns the messageCount.
 	 */
 	public int getMessageCount() {
+		if (this.messageCount == null)
+			loadinitState();
 		return messageCount.intValue();
 	}
 
 	public long addMessageCount() {
+		if (messageCount == null) {
+			loadinitState();
+		}
 		return this.messageCount.incrementAndGet();
 	}
 
@@ -68,15 +71,31 @@ public class ForumState {
 	 * @return Returns the threadCount.
 	 */
 	public int getThreadCount() {
+		if (threadCount == null) {
+			loadinitState();
+		}
 		return threadCount.intValue();
 	}
 
 	public long addThreadCount() {
+		if (threadCount == null) {
+			loadinitState();
+		}
 		return this.threadCount.incrementAndGet();
 	}
 
 	public ForumMessage getLastPost() {
+		if (lastPost == null) {
+			loadinitState();
+		}
 		return lastPost;
+	}
+
+	public void setLastPost(ForumMessage forumMessage) {
+		if (lastPost == null) {
+			loadinitState();
+		}
+		this.lastPost = forumMessage;
 	}
 
 	public Forum getForum() {
@@ -102,5 +121,26 @@ public class ForumState {
 			return getLastPost().getModifiedDate();
 		else
 			return "";
+	}
+
+	public void loadinitState() {
+		DomainMessage dm = this.forum.lazyLoaderRole.loadForumState(forum.getForumId());
+		OneOneDTO oneOneDTO = null;
+		try {
+			// synchronized (this) {
+			if (messageCount != null)
+				return;
+			oneOneDTO = (OneOneDTO) dm.getEventResult();
+			if (oneOneDTO != null) {
+				OneOneDTO oneOneDTO2 = (OneOneDTO) oneOneDTO.getParent();
+				this.threadCount = new AtomicLong((Long)oneOneDTO.getChild());
+				lastPost = (ForumMessage) oneOneDTO2.getParent();
+				messageCount = new AtomicLong((Long) oneOneDTO2.getChild());
+				dm.clear();
+			}
+			// }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

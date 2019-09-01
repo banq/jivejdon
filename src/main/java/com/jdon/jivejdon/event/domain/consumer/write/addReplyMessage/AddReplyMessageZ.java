@@ -19,7 +19,6 @@ import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
 import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumMessageReply;
 import com.jdon.jivejdon.model.event.ReplyMessageCreatedEvent;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.repository.ForumFactory;
@@ -56,6 +55,6 @@ public class AddReplyMessageZ implements DomainEventHandler {
 		containerUtil.addModeltoCache(anemicMessageDTO.getMessageId(), forumMessageReply);
 		//update state for Eventually consistent so MessageListNav2Action can find its state has
 		// updated
-		forumMessageReply.getForumThread().changeState((ForumMessageReply) forumMessageReply);
+//		forumMessageReply.getForumThread().changeState((ForumMessageReply) forumMessageReply);
 	}
 }

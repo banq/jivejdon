@@ -17,9 +17,6 @@
 package com.jdon.jivejdon.repository.builder;
 
 import com.jdon.jivejdon.model.Forum;
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.model.state.ForumStateFactory;
 import com.jdon.jivejdon.repository.HotKeysRepository;
 import com.jdon.jivejdon.repository.dao.ForumDao;
 import org.apache.logging.log4j.LogManager;
@@ -32,12 +29,10 @@ public class ForumBuilder {
 
 	private ForumDao forumDao;
 
-	private ForumStateFactory forumStateFactory;
 
-	public ForumBuilder(ForumDao forumDao, ForumStateFactory forumStateFactory, HotKeysRepository hotKeysFactory) {
+	public ForumBuilder(ForumDao forumDao,  HotKeysRepository hotKeysFactory) {
 		this.hotKeysFactory = hotKeysFactory;
 		this.forumDao = forumDao;
-		this.forumStateFactory = forumStateFactory;
 	}
 
 	public Forum create(Long forumId) {
@@ -72,22 +67,22 @@ public class ForumBuilder {
 	 * com.jdon.jivejdon.repository.builder.Builder#buildState(com.jdon.jivejdon
 	 * .model.Forum, com.jdon.jivejdon.model.ForumMessage)
 	 */
-	public void buildState(Forum forum, ForumThread forumThread, ForumMessage message, MessageDirector messageDirector) throws Exception {
-		try {
-			logger.debug(" loadForumState for forumId=" + forum.getForumId());
-			Long lastMessageId = forumDao.getLastPostMessageId(forum.getForumId());
-			if (lastMessageId == null) {
-				logger.warn("maybe first running, not found lastMessageId for forumId: " + forum.getForumId());
-				return;
-			}
-			if ((message == null) || (message.getMessageId().longValue() != lastMessageId.longValue()))
-				message = messageDirector.buildMessage(lastMessageId, forumThread, forum);
-			this.forumStateFactory.init(forum, message);
-		} catch (Exception e) {
-			String error = e + " buildState forumMessageId=" + forum.getForumId();
-			logger.error(error);
-			throw new Exception(error);
-		}
-	}
+//	public void buildState(Forum forum, ForumThread forumThread, ForumMessage message, MessageDirector messageDirector) throws Exception {
+//		try {
+//			logger.debug(" loadForumState for forumId=" + forum.getForumId());
+//			Long lastMessageId = forumDao.getLastPostMessageId(forum.getForumId());
+//			if (lastMessageId == null) {
+//				logger.warn("maybe first running, not found lastMessageId for forumId: " + forum.getForumId());
+//				return;
+//			}
+//			if ((message == null) || (message.getMessageId().longValue() != lastMessageId.longValue()))
+//				message = messageDirector.buildMessage(lastMessageId, forumThread, forum);
+//			this.forumStateFactory.init(forum, message);
+//		} catch (Exception e) {
+//			String error = e + " buildState forumMessageId=" + forum.getForumId();
+//			logger.error(error);
+//			throw new Exception(error);
+//		}
+//	}
 
 }

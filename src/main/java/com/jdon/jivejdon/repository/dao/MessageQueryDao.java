@@ -15,14 +15,14 @@
  */
 package com.jdon.jivejdon.repository.dao;
 
-import java.util.Collection;
-import java.util.List;
-
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.query.QueryCriteria;
 import com.jdon.jivejdon.model.query.ResultSort;
 import com.jdon.jivejdon.model.query.specification.ThreadListSpec;
 import com.jdon.treepatterns.model.TreeModel;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  * all query batch operation for ForumThread or ForumMessage
@@ -60,7 +60,12 @@ public interface MessageQueryDao {
 
 	Long getLastPostMessageId(Long threadId);
 
+	Long getForumLastPostMessageId(Long forumId);
+
+
 	int getMessageCount(Long threadId);
+
+	int getForumMessageCount(Long threadId);
 
 	// text search
 	Collection find(String query, int start, int count);

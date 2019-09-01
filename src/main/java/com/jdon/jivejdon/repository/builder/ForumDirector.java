@@ -35,35 +35,31 @@ public class ForumDirector {
 	}
 
 	public Forum getForum(Long forumId) {
+		logger.debug(" enter getForum for forumId=" + forumId);
+		if (forumId == null)
+			return null;
 		try {
-			return getForum(forumId,null, null);
+			final Forum forum = (Forum) forumBuilder.create(forumId);
+			if (forum == null) {
+				logger.error("no this forum in database id=" + forumId);
+				return null;
+			}
+			if (forum.isSolid())
+				return forum;
+
+			forumBuilder.buildProperties(forum);
+			forum.setSolid(true);
+			return forum;
 		} catch (Exception e) {
 			return null;
 		}
 
 	}
 
-	public Forum getForum(Long forumId, ForumThread forumThread,  final ForumMessage forumMessage) throws Exception {
-		logger.debug(" enter getForum for forumId=" + forumId);
-		if (forumId == null)
-			return null;
-		final Forum forum = (Forum) forumBuilder.create(forumId);
-		if (forum == null) {
-			logger.error("no this forum in database id=" + forumId);
-			return null;
-		}
-		if (forum.isSolid())
-			return forum;
-		
-		construct(forum, forumThread, forumMessage);
-		forum.setSolid(true);
-
-		return forum;
-	}
 
 	public void construct(Forum forum, ForumThread forumThread, ForumMessage forumMessage) throws Exception {
 		forumBuilder.buildProperties(forum);
-		forumBuilder.buildState(forum, forumThread, forumMessage, forumAbstractFactory.messageDirector);
+//		forumBuilder.buildState(forum, forumThread, forumMessage, forumAbstractFactory.messageDirector);
 
 	}
 

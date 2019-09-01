@@ -16,15 +16,14 @@
  */
 package com.jdon.jivejdon.repository.builder;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class ThreadDirector {
 	private final static Logger logger = LogManager.getLogger(ThreadDirector.class);
@@ -83,8 +82,9 @@ public class ThreadDirector {
 
 			// in buildPart will create rootForumMessage that need
 			// buildInitState's TreeModel
+			forumThreadBuilder.buildForum(forumThread, forum);
 			forumThreadBuilder.buildRootMessage(forumThread, rootForumMessage, forum);
-			forumThreadBuilder.buildForum(forumThread, rootForumMessage, forum);
+
 			forumThreadBuilder.buildProperties(forumThread);
 			logger.debug("ForumThread construct: ok threadId=" + forumThread.getThreadId());
 

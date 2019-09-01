@@ -141,6 +141,24 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 		return count;
 	}
 
+	public int getForumMessageCount(Long forumId) {
+		logger.debug("enter getMessageCount  for forumId:" + forumId);
+		String ALL_THREADS = "SELECT count(1) from jiveMessage WHERE forumID=? ";
+		List queryParams = new ArrayList();
+		queryParams.add(forumId);
+		int count = 0;
+		try {
+			Object counto = jdbcTempSource.getJdbcTemp().querySingleObject(queryParams, ALL_THREADS);
+			if (counto instanceof Long)// for mysql 5
+				count = ((Long) counto).intValue();
+			else
+				count = ((Integer) counto).intValue(); // for mysql 4
+		} catch (Exception e) {
+			logger.error(e);
+		}
+		return count;
+	}
+
 	/**
 	 * get laste message from the message db
 	 * 
@@ -150,6 +168,26 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 		String LAST_MESSAGES = "SELECT messageID from jiveMessage WHERE  threadID = ? ORDER BY modifiedDate DESC";
 		List queryParams2 = new ArrayList();
 		queryParams2.add(threadId);
+
+		Long messageId = null;
+		try {
+			List list = jdbcTempSource.getJdbcTemp().queryMultiObject(queryParams2, LAST_MESSAGES);
+			Iterator iter = list.iterator();
+			if (iter.hasNext()) {
+				Map map = (Map) iter.next();
+				messageId = (Long) map.get("messageID");
+			}
+		} catch (Exception e) {
+			logger.error(e);
+		}
+		return messageId;
+	}
+
+	public Long getForumLastPostMessageId(Long forumId) {
+		logger.debug("enter getLastPostMessageId  for forumId:" + forumId);
+		String LAST_MESSAGES = "SELECT messageID from jiveMessage WHERE  forumID = ? ORDER BY modifiedDate DESC";
+		List queryParams2 = new ArrayList();
+		queryParams2.add(forumId);
 
 		Long messageId = null;
 		try {
@@ -288,10 +326,6 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 	 * @param keyName
 	 *            the key name that included in PageIterator key collection,
 	 *            such as threadId or messageId
-	 * @param mqc
-	 * @param start
-	 * @param count
-	 * @return
 	 */
 	public PageIterator getQueryCriteriaResult(String keyName, QueryCriteria qc, int start, int count) {
 		logger.debug("enter getQueryCriteriaResult");

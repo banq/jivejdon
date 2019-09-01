@@ -65,22 +65,30 @@ public class ForumThreadState {
 		return -1;
 	}
 
-	/**
-	 * @param messageCount
-	 *            The messageCount to set.
-	 */
-	public void setMessageCount(int messageCount) {
-		this.messageCount = new AtomicLong(messageCount);
-	}
-
 	public long addMessageCount() {
+		if (this.messageCount == null)
+			loadinitState();
 		if (getMessageCount() != -1)
 			return messageCount.incrementAndGet();
 		else
 			return 0;
 	}
 
-	private void loadinitState() {
+	public ForumMessage getLastPost() {
+		if (this.lastPost == null) {
+			loadinitState();
+		}
+		return lastPost;
+	}
+
+	public void setLastPost(ForumMessage lastPost) {
+		if (this.lastPost == null) {
+			loadinitState();
+		}
+		this.lastPost = lastPost;
+	}
+
+	public void loadinitState() {
 		DomainMessage dm = this.forumThread.lazyLoaderRole.loadThreadState(forumThread.getThreadId());
 		OneOneDTO oneOneDTO = null;
 		try {
@@ -98,14 +106,6 @@ public class ForumThreadState {
 			e.printStackTrace();
 		}
 	}
-
-	public ForumMessage getLastPost() {
-		if (lastPost == null) {
-			loadinitState();
-		}
-		return lastPost;
-	}
-
 	public boolean lastPostIsNull() {
 		return lastPost == null ? true : false;
 	}

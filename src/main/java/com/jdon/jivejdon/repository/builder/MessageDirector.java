@@ -125,7 +125,7 @@ public class MessageDirector {
 			Optional<Account> accountOptional = messageBuilder.createAccount(anemicMessageDTO.getAccount());
 			FilterPipleSpec filterPipleSpec = new FilterPipleSpec(messageBuilder.getOutFilterManager().getOutFilters());
 			if ((forum == null) || (forum.lazyLoaderRole == null) || (forum.getForumId().longValue() != anemicMessageDTO.getForum().getForumId().longValue())) {
-				forum = messageBuilder.getForumAbstractFactory().forumDirector.getForum(anemicMessageDTO.getForum().getForumId(), forumThread, forumMessage);
+				forum = messageBuilder.getForumAbstractFactory().forumDirector.getForum(anemicMessageDTO.getForum().getForumId());
 			}
 			Long threadId = anemicMessageDTO.getForumThread().getThreadId();
 			if ((forumThread == null) || (forumThread.lazyLoaderRole == null) || (threadId.longValue() != forumThread.getThreadId().longValue())) {

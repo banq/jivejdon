@@ -19,7 +19,6 @@ package com.jdon.jivejdon.repository.builder;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.model.state.ForumThreadStateFactory;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.TagRepository;
 import com.jdon.jivejdon.repository.dao.MessageDao;
@@ -51,14 +50,13 @@ public class ForumAbstractFactory implements ForumFactory {
 	public ForumAbstractFactory(MessageBuilder messageBuilder, ForumBuilder forumBuilder,
 								ContainerUtil containerUtil, SequenceDao sequenceDao, MessageDao
 										messageDao, TagRepository tagRepository, MessageQueryDao
-										messageQueryDao, PropertyDao propertyDao,
-								ForumThreadStateFactory forumThreadStateFactory) {
+										messageQueryDao, PropertyDao propertyDao) {
 		this.containerUtil = containerUtil;
 		this.messageBuilder = messageBuilder;
 		this.messageBuilder.setForumAbstractFactory(this);
 
 		this.threadBuilder = new ThreadBuilder(messageDao, tagRepository, messageQueryDao,
-				propertyDao, forumThreadStateFactory,  this);
+				propertyDao,  this);
 
 		this.forumBuilder = forumBuilder;
 
@@ -130,10 +128,11 @@ public class ForumAbstractFactory implements ForumFactory {
 	public void reloadThreadState(ForumThread forumThread) throws Exception {
 		try {
 			threadBuilder.buildTreeModel(forumThread);
-			threadBuilder.buildState(forumThread, forumThread.getRootMessage(), messageDirector);
-
-			Forum forum = getForum(forumThread.getForum().getForumId());
-			forumBuilder.buildState(forum, forumThread, null, messageDirector);
+			forumThread.getState().loadinitState();
+//			threadBuilder.buildState(forumThread, forumThread.getRootMessage(), messageDirector);
+//
+//			Forum forum = getForum(forumThread.getForum().getForumId());
+//			forumBuilder.buildState(forum);
 
 		} catch (Exception e) {
 			String error = e + " refreshAllState forumThread=" + forumThread.getThreadId();
@@ -142,17 +141,6 @@ public class ForumAbstractFactory implements ForumFactory {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.jdon.jivejdon.repository.builder.ForumFactory#reloadhForumState(java
-	 * .lang.Long)
-	 */
-	public void reloadhForumState(Long forumId) throws Exception {
-		Forum forum = getForum(forumId);
-		forumBuilder.buildState(forum, null, null, messageDirector);
-	}
 
 	public Long getNextId(final int idType) throws Exception {
 		try {
