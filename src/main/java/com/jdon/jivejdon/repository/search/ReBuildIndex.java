@@ -77,7 +77,7 @@ public class ReBuildIndex implements Runnable {
 			logger.debug("rebuildIndex start = " + start + " count = " + count);
 			pi = getAllMessages(start, count);
 		}
-
+        logger.error("rebuildIndex ok!");
 	}
 
 	private void addMessage(AnemicMessageDTO message) {
