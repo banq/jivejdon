@@ -107,41 +107,37 @@ public class MessageDirector {
 			return null;
 		}
 		ForumMessage forumMessage = this.messageBuilder.messageDao.getForumMessageInjection(messageId);
-		if (forumMessage.isSolid())//if from cache , it being build solid
+		if (forumMessage.isSolid())//if from cache , if being solid
 			return forumMessage;
 
-		final AnemicMessageDTO anemicMessageDTO = (AnemicMessageDTO) messageBuilder.createAnemicMessage(messageId);
-		if (anemicMessageDTO == null) {
-			nullmessages.put(messageId, "NULL");
-			logger.error("no this message in database id=" + messageId);
-			return null;
-		}
-		ForumMessage parentforumMessage = null;
-		if (anemicMessageDTO.getParentMessage() != null && anemicMessageDTO.getParentMessage().getMessageId() != null) {
-			parentforumMessage = buildMessage(anemicMessageDTO.getParentMessage().getMessageId(), forumThread, forum);
-		}
+		try {
+			final AnemicMessageDTO anemicMessageDTO = (AnemicMessageDTO) messageBuilder.createAnemicMessage(messageId);
+			if (anemicMessageDTO == null) {
+				nullmessages.put(messageId, "NULL");
+				logger.error("no this message in database id=" + messageId);
+				return null;
+			}
+			ForumMessage parentforumMessage = null;
+			if (anemicMessageDTO.getParentMessage() != null && anemicMessageDTO.getParentMessage().getMessageId() != null) {
+				parentforumMessage = buildMessage(anemicMessageDTO.getParentMessage().getMessageId(), forumThread, forum);
+			}
 
-		Optional<Account> accountOptional = messageBuilder.createAccount(anemicMessageDTO.getAccount());
-		FilterPipleSpec filterPipleSpec = new FilterPipleSpec(messageBuilder.getOutFilterManager().getOutFilters());
-		if ((forum == null) || (forum.lazyLoaderRole == null) || (forum.getForumId().longValue() != anemicMessageDTO.getForum().getForumId().longValue())) {
-			forum = messageBuilder.getForumAbstractFactory().forumDirector.getForum(anemicMessageDTO.getForum().getForumId(), forumThread, forumMessage);
-		}
-		Long threadId = anemicMessageDTO.getForumThread().getThreadId();
-		if ((forumThread == null) || (forumThread.lazyLoaderRole == null) || (threadId.longValue() != forumThread.getThreadId().longValue())) {
-			forumThread = messageBuilder.getForumAbstractFactory().threadDirector.getThread(threadId, parentforumMessage!=null?null:forumMessage, forum);
-		}
-		if(parentforumMessage != null){
-			forumMessage = forumMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId()).messageVO
+			Optional<Account> accountOptional = messageBuilder.createAccount(anemicMessageDTO.getAccount());
+			FilterPipleSpec filterPipleSpec = new FilterPipleSpec(messageBuilder.getOutFilterManager().getOutFilters());
+			if ((forum == null) || (forum.lazyLoaderRole == null) || (forum.getForumId().longValue() != anemicMessageDTO.getForum().getForumId().longValue())) {
+				forum = messageBuilder.getForumAbstractFactory().forumDirector.getForum(anemicMessageDTO.getForum().getForumId(), forumThread, forumMessage);
+			}
+			Long threadId = anemicMessageDTO.getForumThread().getThreadId();
+			if ((forumThread == null) || (forumThread.lazyLoaderRole == null) || (threadId.longValue() != forumThread.getThreadId().longValue())) {
+				forumThread = messageBuilder.getForumAbstractFactory().threadDirector.getThread(threadId, parentforumMessage != null ? null : forumMessage, forum);
+			}
+			forumMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId()).messageVO
 					(anemicMessageDTO.getMessageVO()).forum
 					(forum).forumThread(forumThread)
 					.acount(accountOptional.orElse(new Account())).creationDate(anemicMessageDTO.getCreationDate()).modifiedDate(anemicMessageDTO.getModifiedDate()).filterPipleSpec(filterPipleSpec)
-					.uploads(null).props(null).build((ForumMessageReply) forumMessage, parentforumMessage);
-		}else{
-			forumMessage = forumMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId()).messageVO
-					(anemicMessageDTO.getMessageVO()).forum
-					(forum).forumThread(forumThread)
-					.acount(accountOptional.orElse(new Account())).creationDate(anemicMessageDTO.getCreationDate()).modifiedDate(anemicMessageDTO.getModifiedDate()).filterPipleSpec(filterPipleSpec)
-					.uploads(null).props(null).build(forumMessage);
+					.uploads(null).props(null).build(forumMessage, parentforumMessage);
+		}catch (Exception e){
+			logger.error("buildMessage exception "+ e.getMessage() + " messageId=" + messageId);
 		}
 		return forumMessage;
 

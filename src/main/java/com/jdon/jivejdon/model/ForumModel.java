@@ -37,7 +37,7 @@ public class ForumModel implements EmbedIF, Serializable {
 
 	// no used:it is a paramter from command if UI.
 	// if  Id  is null, this is a DTO
-	protected volatile boolean parameter;
+	protected volatile boolean parameter = true;
 
 	/**
 	 * @return Returns the embedded.

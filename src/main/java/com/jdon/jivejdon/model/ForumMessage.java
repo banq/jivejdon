@@ -124,6 +124,10 @@ public class ForumMessage extends ForumModel implements Cloneable {
         return this.forumThread.isRoot(this);
     }
 
+    public ForumMessage getParentMessage(){
+        return isRoot()?null:((ForumMessageReply)this).getParentMessage();
+    }
+
     public MessageVO getMessageVO() {
         return messageVO;
     }
@@ -175,7 +179,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
             ForumMessageReply forumMessageReply = new ForumMessageReply(anemicMessageDTO.getMessageId(), this.getMessageId());
             long modifiedDate = System.currentTimeMillis();
             String creationDate = Constants.getDefaultDateTimeDisp(modifiedDate);
-            forumMessageReply = this.messageBuilder()
+            this.messageBuilder()
                     .messageId(anemicMessageDTO.getMessageId())
                     .messageVO(anemicMessageDTO.getMessageVO())
                     .forum(this.forum).forumThread(this.forumThread)
@@ -249,7 +253,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
                 (newForumMessageInputparamter.getMessageVO()).forum
                 (this.forum).forumThread(this.forumThread)
                 .acount(this.getAccount()).creationDate(this.creationDate).modifiedDate(now).filterPipleSpec(this.filterPipleSpec)
-                .uploads(uploads).props(props).build(this);
+                .uploads(uploads).props(props).build(this, getParentMessage());
 
         // merge with old properties;
         eventSourcing.saveMessageProperties(new MessagePropertiesUpdatedEvent(this.messageId,
@@ -508,22 +512,23 @@ public class ForumMessage extends ForumModel implements Cloneable {
             this.props = props;
         }
 
-        public ForumMessage build(ForumMessage forumMessage) {
-            if (forumMessage instanceof ForumMessageReply){
-                ForumMessageReply forumMessageReply = (ForumMessageReply)forumMessage;
-                build(forumMessageReply, forumMessageReply.getParentMessage());
-            }else
-                forumMessage.build(messageId, messageVO, forum, forumThread, account,
-                    creationDate,  modifiedDate, filterPipleSpec, uploads, props);
-            return forumMessage;
-        }
-
-        public ForumMessageReply build(ForumMessageReply forumMessageRely,
+        public void build(ForumMessage forumMessage,
                                        ForumMessage parentForumMessage) {
-            forumMessageRely.build(messageId, messageVO, forum, forumThread, account,
-                    creationDate,  modifiedDate, filterPipleSpec, uploads,
-                    props, parentForumMessage);
-            return forumMessageRely;
+            try {
+                if (parentForumMessage != null && forumMessage instanceof ForumMessageReply) {
+                    ForumMessageReply forumMessageRely = (ForumMessageReply) forumMessage;
+                    forumMessageRely.build(messageId, messageVO, forum, forumThread, account,
+                            creationDate, modifiedDate, filterPipleSpec, uploads,
+                            props, parentForumMessage);
+                } else if (parentForumMessage == null && forumMessage instanceof ForumMessage) {
+                    forumMessage.build(messageId, messageVO, forum, forumThread, account,
+                            creationDate, modifiedDate, filterPipleSpec, uploads, props);
+                } else {
+                    System.err.println("build error:" + forumMessage.getClass().getName() + forumMessage.getMessageId());
+                }
+            }catch (Exception e){
+                System.err.println("build Exception:" + forumMessage.getClass().getName() + forumMessage.getMessageId());
+            }
         }
     }
 
