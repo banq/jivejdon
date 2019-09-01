@@ -15,7 +15,6 @@ import org.compass.annotations.SearchableReference;
  * used for presentation MessageForm
  * and for persistence MessageCore of jiveMessage database table
  */
-//@Model  //for edit , is a jdon-struts bug
 @Searchable
 public class AnemicMessageDTO {
     @SearchableId
