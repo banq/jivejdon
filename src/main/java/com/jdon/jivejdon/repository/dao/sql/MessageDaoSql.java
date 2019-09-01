@@ -100,6 +100,22 @@ public abstract class MessageDaoSql implements MessageDao {
 		return forumMessage;
 	}
 
+	public Long getParentMessageId(Long messageId) {
+		logger.debug("enter isRoot  for id:" + messageId);
+		String LOAD_MESSAGE = "SELECT parentMessageID FROM jiveMessage WHERE messageID=?";
+		List queryParams = new ArrayList();
+		queryParams.add(messageId);
+
+		Long pmessageId = null;
+		try {
+			pmessageId = (Long)jdbcTempSource.getJdbcTemp().querySingleObject(queryParams, LOAD_MESSAGE);
+		} catch (Exception e) {
+			logger.error("isRoot messageId=" + messageId + " happend  " + e);
+		}
+		return pmessageId;
+	}
+
+
 	public MessageVO getMessageVOCore(ForumMessage forumMessage) {
 		logger.debug("enter MessageVO  for id:" + forumMessage.getMessageId());
 		String LOAD_MESSAGE = "SELECT threadID, forumID, userID, subject, body, modValue, " +

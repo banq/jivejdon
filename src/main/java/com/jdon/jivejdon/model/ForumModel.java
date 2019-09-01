@@ -35,7 +35,7 @@ public class ForumModel implements EmbedIF, Serializable {
 	// it is a solid object from repository
 	protected volatile boolean solid;
 
-	// it is a paramter from command if UI.
+	// no used:it is a paramter from command if UI.
 	// if  Id  is null, this is a DTO
 	protected volatile boolean parameter;
 

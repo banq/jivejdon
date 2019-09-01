@@ -53,12 +53,8 @@ public class MessageDaoDecorator extends MessageDaoSql {
 	 */
 	@Around()
 	public ForumMessage getForumMessageInjection(Long messageId) {
-		AnemicMessageDTO anemicMessageDTO = super.getAnemicMessage(messageId);
-		if (anemicMessageDTO.getParentMessage() != null && anemicMessageDTO.getParentMessage().getMessageId() != null)
-			return new ForumMessageReply();
-		else
-			return new ForumMessage(messageId);
-
+		Long pmessageId = super.getParentMessageId(messageId);
+		return pmessageId == null?new ForumMessage(messageId):new ForumMessageReply(messageId, pmessageId);
 	}
 
 	public AnemicMessageDTO getAnemicMessage(Long messageId) {

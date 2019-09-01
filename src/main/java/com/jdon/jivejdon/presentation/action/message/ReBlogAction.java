@@ -15,30 +15,24 @@
  */
 package com.jdon.jivejdon.presentation.action.message;
 
-import java.lang.reflect.InvocationTargetException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.logging.log4j.*;
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
-
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.events.EventModel;
 import com.jdon.jivejdon.Constants;
 import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumMessageReply;
+import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.presentation.form.MessageForm;
 import com.jdon.jivejdon.service.ForumMessageService;
 import com.jdon.model.ModelForm;
 import com.jdon.strutsutil.FormBeanUtil;
 import com.jdon.util.UtilValidate;
+import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.struts.action.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Response for post a reply message.
@@ -142,11 +136,11 @@ public class ReBlogAction extends Action {
 	protected Long createReply(MessageForm messageReplyForm, HttpServletRequest request) throws Exception {
 		Long replyMessageId = null;
 		try {
-			ForumMessageReply forumMessageReply = new ForumMessageReply();
-			formCopyToModelIF(messageReplyForm, forumMessageReply);
+			AnemicMessageDTO anemicMessageDTO = new AnemicMessageDTO();
+			formCopyToModelIF(messageReplyForm, anemicMessageDTO);
 			EventModel em = new EventModel();
 			em = new EventModel();
-			em.setModelIF(forumMessageReply);
+			em.setModelIF(anemicMessageDTO);
 			ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
 			replyMessageId = forumMessageService.createReplyMessage(em);
 			if (em.getErrors() != null) {

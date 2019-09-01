@@ -172,7 +172,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
         try {
 //			Thread.sleep(5000); test blocking async
             // basic construct
-            ForumMessageReply forumMessageReply = new ForumMessageReply();
+            ForumMessageReply forumMessageReply = new ForumMessageReply(anemicMessageDTO.getMessageId(), this.getMessageId());
             long modifiedDate = System.currentTimeMillis();
             String creationDate = Constants.getDefaultDateTimeDisp(modifiedDate);
             forumMessageReply = this.messageBuilder()
@@ -531,31 +531,32 @@ public class ForumMessage extends ForumModel implements Cloneable {
     public void build(long messageId, MessageVO messageVO, Forum
             forum, ForumThread forumThread, Account account,String creationDate, long modifiedDate ,FilterPipleSpec filterPipleSpec,
                       Collection<UploadFile> uploads, Collection<Property> props) {
-        if (this.isSolid()) return;
         try {
-            synchronized (this) {
-                if (this.isSolid()) return;
-                setMessageId(messageId);
-                setAccount(account);
-                setCreationDate(creationDate);
-                setModifiedDate(modifiedDate);
-                setForum(forum);
-                setForumThread(forumThread);
-                setFilterPipleSpec(filterPipleSpec);
-                if (uploads != null)
-                    this.getAttachment().setUploadFiles(uploads);
-                this.messagePropertysVO = new MessagePropertysVO(messageId, this.lazyLoaderRole);
-                if (props != null)
-                    this.getMessagePropertysVO().replacePropertys(props);
-                else
-                    //preload messageProperty
-                    getMessagePropertysVO().preLoadPropertys();
-                //apply all filter specification , business rule!
-                messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO
-                        .getBody()).build();
-                setMessageVO(filterPipleSpec.apply(messageVO));
-                this.setSolid(true);//construt end
-            }
+            if (!this.isSolid())
+                synchronized (this) {
+                    if (!this.isSolid()) {
+                        setMessageId(messageId);
+                        setAccount(account);
+                        setCreationDate(creationDate);
+                        setModifiedDate(modifiedDate);
+                        setForum(forum);
+                        setForumThread(forumThread);
+                        setFilterPipleSpec(filterPipleSpec);
+                        if (uploads != null)
+                            this.getAttachment().setUploadFiles(uploads);
+                        this.messagePropertysVO = new MessagePropertysVO(messageId, this.lazyLoaderRole);
+                        if (props != null)
+                            this.getMessagePropertysVO().replacePropertys(props);
+                        else
+                            //preload messageProperty
+                            getMessagePropertysVO().preLoadPropertys();
+                        //apply all filter specification , business rule!
+                        messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO
+                                .getBody()).build();
+                        setMessageVO(filterPipleSpec.apply(messageVO));
+                        this.setSolid(true);//construt end
+                    }
+                }
         } catch (Exception e) {
             System.err.print("Message build error:"+ messageId);
         }
