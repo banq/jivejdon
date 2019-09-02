@@ -131,7 +131,7 @@ public class MessageDirector {
 			if ((forumThread == null) || (forumThread.lazyLoaderRole == null) || (threadId.longValue() != forumThread.getThreadId().longValue())) {
 				forumThread = messageBuilder.getForumAbstractFactory().threadDirector.getThread(threadId, parentforumMessage != null ? null : forumMessage, forum);
 			}
-			forumMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId()).messageVO
+			ForumMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId()).messageVO
 					(anemicMessageDTO.getMessageVO()).forum
 					(forum).forumThread(forumThread)
 					.acount(accountOptional.orElse(new Account())).creationDate(anemicMessageDTO.getCreationDate()).modifiedDate(anemicMessageDTO.getModifiedDate()).filterPipleSpec(filterPipleSpec)

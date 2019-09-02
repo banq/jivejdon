@@ -103,7 +103,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
         this.messagePropertysVO = new MessagePropertysVO(new Long(0), new ArrayList());
     }
 
-    public  RequireMessageId messageBuilder() {
+    public static RequireMessageId messageBuilder() {
         return messageId -> messageVO -> forum -> forumThread -> account -> creationDate ->modifiedDate-> filterPipleSpec
                 -> uploads -> properties -> new FinalStageVO(messageId, messageVO, forum, forumThread, account,  creationDate,  modifiedDate, filterPipleSpec, uploads, properties);
     }
@@ -179,7 +179,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
             ForumMessageReply forumMessageReply = new ForumMessageReply(anemicMessageDTO.getMessageId(), this.getMessageId());
             long modifiedDate = System.currentTimeMillis();
             String creationDate = Constants.getDefaultDateTimeDisp(modifiedDate);
-            this.messageBuilder()
+            ForumMessage.messageBuilder()
                     .messageId(anemicMessageDTO.getMessageId())
                     .messageVO(anemicMessageDTO.getMessageVO())
                     .forum(this.forum).forumThread(this.forumThread)
@@ -249,7 +249,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
         Collection<Property> props = newForumMessageInputparamter.getMessagePropertysVO()
                 .getPropertys();
         this.setSolid(false);
-        this.messageBuilder().messageId(this.getMessageId()).messageVO
+        ForumMessage.messageBuilder().messageId(this.getMessageId()).messageVO
                 (newForumMessageInputparamter.getMessageVO()).forum
                 (this.forum).forumThread(this.forumThread)
                 .acount(this.getAccount()).creationDate(this.creationDate).modifiedDate(now).filterPipleSpec(this.filterPipleSpec)
@@ -485,7 +485,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 
 
 
-    public  class FinalStageVO {
+    public static class FinalStageVO {
         private final long messageId;
         private final MessageVO messageVO;
         private final Account account;
