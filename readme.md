@@ -57,10 +57,12 @@ All classes, methods and other members named in business language used in the Bo
 
 Clean architecture/Hexagonal_architecture
 ==============================
-JiveJdon is developed with JdonFramework that supports Customer/Supply or pub-sub model, this model can seperate domain logic from infrastructure, databases, other stuff. 
+JiveJdon is developed with JdonFramework that supports Customer/Supply or pub-sub model, this model can seperate domain logic from infrastructure, databases, other stuff.
+
 ![avatar](./doc/clean.png)
 
 JiveJdon and Hexagonal_architecture:
+
 ![avatar](./doc/hexagonal_architecture.png)
 
 
@@ -68,13 +70,13 @@ JiveJdon and Hexagonal_architecture:
 ``````
 	<model key="messageId" class="com.jdon.jivejdon.model.message.AnemicMessageDTO">
 		<actionForm name="messageForm"/>
-			<handler>
-				<service ref="forumMessageService">
+		<handler>
+			<service ref="forumMessageService">
 			
-					<createMethod name="createReplyMessage"/>
+				<createMethod name="createReplyMessage"/>
 					
-				</service>
-			</handler>
+			</service>
+		</handler>
 	</model>
 ``````
 When post a reply message,  a POST command will action [forumMessageService](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/service/imp/message/ForumMessageShell.java) createReplyMessage method:
