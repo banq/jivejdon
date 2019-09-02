@@ -27,10 +27,7 @@ import java.util.Collection;
  * @author <a href="mailto:banq@163.com">banq</a>
  */
 public interface MessageDao {
-//
-//	ForumMessage getMessageCore(ModelKey modelKey);
 
-	ForumMessage getForumMessageInjection(Long messageId);
 
 	AnemicMessageDTO getAnemicMessage(Long messageId);
 
@@ -46,7 +43,9 @@ public interface MessageDao {
 
 	ForumThread getThreadCore(Long threadId);
 
-	void createThread(ForumThread forumThread) throws Exception;
+	Long getThreadRootMessageId(Long threadId);
+
+	void createThread(AnemicMessageDTO forumMessagePostDTO) throws Exception;
 
 	void updateThread(ForumThread forumThread) throws Exception;
 

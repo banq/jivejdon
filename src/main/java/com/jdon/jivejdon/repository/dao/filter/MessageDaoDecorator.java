@@ -18,8 +18,6 @@ package com.jdon.jivejdon.repository.dao.filter;
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.pointcut.Around;
 import com.jdon.jivejdon.Constants;
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumMessageReply;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.repository.builder.MessageInitFactory;
@@ -48,14 +46,7 @@ public class MessageDaoDecorator extends MessageDaoSql {
 		this.messageSearchProxy = messageSearchProxy;
 	}
 
-	/**
-	 * active the cache
-	 */
-	@Around()
-	public ForumMessage getForumMessageInjection(Long messageId) {
-		Long pmessageId = super.getParentMessageId(messageId);
-		return pmessageId == null?new ForumMessage(messageId):new ForumMessageReply(messageId, pmessageId);
-	}
+
 
 	public AnemicMessageDTO getAnemicMessage(Long messageId) {
 		return  super.getAnemicMessage(messageId);

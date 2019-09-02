@@ -143,11 +143,10 @@ public class MessageInitFactory {
 	}
 
 	public ForumThread createThreadCore(Long threadId, Map map) {
-		ForumMessage rootforumMessage = new ForumMessage((Long) map.get("rootMessageID"));
 
 			Forum forum = new Forum();
 			forum.setForumId((Long) map.get("forumID"));
-			ForumThread forumThread = new ForumThread(rootforumMessage, threadId,forum);
+			ForumThread forumThread = new ForumThread(null, threadId,forum);
 
 			forumThread.setForum(forum);
 

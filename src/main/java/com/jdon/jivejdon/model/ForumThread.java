@@ -183,6 +183,9 @@ public class ForumThread extends ForumModel {
 	}
 
 	public ForumMessage getRootMessage() {
+		if (rootMessage == null){
+			System.err.println("this is DTO thread" + threadId);
+		}
 		return rootMessage;
 	}
 

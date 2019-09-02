@@ -15,10 +15,7 @@
  */
 package com.jdon.jivejdon.model.proptery;
 
-import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.event.domain.producer.read.LazyLoaderRole;
 import com.jdon.jivejdon.model.Property;
-import com.jdon.jivejdon.model.util.LazyLoader;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -31,57 +28,25 @@ import java.util.Iterator;
  * @author banq
  * 
  */
-public class MessagePropertysVO extends LazyLoader {
+public class MessagePropertysVO {
 	public final static String PROPERTY_MASKED = "MASKED";
 
 	public final static String PROPERTY_IP = "IP";
 
 	public final static String DIG_NUMBER = "digNumber";
 
-	private final long messageId;
+	private final Long messageId;
 
-	private LazyLoaderRole lazyLoaderRole;
-
-	private Collection<Property> propertys;
+	private final Collection<Property> propertys;
 
 	// for read or load
-	public MessagePropertysVO(long messageId, LazyLoaderRole lazyLoaderRole) {
-		this.messageId = messageId;
-		this.lazyLoaderRole = lazyLoaderRole;
-	}
-
-	// for be written
-	public MessagePropertysVO(long messageId, Collection<Property> propertys) {
+	public MessagePropertysVO(Long messageId, Collection<Property> propertys) {
 		this.messageId = messageId;
 		this.propertys = propertys;
-	}
-
-	public long getMessageId() {
-		return messageId;
 	}
 
 	public Collection<Property> getPropertys() {
-		if (this.propertys != null)
-			return this.propertys;
-
-		if (propertys == null && lazyLoaderRole != null) {
-			// synchronized (this) {
-			Collection<Property> propertys = (Collection) super.loadBlockedResult();
-			if (propertys != null)
-				this.propertys = propertys;
-			// }
-		} else if (propertys == null && lazyLoaderRole == null) {
-			System.err.print("my god, how propertys was bornd?");
-		}
 		return propertys;
-	}
-
-	public void setPropertys(Collection<Property> propertys) {
-		this.propertys = propertys;
-	}
-
-	public void preLoadPropertys() {
-		super.preload();
 	}
 
 	public boolean isMasked() {
@@ -195,12 +160,6 @@ public class MessagePropertysVO extends LazyLoader {
 		return null;
 	}
 
-	@Override
-	public DomainMessage getDomainMessage() {
-		if (lazyLoaderRole == null){
-			System.err.println("lazyLoaderRole is null for message="+this.messageId);
-		}
-		return lazyLoaderRole.loadMessageProperties(messageId);
-	}
+
 
 }

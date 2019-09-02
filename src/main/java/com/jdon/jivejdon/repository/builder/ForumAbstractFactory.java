@@ -22,7 +22,6 @@ import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.TagRepository;
 import com.jdon.jivejdon.repository.dao.MessageDao;
-import com.jdon.jivejdon.repository.dao.MessageQueryDao;
 import com.jdon.jivejdon.repository.dao.PropertyDao;
 import com.jdon.jivejdon.repository.dao.SequenceDao;
 import com.jdon.jivejdon.util.ContainerUtil;
@@ -35,37 +34,24 @@ public class ForumAbstractFactory implements ForumFactory {
 	private final static Logger logger = LogManager.getLogger(ForumAbstractFactory.class);
 
 	public final ForumDirector forumDirector;
-	public final MessageDirector messageDirector;
+	public final MessageDirectorIF messageDirectorIF;
 	public final ThreadDirector threadDirector;
 
-	protected final MessageBuilder messageBuilder;
-	protected final ThreadBuilder threadBuilder;
-	protected final ForumBuilder forumBuilder;
 	protected final ContainerUtil containerUtil;
 
 	private final SequenceDao sequenceDao;
 
 	// define in manager.xml
 
-	public ForumAbstractFactory(MessageBuilder messageBuilder, ForumBuilder forumBuilder,
+	public ForumAbstractFactory(MessageDirectorIF messageDirectorIF, ForumDirector forumDirector,
 								ContainerUtil containerUtil, SequenceDao sequenceDao, MessageDao
-										messageDao, TagRepository tagRepository, MessageQueryDao
-										messageQueryDao, PropertyDao propertyDao) {
+										messageDao, TagRepository tagRepository, PropertyDao propertyDao) {
 		this.containerUtil = containerUtil;
-		this.messageBuilder = messageBuilder;
-		this.messageBuilder.setForumAbstractFactory(this);
-
-		this.threadBuilder = new ThreadBuilder(messageDao, tagRepository, messageQueryDao,
-				propertyDao,  this);
-
-		this.forumBuilder = forumBuilder;
-
+		this.messageDirectorIF = messageDirectorIF;
 		this.sequenceDao = sequenceDao;
-
-		this.forumDirector = new ForumDirector(this, forumBuilder);
-		this.messageDirector = new MessageDirector(messageBuilder);
-		this.threadDirector = new ThreadDirector(threadBuilder);
-
+		this.forumDirector = forumDirector;
+		this.threadDirector = new ThreadDirector(forumDirector, messageDao, tagRepository, propertyDao,  messageDirectorIF);
+        this.messageDirectorIF.setThreadDirector(this.threadDirector);
 	}
 
 	/*
@@ -79,16 +65,6 @@ public class ForumAbstractFactory implements ForumFactory {
 		return forumDirector.getForum(forumId);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.jdon.jivejdon.repository.builder.ForumFactory#getMessageWithPropterty
-	 * (java.lang.Long)
-	 */
-	public ForumMessage getMessageWithPropterty(Long messageId) {
-		return messageDirector.getMessageWithPropterty(messageId);
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -98,7 +74,7 @@ public class ForumAbstractFactory implements ForumFactory {
 	 * .Long)
 	 */
 	public ForumMessage getMessage(Long messageId) {
-		return messageDirector.buildMessage(messageId);
+		return messageDirectorIF.getMessage(messageId);
 	}
 
 	/*
@@ -127,7 +103,7 @@ public class ForumAbstractFactory implements ForumFactory {
 	 */
 	public void reloadThreadState(ForumThread forumThread) throws Exception {
 		try {
-			threadBuilder.buildTreeModel(forumThread);
+			buildTreeModel(forumThread);
 			forumThread.getState().loadinitState();
 //			threadBuilder.buildState(forumThread, forumThread.getRootMessage(), messageDirector);
 //
@@ -151,6 +127,18 @@ public class ForumAbstractFactory implements ForumFactory {
 			throw new Exception(error);
 		}
 
+	}
+
+	public void buildTreeModel(final ForumThread forumThread) throws Exception {
+		try {
+			// NO NEED PRELOADE tREE, ONLY LOAD IT WHEN NEED.
+			// forumThread.preloadTreeMode();
+			// forumThreadTreeModelFactory.create(forumThread);
+		} catch (Exception e) {
+			String error = e + " buildInitState forumThreadId=" + forumThread.getThreadId();
+			logger.error(error);
+			throw new Exception(error);
+		}
 	}
 
 }

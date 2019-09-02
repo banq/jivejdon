@@ -23,20 +23,18 @@
 
 		<component name="MessageFactory"
 			class="com.jdon.jivejdon.repository.builder.MessageInitFactory"/>
-			
+
+		<component name="MessageDirector"
+				   class="com.jdon.jivejdon.repository.builder.MessageDirector"/>
+
+		<component name="ForumDirector"
+				   class="com.jdon.jivejdon.repository.builder.ForumDirector"/>
+
+
 		<component name="AccountInitFactory"
 			class="com.jdon.jivejdon.repository.builder.AccountInitFactory"/>			
 
 
-		<component name="messageBuilder"
-                   class="com.jdon.jivejdon.repository.builder.MessageBuilder"/>
-
-        <!--<component name="ThreadBuilder"-->
-        <!--class="com.jdon.jivejdon.repository.builder.ThreadBuilder"/>		-->
-
-		<component name="forumBuilder"
-			class="com.jdon.jivejdon.repository.builder.ForumBuilder"/>				
-			
         <component name="accountFactory"
 			class="com.jdon.jivejdon.repository.builder.AccountFactoryDao"/>					
 		

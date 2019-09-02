@@ -1,9 +1,5 @@
 package com.jdon.jivejdon.presentation.action.admin;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.logging.log4j.*;
-
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.query.MultiCriteria;
@@ -11,6 +7,10 @@ import com.jdon.jivejdon.service.ForumMessageQueryService;
 import com.jdon.jivejdon.service.ForumMessageService;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.util.UtilValidate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class UserMessageListAction extends ModelListAction {
 	private final static Logger logger = LogManager.getLogger(UserMessageListAction.class);
@@ -43,7 +43,7 @@ public class UserMessageListAction extends ModelListAction {
 	public Object findModelIFByKey(HttpServletRequest request, Object key) {
 		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
 		logger.debug(" key calss type = " + key.getClass().getName());
-		return forumMessageService.findMessageWithPropterty((Long) key);
+		return forumMessageService.getMessage((Long) key);
 	}
 
 }

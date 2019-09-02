@@ -16,30 +16,31 @@
  */
 package com.jdon.jivejdon.repository.builder;
 
-import org.apache.logging.log4j.*;
-
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.repository.HotKeysRepository;
+import com.jdon.jivejdon.repository.dao.ForumDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ForumDirector {
 	private final static Logger logger = LogManager.getLogger(ForumDirector.class);
 
-	private ForumBuilder forumBuilder;
+	private final HotKeysRepository hotKeysFactory;
 
-	private ForumAbstractFactory forumAbstractFactory;
+	private final ForumDao forumDao;
 
-	public ForumDirector(ForumAbstractFactory forumAbstractFactory, ForumBuilder forumBuilder) {
-		this.forumBuilder = forumBuilder;
-		this.forumAbstractFactory = forumAbstractFactory;
+	public ForumDirector(ForumDao forumDao,  HotKeysRepository hotKeysFactory) {
+		this.hotKeysFactory = hotKeysFactory;
+		this.forumDao = forumDao;
 	}
-
 	public Forum getForum(Long forumId) {
 		logger.debug(" enter getForum for forumId=" + forumId);
 		if (forumId == null)
 			return null;
 		try {
-			final Forum forum = (Forum) forumBuilder.create(forumId);
+			final Forum forum = (Forum) create(forumId);
 			if (forum == null) {
 				logger.error("no this forum in database id=" + forumId);
 				return null;
@@ -47,7 +48,7 @@ public class ForumDirector {
 			if (forum.isSolid())
 				return forum;
 
-			forumBuilder.buildProperties(forum);
+			buildProperties(forum);
 			forum.setSolid(true);
 			return forum;
 		} catch (Exception e) {
@@ -56,15 +57,19 @@ public class ForumDirector {
 
 	}
 
-
-	public void construct(Forum forum, ForumThread forumThread, ForumMessage forumMessage) throws Exception {
-		forumBuilder.buildProperties(forum);
-//		forumBuilder.buildState(forum, forumThread, forumMessage, forumAbstractFactory.messageDirector);
-
+	public Forum create(Long forumId) {
+		return forumDao.getForum(forumId);
 	}
 
-	public void setForumBuilder(ForumBuilder forumBuilder) {
-		this.forumBuilder = forumBuilder;
+	public void buildProperties(Forum forum) {
+		forum.setHotKeys(hotKeysFactory.getHotKeys());
+	}
+
+
+	public void construct(Forum forum, ForumThread forumThread, ForumMessage forumMessage) throws Exception {
+		buildProperties(forum);
+//		forumBuilder.buildState(forum, forumThread, forumMessage, forumAbstractFactory.messageDirector);
+
 	}
 
 }

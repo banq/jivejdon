@@ -1,7 +1,5 @@
 package com.jdon.jivejdon.repository.builder;
 
-import com.jdon.jivejdon.Constants;
-import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.repository.ThreadRepository;
@@ -21,18 +19,9 @@ public class ThreadRepositoryDao implements ThreadRepository {
 		this.messageDaoFacade = messageDaoFacade;
 	}
 
-	public ForumThread initThread(AnemicMessageDTO forumMessageDTO) throws
-			Exception {
-		logger.debug(" createThread");
-
-		Long tIDInt = messageDaoFacade.getSequenceDao().getNextId(Constants.THREAD);
-		return new ForumThread(new ForumMessage(forumMessageDTO.getMessageId()), tIDInt,
-				forumMessageDTO.getForum());
-	}
-
-	@Override
-	public void createThread(ForumThread forumThread) throws Exception {
-		messageDaoFacade.getMessageDao().createThread(forumThread);
+	
+	public void createThread(AnemicMessageDTO forumMessagePostDTO) throws Exception {
+		messageDaoFacade.getMessageDao().createThread(forumMessagePostDTO);
 	}
 
 	/* (non-Javadoc)

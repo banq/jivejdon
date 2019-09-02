@@ -53,11 +53,6 @@ public interface ForumMessageService {
 	 */
 	ForumMessage getMessage(Long messageId);
 
-	/**
-	 * no Authorization ; no cache Intercept equals getMessage, has full
-	 * propperties
-	 */
-	ForumMessage findMessageWithPropterty(Long messageId);
 
 	/**
 	 * create a topic message, it is a root message

@@ -43,8 +43,6 @@ public interface MessageKernelIF {
 	 */
 	public abstract ForumMessage getMessage(Long messageId);
 
-	public abstract ForumMessage getMessageWithPropterty(Long messageId);
-
 	/**
 	 * return a full ForumThread one ForumThread has one rootMessage need solve
 	 * the realtion with Forum rootForumMessage lastPost

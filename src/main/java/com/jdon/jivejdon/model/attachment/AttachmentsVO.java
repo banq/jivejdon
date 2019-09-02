@@ -15,10 +15,6 @@
  */
 package com.jdon.jivejdon.model.attachment;
 
-import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.event.domain.producer.read.LazyLoaderRole;
-import com.jdon.jivejdon.model.util.LazyLoader;
-
 import java.util.Collection;
 
 /**
@@ -29,46 +25,24 @@ import java.util.Collection;
  * @author banq
  * 
  */
-public class AttachmentsVO extends LazyLoader {
+public class AttachmentsVO  {
 
-	private final long messageId;
-
-	private LazyLoaderRole lazyLoaderRole;
+	private final Long messageId;
 
 	// for upload files lazyload
-	private volatile Collection uploadFiles;
+	private final  Collection uploadFiles;
 
 	// for read or load
-	public AttachmentsVO(long messageId, LazyLoaderRole lazyLoaderRole) {
-		super();
-		this.messageId = messageId;
-		this.lazyLoaderRole = lazyLoaderRole;
-	}
-
-	// for be written
-	public AttachmentsVO(long messageId, Collection<UploadFile> uploadFiles) {
+	public AttachmentsVO( Long messageId,  Collection<UploadFile> uploadFiles) {
 		super();
 		this.messageId = messageId;
 		this.uploadFiles = uploadFiles;
 	}
 
-	public long getMessageId() {
-		return messageId;
-	}
 
 	public Collection<UploadFile> getUploadFiles() {
-		if (this.uploadFiles == null && lazyLoaderRole != null) {
-			// return result cannot be null, can be a ArrayList that isEmpty()
-			// blocked until return result, display attachement lifecycle is
-			// same as messageVO;
-			this.uploadFiles = (Collection) super.loadBlockedResult();
-		}
-		return uploadFiles;
-	}
 
-	public void setUploadFiles(Collection<UploadFile> uploadFiles) {
-		// this.uploadFiles = uploadFiles;
-		this.uploadFiles = uploadFiles;
+		return uploadFiles;
 	}
 
 	public void preloadUploadFileDatas() {
@@ -81,9 +55,5 @@ public class AttachmentsVO extends LazyLoader {
 		}
 	}
 
-	@Override
-	public DomainMessage getDomainMessage() {
-		return lazyLoaderRole.loadUploadFiles(Long.toString(messageId));
-	}
 
 }

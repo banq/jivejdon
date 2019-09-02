@@ -383,9 +383,6 @@ public class ForumMessageShell implements ForumMessageService {
 		return null;
 	}
 
-	public ForumMessage findMessageWithPropterty(Long messageId) {
-		return messageKernel.getMessageWithPropterty(messageId);
-	}
 
 	/**
 	 * return a full ForumThread one ForumThread has one rootMessage need solve

@@ -48,35 +48,6 @@ public abstract class MessageDaoSql implements MessageDao {
 		this.messageFactory = messageFactory;
 	}
 
-//	/*
-//	 * ForumMessage中包含的ForumThread Forum等对象只是包涵ID的空对象,完整对象需要 前台再行处理.
-//	 *
-//	 * @see com.jdon.jivejdon.dao.MessageDao#getMessage(java.lang.String)
-//	 */
-//	public ForumMessage getMessageCore(Long messageId) {
-//		logger.debug("enter getMessage  for id:" + messageId);
-//		String LOAD_MESSAGE = "SELECT threadID, forumID, userID, subject, body, modValue, " +
-//				"rewardPoints, "
-//				+ "creationDate, modifiedDate, parentMessageID FROM jiveMessage WHERE messageID=?";
-//		List queryParams = new ArrayList();
-//		queryParams.add(messageId);
-//
-//		ForumMessage forumMessage = null;
-//		try {
-//			List list = jdbcTempSource.getJdbcTemp().queryMultiObject(queryParams, LOAD_MESSAGE);
-//			Iterator iter = list.iterator();
-//			if (iter.hasNext()) {
-//				Map map = (Map) iter.next();
-//				forumMessage = messageFactory.createMessageCore(messageId, map);
-//			}
-//		} catch (Exception e) {
-//			logger.error("messageId=" + messageId + " happend  " + e);
-//		}
-//		logger.debug("getMessage end");
-//		return forumMessage;
-//	}
-
-
 	public AnemicMessageDTO getAnemicMessage(Long messageId) {
 		logger.debug("enter getMessage  for id:" + messageId);
 		String LOAD_MESSAGE = "SELECT threadID, forumID, userID, subject, body, modValue, " +
@@ -171,6 +142,27 @@ public abstract class MessageDaoSql implements MessageDao {
 		return forumThread;
 	}
 
+	public Long getThreadRootMessageId(Long threadId) {
+		logger.debug("enter getThreadRootMessageId for id:" + threadId);
+		String LOAD_THREAD = "SELECT forumID, rootMessageID FROM jiveThread WHERE threadID=?";
+		List queryParams = new ArrayList();
+		queryParams.add(threadId);
+
+		Long rootMessageId = null;
+		try {
+			List list = jdbcTempSource.getJdbcTemp().queryMultiObject(queryParams, LOAD_THREAD);
+			Iterator iter = list.iterator();
+			if (iter.hasNext()) {
+				Map map = (Map) iter.next();
+				rootMessageId = (Long) map.get("rootMessageID");
+
+			}
+		} catch (Exception e) {
+			logger.error("threadId=" + threadId + " happend  " + e);
+		}
+		return rootMessageId;
+	}
+
 	/*
 	 * topic message insert, no parentMessageID value,so the table's field
 	 * default value must be null
@@ -258,13 +250,13 @@ public abstract class MessageDaoSql implements MessageDao {
 		}
 	}
 
-	public void createThread(ForumThread forumThread) throws Exception {
+	public void createThread(AnemicMessageDTO forumMessagePostDTO) throws Exception {
 		String INSERT_THREAD = "INSERT INTO jiveThread(threadID,forumID,rootMessageID,modValue, "
 				+ "rewardPoints,creationDate,modifiedDate) VALUES(?,?,?,?,?,?,?)";
 		List queryParams = new ArrayList();
-		queryParams.add(forumThread.getThreadId());
-		queryParams.add(forumThread.getForum().getForumId());
-		queryParams.add(forumThread.getRootMessage().getMessageId());
+		queryParams.add(forumMessagePostDTO.getForumThread().getThreadId());
+		queryParams.add(forumMessagePostDTO.getForumThread().getForum().getForumId());
+		queryParams.add(forumMessagePostDTO.getMessageId());
 		queryParams.add(new Integer(0));
 //		MessageVO messageVO = forumThread.getRootMessage().getMessageVO();
 		//getRewardPoints
@@ -275,7 +267,6 @@ public abstract class MessageDaoSql implements MessageDao {
 		String saveDateTime = ToolsUtil.dateToMillis(now);
 		String displayDateTime = constants.getDateTimeDisp(saveDateTime);
 		queryParams.add(saveDateTime);
-		forumThread.setCreationDate(displayDateTime);
 
 		queryParams.add(saveDateTime);
 		// forumThread.setModifiedDate(displayDateTime);
@@ -283,7 +274,7 @@ public abstract class MessageDaoSql implements MessageDao {
 		try {
 			jdbcTempSource.getJdbcTemp().operate(queryParams, INSERT_THREAD);
 		} catch (Exception e) {
-			logger.error("forumThread=" + forumThread.getThreadId() + " happend " + e);
+			logger.error("forumThread=" + forumMessagePostDTO.getForumThread().getThreadId() + " happend " + e);
 			throw new Exception(e);
 		}
 	}

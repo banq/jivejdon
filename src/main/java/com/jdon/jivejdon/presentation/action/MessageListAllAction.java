@@ -61,8 +61,7 @@ public class MessageListAllAction extends ModelListAction {
 		// getXXX can be intercepted by cacheinterceptor before accessing
 		// ForumMessageServiceShell
 		ForumMessage forumMessage = forumMessageService.getMessage((Long) key);
-		if (forumMessage != null)
-			forumMessage.preloadWhenView();
+
 		return forumMessage;
 	}
 

@@ -99,6 +99,7 @@ public class Forum extends ForumModel {
 	}
 
 	private boolean isRepeatedMessage(AnemicMessageDTO anemicMessageDTO){
+		if (this.forumState.get().getLastPost() == null) return false;
 		return this.forumState.get().getLastPost().isSubjectRepeated(anemicMessageDTO.getMessageVO().getSubject())?true:false;
 
 	}

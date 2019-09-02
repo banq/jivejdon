@@ -73,7 +73,6 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	 * .jdon.jivejdon.model.ForumMessage)
 	 */
 	public void createTopicMessage(AnemicMessageDTO forumMessagePostDTO) throws Exception {
-		ForumThread forumThread = super.initThread(forumMessagePostDTO);
 		try {
 			logger.debug(" enter service: createMessage ");
 			Forum forum = forumBuilder.getForum(forumMessagePostDTO.getForum().getForumId());
@@ -81,10 +80,12 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 				logger.error(" no this forum, forumId = " + forumMessagePostDTO.getForum().getForumId());
 				return;
 			}
+			Long tIDInt = messageDaoFacade.getSequenceDao().getNextId(Constants.THREAD);
 			forumMessagePostDTO.setForum(forum);
-			forumMessagePostDTO.setForumThread(forumThread);
+			forumMessagePostDTO.setForumThread(new ForumThread(null, tIDInt,
+					forumMessagePostDTO.getForum()));
 			messageDaoFacade.getMessageDao().createMessage(forumMessagePostDTO);
-			super.createThread(forumThread);
+			super.createThread(forumMessagePostDTO);
 			uploadRepository.saveAllUploadFiles(forumMessagePostDTO.getMessageId().toString(), forumMessagePostDTO.getAttachment().getUploadFiles());
 
 			propertyDao.saveProperties(Constants.MESSAGE, forumMessagePostDTO.getMessageId(), forumMessagePostDTO.getMessagePropertysVO()
@@ -92,11 +93,11 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 
 			// tag title can be updated between in thread with repository
 			// so it can be used in model ForumThread's changetags method
-			tagRepository.saveTagTitle(forumThread.getThreadId(), forumMessagePostDTO.getTagTitle());
+			tagRepository.saveTagTitle(forumMessagePostDTO.getForumThread().getThreadId(), forumMessagePostDTO.getTagTitle());
 
 		} catch (Exception e) {
 			try {
-				messageDaoFacade.getMessageDao().deleteThread(forumThread.getThreadId());
+				messageDaoFacade.getMessageDao().deleteThread(forumMessagePostDTO.getForumThread().getThreadId());
 			} finally {
 			}
 			try {

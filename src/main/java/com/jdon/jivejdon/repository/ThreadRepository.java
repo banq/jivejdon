@@ -21,9 +21,6 @@ import java.util.List;
 
 public interface ThreadRepository {
 
-	
-	public void createThread(ForumThread forumThread) throws Exception;
-
 	public abstract void updateThread(ForumThread thread) throws Exception;
 
 	public abstract void deleteThread(ForumThread thread) throws Exception;

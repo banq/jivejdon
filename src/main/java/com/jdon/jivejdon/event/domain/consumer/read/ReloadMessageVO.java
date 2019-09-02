@@ -21,21 +21,24 @@ import com.jdon.domain.message.DomainEventHandler;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.repository.builder.ForumAbstractFactory;
+import com.jdon.jivejdon.repository.dao.MessageDao;
 
 @Consumer("reloadMessageVO")
 public class ReloadMessageVO implements DomainEventHandler {
 
 	private final ForumAbstractFactory forumAbstractFactory;
+	private final MessageDao messageDao;
 
-	public ReloadMessageVO(ForumAbstractFactory forumAbstractFactory) {
+	public ReloadMessageVO(ForumAbstractFactory forumAbstractFactory, MessageDao messageDao) {
 		super();
 		this.forumAbstractFactory = forumAbstractFactory;
+		this.messageDao = messageDao;
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 		Long messageId = (Long) event.getDomainMessage().getEventSource();
 		ForumMessage forumMessage = forumAbstractFactory.getMessage(messageId);
-		MessageVO messageVO = forumAbstractFactory.messageDirector.getMessageVO(forumMessage);
+		MessageVO messageVO = messageDao.getMessageVOCore(forumMessage);
 		event.getDomainMessage().setEventResult(messageVO);
 
 	}

@@ -137,20 +137,6 @@ public class MessageKernel implements MessageKernelIF {
 //			return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.jdon.jivejdon.service.imp.message.MessageKernelIF#getMessageWithPropterty
-	 * (java.lang.Long)
-	 */
-	@Override
-	public ForumMessage getMessageWithPropterty(Long messageId) {
-//		if (threadManagerContext.isTransactionOk(messageId))
-			return forumAbstractFactory.getMessageWithPropterty(messageId);
-//		else
-//			return null;
-	}
 
 	/*
 	 * (non-Javadoc)

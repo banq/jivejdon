@@ -25,8 +25,6 @@ public interface ForumFactory {
 
 	public abstract Forum getForum(Long forumId);
 
-	public abstract ForumMessage getMessageWithPropterty(Long messageId);
-
 	public abstract ForumMessage getMessage(Long messageId);
 
 	public abstract Optional<ForumThread> getThread(Long threadId);
