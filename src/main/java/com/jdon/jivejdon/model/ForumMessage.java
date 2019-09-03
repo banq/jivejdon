@@ -83,16 +83,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
     private MessagePropertysVO messagePropertysVO;
     private ReBlogVO reBlogVO;
 
-    // created from repository that will be in memory, it is Entity
-    protected ForumMessage(Long messageId) {
-        this.messageId = messageId;
-        this.messageVO = this.messageVOBuilder().subject("").body("").build();
-        this.messageUrlVO = new MessageUrlVO("", "");
-    }
-
-    // the forumThread using this for AnemicMessageDTO
-    // if create a ForumMessage, please using builder pattern!
-    private ForumMessage() { }
+    protected ForumMessage() { }
 
     public static RequireMessageId messageBuilder() {
         return messageId -> parentMessage-> messageVO -> forum -> forumThread -> account -> creationDate ->modifiedDate-> filterPipleSpec
@@ -501,13 +492,13 @@ public class ForumMessage extends ForumModel implements Cloneable {
         public ForumMessage build() {
             try {
                 if (parentMessage != null ) {
-                    ForumMessageReply forumMessageRely = new ForumMessageReply(messageId, parentMessage);
+                    ForumMessageReply forumMessageRely = new ForumMessageReply();
                     forumMessageRely.build(messageId, messageVO, forum, forumThread, account,
                             creationDate, modifiedDate, filterPipleSpec, uploads,
                             props, parentMessage);
                     return forumMessageRely;
                 } else {
-                    ForumMessage forumMessage = new ForumMessage(messageId);
+                    ForumMessage forumMessage = new ForumMessage();
                     forumMessage.build(messageId, messageVO, forum, forumThread, account,
                             creationDate, modifiedDate, filterPipleSpec, uploads, props);
                     return forumMessage;

@@ -32,9 +32,7 @@ public final class ForumMessageReply extends ForumMessage {
 
 	private ForumMessage parentMessage;
 
-	public ForumMessageReply(Long messageId, ForumMessage parentMessage) {
-		super(messageId);
-		this.parentMessage = parentMessage;
+	protected ForumMessageReply() {
 	}
 
 	/**
