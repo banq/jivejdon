@@ -104,9 +104,10 @@ public class ForumThread extends ForumModel {
 //	 * DTO object, limited usage
 //	 */
 //	private ForumThread() {
+//		this.threadId = null;
 //		this.threadTagsVO = new ThreadTagsVO(this, new ArrayList());
 //		this.propertys = new ArrayList();
-////		this.state = new AtomicReference(new ForumThreadState(this));
+//		this.state = new AtomicReference(new ForumThreadState(this));
 //		this.viewCounter = new ViewCounter(this);
 ////		this.rootMessage = new ForumMessage();
 //	}

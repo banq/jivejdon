@@ -7,7 +7,7 @@
 <bean:define id="title" value=" 帖子保存结果"/>
 <%@ include file="messageHeader.jsp" %>
 
-
+<bean:parameter id="threadId" name="threadId"  value=""/>
 <table cellpadding="0" cellspacing="0" border="0" align="center">
     <tr>
         <td valign="top">
@@ -21,8 +21,7 @@
                 操作成功！
 
 
-                <a href='<%=request.getContextPath()%>/<bean:write name="threadForm"
-        property="threadId" />?<%=System.currentTimeMillis() %> '>按这里返回，因为浏览器缓存需要重新刷新</a>
+                <a href='<%=request.getContextPath()%>/<bean:write name="threadId" />?<%=System.currentTimeMillis() %> '>按这里返回，因为浏览器缓存需要重新刷新</a>
                 </logic:empty>
                 </logic:messagesNotPresent>
         </td>

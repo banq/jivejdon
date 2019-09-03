@@ -257,16 +257,14 @@ public class ForumMessageShell implements ForumMessageService {
 		}
 	}
 
-	public void updateThreadName(EventModel em) throws Exception{
-		ForumThread newforumThread = (ForumThread) em.getModelIF();
-		Optional<ForumThread> forumThreadOptional = messageKernel.getThread(newforumThread
-				.getThreadId());
+	public void updateThreadName(Long threadId, String name) throws Exception{
+		Optional<ForumThread> forumThreadOptional = messageKernel.getThread(threadId);
 		if (!forumThreadOptional.isPresent())
 			return;
 		if (!isAuthenticated(forumThreadOptional.get().getRootMessage())) {
 			return;
 		}
-		forumThreadOptional.get().updateName(newforumThread.getName());
+		forumThreadOptional.get().updateName(name);
 	}
 
 	/**

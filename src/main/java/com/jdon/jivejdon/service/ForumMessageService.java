@@ -87,6 +87,6 @@ public interface ForumMessageService {
 
 	public void reBlog(Long replyMessageId, Long topicMessageId) throws Exception;
 
-	public void updateThreadName(EventModel em) throws Exception;
+	public void updateThreadName(Long threadId, String name) throws Exception;
 
 }
