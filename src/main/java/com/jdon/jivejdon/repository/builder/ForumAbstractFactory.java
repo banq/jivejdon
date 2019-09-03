@@ -74,6 +74,9 @@ public class ForumAbstractFactory implements ForumFactory {
 	 * .Long)
 	 */
 	public ForumMessage getMessage(Long messageId) {
+		if (messageId == null){
+			return null;
+		}
 		return messageDirectorIF.getMessage(messageId);
 	}
 

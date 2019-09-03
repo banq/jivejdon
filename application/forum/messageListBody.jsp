@@ -109,14 +109,6 @@
                   id='body_<bean:write name="forumMessage" property="messageId"/>'><p class="indent">
                 <bean:write name="forumMessage" property="messageVO.body" filter="false"/>
               </h1>
-              <logic:notEmpty name="forumMessage" property="reBlogVO.messageTos">
-              <logic:iterate id="forumMessageTo" name="forumMessage" property="reBlogVO.messageTos">
-              <div class="reblogto"> 转发至:<a
-                  href="<%=request.getContextPath()%>/<bean:write name="forumMessageTo" property="forumThread.threadId"/>">
-                <bean:write name="forumMessageTo" property="messageVO.subject"/>
-              </a></div>
-              </logic:iterate>
-              </logic:notEmpty>
               <logic:equal name="forumMessage" property="root" value="true">    
               <div class="post_titletag">
                 <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">
