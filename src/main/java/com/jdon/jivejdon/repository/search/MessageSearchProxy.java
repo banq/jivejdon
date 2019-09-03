@@ -2,6 +2,7 @@ package com.jdon.jivejdon.repository.search;
 
 import com.jdon.container.pico.Startable;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.model.query.MessageSearchSpec;
 import com.jdon.jivejdon.repository.dao.sql.MessageUtilSQL;
 import com.jdon.jivejdon.util.ThreadTimer;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Pattern;
 
 public class MessageSearchProxy implements Startable, MessageSearchRepository {
 	private final static Logger logger = LogManager.getLogger(MessageSearchProxy.class);
@@ -26,6 +28,10 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 	private MessageUtilSQL messageUtilSQL;
 
 	private ThreadTimer threadTimer;
+	private final static Pattern quoteEscape = Pattern.compile("\\[.*?\\](.*)\\[\\/.*?\\]");
+	private final static Pattern htmlEscape = Pattern.compile("\\<.*?\\>|<[^>]+");
+
+	private final static Pattern urlEscape = Pattern.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
 
 	public MessageSearchProxy(MessageUtilSQL messageUtilSQL, ThreadTimer threadTimer) {
 		this.caches = new ConcurrentHashMap();
@@ -80,12 +86,12 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 		thread.setMessageSearchProxy(this);
 		threadTimer.offer(thread);
 	}
-
-	public void createMessageReplyTimer(AnemicMessageDTO forumMessageReply) {
-		AppendMessageThread thread = new AppendMessageThread(forumMessageReply);
-		thread.setMessageSearchProxy(this);
-		threadTimer.offer(thread);
-	}
+//
+//	public void createMessageReplyTimer(AnemicMessageDTO forumMessageReply) {
+//		AppendMessageThread thread = new AppendMessageThread(forumMessageReply);
+//		thread.setMessageSearchProxy(this);
+//		threadTimer.offer(thread);
+//	}
 
 	/*
 	 * (non-Javadoc)
@@ -243,7 +249,8 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 				String body = hits.highlighter(i).fragment("body");
 				String subject = hits.highlighter(i).fragment("subject");
 				messageSearchSpec.setSubject(subject);
-				messageSearchSpec.setBody(body);
+				MessageVO messageVO = new MessageVO();
+				messageSearchSpec.setBody(escapeHtmlURL(body));
 
 				// String tagTitle[] =
 				// hits.highlighter(i).fragments("tagTitle");
@@ -323,8 +330,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 					String body = hits.highlighter(i).fragment("body");
 					String subject = hits.highlighter(i).fragment("subject");
 					messageSearchSpec.setSubject(subject);
-					messageSearchSpec.setBody(body);
-
+					messageSearchSpec.setBody(escapeHtmlURL(body));
 					messageSearchSpec.setResultAllCount(hits.getLength());
 					result.add(messageSearchSpec);
 					j++;
@@ -380,4 +386,9 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 		return mss;
 	}
 
+	private String escapeHtmlURL(String s){
+		String nohtml = htmlEscape.matcher(s).replaceAll(" ");
+		String noQuote = quoteEscape.matcher(nohtml).replaceAll(" ");
+		return urlEscape.matcher(noQuote).replaceAll(" ");
+	}
 }

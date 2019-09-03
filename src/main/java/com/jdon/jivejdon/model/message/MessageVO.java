@@ -39,10 +39,6 @@ public final class MessageVO implements Serializable, Cloneable {
 	 * only using builder pattern to create MessageVO!
 	 * <p>
 	 * MessageVO..builder().subject().body().message().build();
-	 *
-	 * @param subject
-	 * @param body
-	 * @param forumMessage
 	 */
 	private MessageVO(String subject, String body, ForumMessage forumMessage) {
 		this.forumMessage = forumMessage;
@@ -69,9 +65,6 @@ public final class MessageVO implements Serializable, Cloneable {
 		return subject;
 	}
 
-	/**
-	 * @return Returns the body.
-	 */
 	public String getBody() {
 		return body;
 	}

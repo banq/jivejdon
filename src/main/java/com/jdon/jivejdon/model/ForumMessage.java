@@ -83,7 +83,10 @@ public class ForumMessage extends ForumModel implements Cloneable {
     private MessagePropertysVO messagePropertysVO;
     private ReBlogVO reBlogVO;
 
-    protected ForumMessage() { }
+    protected ForumMessage() {
+        this.messageVO = this.messageVOBuilder().subject("").body("").build();
+        this.messageUrlVO = new MessageUrlVO("", "");
+    }
 
     public static RequireMessageId messageBuilder() {
         return messageId -> parentMessage-> messageVO -> forum -> forumThread -> account -> creationDate ->modifiedDate-> filterPipleSpec

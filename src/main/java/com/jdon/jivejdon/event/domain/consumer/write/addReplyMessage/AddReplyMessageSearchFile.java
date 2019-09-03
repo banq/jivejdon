@@ -43,7 +43,7 @@ public class AddReplyMessageSearchFile implements DomainEventHandler {
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 		ReplyMessageCreatedEvent es = (ReplyMessageCreatedEvent) event.getDomainMessage().getEventSource();
-		messageSearchRepository.createMessageReplyTimer(es.getForumMessageReplyDTO());
+		//messageSearchRepository.createMessageReplyTimer(es.getForumMessageReplyDTO());
 
 	}
 }
