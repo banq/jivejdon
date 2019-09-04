@@ -49,7 +49,7 @@ Primitive attributes of Entites grouped together using ValueObjects.
 [MessageVO](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/message/MessageVO.java) is a valueObject of aggregate root entity[ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java), inlcude message content: subject and body, it will be processed with complex business filter logic, these filters have many implements,such as: TEXT to HTML.
 
 
-1. **Business language**
+5. **Business language**
 
 All classes, methods and other members named in business language used in the Bounded Context.
 
