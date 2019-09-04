@@ -124,7 +124,6 @@ Document
 
 [chinese install doc](./doc/install_cn.txt)
 
-
-[chinese design doc]([./doc/install_cn.txt](https://www.jdon.com/ddd/jivejdon/1.html))
+[chinese design doc](https://www.jdon.com/ddd/jivejdon/1.html)
 
 
