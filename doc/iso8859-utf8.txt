@@ -1,5 +1,0 @@
-mysqldump -ubanq -p --default-character-set=latin1  Jive > jive.sql
-iconv -t utf-8 -f gb2312 -c jive.sql > jivejdon.sql 
-mysql -hlocalhost -ubanq -p jivejdon < jivejdon.sql
-
-总积分=发帖数*0.5+精华帖数*10+在线时间(小时)*10+页面浏览量/1000
