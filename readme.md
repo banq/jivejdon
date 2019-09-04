@@ -120,8 +120,11 @@ browser : http://$DOCKER_HOST_IP:8080
 Document
 ------------------------------------
 
-english: [doc/install_en.txt](./doc/install_en.txt)
+[english install doc](./doc/install_en.txt)
 
-chinese: [doc/install_cn.txt](./doc/install_cn.txt)
+[chinese install doc](./doc/install_cn.txt)
+
+
+[chinese design doc]([./doc/install_cn.txt](https://www.jdon.com/ddd/jivejdon/1.html))
 
 
