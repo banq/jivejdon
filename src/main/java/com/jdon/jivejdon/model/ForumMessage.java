@@ -123,9 +123,9 @@ public class ForumMessage extends ForumModel implements Cloneable {
             messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO
                     .getBody()).build();
         } if(messageVO.getSubject().length() == 0 || messageVO.getBody().length() == 0)
-            System.err.println("messageVO is null" + this.messageId);
+            System.err.println("messageVO is null for messageId=" + this.messageId);
         else if (filterPipleSpec == null){
-            System.err.println("filterPipleSpec is null" + this.messageId);
+            System.err.println("filterPipleSpec is null for messageId=" + this.messageId);
         }
 
         //apply complex business filter logic to messageVO;
