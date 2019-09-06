@@ -64,6 +64,7 @@ public class ReBuildIndex implements Runnable {
 			while (pi.hasNext()) {
 				Long threadId = (Long) pi.next();
 				addMessage(threadId);
+
 			}
 			if (found)
 				break;
@@ -85,6 +86,7 @@ public class ReBuildIndex implements Runnable {
 			anemicMessageDTO.setMessageVO(message.getMessageVO());
 			anemicMessageDTO.setForumThread(message.getForumThread());
 			messageSearchProxy.createMessage(anemicMessageDTO);
+            Thread.sleep(5000);
 		} catch (Exception e) {
 			logger.error(e);
 		}
