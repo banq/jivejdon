@@ -1,7 +1,7 @@
 Jivejdon
 =========================================
 
-Jivejdon is a full DDD example powered by [jdonframework](https://github.com/banq/jdonframework) ,running  for over ten years
+Jivejdon is a full DDD application, Event Soucing and clean architecture/Hexagonalarchitecture,  powered by [jdonframework](https://github.com/banq/jdonframework) ,running  for over ten years
 in: [https://www.jdon.com/forum](https://www.jdon.com/forum)
 
 Use Case
@@ -55,7 +55,28 @@ All classes, methods and other members named in business language used in the Bo
 
 
 
-Clean architecture/Hexagonal_architecture
+Event Sourcing
+==============================
+Posting a message is a event, modifying the last reply post status for one thread. 
+
+![avatar](./doc/es.png)
+
+How to get the the last reply post status for one thread?we must iterate all posted events collection.
+
+JiveMessage is a posted events collection database table, with a SQL select we can get the last message posted event:
+
+``````
+
+SELECT messageID from jiveMessage WHERE  threadID = ? ORDER BY modifiedDate DESC
+
+``````
+
+These is no field for last reply post status in jivejdon database, its all states are from posted events projection.
+
+
+
+
+Clean architecture/Hexagonal architecture
 ==============================
 JiveJdon is developed with JdonFramework that supports Customer/Supply or pub-sub model, this model can seperate domain logic from infrastructure, databases, other stuff.
 
