@@ -73,7 +73,7 @@ SELECT messageID from jiveMessage WHERE  threadID = ? ORDER BY modifiedDate DESC
 
 These is no field for last reply post status in jivejdon database, its all states are from posted events projection.
 
-When a user post a new ForumMessage, a ReplyMessageCreatedEvent event will be fired to event store: JiveMessage, and refresh the snapshot of event: ForumThreadState.
+When a user post a new ForumMessage, a ReplyMessageCreatedEvent event will be saved to event store: JiveMessage,  simultaneously refresh the snapshot of event: ForumThreadState.
 
 
 
@@ -125,7 +125,7 @@ Business/domain logic is in the addChild message method of [ForumMessage](https:
  
  "eventSourcing.addReplyMessage" will send a "ReplyMessageCreatedEvent" domain Event to infrastructure layer such as Repository. with the pub-sub model of jdonframework, make domain no dependencies to infrastructure, databases, other stuff.
 
- ReplyMessageCreatedEvent will save to event store: jiveMessage, that is a posted events table. it used 
+ a ReplyMessageCreatedEvent event will be saved in event store: jiveMessage, that is a posted events table. it used 
  to project the last reply state of a thread. 
  
  
