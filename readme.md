@@ -100,7 +100,7 @@ JiveJdon and Hexagonal_architecture:
 		</handler>
 	</model>
 ``````
-When post a reply message,  a POST command will action [forumMessageService](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/service/imp/message/ForumMessageShell.java) createReplyMessage method:
+When post a reply message,  a POST command will action createReplyMessage method of [forumMessageService](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/service/imp/message/ForumMessageShell.java) :
 
 ``````
 public interface ForumMessageService {
@@ -111,7 +111,7 @@ public interface ForumMessageService {
 }
 ``````
 
-Domain sevice forumMessageService will delegate business logic responsibility to aggregate root entity: [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java), [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java) has two
+Domain sevice forumMessageService will delegate responsibility to business logic object：the aggregate root entity [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java), that has two
 types: topic post and rely post, topic is a root message and has many reply messages, all messages 
 compose one Thread(ForumThread)
  
@@ -121,7 +121,7 @@ Business/domain logic is in the addChild message method of [ForumMessage](https:
 
  @OnCommand("postReplyMessageCommand") annotation is a command handler in pub-sub model from jdonframework, it can make this method executed in a single-writer pattern - no blocked, no lock, high concurrent. only one thread/process invoking this update method.
  
- "eventSourcing.addReplyMessage" will send a Domain Event to infrastructure layer such as Repository. with this pub-sub model from jdonframework, no dependencies to infrastructure, databases, other stuff. 
+ "eventSourcing.addReplyMessage" will send a Domain Event to infrastructure layer such as Repository. with the pub-sub model of jdonframework, make domain no dependencies to infrastructure, databases, other stuff. 
  
  
  
