@@ -125,7 +125,9 @@ Business/domain logic is in the addChild message method of [ForumMessage](https:
  
  "eventSourcing.addReplyMessage" will send a "ReplyMessageCreatedEvent" domain Event to infrastructure layer such as Repository. with the pub-sub model of jdonframework, make domain no dependencies to infrastructure, databases, other stuff.
 
- a ReplyMessageCreatedEvent event will be saved in event store: jiveMessage, that is a posted events table. it used 
+ReplyMessage Created Event occurring in the domain will be saved in the event storage jiveMessage data table
+
+ Domain event "ReplyMessageCreatedEvent"  occurring in the domain will be saved in event store "jiveMessage" that is a posted events table, used 
  to project the last reply state of a thread. 
  
  
