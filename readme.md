@@ -70,8 +70,9 @@ JiveMessage is a posted events collection database table, with a SQL select we c
 SELECT messageID from jiveMessage WHERE  threadID = ? ORDER BY modifiedDate DESC
 
 ``````
+This sql can quickly find the last replies, No need to play back all posted events.
 
-There is no special field  for last replyies state in jiveThread, all states are from posted events projection.
+In jiveThread table there is no special field for last replyies state , all states are from posted events projection. (projection can use SQL!)
 
 When a user post a new ForumMessage, a ReplyMessageCreatedEvent event will be saved to event store: JiveMessage,  simultaneously refresh the snapshot of event: ForumThreadState.
 
@@ -126,8 +127,7 @@ Business/domain logic is in the addChild message method of [ForumMessage](https:
  "eventSourcing.addReplyMessage" will send a "ReplyMessageCreatedEvent" domain Event to infrastructure layer such as Repository. with the pub-sub model of jdonframework, make domain no dependencies to infrastructure, databases, other stuff.
 
  Domain event "ReplyMessageCreatedEvent"  occurring in the domain will be saved in event store "jiveMessage" that is a posted events table
- to project the last replies state of a thread. 
- 
+ to project the last replies state of a thread.(Event Sourcing)
  
  
 
