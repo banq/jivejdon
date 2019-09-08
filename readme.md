@@ -57,11 +57,11 @@ All classes, methods and other members named in business language used in the Bo
 
 Event Sourcing
 ==============================
-Posting a message is a event, modifying the last reply post status for one thread. 
+Posting a message is a event, modifying the last replies status for one thread. 
 
 ![avatar](./doc/es.png)
 
-How to get the the last reply post status for one thread?we must iterate all posted events collection.
+How to get the the last replies status for one thread?we must iterate all posted events collection.
 
 JiveMessage is a posted events collection database table, with a SQL select we can get the last message posted event:
 
@@ -71,7 +71,7 @@ SELECT messageID from jiveMessage WHERE  threadID = ? ORDER BY modifiedDate DESC
 
 ``````
 
-These is no field for last reply post status in jivejdon database, its all states are from posted events projection.
+There is no special field  for last replyies state in jiveThread, all states are from posted events projection.
 
 When a user post a new ForumMessage, a ReplyMessageCreatedEvent event will be saved to event store: JiveMessage,  simultaneously refresh the snapshot of event: ForumThreadState.
 
@@ -102,7 +102,7 @@ JiveJdon and Hexagonal_architecture:
 		</handler>
 	</model>
 ``````
-When post a reply message,  a POST command will action createReplyMessage method of [forumMessageService](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/service/imp/message/ForumMessageShell.java) :
+When post a replies message,  a POST command will action createReplyMessage method of [forumMessageService](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/service/imp/message/ForumMessageShell.java) :
 
 ``````
 public interface ForumMessageService {
@@ -114,7 +114,7 @@ public interface ForumMessageService {
 ``````
 
 Domain sevice forumMessageService will delegate responsibility to business logic object：the aggregate root entity [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java), that has two
-types: topic post and rely post, topic is a root message and has many reply messages, all messages 
+types: topic post and rely post, topic is a root message and has many replies messages, all messages 
 compose one Thread(ForumThread)
  
 Business/domain logic is in the addChild message method of [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java) 
@@ -128,7 +128,7 @@ Business/domain logic is in the addChild message method of [ForumMessage](https:
 ReplyMessage Created Event occurring in the domain will be saved in the event storage jiveMessage data table
 
  Domain event "ReplyMessageCreatedEvent"  occurring in the domain will be saved in event store "jiveMessage" that is a posted events table, used 
- to project the last reply state of a thread. 
+ to project the last replies state of a thread. 
  
  
  
