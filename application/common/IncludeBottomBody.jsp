@@ -47,8 +47,8 @@
 			</div>
 		</div>
 		<div class="copy-right">
-			<p> <a href="http://www.miibeian.gov.cn/" target="_blank" >沪ICP证12033263</a> 点击标题查看原文 版权原文所有 <a
-      href="/jdonframework/" >Powered by JdonFramework </a></p>
+			<p> <a href="http://www.miibeian.gov.cn/" target="_blank" >沪ICP证12033263</a> 本系统软件来自<a
+      href="https://github.com/banq/jivejdon" >开源JiveJdon</a></p>
 		</div>
 	</footer>
 	<!-- Footer -->
