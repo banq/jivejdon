@@ -136,7 +136,7 @@ CQRS addresses separates reads and writes into separate models, using commands t
 
 In jivejdon ForumThread and ForumMessage are saved in cache, cache is a snapshot of even logs, if a update command activate one of these models, they will send domain events to clear the cache datas, the cache is similar as the database for query/read model, the consistency between with cache and the database for commmand model is maintained by the domain events such as "ReplyMessageCreatedEvent".
 
-the domain event "ReplyMessageCreatedEvent" do three things:
+The domain event "ReplyMessageCreatedEvent" do three things:
 1. add a new post message to "jiveMessage" (event sourcing)
 2. clear the query cache (CQRS)
 3. update/project the last replies state of a thread (event sourcing)
