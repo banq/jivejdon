@@ -39,22 +39,17 @@ import com.jdon.jivejdon.model.reblog.ReBlogVO;
 import java.util.Collection;
 
 /**
- * Aggregate Root + DTO
+ * Aggregate Root
  * <p>
- * 1. This model  is Aggregate Root Entity when being RootMessage in ForumThread.
+ * This model  is Aggregate Root Entity when being RootMessage in ForumThread.
  * ForumThread is another Aggregate Root; in this system, there are two aggregate roots.
  * like Car and Enginee!
+ *
+ * ForumMessage take care of all in a post such as content, ForumThread take care of all outsied a post.
  * <p>
- * 2. this model act as data transfer object(DTO) that is from UI to domain.
+ *
  * <p>
- * so this model acts two kinds of Actor in two diiferent flows:
- * 1. In from repository to domain flow, It is aggregateRoot Entity;
- * 2. In from domain to UI flow ,It is DTO;
- * <p>
- * there are two construct methods in two flows.
- * 1. using builder() and ForumModel's solid state when in first flow
- * 2. using business special method such as addChild() and ForumModel's parameter state when in
- * second flow!
+
  *
  * @author <a href="mailto:banq@163.com">banq</a>
  */

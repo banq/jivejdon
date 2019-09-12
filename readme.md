@@ -129,7 +129,12 @@ Business/domain logic is in the addChild message method of [ForumMessage](https:
  Domain event "ReplyMessageCreatedEvent"  occurring in the domain will be saved in event store "jiveMessage" that is a posted events table
  to project the last replies state of a thread.(Event Sourcing)
  
- 
+
+CQRS architecture
+==============================
+CQRS addresses separates reads and writes into separate models, using commands to update data, and queries to read data.
+In jivejdon ForumThread and ForumMessage are saved in cache, cache is a snapshot of even logs, if a update command activate one of these models, they will send domain events to clear the cache datas, the cache is similar as the database for query/read model, the consistency between with cache and the database for commmand model maintained by the domain events.
+
 
 Install
 ===============================
