@@ -18,6 +18,7 @@ package com.jdon.jivejdon.repository.dao.filter;
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.pointcut.Around;
 import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.repository.builder.MessageInitFactory;
@@ -53,8 +54,8 @@ public class MessageDaoDecorator extends MessageDaoSql {
 	}
 
 	@Around()
-	public ForumThread getThreadCore(Long threadId) {
-		return super.getThreadCore(threadId);
+	public ForumThread getThreadCore(Long threadId, ForumMessage rootMessage) {
+		return super.getThreadCore(threadId, rootMessage);
 	}
 
 	public void createMessage(AnemicMessageDTO forumMessagePostDTO) throws Exception {

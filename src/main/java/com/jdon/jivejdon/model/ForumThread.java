@@ -137,7 +137,7 @@ public class ForumThread extends ForumModel {
 	}
 
 
-	public void setForum(Forum forum) {
+	private void setForum(Forum forum) {
 		this.forum = forum;
 //		if (this.rootMessage != null) {
 //			rootMessage.setForum(forum);
@@ -151,7 +151,7 @@ public class ForumThread extends ForumModel {
 
 	public String getName() {
 		if (this.getRootMessage() == null){
-			System.err.println(" thread rootmessage is null" + threadId);
+			System.err.println("getName(): thread rootmessage is null" + threadId);
 			return "null";
 		}
 		return this.getRootMessage().getMessageVO().getSubject();
@@ -185,20 +185,19 @@ public class ForumThread extends ForumModel {
 
 	public ForumMessage getRootMessage() {
 		if (rootMessage == null){
-			System.err.println("this is DTO thread" + threadId);
+			System.err.println("getRootMessage: rootMessage is null! threadId:" + threadId);
 		}
 		return rootMessage;
 	}
 
 
-	public void setRootMessage(ForumMessage rootMessage) {
+	private void setRootMessage(ForumMessage rootMessage) {
 		if (rootMessage == null) return;
 		if (rootMessage instanceof ForumMessageReply){
 			System.err.println("root message must be ForumMessage threadId=" + this.threadId + " messageId="+rootMessage.getMessageId());
 			return;
 		}
 		this.rootMessage = rootMessage;
-//		this.rootMessage.setForumThread(this);
 	}
 
 	/**
@@ -356,7 +355,7 @@ public class ForumThread extends ForumModel {
 		return threadTagsVO;
 	}
 
-	public void setThreadTagsVO(ThreadTagsVO threadTagsVO) {
+	private void setThreadTagsVO(ThreadTagsVO threadTagsVO) {
 		this.threadTagsVO = threadTagsVO;
 
 		// set rootMessage's titles;
@@ -388,6 +387,14 @@ public class ForumThread extends ForumModel {
 		else
 			return this.creationDate;
 
+	}
+
+	public synchronized void build(Forum forum, ForumMessage rootMessage, ThreadTagsVO threadTagsVO){
+
+		this.setForum(forum);
+		this.setRootMessage(rootMessage);
+		this.setThreadTagsVO(threadTagsVO);
+		this.setSolid(true);
 	}
 
 }

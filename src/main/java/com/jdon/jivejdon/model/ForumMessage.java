@@ -533,7 +533,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
                     }
                 }
         } catch (Exception e) {
-            System.err.print("Message build error:"+ messageId);
+            System.err.println(" Message build error:"+ messageId);
         }
 
     }

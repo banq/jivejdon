@@ -9,5 +9,5 @@ public interface MessageDirectorIF {
 
     ForumMessage getMessage(Long messageId, ForumThread forumThread);
 
-    void setThreadDirector(ThreadDirector threadDirector);
+    void setThreadDirector(ThreadDirectorIF threadDirectorIF);
 }

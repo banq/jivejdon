@@ -17,8 +17,6 @@
 package com.jdon.jivejdon.repository.builder;
 
 import com.jdon.jivejdon.model.Forum;
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.repository.HotKeysRepository;
 import com.jdon.jivejdon.repository.dao.ForumDao;
 import org.apache.logging.log4j.LogManager;
@@ -40,36 +38,12 @@ public class ForumDirector {
 		if (forumId == null)
 			return null;
 		try {
-			final Forum forum = (Forum) create(forumId);
-			if (forum == null) {
-				logger.error("no this forum in database id=" + forumId);
-				return null;
-			}
-			if (forum.isSolid())
-				return forum;
-
-			buildProperties(forum);
-			forum.setSolid(true);
-			return forum;
+			return forumDao.getForum(forumId);
 		} catch (Exception e) {
 			return null;
 		}
-
-	}
-
-	public Forum create(Long forumId) {
-		return forumDao.getForum(forumId);
-	}
-
-	public void buildProperties(Forum forum) {
-		forum.setHotKeys(hotKeysFactory.getHotKeys());
 	}
 
 
-	public void construct(Forum forum, ForumThread forumThread, ForumMessage forumMessage) throws Exception {
-		buildProperties(forum);
-//		forumBuilder.buildState(forum, forumThread, forumMessage, forumAbstractFactory.messageDirector);
-
-	}
 
 }

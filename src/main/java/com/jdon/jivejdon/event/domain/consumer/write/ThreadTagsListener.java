@@ -53,8 +53,11 @@ public class ThreadTagsListener implements DomainEventHandler {
 			Collection newtags = tagRepository.getThreadTags(forumThreadOptional.get());
 			ThreadTagsVO threadTagsVO = new ThreadTagsVO(forumThreadOptional.get(), newtags);
 			Collection lasttags = forumThreadOptional.get().getThreadTagsVO().getTags();
-			forumThreadOptional.get().setThreadTagsVO(threadTagsVO);
-			threadTagsVO.subscriptionNotify(lasttags);
+			ForumThread forumThread = forumThreadOptional.get();
+			if (forumThread != null) {
+				forumThread.build(forumThread.getForum(),forumThread.getRootMessage(),threadTagsVO);
+				threadTagsVO.subscriptionNotify(lasttags);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

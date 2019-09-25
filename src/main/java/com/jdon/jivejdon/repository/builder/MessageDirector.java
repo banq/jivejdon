@@ -34,8 +34,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -45,8 +43,6 @@ import java.util.Optional;
 @Introduce("modelCache")
 public class MessageDirector implements MessageDirectorIF {
 	private final static Logger logger = LogManager.getLogger(MessageDirector.class);
-
-	private final Map nullmessages;
 
 	public final MessageDao messageDao;
 
@@ -60,7 +56,7 @@ public class MessageDirector implements MessageDirectorIF {
 
 	private final UploadRepository uploadRepository;
 
-	private  ThreadDirector threadDirector;
+	private ThreadDirectorIF threadDirectorIF;
 
 	public MessageDirector(ForumDirector forumDirector, MessageDao messageDao,  AccountFactory accountFactory,
 						   OutFilterManager outFilterManager, PropertyDao propertyDao, UploadRepository uploadRepository) {
@@ -69,36 +65,20 @@ public class MessageDirector implements MessageDirectorIF {
 		this.messageDao = messageDao;
 		this.accountFactory = accountFactory;
 		this.outFilterManager = outFilterManager;
-		this.nullmessages = lruCache(100);
 		this.propertyDao = propertyDao;
 		this.uploadRepository = uploadRepository;
 
 	}
 
-	public void setThreadDirector(ThreadDirector threadDirector) {
-		this.threadDirector = threadDirector;
+	public void setThreadDirector(ThreadDirectorIF threadDirectorIF) {
+		this.threadDirectorIF = threadDirectorIF;
 	}
-
-	private static <K, V> Map<K, V> lruCache(final int maxSize) {
-		return new LinkedHashMap<K, V>(maxSize * 4 / 3, 0.75f, true) {
-			@Override
-			protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
-				return size() > maxSize;
-			}
-		};
-	}
-
-
 
 	@Override
 	@Around()
 	public ForumMessage getMessage(Long messageId) {
 		if (messageId == null || messageId == 0)
 			return null;
-		if (nullmessages.containsKey(messageId)) {
-			logger.error("repeat no this message in database id=" + messageId);
-			return null;
-		}
 		try {
 			return buildMessage(messageId, null);
 		} catch (Exception e) {
@@ -110,10 +90,6 @@ public class MessageDirector implements MessageDirectorIF {
 	public ForumMessage getMessage(Long messageId, ForumThread forumThread){
 		if (messageId == null || messageId == 0)
 			return null;
-		if (nullmessages.containsKey(messageId)) {
-			logger.error("repeat no this message in database id=" + messageId);
-			return null;
-		}
 		try {
 			return buildMessage(messageId, forumThread);
 		} catch (Exception e) {
@@ -133,7 +109,6 @@ public class MessageDirector implements MessageDirectorIF {
 		try {
 			final AnemicMessageDTO anemicMessageDTO = (AnemicMessageDTO) messageDao.getAnemicMessage(messageId);
 			if (anemicMessageDTO == null) {
-				nullmessages.put(messageId, "NULL");
 				logger.error("no this message in database id=" + messageId);
 				return null;
 			}
@@ -145,8 +120,8 @@ public class MessageDirector implements MessageDirectorIF {
 			Optional<Account> accountOptional = createAccount(anemicMessageDTO.getAccount());
 			FilterPipleSpec filterPipleSpec = new FilterPipleSpec(outFilterManager.getOutFilters());
 			Forum forum = forumDirector.getForum(anemicMessageDTO.getForum().getForumId());
-			if (forumThread == null || forumThread.lazyLoaderRole == null)
-				forumThread = threadDirector.getThread(anemicMessageDTO.getForumThread().getThreadId());
+			if (forumThread == null )
+				forumThread = threadDirectorIF.getThread(anemicMessageDTO.getForumThread().getThreadId());
 			Collection props = propertyDao.getProperties(Constants.MESSAGE, messageId);
 			Collection uploads = uploadRepository.getUploadFiles(anemicMessageDTO.getMessageId().toString());
 			ForumMessage forumMessage = ForumMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId())

@@ -120,7 +120,7 @@ public abstract class MessageDaoSql implements MessageDao {
 	 *
 	 * @see com.jdon.jivejdon.dao.MessageDao#getThread(java.lang.String)
 	 */
-	public ForumThread getThreadCore(Long threadId) {
+	public ForumThread getThreadCore(Long threadId, ForumMessage rootMessage) {
 		logger.debug("enter getThread for id:" + threadId);
 		String LOAD_THREAD = "SELECT forumID, rootMessageID, modValue, rewardPoints, " +
 				"creationDate, "
@@ -134,7 +134,7 @@ public abstract class MessageDaoSql implements MessageDao {
 			Iterator iter = list.iterator();
 			if (iter.hasNext()) {
 				Map map = (Map) iter.next();
-				forumThread = messageFactory.createThreadCore(threadId, map);
+				forumThread = messageFactory.createThreadCore(threadId, map,  rootMessage);
 			}
 		} catch (Exception e) {
 			logger.error("threadId=" + threadId + " happend  " + e);
@@ -209,11 +209,6 @@ public abstract class MessageDaoSql implements MessageDao {
 			if (this.getAnemicMessage(forumMessage.getParentMessage().getMessageId()) == null)
 				throw new Exception(" this message=" + forumMessage.getMessageId() + "'s parent= "
 						+ forumMessage.getParentMessage().getMessageId()
-						+ " has deleted");
-
-			if (this.getThreadCore(forumMessage.getForumThread().getThreadId()) == null)
-				throw new Exception(" this message=" + forumMessage.getMessageId() + "'s thread= "
-						+ forumMessage.getForumThread().getThreadId()
 						+ " has deleted");
 
 			String INSERT_MESSAGE = "INSERT INTO jiveMessage(messageID, parentMessageID, " +

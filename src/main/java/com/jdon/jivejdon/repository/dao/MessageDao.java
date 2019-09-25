@@ -41,7 +41,7 @@ public interface MessageDao {
 
 	void deleteMessage(Long forumMessageId) throws Exception;
 
-	ForumThread getThreadCore(Long threadId);
+	ForumThread getThreadCore(Long threadId, ForumMessage rootMessage);
 
 	Long getThreadRootMessageId(Long threadId);
 

@@ -28,6 +28,8 @@ import com.jdon.jivejdon.util.ContainerUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Optional;
 
 public class ForumAbstractFactory implements ForumFactory {
@@ -35,23 +37,26 @@ public class ForumAbstractFactory implements ForumFactory {
 
 	public final ForumDirector forumDirector;
 	public final MessageDirectorIF messageDirectorIF;
-	public final ThreadDirector threadDirector;
+	public final ThreadDirectorIF threadDirectorIF;
 
 	protected final ContainerUtil containerUtil;
 
 	private final SequenceDao sequenceDao;
 
+	private final Map nullthreads ;
+
 	// define in manager.xml
 
-	public ForumAbstractFactory(MessageDirectorIF messageDirectorIF, ForumDirector forumDirector,
+	public ForumAbstractFactory(MessageDirectorIF messageDirectorIF,ThreadDirectorIF threadDirectorIF, ForumDirector forumDirector,
 								ContainerUtil containerUtil, SequenceDao sequenceDao, MessageDao
 										messageDao, TagRepository tagRepository, PropertyDao propertyDao) {
 		this.containerUtil = containerUtil;
 		this.messageDirectorIF = messageDirectorIF;
+		this.messageDirectorIF.setThreadDirector(threadDirectorIF);
 		this.sequenceDao = sequenceDao;
 		this.forumDirector = forumDirector;
-		this.threadDirector = new ThreadDirector(forumDirector, messageDao, tagRepository, propertyDao,  messageDirectorIF);
-        this.messageDirectorIF.setThreadDirector(this.threadDirector);
+		this.threadDirectorIF = threadDirectorIF;
+		this.nullthreads = lruCache(100);
 	}
 
 	/*
@@ -62,7 +67,14 @@ public class ForumAbstractFactory implements ForumFactory {
 	 * Long)
 	 */
 	public Forum getForum(Long forumId) {
-		return forumDirector.getForum(forumId);
+		if (nullthreads.containsKey(forumId)){
+			logger.error("repeat no forumId=" + forumId);
+			return null;
+		}
+		Forum forum =  forumDirector.getForum(forumId);
+		if (forum == null)
+		   nullthreads.put(forumId, "null");
+		return forum;
 	}
 
 
@@ -77,7 +89,14 @@ public class ForumAbstractFactory implements ForumFactory {
 		if (messageId == null){
 			return null;
 		}
-		return messageDirectorIF.getMessage(messageId);
+		if (nullthreads.containsKey(messageId)){
+			logger.error("repeat no forumId=" + messageId);
+			return null;
+		}
+		ForumMessage forumMessage =  messageDirectorIF.getMessage(messageId);
+		if (forumMessage == null)
+			nullthreads.put(messageId, "null");
+		return forumMessage;
 	}
 
 	/*
@@ -88,11 +107,18 @@ public class ForumAbstractFactory implements ForumFactory {
 	 * .Long)
 	 */
 	public Optional<ForumThread> getThread(Long threadId) {
+		if (nullthreads.containsKey(threadId)){
+			logger.error("repeat no forumId=" + threadId);
+			return null;
+		}
 		ForumThread forumThread = null;
 		try {
-			forumThread = threadDirector.getThread(threadId);
+			forumThread = threadDirectorIF.getThread(threadId);
+			if (forumThread == null)
+				nullthreads.put(threadId, "null");
 		} catch (Exception e) {
 			e.printStackTrace();
+			nullthreads.put(threadId, "null");
 		}
 		return Optional.ofNullable(forumThread);
 	}
@@ -106,7 +132,6 @@ public class ForumAbstractFactory implements ForumFactory {
 	 */
 	public void reloadThreadState(ForumThread forumThread) throws Exception {
 		try {
-			buildTreeModel(forumThread);
 			forumThread.getState().loadinitState();
 //			threadBuilder.buildState(forumThread, forumThread.getRootMessage(), messageDirector);
 //
@@ -129,19 +154,16 @@ public class ForumAbstractFactory implements ForumFactory {
 			logger.error(error);
 			throw new Exception(error);
 		}
-
 	}
 
-	public void buildTreeModel(final ForumThread forumThread) throws Exception {
-		try {
-			// NO NEED PRELOADE tREE, ONLY LOAD IT WHEN NEED.
-			// forumThread.preloadTreeMode();
-			// forumThreadTreeModelFactory.create(forumThread);
-		} catch (Exception e) {
-			String error = e + " buildInitState forumThreadId=" + forumThread.getThreadId();
-			logger.error(error);
-			throw new Exception(error);
-		}
+
+	private static <K,V> Map<K,V> lruCache(final int maxSize) {
+		return new LinkedHashMap<K,V>(maxSize*4/3, 0.75f, true) {
+			@Override
+			protected boolean removeEldestEntry(Map.Entry<K,V> eldest) {
+				return size() > maxSize;
+			}
+		};
 	}
 
 }

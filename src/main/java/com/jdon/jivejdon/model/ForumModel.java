@@ -52,7 +52,7 @@ public class ForumModel implements EmbedIF, Serializable {
 	 * View client.
 	 * 
 	 */
-	public void setSolid(boolean solid) {
+	protected void setSolid(boolean solid) {
 		this.solid = solid;
 		if (solid)
 			this.setParameter(false);
@@ -63,7 +63,7 @@ public class ForumModel implements EmbedIF, Serializable {
 		return parameter;
 	}
 
-	public void setParameter(boolean parameter) {
+	protected void setParameter(boolean parameter) {
 		this.parameter = parameter;
 		if (parameter)
 			this.setSolid(false);

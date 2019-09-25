@@ -57,14 +57,6 @@ public class ThreadRepositoryDao implements ThreadRepository {
 	 * .lang.Long)
 	 */
 	public List getThreadsPrevNext(Long forumId, Long currentThreadId) {
-		List resultObject = new ArrayList();
-		if (messageDaoFacade.getMessageDao().getThreadCore(currentThreadId) == null) {// if
-			// not
-			// this
-			// currentThreadId
-			logger.error("not found this currentThreadId:" + currentThreadId);
-			return resultObject;
-		}
 		return messageDaoFacade.getMessageQueryDao().getThreadsPrevNext(forumId, currentThreadId);
 	}
 

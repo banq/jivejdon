@@ -142,13 +142,13 @@ public class MessageInitFactory {
 		return forumMessage.messageVOBuilder().subject(subject).body(body).build();
 	}
 
-	public ForumThread createThreadCore(Long threadId, Map map) {
+	public ForumThread createThreadCore(Long threadId, Map map, ForumMessage rootMessage) {
 
 			Forum forum = new Forum();
 			forum.setForumId((Long) map.get("forumID"));
-			ForumThread forumThread = new ForumThread(null, threadId,forum);
+			ForumThread forumThread = new ForumThread(rootMessage, threadId,forum);
 
-			forumThread.setForum(forum);
+//			forumThread.setForum(forum);
 
 			// String saveDateTime = ((String) map.get("modifiedDate")).trim();
 			// String displayDateTime = constants.getDateTimeDisp(saveDateTime);

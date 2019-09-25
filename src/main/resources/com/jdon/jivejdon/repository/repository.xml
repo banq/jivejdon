@@ -27,6 +27,9 @@
 		<component name="MessageDirector"
 				   class="com.jdon.jivejdon.repository.builder.MessageDirector"/>
 
+		<component name="ThreadDirector"
+				   class="com.jdon.jivejdon.repository.builder.ThreadDirector"/>
+
 		<component name="ForumDirector"
 				   class="com.jdon.jivejdon.repository.builder.ForumDirector"/>
 

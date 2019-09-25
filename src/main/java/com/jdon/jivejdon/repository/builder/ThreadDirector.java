@@ -16,6 +16,8 @@
  */
 package com.jdon.jivejdon.repository.builder;
 
+import com.jdon.annotation.Introduce;
+import com.jdon.annotation.pointcut.Around;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
@@ -27,10 +29,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
-public class ThreadDirector {
+@Introduce("modelCache")
+public class ThreadDirector implements ThreadDirectorIF {
 	private final static Logger logger = LogManager.getLogger(ThreadDirector.class);
 
 	private final MessageDao messageDao;
@@ -43,8 +44,6 @@ public class ThreadDirector {
 
 	private final ForumDirector forumDirector;
 
-	private final Map nullthreads ;
-
 	public ThreadDirector(ForumDirector forumDirector, MessageDao messageDao, TagRepository tagRepository,  PropertyDao propertyDao,MessageDirectorIF
 			messageDirectorIF) {
 		this.forumDirector = forumDirector;
@@ -52,12 +51,15 @@ public class ThreadDirector {
 		this.tagRepository = tagRepository;
 		this.propertyDao = propertyDao;
 		this.messageDirectorIF = messageDirectorIF;
-		this.nullthreads = lruCache(100);
 	}
 
+	@Override
+	@Around
 	public ForumThread getThread(Long threadId) throws Exception {
+		if (threadId == null || threadId == 0)
+			return null;
 		try {
-			return getThread(threadId,null,null);
+			return build(threadId, null);
 		} catch (Exception e) {
 			throw new Exception(e);
 		}
@@ -71,120 +73,37 @@ public class ThreadDirector {
 	 * @param threadId
 	 * @return
 	 */
-	public ForumThread getThread(final Long threadId, ForumMessage forumMessage, final Forum forum) throws Exception {
+	@Override
+	@Around
+	public ForumThread getThread(final Long threadId, ForumMessage rootMessage) throws Exception {
 		logger.debug("TH----> enter getThread, threadId=" + threadId);
-		if (nullthreads.containsKey(threadId)){
-			logger.error("repeat no threadId=" + threadId);
-			throw new Exception("repeat no this forumThread");
+		if (threadId == null || threadId == 0)
+			return null;
+
+		try {
+			return build(threadId, rootMessage);
+		} catch (Exception e) {
+			throw new Exception(e);
 		}
-		ForumThread forumThread = (ForumThread) create(threadId);
+	}
+
+	private ForumThread build(final Long threadId, ForumMessage rootMessage) throws Exception {
+		ForumThread forumThread = messageDao.getThreadCore(threadId , rootMessage);
 		if (forumThread == null) {
-			nullthreads.put(threadId, "null");
 			logger.error("no threadId=" + threadId);
 			throw new Exception("no this forumThread");
 		}
-
-		if (forumThread.isSolid())
-			return forumThread;
-
-		construct(forumThread, forum);
-		forumThread.setSolid(true);
-		return forumThread;
-	}
-
-	public ForumThread create(Long threadId) {
-		return  messageDao.getThreadCore(threadId);
-
-	}
-
-	public void construct(ForumThread forumThread, Forum forum) throws Exception {
-		try {
-			logger.debug("ForumThread construct :<Embed ForumThread---->  start, threadId=" + forumThread.getThreadId());
-			// buildTreeModel at first called
-			buildTreeModel(forumThread);
-
-			// in buildPart will create rootForumMessage that need
-			// buildInitState's TreeModel
-			buildForum(forumThread, forum);
-			buildRootMessage(forumThread,forum);
-
-			buildProperties(forumThread);
-			logger.debug("ForumThread construct: ok threadId=" + forumThread.getThreadId());
-
-		} catch (Exception e) {
-			String error = e + " construct forumThreadId=" + forumThread.getThreadId();
-			logger.error(error);
-			throw new Exception(error);
-		}
-	}
-
-	public static <K,V> Map<K,V> lruCache(final int maxSize) {
-	    return new LinkedHashMap<K,V>(maxSize*4/3, 0.75f, true) {
-	        @Override
-	        protected boolean removeEldestEntry(Map.Entry<K,V> eldest) {
-	            return size() > maxSize;
-	        }
-	    };
-	}
-
-	public void buildRootMessage(ForumThread forumThread, Forum forum) throws Exception {
-		try {
+		Forum forum = forumDirector.getForum(forumThread.getForum().getForumId());
+		if (rootMessage == null) {
 			Long rootmessageId = this.messageDao.getThreadRootMessageId(forumThread.getThreadId());
-			ForumMessage rootForumMessage  = messageDirectorIF.getMessage(rootmessageId, forumThread);
-			forumThread.setRootMessage(rootForumMessage);
-//			rootForumMessage.setForumThread(forumThread);
-
-			// only have rootMessage, so have thread
-			buildProperties(forumThread);
-		} catch (Exception e) {
-			String error = e + " buildRootMessage forumThreadId=" + forumThread.getThreadId();
-			logger.error(error);
-			throw new Exception(error);
+			rootMessage = messageDirectorIF.getMessage(rootmessageId, forumThread);
 		}
-	}
-
-	public void buildProperties(ForumThread forumThread) {
-		try {
 			//init viewcount
-			forumThread.getViewCounter().loadinitCount();
-
-			Collection tags = tagRepository.getThreadTags(forumThread);
-			ThreadTagsVO threadTagsVO = new ThreadTagsVO(forumThread, tags);
-			forumThread.setThreadTagsVO(threadTagsVO);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void buildForum(ForumThread forumThread, Forum forum) throws Exception {
-		try {
-			if ((forum == null) || (forum.getForumId().longValue() != forumThread.getForum().getForumId().longValue())) {
-				forum = forumDirector.getForum(forumThread.getForum().getForumId());
-			}
-			forumThread.setForum(forum);
-		} catch (Exception e) {
-			String error = e + " buildRootMessage forumThreadId=" + forumThread.getThreadId();
-			logger.error(error);
-			throw new Exception(error);
-		}
-	}
-
-	/**
-	 * get a state of a thread forumThreadState.setTreeModel(treeModel);
-	 *
-	 * @param forumThread
-	 */
-	public void buildTreeModel(final ForumThread forumThread) throws Exception {
-		try {
-			// NO NEED PRELOADE tREE, ONLY LOAD IT WHEN NEED.
-			// forumThread.preloadTreeMode();
-			// forumThreadTreeModelFactory.create(forumThread);
-		} catch (Exception e) {
-			String error = e + " buildInitState forumThreadId=" + forumThread.getThreadId();
-			logger.error(error);
-			throw new Exception(error);
-		}
+		forumThread.getViewCounter().loadinitCount();
+		Collection tags = tagRepository.getThreadTags(forumThread);
+		ThreadTagsVO threadTagsVO = new ThreadTagsVO(forumThread, tags);
+		forumThread.build(forum, rootMessage, threadTagsVO);
+		return forumThread;
 	}
 
 }
