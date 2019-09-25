@@ -390,7 +390,7 @@ public class ForumThread extends ForumModel {
 	}
 
 	public synchronized void build(Forum forum, ForumMessage rootMessage, ThreadTagsVO threadTagsVO){
-
+        if (isSolid()) return;
 		this.setForum(forum);
 		this.setRootMessage(rootMessage);
 		this.setThreadTagsVO(threadTagsVO);
