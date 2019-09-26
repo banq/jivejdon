@@ -109,16 +109,16 @@ public class ForumAbstractFactory implements ForumFactory {
 	public Optional<ForumThread> getThread(Long threadId) {
 		if (nullthreads.containsKey(threadId)){
 			logger.error("repeat no forumId=" + threadId);
-			return null;
+			return Optional.ofNullable(null);
 		}
 		ForumThread forumThread = null;
 		try {
 			forumThread = threadDirectorIF.getThread(threadId);
-			if (forumThread == null)
-				nullthreads.put(threadId, "null");
 		} catch (Exception e) {
 			e.printStackTrace();
-			nullthreads.put(threadId, "null");
+		}finally {
+			if (forumThread == null)
+				nullthreads.put(threadId, "null");
 		}
 		return Optional.ofNullable(forumThread);
 	}
