@@ -13,13 +13,11 @@ DDD Aggregate Model
 
 ![avatar](./doc/aggregates2.png)
 
-[com.jdon.jivejdon.model.ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java) is the aggregate root entity of post bounded context, it is a rich model not anemic model, no "public" setter method, all setter methods are "private":
+There are two aggregate roots in jivejdon: FormThread and ForumMessage(Root Message).
+
+[com.jdon.jivejdon.model.ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java) is a rich model instead of a anemic model, no "public" setter method, all setter methods are "private":
 
 ![avatar](./doc/private-setter.png)
-
-Aggregate root entity builder pattern:
-![avatar](./doc/builder.png)
-
 
 Domain Model principles:
 
@@ -33,11 +31,11 @@ No dependencies to infrastructure, databases, other stuff. All classes are POJO.
 
 The customer/supply model from jdonframework can seperate domain model from Persistence/Repository.
 
-All datas out of domain is packed in a DTO anemic model([AnemicMessageDTO](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/message/AnemicMessageDTO.java)), so business rules in the aggregate root entity will not leak outside domain. 
+All business datas outside of domain is packed in a DTO anemic model([AnemicMessageDTO](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/message/AnemicMessageDTO.java)), so business rules in the aggregate root entity will not leak outside of domain. 
 
 ![avatar](./doc/richmodel.png)
 
-these DTO anemic models can alseo be packed in Command and Domain Events，so they be managed in DDD ubiquitous business language.
+These DTO anemic models can alseo be packed in Command and Domain Events，so they be managed in DDD ubiquitous business language.
 
 3. **Rich in behavior**
 
@@ -46,12 +44,71 @@ All business logic is located in Domain Model. No leaks to application layer or 
 4. **Low level of primitive obssesion**
 
 Primitive attributes of Entites grouped together using ValueObjects.
-[MessageVO](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/message/MessageVO.java) is a valueObject of aggregate root entity[ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java), inlcude message content: subject and body, it will be processed with complex business filter logic, these filters have many implements,such as: TEXT to HTML.
+
+[MessageVO](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/message/MessageVO.java) is a value Object, and has two attributes for message content: subject/body.
 
 
-5. **Business language**
 
-All classes, methods and other members named in business language used in the Bounded Context.
+Clean architecture/Hexagonal architecture
+==============================
+JiveJdon is developed with JdonFramework that supports Customer/Supply or pub-sub model, this model can seperate domain logic from infrastructure, databases, other stuff.
+
+![avatar](./doc/clean.png)
+
+JiveJdon and Hexagonal_architecture:
+
+![avatar](./doc/hexagonal_architecture.png)
+
+
+ [models.xml](https://github.com/banq/jivejdon/blob/master/src/main/resources/com/jdon/jivejdon/model/models.xml) is a adapter, it is XML configure acting as a controller.
+``````
+	<model key="messageId" class="com.jdon.jivejdon.model.message.AnemicMessageDTO">
+		<actionForm name="messageForm"/>
+		<handler>
+			<service ref="forumMessageService">
+			
+				<createMethod name="createReplyMessage"/>
+					
+			</service>
+		</handler>
+	</model>
+``````
+When post a replies message,  a POST command will action createReplyMessage method of [forumMessageService](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/service/imp/message/ForumMessageShell.java) :
+
+``````
+public interface ForumMessageService {
+
+	Long createReplyMessage(EventModel em) throws Exception;
+	....
+	
+}
+``````
+
+Domain sevice forumMessageService will delegate responsibility to the entity [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java), 
+ 
+createReplyMessage() method will send a command to the addChild()  method of [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java) 
+ 
+ ![avatar](./doc/builder.png)
+
+ @OnCommand("postReplyMessageCommand") annotation make addChild() being a command handler, the annotation is from pub-sub model of jdonframework, it can make this method executed with a [single-writer pattern](http://mechanical-sympathy.blogspot.co.uk/2011/09/single-writer-principle.html) - no blocked, no lock, high concurrent. only one thread/process invoking this update method.
+ 
+ "eventSourcing.addReplyMessage" will send a "ReplyMessageCreatedEvent" domain Event to infrastructure layer such as Repository. seperate domain logic from infrastructure, databases, other stuffs.
+
+ Domain event "ReplyMessageCreatedEvent"  occurring in the domain is saved in the event store "jiveMessage", this is a message posted events table. the event can be used for reconstructing the last replies state of a thread, events replay is in [ForumThreadState](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumThreadState.java) .
+ 
+
+CQRS architecture
+==============================
+CQRS addresses separates reads and writes into separate models, using commands to update data, and queries to read data.
+
+ ![avatar](./doc/cqrs.png)
+
+In jivejdon ForumThread and ForumMessage are saved in cache, cache is a snapshot of even logs, if a update command activate one of these models, they will send domain events to clear the cache datas, the cache is similar as the database for query/read model, the consistency between with cache and the database for commmand model is maintained by the domain events such as "ReplyMessageCreatedEvent".
+
+The domain event "ReplyMessageCreatedEvent" do three things:
+1. add a new post message to "jiveMessage" (events log)
+2. clear the query cache (CQRS)
+3. update/project the last replies state of a thread (event project to state)
 
 
 
@@ -124,72 +181,6 @@ public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 
 ThreadStateLoader will reconstruct current state by SQL from MySQL database, the sql is  "select count(1) ...".
 and now we refreshed the current state of a ForumThread: the count for all message replies.
-
-Clean architecture/Hexagonal architecture
-==============================
-JiveJdon is developed with JdonFramework that supports Customer/Supply or pub-sub model, this model can seperate domain logic from infrastructure, databases, other stuff.
-
-![avatar](./doc/clean.png)
-
-JiveJdon and Hexagonal_architecture:
-
-![avatar](./doc/hexagonal_architecture.png)
-
-
- [models.xml](https://github.com/banq/jivejdon/blob/master/src/main/resources/com/jdon/jivejdon/model/models.xml) is a adapter, it is XML configure acting as a controller.
-``````
-	<model key="messageId" class="com.jdon.jivejdon.model.message.AnemicMessageDTO">
-		<actionForm name="messageForm"/>
-		<handler>
-			<service ref="forumMessageService">
-			
-				<createMethod name="createReplyMessage"/>
-					
-			</service>
-		</handler>
-	</model>
-``````
-When post a replies message,  a POST command will action createReplyMessage method of [forumMessageService](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/service/imp/message/ForumMessageShell.java) :
-
-``````
-public interface ForumMessageService {
-
-	Long createReplyMessage(EventModel em) throws Exception;
-	....
-	
-}
-``````
-
-Domain sevice forumMessageService will delegate responsibility to business logic object：the aggregate root entity [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java), that has two
-types: topic post and rely post, topic is a root message and has many replies messages, all messages 
-compose one Thread(ForumThread)
- 
-Business/domain logic is in the addChild message method of [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java) 
- 
- ![avatar](./doc/builder.png)
-
- @OnCommand("postReplyMessageCommand") annotation is a command handler in pub-sub model from jdonframework, it can make this method executed in a [single-writer pattern](http://mechanical-sympathy.blogspot.co.uk/2011/09/single-writer-principle.html) - no blocked, no lock, high concurrent. only one thread/process invoking this update method.
- 
- "eventSourcing.addReplyMessage" will send a "ReplyMessageCreatedEvent" domain Event to infrastructure layer such as Repository. with the pub-sub model of jdonframework, make domain no dependencies to infrastructure, databases, other stuff.
-
- Domain event "ReplyMessageCreatedEvent"  occurring in the domain will be saved in event store "jiveMessage" that is a posted events table
- to project the last replies state of a thread.(Event Sourcing)
- 
-
-CQRS architecture
-==============================
-CQRS addresses separates reads and writes into separate models, using commands to update data, and queries to read data.
-
- ![avatar](./doc/cqrs.png)
-
-In jivejdon ForumThread and ForumMessage are saved in cache, cache is a snapshot of even logs, if a update command activate one of these models, they will send domain events to clear the cache datas, the cache is similar as the database for query/read model, the consistency between with cache and the database for commmand model is maintained by the domain events such as "ReplyMessageCreatedEvent".
-
-The domain event "ReplyMessageCreatedEvent" do three things:
-1. add a new post message to "jiveMessage" (events log)
-2. clear the query cache (CQRS)
-3. update/project the last replies state of a thread (event project to state)
-
-
 
 
 Install
