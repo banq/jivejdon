@@ -12,7 +12,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="form-group">
-      <textarea styleClass="form-control" property="subject" styleId="replySubject" cols="100" rows="2" tabindex="5"
+      <textarea class="form-control" property="subject" id="replySubject" cols="100" rows="2" tabindex="5"
                 onfocus="if(value=='标题/评论限140字'){value=''}"
                 onblur="if (value ==''){value='标题/评论限140字'}" >标题/评论限140字</textarea>
       </div>
@@ -22,7 +22,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="form-group">
-        <textarea styleClass="form-control" property="body" cols="100" rows="40" styleId="formBody" tabindex="6"></textarea>
+        <textarea class="form-control" property="body" cols="100" rows="40" id="formBody" tabindex="6"></textarea>
 
       </div>
     </div>
