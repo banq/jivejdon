@@ -15,9 +15,9 @@ String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
     <meta property="og:url" content="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />"/>
     <meta property="og:release_date" content="<bean:write name="forumThread" property="creationDate" />"/>
     <meta name="keywords" content="<logic:iterate id="threadTag" name="forumThread" property="tags" ><bean:write name="threadTag" property="title" />,</logic:iterate>"/>
-    <meta name="description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" /> "/>
+    <meta name="description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[140]" /> "/>
     <meta name="og:title" content="<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>"/>
-    <meta name="og:description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" /> "/>
+    <meta name="og:description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[140]" /> "/>
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap" />
     <link rel="alternate" type="application/rss+xml" title="解道订阅" href="/rss" />
     <style>
