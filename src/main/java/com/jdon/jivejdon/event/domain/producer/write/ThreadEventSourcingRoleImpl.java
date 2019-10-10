@@ -19,12 +19,8 @@ import com.jdon.annotation.Component;
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.model.Send;
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.model.dci.ThreadEventSourcingRole;
-import com.jdon.jivejdon.model.event.MessageRemoveCommand;
-import com.jdon.jivejdon.model.event.MessageRemovedEvent;
 import com.jdon.jivejdon.model.event.PostTopicMessageCommand;
 import com.jdon.jivejdon.model.event.TopicMessagePostedEvent;
-import com.jdon.jivejdon.model.util.OneOneDTO;
 
 @Component
 @Introduce("message")
@@ -41,28 +37,5 @@ public class ThreadEventSourcingRoleImpl implements ThreadEventSourcingRole {
 		return new DomainMessage(topicMessagePostedEvent);
 	}
 
-
-	@Override
-	@Send("postReBlog")
-	public DomainMessage postReBlog(OneOneDTO oneOneDTO) {
-		return new DomainMessage(oneOneDTO);
-	}
-
-	@Override
-	@Send("deleteMessage")
-	public DomainMessage deleteMessage(MessageRemoveCommand event) {
-		return new DomainMessage(event);
-	}
-
-	@Override
-	@Send("postThread")
-	public DomainMessage postThread(DomainMessage domainMessage) {
-		return new DomainMessage(domainMessage);
-	}
-
-	@Send("delThread")
-	public DomainMessage delThread(MessageRemovedEvent event) {
-		return new DomainMessage(event);
-	}
 
 }

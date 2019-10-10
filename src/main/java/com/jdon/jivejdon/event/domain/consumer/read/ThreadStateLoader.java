@@ -25,7 +25,7 @@ import com.jdon.jivejdon.model.util.OneOneDTO;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.dao.MessageQueryDao;
 
-@Consumer("loadThreadState")
+@Consumer("projectStateFromEventSource")
 public class ThreadStateLoader implements DomainEventHandler {
 	private final static Logger logger = LogManager.getLogger(ThreadStateLoader.class);
 

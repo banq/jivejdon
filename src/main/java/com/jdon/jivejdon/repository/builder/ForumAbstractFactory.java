@@ -132,7 +132,7 @@ public class ForumAbstractFactory implements ForumFactory {
 	 */
 	public void reloadThreadState(ForumThread forumThread) throws Exception {
 		try {
-			forumThread.getState().loadinitState();
+			forumThread.getState().projectStateFromEventSource();
 //			threadBuilder.buildState(forumThread, forumThread.getRootMessage(), messageDirector);
 //
 //			Forum forum = getForum(forumThread.getForum().getForumId());

@@ -26,7 +26,6 @@ import com.jdon.jivejdon.auth.ResourceAuthorization;
 import com.jdon.jivejdon.manager.filter.InFilterManager;
 import com.jdon.jivejdon.model.*;
 import com.jdon.jivejdon.model.attachment.AttachmentsVO;
-import com.jdon.jivejdon.model.dci.ThreadManagerContext;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.message.output.RenderingFilterManager;
 import com.jdon.jivejdon.model.proptery.MessagePropertysVO;
@@ -61,13 +60,11 @@ public class ForumMessageShell implements ForumMessageService {
 	protected final MessageKernelIF messageKernel;
 	protected final UploadService uploadService;
 	protected final ForumFactory forumBuilder;
-	private final ThreadManagerContext threadManagerContext;
 	private final RenderingFilterManager renderingFilterManager;
 	protected SessionContext sessionContext;
 
 	public ForumMessageShell(SessionContextUtil sessionContextUtil, ResourceAuthorization messageServiceAuth, InFilterManager inFilterManager,
-							 MessageKernelIF messageKernel, UploadService uploadService, ForumFactory forumBuilder, RenderingFilterManager renderingFilterManager,
-			ThreadManagerContext threadManagerContext) {
+							 MessageKernelIF messageKernel, UploadService uploadService, ForumFactory forumBuilder, RenderingFilterManager renderingFilterManager) {
 		this.sessionContextUtil = sessionContextUtil;
 		this.resourceAuthorization = messageServiceAuth;
 		this.inFilterManager = inFilterManager;
@@ -75,7 +72,6 @@ public class ForumMessageShell implements ForumMessageService {
 		this.messageKernel = messageKernel;
 		this.uploadService = uploadService;
 		this.forumBuilder = forumBuilder;
-		this.threadManagerContext = threadManagerContext;
 	}
 
 	/**
@@ -194,8 +190,8 @@ public class ForumMessageShell implements ForumMessageService {
 
 	// reblog retweet
 	public void reBlog(Long replyMessageId, Long topicMessageId) throws Exception {
-
-		threadManagerContext.postReBlog(replyMessageId, topicMessageId);
+//
+//		threadManagerContext.postReBlog(replyMessageId, topicMessageId);
 	}
 
 	public void associateThread(EventModel em) throws Exception {

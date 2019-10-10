@@ -18,13 +18,8 @@ package com.jdon.jivejdon.event.domain.producer.write;
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.model.Send;
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.model.event.MessageMovedEvent;
-import com.jdon.jivejdon.model.event.MessagePropertiesUpdatedEvent;
-import com.jdon.jivejdon.model.event.MessageUpdatedEvent;
-import com.jdon.jivejdon.model.event.ReplyMessageCreatedEvent;
-import com.jdon.jivejdon.model.event.ThreadNameSavedEvent;
-import com.jdon.jivejdon.model.event.ThreadTagsSavedEvent;
-import com.jdon.jivejdon.model.event.UploadFilesSavedEvent;
+import com.jdon.jivejdon.model.event.*;
+import com.jdon.jivejdon.model.util.OneOneDTO;
 
 @Introduce("message")
 public class MessageEventSourcingRole {
@@ -43,6 +38,22 @@ public class MessageEventSourcingRole {
 	public DomainMessage moveMessage(MessageMovedEvent event) {
 		return new DomainMessage(event);
 	}
+
+	@Send("postReBlog")
+	public DomainMessage postReBlog(OneOneDTO oneOneDTO) {
+		return new DomainMessage(oneOneDTO);
+	}
+
+	@Send("deleteMessage")
+	public DomainMessage deleteMessage(MessageRemoveCommand event) {
+		return new DomainMessage(event);
+	}
+
+	@Send("delThread")
+	public DomainMessage delThread(MessageRemovedEvent event) {
+		return new DomainMessage(event);
+	}
+
 
 	@Send("updateMessageProperties")
 	public DomainMessage saveMessageProperties(MessagePropertiesUpdatedEvent event) {

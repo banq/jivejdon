@@ -147,7 +147,7 @@ public class MessageTransactionPersistence {
 				tagRepository.deleteTagTitle(delforumMessage.getForumThread().getThreadId());
 				messageRepository.deleteThread(delforumMessage.getForumThread());
 			}
-
+			forumAbstractFactory.reloadThreadState(delforumMessage.getForumThread());
 			jtaTransactionUtil.commitTransaction();
 
 		} catch (Exception e) {

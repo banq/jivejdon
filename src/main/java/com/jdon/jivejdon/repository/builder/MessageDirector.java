@@ -160,7 +160,7 @@ public class MessageDirector implements MessageDirectorIF {
 				    parentforumMessage = buildMessage(anemicMessageDTO.getParentMessage().getMessageId());
 				return createRepliesMessage(anemicMessageDTO, parentforumMessage);
 			}else{
-				return createRootMessage(anemicMessageDTO, forumThread);
+				return forumThread.getRootMessage();
 			}
 
 		}catch (Exception e){

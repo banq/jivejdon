@@ -21,9 +21,7 @@ import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.Constants;
 import com.jdon.jivejdon.event.domain.producer.read.LazyLoaderRole;
 import com.jdon.jivejdon.event.domain.producer.write.MessageEventSourcingRole;
-import com.jdon.jivejdon.model.event.MessageMovedEvent;
-import com.jdon.jivejdon.model.event.ThreadNameSavedEvent;
-import com.jdon.jivejdon.model.event.ThreadTagsSavedEvent;
+import com.jdon.jivejdon.model.event.*;
 import com.jdon.jivejdon.model.realtime.ForumMessageDTO;
 import com.jdon.jivejdon.model.realtime.LobbyPublisherRoleIF;
 import com.jdon.jivejdon.model.realtime.Notification;
@@ -31,6 +29,7 @@ import com.jdon.jivejdon.model.subscription.SubPublisherRoleIF;
 import com.jdon.jivejdon.model.subscription.event.ThreadSubscribedNotifyEvent;
 import com.jdon.jivejdon.model.thread.ThreadTagsVO;
 import com.jdon.jivejdon.model.thread.ViewCounter;
+import com.jdon.jivejdon.model.util.OneOneDTO;
 import com.jdon.treepatterns.TreeVisitor;
 import com.jdon.treepatterns.model.TreeModel;
 import com.jdon.util.StringUtil;
@@ -388,6 +387,18 @@ public class ForumThread extends ForumModel {
 			return this.creationDate;
 
 	}
+
+
+    public void postReBlog(Long messageFromId, Long messageToId) {
+        OneOneDTO oneOneDTO = new OneOneDTO(messageFromId, messageToId);
+        eventSourcing.postReBlog(oneOneDTO);
+    }
+
+    public void delete(ForumMessage delforumMessage) {
+        DomainMessage domainMessage = eventSourcing.deleteMessage(new MessageRemoveCommand(delforumMessage.getMessageId()));
+        eventSourcing.delThread(new MessageRemovedEvent(delforumMessage));
+
+    }
 
 	public synchronized void build(Forum forum, ForumMessage rootMessage, ThreadTagsVO threadTagsVO){
         if (isSolid()) return;

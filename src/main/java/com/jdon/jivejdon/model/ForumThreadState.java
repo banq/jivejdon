@@ -59,7 +59,7 @@ public class ForumThreadState {
 	 */
 	public int getMessageCount() {
 		if (this.messageCount == null)
-			loadinitState();
+			projectStateFromEventSource();
 		if (messageCount != null)
 			return messageCount.intValue();
 		return -1;
@@ -67,7 +67,7 @@ public class ForumThreadState {
 
 	public long addMessageCount() {
 		if (this.messageCount == null)
-			loadinitState();
+			projectStateFromEventSource();
 		if (getMessageCount() != -1)
 			return messageCount.incrementAndGet();
 		else
@@ -76,25 +76,25 @@ public class ForumThreadState {
 
 	public ForumMessage getLastPost() {
 		if (this.lastPost == null) {
-			loadinitState();
+			projectStateFromEventSource();
 		}
 		return lastPost;
 	}
 
 	public void setLastPost(ForumMessage lastPost) {
 		if (this.lastPost == null) {
-			loadinitState();
+			projectStateFromEventSource();
 		}
 		this.lastPost = lastPost;
 	}
 
-	public void loadinitState() {
-		DomainMessage dm = this.forumThread.lazyLoaderRole.loadThreadState(forumThread.getThreadId());
+	public void projectStateFromEventSource() {
+		DomainMessage dm = this.forumThread.lazyLoaderRole.projectStateFromEventSource(forumThread.getThreadId());
 		OneOneDTO oneOneDTO = null;
 		try {
 			// synchronized (this) {
-			if (messageCount != null)
-				return;
+//			if (messageCount != null)
+//				return;
 			oneOneDTO = (OneOneDTO) dm.getEventResult();
 			if (oneOneDTO != null) {
 				lastPost = (ForumMessage) oneOneDTO.getParent();

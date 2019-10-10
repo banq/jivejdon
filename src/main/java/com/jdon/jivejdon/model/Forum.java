@@ -21,7 +21,7 @@ import com.jdon.annotation.model.OnCommand;
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.Constants;
 import com.jdon.jivejdon.event.domain.producer.read.LazyLoaderRole;
-import com.jdon.jivejdon.model.dci.ThreadEventSourcingRole;
+import com.jdon.jivejdon.event.domain.producer.write.ThreadEventSourcingRole;
 import com.jdon.jivejdon.model.event.PostTopicMessageCommand;
 import com.jdon.jivejdon.model.event.TopicMessagePostedEvent;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;

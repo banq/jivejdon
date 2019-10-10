@@ -79,8 +79,8 @@ public class LazyLoaderRole {
 		return new DomainMessage(forumId);
 	}
 
-	@Send("loadThreadState")
-	public DomainMessage loadThreadState(Long threadId) {
+	@Send("projectStateFromEventSource")
+	public DomainMessage projectStateFromEventSource(Long threadId) {
 		return new DomainMessage(threadId);
 	}
 

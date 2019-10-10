@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.dci;
+package com.jdon.jivejdon.event.domain.producer.write;
 
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.model.event.MessageRemoveCommand;
@@ -35,12 +35,5 @@ public interface ThreadEventSourcingRole {
 
 	DomainMessage topicMessagePosted(TopicMessagePostedEvent topicMessagePostedEvent);
 
-	DomainMessage postReBlog(OneOneDTO oneOneDTO);
-
-	DomainMessage deleteMessage(MessageRemoveCommand event);
-
-	DomainMessage postThread(DomainMessage domainMessage);
-
-	DomainMessage delThread(MessageRemovedEvent event);
 
 }

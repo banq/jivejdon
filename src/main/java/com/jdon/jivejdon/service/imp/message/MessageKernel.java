@@ -25,7 +25,6 @@ import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.model.dci.ThreadManagerContext;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.model.query.MultiCriteria;
@@ -46,15 +45,12 @@ import java.util.regex.Pattern;
 public class MessageKernel implements MessageKernelIF {
 	private final static Logger logger = LogManager.getLogger(MessageKernel.class);
 	private final static Pattern htmlEscape = Pattern.compile("\\<.*?\\>|<[^>]+");
-	private final ThreadManagerContext threadManagerContext;
 	protected ForumMessageQueryService forumMessageQueryService;
 	protected ForumFactory forumAbstractFactory;
 
-	public MessageKernel(ForumMessageQueryService forumMessageQueryService, ForumFactory forumAbstractFactory,
-			ThreadManagerContext threadManagerContext) {
+	public MessageKernel(ForumMessageQueryService forumMessageQueryService, ForumFactory forumAbstractFactory) {
 		this.forumMessageQueryService = forumMessageQueryService;
 		this.forumAbstractFactory = forumAbstractFactory;
-		this.threadManagerContext = threadManagerContext;
 	}
 
 	/*
@@ -177,7 +173,7 @@ public class MessageKernel implements MessageKernelIF {
 	public void deleteMessage(AnemicMessageDTO beingdelforumMessage) throws Exception {
         ForumMessage delforumMessage = this.getMessage(beingdelforumMessage.getMessageId());
 		if (delforumMessage != null)
-			this.threadManagerContext.delete(delforumMessage);
+			delforumMessage.getForumThread().delete(delforumMessage);
 
 	}
 
@@ -221,7 +217,7 @@ public class MessageKernel implements MessageKernelIF {
 			ForumMessage message = getMessage(messageId);
 			if (message!= null
 					&& message.getAccount().getUsername().equals(username)) {
-					this.threadManagerContext.delete(message);
+				   message.getForumThread().delete(message);
 			}
 		}
 	}
