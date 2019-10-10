@@ -70,14 +70,60 @@ JiveMessage is a posted events collection database table, with a SQL select we c
 SELECT messageID from jiveMessage WHERE  threadID = ? ORDER BY modifiedDate DESC
 
 ``````
-This sql can quickly find the last replies, No need to play back all posted events.
+This sql can quickly find the last replies,  similar as replaying all posted events to project current state.
 
 In jiveThread table there is no special field for last replyies state , all states are from posted events projection. (projection can use SQL!)
 
 When a user post a new ForumMessage, a ReplyMessageCreatedEvent event will be saved to event store: JiveMessage,  simultaneously refresh the snapshot of event: ForumThreadState.
 
+In [ForumThreadState](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumThreadState.java) there is another method for projecting state from the database, if we want tp get the count of all message replies, its projectStateFromEventSource() method can do this:
 
+````
 
+	public void projectStateFromEventSource() {
+		DomainMessage dm = this.forumThread.lazyLoaderRole.projectStateFromEventSource(forumThread.getThreadId());
+		OneOneDTO oneOneDTO = null;
+		try {
+			oneOneDTO = (OneOneDTO) dm.getEventResult();
+			if (oneOneDTO != null) {
+				lastPost = (ForumMessage) oneOneDTO.getParent();
+				messageCount = new AtomicLong((Long) oneOneDTO.getChild());
+				dm.clear();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+````
+
+lazyLoaderRole.projectStateFromEventSource will send a "projectStateFromEventSource" message to [ThreadStateLoader](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/event/domain/consumer/read/ThreadStateLoader.java):
+
+````````````
+public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
+		try {
+			ForumMessage lastPost = forumAbstractFactory.getMessage(lastMessageId);
+
+			long messagereplyCount;
+			long messageCount = messageQueryDao.getMessageCount(threadId);
+			if (messageCount >= 1)
+				messagereplyCount = messageCount - 1;
+			else
+				messagereplyCount = messageCount;
+
+			OneOneDTO oneOneDTO = new OneOneDTO(lastPost, messagereplyCount);
+			event.getDomainMessage().setEventResult(oneOneDTO);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+````````````
+
+ThreadStateLoader will reconstruct current state by SQL from MySQL database, the sql is  "select count(1) ...".
+and now we refresh the current state of a ForumThread: the count for all message replies.
 
 Clean architecture/Hexagonal architecture
 ==============================

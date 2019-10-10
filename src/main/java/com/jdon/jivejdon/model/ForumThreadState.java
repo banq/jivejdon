@@ -92,16 +92,12 @@ public class ForumThreadState {
 		DomainMessage dm = this.forumThread.lazyLoaderRole.projectStateFromEventSource(forumThread.getThreadId());
 		OneOneDTO oneOneDTO = null;
 		try {
-			// synchronized (this) {
-//			if (messageCount != null)
-//				return;
 			oneOneDTO = (OneOneDTO) dm.getEventResult();
 			if (oneOneDTO != null) {
 				lastPost = (ForumMessage) oneOneDTO.getParent();
 				messageCount = new AtomicLong((Long) oneOneDTO.getChild());
 				dm.clear();
 			}
-			// }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
