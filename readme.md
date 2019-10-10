@@ -123,7 +123,7 @@ public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 ````````````
 
 ThreadStateLoader will reconstruct current state by SQL from MySQL database, the sql is  "select count(1) ...".
-and now we refresh the current state of a ForumThread: the count for all message replies.
+and now we refreshed the current state of a ForumThread: the count for all message replies.
 
 Clean architecture/Hexagonal architecture
 ==============================
