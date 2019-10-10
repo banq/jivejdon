@@ -96,7 +96,7 @@ public class ThreadDirector implements ThreadDirectorIF {
 		Forum forum = forumDirector.getForum(forumThread.getForum().getForumId());
 		if (rootMessage == null) {
 			Long rootmessageId = this.messageDao.getThreadRootMessageId(forumThread.getThreadId());
-			rootMessage = messageDirectorIF.getMessage(rootmessageId, forumThread);
+			rootMessage = messageDirectorIF.getRootMessage(rootmessageId, forumThread);
 		}
 			//init viewcount
 		forumThread.getViewCounter().loadinitCount();

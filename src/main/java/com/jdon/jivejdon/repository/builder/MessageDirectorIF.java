@@ -7,7 +7,7 @@ public interface MessageDirectorIF {
 
     ForumMessage getMessage(Long messageId);
 
-    ForumMessage getMessage(Long messageId, ForumThread forumThread);
+    ForumMessage getRootMessage(Long messageId, ForumThread forumThread);
 
     void setThreadDirector(ThreadDirectorIF threadDirectorIF);
 }
