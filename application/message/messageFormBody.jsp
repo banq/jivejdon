@@ -9,27 +9,27 @@
 <script src="//cdn.jdon.com/common/ckeditor/ckeditor.js"></script>
 <script src="//cdn.jdon.com/common/ckeditor/sample.js"></script>
 <div class="box">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="form-group">
-      <textarea class="form-control" property="subject" id="replySubject" cols="100" rows="2" tabindex="5"
-                onfocus="if(value=='标题/评论限140字'){value=''}"
-                onblur="if (value ==''){value='标题/评论限140字'}" >标题/评论限140字</textarea>
-      </div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <html:textarea styleClass="form-control" property="subject" styleId="replySubject" cols="100" rows="2" tabindex="5"
+                     onfocus="if(value=='标题/评论限140字'){value=''}"
+                     onblur="if (value ==''){value='标题/评论限140字'}" ></html:textarea>
     </div>
   </div>
+</div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <div class="form-group">
-        <textarea class="form-control" property="body" cols="100" rows="40" id="formBody" tabindex="6"></textarea>
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <html:textarea styleClass="form-control" property="body" cols="100" rows="40" styleId="formBody" tabindex="6"></html:textarea>
 
-      </div>
     </div>
   </div>
-  <script>
-      initSample();
-      // CKEDITOR.config.height = 480;
-      CKEDITOR.config.autoGrow_minHeight = 480;
-  </script>
+</div>
+<script>
+    initSample();
+    // CKEDITOR.config.height = 480;
+    CKEDITOR.config.autoGrow_minHeight = 480;
+</script>
 
