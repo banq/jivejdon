@@ -183,6 +183,7 @@ ThreadStateLoader will reconstruct current state by SQL from MySQL database, the
 and now we refreshed the current state of a ForumThread: the count for all message replies.
 
 Domain model mapping to the database schema:
+
 ![avatar](./doc/es-db.png)
 
 Most of stuffs in aggregate root "ForumThread" mapping to jiveThread table, but its "rootMessage" mapping to jiveMessage table, and its state "ForumThreadState" is projected from jiveMessage table. 
