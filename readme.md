@@ -182,6 +182,13 @@ public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 ThreadStateLoader will reconstruct current state by SQL from MySQL database, the sql is  "select count(1) ...".
 and now we refreshed the current state of a ForumThread: the count for all message replies.
 
+Domain model mapping to the database schema:
+![avatar](./doc/es-db.png)
+
+Most of stuffs in aggregate root "ForumThread" mapping to jiveThread table, but its "rootMessage" mapping to jiveMessage table, and its state "ForumThreadState" is projected from jiveMessage table. 
+In jiveMessage table there are two kinds of ForumMessage: root message and replies messages, one thread only has one root message, but has many replies messages, these replies messages are replies-posted event log. 
+in domain model,repliese messages (FormMessageReply) is a sub class of Root Message(FormMessage).
+
 
 Install
 ===============================
