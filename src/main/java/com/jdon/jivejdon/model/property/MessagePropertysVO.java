@@ -13,9 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.proptery;
-
-import com.jdon.jivejdon.model.Property;
+package com.jdon.jivejdon.model.property;
 
 import java.util.Collection;
 import java.util.Iterator;

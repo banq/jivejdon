@@ -10,7 +10,7 @@ import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.query.MultiCriteria;
 import com.jdon.jivejdon.model.query.QueryCriteria;
 import com.jdon.jivejdon.presentation.form.QueryForm;
-import com.jdon.jivejdon.service.ForumMessageQueryService;
+import com.jdon.jivejdon.service.query.ForumMessageQueryService;
 import com.jdon.jivejdon.service.ForumMessageService;
 import com.jdon.strutsutil.FormBeanUtil;
 import com.jdon.strutsutil.ModelListAction;

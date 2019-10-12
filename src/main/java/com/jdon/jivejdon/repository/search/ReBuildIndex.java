@@ -5,7 +5,7 @@ import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.repository.ForumFactory;
-import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
+import com.jdon.jivejdon.repository.query.MessagePageIteratorSolver;
 import com.jdon.model.query.PageIteratorSolver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

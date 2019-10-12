@@ -15,13 +15,13 @@
  */
 package com.jdon.jivejdon.service.util;
 
+import com.jdon.jivejdon.model.account.Account;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.jdon.container.visitor.data.SessionContext;
 import com.jdon.container.visitor.data.SessionContextSetup;
-import com.jdon.jivejdon.model.Account;
-import com.jdon.jivejdon.repository.AccountFactory;
+import com.jdon.jivejdon.repository.acccount.AccountFactory;
 import com.jdon.jivejdon.util.ContainerUtil;
 
 /**
@@ -46,19 +46,19 @@ public class SessionContextUtil {
 	public boolean isLogin(SessionContext sessionContext) {
 		if (sessionContext == null)
 			return false;
-		Account account = (com.jdon.jivejdon.model.Account) sessionContext.getArrtibute(ACCOUNT);
+		Account account = (Account) sessionContext.getArrtibute(ACCOUNT);
 		if (account == null)
 			return false;
 		else
 			return true;
 	}
 
-	public com.jdon.jivejdon.model.Account getLoginAccount(SessionContext sessionContext) {
+	public Account getLoginAccount(SessionContext sessionContext) {
 		if (sessionContext == null)
 			return null;
-		com.jdon.jivejdon.model.Account account = null;
+		Account account = null;
 		try {
-			account = (com.jdon.jivejdon.model.Account) sessionContext.getArrtibute(ACCOUNT);
+			account = (Account) sessionContext.getArrtibute(ACCOUNT);
 			if (account == null) {
 				account = loadAccount(sessionContext);
 				if (account != null) {

@@ -16,7 +16,6 @@
 package com.jdon.jivejdon.repository.builder;
 
 import com.jdon.jivejdon.Constants;
-import com.jdon.jivejdon.manager.MessageDeletor;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
@@ -24,8 +23,8 @@ import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.util.OneOneDTO;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.MessageRepository;
-import com.jdon.jivejdon.repository.TagRepository;
-import com.jdon.jivejdon.repository.UploadRepository;
+import com.jdon.jivejdon.repository.property.TagRepository;
+import com.jdon.jivejdon.repository.property.UploadRepository;
 import com.jdon.jivejdon.repository.dao.MessageDaoFacade;
 import com.jdon.jivejdon.repository.dao.PropertyDao;
 import com.jdon.jivejdon.util.ContainerUtil;

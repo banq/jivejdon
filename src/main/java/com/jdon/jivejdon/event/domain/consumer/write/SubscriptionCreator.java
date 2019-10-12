@@ -23,9 +23,9 @@ import com.jdon.jivejdon.model.subscription.Subscription;
 import com.jdon.jivejdon.model.subscription.event.ThreadSubscribedCreateEvent;
 import com.jdon.jivejdon.model.subscription.subscribed.Subscribed;
 import com.jdon.jivejdon.model.subscription.subscribed.ThreadSubscribed;
-import com.jdon.jivejdon.repository.AccountFactory;
-import com.jdon.jivejdon.repository.SubscriptionRepository;
-import com.jdon.jivejdon.repository.builder.SubscribedFactory;
+import com.jdon.jivejdon.repository.acccount.AccountFactory;
+import com.jdon.jivejdon.repository.subscription.SubscriptionRepository;
+import com.jdon.jivejdon.repository.subscription.SubscribedFactory;
 
 @Consumer("createSubscription")
 public class SubscriptionCreator implements DomainEventHandler {

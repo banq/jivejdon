@@ -1,10 +1,10 @@
 package com.jdon.jivejdon.model.message;
 
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.attachment.AttachmentsVO;
-import com.jdon.jivejdon.model.proptery.MessagePropertysVO;
+import com.jdon.jivejdon.model.property.MessagePropertysVO;
 import org.compass.annotations.Searchable;
 import org.compass.annotations.SearchableComponent;
 import org.compass.annotations.SearchableId;

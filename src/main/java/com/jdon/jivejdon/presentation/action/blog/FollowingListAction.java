@@ -23,8 +23,8 @@ import org.apache.logging.log4j.Logger;
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.subscription.subscribed.AccountSubscribed;
-import com.jdon.jivejdon.service.AccountService;
-import com.jdon.jivejdon.service.SubscriptionService;
+import com.jdon.jivejdon.service.account.AccountService;
+import com.jdon.jivejdon.service.subscription.SubscriptionService;
 import com.jdon.strutsutil.ModelListAction;
 
 public class FollowingListAction extends ModelListAction {

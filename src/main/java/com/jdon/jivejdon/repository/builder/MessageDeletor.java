@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.manager;
+package com.jdon.jivejdon.repository.builder;
 
 import org.apache.logging.log4j.*;
 

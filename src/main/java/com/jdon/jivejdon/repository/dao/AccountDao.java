@@ -16,7 +16,7 @@
 package com.jdon.jivejdon.repository.dao;
 
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 
 /**
  * @author <a href="mailto:banqJdon<AT>jdon.com">banq</a>

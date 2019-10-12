@@ -1,17 +1,15 @@
-package com.jdon.jivejdon.repository.builder;
-
-import java.util.regex.Pattern;
-
-import org.apache.commons.validator.EmailValidator;
+package com.jdon.jivejdon.repository.acccount;
 
 import com.jdon.container.pico.Startable;
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.auth.Role;
-import com.jdon.jivejdon.repository.AccountFactory;
 import com.jdon.jivejdon.repository.dao.AccountDao;
 import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
+import org.apache.commons.validator.EmailValidator;
+
+import java.util.regex.Pattern;
 
 public class AccountFactoryDao implements AccountFactory, Startable {
 	private final static String module = AccountFactoryDao.class.getName();
@@ -33,7 +31,7 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.AccountFactory#getFullAccount(com.jdon.jivejdon
+	 * com.jdon.jivejdon.repository.acccount.AccountFactory#getFullAccount(com.jdon.jivejdon
 	 * .model.Account)
 	 */
 	public Account getFullAccount(Account accountIn) {
@@ -102,7 +100,7 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.AccountFactory#getFullAccount(java.lang.
+	 * com.jdon.jivejdon.repository.acccount.AccountFactory#getFullAccount(java.lang.
 	 * String)
 	 */
 	public Account getFullAccount(String userId) {

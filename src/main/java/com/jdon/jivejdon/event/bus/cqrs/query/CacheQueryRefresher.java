@@ -17,7 +17,7 @@ package com.jdon.jivejdon.event.bus.cqrs.query;
 
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.repository.ForumFactory;
-import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
+import com.jdon.jivejdon.repository.query.MessagePageIteratorSolver;
 
 public class CacheQueryRefresher {
 

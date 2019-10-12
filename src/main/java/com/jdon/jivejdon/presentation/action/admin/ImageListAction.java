@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.service.UploadInfoVOService;
+import com.jdon.jivejdon.service.property.UploadInfoVOService;
 import com.jdon.strutsutil.ModelListAction;
 /**
  * 

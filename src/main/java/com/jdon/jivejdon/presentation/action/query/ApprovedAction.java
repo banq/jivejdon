@@ -6,7 +6,7 @@ import com.jdon.jivejdon.manager.mapreduce.ThreadApprovedNewList;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.query.ResultSort;
 import com.jdon.jivejdon.model.query.specification.ThreadListSpec;
-import com.jdon.jivejdon.service.ForumMessageQueryService;
+import com.jdon.jivejdon.service.query.ForumMessageQueryService;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
 import org.apache.struts.action.ActionForm;

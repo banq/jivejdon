@@ -15,6 +15,7 @@
  */
 package com.jdon.jivejdon.auth;
 
+import com.jdon.jivejdon.model.account.Account;
 import org.apache.logging.log4j.*;
 
 import com.jdon.jivejdon.Constants;
@@ -43,7 +44,7 @@ public class ResourceAuthorization {
     * @param account  loged Account
     * @throws NoPermissionException
     */
-   public void verifyAuthenticated(ForumMessage forumMessage, com.jdon.jivejdon.model.Account account)
+   public void verifyAuthenticated(ForumMessage forumMessage, Account account)
 			throws NoPermissionException {
 		if (!isMessageOwner(forumMessage, account)) {
 			throw new NoPermissionException(Constants.NOPERMISSIONS);
@@ -53,7 +54,7 @@ public class ResourceAuthorization {
 		}
 	}
    
-   public boolean isAuthenticated(ForumMessage forumMessage, com.jdon.jivejdon.model.Account account){
+   public boolean isAuthenticated(ForumMessage forumMessage, Account account){
 	   boolean isAuthenticated = false;
 		try {
 			if (isMessageOwner(forumMessage, account)
@@ -69,7 +70,7 @@ public class ResourceAuthorization {
 	 * 1. auth check: amdin and the owner can modify this nessage.
 	 * 
 	 */
-    public boolean isMessageOwner(ForumMessage forumMessage, com.jdon.jivejdon.model.Account account ){
+    public boolean isMessageOwner(ForumMessage forumMessage, Account account ){
         logger.debug(" enter operateMessageAuthCheck1 id =" + forumMessage.getMessageId());        
         return isOwner(account,  forumMessage.getAccount());
     }
@@ -80,7 +81,7 @@ public class ResourceAuthorization {
      * @param account2 old account
      * @return
      */
-    public boolean isOwner(com.jdon.jivejdon.model.Account account, com.jdon.jivejdon.model.Account account2) {
+    public boolean isOwner(Account account, Account account2) {
 		boolean ret = false;
 		if (isAdmin(account)) {
 			ret = true;
@@ -92,7 +93,7 @@ public class ResourceAuthorization {
 		return ret;
 	}
     
-    public boolean isAdmin(com.jdon.jivejdon.model.Account account) {
+    public boolean isAdmin(Account account) {
 		boolean ret = false;
 		if ((account.getRoleName().equals(Role.ADMIN))
 				|| (account.getRoleName().equals(Role.MODERATOR))) {
@@ -105,7 +106,7 @@ public class ResourceAuthorization {
     /**
 	 * 2. if the message has childern, only admin can update it.
 	 */
-    public boolean isMessageLeaf(ForumMessage forumMessage, com.jdon.jivejdon.model.Account account){
+    public boolean isMessageLeaf(ForumMessage forumMessage, Account account){
         boolean ret = false;
         logger.debug(" enter operateMessageAuthCheck2 id =" + forumMessage.getMessageId());        
         try {

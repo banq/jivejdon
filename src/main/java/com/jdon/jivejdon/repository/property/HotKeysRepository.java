@@ -14,11 +14,11 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.repository;
+package com.jdon.jivejdon.repository.property;
+
+import com.jdon.jivejdon.model.property.HotKeys;
 
 import java.util.Collection;
-
-import com.jdon.jivejdon.model.HotKeys;
 
 public class HotKeysRepository {
 	

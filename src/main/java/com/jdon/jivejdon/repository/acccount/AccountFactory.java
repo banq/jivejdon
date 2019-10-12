@@ -13,9 +13,9 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository;
+package com.jdon.jivejdon.repository.acccount;
 
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 
 public interface AccountFactory {
 

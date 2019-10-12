@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository;
+package com.jdon.jivejdon.repository.property;
 
 import java.util.Collection;
 

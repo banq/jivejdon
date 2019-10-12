@@ -12,12 +12,12 @@ import com.jdon.annotation.intercept.SessionContextAcceptable;
 import com.jdon.container.visitor.data.SessionContext;
 import com.jdon.controller.events.EventModel;
 import com.jdon.jivejdon.Constants;
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.attachment.UploadFile;
-import com.jdon.jivejdon.repository.AccountFactory;
-import com.jdon.jivejdon.repository.UploadRepository;
+import com.jdon.jivejdon.repository.acccount.AccountFactory;
+import com.jdon.jivejdon.repository.property.UploadRepository;
 import com.jdon.jivejdon.repository.dao.SequenceDao;
-import com.jdon.jivejdon.service.UploadService;
+import com.jdon.jivejdon.service.property.UploadService;
 import com.jdon.util.UtilValidate;
 
 @Poolable

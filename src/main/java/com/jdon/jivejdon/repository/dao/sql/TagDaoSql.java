@@ -27,7 +27,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.Constants;
-import com.jdon.jivejdon.model.ThreadTag;
+import com.jdon.jivejdon.model.property.ThreadTag;
 import com.jdon.jivejdon.model.query.specification.TaggedThreadListSpec;
 import com.jdon.jivejdon.repository.dao.SequenceDao;
 import com.jdon.jivejdon.repository.dao.TagDao;

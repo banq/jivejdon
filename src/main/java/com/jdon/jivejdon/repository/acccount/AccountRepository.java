@@ -13,10 +13,10 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository;
+package com.jdon.jivejdon.repository.acccount;
 
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.account.PasswordassitVO;
 
 public interface AccountRepository {

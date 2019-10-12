@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jdon.jivejdon.model;
+package com.jdon.jivejdon.model.shortmessage;
 
 import com.jdon.jivejdon.model.shortmessage.ShortMessage;
 import com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository;

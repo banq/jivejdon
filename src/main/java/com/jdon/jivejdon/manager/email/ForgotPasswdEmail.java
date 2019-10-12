@@ -2,7 +2,7 @@ package com.jdon.jivejdon.manager.email;
 
 import com.jdon.annotation.Component;
 import com.jdon.container.pico.Startable;
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.util.EmailTask;
 import com.jdon.util.Debug;
 

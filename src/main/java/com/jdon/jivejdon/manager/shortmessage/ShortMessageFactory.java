@@ -22,12 +22,12 @@ import java.util.Observer;
 import com.jdon.annotation.Component;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.Constants;
-import com.jdon.jivejdon.model.Account;
-import com.jdon.jivejdon.model.ShortMessage;
-import com.jdon.jivejdon.model.ShortMessageState;
+import com.jdon.jivejdon.model.account.Account;
+import com.jdon.jivejdon.model.shortmessage.ShortMessage;
+import com.jdon.jivejdon.model.shortmessage.ShortMessageState;
 import com.jdon.jivejdon.model.event.ATUserNotifiedEvent;
-import com.jdon.jivejdon.repository.AccountFactory;
-import com.jdon.jivejdon.repository.ShortMessageRepository;
+import com.jdon.jivejdon.repository.acccount.AccountFactory;
+import com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository;
 import com.jdon.jivejdon.repository.dao.SequenceDao;
 import com.jdon.jivejdon.repository.dao.ShortMessageDao;
 
@@ -147,7 +147,7 @@ public class ShortMessageFactory implements Observer {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.ShortMessageRepository#update(java.util.
+	 * com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository#update(java.util.
 	 * Observable, java.lang.Object)
 	 */
 	public void update(Observable obj, Object arg) {

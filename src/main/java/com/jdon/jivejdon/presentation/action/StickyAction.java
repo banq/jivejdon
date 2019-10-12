@@ -9,9 +9,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.model.Property;
-import com.jdon.jivejdon.model.proptery.ThreadPropertys;
-import com.jdon.jivejdon.service.PropertyService;
+import com.jdon.jivejdon.model.property.Property;
+import com.jdon.jivejdon.model.property.ThreadPropertys;
+import com.jdon.jivejdon.service.property.PropertyService;
 
 /**
  * change the ui_statie of thread one thread just only have one state(see

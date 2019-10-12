@@ -21,7 +21,7 @@ import com.jdon.domain.message.DomainEventHandler;
 import com.jdon.jivejdon.event.bus.cqrs.query.CacheQueryRefresher;
 import com.jdon.jivejdon.model.event.ReplyMessageCreatedEvent;
 import com.jdon.jivejdon.repository.ForumFactory;
-import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
+import com.jdon.jivejdon.repository.query.MessagePageIteratorSolver;
 
 /**
  * 

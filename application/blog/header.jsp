@@ -1,3 +1,4 @@
+<%@ page import="com.jdon.jivejdon.model.account.Account" %>
 <%@ taglib uri="struts-logic" prefix="logic" %>
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>
@@ -25,7 +26,7 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCache(expire, modelLastModified
 //	<!-- note: here must be userId, actually userId'value is username'value, need a model key  -->
 //	<to>/blog/index.shtml?userId=$1&amp;username=$1</to>
 //</rule>
-  com.jdon.jivejdon.model.Account account = (com.jdon.jivejdon.model.Account)request.getAttribute("loginAccount");
+  Account account = (Account)request.getAttribute("loginAccount");
   String userId = request.getParameter("userId");
   String username = request.getParameter("username");
   if (userId != null || username != null ){

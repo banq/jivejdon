@@ -1,6 +1,6 @@
 <%@ page trimDirectiveWhitespaces="true" %>
-<%@page import="com.jdon.jivejdon.service.AccountService,
-              com.jdon.jivejdon.model.Account,
+<%@page import="com.jdon.jivejdon.service.account.AccountService,
+              com.jdon.jivejdon.model.account.Account,
               com.jdon.controller.WebAppUtil" %>
 <%
 //need at first include IncludeTop.jsp

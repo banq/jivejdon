@@ -17,7 +17,7 @@ package com.jdon.jivejdon.presentation.action.util;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.service.ForumMessageQueryService;
+import com.jdon.jivejdon.service.query.ForumMessageQueryService;
 import com.jdon.jivejdon.util.ToolsUtil;
 import com.jdon.strutsutil.FormBeanUtil;
 import com.jdon.util.UtilValidate;

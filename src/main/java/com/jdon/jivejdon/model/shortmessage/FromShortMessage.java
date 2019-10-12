@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jdon.jivejdon.model;
+package com.jdon.jivejdon.model.shortmessage;
 
 import com.jdon.annotation.Model;
-import com.jdon.jivejdon.model.shortmessage.ShortMessage;
 
 /**
  * 负责 新消息 以及草稿修改

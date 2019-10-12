@@ -1,6 +1,6 @@
 package com.jdon.jivejdon.model.subscription.subscribed;
 
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.ForumMessage;
 
 public class AccountSubscribed implements Subscribed {

@@ -3,9 +3,10 @@ package com.jdon.jivejdon.presentation.filter;
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.presentation.form.MessageForm;
 import com.jdon.jivejdon.presentation.form.ThreadForm;
-import com.jdon.jivejdon.service.AccountService;
+import com.jdon.jivejdon.service.account.AccountService;
 import com.jdon.jivejdon.service.ForumMessageService;
 import com.jdon.jivejdon.service.ForumService;
 import com.jdon.util.Debug;
@@ -24,7 +25,7 @@ public class ThreadEditAuthFilter  extends Action {
 		Debug.logVerbose("enter ThreadEditAuthFilter");
 		ThreadForm threadForm = (ThreadForm) form;
 		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
-		com.jdon.jivejdon.model.Account account = accountService.getloginAccount();
+		Account account = accountService.getloginAccount();
 		if (account == null) {
 			threadForm.setAuthenticated(false);// only logined user can post
 			return mapping.findForward("success");

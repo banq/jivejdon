@@ -1,8 +1,8 @@
 package com.jdon.jivejdon.manager.mapreduce;
 
 import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.model.ThreadTag;
-import com.jdon.jivejdon.service.TagService;
+import com.jdon.jivejdon.model.property.ThreadTag;
+import com.jdon.jivejdon.service.property.TagService;
 
 import java.util.ArrayList;
 import java.util.Collection;

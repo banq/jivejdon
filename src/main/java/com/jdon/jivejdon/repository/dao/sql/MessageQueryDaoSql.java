@@ -21,7 +21,7 @@ import com.jdon.jivejdon.model.query.QuerySpecification;
 import com.jdon.jivejdon.model.query.ResultSort;
 import com.jdon.jivejdon.model.query.specification.QuerySpecDBModifiedDate;
 import com.jdon.jivejdon.model.query.specification.ThreadListSpec;
-import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
+import com.jdon.jivejdon.repository.query.MessagePageIteratorSolver;
 import com.jdon.jivejdon.repository.dao.MessageQueryDao;
 import com.jdon.model.query.block.Block;
 import com.jdon.treepatterns.model.TreeModel;

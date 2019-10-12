@@ -29,7 +29,7 @@ import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.model.query.MultiCriteria;
 import com.jdon.jivejdon.repository.ForumFactory;
-import com.jdon.jivejdon.service.ForumMessageQueryService;
+import com.jdon.jivejdon.service.query.ForumMessageQueryService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -238,7 +238,7 @@ public class MessageKernel implements MessageKernelIF {
 	 * 
 	 * @see com.jdon.jivejdon.service.imp.message.MessageKernelIF#
 	 * setForumMessageQueryService
-	 * (com.jdon.jivejdon.service.ForumMessageQueryService)
+	 * (com.jdon.jivejdon.service.query.ForumMessageQueryService)
 	 */
 	@Override
 	public void setForumMessageQueryService(ForumMessageQueryService forumMessageQueryService) {

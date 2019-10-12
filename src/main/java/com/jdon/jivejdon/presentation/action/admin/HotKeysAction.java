@@ -25,9 +25,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.model.HotKeys;
+import com.jdon.jivejdon.model.property.HotKeys;
 import com.jdon.jivejdon.presentation.form.PropertysForm;
-import com.jdon.jivejdon.service.TagService;
+import com.jdon.jivejdon.service.property.TagService;
 
 public class HotKeysAction extends Action {
 

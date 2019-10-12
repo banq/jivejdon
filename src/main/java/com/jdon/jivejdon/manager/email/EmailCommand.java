@@ -17,7 +17,7 @@ package com.jdon.jivejdon.manager.email;
 
 import java.util.List;
 
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 
 public interface EmailCommand {
 

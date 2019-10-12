@@ -22,10 +22,10 @@ import java.util.concurrent.TimeUnit;
 import com.jdon.annotation.Component;
 import com.jdon.container.pico.Startable;
 import com.jdon.jivejdon.manager.email.ForgotPasswdEmail;
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.account.PasswordassitVO;
-import com.jdon.jivejdon.repository.AccountFactory;
-import com.jdon.jivejdon.repository.AccountRepository;
+import com.jdon.jivejdon.repository.acccount.AccountFactory;
+import com.jdon.jivejdon.repository.acccount.AccountRepository;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;
 import com.jdon.util.StringUtil;
 

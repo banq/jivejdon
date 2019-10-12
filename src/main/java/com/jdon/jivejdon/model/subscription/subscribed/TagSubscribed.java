@@ -1,6 +1,6 @@
 package com.jdon.jivejdon.model.subscription.subscribed;
 
-import com.jdon.jivejdon.model.ThreadTag;
+import com.jdon.jivejdon.model.property.ThreadTag;
 
 public class TagSubscribed implements Subscribed {
 

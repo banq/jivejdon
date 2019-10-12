@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model;
+package com.jdon.jivejdon.model.util;
 
 import java.io.Serializable;
 

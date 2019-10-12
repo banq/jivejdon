@@ -25,13 +25,15 @@ import com.jdon.jivejdon.auth.NoPermissionException;
 import com.jdon.jivejdon.auth.ResourceAuthorization;
 import com.jdon.jivejdon.manager.filter.InFilterManager;
 import com.jdon.jivejdon.model.*;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.attachment.AttachmentsVO;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.message.output.RenderingFilterManager;
-import com.jdon.jivejdon.model.proptery.MessagePropertysVO;
+import com.jdon.jivejdon.model.property.MessagePropertysVO;
+import com.jdon.jivejdon.model.property.Property;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.service.ForumMessageService;
-import com.jdon.jivejdon.service.UploadService;
+import com.jdon.jivejdon.service.property.UploadService;
 import com.jdon.jivejdon.service.util.SessionContextUtil;
 import com.jdon.util.UtilValidate;
 import org.apache.logging.log4j.LogManager;
@@ -84,7 +86,7 @@ public class ForumMessageShell implements ForumMessageService {
 		if (forumMessage == null) return allowEdit;
 		if (!forumMessage.isSolid())
 			return allowEdit;// forumMessage is null or only has mesageId
-		com.jdon.jivejdon.model.Account account = sessionContextUtil.getLoginAccount(sessionContext);
+		Account account = sessionContextUtil.getLoginAccount(sessionContext);
 		allowEdit = resourceAuthorization.isAuthenticated(forumMessage, account);
 		return allowEdit;
 	}
@@ -181,7 +183,7 @@ public class ForumMessageShell implements ForumMessageService {
 
 	private boolean prepareCreate(AnemicMessageDTO forumMessage) throws Exception {
 		// the poster
-		com.jdon.jivejdon.model.Account account = sessionContextUtil.getLoginAccount(sessionContext);
+		Account account = sessionContextUtil.getLoginAccount(sessionContext);
 		if (account == null)
 			return false;
 		forumMessage.setAccount(account);
@@ -200,7 +202,7 @@ public class ForumMessageShell implements ForumMessageService {
 
 	private boolean isAuthenticated(ForumMessage forumMessage) {
 		try {
-			com.jdon.jivejdon.model.Account account = sessionContextUtil.getLoginAccount(sessionContext);
+			Account account = sessionContextUtil.getLoginAccount(sessionContext);
 			resourceAuthorization.verifyAuthenticated(forumMessage, account);
 			return true;
 		} catch (NoPermissionException e) {
@@ -290,7 +292,7 @@ public class ForumMessageShell implements ForumMessageService {
 
 	public void deleteUserMessages(String username) throws Exception {
 		try {
-			com.jdon.jivejdon.model.Account account = sessionContextUtil.getLoginAccount(sessionContext);
+			Account account = sessionContextUtil.getLoginAccount(sessionContext);
 			if (resourceAuthorization.isAdmin(account))
 				messageKernel.deleteUserMessages(username);
 		} catch (Exception e) {
@@ -305,7 +307,7 @@ public class ForumMessageShell implements ForumMessageService {
 	 */
 	public void maskMessage(EventModel em) throws Exception {
 		logger.debug("enter maskMessage");
-		com.jdon.jivejdon.model.Account account = sessionContextUtil.getLoginAccount(sessionContext);
+		Account account = sessionContextUtil.getLoginAccount(sessionContext);
 		if (!resourceAuthorization.isAdmin(account))
 			return;
 

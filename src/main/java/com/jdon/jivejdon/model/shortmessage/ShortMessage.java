@@ -16,8 +16,7 @@
  */
 package com.jdon.jivejdon.model.shortmessage;
 
-import com.jdon.jivejdon.model.Account;
-import com.jdon.jivejdon.model.ShortMessageState;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.util.UtilValidate;
 
 //@Model
@@ -40,7 +39,7 @@ public class ShortMessage {
 	protected String messageTo;
 
 	// owner
-	protected com.jdon.jivejdon.model.Account account;
+	protected Account account;
 
 	//
 	protected ShortMessageState shortMessageState;

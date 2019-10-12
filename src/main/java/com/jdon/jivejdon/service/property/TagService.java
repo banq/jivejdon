@@ -14,15 +14,15 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.service;
-
-import java.util.Collection;
+package com.jdon.jivejdon.service.property;
 
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.model.HotKeys;
-import com.jdon.jivejdon.model.ThreadTag;
+import com.jdon.jivejdon.model.property.HotKeys;
+import com.jdon.jivejdon.model.property.ThreadTag;
 import com.jdon.jivejdon.model.query.specification.TaggedThreadListSpec;
+
+import java.util.Collection;
 
 public interface TagService {
 

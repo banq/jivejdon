@@ -20,7 +20,7 @@ import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.repository.ForumFactory;
-import com.jdon.jivejdon.repository.TagRepository;
+import com.jdon.jivejdon.repository.property.TagRepository;
 import com.jdon.jivejdon.repository.dao.MessageDao;
 import com.jdon.jivejdon.repository.dao.PropertyDao;
 import com.jdon.jivejdon.repository.dao.SequenceDao;

@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.proptery;
+package com.jdon.jivejdon.model.property;
 
 /**
  * 

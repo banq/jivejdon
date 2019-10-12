@@ -43,7 +43,7 @@ import weibo4j.org.json.JSONObject;
 import com.jdon.annotation.Component;
 import com.jdon.jivejdon.manager.weibo.UserConnectorAuth;
 import com.jdon.jivejdon.model.account.OAuthUserVO;
-import com.jdon.jivejdon.repository.Userconnector;
+import com.jdon.jivejdon.repository.acccount.Userconnector;
 import com.jdon.util.UtilValidate;
 
 @Component("googleOAuthSubmitter")

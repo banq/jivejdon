@@ -13,13 +13,13 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.service;
+package com.jdon.jivejdon.service.account;
 
 import net.oauth.OAuthAccessor;
 
 import com.jdon.jivejdon.manager.account.sina.AccessToken;
 import com.jdon.jivejdon.manager.weibo.UserConnectorAuth;
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 import com.tencent.weibo.oauthv2.OAuthV2;
 
 public interface OAuthAccountService {

@@ -19,7 +19,7 @@ import com.jdon.annotation.Component;
 import com.jdon.jivejdon.manager.account.sina.AccessToken;
 import com.jdon.jivejdon.manager.weibo.UserConnectorAuth;
 import com.jdon.jivejdon.model.account.OAuthUserVO;
-import com.jdon.jivejdon.repository.Userconnector;
+import com.jdon.jivejdon.repository.acccount.Userconnector;
 import com.jdon.util.UtilValidate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

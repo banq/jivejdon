@@ -5,7 +5,7 @@ import com.jdon.annotation.Introduce;
 import com.jdon.annotation.pointcut.Around;
 import com.jdon.jivejdon.Constants;
 import com.jdon.jivejdon.model.subscription.Subscription;
-import com.jdon.jivejdon.repository.builder.SubscriptionInitFactory;
+import com.jdon.jivejdon.repository.subscription.SubscriptionInitFactory;
 import com.jdon.jivejdon.repository.dao.sql.JdbcTempSource;
 import com.jdon.jivejdon.repository.dao.sql.SubscriptionDaoSql;
 import com.jdon.jivejdon.util.ContainerUtil;

@@ -1,21 +1,19 @@
-package com.jdon.jivejdon.model;
-
-import java.util.Date;
-import java.util.Observable;
+package com.jdon.jivejdon.model.account;
 
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
 import com.jdon.jivejdon.Constants;
 import com.jdon.jivejdon.event.domain.producer.read.LazyLoaderRole;
-import com.jdon.jivejdon.model.account.AccountMessageVO;
-import com.jdon.jivejdon.model.account.Attachment;
-import com.jdon.jivejdon.model.account.RoleLoader;
 import com.jdon.jivejdon.model.attachment.UploadFile;
 import com.jdon.jivejdon.model.auth.Role;
 import com.jdon.jivejdon.model.message.upload.UploadLazyLoader;
+import com.jdon.jivejdon.model.property.Reward;
 import com.jdon.jivejdon.model.shortmessage.AccountSMState;
 import com.jdon.jivejdon.model.subscription.SubscribedState;
 import com.jdon.jivejdon.model.subscription.subscribed.AccountSubscribed;
+
+import java.util.Date;
+import java.util.Observable;
 
 /**
  * we have a SSO server, all auth information will be save to the sso server,

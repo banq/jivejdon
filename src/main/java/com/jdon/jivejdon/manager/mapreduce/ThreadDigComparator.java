@@ -1,7 +1,7 @@
 package com.jdon.jivejdon.manager.mapreduce;
 
 import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.service.ForumMessageQueryService;
+import com.jdon.jivejdon.service.query.ForumMessageQueryService;
 
 import java.util.Comparator;
 

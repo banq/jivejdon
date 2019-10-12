@@ -20,7 +20,7 @@ import java.util.Date;
 import com.jdon.jivejdon.manager.subscription.SubscriptionAction;
 import com.jdon.jivejdon.manager.subscription.SubscriptionNotify;
 import com.jdon.jivejdon.manager.weibo.UserConnectorAuth;
-import com.jdon.jivejdon.model.ShortMessage;
+import com.jdon.jivejdon.model.shortmessage.ShortMessage;
 import com.jdon.jivejdon.model.subscription.Subscription;
 import com.jdon.jivejdon.model.subscription.messsage.WeiboExpiredNotifyMessage;
 import com.jdon.jivejdon.model.subscription.notifysubscribed.NotifySubscribed;

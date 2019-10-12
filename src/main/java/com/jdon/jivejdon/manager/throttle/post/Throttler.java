@@ -19,7 +19,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import com.jdon.annotation.Component;
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 
 @Component
 public class Throttler {

@@ -1,6 +1,6 @@
 package com.jdon.jivejdon.model.query.specification;
 
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 

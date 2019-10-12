@@ -13,11 +13,11 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository;
+package com.jdon.jivejdon.repository.shortmessage;
 
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.model.Account;
-import com.jdon.jivejdon.model.ShortMessage;
+import com.jdon.jivejdon.model.account.Account;
+import com.jdon.jivejdon.model.shortmessage.ShortMessage;
 
 public interface ShortMessageRepository {
 

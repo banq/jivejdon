@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jdon.jivejdon.service;
+package com.jdon.jivejdon.service.shortmessage;
 
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.model.FromShortMessage;
-import com.jdon.jivejdon.model.ToShortMessage;
+import com.jdon.jivejdon.model.shortmessage.FromShortMessage;
+import com.jdon.jivejdon.model.shortmessage.ToShortMessage;
 
 /**
  * ShortMessageService.java

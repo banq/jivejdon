@@ -13,7 +13,7 @@ import org.apache.struts.action.ActionMapping;
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.model.attachment.UploadFile;
 import com.jdon.jivejdon.model.message.upload.UploadFileFilter;
-import com.jdon.jivejdon.service.UploadService;
+import com.jdon.jivejdon.service.property.UploadService;
 import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
 

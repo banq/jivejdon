@@ -17,7 +17,7 @@ import com.jdon.jivejdon.manager.weibo.TecentWeiboSubmitter;
 import com.jdon.jivejdon.model.subscription.Subscription;
 import com.jdon.jivejdon.model.subscription.event.SubscribedNotifyEvent;
 import com.jdon.jivejdon.model.subscription.notifysubscribed.NotifySubscribed;
-import com.jdon.jivejdon.repository.AccountFactory;
+import com.jdon.jivejdon.repository.acccount.AccountFactory;
 import com.jdon.jivejdon.repository.dao.SubscriptionDao;
 
 @Component("subscriptionNotify")

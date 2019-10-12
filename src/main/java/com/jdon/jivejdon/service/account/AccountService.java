@@ -13,14 +13,14 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.service;
-
-import java.util.Collection;
+package com.jdon.jivejdon.service.account;
 
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.account.PasswordassitVO;
+
+import java.util.Collection;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -28,9 +28,9 @@ import com.jdon.jivejdon.model.account.PasswordassitVO;
  */
 public interface AccountService {
 
-	com.jdon.jivejdon.model.Account initAccount(EventModel em);
+	Account initAccount(EventModel em);
 
-	com.jdon.jivejdon.model.Account getAccountByName(String username);
+	Account getAccountByName(String username);
 
 	Account getLoginAccountByName(String username);
 
@@ -44,9 +44,9 @@ public interface AccountService {
 
 	PageIterator getAccounts(int start, int count);
 
-	com.jdon.jivejdon.model.Account getAccount(Long userId);
+	Account getAccount(Long userId);
 
-	com.jdon.jivejdon.model.Account getloginAccount();
+	Account getloginAccount();
 
 	void updateAccountAttachment(EventModel em);
 

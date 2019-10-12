@@ -24,7 +24,7 @@ import com.jdon.jivejdon.Constants;
 import com.jdon.jivejdon.manager.block.ErrorBlockerIF;
 import com.jdon.jivejdon.manager.filter.InputSwitcherIF;
 import com.jdon.jivejdon.manager.throttle.post.Throttler;
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.service.util.SessionContextUtil;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;

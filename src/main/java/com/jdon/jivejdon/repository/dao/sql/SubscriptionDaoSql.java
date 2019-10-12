@@ -15,7 +15,7 @@ import com.jdon.jivejdon.manager.subscription.action.EmailAction;
 import com.jdon.jivejdon.manager.subscription.action.ShortMsgAction;
 import com.jdon.jivejdon.model.subscription.Subscription;
 import com.jdon.jivejdon.model.subscription.subscribed.Subscribed;
-import com.jdon.jivejdon.repository.builder.SubscriptionInitFactory;
+import com.jdon.jivejdon.repository.subscription.SubscriptionInitFactory;
 import com.jdon.jivejdon.repository.dao.SubscriptionDao;
 import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.jivejdon.util.ToolsUtil;

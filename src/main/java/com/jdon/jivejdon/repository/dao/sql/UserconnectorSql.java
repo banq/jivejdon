@@ -31,7 +31,7 @@ import org.apache.logging.log4j.Logger;
 import com.jdon.annotation.Component;
 import com.jdon.jivejdon.manager.weibo.UserConnectorAuth;
 import com.jdon.jivejdon.model.account.OAuthUserVO;
-import com.jdon.jivejdon.repository.Userconnector;
+import com.jdon.jivejdon.repository.acccount.Userconnector;
 import com.jdon.jivejdon.util.ToolsUtil;
 
 @Component

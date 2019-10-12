@@ -6,7 +6,7 @@ import org.apache.logging.log4j.*;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.service.SubscriptionService;
+import com.jdon.jivejdon.service.subscription.SubscriptionService;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.util.UtilValidate;
 

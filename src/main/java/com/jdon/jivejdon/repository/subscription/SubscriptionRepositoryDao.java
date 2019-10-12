@@ -1,15 +1,14 @@
-package com.jdon.jivejdon.repository.builder;
-
-import java.sql.SQLException;
+package com.jdon.jivejdon.repository.subscription;
 
 import com.jdon.annotation.Component;
 import com.jdon.jivejdon.Constants;
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.subscription.Subscription;
 import com.jdon.jivejdon.repository.acccount.AccountFactory;
-import com.jdon.jivejdon.repository.subscription.SubscriptionRepository;
 import com.jdon.jivejdon.repository.dao.SequenceDao;
 import com.jdon.jivejdon.repository.dao.SubscriptionDao;
+
+import java.sql.SQLException;
 
 @Component
 public class SubscriptionRepositoryDao implements SubscriptionRepository {

@@ -1,7 +1,7 @@
-package com.jdon.jivejdon.service;
+package com.jdon.jivejdon.service.property;
 
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.model.Property;
+import com.jdon.jivejdon.model.property.Property;
 
 public interface PropertyService {
 

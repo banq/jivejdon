@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 
-import com.jdon.jivejdon.model.Account;
-import com.jdon.jivejdon.model.Property;
+import com.jdon.jivejdon.model.account.Account;
+import com.jdon.jivejdon.model.property.Property;
 
 public class AccountProfileForm extends BaseForm {
 

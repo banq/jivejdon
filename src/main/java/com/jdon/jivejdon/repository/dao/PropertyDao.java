@@ -18,7 +18,7 @@ package com.jdon.jivejdon.repository.dao;
 import java.util.Collection;
 
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.model.Property;
+import com.jdon.jivejdon.model.property.Property;
 
 /**
  * @author banq(http://www.jdon.com)

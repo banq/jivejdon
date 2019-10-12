@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.jdon.container.pico.Startable;
 import com.jdon.jivejdon.model.util.CachedCollection;
-import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
+import com.jdon.jivejdon.repository.query.MessagePageIteratorSolver;
 import com.jdon.jivejdon.repository.dao.AccountDao;
 import com.jdon.jivejdon.repository.dao.sql.JdbcTempSource;
 import com.jdon.jivejdon.repository.dao.sql.MessageQueryDaoSql;

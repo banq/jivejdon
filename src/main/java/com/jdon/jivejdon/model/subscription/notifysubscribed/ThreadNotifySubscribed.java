@@ -1,7 +1,7 @@
 package com.jdon.jivejdon.model.subscription.notifysubscribed;
 
 import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.model.ShortMessage;
+import com.jdon.jivejdon.model.shortmessage.ShortMessage;
 import com.jdon.jivejdon.model.subscription.Subscription;
 import com.jdon.jivejdon.model.subscription.messsage.ThreadNotifyMessage;
 import com.jdon.util.StringUtil;

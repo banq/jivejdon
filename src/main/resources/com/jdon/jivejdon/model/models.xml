@@ -6,7 +6,7 @@
 <app>
 	<models>
 		<model key="username"
-			class="com.jdon.jivejdon.model.Account">
+			class="com.jdon.jivejdon.model.account.Account">
 			<actionForm name="accountForm"/>
 			<handler>
 				<service ref="accountService">
@@ -98,7 +98,7 @@
         </model>		
         
         <model key="msgId"
-			class="com.jdon.jivejdon.model.FromShortMessage">
+			class="com.jdon.jivejdon.model.shortmessage.FromShortMessage">
 			<actionForm name="fromShortMessageForm"/>
 			<handler>
 				<service ref="shortMessageService">				
@@ -111,7 +111,7 @@
 		</model>			
 		
 		<model key="msgId"
-			class="com.jdon.jivejdon.model.ToShortMessage">
+			class="com.jdon.jivejdon.model.shortmessage.ToShortMessage">
 			<actionForm name="toShortMessageForm"/>
 			<handler>
 				<service ref="shortMessageService">
@@ -124,7 +124,7 @@
 		</model>		
 			
 		<model key="tagID"
-			class="com.jdon.jivejdon.model.ThreadTag">
+			class="com.jdon.jivejdon.model.property.ThreadTag">
 			<actionForm name="tagForm"/>
 			<handler>
 				<service ref="othersService">

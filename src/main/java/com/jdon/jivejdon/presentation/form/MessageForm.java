@@ -17,6 +17,7 @@ package com.jdon.jivejdon.presentation.form;
 
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.attachment.AttachmentsVO;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.message.MessageVO;
@@ -49,7 +50,7 @@ public class MessageForm extends BaseForm {
 
 	private Forum forum;
 
-	private com.jdon.jivejdon.model.Account account;
+	private Account account;
 
 	private AnemicMessageDTO parentMessage;
 
@@ -78,17 +79,17 @@ public class MessageForm extends BaseForm {
 		messageVO = new MessageVO();
 		forum = new Forum(); // for parameter forum.forumId=xxx
 		forumThread = new ForumThread(null,null, forum);
-		account = new com.jdon.jivejdon.model.Account();
+		account = new Account();
 		parentMessage = new AnemicMessageDTO();
 
 	}
 
-	public com.jdon.jivejdon.model.Account getAccount() {
+	public Account getAccount() {
 		return account;
 	}
 
 
-	public void setAccount(com.jdon.jivejdon.model.Account account) {
+	public void setAccount(Account account) {
 		this.account = account;
 	}
 

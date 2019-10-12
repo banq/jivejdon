@@ -9,8 +9,8 @@ import com.jdon.jivejdon.model.attachment.UploadFile;
 import com.jdon.jivejdon.model.attachment.UploadInfoVO;
 import com.jdon.jivejdon.model.message.upload.UploadHelper;
 import com.jdon.jivejdon.repository.ForumFactory;
-import com.jdon.jivejdon.repository.UploadRepository;
-import com.jdon.jivejdon.service.UploadInfoVOService;
+import com.jdon.jivejdon.repository.property.UploadRepository;
+import com.jdon.jivejdon.service.property.UploadInfoVOService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

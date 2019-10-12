@@ -20,7 +20,7 @@ import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.presentation.form.MessageListForm;
-import com.jdon.jivejdon.service.ForumMessageQueryService;
+import com.jdon.jivejdon.service.query.ForumMessageQueryService;
 import com.jdon.jivejdon.service.ForumService;
 import com.jdon.strutsutil.ModelListForm;
 import com.jdon.util.Debug;

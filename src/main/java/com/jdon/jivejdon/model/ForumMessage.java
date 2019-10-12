@@ -23,6 +23,7 @@ import com.jdon.jivejdon.Constants;
 import com.jdon.jivejdon.event.domain.producer.read.LazyLoaderRole;
 import com.jdon.jivejdon.event.domain.producer.write.MessageEventSourcingRole;
 import com.jdon.jivejdon.event.domain.producer.write.ShortMPublisherRole;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.attachment.AttachmentsVO;
 import com.jdon.jivejdon.model.attachment.UploadFile;
 import com.jdon.jivejdon.model.event.MessagePropertiesUpdatedEvent;
@@ -33,8 +34,10 @@ import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.message.FilterPipleSpec;
 import com.jdon.jivejdon.model.message.MessageUrlVO;
 import com.jdon.jivejdon.model.message.MessageVO;
-import com.jdon.jivejdon.model.proptery.MessagePropertysVO;
+import com.jdon.jivejdon.model.property.MessagePropertysVO;
+import com.jdon.jivejdon.model.property.Property;
 import com.jdon.jivejdon.model.reblog.ReBlogVO;
+import com.jdon.jivejdon.model.util.ForumModel;
 
 import java.util.Collection;
 
@@ -93,7 +96,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
         return account;
     }
 
-    private void setAccount(com.jdon.jivejdon.model.Account account) {
+    private void setAccount(Account account) {
         this.account = account;
     }
 

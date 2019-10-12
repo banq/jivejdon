@@ -14,21 +14,20 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.repository.builder;
+package com.jdon.jivejdon.repository.property;
+
+import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.model.property.Property;
+import com.jdon.jivejdon.model.util.CachedCollection;
+import com.jdon.jivejdon.repository.dao.PropertyDao;
+import com.jdon.jivejdon.util.ContainerUtil;
+import com.jdon.util.UtilValidate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-
-import org.apache.logging.log4j.*;
-
-import com.jdon.jivejdon.Constants;
-import com.jdon.jivejdon.model.Property;
-import com.jdon.jivejdon.model.util.CachedCollection;
-import com.jdon.jivejdon.repository.property.PropertyFactory;
-import com.jdon.jivejdon.repository.dao.PropertyDao;
-import com.jdon.jivejdon.util.ContainerUtil;
-import com.jdon.util.UtilValidate;
 
 public class PropertyFactoryDao implements PropertyFactory {
 	private final static Logger logger = LogManager.getLogger(PropertyFactoryDao.class);

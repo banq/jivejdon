@@ -13,12 +13,12 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository;
-
-import java.util.Collection;
+package com.jdon.jivejdon.repository.property;
 
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.attachment.UploadFile;
+
+import java.util.Collection;
 
 public interface UploadRepository {
 

@@ -7,7 +7,7 @@ import com.jdon.jivejdon.manager.throttle.hitkey.HitKeySame;
 import com.jdon.jivejdon.manager.viewcount.ThreadViewCounterJob;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.presentation.filter.SpamFilterTooFreq;
-import com.jdon.jivejdon.service.ForumMessageQueryService;
+import com.jdon.jivejdon.service.query.ForumMessageQueryService;
 import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
 import org.apache.struts.action.Action;

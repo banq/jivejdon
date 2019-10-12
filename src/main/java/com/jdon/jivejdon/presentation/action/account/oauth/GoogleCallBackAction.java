@@ -31,8 +31,8 @@ import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.manager.account.GoogleOAuthSubmitter;
-import com.jdon.jivejdon.model.Account;
-import com.jdon.jivejdon.service.OAuthAccountService;
+import com.jdon.jivejdon.model.account.Account;
+import com.jdon.jivejdon.service.account.OAuthAccountService;
 
 public class GoogleCallBackAction extends Action {
 	private final static Logger logger = LogManager.getLogger(GoogleCallBackAction.class);

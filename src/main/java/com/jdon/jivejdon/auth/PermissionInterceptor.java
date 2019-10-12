@@ -21,6 +21,7 @@ import com.jdon.container.access.TargetMetaRequestsHolder;
 import com.jdon.container.visitor.data.SessionContext;
 import com.jdon.controller.events.EventModel;
 import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.auth.PermissionRule;
 import com.jdon.jivejdon.service.util.SessionContextUtil;
 import org.aopalliance.intercept.MethodInterceptor;
@@ -90,7 +91,7 @@ public class PermissionInterceptor implements MethodInterceptor {
 			TargetMetaRequest targetMetaRequest = targetMetaRequestsHolder.getTargetMetaRequest();
 			SessionContext sessionContext = targetMetaRequest.getSessionContext();
 			if (sessionContext != null) {
-				com.jdon.jivejdon.model.Account account = sessionContextUtil.getLoginAccount(sessionContext);
+				Account account = sessionContextUtil.getLoginAccount(sessionContext);
 				if (account != null) {
 					roleName = account.getRoleName();
 					logger.debug("the roleName=" + roleName);

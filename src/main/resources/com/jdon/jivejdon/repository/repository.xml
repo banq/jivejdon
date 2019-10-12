@@ -8,14 +8,14 @@
        
 	    <!--  business components  start-->
 	    <component name="hotKeysRepository"
-			class="com.jdon.jivejdon.repository.HotKeysRepository"/>										
+			class="com.jdon.jivejdon.repository.property.HotKeysRepository"/>
 	    
 	    
     	<component name="messageRepository"
 			class="com.jdon.jivejdon.repository.builder.MessageRepositoryDao"/>		
 			
     	<component name="uploadRepository"
-			class="com.jdon.jivejdon.repository.builder.UploadRepositoryDao"/>		
+			class="com.jdon.jivejdon.repository.property.UploadRepositoryDao"/>
 			
 
          <component name="forumAbstractFactory"
@@ -35,21 +35,21 @@
 
 
 		<component name="AccountInitFactory"
-			class="com.jdon.jivejdon.repository.builder.AccountInitFactory"/>			
+			class="com.jdon.jivejdon.repository.acccount.AccountInitFactory"/>
 
 
         <component name="accountFactory"
-			class="com.jdon.jivejdon.repository.builder.AccountFactoryDao"/>					
+			class="com.jdon.jivejdon.repository.acccount.AccountFactoryDao"/>
 		
 		<component name="propertyFactory"
-			class="com.jdon.jivejdon.repository.builder.PropertyFactoryDao"/>		
+			class="com.jdon.jivejdon.repository.property.PropertyFactoryDao"/>
 			
 				
 		<component name="shortMessageRepository"
-			class="com.jdon.jivejdon.repository.builder.ShortMessageRepositoryDao"/>		
+			class="com.jdon.jivejdon.repository.shortmessage.ShortMessageRepositoryDao"/>
 
 		<component name="tagRepository"
-			class="com.jdon.jivejdon.repository.builder.TagRepositoryDao"/>	
+			class="com.jdon.jivejdon.repository.property.TagRepositoryDao"/>
 			
 		<!-- search   -->
     	<component name="messageSearchProxy"

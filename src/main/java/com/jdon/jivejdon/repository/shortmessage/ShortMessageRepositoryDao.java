@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jdon.jivejdon.repository.builder;
+package com.jdon.jivejdon.repository.shortmessage;
 
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.model.Account;
-import com.jdon.jivejdon.model.ShortMessage;
-import com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository;
+import com.jdon.jivejdon.model.account.Account;
+import com.jdon.jivejdon.model.shortmessage.ShortMessage;
 import com.jdon.jivejdon.repository.dao.ShortMessageDao;
 
 /**
@@ -49,7 +48,7 @@ public class ShortMessageRepositoryDao implements ShortMessageRepository {
 	 * 
 	 * @see
 	 * com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository#updateShortMessage
-	 * (com.jdon.jivejdon.model.ShortMessage)
+	 * (com.jdon.jivejdon.model.shortmessage.ShortMessage)
 	 */
 	public void updateShortMessage(ShortMessage msg) throws Exception {
 		this.shortMessageDao.updateShortMessate(msg);
@@ -69,7 +68,7 @@ public class ShortMessageRepositoryDao implements ShortMessageRepository {
 	 * 
 	 * @see
 	 * com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository#deleteShortMessage
-	 * (com.jdon.jivejdon.model.ShortMessage)
+	 * (com.jdon.jivejdon.model.shortmessage.ShortMessage)
 	 */
 	public void deleteShortMessage(ShortMessage msg) throws Exception {
 		this.shortMessageDao.deleteShortMessage(msg.getMsgId());
@@ -115,7 +114,7 @@ public class ShortMessageRepositoryDao implements ShortMessageRepository {
 	 * 
 	 * @see
 	 * com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository#getReceiveShortMessages
-	 * (int, int, com.jdon.jivejdon.model.Account)
+	 * (int, int, com.jdon.jivejdon.model.account.Account)
 	 */
 	public PageIterator getReceiveShortMessages(int start, int count, Account account) {
 		// TODO Auto-generated method stub
@@ -127,7 +126,7 @@ public class ShortMessageRepositoryDao implements ShortMessageRepository {
 	 * 
 	 * @see
 	 * com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository#getSendShortMessages
-	 * (int, int, com.jdon.jivejdon.model.Account)
+	 * (int, int, com.jdon.jivejdon.model.account.Account)
 	 */
 	public PageIterator getSendShortMessages(int start, int count, Account account) {
 		// TODO Auto-generated method stub
@@ -139,7 +138,7 @@ public class ShortMessageRepositoryDao implements ShortMessageRepository {
 	 * 
 	 * @see
 	 * com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository#getSaveShortMessages
-	 * (int, int, com.jdon.jivejdon.model.Account)
+	 * (int, int, com.jdon.jivejdon.model.account.Account)
 	 */
 	public PageIterator getSaveShortMessages(int start, int count, Account account) {
 		// TODO Auto-generated method stub

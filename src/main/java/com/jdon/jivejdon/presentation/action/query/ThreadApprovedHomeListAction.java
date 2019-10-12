@@ -4,7 +4,7 @@ import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.manager.mapreduce.HomepageListSolver;
 import com.jdon.jivejdon.manager.mapreduce.ThreadApprovedNewList;
-import com.jdon.jivejdon.service.ForumMessageQueryService;
+import com.jdon.jivejdon.service.query.ForumMessageQueryService;
 import com.jdon.strutsutil.ModelListAction;
 
 import javax.servlet.http.HttpServletRequest;

@@ -18,7 +18,7 @@ package com.jdon.jivejdon.repository.dao.filter;
 
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.pointcut.Around;
-import com.jdon.jivejdon.model.ThreadTag;
+import com.jdon.jivejdon.model.property.ThreadTag;
 import com.jdon.jivejdon.repository.dao.SequenceDao;
 import com.jdon.jivejdon.repository.dao.sql.JdbcTempSource;
 import com.jdon.jivejdon.repository.dao.sql.TagDaoSql;

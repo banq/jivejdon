@@ -17,7 +17,7 @@ package com.jdon.jivejdon.model.subscription.notifysubscribed;
 
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ShortMessage;
+import com.jdon.jivejdon.model.shortmessage.ShortMessage;
 import com.jdon.jivejdon.model.subscription.Subscription;
 import com.jdon.jivejdon.model.subscription.messsage.ForumNotifyMessage;
 import com.jdon.util.StringUtil;

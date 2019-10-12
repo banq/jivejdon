@@ -31,7 +31,7 @@ import com.jdon.jivejdon.model.query.ResultSort;
 import com.jdon.jivejdon.model.query.specification.ThreadListSpec;
 import com.jdon.jivejdon.model.query.specification.ThreadListSpecForMod;
 import com.jdon.jivejdon.presentation.action.util.ForumUtil;
-import com.jdon.jivejdon.service.ForumMessageQueryService;
+import com.jdon.jivejdon.service.query.ForumMessageQueryService;
 import com.jdon.jivejdon.util.ToolsUtil;
 import com.jdon.util.UtilValidate;
 import org.apache.logging.log4j.LogManager;

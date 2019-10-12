@@ -14,15 +14,15 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.repository.builder;
-
-import java.util.Map;
-
-import org.apache.logging.log4j.*;
+package com.jdon.jivejdon.repository.acccount;
 
 import com.jdon.jivejdon.Constants;
-import com.jdon.jivejdon.model.Account;
-import com.jdon.jivejdon.model.Reward;
+import com.jdon.jivejdon.model.account.Account;
+import com.jdon.jivejdon.model.property.Reward;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Map;
 
 public class AccountInitFactory {
 	private final static Logger logger = LogManager.getLogger(AccountInitFactory.class);

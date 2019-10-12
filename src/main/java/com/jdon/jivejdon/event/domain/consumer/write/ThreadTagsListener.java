@@ -21,7 +21,7 @@ import com.jdon.domain.message.DomainEventHandler;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.event.ThreadTagsSavedEvent;
 import com.jdon.jivejdon.model.thread.ThreadTagsVO;
-import com.jdon.jivejdon.repository.TagRepository;
+import com.jdon.jivejdon.repository.property.TagRepository;
 import com.jdon.jivejdon.repository.builder.ForumAbstractFactory;
 
 import java.util.Collection;

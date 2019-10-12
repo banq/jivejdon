@@ -18,6 +18,7 @@ package com.jdon.jivejdon.repository.builder;
 
 import com.jdon.jivejdon.Constants;
 import com.jdon.jivejdon.model.*;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.auth.Role;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.message.MessageVO;
@@ -44,7 +45,7 @@ public class MessageInitFactory {
 //			}
 //			Object o = map.get("userID");
 //			if (o != null) {
-//				com.jdon.jivejdon.model.Account account = new com.jdon.jivejdon.model.Account();
+//				com.jdon.jivejdon.model.account.Account account = new com.jdon.jivejdon.model.account.Account();
 //				account.setUserIdLong((Long) o);
 //				forumMessage.setAccount(account);
 //			} else {
@@ -91,7 +92,7 @@ public class MessageInitFactory {
 
 			Object o = map.get("userID");
 			if (o != null) {
-				com.jdon.jivejdon.model.Account account = new com.jdon.jivejdon.model.Account();
+				Account account = new Account();
 				account.setUserIdLong((Long) o);
 				messageCore.setAccount(account);
 			} else {

@@ -3,7 +3,7 @@ package com.jdon.jivejdon.presentation.action.query;
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.manager.mapreduce.ThreadApprovedNewList;
 import com.jdon.jivejdon.manager.mapreduce.ThreadTagList;
-import com.jdon.jivejdon.model.ThreadTag;
+import com.jdon.jivejdon.model.property.ThreadTag;
 import com.jdon.strutsutil.ModelListForm;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;

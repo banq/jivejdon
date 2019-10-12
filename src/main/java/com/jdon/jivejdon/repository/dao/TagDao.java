@@ -19,7 +19,7 @@ package com.jdon.jivejdon.repository.dao;
 import java.util.Collection;
 
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.model.ThreadTag;
+import com.jdon.jivejdon.model.property.ThreadTag;
 import com.jdon.jivejdon.model.query.specification.TaggedThreadListSpec;
 
 public interface TagDao {

@@ -22,7 +22,7 @@ import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
 import com.jdon.jivejdon.model.event.UploadFilesSavedEvent;
-import com.jdon.jivejdon.repository.UploadRepository;
+import com.jdon.jivejdon.repository.property.UploadRepository;
 
 @Consumer("saveUploadFiles")
 public class UploadFilesSaveListener implements DomainEventHandler {

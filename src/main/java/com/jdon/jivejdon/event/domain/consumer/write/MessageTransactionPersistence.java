@@ -9,7 +9,7 @@ import com.jdon.jivejdon.model.event.PostTopicMessageCommand;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.model.util.OneOneDTO;
 import com.jdon.jivejdon.repository.ForumFactory;
-import com.jdon.jivejdon.repository.TagRepository;
+import com.jdon.jivejdon.repository.property.TagRepository;
 import com.jdon.jivejdon.repository.builder.MessageRepositoryDao;
 import com.jdon.jivejdon.service.util.JtaTransactionUtil;
 import org.apache.logging.log4j.LogManager;

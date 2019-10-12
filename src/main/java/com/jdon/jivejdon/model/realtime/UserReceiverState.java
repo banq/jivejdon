@@ -15,7 +15,7 @@
  */
 package com.jdon.jivejdon.model.realtime;
 
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 
 public class UserReceiverState {
 

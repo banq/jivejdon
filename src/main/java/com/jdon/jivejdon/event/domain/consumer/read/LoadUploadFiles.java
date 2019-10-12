@@ -25,7 +25,7 @@ import com.jdon.annotation.Component;
 import com.jdon.annotation.model.OnEvent;
 import com.jdon.domain.dci.RoleAssigner;
 import com.jdon.jivejdon.model.attachment.UploadFile;
-import com.jdon.jivejdon.repository.UploadRepository;
+import com.jdon.jivejdon.repository.property.UploadRepository;
 import com.jdon.jivejdon.repository.dao.UploadFileDao;
 
 @Component

@@ -33,7 +33,7 @@ import com.jdon.jivejdon.manager.throttle.hitkey.HitKeyIF;
 import com.jdon.jivejdon.manager.throttle.hitkey.HitKeySame;
 import com.jdon.jivejdon.model.attachment.UploadFile;
 import com.jdon.jivejdon.model.message.upload.UploadFileFilter;
-import com.jdon.jivejdon.service.UploadService;
+import com.jdon.jivejdon.service.property.UploadService;
 import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
 

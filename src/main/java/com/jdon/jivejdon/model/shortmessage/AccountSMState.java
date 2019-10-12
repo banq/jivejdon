@@ -19,7 +19,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 
 public class AccountSMState implements Observer {
 

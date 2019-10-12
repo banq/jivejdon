@@ -23,7 +23,7 @@ import com.jdon.jivejdon.event.bus.cqrs.query.CacheQueryRefresher;
 import com.jdon.jivejdon.event.domain.producer.write.LobbyPublisherRole;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.model.ThreadTag;
+import com.jdon.jivejdon.model.property.ThreadTag;
 import com.jdon.jivejdon.model.event.TopicMessagePostedEvent;
 import com.jdon.jivejdon.model.realtime.ForumMessageDTO;
 import com.jdon.jivejdon.model.realtime.LobbyPublisherRoleIF;
@@ -34,7 +34,7 @@ import com.jdon.jivejdon.model.subscription.event.AccountSubscribedNotifyEvent;
 import com.jdon.jivejdon.model.subscription.event.TagSubscribedNotifyEvent;
 import com.jdon.jivejdon.model.subscription.event.ThreadSubscribedCreateEvent;
 import com.jdon.jivejdon.repository.ForumFactory;
-import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
+import com.jdon.jivejdon.repository.query.MessagePageIteratorSolver;
 
 @Consumer("topicMessagePostedEvent")
 public class ThreadPostListener implements DomainEventHandler {

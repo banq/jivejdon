@@ -13,12 +13,12 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.model;
-
-import java.io.Serializable;
+package com.jdon.jivejdon.model.property;
 
 import org.compass.annotations.Searchable;
 import org.compass.annotations.SearchableProperty;
+
+import java.io.Serializable;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>

@@ -15,27 +15,26 @@
  */
 package com.jdon.jivejdon.service.imp.account;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import org.apache.commons.validator.EmailValidator;
-
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.Constants;
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.account.PasswordassitVO;
 import com.jdon.jivejdon.model.auth.Role;
-import com.jdon.jivejdon.repository.AccountFactory;
-import com.jdon.jivejdon.repository.AccountRepository;
-import com.jdon.jivejdon.repository.PropertyFactory;
-import com.jdon.jivejdon.repository.Userconnector;
+import com.jdon.jivejdon.repository.acccount.AccountFactory;
+import com.jdon.jivejdon.repository.acccount.AccountRepository;
+import com.jdon.jivejdon.repository.acccount.Userconnector;
 import com.jdon.jivejdon.repository.dao.SequenceDao;
 import com.jdon.jivejdon.repository.dao.util.OldUpdateNewUtil;
-import com.jdon.jivejdon.service.AccountService;
+import com.jdon.jivejdon.repository.property.PropertyFactory;
+import com.jdon.jivejdon.service.account.AccountService;
 import com.jdon.jivejdon.service.util.JtaTransactionUtil;
 import com.jdon.util.Debug;
 import com.jdon.util.task.TaskEngine;
+import org.apache.commons.validator.EmailValidator;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -207,7 +206,7 @@ public abstract class AccountServiceImp implements AccountService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jdon.jivejdon.service.AccountService#getAccounts(int, int)
+	 * @see com.jdon.jivejdon.service.account.AccountService#getAccounts(int, int)
 	 */
 	public PageIterator getAccounts(int start, int count) {
 		return accountRepository.getAccounts(start, count);

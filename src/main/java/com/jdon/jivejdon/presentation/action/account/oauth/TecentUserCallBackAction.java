@@ -31,9 +31,9 @@ import org.apache.struts.action.ActionMapping;
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.manager.weibo.TecentWeiboSubmitter;
 import com.jdon.jivejdon.manager.weibo.UserConnectorAuth;
-import com.jdon.jivejdon.model.Account;
-import com.jdon.jivejdon.repository.builder.SubscriptionInitFactory;
-import com.jdon.jivejdon.service.OAuthAccountService;
+import com.jdon.jivejdon.model.account.Account;
+import com.jdon.jivejdon.repository.subscription.SubscriptionInitFactory;
+import com.jdon.jivejdon.service.account.OAuthAccountService;
 import com.jdon.util.UtilValidate;
 import com.tencent.weibo.oauthv2.OAuthV2;
 

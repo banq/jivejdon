@@ -18,7 +18,7 @@ package com.jdon.jivejdon.manager.subscription.action;
 import com.jdon.jivejdon.manager.subscription.SubscriptionAction;
 import com.jdon.jivejdon.manager.subscription.SubscriptionNotify;
 import com.jdon.jivejdon.manager.weibo.UserConnectorAuth;
-import com.jdon.jivejdon.model.ShortMessage;
+import com.jdon.jivejdon.model.shortmessage.ShortMessage;
 import com.jdon.jivejdon.model.subscription.Subscription;
 import com.jdon.jivejdon.model.subscription.notifysubscribed.NotifySubscribed;
 

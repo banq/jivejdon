@@ -8,7 +8,7 @@ import java.util.Map;
 
 import org.apache.logging.log4j.*;
 
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.auth.Role;
 import com.jdon.jivejdon.repository.dao.AccountDao;
 import com.jdon.jivejdon.repository.dao.sql.AccountSSOSql;
@@ -122,7 +122,7 @@ public class OldUpdateNewUtil implements Runnable {
 		return result;
 	}
 
-	private void insertSSODB(com.jdon.jivejdon.model.Account account, String userRoleId) {
+	private void insertSSODB(Account account, String userRoleId) {
 		logger.debug("enter insertSSOServer");
 		try {
 			// the user has `` ,because mysql user is special

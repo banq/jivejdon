@@ -17,7 +17,7 @@ package com.jdon.jivejdon.model.event;
 
 import java.util.Collection;
 
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 
 public class ATUserNotifiedEvent {
 

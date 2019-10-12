@@ -15,8 +15,8 @@
  */
 package com.jdon.jivejdon.manager.mapreduce;
 
-import com.jdon.jivejdon.model.Account;
-import com.jdon.jivejdon.service.AccountService;
+import com.jdon.jivejdon.model.account.Account;
+import com.jdon.jivejdon.service.account.AccountService;
 
 import java.util.ArrayList;
 import java.util.Collection;

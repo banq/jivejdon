@@ -27,14 +27,14 @@ import com.jdon.container.visitor.data.SessionContext;
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.manager.shortmessage.ShortMessageFactory;
-import com.jdon.jivejdon.model.Account;
-import com.jdon.jivejdon.model.FromShortMessage;
-import com.jdon.jivejdon.model.ShortMessage;
-import com.jdon.jivejdon.model.ToShortMessage;
-import com.jdon.jivejdon.repository.AccountFactory;
-import com.jdon.jivejdon.repository.ShortMessageRepository;
+import com.jdon.jivejdon.model.account.Account;
+import com.jdon.jivejdon.model.shortmessage.FromShortMessage;
+import com.jdon.jivejdon.model.shortmessage.ShortMessage;
+import com.jdon.jivejdon.model.shortmessage.ToShortMessage;
+import com.jdon.jivejdon.repository.acccount.AccountFactory;
+import com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository;
 import com.jdon.jivejdon.repository.builder.ForumAbstractFactory;
-import com.jdon.jivejdon.service.ShortMessageService;
+import com.jdon.jivejdon.service.shortmessage.ShortMessageService;
 import com.jdon.jivejdon.service.util.SessionContextUtil;
 
 /**

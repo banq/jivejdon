@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository;
+package com.jdon.jivejdon.repository.subscription;
 
 import com.jdon.jivejdon.model.subscription.Subscription;
 import com.jdon.jivejdon.repository.dao.SubscriptionDao;

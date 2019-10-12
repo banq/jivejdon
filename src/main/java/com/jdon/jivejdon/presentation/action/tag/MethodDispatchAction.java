@@ -5,9 +5,10 @@ import com.jdon.jivejdon.manager.throttle.hitkey.CustomizedThrottle;
 import com.jdon.jivejdon.manager.throttle.hitkey.HitKeyIF;
 import com.jdon.jivejdon.manager.throttle.hitkey.HitKeySame;
 import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.service.AccountService;
+import com.jdon.jivejdon.model.account.Account;
+import com.jdon.jivejdon.service.account.AccountService;
 import com.jdon.jivejdon.service.ForumMessageService;
-import com.jdon.jivejdon.service.TagService;
+import com.jdon.jivejdon.service.property.TagService;
 import com.jdon.util.UtilValidate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -76,7 +77,7 @@ public class MethodDispatchAction extends DispatchAction {
 		boolean isOK = false;
 		AccountService accountService = (AccountService) WebAppUtil.getService("accountService",
 				request);
-		com.jdon.jivejdon.model.Account account = accountService.getloginAccount();
+		Account account = accountService.getloginAccount();
 		if (account == null) return isOK;
 		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService
 				("forumMessageService", request);

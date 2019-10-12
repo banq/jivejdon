@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository;
+package com.jdon.jivejdon.repository.acccount;
 
 import com.jdon.jivejdon.manager.weibo.UserConnectorAuth;
 import com.jdon.jivejdon.model.account.OAuthUserVO;

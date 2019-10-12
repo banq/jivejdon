@@ -16,8 +16,8 @@
 package com.jdon.jivejdon.repository.dao;
 
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.model.Account;
-import com.jdon.jivejdon.model.ShortMessage;
+import com.jdon.jivejdon.model.account.Account;
+import com.jdon.jivejdon.model.shortmessage.ShortMessage;
 
 /**
  * ShortMessageDao.java

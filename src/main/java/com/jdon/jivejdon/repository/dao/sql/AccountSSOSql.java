@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.jdon.jivejdon.model.account.Account;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -108,7 +109,7 @@ public class AccountSSOSql {
 		return passwordassitVO;
 	}
 
-	public void insertSSOServer(com.jdon.jivejdon.model.Account account) throws Exception {
+	public void insertSSOServer(Account account) throws Exception {
 		logger.debug("enter insertSSOServer");
 		try {
 			// the user has `` ,because mysql user is special
@@ -207,7 +208,7 @@ public class AccountSSOSql {
 		return roleId;
 	}
 
-	public void updateSSOServer(com.jdon.jivejdon.model.Account account) throws Exception {
+	public void updateSSOServer(Account account) throws Exception {
 		logger.debug("enter updayeSSOServer");
 
 		try {
@@ -231,7 +232,7 @@ public class AccountSSOSql {
 
 	}
 
-	public void deleteSSOServer(com.jdon.jivejdon.model.Account account) throws Exception {
+	public void deleteSSOServer(Account account) throws Exception {
 		logger.debug("enter deleteSSOServer");
 		String SQL = "DELETE FROM user WHERE userId=?";
 		List queryParams = new ArrayList();

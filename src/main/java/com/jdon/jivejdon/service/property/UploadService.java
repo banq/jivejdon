@@ -13,13 +13,13 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.service;
-
-import java.util.Collection;
+package com.jdon.jivejdon.service.property;
 
 import com.jdon.container.visitor.data.SessionContext;
 import com.jdon.controller.events.EventModel;
 import com.jdon.jivejdon.model.attachment.UploadFile;
+
+import java.util.Collection;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>

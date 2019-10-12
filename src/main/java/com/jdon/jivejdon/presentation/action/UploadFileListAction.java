@@ -20,6 +20,7 @@ import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jdon.jivejdon.model.account.Account;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
@@ -30,9 +31,9 @@ import org.apache.struts.action.ActionMapping;
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.presentation.form.UpLoadFileForm;
-import com.jdon.jivejdon.service.AccountService;
+import com.jdon.jivejdon.service.account.AccountService;
 import com.jdon.jivejdon.service.ForumMessageService;
-import com.jdon.jivejdon.service.UploadService;
+import com.jdon.jivejdon.service.property.UploadService;
 import com.jdon.strutsutil.FormBeanUtil;
 import com.jdon.strutsutil.ModelListForm;
 import com.jdon.util.UtilValidate;
@@ -71,7 +72,7 @@ public class UploadFileListAction extends Action {
 			return;
 		}
 		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
-		com.jdon.jivejdon.model.Account account = accountService.getloginAccount();
+		Account account = accountService.getloginAccount();
 		if (account == null) {
 			upLoadFileForm.setAuthenticated(false);
 			return;

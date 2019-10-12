@@ -1,3 +1,4 @@
+<%@ page import="com.jdon.jivejdon.model.account.Account" %>
 <%@ taglib uri="struts-logic" prefix="logic" %>
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>
@@ -21,7 +22,7 @@
 <%@ include file="../../../common/loginAccount.jsp" %>
 <logic:present name="loginAccount" >
   <%
-  com.jdon.jivejdon.model.Account account = (com.jdon.jivejdon.model.Account)request.getAttribute("loginAccount");
+  Account account = (Account)request.getAttribute("loginAccount");
   String userId = request.getParameter("userId");
   if ( account.getUserId().equals(userId)){
 	  request.setAttribute("isOwner", "true"); 

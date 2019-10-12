@@ -1,17 +1,13 @@
-package com.jdon.jivejdon.repository.builder;
+package com.jdon.jivejdon.repository.subscription;
 
 import com.jdon.annotation.Component;
 import com.jdon.jivejdon.model.subscription.Subscription;
 import com.jdon.jivejdon.model.subscription.messsage.AccountNotifyMessage;
 import com.jdon.jivejdon.model.subscription.messsage.TagNotifyMessage;
 import com.jdon.jivejdon.model.subscription.messsage.ThreadNotifyMessage;
-import com.jdon.jivejdon.model.subscription.subscribed.AccountSubscribed;
-import com.jdon.jivejdon.model.subscription.subscribed.ForumSubscribed;
-import com.jdon.jivejdon.model.subscription.subscribed.Subscribed;
-import com.jdon.jivejdon.model.subscription.subscribed.TagSubscribed;
-import com.jdon.jivejdon.model.subscription.subscribed.ThreadSubscribed;
-import com.jdon.jivejdon.repository.acccount.AccountFactory;
+import com.jdon.jivejdon.model.subscription.subscribed.*;
 import com.jdon.jivejdon.repository.ForumFactory;
+import com.jdon.jivejdon.repository.acccount.AccountFactory;
 import com.jdon.jivejdon.repository.property.TagRepository;
 
 @Component

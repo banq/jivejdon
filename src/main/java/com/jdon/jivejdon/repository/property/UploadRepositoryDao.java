@@ -1,17 +1,15 @@
-package com.jdon.jivejdon.repository.builder;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+package com.jdon.jivejdon.repository.property;
 
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.attachment.UploadFile;
 import com.jdon.jivejdon.model.message.upload.UploadHelper;
-import com.jdon.jivejdon.repository.property.UploadRepository;
 import com.jdon.jivejdon.repository.dao.UploadFileDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 public class UploadRepositoryDao implements UploadRepository {
 	private final static Logger logger = LogManager.getLogger(UploadRepositoryDao.class);

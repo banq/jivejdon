@@ -4,7 +4,7 @@ import com.jdon.container.pico.Startable;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.query.HotThreadSpecification;
 import com.jdon.jivejdon.model.query.QueryCriteria;
-import com.jdon.jivejdon.repository.AccountFactory;
+import com.jdon.jivejdon.repository.acccount.AccountFactory;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.dao.MessageQueryDao;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;

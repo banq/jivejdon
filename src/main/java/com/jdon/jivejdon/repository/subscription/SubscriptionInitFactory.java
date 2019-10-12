@@ -13,9 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.builder;
-
-import java.util.Map;
+package com.jdon.jivejdon.repository.subscription;
 
 import com.jdon.annotation.Component;
 import com.jdon.jivejdon.Constants;
@@ -25,10 +23,12 @@ import com.jdon.jivejdon.manager.subscription.action.ShortMsgAction;
 import com.jdon.jivejdon.manager.subscription.action.SinaWeiboAction;
 import com.jdon.jivejdon.manager.subscription.action.TecentWeiboAction;
 import com.jdon.jivejdon.manager.weibo.UserConnectorAuth;
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.subscription.Subscription;
 import com.jdon.jivejdon.model.subscription.messsage.WeiboExpiredNotifyMessage;
 import com.jdon.jivejdon.repository.dao.sql.UserconnectorSql;
+
+import java.util.Map;
 
 @Component
 public class SubscriptionInitFactory {

@@ -17,7 +17,7 @@
 package com.jdon.jivejdon.repository.builder;
 
 import com.jdon.jivejdon.model.Forum;
-import com.jdon.jivejdon.repository.HotKeysRepository;
+import com.jdon.jivejdon.repository.property.HotKeysRepository;
 import com.jdon.jivejdon.repository.dao.ForumDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

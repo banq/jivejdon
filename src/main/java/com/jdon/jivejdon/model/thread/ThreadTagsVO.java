@@ -16,7 +16,7 @@
 package com.jdon.jivejdon.model.thread;
 
 import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.model.ThreadTag;
+import com.jdon.jivejdon.model.property.ThreadTag;
 import com.jdon.jivejdon.model.subscription.event.TagSubscribedNotifyEvent;
 
 import java.util.Collection;

@@ -6,7 +6,7 @@ import com.jdon.domain.message.DomainEventHandler;
 import com.jdon.jivejdon.event.bus.cqrs.query.CacheQueryRefresher;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.event.ThreadNameSavedEvent;
-import com.jdon.jivejdon.repository.MessagePageIteratorSolver;
+import com.jdon.jivejdon.repository.query.MessagePageIteratorSolver;
 import com.jdon.jivejdon.repository.builder.ForumAbstractFactory;
 import com.jdon.jivejdon.repository.builder.MessageRepositoryDao;
 import com.jdon.jivejdon.repository.builder.ThreadRepositoryDao;

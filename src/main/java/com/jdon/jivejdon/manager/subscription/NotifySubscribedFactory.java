@@ -16,11 +16,11 @@
 package com.jdon.jivejdon.manager.subscription;
 
 import com.jdon.annotation.Component;
-import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.model.ThreadTag;
+import com.jdon.jivejdon.model.property.ThreadTag;
 import com.jdon.jivejdon.model.subscription.event.AccountSubscribedNotifyEvent;
 import com.jdon.jivejdon.model.subscription.event.ForumSubscribedNotifyEvent;
 import com.jdon.jivejdon.model.subscription.event.SubscribedNotifyEvent;
@@ -35,9 +35,9 @@ import com.jdon.jivejdon.model.subscription.notifysubscribed.ForumNotifySubscrib
 import com.jdon.jivejdon.model.subscription.notifysubscribed.NotifySubscribed;
 import com.jdon.jivejdon.model.subscription.notifysubscribed.TagNotifySubscribed;
 import com.jdon.jivejdon.model.subscription.notifysubscribed.ThreadNotifySubscribed;
-import com.jdon.jivejdon.repository.AccountFactory;
+import com.jdon.jivejdon.repository.acccount.AccountFactory;
 import com.jdon.jivejdon.repository.ForumFactory;
-import com.jdon.jivejdon.repository.TagRepository;
+import com.jdon.jivejdon.repository.property.TagRepository;
 
 import java.util.Optional;
 

@@ -10,7 +10,7 @@ import com.jdon.jivejdon.manager.subscription.SubscriptionActionHolder;
 import com.jdon.jivejdon.manager.subscription.action.EmailAction;
 import com.jdon.jivejdon.manager.subscription.action.ShortMsgAction;
 import com.jdon.jivejdon.model.subscription.subscribed.Subscribed;
-import com.jdon.jivejdon.repository.builder.SubscribedFactory;
+import com.jdon.jivejdon.repository.subscription.SubscribedFactory;
 
 public class SubscriptionForm extends BaseForm {
 	/**

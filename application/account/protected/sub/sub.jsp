@@ -1,3 +1,4 @@
+<%@ page import="com.jdon.jivejdon.model.account.Account" %>
 <%@ taglib uri="struts-logic" prefix="logic" %>
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>
@@ -20,7 +21,7 @@
 <html:hidden name="subscriptionForm" property="subscribeType"/>
 <html:hidden name="subscriptionForm" property="subscribeId"/>
 <%
-com.jdon.jivejdon.model.Account account = (com.jdon.jivejdon.model.Account)request.getAttribute("loginAccount");
+Account account = (Account)request.getAttribute("loginAccount");
 String userId = account.getUserId();
 String email = account.getEmail();
 String role = account.getRoleName();

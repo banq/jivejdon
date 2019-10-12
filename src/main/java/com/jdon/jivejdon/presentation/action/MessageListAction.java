@@ -19,9 +19,10 @@ import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.presentation.form.MessageListForm;
-import com.jdon.jivejdon.service.AccountService;
-import com.jdon.jivejdon.service.ForumMessageQueryService;
+import com.jdon.jivejdon.service.account.AccountService;
+import com.jdon.jivejdon.service.query.ForumMessageQueryService;
 import com.jdon.jivejdon.service.ForumMessageService;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
@@ -124,7 +125,7 @@ public class MessageListAction extends ModelListAction {
 			return authenticateds;
 
 		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
-		com.jdon.jivejdon.model.Account account = accountService.getloginAccount();
+		Account account = accountService.getloginAccount();
 		if (account == null)
 			return authenticateds;// if login need auth check
 
