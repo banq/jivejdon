@@ -1,11 +1,5 @@
 package com.jdon.jivejdon.service.imp.subscription;
 
-import java.util.Comparator;
-import java.util.TreeSet;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jdon.annotation.Service;
 import com.jdon.annotation.intercept.SessionContextAcceptable;
 import com.jdon.annotation.intercept.Stateful;
@@ -26,6 +20,11 @@ import com.jdon.jivejdon.repository.Userconnector;
 import com.jdon.jivejdon.service.ForumMessageQueryService;
 import com.jdon.jivejdon.service.SubscriptionService;
 import com.jdon.jivejdon.service.util.SessionContextUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Comparator;
+import java.util.TreeSet;
 
 @Stateful
 @Service("subscriptionService")
@@ -88,7 +87,7 @@ public class SubscriptionServiceImp implements SubscriptionService {
 			subscription = getSubscription(subscription.getSubscriptionId());
 			subscription.updateSubscriptionCount(1);
 		} catch (Exception e) {
-			logger.error("createSubscription error:" + getloginAccount().getUsername() + " subscription:" + subscription.getSubscriptionId());
+			logger.error("createSubscription error:" + getloginAccount().getUsername() + " subscription:" + subscription.getSubscriptionId()+ " error:"+e.getMessage());
 			em.setErrors(Constants.ERRORS);
 		}
 
@@ -141,7 +140,7 @@ public class SubscriptionServiceImp implements SubscriptionService {
 				logger.error("deleteSubscription error: no this subscription:" + subscriptionp.getSubscriptionId());
 			}
 		} catch (Exception e) {
-			logger.error("deleteSubscription error: subscription:" + subscriptionp.getSubscriptionId());
+			logger.error("deleteSubscription error: subscription:" + subscriptionp.getSubscriptionId() + " error:"+e.getMessage());
 		}
 
 	}
