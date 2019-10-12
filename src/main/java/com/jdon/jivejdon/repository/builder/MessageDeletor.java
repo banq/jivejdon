@@ -33,7 +33,6 @@ public class MessageDeletor extends RecursiveNodeWalker {
 	protected MessageRepository messageRepository;
 
 	/**
-	 * @param messageDao
 	 */
 	public MessageDeletor(MessageRepository messageRepository) {
 		this.messageRepository = messageRepository;

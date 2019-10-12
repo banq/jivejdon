@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.attachment.UploadFile;
 import com.jdon.jivejdon.model.message.upload.UploadHelper;
-import com.jdon.jivejdon.repository.UploadRepository;
+import com.jdon.jivejdon.repository.property.UploadRepository;
 import com.jdon.jivejdon.repository.dao.UploadFileDao;
 
 public class UploadRepositoryDao implements UploadRepository {
@@ -27,7 +27,7 @@ public class UploadRepositoryDao implements UploadRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.UploadRepository#getUploadFiles(java.lang
+	 * com.jdon.jivejdon.repository.property.UploadRepository#getUploadFiles(java.lang
 	 * .String)
 	 */
 	public Collection getUploadFiles(String parentId) {
@@ -46,7 +46,7 @@ public class UploadRepositoryDao implements UploadRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.UploadRepository#getSingleUploadFile(java
+	 * com.jdon.jivejdon.repository.property.UploadRepository#getSingleUploadFile(java
 	 * .lang.String)
 	 */
 	public UploadFile getSingleUploadFile(String parentId) {
@@ -63,7 +63,7 @@ public class UploadRepositoryDao implements UploadRepository {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jdon.jivejdon.repository.UploadRepository#getUploadFiles(int,
+	 * @see com.jdon.jivejdon.repository.property.UploadRepository#getUploadFiles(int,
 	 * int)
 	 */
 	public PageIterator getUploadFiles(int start, int count) {
@@ -74,7 +74,7 @@ public class UploadRepositoryDao implements UploadRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.UploadRepository#getUploadFile(java.lang
+	 * com.jdon.jivejdon.repository.property.UploadRepository#getUploadFile(java.lang
 	 * .String)
 	 */
 	public UploadFile getUploadFile(String objectId) {
@@ -85,7 +85,7 @@ public class UploadRepositoryDao implements UploadRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.UploadRepository#saveAllUploadFiles(java
+	 * com.jdon.jivejdon.repository.property.UploadRepository#saveAllUploadFiles(java
 	 * .lang.String, java.util.Collection)
 	 */
 	private void insertAllUploadFiles(String parentId, Collection uploads) throws Exception {
@@ -112,7 +112,7 @@ public class UploadRepositoryDao implements UploadRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.UploadRepository#updateAllUploadFiles(java
+	 * com.jdon.jivejdon.repository.property.UploadRepository#updateAllUploadFiles(java
 	 * .lang.String, java.util.Collection)
 	 */
 	public void saveAllUploadFiles(String parentId, Collection uploads) throws Exception {
@@ -128,7 +128,7 @@ public class UploadRepositoryDao implements UploadRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.UploadRepository#deleteAllUploadFiles(java
+	 * com.jdon.jivejdon.repository.property.UploadRepository#deleteAllUploadFiles(java
 	 * .lang.String)
 	 */
 	public void deleteAllUploadFiles(String parentId) {
@@ -144,7 +144,7 @@ public class UploadRepositoryDao implements UploadRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.UploadRepository#deleteUploadFile(java.lang
+	 * com.jdon.jivejdon.repository.property.UploadRepository#deleteUploadFile(java.lang
 	 * .String)
 	 */
 	public void deleteUploadFile(String objectId) {

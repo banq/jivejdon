@@ -15,6 +15,9 @@
  */
 package com.jdon.jivejdon.model;
 
+import com.jdon.jivejdon.model.shortmessage.ShortMessage;
+import com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository;
+
 import java.util.Observable;
 
 /**
@@ -69,7 +72,7 @@ public class ShortMessageState extends Observable {
 	 * 
 	 * @param hasRead
 	 * @param shortMessage
-	 * @see com.jdon.jivejdon.repository.ShortMessageRepository#update(java.util.Observable,
+	 * @see ShortMessageRepository#update(java.util.Observable,
 	 *      java.lang.Object)
 	 */
 	public void setHasRead(boolean hasRead, ShortMessage shortMessage) {

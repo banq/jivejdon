@@ -18,7 +18,7 @@ package com.jdon.jivejdon.repository.builder;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.model.Account;
 import com.jdon.jivejdon.model.ShortMessage;
-import com.jdon.jivejdon.repository.ShortMessageRepository;
+import com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository;
 import com.jdon.jivejdon.repository.dao.ShortMessageDao;
 
 /**
@@ -48,7 +48,7 @@ public class ShortMessageRepositoryDao implements ShortMessageRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.ShortMessageRepository#updateShortMessage
+	 * com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository#updateShortMessage
 	 * (com.jdon.jivejdon.model.ShortMessage)
 	 */
 	public void updateShortMessage(ShortMessage msg) throws Exception {
@@ -60,7 +60,7 @@ public class ShortMessageRepositoryDao implements ShortMessageRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.ShortMessageRepository#findTheUser(java.
+	 * com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository#findTheUser(java.
 	 * lang.String)
 	 */
 
@@ -68,7 +68,7 @@ public class ShortMessageRepositoryDao implements ShortMessageRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.ShortMessageRepository#deleteShortMessage
+	 * com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository#deleteShortMessage
 	 * (com.jdon.jivejdon.model.ShortMessage)
 	 */
 	public void deleteShortMessage(ShortMessage msg) throws Exception {
@@ -79,7 +79,7 @@ public class ShortMessageRepositoryDao implements ShortMessageRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.ShortMessageRepository#deleteUserAllShortMessage
+	 * com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository#deleteUserAllShortMessage
 	 * (java.lang.String)
 	 */
 	public void deleteUserAllShortMessage(String userId) throws Exception {
@@ -94,7 +94,7 @@ public class ShortMessageRepositoryDao implements ShortMessageRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.ShortMessageRepository#findShortMessage(
+	 * com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository#findShortMessage(
 	 * java.lang.Long)
 	 */
 
@@ -102,7 +102,7 @@ public class ShortMessageRepositoryDao implements ShortMessageRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.ShortMessageRepository#getShortMessages(int,
+	 * com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository#getShortMessages(int,
 	 * int, java.lang.Long)
 	 */
 	public PageIterator getShortMessages(int start, int count, Long userId) {
@@ -114,7 +114,7 @@ public class ShortMessageRepositoryDao implements ShortMessageRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.ShortMessageRepository#getReceiveShortMessages
+	 * com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository#getReceiveShortMessages
 	 * (int, int, com.jdon.jivejdon.model.Account)
 	 */
 	public PageIterator getReceiveShortMessages(int start, int count, Account account) {
@@ -126,7 +126,7 @@ public class ShortMessageRepositoryDao implements ShortMessageRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.ShortMessageRepository#getSendShortMessages
+	 * com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository#getSendShortMessages
 	 * (int, int, com.jdon.jivejdon.model.Account)
 	 */
 	public PageIterator getSendShortMessages(int start, int count, Account account) {
@@ -138,7 +138,7 @@ public class ShortMessageRepositoryDao implements ShortMessageRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.ShortMessageRepository#getSaveShortMessages
+	 * com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository#getSaveShortMessages
 	 * (int, int, com.jdon.jivejdon.model.Account)
 	 */
 	public PageIterator getSaveShortMessages(int start, int count, Account account) {

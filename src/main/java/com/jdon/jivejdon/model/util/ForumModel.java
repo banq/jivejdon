@@ -15,8 +15,6 @@
  */
 package com.jdon.jivejdon.model;
 
-import com.jdon.jivejdon.repository.EmbedIF;
-
 import java.io.Serializable;
 
 /**
@@ -29,7 +27,7 @@ import java.io.Serializable;
  * * 2. using business special method such as addChild() and ForumModel's parameter state when in
  * * second flow!
  */
-public class ForumModel implements EmbedIF, Serializable {
+public class ForumModel implements  Serializable {
 	private static final long serialVersionUID = 1L;
 
 	// it is a solid object from repository

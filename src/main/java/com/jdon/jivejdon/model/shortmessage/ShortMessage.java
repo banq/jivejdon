@@ -14,8 +14,10 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.model;
+package com.jdon.jivejdon.model.shortmessage;
 
+import com.jdon.jivejdon.model.Account;
+import com.jdon.jivejdon.model.ShortMessageState;
 import com.jdon.util.UtilValidate;
 
 //@Model

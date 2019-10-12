@@ -25,7 +25,7 @@ import org.apache.logging.log4j.*;
 import com.jdon.jivejdon.Constants;
 import com.jdon.jivejdon.model.Property;
 import com.jdon.jivejdon.model.util.CachedCollection;
-import com.jdon.jivejdon.repository.PropertyFactory;
+import com.jdon.jivejdon.repository.property.PropertyFactory;
 import com.jdon.jivejdon.repository.dao.PropertyDao;
 import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.util.UtilValidate;
@@ -46,7 +46,7 @@ public class PropertyFactoryDao implements PropertyFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jdon.jivejdon.repository.PropertyFactory#saveForumPropertys(int,
+	 * @see com.jdon.jivejdon.repository.property.PropertyFactory#saveForumPropertys(int,
 	 * java.util.Collection)
 	 */
 	public void saveForumPropertys(int id, Collection props) {
@@ -72,7 +72,7 @@ public class PropertyFactoryDao implements PropertyFactory {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.PropertyFactory#saveThreadPropertys(int,
+	 * com.jdon.jivejdon.repository.property.PropertyFactory#saveThreadPropertys(int,
 	 * java.util.Collection)
 	 */
 	public void saveThreadPropertys(int threadID, Collection props) {
@@ -97,7 +97,7 @@ public class PropertyFactoryDao implements PropertyFactory {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.PropertyFactory#getForumPropertys(java.lang
+	 * com.jdon.jivejdon.repository.property.PropertyFactory#getForumPropertys(java.lang
 	 * .Long)
 	 */
 	public Collection getForumPropertys(Long id) {
@@ -148,7 +148,7 @@ public class PropertyFactoryDao implements PropertyFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jdon.jivejdon.repository.PropertyFactory#getThreadPropertys(int)
+	 * @see com.jdon.jivejdon.repository.property.PropertyFactory#getThreadPropertys(int)
 	 */
 	public Collection getThreadPropertys(int threadID) {
 		Collection props = (Collection) containerUtil.getCacheManager().getCache().get(new Integer(threadID));

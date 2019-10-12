@@ -16,6 +16,7 @@
 package com.jdon.jivejdon.model;
 
 import com.jdon.annotation.Model;
+import com.jdon.jivejdon.model.shortmessage.ShortMessage;
 
 /**
  * 负责 新消息 以及草稿修改

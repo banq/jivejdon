@@ -10,9 +10,9 @@ import com.jdon.jivejdon.model.subscription.subscribed.ForumSubscribed;
 import com.jdon.jivejdon.model.subscription.subscribed.Subscribed;
 import com.jdon.jivejdon.model.subscription.subscribed.TagSubscribed;
 import com.jdon.jivejdon.model.subscription.subscribed.ThreadSubscribed;
-import com.jdon.jivejdon.repository.AccountFactory;
+import com.jdon.jivejdon.repository.acccount.AccountFactory;
 import com.jdon.jivejdon.repository.ForumFactory;
-import com.jdon.jivejdon.repository.TagRepository;
+import com.jdon.jivejdon.repository.property.TagRepository;
 
 @Component
 public class SubscribedFactory {
