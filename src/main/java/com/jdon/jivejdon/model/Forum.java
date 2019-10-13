@@ -20,8 +20,8 @@ import com.jdon.annotation.model.Inject;
 import com.jdon.annotation.model.OnCommand;
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.event.domain.producer.read.LazyLoaderRole;
-import com.jdon.jivejdon.event.domain.producer.write.ThreadEventSourcingRole;
+import com.jdon.jivejdon.pubsub.domain.producer.read.LazyLoaderRole;
+import com.jdon.jivejdon.pubsub.domain.producer.write.ThreadEventSourcingRole;
 import com.jdon.jivejdon.model.event.PostTopicMessageCommand;
 import com.jdon.jivejdon.model.event.TopicMessagePostedEvent;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
@@ -230,7 +230,7 @@ public class Forum extends ForumModel {
 		forumState.get().setLastPost(forumMessageReply);
 
 		// Date olddate = Constants.parseDateTime(oldmessage.getCreationDate());
-		// if (Constants.timeAfter(1, olddate)) {// a event per one hour
+		// if (Constants.timeAfter(1, olddate)) {// a pubsub per one hour
 		// this.publisherRole.subscriptionNotify(new
 		// ForumSubscribedNotifyEvent(this.getForumId(), forumMessageReply));
 		// }

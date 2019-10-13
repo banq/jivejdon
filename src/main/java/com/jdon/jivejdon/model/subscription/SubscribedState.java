@@ -16,7 +16,7 @@
 package com.jdon.jivejdon.model.subscription;
 
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.event.domain.producer.read.LazyLoaderRole;
+import com.jdon.jivejdon.pubsub.domain.producer.read.LazyLoaderRole;
 import com.jdon.jivejdon.model.subscription.subscribed.Subscribed;
 import com.jdon.jivejdon.model.util.LazyLoader;
 import com.jdon.jivejdon.model.util.OneOneDTO;

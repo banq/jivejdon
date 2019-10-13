@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.event.domain.consumer.read;
+package com.jdon.jivejdon.pubsub.domain.consumer.read;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,7 +24,7 @@ import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
 import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.event.domain.consumer.write.MessagePropertiesListener;
+import com.jdon.jivejdon.pubsub.domain.consumer.write.MessagePropertiesListener;
 import com.jdon.jivejdon.repository.dao.PropertyDao;
 
 @Consumer("loadMessageProperties")

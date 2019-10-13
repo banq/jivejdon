@@ -19,8 +19,8 @@ import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.event.domain.producer.read.LazyLoaderRole;
-import com.jdon.jivejdon.event.domain.producer.write.MessageEventSourcingRole;
+import com.jdon.jivejdon.pubsub.domain.producer.read.LazyLoaderRole;
+import com.jdon.jivejdon.pubsub.domain.producer.write.MessageEventSourcingRole;
 import com.jdon.jivejdon.model.event.*;
 import com.jdon.jivejdon.model.property.ThreadTag;
 import com.jdon.jivejdon.model.realtime.ForumMessageDTO;
@@ -259,7 +259,7 @@ public class ForumThread extends ForumModel {
 
 			Date olddate = Constants.parseDateTime(oldmessage.getCreationDate
 					());
-			if (Constants.timeAfter(1, olddate)) {// a event per one hour
+			if (Constants.timeAfter(1, olddate)) {// a pubsub per one hour
 				subPublisherRole.subscriptionNotify(new
 						ThreadSubscribedNotifyEvent(this.getThreadId()));
 			}

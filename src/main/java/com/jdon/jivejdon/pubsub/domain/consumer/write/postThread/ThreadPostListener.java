@@ -13,14 +13,14 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.event.domain.consumer.write.postThread;
+package com.jdon.jivejdon.pubsub.domain.consumer.write.postThread;
 
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.dci.RoleAssigner;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.event.bus.cqrs.query.CacheQueryRefresher;
-import com.jdon.jivejdon.event.domain.producer.write.LobbyPublisherRole;
+import com.jdon.jivejdon.pubsub.bus.cqrs.query.CacheQueryRefresher;
+import com.jdon.jivejdon.pubsub.domain.producer.write.LobbyPublisherRole;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.property.ThreadTag;
@@ -54,7 +54,7 @@ public class ThreadPostListener implements DomainEventHandler {
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 		TopicMessagePostedEvent topicMessagePostedEvent = (TopicMessagePostedEvent) event.getDomainMessage().getEventSource();
 		ForumMessage forumMessage = topicMessagePostedEvent.getForumMessage();
-			// if there is a event bus server, rewrite this code:
+			// if there is a pubsub bus server, rewrite this code:
 		eventHandler.refresh(forumMessage);
 
 	}

@@ -1,9 +1,9 @@
-package com.jdon.jivejdon.event.domain.consumer.write.updatemessage;
+package com.jdon.jivejdon.pubsub.domain.consumer.write.updatemessage;
 
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.event.bus.cqrs.query.CacheQueryRefresher;
+import com.jdon.jivejdon.pubsub.bus.cqrs.query.CacheQueryRefresher;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.event.ThreadNameSavedEvent;
 import com.jdon.jivejdon.repository.query.MessagePageIteratorSolver;

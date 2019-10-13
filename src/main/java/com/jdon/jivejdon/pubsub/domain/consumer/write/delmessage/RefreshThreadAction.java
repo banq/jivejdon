@@ -13,12 +13,12 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.event.domain.consumer.write.delmessage;
+package com.jdon.jivejdon.pubsub.domain.consumer.write.delmessage;
 
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.event.bus.cqrs.query.CacheQueryRefresher;
+import com.jdon.jivejdon.pubsub.bus.cqrs.query.CacheQueryRefresher;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.event.MessageRemovedEvent;
@@ -42,7 +42,7 @@ public class RefreshThreadAction implements DomainEventHandler {
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 		MessageRemovedEvent messageRemovedEvent = (MessageRemovedEvent) event.getDomainMessage().getEventSource();
 		reload(messageRemovedEvent.getForumMessage());
-		// send to event bus to notify refresh view model
+		// send to pubsub bus to notify refresh view model
 		eventHandler.refresh(messageRemovedEvent.getForumMessage());
 
 	}

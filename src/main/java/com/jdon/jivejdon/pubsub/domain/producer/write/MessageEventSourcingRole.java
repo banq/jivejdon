@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.event.domain.producer.write;
+package com.jdon.jivejdon.pubsub.domain.producer.write;
 
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.model.Send;

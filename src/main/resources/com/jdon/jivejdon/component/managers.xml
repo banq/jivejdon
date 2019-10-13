@@ -298,7 +298,7 @@
 		</component>
 
         <component name="cdnRefreshUrls"
-                   class="com.jdon.jivejdon.event.domain.consumer.write.postThread.CDNRefreshUrls">
+                   class="com.jdon.jivejdon.pubsub.domain.consumer.write.postThread.CDNRefreshUrls">
             <constructor value="query/approved"/>
             <constructor value="rss"/>
             <constructor value="query/threadDigList"/>

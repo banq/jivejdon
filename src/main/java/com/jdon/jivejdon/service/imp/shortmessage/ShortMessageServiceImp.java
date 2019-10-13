@@ -301,7 +301,7 @@ public class ShortMessageServiceImp implements ShortMessageService {
 		return pageIterator;
 	}
 
-	// accept event from LazyLoaderRole's @Send("loadNewShortMessageCount")
+	// accept pubsub from LazyLoaderRole's @Send("loadNewShortMessageCount")
 	@OnEvent("loadNewShortMessageCount")
 	public int loadNewShortMessageCount(String userId) {
 		Account account = this.accountFactory.getFullAccount(userId);

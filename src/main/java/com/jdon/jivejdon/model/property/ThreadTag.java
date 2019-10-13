@@ -18,7 +18,7 @@ package com.jdon.jivejdon.model.property;
 
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
-import com.jdon.jivejdon.event.domain.producer.read.LazyLoaderRole;
+import com.jdon.jivejdon.pubsub.domain.producer.read.LazyLoaderRole;
 import com.jdon.jivejdon.model.subscription.SubscribedState;
 import com.jdon.jivejdon.model.subscription.subscribed.TagSubscribed;
 

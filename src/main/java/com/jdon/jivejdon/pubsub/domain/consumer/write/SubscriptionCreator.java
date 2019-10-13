@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.event.domain.consumer.write;
+package com.jdon.jivejdon.pubsub.domain.consumer.write;
 
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;

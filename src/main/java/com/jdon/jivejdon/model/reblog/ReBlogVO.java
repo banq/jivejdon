@@ -18,7 +18,7 @@ package com.jdon.jivejdon.model.reblog;
 import java.util.Collection;
 
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.event.domain.producer.read.LazyLoaderRole;
+import com.jdon.jivejdon.pubsub.domain.producer.read.LazyLoaderRole;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.util.LazyLoader;

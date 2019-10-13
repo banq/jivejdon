@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.event.domain.consumer.write.postThread;
+package com.jdon.jivejdon.pubsub.domain.consumer.write.postThread;
 
 public class CDNRefreshUrls {
 

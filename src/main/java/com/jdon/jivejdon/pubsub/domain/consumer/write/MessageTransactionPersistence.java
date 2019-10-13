@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.event.domain.consumer.write;
+package com.jdon.jivejdon.pubsub.domain.consumer.write;
 
 import com.jdon.annotation.Component;
 import com.jdon.annotation.model.OnEvent;

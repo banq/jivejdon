@@ -13,19 +13,19 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.event.domain.consumer.write.addReplyMessage;
+package com.jdon.jivejdon.pubsub.domain.consumer.write.addReplyMessage;
 
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.event.bus.cqrs.query.CacheQueryRefresher;
+import com.jdon.jivejdon.pubsub.bus.cqrs.query.CacheQueryRefresher;
 import com.jdon.jivejdon.model.event.ReplyMessageCreatedEvent;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.query.MessagePageIteratorSolver;
 
 /**
  * 
- * Event Sourcing send this event to a message Bus to refresh Query system.
+ * Event Sourcing send this pubsub to a message Bus to refresh Query system.
  * 
  * 
  * @author banq

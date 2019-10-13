@@ -13,17 +13,14 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.event.domain.producer.write;
+package com.jdon.jivejdon.pubsub.domain.producer.write;
 
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.model.event.MessageRemoveCommand;
-import com.jdon.jivejdon.model.event.MessageRemovedEvent;
 import com.jdon.jivejdon.model.event.PostTopicMessageCommand;
 import com.jdon.jivejdon.model.event.TopicMessagePostedEvent;
-import com.jdon.jivejdon.model.util.OneOneDTO;
 
 /**
- * sub-class is implemented by domain event that is in
+ * sub-class is implemented by domain pubsub that is in
  * com.jdon.jivejdon.domainevent.subscriber.write.ThreadRole
  * 
  * @author banq

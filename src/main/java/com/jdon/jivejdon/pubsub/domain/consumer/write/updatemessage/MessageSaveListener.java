@@ -13,12 +13,12 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.event.domain.consumer.write.updatemessage;
+package com.jdon.jivejdon.pubsub.domain.consumer.write.updatemessage;
 
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.event.domain.consumer.write.MessageTransactionPersistence;
+import com.jdon.jivejdon.pubsub.domain.consumer.write.MessageTransactionPersistence;
 import com.jdon.jivejdon.model.event.MessageUpdatedEvent;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.repository.ForumFactory;
