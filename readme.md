@@ -94,7 +94,7 @@ createReplyMessage() method will send a command to the addChild()  method of [Fo
  
  "eventSourcing.addReplyMessage" will send a "ReplyMessageCreatedEvent" domain Event to infrastructure layer such as Repository. seperate domain logic from infrastructure, databases, other stuffs.
 
- Domain event "ReplyMessageCreatedEvent"  occurring in the domain is saved in the event store "jiveMessage", this is a message posted events table. the event can be used for reconstructing the last replies state of a thread, events replay is in [ForumThreadState](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumThreadState.java) .
+ Domain event "ReplyMessageCreatedEvent"  occurring in the domain is saved in the event store "jiveMessage", this is a message posted events table. the event can be used for reconstructing the latest replies state of a thread, events replay is in [ForumThreadState](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumThreadState.java) .
  
 
 CQRS architecture
@@ -108,28 +108,28 @@ In jivejdon ForumThread and ForumMessage are saved in cache, cache is a snapshot
 The domain event "ReplyMessageCreatedEvent" do three things:
 1. add a new post message to "jiveMessage" (events log)
 2. clear the query cache (CQRS)
-3. update/project the last replies state of a thread (event project to state)
+3. update/project the latest replies state of a thread (event project to state)
 
 
 
 Event Sourcing
 ==============================
-Posting a message is a event, modifying the last replies status for one thread. 
+Posting a message is a event, modifying the latest replies status for one thread. 
 
 ![avatar](./doc/es.png)
 
-How to get the the last replies status for one thread?we must iterate all posted events collection.
+How to get the the latest replies status for one thread?we must iterate all posted events collection.
 
-JiveMessage is a posted events collection database table, with a SQL select we can get the last message posted event:
+JiveMessage is a posted events collection database table, with a SQL select we can get the latest message posted event:
 
 ``````
 
 SELECT messageID from jiveMessage WHERE  threadID = ? ORDER BY modifiedDate DESC
 
 ``````
-This sql can quickly find the last replies,  similar as replaying all posted events to project current state.
+This sql can quickly find the latest replies,  similar as replaying all posted events to project current state.
 
-In jiveThread table there is no special field for last replyies state , all states are from posted events projection. (projection can use SQL!)
+In jiveThread table there is no special field for latest replyies state , all states are from posted events projection. (projection can use SQL!)
 
 When a user post a new ForumMessage, a ReplyMessageCreatedEvent event will be saved to event store: JiveMessage,  simultaneously refresh the snapshot of event: ForumThreadState.
 
