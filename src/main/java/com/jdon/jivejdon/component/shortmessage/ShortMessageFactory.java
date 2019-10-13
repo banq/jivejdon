@@ -21,7 +21,7 @@ import java.util.Observer;
 
 import com.jdon.annotation.Component;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.shortmessage.ShortMessage;
 import com.jdon.jivejdon.model.shortmessage.ShortMessageState;

@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.manager.sitemap;
+package com.jdon.jivejdon.component.sitemap;
 
 import java.io.IOException;
 import java.io.Writer;

@@ -20,7 +20,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.jdon.annotation.Service;
 import com.jdon.controller.events.EventModel;
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.repository.dao.SequenceDao;
 
 @Service("sitemapService")

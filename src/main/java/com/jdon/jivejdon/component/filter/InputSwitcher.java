@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.manager.filter;
+package com.jdon.jivejdon.component.filter;
 
 import java.io.BufferedReader;
 import java.io.StringReader;
@@ -42,14 +42,14 @@ public class InputSwitcher implements InputSwitcherIF  {
       
     
     /* (non-Javadoc)
-	 * @see com.jdon.jivejdon.manager.filter.InputSwitcherIF#isInputPermit()
+	 * @see com.jdon.jivejdon.component.filter.InputSwitcherIF#isInputPermit()
 	 */
     public boolean isInputPermit() {
 		return inputPermit;
 	}
 
 	/* (non-Javadoc)
-	 * @see com.jdon.jivejdon.manager.filter.InputSwitcherIF#setInputPermit(boolean)
+	 * @see com.jdon.jivejdon.component.filter.InputSwitcherIF#setInputPermit(boolean)
 	 */
 	public void setInputPermit(boolean inputPermit, String des) {
 		this.inputPermit = inputPermit;

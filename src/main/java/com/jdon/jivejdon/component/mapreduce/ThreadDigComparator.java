@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.manager.mapreduce;
+package com.jdon.jivejdon.component.mapreduce;
 
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.service.query.ForumMessageQueryService;

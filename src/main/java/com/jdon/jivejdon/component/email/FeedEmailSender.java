@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.manager.email;
+package com.jdon.jivejdon.component.email;
 
 import com.jdon.controller.events.EventModel;
 

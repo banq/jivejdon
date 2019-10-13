@@ -2,7 +2,7 @@ package com.jdon.jivejdon.manager.viewcount;
 
 import com.jdon.annotation.Component;
 import com.jdon.container.pico.Startable;
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.property.Property;
 import com.jdon.jivejdon.model.property.ThreadPropertys;

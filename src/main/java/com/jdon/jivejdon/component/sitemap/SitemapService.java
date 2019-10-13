@@ -13,17 +13,18 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.manager.throttle.hitkey;
+package com.jdon.jivejdon.component.sitemap;
 
-public interface HitKeyIF {
+import com.jdon.controller.events.EventModel;
 
-	String getHitIp();
+public interface SitemapService {
 
-	String getKey();
+	public void addUrl(EventModel em);
 
-	String getBeHitId();
+	public void updateUrl(EventModel em);
 
-	boolean satisfy(HitKeyIF hitkey);
+	public void deleteUrl(EventModel em);
 
-	boolean isEmpty();
+	public Url getUrl(Long urlId);
+
 }

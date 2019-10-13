@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.manager.filter;
+package com.jdon.jivejdon.component.filter;
 
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.model.message.output.RenderingFilterManager;
@@ -11,7 +11,7 @@ import java.util.function.Function;
 
 /**
  * customzied filter
- * configure in manager.xml
+ * configure in component.xml
  */
 public class OutFilterManager {
 	private final static Logger logger = LogManager.getLogger(OutFilterManager.class);
