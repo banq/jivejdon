@@ -905,7 +905,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 		
 		this._mouseDrag(event, true); //Execute the drag once - this causes the helper not to be visible before getting its correct position
 		
-		//If the ddmanager is used for droppables, inform the manager that dragging has started (see #5003)
+		//If the ddmanager is used for droppables, inform the component that dragging has started (see #5003)
 		if ( $.ui.ddmanager ) $.ui.ddmanager.dragStart(this, event);
 		
 		return true;
@@ -936,7 +936,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 
 	_mouseStop: function(event) {
 
-		//If we are using droppables, inform the manager about the drop
+		//If we are using droppables, inform the component about the drop
 		var dropped = false;
 		if ($.ui.ddmanager && !this.options.dropBehaviour)
 			dropped = $.ui.ddmanager.drop(this, event);
@@ -980,7 +980,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 			}); //Remove frame helpers
 		}
 		
-		//If the ddmanager is used for droppables, inform the manager that dragging has stopped (see #5003)
+		//If the ddmanager is used for droppables, inform the component that dragging has stopped (see #5003)
 		if( $.ui.ddmanager ) $.ui.ddmanager.dragStop(this, event);
 		
 		return $.ui.mouse.prototype._mouseUp.call(this, event);
@@ -1594,7 +1594,7 @@ $.widget("ui.droppable", {
 		//Store the droppable's proportions
 		this.proportions = { width: this.element[0].offsetWidth, height: this.element[0].offsetHeight };
 
-		// Add the reference and positions to the manager
+		// Add the reference and positions to the component
 		$.ui.ddmanager.droppables[o.scope] = $.ui.ddmanager.droppables[o.scope] || [];
 		$.ui.ddmanager.droppables[o.scope].push(this);
 
@@ -1751,7 +1751,7 @@ $.ui.intersect = function(draggable, droppable, toleranceMode) {
 };
 
 /*
-	This manager tracks offsets of draggables and droppables
+	This component tracks offsets of draggables and droppables
 */
 $.ui.ddmanager = {
 	current: null,
@@ -3221,7 +3221,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 
 		if(!event) return;
 
-		//If we are using droppables, inform the manager about the drop
+		//If we are using droppables, inform the component about the drop
 		if ($.ui.ddmanager && !this.options.dropBehaviour)
 			$.ui.ddmanager.drop(this, event);
 
@@ -3483,7 +3483,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 			for (var j=0, queriesLength = _queries.length; j < queriesLength; j++) {
 				var item = $(_queries[j]);
 
-				item.data(this.widgetName + '-item', targetData); // Data for target checking (mouse manager)
+				item.data(this.widgetName + '-item', targetData); // Data for target checking (mouse component)
 
 				items.push({
 					item: item,
@@ -6887,7 +6887,7 @@ var PROP_NAME = 'datepicker';
 var dpuuid = new Date().getTime();
 var instActive;
 
-/* Date picker manager.
+/* Date picker component.
    Use the singleton instance of this class, $.datepicker, to interact with the date picker.
    Settings for (groups of) date pickers are maintained in an instance object,
    allowing multiple different settings on the same page. */
@@ -7001,7 +7001,7 @@ $.extend(Datepicker.prototype, {
 
 	/* Override the default settings for all instances of the date picker.
 	   @param  settings  object - the new settings to use as defaults (anonymous object)
-	   @return the manager object */
+	   @return the component object */
 	setDefaults: function(settings) {
 		extendRemove(this._defaults, settings || {});
 		return this;
@@ -7170,7 +7170,7 @@ $.extend(Datepicker.prototype, {
 	   @param  pos       int[2] - coordinates for the dialog's position within the screen or
 	                     event - with x/y coordinates or
 	                     leave empty for default (screen centre)
-	   @return the manager object */
+	   @return the component object */
 	_dialogDatepicker: function(input, date, onSelect, settings, pos) {
 		var inst = this._dialogInst; // internal instance
 		if (!inst) {

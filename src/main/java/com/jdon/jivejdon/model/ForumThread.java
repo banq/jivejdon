@@ -18,7 +18,7 @@ package com.jdon.jivejdon.model;
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.event.domain.producer.read.LazyLoaderRole;
 import com.jdon.jivejdon.event.domain.producer.write.MessageEventSourcingRole;
 import com.jdon.jivejdon.model.event.*;

@@ -1,10 +1,10 @@
 package com.jdon.jivejdon.presentation.action;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.manager.throttle.hitkey.CustomizedThrottle;
-import com.jdon.jivejdon.manager.throttle.hitkey.HitKeyIF;
-import com.jdon.jivejdon.manager.throttle.hitkey.HitKeySame;
-import com.jdon.jivejdon.manager.viewcount.ThreadViewCounterJob;
+import com.jdon.jivejdon.component.throttle.hitkey.CustomizedThrottle;
+import com.jdon.jivejdon.component.throttle.hitkey.HitKeyIF;
+import com.jdon.jivejdon.component.throttle.hitkey.HitKeySame;
+import com.jdon.jivejdon.component.viewcount.ThreadViewCounterJob;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.presentation.filter.SpamFilterTooFreq;
 import com.jdon.jivejdon.service.query.ForumMessageQueryService;

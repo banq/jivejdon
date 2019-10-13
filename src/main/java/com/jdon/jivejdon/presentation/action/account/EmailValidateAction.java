@@ -28,7 +28,7 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.manager.email.ValidateCodeEmail;
+import com.jdon.jivejdon.component.email.ValidateCodeEmail;
 import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.service.account.AccountService;
 

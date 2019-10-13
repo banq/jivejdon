@@ -3,7 +3,7 @@ package com.jdon.jivejdon.service.imp.message;
 import com.jdon.annotation.Service;
 import com.jdon.annotation.Singleton;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.manager.query.HotThreadQueryManager;
+import com.jdon.jivejdon.component.query.HotThreadQueryManager;
 import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;

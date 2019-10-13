@@ -15,7 +15,7 @@
  */
 package com.jdon.jivejdon.repository.builder;
 
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;

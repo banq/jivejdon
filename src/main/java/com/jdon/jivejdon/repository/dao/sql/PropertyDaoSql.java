@@ -27,7 +27,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.jdon.container.pico.Startable;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.property.Property;
 import com.jdon.jivejdon.repository.dao.PropertyDao;
 import com.jdon.jivejdon.util.ContainerUtil;

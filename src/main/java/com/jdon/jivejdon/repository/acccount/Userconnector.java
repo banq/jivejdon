@@ -15,7 +15,7 @@
  */
 package com.jdon.jivejdon.repository.acccount;
 
-import com.jdon.jivejdon.manager.weibo.UserConnectorAuth;
+import com.jdon.jivejdon.component.weibo.UserConnectorAuth;
 import com.jdon.jivejdon.model.account.OAuthUserVO;
 
 public interface Userconnector {

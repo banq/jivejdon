@@ -3,7 +3,7 @@ package com.jdon.jivejdon.service.imp.upload;
 import com.jdon.annotation.intercept.Poolable;
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.manager.query.SlideImageQueryManager;
+import com.jdon.jivejdon.component.query.SlideImageQueryManager;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.attachment.UploadFile;
 import com.jdon.jivejdon.model.attachment.UploadInfoVO;

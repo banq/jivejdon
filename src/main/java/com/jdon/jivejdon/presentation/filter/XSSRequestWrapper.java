@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
-import com.jdon.jivejdon.manager.block.ErrorBlockerIF;
+import com.jdon.jivejdon.component.block.ErrorBlockerIF;
 
 public class XSSRequestWrapper extends HttpServletRequestWrapper {
 	private ErrorBlockerIF errorBlocker;

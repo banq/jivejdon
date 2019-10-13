@@ -19,7 +19,7 @@ import com.google.common.eventbus.AsyncEventBus;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.manager.pingrpc.BlogPingClient;
+import com.jdon.jivejdon.component.pingrpc.BlogPingClient;
 import com.jdon.jivejdon.model.realtime.Lobby;
 import com.jdon.jivejdon.model.realtime.Notification;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;

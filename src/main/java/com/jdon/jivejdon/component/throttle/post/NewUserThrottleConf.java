@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.manager.throttle.post;
+package com.jdon.jivejdon.component.throttle.post;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,7 +32,7 @@ public class NewUserThrottleConf {
 
 	private int timeLimitE;
 
-	// see manager.xml config.parameter
+	// see component.xml config.parameter
 	public NewUserThrottleConf(String threshold, String interval, String newUserThresholds, String timeLimitS, String timeLimitE) {
 		// threshold can't be negative, that would mean everyone is abusive
 		int thresh = 2;

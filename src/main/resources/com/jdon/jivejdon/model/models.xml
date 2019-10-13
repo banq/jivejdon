@@ -159,7 +159,7 @@
 		</model>
 		
 		<model key="urlId"
-			class="com.jdon.jivejdon.manager.sitemap.Url">
+			class="com.jdon.jivejdon.component.sitemap.Url">
 			<actionForm name="urlForm"/>
 			<handler>
 				<service ref="sitemapService">		

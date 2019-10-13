@@ -16,7 +16,7 @@
  */
 package com.jdon.jivejdon.repository.property;
 
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.property.Property;
 import com.jdon.jivejdon.model.util.CachedCollection;
 import com.jdon.jivejdon.repository.dao.PropertyDao;

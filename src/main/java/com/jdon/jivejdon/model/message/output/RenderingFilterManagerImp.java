@@ -15,7 +15,7 @@
  */
 package com.jdon.jivejdon.model.message.output;
 
-import com.jdon.jivejdon.manager.filter.OutFilterManager;
+import com.jdon.jivejdon.component.filter.OutFilterManager;
 import com.jdon.jivejdon.model.message.MessageVO;
 import com.jdon.jivejdon.repository.dao.SetupDao;
 import com.jdon.jivejdon.util.BeanUtils;
@@ -39,7 +39,7 @@ import java.util.function.Function;
 /**
  * setup all filter into Database <component name="renderingFilterManager"
  * class="com.jdon.jivejdon.model.message.output.RenderingFilterManagerImp" />
- * in manager.xml
+ * in component.xml
  * 
  * @author <a href="mailto:banq@163.com">banq</a>
  * 
@@ -220,7 +220,7 @@ public class RenderingFilterManagerImp implements RenderingFilterManager {
 		// Make sure properties are loaded.
 		loadProperties();
 
-		// Now load up filters for this manager.
+		// Now load up filters for this component.
 		context = name + ".";
 		// See if a record for this context exists yet. If not, create one.
 		String fCount = properties.getProperty(context + "filterCount");

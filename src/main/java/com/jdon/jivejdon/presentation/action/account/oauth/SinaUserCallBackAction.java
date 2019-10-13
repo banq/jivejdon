@@ -29,9 +29,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.manager.account.SinaOAuthSubmitter;
-import com.jdon.jivejdon.manager.account.sina.AccessToken;
-import com.jdon.jivejdon.manager.weibo.UserConnectorAuth;
+import com.jdon.jivejdon.component.account.SinaOAuthSubmitter;
+import com.jdon.jivejdon.component.account.sina.AccessToken;
+import com.jdon.jivejdon.component.weibo.UserConnectorAuth;
 import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.repository.subscription.SubscriptionInitFactory;
 import com.jdon.jivejdon.service.account.OAuthAccountService;

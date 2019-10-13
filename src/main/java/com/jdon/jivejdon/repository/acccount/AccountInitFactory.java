@@ -16,7 +16,7 @@
  */
 package com.jdon.jivejdon.repository.acccount;
 
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.property.Reward;
 import org.apache.logging.log4j.LogManager;

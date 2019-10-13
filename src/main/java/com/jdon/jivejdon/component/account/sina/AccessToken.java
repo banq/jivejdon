@@ -13,7 +13,7 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.manager.account.sina;
+package com.jdon.jivejdon.component.account.sina;
 
 import weibo4j.http.Response;
 import weibo4j.model.WeiboException;

@@ -13,14 +13,14 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.manager.subscription.action;
+package com.jdon.jivejdon.component.subscription.action;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.TimeUnit;
 
 import com.jdon.container.pico.Startable;
-import com.jdon.jivejdon.manager.subscription.SubscriptionAction;
+import com.jdon.jivejdon.component.subscription.SubscriptionAction;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;
 import com.jdon.util.UtilValidate;
 

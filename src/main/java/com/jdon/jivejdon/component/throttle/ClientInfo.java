@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.manager.throttle;
+package com.jdon.jivejdon.component.throttle;
 
 import java.io.Serializable;
 

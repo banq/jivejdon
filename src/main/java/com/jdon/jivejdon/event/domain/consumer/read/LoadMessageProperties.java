@@ -23,7 +23,7 @@ import org.apache.logging.log4j.*;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.event.domain.consumer.write.MessagePropertiesListener;
 import com.jdon.jivejdon.repository.dao.PropertyDao;
 

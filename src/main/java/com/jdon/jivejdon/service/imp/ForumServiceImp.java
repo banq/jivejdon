@@ -23,7 +23,7 @@ import org.apache.logging.log4j.*;
 import com.jdon.annotation.Singleton;
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.repository.ForumFactory;
 import com.jdon.jivejdon.repository.dao.ForumDao;

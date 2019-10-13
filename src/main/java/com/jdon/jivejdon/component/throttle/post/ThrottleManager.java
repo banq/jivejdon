@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.manager.throttle.post;
+package com.jdon.jivejdon.component.throttle.post;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,8 +24,8 @@ import org.apache.logging.log4j.Logger;
 
 import com.jdon.cache.UtilCache;
 import com.jdon.container.pico.Startable;
-import com.jdon.jivejdon.manager.block.IPBanListManagerIF;
-import com.jdon.jivejdon.manager.throttle.ClientInfo;
+import com.jdon.jivejdon.component.block.IPBanListManagerIF;
+import com.jdon.jivejdon.component.throttle.ClientInfo;
 import com.jdon.jivejdon.util.ExpiringCacheEntry;
 
 /**
@@ -130,7 +130,7 @@ public class ThrottleManager implements Startable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.manager.throttle.ThrottleManagerIF#isAbusive(java.lang
+	 * com.jdon.jivejdon.component.throttle.ThrottleManagerIF#isAbusive(java.lang
 	 * .String)
 	 */
 	public boolean isAbusive(String clientId) {

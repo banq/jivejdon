@@ -45,7 +45,7 @@ public class ForumAbstractFactory implements ForumFactory {
 
 	private final Map nullthreads ;
 
-	// define in manager.xml
+	// define in component.xml
 
 	public ForumAbstractFactory(MessageDirectorIF messageDirectorIF,ThreadDirectorIF threadDirectorIF, ForumDirector forumDirector,
 								ContainerUtil containerUtil, SequenceDao sequenceDao, MessageDao

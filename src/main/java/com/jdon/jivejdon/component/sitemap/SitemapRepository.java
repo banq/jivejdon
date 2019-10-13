@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.manager.sitemap;
+package com.jdon.jivejdon.component.sitemap;
 
 import com.jdon.controller.model.PageIterator;
 

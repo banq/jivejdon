@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.manager.email;
+package com.jdon.jivejdon.component.email;
 
 import java.util.Random;
 

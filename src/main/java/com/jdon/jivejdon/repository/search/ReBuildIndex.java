@@ -46,7 +46,7 @@ public class ReBuildIndex implements Runnable {
 			// has never been built before.
 			rebuildIndex();
 		} finally {
-			// Reset state of the search manager to idle.
+			// Reset state of the search component to idle.
 			busy = false;
 			if (messageSearchProxy != null)
 				messageSearchProxy.stop();

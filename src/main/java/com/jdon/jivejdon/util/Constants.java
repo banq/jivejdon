@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon;
+package com.jdon.jivejdon.util;
 
 import com.ocpsoft.pretty.time.PrettyTime;
 

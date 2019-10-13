@@ -29,7 +29,7 @@
   </plug-in>
   <plug-in className="com.jdon.strutsutil.InitPlugIn">
     <set-property property="modelmapping-config"  
-    value="com.jdon.jivejdon.manager.managers.xml" />
+    value="com.jdon.jivejdon.component.managers.xml" />
   </plug-in>
   <plug-in className="com.jdon.strutsutil.InitPlugIn">
     <set-property property="modelmapping-config"  

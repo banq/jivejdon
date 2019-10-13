@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.manager.throttle.post;
+package com.jdon.jivejdon.component.throttle.post;
 
 public class ThresholdLimit {
 

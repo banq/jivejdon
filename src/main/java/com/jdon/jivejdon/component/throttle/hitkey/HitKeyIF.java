@@ -25,4 +25,5 @@ public interface HitKeyIF {
 
 	boolean satisfy(HitKeyIF hitkey);
 
-	boolean isEmpty();
+	boolean isEmpty();
+}

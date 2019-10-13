@@ -2,7 +2,7 @@ package com.jdon.jivejdon.model.account;
 
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.event.domain.producer.read.LazyLoaderRole;
 import com.jdon.jivejdon.model.attachment.UploadFile;
 import com.jdon.jivejdon.model.auth.Role;

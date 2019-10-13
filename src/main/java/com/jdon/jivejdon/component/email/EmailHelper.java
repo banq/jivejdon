@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.manager.email;
+package com.jdon.jivejdon.component.email;
 
 import com.google.common.eventbus.AsyncEventBus;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;

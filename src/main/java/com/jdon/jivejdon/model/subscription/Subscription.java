@@ -1,8 +1,8 @@
 package com.jdon.jivejdon.model.subscription;
 
 import com.jdon.annotation.Model;
-import com.jdon.jivejdon.manager.subscription.SubscriptionAction;
-import com.jdon.jivejdon.manager.subscription.SubscriptionActionHolder;
+import com.jdon.jivejdon.component.subscription.SubscriptionAction;
+import com.jdon.jivejdon.component.subscription.SubscriptionActionHolder;
 import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.subscription.subscribed.Subscribed;
 

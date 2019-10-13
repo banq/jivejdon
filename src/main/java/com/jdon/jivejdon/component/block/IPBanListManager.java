@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.manager.block;
+package com.jdon.jivejdon.component.block;
 
 import com.jdon.jivejdon.repository.dao.SetupDao;
 import org.apache.logging.log4j.LogManager;
@@ -73,7 +73,7 @@ public class IPBanListManager implements Runnable, IPBanListManagerIF {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.jdon.jivejdon.manager.block.IPBanListManagerIF#isBanned(java.lang
+	 * com.jdon.jivejdon.component.block.IPBanListManagerIF#isBanned(java.lang
 	 * .String)
 	 */
 	public boolean isBanned(String remoteIp) {
@@ -89,7 +89,7 @@ public class IPBanListManager implements Runnable, IPBanListManagerIF {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.jdon.jivejdon.manager.block.IPBanListManagerIF#addBannedIp(java.lang
+	 * com.jdon.jivejdon.component.block.IPBanListManagerIF#addBannedIp(java.lang
 	 * .String)
 	 */
 	public void addBannedIp(String ip) {
@@ -116,7 +116,7 @@ public class IPBanListManager implements Runnable, IPBanListManagerIF {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.jdon.jivejdon.manager.block.IPBanListManagerIF#deleteBannedIp(java
+	 * com.jdon.jivejdon.component.block.IPBanListManagerIF#deleteBannedIp(java
 	 * .lang.String)
 	 */
 	public void deleteBannedIp(String ip) {
@@ -141,7 +141,7 @@ public class IPBanListManager implements Runnable, IPBanListManagerIF {
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.jdon.jivejdon.manager.block.IPBanListManagerIF#getAllBanIpList()
+	 * @see com.jdon.jivejdon.component.block.IPBanListManagerIF#getAllBanIpList()
 	 */
 	public Collection getAllBanIpList() {
 		this.loadBannedIpsIfNeeded(false);
@@ -151,7 +151,7 @@ public class IPBanListManager implements Runnable, IPBanListManagerIF {
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.jdon.jivejdon.manager.block.IPBanListManagerIF#clear()
+	 * @see com.jdon.jivejdon.component.block.IPBanListManagerIF#clear()
 	 */
 	public void clear() {
 		myLastModified = true;

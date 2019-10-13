@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.manager.filter;
+package com.jdon.jivejdon.component.filter;
 
 import com.jdon.jivejdon.model.message.MessageVO;
 import org.apache.logging.log4j.LogManager;

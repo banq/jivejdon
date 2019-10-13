@@ -17,7 +17,7 @@
 package com.jdon.jivejdon.repository.property;
 
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.property.ThreadTag;
 import com.jdon.jivejdon.model.query.specification.TaggedThreadListSpec;

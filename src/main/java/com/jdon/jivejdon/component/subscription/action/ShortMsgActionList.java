@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.manager.subscription.action;
+package com.jdon.jivejdon.component.subscription.action;
 
 import java.util.ArrayList;
 import java.util.List;

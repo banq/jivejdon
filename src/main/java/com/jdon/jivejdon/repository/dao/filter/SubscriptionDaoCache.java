@@ -3,7 +3,7 @@ package com.jdon.jivejdon.repository.dao.filter;
 import com.jdon.annotation.Component;
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.pointcut.Around;
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.subscription.Subscription;
 import com.jdon.jivejdon.repository.subscription.SubscriptionInitFactory;
 import com.jdon.jivejdon.repository.dao.sql.JdbcTempSource;

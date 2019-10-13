@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.manager.query;
+package com.jdon.jivejdon.component.query;
 
 import java.util.ArrayList;
 import java.util.Collection;

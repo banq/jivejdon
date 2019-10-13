@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 
-import com.jdon.jivejdon.manager.subscription.SubscriptionActionHolder;
-import com.jdon.jivejdon.manager.subscription.action.EmailAction;
-import com.jdon.jivejdon.manager.subscription.action.ShortMsgAction;
+import com.jdon.jivejdon.component.subscription.SubscriptionActionHolder;
+import com.jdon.jivejdon.component.subscription.action.EmailAction;
+import com.jdon.jivejdon.component.subscription.action.ShortMsgAction;
 import com.jdon.jivejdon.model.subscription.subscribed.Subscribed;
 import com.jdon.jivejdon.repository.subscription.SubscribedFactory;
 

@@ -18,7 +18,7 @@ package com.jdon.jivejdon.auth;
 import com.jdon.jivejdon.model.account.Account;
 import org.apache.logging.log4j.*;
 
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.auth.Role;
 

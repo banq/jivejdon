@@ -26,7 +26,7 @@ import com.jdon.annotation.model.OnEvent;
 import com.jdon.container.visitor.data.SessionContext;
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.manager.shortmessage.ShortMessageFactory;
+import com.jdon.jivejdon.component.shortmessage.ShortMessageFactory;
 import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.shortmessage.FromShortMessage;
 import com.jdon.jivejdon.model.shortmessage.ShortMessage;

@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.manager.account;
+package com.jdon.jivejdon.component.account;
 
 import static net.oauth.OAuth.HMAC_SHA1;
 import static net.oauth.OAuth.OAUTH_SIGNATURE_METHOD;
@@ -41,7 +41,7 @@ import org.apache.logging.log4j.Logger;
 import weibo4j.org.json.JSONObject;
 
 import com.jdon.annotation.Component;
-import com.jdon.jivejdon.manager.weibo.UserConnectorAuth;
+import com.jdon.jivejdon.component.weibo.UserConnectorAuth;
 import com.jdon.jivejdon.model.account.OAuthUserVO;
 import com.jdon.jivejdon.repository.acccount.Userconnector;
 import com.jdon.util.UtilValidate;

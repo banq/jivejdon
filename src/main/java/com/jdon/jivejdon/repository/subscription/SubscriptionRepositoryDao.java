@@ -1,7 +1,7 @@
 package com.jdon.jivejdon.repository.subscription;
 
 import com.jdon.annotation.Component;
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.subscription.Subscription;
 import com.jdon.jivejdon.repository.acccount.AccountFactory;

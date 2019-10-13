@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.manager.exception;
+package com.jdon.jivejdon.component.exception;
 
 /**
  *

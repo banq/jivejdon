@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.manager.query;
+package com.jdon.jivejdon.component.query;
 
 import com.jdon.container.pico.Startable;
 import com.jdon.controller.model.PageIterator;

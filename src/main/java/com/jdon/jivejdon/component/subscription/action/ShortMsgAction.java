@@ -71,4 +71,6 @@ public class ShortMsgAction implements SubscriptionAction {
 
 	public void setNotifySubscribed(NotifySubscribed notifySubscribed) {
 		this.notifySubscribed = notifySubscribed;
-	
+	}
+
+}

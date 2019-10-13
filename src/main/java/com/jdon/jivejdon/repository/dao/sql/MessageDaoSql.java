@@ -15,7 +15,7 @@
  */
 package com.jdon.jivejdon.repository.dao.sql;
 
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;

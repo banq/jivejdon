@@ -27,9 +27,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.manager.throttle.hitkey.CustomizedThrottle;
-import com.jdon.jivejdon.manager.throttle.hitkey.HitKeyIF;
-import com.jdon.jivejdon.manager.throttle.hitkey.HitKeySame;
+import com.jdon.jivejdon.component.throttle.hitkey.CustomizedThrottle;
+import com.jdon.jivejdon.component.throttle.hitkey.HitKeyIF;
+import com.jdon.jivejdon.component.throttle.hitkey.HitKeySame;
 import com.jdon.jivejdon.presentation.form.SkinUtils;
 import com.jdon.util.Debug;
 import com.jdon.util.RegisterCode;

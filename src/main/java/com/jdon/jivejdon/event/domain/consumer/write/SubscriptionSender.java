@@ -19,7 +19,7 @@ import com.google.common.eventbus.AsyncEventBus;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.manager.subscription.SubscriptionNotify;
+import com.jdon.jivejdon.component.subscription.SubscriptionNotify;
 import com.jdon.jivejdon.model.subscription.event.SubscribedNotifyEvent;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;
 

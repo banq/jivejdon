@@ -17,7 +17,7 @@ package com.jdon.jivejdon.presentation.action.message;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.events.EventModel;
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.presentation.form.MessageForm;

@@ -13,7 +13,7 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.manager.mapreduce;
+package com.jdon.jivejdon.component.mapreduce;
 
 import com.jdon.annotation.Component;
 import com.jdon.container.pico.Startable;

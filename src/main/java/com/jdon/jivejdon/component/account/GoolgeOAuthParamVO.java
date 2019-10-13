@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.manager.account;
+package com.jdon.jivejdon.component.account;
 
 import net.oauth.OAuthServiceProvider;
 

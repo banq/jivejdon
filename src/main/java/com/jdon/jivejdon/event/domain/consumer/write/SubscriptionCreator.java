@@ -18,7 +18,7 @@ package com.jdon.jivejdon.event.domain.consumer.write;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.manager.subscription.action.ShortMsgAction;
+import com.jdon.jivejdon.component.subscription.action.ShortMsgAction;
 import com.jdon.jivejdon.model.subscription.Subscription;
 import com.jdon.jivejdon.model.subscription.event.ThreadSubscribedCreateEvent;
 import com.jdon.jivejdon.model.subscription.subscribed.Subscribed;

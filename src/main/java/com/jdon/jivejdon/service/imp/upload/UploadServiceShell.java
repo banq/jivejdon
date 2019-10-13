@@ -11,7 +11,7 @@ import com.jdon.annotation.intercept.Poolable;
 import com.jdon.annotation.intercept.SessionContextAcceptable;
 import com.jdon.container.visitor.data.SessionContext;
 import com.jdon.controller.events.EventModel;
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.attachment.UploadFile;
 import com.jdon.jivejdon.repository.acccount.AccountFactory;

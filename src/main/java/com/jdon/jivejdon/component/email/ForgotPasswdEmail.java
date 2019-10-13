@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.manager.email;
+package com.jdon.jivejdon.component.email;
 
 import com.jdon.annotation.Component;
 import com.jdon.container.pico.Startable;

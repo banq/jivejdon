@@ -1,9 +1,9 @@
 package com.jdon.jivejdon.presentation.action.tag;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.manager.throttle.hitkey.CustomizedThrottle;
-import com.jdon.jivejdon.manager.throttle.hitkey.HitKeyIF;
-import com.jdon.jivejdon.manager.throttle.hitkey.HitKeySame;
+import com.jdon.jivejdon.component.throttle.hitkey.CustomizedThrottle;
+import com.jdon.jivejdon.component.throttle.hitkey.HitKeyIF;
+import com.jdon.jivejdon.component.throttle.hitkey.HitKeySame;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.service.account.AccountService;

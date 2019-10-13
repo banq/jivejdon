@@ -1,6 +1,6 @@
 package com.jdon.jivejdon.model.query;
 
-import com.jdon.jivejdon.manager.query.ThreadCompareVO;
+import com.jdon.jivejdon.component.query.ThreadCompareVO;
 
 import java.util.Collections;
 import java.util.Comparator;

@@ -6,7 +6,7 @@
 <%@ page import="java.io.*,java.util.*"%>
 
 <%@page import="com.jdon.controller.WebAppUtil,
-com.jdon.jivejdon.manager.block.ErrorBlockerIF,com.jdon.jivejdon.manager.email.*"%>
+com.jdon.jivejdon.component.block.ErrorBlockerIF,com.jdon.jivejdon.component.email.*"%>
 <%
    String isSendMail=(String)this.getServletContext().getAttribute(request.getRemoteAddr()+"500"); 
    if (isSendMail == null)

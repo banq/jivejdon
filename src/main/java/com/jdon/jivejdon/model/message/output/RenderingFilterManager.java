@@ -15,7 +15,7 @@
  */
 package com.jdon.jivejdon.model.message.output;
 
-import com.jdon.jivejdon.manager.filter.OutFilterManager;
+import com.jdon.jivejdon.component.filter.OutFilterManager;
 import com.jdon.jivejdon.model.message.MessageVO;
 
 import java.util.function.Function;
@@ -86,7 +86,7 @@ public interface RenderingFilterManager {
     /**
      * Saves all ForumMessageFilters to the persistent store. This method
      * should be called after setting any properties on invidual filters
-     * that are being managed by this filter manager. Warning: calling this
+     * that are being managed by this filter component. Warning: calling this
      * method will expire the entire message cache so that cache consistency
      * is maintained.
      *

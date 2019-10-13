@@ -14,7 +14,7 @@
 
 		<!-- message output  filter -->
 		<component name="outFilterManager"
-			class="com.jdon.jivejdon.manager.filter.OutFilterManager" />
+			class="com.jdon.jivejdon.component.filter.OutFilterManager" />
 
 		<component name="renderingFilterManager"
 			class="com.jdon.jivejdon.model.message.output.RenderingFilterManagerImp" />
@@ -64,28 +64,28 @@
 
 		<!-- message input  filter -->
 		<component name="inFilterManager"
-			class="com.jdon.jivejdon.manager.filter.InFilterManager">
+			class="com.jdon.jivejdon.component.filter.InFilterManager">
             <constructor value="com.jdon.jivejdon.model.message.weibo.EscapeUTFInFIlter"/>
 			<constructor value="com.jdon.jivejdon.model.message.props.InFilterPosterIP" />
 			<constructor value="com.jdon.jivejdon.model.message.weibo.InFilterAuthor" />	
 		</component>
 
 		<component name="queryManager"
-			class="com.jdon.jivejdon.manager.query.HotThreadQueryManager" />
+			class="com.jdon.jivejdon.component.query.HotThreadQueryManager" />
 
 		<!--  Throttle -->
 		
 		<component name="throttleManager"
-			class="com.jdon.jivejdon.manager.throttle.post.ThrottleManager" />
+			class="com.jdon.jivejdon.component.throttle.post.ThrottleManager" />
 			
 		<component name="throttleConf"
-			class="com.jdon.jivejdon.manager.throttle.post.ThrottleConf">
+			class="com.jdon.jivejdon.component.throttle.post.ThrottleConf">
 			<constructor value="6" />       <!-- operator C(R)UD limit for post.ThrottleManager-->
 			<constructor value="10" />    	<!-- second -->
 		</component>
 		
 		<component name="newUserThrottleConf"
-			class="com.jdon.jivejdon.manager.throttle.post.NewUserThrottleConf">
+			class="com.jdon.jivejdon.component.throttle.post.NewUserThrottleConf">
             <constructor value="10"/>       <!-- register limit for post.ThrottleManager-->
             <constructor value="60"/>        <!-- second -->
             <constructor value="60"/>     <!-- second who that register time is leass than 1 day
@@ -95,26 +95,26 @@
 		</component>
 		
 		<component name="hitConf"
-			class="com.jdon.jivejdon.manager.throttle.hitkey.HitConf">
+			class="com.jdon.jivejdon.component.throttle.hitkey.HitConf">
 			<constructor value="30" />       <!-- access Read limit for CustomizedThrottle  min value is 5 for uploadShowAction five author pics -->
 			<constructor value="10" />    	<!-- second -->
 		</component>
 
 		<component name="whiteIPs"
-			class="com.jdon.jivejdon.manager.block.WhiteIPs" >
+			class="com.jdon.jivejdon.component.block.WhiteIPs" >
 				<constructor value=".*(203.208|65.55|110.75|220.181|123.125|61.135|159.226|125.90|124.115|122.248|157.55|157.56|1.202|66.249|192.168|0:0:0:0:0:0:0:1|123.151).*" />
 	    </component>
 
 		<component name="iPBanListManager"
-			class="com.jdon.jivejdon.manager.block.IPBanListManager" />
+			class="com.jdon.jivejdon.component.block.IPBanListManager" />
 
 		<component name="inputSwitcher"
-			class="com.jdon.jivejdon.manager.filter.InputSwitcher" />
+			class="com.jdon.jivejdon.component.filter.InputSwitcher" />
 
 
 
 		<component name="forgotPasswdEmailParams"
-			class="com.jdon.jivejdon.manager.email.ForgotPasswdEmailParams">
+			class="com.jdon.jivejdon.component.email.ForgotPasswdEmailParams">
 			<!--  tomcat context.xml  config javaMail -->			
 			<constructor value="java:comp/env/mail/Session" />
 			<!--  Jboss deploy/mail-service.xml configure 
@@ -128,7 +128,7 @@
 		<!-- forget password send mail by JavaMail end   -->
 
 		<component name="validateCodeEmailParams"
-			class="com.jdon.jivejdon.manager.email.ValidateCodeEmailParams">
+			class="com.jdon.jivejdon.component.email.ValidateCodeEmailParams">
 			<!--  tomcat context.xml  config javaMail -->			
 			<constructor value="java:comp/env/mail/Session" />
 			<!--  Jboss deploy/mail-service.xml configure 
@@ -144,7 +144,7 @@
 		
 		
 		<component name="feedbackEmailParams"
-			class="com.jdon.jivejdon.manager.email.FeedbackEmailParams">
+			class="com.jdon.jivejdon.component.email.FeedbackEmailParams">
 			<!--  tomcat context.xml  config javaMail -->			
 			<constructor value="java:comp/env/mail/Session" />			
 			<constructor value="admin" />
@@ -153,17 +153,17 @@
 		
 		
 		<component name="SubscriptionEmailParams"
-			class="com.jdon.jivejdon.manager.email.SubscriptionEmailParams">
+			class="com.jdon.jivejdon.component.email.SubscriptionEmailParams">
 			<!--  tomcat context.xml  config javaMail -->			
 			<constructor value="java:comp/env/mail/Session" />			
 			<constructor value="jdonmon@163.com" />
 		</component>
 
 		<component name="emailHelper"
-			class="com.jdon.jivejdon.manager.email.EmailHelper" />
+			class="com.jdon.jivejdon.component.email.EmailHelper" />
 		
 		<component name="EmailSender"
-			class="com.jdon.jivejdon.manager.email.EmailSender">
+			class="com.jdon.jivejdon.component.email.EmailSender">
 			<constructor value="java:comp/env/mail/Session" />			
 		</component>
 		
@@ -206,7 +206,7 @@
 		
 		
 		<component name="threadViewCountParameter"
-			class="com.jdon.jivejdon.manager.viewcount.ThreadViewCountParameter">
+			class="com.jdon.jivejdon.component.viewcount.ThreadViewCountParameter">
             <constructor value="1800"/>
             <constructor value="1800"/> <!-- 30*60s unit: s -->
 		</component>
@@ -221,14 +221,14 @@
 		</component>
 		
 		<component name="weiBoShortMessageParams"
-			class="com.jdon.jivejdon.manager.shortmessage.WeiBoShortMessageParams">
+			class="com.jdon.jivejdon.component.shortmessage.WeiBoShortMessageParams">
 			<constructor value="有贴提到你：" />
             <constructor
                     value="在 &lt;a href=/forum/messageNavList.shtml?message=messageId target=_blank   &gt; subject &lt;/a&gt; 帖子中提到了你，去看看吧。"/>
 		</component>
 		
 		<component name="sinaOAuthParamVO"
-			class="com.jdon.jivejdon.manager.account.SinaOAuthParamVO">
+			class="com.jdon.jivejdon.component.account.SinaOAuthParamVO">
 			<constructor value="2879276008" /><!-- CONSUMER_KEY -->
     	    <constructor value="8af8248a4cd6bf389685e6d3907349f0" /> <!--  CONSUMER_SECRET -->
     	    <constructor value="https://api.weibo.com/2/" /> <!--  BASEURL -->
@@ -237,7 +237,7 @@
 		</component>
 
 		<component name="weiboTransferParamVO"
-			class="com.jdon.jivejdon.manager.weibo.WeiboTransferParamVO">
+			class="com.jdon.jivejdon.component.weibo.WeiboTransferParamVO">
 			<!-- sina -->
 			<constructor value="sinaID" /> <!-- 新浪微博@username      jivejdon jaas not support chinese name -->
     	    <constructor value="@sina.com" /> <!-- sample: banq@sina.com -->
@@ -253,13 +253,13 @@
 		</component>
 
 		<component name="tecentWeiboOAuthParamVO"
-			class="com.jdon.jivejdon.manager.weibo.TecentWeiboOAuthParamVO">
+			class="com.jdon.jivejdon.component.weibo.TecentWeiboOAuthParamVO">
 			<constructor value="801210431" /><!-- CONSUMER_KEY -->
     	    <constructor value="ab5aa7fc9eb0c29957aa2cf605d8aa89" /> <!--  CONSUMER_SECRET -->
 		</component>
 
 		<component name="goolgeOAuthParamVO"
-			class="com.jdon.jivejdon.manager.account.GoolgeOAuthParamVO">
+			class="com.jdon.jivejdon.component.account.GoolgeOAuthParamVO">
 			<constructor value="www.jdon.com" /><!-- CONSUMER_KEY -->
     	    <constructor value="rJa_VwHYCMi8hkx99nUA3CDJ" /> <!--  CONSUMER_SECRET -->
     	    <constructor value="https://www.google.com/accounts/OAuthGetRequestToken" /> <!--  requestTokenURL -->
@@ -271,7 +271,7 @@
 		</component>
 
 	<component name="queueListerner"
-			class="com.jdon.jivejdon.manager.subscription.action.QueueListerner">
+			class="com.jdon.jivejdon.component.subscription.action.QueueListerner">
 			<constructor value="100" /><!-- seconds -->
 		    <constructor value="20" /><!--  -->
 	</component>
@@ -283,7 +283,7 @@
 	</component>    
     
 		<component name="blogPingTempParams"
-			class="com.jdon.jivejdon.manager.pingrpc.BlogPingTempParams">
+			class="com.jdon.jivejdon.component.pingrpc.BlogPingTempParams">
 			<constructor value="Jdon" /><!-- blog title -->
 			<constructor value="https://www.jdon.com/" /> <!-- blog url -->
     	    <constructor value="https://www.jdon.com/#threadId#" /> <!--
@@ -292,7 +292,7 @@
 		</component>
 
 		<component name="blogPingServerUrl"
-			class="com.jdon.jivejdon.manager.pingrpc.BlogPingServerUrl">
+			class="com.jdon.jivejdon.component.pingrpc.BlogPingServerUrl">
 			<constructor value="http://ping.baidu.com/ping/RPC2" />
 <!--     	    <constructor value="http://blogsearch.google.com/ping/RPC2" /> --> 
 		</component>

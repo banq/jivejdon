@@ -16,13 +16,13 @@
 package com.jdon.jivejdon.repository.subscription;
 
 import com.jdon.annotation.Component;
-import com.jdon.jivejdon.Constants;
-import com.jdon.jivejdon.manager.subscription.SubscriptionAction;
-import com.jdon.jivejdon.manager.subscription.action.EmailAction;
-import com.jdon.jivejdon.manager.subscription.action.ShortMsgAction;
-import com.jdon.jivejdon.manager.subscription.action.SinaWeiboAction;
-import com.jdon.jivejdon.manager.subscription.action.TecentWeiboAction;
-import com.jdon.jivejdon.manager.weibo.UserConnectorAuth;
+import com.jdon.jivejdon.util.Constants;
+import com.jdon.jivejdon.component.subscription.SubscriptionAction;
+import com.jdon.jivejdon.component.subscription.action.EmailAction;
+import com.jdon.jivejdon.component.subscription.action.ShortMsgAction;
+import com.jdon.jivejdon.component.subscription.action.SinaWeiboAction;
+import com.jdon.jivejdon.component.subscription.action.TecentWeiboAction;
+import com.jdon.jivejdon.component.weibo.UserConnectorAuth;
 import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.subscription.Subscription;
 import com.jdon.jivejdon.model.subscription.messsage.WeiboExpiredNotifyMessage;

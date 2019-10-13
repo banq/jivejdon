@@ -18,7 +18,7 @@ package com.jdon.jivejdon.model.realtime.notification;
 import java.util.Date;
 import java.util.Locale;
 
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.realtime.ForumMessageDTO;
 import com.jdon.jivejdon.model.realtime.Notification;
 import com.jdon.util.StringUtil;

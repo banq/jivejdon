@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.manager.throttle.hitkey;
+package com.jdon.jivejdon.component.throttle.hitkey;
 
 import org.apache.logging.log4j.*;
 
@@ -25,7 +25,7 @@ public class HitConf {
 
 	private int interval = 60000; // milliseconds
 
-	// see manager.xml config.parameter
+	// see component.xml config.parameter
 	public HitConf(String threshold, String interval) {
 		// threshold can't be negative, that would mean everyone is abusive
 		int thresh = 25;

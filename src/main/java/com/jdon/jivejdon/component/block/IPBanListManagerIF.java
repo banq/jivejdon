@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.manager.block;
+package com.jdon.jivejdon.component.block;
 
 import java.util.Collection;
 

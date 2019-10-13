@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.manager.viewcount;
+package com.jdon.jivejdon.component.viewcount;
 
 import com.jdon.annotation.Component;
 import com.jdon.container.pico.Startable;
@@ -92,7 +92,7 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.manager.viewcount.ThreadViewCounterJob#checkViewCounter
+	 * com.jdon.jivejdon.component.viewcount.ThreadViewCounterJob#checkViewCounter
 	 * (com.jdon.jivejdon.model.ForumThread)
 	 */
 	@Override

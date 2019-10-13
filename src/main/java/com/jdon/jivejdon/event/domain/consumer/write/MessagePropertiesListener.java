@@ -21,7 +21,7 @@ import org.apache.logging.log4j.Logger;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.event.MessagePropertiesUpdatedEvent;
 import com.jdon.jivejdon.repository.builder.ForumAbstractFactory;
 import com.jdon.jivejdon.repository.dao.PropertyDao;

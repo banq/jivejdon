@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.manager.weibo;
+package com.jdon.jivejdon.component.weibo;
 
 public class TecentWeiboOAuthParamVO {
 

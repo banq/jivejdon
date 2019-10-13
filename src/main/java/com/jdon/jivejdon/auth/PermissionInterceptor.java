@@ -20,7 +20,7 @@ import com.jdon.container.access.TargetMetaRequest;
 import com.jdon.container.access.TargetMetaRequestsHolder;
 import com.jdon.container.visitor.data.SessionContext;
 import com.jdon.controller.events.EventModel;
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.auth.PermissionRule;
 import com.jdon.jivejdon.service.util.SessionContextUtil;

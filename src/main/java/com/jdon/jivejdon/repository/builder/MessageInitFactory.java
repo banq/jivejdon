@@ -16,7 +16,7 @@
  */
 package com.jdon.jivejdon.repository.builder;
 
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.*;
 import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.auth.Role;

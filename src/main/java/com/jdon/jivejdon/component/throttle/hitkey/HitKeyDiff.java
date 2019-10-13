@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.manager.throttle.hitkey;
+package com.jdon.jivejdon.component.throttle.hitkey;
 
 import com.jdon.util.UtilValidate;
 

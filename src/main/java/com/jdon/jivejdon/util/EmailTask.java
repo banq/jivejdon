@@ -1,6 +1,6 @@
 package com.jdon.jivejdon.util;
 
-import com.jdon.jivejdon.manager.email.EmailHelper;
+import com.jdon.jivejdon.component.email.EmailHelper;
 
 import javax.mail.Address;
 import javax.mail.Authenticator;

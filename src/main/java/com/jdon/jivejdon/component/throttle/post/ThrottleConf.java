@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.manager.throttle.post;
+package com.jdon.jivejdon.component.throttle.post;
 
 import org.apache.logging.log4j.*;
 
@@ -26,7 +26,7 @@ public class ThrottleConf {
 
 	private int interval = 60000; // milliseconds
 
-	// see manager.xml config.parameter
+	// see component.xml config.parameter
 	public ThrottleConf(String threshold, String interval) {
 		// threshold can't be negative, that would mean everyone is abusive
 		int thresh = 25;

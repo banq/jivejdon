@@ -2,7 +2,7 @@ package com.jdon.jivejdon.presentation.action.query;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.manager.mapreduce.ThreadApprovedNewList;
+import com.jdon.jivejdon.component.mapreduce.ThreadApprovedNewList;
 import com.jdon.jivejdon.service.query.ForumMessageQueryService;
 import com.jdon.strutsutil.ModelListAction;
 

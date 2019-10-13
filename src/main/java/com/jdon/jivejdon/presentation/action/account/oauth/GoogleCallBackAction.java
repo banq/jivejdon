@@ -30,7 +30,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.manager.account.GoogleOAuthSubmitter;
+import com.jdon.jivejdon.component.account.GoogleOAuthSubmitter;
 import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.service.account.OAuthAccountService;
 

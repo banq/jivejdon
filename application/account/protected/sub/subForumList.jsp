@@ -77,18 +77,18 @@
 					</a>
 				</td>
 				<td class="contact" align="center" >
-				    <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.manager.subscription.action.ShortMsgAction)" disabled="true"/>
+				    <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.component.subscription.action.ShortMsgAction)" disabled="true"/>
 				</td>
 				<td class="contact" align="center" >
-				   <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.manager.subscription.action.EmailAction)" disabled="true"/>
+				   <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.component.subscription.action.EmailAction)" disabled="true"/>
 				</td>
 			
 				<td class="contact" align="center" >
-				   <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.manager.subscription.action.SinaWeiboAction)" disabled="true"/>
+				   <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.component.subscription.action.SinaWeiboAction)" disabled="true"/>
 				</td>
 				
 				<td class="contact" align="center" >
-				   <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.manager.subscription.action.TecentWeiboAction)" disabled="true"/>
+				   <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.component.subscription.action.TecentWeiboAction)" disabled="true"/>
 				</td>
 			
 			</tr>

@@ -17,7 +17,7 @@ package com.jdon.jivejdon.service.imp.account;
 
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.account.PasswordassitVO;
 import com.jdon.jivejdon.model.auth.Role;

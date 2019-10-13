@@ -29,7 +29,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.jdon.annotation.Component;
-import com.jdon.jivejdon.manager.weibo.UserConnectorAuth;
+import com.jdon.jivejdon.component.weibo.UserConnectorAuth;
 import com.jdon.jivejdon.model.account.OAuthUserVO;
 import com.jdon.jivejdon.repository.acccount.Userconnector;
 import com.jdon.jivejdon.util.ToolsUtil;
@@ -50,7 +50,7 @@ public class UserconnectorSql implements Userconnector {
 	 * 
 	 * @see
 	 * com.jdon.jivejdon.repository.dao.sql.Userconnector#saveSinaWeiboUserconn
-	 * (java.lang.String, com.jdon.jivejdon.manager.weibo.userConnectorAuth)
+	 * (java.lang.String, com.jdon.jivejdon.component.weibo.userConnectorAuth)
 	 */
 	@Override
 	public void saveUserConnectorAuth(UserConnectorAuth userConnectorAuth) {

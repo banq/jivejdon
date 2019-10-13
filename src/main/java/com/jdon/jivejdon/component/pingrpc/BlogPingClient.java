@@ -13,7 +13,7 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.manager.pingrpc;
+package com.jdon.jivejdon.component.pingrpc;
 
 import com.google.common.eventbus.Subscribe;
 import com.jdon.annotation.Component;

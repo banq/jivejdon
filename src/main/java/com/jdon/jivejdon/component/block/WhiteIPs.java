@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.manager.block;
+package com.jdon.jivejdon.component.block;
 
 import java.util.regex.Pattern;
 

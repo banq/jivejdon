@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.manager.mapreduce;
+package com.jdon.jivejdon.component.mapreduce;
 
 import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.service.account.AccountService;

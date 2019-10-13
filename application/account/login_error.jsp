@@ -5,7 +5,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <%@page import="com.jdon.controller.WebAppUtil,
-com.jdon.jivejdon.manager.block.ErrorBlockerIF"%>
+com.jdon.jivejdon.component.block.ErrorBlockerIF"%>
 <%
 ErrorBlockerIF errorBlocker = (ErrorBlockerIF) WebAppUtil.getComponentInstance("errorBlocker", request);
 if (errorBlocker.checkCount(request.getRemoteAddr(), 5)){

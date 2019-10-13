@@ -24,7 +24,7 @@ import com.jdon.jivejdon.model.account.Account;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.account.PasswordassitVO;
 import com.jdon.jivejdon.repository.dao.SequenceDao;
 import com.jdon.jivejdon.util.ToolsUtil;

@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.manager.pingrpc;
+package com.jdon.jivejdon.component.pingrpc;
 
 import java.net.SocketException;
 import java.net.URL;

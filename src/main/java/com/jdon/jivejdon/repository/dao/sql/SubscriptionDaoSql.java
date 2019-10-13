@@ -10,9 +10,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.Constants;
-import com.jdon.jivejdon.manager.subscription.action.EmailAction;
-import com.jdon.jivejdon.manager.subscription.action.ShortMsgAction;
+import com.jdon.jivejdon.util.Constants;
+import com.jdon.jivejdon.component.subscription.action.EmailAction;
+import com.jdon.jivejdon.component.subscription.action.ShortMsgAction;
 import com.jdon.jivejdon.model.subscription.Subscription;
 import com.jdon.jivejdon.model.subscription.subscribed.Subscribed;
 import com.jdon.jivejdon.repository.subscription.SubscriptionInitFactory;

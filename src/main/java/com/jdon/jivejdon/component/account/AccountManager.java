@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.manager.account;
+package com.jdon.jivejdon.component.account;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.jdon.annotation.Component;
 import com.jdon.container.pico.Startable;
-import com.jdon.jivejdon.manager.email.ForgotPasswdEmail;
+import com.jdon.jivejdon.component.email.ForgotPasswdEmail;
 import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.account.PasswordassitVO;
 import com.jdon.jivejdon.repository.acccount.AccountFactory;

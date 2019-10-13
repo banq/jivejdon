@@ -20,7 +20,7 @@ import com.jdon.annotation.Service;
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.controller.pool.Poolable;
-import com.jdon.jivejdon.Constants;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.property.HotKeys;
 import com.jdon.jivejdon.model.property.ThreadTag;

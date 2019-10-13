@@ -18,8 +18,8 @@ package com.jdon.jivejdon.repository.builder;
 
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.pointcut.Around;
-import com.jdon.jivejdon.Constants;
-import com.jdon.jivejdon.manager.filter.OutFilterManager;
+import com.jdon.jivejdon.util.Constants;
+import com.jdon.jivejdon.component.filter.OutFilterManager;
 import com.jdon.jivejdon.model.account.Account;
 import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
