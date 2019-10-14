@@ -118,9 +118,9 @@ Posting a message is a event, modifying the latest replies status for one thread
 
 ![avatar](./doc/es.png)
 
-How to get the the latest replies status for one thread?we must iterate all posted events collection.
+How to get the the latest replies status for one thread? we must iterate all posted events collection.
 
-JiveMessage is a posted events collection database table, with a SQL select we can get the latest message posted event:
+JiveMessage is a storing posted events database in time order, with one SQL we can get the latest message posted event:
 
 ``````
 
