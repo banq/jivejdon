@@ -120,7 +120,7 @@ Posting a message is a event, modifying the latest replies status for one thread
 
 How to get the the latest replies status for one thread? we must iterate all posted events collection.
 
-JiveMessage is a storing posted events database in time order, with one SQL we can reduce them chronologically to get the current state: the latest posted event:
+JiveMessage is a database storing posted events in time order, with one SQL we can reduce them chronologically to get the current state: the latest posted event:
 
 ``````
 
