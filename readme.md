@@ -120,14 +120,14 @@ Posting a message is a event, modifying the latest replies status for one thread
 
 How to get the the latest replies status for one thread? we must iterate all posted events collection.
 
-JiveMessage is a storing posted events database in time order, with one SQL we can get the latest message posted event:
+JiveMessage is a storing posted events database in time order, with one SQL we can reduce them chronologically to get the current state: the latest posted event:
 
 ``````
 
 SELECT messageID from jiveMessage WHERE  threadID = ? ORDER BY modifiedDate DESC
 
 ``````
-This sql can quickly find the latest replies,  similar as replaying all posted events to project current state.
+This sql can quickly find the latest replies post,  similar as replaying all posted events to project the current state.
 
 In jiveThread table there is no special field for latest replyies state , all states are from posted events projection. (projection can use SQL!)
 
