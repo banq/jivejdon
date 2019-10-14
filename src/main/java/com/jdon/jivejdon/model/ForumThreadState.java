@@ -36,13 +36,13 @@ public class ForumThreadState {
 	 * answer of this method.
 	 */
 	private AtomicLong messageCount;
-	private ForumMessage lastPost;
+	private ForumMessage latestPost;
 	private SubscribedState subscribedState;
 
-	public ForumThreadState(ForumThread forumThread, ForumMessage lastPost, long messageCount) {
+	public ForumThreadState(ForumThread forumThread, ForumMessage latestPost, long messageCount) {
 		super();
 		this.forumThread = forumThread;
-		this.lastPost = lastPost;
+		this.latestPost = latestPost;
 		this.messageCount = new AtomicLong(messageCount);
 
 	}
@@ -50,7 +50,7 @@ public class ForumThreadState {
 	public ForumThreadState(ForumThread forumThread) {
 		super();
 		this.forumThread = forumThread;
-		this.lastPost = null;
+		this.latestPost = null;
 		this.messageCount = null;
 	}
 
@@ -74,18 +74,18 @@ public class ForumThreadState {
 			return 0;
 	}
 
-	public ForumMessage getLastPost() {
-		if (this.lastPost == null) {
+	public ForumMessage getLatestPost() {
+		if (this.latestPost == null) {
 			projectStateFromEventSource();
 		}
-		return lastPost;
+		return latestPost;
 	}
 
-	public void setLastPost(ForumMessage lastPost) {
-		if (this.lastPost == null) {
+	public void setLatestPost(ForumMessage latestPost) {
+		if (this.latestPost == null) {
 			projectStateFromEventSource();
 		}
-		this.lastPost = lastPost;
+		this.latestPost = latestPost;
 	}
 
 	public void projectStateFromEventSource() {
@@ -94,7 +94,7 @@ public class ForumThreadState {
 		try {
 			oneOneDTO = (OneOneDTO) dm.getEventResult();
 			if (oneOneDTO != null) {
-				lastPost = (ForumMessage) oneOneDTO.getParent();
+				latestPost = (ForumMessage) oneOneDTO.getParent();
 				messageCount = new AtomicLong((Long) oneOneDTO.getChild());
 				dm.clear();
 			}
@@ -102,8 +102,8 @@ public class ForumThreadState {
 			e.printStackTrace();
 		}
 	}
-	public boolean lastPostIsNull() {
-		return lastPost == null ? true : false;
+	public boolean latestPostIsNull() {
+		return latestPost == null ? true : false;
 	}
 
 	public ForumThread getForumThread() {
@@ -111,15 +111,15 @@ public class ForumThreadState {
 	}
 
 	public String getModifiedDate() {
-		if (getLastPost() != null)
-			return getLastPost().getModifiedDate();
+		if (getLatestPost() != null)
+			return getLatestPost().getModifiedDate();
 		else
 			return "";
 	}
 
 	public long getModifiedDate2() {
-		if (getLastPost() != null)
-			return getLastPost().getModifiedDate2();
+		if (getLatestPost() != null)
+			return getLatestPost().getModifiedDate2();
 		else
 			return 0;
 	}

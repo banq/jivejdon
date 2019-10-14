@@ -53,12 +53,12 @@
 		        
 		       <logic:greaterThan name="forumThread"
                                    property="state.messageCount" value="0">
-                <logic:notEmpty name="forumThread" property="state.lastPost">
-                    <bean:define id="lastPost" name="forumThread"
-                                 property="state.lastPost"/>
+                <logic:notEmpty name="forumThread" property="state.latestPost">
+                    <bean:define id="latestPost" name="forumThread"
+                                 property="state.latestPost"/>
 					<span class="badge">
-                     <bean:write name="lastPost" property="account.username"/>
-				     于<bean:write name="lastPost" property="modifiedDate3"/>
+                     <bean:write name="latestPost" property="account.username"/>
+				     于<bean:write name="latestPost" property="modifiedDate3"/>
 					</span>
                </logic:notEmpty>
             </logic:greaterThan>

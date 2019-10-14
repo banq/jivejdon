@@ -22,8 +22,8 @@
 
 <body >
 <logic:notEmpty name="forumForm" property="forumState">
-<logic:notEmpty name="forumForm" property="forumState.lastPost">
-    <bean:define id="forumMessage" name="forumForm" property="forumState.lastPost"/>
+<logic:notEmpty name="forumForm" property="forumState.latestPost">
+    <bean:define id="forumMessage" name="forumForm" property="forumState.latestPost"/>
        <logic:notEmpty name="forumMessage">
  
 

@@ -101,14 +101,14 @@ public class Forum extends ForumModel {
 	}
 
 	private boolean isRepeatedMessage(AnemicMessageDTO anemicMessageDTO){
-		if (this.forumState.get().getLastPost() == null) return false;
-		return this.forumState.get().getLastPost().isSubjectRepeated(anemicMessageDTO.getMessageVO().getSubject())?true:false;
+		if (this.forumState.get().getLatestPost() == null) return false;
+		return this.forumState.get().getLatestPost().isSubjectRepeated(anemicMessageDTO.getMessageVO().getSubject())?true:false;
 
 	}
 
 	public void threadPosted(ForumMessage rootForumMessage) {
 		forumState.get().addThreadCount();
-		forumState.get().setLastPost(rootForumMessage);
+		forumState.get().setLatestPost(rootForumMessage);
 		this.publisherRole.subscriptionNotify(new ForumSubscribedNotifyEvent(this.forumId, rootForumMessage));
 	}
 
@@ -166,7 +166,7 @@ public class Forum extends ForumModel {
 	 * @return Returns the modifiedDate.
 	 */
 	public String getModifiedDate() {
-		if (getForumState().getLastPost() != null)
+		if (getForumState().getLatestPost() != null)
 			return getForumState().getModifiedDate();
 		else
 			return this.creationDate;
@@ -227,7 +227,7 @@ public class Forum extends ForumModel {
 
 	public void addNewMessage(ForumMessageReply forumMessageReply) {
 		forumState.get().addMessageCount();
-		forumState.get().setLastPost(forumMessageReply);
+		forumState.get().setLatestPost(forumMessageReply);
 
 		// Date olddate = Constants.parseDateTime(oldmessage.getCreationDate());
 		// if (Constants.timeAfter(1, olddate)) {// a pubsub per one hour
@@ -237,7 +237,7 @@ public class Forum extends ForumModel {
 	}
 
 	public void updateNewMessage(ForumMessage forumMessage) {
-		forumState.get().setLastPost(forumMessage);
+		forumState.get().setLatestPost(forumMessage);
 	}
 
 

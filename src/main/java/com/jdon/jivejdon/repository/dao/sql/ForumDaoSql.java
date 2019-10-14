@@ -244,7 +244,7 @@ public abstract class ForumDaoSql implements ForumDao {
 	 * get laste message from the message db
 	 * 
 	 */
-	public Long getLastPostMessageId(Long forumId) {
+	public Long getLatestPostMessageId(Long forumId) {
 		String LAST_MESSAGES = "SELECT messageID from jiveMessage WHERE forumID=? ORDER BY modifiedDate DESC";
 		List queryParams2 = new ArrayList();
 		queryParams2.add(forumId);

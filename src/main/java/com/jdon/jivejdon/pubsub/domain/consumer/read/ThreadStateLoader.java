@@ -43,12 +43,12 @@ public class ThreadStateLoader implements DomainEventHandler {
 		try {
 			long threadId = (Long) event.getDomainMessage().getEventSource();
 
-			Long lastMessageId = messageQueryDao.getLastPostMessageId(threadId);
+			Long lastMessageId = messageQueryDao.getLatestPostMessageId(threadId);
 			if (lastMessageId == null) {
 				logger.warn("maybe first running, not found lastMessageId for forumthreadId: " + threadId);
 				return;
 			}
-			ForumMessage lastPost = forumAbstractFactory.getMessage(lastMessageId);
+			ForumMessage latestPost = forumAbstractFactory.getMessage(lastMessageId);
 
 			long messagereplyCount;
 			long messageCount = messageQueryDao.getMessageCount(threadId);
@@ -57,7 +57,7 @@ public class ThreadStateLoader implements DomainEventHandler {
 			else
 				messagereplyCount = messageCount;
 
-			OneOneDTO oneOneDTO = new OneOneDTO(lastPost, messagereplyCount);
+			OneOneDTO oneOneDTO = new OneOneDTO(latestPost, messagereplyCount);
 			event.getDomainMessage().setEventResult(oneOneDTO);
 
 		} catch (Exception e) {

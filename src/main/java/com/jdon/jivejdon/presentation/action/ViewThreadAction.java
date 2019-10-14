@@ -62,7 +62,7 @@ public class ViewThreadAction extends Action {
 			}
 
 
-			if (!thread.getState().lastPostIsNull()) {
+			if (!thread.getState().latestPostIsNull()) {
 					thread.addViewCount();
 					getThreadViewCounterJob().checkViewCounter(thread);
 			}

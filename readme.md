@@ -143,7 +143,7 @@ In [ForumThreadState](https://github.com/banq/jivejdon/blob/master/src/main/java
 		try {
 			oneOneDTO = (OneOneDTO) dm.getEventResult();
 			if (oneOneDTO != null) {
-				lastPost = (ForumMessage) oneOneDTO.getParent();
+				latestPost = (ForumMessage) oneOneDTO.getParent();
 				messageCount = new AtomicLong((Long) oneOneDTO.getChild());
 				dm.clear();
 			}
@@ -159,7 +159,7 @@ lazyLoaderRole.projectStateFromEventSource will send a "projectStateFromEventSou
 ````````````
 public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 		try {
-			ForumMessage lastPost = forumAbstractFactory.getMessage(lastMessageId);
+			ForumMessage latestPost = forumAbstractFactory.getMessage(lastMessageId);
 
 			long messagereplyCount;
 			long messageCount = messageQueryDao.getMessageCount(threadId);
@@ -168,7 +168,7 @@ public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 			else
 				messagereplyCount = messageCount;
 
-			OneOneDTO oneOneDTO = new OneOneDTO(lastPost, messagereplyCount);
+			OneOneDTO oneOneDTO = new OneOneDTO(latestPost, messagereplyCount);
 			event.getDomainMessage().setEventResult(oneOneDTO);
 
 		} catch (Exception e) {

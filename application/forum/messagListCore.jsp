@@ -191,7 +191,7 @@
   <script src="https://cdn.jdon.com/common/messageList6.js"></script>
   <script>
               var sId = "";
-              <logic:notEmpty name="forumThread" property="state.lastPost">
+              <logic:notEmpty name="forumThread" property="state.latestPost">
               </logic:notEmpty>
               viewcount('<bean:write name="forumThread" property="threadId" />', "");
               approveList();

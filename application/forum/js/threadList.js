@@ -14,9 +14,9 @@ function goToAnotherPage(contextPath, count)
 	
 } 
 
-function lastPost(threadId, messageId){
+function latestPost(threadId, messageId){
    var pars = 'messageId=' +messageId ;
-   new Ajax.Updater(threadId, contextpath + '/forum/lastPost.shtml', { method: 'get', parameters: pars });
+   new Ajax.Updater(threadId, contextpath + '/forum/latestPost.shtml', { method: 'get', parameters: pars });
    
 }
 
@@ -124,7 +124,7 @@ var initTooltipWL = function (e){
 
 var initLastPost = function(e){
  TooltipManager.init('ThreadLastPost', 
-  {url: contextpath+"/query/threadLastPostViewAction.shtml", 
+  {url: contextpath+"/query/threadLatestPostViewAction.shtml",
    options: {method: 'get'}},
    {className:"mac_os_x", width:150});
     TooltipManager.showNow(e);   

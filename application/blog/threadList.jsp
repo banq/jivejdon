@@ -76,11 +76,11 @@
              &nbsp;阅<bean:write name="forumThread" property="viewCount" />
     &nbsp;评<bean:write name="forumThread" property="state.messageCount" />
         <logic:greaterThan name="forumThread" property="state.messageCount" value="0">
-           <logic:notEmpty name="forumThread" property="state.lastPost">                        
-            <bean:define id="lastPost" name="forumThread" property="state.lastPost"/>                        
+           <logic:notEmpty name="forumThread" property="state.latestPost">
+            <bean:define id="latestPost" name="forumThread" property="state.latestPost"/>
                    &nbsp;最近更新：
-            <bean:write name="lastPost" property="account.username" />
-            &nbsp; <bean:write name="lastPost" property="modifiedDate3" />
+            <bean:write name="latestPost" property="account.username" />
+            &nbsp; <bean:write name="latestPost" property="modifiedDate3" />
           </logic:notEmpty>
          </logic:greaterThan>       
          

@@ -243,7 +243,7 @@ public class ForumThread extends ForumModel {
 	 * @param forumMessageReply
 	 */
 	private void changeState(ForumMessageReply forumMessageReply) {
-        this.state.get().setLastPost(forumMessageReply);
+        this.state.get().setLatestPost(forumMessageReply);
         this.state.get().addMessageCount();
         this.forum.addNewMessage(forumMessageReply);
 	}
@@ -251,7 +251,7 @@ public class ForumThread extends ForumModel {
 	public void addNewMessage(ForumMessage forumMessageParent,
 							  ForumMessageReply forumMessageReply) {
 		try {
-			ForumMessage oldmessage = this.getState().getLastPost();
+			ForumMessage oldmessage = this.getState().getLatestPost();
             changeState(forumMessageReply);
 			getForumThreadTreeModel().addChildAction(forumMessageReply);
 
@@ -297,7 +297,7 @@ public class ForumThread extends ForumModel {
 			changeTags(forumMessage.getTagTitle());
 		}
 
-		this.state.get().setLastPost(forumMessage);
+		this.state.get().setLatestPost(forumMessage);
 		this.forum.updateNewMessage(forumMessage);
 
 	}
@@ -383,7 +383,7 @@ public class ForumThread extends ForumModel {
 
 	// not use the field modifiedDate in DB.
 	public String getModifiedDate() {
-		if (getState().getLastPost() != null)
+		if (getState().getLatestPost() != null)
 			return getState().getModifiedDate();
 		else
 			return this.creationDate;

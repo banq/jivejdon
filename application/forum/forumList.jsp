@@ -49,7 +49,7 @@
             </td>
             <td>
        
-            <bean:define id="messageForm" name="forum" property="forumState.lastPost" />            
+            <bean:define id="messageForm" name="forum" property="forumState.latestPost" />
   <logic:notEmpty name="messageForm" property="creationDate">
                           <span class="home_content" >
                           <span  class='ForumLastPost ajax_forumId=<bean:write name="forum" property="forumId"/>' >

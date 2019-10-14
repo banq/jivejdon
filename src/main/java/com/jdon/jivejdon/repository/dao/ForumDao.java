@@ -48,7 +48,7 @@ public interface ForumDao {
 	 * get laste message from the message db
 	 * 
 	 */
-	public Long getLastPostMessageId(Long forumId);
+	public Long getLatestPostMessageId(Long forumId);
 
 	void clearCache();
 

@@ -40,7 +40,7 @@ public class ForumState  {
 	 */
 	private  AtomicLong messageCount;
 
-	private  ForumMessage lastPost;
+	private  ForumMessage latestPost;
 
 	private final Forum forum;
 
@@ -84,18 +84,18 @@ public class ForumState  {
 		return this.threadCount.incrementAndGet();
 	}
 
-	public ForumMessage getLastPost() {
-		if (lastPost == null) {
+	public ForumMessage getLatestPost() {
+		if (latestPost == null) {
 			loadinitState();
 		}
-		return lastPost;
+		return latestPost;
 	}
 
-	public void setLastPost(ForumMessage forumMessage) {
-		if (lastPost == null) {
+	public void setLatestPost(ForumMessage forumMessage) {
+		if (latestPost == null) {
 			loadinitState();
 		}
-		this.lastPost = forumMessage;
+		this.latestPost = forumMessage;
 	}
 
 	public Forum getForum() {
@@ -117,8 +117,8 @@ public class ForumState  {
 	}
 
 	public String getModifiedDate() {
-		if (getLastPost() != null)
-			return getLastPost().getModifiedDate();
+		if (getLatestPost() != null)
+			return getLatestPost().getModifiedDate();
 		else
 			return "";
 	}
@@ -134,7 +134,7 @@ public class ForumState  {
 			if (oneOneDTO != null) {
 				OneOneDTO oneOneDTO2 = (OneOneDTO) oneOneDTO.getParent();
 				this.threadCount = new AtomicLong((Long)oneOneDTO.getChild());
-				lastPost = (ForumMessage) oneOneDTO2.getParent();
+				latestPost = (ForumMessage) oneOneDTO2.getParent();
 				messageCount = new AtomicLong((Long) oneOneDTO2.getChild());
 				dm.clear();
 			}

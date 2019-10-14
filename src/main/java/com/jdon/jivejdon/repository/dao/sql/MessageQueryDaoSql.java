@@ -163,8 +163,8 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 	 * get laste message from the message db
 	 * 
 	 */
-	public Long getLastPostMessageId(Long threadId) {
-		logger.debug("enter getLastPostMessageId  for threadId:" + threadId);
+	public Long getLatestPostMessageId(Long threadId) {
+		logger.debug("enter getLatestPostMessageId  for threadId:" + threadId);
 		String LAST_MESSAGES = "SELECT messageID from jiveMessage WHERE  threadID = ? ORDER BY modifiedDate DESC";
 		List queryParams2 = new ArrayList();
 		queryParams2.add(threadId);
@@ -183,8 +183,8 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 		return messageId;
 	}
 
-	public Long getForumLastPostMessageId(Long forumId) {
-		logger.debug("enter getLastPostMessageId  for forumId:" + forumId);
+	public Long getForumLatestPostMessageId(Long forumId) {
+		logger.debug("enter getLatestPostMessageId  for forumId:" + forumId);
 		String LAST_MESSAGES = "SELECT messageID from jiveMessage WHERE  forumID = ? ORDER BY modifiedDate DESC";
 		List queryParams2 = new ArrayList();
 		queryParams2.add(forumId);

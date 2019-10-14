@@ -88,10 +88,10 @@
             <forward name="hotkeys" path="/query/hotkeys.jsp"/>
         </action>
 
-        <action name="threadForm" path="/query/threadLastPostViewAction"
+        <action name="threadForm" path="/query/threadLatestPostViewAction"
                 type="com.jdon.strutsutil.ModelDispAction" scope="request"
                 validate="false">
-            <forward name="success" path="/query/others/threadLastPostView.jsp"/>
+            <forward name="success" path="/query/others/threadLatestPostView.jsp"/>
         </action>
 
         <action path="/message/tags"

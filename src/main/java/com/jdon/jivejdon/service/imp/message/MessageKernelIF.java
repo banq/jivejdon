@@ -45,7 +45,7 @@ public interface MessageKernelIF {
 
 	/**
 	 * return a full ForumThread one ForumThread has one rootMessage need solve
-	 * the realtion with Forum rootForumMessage lastPost
+	 * the realtion with Forum rootForumMessage latestPost
 	 * 
 	 * @param threadId
 	 * @return

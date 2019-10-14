@@ -50,8 +50,8 @@ public class MessageListNavAction extends Action {
 			return mapping.findForward("failure");
 		}
 
-		Long lastMessageId = forum.getForumState().getLastPost().getMessageId();
-		Long threadId = forum.getForumState().getLastPost().getForumThread().getThreadId();
+		Long lastMessageId = forum.getForumState().getLatestPost().getMessageId();
+		Long threadId = forum.getForumState().getLatestPost().getForumThread().getThreadId();
 		if (lastMessageId.longValue() >= (new Long(messageId)).longValue()) {
 			ActionRedirect redirect = new ActionRedirect(mapping.findForward("success"));
 			redirect.addParameter("thread", threadId);

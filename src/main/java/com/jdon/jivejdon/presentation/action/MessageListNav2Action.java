@@ -60,7 +60,7 @@ public class MessageListNav2Action extends Action {
 		ForumThread thread = forumMessageParent.getForumThread();
 		long threadId = thread.getThreadId();
 		//AddReplyMessageZ will update state
-		Long lastMessageId = thread.getState().getLastPost().getMessageId();
+		Long lastMessageId = thread.getState().getLatestPost().getMessageId();
 		if (lastMessageId.longValue() >= (new Long(messageId)).longValue()) {
 			int start = locateTheMessage(new Long(threadId), lastMessageId, new Long(messageId),
 					messageListForm.getCount());
