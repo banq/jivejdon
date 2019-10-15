@@ -20,14 +20,15 @@ import com.jdon.jivejdon.model.Forum;
 import com.jdon.jivejdon.model.ForumMessage;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.repository.ForumFactory;
-import com.jdon.jivejdon.repository.property.TagRepository;
 import com.jdon.jivejdon.repository.dao.MessageDao;
 import com.jdon.jivejdon.repository.dao.PropertyDao;
 import com.jdon.jivejdon.repository.dao.SequenceDao;
+import com.jdon.jivejdon.repository.property.TagRepository;
 import com.jdon.jivejdon.util.ContainerUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -43,7 +44,7 @@ public class ForumAbstractFactory implements ForumFactory {
 
 	private final SequenceDao sequenceDao;
 
-	private final Map nullthreads ;
+	private final Map<Long,String> nullthreads ;
 
 	// define in component.xml
 
@@ -158,12 +159,12 @@ public class ForumAbstractFactory implements ForumFactory {
 
 
 	private static <K,V> Map<K,V> lruCache(final int maxSize) {
-		return new LinkedHashMap<K,V>(maxSize*4/3, 0.75f, true) {
+		return Collections.synchronizedMap(new LinkedHashMap<K,V>(maxSize*4/3, 0.75f, true) {
 			@Override
 			protected boolean removeEldestEntry(Map.Entry<K,V> eldest) {
 				return size() > maxSize;
 			}
-		};
+		});
 	}
 
 }
