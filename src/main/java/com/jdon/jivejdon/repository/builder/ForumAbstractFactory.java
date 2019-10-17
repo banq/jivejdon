@@ -68,14 +68,7 @@ public class ForumAbstractFactory implements ForumFactory {
 	 * Long)
 	 */
 	public Forum getForum(Long forumId) {
-		if (nullthreads.containsKey(forumId)){
-			logger.error("repeat no forumId=" + forumId);
-			return null;
-		}
-		Forum forum =  forumDirector.getForum(forumId);
-		if (forum == null)
-		   nullthreads.put(forumId, "null");
-		return forum;
+		return  forumDirector.getForum(forumId);
 	}
 
 
