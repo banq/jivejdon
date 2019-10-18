@@ -18,10 +18,10 @@ package com.jdon.jivejdon.model;
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.pubsub.domain.producer.read.LazyLoaderRole;
-import com.jdon.jivejdon.pubsub.domain.producer.write.MessageEventSourcingRole;
-import com.jdon.jivejdon.model.event.*;
+import com.jdon.jivejdon.model.event.MessageMovedEvent;
+import com.jdon.jivejdon.model.event.MessageRemoveCommand;
+import com.jdon.jivejdon.model.event.MessageRemovedEvent;
+import com.jdon.jivejdon.model.event.ThreadNameSavedEvent;
 import com.jdon.jivejdon.model.property.ThreadTag;
 import com.jdon.jivejdon.model.realtime.ForumMessageDTO;
 import com.jdon.jivejdon.model.realtime.LobbyPublisherRoleIF;
@@ -32,12 +32,14 @@ import com.jdon.jivejdon.model.thread.ThreadTagsVO;
 import com.jdon.jivejdon.model.thread.ViewCounter;
 import com.jdon.jivejdon.model.util.ForumModel;
 import com.jdon.jivejdon.model.util.OneOneDTO;
+import com.jdon.jivejdon.pubsub.domain.producer.read.LazyLoaderRole;
+import com.jdon.jivejdon.pubsub.domain.producer.write.MessageEventSourcingRole;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.treepatterns.TreeVisitor;
 import com.jdon.treepatterns.model.TreeModel;
 import com.jdon.util.StringUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicReference;
@@ -205,25 +207,7 @@ public class ForumThread extends ForumModel {
 	 * @return Returns the forumThreadState.
 	 */
 	public ForumThreadState getState() {
-
 		return state.get();
-	}
-
-
-	public Collection<ThreadTag> getTags() {
-		return this.threadTagsVO.getTags();
-	}
-
-	public void changeTags(String[] tagTitles) {
-		if (tagTitles == null || tagTitles.length == 0)
-			return;
-		getRootMessage().setTagTitle(tagTitles);
-		eventSourcing.saveTagTitles(new ThreadTagsSavedEvent(this.threadId,
-				Arrays.asList(tagTitles)));
-	}
-
-	public String[] getTagTitles() {
-		return getRootMessage().getTagTitle();
 	}
 
 	public boolean isRoot(ForumMessage message) {
@@ -294,12 +278,10 @@ public class ForumThread extends ForumModel {
 	public void updateMessage(ForumMessage forumMessage) {
 		if (isRoot(forumMessage)) {
 			this.setRootMessage(forumMessage);
-			changeTags(forumMessage.getTagTitle());
+			setRootMessageTitles();
 		}
-
 		this.state.get().setLatestPost(forumMessage);
 		this.forum.updateNewMessage(forumMessage);
-
 	}
 
 
@@ -358,17 +340,28 @@ public class ForumThread extends ForumModel {
 
 	private void setThreadTagsVO(ThreadTagsVO threadTagsVO) {
 		this.threadTagsVO = threadTagsVO;
+		setRootMessageTitles();
+	}
 
-		// set rootMessage's titles;
-		String[] tagTitles = new String[threadTagsVO.getTags().size()];
-		int i = 0;
-		for (Object o : threadTagsVO.getTags()) {
-			ThreadTag tag = (ThreadTag) o;
-			tagTitles[i] = tag.getTitle();
-			i++;
-		}
+	private void setRootMessageTitles(){
+		String[] tagTitles = threadTagsVO.getTags().stream().map(ThreadTag::getTitle).toArray(String[]::new);
 		getRootMessage().setTagTitle(tagTitles);
 	}
+
+	public Collection<ThreadTag> getTags() {
+		return this.threadTagsVO.getTags();
+	}
+
+	public void changeTags(ThreadTagsVO threadTagsVO) {
+		this.getThreadTagsVO().subscriptionNotify(threadTagsVO.getTags());
+		this.threadTagsVO = threadTagsVO;
+		setRootMessageTitles();
+	}
+
+	public String[] getTagTitles() {
+		return getRootMessage().getTagTitle();
+	}
+
 
 	/**
 	 * all dig for reply messages add to root Message

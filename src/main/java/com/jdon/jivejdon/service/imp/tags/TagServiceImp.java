@@ -20,6 +20,7 @@ import com.jdon.annotation.Service;
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.controller.pool.Poolable;
+import com.jdon.jivejdon.model.thread.ThreadTagsVO;
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.model.ForumThread;
 import com.jdon.jivejdon.model.property.HotKeys;
@@ -137,10 +138,13 @@ public class TagServiceImp implements TagService, Poolable {
 			return;
 		}
 		try {
+			tagRepository.saveTagTitle(threadId, tagTitles);
 			Optional<ForumThread> forumThreadOptional = messageRepository.getForumBuilder()
 					.getThread(threadId);
+			Collection<ThreadTag> newtags = tagRepository.getThreadTags(forumThreadOptional.get());
+			ThreadTagsVO threadTagsVO = new ThreadTagsVO(forumThreadOptional.get(), newtags);
 			// this is update thread in memory cache
-			forumThreadOptional.get().changeTags(tagTitles);
+			forumThreadOptional.get().changeTags(threadTagsVO);
 		} catch (Exception e) {
 			logger.error(e);
 		}

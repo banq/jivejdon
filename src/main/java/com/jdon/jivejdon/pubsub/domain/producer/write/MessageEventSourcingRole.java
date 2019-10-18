@@ -65,11 +65,6 @@ public class MessageEventSourcingRole {
 		return new DomainMessage(event);
 	}
 
-	@Send("saveTags")
-	public DomainMessage saveTagTitles(ThreadTagsSavedEvent event) {
-		return new DomainMessage(event);
-	}
-
 	@Send("saveName")
 	public DomainMessage saveName(ThreadNameSavedEvent event) {
 		return new DomainMessage(event);
