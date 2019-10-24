@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.repository.dao.sql;
+package com.jdon.jivejdon.infrastructure.repository.dao.sql;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,8 +29,8 @@ import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.domain.model.query.specification.TaggedThreadListSpec;
-import com.jdon.jivejdon.repository.dao.SequenceDao;
-import com.jdon.jivejdon.repository.dao.TagDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.SequenceDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.TagDao;
 import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.model.query.PageIteratorSolver;
 

@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.dao.sql;
+package com.jdon.jivejdon.infrastructure.repository.dao.sql;
 
 import java.util.ArrayList;
 import java.util.List;

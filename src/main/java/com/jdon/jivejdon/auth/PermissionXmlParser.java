@@ -24,7 +24,7 @@ import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 
 import com.jdon.controller.config.DTDEntityResolver;
-import com.jdon.jivejdon.model.auth.PermissionRule;
+import com.jdon.jivejdon.domain.model.auth.PermissionRule;
 import com.jdon.util.Debug;
 import com.jdon.util.FileLocator;
 

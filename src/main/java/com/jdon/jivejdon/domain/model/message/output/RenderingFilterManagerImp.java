@@ -13,11 +13,11 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.message.output;
+package com.jdon.jivejdon.domain.model.message.output;
 
-import com.jdon.jivejdon.component.filter.OutFilterManager;
-import com.jdon.jivejdon.model.message.MessageVO;
-import com.jdon.jivejdon.repository.dao.SetupDao;
+import com.jdon.jivejdon.spi.component.filter.OutFilterManager;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
+import com.jdon.jivejdon.infrastructure.repository.dao.SetupDao;
 import com.jdon.jivejdon.util.BeanUtils;
 import com.jdon.jivejdon.util.XMLProperties;
 import org.apache.logging.log4j.LogManager;
@@ -38,15 +38,15 @@ import java.util.function.Function;
 
 /**
  * setup all filter into Database <component name="renderingFilterManager"
- * class="com.jdon.jivejdon.model.message.output.RenderingFilterManagerImp" />
+ * class="com.jdon.jivejdon.domain.model.message.output.RenderingFilterManagerImp" />
  * in component.xml
  * 
  * @author <a href="mailto:banq@163.com">banq</a>
  * 
  */
 public class RenderingFilterManagerImp implements RenderingFilterManager {
-	public static final String[] DEFAULT_FILTER_CLASSES = new String[] { "com.jdon.jivejdon.model.message.output.html.TextStyle",
-			"com.jdon.jivejdon.model.message.output.html.Newline", };
+	public static final String[] DEFAULT_FILTER_CLASSES = new String[] { "com.jdon.jivejdon.domain.model.message.output.html.TextStyle",
+			"com.jdon.jivejdon.domain.model.message.output.html.Newline", };
 	private final static Logger logger = LogManager.getLogger(RenderingFilterManagerImp.class);
 	private static XMLProperties properties = null;
 	private SetupDao setupDao;

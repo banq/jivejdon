@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.api.imp.subscription;
+package com.jdon.jivejdon.api.impl.subscription;
 
 import com.jdon.annotation.Service;
 import com.jdon.annotation.intercept.SessionContextAcceptable;

@@ -1,6 +1,6 @@
-package com.jdon.jivejdon.model.attachment;
+package com.jdon.jivejdon.domain.model.attachment;
 
-import com.jdon.jivejdon.model.ForumMessage;
+import com.jdon.jivejdon.domain.model.ForumMessage;
 
 /**
  * 

@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.model.shortmessage;
+package com.jdon.jivejdon.domain.model.shortmessage;
 
 import com.jdon.annotation.Model;
 

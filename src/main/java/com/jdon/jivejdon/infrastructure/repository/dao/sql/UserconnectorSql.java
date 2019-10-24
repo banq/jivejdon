@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.dao.sql;
+package com.jdon.jivejdon.infrastructure.repository.dao.sql;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -29,9 +29,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.jdon.annotation.Component;
-import com.jdon.jivejdon.infrastructure.component.weibo.UserConnectorAuth;
+import com.jdon.jivejdon.spi.component.weibo.UserConnectorAuth;
 import com.jdon.jivejdon.domain.model.account.OAuthUserVO;
-import com.jdon.jivejdon.repository.acccount.Userconnector;
+import com.jdon.jivejdon.infrastructure.repository.acccount.Userconnector;
 import com.jdon.jivejdon.util.ToolsUtil;
 
 @Component
@@ -49,8 +49,8 @@ public class UserconnectorSql implements Userconnector {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.dao.sql.Userconnector#saveSinaWeiboUserconn
-	 * (java.lang.String, com.jdon.jivejdon.infrastructure.component.weibo.userConnectorAuth)
+	 * com.jdon.jivejdon.infrastructure.repository.dao.sql.Userconnector#saveSinaWeiboUserconn
+	 * (java.lang.String, com.jdon.jivejdon.spi.component.weibo.userConnectorAuth)
 	 */
 	@Override
 	public void saveUserConnectorAuth(UserConnectorAuth userConnectorAuth) {
@@ -85,7 +85,7 @@ public class UserconnectorSql implements Userconnector {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.dao.sql.Userconnector#removeSinaWeiboUserconn
+	 * com.jdon.jivejdon.infrastructure.repository.dao.sql.Userconnector#removeSinaWeiboUserconn
 	 * (java.lang.String, java.lang.String)
 	 */
 	@Override
@@ -105,7 +105,7 @@ public class UserconnectorSql implements Userconnector {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.dao.sql.Userconnector#loadSinaWeiboUserconn
+	 * com.jdon.jivejdon.infrastructure.repository.dao.sql.Userconnector#loadSinaWeiboUserconn
 	 * (java.lang.String, java.lang.String)
 	 */
 	@Override

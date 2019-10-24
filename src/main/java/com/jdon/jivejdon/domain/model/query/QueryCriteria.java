@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.query;
+package com.jdon.jivejdon.domain.model.query;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

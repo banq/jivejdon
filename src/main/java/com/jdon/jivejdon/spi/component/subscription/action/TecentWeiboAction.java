@@ -13,14 +13,14 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.infrastructure.component.subscription.action;
+package com.jdon.jivejdon.spi.component.subscription.action;
 
 import java.net.InetAddress;
 import java.util.Date;
 
-import com.jdon.jivejdon.infrastructure.component.subscription.SubscriptionAction;
-import com.jdon.jivejdon.infrastructure.component.subscription.SubscriptionNotify;
-import com.jdon.jivejdon.infrastructure.component.weibo.UserConnectorAuth;
+import com.jdon.jivejdon.spi.component.subscription.SubscriptionAction;
+import com.jdon.jivejdon.spi.component.subscription.SubscriptionNotify;
+import com.jdon.jivejdon.spi.component.weibo.UserConnectorAuth;
 import com.jdon.jivejdon.domain.model.shortmessage.ShortMessage;
 import com.jdon.jivejdon.domain.model.subscription.Subscription;
 import com.jdon.jivejdon.domain.model.subscription.messsage.WeiboExpiredNotifyMessage;

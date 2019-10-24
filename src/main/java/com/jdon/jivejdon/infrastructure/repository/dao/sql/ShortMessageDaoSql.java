@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jdon.jivejdon.repository.dao.sql;
+package com.jdon.jivejdon.infrastructure.repository.dao.sql;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,7 +29,7 @@ import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.shortmessage.ShortMessage;
 import com.jdon.jivejdon.domain.model.shortmessage.ShortMessageState;
-import com.jdon.jivejdon.repository.dao.ShortMessageDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.ShortMessageDao;
 import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.model.query.PageIteratorSolver;
 

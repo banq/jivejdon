@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.model.event;
+package com.jdon.jivejdon.domain.model.event;
 
 public class ThreadNameSavedEvent {
 

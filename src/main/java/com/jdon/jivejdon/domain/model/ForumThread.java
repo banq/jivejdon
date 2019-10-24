@@ -13,27 +13,27 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.model;
+package com.jdon.jivejdon.domain.model;
 
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.model.event.MessageMovedEvent;
-import com.jdon.jivejdon.model.event.MessageRemoveCommand;
-import com.jdon.jivejdon.model.event.MessageRemovedEvent;
-import com.jdon.jivejdon.model.event.ThreadNameSavedEvent;
-import com.jdon.jivejdon.model.property.ThreadTag;
-import com.jdon.jivejdon.model.realtime.ForumMessageDTO;
-import com.jdon.jivejdon.model.realtime.LobbyPublisherRoleIF;
-import com.jdon.jivejdon.model.realtime.Notification;
-import com.jdon.jivejdon.model.subscription.SubPublisherRoleIF;
-import com.jdon.jivejdon.model.subscription.event.ThreadSubscribedNotifyEvent;
-import com.jdon.jivejdon.model.thread.ThreadTagsVO;
-import com.jdon.jivejdon.model.thread.ViewCounter;
-import com.jdon.jivejdon.model.util.ForumModel;
-import com.jdon.jivejdon.model.util.OneOneDTO;
-import com.jdon.jivejdon.pubsub.domain.producer.read.LazyLoaderRole;
-import com.jdon.jivejdon.pubsub.domain.producer.write.MessageEventSourcingRole;
+import com.jdon.jivejdon.domain.model.event.MessageMovedEvent;
+import com.jdon.jivejdon.domain.model.event.MessageRemoveCommand;
+import com.jdon.jivejdon.domain.model.event.MessageRemovedEvent;
+import com.jdon.jivejdon.domain.model.event.ThreadNameSavedEvent;
+import com.jdon.jivejdon.domain.model.property.ThreadTag;
+import com.jdon.jivejdon.domain.model.realtime.ForumMessageDTO;
+import com.jdon.jivejdon.domain.model.realtime.LobbyPublisherRoleIF;
+import com.jdon.jivejdon.domain.model.realtime.Notification;
+import com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF;
+import com.jdon.jivejdon.domain.model.subscription.event.ThreadSubscribedNotifyEvent;
+import com.jdon.jivejdon.domain.model.thread.ThreadTagsVO;
+import com.jdon.jivejdon.domain.model.thread.ViewCounter;
+import com.jdon.jivejdon.domain.model.util.ForumModel;
+import com.jdon.jivejdon.domain.model.util.OneOneDTO;
+import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
+import com.jdon.jivejdon.spi.pubsub.publish.MessageEventSourcingRole;
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.treepatterns.TreeVisitor;
 import com.jdon.treepatterns.model.TreeModel;

@@ -1,10 +1,10 @@
-package com.jdon.jivejdon.repository.search;
+package com.jdon.jivejdon.infrastructure.repository.search;
 
 import com.jdon.container.pico.Startable;
 import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.jivejdon.domain.model.query.MessageSearchSpec;
-import com.jdon.jivejdon.repository.dao.sql.MessageUtilSQL;
+import com.jdon.jivejdon.infrastructure.repository.dao.sql.MessageUtilSQL;
 import com.jdon.jivejdon.util.ThreadTimer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -97,7 +97,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.jdon.jivejdon.repository.search.MessageSearchRepository#createMessage
+	 * com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#createMessage
 	 * (com.jdon.jivejdon.domain.model.ForumMessage)
 	 */
 	public void createMessage(AnemicMessageDTO forumMessage) {
@@ -126,7 +126,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 //	/*
 //	 * (non-Javadoc)
 //	 *
-//	 * @see com.jdon.jivejdon.repository.search.MessageSearchRepository#
+//	 * @see com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#
 //	 * createMessageReply(com.jdon.jivejdon.domain.model.ForumMessageReply)
 //	 */
 //	@Override
@@ -158,7 +158,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.jdon.jivejdon.repository.search.MessageSearchRepository#updateMessage
+	 * com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#updateMessage
 	 * (com.jdon.jivejdon.domain.model.ForumMessage)
 	 */
 	public void updateMessage(AnemicMessageDTO forumMessage) {
@@ -191,7 +191,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.jdon.jivejdon.repository.search.MessageSearchRepository#deleteMessage
+	 * com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#deleteMessage
 	 * (java.lang.Long)
 	 */
 	@Override
@@ -222,7 +222,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.jdon.jivejdon.repository.search.MessageSearchRepository#find(java
+	 * com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#find(java
 	 * .lang.String, int, int)
 	 */
 	public Collection find(String query, int start, int count) {
@@ -275,7 +275,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.jdon.jivejdon.repository.search.MessageSearchRepository#
+	 * @see com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#
 	 * findThreadsAllCount(java.lang.String)
 	 */
 	public int findThreadsAllCount(String query) {
@@ -303,7 +303,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.jdon.jivejdon.repository.search.MessageSearchRepository#findThread
+	 * com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#findThread
 	 * (java.lang.String, int, int)
 	 */
 	public Collection findThread(String query, int start, int count) {
@@ -370,7 +370,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.jdon.jivejdon.repository.search.MessageSearchRepository#
+	 * @see com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#
 	 * getMessageSearchSpec(java.lang.Long)
 	 */
 	public MessageSearchSpec getMessageSearchSpec(Long messageId) {

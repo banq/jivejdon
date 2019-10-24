@@ -13,11 +13,11 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.realtime;
+package com.jdon.jivejdon.domain.model.realtime;
 
 import junit.framework.TestCase;
 
-import com.jdon.jivejdon.model.realtime.notification.ContentFormatConverter;
+import com.jdon.jivejdon.domain.model.realtime.notification.ContentFormatConverter;
 
 public class NotificationLocatorTest extends TestCase {
 

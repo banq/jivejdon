@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.service.subscription;
+package com.jdon.jivejdon.api.subscription;
 
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;

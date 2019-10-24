@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.infrastructure.component.email;
+package com.jdon.jivejdon.spi.component.email;
 
 import com.jdon.annotation.Service;
 import com.jdon.container.pico.Startable;

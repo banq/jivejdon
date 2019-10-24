@@ -13,13 +13,13 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.shortmessage;
+package com.jdon.jivejdon.domain.model.shortmessage;
 
 import java.util.Observable;
 import java.util.Observer;
 
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.model.account.Account;
+import com.jdon.jivejdon.domain.model.account.Account;
 
 public class AccountSMState implements Observer {
 

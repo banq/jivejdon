@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.pubsub.domain.consumer.write.updatemessage;
+package com.jdon.jivejdon.spi.pubsub.subscriber.updatemessage;
 
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;

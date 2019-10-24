@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.service.util;
+package com.jdon.jivejdon.api.util;
 
 import com.jdon.jivejdon.domain.model.account.Account;
 import org.apache.logging.log4j.LogManager;
@@ -21,7 +21,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.jdon.container.visitor.data.SessionContext;
 import com.jdon.container.visitor.data.SessionContextSetup;
-import com.jdon.jivejdon.repository.acccount.AccountFactory;
+import com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactory;
 import com.jdon.jivejdon.util.ContainerUtil;
 
 /**

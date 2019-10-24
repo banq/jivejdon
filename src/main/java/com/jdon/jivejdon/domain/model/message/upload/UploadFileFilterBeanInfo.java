@@ -14,9 +14,9 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.model.message.upload;
+package com.jdon.jivejdon.domain.model.message.upload;
 
-import com.jdon.jivejdon.model.message.output.beanutil.FilterBeanInfo;
+import com.jdon.jivejdon.domain.model.message.output.beanutil.FilterBeanInfo;
 
 public class UploadFileFilterBeanInfo extends FilterBeanInfo {
 	public static final String[] PROPERTY_NAMES = { "fileShowFileName" };

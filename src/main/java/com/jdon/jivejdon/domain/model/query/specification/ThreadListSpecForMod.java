@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.query.specification;
+package com.jdon.jivejdon.domain.model.query.specification;
 
 public class ThreadListSpecForMod extends ThreadListSpec {
 

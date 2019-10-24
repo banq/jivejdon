@@ -13,9 +13,9 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.subscription.subscribed;
+package com.jdon.jivejdon.domain.model.subscription.subscribed;
 
-import com.jdon.jivejdon.model.Forum;
+import com.jdon.jivejdon.domain.model.Forum;
 
 public class ForumSubscribed implements Subscribed {
 

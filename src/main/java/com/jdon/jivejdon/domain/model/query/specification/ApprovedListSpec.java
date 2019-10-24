@@ -1,8 +1,8 @@
-package com.jdon.jivejdon.model.query.specification;
+package com.jdon.jivejdon.domain.model.query.specification;
 
-import com.jdon.jivejdon.model.account.Account;
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.domain.model.ForumMessage;
+import com.jdon.jivejdon.domain.model.ForumThread;
 
 import java.util.Collection;
 

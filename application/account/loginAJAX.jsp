@@ -24,8 +24,8 @@
 
 
 <%@page import="com.jdon.controller.WebAppUtil,
-              com.jdon.jivejdon.model.account.Account,
-              com.jdon.jivejdon.service.account.AccountService" %>
+              com.jdon.jivejdon.domain.model.account.Account,
+              com.jdon.jivejdon.api.account.AccountService" %>
 <%
   //need at first include IncludeTop.jsp
 //this jsp can save logined account all datas into request, if you inlude this jsp, you can get them. 

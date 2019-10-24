@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.model.message.output.html;
+package com.jdon.jivejdon.domain.model.message.output.html;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

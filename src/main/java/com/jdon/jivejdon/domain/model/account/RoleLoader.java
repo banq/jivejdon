@@ -13,11 +13,11 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.account;
+package com.jdon.jivejdon.domain.model.account;
 
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.pubsub.domain.producer.read.LazyLoaderRole;
-import com.jdon.jivejdon.model.util.LazyLoader;
+import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
+import com.jdon.jivejdon.domain.model.util.LazyLoader;
 
 public class RoleLoader extends LazyLoader {
 

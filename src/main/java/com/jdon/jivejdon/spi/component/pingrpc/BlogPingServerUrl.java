@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.infrastructure.component.pingrpc;
+package com.jdon.jivejdon.spi.component.pingrpc;
 
 public class BlogPingServerUrl {
 	private final String serviceUrl[];

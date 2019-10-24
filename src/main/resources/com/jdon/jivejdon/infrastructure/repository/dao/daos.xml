@@ -9,54 +9,54 @@
       
 		<!--  dao  start-->				
 		<component name="messageDaoFacade"
-			class="com.jdon.jivejdon.repository.dao.MessageDaoFacade"/>		
+			class="com.jdon.jivejdon.infrastructure.repository.dao.MessageDaoFacade"/>
 		
 		<component name="sequenceDao"
-			class="com.jdon.jivejdon.repository.dao.sql.SequenceDaoSql"/>
+			class="com.jdon.jivejdon.infrastructure.repository.dao.sql.SequenceDaoSql"/>
 
 		<component name="forumDao"
-			class="com.jdon.jivejdon.repository.dao.filter.ForumDaoCache"/>
+			class="com.jdon.jivejdon.infrastructure.repository.dao.filter.ForumDaoCache"/>
 
     	<component name="messageDao"
-			class="com.jdon.jivejdon.repository.dao.filter.MessageDaoDecorator"/>		
+			class="com.jdon.jivejdon.infrastructure.repository.dao.filter.MessageDaoDecorator"/>
 		
      	<component name="messageQueryDao"
-			class="com.jdon.jivejdon.repository.dao.filter.MessageQueryDaoProxy"/>	
+			class="com.jdon.jivejdon.infrastructure.repository.dao.filter.MessageQueryDaoProxy"/>
 		
 		<component name="propertyDao"
-			class="com.jdon.jivejdon.repository.dao.sql.PropertyDaoSql"/>	
+			class="com.jdon.jivejdon.infrastructure.repository.dao.sql.PropertyDaoSql"/>
 		
 		<component name="uploadFileDao"
-			class="com.jdon.jivejdon.repository.dao.filter.UploadFileDaoCache"/>
+			class="com.jdon.jivejdon.infrastructure.repository.dao.filter.UploadFileDaoCache"/>
 				
 		<component name="accountDao"
-			class="com.jdon.jivejdon.repository.dao.sql.AccountDaoSql"/>
+			class="com.jdon.jivejdon.infrastructure.repository.dao.sql.AccountDaoSql"/>
 		
 		<component name="accountSSOSql"
-			class="com.jdon.jivejdon.repository.dao.sql.AccountSSOSql"/>
+			class="com.jdon.jivejdon.infrastructure.repository.dao.sql.AccountSSOSql"/>
 		
     	<component name="setupDao"
-			class="com.jdon.jivejdon.repository.dao.sql.SetupDaoSql"/>
+			class="com.jdon.jivejdon.infrastructure.repository.dao.sql.SetupDaoSql"/>
 						
 		<component name="shortMessageDao" 
-			class="com.jdon.jivejdon.repository.dao.sql.ShortMessageDaoSql">
+			class="com.jdon.jivejdon.infrastructure.repository.dao.sql.ShortMessageDaoSql">
 		</component>
 		
 		<component name="tagDaoCache" 
-			class="com.jdon.jivejdon.repository.dao.filter.TagDaoCache">
+			class="com.jdon.jivejdon.infrastructure.repository.dao.filter.TagDaoCache">
 		</component>
 		<!--  dao  end-->				
 			
 		
 		<!--  DataSource  -->	
 		<component name="jdbcTempSource"
-			class="com.jdon.jivejdon.repository.dao.sql.JdbcTempSource">
+			class="com.jdon.jivejdon.infrastructure.repository.dao.sql.JdbcTempSource">
 	       <constructor value="java:comp/env/jdbc/JiveJdonDS"/>
         </component>
 				
     	<!--  DataSource for SSO -->	
 		<component name="jdbcTempSSOSource"
-			class="com.jdon.jivejdon.repository.dao.sql.JdbcTempSSOSource">     
+			class="com.jdon.jivejdon.infrastructure.repository.dao.sql.JdbcTempSSOSource">
        <!-- tomcat jndi     --> 
            <constructor value="java:comp/env/jdbc/SecurityDS"/>
                <!-- tomcat jndi  if context.xml not configure Security data soure, use below

@@ -26,7 +26,7 @@
               </span>
             
             <%
-             com.jdon.jivejdon.model.ForumThread thread = (com.jdon.jivejdon.model.ForumThread)pageContext.getAttribute("forumThread");
+             com.jdon.jivejdon.domain.model.ForumThread thread = (com.jdon.jivejdon.domain.model.ForumThread)pageContext.getAttribute("forumThread");
              int bodylength = thread.getRootMessage().getMessageVO().getBody().length();
              java.text.DecimalFormat df  = new java.text.DecimalFormat("#.000");
              int bl = bodylength/1024;

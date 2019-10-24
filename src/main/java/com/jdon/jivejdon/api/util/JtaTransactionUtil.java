@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.service.util;
+package com.jdon.jivejdon.api.util;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;

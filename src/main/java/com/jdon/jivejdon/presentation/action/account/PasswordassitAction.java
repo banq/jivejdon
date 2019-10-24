@@ -31,11 +31,11 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.model.account.Account;
-import com.jdon.jivejdon.model.account.PasswordassitVO;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.domain.model.account.PasswordassitVO;
 import com.jdon.jivejdon.presentation.action.account.oauth.CallUtil;
 import com.jdon.jivejdon.presentation.form.SkinUtils;
-import com.jdon.jivejdon.service.account.AccountService;
+import com.jdon.jivejdon.api.account.AccountService;
 
 public class PasswordassitAction extends Action {
 	private final static Logger logger = LogManager.getLogger(PasswordassitAction.class);

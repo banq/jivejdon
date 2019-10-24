@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.infrastructure.component.mapreduce;
+package com.jdon.jivejdon.spi.component.mapreduce;
 
 import java.util.Comparator;
 import java.util.Map;

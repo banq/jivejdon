@@ -13,9 +13,9 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.message.output.shield;
+package com.jdon.jivejdon.domain.model.message.output.shield;
 
-import com.jdon.jivejdon.model.message.output.beanutil.FilterBeanInfo;
+import com.jdon.jivejdon.domain.model.message.output.beanutil.FilterBeanInfo;
 
 /**
  * BeanInfo class for the Profanity filter.

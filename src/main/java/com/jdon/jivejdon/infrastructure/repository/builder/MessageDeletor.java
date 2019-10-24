@@ -13,11 +13,11 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.builder;
+package com.jdon.jivejdon.infrastructure.repository.builder;
 
 import org.apache.logging.log4j.*;
 
-import com.jdon.jivejdon.repository.MessageRepository;
+import com.jdon.jivejdon.infrastructure.repository.MessageRepository;
 import com.jdon.treepatterns.composite.Branch;
 import com.jdon.treepatterns.composite.Leaf;
 import com.jdon.treepatterns.visitor.RecursiveNodeWalker;

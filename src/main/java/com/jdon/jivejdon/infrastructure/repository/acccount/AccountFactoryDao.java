@@ -1,9 +1,9 @@
-package com.jdon.jivejdon.repository.acccount;
+package com.jdon.jivejdon.infrastructure.repository.acccount;
 
 import com.jdon.container.pico.Startable;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.auth.Role;
-import com.jdon.jivejdon.repository.dao.AccountDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.AccountDao;
 import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
@@ -31,7 +31,7 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.acccount.AccountFactory#getFullAccount(com.jdon.jivejdon
+	 * com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactory#getFullAccount(com.jdon.jivejdon
 	 * .model.Account)
 	 */
 	public Account getFullAccount(Account accountIn) {
@@ -100,7 +100,7 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.acccount.AccountFactory#getFullAccount(java.lang.
+	 * com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactory#getFullAccount(java.lang.
 	 * String)
 	 */
 	public Account getFullAccount(String userId) {

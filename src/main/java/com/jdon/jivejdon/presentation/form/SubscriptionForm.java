@@ -6,11 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 
-import com.jdon.jivejdon.component.subscription.SubscriptionActionHolder;
-import com.jdon.jivejdon.component.subscription.action.EmailAction;
-import com.jdon.jivejdon.component.subscription.action.ShortMsgAction;
-import com.jdon.jivejdon.model.subscription.subscribed.Subscribed;
-import com.jdon.jivejdon.repository.subscription.SubscribedFactory;
+import com.jdon.jivejdon.spi.component.subscription.SubscriptionActionHolder;
+import com.jdon.jivejdon.spi.component.subscription.action.EmailAction;
+import com.jdon.jivejdon.spi.component.subscription.action.ShortMsgAction;
+import com.jdon.jivejdon.domain.model.subscription.subscribed.Subscribed;
+import com.jdon.jivejdon.infrastructure.repository.subscription.SubscribedFactory;
 
 public class SubscriptionForm extends BaseForm {
 	/**

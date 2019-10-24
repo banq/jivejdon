@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.service;
+package com.jdon.jivejdon.api;
 
 import com.jdon.controller.events.EventModel;
 import com.jdon.jivejdon.auth.CUDInputInterceptor;

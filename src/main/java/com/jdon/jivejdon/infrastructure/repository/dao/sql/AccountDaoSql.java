@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.dao.sql;
+package com.jdon.jivejdon.infrastructure.repository.dao.sql;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,9 +29,9 @@ import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.account.PasswordassitVO;
-import com.jdon.jivejdon.repository.acccount.AccountRepository;
-import com.jdon.jivejdon.repository.acccount.AccountInitFactory;
-import com.jdon.jivejdon.repository.dao.AccountDao;
+import com.jdon.jivejdon.infrastructure.repository.acccount.AccountRepository;
+import com.jdon.jivejdon.infrastructure.repository.acccount.AccountInitFactory;
+import com.jdon.jivejdon.infrastructure.repository.dao.AccountDao;
 import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.jivejdon.util.ToolsUtil;
 import com.jdon.model.query.PageIteratorSolver;

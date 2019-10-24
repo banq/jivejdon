@@ -12,7 +12,7 @@ import org.apache.struts.action.ActionMapping;
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.presentation.form.QueryForm;
-import com.jdon.jivejdon.service.ForumService;
+import com.jdon.jivejdon.api.ForumService;
 import com.jdon.util.UtilValidate;
 
 public class QueryViewAction extends Action {

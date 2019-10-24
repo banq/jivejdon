@@ -28,7 +28,7 @@ import java.util.StringTokenizer;
 
 import org.apache.logging.log4j.*;
 
-import com.jdon.jivejdon.model.message.output.beanutil.FilterBeanInfo;
+import com.jdon.jivejdon.domain.model.message.output.beanutil.FilterBeanInfo;
   
 
 /**

@@ -110,4 +110,8 @@ public class SequenceDaoSql implements SequenceDao {
 			currentIDs.put(idType, new Long(currentID));
 		} catch (Exception e) {
 			logger.error(e);
-			throw new SQLException(e.
+			throw new SQLException(e.getMessage());
+		}
+	}
+
+}

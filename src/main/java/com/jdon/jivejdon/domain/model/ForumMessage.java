@@ -13,31 +13,31 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.model;
+package com.jdon.jivejdon.domain.model;
 
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
 import com.jdon.annotation.model.OnCommand;
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.pubsub.domain.producer.read.LazyLoaderRole;
-import com.jdon.jivejdon.pubsub.domain.producer.write.MessageEventSourcingRole;
-import com.jdon.jivejdon.pubsub.domain.producer.write.ShortMPublisherRole;
-import com.jdon.jivejdon.model.account.Account;
-import com.jdon.jivejdon.model.attachment.AttachmentsVO;
-import com.jdon.jivejdon.model.attachment.UploadFile;
-import com.jdon.jivejdon.model.event.MessagePropertiesUpdatedEvent;
-import com.jdon.jivejdon.model.event.MessageUpdatedEvent;
-import com.jdon.jivejdon.model.event.ReplyMessageCreatedEvent;
-import com.jdon.jivejdon.model.event.UploadFilesSavedEvent;
-import com.jdon.jivejdon.model.message.AnemicMessageDTO;
-import com.jdon.jivejdon.model.message.FilterPipleSpec;
-import com.jdon.jivejdon.model.message.MessageUrlVO;
-import com.jdon.jivejdon.model.message.MessageVO;
-import com.jdon.jivejdon.model.property.MessagePropertysVO;
-import com.jdon.jivejdon.model.property.Property;
-import com.jdon.jivejdon.model.reblog.ReBlogVO;
-import com.jdon.jivejdon.model.util.ForumModel;
+import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
+import com.jdon.jivejdon.spi.pubsub.publish.MessageEventSourcingRole;
+import com.jdon.jivejdon.spi.pubsub.publish.ShortMPublisherRole;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.domain.model.attachment.AttachmentsVO;
+import com.jdon.jivejdon.domain.model.attachment.UploadFile;
+import com.jdon.jivejdon.domain.model.event.MessagePropertiesUpdatedEvent;
+import com.jdon.jivejdon.domain.model.event.MessageUpdatedEvent;
+import com.jdon.jivejdon.domain.model.event.ReplyMessageCreatedEvent;
+import com.jdon.jivejdon.domain.model.event.UploadFilesSavedEvent;
+import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.domain.model.message.FilterPipleSpec;
+import com.jdon.jivejdon.domain.model.message.MessageUrlVO;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.property.MessagePropertysVO;
+import com.jdon.jivejdon.domain.model.property.Property;
+import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
+import com.jdon.jivejdon.domain.model.util.ForumModel;
 
 import java.util.Collection;
 

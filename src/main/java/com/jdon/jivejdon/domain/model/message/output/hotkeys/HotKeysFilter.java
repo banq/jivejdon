@@ -14,11 +14,11 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.model.message.output.hotkeys;
+package com.jdon.jivejdon.domain.model.message.output.hotkeys;
 
-import com.jdon.jivejdon.model.property.HotKeys;
-import com.jdon.jivejdon.model.property.Property;
-import com.jdon.jivejdon.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.property.HotKeys;
+import com.jdon.jivejdon.domain.model.property.Property;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.util.Debug;
 
 import java.util.Iterator;

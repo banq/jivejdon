@@ -11,9 +11,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.model.attachment.UploadFile;
-import com.jdon.jivejdon.model.message.upload.UploadFileFilter;
-import com.jdon.jivejdon.service.property.UploadService;
+import com.jdon.jivejdon.domain.model.attachment.UploadFile;
+import com.jdon.jivejdon.domain.model.message.upload.UploadFileFilter;
+import com.jdon.jivejdon.api.property.UploadService;
 import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
 
@@ -30,7 +30,7 @@ public class UploadShowAction extends Action {
 			throw new Exception("parameter id is null");
 
 		// see
-		// com.jdon.jivejdon.model.message.upload.MessageRenderingFile/MessageRenderingImage
+		// com.jdon.jivejdon.domain.model.message.upload.MessageRenderingFile/MessageRenderingImage
 		String type = request.getParameter("type");
 		if (UtilValidate.isEmpty(type))
 			type = "image/JPEG";

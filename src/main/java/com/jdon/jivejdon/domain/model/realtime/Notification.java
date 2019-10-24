@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.realtime;
+package com.jdon.jivejdon.domain.model.realtime;
 
 import java.util.Date;
 

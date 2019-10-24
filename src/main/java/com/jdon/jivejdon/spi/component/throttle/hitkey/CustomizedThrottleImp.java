@@ -1,11 +1,11 @@
-package com.jdon.jivejdon.infrastructure.component.throttle.hitkey;
+package com.jdon.jivejdon.spi.component.throttle.hitkey;
 
 import org.apache.logging.log4j.*;
 
 import com.jdon.annotation.Component;
 import com.jdon.cache.UtilCache;
 import com.jdon.container.pico.Startable;
-import com.jdon.jivejdon.infrastructure.component.block.IPBanListManagerIF;
+import com.jdon.jivejdon.spi.component.block.IPBanListManagerIF;
 import com.jdon.jivejdon.util.ExpiringCacheEntry;
 
 @Component("customizedThrottle")
@@ -32,15 +32,15 @@ public class CustomizedThrottleImp implements CustomizedThrottle, Startable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.infrastructure.component.throttle.ThrottleManagerIF#processHitFilter
+	 * com.jdon.jivejdon.spi.component.throttle.ThrottleManagerIF#processHitFilter
 	 * (java.lang.String)
 	 */
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.infrastructure.component.throttle.img.ImgshowThrottle#processHitFilter
-	 * (com.jdon.jivejdon.infrastructure.component.throttle.img.ImgHitKey)
+	 * com.jdon.jivejdon.spi.component.throttle.img.ImgshowThrottle#processHitFilter
+	 * (com.jdon.jivejdon.spi.component.throttle.img.ImgHitKey)
 	 */
 	public boolean processHitFilter(HitKeyIF hitKey) {
 

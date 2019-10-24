@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.model.message;
+package com.jdon.jivejdon.domain.model.message;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

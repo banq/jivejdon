@@ -21,23 +21,23 @@
   
   <plug-in className="com.jdon.strutsutil.InitPlugIn">
     <set-property property="modelmapping-config"  
-    value="com.jdon.jivejdon.model.models.xml" />
+    value="com.jdon.jivejdon.domain.model.models.xml" />
   </plug-in>
   <plug-in className="com.jdon.strutsutil.InitPlugIn">
     <set-property property="modelmapping-config"  
-    value="com.jdon.jivejdon.model.others.models.xml" />
+    value="com.jdon.jivejdon.domain.model.others.models.xml" />
   </plug-in>
   <plug-in className="com.jdon.strutsutil.InitPlugIn">
     <set-property property="modelmapping-config"  
-    value="com.jdon.jivejdon.component.managers.xml" />
+    value="com.jdon.jivejdon.spi.component.managers.xml" />
   </plug-in>
   <plug-in className="com.jdon.strutsutil.InitPlugIn">
     <set-property property="modelmapping-config"  
-    value="com.jdon.jivejdon.repository.repository.xml" />
+    value="com.jdon.jivejdon.infrastructure.repository.repository.xml" />
   </plug-in>
   <plug-in className="com.jdon.strutsutil.InitPlugIn">
     <set-property property="modelmapping-config"  
-    value="com.jdon.jivejdon.repository.dao.daos.xml" />
+    value="com.jdon.jivejdon.infrastructure.repository.dao.daos.xml" />
   </plug-in>  
   <plug-in className="com.jdon.strutsutil.InitPlugIn">
     <set-property property="modelmapping-config"  

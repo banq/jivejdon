@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.infrastructure.component.weibo;
+package com.jdon.jivejdon.spi.component.weibo;
 
 public class WeiboTransferParamVO {
 

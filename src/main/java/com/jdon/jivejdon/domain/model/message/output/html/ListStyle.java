@@ -1,6 +1,6 @@
-package com.jdon.jivejdon.model.message.output.html;
+package com.jdon.jivejdon.domain.model.message.output.html;
 
-import com.jdon.jivejdon.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 
 import java.util.function.Function;
 

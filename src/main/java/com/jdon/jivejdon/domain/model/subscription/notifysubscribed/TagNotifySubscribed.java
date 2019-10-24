@@ -1,10 +1,10 @@
-package com.jdon.jivejdon.model.subscription.notifysubscribed;
+package com.jdon.jivejdon.domain.model.subscription.notifysubscribed;
 
-import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.model.shortmessage.ShortMessage;
-import com.jdon.jivejdon.model.property.ThreadTag;
-import com.jdon.jivejdon.model.subscription.Subscription;
-import com.jdon.jivejdon.model.subscription.messsage.TagNotifyMessage;
+import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.shortmessage.ShortMessage;
+import com.jdon.jivejdon.domain.model.property.ThreadTag;
+import com.jdon.jivejdon.domain.model.subscription.Subscription;
+import com.jdon.jivejdon.domain.model.subscription.messsage.TagNotifyMessage;
 import com.jdon.util.StringUtil;
 
 public class TagNotifySubscribed implements NotifySubscribed {

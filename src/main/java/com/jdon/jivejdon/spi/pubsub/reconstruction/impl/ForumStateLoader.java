@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.pubsub.domain.consumer.read;
+package com.jdon.jivejdon.spi.pubsub.reconstruction.impl;
 
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;

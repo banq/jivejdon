@@ -14,14 +14,14 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.repository.dao.filter;
+package com.jdon.jivejdon.infrastructure.repository.dao.filter;
 
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.pointcut.Around;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
-import com.jdon.jivejdon.repository.dao.SequenceDao;
-import com.jdon.jivejdon.repository.dao.sql.JdbcTempSource;
-import com.jdon.jivejdon.repository.dao.sql.TagDaoSql;
+import com.jdon.jivejdon.infrastructure.repository.dao.SequenceDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.sql.JdbcTempSource;
+import com.jdon.jivejdon.infrastructure.repository.dao.sql.TagDaoSql;
 import com.jdon.jivejdon.util.ContainerUtil;
 
 @Introduce("modelCache")

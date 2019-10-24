@@ -33,3 +33,5 @@ public class AccountSubscribedNotifyEvent implements SubscribedNotifyEvent {
 	public long getMessageId() {
 		return messageId;
 	}
+
+}

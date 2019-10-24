@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.shortmessage;
+package com.jdon.jivejdon.infrastructure.repository.shortmessage;
 
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.domain.model.account.Account;

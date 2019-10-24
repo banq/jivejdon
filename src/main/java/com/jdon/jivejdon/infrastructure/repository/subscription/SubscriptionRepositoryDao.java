@@ -1,12 +1,12 @@
-package com.jdon.jivejdon.repository.subscription;
+package com.jdon.jivejdon.infrastructure.repository.subscription;
 
 import com.jdon.annotation.Component;
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.subscription.Subscription;
-import com.jdon.jivejdon.repository.acccount.AccountFactory;
-import com.jdon.jivejdon.repository.dao.SequenceDao;
-import com.jdon.jivejdon.repository.dao.SubscriptionDao;
+import com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactory;
+import com.jdon.jivejdon.infrastructure.repository.dao.SequenceDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.SubscriptionDao;
 
 import java.sql.SQLException;
 
@@ -32,7 +32,7 @@ public class SubscriptionRepositoryDao implements SubscriptionRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.subscription.SubscriptionRepository#createSubscription
+	 * com.jdon.jivejdon.infrastructure.repository.subscription.SubscriptionRepository#createSubscription
 	 * (com.jdon.jivejdon.domain.model.subscription.Subscription)
 	 */
 	public void createSubscription(Subscription subscription) {
@@ -49,7 +49,7 @@ public class SubscriptionRepositoryDao implements SubscriptionRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.subscription.SubscriptionRepository#getSubscription(java
+	 * com.jdon.jivejdon.infrastructure.repository.subscription.SubscriptionRepository#getSubscription(java
 	 * .lang.Long)
 	 */
 	public Subscription getSubscription(Long id) {
@@ -61,7 +61,7 @@ public class SubscriptionRepositoryDao implements SubscriptionRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.subscription.SubscriptionRepository#getFullSub(com.jdon
+	 * com.jdon.jivejdon.infrastructure.repository.subscription.SubscriptionRepository#getFullSub(com.jdon
 	 * .jivejdon.model.subscription.Subscription)
 	 */
 	public Subscription getFullSub(Subscription subscription) {
@@ -75,7 +75,7 @@ public class SubscriptionRepositoryDao implements SubscriptionRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.subscription.SubscriptionRepository#deleteSubscription
+	 * com.jdon.jivejdon.infrastructure.repository.subscription.SubscriptionRepository#deleteSubscription
 	 * (com.jdon.jivejdon.domain.model.subscription.Subscription)
 	 */
 	public void deleteSubscription(Subscription subscription) {
@@ -86,7 +86,7 @@ public class SubscriptionRepositoryDao implements SubscriptionRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.subscription.SubscriptionRepository#getSubscriptionDao()
+	 * com.jdon.jivejdon.infrastructure.repository.subscription.SubscriptionRepository#getSubscriptionDao()
 	 */
 	public SubscriptionDao getSubscriptionDao() {
 		return subscriptionDao;

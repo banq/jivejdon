@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.service;
+package com.jdon.jivejdon.api;
 
 import java.util.Collection;
 

@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.dao.sql;
+package com.jdon.jivejdon.infrastructure.repository.dao.sql;
 
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.domain.model.query.QueryCriteria;
@@ -21,8 +21,8 @@ import com.jdon.jivejdon.domain.model.query.QuerySpecification;
 import com.jdon.jivejdon.domain.model.query.ResultSort;
 import com.jdon.jivejdon.domain.model.query.specification.QuerySpecDBModifiedDate;
 import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
-import com.jdon.jivejdon.repository.query.MessagePageIteratorSolver;
-import com.jdon.jivejdon.repository.dao.MessageQueryDao;
+import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
+import com.jdon.jivejdon.infrastructure.repository.dao.MessageQueryDao;
 import com.jdon.model.query.block.Block;
 import com.jdon.treepatterns.model.TreeModel;
 import org.apache.logging.log4j.LogManager;

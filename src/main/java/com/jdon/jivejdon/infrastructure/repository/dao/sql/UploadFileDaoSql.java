@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.dao.sql;
+package com.jdon.jivejdon.infrastructure.repository.dao.sql;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,7 +35,7 @@ import com.jdon.util.UtilValidate;
  * @author banq(http://www.jdon.com)
  * 
  */
-public abstract class UploadFileDaoSql implements com.jdon.jivejdon.repository.dao.UploadFileDao {
+public abstract class UploadFileDaoSql implements com.jdon.jivejdon.infrastructure.repository.dao.UploadFileDao {
 	private final static Logger logger = LogManager.getLogger(UploadFileDaoSql.class);
 
 	protected PageIteratorSolver pageIteratorSolver;

@@ -13,9 +13,9 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.account;
+package com.jdon.jivejdon.domain.model.account;
 
-import com.jdon.jivejdon.component.weibo.UserConnectorAuth;
+import com.jdon.jivejdon.spi.component.weibo.UserConnectorAuth;
 
 public class OAuthUserVO {
 

@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.api.imp;
+package com.jdon.jivejdon.api.impl;
 
 import com.jdon.annotation.Service;
 import com.jdon.controller.model.PageIterator;

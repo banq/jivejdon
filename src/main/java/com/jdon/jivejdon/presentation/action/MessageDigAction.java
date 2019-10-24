@@ -1,12 +1,12 @@
 package com.jdon.jivejdon.presentation.action;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.component.throttle.hitkey.CustomizedThrottle;
-import com.jdon.jivejdon.component.throttle.hitkey.HitKeyIF;
-import com.jdon.jivejdon.component.throttle.hitkey.HitKeySame;
-import com.jdon.jivejdon.model.ForumMessage;
+import com.jdon.jivejdon.spi.component.throttle.hitkey.CustomizedThrottle;
+import com.jdon.jivejdon.spi.component.throttle.hitkey.HitKeyIF;
+import com.jdon.jivejdon.spi.component.throttle.hitkey.HitKeySame;
+import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.presentation.filter.SpamFilterTooFreq;
-import com.jdon.jivejdon.service.ForumMessageService;
+import com.jdon.jivejdon.api.ForumMessageService;
 import com.jdon.util.UtilValidate;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;

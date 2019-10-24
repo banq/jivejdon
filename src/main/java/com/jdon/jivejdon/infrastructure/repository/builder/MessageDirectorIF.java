@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.repository.builder;
+package com.jdon.jivejdon.infrastructure.repository.builder;
 
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;

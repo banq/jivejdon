@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.model.query;
+package com.jdon.jivejdon.domain.model.query;
 
 import com.jdon.util.UtilDateTime;
 import com.jdon.util.UtilValidate;

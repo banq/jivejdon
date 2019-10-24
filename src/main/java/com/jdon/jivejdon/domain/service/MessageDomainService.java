@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.service.imp.message;
+package com.jdon.jivejdon.domain.service;
 
 import com.jdon.annotation.model.Owner;
 import com.jdon.annotation.model.Receiver;
@@ -24,11 +24,11 @@ import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
-import com.jdon.jivejdon.service.query.ForumMessageQueryService;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 
 import java.util.Optional;
 
-public interface MessageKernelIF {
+public interface MessageDomainService {
 
 	/**
 	 * get the full forum in forumMessage, and return it.

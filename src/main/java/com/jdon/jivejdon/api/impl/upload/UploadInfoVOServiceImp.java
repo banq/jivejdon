@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.api.imp.upload;
+package com.jdon.jivejdon.api.impl.upload;
 
 import com.jdon.annotation.intercept.Poolable;
 import com.jdon.controller.events.EventModel;

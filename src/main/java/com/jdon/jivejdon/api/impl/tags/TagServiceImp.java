@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.api.imp.tags;
+package com.jdon.jivejdon.api.impl.tags;
 
 import com.jdon.annotation.Service;
 import com.jdon.controller.events.EventModel;

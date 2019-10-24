@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 
-import com.jdon.jivejdon.model.property.Property;
+import com.jdon.jivejdon.domain.model.property.Property;
 import com.jdon.model.ModelForm;
 
 public class QueryForm extends ModelForm {

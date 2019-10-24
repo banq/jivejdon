@@ -21,7 +21,7 @@ import org.apache.logging.log4j.*;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.service.shortmessage.ShortMessageService;
+import com.jdon.jivejdon.api.shortmessage.ShortMessageService;
 import com.jdon.strutsutil.ModelListAction;
 
 /**

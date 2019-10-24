@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.infrastructure.component.block;
+package com.jdon.jivejdon.spi.component.block;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,9 +21,9 @@ import java.util.concurrent.TimeUnit;
 
 import com.jdon.annotation.Component;
 import com.jdon.container.pico.Startable;
-import com.jdon.jivejdon.infrastructure.component.throttle.hitkey.CustomizedThrottle;
-import com.jdon.jivejdon.infrastructure.component.throttle.hitkey.HitKeyIF;
-import com.jdon.jivejdon.infrastructure.component.throttle.hitkey.HitKeySame;
+import com.jdon.jivejdon.spi.component.throttle.hitkey.CustomizedThrottle;
+import com.jdon.jivejdon.spi.component.throttle.hitkey.HitKeyIF;
+import com.jdon.jivejdon.spi.component.throttle.hitkey.HitKeySame;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;
 
 @Component("errorBlocker")
@@ -56,7 +56,7 @@ public class ErrorBlocker implements Startable, ErrorBlockerIF {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.infrastructure.component.block.ErrorBlockerIF#doErrorIP(java.lang.String
+	 * com.jdon.jivejdon.spi.component.block.ErrorBlockerIF#doErrorIP(java.lang.String
 	 * , int)
 	 */
 	public boolean checkRate(String ip, int callcount) {

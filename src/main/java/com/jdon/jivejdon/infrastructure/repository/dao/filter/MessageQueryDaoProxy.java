@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.dao.filter;
+package com.jdon.jivejdon.infrastructure.repository.dao.filter;
 
 import java.util.Collection;
 import java.util.Map;
@@ -21,11 +21,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.jdon.container.pico.Startable;
 import com.jdon.jivejdon.domain.model.util.CachedCollection;
-import com.jdon.jivejdon.repository.query.MessagePageIteratorSolver;
-import com.jdon.jivejdon.repository.dao.AccountDao;
-import com.jdon.jivejdon.repository.dao.sql.JdbcTempSource;
-import com.jdon.jivejdon.repository.dao.sql.MessageQueryDaoSql;
-import com.jdon.jivejdon.repository.search.MessageSearchRepository;
+import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
+import com.jdon.jivejdon.infrastructure.repository.dao.AccountDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.sql.JdbcTempSource;
+import com.jdon.jivejdon.infrastructure.repository.dao.sql.MessageQueryDaoSql;
+import com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository;
 
 /**
  * @author banq(http://www.jdon.com)

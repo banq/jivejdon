@@ -1,14 +1,14 @@
 package com.jdon.jivejdon.presentation.action.tag;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.component.throttle.hitkey.CustomizedThrottle;
-import com.jdon.jivejdon.component.throttle.hitkey.HitKeyIF;
-import com.jdon.jivejdon.component.throttle.hitkey.HitKeySame;
-import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.model.account.Account;
-import com.jdon.jivejdon.service.account.AccountService;
-import com.jdon.jivejdon.service.ForumMessageService;
-import com.jdon.jivejdon.service.property.TagService;
+import com.jdon.jivejdon.spi.component.throttle.hitkey.CustomizedThrottle;
+import com.jdon.jivejdon.spi.component.throttle.hitkey.HitKeyIF;
+import com.jdon.jivejdon.spi.component.throttle.hitkey.HitKeySame;
+import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.api.account.AccountService;
+import com.jdon.jivejdon.api.ForumMessageService;
+import com.jdon.jivejdon.api.property.TagService;
 import com.jdon.util.UtilValidate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

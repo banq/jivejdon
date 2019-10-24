@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.infrastructure.component.subscription;
+package com.jdon.jivejdon.spi.component.subscription;
 
 import java.util.Collection;
 
@@ -7,13 +7,13 @@ import org.apache.logging.log4j.Logger;
 
 import com.google.common.eventbus.Subscribe;
 import com.jdon.annotation.Component;
-import com.jdon.jivejdon.infrastructure.component.account.SinaOAuthSubmitter;
-import com.jdon.jivejdon.infrastructure.component.email.SubscriptionEmail;
-import com.jdon.jivejdon.infrastructure.component.shortmessage.ShortMessageFactory;
-import com.jdon.jivejdon.infrastructure.component.subscription.action.QueueListerner;
-import com.jdon.jivejdon.infrastructure.component.subscription.action.ShortMsgAction;
-import com.jdon.jivejdon.infrastructure.component.subscription.action.ShortMsgActionList;
-import com.jdon.jivejdon.infrastructure.component.weibo.TecentWeiboSubmitter;
+import com.jdon.jivejdon.spi.component.account.SinaOAuthSubmitter;
+import com.jdon.jivejdon.spi.component.email.SubscriptionEmail;
+import com.jdon.jivejdon.spi.component.shortmessage.ShortMessageFactory;
+import com.jdon.jivejdon.spi.component.subscription.action.QueueListerner;
+import com.jdon.jivejdon.spi.component.subscription.action.ShortMsgAction;
+import com.jdon.jivejdon.spi.component.subscription.action.ShortMsgActionList;
+import com.jdon.jivejdon.spi.component.weibo.TecentWeiboSubmitter;
 import com.jdon.jivejdon.domain.model.subscription.Subscription;
 import com.jdon.jivejdon.domain.model.subscription.event.SubscribedNotifyEvent;
 import com.jdon.jivejdon.domain.model.subscription.notifysubscribed.NotifySubscribed;

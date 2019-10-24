@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.search;
+package com.jdon.jivejdon.infrastructure.repository.search;
 
 import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
 

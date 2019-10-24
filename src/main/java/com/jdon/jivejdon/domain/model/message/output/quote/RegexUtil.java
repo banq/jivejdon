@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.model.message.output.quote;
+package com.jdon.jivejdon.domain.model.message.output.quote;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

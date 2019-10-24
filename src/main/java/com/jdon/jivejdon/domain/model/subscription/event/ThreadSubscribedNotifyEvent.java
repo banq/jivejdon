@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.subscription.event;
+package com.jdon.jivejdon.domain.model.subscription.event;
 
 public class ThreadSubscribedNotifyEvent implements SubscribedNotifyEvent {
 	private final Long threadId;

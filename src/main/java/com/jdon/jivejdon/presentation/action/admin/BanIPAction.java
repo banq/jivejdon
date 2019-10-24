@@ -13,7 +13,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.component.block.IPBanListManagerIF;
+import com.jdon.jivejdon.spi.component.block.IPBanListManagerIF;
 import com.jdon.util.UtilValidate;
 
 public class BanIPAction extends Action {

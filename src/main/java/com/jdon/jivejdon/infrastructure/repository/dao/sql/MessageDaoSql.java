@@ -13,7 +13,7 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.repository.dao.sql;
+package com.jdon.jivejdon.infrastructure.repository.dao.sql;
 
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.ForumMessage;
@@ -21,8 +21,8 @@ import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.jivejdon.domain.model.util.OneOneDTO;
-import com.jdon.jivejdon.repository.builder.MessageInitFactory;
-import com.jdon.jivejdon.repository.dao.MessageDao;
+import com.jdon.jivejdon.infrastructure.repository.builder.MessageInitFactory;
+import com.jdon.jivejdon.infrastructure.repository.dao.MessageDao;
 import com.jdon.jivejdon.util.ToolsUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -13,13 +13,13 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.pubsub.domain.consumer.write.addReplyMessage;
+package com.jdon.jivejdon.spi.pubsub.subscriber.addReplyMessage;
 
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.pubsub.domain.consumer.write.MessageTransactionPersistence;
-import com.jdon.jivejdon.pubsub.domain.consumer.write.updatemessage.MessageSaveListener;
+import com.jdon.jivejdon.spi.pubsub.subscriber.MessageTransactionPersistence;
+import com.jdon.jivejdon.spi.pubsub.subscriber.updatemessage.MessageSaveListener;
 import com.jdon.jivejdon.domain.model.event.ReplyMessageCreatedEvent;
 import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;

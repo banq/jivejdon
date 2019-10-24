@@ -196,4 +196,6 @@ public class MessageInitFactory {
 		account.setModifiedDate("");
 		account.setCreationDate("");
 		account.setAnonymous(true);
-		return ac
+		return account;
+	}
+}

@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.pubsub.domain.consumer.write.delmessage;
+package com.jdon.jivejdon.spi.pubsub.subscriber.delmessage;
 
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;

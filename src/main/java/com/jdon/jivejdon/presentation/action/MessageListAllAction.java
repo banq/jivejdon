@@ -19,9 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.service.query.ForumMessageQueryService;
-import com.jdon.jivejdon.service.ForumMessageService;
+import com.jdon.jivejdon.domain.model.ForumMessage;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
+import com.jdon.jivejdon.api.ForumMessageService;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.util.Debug;
 

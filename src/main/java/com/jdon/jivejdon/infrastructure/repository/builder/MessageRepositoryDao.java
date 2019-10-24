@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.builder;
+package com.jdon.jivejdon.infrastructure.repository.builder;
 
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.Forum;
@@ -21,12 +21,12 @@ import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.domain.model.util.OneOneDTO;
-import com.jdon.jivejdon.repository.ForumFactory;
-import com.jdon.jivejdon.repository.MessageRepository;
-import com.jdon.jivejdon.repository.property.TagRepository;
-import com.jdon.jivejdon.repository.property.UploadRepository;
-import com.jdon.jivejdon.repository.dao.MessageDaoFacade;
-import com.jdon.jivejdon.repository.dao.PropertyDao;
+import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
+import com.jdon.jivejdon.infrastructure.repository.MessageRepository;
+import com.jdon.jivejdon.infrastructure.repository.property.TagRepository;
+import com.jdon.jivejdon.infrastructure.repository.property.UploadRepository;
+import com.jdon.jivejdon.infrastructure.repository.dao.MessageDaoFacade;
+import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
 import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.treepatterns.TreeVisitor;
 import org.apache.logging.log4j.LogManager;
@@ -68,7 +68,7 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.MessageRepository#createTopicMessage(com
+	 * com.jdon.jivejdon.infrastructure.repository.MessageRepository#createTopicMessage(com
 	 * .jdon.jivejdon.model.ForumMessage)
 	 */
 	public void createTopicMessage(AnemicMessageDTO forumMessagePostDTO) throws Exception {
@@ -114,7 +114,7 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.MessageRepository#createReplyMessage(com
+	 * com.jdon.jivejdon.infrastructure.repository.MessageRepository#createReplyMessage(com
 	 * .jdon.jivejdon.model.ForumMessageReply)
 	 */
 	public void createReplyMessage(AnemicMessageDTO forumMessageReplyPostDTO) throws Exception {
@@ -147,7 +147,7 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.MessageRepository#updateMessage(com.jdon
+	 * com.jdon.jivejdon.infrastructure.repository.MessageRepository#updateMessage(com.jdon
 	 * .jivejdon.model.ForumMessage)
 	 */
 	public void updateMessage(AnemicMessageDTO newForumMessageInputparamter) throws Exception {
@@ -169,7 +169,7 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.MessageRepository#updateMessageProperties
+	 * com.jdon.jivejdon.infrastructure.repository.MessageRepository#updateMessageProperties
 	 * (com.jdon.jivejdon.domain.model.ForumMessage)
 	 */
 	public void updateMessageProperties(ForumMessage forumMessage) throws Exception {
@@ -187,7 +187,7 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.MessageRepository#deleteMessageComposite
+	 * com.jdon.jivejdon.infrastructure.repository.MessageRepository#deleteMessageComposite
 	 * (com.jdon.jivejdon.domain.model.ForumMessage)
 	 */
 	public void deleteMessageComposite(ForumMessage delforumMessage) throws Exception {
@@ -211,7 +211,7 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.MessageRepository#deleteMessage(java.lang
+	 * com.jdon.jivejdon.infrastructure.repository.MessageRepository#deleteMessage(java.lang
 	 * .Long)
 	 */
 	public void deleteMessage(Long messageId) throws Exception {
@@ -231,7 +231,7 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jdon.jivejdon.repository.MessageRepository#getNextId(int)
+	 * @see com.jdon.jivejdon.infrastructure.repository.MessageRepository#getNextId(int)
 	 */
 	public synchronized Long getNextId(int idType) throws Exception {
 		try {
@@ -280,7 +280,7 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jdon.jivejdon.repository.MessageRepository#getForumBuilder()
+	 * @see com.jdon.jivejdon.infrastructure.repository.MessageRepository#getForumBuilder()
 	 */
 	public ForumFactory getForumBuilder() {
 		return forumBuilder;
@@ -289,7 +289,7 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jdon.jivejdon.repository.MessageRepository#getMessageDaoFacade()
+	 * @see com.jdon.jivejdon.infrastructure.repository.MessageRepository#getMessageDaoFacade()
 	 */
 	public MessageDaoFacade getMessageDaoFacade() {
 		return messageDaoFacade;

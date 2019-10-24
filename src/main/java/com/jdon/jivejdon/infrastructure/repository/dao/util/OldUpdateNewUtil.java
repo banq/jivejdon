@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.repository.dao.util;
+package com.jdon.jivejdon.infrastructure.repository.dao.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,10 +10,10 @@ import org.apache.logging.log4j.*;
 
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.auth.Role;
-import com.jdon.jivejdon.repository.dao.AccountDao;
-import com.jdon.jivejdon.repository.dao.sql.AccountSSOSql;
-import com.jdon.jivejdon.repository.dao.sql.JdbcTempSSOSource;
-import com.jdon.jivejdon.repository.dao.sql.JdbcTempSource;
+import com.jdon.jivejdon.infrastructure.repository.dao.AccountDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.sql.AccountSSOSql;
+import com.jdon.jivejdon.infrastructure.repository.dao.sql.JdbcTempSSOSource;
+import com.jdon.jivejdon.infrastructure.repository.dao.sql.JdbcTempSource;
 import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.jivejdon.util.ToolsUtil;
 

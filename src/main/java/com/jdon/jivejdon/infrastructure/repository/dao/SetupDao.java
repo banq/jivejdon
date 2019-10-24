@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.dao;
+package com.jdon.jivejdon.infrastructure.repository.dao;
 
 /**
  * read the xml setup from the database, and modify the xml ant then save to database.

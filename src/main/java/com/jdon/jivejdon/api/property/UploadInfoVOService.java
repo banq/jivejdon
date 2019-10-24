@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.service.property;
+package com.jdon.jivejdon.api.property;
 
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;

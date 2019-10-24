@@ -1,16 +1,16 @@
-package com.jdon.jivejdon.model.account;
+package com.jdon.jivejdon.domain.model.account;
 
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
 import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.pubsub.domain.producer.read.LazyLoaderRole;
-import com.jdon.jivejdon.model.attachment.UploadFile;
-import com.jdon.jivejdon.model.auth.Role;
-import com.jdon.jivejdon.model.message.upload.UploadLazyLoader;
-import com.jdon.jivejdon.model.property.Reward;
-import com.jdon.jivejdon.model.shortmessage.AccountSMState;
-import com.jdon.jivejdon.model.subscription.SubscribedState;
-import com.jdon.jivejdon.model.subscription.subscribed.AccountSubscribed;
+import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
+import com.jdon.jivejdon.domain.model.attachment.UploadFile;
+import com.jdon.jivejdon.domain.model.auth.Role;
+import com.jdon.jivejdon.domain.model.message.upload.UploadLazyLoader;
+import com.jdon.jivejdon.domain.model.property.Reward;
+import com.jdon.jivejdon.domain.model.shortmessage.AccountSMState;
+import com.jdon.jivejdon.domain.model.subscription.SubscribedState;
+import com.jdon.jivejdon.domain.model.subscription.subscribed.AccountSubscribed;
 
 import java.util.Date;
 import java.util.Observable;

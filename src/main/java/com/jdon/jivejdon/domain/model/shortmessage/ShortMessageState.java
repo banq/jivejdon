@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jdon.jivejdon.model.shortmessage;
+package com.jdon.jivejdon.domain.model.shortmessage;
 
-import com.jdon.jivejdon.model.shortmessage.ShortMessage;
-import com.jdon.jivejdon.repository.shortmessage.ShortMessageRepository;
+import com.jdon.jivejdon.domain.model.shortmessage.ShortMessage;
+import com.jdon.jivejdon.infrastructure.repository.shortmessage.ShortMessageRepository;
 
 import java.util.Observable;
 

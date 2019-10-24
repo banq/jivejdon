@@ -13,10 +13,10 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.thread;
+package com.jdon.jivejdon.domain.model.thread;
 
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.domain.model.ForumThread;
 
 public class ViewCounter {
 

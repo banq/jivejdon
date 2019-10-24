@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.util;
+package com.jdon.jivejdon.domain.model.util;
 
 public class OneOneDTO implements java.io.Serializable {
 

@@ -105,7 +105,7 @@ note:
 替代myaspect.xml和web.xml 失效防止Spam功能。
 
 设置：
-起初设置要进入管理依据下面顺序安装下面过滤器 ,如果没有，添加过滤器类名，包括包名类名：com.jdon.jivejdon.model.message.output.html.ListStyle:
+起初设置要进入管理依据下面顺序安装下面过滤器 ,如果没有，添加过滤器类名，包括包名类名：com.jdon.jivejdon.domain.model.message.output.html.ListStyle:
 1.  HTMLFilter
 2 	ListStyle
 3 	CodeHighlighter
@@ -120,8 +120,8 @@ note:
 12 	AuthorNameFormat
 13 	QuoteRegexFilter
 14 	FontStyle
-15 com.jdon.jivejdon.model.message.output.linkurl.LinkUrlExtractor
-16 com.jdon.jivejdon.model.message.output.thumbnailUrl.ThumbnailExtractor
+15 com.jdon.jivejdon.domain.model.message.output.linkurl.LinkUrlExtractor
+16 com.jdon.jivejdon.domain.model.message.output.thumbnailUrl.ThumbnailExtractor
 
 
 ##############################################################################################

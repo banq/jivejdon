@@ -151,7 +151,7 @@ function properties(theForm) {
                 <td width="20%">&nbsp;</td>
                 <td width="20%" nowrap>
                      
-                     <%=com.jdon.jivejdon.model.message.output.beanutil.FiltersUtils.getPropertyHTML(filtersForm.getFiltersIndexed(i),  propertyDescriptor ) %>
+                     <%=com.jdon.jivejdon.domain.model.message.output.beanutil.FiltersUtils.getPropertyHTML(filtersForm.getFiltersIndexed(i),  propertyDescriptor ) %>
                 </td>
             </tr>
          </logic:iterate>

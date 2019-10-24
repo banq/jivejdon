@@ -1,6 +1,6 @@
-package com.jdon.jivejdon.model.query.specification;
+package com.jdon.jivejdon.domain.model.query.specification;
 
-import com.jdon.jivejdon.model.query.ResultSort;
+import com.jdon.jivejdon.domain.model.query.ResultSort;
 import com.jdon.util.UtilValidate;
 
 public class ThreadListSpec {

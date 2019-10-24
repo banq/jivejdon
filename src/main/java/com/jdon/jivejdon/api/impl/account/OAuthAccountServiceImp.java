@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.api.imp.account;
+package com.jdon.jivejdon.api.impl.account;
 
 import java.util.ArrayList;
 import java.util.List;

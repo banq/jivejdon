@@ -14,10 +14,10 @@ import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.model.property.ThreadPropertys;
-import com.jdon.jivejdon.service.query.ForumMessageQueryService;
-import com.jdon.jivejdon.service.property.PropertyService;
+import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.property.ThreadPropertys;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
+import com.jdon.jivejdon.api.property.PropertyService;
 
 /**
  * displays the sticky thread list

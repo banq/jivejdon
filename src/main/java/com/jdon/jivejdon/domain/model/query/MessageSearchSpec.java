@@ -1,6 +1,6 @@
-package com.jdon.jivejdon.model.query;
+package com.jdon.jivejdon.domain.model.query;
 
-import com.jdon.jivejdon.model.ForumMessage;
+import com.jdon.jivejdon.domain.model.ForumMessage;
 
 public class MessageSearchSpec {
 

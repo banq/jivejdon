@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.infrastructure.component.viewcount;
+package com.jdon.jivejdon.spi.component.viewcount;
 
 import com.jdon.jivejdon.domain.model.ForumThread;
 

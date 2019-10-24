@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.infrastructure.component.email;
+package com.jdon.jivejdon.spi.component.email;
 
 import javax.mail.Address;
 import javax.mail.Authenticator;

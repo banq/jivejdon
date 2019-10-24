@@ -15,7 +15,7 @@
  */
 package com.jdon.jivejdon.presentation.form;
 
-import com.jdon.jivejdon.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 import org.apache.struts.action.ActionMapping;
 
 import javax.servlet.http.HttpServletRequest;

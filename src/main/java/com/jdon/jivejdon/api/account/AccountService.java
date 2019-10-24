@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.service.account;
+package com.jdon.jivejdon.api.account;
 
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;

@@ -13,10 +13,10 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.subscription;
+package com.jdon.jivejdon.infrastructure.repository.subscription;
 
 import com.jdon.jivejdon.domain.model.subscription.Subscription;
-import com.jdon.jivejdon.repository.dao.SubscriptionDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.SubscriptionDao;
 
 public interface SubscriptionRepository {
 

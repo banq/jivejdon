@@ -26,9 +26,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.component.mapreduce.AuthorList;
-import com.jdon.jivejdon.component.mapreduce.ThreadApprovedNewList;
-import com.jdon.jivejdon.model.account.Account;
+import com.jdon.jivejdon.spi.component.mapreduce.AuthorList;
+import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
+import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.strutsutil.ModelListForm;
 
 public class AuthorListAction extends Action {

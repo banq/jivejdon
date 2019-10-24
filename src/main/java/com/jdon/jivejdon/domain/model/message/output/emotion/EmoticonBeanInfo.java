@@ -13,9 +13,9 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.message.output.emotion;
+package com.jdon.jivejdon.domain.model.message.output.emotion;
 
-import com.jdon.jivejdon.model.message.output.beanutil.FilterBeanInfo;
+import com.jdon.jivejdon.domain.model.message.output.beanutil.FilterBeanInfo;
 
 /**
  * BeanInfo class for the Emoticon filter.

@@ -13,9 +13,9 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.event;
+package com.jdon.jivejdon.domain.model.event;
 
-import com.jdon.jivejdon.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
 
 public class ReplyMessageCreatedEvent {
 

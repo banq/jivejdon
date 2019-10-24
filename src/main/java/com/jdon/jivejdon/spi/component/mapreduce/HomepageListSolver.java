@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.infrastructure.component.mapreduce;
+package com.jdon.jivejdon.spi.component.mapreduce;
 
 import com.jdon.annotation.Component;
 import com.jdon.jivejdon.domain.model.ForumThread;

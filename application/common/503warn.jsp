@@ -1,7 +1,7 @@
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@page import="com.jdon.controller.WebAppUtil,
-com.jdon.jivejdon.component.throttle.hitkey.CustomizedThrottle,com.jdon.jivejdon.component.throttle.hitkey.HitKeySame,com.jdon.jivejdon.component.throttle.hitkey.HitKeyIF"%>
+com.jdon.jivejdon.spi.component.throttle.hitkey.CustomizedThrottle,com.jdon.jivejdon.spi.component.throttle.hitkey.HitKeySame,com.jdon.jivejdon.spi.component.throttle.hitkey.HitKeyIF"%>
 
 <%
 	try{

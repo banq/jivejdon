@@ -15,7 +15,7 @@ DDD Aggregate Model
 
 There are two aggregate roots in jivejdon: FormThread and ForumMessage(Root Message).
 
-[com.jdon.jivejdon.model.ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java) is a rich model instead of a anemic model, no "public" setter method, all setter methods are "private":
+[com.jdon.jivejdon.domain.model.ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java) is a rich model instead of a anemic model, no "public" setter method, all setter methods are "private":
 
 ![avatar](./doc/private-setter.png)
 
@@ -62,7 +62,7 @@ JiveJdon and Hexagonal_architecture:
 
  [models.xml](https://github.com/banq/jivejdon/blob/master/src/main/resources/com/jdon/jivejdon/model/models.xml) is a adapter, it is XML configure acting as a controller.
 ``````
-	<model key="messageId" class="com.jdon.jivejdon.model.message.AnemicMessageDTO">
+	<model key="messageId" class="com.jdon.jivejdon.domain.model.message.AnemicMessageDTO">
 		<actionForm name="messageForm"/>
 		<handler>
 			<service ref="forumMessageService">

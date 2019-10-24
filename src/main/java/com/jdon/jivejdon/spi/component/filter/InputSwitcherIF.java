@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.infrastructure.component.filter;
+package com.jdon.jivejdon.spi.component.filter;
 
 public interface InputSwitcherIF {
 

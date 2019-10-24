@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.infrastructure.component.query;
+package com.jdon.jivejdon.spi.component.query;
 
 import java.util.ArrayList;
 import java.util.Collection;

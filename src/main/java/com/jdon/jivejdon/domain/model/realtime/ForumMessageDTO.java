@@ -13,9 +13,9 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.realtime;
+package com.jdon.jivejdon.domain.model.realtime;
 
-import com.jdon.jivejdon.model.ForumMessage;
+import com.jdon.jivejdon.domain.model.ForumMessage;
 
 public class ForumMessageDTO {
 

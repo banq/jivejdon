@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE app PUBLIC "-//Jdon//DTD 2005 1.0 Framework//EN" "http://www.jdon.com/jdonframework.dtd">
+	<!--
+		qucik manual http://www.jdon.com/jdonframework/threemin.htm english
+		version: https://jdon.dev.java.net/steps.html
+	-->
+<app>
+	<services>
+		<component name="constants" class="com.jdon.jivejdon.util.Constants">
+			<constructor value="yyyy-MM-dd HH:mm" />    	<!--displaye date format -->
+			<constructor value="ZH" />    	<!--displaye date format -->
+		</component>
+
+
+		<!-- message output  filter -->
+		<component name="outFilterManager"
+			class="com.jdon.jivejdon.spi.component.filter.OutFilterManager" />
+
+		<component name="renderingFilterManager"
+			class="com.jdon.jivejdon.domain.model.message.output.RenderingFilterManagerImp" />
+
+		<component name="renderingAvailableFilters"
+			class="com.jdon.jivejdon.domain.model.message.output.RenderingAvailableFilters">
+			<constructor value="com.jdon.jivejdon.domain.model.message.output.html.HTMLFilter" />
+			<constructor value="com.jdon.jivejdon.domain.model.message.output.html.Newline" />
+			<constructor value="com.jdon.jivejdon.domain.model.message.output.html.TextStyle" />
+			<constructor
+				value="com.jdon.jivejdon.domain.model.message.output.html.URLConverter" />
+			<constructor
+				value="com.jdon.jivejdon.domain.model.message.output.shield.Profanity" />
+			<constructor
+				value="com.jdon.jivejdon.domain.model.message.output.codeviewer.CodeHighlighter" />
+			<constructor value="com.jdon.jivejdon.domain.model.message.output.html.WordBreak" />
+			<constructor
+				value="com.jdon.jivejdon.domain.model.message.output.html.QuoteFilter" />
+			<constructor
+				value="com.jdon.jivejdon.domain.model.message.output.emotion.Emoticon" />
+			<constructor
+				value="com.jdon.jivejdon.domain.model.message.output.shield.Bodymasking" />
+			<constructor
+				value="com.jdon.jivejdon.domain.model.message.output.hotkeys.HotKeysFilter" />
+			<constructor
+				value="com.jdon.jivejdon.domain.model.message.output.html.ImageFilter" />
+			<constructor
+				value="com.jdon.jivejdon.domain.model.message.output.quote.QuoteRegexFilter" />
+			<constructor
+				value="com.jdon.jivejdon.domain.model.message.upload.UploadImageFilter" />
+			<constructor
+				value="com.jdon.jivejdon.domain.model.message.upload.UploadFileFilter" />
+
+			<constructor
+				value="com.jdon.jivejdon.domain.model.message.output.weibo.AuthorNameFormat" />
+            <constructor
+                    value="com.jdon.jivejdon.domain.model.message.output.html.ListStyle"/>
+            <constructor
+                    value="com.jdon.jivejdon.domain.model.message.output.html.FontStyle"/>
+            <constructor
+                    value="com.jdon.jivejdon.domain.model.message.output.linkurl.LinkUrlExtractor"/>
+            <constructor
+                    value="com.jdon.jivejdon.domain.model.message.output.thumbnailUrl.ThumbnailExtractor"/>
+
+
+        </component>
+
+		<!-- message input  filter -->
+		<component name="inFilterManager"
+			class="com.jdon.jivejdon.spi.component.filter.InFilterManager">
+            <constructor value="com.jdon.jivejdon.domain.model.message.weibo.EscapeUTFInFIlter"/>
+			<constructor value="com.jdon.jivejdon.domain.model.message.props.InFilterPosterIP" />
+			<constructor value="com.jdon.jivejdon.domain.model.message.weibo.InFilterAuthor" />
+		</component>
+
+		<component name="queryManager"
+			class="com.jdon.jivejdon.spi.component.query.HotThreadQueryManager" />
+
+		<!--  Throttle -->
+		
+		<component name="throttleManager"
+			class="com.jdon.jivejdon.spi.component.throttle.post.ThrottleManager" />
+			
+		<component name="throttleConf"
+			class="com.jdon.jivejdon.spi.component.throttle.post.ThrottleConf">
+			<constructor value="6" />       <!-- operator C(R)UD limit for post.ThrottleManager-->
+			<constructor value="10" />    	<!-- second -->
+		</component>
+		
+		<component name="newUserThrottleConf"
+			class="com.jdon.jivejdon.spi.component.throttle.post.NewUserThrottleConf">
+            <constructor value="10"/>       <!-- register limit for post.ThrottleManager-->
+            <constructor value="60"/>        <!-- second -->
+            <constructor value="60"/>     <!-- second who that register time is leass than 1 day
+			is a new User -->
+            <constructor value="1"/>   <!--  time  limit start hour -->
+            <constructor value="2"/>    <!--  time  limit end  hour -->
+		</component>
+		
+		<component name="hitConf"
+			class="com.jdon.jivejdon.spi.component.throttle.hitkey.HitConf">
+			<constructor value="30" />       <!-- access Read limit for CustomizedThrottle  min value is 5 for uploadShowAction five author pics -->
+			<constructor value="10" />    	<!-- second -->
+		</component>
+
+		<component name="whiteIPs"
+			class="com.jdon.jivejdon.spi.component.block.WhiteIPs" >
+				<constructor value=".*(203.208|65.55|110.75|220.181|123.125|61.135|159.226|125.90|124.115|122.248|157.55|157.56|1.202|66.249|192.168|0:0:0:0:0:0:0:1|123.151).*" />
+	    </component>
+
+		<component name="iPBanListManager"
+			class="com.jdon.jivejdon.spi.component.block.IPBanListManager" />
+
+		<component name="inputSwitcher"
+			class="com.jdon.jivejdon.spi.component.filter.InputSwitcher" />
+
+
+
+		<component name="forgotPasswdEmailParams"
+			class="com.jdon.jivejdon.spi.component.email.ForgotPasswdEmailParams">
+			<!--  tomcat context.xml  config javaMail -->			
+			<constructor value="java:comp/env/mail/Session" />
+			<!--  Jboss deploy/mail-service.xml configure 
+			<constructor value="java:/Mail" />-->
+			<constructor value=" Jdon.com your login datas " />
+			<constructor value="您好：您索要的jdon.com网站登陆用户和密码如下：" />
+			<constructor value="Jdon.com --- 专业的软件架构之道" />
+			<constructor value="Jdon.com" />
+            <constructor value="banq@163.com"/>
+		</component>
+		<!-- forget password send mail by JavaMail end   -->
+
+		<component name="validateCodeEmailParams"
+			class="com.jdon.jivejdon.spi.component.email.ValidateCodeEmailParams">
+			<!--  tomcat context.xml  config javaMail -->			
+			<constructor value="java:comp/env/mail/Session" />
+			<!--  Jboss deploy/mail-service.xml configure 
+			<constructor value="java:/Mail" />-->
+			<constructor value="Jdon.com验证邮件 本信件 是因为你开通了本站的邮件关注订阅功能 " />
+			<constructor value="您好：请访问下面的网址验证你的Email" />
+			<constructor
+				value="https://www.jdon.com/account/emailValidate.shtml?Referer=https://www.jdon.com&amp;method=emailValidate" />
+			<constructor value="jdon.com" />
+            <constructor value="banq@163.com"/>
+		</component>
+		
+		
+		
+		<component name="feedbackEmailParams"
+			class="com.jdon.jivejdon.spi.component.email.FeedbackEmailParams">
+			<!--  tomcat context.xml  config javaMail -->			
+			<constructor value="java:comp/env/mail/Session" />			
+			<constructor value="admin" />
+			<constructor value="banq@163.com" />
+		</component>
+		
+		
+		<component name="SubscriptionEmailParams"
+			class="com.jdon.jivejdon.spi.component.email.SubscriptionEmailParams">
+			<!--  tomcat context.xml  config javaMail -->			
+			<constructor value="java:comp/env/mail/Session" />			
+			<constructor value="jdonmon@163.com" />
+		</component>
+
+		<component name="emailHelper"
+			class="com.jdon.jivejdon.spi.component.email.EmailHelper" />
+		
+		<component name="EmailSender"
+			class="com.jdon.jivejdon.spi.component.email.EmailSender">
+			<constructor value="java:comp/env/mail/Session" />			
+		</component>
+		
+
+		<component name="tagNotifyMessage"
+			class="com.jdon.jivejdon.domain.model.subscription.messsage.TagNotifyMessage">
+			<constructor value="您关注的标签有新主题 " />
+            <constructor value="https://jdon.com/tags/tagId"/>
+			<constructor value="admin" />
+		</component>
+
+		<component name="threadNotifyMessage"
+			class="com.jdon.jivejdon.domain.model.subscription.messsage.ThreadNotifyMessage">
+			<constructor value=" 您关注的主题贴有新回复  " />
+			<constructor
+                    value="https://jdon.com/threadId"/>
+			<constructor value="admin" />
+		</component>
+		
+		<component name="forumNotifyMessage"
+			class="com.jdon.jivejdon.domain.model.subscription.messsage.ForumNotifyMessage">
+			<constructor value="您关注的论坛有新贴 " />
+            <constructor value="https://jdon.com/threadId"/>
+			<constructor value="admin" />
+		</component>
+		
+		<component name="accountNotifyMessage"
+			class="com.jdon.jivejdon.domain.model.subscription.messsage.AccountNotifyMessage">
+			<constructor value="您关注的作者有新主题贴   " />
+            <constructor value="https://jdon.com/threadId"/>
+			<constructor value="admin" />
+		</component>
+		
+		<component name="weiboExpiredNotifyMessage"
+			class="com.jdon.jivejdon.domain.model.subscription.messsage.WeiboExpiredNotifyMessage">
+			<constructor value=" 微博授权过期  " />
+			<constructor value=" 微博帐号 weibouserId 授权已经过期(7有效期)，请重新订阅 一次再次授权即可 (订阅多个只需要任选一个重新订阅即可) " />
+			<constructor value="admin" />
+		</component>
+		
+		
+		<component name="threadViewCountParameter"
+			class="com.jdon.jivejdon.spi.component.viewcount.ThreadViewCountParameter">
+            <constructor value="1800"/>
+            <constructor value="1800"/> <!-- 30*60s unit: s -->
+		</component>
+		
+		<component name="contentFormatConverter"
+			class="com.jdon.jivejdon.domain.model.realtime.notification.ContentFormatConverter">
+			<constructor value="300" /> <!-- notification lifecycle seconds   -->
+			<constructor value="ZH" /><!-- Date time Locale -->			
+			<constructor value="发了新帖 " />
+            <constructor
+                    value="&lt;a href='/threadId' target='_blank' onclick='window.top.disablePopUPWithID(notificationId,scopeSeconds)'  &gt; subject &lt;/a&gt;"/>
+		</component>
+		
+		<component name="weiBoShortMessageParams"
+			class="com.jdon.jivejdon.spi.component.shortmessage.WeiBoShortMessageParams">
+			<constructor value="有贴提到你：" />
+            <constructor
+                    value="在 &lt;a href=/forum/messageNavList.shtml?message=messageId target=_blank   &gt; subject &lt;/a&gt; 帖子中提到了你，去看看吧。"/>
+		</component>
+		
+		<component name="sinaOAuthParamVO"
+			class="com.jdon.jivejdon.spi.component.account.SinaOAuthParamVO">
+			<constructor value="2879276008" /><!-- CONSUMER_KEY -->
+    	    <constructor value="8af8248a4cd6bf389685e6d3907349f0" /> <!--  CONSUMER_SECRET -->
+    	    <constructor value="https://api.weibo.com/2/" /> <!--  BASEURL -->
+    	    <constructor value="https://api.weibo.com/oauth2/authorize" /> <!--  authorizeURL -->
+       	    <constructor value="https://api.weibo.com/oauth2/access_token" /> <!--  accessTokenURL -->
+		</component>
+
+		<component name="weiboTransferParamVO"
+			class="com.jdon.jivejdon.spi.component.weibo.WeiboTransferParamVO">
+			<!-- sina -->
+			<constructor value="sinaID" /> <!-- 新浪微博@username      jivejdon jaas not support chinese name -->
+    	    <constructor value="@sina.com" /> <!-- sample: banq@sina.com -->
+    	    <constructor value="新浪微博" />
+    	    <constructor value="http://weibo.com/" />
+    	    <constructor value="个人介绍" />
+    	    <!--  tecent -->
+			<constructor value="tecentID" />
+    	    <constructor value="@qq.com" />
+            <constructor value="腾讯微博" />
+            <constructor value="http://t.qq.com/" />
+            <constructor value="个人介绍" />    	        	        	    
+		</component>
+
+		<component name="tecentWeiboOAuthParamVO"
+			class="com.jdon.jivejdon.spi.component.weibo.TecentWeiboOAuthParamVO">
+			<constructor value="801210431" /><!-- CONSUMER_KEY -->
+    	    <constructor value="ab5aa7fc9eb0c29957aa2cf605d8aa89" /> <!--  CONSUMER_SECRET -->
+		</component>
+
+		<component name="goolgeOAuthParamVO"
+			class="com.jdon.jivejdon.spi.component.account.GoolgeOAuthParamVO">
+			<constructor value="www.jdon.com" /><!-- CONSUMER_KEY -->
+    	    <constructor value="rJa_VwHYCMi8hkx99nUA3CDJ" /> <!--  CONSUMER_SECRET -->
+    	    <constructor value="https://www.google.com/accounts/OAuthGetRequestToken" /> <!--  requestTokenURL -->
+    	    <constructor value="https://www.google.com/accounts/OAuthAuthorizeToken" /> <!--  userAuthorizationURL -->
+    	    <constructor value="https://www.google.com/accounts/OAuthGetAccessToken" /> <!--  accessTokenURL -->
+    	    <constructor value="https://www.googleapis.com/auth/userinfo.profile" /> <!--  userinfo google scope -->
+    	    <constructor value="https://www.googleapis.com/oauth2/v1/userinfo" /> <!--  get user info -->
+    	    
+		</component>
+
+	<component name="queueListerner"
+			class="com.jdon.jivejdon.spi.component.subscription.action.QueueListerner">
+			<constructor value="100" /><!-- seconds -->
+		    <constructor value="20" /><!--  -->
+	</component>
+
+    <component name="threadTimer"
+			class="com.jdon.jivejdon.util.ThreadTimer">
+        <constructor value="1"/><!-- seconds -->
+        <constructor value="500"/><!--  -->
+	</component>    
+    
+		<component name="blogPingTempParams"
+			class="com.jdon.jivejdon.spi.component.pingrpc.BlogPingTempParams">
+			<constructor value="Jdon" /><!-- blog title -->
+			<constructor value="https://www.jdon.com/" /> <!-- blog url -->
+    	    <constructor value="https://www.jdon.com/#threadId#" /> <!--
+    	     UrlChanges -->
+    	    <constructor value="https://www.jdon.com/rss" /> <!-- BLOG RSS -->
+		</component>
+
+		<component name="blogPingServerUrl"
+			class="com.jdon.jivejdon.spi.component.pingrpc.BlogPingServerUrl">
+			<constructor value="http://ping.baidu.com/ping/RPC2" />
+<!--     	    <constructor value="http://blogsearch.google.com/ping/RPC2" /> --> 
+		</component>
+
+        <component name="cdnRefreshUrls"
+                   class="com.jdon.jivejdon.spi.pubsub.subscriber.postThread.CDNRefreshUrls">
+            <constructor value="query/approved"/>
+            <constructor value="rss"/>
+            <constructor value="query/threadDigList"/>
+            <constructor value="query/threadNewList"/>
+            <constructor value="query/popularList"/>
+            <constructor value="query/urlListAction"/>
+            <constructor value=""/>
+        </component>
+			
+		</services>
+</app>

@@ -13,9 +13,9 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.message.output.weibo;
+package com.jdon.jivejdon.domain.model.message.output.weibo;
 
-import com.jdon.jivejdon.model.message.output.beanutil.FilterBeanInfo;
+import com.jdon.jivejdon.domain.model.message.output.beanutil.FilterBeanInfo;
 
 public class AuthorNameFormatBeanInfo extends FilterBeanInfo {
 

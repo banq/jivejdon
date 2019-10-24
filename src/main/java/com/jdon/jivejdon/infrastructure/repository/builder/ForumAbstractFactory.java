@@ -14,16 +14,16 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.repository.builder;
+package com.jdon.jivejdon.infrastructure.repository.builder;
 
 import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.repository.ForumFactory;
-import com.jdon.jivejdon.repository.dao.MessageDao;
-import com.jdon.jivejdon.repository.dao.PropertyDao;
-import com.jdon.jivejdon.repository.dao.SequenceDao;
-import com.jdon.jivejdon.repository.property.TagRepository;
+import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
+import com.jdon.jivejdon.infrastructure.repository.dao.MessageDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.SequenceDao;
+import com.jdon.jivejdon.infrastructure.repository.property.TagRepository;
 import com.jdon.jivejdon.util.ContainerUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -64,7 +64,7 @@ public class ForumAbstractFactory implements ForumFactory {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.builder.ForumFactory#getForum(java.lang.
+	 * com.jdon.jivejdon.infrastructure.repository.builder.ForumFactory#getForum(java.lang.
 	 * Long)
 	 */
 	public Forum getForum(Long forumId) {
@@ -76,7 +76,7 @@ public class ForumAbstractFactory implements ForumFactory {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.builder.ForumFactory#getMessage(java.lang
+	 * com.jdon.jivejdon.infrastructure.repository.builder.ForumFactory#getMessage(java.lang
 	 * .Long)
 	 */
 	public ForumMessage getMessage(Long messageId) {
@@ -97,7 +97,7 @@ public class ForumAbstractFactory implements ForumFactory {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.builder.ForumFactory#getThread(java.lang
+	 * com.jdon.jivejdon.infrastructure.repository.builder.ForumFactory#getThread(java.lang
 	 * .Long)
 	 */
 	public Optional<ForumThread> getThread(Long threadId) {
@@ -121,7 +121,7 @@ public class ForumAbstractFactory implements ForumFactory {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.repository.builder.ForumFactory#reloadThreadState(com
+	 * com.jdon.jivejdon.infrastructure.repository.builder.ForumFactory#reloadThreadState(com
 	 * .jdon.jivejdon.model.ForumThread)
 	 */
 	public void reloadThreadState(ForumThread forumThread) throws Exception {

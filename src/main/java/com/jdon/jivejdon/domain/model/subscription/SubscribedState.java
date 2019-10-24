@@ -13,13 +13,13 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.subscription;
+package com.jdon.jivejdon.domain.model.subscription;
 
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.pubsub.domain.producer.read.LazyLoaderRole;
-import com.jdon.jivejdon.model.subscription.subscribed.Subscribed;
-import com.jdon.jivejdon.model.util.LazyLoader;
-import com.jdon.jivejdon.model.util.OneOneDTO;
+import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
+import com.jdon.jivejdon.domain.model.subscription.subscribed.Subscribed;
+import com.jdon.jivejdon.domain.model.util.LazyLoader;
+import com.jdon.jivejdon.domain.model.util.OneOneDTO;
 
 /**
  * // the field is not the core field of ThreadTag, it's value is fetched by //

@@ -21,8 +21,8 @@ import org.apache.log4j.Logger;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.component.sitemap.SitemapRepository;
-import com.jdon.jivejdon.component.sitemap.SitemapService;
+import com.jdon.jivejdon.spi.component.sitemap.SitemapRepository;
+import com.jdon.jivejdon.spi.component.sitemap.SitemapService;
 import com.jdon.strutsutil.ModelListAction;
 
 /**

@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.repository.dao.sql;
+package com.jdon.jivejdon.infrastructure.repository.dao.sql;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,12 +11,12 @@ import org.apache.logging.log4j.Logger;
 
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.infrastructure.component.subscription.action.EmailAction;
-import com.jdon.jivejdon.infrastructure.component.subscription.action.ShortMsgAction;
+import com.jdon.jivejdon.spi.component.subscription.action.EmailAction;
+import com.jdon.jivejdon.spi.component.subscription.action.ShortMsgAction;
 import com.jdon.jivejdon.domain.model.subscription.Subscription;
 import com.jdon.jivejdon.domain.model.subscription.subscribed.Subscribed;
-import com.jdon.jivejdon.repository.subscription.SubscriptionInitFactory;
-import com.jdon.jivejdon.repository.dao.SubscriptionDao;
+import com.jdon.jivejdon.infrastructure.repository.subscription.SubscriptionInitFactory;
+import com.jdon.jivejdon.infrastructure.repository.dao.SubscriptionDao;
 import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.jivejdon.util.ToolsUtil;
 import com.jdon.model.query.PageIteratorSolver;

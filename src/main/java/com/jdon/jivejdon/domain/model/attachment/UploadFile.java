@@ -13,10 +13,10 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.attachment;
+package com.jdon.jivejdon.domain.model.attachment;
 
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.message.upload.UploadHelper;
+import com.jdon.jivejdon.domain.model.ForumMessage;
+import com.jdon.jivejdon.domain.model.message.upload.UploadHelper;
 
 /**
  * @author banq(http://www.jdon.com)

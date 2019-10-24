@@ -13,10 +13,10 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.message.output;
+package com.jdon.jivejdon.domain.model.message.output;
 
-import com.jdon.jivejdon.component.filter.OutFilterManager;
-import com.jdon.jivejdon.model.message.MessageVO;
+import com.jdon.jivejdon.spi.component.filter.OutFilterManager;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 
 import java.util.function.Function;
 

@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.feed;
+package com.jdon.jivejdon.domain.model.feed;
 
 import com.jdon.annotation.Model;
 

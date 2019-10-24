@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.service.query;
+package com.jdon.jivejdon.api.query;
 
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.domain.model.ForumMessage;

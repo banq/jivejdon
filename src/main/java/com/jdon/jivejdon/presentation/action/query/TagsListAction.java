@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.service.property.TagService;
+import com.jdon.jivejdon.api.property.TagService;
 import com.jdon.strutsutil.ModelListAction;
 
 /**

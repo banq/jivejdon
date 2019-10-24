@@ -13,10 +13,10 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.realtime;
+package com.jdon.jivejdon.domain.model.realtime;
 
 import com.jdon.annotation.Component;
-import com.jdon.jivejdon.model.realtime.notification.ContentFormatConverter;
+import com.jdon.jivejdon.domain.model.realtime.notification.ContentFormatConverter;
 
 @Component("lobby")
 public class Lobby {

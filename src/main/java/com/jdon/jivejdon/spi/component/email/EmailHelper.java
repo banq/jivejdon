@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.infrastructure.component.email;
+package com.jdon.jivejdon.spi.component.email;
 
 import com.google.common.eventbus.AsyncEventBus;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;

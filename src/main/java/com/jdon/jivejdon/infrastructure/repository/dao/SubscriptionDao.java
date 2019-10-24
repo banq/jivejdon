@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.repository.dao;
+package com.jdon.jivejdon.infrastructure.repository.dao;
 
 import java.util.Collection;
 

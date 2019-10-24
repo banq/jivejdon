@@ -13,9 +13,9 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.message.output.codeviewer;
+package com.jdon.jivejdon.domain.model.message.output.codeviewer;
 
-import com.jdon.jivejdon.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.util.StringUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

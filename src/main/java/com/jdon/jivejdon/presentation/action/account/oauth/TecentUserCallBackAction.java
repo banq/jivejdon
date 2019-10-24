@@ -29,11 +29,11 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.component.weibo.TecentWeiboSubmitter;
-import com.jdon.jivejdon.component.weibo.UserConnectorAuth;
-import com.jdon.jivejdon.model.account.Account;
-import com.jdon.jivejdon.repository.subscription.SubscriptionInitFactory;
-import com.jdon.jivejdon.service.account.OAuthAccountService;
+import com.jdon.jivejdon.spi.component.weibo.TecentWeiboSubmitter;
+import com.jdon.jivejdon.spi.component.weibo.UserConnectorAuth;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.infrastructure.repository.subscription.SubscriptionInitFactory;
+import com.jdon.jivejdon.api.account.OAuthAccountService;
 import com.jdon.util.UtilValidate;
 import com.tencent.weibo.oauthv2.OAuthV2;
 

@@ -1,6 +1,6 @@
-package com.jdon.jivejdon.model.message.output.thumbnailUrl;
+package com.jdon.jivejdon.domain.model.message.output.thumbnailUrl;
 
-import com.jdon.jivejdon.model.message.output.beanutil.FilterBeanInfo;
+import com.jdon.jivejdon.domain.model.message.output.beanutil.FilterBeanInfo;
 
 public class ThumbnailExtractorBeanInfo extends FilterBeanInfo {
 	public static final String[] PROPERTY_NAMES = {"thumbpics"};

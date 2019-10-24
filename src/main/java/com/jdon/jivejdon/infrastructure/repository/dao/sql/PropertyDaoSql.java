@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.dao.sql;
+package com.jdon.jivejdon.infrastructure.repository.dao.sql;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,7 +29,7 @@ import com.jdon.container.pico.Startable;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.property.Property;
-import com.jdon.jivejdon.repository.dao.PropertyDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
 import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.model.query.PageIteratorSolver;
 import com.jdon.util.UtilValidate;

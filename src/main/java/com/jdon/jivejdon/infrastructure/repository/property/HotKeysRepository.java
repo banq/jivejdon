@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.repository.property;
+package com.jdon.jivejdon.infrastructure.repository.property;
 
 import com.jdon.jivejdon.domain.model.property.HotKeys;
 

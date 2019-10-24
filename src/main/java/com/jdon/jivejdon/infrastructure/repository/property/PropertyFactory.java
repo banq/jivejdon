@@ -29,4 +29,6 @@ public interface PropertyFactory {
 
 	public void saveUserPropertys(Long userId, Collection props);
 
-	Collection getUserPropertys(Lon
+	Collection getUserPropertys(Long userId);
+
+}

@@ -6,7 +6,7 @@
 <app>
 	<models>
 		<model key="username"
-			class="com.jdon.jivejdon.model.account.Account">
+			class="com.jdon.jivejdon.domain.model.account.Account">
 			<actionForm name="accountForm"/>
 			<handler>
 				<service ref="accountService">
@@ -20,7 +20,7 @@
 		</model>
 		
 		<model key="forumId"
-			class="com.jdon.jivejdon.model.Forum">
+			class="com.jdon.jivejdon.domain.model.Forum">
 			<actionForm name="forumForm"/>
 			<handler>
 				<service ref="forumService">
@@ -32,7 +32,7 @@
 			</handler>
 		</model>
 		<model key="messageId"
-			class="com.jdon.jivejdon.model.message.AnemicMessageDTO">
+			class="com.jdon.jivejdon.domain.model.message.AnemicMessageDTO">
 			<actionForm name="messageForm"/>
 			<handler>
 				<service ref="forumMessageService">
@@ -45,7 +45,7 @@
 			</handler>
 		</model>
 		<model key="messageId"
-			class="com.jdon.jivejdon.model.message.AnemicMessageDTO">
+			class="com.jdon.jivejdon.domain.model.message.AnemicMessageDTO">
 			<actionForm name="messageReplyForm"/>
 			<handler>
 				<service ref="forumMessageService">
@@ -60,7 +60,7 @@
 			</handler>
 		</model>		
 		<model key="threadId"
-			class="com.jdon.jivejdon.model.ForumThread">
+			class="com.jdon.jivejdon.domain.model.ForumThread">
 			<actionForm name="threadForm"/>
 			<handler>
 				<service ref="forumMessageService">
@@ -68,7 +68,7 @@
 				</service>
 			</handler>
 		</model>
-		 <model class="com.jdon.jivejdon.model.attachment.UploadFile" key="id">
+		 <model class="com.jdon.jivejdon.domain.model.attachment.UploadFile" key="id">
            <actionForm name="upLoadFileForm" />
 			<handler>
                <service ref="uploadService">					
@@ -78,7 +78,7 @@
 			</handler>
         </model>		
         
-        <model class="com.jdon.jivejdon.model.attachment.UploadFile" key="id">
+        <model class="com.jdon.jivejdon.domain.model.attachment.UploadFile" key="id">
            <actionForm name="accountFaceFileForm" />
 			<handler>
                <service ref="uploadService">					
@@ -87,7 +87,7 @@
 			</handler>
         </model>
         
-        <model key="imageId" class="com.jdon.jivejdon.model.attachment.UploadInfoVO">
+        <model key="imageId" class="com.jdon.jivejdon.domain.model.attachment.UploadInfoVO">
         	<actionForm name="imageInfoForm"/>
         	<handler>
         		<service ref="uploadInfoVOService">
@@ -98,7 +98,7 @@
         </model>		
         
         <model key="msgId"
-			class="com.jdon.jivejdon.model.shortmessage.FromShortMessage">
+			class="com.jdon.jivejdon.domain.model.shortmessage.FromShortMessage">
 			<actionForm name="fromShortMessageForm"/>
 			<handler>
 				<service ref="shortMessageService">				
@@ -111,7 +111,7 @@
 		</model>			
 		
 		<model key="msgId"
-			class="com.jdon.jivejdon.model.shortmessage.ToShortMessage">
+			class="com.jdon.jivejdon.domain.model.shortmessage.ToShortMessage">
 			<actionForm name="toShortMessageForm"/>
 			<handler>
 				<service ref="shortMessageService">
@@ -124,7 +124,7 @@
 		</model>		
 			
 		<model key="tagID"
-			class="com.jdon.jivejdon.model.property.ThreadTag">
+			class="com.jdon.jivejdon.domain.model.property.ThreadTag">
 			<actionForm name="tagForm"/>
 			<handler>
 				<service ref="othersService">
@@ -136,7 +136,7 @@
 		</model>		
 		
 		<model key="subscriptionId"
-			class="com.jdon.jivejdon.model.subscription.Subscription">
+			class="com.jdon.jivejdon.domain.model.subscription.Subscription">
 			<actionForm name="subscriptionForm"/>
 			<handler>
 				<service ref="subscriptionService">
@@ -150,7 +150,7 @@
 		</model>			
 		
 		<model key="email"
-			class="com.jdon.jivejdon.model.feed.Feed">
+			class="com.jdon.jivejdon.domain.model.feed.Feed">
 			<actionForm name="feedForm"/>
 			<handler>
 				<service ref="feedEmailSender">					
@@ -159,7 +159,7 @@
 		</model>
 		
 		<model key="urlId"
-			class="com.jdon.jivejdon.component.sitemap.Url">
+			class="com.jdon.jivejdon.spi.component.sitemap.Url">
 			<actionForm name="urlForm"/>
 			<handler>
 				<service ref="sitemapService">		

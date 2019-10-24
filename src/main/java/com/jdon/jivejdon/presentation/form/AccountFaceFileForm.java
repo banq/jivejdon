@@ -13,7 +13,7 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.upload.FormFile;
 import org.apache.struts.upload.MultipartRequestHandler;
 
-import com.jdon.jivejdon.model.message.upload.UploadHelper;
+import com.jdon.jivejdon.domain.model.message.upload.UploadHelper;
 import com.jdon.jivejdon.util.ImageUtils;
 
 public class AccountFaceFileForm extends BaseForm {

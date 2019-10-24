@@ -13,12 +13,12 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository;
+package com.jdon.jivejdon.infrastructure.repository;
 
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.domain.model.util.OneOneDTO;
-import com.jdon.jivejdon.repository.dao.MessageDaoFacade;
+import com.jdon.jivejdon.infrastructure.repository.dao.MessageDaoFacade;
 
 import java.util.Collection;
 

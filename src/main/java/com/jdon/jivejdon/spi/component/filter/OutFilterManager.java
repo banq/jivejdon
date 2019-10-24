@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.infrastructure.component.filter;
+package com.jdon.jivejdon.spi.component.filter;
 
 import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.jivejdon.domain.model.message.output.RenderingFilterManager;

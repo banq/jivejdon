@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.api.imp.message;
+package com.jdon.jivejdon.api.impl.message;
 
 import com.jdon.annotation.Service;
 import com.jdon.annotation.intercept.Poolable;

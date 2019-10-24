@@ -1,14 +1,14 @@
 package com.jdon.jivejdon.presentation.filter;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.model.Forum;
-import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.model.account.Account;
+import com.jdon.jivejdon.domain.model.Forum;
+import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.presentation.form.MessageForm;
 import com.jdon.jivejdon.presentation.form.ThreadForm;
-import com.jdon.jivejdon.service.account.AccountService;
-import com.jdon.jivejdon.service.ForumMessageService;
-import com.jdon.jivejdon.service.ForumService;
+import com.jdon.jivejdon.api.account.AccountService;
+import com.jdon.jivejdon.api.ForumMessageService;
+import com.jdon.jivejdon.api.ForumService;
 import com.jdon.util.Debug;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;

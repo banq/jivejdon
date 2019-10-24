@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.subscription.messsage;
+package com.jdon.jivejdon.domain.model.subscription.messsage;
 
 
 public class WeiboExpiredNotifyMessage {

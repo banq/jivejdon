@@ -13,14 +13,14 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model;
+package com.jdon.jivejdon.domain.model;
 
 import com.jdon.annotation.Model;
-import com.jdon.jivejdon.model.account.Account;
-import com.jdon.jivejdon.model.attachment.UploadFile;
-import com.jdon.jivejdon.model.message.FilterPipleSpec;
-import com.jdon.jivejdon.model.message.MessageVO;
-import com.jdon.jivejdon.model.property.Property;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.domain.model.attachment.UploadFile;
+import com.jdon.jivejdon.domain.model.message.FilterPipleSpec;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.property.Property;
 
 import java.util.Collection;
 

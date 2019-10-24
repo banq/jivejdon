@@ -1,7 +1,7 @@
 package com.jdon.jivejdon.presentation.action.message;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.service.ForumMessageService;
+import com.jdon.jivejdon.api.ForumMessageService;
 import com.jdon.strutsutil.FormBeanUtil;
 import com.jdon.util.Debug;
 import org.apache.struts.action.Action;

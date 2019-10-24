@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.model.auth;
+package com.jdon.jivejdon.domain.model.auth;
 
 import java.util.HashSet;
 import java.util.Set;

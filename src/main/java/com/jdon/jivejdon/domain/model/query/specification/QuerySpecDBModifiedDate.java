@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.model.query.specification;
+package com.jdon.jivejdon.domain.model.query.specification;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,9 +6,9 @@ import java.util.Collection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.jdon.jivejdon.model.query.MultiCriteria;
-import com.jdon.jivejdon.model.query.QueryCriteria;
-import com.jdon.jivejdon.model.query.QuerySpecification;
+import com.jdon.jivejdon.domain.model.query.MultiCriteria;
+import com.jdon.jivejdon.domain.model.query.QueryCriteria;
+import com.jdon.jivejdon.domain.model.query.QuerySpecification;
 import com.jdon.jivejdon.util.ToolsUtil;
 import com.jdon.util.UtilValidate;
 

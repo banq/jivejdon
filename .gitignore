@@ -50,8 +50,8 @@ classes/com/jdon/jivejdon/repository/builder/ThreadRepositoryDao.class
 classes/com/jdon/jivejdon/repository/dao/sql/MessageDaoSql.class
 classes/com/jdon/jivejdon/service/imp/message/ForumMessageShell.class
 doc/tomcat/lib/jaas.jar
-report/TEST-com.jdon.jivejdon.repository.search.CompassTest.txt
-report/TEST-com.jdon.jivejdon.model.realtime.NotificationLocatorTest.txt
+report/TEST-com.jdon.jivejdon.infrastructure.repository.search.CompassTest.txt
+report/TEST-com.jdon.jivejdon.domain.model.realtime.NotificationLocatorTest.txt
 .classpath
 .factorypath
 .project
@@ -77,9 +77,9 @@ classes/com/jdon/jivejdon/repository/builder/ThreadRepositoryDao.class
 classes/com/jdon/jivejdon/repository/dao/sql/MessageDaoSql.class
 classes/com/jdon/jivejdon/service/imp/message/ForumMessageShell.class
 doc/tomcat/lib/jaas.jar
-report/TEST-com.jdon.jivejdon.model.realtime.NotificationLocatorTest.txt
+report/TEST-com.jdon.jivejdon.domain.model.realtime.NotificationLocatorTest.txt
 doc/tomcat/lib/jaas.jar
-report/TEST-com.jdon.jivejdon.repository.search.CompassTest.txt
+report/TEST-com.jdon.jivejdon.infrastructure.repository.search.CompassTest.txt
 /doc/tomcat/lib/jaas.jar
 .settings/
 application/blog/js/

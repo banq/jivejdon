@@ -1,7 +1,7 @@
-package com.jdon.jivejdon.model.message;
+package com.jdon.jivejdon.domain.model.message;
 
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.pubsub.domain.producer.read.LazyLoaderRole;
+import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 
 /**
  * 

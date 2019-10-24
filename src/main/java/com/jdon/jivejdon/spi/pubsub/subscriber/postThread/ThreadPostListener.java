@@ -13,14 +13,14 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.pubsub.domain.consumer.write.postThread;
+package com.jdon.jivejdon.spi.pubsub.subscriber.postThread;
 
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.dci.RoleAssigner;
 import com.jdon.domain.message.DomainEventHandler;
 import com.jdon.jivejdon.infrastructure.cqrs.CacheQueryRefresher;
-import com.jdon.jivejdon.spi.pubsub.LobbyPublisherRole;
+import com.jdon.jivejdon.spi.pubsub.publish.LobbyPublisherRole;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;

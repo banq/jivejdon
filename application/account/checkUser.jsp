@@ -6,7 +6,7 @@
 
 
 <%@page import="com.jdon.controller.WebAppUtil,
-com.jdon.jivejdon.service.account.AccountService"%>
+com.jdon.jivejdon.api.account.AccountService"%>
 
 <%
 String sessionId = request.getParameter("sessionId");

@@ -35,4 +35,6 @@ public class UploadImageFilterBeanInfo extends FilterBeanInfo {
 	}
 
 	public String getName() {
-		return "UploadImageFil
+		return "UploadImageFilter";
+	}
+}

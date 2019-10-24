@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.message.upload;
+package com.jdon.jivejdon.domain.model.message.upload;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.api.imp.account;
+package com.jdon.jivejdon.api.impl.account;
 
 import com.jdon.annotation.intercept.SessionContextAcceptable;
 import com.jdon.annotation.intercept.Stateful;

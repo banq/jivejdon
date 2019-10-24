@@ -57,4 +57,7 @@ public class ThreadRepositoryDao implements ThreadRepository {
 	 * .lang.Long)
 	 */
 	public List getThreadsPrevNext(Long forumId, Long currentThreadId) {
-		return mess
+		return messageDaoFacade.getMessageQueryDao().getThreadsPrevNext(forumId, currentThreadId);
+	}
+
+}

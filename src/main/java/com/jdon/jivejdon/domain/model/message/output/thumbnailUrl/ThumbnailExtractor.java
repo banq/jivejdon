@@ -1,7 +1,7 @@
-package com.jdon.jivejdon.model.message.output.thumbnailUrl;
+package com.jdon.jivejdon.domain.model.message.output.thumbnailUrl;
 
-import com.jdon.jivejdon.model.message.MessageUrlVO;
-import com.jdon.jivejdon.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.message.MessageUrlVO;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

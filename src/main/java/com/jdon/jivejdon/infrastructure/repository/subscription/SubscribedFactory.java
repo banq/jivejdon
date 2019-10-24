@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.repository.subscription;
+package com.jdon.jivejdon.infrastructure.repository.subscription;
 
 import com.jdon.annotation.Component;
 import com.jdon.jivejdon.domain.model.subscription.Subscription;
@@ -6,9 +6,9 @@ import com.jdon.jivejdon.domain.model.subscription.messsage.AccountNotifyMessage
 import com.jdon.jivejdon.domain.model.subscription.messsage.TagNotifyMessage;
 import com.jdon.jivejdon.domain.model.subscription.messsage.ThreadNotifyMessage;
 import com.jdon.jivejdon.domain.model.subscription.subscribed.*;
-import com.jdon.jivejdon.repository.ForumFactory;
-import com.jdon.jivejdon.repository.acccount.AccountFactory;
-import com.jdon.jivejdon.repository.property.TagRepository;
+import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
+import com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactory;
+import com.jdon.jivejdon.infrastructure.repository.property.TagRepository;
 
 @Component
 public class SubscribedFactory {

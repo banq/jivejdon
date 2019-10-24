@@ -1,6 +1,6 @@
 package com.jdon.jivejdon.auth;
 
-import com.jdon.jivejdon.model.auth.PermissionRule;
+import com.jdon.jivejdon.domain.model.auth.PermissionRule;
 
 public class OperationAuthorization {
 	private PermissionRule permissionRule;

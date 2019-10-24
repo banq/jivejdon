@@ -1,11 +1,11 @@
-package com.jdon.jivejdon.repository.search;
+package com.jdon.jivejdon.infrastructure.repository.search;
 
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
-import com.jdon.jivejdon.repository.ForumFactory;
-import com.jdon.jivejdon.repository.query.MessagePageIteratorSolver;
+import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
+import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
 import com.jdon.model.query.PageIteratorSolver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

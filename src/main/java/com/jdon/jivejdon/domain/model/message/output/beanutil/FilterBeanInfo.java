@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.message.output.beanutil;
+package com.jdon.jivejdon.domain.model.message.output.beanutil;
 
 
 import java.beans.BeanDescriptor;

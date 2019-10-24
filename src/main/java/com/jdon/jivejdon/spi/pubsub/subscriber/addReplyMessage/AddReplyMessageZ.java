@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.pubsub.domain.consumer.write.addReplyMessage;
+package com.jdon.jivejdon.spi.pubsub.subscriber.addReplyMessage;
 
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;

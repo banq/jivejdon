@@ -13,12 +13,12 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model;
+package com.jdon.jivejdon.domain.model;
 
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.model.subscription.SubscribedState;
-import com.jdon.jivejdon.model.subscription.subscribed.ThreadSubscribed;
-import com.jdon.jivejdon.model.util.OneOneDTO;
+import com.jdon.jivejdon.domain.model.subscription.SubscribedState;
+import com.jdon.jivejdon.domain.model.subscription.subscribed.ThreadSubscribed;
+import com.jdon.jivejdon.domain.model.util.OneOneDTO;
 
 import java.util.concurrent.atomic.AtomicLong;
 

@@ -15,7 +15,7 @@
  */
 package com.jdon.jivejdon.util;
 
-import com.jdon.jivejdon.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.util.StringUtil;
 
 import java.beans.PropertyDescriptor;

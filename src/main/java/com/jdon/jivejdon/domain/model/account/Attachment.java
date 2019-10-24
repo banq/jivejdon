@@ -13,12 +13,12 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.account;
+package com.jdon.jivejdon.domain.model.account;
 
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.model.attachment.UploadFile;
-import com.jdon.jivejdon.model.message.upload.UploadLazyLoader;
-import com.jdon.jivejdon.model.util.LazyLoader;
+import com.jdon.jivejdon.domain.model.attachment.UploadFile;
+import com.jdon.jivejdon.domain.model.message.upload.UploadLazyLoader;
+import com.jdon.jivejdon.domain.model.util.LazyLoader;
 
 public class Attachment extends LazyLoader {
 

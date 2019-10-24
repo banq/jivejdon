@@ -8,30 +8,30 @@
 	<services>
         <!--  business services  start-->
 		<pojoService name="forumService"
-			class="com.jdon.jivejdon.service.imp.ForumServiceImp"/>
+			class="com.jdon.jivejdon.api.impl.ForumServiceImp"/>
 			
        <!-- replaced by annotation
 		<pojoService name="forumMessageService"
-			class="com.jdon.jivejdon.service.imp.message.ForumMessageShell"/>
+			class="com.jdon.jivejdon.api.impll.message.ForumMessageServiceImplceImpl"/>
 			
 
 		<component name="messageKernel"
-			class="com.jdon.jivejdon.service.imp.message.MessageKernel"/>
+			class="com.jdon.jivejdon.api.impll.message.MessageDomainServiceImplServiceImpl"/>
 			
         <pojoService name="forumMessageQueryService"
-			class="com.jdon.jivejdon.service.imp.message.ForumMessageQueryServiceImp"/>
+			class="com.jdon.jivejdon.api.impll.message.ForumMessageQueryServiceImp"/>
 			
 			-->
 	     
 		<pojoService name="uploadService"
-			class="com.jdon.jivejdon.service.imp.upload.UploadServiceShell"/>
+			class="com.jdon.jivejdon.api.impl.upload.UploadServiceShell"/>
 		
 		
      	<pojoService name="accountService"
-			class="com.jdon.jivejdon.service.imp.account.AccountServiceShell"/>
+			class="com.jdon.jivejdon.api.impl.account.AccountServiceShell"/>
 
 		<pojoService name="uploadInfoVOService" 
-			class="com.jdon.jivejdon.service.imp.upload.UploadInfoVOServiceImp">
+			class="com.jdon.jivejdon.api.impl.upload.UploadInfoVOServiceImp">
 		</pojoService>
 			
          <!--  business services  end-->
@@ -42,13 +42,13 @@
 		
 
         <component name="sessionContextUtil"
-			class="com.jdon.jivejdon.service.util.SessionContextUtil"/>
+			class="com.jdon.jivejdon.api.util.SessionContextUtil"/>
         <!--  relation with the micro container end -->					
         			
 		
         <!-- Tansaction JNDI   -->
         <component name="jtaTransactionUtil"
-			class="com.jdon.jivejdon.service.util.JtaTransactionUtil">
+			class="com.jdon.jivejdon.api.util.JtaTransactionUtil">
 			 <!--<constructor value="JTA"/>  
 			    <constructor value="java:/TransactionManager"/> -->
 			  <constructor value="JDBC"/> 

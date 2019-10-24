@@ -1,6 +1,6 @@
-package com.jdon.jivejdon.model.message.weibo;
+package com.jdon.jivejdon.domain.model.message.weibo;
 
-import com.jdon.jivejdon.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.jivejdon.util.EmojiRegexUtil;
 
 import java.util.function.Function;

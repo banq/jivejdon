@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.infrastructure.component.email;
+package com.jdon.jivejdon.spi.component.email;
 
 import java.util.Random;
 

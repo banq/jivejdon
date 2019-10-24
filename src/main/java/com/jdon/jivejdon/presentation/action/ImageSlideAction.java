@@ -11,7 +11,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.service.property.UploadInfoVOService;
+import com.jdon.jivejdon.api.property.UploadInfoVOService;
 import com.jdon.strutsutil.ModelListForm;
 
 public class ImageSlideAction extends Action {

@@ -13,10 +13,10 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.model.message.upload;
+package com.jdon.jivejdon.domain.model.message.upload;
 
-import com.jdon.jivejdon.model.attachment.UploadFile;
-import com.jdon.jivejdon.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.attachment.UploadFile;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 
 import java.util.Collection;
 import java.util.Iterator;

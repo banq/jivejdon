@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.infrastructure.component.query;
+package com.jdon.jivejdon.spi.component.query;
 
 public class ThreadCompareVO {
     private final Long threadId;

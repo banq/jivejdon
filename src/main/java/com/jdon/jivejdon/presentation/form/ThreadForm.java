@@ -23,9 +23,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 
-import com.jdon.jivejdon.model.Forum;
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumThreadState;
+import com.jdon.jivejdon.domain.model.Forum;
+import com.jdon.jivejdon.domain.model.ForumMessage;
+import com.jdon.jivejdon.domain.model.ForumThreadState;
 
 public class ThreadForm extends BaseForm {
 

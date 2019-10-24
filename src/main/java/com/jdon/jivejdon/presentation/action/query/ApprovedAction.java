@@ -2,11 +2,11 @@ package com.jdon.jivejdon.presentation.action.query;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.component.mapreduce.ThreadApprovedNewList;
-import com.jdon.jivejdon.model.Forum;
-import com.jdon.jivejdon.model.query.ResultSort;
-import com.jdon.jivejdon.model.query.specification.ThreadListSpec;
-import com.jdon.jivejdon.service.query.ForumMessageQueryService;
+import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
+import com.jdon.jivejdon.domain.model.Forum;
+import com.jdon.jivejdon.domain.model.query.ResultSort;
+import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
 import org.apache.struts.action.ActionForm;

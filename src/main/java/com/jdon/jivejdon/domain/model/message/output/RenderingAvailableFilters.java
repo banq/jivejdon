@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.model.message.output;
+package com.jdon.jivejdon.domain.model.message.output;
 
 public class RenderingAvailableFilters {
 	

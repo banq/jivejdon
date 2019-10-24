@@ -1,9 +1,9 @@
 package com.jdon.jivejdon.presentation.action.query;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.component.mapreduce.ThreadApprovedNewList;
-import com.jdon.jivejdon.component.mapreduce.ThreadTagList;
-import com.jdon.jivejdon.model.property.ThreadTag;
+import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
+import com.jdon.jivejdon.spi.component.mapreduce.ThreadTagList;
+import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.strutsutil.ModelListForm;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;

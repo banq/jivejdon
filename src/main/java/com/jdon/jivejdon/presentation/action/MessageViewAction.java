@@ -25,9 +25,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.model.ForumMessage;
+import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.presentation.form.MessageForm;
-import com.jdon.jivejdon.service.ForumMessageService;
+import com.jdon.jivejdon.api.ForumMessageService;
 import com.jdon.strutsutil.FormBeanUtil;
 
 public class MessageViewAction extends Action {

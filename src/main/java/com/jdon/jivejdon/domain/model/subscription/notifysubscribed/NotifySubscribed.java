@@ -1,7 +1,7 @@
-package com.jdon.jivejdon.model.subscription.notifysubscribed;
+package com.jdon.jivejdon.domain.model.subscription.notifysubscribed;
 
-import com.jdon.jivejdon.model.shortmessage.ShortMessage;
-import com.jdon.jivejdon.model.subscription.Subscription;
+import com.jdon.jivejdon.domain.model.shortmessage.ShortMessage;
+import com.jdon.jivejdon.domain.model.subscription.Subscription;
 
 public interface NotifySubscribed {
 

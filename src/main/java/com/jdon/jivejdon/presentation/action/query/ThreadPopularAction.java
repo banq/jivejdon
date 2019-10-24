@@ -4,8 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.service.query.ForumMessageQueryService;
+import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.util.Debug;
 

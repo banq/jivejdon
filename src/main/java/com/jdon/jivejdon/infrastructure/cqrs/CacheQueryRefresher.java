@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.pubsub.bus.cqrs.query;
+package com.jdon.jivejdon.infrastructure.cqrs;
 
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;

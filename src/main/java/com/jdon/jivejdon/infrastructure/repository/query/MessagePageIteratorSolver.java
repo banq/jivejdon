@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.query;
+package com.jdon.jivejdon.infrastructure.repository.query;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.jdon.annotation.Component;
 import com.jdon.container.pico.Startable;
-import com.jdon.jivejdon.repository.dao.sql.JdbcTempSource;
+import com.jdon.jivejdon.infrastructure.repository.dao.sql.JdbcTempSource;
 import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;
 import com.jdon.model.query.PageIteratorSolver;

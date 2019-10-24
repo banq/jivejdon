@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.infrastructure.component.throttle.hitkey;
+package com.jdon.jivejdon.spi.component.throttle.hitkey;
 
 public interface HitKeyIF {
 

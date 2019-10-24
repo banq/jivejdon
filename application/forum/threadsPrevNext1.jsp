@@ -21,7 +21,7 @@
 <%
 java.util.ListIterator iter = (java.util.ListIterator)request.getAttribute("ThreadsPrevNext");
 if (iter.hasPrevious()){
-   com.jdon.jivejdon.model.ForumThread forumThreadPrev = (com.jdon.jivejdon.model.ForumThread)iter.previous();
+   com.jdon.jivejdon.domain.model.ForumThread forumThreadPrev = (com.jdon.jivejdon.domain.model.ForumThread)iter.previous();
    request.setAttribute("forumThreadPrev", forumThreadPrev);
   // advance the iterator pointer back to the original index   
    iter.next();
@@ -66,7 +66,7 @@ if (iter.hasPrevious()){
 if (iter.hasNext())
    iter.next();
 if (iter.hasNext()){
-   com.jdon.jivejdon.model.ForumThread forumThreadNext = (com.jdon.jivejdon.model.ForumThread)iter.next();
+   com.jdon.jivejdon.domain.model.ForumThread forumThreadNext = (com.jdon.jivejdon.domain.model.ForumThread)iter.next();
    request.setAttribute("forumThreadNext", forumThreadNext);
   %>
     <logic:notEmpty name="forumThreadNext" >

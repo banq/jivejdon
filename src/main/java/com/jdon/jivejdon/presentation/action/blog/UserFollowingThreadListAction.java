@@ -22,10 +22,10 @@ import org.apache.logging.log4j.Logger;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.presentation.form.AccountProfileForm;
-import com.jdon.jivejdon.service.query.ForumMessageQueryService;
-import com.jdon.jivejdon.service.subscription.SubscriptionService;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
+import com.jdon.jivejdon.api.subscription.SubscriptionService;
 import com.jdon.strutsutil.FormBeanUtil;
 import com.jdon.strutsutil.ModelListAction;
 

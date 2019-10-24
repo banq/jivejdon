@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.spi.pubsub;
+package com.jdon.jivejdon.spi.pubsub.publish;
 
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.model.Send;

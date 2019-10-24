@@ -27,7 +27,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.presentation.form.ShortMessageForm;
-import com.jdon.jivejdon.service.shortmessage.ShortMessageService;
+import com.jdon.jivejdon.api.shortmessage.ShortMessageService;
 import com.jdon.strutsutil.FormBeanUtil;
 
 /**

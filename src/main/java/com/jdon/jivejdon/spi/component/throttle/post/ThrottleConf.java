@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.infrastructure.component.throttle.post;
+package com.jdon.jivejdon.spi.component.throttle.post;
 
 import org.apache.logging.log4j.*;
 

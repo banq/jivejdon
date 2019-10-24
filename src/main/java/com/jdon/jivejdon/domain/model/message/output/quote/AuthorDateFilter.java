@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.model.message.output.quote;
+package com.jdon.jivejdon.domain.model.message.output.quote;
 
 /**
  * replace [quote author=username date=yyyy/mm/dd][/quote]

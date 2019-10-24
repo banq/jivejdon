@@ -21,7 +21,7 @@ if (iter3.hasPrevious()){
     <tr>
 	<td>上一篇:
         <%
-   com.jdon.jivejdon.model.ForumThread forumThreadPrev = (com.jdon.jivejdon.model.ForumThread)iter3.previous();
+   com.jdon.jivejdon.domain.model.ForumThread forumThreadPrev = (com.jdon.jivejdon.domain.model.ForumThread)iter3.previous();
    request.setAttribute("forumThreadPrev", forumThreadPrev);
   // advance the iterator pointer back to the original index   
    iter3.next();
@@ -42,7 +42,7 @@ if (iter3.hasNext()){
 %>
 	<td align="right">下一篇:
    <%
-   com.jdon.jivejdon.model.ForumThread forumThreadNext = (com.jdon.jivejdon.model.ForumThread)iter3.next();
+   com.jdon.jivejdon.domain.model.ForumThread forumThreadNext = (com.jdon.jivejdon.domain.model.ForumThread)iter3.next();
    request.setAttribute("forumThreadNext", forumThreadNext);
   %>
   <logic:notEmpty name="forumThreadNext" >

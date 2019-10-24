@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.model.subscription.subscribed;
+package com.jdon.jivejdon.domain.model.subscription.subscribed;
 
 public interface Subscribed {
 

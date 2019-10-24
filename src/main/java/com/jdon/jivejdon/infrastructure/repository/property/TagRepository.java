@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.property;
+package com.jdon.jivejdon.infrastructure.repository.property;
 
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.domain.model.ForumThread;

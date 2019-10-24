@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.infrastructure.component.account;
+package com.jdon.jivejdon.spi.component.account;
 
 public class SinaOAuthParamVO {
 

@@ -1,4 +1,4 @@
-<%@ page import="com.jdon.jivejdon.model.account.Account" %>
+<%@ page import="com.jdon.jivejdon.domain.model.account.Account" %>
 <%@ taglib uri="struts-logic" prefix="logic" %>
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>

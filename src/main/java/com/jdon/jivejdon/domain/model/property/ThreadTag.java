@@ -14,13 +14,13 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.model.property;
+package com.jdon.jivejdon.domain.model.property;
 
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
-import com.jdon.jivejdon.pubsub.domain.producer.read.LazyLoaderRole;
-import com.jdon.jivejdon.model.subscription.SubscribedState;
-import com.jdon.jivejdon.model.subscription.subscribed.TagSubscribed;
+import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
+import com.jdon.jivejdon.domain.model.subscription.SubscribedState;
+import com.jdon.jivejdon.domain.model.subscription.subscribed.TagSubscribed;
 
 @Model
 public class ThreadTag {

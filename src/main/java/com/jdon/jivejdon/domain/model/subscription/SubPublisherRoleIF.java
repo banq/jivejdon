@@ -13,12 +13,12 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.subscription;
+package com.jdon.jivejdon.domain.model.subscription;
 
 import com.jdon.annotation.model.Send;
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.model.subscription.event.SubscribedNotifyEvent;
-import com.jdon.jivejdon.model.subscription.event.ThreadSubscribedCreateEvent;
+import com.jdon.jivejdon.domain.model.subscription.event.SubscribedNotifyEvent;
+import com.jdon.jivejdon.domain.model.subscription.event.ThreadSubscribedCreateEvent;
 
 public interface SubPublisherRoleIF {
 
@@ -26,8 +26,8 @@ public interface SubPublisherRoleIF {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.model.subscription.SubPublisherRoleIF#subscriptionNotify
-	 * (com.jdon.jivejdon.model.subscription.subscribed.Subscribed)
+	 * com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF#subscriptionNotify
+	 * (com.jdon.jivejdon.domain.model.subscription.subscribed.Subscribed)
 	 */
 	@Send("subscriptionSender")
 	public abstract DomainMessage subscriptionNotify(SubscribedNotifyEvent subscribedNotifyEvent);
@@ -36,8 +36,8 @@ public interface SubPublisherRoleIF {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.model.subscription.SubPublisherRoleIF#createSubscription
-	 * (com.jdon.jivejdon.model.ForumMessage)
+	 * com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF#createSubscription
+	 * (com.jdon.jivejdon.domain.model.ForumMessage)
 	 */
 	@Send("createSubscription")
 	public abstract DomainMessage createSubscription(ThreadSubscribedCreateEvent threadSubscribedEvent);

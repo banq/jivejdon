@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.model.query;
+package com.jdon.jivejdon.domain.model.query;
 
 import java.util.Date;
 import java.util.GregorianCalendar;

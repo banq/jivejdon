@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.api.imp.upload;
+package com.jdon.jivejdon.api.impl.upload;
 
 import java.util.Collection;
 import java.util.Iterator;

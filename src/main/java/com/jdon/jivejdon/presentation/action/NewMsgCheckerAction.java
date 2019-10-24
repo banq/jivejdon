@@ -3,7 +3,7 @@ package com.jdon.jivejdon.presentation.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jdon.jivejdon.model.account.Account;
+import com.jdon.jivejdon.domain.model.account.Account;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
@@ -12,9 +12,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.model.realtime.Lobby;
-import com.jdon.jivejdon.model.realtime.Notification;
-import com.jdon.jivejdon.service.account.AccountService;
+import com.jdon.jivejdon.domain.model.realtime.Lobby;
+import com.jdon.jivejdon.domain.model.realtime.Notification;
+import com.jdon.jivejdon.api.account.AccountService;
 
 public class NewMsgCheckerAction extends Action {
 	private final static Logger logger = LogManager.getLogger(NewMsgCheckerAction.class);

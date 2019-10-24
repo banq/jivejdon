@@ -13,9 +13,9 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.message.output.quote;
+package com.jdon.jivejdon.domain.model.message.output.quote;
 
-import com.jdon.jivejdon.model.message.output.beanutil.FilterBeanInfo;
+import com.jdon.jivejdon.domain.model.message.output.beanutil.FilterBeanInfo;
 
 public class QuoteRegexFilterBeanInfo extends FilterBeanInfo {
 

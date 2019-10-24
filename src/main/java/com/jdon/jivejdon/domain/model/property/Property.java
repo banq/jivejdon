@@ -13,7 +13,7 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.model.property;
+package com.jdon.jivejdon.domain.model.property;
 
 import org.compass.annotations.Searchable;
 import org.compass.annotations.SearchableProperty;

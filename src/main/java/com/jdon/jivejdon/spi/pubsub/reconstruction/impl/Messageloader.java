@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.pubsub.domain.consumer.read;
+package com.jdon.jivejdon.spi.pubsub.reconstruction.impl;
 
 import org.apache.logging.log4j.*;
 

@@ -3,7 +3,7 @@ package com.jdon.jivejdon.presentation.action.account;
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.component.block.ErrorBlockerIF;
+import com.jdon.jivejdon.spi.component.block.ErrorBlockerIF;
 import com.jdon.util.UtilValidate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

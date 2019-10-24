@@ -13,10 +13,10 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.message.output.weibo;
+package com.jdon.jivejdon.domain.model.message.output.weibo;
 
-import com.jdon.jivejdon.model.message.MessageVO;
-import com.jdon.jivejdon.model.message.weibo.InFilterAuthor;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.message.weibo.InFilterAuthor;
 import com.jdon.util.StringUtil;
 
 import java.util.function.Function;

@@ -82,7 +82,7 @@ password:admin
 
 setup:
 
-intall filters in admin, if no ,add it,such as com.jdon.jivejdon.model.message.output.html.ListStyle:
+intall filters in admin, if no ,add it,such as com.jdon.jivejdon.domain.model.message.output.html.ListStyle:
 1.  HTMLFilter
 2 	ListStyle
 3 	CodeHighlighter
@@ -97,6 +97,6 @@ intall filters in admin, if no ,add it,such as com.jdon.jivejdon.model.message.o
 12 	AuthorNameFormat
 13 	QuoteRegexFilter
 14 	FontStyle
-15 com.jdon.jivejdon.model.message.output.linkurl.LinkUrlExtractor
-16 com.jdon.jivejdon.model.message.output.thumbnailUrl.ThumbnailExtractor
+15 com.jdon.jivejdon.domain.model.message.output.linkurl.LinkUrlExtractor
+16 com.jdon.jivejdon.domain.model.message.output.thumbnailUrl.ThumbnailExtractor
 

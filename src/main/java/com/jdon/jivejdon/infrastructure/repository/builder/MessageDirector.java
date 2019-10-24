@@ -14,22 +14,22 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.repository.builder;
+package com.jdon.jivejdon.infrastructure.repository.builder;
 
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.pointcut.Around;
 import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.infrastructure.component.filter.OutFilterManager;
+import com.jdon.jivejdon.spi.component.filter.OutFilterManager;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.domain.model.message.FilterPipleSpec;
-import com.jdon.jivejdon.repository.acccount.AccountFactory;
-import com.jdon.jivejdon.repository.property.UploadRepository;
-import com.jdon.jivejdon.repository.dao.MessageDao;
-import com.jdon.jivejdon.repository.dao.PropertyDao;
+import com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactory;
+import com.jdon.jivejdon.infrastructure.repository.property.UploadRepository;
+import com.jdon.jivejdon.infrastructure.repository.dao.MessageDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

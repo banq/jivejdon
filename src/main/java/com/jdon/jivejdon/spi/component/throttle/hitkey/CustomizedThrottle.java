@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.infrastructure.component.throttle.hitkey;
+package com.jdon.jivejdon.spi.component.throttle.hitkey;
 
 public interface CustomizedThrottle {
 
@@ -9,7 +9,7 @@ public interface CustomizedThrottle {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.infrastructure.component.throttle.ThrottleManagerIF#processHitFilter
+	 * com.jdon.jivejdon.spi.component.throttle.ThrottleManagerIF#processHitFilter
 	 * (java.lang.String)
 	 */
 	boolean processHitFilter(HitKeyIF hitKey);

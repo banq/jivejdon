@@ -14,9 +14,9 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.model.message.output.shield;
+package com.jdon.jivejdon.domain.model.message.output.shield;
 
-import com.jdon.jivejdon.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

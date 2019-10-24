@@ -14,11 +14,11 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.repository.builder;
+package com.jdon.jivejdon.infrastructure.repository.builder;
 
 import com.jdon.jivejdon.domain.model.Forum;
-import com.jdon.jivejdon.repository.property.HotKeysRepository;
-import com.jdon.jivejdon.repository.dao.ForumDao;
+import com.jdon.jivejdon.infrastructure.repository.property.HotKeysRepository;
+import com.jdon.jivejdon.infrastructure.repository.dao.ForumDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.model.query.specification;
+package com.jdon.jivejdon.domain.model.query.specification;
 
 public class TaggedThreadListSpec extends ThreadListSpec {
 	

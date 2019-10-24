@@ -1,4 +1,4 @@
-<%@ page import="com.jdon.jivejdon.model.account.Account" %>
+<%@ page import="com.jdon.jivejdon.domain.model.account.Account" %>
 <%@ taglib uri="struts-logic" prefix="logic" %>
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>
@@ -80,16 +80,16 @@
 					<bean:write name="subscribed" property="name" />
 				</td>
 				<td class="contact" align="center" >
-				    <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.component.subscription.action.ShortMsgAction)" disabled="true"/>
+				    <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.spi.component.subscription.action.ShortMsgAction)" disabled="true"/>
 				</td>
 				<td class="contact" align="center" >
-				   <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.component.subscription.action.EmailAction)" disabled="true"/>
+				   <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.spi.component.subscription.action.EmailAction)" disabled="true"/>
 				</td>
 				<td class="contact" align="center" >
-				   <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.component.subscription.action.SinaWeiboAction)" disabled="true"/>
+				   <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.spi.component.subscription.action.SinaWeiboAction)" disabled="true"/>
 				</td>
 				<td class="contact" align="center" >
-				   <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.component.subscription.action.TecentWeiboAction)" disabled="true"/>
+				   <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.spi.component.subscription.action.TecentWeiboAction)" disabled="true"/>
 				</td>
 				
 				

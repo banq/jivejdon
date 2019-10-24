@@ -29,7 +29,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.component.weibo.TecentWeiboSubmitter;
+import com.jdon.jivejdon.spi.component.weibo.TecentWeiboSubmitter;
 
 public class TecentUserCallAction extends Action {
 	private final static Logger logger = LogManager.getLogger(TecentUserCallAction.class);

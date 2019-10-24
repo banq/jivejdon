@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.dao.filter;
+package com.jdon.jivejdon.infrastructure.repository.dao.filter;
 
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.pointcut.Around;
@@ -21,13 +21,13 @@ import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
-import com.jdon.jivejdon.repository.builder.MessageInitFactory;
-import com.jdon.jivejdon.repository.dao.AccountDao;
-import com.jdon.jivejdon.repository.dao.PropertyDao;
-import com.jdon.jivejdon.repository.dao.UploadFileDao;
-import com.jdon.jivejdon.repository.dao.sql.JdbcTempSource;
-import com.jdon.jivejdon.repository.dao.sql.MessageDaoSql;
-import com.jdon.jivejdon.repository.search.MessageSearchRepository;
+import com.jdon.jivejdon.infrastructure.repository.builder.MessageInitFactory;
+import com.jdon.jivejdon.infrastructure.repository.dao.AccountDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.UploadFileDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.sql.JdbcTempSource;
+import com.jdon.jivejdon.infrastructure.repository.dao.sql.MessageDaoSql;
+import com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository;
 import com.jdon.jivejdon.util.ContainerUtil;
 
 /**

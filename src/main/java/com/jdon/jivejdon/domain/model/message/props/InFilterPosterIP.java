@@ -13,9 +13,9 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.message.props;
+package com.jdon.jivejdon.domain.model.message.props;
 
-import com.jdon.jivejdon.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.util.Debug;
 
 import java.text.DateFormat;

@@ -31,7 +31,7 @@ import org.apache.struts.action.ActionMapping;
 import com.jdon.cache.CacheableWrapper;
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.model.util.OneOneDTO;
+import com.jdon.jivejdon.domain.model.util.OneOneDTO;
 import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.strutsutil.ModelListForm;
 import com.jdon.util.ClassUtil;

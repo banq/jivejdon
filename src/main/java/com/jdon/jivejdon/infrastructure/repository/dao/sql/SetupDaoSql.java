@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.dao.sql;
+package com.jdon.jivejdon.infrastructure.repository.dao.sql;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,7 +22,7 @@ import java.util.Map;
 
 import org.apache.logging.log4j.*;
 
-import com.jdon.jivejdon.repository.dao.SetupDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.SetupDao;
 
 /**
  * @author <a href="mailto:banqJdon<AT>jdon.com">banq</a>

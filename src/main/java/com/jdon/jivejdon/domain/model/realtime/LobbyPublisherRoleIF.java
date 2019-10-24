@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.realtime;
+package com.jdon.jivejdon.domain.model.realtime;
 
 import com.jdon.domain.message.DomainMessage;
 
@@ -23,7 +23,7 @@ public interface LobbyPublisherRoleIF {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.model.realtime.LobbyPublisherRoleIF#notifyLobby(com
+	 * com.jdon.jivejdon.domain.model.realtime.LobbyPublisherRoleIF#notifyLobby(com
 	 * .jdon.jivejdon.model.realtime.Notification)
 	 */
 	DomainMessage notifyLobby(Notification notification);

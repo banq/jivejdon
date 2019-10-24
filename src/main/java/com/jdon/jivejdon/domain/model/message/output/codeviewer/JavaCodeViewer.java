@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.message.output.codeviewer;
+package com.jdon.jivejdon.domain.model.message.output.codeviewer;
 
 import java.util.HashMap;
 

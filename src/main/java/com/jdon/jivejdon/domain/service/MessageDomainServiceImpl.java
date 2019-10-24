@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.service.imp.message;
+package com.jdon.jivejdon.domain.service;
 
 import com.jdon.annotation.Component;
 import com.jdon.annotation.Introduce;
@@ -28,8 +28,8 @@ import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.jivejdon.domain.model.query.MultiCriteria;
-import com.jdon.jivejdon.repository.ForumFactory;
-import com.jdon.jivejdon.service.query.ForumMessageQueryService;
+import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,13 +42,13 @@ import java.util.regex.Pattern;
  */
 @Component
 @Introduce("componentmessage")
-public class MessageKernel implements MessageKernelIF {
-	private final static Logger logger = LogManager.getLogger(MessageKernel.class);
+public class MessageDomainServiceImpl implements MessageDomainService {
+	private final static Logger logger = LogManager.getLogger(MessageDomainServiceImpl.class);
 	private final static Pattern htmlEscape = Pattern.compile("\\<.*?\\>|<[^>]+");
 	protected ForumMessageQueryService forumMessageQueryService;
 	protected ForumFactory forumAbstractFactory;
 
-	public MessageKernel(ForumMessageQueryService forumMessageQueryService, ForumFactory forumAbstractFactory) {
+	public MessageDomainServiceImpl(ForumMessageQueryService forumMessageQueryService, ForumFactory forumAbstractFactory) {
 		this.forumMessageQueryService = forumMessageQueryService;
 		this.forumAbstractFactory = forumAbstractFactory;
 	}
@@ -60,7 +60,7 @@ public class MessageKernel implements MessageKernelIF {
 	 * AnemicMessageDTO will map to messageForm
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.service.imp.message.MessageKernelIF#initMessage(com
+	 * com.jdon.jivejdon.domain.service.MessageDomainService#initMessage(com
 	 * .jdon.controller.events.EventModel)
 	 */
 	@Override
@@ -86,7 +86,7 @@ public class MessageKernel implements MessageKernelIF {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.service.imp.message.MessageKernelIF#initReplyMessage
+	 * com.jdon.jivejdon.domain.service.MessageDomainService#initReplyMessage
 	 * (com.jdon.controller.events.EventModel)
 	 */
 	@Override
@@ -121,7 +121,7 @@ public class MessageKernel implements MessageKernelIF {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.service.imp.message.MessageKernelIF#getMessage(java
+	 * com.jdon.jivejdon.domain.service.MessageDomainService#getMessage(java
 	 * .lang.Long)
 	 */
 	@Override
@@ -138,7 +138,7 @@ public class MessageKernel implements MessageKernelIF {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.service.imp.message.MessageKernelIF#getThread(java.
+	 * com.jdon.jivejdon.domain.service.MessageDomainService#getThread(java.
 	 * lang.Long)
 	 */
 	@Override
@@ -166,7 +166,7 @@ public class MessageKernel implements MessageKernelIF {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.service.imp.message.MessageKernelIF#deleteMessage(com
+	 * com.jdon.jivejdon.domain.service.MessageDomainService#deleteMessage(com
 	 * .jdon.jivejdon.model.ForumMessage)
 	 */
 	@Override
@@ -181,7 +181,7 @@ public class MessageKernel implements MessageKernelIF {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.service.imp.message.MessageKernelIF#deleteUserMessages
+	 * com.jdon.jivejdon.domain.service.MessageDomainService#deleteUserMessages
 	 * (java.lang.String)
 	 */
 	@Override
@@ -225,7 +225,7 @@ public class MessageKernel implements MessageKernelIF {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jdon.jivejdon.service.imp.message.MessageKernelIF#
+	 * @see com.jdon.jivejdon.domain.service.MessageDomainService#
 	 * getForumMessageQueryService()
 	 */
 	@Override
@@ -236,9 +236,9 @@ public class MessageKernel implements MessageKernelIF {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jdon.jivejdon.service.imp.message.MessageKernelIF#
+	 * @see com.jdon.jivejdon.domain.service.MessageDomainService#
 	 * setForumMessageQueryService
-	 * (com.jdon.jivejdon.service.query.ForumMessageQueryService)
+	 * (com.jdon.jivejdon.api.query.ForumMessageQueryService)
 	 */
 	@Override
 	public void setForumMessageQueryService(ForumMessageQueryService forumMessageQueryService) {

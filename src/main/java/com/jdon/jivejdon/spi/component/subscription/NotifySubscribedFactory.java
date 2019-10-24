@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.infrastructure.component.subscription;
+package com.jdon.jivejdon.spi.component.subscription;
 
 import com.jdon.annotation.Component;
 import com.jdon.jivejdon.domain.model.account.Account;

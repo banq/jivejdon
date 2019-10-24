@@ -1,6 +1,6 @@
-package com.jdon.jivejdon.model.message.output.quote;
+package com.jdon.jivejdon.domain.model.message.output.quote;
 
-import com.jdon.jivejdon.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 
 import java.util.ArrayList;
 import java.util.List;

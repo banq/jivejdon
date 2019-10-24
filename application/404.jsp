@@ -3,8 +3,8 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@page isELIgnored="false" %>
 <%@page import="com.jdon.controller.WebAppUtil,
-com.jdon.jivejdon.component.block.ErrorBlockerIF,com.jdon.jivejdon.component.email.EmailHelper" %>
-<%@ page import="com.jdon.jivejdon.component.email.EmailVO" %>
+com.jdon.jivejdon.spi.component.block.ErrorBlockerIF,com.jdon.jivejdon.spi.component.email.EmailHelper" %>
+<%@ page import="com.jdon.jivejdon.spi.component.email.EmailVO" %>
 <%
 ErrorBlockerIF errorBlocker = (ErrorBlockerIF) WebAppUtil.getComponentInstance("errorBlocker", this.getServletContext());
 if (errorBlocker.checkRate(request.getRemoteAddr(), 4)){

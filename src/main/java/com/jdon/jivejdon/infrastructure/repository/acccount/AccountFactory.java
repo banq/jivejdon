@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.acccount;
+package com.jdon.jivejdon.infrastructure.repository.acccount;
 
 import com.jdon.jivejdon.domain.model.account.Account;
 

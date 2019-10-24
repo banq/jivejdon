@@ -34,7 +34,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.component.block.IPBanListManagerIF;
+import com.jdon.jivejdon.spi.component.block.IPBanListManagerIF;
 
 /**
  * Ban clients that has banned.

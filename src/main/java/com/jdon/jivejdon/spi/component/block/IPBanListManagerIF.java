@@ -1,4 +1,4 @@
-package com.jdon.jivejdon.infrastructure.component.block;
+package com.jdon.jivejdon.spi.component.block;
 
 import java.util.Collection;
 

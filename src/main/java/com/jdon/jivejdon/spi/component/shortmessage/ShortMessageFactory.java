@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jdon.jivejdon.infrastructure.component.shortmessage;
+package com.jdon.jivejdon.spi.component.shortmessage;
 
 import java.sql.SQLException;
 import java.util.Observable;

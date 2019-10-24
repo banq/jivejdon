@@ -13,22 +13,22 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model;
+package com.jdon.jivejdon.domain.model;
 
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
 import com.jdon.annotation.model.OnCommand;
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.pubsub.domain.producer.read.LazyLoaderRole;
-import com.jdon.jivejdon.pubsub.domain.producer.write.ThreadEventSourcingRole;
-import com.jdon.jivejdon.model.event.PostTopicMessageCommand;
-import com.jdon.jivejdon.model.event.TopicMessagePostedEvent;
-import com.jdon.jivejdon.model.message.AnemicMessageDTO;
-import com.jdon.jivejdon.model.property.HotKeys;
-import com.jdon.jivejdon.model.subscription.SubPublisherRoleIF;
-import com.jdon.jivejdon.model.subscription.event.ForumSubscribedNotifyEvent;
-import com.jdon.jivejdon.model.util.ForumModel;
+import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
+import com.jdon.jivejdon.spi.pubsub.publish.ThreadEventSourcingRole;
+import com.jdon.jivejdon.domain.model.event.PostTopicMessageCommand;
+import com.jdon.jivejdon.domain.model.event.TopicMessagePostedEvent;
+import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.domain.model.property.HotKeys;
+import com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF;
+import com.jdon.jivejdon.domain.model.subscription.event.ForumSubscribedNotifyEvent;
+import com.jdon.jivejdon.domain.model.util.ForumModel;
 import org.compass.annotations.Searchable;
 import org.compass.annotations.SearchableId;
 import org.compass.annotations.SearchableProperty;

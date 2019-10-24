@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.attachment;
+package com.jdon.jivejdon.domain.model.attachment;
 
 import java.util.Collection;
 

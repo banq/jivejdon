@@ -13,20 +13,20 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.subscription;
+package com.jdon.jivejdon.infrastructure.repository.subscription;
 
 import com.jdon.annotation.Component;
 import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.infrastructure.component.subscription.SubscriptionAction;
-import com.jdon.jivejdon.infrastructure.component.subscription.action.EmailAction;
-import com.jdon.jivejdon.infrastructure.component.subscription.action.ShortMsgAction;
-import com.jdon.jivejdon.infrastructure.component.subscription.action.SinaWeiboAction;
-import com.jdon.jivejdon.infrastructure.component.subscription.action.TecentWeiboAction;
-import com.jdon.jivejdon.infrastructure.component.weibo.UserConnectorAuth;
+import com.jdon.jivejdon.spi.component.subscription.SubscriptionAction;
+import com.jdon.jivejdon.spi.component.subscription.action.EmailAction;
+import com.jdon.jivejdon.spi.component.subscription.action.ShortMsgAction;
+import com.jdon.jivejdon.spi.component.subscription.action.SinaWeiboAction;
+import com.jdon.jivejdon.spi.component.subscription.action.TecentWeiboAction;
+import com.jdon.jivejdon.spi.component.weibo.UserConnectorAuth;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.subscription.Subscription;
 import com.jdon.jivejdon.domain.model.subscription.messsage.WeiboExpiredNotifyMessage;
-import com.jdon.jivejdon.repository.dao.sql.UserconnectorSql;
+import com.jdon.jivejdon.infrastructure.repository.dao.sql.UserconnectorSql;
 
 import java.util.Map;
 

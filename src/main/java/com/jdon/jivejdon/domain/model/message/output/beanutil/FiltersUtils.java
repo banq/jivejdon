@@ -1,6 +1,6 @@
-package com.jdon.jivejdon.model.message.output.beanutil;
+package com.jdon.jivejdon.domain.model.message.output.beanutil;
 
-import com.jdon.jivejdon.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.util.StringUtil;
 
 import java.beans.PropertyDescriptor;

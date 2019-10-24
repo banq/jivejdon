@@ -1,10 +1,10 @@
-package com.jdon.jivejdon.model.subscription;
+package com.jdon.jivejdon.domain.model.subscription;
 
 import com.jdon.annotation.Model;
-import com.jdon.jivejdon.component.subscription.SubscriptionAction;
-import com.jdon.jivejdon.component.subscription.SubscriptionActionHolder;
-import com.jdon.jivejdon.model.account.Account;
-import com.jdon.jivejdon.model.subscription.subscribed.Subscribed;
+import com.jdon.jivejdon.spi.component.subscription.SubscriptionAction;
+import com.jdon.jivejdon.spi.component.subscription.SubscriptionActionHolder;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.domain.model.subscription.subscribed.Subscribed;
 
 @Model
 public class Subscription {

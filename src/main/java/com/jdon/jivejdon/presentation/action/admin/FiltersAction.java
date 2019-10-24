@@ -16,11 +16,11 @@
 package com.jdon.jivejdon.presentation.action.admin;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.model.message.MessageVO;
-import com.jdon.jivejdon.model.message.output.RenderingFilterManager;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.message.output.RenderingFilterManager;
 import com.jdon.jivejdon.presentation.form.FiltersForm;
-import com.jdon.jivejdon.service.ForumMessageService;
-import com.jdon.jivejdon.service.ForumService;
+import com.jdon.jivejdon.api.ForumMessageService;
+import com.jdon.jivejdon.api.ForumService;
 import com.jdon.jivejdon.util.BeanUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

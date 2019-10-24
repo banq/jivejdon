@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.auth;
+package com.jdon.jivejdon.domain.model.auth;
 
 /**
  * in jivejdon_permisision.xml must be same as this class's role value

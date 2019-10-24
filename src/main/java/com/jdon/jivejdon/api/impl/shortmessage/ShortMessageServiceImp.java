@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jdon.jivejdon.api.imp.shortmessage;
+package com.jdon.jivejdon.api.impl.shortmessage;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.logging.log4j.LogManager;

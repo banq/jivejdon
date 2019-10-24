@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.infrastructure.component.shortmessage;
+package com.jdon.jivejdon.spi.component.shortmessage;
 
 import com.jdon.jivejdon.domain.model.event.ATUserNotifiedEvent;
 import com.jdon.util.StringUtil;

@@ -13,16 +13,16 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.reblog;
+package com.jdon.jivejdon.domain.model.reblog;
 
 import java.util.Collection;
 
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.pubsub.domain.producer.read.LazyLoaderRole;
-import com.jdon.jivejdon.model.ForumMessage;
-import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.model.util.LazyLoader;
-import com.jdon.jivejdon.model.util.OneManyDTO;
+import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
+import com.jdon.jivejdon.domain.model.ForumMessage;
+import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.util.LazyLoader;
+import com.jdon.jivejdon.domain.model.util.OneManyDTO;
 
 public class ReBlogVO extends LazyLoader {
 

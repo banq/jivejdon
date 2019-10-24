@@ -11,7 +11,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.service.ForumMessageService;
+import com.jdon.jivejdon.api.ForumMessageService;
 import com.jdon.jivejdon.util.ContainerUtil;
 
 public class MethodDispatchAction extends DispatchAction {

@@ -1,6 +1,6 @@
-package com.jdon.jivejdon.model.message.output.linkurl;
+package com.jdon.jivejdon.domain.model.message.output.linkurl;
 
-import com.jdon.jivejdon.model.message.output.beanutil.FilterBeanInfo;
+import com.jdon.jivejdon.domain.model.message.output.beanutil.FilterBeanInfo;
 
 public class LinkUrlExtractorBeanInfo extends FilterBeanInfo {
 

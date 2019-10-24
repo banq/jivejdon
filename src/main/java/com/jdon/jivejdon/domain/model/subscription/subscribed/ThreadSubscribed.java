@@ -1,6 +1,6 @@
-package com.jdon.jivejdon.model.subscription.subscribed;
+package com.jdon.jivejdon.domain.model.subscription.subscribed;
 
-import com.jdon.jivejdon.model.ForumThread;
+import com.jdon.jivejdon.domain.model.ForumThread;
 
 public class ThreadSubscribed implements Subscribed {
 

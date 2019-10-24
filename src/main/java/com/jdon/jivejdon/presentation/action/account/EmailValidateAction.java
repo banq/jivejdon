@@ -28,9 +28,9 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.component.email.ValidateCodeEmail;
-import com.jdon.jivejdon.model.account.Account;
-import com.jdon.jivejdon.service.account.AccountService;
+import com.jdon.jivejdon.spi.component.email.ValidateCodeEmail;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.api.account.AccountService;
 
 public class EmailValidateAction extends Action {
 	private final static Logger logger = LogManager.getLogger(EmailValidateAction.class);

@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.spi.pubsub.es_projection;
+package com.jdon.jivejdon.spi.pubsub.reconstruction;
 
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.model.Send;

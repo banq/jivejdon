@@ -13,9 +13,9 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.subscription.event;
+package com.jdon.jivejdon.domain.model.subscription.event;
 
-import com.jdon.jivejdon.model.ForumMessage;
+import com.jdon.jivejdon.domain.model.ForumMessage;
 
 public class ForumSubscribedNotifyEvent implements SubscribedNotifyEvent {
 

@@ -1,9 +1,9 @@
 package com.jdon.jivejdon.presentation.action.message;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
 import com.jdon.jivejdon.presentation.form.MessageForm;
-import com.jdon.jivejdon.service.ForumMessageService;
+import com.jdon.jivejdon.api.ForumMessageService;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;

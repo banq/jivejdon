@@ -13,14 +13,14 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.subscription;
+package com.jdon.jivejdon.domain.model.subscription;
 
 import com.jdon.annotation.Component;
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.model.Send;
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.model.subscription.event.SubscribedNotifyEvent;
-import com.jdon.jivejdon.model.subscription.event.ThreadSubscribedCreateEvent;
+import com.jdon.jivejdon.domain.model.subscription.event.SubscribedNotifyEvent;
+import com.jdon.jivejdon.domain.model.subscription.event.ThreadSubscribedCreateEvent;
 
 @Component
 @Introduce("message")
@@ -30,15 +30,15 @@ public class SubPublisherRole implements SubPublisherRoleIF {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.model.subscription.SubPublisherRoleIF#subscriptionNotify
-	 * (com.jdon.jivejdon.model.subscription.subscribed.Subscribed)
+	 * com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF#subscriptionNotify
+	 * (com.jdon.jivejdon.domain.model.subscription.subscribed.Subscribed)
 	 */
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.model.subscription.SubPublisherRoleIF#subscriptionNotify
-	 * (com.jdon.jivejdon.model.subscription.subscribed.Subscribed)
+	 * com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF#subscriptionNotify
+	 * (com.jdon.jivejdon.domain.model.subscription.subscribed.Subscribed)
 	 */
 	@Override
 	@Send("subscriptionSender")
@@ -50,15 +50,15 @@ public class SubPublisherRole implements SubPublisherRoleIF {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.model.subscription.SubPublisherRoleIF#createSubscription
-	 * (com.jdon.jivejdon.model.ForumMessage)
+	 * com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF#createSubscription
+	 * (com.jdon.jivejdon.domain.model.ForumMessage)
 	 */
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.model.subscription.SubPublisherRoleIF#createSubscription
-	 * (com.jdon.jivejdon.model.ForumMessage)
+	 * com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF#createSubscription
+	 * (com.jdon.jivejdon.domain.model.ForumMessage)
 	 */
 	@Override
 	@Send("createSubscription")

@@ -13,11 +13,11 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.infrastructure.component.account;
+package com.jdon.jivejdon.spi.component.account;
 
 import com.jdon.annotation.Component;
-import com.jdon.jivejdon.infrastructure.component.account.sina.AccessToken;
-import com.jdon.jivejdon.infrastructure.component.weibo.UserConnectorAuth;
+import com.jdon.jivejdon.spi.component.account.sina.AccessToken;
+import com.jdon.jivejdon.spi.component.weibo.UserConnectorAuth;
 import com.jdon.jivejdon.domain.model.account.OAuthUserVO;
 import com.jdon.jivejdon.infrastructure.repository.acccount.Userconnector;
 import com.jdon.util.UtilValidate;

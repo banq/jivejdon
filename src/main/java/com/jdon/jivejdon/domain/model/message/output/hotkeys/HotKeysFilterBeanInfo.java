@@ -14,9 +14,9 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.model.message.output.hotkeys;
+package com.jdon.jivejdon.domain.model.message.output.hotkeys;
 
-import com.jdon.jivejdon.model.message.output.beanutil.FilterBeanInfo;
+import com.jdon.jivejdon.domain.model.message.output.beanutil.FilterBeanInfo;
 
 public class HotKeysFilterBeanInfo extends FilterBeanInfo {
 	public static final String[] PROPERTY_NAMES = { "prefix_regEx", "suffix_regEx"};

@@ -2,7 +2,7 @@
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@page import="com.jdon.jivejdon.component.block.ErrorBlockerIF"%>
+<%@page import="com.jdon.jivejdon.spi.component.block.ErrorBlockerIF"%>
 <%@page import="java.util.UUID"%>
 <%@page import="com.jdon.jivejdon.presentation.form.SkinUtils"%>
 <%

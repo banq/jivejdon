@@ -13,15 +13,15 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.repository.dao.filter;
+package com.jdon.jivejdon.infrastructure.repository.dao.filter;
 
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.pointcut.Around;
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.Forum;
-import com.jdon.jivejdon.repository.builder.MessageInitFactory;
-import com.jdon.jivejdon.repository.dao.sql.ForumDaoSql;
-import com.jdon.jivejdon.repository.dao.sql.JdbcTempSource;
+import com.jdon.jivejdon.infrastructure.repository.builder.MessageInitFactory;
+import com.jdon.jivejdon.infrastructure.repository.dao.sql.ForumDaoSql;
+import com.jdon.jivejdon.infrastructure.repository.dao.sql.JdbcTempSource;
 import com.jdon.jivejdon.util.ContainerUtil;
 
 /**

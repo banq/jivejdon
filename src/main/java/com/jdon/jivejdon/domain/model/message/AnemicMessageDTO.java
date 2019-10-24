@@ -1,10 +1,10 @@
-package com.jdon.jivejdon.model.message;
+package com.jdon.jivejdon.domain.model.message;
 
-import com.jdon.jivejdon.model.account.Account;
-import com.jdon.jivejdon.model.Forum;
-import com.jdon.jivejdon.model.ForumThread;
-import com.jdon.jivejdon.model.attachment.AttachmentsVO;
-import com.jdon.jivejdon.model.property.MessagePropertysVO;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.domain.model.Forum;
+import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.attachment.AttachmentsVO;
+import com.jdon.jivejdon.domain.model.property.MessagePropertysVO;
 import org.compass.annotations.Searchable;
 import org.compass.annotations.SearchableComponent;
 import org.compass.annotations.SearchableId;

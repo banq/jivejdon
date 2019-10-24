@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package com.jdon.jivejdon.repository.builder;
+package com.jdon.jivejdon.infrastructure.repository.builder;
 
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.pointcut.Around;
@@ -22,9 +22,9 @@ import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.thread.ThreadTagsVO;
-import com.jdon.jivejdon.repository.property.TagRepository;
-import com.jdon.jivejdon.repository.dao.MessageDao;
-import com.jdon.jivejdon.repository.dao.PropertyDao;
+import com.jdon.jivejdon.infrastructure.repository.property.TagRepository;
+import com.jdon.jivejdon.infrastructure.repository.dao.MessageDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

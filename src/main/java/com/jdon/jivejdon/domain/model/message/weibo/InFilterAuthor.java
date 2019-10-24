@@ -13,11 +13,11 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.model.message.weibo;
+package com.jdon.jivejdon.domain.model.message.weibo;
 
-import com.jdon.jivejdon.model.event.ATUserNotifiedEvent;
-import com.jdon.jivejdon.model.message.MessageVO;
-import com.jdon.jivejdon.model.message.output.weibo.AuthorNameFormat;
+import com.jdon.jivejdon.domain.model.event.ATUserNotifiedEvent;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.message.output.weibo.AuthorNameFormat;
 import com.jdon.util.Debug;
 
 import java.util.Collection;

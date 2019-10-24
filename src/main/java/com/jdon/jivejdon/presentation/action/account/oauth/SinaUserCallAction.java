@@ -28,7 +28,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.component.account.SinaOAuthSubmitter;
+import com.jdon.jivejdon.spi.component.account.SinaOAuthSubmitter;
 
 public class SinaUserCallAction extends Action {
 	private final static Logger logger = LogManager.getLogger(SinaUserCallAction.class);

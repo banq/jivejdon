@@ -33,9 +33,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.*;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.component.throttle.hitkey.CustomizedThrottle;
-import com.jdon.jivejdon.component.throttle.hitkey.HitKeyDiff;
-import com.jdon.jivejdon.component.throttle.hitkey.HitKeyIF;
+import com.jdon.jivejdon.spi.component.throttle.hitkey.CustomizedThrottle;
+import com.jdon.jivejdon.spi.component.throttle.hitkey.HitKeyDiff;
+import com.jdon.jivejdon.spi.component.throttle.hitkey.HitKeyIF;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;
 import com.jdon.util.UtilValidate;
 

@@ -20,7 +20,7 @@ import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jdon.jivejdon.model.account.Account;
+import com.jdon.jivejdon.domain.model.account.Account;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
@@ -29,11 +29,11 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.model.ForumMessage;
+import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.presentation.form.UpLoadFileForm;
-import com.jdon.jivejdon.service.account.AccountService;
-import com.jdon.jivejdon.service.ForumMessageService;
-import com.jdon.jivejdon.service.property.UploadService;
+import com.jdon.jivejdon.api.account.AccountService;
+import com.jdon.jivejdon.api.ForumMessageService;
+import com.jdon.jivejdon.api.property.UploadService;
 import com.jdon.strutsutil.FormBeanUtil;
 import com.jdon.strutsutil.ModelListForm;
 import com.jdon.util.UtilValidate;

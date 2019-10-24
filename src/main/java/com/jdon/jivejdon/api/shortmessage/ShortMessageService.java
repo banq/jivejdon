@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jdon.jivejdon.service.shortmessage;
+package com.jdon.jivejdon.api.shortmessage;
 
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;

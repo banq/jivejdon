@@ -48,4 +48,6 @@ public interface TagDao {
 
 	void delThreadTag(Long tagID, Long threadID) throws Exception;
 
-	void deleteThreadTag(Long tagID) throws Ex
+	void deleteThreadTag(Long tagID) throws Exception;
+
+}

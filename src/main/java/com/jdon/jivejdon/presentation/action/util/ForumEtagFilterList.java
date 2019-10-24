@@ -16,7 +16,7 @@
 package com.jdon.jivejdon.presentation.action.util;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.service.ForumService;
+import com.jdon.jivejdon.api.ForumService;
 import com.jdon.jivejdon.util.ToolsUtil;
 import com.jdon.strutsutil.ModelListAction;
 import org.apache.struts.action.ActionForm;
