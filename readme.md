@@ -31,7 +31,7 @@ No dependencies to infrastructure, databases, other stuff. All classes are POJO.
 
 The customer/supply model from jdonframework can seperate domain model from Persistence/Repository.
 
-All business datas outside of domain is packed in a DTO anemic model([AnemicMessageDTO](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/message/AnemicMessageDTO.java)), so business rules in the aggregate root entity will not leak outside of domain. 
+All business datas outside of domain is packed in a DTO anemic model([AnemicMessageDTO](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/infrastructure/dto/AnemicMessageDTO.java)), so business rules in the aggregate root entity will not leak outside of domain. 
 
 ![avatar](./doc/richmodel.png)
 
@@ -45,7 +45,7 @@ All business logic is located in Domain Model. No leaks to application layer or 
 
 Primitive attributes of Entites grouped together using ValueObjects.
 
-[MessageVO](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/message/MessageVO.java) is a value Object, and has two attributes for message content: subject/body.
+[MessageVO](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/domain/model/message/MessageVO.java) is a value Object, and has two attributes for message content: subject/body.
 
 
 
@@ -60,7 +60,7 @@ JiveJdon and Hexagonal_architecture:
 ![avatar](./doc/hexagonal_architecture.png)
 
 
- [models.xml](https://github.com/banq/jivejdon/blob/master/src/main/resources/com/jdon/jivejdon/model/models.xml) is a adapter, it is XML configure acting as a controller.
+ [models.xml](https://github.com/banq/jivejdon/blob/master/src/main/resources/com/jdon/jivejdon/domain/model/models.xml) is a adapter, it is XML configure acting as a controller.
 ``````
 	<model key="messageId" class="com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO">
 		<actionForm name="messageForm"/>
@@ -73,7 +73,7 @@ JiveJdon and Hexagonal_architecture:
 		</handler>
 	</model>
 ``````
-When post a replies message,  a POST command will action createReplyMessage method of [forumMessageService](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/service/imp/message/ForumMessageShell.java) :
+When post a replies message,  a POST command will action createReplyMessage method of [forumMessageService](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/api/impl/message/ForumMessageServiceImpl.java) :
 
 ``````
 public interface ForumMessageService {
@@ -84,9 +84,9 @@ public interface ForumMessageService {
 }
 ``````
 
-Domain sevice forumMessageService will delegate responsibility to the entity [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java), 
+Domain sevice forumMessageService will delegate responsibility to the entity [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/domain/model/ForumMessage.java), 
  
-createReplyMessage() method will send a command to the addChild()  method of [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java) 
+createReplyMessage() method will send a command to the addChild()  method of [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/domain/model/ForumMessage.java) 
  
  ![avatar](./doc/builder.png)
 
@@ -94,7 +94,7 @@ createReplyMessage() method will send a command to the addChild()  method of [Fo
  
  "eventSourcing.addReplyMessage" will send a "ReplyMessageCreatedEvent" domain Event to infrastructure layer such as Repository. seperate domain logic from infrastructure, databases, other stuffs.
 
- Domain event "ReplyMessageCreatedEvent"  occurring in the domain is saved in the event store "jiveMessage", this is a message posted events table. the event can be used for reconstructing the latest replies state of a thread, events replay is in [ForumThreadState](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumThreadState.java) .
+ Domain event "ReplyMessageCreatedEvent"  occurring in the domain is saved in the event store "jiveMessage", this is a message posted events table. the event can be used for reconstructing the latest replies state of a thread, events replay is in [ForumThreadState](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/domain/model/ForumThreadState.java) .
  
 
 CQRS architecture
@@ -133,7 +133,7 @@ In jiveThread table there is no special field for latest replyies state , all st
 
 When a user post a new ForumMessage, a ReplyMessageCreatedEvent event will be saved to event store: JiveMessage,  simultaneously refresh the snapshot of event: ForumThreadState.
 
-In [ForumThreadState](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumThreadState.java) there is another method for projecting state from the database, if we want tp get the count of all message replies, its projectStateFromEventSource() method can do this:
+In [ForumThreadState](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/domain/model/ForumThreadState.java) there is another method for projecting state from the database, if we want tp get the count of all message replies, its projectStateFromEventSource() method can do this:
 
 ````
 
@@ -154,7 +154,7 @@ In [ForumThreadState](https://github.com/banq/jivejdon/blob/master/src/main/java
 
 ````
 
-lazyLoaderRole.projectStateFromEventSource will send a "projectStateFromEventSource" message to [ThreadStateLoader](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/event/domain/consumer/read/ThreadStateLoader.java):
+lazyLoaderRole.projectStateFromEventSource will send a "projectStateFromEventSource" message to [ThreadStateLoader](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/spi/pubsub/reconstruction/impl/ThreadStateLoader.java):
 
 ````````````
 public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
