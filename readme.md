@@ -92,8 +92,8 @@ public interface ForumMessageService {
 ``````
 
 The forumMessageService will delegate the responsibility to the aggregate root entity [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/domain/model/ForumMessage.java), 
- 
-createReplyMessage() method will send a command to the addChild()  method of [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/domain/model/ForumMessage.java) ,it is too a command handler of CQRS:
+
+The createReplyMessage() method of the forumMessageService will send a command to the addChild()  method of [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/domain/model/ForumMessage.java) that is too a command handler of CQRS:
  
  ![avatar](./doc/builder.png)
 
