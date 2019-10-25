@@ -15,7 +15,7 @@ DDD Aggregate Model
 
 There are two aggregate roots in jivejdon: FormThread and ForumMessage(Root Message).
 
-[com.jdon.jivejdon.domain.model.ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java) is a rich model instead of a anemic model, no "public" setter method, all setter methods are "private":
+[com.jdon.jivejdon.domain.model.ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java) is a rich model, no "public" setter method, all setter methods are "private":
 
 ![avatar](./doc/private-setter.png)
 
@@ -55,12 +55,19 @@ JiveJdon is developed with JdonFramework that supports Customer/Supply or pub-su
 
 ![avatar](./doc/clean.png)
 
-JiveJdon and Hexagonal_architecture:
+JiveJdon Hexagonal_architecture:
 
 ![avatar](./doc/hexagonal_architecture.png)
 
+here is package view of jivejdon:
 
- [models.xml](https://github.com/banq/jivejdon/blob/master/src/main/resources/com/jdon/jivejdon/domain/model/models.xml) is a adapter, it is XML configure acting as a controller.
+![avatar](./doc/package.png)
+
+Invoking path:
+``````
+presentation -> api -> domain -> spi ->infrastructure
+``````
+ [models.xml](https://github.com/banq/jivejdon/blob/master/src/main/resources/com/jdon/jivejdon/domain/model/models.xml) is a adapter for presentation:
 ``````
 	<model key="messageId" class="com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO">
 		<actionForm name="messageForm"/>
@@ -73,7 +80,7 @@ JiveJdon and Hexagonal_architecture:
 		</handler>
 	</model>
 ``````
-When post a replies message,  a POST command will action createReplyMessage method of [forumMessageService](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/api/impl/message/ForumMessageServiceImpl.java) :
+When a user post a replies message,  a POST command from presentation will action the createReplyMessage method of [forumMessageService](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/api/impl/message/ForumMessageServiceImpl.java) in api :
 
 ``````
 public interface ForumMessageService {
@@ -84,9 +91,9 @@ public interface ForumMessageService {
 }
 ``````
 
-Domain sevice forumMessageService will delegate responsibility to the entity [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/domain/model/ForumMessage.java), 
+The forumMessageService will delegate the responsibility to the aggregate root entity [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/domain/model/ForumMessage.java), 
  
-createReplyMessage() method will send a command to the addChild()  method of [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/domain/model/ForumMessage.java) 
+createReplyMessage() method will send a command to the addChild()  method of [ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/domain/model/ForumMessage.java) ,it is too a command handler of CQRS:
  
  ![avatar](./doc/builder.png)
 
