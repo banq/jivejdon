@@ -62,7 +62,7 @@ JiveJdon and Hexagonal_architecture:
 
  [models.xml](https://github.com/banq/jivejdon/blob/master/src/main/resources/com/jdon/jivejdon/model/models.xml) is a adapter, it is XML configure acting as a controller.
 ``````
-	<model key="messageId" class="com.jdon.jivejdon.domain.model.message.AnemicMessageDTO">
+	<model key="messageId" class="com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO">
 		<actionForm name="messageForm"/>
 		<handler>
 			<service ref="forumMessageService">

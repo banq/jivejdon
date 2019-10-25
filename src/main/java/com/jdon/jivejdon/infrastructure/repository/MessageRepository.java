@@ -16,7 +16,7 @@
 package com.jdon.jivejdon.infrastructure.repository;
 
 import com.jdon.jivejdon.domain.model.ForumMessage;
-import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.domain.model.util.OneOneDTO;
 import com.jdon.jivejdon.infrastructure.repository.dao.MessageDaoFacade;
 

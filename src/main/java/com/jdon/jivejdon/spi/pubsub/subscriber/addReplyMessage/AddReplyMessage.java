@@ -21,7 +21,7 @@ import com.jdon.domain.message.DomainEventHandler;
 import com.jdon.jivejdon.spi.pubsub.subscriber.MessageTransactionPersistence;
 import com.jdon.jivejdon.spi.pubsub.subscriber.updatemessage.MessageSaveListener;
 import com.jdon.jivejdon.domain.model.event.ReplyMessageCreatedEvent;
-import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

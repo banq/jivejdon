@@ -20,7 +20,7 @@ import com.jdon.annotation.pointcut.Around;
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.infrastructure.repository.builder.MessageInitFactory;
 import com.jdon.jivejdon.infrastructure.repository.dao.AccountDao;
 import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;

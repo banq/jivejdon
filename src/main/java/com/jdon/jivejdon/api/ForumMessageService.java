@@ -19,7 +19,7 @@ import com.jdon.controller.events.EventModel;
 import com.jdon.jivejdon.auth.CUDInputInterceptor;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.domain.model.message.output.RenderingFilterManager;
 
 /**

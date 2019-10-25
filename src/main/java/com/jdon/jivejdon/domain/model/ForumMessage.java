@@ -30,7 +30,7 @@ import com.jdon.jivejdon.domain.model.event.MessagePropertiesUpdatedEvent;
 import com.jdon.jivejdon.domain.model.event.MessageUpdatedEvent;
 import com.jdon.jivejdon.domain.model.event.ReplyMessageCreatedEvent;
 import com.jdon.jivejdon.domain.model.event.UploadFilesSavedEvent;
-import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.domain.model.message.FilterPipleSpec;
 import com.jdon.jivejdon.domain.model.message.MessageUrlVO;
 import com.jdon.jivejdon.domain.model.message.MessageVO;

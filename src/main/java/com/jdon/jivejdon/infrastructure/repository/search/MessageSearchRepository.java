@@ -15,7 +15,7 @@
  */
 package com.jdon.jivejdon.infrastructure.repository.search;
 
-import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 
 import java.util.Collection;
 

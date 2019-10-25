@@ -20,7 +20,7 @@ import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.*;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.auth.Role;
-import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.domain.model.message.MessageVO;
 
 import java.util.Map;

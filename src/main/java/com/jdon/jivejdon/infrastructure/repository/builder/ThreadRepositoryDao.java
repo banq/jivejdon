@@ -1,13 +1,12 @@
 package com.jdon.jivejdon.infrastructure.repository.builder;
 
 import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.infrastructure.repository.ThreadRepository;
 import com.jdon.jivejdon.infrastructure.repository.dao.MessageDaoFacade;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ThreadRepositoryDao implements ThreadRepository {

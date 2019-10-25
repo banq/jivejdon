@@ -15,7 +15,7 @@
  */
 package com.jdon.jivejdon.domain.model.event;
 
-import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 
 public class MessageUpdatedEvent {
 

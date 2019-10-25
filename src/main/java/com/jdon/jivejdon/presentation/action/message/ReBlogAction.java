@@ -19,7 +19,7 @@ import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.events.EventModel;
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.ForumMessage;
-import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.presentation.form.MessageForm;
 import com.jdon.jivejdon.api.ForumMessageService;
 import com.jdon.model.ModelForm;

@@ -32,7 +32,7 @@
 			</handler>
 		</model>
 		<model key="messageId"
-			class="com.jdon.jivejdon.domain.model.message.AnemicMessageDTO">
+			class="com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO">
 			<actionForm name="messageForm"/>
 			<handler>
 				<service ref="forumMessageService">
@@ -45,7 +45,7 @@
 			</handler>
 		</model>
 		<model key="messageId"
-			class="com.jdon.jivejdon.domain.model.message.AnemicMessageDTO">
+			class="com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO">
 			<actionForm name="messageReplyForm"/>
 			<handler>
 				<service ref="forumMessageService">

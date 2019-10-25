@@ -1,7 +1,7 @@
 package com.jdon.jivejdon.infrastructure.repository.search;
 
 import com.jdon.container.pico.Startable;
-import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.jivejdon.domain.model.query.MessageSearchSpec;
 import com.jdon.jivejdon.infrastructure.repository.dao.sql.MessageUtilSQL;
@@ -64,7 +64,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 			config.setSetting("compass.engine.highlighter.default.formatter.simple.pre", "<font color=CC0033>");
 			config.setSetting("compass.engine.highlighter.default.formatter.simple.post", "</font>");
 			config.setSetting("compass.engine.optimizer.schedule.period", "3600");
-			config.addClass(com.jdon.jivejdon.domain.model.message.AnemicMessageDTO.class);
+			config.addClass(AnemicMessageDTO.class);
 			config.addClass(com.jdon.jivejdon.domain.model.Forum.class);
 			config.addClass(com.jdon.jivejdon.domain.model.message.MessageVO.class);
 			compass = config.buildCompass();

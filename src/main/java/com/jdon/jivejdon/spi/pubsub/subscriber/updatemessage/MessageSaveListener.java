@@ -20,7 +20,7 @@ import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
 import com.jdon.jivejdon.spi.pubsub.subscriber.MessageTransactionPersistence;
 import com.jdon.jivejdon.domain.model.event.MessageUpdatedEvent;
-import com.jdon.jivejdon.domain.model.message.AnemicMessageDTO;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
