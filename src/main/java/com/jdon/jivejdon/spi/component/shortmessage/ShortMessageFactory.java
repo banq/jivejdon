@@ -25,7 +25,7 @@ import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.shortmessage.ShortMessage;
 import com.jdon.jivejdon.domain.model.shortmessage.ShortMessageState;
-import com.jdon.jivejdon.domain.model.event.ATUserNotifiedEvent;
+import com.jdon.jivejdon.domain.event.ATUserNotifiedEvent;
 import com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactory;
 import com.jdon.jivejdon.infrastructure.repository.shortmessage.ShortMessageRepository;
 import com.jdon.jivejdon.infrastructure.repository.dao.SequenceDao;

@@ -18,9 +18,7 @@ package com.jdon.jivejdon.spi.pubsub.subscriber.addReplyMessage;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.domain.model.ForumMessage;
-import com.jdon.jivejdon.domain.model.event.ReplyMessageCreatedEvent;
-import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
+import com.jdon.jivejdon.domain.event.RepliesMessagePostedEvent;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import com.jdon.jivejdon.util.ContainerUtil;
 
@@ -45,15 +43,13 @@ public class AddReplyMessageZ implements DomainEventHandler {
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
-		ReplyMessageCreatedEvent es = (ReplyMessageCreatedEvent) event.getDomainMessage().getEventSource();
-		AnemicMessageDTO anemicMessageDTO = es.getForumMessageReplyDTO();
+		RepliesMessagePostedEvent repliesMessagePostedEvent = (RepliesMessagePostedEvent) event.getDomainMessage().getEventSource();
 		// change the forumMessageReply parameter DTO from commannd to like from
 		// repository
 //		forumMessageReply.finishDTO();
 		event.getDomainMessage().clear();
-		ForumMessage forumMessageReply = forumAbstractFactory.getMessage(anemicMessageDTO.getMessageId());
-		containerUtil.addModeltoCache(anemicMessageDTO.getMessageId(), forumMessageReply);
-		//update state for Eventually consistent so MessageListNav2Action can find its state has
+//		containerUtil.addModeltoCache(forumMessageReply.getMessageId(), forumMessageReply);
+//		//update state for Eventually consistent so MessageListNav2Action can find its state has
 		// updated
 //		forumMessageReply.getForumThread().changeState((ForumMessageReply) forumMessageReply);
 	}

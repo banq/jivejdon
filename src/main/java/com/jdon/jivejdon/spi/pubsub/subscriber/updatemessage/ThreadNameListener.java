@@ -5,7 +5,7 @@ import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
 import com.jdon.jivejdon.infrastructure.cqrs.CacheQueryRefresher;
 import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.event.ThreadNameSavedEvent;
+import com.jdon.jivejdon.domain.event.ThreadNameRevisedEvent;
 import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
 import com.jdon.jivejdon.infrastructure.repository.builder.ForumAbstractFactory;
 import com.jdon.jivejdon.infrastructure.repository.builder.MessageRepositoryDao;
@@ -39,7 +39,7 @@ public class ThreadNameListener implements DomainEventHandler {
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 
-		ThreadNameSavedEvent es = (ThreadNameSavedEvent) event.getDomainMessage().getEventSource();
+		ThreadNameRevisedEvent es = (ThreadNameRevisedEvent) event.getDomainMessage().getEventSource();
 		Long threadId = es.getThreadId();
 		Optional<ForumThread> forumThreadOptional = forumAbstractFactory.getThread(threadId);
 		try {

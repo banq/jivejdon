@@ -1,31 +1,33 @@
-package com.jdon.jivejdon.spi.pubsub.subscriber;
+package com.jdon.jivejdon.infrastructure;
 
 import com.jdon.annotation.Component;
 import com.jdon.annotation.model.OnEvent;
+import com.jdon.jivejdon.api.util.JtaTransactionUtil;
+import com.jdon.jivejdon.domain.command.MessageRemoveCommand;
+import com.jdon.jivejdon.domain.command.PostRepliesMessageCommand;
+import com.jdon.jivejdon.domain.command.PostTopicMessageCommand;
+import com.jdon.jivejdon.domain.command.ReviseForumMessageCommand;
 import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumMessage;
-import com.jdon.jivejdon.domain.model.event.MessageRemoveCommand;
-import com.jdon.jivejdon.domain.model.event.PostTopicMessageCommand;
-import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.domain.model.util.OneOneDTO;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
-import com.jdon.jivejdon.infrastructure.repository.property.TagRepository;
 import com.jdon.jivejdon.infrastructure.repository.builder.MessageRepositoryDao;
-import com.jdon.jivejdon.api.util.JtaTransactionUtil;
+import com.jdon.jivejdon.infrastructure.repository.property.TagRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Component
-public class MessageTransactionPersistence {
-	private final static Logger logger = LogManager.getLogger(MessageTransactionPersistence.class);
+public class MessageCRUDService {
+	private final static Logger logger = LogManager.getLogger(MessageCRUDService.class);
 
 	private final JtaTransactionUtil jtaTransactionUtil;
 	private final MessageRepositoryDao messageRepository;
 	private final TagRepository tagRepository;
 	private final ForumFactory forumAbstractFactory;
 
-	public MessageTransactionPersistence(JtaTransactionUtil jtaTransactionUtil, MessageRepositoryDao messageRepository, TagRepository tagRepository,
-										 ForumFactory forumAbstractFactory) {
+	public MessageCRUDService(JtaTransactionUtil jtaTransactionUtil, MessageRepositoryDao messageRepository, TagRepository tagRepository,
+							  ForumFactory forumAbstractFactory) {
 		super();
 		this.jtaTransactionUtil = jtaTransactionUtil;
 		this.messageRepository = messageRepository;
@@ -33,68 +35,52 @@ public class MessageTransactionPersistence {
 		this.forumAbstractFactory = forumAbstractFactory;
 	}
 
-	@OnEvent("postTopicMessageCommand")
-	public ForumMessage insertTopicMessage(PostTopicMessageCommand command) {
+	@OnEvent("saveTopicMessageCommand")
+	public ForumMessage insertTopicMessage(PostTopicMessageCommand postTopicMessageCommand) {
 		logger.debug("enter createTopicMessage");
-		AnemicMessageDTO forumMessagePostDTO = command.getForumMessageDTO();
 		try {
-//			Thread.sleep(5000);
-			jtaTransactionUtil.beginTransaction();
-			messageRepository.createTopicMessage(forumMessagePostDTO);
+			messageRepository.createTopicMessage(AnemicMessageDTO.commandToDTO(postTopicMessageCommand));
 			logger.debug("createTopicMessage ok!");
-			jtaTransactionUtil.commitTransaction();
-			return forumAbstractFactory.getMessage(forumMessagePostDTO.getMessageId());
+			return forumAbstractFactory.getMessage(postTopicMessageCommand.getMessageId());
 		} catch (Exception e) {
-			jtaTransactionUtil.rollback();
-			String error = e + " createTopicMessage forumMessageId=" + forumMessagePostDTO.getMessageId();
+			String error = e + " createTopicMessage forumMessageId=" + postTopicMessageCommand.getMessageId();
 			logger.error(error);
 			return null;
 		}
-
 	}
+
+
 
 	/**
 	 * called by @Consumer("addReplyMessage") in AddReplyMessage that is listerner.
-	 *
-	 * @param forumMessageReplyPostDTO
-	 * @throws Exception
 	 */
-	public void insertReplyMessage(AnemicMessageDTO forumMessageReplyPostDTO) throws Exception {
+	public void insertReplyMessage(PostRepliesMessageCommand postRepliesMessageCommand) throws Exception {
 		logger.debug("enter createReplyMessage");
-		if ((forumMessageReplyPostDTO.getParentMessage() == null) || (forumMessageReplyPostDTO.getParentMessage().getMessageId() == null)) {
-			logger.error("parentMessage is null, this is not reply message!");
-			return;
-		}
 		try {
-//			Thread.sleep(10000);
-			jtaTransactionUtil.beginTransaction();
-			messageRepository.createReplyMessage(forumMessageReplyPostDTO);
+            AnemicMessageDTO anemicMessageDTO = AnemicMessageDTO.commandToDTO(postRepliesMessageCommand);
+            anemicMessageDTO.setParentMessage(new AnemicMessageDTO(postRepliesMessageCommand.getParentMessage().getMessageId()));
+			anemicMessageDTO.setForumThread(postRepliesMessageCommand.getParentMessage().getForumThread());
+            messageRepository.createReplyMessage(anemicMessageDTO);
 			logger.debug("createReplyMessage ok!");
-			jtaTransactionUtil.commitTransaction();
 		} catch (Exception e) {
-			jtaTransactionUtil.rollback();
-			String error = e + " createTopicMessage forumMessageId=" + forumMessageReplyPostDTO.getParentMessage().getMessageId();
+			String error = e + " createTopicMessage forumMessageId=" + postRepliesMessageCommand.getMessageId();
 			logger.error(error);
 			throw new Exception(error);
 		}
-
 	}
 
-	public void updateMessage(AnemicMessageDTO newForumMessageInputparamter) throws Exception {
 
+	public void updateMessage(ReviseForumMessageCommand reviseForumMessageCommand) throws Exception {
 		logger.debug("enter updateMessage");
-		try {
-			// merge
-			jtaTransactionUtil.beginTransaction();
-			messageRepository.updateMessage(newForumMessageInputparamter);
+        AnemicMessageDTO anemicMessageDTO = AnemicMessageDTO.commandToDTO(reviseForumMessageCommand);
+        try {
+			messageRepository.updateMessage(anemicMessageDTO);
 
 			// update the forumThread's updatetime
-			messageRepository.updateThread(newForumMessageInputparamter.getForumThread());
+			messageRepository.updateThread(anemicMessageDTO.getForumThread());
 
-			jtaTransactionUtil.commitTransaction();
 		} catch (Exception e) {
-			jtaTransactionUtil.rollback();
-			String error = e + " updateMessage forumMessageId=" + newForumMessageInputparamter.getMessageId();
+			String error = e + " updateMessage forumMessageId=" + anemicMessageDTO.getMessageId();
 			logger.error(error);
 			throw new Exception(error);
 		}

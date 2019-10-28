@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.domain.model.event;
+package com.jdon.jivejdon.domain.event;
 
 import java.util.Collection;
 

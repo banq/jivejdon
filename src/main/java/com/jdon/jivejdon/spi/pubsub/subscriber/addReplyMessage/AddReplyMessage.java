@@ -18,11 +18,10 @@ package com.jdon.jivejdon.spi.pubsub.subscriber.addReplyMessage;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.spi.pubsub.subscriber.MessageTransactionPersistence;
-import com.jdon.jivejdon.spi.pubsub.subscriber.updatemessage.MessageSaveListener;
-import com.jdon.jivejdon.domain.model.event.ReplyMessageCreatedEvent;
-import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
+import com.jdon.jivejdon.domain.event.RepliesMessagePostedEvent;
+import com.jdon.jivejdon.infrastructure.MessageCRUDService;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
+import com.jdon.jivejdon.spi.pubsub.subscriber.updatemessage.MessageRevisedListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,23 +38,21 @@ import org.apache.logging.log4j.Logger;
  */
 @Consumer("addReplyMessage")
 public class AddReplyMessage implements DomainEventHandler {
-	private final static Logger logger = LogManager.getLogger(MessageSaveListener.class);
+	private final static Logger logger = LogManager.getLogger(MessageRevisedListener.class);
 
-	protected final MessageTransactionPersistence messageTransactionPersistence;
+	protected final MessageCRUDService messageCRUDService;
 	protected final ForumFactory forumAbstractFactory;
 
-	public AddReplyMessage(MessageTransactionPersistence messageTransactionPersistence, ForumFactory forumAbstractFactory) {
+	public AddReplyMessage(MessageCRUDService messageCRUDService, ForumFactory forumAbstractFactory) {
 		super();
-		this.messageTransactionPersistence = messageTransactionPersistence;
+		this.messageCRUDService = messageCRUDService;
 		this.forumAbstractFactory = forumAbstractFactory;
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
-		ReplyMessageCreatedEvent es = (ReplyMessageCreatedEvent) event.getDomainMessage().getEventSource();
-		AnemicMessageDTO forumMessageReplyPostDTO = es.getForumMessageReplyDTO();
-
+		RepliesMessagePostedEvent repliesMessagePostedEvent = (RepliesMessagePostedEvent) event.getDomainMessage().getEventSource();
 		try {
-			messageTransactionPersistence.insertReplyMessage(forumMessageReplyPostDTO);
+			messageCRUDService.insertReplyMessage(repliesMessagePostedEvent.getPostRepliesMessageCommand());
 		} catch (Exception e) {
 			logger.error(e);
 		}

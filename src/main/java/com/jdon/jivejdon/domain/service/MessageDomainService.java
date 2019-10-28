@@ -20,11 +20,14 @@ import com.jdon.annotation.model.Receiver;
 import com.jdon.annotation.model.Send;
 import com.jdon.controller.events.EventModel;
 import com.jdon.domain.message.DomainMessage;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
+import com.jdon.jivejdon.domain.command.PostRepliesMessageCommand;
+import com.jdon.jivejdon.domain.command.PostTopicMessageCommand;
+import com.jdon.jivejdon.domain.command.ReviseForumMessageCommand;
 import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
-import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 
 import java.util.Optional;
 
@@ -52,14 +55,14 @@ public interface MessageDomainService {
 	 */
 	public abstract Optional<ForumThread> getThread(Long threadId);
 
-	@Send("postMessageCommand")
-	public DomainMessage post(@Owner long forumId, @Receiver Forum forum, AnemicMessageDTO forumMessageInputDTO) ;
+	@Send("postTopicMessageCommand")
+	public DomainMessage post(@Owner long forumId, @Receiver Forum forum, PostTopicMessageCommand postTopicMessageCommand) ;
 
-	@Send("postReplyMessageCommand")
-	public DomainMessage addreply(@Owner long threadId, @Receiver ForumMessage parentforumMessage, AnemicMessageDTO newForumMessageInputparamter);
+	@Send("postRepliesMessageCommand")
+	public DomainMessage addreply(@Owner long threadId, @Receiver ForumMessage parentforumMessage, PostRepliesMessageCommand postRepliesMessageCommand);
 
-	@Send("updateForumMessage")
-	public DomainMessage update(@Owner long threadId, @Receiver ForumMessage oldforumMessage, AnemicMessageDTO newForumMessageInputparamter);
+	@Send("reviseForumMessageCommand")
+	public DomainMessage revise(@Owner long threadId, @Receiver ForumMessage oldforumMessage, ReviseForumMessageCommand reviseForumMessageCommand);
 
 	/*
 	 * delete a message and not inlcude its childern

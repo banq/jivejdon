@@ -15,19 +15,18 @@
  */
 package com.jdon.jivejdon.domain.event;
 
-import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
+import com.jdon.jivejdon.domain.command.PostRepliesMessageCommand;
 
-public class ReplyMessageCreatedEvent {
+public class RepliesMessagePostedEvent {
 
-	private final AnemicMessageDTO forumMessageReplyDTO;
+	private final PostRepliesMessageCommand postRepliesMessageCommand;
 
-	public ReplyMessageCreatedEvent(AnemicMessageDTO forumMessageReplyDTO) {
+	public RepliesMessagePostedEvent(PostRepliesMessageCommand postRepliesMessageCommand) {
 		super();
-		this.forumMessageReplyDTO = forumMessageReplyDTO;
+		this.postRepliesMessageCommand = postRepliesMessageCommand;
 	}
 
-	public AnemicMessageDTO getForumMessageReplyDTO() {
-		return forumMessageReplyDTO;
+	public PostRepliesMessageCommand getPostRepliesMessageCommand() {
+		return postRepliesMessageCommand;
 	}
-
 }

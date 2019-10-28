@@ -19,16 +19,15 @@ import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
 import com.jdon.annotation.model.OnCommand;
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
-import com.jdon.jivejdon.spi.pubsub.publish.ThreadEventSourcingRole;
-import com.jdon.jivejdon.domain.model.event.PostTopicMessageCommand;
-import com.jdon.jivejdon.domain.model.event.TopicMessagePostedEvent;
-import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
+import com.jdon.jivejdon.domain.command.PostTopicMessageCommand;
+import com.jdon.jivejdon.domain.event.TopicMessagePostedEvent;
 import com.jdon.jivejdon.domain.model.property.HotKeys;
 import com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF;
 import com.jdon.jivejdon.domain.model.subscription.event.ForumSubscribedNotifyEvent;
 import com.jdon.jivejdon.domain.model.util.ForumModel;
+import com.jdon.jivejdon.spi.pubsub.publish.ThreadEventSourcingRole;
+import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
+import com.jdon.jivejdon.util.Constants;
 import org.compass.annotations.Searchable;
 import org.compass.annotations.SearchableId;
 import org.compass.annotations.SearchableProperty;
@@ -84,15 +83,14 @@ public class Forum extends ForumModel {
 	@Inject
 	public ThreadEventSourcingRole eventSourcingRole;
 
-	@OnCommand("postMessageCommand")
-	public void postMessage(AnemicMessageDTO anemicMessageDTO) {
+	@OnCommand("postTopicMessageCommand")
+	public void postMessage(PostTopicMessageCommand postTopicMessageCommand) {
 		//fill the business rule for post a topic message
-		if (isRepeatedMessage(anemicMessageDTO)){
-			System.err.println("repeat message error: " + anemicMessageDTO.getMessageVO().getSubject());
+		if (isRepeatedMessage(postTopicMessageCommand)){
+			System.err.println("repeat message error: " + postTopicMessageCommand.getMessageVO().getSubject());
 			return;
 		}
-		DomainMessage domainMessage = eventSourcingRole.postTopicMessage(new
-				PostTopicMessageCommand(anemicMessageDTO));
+		DomainMessage domainMessage = eventSourcingRole.saveTopicMessage(postTopicMessageCommand);
 		ForumMessage rootForumMessage = (ForumMessage)domainMessage.getBlockEventResult();
 		if (rootForumMessage != null) {//make sure repostiory finish save new message
 			threadPosted(rootForumMessage);
@@ -100,9 +98,9 @@ public class Forum extends ForumModel {
 		}
 	}
 
-	private boolean isRepeatedMessage(AnemicMessageDTO anemicMessageDTO){
+	private boolean isRepeatedMessage(PostTopicMessageCommand postTopicMessageCommand){
 		if (this.forumState.get().getLatestPost() == null) return false;
-		return this.forumState.get().getLatestPost().isSubjectRepeated(anemicMessageDTO.getMessageVO().getSubject())?true:false;
+		return this.forumState.get().getLatestPost().isSubjectRepeated(postTopicMessageCommand.getMessageVO().getSubject())?true:false;
 
 	}
 

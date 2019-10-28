@@ -18,8 +18,8 @@ package com.jdon.jivejdon.spi.pubsub.subscriber.addReplyMessage;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
+import com.jdon.jivejdon.domain.event.RepliesMessagePostedEvent;
 import com.jdon.jivejdon.infrastructure.cqrs.CacheQueryRefresher;
-import com.jdon.jivejdon.domain.model.event.ReplyMessageCreatedEvent;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
 
@@ -42,8 +42,8 @@ public class AddReplyMessageSendEventBus implements DomainEventHandler {
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
-		ReplyMessageCreatedEvent es = (ReplyMessageCreatedEvent) event.getDomainMessage().getEventSource();
-		Long messageId = es.getForumMessageReplyDTO().getMessageId();
+		RepliesMessagePostedEvent repliesMessagePostedEvent = (RepliesMessagePostedEvent) event.getDomainMessage().getEventSource();
+		Long messageId = repliesMessagePostedEvent.getPostRepliesMessageCommand().getMessageId();
 		cacheQueryRefresher.refresh(this.forumFactory.getMessage(messageId));
 	}
 }

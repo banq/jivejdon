@@ -1,12 +1,12 @@
 package com.jdon.jivejdon.domain.event;
 
-public class ThreadNameSavedEvent {
+public class ThreadNameRevisedEvent {
 
 	private final Long threadId;
 
 	private final String name;
 
-	public ThreadNameSavedEvent(Long threadId, String name) {
+	public ThreadNameRevisedEvent(Long threadId, String name) {
 		this.threadId = threadId;
 		this.name = name;
 	}

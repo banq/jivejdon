@@ -18,24 +18,25 @@ package com.jdon.jivejdon.spi.pubsub.publish;
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.model.Send;
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.domain.model.event.*;
+import com.jdon.jivejdon.domain.command.MessageRemoveCommand;
+import com.jdon.jivejdon.domain.event.*;
 import com.jdon.jivejdon.domain.model.util.OneOneDTO;
 
 @Introduce("message")
 public class MessageEventSourcingRole {
 
 	@Send("addReplyMessage")
-	public DomainMessage addReplyMessage(ReplyMessageCreatedEvent event) {
+	public DomainMessage addReplyMessage(RepliesMessagePostedEvent event) {
 		return new DomainMessage(event);
 	}
 
 	@Send("saveMessage")
-	public DomainMessage saveMessage(MessageUpdatedEvent event) {
+	public DomainMessage saveMessage(MessageRevisedEvent event) {
 		return new DomainMessage(event);
 	}
 
 	@Send("moveMessage")
-	public DomainMessage moveMessage(MessageMovedEvent event) {
+	public DomainMessage moveMessage(MessageOwnershipChangedEvent event) {
 		return new DomainMessage(event);
 	}
 
@@ -56,17 +57,17 @@ public class MessageEventSourcingRole {
 
 
 	@Send("updateMessageProperties")
-	public DomainMessage saveMessageProperties(MessagePropertiesUpdatedEvent event) {
+	public DomainMessage saveMessageProperties(MessagePropertiesRevisedEvent event) {
 		return new DomainMessage(event);
 	}
 
 	@Send("saveUploadFiles")
-	public DomainMessage saveUploadFiles(UploadFilesSavedEvent event) {
+	public DomainMessage saveUploadFiles(UploadFilesAttachedEvent event) {
 		return new DomainMessage(event);
 	}
 
 	@Send("saveName")
-	public DomainMessage saveName(ThreadNameSavedEvent event) {
+	public DomainMessage saveName(ThreadNameRevisedEvent event) {
 		return new DomainMessage(event);
 	}
 

@@ -15,24 +15,24 @@
  */
 package com.jdon.jivejdon.domain.event;
 
-public class MessageMovedEvent {
+public class MessageOwnershipChangedEvent {
 
 	private final Long oldMessageId;
 
-	private final Long newMessageId;
+	private final Long newForumId;
 
-	public MessageMovedEvent(Long oldMessageId, Long newMessageId) {
+	public MessageOwnershipChangedEvent(Long oldMessageId, Long newForumId) {
 		super();
 		this.oldMessageId = oldMessageId;
-		this.newMessageId = newMessageId;
+		this.newForumId = newForumId;
 	}
 
 	public Long getOldMessageId() {
 		return oldMessageId;
 	}
 
-	public Long getNewMessageId() {
-		return newMessageId;
+	public Long getNewForumId() {
+		return newForumId;
 	}
 
 }

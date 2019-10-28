@@ -18,33 +18,29 @@ package com.jdon.jivejdon.spi.pubsub.subscriber.updatemessage;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.infrastructure.MessageCRUDService;
 import com.jdon.jivejdon.domain.event.MessageRevisedEvent;
-import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
+import com.jdon.jivejdon.infrastructure.MessageCRUDService;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Consumer("messageRevised")
-public class MessageSaveListener implements DomainEventHandler {
-	private final static Logger logger = LogManager.getLogger(MessageSaveListener.class);
+public class MessageRevisedListener implements DomainEventHandler {
+	private final static Logger logger = LogManager.getLogger(MessageRevisedListener.class);
 
 	protected MessageCRUDService messageCRUDService;
 	protected ForumFactory forumAbstractFactory;
 
-	public MessageSaveListener(MessageCRUDService messageCRUDService, ForumFactory forumAbstractFactory) {
+	public MessageRevisedListener(MessageCRUDService messageCRUDService, ForumFactory forumAbstractFactory) {
 		super();
 		this.messageCRUDService = messageCRUDService;
 		this.forumAbstractFactory = forumAbstractFactory;
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
-		MessageRevisedEvent es = (MessageRevisedEvent) event.getDomainMessage().getEventSource();
-		AnemicMessageDTO newForumMessageInputparamter = es.getNewForumMessageInputparamter();
-		if (newForumMessageInputparamter == null)
-			return;
+		MessageRevisedEvent messageRevisedEvent = (MessageRevisedEvent) event.getDomainMessage().getEventSource();
 		try {
-			messageCRUDService.updateMessage(newForumMessageInputparamter);
+			messageCRUDService.updateMessage(messageRevisedEvent.getReviseForumMessageCommand());
 		} catch (Exception e) {
 			logger.error(e);
 		}

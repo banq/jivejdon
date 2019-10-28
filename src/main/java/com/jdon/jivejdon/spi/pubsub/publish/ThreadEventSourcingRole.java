@@ -16,8 +16,8 @@
 package com.jdon.jivejdon.spi.pubsub.publish;
 
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.domain.model.event.PostTopicMessageCommand;
-import com.jdon.jivejdon.domain.model.event.TopicMessagePostedEvent;
+import com.jdon.jivejdon.domain.command.PostTopicMessageCommand;
+import com.jdon.jivejdon.domain.event.TopicMessagePostedEvent;
 
 /**
  * sub-class is implemented by domain pubsub that is in
@@ -28,7 +28,7 @@ import com.jdon.jivejdon.domain.model.event.TopicMessagePostedEvent;
  */
 public interface ThreadEventSourcingRole {
 
-	DomainMessage postTopicMessage(PostTopicMessageCommand command);
+	DomainMessage saveTopicMessage(PostTopicMessageCommand command);
 
 	DomainMessage topicMessagePosted(TopicMessagePostedEvent topicMessagePostedEvent);
 

@@ -106,22 +106,23 @@ note:
 
 设置：
 起初设置要进入管理依据下面顺序安装下面过滤器 ,如果没有，添加过滤器类名，包括包名类名：com.jdon.jivejdon.domain.model.message.output.html.ListStyle:
-1.  HTMLFilter
-2 	ListStyle
-3 	CodeHighlighter
-4 	TextStyle
-5 	Newline
-6 	URLConverter
-7 	ImageFilter
-8 	Profanity
-9 	UploadImageFilter
-10 	Bodymasking
-11 	UploadFileFilter
-12 	AuthorNameFormat
-13 	QuoteRegexFilter
-14 	FontStyle
+1.              com.jdon.jivejdon.domain.model.message.output.html.HTMLFilter
+2 	com.jdon.jivejdon.domain.model.message.output.html.ListStyle
+3               com.jdon.jivejdon.domain.model.message.output.html.Newline
+4 	com.jdon.jivejdon.domain.model.message.output.html.CodeHighlighter 	
+5 	com.jdon.jivejdon.domain.model.message.output.html.TextStyle
+6 	com.jdon.jivejdon.domain.model.message.output.html.URLConverter
+7 	com.jdon.jivejdon.domain.model.message.output.html.ImageFilter
+8 	com.jdon.jivejdon.domain.model.message.output.html.Profanity
+9 	com.jdon.jivejdon.domain.model.message.output.html.UploadImageFilter
+10 	com.jdon.jivejdon.domain.model.message.output.html.UploadFileFilter
+11 	com.jdon.jivejdon.domain.model.message.output.html.Bodymasking
+12 	com.jdon.jivejdon.domain.model.message.output.html.AuthorNameFormat
+13 	com.jdon.jivejdon.domain.model.message.output.html.QuoteRegexFilter
+14 	com.jdon.jivejdon.domain.model.message.output.html.FontStyle
 15 com.jdon.jivejdon.domain.model.message.output.linkurl.LinkUrlExtractor
 16 com.jdon.jivejdon.domain.model.message.output.thumbnailUrl.ThumbnailExtractor
+
 
 
 ##############################################################################################

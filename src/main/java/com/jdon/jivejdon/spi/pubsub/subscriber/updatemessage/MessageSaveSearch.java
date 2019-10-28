@@ -18,7 +18,8 @@ package com.jdon.jivejdon.spi.pubsub.subscriber.updatemessage;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.domain.model.event.MessageUpdatedEvent;
+import com.jdon.jivejdon.domain.event.MessageRevisedEvent;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository;
 
 @Consumer("saveMessage")
@@ -32,8 +33,8 @@ public class MessageSaveSearch implements DomainEventHandler {
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
-		MessageUpdatedEvent es = (MessageUpdatedEvent) event.getDomainMessage().getEventSource();
-		messageSearchRepository.updateMessage(es.getNewForumMessageInputparamter());
+		MessageRevisedEvent messageRevisedEvent = (MessageRevisedEvent) event.getDomainMessage().getEventSource();
+		messageSearchRepository.updateMessage(AnemicMessageDTO.commandToDTO(messageRevisedEvent.getReviseForumMessageCommand()));
 
 	}
 

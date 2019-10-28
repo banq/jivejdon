@@ -15,18 +15,18 @@
  */
 package com.jdon.jivejdon.domain.event;
 
-import com.jdon.jivejdon.domain.model.ForumMessage;
+import com.jdon.jivejdon.domain.command.ReviseForumMessageCommand;
 
-public class MessageUpdatedEvent {
+public class MessageRevisedEvent {
 
-	private final ForumMessage forumMessage;
+	private final ReviseForumMessageCommand reviseForumMessageCommand;
 
-	public MessageUpdatedEvent(ForumMessage forumMessage) {
+	public MessageRevisedEvent(ReviseForumMessageCommand reviseForumMessageCommand) {
 		super();
-		this.forumMessage = forumMessage;
+		this.reviseForumMessageCommand = reviseForumMessageCommand;
 	}
 
-	public ForumMessage getForumMessage() {
-		return forumMessage;
+	public ReviseForumMessageCommand getReviseForumMessageCommand() {
+		return reviseForumMessageCommand;
 	}
 }

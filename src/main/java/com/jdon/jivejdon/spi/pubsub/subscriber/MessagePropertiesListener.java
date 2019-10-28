@@ -22,7 +22,7 @@ import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
 import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.domain.model.event.MessagePropertiesUpdatedEvent;
+import com.jdon.jivejdon.domain.event.MessagePropertiesRevisedEvent;
 import com.jdon.jivejdon.infrastructure.repository.builder.ForumAbstractFactory;
 import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
 
@@ -40,7 +40,7 @@ public class MessagePropertiesListener implements DomainEventHandler {
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
-		MessagePropertiesUpdatedEvent es = (MessagePropertiesUpdatedEvent) event.getDomainMessage().getEventSource();
+		MessagePropertiesRevisedEvent es = (MessagePropertiesRevisedEvent) event.getDomainMessage().getEventSource();
 		try {
 			long messageId = es.getMessageId();
 			propertyDao.deleteProperties(Constants.MESSAGE, messageId);

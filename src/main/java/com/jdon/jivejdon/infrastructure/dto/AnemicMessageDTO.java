@@ -1,5 +1,7 @@
 package com.jdon.jivejdon.infrastructure.dto;
 
+import com.jdon.jivejdon.domain.command.PostTopicMessageCommand;
+import com.jdon.jivejdon.domain.command.ReviseForumMessageCommand;
 import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.account.Account;
@@ -35,8 +37,6 @@ public class AnemicMessageDTO {
     private Account operator; // operator this message,maybe Admin or others;
     private boolean authenticated ;// default false
 
-    // not let messageVo be Filtered , it should be save to DB.
-    private boolean messageVOFiltered = true;
     private boolean masked;
     private boolean replyNotify;
     //for messageForm inject
@@ -136,14 +136,6 @@ public class AnemicMessageDTO {
         this.messageVO = messageVO;
     }
 
-    public boolean isMessageVOFiltered() {
-        return messageVOFiltered;
-    }
-
-    public void setMessageVOFiltered(boolean messageVOFiltered) {
-        this.messageVOFiltered = messageVOFiltered;
-    }
-
     public boolean isMasked() {
         return masked;
     }
@@ -185,4 +177,28 @@ public class AnemicMessageDTO {
     public void setOperator(Account operator) {
         this.operator = operator;
     }
+
+    public static AnemicMessageDTO commandToDTO(PostTopicMessageCommand postTopicMessageCommand){
+        AnemicMessageDTO forumMessageDTO = new AnemicMessageDTO(postTopicMessageCommand.getMessageId());
+        forumMessageDTO.setAccount(postTopicMessageCommand.getAccount());
+        forumMessageDTO.setMessageVO(postTopicMessageCommand.getMessageVO());
+        forumMessageDTO.setAttachment(postTopicMessageCommand.getAttachment());
+        forumMessageDTO.setForum(postTopicMessageCommand.getForum());
+        forumMessageDTO.setMessagePropertysVO(postTopicMessageCommand.getMessagePropertysVO());
+        forumMessageDTO.setTagTitle(postTopicMessageCommand.getTagTitle());
+        return forumMessageDTO;
+    }
+
+    public static AnemicMessageDTO commandToDTO(ReviseForumMessageCommand reviseForumMessageCommand){
+        AnemicMessageDTO forumMessageDTO = new AnemicMessageDTO(reviseForumMessageCommand.getOldforumMessage().getMessageId());
+        forumMessageDTO.setAccount(reviseForumMessageCommand.getOldforumMessage().getAccount());
+        forumMessageDTO.setMessageVO(reviseForumMessageCommand.getMessageVO());
+        forumMessageDTO.setAttachment(reviseForumMessageCommand.getAttachment());
+        forumMessageDTO.setForum(reviseForumMessageCommand.getOldforumMessage().getForum());
+        forumMessageDTO.setForumThread(reviseForumMessageCommand.getOldforumMessage().getForumThread());
+        forumMessageDTO.setMessagePropertysVO(reviseForumMessageCommand.getMessagePropertysVO());
+        forumMessageDTO.setTagTitle(reviseForumMessageCommand.getOldforumMessage().getTagTitle());
+        return forumMessageDTO;
+    }
+
 }

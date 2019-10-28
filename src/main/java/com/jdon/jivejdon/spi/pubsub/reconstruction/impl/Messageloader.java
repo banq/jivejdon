@@ -20,13 +20,13 @@ import org.apache.logging.log4j.*;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.spi.pubsub.subscriber.updatemessage.MessageSaveListener;
+import com.jdon.jivejdon.spi.pubsub.subscriber.updatemessage.MessageRevisedListener;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 
 @Consumer("loadMessage")
 public class Messageloader implements DomainEventHandler {
-	private final static Logger logger = LogManager.getLogger(MessageSaveListener.class);
+	private final static Logger logger = LogManager.getLogger(MessageRevisedListener.class);
 
 	protected ForumFactory forumAbstractFactory;
 

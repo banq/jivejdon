@@ -18,7 +18,7 @@ package com.jdon.jivejdon.spi.pubsub.subscriber.addReplyMessage;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.domain.model.event.ReplyMessageCreatedEvent;
+import com.jdon.jivejdon.domain.event.RepliesMessagePostedEvent;
 import com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository;
 
 /**
@@ -42,7 +42,7 @@ public class AddReplyMessageSearchFile implements DomainEventHandler {
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
-		ReplyMessageCreatedEvent es = (ReplyMessageCreatedEvent) event.getDomainMessage().getEventSource();
+		RepliesMessagePostedEvent repliesMessagePostedEvent = (RepliesMessagePostedEvent) event.getDomainMessage().getEventSource();
 		//messageSearchRepository.createMessageReplyTimer(es.getForumMessageReplyDTO());
 
 	}

@@ -15,29 +15,30 @@
  */
 package com.jdon.jivejdon.spi.pubsub.subscriber;
 
+import com.jdon.jivejdon.infrastructure.MessageCRUDService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.domain.model.event.MessageMovedEvent;
+import com.jdon.jivejdon.domain.event.MessageOwnershipChangedEvent;
 
 @Consumer("moveMessage")
 public class MessageMovingListener implements DomainEventHandler {
 	private final static Logger logger = LogManager.getLogger(MessageMovingListener.class);
 
-	protected MessageTransactionPersistence messageTransactionPersistence;
+	protected MessageCRUDService messageCRUDService;
 
-	public MessageMovingListener(MessageTransactionPersistence messageTransactionPersistence) {
+	public MessageMovingListener(MessageCRUDService messageCRUDService) {
 		super();
-		this.messageTransactionPersistence = messageTransactionPersistence;
+		this.messageCRUDService = messageCRUDService;
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
-		MessageMovedEvent es = (MessageMovedEvent) event.getDomainMessage().getEventSource();
+		MessageOwnershipChangedEvent es = (MessageOwnershipChangedEvent) event.getDomainMessage().getEventSource();
 		try {
-			messageTransactionPersistence.moveMessage(es.getOldMessageId(), es.getNewMessageId());
+			messageCRUDService.moveMessage(es.getOldMessageId(), es.getNewForumId());
 		} catch (Exception e) {
 			logger.error(e);
 		}

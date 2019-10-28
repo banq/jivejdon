@@ -18,10 +18,10 @@ package com.jdon.jivejdon.domain.model;
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.domain.model.event.MessageMovedEvent;
-import com.jdon.jivejdon.domain.model.event.MessageRemoveCommand;
-import com.jdon.jivejdon.domain.model.event.MessageRemovedEvent;
-import com.jdon.jivejdon.domain.model.event.ThreadNameSavedEvent;
+import com.jdon.jivejdon.domain.event.MessageOwnershipChangedEvent;
+import com.jdon.jivejdon.domain.command.MessageRemoveCommand;
+import com.jdon.jivejdon.domain.event.MessageRemovedEvent;
+import com.jdon.jivejdon.domain.event.ThreadNameRevisedEvent;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.domain.model.realtime.ForumMessageDTO;
 import com.jdon.jivejdon.domain.model.realtime.LobbyPublisherRoleIF;
@@ -167,7 +167,7 @@ public class ForumThread extends ForumModel {
 
 	public void updateName(String name) {
 		this.getRootMessage().updateSubject(name);
-		eventSourcing.saveName(new ThreadNameSavedEvent(this.getThreadId(),
+		eventSourcing.saveName(new ThreadNameRevisedEvent(this.getThreadId(),
 				name));
 	}
 
@@ -268,7 +268,7 @@ public class ForumThread extends ForumModel {
 //			forumMessage.setForum(newForum);
 			setForum(newForum);
 
-			eventSourcing.moveMessage(new MessageMovedEvent(forumMessage
+			eventSourcing.moveMessage(new MessageOwnershipChangedEvent(forumMessage
 					.getMessageId(), newForum.getForumId()));
 			dm.clear();
 		}

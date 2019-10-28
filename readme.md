@@ -97,7 +97,8 @@ The createReplyMessage() method of the forumMessageService will send a command t
  
  ![avatar](./doc/builder.png)
 
- @OnCommand("postReplyMessageCommand") annotation make addChild() being a command handler, the annotation is from pub-sub model of jdonframework, it can make this method executed with a [single-writer pattern](http://mechanical-sympathy.blogspot.co.uk/2011/09/single-writer-principle.html) - no blocked, no lock, high concurrent. only one thread/process invoking this update method.
+ @OnCommand("postRepliesMessageCommand") annotation make addChild() being a command handler, the annotation is from pub-sub model of jdonframework, it can make
+  this method executed with a [single-writer pattern](http://mechanical-sympathy.blogspot.co.uk/2011/09/single-writer-principle.html) - no blocked, no lock, high concurrent. only one thread/process invoking this update method.
  
  "eventSourcing.addReplyMessage" will send a "ReplyMessageCreatedEvent" domain Event to infrastructure layer such as Repository. seperate domain logic from infrastructure, databases, other stuffs.
 

@@ -19,13 +19,13 @@ import com.jdon.jivejdon.domain.model.attachment.UploadFile;
 
 import java.util.Collection;
 
-public class UploadFilesSavedEvent {
+public class UploadFilesAttachedEvent {
 
 	private final Long messageId;
 
 	private final Collection<UploadFile> uploads;
 
-	public UploadFilesSavedEvent(Long messageId, Collection<UploadFile> uploads) {
+	public UploadFilesAttachedEvent(Long messageId, Collection<UploadFile> uploads) {
 		super();
 		this.messageId = messageId;
 		this.uploads = uploads;

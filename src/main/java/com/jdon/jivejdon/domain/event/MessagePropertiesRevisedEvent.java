@@ -17,13 +17,13 @@ package com.jdon.jivejdon.domain.event;
 
 import java.util.Collection;
 
-public class MessagePropertiesUpdatedEvent {
+public class MessagePropertiesRevisedEvent {
 
 	private final long messageId;
 
 	private final Collection properties;
 
-	public MessagePropertiesUpdatedEvent(long messageId, Collection properties) {
+	public MessagePropertiesRevisedEvent(long messageId, Collection properties) {
 		super();
 		this.messageId = messageId;
 		this.properties = properties;

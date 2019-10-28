@@ -15,24 +15,17 @@
  */
 package com.jdon.jivejdon.util;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Reader;
-import java.io.Writer;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.StringTokenizer;
-
+import com.jdon.util.jdom.DataUnformatFilter;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 
-import com.jdon.util.jdom.DataUnformatFilter;
+import java.io.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 /**
  * Provides the the ability to use simple XML property files. Each property is
@@ -73,7 +66,7 @@ public class XMLProperties {
 			builder.setXMLFilter(format);
 			doc = builder.build(new File(fileName));
 		} catch (Exception e) {
-			System.err.println("Error creating XML parser in " + "PropertyManager.java");
+			System.err.println("Error creating XML parser in " + "PropertyManager.java" + " fileName=" + fileName);
 			e.printStackTrace();
 		}
 	}
@@ -92,7 +85,7 @@ public class XMLProperties {
 			builder.setXMLFilter(format);
 			doc = builder.build(inputStream);
 		} catch (Exception e) {
-			System.err.println("Error creating XML parser in " + "PropertyManager.java");
+			System.err.println("Error creating XML parser in " + "PropertyManager.java" + " fileName=" + inputStream.toString());
 			e.printStackTrace();
 		}
 	}
@@ -105,7 +98,7 @@ public class XMLProperties {
 			builder.setXMLFilter(format);
 			doc = builder.build(reader);
 		} catch (Exception e) {
-			System.err.println("Error creating XML parser in " + "PropertyManager.java");
+			System.err.println("Error creating XML parser in " + "PropertyManager.java"  + " fileName=" + reader.toString());
 			e.printStackTrace();
 		}
 	}

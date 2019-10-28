@@ -19,15 +19,15 @@ import com.jdon.annotation.Component;
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.model.Send;
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.domain.model.event.PostTopicMessageCommand;
-import com.jdon.jivejdon.domain.model.event.TopicMessagePostedEvent;
+import com.jdon.jivejdon.domain.command.PostTopicMessageCommand;
+import com.jdon.jivejdon.domain.event.TopicMessagePostedEvent;
 
 @Component
 @Introduce("message")
 public class ThreadEventSourcingRoleImpl implements ThreadEventSourcingRole {
 
-	@Send("postTopicMessageCommand")
-	public DomainMessage postTopicMessage(PostTopicMessageCommand command) {
+	@Send("saveTopicMessageCommand")
+	public DomainMessage saveTopicMessage(PostTopicMessageCommand command) {
 		return new DomainMessage(command);
 	}
 

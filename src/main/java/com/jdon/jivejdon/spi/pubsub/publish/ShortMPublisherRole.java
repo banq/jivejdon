@@ -18,7 +18,7 @@ package com.jdon.jivejdon.spi.pubsub.publish;
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.model.Send;
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.domain.model.event.ATUserNotifiedEvent;
+import com.jdon.jivejdon.domain.event.ATUserNotifiedEvent;
 
 @Introduce("message")
 public class ShortMPublisherRole {

@@ -15,7 +15,7 @@
  */
 package com.jdon.jivejdon.spi.component.shortmessage;
 
-import com.jdon.jivejdon.domain.model.event.ATUserNotifiedEvent;
+import com.jdon.jivejdon.domain.event.ATUserNotifiedEvent;
 import com.jdon.util.StringUtil;
 
 public class WeiBoShortMessageParams {

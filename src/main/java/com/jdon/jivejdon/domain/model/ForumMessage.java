@@ -19,18 +19,15 @@ import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
 import com.jdon.annotation.model.OnCommand;
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
-import com.jdon.jivejdon.spi.pubsub.publish.MessageEventSourcingRole;
-import com.jdon.jivejdon.spi.pubsub.publish.ShortMPublisherRole;
+import com.jdon.jivejdon.domain.command.PostRepliesMessageCommand;
+import com.jdon.jivejdon.domain.command.ReviseForumMessageCommand;
+import com.jdon.jivejdon.domain.event.MessagePropertiesRevisedEvent;
+import com.jdon.jivejdon.domain.event.MessageRevisedEvent;
+import com.jdon.jivejdon.domain.event.RepliesMessagePostedEvent;
+import com.jdon.jivejdon.domain.event.UploadFilesAttachedEvent;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.attachment.AttachmentsVO;
 import com.jdon.jivejdon.domain.model.attachment.UploadFile;
-import com.jdon.jivejdon.domain.model.event.MessagePropertiesUpdatedEvent;
-import com.jdon.jivejdon.domain.model.event.MessageUpdatedEvent;
-import com.jdon.jivejdon.domain.model.event.ReplyMessageCreatedEvent;
-import com.jdon.jivejdon.domain.model.event.UploadFilesSavedEvent;
-import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.domain.model.message.FilterPipleSpec;
 import com.jdon.jivejdon.domain.model.message.MessageUrlVO;
 import com.jdon.jivejdon.domain.model.message.MessageVO;
@@ -38,6 +35,10 @@ import com.jdon.jivejdon.domain.model.property.MessagePropertysVO;
 import com.jdon.jivejdon.domain.model.property.Property;
 import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
 import com.jdon.jivejdon.domain.model.util.ForumModel;
+import com.jdon.jivejdon.spi.pubsub.publish.MessageEventSourcingRole;
+import com.jdon.jivejdon.spi.pubsub.publish.ShortMPublisherRole;
+import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
+import com.jdon.jivejdon.util.Constants;
 
 import java.util.Collection;
 
@@ -160,78 +161,55 @@ public class ForumMessage extends ForumModel implements Cloneable {
     /**
      * post a reply forumMessage
      */
-    @OnCommand("postReplyMessageCommand")
-    public void addChild(AnemicMessageDTO anemicMessageDTO) {
+    @OnCommand("postRepliesMessageCommand")
+    public void addChild(PostRepliesMessageCommand postRepliesMessageCommand) {
         try {
-//			Thread.sleep(5000); test blocking async
-            // basic construct
             long modifiedDate = System.currentTimeMillis();
             String creationDate = Constants.getDefaultDateTimeDisp(modifiedDate);
             ForumMessageReply forumMessageReply= (ForumMessageReply)ForumMessage.messageBuilder()
-                    .messageId(anemicMessageDTO.getMessageId())
+                    .messageId(postRepliesMessageCommand.getMessageId())
                     .parentMessage(this)
-                    .messageVO(anemicMessageDTO.getMessageVO())
+                    .messageVO(postRepliesMessageCommand.getMessageVO())
                     .forum(this.forum).forumThread(this.forumThread)
-                    .acount(anemicMessageDTO.getAccount())
+                    .acount(postRepliesMessageCommand.getAccount())
                     .creationDate(creationDate)
                     .modifiedDate(modifiedDate)
                     .filterPipleSpec(this.filterPipleSpec)
-                    .uploads(anemicMessageDTO.getAttachment().getUploadFiles())
-                    .props(anemicMessageDTO.getMessagePropertysVO().getPropertys())
+                    .uploads(postRepliesMessageCommand.getAttachment().getUploadFiles())
+                    .props(postRepliesMessageCommand.getMessagePropertysVO().getPropertys())
                     .build();
 
             forumThread.addNewMessage(this, forumMessageReply);
             forumMessageReply.getAccount().updateMessageCount(1);
-            anemicMessageDTO.setForumThread(this.forumThread);
-            anemicMessageDTO.setForum(this.forum);
-            eventSourcing.addReplyMessage(new ReplyMessageCreatedEvent(anemicMessageDTO));
+            eventSourcing.addReplyMessage(new RepliesMessagePostedEvent(postRepliesMessageCommand));
         } catch (Exception e) {
             System.err.print(" addReplyMessage error:" + e + this.messageId);
         }
     }
 
-    /**
-     * doing after put a exist forumMessage
-     *
-     * @param anemicMessageDTO
-     */
-    @OnCommand("updateForumMessage")
-    public void update(AnemicMessageDTO anemicMessageDTO) {
+    @OnCommand("reviseForumMessageCommand")
+    public void revise(ReviseForumMessageCommand reviseForumMessageCommand) {
         try {
-            long now = System.currentTimeMillis();
-            setModifiedDate(now);
-            MessageVO messageVO = this.messageVOBuilder().subject(anemicMessageDTO.getMessageVO().getSubject()).body(anemicMessageDTO.getMessageVO()
+            setModifiedDate(System.currentTimeMillis());
+            MessageVO messageVO = this.messageVOBuilder().subject(reviseForumMessageCommand.getMessageVO().getSubject()).body(reviseForumMessageCommand.getMessageVO()
                     .getBody()).build();
             setMessageVO(messageVO);
-
             forumThread.updateMessage(this);
-
-            if (anemicMessageDTO.getForum() != null) {
-                Long newforumId = anemicMessageDTO.getForum().getForumId();
-                if (newforumId != null && getForum().getForumId().longValue() != newforumId.longValue()
-                         && ((this.getForumThread().isRoot(this)) && (this.isLeaf()))) {
-                    Forum newForum = getForumThread().moveForum(this, anemicMessageDTO.getForum());
-                    this.setForum(newForum);
-                }
-            }
-
-            Collection<UploadFile> uploads = anemicMessageDTO.getAttachment()
-                    .getUploadFiles();
+            Collection<UploadFile> uploads = reviseForumMessageCommand.getAttachment().getUploadFiles();
             if (uploads != null) {
                 setAttachment(new AttachmentsVO(this.messageId, uploads));
-                eventSourcing.saveUploadFiles(new UploadFilesSavedEvent(this.messageId, uploads));
+                eventSourcing.saveUploadFiles(new UploadFilesAttachedEvent(this.messageId, uploads));
             }
             // 3. association message property
-            Collection<Property> props = anemicMessageDTO.getMessagePropertysVO()
-                    .getPropertys();
+            Collection<Property> props = reviseForumMessageCommand.getMessagePropertysVO().getPropertys();
             if (props != null)
                 this.getMessagePropertysVO().replacePropertys(props);
 
             // save this updated message to db
-            eventSourcing.saveMessage(new MessageUpdatedEvent(anemicMessageDTO));
+            eventSourcing.saveMessage(new MessageRevisedEvent(reviseForumMessageCommand));
 
             // merge with old properties;
-            eventSourcing.saveMessageProperties(new MessagePropertiesUpdatedEvent(this.messageId,
+            eventSourcing.saveMessageProperties(new MessagePropertiesRevisedEvent(this.messageId,
                     getMessagePropertysVO().getPropertys()));
         } catch (Exception e) {
             System.err.print(" updateMessage error:" + e + this.messageId);
@@ -242,7 +220,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
 
     public void updateMasked(boolean masked) {
         this.getMessagePropertysVO().updateMasked(masked);
-        eventSourcing.saveMessageProperties(new MessagePropertiesUpdatedEvent(this.messageId,
+        eventSourcing.saveMessageProperties(new MessagePropertiesRevisedEvent(this.messageId,
                 getMessagePropertysVO().getPropertys()));
         this.getForumThread().updateMessage(this);
         this.reloadMessageVOOrignal();
@@ -346,7 +324,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
     public void messaegDigAction() {
         this.getMessagePropertysVO().addMessageDigCount();
         this.forumThread.addDig(this);
-        eventSourcing.saveMessageProperties(new MessagePropertiesUpdatedEvent(this.messageId,
+        eventSourcing.saveMessageProperties(new MessagePropertiesRevisedEvent(this.messageId,
                 getMessagePropertysVO().getPropertys()));
     }
 

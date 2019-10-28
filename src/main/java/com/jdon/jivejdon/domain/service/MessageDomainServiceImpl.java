@@ -22,6 +22,9 @@ import com.jdon.annotation.model.Receiver;
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.domain.message.DomainMessage;
+import com.jdon.jivejdon.domain.command.PostRepliesMessageCommand;
+import com.jdon.jivejdon.domain.command.PostTopicMessageCommand;
+import com.jdon.jivejdon.domain.command.ReviseForumMessageCommand;
 import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
@@ -147,16 +150,16 @@ public class MessageDomainServiceImpl implements MessageDomainService {
 		return forumAbstractFactory.getThread(threadId);
 
 	}
-	public DomainMessage post(@Owner long forumId, @Receiver Forum forum, AnemicMessageDTO forumMessageInputDTO) {
-		return new DomainMessage(forumMessageInputDTO);
+	public DomainMessage post(@Owner long forumId, @Receiver Forum forum, PostTopicMessageCommand postTopicMessageCommand) {
+		return new DomainMessage(postTopicMessageCommand);
 	}
 
-	public DomainMessage addreply(long threadId, ForumMessage paranetforumMessage, AnemicMessageDTO newForumMessageInputparamter) {
-		return new DomainMessage(newForumMessageInputparamter);
+	public DomainMessage addreply(long threadId, ForumMessage paranetforumMessage, PostRepliesMessageCommand postRepliesMessageCommand) {
+		return new DomainMessage(postRepliesMessageCommand);
 	}
 
-	public DomainMessage update(long threadId, ForumMessage oldforumMessage, AnemicMessageDTO newForumMessageInputparamter) {
-		return new DomainMessage(newForumMessageInputparamter);
+	public DomainMessage revise(long threadId, ForumMessage oldforumMessage, ReviseForumMessageCommand reviseForumMessageCommand) {
+		return new DomainMessage(reviseForumMessageCommand);
 	}
 
 	/*

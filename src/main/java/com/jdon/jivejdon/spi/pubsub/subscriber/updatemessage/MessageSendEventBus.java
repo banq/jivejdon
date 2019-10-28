@@ -19,7 +19,7 @@ import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
 import com.jdon.jivejdon.infrastructure.cqrs.CacheQueryRefresher;
-import com.jdon.jivejdon.domain.model.event.MessageUpdatedEvent;
+import com.jdon.jivejdon.domain.event.MessageRevisedEvent;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
 
@@ -43,9 +43,8 @@ public class MessageSendEventBus implements DomainEventHandler {
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 		// todo send to JMS or MQ
-		MessageUpdatedEvent es = (MessageUpdatedEvent) event.getDomainMessage().getEventSource();
-		Long messageId = es.getNewForumMessageInputparamter().getMessageId();
-		cacheQueryRefresher.refresh(this.forumFactory.getMessage(messageId));
+		MessageRevisedEvent messageRevisedEvent = (MessageRevisedEvent) event.getDomainMessage().getEventSource();
+		cacheQueryRefresher.refresh(this.forumFactory.getMessage(messageRevisedEvent.getReviseForumMessageCommand().getOldforumMessage().getMessageId()));
 
 	}
 }

@@ -24,7 +24,7 @@ import com.jdon.jivejdon.spi.pubsub.publish.LobbyPublisherRole;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
-import com.jdon.jivejdon.domain.model.event.TopicMessagePostedEvent;
+import com.jdon.jivejdon.domain.event.TopicMessagePostedEvent;
 import com.jdon.jivejdon.domain.model.realtime.ForumMessageDTO;
 import com.jdon.jivejdon.domain.model.realtime.LobbyPublisherRoleIF;
 import com.jdon.jivejdon.domain.model.realtime.Notification;

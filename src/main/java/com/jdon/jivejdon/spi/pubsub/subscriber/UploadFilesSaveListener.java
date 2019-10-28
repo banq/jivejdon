@@ -21,7 +21,7 @@ import org.apache.logging.log4j.Logger;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.domain.model.event.UploadFilesSavedEvent;
+import com.jdon.jivejdon.domain.event.UploadFilesAttachedEvent;
 import com.jdon.jivejdon.infrastructure.repository.property.UploadRepository;
 
 @Consumer("saveUploadFiles")
@@ -35,7 +35,7 @@ public class UploadFilesSaveListener implements DomainEventHandler {
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
-		UploadFilesSavedEvent es = (UploadFilesSavedEvent) event.getDomainMessage().getEventSource();
+		UploadFilesAttachedEvent es = (UploadFilesAttachedEvent) event.getDomainMessage().getEventSource();
 		try {
 			Long messageId = es.getMessageId();
 			uploadRepository.saveAllUploadFiles(messageId.toString(), es.getUploads());

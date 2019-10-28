@@ -15,7 +15,7 @@
  */
 package com.jdon.jivejdon.domain.model.message.weibo;
 
-import com.jdon.jivejdon.domain.model.event.ATUserNotifiedEvent;
+import com.jdon.jivejdon.domain.event.ATUserNotifiedEvent;
 import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.jivejdon.domain.model.message.output.weibo.AuthorNameFormat;
 import com.jdon.util.Debug;

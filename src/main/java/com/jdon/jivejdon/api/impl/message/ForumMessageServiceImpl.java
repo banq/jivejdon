@@ -20,22 +20,27 @@ import com.jdon.annotation.intercept.Poolable;
 import com.jdon.annotation.intercept.SessionContextAcceptable;
 import com.jdon.container.visitor.data.SessionContext;
 import com.jdon.controller.events.EventModel;
-import com.jdon.jivejdon.domain.service.MessageDomainService;
-import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.auth.NoPermissionException;
-import com.jdon.jivejdon.auth.ResourceAuthorization;
-import com.jdon.jivejdon.spi.component.filter.InFilterManager;
-import com.jdon.jivejdon.domain.model.*;
-import com.jdon.jivejdon.domain.model.account.Account;
-import com.jdon.jivejdon.domain.model.attachment.AttachmentsVO;
-import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
-import com.jdon.jivejdon.domain.model.message.output.RenderingFilterManager;
-import com.jdon.jivejdon.domain.model.property.MessagePropertysVO;
-import com.jdon.jivejdon.domain.model.property.Property;
-import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import com.jdon.jivejdon.api.ForumMessageService;
 import com.jdon.jivejdon.api.property.UploadService;
 import com.jdon.jivejdon.api.util.SessionContextUtil;
+import com.jdon.jivejdon.auth.NoPermissionException;
+import com.jdon.jivejdon.auth.ResourceAuthorization;
+import com.jdon.jivejdon.domain.command.PostRepliesMessageCommand;
+import com.jdon.jivejdon.domain.command.PostTopicMessageCommand;
+import com.jdon.jivejdon.domain.command.ReviseForumMessageCommand;
+import com.jdon.jivejdon.domain.model.Forum;
+import com.jdon.jivejdon.domain.model.ForumMessage;
+import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.domain.model.attachment.AttachmentsVO;
+import com.jdon.jivejdon.domain.model.message.output.RenderingFilterManager;
+import com.jdon.jivejdon.domain.model.property.MessagePropertysVO;
+import com.jdon.jivejdon.domain.model.property.Property;
+import com.jdon.jivejdon.domain.service.MessageDomainService;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
+import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
+import com.jdon.jivejdon.spi.component.filter.InFilterManager;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.util.UtilValidate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -104,27 +109,20 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 			return null;
 		Long mIDInt = forumBuilder.getNextId(Constants.MESSAGE);
 		try {
-			forumMessagePostDTO.setMessageId(mIDInt);
-			forumMessagePostDTO.setForum(forum);
-			// upload
 			Collection uploads = uploadService.loadAllUploadFilesOfMessage(mIDInt, sessionContext);
 			AttachmentsVO attachmentsVO = new AttachmentsVO(mIDInt, uploads);
-			forumMessagePostDTO.setAttachment(attachmentsVO);
-
 			Account operator = sessionContextUtil.getLoginAccount(sessionContext);
-			// forumMessagePostDTO.setOperator(operator);
-
 			Collection properties = new ArrayList();
 			properties.add(new Property(MessagePropertysVO.PROPERTY_IP, operator.getPostIP()));
 			MessagePropertysVO messagePropertysVO = new MessagePropertysVO(mIDInt, properties);
-			forumMessagePostDTO.setMessagePropertysVO(messagePropertysVO);
-
-			forumMessagePostDTO.setMessageVO(inFilterManager.applyFilters
-					(forumMessagePostDTO.getMessageVO()));
 
 			if (!UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getBody()) ||
 					!UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getSubject())) {
-				messageKernel.post(forum.getForumId(), forum, forumMessagePostDTO);
+				PostTopicMessageCommand postTopicMessageCommand  =
+						new PostTopicMessageCommand(mIDInt, forum, operator,
+								inFilterManager.applyFilters(forumMessagePostDTO.getMessageVO()),
+								attachmentsVO, messagePropertysVO, forumMessagePostDTO.getTagTitle());
+				messageKernel.post(forum.getForumId(), forum, postTopicMessageCommand);
 			}
 
 		} catch (Exception e) {
@@ -143,13 +141,18 @@ public class ForumMessageServiceImpl implements ForumMessageService {
         AnemicMessageDTO forumMessageReplyPostDTO = (AnemicMessageDTO) em.getModelIF();
 		if (UtilValidate.isEmpty(forumMessageReplyPostDTO.getMessageVO().getBody()))
 			return null;
+		if ((forumMessageReplyPostDTO.getParentMessage() == null || forumMessageReplyPostDTO.getParentMessage().getMessageId() == null)) {
+			return null;
+		}
+		ForumMessage parentMessage = getMessage(forumMessageReplyPostDTO.getParentMessage().getMessageId());
+		if (parentMessage == null) {
+			logger.error("not this parent Message: " + forumMessageReplyPostDTO.getParentMessage().getMessageId());
+			return null;
+		}
 		if (!prepareCreate(forumMessageReplyPostDTO))
 			return null;
 		Long mIDInt = this.forumBuilder.getNextId(Constants.MESSAGE);
 		try {
-
-			forumMessageReplyPostDTO.setMessageId(mIDInt);
-
 			Collection uploads = uploadService.loadAllUploadFilesOfMessage(mIDInt, sessionContext);
 			AttachmentsVO attachmentsVO = new AttachmentsVO(mIDInt, uploads);
 			forumMessageReplyPostDTO.setAttachment(attachmentsVO);
@@ -161,18 +164,11 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 			Collection properties = new ArrayList();
 			properties.add(new Property(MessagePropertysVO.PROPERTY_IP, operator.getPostIP()));
 			MessagePropertysVO messagePropertysVO = new MessagePropertysVO(mIDInt, properties);
-			forumMessageReplyPostDTO.setMessagePropertysVO(messagePropertysVO);
-
-			forumMessageReplyPostDTO.setMessageVO(inFilterManager.applyFilters
-					(forumMessageReplyPostDTO.getMessageVO()));
-
-			ForumMessage parentMessage = getMessage(forumMessageReplyPostDTO.getParentMessage().getMessageId());
-			if (parentMessage == null) {
-				logger.error("not this parent Message: " + forumMessageReplyPostDTO.getParentMessage().getMessageId());
-				return null;
-			}
-			messageKernel.addreply(parentMessage.getForumThread().getThreadId(), parentMessage, forumMessageReplyPostDTO);
-
+			PostRepliesMessageCommand postRepliesMessageCommand =
+					new PostRepliesMessageCommand(parentMessage, mIDInt, operator,
+							inFilterManager.applyFilters(forumMessageReplyPostDTO.getMessageVO()),
+							attachmentsVO, messagePropertysVO, forumMessageReplyPostDTO.getTagTitle());
+			messageKernel.addreply(parentMessage.getForumThread().getThreadId(), parentMessage, postRepliesMessageCommand);
 		} catch (Exception e) {
 			logger.error(e);
 			em.setErrors(Constants.ERRORS);
@@ -223,31 +219,24 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 	 */
 	public void updateMessage(EventModel em) throws Exception {
         AnemicMessageDTO newForumMessageInputparamter = (AnemicMessageDTO) em.getModelIF();
+		ForumMessage oldforumMessage = messageKernel.getMessage(newForumMessageInputparamter.getMessageId());
+		if (oldforumMessage == null)
+			return;
+		if (!isAuthenticated(oldforumMessage)) {
+			em.setErrors(Constants.NOPERMISSIONS);
+			return;
+		}
 		try {
-			ForumMessage oldforumMessage = messageKernel.getMessage(newForumMessageInputparamter.getMessageId());
-			if (oldforumMessage == null)
-				return;
-			if (!isAuthenticated(oldforumMessage)) {
-				em.setErrors(Constants.NOPERMISSIONS);
-				return;
-			}
 			Account operator = sessionContextUtil.getLoginAccount(sessionContext);
-			newForumMessageInputparamter.setOperator(operator);
-
 			Collection uploads = uploadService.loadAllUploadFilesOfMessage(oldforumMessage.getMessageId(), this.sessionContext);
 			AttachmentsVO attachmentsVO = new AttachmentsVO(newForumMessageInputparamter.getMessageId(), uploads);
-			newForumMessageInputparamter.setAttachment(attachmentsVO);
-
 			Collection properties = new ArrayList();
 			properties.add(new Property(MessagePropertysVO.PROPERTY_IP, operator.getPostIP()));
 			MessagePropertysVO messagePropertysVO = new MessagePropertysVO(newForumMessageInputparamter.getMessageId(), properties);
-			newForumMessageInputparamter.setMessagePropertysVO(messagePropertysVO);
-
-			newForumMessageInputparamter.setMessageVO(inFilterManager.applyFilters
-					(newForumMessageInputparamter.getMessageVO()));
-			// oldforumMessage.update(newForumMessageInputparamter);
-			messageKernel.update(oldforumMessage.getForumThread().getThreadId(), oldforumMessage, newForumMessageInputparamter);
-
+			ReviseForumMessageCommand reviseForumMessageCommand = new ReviseForumMessageCommand(oldforumMessage,
+					inFilterManager.applyFilters(newForumMessageInputparamter.getMessageVO()),
+					attachmentsVO, messagePropertysVO);
+			messageKernel.revise(oldforumMessage.getForumThread().getThreadId(), oldforumMessage, reviseForumMessageCommand);
 		} catch (Exception e) {
 			logger.error(e);
 			em.setErrors(Constants.ERRORS);
