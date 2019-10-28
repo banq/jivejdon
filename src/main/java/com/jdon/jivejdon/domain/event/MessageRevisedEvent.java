@@ -13,28 +13,20 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.domain.model.event;
+package com.jdon.jivejdon.domain.event;
 
-import java.util.Collection;
+import com.jdon.jivejdon.domain.model.ForumMessage;
 
-public class MessagePropertiesUpdatedEvent {
+public class MessageUpdatedEvent {
 
-	private final long messageId;
+	private final ForumMessage forumMessage;
 
-	private final Collection properties;
-
-	public MessagePropertiesUpdatedEvent(long messageId, Collection properties) {
+	public MessageUpdatedEvent(ForumMessage forumMessage) {
 		super();
-		this.messageId = messageId;
-		this.properties = properties;
+		this.forumMessage = forumMessage;
 	}
 
-	public long getMessageId() {
-		return messageId;
+	public ForumMessage getForumMessage() {
+		return forumMessage;
 	}
-
-	public Collection getProperties() {
-		return properties;
-	}
-
 }

@@ -13,28 +13,28 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.domain.model.event;
+package com.jdon.jivejdon.domain.event;
 
 import java.util.Collection;
 
-public class ThreadTagsSavedEvent {
+public class MessagePropertiesUpdatedEvent {
 
-	private final Long threadId;
+	private final long messageId;
 
-	private final Collection<String> titles;
+	private final Collection properties;
 
-	public ThreadTagsSavedEvent(Long threadId, Collection<String> titles) {
+	public MessagePropertiesUpdatedEvent(long messageId, Collection properties) {
 		super();
-		this.threadId = threadId;
-		this.titles = titles;
+		this.messageId = messageId;
+		this.properties = properties;
 	}
 
-	public Long getThreadId() {
-		return threadId;
+	public long getMessageId() {
+		return messageId;
 	}
 
-	public Collection<String> getTitles() {
-		return titles;
+	public Collection getProperties() {
+		return properties;
 	}
 
 }

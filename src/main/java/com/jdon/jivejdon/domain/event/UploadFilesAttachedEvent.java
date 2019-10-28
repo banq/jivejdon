@@ -13,11 +13,11 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.domain.model.event;
-
-import java.util.Collection;
+package com.jdon.jivejdon.domain.event;
 
 import com.jdon.jivejdon.domain.model.attachment.UploadFile;
+
+import java.util.Collection;
 
 public class UploadFilesSavedEvent {
 
