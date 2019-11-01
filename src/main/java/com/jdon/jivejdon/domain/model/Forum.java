@@ -24,7 +24,6 @@ import com.jdon.jivejdon.domain.event.TopicMessagePostedEvent;
 import com.jdon.jivejdon.domain.model.property.HotKeys;
 import com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF;
 import com.jdon.jivejdon.domain.model.subscription.event.ForumSubscribedNotifyEvent;
-import com.jdon.jivejdon.domain.model.util.ForumModel;
 import com.jdon.jivejdon.spi.pubsub.publish.ThreadEventSourcingRole;
 import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 import com.jdon.jivejdon.util.Constants;
@@ -42,7 +41,7 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 @Searchable
 @Model
-public class Forum extends ForumModel {
+public class Forum  {
 
 	/**
 	 *

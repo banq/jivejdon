@@ -34,7 +34,6 @@ import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.jivejdon.domain.model.property.MessagePropertysVO;
 import com.jdon.jivejdon.domain.model.property.Property;
 import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
-import com.jdon.jivejdon.domain.model.util.ForumModel;
 import com.jdon.jivejdon.spi.pubsub.publish.MessageEventSourcingRole;
 import com.jdon.jivejdon.spi.pubsub.publish.ShortMPublisherRole;
 import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
@@ -58,7 +57,7 @@ import java.util.Collection;
  * @author <a href="mailto:banq@163.com">banq</a>
  */
 @Model
-public class ForumMessage extends ForumModel implements Cloneable {
+public class ForumMessage implements Cloneable {
     private static final long serialVersionUID = 1L;
     @Inject
     public LazyLoaderRole lazyLoaderRole;
@@ -81,6 +80,7 @@ public class ForumMessage extends ForumModel implements Cloneable {
     private AttachmentsVO attachmentsVO;
     private MessagePropertysVO messagePropertysVO;
     private ReBlogVO reBlogVO;
+    private volatile boolean solid;
 
     protected ForumMessage() {
         this.messageVO = this.messageVOBuilder().subject("").body("").build();
@@ -517,5 +517,13 @@ public class ForumMessage extends ForumModel implements Cloneable {
             System.err.println(" Message build error:"+ messageId);
         }
 
+    }
+
+    public boolean isSolid() {
+        return solid;
+    }
+
+    private void setSolid(boolean solid) {
+        this.solid = solid;
     }
 }

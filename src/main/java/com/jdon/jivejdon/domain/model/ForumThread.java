@@ -30,7 +30,6 @@ import com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF;
 import com.jdon.jivejdon.domain.model.subscription.event.ThreadSubscribedNotifyEvent;
 import com.jdon.jivejdon.domain.model.thread.ThreadTagsVO;
 import com.jdon.jivejdon.domain.model.thread.ViewCounter;
-import com.jdon.jivejdon.domain.model.util.ForumModel;
 import com.jdon.jivejdon.domain.model.util.OneOneDTO;
 import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 import com.jdon.jivejdon.spi.pubsub.publish.MessageEventSourcingRole;
@@ -53,7 +52,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * @author <a href="mailto:banq@163.com">banq</a>
  */
 @Model
-public class ForumThread extends ForumModel {
+public class ForumThread {
 	private static final long serialVersionUID = 1L;
 	@Inject
 	public LazyLoaderRole lazyLoaderRole;
@@ -86,6 +85,8 @@ public class ForumThread extends ForumModel {
 	private volatile ForumThreadTreeModel forumThreadTreeModel;
 
 	private long creationDate2;
+
+	private boolean solid;
 
 
 	/**
@@ -403,4 +404,11 @@ public class ForumThread extends ForumModel {
 		this.setSolid(true);
 	}
 
+	public boolean isSolid() {
+		return solid;
+	}
+
+	private void setSolid(boolean solid) {
+		this.solid = solid;
+	}
 }
