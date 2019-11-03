@@ -190,10 +190,6 @@
   <%@ include file="../account/loginAJAX.jsp" %>
   <script src="https://cdn.jdon.com/common/messageList6.js"></script>
   <script>
-              var sId = "";
-              <logic:notEmpty name="forumThread" property="state.latestPost">
-              </logic:notEmpty>
-              viewcount('<bean:write name="forumThread" property="threadId" />', "");
               approveList();
               window.onload = function () {
                   <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">

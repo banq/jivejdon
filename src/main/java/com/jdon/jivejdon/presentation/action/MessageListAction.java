@@ -24,6 +24,7 @@ import com.jdon.jivejdon.presentation.form.MessageListForm;
 import com.jdon.jivejdon.api.account.AccountService;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.api.ForumMessageService;
+import com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
 import com.jdon.util.Debug;
@@ -40,6 +41,7 @@ import javax.servlet.http.HttpServletRequest;
 public class MessageListAction extends ModelListAction {
 	private final static String module = MessageListAction.class.getName();
 	private ForumMessageQueryService forumMessageQueryService;
+	private ThreadViewCounterJob threadViewCounterJob;
 
 	public ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
@@ -103,6 +105,9 @@ public class MessageListAction extends ModelListAction {
 				throw new Exception("thread is null " + threadId);
 
 			modelListForm.setOneModel(forumThread);
+			//view count
+			forumThread.addViewCount();
+			getThreadViewCounterJob().saveViewCounter(forumThread);
 
 			if (request.getSession(false) != null) {
 				boolean[] authenticateds = getAuthedListForm(actionForm, request);
@@ -138,6 +143,14 @@ public class MessageListAction extends ModelListAction {
 			i++;
 		}
 		return authenticateds;
+	}
+
+
+	private ThreadViewCounterJob getThreadViewCounterJob() {
+		if (threadViewCounterJob == null)
+			threadViewCounterJob = (ThreadViewCounterJob) WebAppUtil.getComponentInstance
+					("threadViewCounterJob", this.servlet.getServletContext());
+		return threadViewCounterJob;
 	}
 
 }

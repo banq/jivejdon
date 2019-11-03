@@ -23,6 +23,6 @@ public interface ThreadViewCounterJob {
 	 * 
 	 * @param thread
 	 */
-	public abstract boolean checkViewCounter(ForumThread thread);
+	public abstract void saveViewCounter(ForumThread thread);
 
 }

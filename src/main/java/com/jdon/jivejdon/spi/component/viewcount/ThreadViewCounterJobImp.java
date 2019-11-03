@@ -92,16 +92,12 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob#checkViewCounter
+	 * com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob#saveViewCounter
 	 * (com.jdon.jivejdon.domain.model.ForumThread)
 	 */
 	@Override
-	public boolean checkViewCounter(ForumThread thread) {
-		if (!concurrentHashMap.containsKey(thread.getThreadId())) {
-			concurrentHashMap.put(thread.getThreadId(), thread.getViewCounter());
-			return true;
-		}
-		return false;
+	public void saveViewCounter(ForumThread thread) {
+		concurrentHashMap.computeIfAbsent(thread.getThreadId(), unused -> thread.getViewCounter());
 	}
 
 	private int getFromDB(Long threadId) {
