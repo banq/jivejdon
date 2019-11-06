@@ -112,6 +112,11 @@ public class ThreadListAction extends ModelListAction {
 		if ((forumId == null) || !UtilValidate.isInteger(forumId) || forumId.length()>10) {
 			forum = new Forum();
 			forum.setName("");
+
+		} else if(Long.valueOf(forumId).longValue()>200){
+		//for the bot or DDOS attack
+			forum = new Forum();
+			forum.setName("");
 		} else {
 			forum = forumService.getForum(new Long(forumId));
 		}
