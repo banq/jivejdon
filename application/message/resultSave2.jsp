@@ -4,6 +4,12 @@
 <%@ taglib uri="/WEB-INF/MultiPages.tld" prefix="MultiPages" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
+<%
+    response.setHeader("Pragma", "No-cache");
+    response.setHeader("Cache-Control", "no-cache");
+    response.setDateHeader("Expires", 0);
+%>
+
 
 <bean:define id="messageId" name="messageReplyForm" property="messageId"/>
 <bean:define id="pMessageId" name="messageReplyForm" property="parentMessage.messageId"/>
