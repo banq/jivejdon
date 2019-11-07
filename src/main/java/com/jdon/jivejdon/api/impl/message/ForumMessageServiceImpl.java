@@ -131,6 +131,8 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 		} finally {
 			uploadService.clearSession(sessionContext);
 		}
+		//for MessageListNavAction
+		forumMessagePostDTO.setMessageId(mIDInt);
 		return mIDInt;
 	}
 
@@ -175,6 +177,8 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 		} finally {
 			uploadService.clearSession(sessionContext);
 		}
+		//for MessageListNav2Action
+		forumMessageReplyPostDTO.setMessageId(mIDInt);
 		return mIDInt;
 	}
 
