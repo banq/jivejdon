@@ -1,6 +1,6 @@
 <%
   String ip = request.getParameter("ip");
-  if (ip.length() == 0) {
+  if (ip == null || ip.length() == 0) {
     ip = request.getRemoteAddr();
   }
   if (ip.indexOf("127.0.0.1") != -1)
