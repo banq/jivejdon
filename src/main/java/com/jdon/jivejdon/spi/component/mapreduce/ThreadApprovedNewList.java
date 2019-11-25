@@ -85,7 +85,7 @@ public class ThreadApprovedNewList implements Startable {
 			}
 		};
 		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(task, 60 * 60 * 6,
-				60 * 60 * 6, TimeUnit.SECONDS);
+				60 * 60 * 1, TimeUnit.SECONDS);
 
 	}
 
