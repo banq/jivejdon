@@ -7,7 +7,7 @@ com.jdon.jivejdon.spi.component.block.ErrorBlockerIF,com.jdon.jivejdon.spi.compo
 <%@ page import="com.jdon.jivejdon.spi.component.email.EmailVO" %>
 <%
 ErrorBlockerIF errorBlocker = (ErrorBlockerIF) WebAppUtil.getComponentInstance("errorBlocker", this.getServletContext());
-if (errorBlocker.checkRate(request.getRemoteAddr(), 4)){
+if (errorBlocker.checkRate(request.getRemoteAddr(), 10)){
   String isSendMail = (String) this.getServletContext().getAttribute(request.getRemoteAddr() + "404");
   if (isSendMail == null) {%>
 <%

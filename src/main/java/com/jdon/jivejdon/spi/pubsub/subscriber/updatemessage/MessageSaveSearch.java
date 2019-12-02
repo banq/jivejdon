@@ -22,7 +22,7 @@ import com.jdon.jivejdon.domain.event.MessageRevisedEvent;
 import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository;
 
-@Consumer("saveMessage")
+@Consumer("messageRevised")
 public class MessageSaveSearch implements DomainEventHandler {
 
 	private MessageSearchRepository messageSearchRepository;

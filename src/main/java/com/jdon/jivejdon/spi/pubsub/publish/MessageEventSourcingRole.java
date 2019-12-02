@@ -30,7 +30,7 @@ public class MessageEventSourcingRole {
 		return new DomainMessage(event);
 	}
 
-	@Send("saveMessage")
+	@Send("messageRevised")
 	public DomainMessage saveMessage(MessageRevisedEvent event) {
 		return new DomainMessage(event);
 	}

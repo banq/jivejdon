@@ -22,7 +22,7 @@ com.jdon.jivejdon.spi.component.block.ErrorBlockerIF,com.jdon.jivejdon.spi.compo
 		this.getServletContext().setAttribute(request.getRemoteAddr()+"500","true");
 	}
 ErrorBlockerIF errorBlocker = (ErrorBlockerIF) WebAppUtil.getComponentInstance("errorBlocker", this.getServletContext());
-if (errorBlocker.checkRate(request.getRemoteAddr(), 2)){	
+if (errorBlocker.checkRate(request.getRemoteAddr(), 5)){
     return;
 }
 

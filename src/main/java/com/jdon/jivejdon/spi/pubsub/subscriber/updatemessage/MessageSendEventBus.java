@@ -31,7 +31,7 @@ import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolv
  * @author banq
  * 
  */
-@Consumer("saveMessage")
+@Consumer("messageRevised")
 public class MessageSendEventBus implements DomainEventHandler {
 	private final CacheQueryRefresher cacheQueryRefresher;
 	private final ForumFactory forumFactory;

@@ -27,7 +27,7 @@ import com.jdon.domain.message.DomainEventHandler;
  * @author banq
  * 
  */
-@Consumer("saveMessage")
+@Consumer("messageRevised")
 public class MessageZ implements DomainEventHandler {
 
 	public MessageZ() {
