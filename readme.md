@@ -51,7 +51,8 @@ Primitive attributes of Entites grouped together using ValueObjects.
 
 Clean architecture/Hexagonal architecture
 ==============================
-[why clean architecture/Hexagonal architecture are a better choice for "Implementing Domain Driven Design"](https://github.com/banq/jivejdon/issues/8) 
+[Why clean architecture/Hexagonal architecture are a better choice for "Implementing Domain Driven Design"](https://github.com/banq/jivejdon/issues/8) 
+
 JiveJdon is developed with JdonFramework that supports Customer/Supply or pub-sub model, this model can seperate domain logic from infrastructure, databases, other stuff.
 
 ![avatar](./doc/clean.png)
