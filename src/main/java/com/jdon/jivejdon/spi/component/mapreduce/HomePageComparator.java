@@ -43,12 +43,12 @@ public class HomePageComparator implements Comparator<ForumThread> {
 		if (thread.getTags().size() > 3) {
 			tagsCount = tagsCount * 3;
 		}
-		double p = (tagsCount + thread.getViewCount()) * (thread.getState()
+		double p = tagsCount * thread.getViewCount() * (thread.getState()
 				.getMessageCount() + 1) * thread.getRootMessage().getDigCount();
 
 		double t = System.currentTimeMillis() - thread.getState().getModifiedDate2() + 1000;
 
-		double G = 3;
+		double G = 1.5;
 		double tg = Math.pow(t, G);
 		return p / (tg + 1);
 	}
