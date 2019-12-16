@@ -2,8 +2,8 @@ package com.jdon.jivejdon.presentation.action.query;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
+import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
 import com.jdon.strutsutil.ModelListAction;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +26,14 @@ public class ThreadApprovedNewListAction extends ModelListAction {
 
 		return threadApprovedNewList;
 	}
+//
+//	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		ActionForward actionForward = super.execute(actionMapping, actionForm,request,response);
+//		ModelListForm listForm = this.getModelListForm(actionMapping, actionForm, request);
+//		List sortedList = (List)listForm.getList().stream().sorted(new HomePageComparator()).collect(Collectors.toList());
+//		listForm.setList(sortedList);
+//		return actionForward;
+//	}
 
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
 		if (start >= ThreadApprovedNewList.maxSize || start % count != 0)
