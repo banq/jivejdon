@@ -15,18 +15,26 @@
  */
 package com.jdon.jivejdon.presentation.action.query;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
+import com.jdon.jivejdon.api.property.TagService;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.domain.model.query.specification.TaggedThreadListSpec;
-import com.jdon.jivejdon.api.query.ForumMessageQueryService;
-import com.jdon.jivejdon.api.property.TagService;
+import com.jdon.jivejdon.spi.component.mapreduce.HomePageComparator;
 import com.jdon.strutsutil.ModelListAction;
+import com.jdon.strutsutil.ModelListForm;
 import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -42,7 +50,15 @@ public class TaggedThreadListAction extends ModelListAction {
 		return forumMessageQueryService;
 	}
 
-	/*
+	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ActionForward actionForward = super.execute(actionMapping, actionForm,request,response);
+		ModelListForm listForm = this.getModelListForm(actionMapping, actionForm, request);
+		List sortedList = (List)listForm.getList().stream().sorted(new HomePageComparator()).collect(Collectors.toList());
+		listForm.setList(sortedList);
+		return actionForward;
+	}
+
+		/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
