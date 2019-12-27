@@ -15,23 +15,12 @@
  */
 package com.jdon.jivejdon.spi.component.email;
 
-import javax.mail.Address;
-import javax.mail.Authenticator;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.Multipart;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.internet.MimeUtility;
-import javax.naming.InitialContext;
-
 import com.google.common.eventbus.Subscribe;
 import com.jdon.container.pico.Startable;
+
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.naming.InitialContext;
 
 public class EmailSender implements Startable {
 	public final static String NOHTML_FORMAT = "text/plain";
@@ -60,6 +49,7 @@ public class EmailSender implements Startable {
 	public void send(EmailVO emailVO) {
 		try {
 			Message message = createMessage(emailVO);
+			System.err.println("sending email2 : " + message.getAllRecipients());
 			if (message != null)
 				Transport.send(message);
 		} catch (Exception e) {
@@ -80,20 +70,7 @@ public class EmailSender implements Startable {
 	 * If parts of the message are invalid (ie, the toEmail is null) the message
 	 * won't be sent.
 	 * 
-	 * @param toName
-	 *            the name of the recipient of this email.
-	 * @param toEmail
-	 *            the email address of the recipient of this email.
-	 * @param fromName
-	 *            the name of the sender of this email.
-	 * @param fromEmail
-	 *            the email address of the sender of this email.
-	 * @param subject
-	 *            the subject of the email.
-	 * @param body
-	 *            the body of the email.
-	 * @param format
-	 *            text/html or text/plain
+
 	 */
 	public Message createMessage(EmailVO emailVO) {
 		// Check for errors in the given fields:

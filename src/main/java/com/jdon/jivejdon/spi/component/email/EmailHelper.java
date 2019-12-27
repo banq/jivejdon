@@ -14,6 +14,7 @@ public class EmailHelper {
 
 	public void send(EmailVO emailVO) {
 		eventBus.post(emailVO);
+		System.err.println("send email1 : " + emailVO.getToEmail());
 	}
 
 	public void stop() {

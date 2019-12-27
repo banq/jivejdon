@@ -148,7 +148,7 @@
 			<!--  tomcat context.xml  config javaMail -->			
 			<constructor value="java:comp/env/mail/Session" />			
 			<constructor value="admin" />
-			<constructor value="banq@163.com" />
+			<constructor value="13801923488@139.com" />
 		</component>
 		
 		
@@ -156,7 +156,7 @@
 			class="com.jdon.jivejdon.spi.component.email.SubscriptionEmailParams">
 			<!--  tomcat context.xml  config javaMail -->			
 			<constructor value="java:comp/env/mail/Session" />			
-			<constructor value="jdonmon@163.com" />
+			<constructor value="banq@163.com" />
 		</component>
 
 		<component name="emailHelper"
