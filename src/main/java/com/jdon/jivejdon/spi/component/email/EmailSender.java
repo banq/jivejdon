@@ -49,7 +49,7 @@ public class EmailSender implements Startable {
 	public void send(EmailVO emailVO) {
 		try {
 			Message message = createMessage(emailVO);
-			System.err.println("sending email2 : " + message.getAllRecipients());
+			System.err.println("sending email2 : " + message.getSubject());
 			if (message != null)
 				Transport.send(message);
 		} catch (Exception e) {
