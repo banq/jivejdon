@@ -87,9 +87,15 @@ public class ForumAbstractFactory implements ForumFactory {
 			logger.error("repeat no forumId=" + messageId);
 			return null;
 		}
-		ForumMessage forumMessage =  messageDirectorIF.getMessage(messageId);
-		if (forumMessage == null)
-			nullthreads.put(messageId, "null");
+		ForumMessage forumMessage = null;
+		try{
+		    forumMessage =  messageDirectorIF.getMessage(messageId);
+		} catch (Exception e) {
+			logger.error("messageId="+ messageId + " is null");
+		}finally {
+			if (forumMessage == null)
+				nullthreads.put(messageId, "null");
+		}
 		return forumMessage;
 	}
 
@@ -109,7 +115,7 @@ public class ForumAbstractFactory implements ForumFactory {
 		try {
 			forumThread = threadDirectorIF.getThread(threadId);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("threadId="+ threadId + " is null");
 		}finally {
 			if (forumThread == null)
 				nullthreads.put(threadId, "null");

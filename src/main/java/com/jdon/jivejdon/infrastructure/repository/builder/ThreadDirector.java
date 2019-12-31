@@ -91,7 +91,7 @@ public class ThreadDirector implements ThreadDirectorIF {
 		ForumThread forumThread = messageDao.getThreadCore(threadId , rootMessage);
 		if (forumThread == null) {
 			logger.error("no threadId=" + threadId);
-			throw new Exception("no this forumThread");
+			return null;
 		}
 		Forum forum = forumDirector.getForum(forumThread.getForum().getForumId());
 		if (rootMessage == null) {
