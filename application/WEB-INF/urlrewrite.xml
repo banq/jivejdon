@@ -105,7 +105,7 @@
 
     <rule>
         <from>^/approval/([0-9]+)$</from>
-        <to>/query/approvedListOther.shtml?start=$1&amp;count=8</to>
+        <to>/query/approvedListOther.shtml?start=$1&amp;count=15</to>
     </rule>
 
     <rule>
