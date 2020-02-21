@@ -90,22 +90,22 @@
     </rule>
     <rule>
         <from>^/threads$</from>
-        <to>/forum/threadList.shtml</to>
+        <to>/forum/threadList.shtml?count=15</to>
     </rule>
 
     <rule>
         <from>^/threads/([0-9]+)$</from>
-        <to>/forum/threadList.shtml?start=$1&amp;count=50</to>
+        <to>/forum/threadList.shtml?start=$1&amp;count=15</to>
     </rule>
 
     <rule>
         <from>^/approval$</from>
-        <to>/query/approvedListOther.shtml?start=0&amp;count=15</to>
+        <to>/query/approvedListOther.shtml?start=0&amp;count=8</to>
     </rule>
 
     <rule>
         <from>^/approval/([0-9]+)$</from>
-        <to>/query/approvedListOther.shtml?start=$1&amp;count=15</to>
+        <to>/query/approvedListOther.shtml?start=$1&amp;count=8</to>
     </rule>
 
     <rule>
@@ -182,7 +182,7 @@
     </rule>
     <rule>
         <from>^/tags/p$</from>
-        <to>/query/tagsList.shtml?count=15</to>
+        <to>/query/tagsList.shtml?count=8</to>
     </rule>
     <rule>
         <from>^/tags/p/([0-9]+)$</from>
@@ -190,11 +190,11 @@
     </rule>
     <rule>
         <from>^/tags/([0-9]+)$</from>
-        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=15</to>
+        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=8</to>
     </rule>
     <rule>
         <from>^/tags/([0-9]+)/([0-9]+)$</from>
-        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=15&amp;start=$2</to>
+        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=8&amp;start=$2</to>
     </rule>
 
     <rule>
