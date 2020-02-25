@@ -4,6 +4,11 @@ Jivejdon
 Jivejdon is a full DDD application with Event Soucing/CQRS and clean architecture/Hexagonalarchitecture,  powered by [jdonframework](https://github.com/banq/jdonframework) ,running  for over ten years
 in: [https://www.jdon.com/forum](https://www.jdon.com/forum)
 
+Domain centric Architecture
+==============================
+Domain centric architecture is a new way to design the morden world entreprise applications.
+![avatar](https://www.jdon.com/simgs/forum/db-ddd.png)
+
 Use Case
 ==============================
 ![avatar](./doc/usecase.png)
