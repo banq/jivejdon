@@ -7,7 +7,8 @@ in: [https://www.jdon.com/forum](https://www.jdon.com/forum)
 Domain centric Architecture
 ==============================
 Domain centric architecture is a new way to design the morden world entreprise applications.
-![avatar](https://www.jdon.com/simgs/forum/db-ddd.png)
+
+![avatar](./doc/db-ddd.png)
 
 Use Case
 ==============================
