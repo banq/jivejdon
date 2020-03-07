@@ -41,16 +41,7 @@ pageContext.setAttribute("title", titleStr);
        <div class="linkblock">
          <div class="row">
           <div class="col-sm-12">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="fluid"
-     data-ad-layout-key="-ef+6k-30-ac+ty"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="4250528285"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+
           </div>
          </div>
        </div>
@@ -86,15 +77,7 @@ pageContext.setAttribute("title", titleStr);
         <div class="widget wid-post">
           <div class="content">
               <div class="post wrap-vid">
-             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 页上左336 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:336px;height:280px"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="6751585519"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+
             </div>
           </div>
         </div>

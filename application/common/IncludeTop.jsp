@@ -21,12 +21,6 @@
         <script src="https://cdn.jdon.com/js/respond.min.js"></script>
     <![endif]-->
 	<script data-ad-client="ca-pub-7573657117119544" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-7573657117119544",
-          enable_page_level_ads: true
-     });
-</script>
 </head>
 <body>
 <%@ include file="../account/loginAJAX.jsp" %>

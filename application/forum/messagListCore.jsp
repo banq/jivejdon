@@ -77,17 +77,6 @@
         </div>
         <div class="box-content">
           <div class="row">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 关键词推广 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="6351391093"
-     data-ad-format="link"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
           </div>
         </div>
       </div>
@@ -124,15 +113,7 @@
       <div class="widget wid-post">
         <div class="content">
           <div class="post wrap-vid">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- 页上左336 -->
-            <ins class="adsbygoogle"
-                 style="display:inline-block;width:336px;height:280px"
-                 data-ad-client="ca-pub-7573657117119544"
-                 data-ad-slot="6751585519"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+
           </div>
         </div>
       </div>
