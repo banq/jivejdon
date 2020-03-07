@@ -32,13 +32,7 @@
         <script src="https://cdn.jdon.com/js/html5shiv.min.js"></script>
         <script src="https://cdn.jdon.com/js/respond.min.js"></script>
     <![endif]-->
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <script>
-     (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-7573657117119544",
-          enable_page_level_ads: true
-     });
-  </script>
+	<script data-ad-client="ca-pub-7573657117119544" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 <body>
 <%@ include file="./common/body_header.jsp" %>
@@ -57,16 +51,7 @@
   <div class="linkblock">
     <div class="row">
         <div class="col-sm-12">
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="fluid"
-     data-ad-layout-key="-ef+6k-30-ac+ty"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="4250528285"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+
         </div>
     </div>
   </div>
@@ -104,15 +89,7 @@
 				<div class="widget wid-post">
 					<div class="content">
 					    <div class="post wrap-vid">
-							<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 页上左336 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:336px;height:280px"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="6751585519"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+							
 						</div>
 					</div>
 				</div>
@@ -157,15 +134,7 @@
 					<!-- Start Widget urlList -->
 				<div class="widget">
 					    <div class="wid-vid">
-								   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 推荐贴右侧300x600 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:300px;height:600px"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="3352261515"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+								 
 							</div>
 				</div>
 			

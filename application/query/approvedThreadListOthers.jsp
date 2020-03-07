@@ -103,24 +103,7 @@ function viewcount(threadId, sId)
         <!---- Start Widget ---->
         <div class="widget">
               <div class="wid-vid">
-         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="autorelaxed"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="7669317912"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-		 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 推荐贴右侧300x600 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:300px;height:600px"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="3352261515"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+
               </div>
         </div>
     

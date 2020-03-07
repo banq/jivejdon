@@ -20,7 +20,7 @@
         <script src="https://cdn.jdon.com/js/html5shiv.min.js></script>
         <script src="https://cdn.jdon.com/js/respond.min.js"></script>
     <![endif]-->
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script data-ad-client="ca-pub-7573657117119544" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({
           google_ad_client: "ca-pub-7573657117119544",
