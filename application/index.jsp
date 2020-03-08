@@ -85,14 +85,7 @@
                       <jsp:include page="/query/tagHotList.shtml" flush="true"></jsp:include>  
                     </div>     
                 </div>
-				<!---- Start Widget ---->
-				<div class="widget wid-post">
-					<div class="content">
-					    <div class="post wrap-vid">
-							
-						</div>
-					</div>
-				</div>
+
 				<!---- Start Widget digList---->
 				<div class="widget">
 					    <div class="wid-vid">
