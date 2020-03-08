@@ -109,24 +109,29 @@
           </ul>
         </div>
       </div>
-      <!-- Start Widget -->
-      <div class="widget wid-post">
-        <div class="content">
-          <div class="post wrap-vid">
-
-          </div>
+      <!---- Start Widget digList---->
+      <div class="widget">
+        <div class="wid-vid">
+          <ul>
+            <div id="digList"></div>
+          </ul>
         </div>
       </div>
-     <!-- Start Widget -->
+      <!-- Start Widget urlList -->
       <div class="widget">
         <div class="wid-vid">
-
+          <ul>
+            <div id="threadNewList"></div>
+          </ul>
         </div>
-      </div>    
-      <!-- Start Widget -->
+      </div>
+
+      <!-- Start Widget poplist -->
       <div class="widget">
         <div class="wid-vid">
-
+          <ul>
+            <div id="poplist"></div>
+          </ul>
         </div>
       </div>
       <!-- Start Widget -->
@@ -156,6 +161,15 @@
   <script src="https://cdn.jdon.com/common/messageList6.js"></script>
   <script>
               approveList();
+              load('https://cdn.jdon.com/query/threadDigList', function (xhr) {
+                  document.getElementById("digList").innerHTML = xhr.responseText;
+              });
+              load('https://cdn.jdon.com/query/threadNewList', function (xhr) {
+                  document.getElementById("threadNewList").innerHTML = xhr.responseText;
+              });
+              load('https://cdn.jdon.com/query/popularList', function (xhr) {
+                  document.getElementById("poplist").innerHTML = xhr.responseText;
+              });
               window.onload = function () {
                   <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">
                   tagthreads(10, 160, 10, <bean:write name="threadTag" property="tagID"/>);
