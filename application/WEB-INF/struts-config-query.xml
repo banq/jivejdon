@@ -202,28 +202,10 @@
             <forward name="success" path="/query/approvedThreadListOthers.jsp"/>
         </action>
 
-
-        <!-- reference in messageList.jsp  /query/threadApprovedTagsList.shtml?start=0&count=15'           -->
         <action path="/query/threadApprovedTagsList"
-                type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction"
-                name="threadListForm" scope="request"
-                validate="false">
-            <forward name="success" path="/query/threadApprovedTagsList2.shtml"/>
-        </action>
-
-        <action path="/query/threadApprovedTagsList2"
                 type="com.jdon.jivejdon.presentation.action.query.ApprovedAction"
                 name="threadListForm" scope="request"
                 validate="false">
-            <forward name="success" path="/query/approvedThreadListTags.jsp"/>
-            <!--
-            <forward name="success" path="/query/threadApprovedTagsList3.shtml"/>
-             -->
-        </action>
-
-        <action path="/query/threadApprovedTagsList3"
-                type="com.jdon.jivejdon.presentation.action.query.TagsListAction"
-                name="tagsListForm" scope="request" validate="false">
             <forward name="success" path="/query/approvedThreadListTags.jsp"/>
         </action>
 
@@ -290,14 +272,6 @@
                 name="threadListForm" scope="request"
                 validate="false">
             <forward name="success" path="/query/others/newlist.jsp"/>
-        </action>
-
-
-        <action path="/query/messageNewList"
-                type="com.jdon.jivejdon.presentation.action.MessageListAllAction"
-                name="messageListForm" scope="request"
-                validate="false">
-            <forward name="success" path="/query/others/newlistmsg.jsp"/>
         </action>
 
         <action path="/query/urlListAction"

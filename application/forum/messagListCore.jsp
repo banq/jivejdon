@@ -160,21 +160,27 @@
   <%@ include file="../account/loginAJAX.jsp" %>
   <script src="https://cdn.jdon.com/common/messageList6.js"></script>
   <script>
-              approveList();
-              load('https://cdn.jdon.com/query/threadDigList', function (xhr) {
-                  document.getElementById("digList").innerHTML = xhr.responseText;
-              });
-              load('https://cdn.jdon.com/query/threadNewList', function (xhr) {
-                  document.getElementById("threadNewList").innerHTML = xhr.responseText;
-              });
-              load('https://cdn.jdon.com/query/popularList', function (xhr) {
-                  document.getElementById("poplist").innerHTML = xhr.responseText;
-              });
-              window.onload = function () {
-                  <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">
-                  tagthreads(10, 160, 10, <bean:write name="threadTag" property="tagID"/>);
-                  </logic:iterate>
-              }
+      load('https://cdn.jdon.com/query/threadDigList', function (xhr) {
+          document.getElementById("digList").innerHTML = xhr.responseText;
+      });
+      load('https://cdn.jdon.com/query/threadNewList', function (xhr) {
+          document.getElementById("threadNewList").innerHTML = xhr.responseText;
+      });
+      load('https://cdn.jdon.com/query/popularList', function (xhr) {
+          document.getElementById("poplist").innerHTML = xhr.responseText;
+      });
+      window.onload = function () {
+          <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">
+             <logic:equal name="tagsi" value="0">
+                load('https://cdn.jdon.com/query/approved/<bean:write name="threadTag" property="tagID"/>', function (xhr) {
+                    document.getElementById('approved').innerHTML = xhr.responseText;
+                 });
+             </logic:equal>
+             <logic:notEqual name="tagsi" value="0">
+               tagthreads(10, 160, 10, <bean:write name="threadTag" property="tagID"/>);
+             </logic:notEqual>
+       </logic:iterate>
+      }
   </script>
 
   <%@include file="footer.jsp" %>
