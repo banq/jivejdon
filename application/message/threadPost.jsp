@@ -23,23 +23,23 @@
   <div class="row">
     <div class="col-md-3">
       <div class="form-group">
-        <input class="form-control" type="text" name="tagTitle" size="15" maxlength="25" id="searchV_0" onfocus="javascript:loadAcJS(this.id)" value=''/>
+        <input class="form-control" type="text" name="tagTitle" size="15" maxlength="25" id="searchV_0"  value=''/>
       </div>
     </div>
     <div class="col-md-3">
       <div class="form-group">
-        <input class="form-control" type="text" name="tagTitle" size="15" maxlength="25" id="searchV_1" onfocus="javascript:loadAcJS(this.id)" value=''/>
+        <input class="form-control" type="text" name="tagTitle" size="15" maxlength="25" id="searchV_1"  value=''/>
       </div>
     </div>
     <div class="col-md-3">
       <div class="form-group">
-        <input class="form-control" type="text" name="tagTitle" size="15" maxlength="25" id="searchV_2" onfocus="javascript:loadAcJS(this.id)" value=''/>
+        <input class="form-control" type="text" name="tagTitle" size="15" maxlength="25" id="searchV_2"  value=''/>
       </div>
     </div>
     <div class="col-md-3">
       <div class="form-group">
 
-        <input class="form-control" type="text" name="tagTitle" size="15" maxlength="25" id="searchV_3" onfocus="javascript:loadAcJS(this.id)" value=''/>
+        <input class="form-control" type="text" name="tagTitle" size="15" maxlength="25" id="searchV_3"  value=''/>
         <logic:notEmpty name="messageForm" property="forumThread.tags">
           <logic:iterate id="threadTag" name="messageForm" property="forumThread.tags" indexId="i">
             <script>
@@ -58,15 +58,28 @@
   <link rel="stylesheet" href="/common/autocomplete/jquery-ui.css" type="text/css">
   <script src="/common/autocomplete/jquery-ui.js"></script>
   <script>
-      function loadAcJS(thisId) {
-          $("#" + thisId).autocomplete({
+      $( function() {
+          $( "#searchV_0" ).autocomplete({
               source: "/message/tags.shtml?method=tags",
               minLength: 1,
-              autoFocus: false,
-              delay: 500
+          });
+          $( "#searchV_1" ).autocomplete({
+              source: "/message/tags.shtml?method=tags",
+              minLength: 1,
+          });
+          $( "#searchV_2" ).autocomplete({
+              source: "/message/tags.shtml?method=tags",
+              minLength: 1,
+          });
+          $( "#searchV_3" ).autocomplete({
+              source: "/message/tags.shtml?method=tags",
+              minLength: 1,
           });
 
-      }
+
+
+      } );
+
   </script>
 
   <div class="row">
