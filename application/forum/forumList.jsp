@@ -91,7 +91,7 @@
 					    <div class="wid-vid">
 						   <ul>
 								 <div>
-                  <jsp:include page="/query/threadNewList2.shtml?count=20" flush="true"></jsp:include>
+                  <jsp:include page="/query/threadNewList.shtml?count=20" flush="true"></jsp:include>
                  </div>    
 							</ul>
 							</div>
