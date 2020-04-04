@@ -61,7 +61,6 @@
       $( function() {
           $( "#searchV_0" ).autocomplete({
               source: "/message/tags.shtml?method=tags",
-              minLength: 1,
           });
           $( "#searchV_1" ).autocomplete({
               source: "/message/tags.shtml?method=tags",
