@@ -61,22 +61,22 @@
       $( function() {
           $( "#searchV_0" ).autocomplete({
               source: "/message/tags.shtml?method=tags",
-              minLength: 3,
+              minLength: 2,
               delay: 1500
           });
           $( "#searchV_1" ).autocomplete({
               source: "/message/tags.shtml?method=tags",
-              minLength: 3,
+              minLength: 2,
               delay: 1500
           });
           $( "#searchV_2" ).autocomplete({
               source: "/message/tags.shtml?method=tags",
-              minLength: 3,
+              minLength: 2,
               delay: 1500
           });
           $( "#searchV_3" ).autocomplete({
               source: "/message/tags.shtml?method=tags",
-              minLength: 3,
+              minLength: 2,
               delay: 1500
           });
 
