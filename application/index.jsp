@@ -16,7 +16,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>解道jdon - 软件架构解决之道</title>
-  <meta name="Description" content="分布式架构、领域驱动设计、模式框架等软件体系结构与解决方案的布道与赋能"/>
+  <meta name="Description" content="分布式架构、领域驱动设计、模式框架等软件体系结构与解决方案的布道赋能"/>
   <meta name="Keywords" content="微服务,SOA,Java,DDD,体系结构,架构,解决方案,Java框架,大数据,云原生,面向对象,函数编程,SpringBoot,EDA,java,web,JavaEE,DDD,CQRS,Event,javascript,Spring,node.js,编程语言,ERP,CRM" />
 	<meta name="domain_verify" content="pmrgi33nmfuw4ir2ejvgi33ofzrw63jcfqrgo5ljmqrduirtmu2wczlcgvrtomzyha2dcylfhfqtmntemmydezbvme4gmmrugarcyitunfwwku3bozsseorrgq2dmmjrgu4teobrgqzh2">
   <meta http-equiv="refresh" content="3600">
