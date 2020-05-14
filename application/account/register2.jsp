@@ -44,7 +44,7 @@ com.jdon.jivejdon.spi.component.block.ErrorBlockerIF"%>
 
 <html:errors/>
 <p><h3 align="center">新用户注册准备阶段，请点击验证按钮验证</h3>
-<div align="center"><form action="/account/NewAccountForm.jsp" method="POST">
+<div align="center"><form action="/account/NewAccountForm2.jsp" method="POST">
     <input type="hidden" name="action" value="create"/>
     <div class="row">
         <div class="col-md-12">
