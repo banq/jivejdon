@@ -15,6 +15,7 @@ com.jdon.jivejdon.spi.component.block.ErrorBlockerIF"%>
     Integer limit = (Integer)request.getSession().getServletContext().getAttribute("limit");
     if (limit != null){
         if (limit <= 0){
+            System.err.println("new user over limited...");
             return;
         }
     }
