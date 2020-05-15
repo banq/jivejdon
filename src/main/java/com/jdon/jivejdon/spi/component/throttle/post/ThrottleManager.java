@@ -16,17 +16,16 @@
  */
 package com.jdon.jivejdon.spi.component.throttle.post;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jdon.cache.UtilCache;
 import com.jdon.container.pico.Startable;
 import com.jdon.jivejdon.spi.component.block.IPBanListManagerIF;
 import com.jdon.jivejdon.spi.component.throttle.ClientInfo;
 import com.jdon.jivejdon.util.ExpiringCacheEntry;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * * From Apache Roller org.apache.roller.util.GenericThrottle
@@ -66,6 +65,19 @@ public class ThrottleManager implements Startable {
 
 		return true;
 	}
+
+	public boolean checkValidateByCustomerId(String cliendId, String ip, String category) {
+		if (!checkValidate(ip, category))
+			return false;
+
+		if (processHit(cliendId, category)) {
+			log.error("post checkValidateByCustomerId: " + cliendId + " threshold=" + limit.get(category).getInterval());
+			return false;
+		}
+
+		return true;
+	}
+
 
 	public void blockIP(String ip) {
 		iPBanListManager.addBannedIp(ip);

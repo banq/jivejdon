@@ -19,21 +19,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class NewUserThrottleConf {
-	private final static Logger log = LogManager.getLogger(ThrottleConf.class);
+	private final static Logger log = LogManager.getLogger(VIPUserThrottleConf.class);
 
 	// threshold and interval to determine who is abusive
 	private int threshold = 2;
 
 	private int interval = 60000; // milliseconds
 
-	private int newUserThreshold = 3600; // 1 day 1x24x60x60 seconds
-
 	private int timeLimitS;
 
 	private int timeLimitE;
 
 	// see component.xml config.parameter
-	public NewUserThrottleConf(String threshold, String interval, String newUserThresholds, String timeLimitS, String timeLimitE) {
+	public NewUserThrottleConf(String threshold, String interval, String timeLimitS, String timeLimitE) {
 		// threshold can't be negative, that would mean everyone is abusive
 		int thresh = 2;
 		try {
@@ -57,8 +55,6 @@ public class NewUserThrottleConf {
 			// milliseconds
 		}
 
-		newUserThreshold = Integer.parseInt(newUserThresholds);
-
 		this.timeLimitS = Integer.parseInt(timeLimitS);
 		this.timeLimitE = Integer.parseInt(timeLimitE);
 
@@ -80,13 +76,6 @@ public class NewUserThrottleConf {
 		this.threshold = threshold;
 	}
 
-	public int getNewUserThreshold() {
-		return newUserThreshold;
-	}
-
-	public void setNewUserThreshold(int newUserThreshold) {
-		this.newUserThreshold = newUserThreshold;
-	}
 
 	public int getTimeLimitS() {
 		return timeLimitS;

@@ -15,56 +15,48 @@
  */
 package com.jdon.jivejdon.spi.component.throttle.post;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import com.jdon.annotation.Component;
 import com.jdon.jivejdon.domain.model.account.Account;
+
+import java.util.Calendar;
+import java.util.Date;
 
 @Component
 public class Throttler {
 
 	protected final ThrottleManager throttleManager;
-	private final ThrottleConf throttleConf;
+	private final VIPUserThrottleConf vipUserThrottleConf;
 	private final NewUserThrottleConf newUserThrottleConf;
 
-	public Throttler(ThrottleManager throttleManager, ThrottleConf throttleConf, NewUserThrottleConf newUserThrottleConf) {
+	public Throttler(ThrottleManager throttleManager, VIPUserThrottleConf vipUserThrottleConf, NewUserThrottleConf newUserThrottleConf) {
 		super();
 		this.throttleManager = throttleManager;
-		this.throttleConf = throttleConf;
+		this.vipUserThrottleConf = vipUserThrottleConf;
 		this.newUserThrottleConf = newUserThrottleConf;
 
 	}
 
-	public boolean checkValidate(Account account) {
-		if (!throttleManager.contain("checkValidate")) {
-			ThresholdLimit thresholdLimit = new ThresholdLimit(throttleConf.getThreshold(), throttleConf.getInterval());
-			throttleManager.setCategoryParams("checkValidate", thresholdLimit);
+	public boolean checkVIPValidate(Account account) {
+		if (!throttleManager.contain("checkVIPValidate")) {
+			ThresholdLimit thresholdLimit = new ThresholdLimit(vipUserThrottleConf.getThreshold(), vipUserThrottleConf.getInterval());
+			throttleManager.setCategoryParams("checkVIPValidate", thresholdLimit);
 		}
-		return throttleManager.checkValidate(account.getPostIP(), "checkValidate");
+		return throttleManager.checkValidateByCustomerId(account.getUserId(), account.getPostIP(), "checkVIPValidate");
 
 	}
 
-	public boolean checkPostValidate(Account account) {
-		Date nowD = new Date();
-		long diffs = (nowD.getTime() - account.getCreationDate2().getTime()) / 1000;
-		if (diffs < newUserThrottleConf.getNewUserThreshold() || account.getMessageCount() <= 0) {
-			if (timeLimit())
-				return false;
-
-			if (!throttleManager.contain("checkPostValidate")) {
-				ThresholdLimit thresholdLimit = new ThresholdLimit(newUserThrottleConf.getThreshold(), newUserThrottleConf.getInterval());
-				throttleManager.setCategoryParams("checkPostValidate", thresholdLimit);
-			}
-			return throttleManager.checkValidate(account.getPostIP(), "checkPostValidate");
-		} else {
-			return checkValidate(account);
+	public boolean checkNewUserPostValidate(Account account) {
+		if (timeLimit())// closed at evening
+			return false;
+		if (!throttleManager.contain("checkNewUserPostValidate")) {
+			ThresholdLimit thresholdLimit = new ThresholdLimit(newUserThrottleConf.getThreshold(), newUserThrottleConf.getInterval());
+			throttleManager.setCategoryParams("checkNewUserPostValidate", thresholdLimit);
 		}
-
+		return throttleManager.checkValidateByCustomerId(account.getUserId(), account.getPostIP(), "checkNewUserPostValidate");
 	}
 
 	private boolean timeLimit() {
-		// evening shut up
+		// at evening  we closed
 		Calendar startingCalendar = Calendar.getInstance();
 		startingCalendar.setTime(new Date());
 		if (startingCalendar.get(Calendar.HOUR_OF_DAY) < newUserThrottleConf.getTimeLimitS()
@@ -78,4 +70,7 @@ public class Throttler {
 		return throttleManager.isAbusive(ip);
 	}
 
+	public VIPUserThrottleConf getVipUserThrottleConf() {
+		return vipUserThrottleConf;
+	}
 }

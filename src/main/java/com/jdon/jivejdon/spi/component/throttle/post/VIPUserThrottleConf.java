@@ -18,8 +18,11 @@ package com.jdon.jivejdon.spi.component.throttle.post;
 
 import org.apache.logging.log4j.*;
 
-public class ThrottleConf {
-	private final static Logger log = LogManager.getLogger(ThrottleConf.class);
+public class VIPUserThrottleConf {
+	private final static Logger log = LogManager.getLogger(VIPUserThrottleConf.class);
+
+	//exceed this meesgae count, will be vip user.
+	private int vipmessagecount = 10;
 
 	// threshold and interval to determine who is abusive
 	private int threshold = 25;
@@ -27,7 +30,13 @@ public class ThrottleConf {
 	private int interval = 60000; // milliseconds
 
 	// see component.xml config.parameter
-	public ThrottleConf(String threshold, String interval) {
+	public VIPUserThrottleConf(String vipmessagecounts, String threshold, String interval) {
+		try {
+			vipmessagecount = Integer.parseInt(vipmessagecounts);
+		} catch (Exception e) {
+			log.warn("bad input for config property comment.throttle.threshold");
+		}
+
 		// threshold can't be negative, that would mean everyone is abusive
 		int thresh = 25;
 		try {
@@ -69,4 +78,11 @@ public class ThrottleConf {
 		this.threshold = threshold;
 	}
 
+	public int getVipmessagecount() {
+		return vipmessagecount;
+	}
+
+	public void setVipmessagecount(int vipmessagecount) {
+		this.vipmessagecount = vipmessagecount;
+	}
 }

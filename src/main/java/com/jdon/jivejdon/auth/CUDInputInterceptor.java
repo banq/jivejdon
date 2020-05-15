@@ -129,8 +129,12 @@ public class CUDInputInterceptor implements MethodInterceptor {
 
 		//	if (methodNameNow.contains("create")) {
 		if (methodNameNow.contains("createTopic") || methodNameNow.contains("createReply")) {
-			if (account.getMessageCount() > 2000)
-				isAllowed = throttler.checkPostValidate(account);
+			if (account.getMessageCount() > throttler.getVipUserThrottleConf().getVipmessagecount())
+				isAllowed = throttler.checkVIPValidate(account);
+			else if(account.getMessageCount() <= throttler.getVipUserThrottleConf().getVipmessagecount() && methodNameNow.contains("createTopic") )
+				isAllowed = false;
+			else
+				isAllowed = throttler.checkNewUserPostValidate(account);
 		} else
 			isAllowed = !throttler.isAbusive(account.getPostIP());
 		return isAllowed;

@@ -3,7 +3,15 @@
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ taglib uri="/WEB-INF/MultiPages.tld" prefix="MultiPages" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-
+<%
+    Integer limit = (Integer)request.getSession().getServletContext().getAttribute("limit");
+    if (limit != null){
+        if (limit > 0)
+            limit = limit -1;
+    }else
+        limit = 10;
+    request.getSession().getServletContext().setAttribute("limit",limit);
+%>
 
 <bean:define id="title"  value=" 注册资料成功" />
 <%@ include file="../common/IncludeTop.jsp" %>

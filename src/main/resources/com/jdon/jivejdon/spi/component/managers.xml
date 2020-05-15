@@ -78,20 +78,19 @@
 		<component name="throttleManager"
 			class="com.jdon.jivejdon.spi.component.throttle.post.ThrottleManager" />
 			
-		<component name="throttleConf"
-			class="com.jdon.jivejdon.spi.component.throttle.post.ThrottleConf">
-			<constructor value="6" />       <!-- operator C(R)UD limit for post.ThrottleManager-->
-			<constructor value="10" />    	<!-- second -->
+		<component name="vipUserThrottleConf"
+			class="com.jdon.jivejdon.spi.component.throttle.post.VIPUserThrottleConf">
+			<constructor value="10" />    	<!-- vip message count -->
+			<constructor value="3" />       <!-- operator CUD limit for VIP user-->
+			<constructor value="3600" />    	<!-- limit time /second -->
 		</component>
 		
 		<component name="newUserThrottleConf"
 			class="com.jdon.jivejdon.spi.component.throttle.post.NewUserThrottleConf">
-            <constructor value="2"/>       <!-- register limit for post.ThrottleManager-->
-            <constructor value="60"/>        <!-- second -->
-            <constructor value="60"/>     <!-- second who that register time is leass than 1 day
-			is a new User -->
-            <constructor value="1"/>   <!--  time  limit start hour -->
-            <constructor value="2"/>    <!--  time  limit end  hour -->
+            <constructor value="1"/>       <!-- register limit for post.ThrottleManager-->
+            <constructor value="86400"/>        <!-- second 86400=one day -->
+            <constructor value="9"/>   <!--  time  limit start hour -->
+            <constructor value="17"/>    <!--  time  limit end  hour -->
 		</component>
 		
 		<component name="hitConf"
