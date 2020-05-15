@@ -12,12 +12,19 @@
     if (errorBlocker.checkRate(request.getRemoteAddr(), 3)){
         return;
     }
+    Integer limit = (Integer)request.getSession().getServletContext().getAttribute("limit");
+    if (limit != null){
+        if (limit <= 0){
+            return;
+        }
+    }
     String randstr = (String)request.getParameter("randstr");
     if(randstr == null) return;
     if (!SkinUtils.verifyQQRegisterCode((String)request.getParameter("registerCode"), randstr,request.getRemoteAddr())) {
         return;
     }
     request.getSession().setAttribute("randstr", randstr);
+
 
 
 %>

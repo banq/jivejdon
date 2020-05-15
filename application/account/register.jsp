@@ -3,7 +3,7 @@
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-
+<%@page import="java.util.*"%>
 <%@page import="com.jdon.controller.WebAppUtil,
 com.jdon.jivejdon.spi.component.block.ErrorBlockerIF"%>
 <%
@@ -15,13 +15,20 @@ com.jdon.jivejdon.spi.component.block.ErrorBlockerIF"%>
     Integer limit = (Integer)request.getSession().getServletContext().getAttribute("limit");
     if (limit != null){
         if (limit <= 0){
+            out.println("<p><br> 为防止垃圾广告，新用户注册额度用完，下周再来。<br>可用新浪微博账号登入。");
             System.err.println("new user over limited...");
             return;
         }
     }
 
-%>
+    Calendar startingCalendar = Calendar.getInstance();
+    startingCalendar.setTime(new Date());
+    if (startingCalendar.get(Calendar.HOUR_OF_DAY) < 10 || startingCalendar.get(Calendar.HOUR_OF_DAY) > 16) {
+        out.println("<p><br> 为防止垃圾广告，本段时间关闭注册，工作时间内正常开放。<br>这期间可用微博账号登入。");
+        return;
+    }
 
+%>
 
 <bean:parameter name="subject" id="subject" value=""/>
 <bean:parameter name="body" id="body" value=""/>
