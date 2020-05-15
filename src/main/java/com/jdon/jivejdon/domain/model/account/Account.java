@@ -2,6 +2,7 @@ package com.jdon.jivejdon.domain.model.account;
 
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
+import com.jdon.jivejdon.spi.component.throttle.post.Throttler;
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 import com.jdon.jivejdon.domain.model.attachment.UploadFile;
@@ -56,6 +57,8 @@ public class Account {
 	private boolean anonymous;
 
 	private Attachment attachment;
+
+	private boolean masked;
 
 	private RoleLoader roleLoader;
 
@@ -348,6 +351,40 @@ public class Account {
 			return true;
 		else
 			return false;
+	}
+
+	public boolean isMasked() {
+		return masked;
+	}
+
+	public void setMasked(boolean masked) {
+		this.masked = masked;
+	}
+
+    /**
+     * post rule is business rule, refactoring from CUDInputInterceptor to here.
+     * called by CUDInputInterceptor.
+     * @param methodNameNow
+     * @param throttler
+     * @return
+     */
+	public boolean postIsAllowed(String methodNameNow,Throttler throttler) {
+		boolean isAllowed = false;
+		if (isMasked()) {
+			throttler.blockIP(getPostIP());
+			return isAllowed;
+		}
+		//	if (methodNameNow.contains("create")) {
+		if (methodNameNow.contains("createTopic") || methodNameNow.contains("createReply")) {
+			if (getMessageCount() > throttler.getVipUserThrottleConf().getVipmessagecount())
+				isAllowed = throttler.checkVIPValidate(this);
+			else if(getMessageCount() <= throttler.getVipUserThrottleConf().getVipmessagecount() && methodNameNow.contains("createTopic") )
+				isAllowed = false;
+			else
+				isAllowed = throttler.checkNewUserPostValidate(this);
+		} else
+			isAllowed = !throttler.isAbusive(getPostIP());
+		return isAllowed;
 	}
 
 }

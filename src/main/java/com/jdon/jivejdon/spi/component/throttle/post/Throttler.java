@@ -70,6 +70,10 @@ public class Throttler {
 		return throttleManager.isAbusive(ip);
 	}
 
+	public void blockIP(String ip) {
+		throttleManager.blockIP(ip);
+	}
+
 	public VIPUserThrottleConf getVipUserThrottleConf() {
 		return vipUserThrottleConf;
 	}

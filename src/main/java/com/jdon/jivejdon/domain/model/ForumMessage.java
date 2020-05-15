@@ -216,9 +216,14 @@ public class ForumMessage implements Cloneable {
         }
     }
 
-
+    public boolean isMasked() {
+        boolean isMasked = this.getMessagePropertysVO().isMasked();
+        this.getAccount().setMasked(isMasked);
+        return isMasked;
+    }
 
     public void updateMasked(boolean masked) {
+        this.getAccount().setMasked(masked);
         this.getMessagePropertysVO().updateMasked(masked);
         eventSourcing.saveMessageProperties(new MessagePropertiesRevisedEvent(this.messageId,
                 getMessagePropertysVO().getPropertys()));
@@ -232,14 +237,6 @@ public class ForumMessage implements Cloneable {
 
     private void setAttachment(AttachmentsVO attachmentsVO) {
         this.attachmentsVO = attachmentsVO;
-    }
-
-    public boolean isMasked() {
-        return this.getMessagePropertysVO().isMasked();
-    }
-
-    private void setMasked(boolean masked) {
-        getMessagePropertysVO().setMasked(masked);
     }
 
     public String getCreationDate() {
