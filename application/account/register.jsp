@@ -56,6 +56,10 @@ com.jdon.jivejdon.spi.component.block.ErrorBlockerIF"%>
     <div class="row">
         <div class="col-md-12">
             <div class="box">
+                为防止垃圾广告，新用户注册实现有条件限制。<br>
+                如果注册过程无法正常进行，请使用微博账号直接登录。
+            </div>
+            <div class="box">
                 <div>第一步：
                     <!--点击此元素会自动激活验证码-->
                     <!--id : 元素的id(必须)-->
