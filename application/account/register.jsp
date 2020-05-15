@@ -15,7 +15,7 @@ com.jdon.jivejdon.spi.component.block.ErrorBlockerIF"%>
     Integer limit = (Integer)request.getSession().getServletContext().getAttribute("limit");
     if (limit != null){
         if (limit <= 0){
-            out.println("<p><br> 为防止垃圾广告，新用户注册额度用完，下周再来。<br>可用新浪微博账号登入。");
+            out.println("<p><br> 为防止垃圾广告，新用户注册额度用完，下周再来。<br>可用<a href='/account/oauth/sinaCallAction.shtml'>微博账号登入</a>。");
             System.err.println("new user over limited...");
             return;
         }
@@ -24,7 +24,7 @@ com.jdon.jivejdon.spi.component.block.ErrorBlockerIF"%>
     Calendar startingCalendar = Calendar.getInstance();
     startingCalendar.setTime(new Date());
     if (startingCalendar.get(Calendar.HOUR_OF_DAY) < 10 || startingCalendar.get(Calendar.HOUR_OF_DAY) > 16) {
-        out.println("<p><br> 为防止垃圾广告，本段时间关闭注册，工作时间内正常开放。<br>这期间可用微博账号登入。");
+        out.println("<p><br> 为防止垃圾广告，本段时间关闭注册，工作时间内正常开放。<br>期间可用<a href='/account/oauth/sinaCallAction.shtml'>微博账号登入</a>。");
         return;
     }
 
