@@ -44,7 +44,7 @@ public class ForumAbstractFactory implements ForumFactory {
 
 	private final SequenceDao sequenceDao;
 
-	private final Map<Long,String> nullthreads ;
+	private final Map<Long,Integer> nullthreads ;
 
 	// define in component.xml
 
@@ -83,18 +83,11 @@ public class ForumAbstractFactory implements ForumFactory {
 		if (messageId == null){
 			return null;
 		}
-		if (nullthreads.containsKey(messageId)){
-			logger.error("repeat no forumId=" + messageId);
-			return null;
-		}
 		ForumMessage forumMessage = null;
 		try{
 		    forumMessage =  messageDirectorIF.getMessage(messageId);
 		} catch (Exception e) {
 			logger.error("messageId="+ messageId + " is null");
-		}finally {
-			if (forumMessage == null)
-				nullthreads.put(messageId, "null");
 		}
 		return forumMessage;
 	}
@@ -107,9 +100,13 @@ public class ForumAbstractFactory implements ForumFactory {
 	 * .Long)
 	 */
 	public Optional<ForumThread> getThread(Long threadId) {
-		if (nullthreads.containsKey(threadId)){
-			logger.error("repeat no forumId=" + threadId);
-			return Optional.ofNullable(null);
+		Object nullthread = nullthreads.get(threadId);
+		if (nullthread != null){
+			int nullthreadt = (Integer)nullthread;
+			if( nullthreadt >10) {
+				logger.error("repeat no forumId=" + threadId);
+				return Optional.ofNullable(null);
+			}
 		}
 		ForumThread forumThread = null;
 		try {
@@ -118,7 +115,7 @@ public class ForumAbstractFactory implements ForumFactory {
 			logger.error("threadId="+ threadId + " is null");
 		}finally {
 			if (forumThread == null)
-				nullthreads.put(threadId, "null");
+				nullthreads.merge(threadId,1, (prev, one) -> prev + one);
 		}
 		return Optional.ofNullable(forumThread);
 	}
