@@ -66,7 +66,7 @@ com.jdon.jivejdon.spi.component.block.ErrorBlockerIF"%>
             <div class="box">
                 为防止垃圾广告，新用户注册实现有条件限制。<br>
                 如果注册过程无法正常进行，请使用<a href='/account/oauth/sinaCallAction.shtml'>微博账号登入</a>。<br>
-                请严格按照下面两步骤顺序点击按钮,点完第一步按钮再点第二步按钮：
+                请严格按照下面两步骤顺序点击按钮,点完第一步按钮完成人机验证再点第二步按钮：
             </div>
             <div class="box">
                 <div>第一步：
@@ -78,7 +78,7 @@ com.jdon.jivejdon.spi.component.block.ErrorBlockerIF"%>
                     <button type="button" id="TencentCaptcha"
                             data-appid="2050847547"
                             data-cbfn="callback"
-                    >验证</button>
+                    >人机验证</button>
                     <input type="hidden" id="registerCode" name="registerCode"  >
                     <input type="hidden" id="randstr" name="randstr"   >
                 </div>
@@ -87,7 +87,7 @@ com.jdon.jivejdon.spi.component.block.ErrorBlockerIF"%>
             <div class="box">
 
                 <div>第二步：
-                    <input type="submit" value="确认"/>
+                    <input type="submit" value="进入注册"/>
                 </div>
             </div>
         </div>
