@@ -27,12 +27,14 @@
         <bean:write name="threadTag" property="title" />   
     </a>
    &nbsp;&nbsp;
+<logic:notEmpty  name="threadTag" property="subscriptionCount" >
 <logic:greaterThan name="threadTag" property="subscriptionCount" value="0">
   <a href="<%=request.getContextPath() %>/social/contentfollower.shtml?subscribedId=<bean:write name="threadTag" property="tagID" />&subject=<bean:write name="threadTag" property="title" />" target="_blank"  rel="nofollow" class="whitelink">
   <i class="fa fa-feed"></i>
 	  <bean:write name="threadTag" property="subscriptionCount"/>
   </a>
 </logic:greaterThan>
+</logic:notEmpty>
    &nbsp;&nbsp;
   <a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=2&subscribeId=<bean:write name="threadTag" property="tagID"/>"
  target="_blank" title="当本标签有新内容加入 自动通知我"  rel="nofollow">
@@ -60,12 +62,14 @@
         <bean:write name="threadTag" property="title" />   
     </a>
    &nbsp;&nbsp;
-<logic:greaterThan name="threadTag" property="subscriptionCount" value="0">
+        <logic:notEmpty  name="threadTag" property="subscriptionCount" >
+        <logic:greaterThan name="threadTag" property="subscriptionCount" value="0">
   <a href="<%=request.getContextPath() %>/social/contentfollower.shtml?subscribedId=<bean:write name="threadTag" property="tagID" />&subject=<bean:write name="threadTag" property="title" />" target="_blank"  rel="nofollow" class="whitelink">
 <i class="fa fa-feed"></i>
 	  <bean:write name="threadTag" property="subscriptionCount"/>
   </a>
 </logic:greaterThan>
+        </logic:notEmpty>
    &nbsp;&nbsp;
   <a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=2&subscribeId=<bean:write name="threadTag" property="tagID"/>"
  target="_blank" title="当本标签有新内容加入 自动通知我"  rel="nofollow">
@@ -95,12 +99,14 @@
         <bean:write name="threadTag" property="title" />   
     </a>
    &nbsp;&nbsp;
+        <logic:notEmpty  name="threadTag" property="subscriptionCount" >
 <logic:greaterThan name="threadTag" property="subscriptionCount" value="0">
   <a href="<%=request.getContextPath() %>/social/contentfollower.shtml?subscribedId=<bean:write name="threadTag" property="tagID" />&subject=<bean:write name="threadTag" property="title" />" target="_blank"  rel="nofollow" class="whitelink">
  <i class="fa fa-feed"></i> 
 	  <bean:write name="threadTag" property="subscriptionCount"/>
   </a>
 </logic:greaterThan>
+        </logic:notEmpty>
    &nbsp;&nbsp;
   <a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=2&subscribeId=<bean:write name="threadTag" property="tagID"/>"
  target="_blank" title="当本标签有新内容加入 自动通知我"  rel="nofollow">
