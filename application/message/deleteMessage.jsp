@@ -25,7 +25,7 @@
    
 <!-- 被删除的帖子 -->	
  
-<html:form action="/message/messageSaveAction.shtml" method="post"  >
+<html:form action="/message/postSaveAction.shtml" method="post"  >
 
 <html:hidden property="method" value="delete"/>
 

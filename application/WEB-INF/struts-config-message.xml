@@ -47,7 +47,7 @@
             <forward name="edit" path="/message/message.jsp"/>
         </action>
         <!-- saving for new topic message creation or message edition , from /forum/threadPost.jsp -->
-        <action name="messageForm" path="/message/messageSaveAction"
+        <action name="messageForm" path="/message/postSaveAction"
                 type="com.jdon.strutsutil.ModelSaveAction" scope="request"
                 validate="true" input="/message/resultSave.jsp">
             <forward name="success" path="/message/resultSave.jsp"/>

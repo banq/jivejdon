@@ -28,7 +28,7 @@ response.setStatus(HttpServletResponse.SC_OK);
 <div class="comment">
 <iframe id='target_new' name='target_new' src='' style='display: none'></iframe>
 
-<html:form action="/message/messageSaveAction.sthml" method="post" target="target_new" styleId="messageNew" onsubmit="return checkPost(this);" >
+<html:form action="/message/postSaveAction.sthml" method="post" target="target_new" styleId="messageNew" onsubmit="return checkPost(this);" >
 
 <html:hidden property="action" />
 <html:hidden property="messageId" />

@@ -13,7 +13,7 @@
 
 <iframe id='target_new' name='target_new' src='' style='display: none'></iframe>
     
-<html:form action="/message/messageSaveAction.sthml" method="post" target="target_new" styleId="messageNew"  onsubmit="return checkPost(this);" >
+<html:form action="/message/postSaveAction.sthml" method="post" target="target_new" styleId="messageNew"  onsubmit="return checkPost(this);" >
 
   <jsp:include page="messageFormBody.jsp" flush="true">
     <jsp:param name="reply" value="false"/>

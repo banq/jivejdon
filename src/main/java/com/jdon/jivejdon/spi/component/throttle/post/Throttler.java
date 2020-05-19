@@ -37,6 +37,8 @@ public class Throttler {
 	}
 
 	public boolean checkVIPValidate(Account account) {
+		if (timeLimit())// closed at evening
+			return false;
 		if (!throttleManager.contain("checkVIPValidate")) {
 			ThresholdLimit thresholdLimit = new ThresholdLimit(vipUserThrottleConf.getThreshold(), vipUserThrottleConf.getInterval());
 			throttleManager.setCategoryParams("checkVIPValidate", thresholdLimit);
