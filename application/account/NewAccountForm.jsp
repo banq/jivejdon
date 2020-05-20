@@ -4,6 +4,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@page import="com.jdon.jivejdon.spi.component.block.ErrorBlockerIF"%>
 <%@page import="java.util.UUID"%>
+<%@page import="java.util.*"%>
 <%@page import="com.jdon.jivejdon.presentation.form.SkinUtils"%>
 <%
     ErrorBlockerIF errorBlocker = (ErrorBlockerIF)
@@ -18,6 +19,14 @@
             return;
         }
     }
+
+    Calendar startingCalendar = Calendar.getInstance();
+    startingCalendar.setTime(new Date());
+    if (startingCalendar.get(Calendar.HOUR_OF_DAY) < 10 || startingCalendar.get(Calendar.HOUR_OF_DAY) > 16) {
+        out.println("<p><br> 为防止垃圾广告，本段时间关闭注册，工作时间内正常开放。<br>期间可用<a href='/account/oauth/sinaCallAction.shtml'>微博账号登入</a>。");
+        return;
+    }
+
     String randstr = (String)request.getParameter("randstr");
     if(randstr == null) return;
     if (!SkinUtils.verifyQQRegisterCode((String)request.getParameter("registerCode"), randstr,request.getRemoteAddr())) {
