@@ -20,6 +20,18 @@
       <logic:equal name="forumMessage" property="root" value="false">
       <div class="frame-yy">
       </logic:equal>
+      <logic:equal name="forumMessage" property="root" value="true"><div>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- 自动调整尺寸 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-7573657117119544"
+             data-ad-slot="9040920314"
+             data-ad-format="auto"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div></logic:equal>
         <div class="post_header">
           <div class="post_title">
             <logic:equal name="forumMessage" property="root" value="true">

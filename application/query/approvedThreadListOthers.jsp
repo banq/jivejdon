@@ -50,7 +50,16 @@ function viewcount(threadId, sId)
 <%@ include file="threadListCore.jsp" %>
 </logic:iterate>
 <div>
-
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- 自动调整尺寸 -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7573657117119544"
+         data-ad-slot="9040920314"
+         data-ad-format="auto"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 </div>
 
           <div class="pagination">
@@ -79,14 +88,39 @@ function viewcount(threadId, sId)
         <div class="widget wid-post">
           <div class="content">
               <div class="post wrap-vid">
-
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                  <!-- 页上左336 -->
+                  <ins class="adsbygoogle"
+                       style="display:inline-block;width:336px;height:280px"
+                       data-ad-client="ca-pub-7573657117119544"
+                       data-ad-slot="6751585519"></ins>
+                  <script>
+                      (adsbygoogle = window.adsbygoogle || []).push({});
+                  </script>
             </div>
           </div>
         </div>
         <!---- Start Widget ---->
         <div class="widget">
               <div class="wid-vid">
-
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                  <ins class="adsbygoogle"
+                       style="display:block"
+                       data-ad-format="autorelaxed"
+                       data-ad-client="ca-pub-7573657117119544"
+                       data-ad-slot="7669317912"></ins>
+                  <script>
+                      (adsbygoogle = window.adsbygoogle || []).push({});
+                  </script>
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                  <!-- 推荐贴右侧300x600 -->
+                  <ins class="adsbygoogle"
+                       style="display:inline-block;width:300px;height:600px"
+                       data-ad-client="ca-pub-7573657117119544"
+                       data-ad-slot="3352261515"></ins>
+                  <script>
+                      (adsbygoogle = window.adsbygoogle || []).push({});
+                  </script>
               </div>
         </div>
     
