@@ -39,6 +39,18 @@
     </tbody>
 </table>
 
+<table class="table table-striped">
+    <tbody>
+<tr><td align="middle">
+    <form method="get" action="https://www.baidu.com/s" class="search">
+        <input type="hidden" name="ct" value="2097152">
+        <input type="hidden" name="si" value="www.jdon.com">
+        <input type="text" name="wd" value="<bean:write name="query"/>" size="40">
+        <input type="submit" value="百度道场">
+    </form>
+</td></tr>
+    </tbody>
+</table>
 <!-- second query result -->
 <logic:present name="messageListForm">
     <logic:greaterThan name="messageListForm" property="allCount" value="0">
