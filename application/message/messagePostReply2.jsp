@@ -13,7 +13,7 @@
 <div class="box">
 <div class="comment">
 <iframe id='target_reply' name='target_reply' src='' style='display: none'></iframe>
-<html:form action="/message/messageReplySaveAction.sthml" method="post" target="target_reply" styleId="messageReply"  onsubmit="return checkPost(this);" >
+<html:form action="/message/replySaveAction.sthml" method="post" target="target_reply" styleId="messageReply"  onsubmit="return checkPost(this);" >
 
 <div class="row">
 	<div class="col-md-12">

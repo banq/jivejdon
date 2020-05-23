@@ -29,8 +29,8 @@
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://cdn.jdon.com/js/html5shiv.min.js"></script>
-        <script src="https://cdn.jdon.com/js/respond.min.js"></script>
+        <script src="https://static.jdon.com/js/html5shiv.min.js"></script>
+        <script src="https://static.jdon.com/js/respond.min.js"></script>
     <![endif]-->
 	<script data-ad-client="ca-pub-7573657117119544" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
@@ -162,11 +162,11 @@
        document.getElementById("home-thumbnai").src = "https://cdn.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
 </script> 		
  <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://cdn.jdon.com/js/bootstrap.min.css"  type="text/css">
+    <link rel="stylesheet" href="https://static.jdon.com/js/bootstrap.min.css"  type="text/css">
 	<!-- Custom Fonts -->
-    <link rel="stylesheet" href="https://cdn.jdon.com/js/font-awesome-4.4.0/css/font-awesome.min.css"  type="text/css">
+    <link rel="stylesheet" href="https://static.jdon.com/js/font-awesome-4.4.0/css/font-awesome.min.css"  type="text/css">
 	<!-- Custom CSS -->
-    <link rel="stylesheet" href="https://cdn.jdon.com/js/style.css">	
+    <link rel="stylesheet" href="https://static.jdon.com/js/style.css">
 <%@ include file="./common/IncludeBottomBody.jsp" %> 
 <%@ include file="../account/loginAJAX.jsp" %>
 <script>       

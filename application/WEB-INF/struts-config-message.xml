@@ -67,7 +67,7 @@
                 validate="false"/>
 
 
-        <action name="messageReplyForm" path="/message/messageReplySaveAction"
+        <action name="messageReplyForm" path="/message/replySaveAction"
                 type="com.jdon.jivejdon.presentation.action.message.ReBlogAction" scope="request"
                 validate="true" input="/message/resultSave2.jsp">
             <forward name="success" path="/message/resultSave2.jsp"/>

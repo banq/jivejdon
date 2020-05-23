@@ -56,10 +56,10 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCache(expire, modelLastModified
     String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
 %>
 <link rel="canonical" href="<%=domainUrl %>/blog/<bean:write name="accountProfileForm" property="account.username"/>" />
-  <link href="//cdn.jdon.com/common/jivejdon5.css" rel="stylesheet" type="text/css"/>
-  <link href="//cdn.jdon.com/common/blog/themes/default/style/blog.css" rel="stylesheet" type="text/css"/>
-<script src="https://cdn.jdon.com/common/js/prototype.js"></script>
-<script src="//cdn.jdon.com/common/login2.js"></script>
+  <link href="//static.jdon.com/common/jivejdon5.css" rel="stylesheet" type="text/css"/>
+  <link href="//static.jdon.com/common/blog/themes/default/style/blog.css" rel="stylesheet" type="text/css"/>
+<script src="https://static.jdon.com/common/js/prototype.js"></script>
+<script src="//static.jdon.com/common/login2.js"></script>
 <script src="<html:rewrite page="/account/protected/js/account.jsp"/>"></script>
 <script >
 

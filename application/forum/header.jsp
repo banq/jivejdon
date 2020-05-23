@@ -26,8 +26,8 @@ String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://cdn.jdon.com/js/html5shiv.min.js"></script>
-        <script src="https://cdn.jdon.com/js/respond.min.js"></script>
+        <script src="https://static.jdon.com/js/html5shiv.min.js"></script>
+        <script src="https://static.jdon.com/js/respond.min.js"></script>
     <![endif]-->
 
 	<%@ include file="../common/security.jsp" %>

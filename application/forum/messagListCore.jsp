@@ -212,7 +212,7 @@
 
   <%-- include LAB.js --%>
   <%@ include file="../account/loginAJAX.jsp" %>
-  <script src="https://cdn.jdon.com/common/messageList6.js"></script>
+  <script src="https://static.jdon.com/common/messageList7.js"></script>
   <script>
       load('https://cdn.jdon.com/query/threadDigList', function (xhr) {
           document.getElementById("digList").innerHTML = xhr.responseText;

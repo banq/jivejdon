@@ -19,11 +19,11 @@
                 <br/>
                 从<html:text styleId="begin_date_b" name="queryForm" property='fromDate'
                             size="20" maxlength="20"
-            /><img width="22" height="21" src="//cdn.jdon.com/images/show-calendar.gif"
+            /><img width="22" height="21" src="//static.jdon.com/images/show-calendar.gif"
                    onclick="return showCalendar('begin_date_b', 'y-m-d');">
                 <br>到<html:text styleId="end_date_b" name="queryForm" property='toDate'
                                 size="20" maxlength="20"
-            /><img width="22" height="21" src="//cdn.jdon.com/images/show-calendar.gif"
+            /><img width="22" height="21" src="//static.jdon.com/images/show-calendar.gif"
                    onclick="return showCalendar('end_date_b', 'y-m-d');">
                 <br>
                 回复数不少于<input type="text" name="messageReplyCountWindow" size="4"
