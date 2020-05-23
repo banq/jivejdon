@@ -1,4 +1,4 @@
-body{background:url(/common/js/img/bg2.png) fixed;color:#666;font-weight:400;font-size:15px;font-family:'Ek Mukta',sans-serif;line-height:1.6em}
+body{background:url(/simgs/bg2.png) fixed;color:#666;font-weight:400;font-size:15px;font-family:'Ek Mukta',sans-serif;line-height:1.6em}
 body,html{margin:0;padding:0;width:100%;word-wrap:break-word}
 ::-moz-selection{background:#000;color:#fff;text-shadow:none}
 ::selection{background:#000;color:#fff;text-shadow:none}
@@ -94,9 +94,9 @@ body.sub-page .logo{margin:110px 0 80px;padding:30px 0 50px}
 .box .info a{border-bottom:1px solid #000;box-shadow:inset 0 -1px 0 #000;color:#000;transition:all ease 150ms}
 .box .info a:hover{border-bottom:1px solid #000;box-shadow:inset 0 -1.3em 0 #000;color:#FFF;text-decoration:none;text-shadow:none}
 .box h2{margin:0;font-size:19px}
-.box .box-header.header-photo{margin-bottom:20px;background:url(/common/js/img/title-picture.png) repeat-x center center}
-.box .box-header.header-natural{margin-bottom:20px;background:url(/common/js/img/title-natural.png) repeat-x center center}
-.box .box-header.header-vimeo{margin-bottom:20px;background:url(/common/js/img/title-vimeo.png) repeat-x center center}
+.box .box-header.header-photo{margin-bottom:20px;background:url(/simgs/title-picture.png) repeat-x center center}
+.box .box-header.header-natural{margin-bottom:20px;background:url(/simgs/title-natural.png) repeat-x center center}
+.box .box-header.header-vimeo{margin-bottom:20px;background:url(/simgs/title-vimeo.png) repeat-x center center}
 .box .box-header h2{display:inline-block;margin-left:15px;padding:0 8px;background-color:#fff;color:#333;font-size:25px}
 .box .box-content{margin-top:30px}
 .box .box-content a{color:#333;font-weight:700}
@@ -125,7 +125,7 @@ ul.pagination li a{color:#444}
 .widget:after,.widget:before{clear:both;display:block;visibility:hidden;width:0;height:0;content:'\0020'}
 .widget ul{margin:0;padding:0;list-style:none}
 .widget ul li{overflow:hidden;list-style:none;text-overflow:ellipsis;white-space:nowrap}
-.widget .heading{background:url(/common/js/img/title.png) repeat-x center center}
+.widget .heading{background:url(/simgs/title.png) repeat-x center center}
 .widget .heading h4{display:inline-block;margin-left:15px;padding:0 8px;background-color:#fff;color:#333;text-transform:uppercase;font-size:22px}
 .widget.wid-vid ul a{float:left;display:inline;margin:3px 2px;padding:5px;border-top:none;border-right:none;border-bottom:1px solid transparent;border-left:none;color:#333;font-weight:700}
 .widget.wid-vid .tab-content{margin-top:13px}
