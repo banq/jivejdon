@@ -16,7 +16,7 @@
 	<!-- Custom Fonts -->
     <link rel="stylesheet" href="https://static.jdon.com/js/font-awesome-4.4.0/css/font-awesome.min.css"  type="text/css">
 	<!-- Custom CSS -->
-    <link rel="stylesheet" href="https://static.jdon.com/js/style.css">
+    <link rel="stylesheet" href="https://cdn.jdon.com/js/style.css">
   <!-- jQuery and Modernizr-->
   <script src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>
 

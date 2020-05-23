@@ -51,11 +51,11 @@
                 <br>用户名<html:text name="queryForm" property="username"/>
                 <br>从<html:text styleId="begin_date_b2" name="queryForm"
                                 property='fromDate' size="20" maxlength="20"
-            /><img width="22" height="21" src="/images/show-calendar.gif"
+            /><img width="22" height="21" src="//static.jdon.com/images/show-calendar.gif"
                    onclick="return showCalendar('begin_date_b2', 'y-m-d');">
                 <br>到<html:text styleId="end_date_b2" name="queryForm" property='toDate'
                                 size="20" maxlength="20"
-            /><img width="22" height="21" src="/images/show-calendar.gif"
+            /><img width="22" height="21" src="//static.jdon.com/images/show-calendar.gif"
                    onclick="return showCalendar('end_date_b2', 'y-m-d');">
                 <br>
                 <html:submit value=" 查询 " property="btnsearch" style="width:60"/>
