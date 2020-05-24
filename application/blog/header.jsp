@@ -122,8 +122,7 @@ var openPopUpBlogW = function(){
 </script>
 </head> 
 
-<body > 
-
+<body >
 <div class="topbar"> 
    <div class="topbar_inner"> 
       <div class="topbar_inner_left"><a href="<html:rewrite page="/"/>" target="_blank"><html:img page="https://static.jdon.com/images/jdonsmall.gif" border="0" width="120" height="35" alt="jdon.com" /></a></div>
@@ -136,12 +135,6 @@ var openPopUpBlogW = function(){
          </logic:notPresent>
          <html:link page="/jasslogin?logout"> 退出 </html:link>
     </logic:present>
-     <logic:notPresent name="principal"  >
-     <span onMouseOver="loadWLJS(loginW)">
-        <a href="javascript:void(0);" onclick='loginW;'>登录</a> | <html:link page="/account/newAccountForm.shtml">注册</html:link>
-        </span>  
-     </logic:notPresent>
-      
     </div> 
    </div> 
 </div> 
