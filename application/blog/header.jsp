@@ -61,7 +61,9 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCache(expire, modelLastModified
   <link href="//static.jdon.com/common/blog/themes/default/style/blog.css" rel="stylesheet" type="text/css"/>
 <script src="//static.jdon.com/common/js/prototype.js"></script>
 <script src="//static.jdon.com/common/login2.js"></script>
+    <logic:present name="principal" >
 <script src="<html:rewrite page="/account/protected/js/account.jsp"/>"></script>
+    </logic:present>
 <script >
 
 function loadWLJS(myfunc){
@@ -124,7 +126,7 @@ var openPopUpBlogW = function(){
 
 <div class="topbar"> 
    <div class="topbar_inner"> 
-      <div class="topbar_inner_left"><a href="<html:rewrite page="/"/>" target="_blank"><html:img page="/images/jdonsmall.gif" border="0" width="120" height="35" alt="jdon.com" /></a></div> 
+      <div class="topbar_inner_left"><a href="<html:rewrite page="/"/>" target="_blank"><html:img page="https://static.jdon.com/images/jdonsmall.gif" border="0" width="120" height="35" alt="jdon.com" /></a></div>
       <div class="topbar_inner_right"> 
     <logic:present name="principal" >
          欢迎<a href="<%=request.getContextPath()%>/blog/<bean:write name="principal" />"></a><bean:write name="principal" /></a> 
@@ -159,7 +161,7 @@ var openPopUpBlogW = function(){
     <input name="count" type="hidden" value="1"/>
    <input name="userId" type="hidden" value="<bean:write name="accountProfileForm" property="account.userId"/>"/>
     <input name="query" value="请输入搜索关键字" type="text" style="width:140px;" class="inputstyle" onFocus="if (searchform.query.value=='请输入搜索关键字'){searchform.query.value=''}"/>
-   <img src="<html:rewrite page="/blog/themes/default/images/search.gif" />" align="absmiddle" style="cursor:pointer" onClick="if((searchform.query.value=='') || (searchform.query.value=='请输入搜索关键字')){alert('请输入搜索关键字！');searchform.query.focus();}else{searchform.submit();}"></div> 
+   <img src="<html:rewrite page="https://static.jdon.com/blog/themes/default/images/search.gif" />" align="absmiddle" style="cursor:pointer" onClick="if((searchform.query.value=='') || (searchform.query.value=='请输入搜索关键字')){alert('请输入搜索关键字！');searchform.query.focus();}else{searchform.submit();}"></div>
 </html:form> 
 </div> 
 <div class="secondbar"></div> 
@@ -242,7 +244,7 @@ var openUploadWindow = function(url){
               <logic:notPresent name="principal" >
                <a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=3&subscribeId=<bean:write name="accountProfileForm" property="account.userId"/>"
                   target="_blank" title="加关注"  rel="nofollow">            
-                 <img src="/images/user_add.gif" width="18" height="18" alt="关注本主题" border="0" /><span class="blackgray">+关注</span>
+                 <img src="https://static.jdon.com/images/user_add.gif " width="18" height="18" alt="关注本主题" border="0" /><span class="blackgray">+关注</span>
                 </a>                
               </logic:notPresent>
               <logic:present name="principal" >
