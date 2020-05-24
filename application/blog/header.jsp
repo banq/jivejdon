@@ -51,6 +51,7 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCache(expire, modelLastModified
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
 <title><bean:write name="accountProfileForm" property="account.username"/>的博客</title> 
 <%
     String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);

@@ -18,6 +18,7 @@ response.setDateHeader("Expires", 0);
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex">
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="https://static.jdon.com/js/bootstrap.min.css" type="text/css">
   <!-- jQuery and Modernizr-->

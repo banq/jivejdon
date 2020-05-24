@@ -15,10 +15,11 @@ if (request.getParameter("threadId") != null){
 <html>
 <head>
 <title>微信扫描</title>
-<meta charset="utf-8">
-<meta http-equiv="content-language" content="zh-CN" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex">
 <script type="text/javascript" src="/common/jquery.min.js"></script>
 <script type="text/javascript" src="/common/js/jquery-qrcode-min.js"></script>
 <style>

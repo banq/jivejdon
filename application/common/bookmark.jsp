@@ -12,6 +12,7 @@
 <meta http-equiv="content-language" content="zh-CN" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex">
 <link rel="stylesheet" href="/common/jivejdon5.css" type="text/css" />
 
 <script>
