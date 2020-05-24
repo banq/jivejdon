@@ -275,21 +275,10 @@
             <url-pattern>/shortmessage/*</url-pattern>
         </web-resource-collection>
         <web-resource-collection>
-            <web-resource-name>User mobile send message</web-resource-name>
-            <url-pattern>/mobile/message/*</url-pattern>
-        </web-resource-collection>
-        <web-resource-collection>
             <web-resource-name>Social</web-resource-name>
             <url-pattern>/social/*</url-pattern>
         </web-resource-collection>
-        <web-resource-collection>
-            <web-resource-name>blog</web-resource-name>
-            <url-pattern>/blog/*</url-pattern>
-        </web-resource-collection>
-        <web-resource-collection>
-            <web-resource-name>mobile blog</web-resource-name>
-            <url-pattern>/mobile/blog/*</url-pattern>
-        </web-resource-collection>
+
 
         <auth-constraint>
             <role-name>User</role-name>

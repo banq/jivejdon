@@ -59,7 +59,7 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCache(expire, modelLastModified
 <link rel="canonical" href="<%=domainUrl %>/blog/<bean:write name="accountProfileForm" property="account.username"/>" />
   <link href="//static.jdon.com/common/jivejdon5.css" rel="stylesheet" type="text/css"/>
   <link href="//static.jdon.com/common/blog/themes/default/style/blog.css" rel="stylesheet" type="text/css"/>
-<script src="https://static.jdon.com/common/js/prototype.js"></script>
+<script src="//static.jdon.com/common/js/prototype.js"></script>
 <script src="//static.jdon.com/common/login2.js"></script>
 <script src="<html:rewrite page="/account/protected/js/account.jsp"/>"></script>
 <script >
@@ -128,7 +128,7 @@ var openPopUpBlogW = function(){
       <div class="topbar_inner_right"> 
     <logic:present name="principal" >
          欢迎<a href="<%=request.getContextPath()%>/blog/<bean:write name="principal" />"></a><bean:write name="principal" /></a> 
-         <a href="<%=request.getContextPath()%>/account/protected/editAccountForm.shtml?action=edit&username=<bean:write name="principal" />"> 注册资料修改 </a> | 
+         <a href="<%=request.getContextPath()%>/account/protected/editAccountForm.shtml?action=edit&username=<bean:write name="principal" />"> 注册资料修改 </a> |
          <logic:notPresent name="isOwner" >
            <a href="<%=request.getContextPath() %>/blog/<bean:write name="principal" />"><bean:write name="principal" />的博客</a> | 
          </logic:notPresent>
