@@ -284,6 +284,7 @@ var openUploadWindow = function(url){
                               
               </span></div>
               <div class="b_op">
+                  <logic:present name="principal" >
               <span onMouseOver="loadWLJS(nof)">
                <logic:notPresent name="isOwner" >
                     <a href="javascript:void(0);" onClick="openShortmessageWindow('发消息','<html:rewrite page="/account/protected/shortmessageAction.shtml" paramId="messageTo"  paramName="accountProfileForm"  paramProperty="account.username" />');"
@@ -302,7 +303,7 @@ var openUploadWindow = function(url){
               
                </logic:present>
                    </span>
-                              
+                  </logic:present>
                </div>	
 	  </div> 
 	  </div> 
