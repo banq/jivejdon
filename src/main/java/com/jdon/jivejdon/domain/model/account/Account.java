@@ -380,8 +380,10 @@ public class Account {
 				isAllowed = throttler.checkVIPValidate(this);
 			else if(getMessageCount() <= throttler.getVipUserThrottleConf().getVipmessagecount() && methodNameNow.contains("createTopic") )
 				isAllowed = false;
-			else
-				isAllowed = throttler.checkNewUserPostValidate(this);
+			else {
+				if(throttler.checkAllValidate())
+				   isAllowed = throttler.checkNewUserPostValidate(this);
+			}
 		} else
 			isAllowed = !throttler.isAbusive(getPostIP());
 		return isAllowed;

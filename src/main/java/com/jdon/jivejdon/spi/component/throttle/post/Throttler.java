@@ -43,7 +43,18 @@ public class Throttler {
 			ThresholdLimit thresholdLimit = new ThresholdLimit(vipUserThrottleConf.getThreshold(), vipUserThrottleConf.getInterval());
 			throttleManager.setCategoryParams("checkVIPValidate", thresholdLimit);
 		}
-		return throttleManager.checkValidateByCustomerId(account.getUserId(), account.getPostIP(), "checkVIPValidate");
+		return throttleManager.checkValidateByClientId(account.getUserId(), account.getPostIP(), "checkVIPValidate");
+
+	}
+
+	public boolean checkAllValidate() {
+		if (timeLimit())// closed at evening
+			return false;
+		if (!throttleManager.contain("checkAllValidate")) {
+			ThresholdLimit thresholdLimit = new ThresholdLimit(vipUserThrottleConf.getThreshold(), vipUserThrottleConf.getInterval());
+			throttleManager.setCategoryParams("checkAllValidate", thresholdLimit);
+		}
+		return throttleManager.checkValidateByClientId("All", "", "checkAllValidate");
 
 	}
 
@@ -54,7 +65,7 @@ public class Throttler {
 			ThresholdLimit thresholdLimit = new ThresholdLimit(newUserThrottleConf.getThreshold(), newUserThrottleConf.getInterval());
 			throttleManager.setCategoryParams("checkNewUserPostValidate", thresholdLimit);
 		}
-		return throttleManager.checkValidateByCustomerId(account.getUserId(), account.getPostIP(), "checkNewUserPostValidate");
+		return throttleManager.checkValidateByClientId(account.getUserId(), account.getPostIP(), "checkNewUserPostValidate");
 	}
 
 	private boolean timeLimit() {

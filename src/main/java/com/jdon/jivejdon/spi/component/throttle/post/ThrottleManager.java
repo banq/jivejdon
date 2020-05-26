@@ -66,9 +66,10 @@ public class ThrottleManager implements Startable {
 		return true;
 	}
 
-	public boolean checkValidateByCustomerId(String cliendId, String ip, String category) {
-		if (!checkValidate(ip, category))
-			return false;
+	public boolean checkValidateByClientId(String cliendId, String ip, String category) {
+		if (!ip.isEmpty())
+	    	if (!checkValidate(ip, category))
+		    	return false;
 
 		if (processHit(cliendId, category)) {
 			log.error("post checkValidateByCustomerId: " + cliendId + " threshold=" + limit.get(category).getInterval());
