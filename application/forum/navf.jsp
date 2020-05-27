@@ -25,7 +25,7 @@ response.setDateHeader("Expires", 0);
   <script src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>
   <!-- Core JavaScript Files -->
   <script src="https://static.jdon.com/js/bootstrap.min.js"></script>
-  <script src="https://static.jdon.com/js/waitingfor.js"></script>
+  <script src="https://static.jdon.com/common/js/waitingfor.js"></script>
 </head>
 <body>
 <script>
