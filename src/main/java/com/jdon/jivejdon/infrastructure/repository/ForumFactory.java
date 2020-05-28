@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 package com.jdon.jivejdon.infrastructure.repository;
 
@@ -23,13 +23,13 @@ import java.util.Optional;
 
 public interface ForumFactory {
 
-	public abstract Forum getForum(Long forumId);
+    Forum getForum(Long forumId);
 
-	public abstract ForumMessage getMessage(Long messageId);
+    ForumMessage getMessage(Long messageId);
 
-	public abstract Optional<ForumThread> getThread(Long threadId);
+    Optional<ForumThread> getThread(Long threadId);
 
-	public abstract void reloadThreadState(ForumThread forumThread) throws Exception;
+    void reloadThreadState(ForumThread forumThread) throws Exception;
 
-	public Long getNextId(final int idType) throws Exception;
+    Long getNextId(final int idType) throws Exception;
 }

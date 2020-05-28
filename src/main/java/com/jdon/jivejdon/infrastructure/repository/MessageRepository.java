@@ -24,53 +24,22 @@ import java.util.Collection;
 
 public interface MessageRepository {
 
-	/*
-	 * create the topic message
-	 */
-	public abstract void createTopicMessage(AnemicMessageDTO forumMessage) throws Exception;
+	void createTopicMessage(AnemicMessageDTO forumMessage) throws Exception;
+	void createReplyMessage(AnemicMessageDTO forumMessageReply) throws Exception;
+	void updateMessage(AnemicMessageDTO forumMessage) throws Exception;
+    void deleteMessageComposite(ForumMessage delforumMessage) throws Exception;
 
-	/**
-	 * the relation about creating reply forumMessage only need a parameter :
-	 * parent message. we can get the Forum or ForumThread from the parent
-	 * message. the hypelink parameter in jsp must be a paremeter: the Id of
-	 * parent message.
-	 * 
-	 */
-	public abstract void createReplyMessage(AnemicMessageDTO forumMessageReply) throws Exception;
+	void deleteMessage(Long messageId) throws Exception;
 
-	/*
-	 * update the message, update the message's subject and body we must mark
-	 * the message that has been updated. there are two kinds of parameters: the
-	 * primary key /new entity data in DTO ForumMessage of the method patameter
-	 */
-	public abstract void updateMessage(AnemicMessageDTO forumMessage) throws Exception;
+	Long getNextId(int idType) throws Exception;
 
-	/**
-	 * 
-	 * Composite pattern
-	 * 
-	 * delete a node or its all childern and refresh the cache.
-	 *
-	 */
-	public abstract void deleteMessageComposite(ForumMessage delforumMessage) throws Exception;
+	ForumFactory getForumBuilder();
 
-	public abstract void deleteMessage(Long messageId) throws Exception;
+	MessageDaoFacade getMessageDaoFacade();
 
-	public abstract Long getNextId(int idType) throws Exception;
+	void saveReBlog(OneOneDTO oneOneDTO) throws Exception;
 
-	/**
-	 * @return Returns the forumBuilder.
-	 */
-	public abstract ForumFactory getForumBuilder();
+	Collection<ForumMessage> getReBlogByFrom(Long messageId) throws Exception;
 
-	/**
-	 * @return Returns the messageDaoFacade.
-	 */
-	public abstract MessageDaoFacade getMessageDaoFacade();
-
-	public void saveReBlog(OneOneDTO oneOneDTO) throws Exception;
-
-	public Collection<ForumMessage> getReBlogByFrom(Long messageId) throws Exception;
-
-	public ForumMessage getReBlogByTo(Long threadId) throws Exception;
+	ForumMessage getReBlogByTo(Long threadId) throws Exception;
 }
