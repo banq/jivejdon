@@ -210,6 +210,20 @@
     <input type="hidden" id="replySubject" name="replySubject" value="<bean:write name="forumThread" property="rootMessage.messageVO.subject"/>"/>
   </div>
 
+  <%--
+<%@ taglib uri="struts-bean" prefix="bean" %>
+<%@ taglib uri="struts-logic" prefix="logic" %>
+<%@ taglib uri="struts-html" prefix="html" %>
+--%>
+  <%@ page contentType="text/html; charset=UTF-8" %>
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="https://static.jdon.com/js/bootstrap.min.css"  type="text/css">
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="https://static.jdon.com/js/font-awesome-4.4.0/css/font-awesome.min.css"  type="text/css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="https://static.jdon.com/common/js/styles/style.css">
+  <%@include file="../common/IncludeBottomBody.jsp"%>
+
   <%-- include LAB.js --%>
   <%@ include file="../account/loginAJAX.jsp" %>
   <script src="https://static.jdon.com/common/messageList7.js"></script>
@@ -225,19 +239,20 @@
       });
       window.onload = function () {
           <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">
-             <logic:equal name="tagsi" value="0">
-                load('https://cdn.jdon.com/query/approved/<bean:write name="threadTag" property="tagID"/>', function (xhr) {
-                    document.getElementById('approved').innerHTML = xhr.responseText;
-                 });
-             </logic:equal>
-             <logic:notEqual name="tagsi" value="0">
-               tagthreads(10, 160, 10, <bean:write name="threadTag" property="tagID"/>);
-             </logic:notEqual>
-       </logic:iterate>
+          <logic:equal name="tagsi" value="0">
+          load('https://cdn.jdon.com/query/approved/<bean:write name="threadTag" property="tagID"/>', function (xhr) {
+              document.getElementById('approved').innerHTML = xhr.responseText;
+          });
+          </logic:equal>
+          <logic:notEqual name="tagsi" value="0">
+          tagthreads(10, 160, 10, <bean:write name="threadTag" property="tagID"/>);
+          </logic:notEqual>
+          </logic:iterate>
       }
   </script>
 
-  <%@include file="footer.jsp" %>
+  </body>
+  </html>
 </logic:empty>
     
     
