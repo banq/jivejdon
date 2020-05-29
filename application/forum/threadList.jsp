@@ -69,7 +69,7 @@ pageContext.setAttribute("title", titleStr);
   <li class="active"><a href="#">时间</a></li>
   <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">回复</a></li>
             <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">点赞</a></li>
-            <li><a href="<%=request.getContextPath()%>/message/threadViewQuery.shtml">更多查询</a></li>
+            <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml">更多查询</a></li>
 	               <div class="tres" style="float: right;">
      
           <MultiPagesREST:pager actionFormName="threadListForm" page="/threads" >

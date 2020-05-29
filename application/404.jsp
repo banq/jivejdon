@@ -43,7 +43,7 @@ if (errorBlocker.checkRate(request.getRemoteAddr(), 10)){
     <p class="title">404错误！<br> 非常抱歉，你访问的网址
     <br>
     <br>在Jdon.com无法找到. 去除多余非法字符后再试试看
- <br>可进入<a href="/message/threadViewQuery.shtml">查询页面</a>查找
+ <br>可进入<a href="/query/threadViewQuery.shtml">查询页面</a>查找
     <a href="<%=request.getContextPath() %>/" class="btn">Jdon.com首页</a>
 </div>
 </center>
