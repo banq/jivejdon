@@ -7,7 +7,7 @@
 
 <bean:define id="title"  value=" 道场查询" />
 <%@ include file="../common/IncludeTop.jsp" %>
-
+<meta name="robots" content="noindex">
 <%@ include file="searchInputView.jsp" %>
 
 <%@ include file="queryInputView.jsp" %>

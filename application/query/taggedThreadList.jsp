@@ -76,7 +76,7 @@ pageContext.setAttribute("title", titleStr);
         <div class="widget wid-follow">
           <div class="content">
             <ul class="list-inline">
-              <form role="form" class="form-horizontal" method="post" action="/message/searchAction.shtml">
+              <form role="form" class="form-horizontal" method="post" action="/query/threadViewQuery.shtml">
 						 <input type="text" placeholder="Search" value="" name="query" id="v_search" class="form-control">
 					 </form>
             </ul>           
