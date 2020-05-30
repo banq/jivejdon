@@ -84,6 +84,13 @@ function viewcount(threadId, sId)
             </ul>           
           </div>
         </div>
+        <!---- Start tags ---->
+        <div class="widget wid-post">
+             <div class="info">
+                <jsp:include page="/query/tagHotList.shtml" flush="true"></jsp:include>
+             </div>
+        </div>
+
         <!---- Start Widget ---->
         <div class="widget wid-post">
           <div class="content">

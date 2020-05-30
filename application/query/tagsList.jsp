@@ -9,7 +9,7 @@
 
 <bean:define id="title"  value="分类主题" />
 <%@ include file="../common/IncludeTop.jsp" %>
-
+<meta name="robots" content="noindex">
 <bean:parameter name="queryType" id="queryType" value=""/>
 
 
@@ -143,5 +143,4 @@
 
 <%@ include file="searchInputView.jsp" %>
 
-<%@ include file="queryInputView.jsp" %>
 <%@include file="../common/IncludeBottom.jsp"%>

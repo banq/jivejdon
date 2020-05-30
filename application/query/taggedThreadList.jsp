@@ -82,7 +82,13 @@ pageContext.setAttribute("title", titleStr);
             </ul>           
           </div>
         </div>
-        <!---- Start Widget ---->
+           <!---- Start tags ---->
+           <div class="widget wid-post">
+               <div class="info">
+                   <jsp:include page="/query/tagHotList.shtml" flush="true"></jsp:include>
+               </div>
+           </div>
+           <!---- Start Widget ---->
         <div class="widget wid-post">
           <div class="content">
               <div class="post wrap-vid">

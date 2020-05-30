@@ -13,6 +13,7 @@
                        value="<bean:write name="query"/>" id="queryId" size="40"/>
                 <html:submit value="道场搜索"/>
             </html:form>
+            <p><jsp:include page="/query/tagHotList.shtml" flush="true"></jsp:include>
         </td>
     </tr>
     </tbody>
@@ -30,3 +31,5 @@
     </td></tr>
     </tbody>
 </table>
+
+
