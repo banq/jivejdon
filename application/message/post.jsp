@@ -9,10 +9,10 @@ com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(5 * 24 * 60 * 60, request, respo
 <!--  deirectly call this :/forum/post.jsp -->
 <%@ include file="../common/IncludeTop.jsp" %>
 <!-- jQuery and Modernizr-->
-<script src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>
+<script src="https://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
 
 <!-- Core JavaScript Files -->
-<script src="https://static.jdon.com/js/bootstrap.min.js"></script>
+<script src="https://libs.baidu.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <a name="post"></a>
 <jsp:include page="threadPost.jsp" flush="true">   
    <jsp:param name="forumId">
