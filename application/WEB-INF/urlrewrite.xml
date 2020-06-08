@@ -220,11 +220,11 @@
     </rule>
     <!-- blog -->
     <rule>
-        <from>^/blog/([^\/|^\>|^\&amp;|^\=|^\'|^\"|^\&lt;|^\?|^\\|^\s]*)$</from>
+        <from>^/blog/(\w+)$</from>
         <to>/blog/home.shtml?username=$1&amp;count=10</to>
     </rule>
     <rule>
-        <from>^/blog/([^\/|^\>|^\&amp;|^\=|^\'|^\"|^\&lt;|^\?|^\\|^\s]*)/([0-9]+)$</from>
+        <from>^/blog/(\w+)/([0-9]+)$</from>
         <to>/blog/home.shtml?username=$1&amp;count=10&amp;start=$2</to>
     </rule>
     <rule>
@@ -237,6 +237,24 @@
         <!-- note: here must be userId, actually userId'value is username'value, need a model key  -->
         <to>/blog/userMessages.shtml?username=$1&amp;count=10&amp;start=$2</to>
     </rule>
+    <!--<rule>-->
+        <!--<from>^/blog/([^\/|^\>|^\&amp;|^\=|^\'|^\"|^\&lt;|^\?|^\\|^\s]*)$</from>-->
+        <!--<to>/blog/home.shtml?username=$1&amp;count=10</to>-->
+    <!--</rule>-->
+    <!--<rule>-->
+        <!--<from>^/blog/([^\/|^\>|^\&amp;|^\=|^\'|^\"|^\&lt;|^\?|^\\|^\s]*)/([0-9]+)$</from>-->
+        <!--<to>/blog/home.shtml?username=$1&amp;count=10&amp;start=$2</to>-->
+    <!--</rule>-->
+    <!--<rule>-->
+        <!--<from>^/blog/messages/(\w+)$</from>-->
+        <!--&lt;!&ndash; note: here must be userId, actually userId'value is username'value, need a model key  &ndash;&gt;-->
+        <!--<to>/blog/userMessages.shtml?username=$1&amp;count=10</to>-->
+    <!--</rule>-->
+    <!--<rule>-->
+        <!--<from>^/blog/messages/(\w+)/([0-9]+)$</from>-->
+        <!--&lt;!&ndash; note: here must be userId, actually userId'value is username'value, need a model key  &ndash;&gt;-->
+        <!--<to>/blog/userMessages.shtml?username=$1&amp;count=10&amp;start=$2</to>-->
+    <!--</rule>-->
 	<rule>
         <from>^/query/threadNewList$</from>
         <to>/query/threadNewList.shtml?count=20</to>

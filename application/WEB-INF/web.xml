@@ -278,10 +278,10 @@
             <web-resource-name>Social</web-resource-name>
             <url-pattern>/social/*</url-pattern>
         </web-resource-collection>
-        <web-resource-collection>
-            <web-resource-name>Blog</web-resource-name>
-            <url-pattern>/blog/*</url-pattern>
-        </web-resource-collection>
+        <!--<web-resource-collection>-->
+            <!--<web-resource-name>Blog</web-resource-name>-->
+            <!--<url-pattern>/blog/*</url-pattern>-->
+        <!--</web-resource-collection>-->
 
 
         <auth-constraint>
