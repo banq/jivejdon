@@ -34,6 +34,15 @@ String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
 <%@ include file="../common/loginAccount.jsp" %>
     <link rel="canonical" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />" />
 	<script data-ad-client="ca-pub-7573657117119544" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-32868073-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-32868073-1');
+    </script>
 </head>
 
 <%@ include file="../common/body_header.jsp" %>
