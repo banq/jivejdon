@@ -227,9 +227,6 @@
       load('https://cdn.jdon.com/query/threadDigList', function (xhr) {
           document.getElementById("digList").innerHTML = xhr.responseText;
       });
-      load('https://cdn.jdon.com/query/threadNewList', function (xhr) {
-          document.getElementById("threadNewList").innerHTML = xhr.responseText;
-      });
       load('https://cdn.jdon.com/query/popularList', function (xhr) {
           document.getElementById("poplist").innerHTML = xhr.responseText;
       });
