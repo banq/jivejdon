@@ -46,21 +46,29 @@ function viewcount(threadId, sId)
 </MultiPagesREST:pager>
           </div>
 
+            <div class="box">
+                <div class="linkblock">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <ins class="adsbygoogle"
+                                 style="display:block; text-align:center;"
+                                 data-ad-layout="in-article"
+                                 data-ad-format="fluid"
+                                 data-ad-client="ca-pub-7573657117119544"
+                                 data-ad-slot="6913243852"></ins>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
 <%@ include file="threadListCore.jsp" %>
 </logic:iterate>
-<div>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-7573657117119544"
-         data-ad-slot="6913243852"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</div>
+
 
           <div class="pagination">
             <MultiPagesREST:pager actionFormName="threadListForm" page="/approval">
