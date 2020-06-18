@@ -50,13 +50,13 @@ function viewcount(threadId, sId)
 <%@ include file="threadListCore.jsp" %>
 </logic:iterate>
 <div>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- 自动调整尺寸 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <ins class="adsbygoogle"
-         style="display:block"
+         style="display:block; text-align:center;"
+         data-ad-layout="in-article"
+         data-ad-format="fluid"
          data-ad-client="ca-pub-7573657117119544"
-         data-ad-slot="9040920314"
-         data-ad-format="auto"></ins>
+         data-ad-slot="6913243852"></ins>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -95,16 +95,18 @@ function viewcount(threadId, sId)
         <div class="widget wid-post">
           <div class="content">
               <div class="post wrap-vid">
-                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                  <!-- 页上左336 -->
+                  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                  <!-- 页面右侧上部336x280 20-06-18 -->
                   <ins class="adsbygoogle"
-                       style="display:inline-block;width:336px;height:280px"
+                       style="display:block"
                        data-ad-client="ca-pub-7573657117119544"
-                       data-ad-slot="6751585519"></ins>
+                       data-ad-slot="6751585519"
+                       data-ad-format="auto"
+                       data-full-width-responsive="true"></ins>
                   <script>
                       (adsbygoogle = window.adsbygoogle || []).push({});
                   </script>
-            </div>
+              </div>
           </div>
         </div>
         <!---- Start Widget ---->
@@ -119,15 +121,7 @@ function viewcount(threadId, sId)
                   <script>
                       (adsbygoogle = window.adsbygoogle || []).push({});
                   </script>
-                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                  <!-- 推荐贴右侧300x600 -->
-                  <ins class="adsbygoogle"
-                       style="display:inline-block;width:300px;height:600px"
-                       data-ad-client="ca-pub-7573657117119544"
-                       data-ad-slot="3352261515"></ins>
-                  <script>
-                      (adsbygoogle = window.adsbygoogle || []).push({});
-                  </script>
+
               </div>
         </div>
     

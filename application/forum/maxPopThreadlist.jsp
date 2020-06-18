@@ -43,13 +43,13 @@ pageContext.setAttribute("title", titleStr);
   contextpath = "<%=request.getContextPath()%>";
  </script> 
 <script language="javascript" defer="defer" src="<html:rewrite page="/forum/js/threadList.js"/>"></script>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 自动调整尺寸 -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <ins class="adsbygoogle"
-     style="display:block"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
      data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="9040920314"
-     data-ad-format="auto"></ins>
+     data-ad-slot="6913243852"></ins>
 <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
