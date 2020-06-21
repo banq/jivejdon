@@ -103,7 +103,15 @@
         </div>
         <div class="box-content">
           <div class="row">
-            <div id="approved" class="approved"></div>
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-format="autorelaxed"
+                 data-ad-client="ca-pub-7573657117119544"
+                 data-ad-slot="7669317912"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
           </div>
         </div>
       </div>
@@ -149,15 +157,15 @@
       <!-- Start Widget -->
       <div class="widget">
         <div class="wid-vid">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-format="autorelaxed"
-                 data-ad-client="ca-pub-7573657117119544"
-                 data-ad-slot="7669317912"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-format="autorelaxed"
+               data-ad-client="ca-pub-7573657117119544"
+               data-ad-slot="7669317912"></ins>
+          <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
         </div>
       </div>
       <!-- Start Widget poplist -->

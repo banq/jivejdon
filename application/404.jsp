@@ -8,19 +8,6 @@ com.jdon.jivejdon.spi.component.block.ErrorBlockerIF,com.jdon.jivejdon.spi.compo
 <%
 ErrorBlockerIF errorBlocker = (ErrorBlockerIF) WebAppUtil.getComponentInstance("errorBlocker", this.getServletContext());
 if (errorBlocker.checkRate(request.getRemoteAddr(), 10)){
-  String isSendMail = (String) this.getServletContext().getAttribute(request.getRemoteAddr() + "404");
-  if (isSendMail == null) {%>
-<%
-		EmailHelper emailHelper = (EmailHelper)WebAppUtil.getComponentInstance("emailHelper", this.getServletContext());
-     	String subject = "404";     	
-    	String body = "404 attack:" + request.getRemoteAddr() + " from url:" + request.getHeader("Referer") ;
-    	String toEmail = "banq@163.com";
-    	String toName = "banq";
-    	String fromEmail = "banq@163.com";
-    	EmailVO emailVO = new EmailVO(toName, toEmail, "", fromEmail, subject, body + " from:" + fromEmail, com.jdon.jivejdon.util.EmailTask.NOHTML_FORMAT);
-    	emailHelper.send(emailVO);
-		this.getServletContext().setAttribute(request.getRemoteAddr()+"404","true");
-	}
     return;
 }
 
