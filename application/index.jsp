@@ -190,7 +190,7 @@
 	<!-- Custom Fonts -->
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.4.0/css/font-awesome.min.css"  type="text/css">
 	<!-- Custom CSS -->
-    <link rel="stylesheet" href="https://static.jdon.com/common/js/styles/style.css">
+    <link rel="stylesheet" href="https://cdn.jdon.com/js/style.css">
 <%@ include file="./common/IncludeBottomBody.jsp" %> 
 <%@ include file="../account/loginAJAX.jsp" %>
 <script>       
