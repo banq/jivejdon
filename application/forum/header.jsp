@@ -33,7 +33,13 @@ String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
 	<%@ include file="../common/security.jsp" %>
 <%@ include file="../common/loginAccount.jsp" %>
     <link rel="canonical" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />" />
-	<script data-ad-client="ca-pub-7573657117119544" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-7573657117119544",
+            enable_page_level_ads: true
+        });
+    </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-32868073-1"></script>
     <script>
