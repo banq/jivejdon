@@ -72,23 +72,6 @@
         </div>
       </div>
       <div class="box">
-        <div class="box-header header-natural">
-        </div>
-        <div class="box-content">
-          <div class="row">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-format="autorelaxed"
-                 data-ad-client="ca-pub-7573657117119544"
-                 data-ad-slot="7669317912"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-          </div>
-        </div>
-      </div>
-      <div class="box">
         <jsp:include page="../message/messagePostReply2.jsp" flush="true">
           <jsp:param name="forumId" value="${forumThread.forum.forumId}"/>
           <jsp:param name="pmessageId" value="${forumThread.rootMessage.messageId}"/>
@@ -134,42 +117,12 @@
           </div>
         </div>
       </div>
-      <!-- Start Widget -->
-      <div class="widget">
-        <div class="wid-vid">
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <ins class="adsbygoogle"
-               style="display:block"
-               data-ad-format="autorelaxed"
-               data-ad-client="ca-pub-7573657117119544"
-               data-ad-slot="7669317912"></ins>
-          <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
-        </div>
-      </div>
       <!-- Start Widget poplist -->
       <div class="widget">
         <div class="wid-vid">
           <ul>
             <div id="poplist"></div>
           </ul>
-        </div>
-      </div>
-      <!-- Start Widget -->
-      <div class="widget">
-        <div class="wid-vid">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- 右侧中部300x600 20-06-18 -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-7573657117119544"
-                 data-ad-slot="3352261515"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
         </div>
       </div>
       <!-- Start Widget -->
