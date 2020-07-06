@@ -183,7 +183,7 @@
 %>
 <script>   
     if(document.getElementById("home-thumbnai") != null)
-       document.getElementById("home-thumbnai").src = "https://cdn.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
+       document.getElementById("home-thumbnai").src = "https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
 </script> 		
  <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://libs.baidu.com/bootstrap/3.1.1/css/bootstrap.min.css"  type="text/css">

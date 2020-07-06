@@ -10,7 +10,7 @@
 		<div class="container">
 			<div class="row">
                 <div class="col-md-12 ">
-                    <a href="/"><img src="https://cdn.jdon.com/simgs/jdon100.png" width="100" height="40"/></a>
+                    <a href="/"><img src="https://static.jdon.com/simgs/jdon100.png" width="100" height="40"/></a>
                     <span class="list-inline top-link link" style="float:right;">
 					    <logic:present name="principal" ><i class="smallgray"> 欢迎<bean:write name="principal" /></i> </logic:present>
 				        <a href="/forum"><i class="fa fa-home"></i>道场</a>
