@@ -10,6 +10,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 	//this value is display count on one page
 	private final int needCount = 15;
+	private final int needViewcount = 200;
 	private long currentIndicator = 0;
 	private int currentStartBlock = 0;
 	private int currentStartPage = 0;
@@ -19,7 +20,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	public boolean isApproved(ForumThread thread, Account account) {
-		if (isGoodBlog(thread, account) || isExcelledDiscuss(thread)) {
+		if (isGoodBlog(thread, account) || isExcelledDiscuss(thread) || isLargeViewCount(thread)) {
 			return true;
 		} else
 			return false;
@@ -33,6 +34,10 @@ public class ApprovedListSpec extends ThreadListSpec {
 	protected boolean isExcelledDiscuss(ForumThread thread) {
 		return (hasTags(thread, 1) && hasReply(thread, 2));
 
+	}
+
+	protected boolean isLargeViewCount(ForumThread thread) {
+		return thread.getViewCount()>needViewcount;
 	}
 
 	private boolean hasTags(ForumThread thread, int throttle) {
