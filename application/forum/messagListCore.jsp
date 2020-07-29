@@ -129,6 +129,23 @@
           </div>
         </div>
       </div>
+
+      <!-- Start Widget -->
+      <div class="widget">
+        <div class="wid-vid">
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <!-- 右侧中部300x600 20-06-18 -->
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-7573657117119544"
+               data-ad-slot="3352261515"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+      </div>
       <!-- Start Widget poplist -->
       <div class="widget">
         <div class="wid-vid">
@@ -137,17 +154,7 @@
           </ul>
         </div>
       </div>
-      <!-- Start Widget -->
-      <div class="widget">
-        <div class="wid-vid">
-          <ul>
-            <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">
-              <span id="tagthreads_<bean:write name="threadTag" property="tagID"/>"></span>
-            </logic:iterate>
 
-          </ul>
-        </div>
-      </div>         
     </div>
   </div>    
 </div>

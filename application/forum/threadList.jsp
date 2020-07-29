@@ -48,6 +48,16 @@ pageContext.setAttribute("title", titleStr);
  if(top !== self) top.location = self.location;
   contextpath = "<%=request.getContextPath()%>";
  </script>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 自动调整尺寸 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="9040920314"
+     data-ad-format="auto"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 <!-- /////////////////////////////////////////Content -->
 <div id="page-content" class="single-page container">
 		<div class="row">
@@ -105,4 +115,14 @@ pageContext.setAttribute("title", titleStr);
             </div>	
 	</div>
 </div>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 自动调整尺寸 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="9040920314"
+     data-ad-format="auto"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 <%@include file="../common/IncludeBottom.jsp"%>
