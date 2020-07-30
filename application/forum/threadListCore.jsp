@@ -8,6 +8,22 @@
 
  <logic:iterate indexId="i" id="forumThread" name="threadListForm"
                    property="list">
+     <logic:equal name="i" value="2">
+     <span  class="list-group-item">
+     <h3 class="list-group-item-heading">
+     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+         <ins class="adsbygoogle"
+              style="display:block"
+              data-ad-format="fluid"
+              data-ad-layout-key="-ef+6k-30-ac+ty"
+              data-ad-client="ca-pub-7573657117119544"
+              data-ad-slot="4250528285"></ins>
+         <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+         </script>
+     </h3>
+     </span>
+     </logic:equal>
    <bean:define id="forumMessage" name="forumThread"
                 property="rootMessage"></bean:define>
    <logic:notEmpty name="forumMessage" property="account">

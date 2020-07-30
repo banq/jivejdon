@@ -57,6 +57,29 @@ pageContext.setAttribute("title", titleStr);
       </div>
      	 
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
+    <logic:equal name="i" value="3">
+        <div class="box">
+            <div class="linkblock" itemscope itemtype="http://schema.org/BlogPosting">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="box">
+                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-format="fluid"
+                                 data-ad-layout-key="-ef+6k-30-ac+ty"
+                                 data-ad-client="ca-pub-7573657117119544"
+                                 data-ad-slot="4250528285"></ins>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </logic:equal>
 <%@ include file="threadListCore.jsp" %>
 </logic:iterate>
 	<div class="tres" > 共有<b>
