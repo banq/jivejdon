@@ -16,19 +16,7 @@
 				        <a href="/forum"><i class="fa fa-home"></i>道场</a>
 						<a href="/threads"><i class="fa fa-list-ul"></i>最新</a>
 						<a href="/tags"><i class="fa fa-star-half-full"></i>推荐</a>
-						<a href="/followus.html"><i class="fa fa-feed"></i>订阅</a>	
-                         <logic:notPresent name="principal" >
-							 <a data-toggle="modal" data-target="#login" href=""><i class="fa fa-sign-in"></i>登陆 </a>
-						</logic:notPresent>
-						<logic:present name="principal" > 
-							<a href="<%=request.getContextPath()%>/message/post.jsp"><i class=" fa fa-share-square"></i>发布</a>
-						</logic:present>
-                        <logic:present name="principal" > 
-							<a href="<%=request.getContextPath()%>/blog/<bean:write name="principal"/>"><i class="fa fa-newspaper-o"></i>博客</a>
-						</logic:present>
-                       <logic:present name="principal" >
-						   <html:link page="/jasslogin?logout"><i class="fa fa-sign-out"></i>退出 </html:link>
-                        </logic:present>
+						<a href="/followus.html"><i class="fa fa-feed"></i>订阅</a>
                     </span>
 				</div>
 			</div>
