@@ -84,7 +84,13 @@
           </div>
         </div>
       </div>
-
+      <%--<div class="box">--%>
+        <%--<jsp:include page="../message/messagePostReply2.jsp" flush="true">--%>
+          <%--<jsp:param name="forumId" value="${forumThread.forum.forumId}"/>--%>
+          <%--<jsp:param name="pmessageId" value="${forumThread.rootMessage.messageId}"/>--%>
+          <%--<jsp:param name="parentMessageSubject" value="${forumThread.name}"/>--%>
+        <%--</jsp:include>--%>
+      <%--</div>--%>
     </div>
     <!-- /////////////////右边 -->
     <div id="sidebar" class="col-md-4">

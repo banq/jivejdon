@@ -17,12 +17,24 @@
 						<a href="/threads"><i class="fa fa-list-ul"></i>最新</a>
 						<a href="/tags"><i class="fa fa-star-half-full"></i>推荐</a>
 						<a href="/followus.html"><i class="fa fa-feed"></i>订阅</a>
+                         <%--<logic:notPresent name="principal" >--%>
+							 <%--<a data-toggle="modal" data-target="#login" href=""><i class="fa fa-sign-in"></i>登陆 </a>--%>
+						<%--</logic:notPresent>--%>
+						<%--<logic:present name="principal" > --%>
+							<%--<a href="<%=request.getContextPath()%>/message/post.jsp"><i class=" fa fa-share-square"></i>发布</a>--%>
+						<%--</logic:present>--%>
+                        <%--<logic:present name="principal" > --%>
+							<%--<a href="<%=request.getContextPath()%>/blog/<bean:write name="principal"/>"><i class="fa fa-newspaper-o"></i>博客</a>--%>
+						<%--</logic:present>--%>
+                       <%--<logic:present name="principal" >--%>
+						   <%--<html:link page="/jasslogin?logout"><i class="fa fa-sign-out"></i>退出 </html:link>--%>
+                        <%--</logic:present>--%>
                     </span>
 				</div>
 			</div>
 		</div>
 	</nav>
-	
+
 	<!--Navigation-->
     <nav id="menu" class="navbar container">
         <div class="navbar-header">
@@ -45,8 +57,8 @@
 								<li><a href="/soa.html">SOA</a></li>
 								<li><a href="/scalable.html">可伸缩性</a></li>
 								<li><a href="/performance.html">性能设计</a></li>
-								<li><a href="/transaction.html">事务</a></li>	
-								<li><a href="/rest.html">RESTful</a></li>	
+								<li><a href="/transaction.html">事务</a></li>
+								<li><a href="/rest.html">RESTful</a></li>
 								<li><a href="/eda.html">事件驱动</a></li>
 								<li><a href="/cache.html">缓存设计</a></li>
 							</ul>
@@ -63,9 +75,9 @@
 								<li><a href="/asynchronous.html">异步编程</a></li>
 								<li><a href="/reactive.html">响应编程</a></li>
 								<li><a href="/functional.html">函数编程</a></li>
-								<li><a href="/aop.html">AOP编程</a></li>							
+								<li><a href="/aop.html">AOP编程</a></li>
 							</ul>
-						</div> 
+						</div>
 					</div>
 				</li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">分布式 <i class="fa fa-arrow-circle-o-down"></i></a>
@@ -81,7 +93,7 @@
 								<li><a href="/cloudcompute.html">云计算</a></li>
 								<li><a href="/bigdata.html">大数据</a></li>
 							</ul>
-						</div> 
+						</div>
 					</div>
 				</li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">学习教程 <i class="fa fa-arrow-circle-o-down"></i></a>
