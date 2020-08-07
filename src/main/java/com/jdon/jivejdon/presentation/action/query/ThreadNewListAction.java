@@ -79,9 +79,9 @@ public class ThreadNewListAction extends ModelListAction {
 			allIds.add((Long) pi.getKeys()[i]);
 		}
 
-		Collection<Long> approvedlist = getThreadApprovedNewList().getApprovedThreads(start);
-
-		allIds.removeAll(approvedlist);
+//		Collection<Long> approvedlist = getThreadApprovedNewList().getApprovedThreads(start);
+//
+//		allIds.removeAll(approvedlist);
 
 		return new PageIterator(allIds.size(), allIds.toArray());
 
