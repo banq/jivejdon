@@ -95,11 +95,11 @@
           <div class="post_body">
           <div class="post_bodyin">
             <div class="post_body_content">
-              <h1 class="tpc_content" id='body_<bean:write name="forumMessage" property="messageId"/>'>
-                  <div class="article">
+              <div class="article">
+                <h1 class="tpc_content" id='body_<bean:write name="forumMessage" property="messageId"/>'>
                      <bean:write name="forumMessage" property="messageVO.body" filter="false"/>
-                  </div>
-              </h1>
+                </h1>
+              </div>
               <logic:equal name="forumMessage" property="root" value="true">    
               <div class="post_titletag">
                 <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">
