@@ -54,7 +54,7 @@
         </div>
 
         <div class="box">
-          <h3>猜你喜欢</h3>
+          <blockquote><em>猜你喜欢</em></blockquote>
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
           <ins class="adsbygoogle"
                style="display:block"
@@ -147,15 +147,6 @@
           </script>
         </div>
       </div>
-      <!-- Start Widget poplist -->
-      <div class="widget">
-        <div class="wid-vid">
-          <ul>
-            <div id="poplist"></div>
-          </ul>
-        </div>
-      </div>
-
     </div>
   </div>    
 </div>
@@ -187,9 +178,6 @@
   <script>
       load('https://cdn.jdon.com/query/threadDigList', function (xhr) {
           document.getElementById("digList").innerHTML = xhr.responseText;
-      });
-      load('https://cdn.jdon.com/query/popularList', function (xhr) {
-          document.getElementById("poplist").innerHTML = xhr.responseText;
       });
   </script>
 

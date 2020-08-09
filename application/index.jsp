@@ -143,17 +143,8 @@
 							</ul>
 							</div>
 				</div>
-			
-				<!-- Start Widget poplist -->
-				<div class="widget">
-					    <div class="wid-vid">
-							<ul>
-							  <div id="poplist"></div>   
-							</ul>
-							</div>
-				</div>
-				
-					<!-- Start Widget urlList -->
+
+				<!-- Start Widget urlList -->
 				<div class="widget">
 					    <div class="wid-vid">
 							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -204,16 +195,6 @@
     load('https://cdn.jdon.com/query/threadDigList', function (xhr) {
   	       document.getElementById("digList").innerHTML = xhr.responseText;
 			});
-	// 	load('https://cdn.jdon.com/query/threadNewList', function (xhr) {
-    //     document.getElementById("threadNewList").innerHTML = xhr.responseText;
-    // });	
-    load('https://cdn.jdon.com/query/popularList', function (xhr) {
-  	       document.getElementById("poplist").innerHTML = xhr.responseText;
-			});
-    // load('https://cdn.jdon.com/query/urlListAction', function (xhr) {
-    //     document.getElementById("urllist").innerHTML = xhr.responseText;
-    // });
-
 </script> 	
 </body>
 </html>

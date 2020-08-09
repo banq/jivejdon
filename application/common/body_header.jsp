@@ -117,7 +117,6 @@
 				<li><a href="javascript:shareto('sina')"><i class="fa fa-weibo"></i></a></li>
 				<li><a href="javascript:shareto('weixin')"><i class="fa fa-weixin"></i></a></li>
 				<li><a href="javascript:shareto('qzone')"><i class="fa fa-qq"></i></a></li>
-				<li><a href="javascript:shareto('googlebuzz')"><i class="fa fa-google-plus-square"></i></a></li>
 			</ul>
 		</div>
 	</nav>
