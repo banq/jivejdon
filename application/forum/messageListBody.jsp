@@ -95,9 +95,10 @@
           <div class="post_body">
           <div class="post_bodyin">
             <div class="post_body_content">
-             <h1 class="tpc_content"
-                  id='body_<bean:write name="forumMessage" property="messageId"/>'><p class="indent">
-                <bean:write name="forumMessage" property="messageVO.body" filter="false"/>
+              <h1 class="tpc_content" id='body_<bean:write name="forumMessage" property="messageId"/>'>
+                  <div class="article">
+                     <bean:write name="forumMessage" property="messageVO.body" filter="false"/>
+                  </div>
               </h1>
               <logic:equal name="forumMessage" property="root" value="true">    
               <div class="post_titletag">
@@ -108,7 +109,7 @@
                 </logic:iterate>
                 </div>
               </logic:equal>
-<p></p>
+              <p></p>
 </div>
 <logic:equal name="forumMessage" property="root" value="true">
   <div class=diggArea>
