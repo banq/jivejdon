@@ -76,7 +76,16 @@
 					</div>
 					<div class="box-content">
 						<div class="row">
-		
+							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<ins class="adsbygoogle"
+								 style="display:block"
+								 data-ad-format="fluid"
+								 data-ad-layout-key="-e3+4a-2h-5p+v6"
+								 data-ad-client="ca-pub-7573657117119544"
+								 data-ad-slot="4250528285"></ins>
+							<script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
 						</div>
 					</div>
 				</div>
