@@ -80,8 +80,8 @@
 			
 		<component name="vipUserThrottleConf"
 			class="com.jdon.jivejdon.spi.component.throttle.post.VIPUserThrottleConf">
-			<constructor value="10" />    	<!-- vip message count -->
-			<constructor value="3" />       <!-- operator CUD limit for VIP user-->
+			<constructor value="100" />    	<!-- vip message count -->
+			<constructor value="10" />       <!-- operator CUD limit for VIP user-->
 			<constructor value="3600" />    	<!-- limit time /second -->
 		</component>
 		
