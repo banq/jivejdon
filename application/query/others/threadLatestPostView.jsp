@@ -52,7 +52,7 @@
             <td style='word-WRAP: break-word'>
      
   
-<span class="tpc_content">
+<span class="article">
       <bean:write name="forumMessage" property="messageVO.shortBody[100]" />
 </span>
 

@@ -90,7 +90,7 @@
                            target="_blank"><b><bean:write name="forumThread"
                                                           property="name"/></b></a>
                         <p>
-                        <span class="tpc_content">
+                        <span class="article">
                 <bean:write name="messageSearchSpec" property="body"
                             filter="false"/>
              </span>
