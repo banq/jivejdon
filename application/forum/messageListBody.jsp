@@ -96,9 +96,9 @@
           <div class="post_bodyin">
             <div class="post_body_content">
               <div class="article">
-                <h1 class="tpc_content" id='body_<bean:write name="forumMessage" property="messageId"/>'>
+                <span id='body_<bean:write name="forumMessage" property="messageId"/>'>
                      <bean:write name="forumMessage" property="messageVO.body" filter="false"/>
-                </h1>
+                </span>
               </div>
               <logic:equal name="forumMessage" property="root" value="true">    
               <div class="post_titletag">
