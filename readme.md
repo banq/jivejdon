@@ -1,8 +1,7 @@
 Jivejdon
 =========================================
 
-Jivejdon is a full DDD application with Event Soucing/CQRS and clean architecture/Hexagonalarchitecture,  powered by [jdonframework](https://github.com/banq/jdonframework) ,running  for over ten years
-in: [https://www.jdon.com/forum](https://www.jdon.com/forum)
+Jivejdon is a full DDD application with Event Soucing/CQRS and clean architecture/Hexagonalarchitecture,  powered by [jdonframework](https://github.com/banq/jdonframework) .
 
 Domain centric Architecture
 ==============================
