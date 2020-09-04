@@ -101,6 +101,20 @@
 						</ul>						
 					</div>
 				</div>
+				<div class="widget wid-post">
+                    <div class="content">
+                       <div class="wrap-vid">
+			               <div class="thumbn"><img src="/simgs/forum/ddd-book.png" class="thumbnail"></div> 
+						      <p><br>本站原创<br><a href="/54881" target="_blank">《复杂软件设计之道：领域驱动设计全面解析与实战》</a></p>
+                        </div>
+                    </div>
+                </div>
+               	<!---- Start tags ---->
+				<div class="widget wid-post">
+                    <div class="info">
+                      <jsp:include page="/query/tagHotList.shtml" flush="true"></jsp:include>  
+                    </div>     
+                </div>				
 				<!---- Start Widget digList---->
 				<div class="widget">
 					<div class="wid-vid">
@@ -117,13 +131,6 @@
 						</script>
 					</div>
 				</div>
-                	<!---- Start tags ---->
-				<div class="widget wid-post">
-                    <div class="info">
-                      <jsp:include page="/query/tagHotList.shtml" flush="true"></jsp:include>  
-                    </div>     
-                </div>
-
 				<!---- Start Widget digList---->
 				<div class="widget">
 					    <div class="wid-vid">
