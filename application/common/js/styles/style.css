@@ -222,7 +222,7 @@ DIV.diggArea{margin:0 auto;background-repeat:no-repeat;WIDTH:45px;HEIGHT:53px;BA
 #subbox span{float:left;display:block;overflow:hidden;width:56px;text-overflow:ellipsis;white-space:nowrap}
 .linkblock{overflow:hidden;text-overflow:ellipsis;word-break: break-all; white-space: normal;padding:5px 15px;border:1px solid #ddd;border-radius:3px;background:#fff;box-shadow:0 15px 10px -15px rgba(0,0,0,.4)}
 .frame-yy{float:left;padding:10px;width:100%;border:1px solid #ddd;border-radius:3px;background:#fff;box-shadow:0 15px 10px -15px rgba(0,0,0,.4)}
-.important{width:300px;padding:8px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
+.important{margin: 1px 20px 1px 1px;padding:10px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
 .important a{color:#888;text-decoration:none;line-height:23px}
 .thumbn{float:left;display:block;margin:10px;width:100px;background:#fff}
 .adsensf{float:right;display:block;margin:15px;background:#fff}
