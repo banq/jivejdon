@@ -95,7 +95,7 @@ public class UploadImageFilter implements Function<MessageVO, MessageVO> {
 			//sb.append("&oid=").append(uploadFile.getOid());
 			sb.append("/").append(uploadFile.getId());
 			sb.append("/").append(uploadFile.getOid());			
-			sb.append("\" border='0' >");
+			sb.append("\" border='0' loading='lazy' >");
 			sb.append("</a></p>\n");
 		} catch (Exception e) {
 			e.printStackTrace();
