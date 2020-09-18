@@ -99,10 +99,10 @@ String coutlength = (String)pageContext.getAttribute("count");
        博客：<span rel="nofollow"><bean:write name="account" property="username"/>.jdon.com</span>
    </a>
       <br>
-   <a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=3&subscribeId=<bean:write name="account" property="userId"/>"
-                  target="_blank" title="加关注"  rel="nofollow">            
-                 <img src="/images/user_add.gif" width="15" height="15" alt="加关注" border="0" align="absmiddle"/><span class="blackgray">+关注</span>
-     </a>
+   <%--<a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=3&subscribeId=<bean:write name="account" property="userId"/>"--%>
+                  <%--target="_blank" title="加关注"  rel="nofollow">            --%>
+                 <%--<img src="/images/user_add.gif" width="15" height="15" alt="加关注" border="0" align="absmiddle"/><span class="blackgray">+关注</span>--%>
+     <%--</a>--%>
    </td>
 </logic:notEqual>     
    </tr></table>       
