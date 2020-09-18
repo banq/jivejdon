@@ -277,10 +277,10 @@
         <from>^/rss$</from>
         <to>/RSServlet</to>
     </rule>
-    <rule>
-        <from>^/rss/tag/([a-zA-Z0-9]+)$</from>
-        <to>/RSServlet?tagId=$1</to>
-    </rule>
+    <!--<rule>-->
+        <!--<from>^/rss/tag/([a-zA-Z0-9]+)$</from>-->
+        <!--<to>/RSServlet?tagId=$1</to>-->
+    <!--</rule>-->
 
 
     <!--
