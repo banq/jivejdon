@@ -45,9 +45,10 @@
 				<span></span>  
                 <logic:notEmpty name="forumMessage" property="account">
 					<i class="fa fa-user"></i>
-				  <a href='<%=request.getContextPath()%>/blog/<bean:write name="forumMessage" property="account.username"/>' class="smallgray">
-                    <bean:write name="forumMessage" property="account.username"/>
-                  </a>
+                <bean:write name="forumMessage" property="account.username"/>
+				  <%-- <a href='<%=request.getContextPath()%>/blog/<bean:write name="forumMessage" property="account.username"/>' class="smallgray" rel="no">
+                    
+                  </a> --%>
                 </logic:notEmpty>      
               </div>
 

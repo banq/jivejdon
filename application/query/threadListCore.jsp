@@ -29,7 +29,7 @@
                       <bean:write name="forumMessage" property="digCount"/>
 					   </span>
                       </logic:notEqual>     
-			 <span><i class="fa fa-user"></i><a href="<%=request.getContextPath()%>/blog/<bean:write name="forumThread" property="rootMessage.account.username"/>" class="smallgray"><bean:write name="forumThread" property="rootMessage.account.username" /></a>
+			 <span><i class="fa fa-user"></i><bean:write name="forumThread" property="rootMessage.account.username" />
                </span>
                       
             </div>

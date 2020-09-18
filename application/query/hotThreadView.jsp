@@ -50,12 +50,10 @@
                     <td><bean:define id="rootMessage" name="forumThread"
                                      property="rootMessage"></bean:define>
                         <logic:notEmpty name="rootMessage" property="account">
-                            <a
-                                    href='<%=request.getContextPath()%>/blog/<bean:write name="rootMessage" property="account.username"/>'
-                                    target="_blank">
+                           
                                 <bean:write name="rootMessage"
                                             property="account.username"/>
-                            </a>
+                        
                         </logic:notEmpty>
                     </td>
                     <td><bean:write name="forumThread"

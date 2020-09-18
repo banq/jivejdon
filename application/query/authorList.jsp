@@ -31,7 +31,7 @@ String coutlength = (String)pageContext.getAttribute("count");
 <logic:iterate id="account" name="accountListForm" property="list" length='<%=coutlength%>'>
 <div class="linkblock">  
 <table width="100%"><tr><td width="50%" align="center">
-         <a href='<%=request.getContextPath()%>/blog/<bean:write name="account" property="username" />'>          
+      
            <logic:notEmpty name="account" property="uploadFile">
             <logic:equal name="account" property="roleName" value="User"> 
                <img  src="/img/account/<bean:write name="account" property="userId"/>"  border='0' class="post_author_pic" />
@@ -62,7 +62,6 @@ String coutlength = (String)pageContext.getAttribute("count");
    </td></tr></table>
 </logic:equal>
 	
-         </a>	
 </td>
 <logic:notEqual name="noheader" value="on">
 <td>
@@ -85,7 +84,7 @@ String coutlength = (String)pageContext.getAttribute("count");
             <span class="smallgray"><bean:write name="account" property="subscribedCount"/></span>
       </a>
     </logic:greaterThan>
-             
+<%--              
 &nbsp; | 微博              
     <logic:greaterThan name="account" property="messageCount" value="0">
        <a href="<%=request.getContextPath()%>/blog/messages/<bean:write name="account" property="username"/>"  target="_blank"  rel="nofollow">
@@ -97,7 +96,7 @@ String coutlength = (String)pageContext.getAttribute("count");
    <br> 	
    <a href="<%=request.getContextPath()%>/blog/<bean:write name="account" property="username"/>" >
        博客：<span rel="nofollow"><bean:write name="account" property="username"/>.jdon.com</span>
-   </a>
+   </a> --%>
       <br>
    <%--<a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=3&subscribeId=<bean:write name="account" property="userId"/>"--%>
                   <%--target="_blank" title="加关注"  rel="nofollow">            --%>
