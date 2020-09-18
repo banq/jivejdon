@@ -18,13 +18,13 @@ String coutlength = (String)pageContext.getAttribute("count");
 	</a>
 	&nbsp;&nbsp;
 	<%--<a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=2&subscribeId=<bean:write name="threadTag" property="tagID"/>" target="_blank" title="当本标签有新内容加入 自动通知我"  rel="nofollow">--%>
-		<i class="fa fa-heart"></i>
-		<logic:notEmpty  name="threadTag" property="subscriptionCount" >
-			<logic:greaterThan name="threadTag" property="subscriptionCount" value="0">
-				<bean:write name="threadTag" property="subscriptionCount"/>
-			</logic:greaterThan>
-		</logic:notEmpty>
-	</a>
+		<%--<i class="fa fa-heart"></i>--%>
+		<%--<logic:notEmpty  name="threadTag" property="subscriptionCount" >--%>
+			<%--<logic:greaterThan name="threadTag" property="subscriptionCount" value="0">--%>
+				<%--<bean:write name="threadTag" property="subscriptionCount"/>--%>
+			<%--</logic:greaterThan>--%>
+		<%--</logic:notEmpty>--%>
+	<%--</a>--%>
 </div>
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='<%=coutlength%>' >
 	<div><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>" target="_blank" class="smallgray"><bean:write name="forumThread" property="name" /></a></div>
