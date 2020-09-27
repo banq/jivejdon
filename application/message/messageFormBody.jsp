@@ -5,9 +5,6 @@
 <%@ taglib uri="struts-html" prefix="html" %>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
-<script src="//static.jdon.com/common/form.js"></script>
-<script src="//static.jdon.com/common/ckeditor/ckeditor.js"></script>
-<script src="//static.jdon.com/common/ckeditor/sample.js"></script>
 <div class="box">
 <div class="row">
   <div class="col-md-12">
@@ -27,6 +24,10 @@
     </div>
   </div>
 </div>
+<script src="//static.jdon.com/common/form.js"></script>
+<script src="//static.jdon.com/common/ckeditor/ckeditor.js"></script>
+<script src="//static.jdon.com/common/ckeditor/sample.js"></script>
+
 <script>
     initSample();
     // CKEDITOR.config.height = 480;
