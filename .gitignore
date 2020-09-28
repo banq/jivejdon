@@ -13,7 +13,6 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
@@ -32,12 +31,10 @@ jivejdon.iml
 target
 classes
 wars
-lib
 report
 searchlib
 servletlib
 strutslib
-doc/tomcat/lib/jaas.jar
 classes/com/jdon/jivejdon/manager/account/SinaOAuthSubmitter.class
 classes/com/jdon/jivejdon/repository/ThreadRepository.class
 classes/com/jdon/jivejdon/manager/account/SinaOAuthSubmitter.class
@@ -49,7 +46,6 @@ classes/com/jdon/jivejdon/repository/builder/MessageRepositoryDao.class
 classes/com/jdon/jivejdon/repository/builder/ThreadRepositoryDao.class
 classes/com/jdon/jivejdon/repository/dao/sql/MessageDaoSql.class
 classes/com/jdon/jivejdon/service/imp/message/ForumMessageShell.class
-doc/tomcat/lib/jaas.jar
 report/TEST-com.jdon.jivejdon.infrastructure.repository.search.CompassTest.txt
 report/TEST-com.jdon.jivejdon.domain.model.realtime.NotificationLocatorTest.txt
 .classpath
@@ -60,8 +56,6 @@ report/TEST-com.jdon.jivejdon.domain.model.realtime.NotificationLocatorTest.txt
 .settings/org.eclipse.core.resources.prefs
 .settings/org.eclipse.jdt.core.prefs
 .settings/org.eclipse.m2e.core.prefs
-bin
-bin
 classes
 .class
 classes/com/jdon/jivejdon/repository/ThreadRepository.class
@@ -76,11 +70,11 @@ classes/com/jdon/jivejdon/repository/builder/MessageRepositoryDao.class
 classes/com/jdon/jivejdon/repository/builder/ThreadRepositoryDao.class
 classes/com/jdon/jivejdon/repository/dao/sql/MessageDaoSql.class
 classes/com/jdon/jivejdon/service/imp/message/ForumMessageShell.class
-doc/tomcat/lib/jaas.jar
+
 report/TEST-com.jdon.jivejdon.domain.model.realtime.NotificationLocatorTest.txt
-doc/tomcat/lib/jaas.jar
+
 report/TEST-com.jdon.jivejdon.infrastructure.repository.search.CompassTest.txt
-/doc/tomcat/lib/jaas.jar
+
 .settings/
 application/blog/js/
 src/main/java/com/jdon/jivejdon/manager/throttle/img/
