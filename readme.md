@@ -221,6 +221,19 @@ Docker:
 browser : http://$DOCKER_HOST_IP:8080
 
 
+Runtime download
+===============================
+[jivejdon+tomcat+mysql](https://pan.baidu.com/s/15yqyo6GBx8OHmpoTpweQ3A)
+download passwd:97j9
+Start the server:
+1. mysql-5.6.15-winx64\bin\mysqld.exe
+2. apache-tomcat-7.0.37\bin\debug.bat
+
+app: http://127.0.0.1:8080/
+debug port:8000
+you can debug jivejdon in IntelliJ Idea by 8000 port
+
+
 Document
 ------------------------------------
 
