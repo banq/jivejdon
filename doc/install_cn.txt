@@ -1,4 +1,16 @@
-﻿JiveJdon可安装任何JavaEE服务器中。基于JDK/JRE 1.6 以上版本。
+﻿两种安装方式：
+1. Docker安装：
+mvn package
+docker build -t jivejdondb -f Dockerfile.db .
+docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 jivejdondb
+docker build -t jivejdonweb -f Dockerfile.web .
+docker run -p 8080:8080 jivejdonweb
+browser : http://$DOCKER_HOST_IP:8080
+
+
+2. 手工安装，非常麻烦
+JiveJdon可安装任何JavaEE服务器中。基于JDK/JRE 1.6 以上版本。
+
 
 ###################################################################################################
 数据库安装准备，这个步骤是所有步骤第一步：
