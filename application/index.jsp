@@ -214,7 +214,7 @@
 <%@ include file="./common/IncludeBottomBody.jsp" %> 
 <%@ include file="../account/loginAJAX.jsp" %>
 <script>       
-    load('/query/threadApprovedNewList3.shtml?count=15', function (xhr) {
+    load('/approvedNewList3', function (xhr) {
         document.getElementById("threadApprovedNewListOthers").innerHTML = xhr.responseText;
     });
     load('https://cdn.jdon.com/query/threadDigList', function (xhr) {
