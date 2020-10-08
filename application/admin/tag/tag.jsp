@@ -20,9 +20,9 @@ Title: <html:text name="tagForm"  property="title"></html:text>
 <br>
  本标签主题数：<bean:write  name="tagForm" property="assonum" />
  <br>
- <html:link page="/query/taggedThreadList.shtml" paramId="tagID" paramName="tagForm" paramProperty="tagID" target="_blank">
-             本标签主题列表</html:link>
-             
+ <a href='<%=request.getContextPath() %>/tags/<bean:write name="tagForm" property="tagID"/>' target="_blank" class="post-tag">
+             本标签主题列表
+</a>           
              
 </html:form>
 <br><br><br>

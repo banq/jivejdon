@@ -50,8 +50,9 @@
 int i = 0;
 %>
 <logic:iterate id="threadTag" name="tagsListForm" property="list" >
-    <html:link page="/query/taggedThreadList.shtml" paramId="tagID" paramName="threadTag" paramProperty="tagID" target="_blank" >
-             <span class="big18"><bean:write name="threadTag" property="title" /></span>    </html:link>
+    <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag">
+             <span class="big18"><bean:write name="threadTag" property="title" /></span>  
+    </a>
     (<bean:write name="threadTag" property="assonum" />)
     <html:link page="/admin/tag/tagAction.shtml?action=edit" paramId="tagID" paramName="threadTag" paramProperty="tagID">             
                编辑 </html:link>
