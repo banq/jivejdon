@@ -65,12 +65,12 @@
                           <span  class='ForumLastPost ajax_forumId=<bean:write name="forum" property="forumId"/>' >
                           <bean:write name="messageForm" property="modifiedDate" /></span></span> 
   
-                           <br>
+                           <%-- <br>
                     <span class="home_content" >作者:</span>
     <a href='<%=request.getContextPath()%>/<bean:write name="messageForm" property="forumThread.threadId"/>' >
                     <span  class='Users ajax_userId=<bean:write name="messageForm" property="account.userId"/>' >
                     <bean:write name="messageForm" property="account.username" /></span></a>                       
-                        
+                         --%>
             </logic:notEmpty>
 
 
@@ -85,7 +85,7 @@
 			</div>
 			<!-- /////////////////右边 -->
              <div id="sidebar" class="col-md-4">
-				<!---- Start Widget ---->
+				<%-- <!---- Start Widget ---->
 				<div class="widget wid-follow">
 					<div class="content">
 						<ul class="list-inline">
@@ -94,7 +94,7 @@
 							</form>
 						</ul>						
 					</div>
-				</div>
+				</div> --%>
 
                  <!---- Start tags ---->
                  <div class="widget wid-post">
