@@ -55,7 +55,7 @@
                 <span class="home_content" ><bean:write name="forum" property="description" filter="false"/></span>
             </td>
             <td>
-               <span class="home_content" > <bean:write name="forum" property="forumState.threadCount" /> / <bean:write name="forum" property="forumState.messageCount" /></span>
+               <span class="home_content" > <bean:write name="forum" property="forumState.threadCount" /> </span>
             </td>
             <td>
        
@@ -63,7 +63,7 @@
   <logic:notEmpty name="messageForm" property="creationDate">
                           <span class="home_content" >
                           <span  class='ForumLastPost ajax_forumId=<bean:write name="forum" property="forumId"/>' >
-                          <bean:write name="messageForm" property="modifiedDate" /></span></span> 
+                          <bean:write name="messageForm" property="modifiedDate2" /></span></span> 
   
                            <%-- <br>
                     <span class="home_content" >作者:</span>
