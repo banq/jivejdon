@@ -224,10 +224,10 @@
 %>
 <script>  
 	if(document.getElementById("home-thumbnai") != null)
-	  if(document.getElementById("home-thumbnai").data != null)
-	     document.getElementById("home-thumbnai").src = document.getElementById("home-thumbnai").data ;
+	    if(document.getElementById("home-thumbnai").getAttribute("data-src") != null)
+	      document.getElementById("home-thumbnai").src = document.getElementById("home-thumbnai").getAttribute("data-src") ;
 	  else
-         document.getElementById("home-thumbnai").src = "https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
+          document.getElementById("home-thumbnai").src = "https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
 </script> 	
 </body>
 </html>
