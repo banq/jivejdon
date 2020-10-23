@@ -189,24 +189,13 @@
 			</div>
 		</div>
 	</div>
-<%
-	String imagesize = "10";
-		if (request.getParameter("imagesize") != null)
-		    imagesize = request.getParameter("imagesize");
-  String mythreadId = "";
-  if (application.getAttribute("thumbthreadId") != null) {
-    mythreadId = ((Long) application.getAttribute("thumbthreadId")).toString();
-  }
-  Integer homethumbnai = (Integer) application.getAttribute(mythreadId);
-  if (homethumbnai == null) {
-    homethumbnai = 1 + (int) (Math.random() * Integer.parseInt(imagesize));
-    application.setAttribute(mythreadId, homethumbnai);
-  }
-%>
-<script>   
-    if(document.getElementById("home-thumbnai") != null)
-       document.getElementById("home-thumbnai").src = "https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
-</script> 		
+	<%@ include file="../account/loginAJAX.jsp" %>
+<script>       
+    load('/approvedNewList3', function (xhr) {
+        document.getElementById("threadApprovedNewListOthers").innerHTML = xhr.responseText;
+    });
+</script>
+
  <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://libs.baidu.com/bootstrap/3.1.1/css/bootstrap.min.css"  type="text/css">
 	<!-- Custom Fonts -->
@@ -214,14 +203,31 @@
 	<!-- Custom CSS -->
     <link rel="stylesheet" href="https://static.jdon.com/common/js/styles/style.css">
 <%@ include file="./common/IncludeBottomBody.jsp" %> 
-<%@ include file="../account/loginAJAX.jsp" %>
 <script>       
-    load('/approvedNewList3', function (xhr) {
-        document.getElementById("threadApprovedNewListOthers").innerHTML = xhr.responseText;
-    });
     load('https://cdn.jdon.com/query/threadDigList', function (xhr) {
   	       document.getElementById("digList").innerHTML = xhr.responseText;
 			});
+</script> 
+<%
+    String imagesize = "10";
+		if (request.getParameter("imagesize") != null)
+		    imagesize = request.getParameter("imagesize");
+    String mythreadId = "";
+    if (application.getAttribute("thumbthreadId") != null) {
+        mythreadId = ((Long) application.getAttribute("thumbthreadId")).toString();
+    }
+    Integer homethumbnai = (Integer) application.getAttribute(mythreadId);
+    if (homethumbnai == null) {
+        homethumbnai = 1 + (int) (Math.random() * Integer.parseInt(imagesize));
+        application.setAttribute(mythreadId, homethumbnai);
+    }
+%>
+<script>  
+	if(document.getElementById("home-thumbnai") != null)
+	  if(document.getElementById("home-thumbnai").data != null)
+	     document.getElementById("home-thumbnai").src = document.getElementById("home-thumbnai").data ;
+	  else
+         document.getElementById("home-thumbnai").src = "https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
 </script> 	
 </body>
 </html>
