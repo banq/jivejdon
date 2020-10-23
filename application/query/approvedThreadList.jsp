@@ -23,7 +23,7 @@
                     <img id="home-thumbnai" src="" border='0' class="thumbnail" width="610"/>
                   </logic:match>
                   <logic:notMatch name="forumMessage" property="messageUrlVO.thumbnailUrl" value="/simgs/thumb/">
-                    <img src="" border='0' class="thumbnail" width="610" data='<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>'/>
+                    <img id="home-thumbnai" src="" border='0' class="thumbnail" width="610" data='<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>'/>
                   </logic:notMatch>
                </logic:notEmpty>
                <logic:empty name="forumMessage" property="messageUrlVO.thumbnailUrl">
