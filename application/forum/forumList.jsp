@@ -35,7 +35,6 @@
 		 <tr>
 		 <th>道场名</th>
 		 <th>主题数</th>
-		 <th>更新</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -57,26 +56,7 @@
             <td>
                <span class="home_content" > <bean:write name="forum" property="forumState.threadCount" /> </span>
             </td>
-            <td>
-       
-            <bean:define id="messageForm" name="forum" property="forumState.latestPost" />
-  <logic:notEmpty name="messageForm" property="creationDate">
-                          <span class="home_content" >
-                          <span  class='ForumLastPost ajax_forumId=<bean:write name="forum" property="forumId"/>' >
-                          <bean:define id="cdate" name="messageForm" property="modifiedDate"></bean:define>
-                           <%String cdateS = (String) pageContext.getAttribute("cdate"); %><%=cdateS.substring(2, 11) %>
-                          </span></span> 
-  
-                           <%-- <br>
-                    <span class="home_content" >作者:</span>
-    <a href='<%=request.getContextPath()%>/<bean:write name="messageForm" property="forumThread.threadId"/>' >
-                    <span  class='Users ajax_userId=<bean:write name="messageForm" property="account.userId"/>' >
-                    <bean:write name="messageForm" property="account.username" /></span></a>                       
-                         --%>
-            </logic:notEmpty>
-
-
-            </td>
+         
         </tr>
 
 </logic:iterate>
