@@ -33,7 +33,7 @@
                      <table class="table table-striped">
 	 <thead>
 		 <tr>
-		 <th>道场名</th>
+		 <th>道场</th>
 		 <th>主题</th>
 		</tr>
 	</thead>
