@@ -34,7 +34,7 @@
 	 <thead>
 		 <tr>
 		 <th>道场名</th>
-		 <th>主题数</th>
+		 <th>主题</th>
 		</tr>
 	</thead>
 	<tbody>
