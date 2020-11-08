@@ -63,7 +63,9 @@
   <logic:notEmpty name="messageForm" property="creationDate">
                           <span class="home_content" >
                           <span  class='ForumLastPost ajax_forumId=<bean:write name="forum" property="forumId"/>' >
-                          <bean:write name="messageForm" property="modifiedDate2" /></span></span> 
+                          <bean:define id="cdate" name="messageForm" property="modifiedDate"></bean:define>
+                           <%String cdateS = (String) pageContext.getAttribute("cdate"); %><%=cdateS.substring(2, 11) %>
+                          </span></span> 
   
                            <%-- <br>
                     <span class="home_content" >作者:</span>
