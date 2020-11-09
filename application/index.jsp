@@ -203,11 +203,6 @@
 	<!-- Custom CSS -->
     <link rel="stylesheet" href="https://static.jdon.com/common/js/styles/style.css">
 <%@ include file="./common/IncludeBottomBody.jsp" %> 
-<script>       
-    load('https://cdn.jdon.com/query/threadDigList', function (xhr) {
-  	       document.getElementById("digList").innerHTML = xhr.responseText;
-			});
-</script> 
 <%
     String imagesize = "10";
 		if (request.getParameter("imagesize") != null)
@@ -229,5 +224,10 @@
 	  else
           document.getElementById("home-thumbnai").src = "https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
 </script> 	
+<script>       
+    load('https://cdn.jdon.com/query/threadDigList', function (xhr) {
+  	       document.getElementById("digList").innerHTML = xhr.responseText;
+			});
+</script> 
 </body>
 </html>
