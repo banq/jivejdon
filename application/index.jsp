@@ -190,11 +190,6 @@
 		</div>
 	</div>
 	<%@ include file="../account/loginAJAX.jsp" %>
-<script>       
-    load('/approvedNewList3', function (xhr) {
-        document.getElementById("threadApprovedNewListOthers").innerHTML = xhr.responseText;
-    });
-</script>
 
  <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://libs.baidu.com/bootstrap/3.1.1/css/bootstrap.min.css"  type="text/css">
@@ -203,6 +198,11 @@
 	<!-- Custom CSS -->
     <link rel="stylesheet" href="https://static.jdon.com/common/js/styles/style.css">
 <%@ include file="./common/IncludeBottomBody.jsp" %> 
+<script>       
+    load('/approvedNewList3', function (xhr) {
+        document.getElementById("threadApprovedNewListOthers").innerHTML = xhr.responseText;
+    });
+</script>
 <%
     String imagesize = "10";
 		if (request.getParameter("imagesize") != null)
