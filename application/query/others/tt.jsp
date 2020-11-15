@@ -8,6 +8,9 @@
 <% 
 com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(6 * 60 * 60, request, response);
 %>
+<logic:empty name="threadTag">
+  return 404;
+</logic:empty>
 <logic:notEmpty name="threadTag">
 
 <bean:parameter id="count" name="count" value="8"/>
