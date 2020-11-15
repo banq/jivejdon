@@ -198,11 +198,6 @@
 	<!-- Custom CSS -->
     <link rel="stylesheet" href="https://static.jdon.com/common/js/styles/style.css">
 <%@ include file="./common/IncludeBottomBody.jsp" %> 
-<script>       
-    load('/approvedNewList3', function (xhr) {
-        document.getElementById("threadApprovedNewListOthers").innerHTML = xhr.responseText;
-    });
-</script>
 <%
     String imagesize = "10";
 		if (request.getParameter("imagesize") != null)
@@ -244,11 +239,13 @@ $(document).ready(function(){
 	//setInterval(lazyload,100);
 	lazyload();
 });
-$(document).ready(function(){
-   		
-}); 
-	
+
 </script> 	
+<script>       
+    load('/approvedNewList3', function (xhr) {
+        document.getElementById("threadApprovedNewListOthers").innerHTML = xhr.responseText;
+    });
+</script>
 <script>       
     load('https://cdn.jdon.com/query/threadDigList', function (xhr) {
   	       document.getElementById("digList").innerHTML = xhr.responseText;
