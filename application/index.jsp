@@ -217,12 +217,17 @@
         application.setAttribute(mythreadId, homethumbnai);
     }
 %>
-<script>  
-	if(document.getElementById("home-thumbnai") != null)
-	    if(document.getElementById("home-thumbnai").getAttribute("data-src") != null)
-	      document.getElementById("home-thumbnai").src = document.getElementById("home-thumbnai").getAttribute("data-src") ;
-	  else
-          document.getElementById("home-thumbnai").src = "https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
+<script> 
+$(document).ready(function(){
+   		if(document.getElementById("home-thumbnai") != null)
+	          if(document.getElementById("home-thumbnai").getAttribute("data-src") != null)
+				   //document.getElementById("home-thumbnai").src = document.getElementById("home-thumbnai").getAttribute("data-src") ;
+				   $("#home-thumbnai").attr('src',$(this).attr('data-src'));
+	          else
+                   //document.getElementById("home-thumbnai").src = "https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
+                   $("#home-thumbnai").attr('src','https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg');
+}); 
+	
 </script> 	
 <script>       
     load('https://cdn.jdon.com/query/threadDigList', function (xhr) {
