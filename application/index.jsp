@@ -219,13 +219,33 @@
 %>
 <script> 
 $(document).ready(function(){
-   		if(document.getElementById("home-thumbnai") != null)
+    // 获取页面视口高度
+    var viewportHeight = $(window).height();
+    var lazyload = function() {
+        // 获取窗口滚动条距离
+        var scrollTop = $(window).scrollTop();
+        $('img').each(function(){
+        // 判断 视口高度+滚动条距离 与 图片元素距离文档原点的高度        
+        var x = scrollTop + viewportHeight - $(this).position().top;
+        // 如果大于0 即该元素能被浏览者看到，则将暂存于自定义属性loadpic的值赋值给真正的src           
+        if (x > 0)
+        {
+            if(document.getElementById("home-thumbnai") != null)
 	          if(document.getElementById("home-thumbnai").getAttribute("data-src") != null)
 				   //document.getElementById("home-thumbnai").src = document.getElementById("home-thumbnai").getAttribute("data-src") ;
 				   $("#home-thumbnai").attr('src',$(this).attr('data-src'));
 	          else
                    //document.getElementById("home-thumbnai").src = "https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
                    $("#home-thumbnai").attr('src','https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg');
+        }
+    })
+    }
+    // 创建定时器 “实时”计算每个元素的src是否应该被赋值
+	//setInterval(lazyload,100);
+	lazyload();
+});
+$(document).ready(function(){
+   		
 }); 
 	
 </script> 	
