@@ -113,17 +113,24 @@
               <p></p>
 </div>
 <logic:equal name="forumMessage" property="root" value="true">
-  <div class=diggArea>
+  <div class="diggArea list-inline  top-social" >
     <DIV class=diggNum id="digNumber_<bean:write name="forumMessage" property="messageId"/>">
       <logic:notEqual name="forumMessage" property="digCount" value="0">
         <bean:write name="forumMessage" property="digCount"/>
       </logic:notEqual>
     </DIV>
-    <DIV class="diggLink top8"
+	<DIV class="diggLink top8"
          id="textArea_<bean:write name="forumMessage" property="messageId"/>"><a
-        href="javascript:digMessage('<bean:write name="forumMessage" property="messageId"/>')">赞</a>
-    </DIV>
+        href="javascript:digMessage('<bean:write name="forumMessage" property="messageId"/>')"><i class="fa fa-thumbs-o-up"></i></a>
+    </DIV> 
   </div>
+   <div style="margin: 0 auto;width: 82px">
+	 <ul class="list-inline  top-social">
+		<li><a href="javascript:shareto('sina')"><i class="fa fa-weibo"></i></a></li>
+		<li><a href="javascript:shareto('weixin')"><i class="fa fa-weixin"></i></a></li>
+		<li><a href="javascript:shareto('qzone')"><i class="fa fa-qq"></i></a></li>		
+	  </ul>
+  </div>		
 </logic:equal>
 </div>
 </div>
