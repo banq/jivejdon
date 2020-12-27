@@ -79,3 +79,28 @@ function loadCkeditJS() {
 }    
 
 
+
+// 右滑返回
+$(document).ready(function(){
+    let startx,starty,endx,endy;
+    let el = document.getElementById('page-content');//触摸区域。
+    function cons() {
+        if (Math.abs(startx - endx) > Math.abs(starty - endy)) { // 确保用户在横向的操作距离大于纵向的操作距离。
+            if (startx + 10 < endx) {  //从左向右滑动距离大于30时生效
+                location.href=document.referrer  // 返回，document.referrer为上一页URL。
+            }
+        }
+    }
+    el.addEventListener('touchstart', function (e) {
+        let touch = e.changedTouches;
+        startx = touch[0].clientX;
+        starty = touch[0].clientY;
+    });
+    el.addEventListener('touchend', function (e) {
+        let touch = e.changedTouches;
+        endx = touch[0].clientX;
+        endy = touch[0].clientY;
+        cons();
+    });
+
+})
