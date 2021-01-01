@@ -42,7 +42,6 @@
     </script>
 </head>
 <body>
-<%@ include file="../account/loginAJAX.jsp" %>
 <%@ include file="./body_header.jsp" %>
 <div id="page-content" class="single-page container">
 	<div class="row">
