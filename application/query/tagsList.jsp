@@ -36,7 +36,7 @@
          load('/query/tt/${threadTag.tagID}', function(xhr) {
   	       document.getElementById('ajax_tagID=<bean:write name="threadTag" property="tagID"/>').innerHTML = xhr.responseText;
          });
-        </script> 
+        </script>
 	</div>	
 </div>  
 </div>

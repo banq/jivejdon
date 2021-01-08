@@ -40,6 +40,7 @@
 
         gtag('config', 'UA-32868073-1');
     </script>
+    <script src="//static.jdon.com/common/login2.js"></script>
 </head>
 <body>
 <%@ include file="./body_header.jsp" %>
