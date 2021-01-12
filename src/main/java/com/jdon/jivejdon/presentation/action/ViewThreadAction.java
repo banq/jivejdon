@@ -34,6 +34,8 @@ public class ViewThreadAction extends Action {
 //			response.sendError(404);
 //			return null;
 //		}
+		if (!request.getProtocol().contains("2"))//http\2
+			return null;
 
 		String threadId = request.getParameter("thread");
 		if ((threadId == null) || (!UtilValidate.isInteger(threadId)) || threadId.length() > 10) {
