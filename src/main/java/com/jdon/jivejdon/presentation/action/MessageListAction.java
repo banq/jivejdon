@@ -105,9 +105,12 @@ public class MessageListAction extends ModelListAction {
 				throw new Exception("thread is null " + threadId);
 
 			modelListForm.setOneModel(forumThread);
-			//view count
-			forumThread.addViewCount();
-			getThreadViewCounterJob().saveViewCounter(forumThread);
+
+			if (request.getProtocol().contains("2"))//http\2
+			{//view count
+				forumThread.addViewCount();
+				getThreadViewCounterJob().saveViewCounter(forumThread);
+			}
 
 			if (request.getSession(false) != null) {
 				boolean[] authenticateds = getAuthedListForm(actionForm, request);
