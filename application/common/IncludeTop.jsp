@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty></title>
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://libs.baidu.com/bootstrap/3.1.1/css/bootstrap.min.css"  type="text/css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css"  type="text/css">
 	<!-- Custom Fonts -->
     <link rel="stylesheet" href="https://cdn.jdon.com/js/font-awesome.min.css"  type="text/css">
 	<!-- Custom CSS -->

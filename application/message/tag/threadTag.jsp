@@ -10,10 +10,10 @@
 <bean:define id="title" value=" 添加标签"/>
 <%@ include file="../messageHeader.jsp" %>
 <!-- jQuery and Modernizr-->
-<script src="https://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <!-- Core JavaScript Files -->
-<script src="https://libs.baidu.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
 
 <link rel="stylesheet" href="/common/autocomplete/jquery-ui.css" type="text/css">
