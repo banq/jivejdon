@@ -12,7 +12,6 @@ com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(6 * 60 * 60, request, response);
 String coutlength = (String)pageContext.getAttribute("count");
 %>        
 <logic:iterate indexId="i"   id="ThreadTag" name="tagsListForm" property="list" length='<%=coutlength%>' >
-    <bean:write name="ThreadTag" property="title"/>
-                     &nbsp;&nbsp; 
+ <bean:write name="ThreadTag" property="title"/>
 </logic:iterate>
 
