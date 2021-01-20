@@ -258,6 +258,13 @@
             <forward name="success" path="/query/others/tagHotList.jsp"/>
         </action>
 
+        <action path="/query/tagHotList2"
+                type="com.jdon.jivejdon.presentation.action.query.ThreadTagHotListAction"
+                name="tagsListForm" scope="request"
+                validate="false">
+            <forward name="success" path="/query/others/tagHotList2.jsp"/>
+        </action>
+
         <action path="/forum/threadDigSortedList"
                 type="com.jdon.jivejdon.presentation.action.query.ThreadDigSortedListAction"
                 name="threadListForm" scope="request"
