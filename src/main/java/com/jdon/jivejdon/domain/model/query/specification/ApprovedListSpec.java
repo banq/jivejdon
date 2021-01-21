@@ -10,7 +10,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 	//this value is display count on one page
 	private final int needCount = 15;
-	private final int needViewcount = 200;
+	private final int needViewcount = 300;
 	private long currentIndicator = 0;
 	private int currentStartBlock = 0;
 	private int currentStartPage = 0;
@@ -20,7 +20,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	public boolean isApproved(ForumThread thread, Account account) {
-		if (isGoodBlog(thread, account) || isExcelledDiscuss(thread) || isLargeViewCount(thread)) {
+		if (isGoodBlog(thread, account) || isExcelledDiscuss(thread)) {
 			return true;
 		} else
 			return false;
