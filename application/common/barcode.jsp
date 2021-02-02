@@ -30,10 +30,28 @@ body {
 </style>
 </head><body>
 <div id="qrcode"></div>
+<canvas id="myCanvas" width="120" height="120" style="border:1px solid #000000;display:none;">
 <script>
         jQuery('#qrcode').qrcode({
+          width: 120, //宽度   
+            height:120, //高度 
                 text        : "<%= url%>"
         });        
+//从 canvas 提取图片 image
+function convertCanvasToImage(canvas) {
+    //新Image对象，可以理解为DOM
+    var image = new Image();
+    // canvas.toDataURL 返回的是一串Base64编码的URL，当然,浏览器自己肯定支持
+    // 指定格式 PNG
+    image.src = canvas.toDataURL("image/png");
+    return image;
+}
+//获取网页中的canvas对象
+var mycanvas1=document.getElementsByTagName('canvas')[0];
+ 
+//将转换后的img标签插入到html中
+var img=convertCanvasToImage(mycanvas1);
+$('#qrcode').html(img);     
 </script>		
 微信扫描或下载识别二维码
 
