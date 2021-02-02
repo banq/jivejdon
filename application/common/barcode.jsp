@@ -20,7 +20,7 @@ if (request.getParameter("threadId") != null){
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex">
-<script type="text/javascript" src="/common/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="/common/js/jquery-qrcode-min.js"></script>
 <style>
 body {
@@ -30,7 +30,7 @@ body {
 </style>
 </head><body>
 <div id="qrcode"></div>
-<canvas id="myCanvas" width="120" height="120" style="border:1px solid #000000;display:none;">
+<canvas id="myCanvas" width="120" height="120" style="border:1px solid #000000;display:none;"></canvas>
 <script>
         jQuery('#qrcode').qrcode({
           width: 120, //宽度   
@@ -53,7 +53,7 @@ var mycanvas1=document.getElementsByTagName('canvas')[0];
 var img=convertCanvasToImage(mycanvas1);
 $('#qrcode').html(img);     
 </script>		
-微信扫描或下载识别二维码
+微信扫描或下载二维图片
 
 </body></html>
 		
