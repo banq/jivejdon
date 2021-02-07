@@ -42,7 +42,7 @@
 <table class="table table-striped">
     <tbody>
 <tr><td align="middle">
-    <form action="http://www.baidu.com/baidu" class="search">
+    <form action="https://www.baidu.com/baidu" class="search">
         <input type=text name=word  value="<bean:write name="query"/>" size="40">
         <input type="submit" value="百度本道场">
         <input name=tn type=hidden value="bds">
