@@ -227,7 +227,7 @@ Runtime download
 download passwd:97j9
 
 Start the server:
-1. mysql-5.6.15-winx64\bin\mysqld.exe
+1. mysql-5.6.15-winx64\bin\mysqld.exe, and telnet 127.0.0.1 3306 
 2. apache-tomcat-7.0.37\bin\debug.bat
 
 app: http://127.0.0.1:8080/
