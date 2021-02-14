@@ -208,9 +208,15 @@ Most of stuffs in aggregate root "ForumThread" mapping to jiveThread table, but 
 In jiveMessage table there are two kinds of ForumMessage: root message and replies messages, one thread only has one root message, but has many replies messages, these replies messages are replies-posted event log. 
 in domain model,repliese messages (FormMessageReply) is a sub class of Root Message(FormMessage).
 
-
-Install
+COmpile & Package & Install
 ===============================
+
+``````
+git clone https://github.com/banq/jivejdon.git
+cd jivejdon
+mvn clean install -U
+``````
+
 Docker:
 1. mvn package
 2. docker build -t jivejdondb -f Dockerfile.db .
