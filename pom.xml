@@ -16,7 +16,8 @@
     </properties>
 
     <repositories>
-
+        <!--mvn clean install -U
+             if failed, please replcae "https://www.jdon.com" with "http://en.jdon.com" -->
         <repository>
             <id>jdon-struts1x</id>
             <url>https://www.jdon.com/jdon-mvn-repo/releases</url>
