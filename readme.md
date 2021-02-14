@@ -234,7 +234,7 @@ app: http://127.0.0.1:8080/
 
 debug port:8000
 
-you can debug jivejdon in IntelliJ Idea by 8000 port
+you can debug jivejdon in IntelliJ Idea with connectting to 8000 port
 
 jdon local repository: [jdon-mvn-repo.rar](https://pan.baidu.com/s/15yqyo6GBx8OHmpoTpweQ3A)
 download passwd:97j9
