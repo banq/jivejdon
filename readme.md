@@ -217,7 +217,7 @@ cd jivejdon
 mvn clean install -U
 ``````
 
-if there are any erros, please remove all downloaded files in Maven local repository and try "mvn clean install -U" again, or directly download all jdon library package from:
+if there are any erros, please remove all downloaded files in Maven local repository and try "mvn clean install -U" again, or directly download all jdon library packages from:
 
 [jdon-mvn-repo.rar](https://pan.baidu.com/s/15yqyo6GBx8OHmpoTpweQ3A)
 download passwd:97j9
