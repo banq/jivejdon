@@ -240,7 +240,7 @@ jdon local repository: [jdon-mvn-repo.rar](https://pan.baidu.com/s/15yqyo6GBx8OH
 download passwd:97j9
 
 copy them to your Maven local repository directory in <localRepository> of your settings.xml file.
-default repository dir:C:\Users\ YOUR WINDOWS LOGIN USERNAME \.m2\repository
+default repository dir:C:\Users\ YOUR WINDOWS LOGIN USERNAME \ .m2\repository
 
 Document
 ------------------------------------
