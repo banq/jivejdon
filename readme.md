@@ -226,18 +226,20 @@ unpack them and copy all files in "release" directory to your Maven local reposi
 default Maven local repository directory:C:\Users\ YOUR WINDOWS LOGIN USERNAME \ .m2\repository
 
 
+Runtime download
+===============================
+
 Docker:
-1. mvn package
-2. docker build -t jivejdondb -f Dockerfile.db .
-3. docker run  -p 3306:3306  -e MYSQL_ROOT_PASSWORD=123456 jivejdondb
-4. docker build -t jivejdonweb -f Dockerfile.web .
-5. docker run  -p 8080:8080 jivejdonweb
+``````
+1. docker build -t jivejdondb -f Dockerfile.db .
+2. docker run  -p 3306:3306  -e MYSQL_ROOT_PASSWORD=123456 jivejdondb
+3. docker build -t jivejdonweb -f Dockerfile.web .
+4. docker run  -p 8080:8080 jivejdonweb
+``````
 
 browser : http://$DOCKER_HOST_IP:8080
 
 
-Runtime download
-===============================
 [jivejdon+tomcat+mysql](https://pan.baidu.com/s/15yqyo6GBx8OHmpoTpweQ3A)
 download passwd:97j9
 
