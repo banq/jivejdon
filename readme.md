@@ -236,6 +236,9 @@ debug port:8000
 
 you can debug jivejdon in IntelliJ Idea by 8000 port
 
+jdon local repository: https://pan.baidu.com/s/1b29UasAn-MdIqRSeZEhb6Q
+download passwd:inaa
+copy them to your Maven local repository directory in <localRepository> of your settings.xml file.
 
 Document
 ------------------------------------
