@@ -19,39 +19,39 @@
 
         <repository>
             <id>jdon-struts1x</id>
-            <url>https://github.com/banq/jdon-mvn-repo/raw/master/releases</url>
+            <url>https://www.jdon.com/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>jdonaccessory</id>
-            <url>https://github.com/banq/jdon-mvn-repo/raw/master/releases</url>
+            <url>https://www.jdon.com/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>jdon-jdbcTemp</id>
-            <url>https://github.com/banq/jdon-mvn-repo/raw/master/releases</url>
+            <url>https://www.jdon.com/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>jdon-treepattern</id>
-            <url>https://github.com/banq/jdon-mvn-repo/raw/master/releases</url>
+            <url>https://www.jdon.com/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>weibo4j</id>
-            <url>https://github.com/banq/jdon-mvn-repo/raw/master/releases</url>
+            <url>https://www.jdon.com/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>tecentweibo</id>
-            <url>https://github.com/banq/jdon-mvn-repo/raw/master/releases</url>
-        </repository>
+            <url>https://www.jdon.com/jdon-mvn-repo/releases</url>
+        </repository> 
         <repository>
             <id>compass</id>
-            <url>https://github.com/banq/jdon-mvn-repo/raw/master/releases</url>
-        </repository>
+            <url>https://www.jdon.com/jdon-mvn-repo/releases</url>
+        </repository> 
         <repository>
             <id>lucene</id>
-            <url>https://github.com/banq/jdon-mvn-repo/raw/master/releases</url>
+            <url>https://www.jdon.com/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>urlrewrite</id>
-            <url>https://github.com/banq/jdon-mvn-repo/raw/master/releases</url>
+            <url>https://www.jdon.com/jdon-mvn-repo/releases</url>
         </repository>
     </repositories>
 
