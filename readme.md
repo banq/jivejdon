@@ -239,6 +239,7 @@ you can debug jivejdon in IntelliJ Idea by 8000 port
 jdon local repository: https://pan.baidu.com/s/1b29UasAn-MdIqRSeZEhb6Q
 download passwd:inaa
 copy them to your Maven local repository directory in <localRepository> of your settings.xml file.
+default:C:\Users\Administrator(your username)\.m2\repository\com\jdon
 
 Document
 ------------------------------------
