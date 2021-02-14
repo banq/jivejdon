@@ -208,7 +208,7 @@ Most of stuffs in aggregate root "ForumThread" mapping to jiveThread table, but 
 In jiveMessage table there are two kinds of ForumMessage: root message and replies messages, one thread only has one root message, but has many replies messages, these replies messages are replies-posted event log. 
 in domain model,repliese messages (FormMessageReply) is a sub class of Root Message(FormMessage).
 
-COmpile & Package & Install
+Compile & Package & Install
 ===============================
 
 ``````
@@ -216,6 +216,15 @@ git clone https://github.com/banq/jivejdon.git
 cd jivejdon
 mvn clean install -U
 ``````
+
+when compile or build if there are any erros, please remove all downloaded files in Maven local repository and try again, or directly download all jdon library package from:
+
+[jdon-mvn-repo.rar](https://pan.baidu.com/s/15yqyo6GBx8OHmpoTpweQ3A)
+download passwd:97j9
+
+unpack them and copy all files in "release" directory to your Maven local repository directory in <localRepository> of your settings.xml file.
+default Maven local repository directory:C:\Users\ YOUR WINDOWS LOGIN USERNAME \ .m2\repository
+
 
 Docker:
 1. mvn package
@@ -242,11 +251,6 @@ debug port:8000
 
 you can debug jivejdon in IntelliJ Idea with connectting to 8000 port
 
-jdon local repository: [jdon-mvn-repo.rar](https://pan.baidu.com/s/15yqyo6GBx8OHmpoTpweQ3A)
-download passwd:97j9
-
-copy them to your Maven local repository directory in <localRepository> of your settings.xml file.
-default repository dir:C:\Users\ YOUR WINDOWS LOGIN USERNAME \ .m2\repository
 
 Document
 ------------------------------------
