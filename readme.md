@@ -217,14 +217,14 @@ cd jivejdon
 mvn clean install -U
 ``````
 
-if there are any erros, please remove all downloaded files in Maven local repository and try "mvn clean install -U" again, or directly download all jdon library packages from:
+if there are any erros, please remove all downloaded files in Maven local repository and try "mvn clean install -U" again, or clone from https://gitee.com/banqjdon/jivejdon, or directly download all jdon library packages from:
 
 [jdon-mvn-repo.rar](https://pan.baidu.com/s/15yqyo6GBx8OHmpoTpweQ3A)
 download passwd:97j9
-
 unpack them and copy all files in "release" directory to your Maven local repository directory in <localRepository> of your settings.xml file.
 default Maven local repository directory:C:\Users\ YOUR WINDOWS LOGIN USERNAME \ .m2\repository
 
+china backup: https://gitee.com/banqjdon/jivejdon
 
 Runtime download
 ===============================
