@@ -149,7 +149,7 @@ var openPopUpBlogW = function(){
       <li></li>
     </ul>
   </div>
-  <html:form action="/message/searchAction.shtml" method="post" styleId="searchform">
+  <html:form action="/query/searchAction.shtml" method="post" styleId="searchform">
     <div class="menubar_right">
     <input name="count" type="hidden" value="1"/>
    <input name="userId" type="hidden" value="<bean:write name="accountProfileForm" property="account.userId"/>"/>

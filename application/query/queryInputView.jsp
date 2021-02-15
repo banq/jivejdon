@@ -27,8 +27,8 @@
                    onclick="return showCalendar('end_date_b', 'y-m-d');">
                 <br>
                 回复数不少于<input type="text" name="messageReplyCountWindow" size="4"
-                             value="10"/>
-                <html:submit value=" 查询热门主题" property="btnsearch"/>
+                             value="0"/>
+                <html:submit value=" 查询" property="btnsearch"/>
             </td>
         </tr>
         </tbody>

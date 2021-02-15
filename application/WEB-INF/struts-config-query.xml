@@ -58,7 +58,7 @@
         </action>
 
         <!-- search message  -->
-        <action path="/message/searchAction"
+        <action path="/query/searchAction"
                 type="com.jdon.jivejdon.presentation.action.query.SearchAction"
                 name="messageListForm" scope="request"
                 validate="false">
@@ -66,7 +66,7 @@
         </action>
 
         <!-- search threads not used -->
-        <action path="/message/searchThreadAction"
+        <action path="/query/searchThreadAction"
                 type="com.jdon.jivejdon.presentation.action.query.SearchThreadAction"
                 name="messageListForm" scope="request"
                 validate="false">
