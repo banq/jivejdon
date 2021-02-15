@@ -212,7 +212,7 @@ Compile & Package & Install
 ===============================
 
 ``````
-git clone https://github.com/banq/jivejdon.git
+git clone https://github.com/banq/jivejdon.git (git clone https://gitee.com/banqjdon/jivejdon.git)
 cd jivejdon
 mvn clean install -U
 ``````
