@@ -229,7 +229,7 @@ china backup: https://gitee.com/banqjdon/jivejdon
 Runtime download
 ===============================
 
-Docker:
+(1) Docker:
 ``````
 1. docker build -t jivejdondb -f Dockerfile.db .
 2. docker run  -p 3306:3306  -e MYSQL_ROOT_PASSWORD=123456 jivejdondb
@@ -240,7 +240,7 @@ Docker:
 browser : http://$DOCKER_HOST_IP:8080
 
 
-[jivejdon+tomcat+mysql](https://pan.baidu.com/s/15yqyo6GBx8OHmpoTpweQ3A)
+(2) [jivejdon+tomcat+mysql](https://pan.baidu.com/s/15yqyo6GBx8OHmpoTpweQ3A)
 download passwd:97j9
 
 Start the server:
