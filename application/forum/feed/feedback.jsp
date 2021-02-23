@@ -83,7 +83,9 @@ window.callback = function(res){
   
 </table>
   </html:form>
-  
+  <p>
+    <p>公众号：</p>
+                    <p><img src="simgs/weixin.png"></p>
 
 </div>
 	
