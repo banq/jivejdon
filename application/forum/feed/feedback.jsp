@@ -85,7 +85,7 @@ window.callback = function(res){
   </html:form>
   <p>
     <p>公众号：</p>
-                    <p><img src="simgs/weixin.png"></p>
+                    <p><img src="/simgs/weixin.png"></p>
 
 </div>
 	
