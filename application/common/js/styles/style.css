@@ -5,13 +5,7 @@ body,html{margin:0;padding:0;width:100%;word-wrap:break-word}
 html{ -webkit-text-size-adjust:none}
 .video embed,.video iframe,.video object{ width:100%;  height:auto}
 img{width:auto\9;height:auto;max-width:100%}
-h1{font-size:24px}
-h2{font-size:20px}
-h3{font-size:18px}
-h4{font-size:16px}
-h5{font-size:14px}
-h6{font-size:14px}
-h1,h2,h3,h4,h5,h6{color:#111;font-weight:600;font-family:Roboto,sans-serif}
+h1,h2,h3,h4,h5,h6{color:#555;font-weight:600;font-family:impact,Roboto,sans-serif}
 p{margin:0 0 20px}
 .indent{text-indent: 0px}
 a{color:#30A87C;-webkit-transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;transition:all .2s ease-in-out}
@@ -213,7 +207,7 @@ footer .footer-3 ul li a:hover{color:#666}
 .btn-2{padding:3px 8px}
 .btn-3{background-color:#444;color:#FADA1A;font-weight:700}
 .btn-3:hover{background-color:#fff;color:#000}
-.article{font-family: 'Segoe UI',SegoeUI,'Microsoft YaHei',微软雅黑,"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight: 400;color: #465049;font-size: 1.6rem;line-height: 1.8;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.article{font-family: 'Segoe UI',SegoeUI,'Microsoft YaHei',微软雅黑,"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight: 300;color: #555;font-size: 18px;line-height: 1.6em;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 DIV.diggArea{margin:0 auto;background-repeat:no-repeat;WIDTH:45px;HEIGHT:53px;BACKGROUND:url(/images/dig.png)}
 .diggArea .diggNum{margin:0 auto;padding-top:5px;padding-right:0;padding-bottom:0;padding-left:0;DISPLAY:block;COLOR:#a200ff;FONT-WEIGHT:lighter;FONT-SIZE:16px;WIDTH:45px;FONT-FAMILY:Georgia;HEIGHT:30px;TEXT-ALIGN:center}
 .diggArea .top8{margin:0 auto;padding-top:0}
