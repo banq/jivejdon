@@ -52,7 +52,7 @@ public class RegisterCodeAction extends HttpServlet {
 	protected Pattern robotPattern;
 
 	protected Pattern domainPattern;
-	
+
 	private ServletContext servletContext;
 
 	// private List<String> bannedIP = new ArrayList();
@@ -77,17 +77,18 @@ public class RegisterCodeAction extends HttpServlet {
 				Debug.logError(e, module);
 			}
 		}
-		
+
 		servletContext = config.getServletContext();
 
 		/**
-		 * Runnable task = new Runnable() { public void run() {
-		 * bannedIP.clear(); } }; // flush to db per one hour
-		 * scheduExec.scheduleWithFixedDelay(task, 60, 6000, TimeUnit.SECONDS);
+		 * Runnable task = new Runnable() { public void run() { bannedIP.clear(); } };
+		 * // flush to db per one hour scheduExec.scheduleWithFixedDelay(task, 60, 6000,
+		 * TimeUnit.SECONDS);
 		 */
 	}
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		if (!isPermitted(request)) {
 			Debug.logError(" is not Permitted ", module);
 			response.sendError(404);
@@ -116,7 +117,8 @@ public class RegisterCodeAction extends HttpServlet {
 			}
 
 			if (SkinUtils.verifyRegisterCode(registerCode, request)) {
-				CustomizedThrottle customizedThrottle = (CustomizedThrottle) WebAppUtil.getComponentInstance("customizedThrottle", servletContext);
+				CustomizedThrottle customizedThrottle = (CustomizedThrottle) WebAppUtil
+						.getComponentInstance("customizedThrottle", servletContext);
 				customizedThrottle.removeBanned(request.getRemoteAddr());
 				response.setHeader("Pragma", "No-cache");
 				response.setHeader("Cache-Control", "no-cache");
@@ -138,7 +140,7 @@ public class RegisterCodeAction extends HttpServlet {
 
 			response.setContentType("images/jpeg");
 			response.setHeader("Pragma", "No-cache");
-			response.setHeader("Cache-Control", "no-cache");
+			response.setHeader("Cache-Control", "no-store");
 			response.setDateHeader("Expires", 0);
 			toClient = response.getOutputStream();
 
@@ -159,7 +161,8 @@ public class RegisterCodeAction extends HttpServlet {
 
 		String userAgent = request.getHeader("User-Agent");
 		if (robotPattern != null) {
-			if (userAgent != null && userAgent.length() > 0 && robotPattern.matcher(userAgent.toLowerCase()).matches()) {
+			if (userAgent != null && userAgent.length() > 0
+					&& robotPattern.matcher(userAgent.toLowerCase()).matches()) {
 				// disable session.
 				return true;
 			}
@@ -171,7 +174,8 @@ public class RegisterCodeAction extends HttpServlet {
 		// if refer is null, 1. browser 2. google 3. otherspam
 		String referrerUrl = request.getHeader("Referer");
 		if (domainPattern != null) {
-			if (referrerUrl != null && referrerUrl.length() > 0 && domainPattern.matcher(referrerUrl.toLowerCase()).matches()) {
+			if (referrerUrl != null && referrerUrl.length() > 0
+					&& domainPattern.matcher(referrerUrl.toLowerCase()).matches()) {
 				return true;
 			}
 		}
@@ -184,7 +188,8 @@ public class RegisterCodeAction extends HttpServlet {
 
 	private boolean isSpamHit(String id, HttpServletRequest request) {
 		if (customizedThrottle == null) {
-			customizedThrottle = (CustomizedThrottle) WebAppUtil.getComponentInstance("customizedThrottle", servletContext);
+			customizedThrottle = (CustomizedThrottle) WebAppUtil.getComponentInstance("customizedThrottle",
+					servletContext);
 		}
 		HitKeyIF hitKey = new HitKeySame(request.getRemoteAddr(), id);
 		return customizedThrottle.processHit(hitKey);

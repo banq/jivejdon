@@ -16,7 +16,7 @@
 <title>最新贴</title>
 <link rel="stylesheet" href="/common/jivejdon5.css" type="text/css" />
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-store">
 <META HTTP-EQUIV="Expires" CONTENT="0">
 </head>
 
