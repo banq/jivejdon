@@ -14,7 +14,7 @@ com.jdon.jivejdon.spi.component.block.ErrorBlockerIF,com.jdon.jivejdon.spi.compo
 		EmailHelper emailHelper = (EmailHelper)WebAppUtil.getComponentInstance("emailHelper", this.getServletContext());
      	String subject = request.getRemoteAddr();     	
     	String body =  request.getHeader("Referer") + " " + request.getRequestURI() + " check: localhost.log ";
-    	String toEmail = "13801923488@139.com";
+    	String toEmail = "banq@163.com";
     	String toName = "banq";
     	String fromEmail = "429722485@qq.com";
     	EmailVO emailVO = new EmailVO(toName, toEmail, "", fromEmail, subject, body + " from:" + fromEmail, com.jdon.jivejdon.util.EmailTask.NOHTML_FORMAT);
