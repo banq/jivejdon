@@ -181,7 +181,8 @@
   <%@include file="../common/IncludeBottomBody.jsp"%>
 
   <%-- include LAB.js --%>
-  <%@ include file="../account/loginAJAX.jsp" %>
+  <%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
+  <script src="//static.jdon.com/common/login2.js"></script>
   <script src="https://static.jdon.com/common/messageList7.js"></script>
   <script>
       load('https://cdn.jdon.com/query/threadDigList', function (xhr) {

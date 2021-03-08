@@ -189,7 +189,8 @@
 			</div>
 		</div>
 	</div>
-	<%@ include file="../account/loginAJAX.jsp" %>
+	<script src="//static.jdon.com/common/login2.js"></script>
+	<%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
 
  <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css"  type="text/css">
