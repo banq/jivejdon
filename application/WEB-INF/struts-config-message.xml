@@ -153,7 +153,7 @@
                 type="com.jdon.jivejdon.presentation.action.MessageListNavAction"
                 name="messageListForm" scope="request"
                 validate="false">
-            <forward name="success" path="/forum/messageList.shtml"/>
+            <forward name="success" path="/"/>
             <forward name="navf" path="/forum/navf.jsp"/>
             <forward name="failure" path="/forum/"/>
         </action>

@@ -18,9 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <%-- /forum/messageNavList.shtml
- * == > MessageListNavAction ==> navf.jsp ==> (urlrewrite.xml)/([0-9]+)/([0-9]+)
- * --%>
+ * <%-- /forum/messageNavList.shtml == > MessageListNavAction ==> navf.jsp ==>
+ * (urlrewrite.xml)/([0-9]+)/([0-9]+) --%>
  *
  * @author banq
  *
@@ -28,7 +27,8 @@ import javax.servlet.http.HttpServletResponse;
 public class MessageListNavAction extends Action {
 	private final static Logger logger = LogManager.getLogger(MessageListNavAction.class);
 
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		MessageListForm messageListForm = (MessageListForm) FormBeanUtil.lookupActionForm(request, "messageListForm"); // same
 		// as struts-config-message.xml
 		if (messageListForm == null) {
@@ -42,8 +42,8 @@ public class MessageListNavAction extends Action {
 			logger.error(" MessageListNavAction error : message  or forum is null");
 			return mapping.findForward("failure");
 		}
-		ForumService forumService = (ForumService) WebAppUtil.getService("forumService", this
-				.servlet.getServletContext());
+		ForumService forumService = (ForumService) WebAppUtil.getService("forumService",
+				this.servlet.getServletContext());
 		Forum forum = forumService.getForum(new Long(forumIds));
 		if (forum == null) {
 			logger.error(" MessageListNavAction error : not found forum =" + forumIds);
@@ -54,8 +54,9 @@ public class MessageListNavAction extends Action {
 		Long threadId = forum.getForumState().getLatestPost().getForumThread().getThreadId();
 		if (lastMessageId.longValue() >= (new Long(messageId)).longValue()) {
 			ActionRedirect redirect = new ActionRedirect(mapping.findForward("success"));
-			redirect.addParameter("thread", threadId);
-			redirect.addParameter("messageId", messageId);
+			// redirect.addParameter("thread", threadId);
+			// redirect.addParameter("messageId", messageId);
+			redirect.setPath("/" + Long.toString(threadId));
 			return redirect;
 		} else {
 			request.setAttribute("forumId", new Long(forumIds));

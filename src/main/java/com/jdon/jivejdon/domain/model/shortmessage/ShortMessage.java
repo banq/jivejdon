@@ -116,7 +116,7 @@ public class ShortMessage {
 	public boolean isSatify(int maxMessageCount) {
 		if (UtilValidate.isEmpty(getMessageTitle()))
 			return false;
-		if (account.isAdmin())
+		if (account != null && account.isAdmin())
 			return true;
 
 		if (maxMessageCount < MESSAGE_MAX_COUNT)

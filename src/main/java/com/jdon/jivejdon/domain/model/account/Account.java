@@ -108,8 +108,7 @@ public class Account {
 	}
 
 	/**
-	 * @param creationDate
-	 *            The creationDate to set.
+	 * @param creationDate The creationDate to set.
 	 */
 	public void setCreationDate(String creationDate) {
 		this.creationDate = creationDate;
@@ -123,8 +122,7 @@ public class Account {
 	}
 
 	/**
-	 * @param emailVisible
-	 *            The emailVisible to set.
+	 * @param emailVisible The emailVisible to set.
 	 */
 	public void setEmailVisible(boolean emailVisible) {
 		this.emailVisible = emailVisible;
@@ -138,8 +136,7 @@ public class Account {
 	}
 
 	/**
-	 * @param modifiedDate
-	 *            The modifiedDate to set.
+	 * @param modifiedDate The modifiedDate to set.
 	 */
 	public void setModifiedDate(String modifiedDate) {
 		this.modifiedDate = modifiedDate;
@@ -153,8 +150,7 @@ public class Account {
 	}
 
 	/**
-	 * @param reward
-	 *            The reward to set.
+	 * @param reward The reward to set.
 	 */
 	public void setReward(Reward reward) {
 		this.reward = reward;
@@ -168,8 +164,7 @@ public class Account {
 	}
 
 	/**
-	 * @param postIP
-	 *            The postIP to set.
+	 * @param postIP The postIP to set.
 	 */
 	public void setPostIP(String postIP) {
 		this.postIP = postIP;
@@ -186,8 +181,7 @@ public class Account {
 	}
 
 	/**
-	 * @param userId
-	 *            The userId to set.
+	 * @param userId The userId to set.
 	 */
 	public void setUserIdLong(Long userId) {
 		if (userId != null)
@@ -312,12 +306,11 @@ public class Account {
 	}
 
 	/**
-	 * <logic:notEmpty name="forumMessage" property="account.uploadFile"> <img
-	 * src=
-	 * "<%=request.getContextPath() %>/img/uploadShowAction.shtml?oid=<bean:write name="
-	 * forumMessage
-	 * " property="account.userId"/>&id=<bean:write name="forumMessage
-	 * " property="account.uploadFile.id"/>" border='0' /> </logic:notEmpty>
+	 * <logic:notEmpty name="forumMessage" property="account.uploadFile"> <img src=
+	 * "<%=request.getContextPath() %>/img/uploadShowAction.shtml?oid=<bean:write
+	 * name=" forumMessage " property="account.userId"/>&id=<bean:write name=
+	 * "forumMessage " property="account.uploadFile.id"/>" border='0' />
+	 * </logic:notEmpty>
 	 * 
 	 * @return
 	 */
@@ -347,7 +340,7 @@ public class Account {
 	}
 
 	public boolean isAdmin() {
-		if (this.getRoleName().equals(Role.ADMIN))
+		if (getRoleName() != null && getRoleName().equals(Role.ADMIN))
 			return true;
 		else
 			return false;
@@ -361,28 +354,30 @@ public class Account {
 		this.masked = masked;
 	}
 
-    /**
-     * post rule is business rule, refactoring from CUDInputInterceptor to here.
-     * called by CUDInputInterceptor.
-     * @param methodNameNow
-     * @param throttler
-     * @return
-     */
-	public boolean postIsAllowed(String methodNameNow,Throttler throttler) {
+	/**
+	 * post rule is business rule, refactoring from CUDInputInterceptor to here.
+	 * called by CUDInputInterceptor.
+	 * 
+	 * @param methodNameNow
+	 * @param throttler
+	 * @return
+	 */
+	public boolean postIsAllowed(String methodNameNow, Throttler throttler) {
 		boolean isAllowed = false;
 		if (isMasked()) {
 			throttler.blockIP(getPostIP());
 			return isAllowed;
 		}
-		//	if (methodNameNow.contains("create")) {
+		// if (methodNameNow.contains("create")) {
 		if (methodNameNow.contains("createTopic") || methodNameNow.contains("createReply")) {
 			if (getMessageCount() > throttler.getVipUserThrottleConf().getVipmessagecount())
 				isAllowed = throttler.checkVIPValidate(this);
-			else if(getMessageCount() <= throttler.getVipUserThrottleConf().getVipmessagecount() && methodNameNow.contains("createTopic") )
+			else if (getMessageCount() <= throttler.getVipUserThrottleConf().getVipmessagecount()
+					&& methodNameNow.contains("createTopic"))
 				isAllowed = false;
 			else {
-				if(throttler.checkAllValidate())
-				   isAllowed = throttler.checkNewUserPostValidate(this);
+				if (throttler.checkAllValidate())
+					isAllowed = throttler.checkNewUserPostValidate(this);
 			}
 		} else
 			isAllowed = !throttler.isAbusive(getPostIP());
