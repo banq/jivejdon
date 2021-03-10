@@ -54,8 +54,6 @@ String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
         <script src="https://static.jdon.com/js/respond.min.js"></script>
     <![endif]-->
 </head>
-
 <%@ include file="../common/body_header.jsp" %>
-
- <%@ include file="../common/header_errors.jsp" %>
+<%@ include file="../common/header_errors.jsp" %>
  
