@@ -3,7 +3,6 @@
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 <header>
 	<!--Top-->
 	<nav id="top">

@@ -190,6 +190,7 @@
 		</div>
 	</div>
 	<%-- <script src="//static.jdon.com/common/login2.js"></script> --%>
+	<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 	<%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
 
  <!-- Bootstrap Core CSS -->

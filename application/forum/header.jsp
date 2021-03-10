@@ -24,9 +24,8 @@ String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
     <meta name="og:description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[140]" /> "/>
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap" />
     <link rel="alternate" type="application/rss+xml" title="解道订阅" href="/rss" />
-
-	<%@ include file="../common/security.jsp" %>
-    <%@ include file="../common/loginAccount.jsp" %>
+	<%-- <%@ include file="../common/security.jsp" %>
+    <%@ include file="../common/loginAccount.jsp" %> --%>
     <link rel="canonical" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />" />
 	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>

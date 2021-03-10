@@ -182,6 +182,7 @@
 
   <%-- include LAB.js --%>
   <%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
+  <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
   <script src="//static.jdon.com/common/login2.js"></script>
   <script src="https://static.jdon.com/common/messageList7.js"></script>
   <script>
