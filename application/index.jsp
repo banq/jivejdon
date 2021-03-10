@@ -189,7 +189,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="//static.jdon.com/common/login2.js"></script>
+	<%-- <script src="//static.jdon.com/common/login2.js"></script> --%>
 	<%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
 
  <!-- Bootstrap Core CSS -->
