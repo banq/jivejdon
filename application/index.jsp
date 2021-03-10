@@ -189,10 +189,9 @@
 			</div>
 		</div>
 	</div>
-	<%-- <script src="//static.jdon.com/common/login2.js"></script> --%>
 	<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
+	<script src="//static.jdon.com/common/login2.js"></script>
 	<%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
-
  <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css"  type="text/css">
 	<!-- Custom Fonts -->
