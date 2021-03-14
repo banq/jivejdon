@@ -47,8 +47,14 @@
                  <a href="<%=request.getContextPath()%>/forum/<bean:write name="forum" property="forumId" />">                
                        <b><span class="threadTitle"><bean:write name="forum" property="name" /></span></b>
                  </a>
-                   <%--<a title="关注本道场" href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=0&subscribeId=<bean:write name="forum" property="forumId" />"  rel="nofollow">--%>
-                      <%--<img src="/images/user_add.gif" width="18" height="18" alt="关注本道场" border="0" /></a>                                     --%>
+                 <% 
+                 if (request.getSession(false) != null){
+                     %>
+                      <a title="关注本道场" href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=0&subscribeId=<bean:write name="forum" property="forumId" />"  rel="nofollow">
+                      <img src="/images/user_add.gif" width="18" height="18" alt="关注本道场" border="0" /></a>                                                         
+                     <%
+                 }
+                 %>
 
                 <br>
                 <span class="home_content" ><bean:write name="forum" property="description" filter="false"/></span>
