@@ -5,7 +5,7 @@
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <% 
-com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(6 * 60 * 60, request, response);
+com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(10 * 60, request, response);
 %>
 <a href="<%=request.getContextPath()%>/threads"><b>别人在看</b></a>
 <div class="important" >
