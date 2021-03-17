@@ -36,8 +36,8 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 	private final ThreadViewCountParameter threadViewCountParameter;
 	private final ScheduledExecutorUtil scheduledExecutorUtil;
 
-	public ThreadViewCounterJobImp(final PropertyDao propertyDao, final ThreadViewCountParameter threadViewCountParameter,
-			ScheduledExecutorUtil scheduledExecutorUtil) {
+	public ThreadViewCounterJobImp(final PropertyDao propertyDao,
+			final ThreadViewCountParameter threadViewCountParameter, ScheduledExecutorUtil scheduledExecutorUtil) {
 		this.concurrentHashMap = new ConcurrentHashMap<Long, ViewCounter>();
 		this.propertyDao = propertyDao;
 		this.threadViewCountParameter = threadViewCountParameter;
@@ -51,8 +51,8 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 			}
 		};
 		// flush to db per one hour
-		scheduledExecutorUtil.getScheduExec().scheduleAtFixedRate(task, threadViewCountParameter.getInitdelay(), threadViewCountParameter.getDelay(),
-				TimeUnit.SECONDS);
+		scheduledExecutorUtil.getScheduExec().scheduleAtFixedRate(task, threadViewCountParameter.getInitdelay(),
+				threadViewCountParameter.getDelay(), TimeUnit.SECONDS);
 	}
 
 	// when container down or undeploy, active this method.
@@ -68,8 +68,8 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 		concurrentHashMap.clear();
 		for (long threadId : viewCounters.keySet()) {
 			ViewCounter viewCounter = viewCounters.get(threadId);
-			if (viewCounter.getViewCount() != viewCounter.getLastSavedCount() && viewCounter
-					.getViewCount() != -1 && viewCounter.getViewCount() != 0) {
+			if (viewCounter.getViewCount() != viewCounter.getLastSavedCount() && viewCounter.getViewCount() != -1
+					&& viewCounter.getViewCount() != 0) {
 				saveItem(viewCounter);
 				viewCounter.setLastSavedCount(viewCounter.getViewCount());
 			}
@@ -91,24 +91,16 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob#saveViewCounter
-	 * (com.jdon.jivejdon.domain.model.ForumThread)
+	 * @see com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob#
+	 * saveViewCounter (com.jdon.jivejdon.domain.model.ForumThread)
 	 */
 	@Override
 	public void saveViewCounter(ForumThread thread) {
 		concurrentHashMap.computeIfAbsent(thread.getThreadId(), unused -> thread.getViewCounter());
 	}
 
-	private int getFromDB(Long threadId) {
-		Integer number = null;
-		Property p = propertyDao.getThreadProperty(threadId, ThreadPropertys.VIEW_COUNT);
-		if (p != null)
-			number = Integer.valueOf(p.getValue());
-		else
-			number = new Integer(0);
-
-		return number;
+	public ConcurrentMap<Long, ViewCounter> getConcurrentHashMap() {
+		return this.concurrentHashMap;
 	}
 
 }

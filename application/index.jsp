@@ -183,8 +183,21 @@
 							<script>
                                 (adsbygoogle = window.adsbygoogle || []).push({});
 							</script>
-							</div>
+						</div>
 				</div>
+
+				
+				<!-- Start Widget newList -->
+				<div class="widget">
+					    <div class="wid-vid">
+							<ul>
+                                <div>
+					              <jsp:include page="/query/threadNewDigList.shtml?count=20" flush="true"></jsp:include>
+				                </div>
+							</ul>
+						</div>
+				</div>
+					
 			
 			</div>
 		</div>
