@@ -191,9 +191,7 @@
 				<div class="widget">
 					    <div class="wid-vid">
 							<ul>
-                                <div>
-					              <jsp:include page="/query/threadNewDigList.shtml?count=20" flush="true"></jsp:include>
-				                </div>
+							    <div id="digNewList"></div>   
 							</ul>
 						</div>
 				</div>
@@ -264,6 +262,10 @@ $(document).ready(function(){
     load('https://cdn.jdon.com/query/threadDigList', function (xhr) {
   	       document.getElementById("digList").innerHTML = xhr.responseText;
 			});
+    load('/query/threadNewDigList.shtml?count=20', function (xhr) {
+  	       document.getElementById("digNewList").innerHTML = xhr.responseText;
+			});
+			
 </script> 
 </body>
 </html>

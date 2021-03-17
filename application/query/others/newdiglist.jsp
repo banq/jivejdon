@@ -7,7 +7,7 @@
 <% 
 com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(6 * 60 * 60, request, response);
 %>
-<a href="<%=request.getContextPath()%>/threads"><b>新赞</b></a>
+<a href="<%=request.getContextPath()%>/threads"><b>别人在看</b></a>
 <div class="important" >
 <bean:parameter id="count" name="count" value="8"/>
 <%
