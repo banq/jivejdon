@@ -21,19 +21,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <%-- /forum/messageNavList.shtml
- * == > MessageListNavAction ==> navf.jsp ==> (urlrewrite.xml)/([0-9]+)/([0-9]+)
- * --%>
+ * <%-- /forum/messageNavList.shtml == > MessageListNavAction ==> navf.jsp ==>
+ * (urlrewrite.xml)/([0-9]+)/([0-9]+) --%>
  *
  * @author banq
  */
 public class MessageListNav2Action extends Action {
 	private final static Logger logger = LogManager.getLogger(MessageListNavAction.class);
 
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest
-			request, HttpServletResponse response) throws Exception {
-		MessageListForm messageListForm = (MessageListForm) FormBeanUtil.lookupActionForm(request,
-				"messageListForm"); // same
+	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		MessageListForm messageListForm = (MessageListForm) FormBeanUtil.lookupActionForm(request, "messageListForm"); // same
 		// as struts-config-message.xml
 		if (messageListForm == null) {
 			logger.error(" MessageListNavAction error : messageListForm is null");
@@ -47,11 +45,10 @@ public class MessageListNav2Action extends Action {
 			return mapping.findForward("failure");
 		}
 
-		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService
-				("forumMessageService", this.servlet.getServletContext());
+		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService",
+				this.servlet.getServletContext());
 
-		ForumMessage forumMessageParent = forumMessageService.getMessage(Long.parseLong
-				(pMessageId));
+		ForumMessage forumMessageParent = forumMessageService.getMessage(Long.parseLong(pMessageId));
 		if (forumMessageParent == null) {
 			logger.error(" not locate pMessageId = " + pMessageId);
 			return mapping.findForward("failure");
@@ -59,7 +56,7 @@ public class MessageListNav2Action extends Action {
 
 		ForumThread thread = forumMessageParent.getForumThread();
 		long threadId = thread.getThreadId();
-		//AddReplyMessageZ will update state
+		// AddReplyMessageZ will update state
 		Long lastMessageId = thread.getState().getLatestPost().getMessageId();
 		if (lastMessageId.longValue() >= (new Long(messageId)).longValue()) {
 			int start = locateTheMessage(new Long(threadId), lastMessageId, new Long(messageId),
@@ -72,7 +69,7 @@ public class MessageListNav2Action extends Action {
 			redirect.addParameter("ver", java.util.UUID.randomUUID().toString());
 			redirect.setAnchor(messageId);
 			return redirect;
-		} else {//forward to /forum/navf2.jsp to waiting a minute until all ok
+		} else {// forward to /forum/navf2.jsp to waiting a minute until all ok
 			request.setAttribute("pMessageId", new Long(pMessageId));
 			request.setAttribute("messageId", new Long(messageId));
 			return mapping.findForward("navf2");

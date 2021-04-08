@@ -35,16 +35,17 @@ public class ThreadEtagFilter extends Action {
 
 	public ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
-			forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService", this.servlet.getServletContext());
+			forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService",
+					this.servlet.getServletContext());
 		return forumMessageQueryService;
 	}
 
-	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
 		if (request.getParameter("nocache") != null) { // for just modified and
 			response.setHeader("Pragma", "No-cache");
-			response.setHeader("Cache-Control", "no-cache");
+			response.setHeader("Cache-Control", "no-store");
 			response.setDateHeader("Expires", 0);
 			return actionMapping.findForward(FormBeanUtil.FORWARD_SUCCESS_NAME);
 		}
@@ -52,15 +53,15 @@ public class ThreadEtagFilter extends Action {
 		// browser cache expire time; default is one hour
 		int expire = 1 * 60 * 60;
 		String threadId = request.getParameter("thread");
-		if ((threadId == null) || (!UtilValidate.isInteger(threadId)) || threadId.length()>10) {
+		if ((threadId == null) || (!UtilValidate.isInteger(threadId)) || threadId.length() > 10) {
 			response.sendError(404);
 			return null;
 		}
-		
+
 		long threadIdl = 0;
-		try{
-		    threadIdl = Long.parseLong(threadId);
-		}catch(Exception e){
+		try {
+			threadIdl = Long.parseLong(threadId);
+		} catch (Exception e) {
 			response.sendError(404);
 			return null;
 		}
@@ -73,15 +74,15 @@ public class ThreadEtagFilter extends Action {
 		long modelLastModifiedDate = forumThread.getState().getModifiedDate2();
 
 		// in 15 days the message expire will be shorter;
-//		Calendar c = Calendar.getInstance();
-//		c.setTime(new Date(modelLastModifiedDate));
-//		c.add(Calendar.DATE, 15);
-//
-//		Calendar tc = Calendar.getInstance();
-//		tc.setTime(new Date());
-//		if (c.after(tc)) {
-//			expire = 24 * 60 * 60;
-//		}
+		// Calendar c = Calendar.getInstance();
+		// c.setTime(new Date(modelLastModifiedDate));
+		// c.add(Calendar.DATE, 15);
+		//
+		// Calendar tc = Calendar.getInstance();
+		// tc.setTime(new Date());
+		// if (c.after(tc)) {
+		// expire = 24 * 60 * 60;
+		// }
 
 		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
 			return null;// response is 304

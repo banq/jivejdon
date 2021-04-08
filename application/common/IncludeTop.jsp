@@ -49,3 +49,4 @@
 		<!-- /////////////////左边 -->
 		<div id="main-content" class="col-md-12">
 <%@ include file="./header_errors.jsp" %>
+<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >

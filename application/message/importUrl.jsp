@@ -22,6 +22,7 @@
 
   <!-- Core JavaScript Files -->
   <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="//static.jdon.com/common/login2.js"></script>
 <title>享道</title>
 <%-- 
 <%@ include file="/common/security.jsp" %>
@@ -30,6 +31,7 @@
 --%>
 </head>
 <body>
+<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 <%@ include file="/account/loginAJAX.jsp" %>
 
 <%

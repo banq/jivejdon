@@ -16,12 +16,12 @@
   <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <%
 response.setHeader("Pragma", "No-cache");
-response.setHeader("Cache-Control", "no-cache");
+response.setHeader("Cache-Control", "no-store");
 response.setDateHeader("Expires", 0);
 response.setStatus(HttpServletResponse.SC_OK);
 %>
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-store">
 <META HTTP-EQUIV="Expires" CONTENT="0">   
 
 <div class="box">

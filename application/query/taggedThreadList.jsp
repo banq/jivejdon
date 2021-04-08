@@ -29,7 +29,16 @@ pageContext.setAttribute("title", titleStr);
         <logic:notEmpty  name="TITLE">
         <h3>#<bean:write  name="TITLE"/></h3>
       </logic:notEmpty>
-        <%--<a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=2&subscribeId=<bean:write name="tagID" /> " target="_blank"  rel="nofollow"><i class="fa fa-heart"></i></a>     --%>
+        <% 
+            if (request.getSession(false) != null){
+            %>
+                 <a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=2&subscribeId=<bean:write name="tagID" /> " target="_blank"  rel="nofollow"><i class="fa fa-heart"></i></a>    
+                 <img src="/images/user_add.gif" width="18" height="18" alt="关注本标签" border="0" /></a>                                                         
+            <%
+            }
+        %>
+      
+        
        <%--&nbsp;&nbsp;--%>
 		<%--<a href="//www.jdon.com/rss/tag/<bean:write name="tagID" />"><i class="fa fa-feed"></i></a>--%>
     <%--&nbsp;&nbsp;--%>

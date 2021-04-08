@@ -23,7 +23,7 @@ String parentId = request.getParameter("parentId");
     <title>上传文件</title>
      <%@ include file="../../../common/headerBody.jsp" %>
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-store">
     <META HTTP-EQUIV="Expires" CONTENT="0">   
   </head>
 <body>

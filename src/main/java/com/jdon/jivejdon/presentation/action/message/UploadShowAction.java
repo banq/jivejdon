@@ -20,11 +20,11 @@ import com.jdon.util.UtilValidate;
 public class UploadShowAction extends Action {
 	public final static String module = UploadShowAction.class.getName();
 
-	private static final byte[] BLANK = { 71, 73, 70, 56, 57, 97, 1, 0, 1, 0, -111, 0, 0, 0, 0, 0, -1, -1, -1, -1, -1, -1, 0, 0, 0, 33, -7, 4, 1, 0,
-			0, 2, 0, 44, 0, 0, 0, 0, 1, 0, 1, 0, 0, 2, 2, 76, 1, 0, 59 };
+	private static final byte[] BLANK = { 71, 73, 70, 56, 57, 97, 1, 0, 1, 0, -111, 0, 0, 0, 0, 0, -1, -1, -1, -1, -1,
+			-1, 0, 0, 0, 33, -7, 4, 1, 0, 0, 2, 0, 44, 0, 0, 0, 0, 1, 0, 1, 0, 0, 2, 2, 76, 1, 0, 59 };
 
-	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		String id = request.getParameter("id");
 		if (UtilValidate.isEmpty(id))
 			throw new Exception("parameter id is null");
@@ -54,13 +54,14 @@ public class UploadShowAction extends Action {
 		return null;
 	}
 
-	protected void outUploadFile(HttpServletResponse response, byte[] data, String type, String dlname) throws Exception {
+	protected void outUploadFile(HttpServletResponse response, byte[] data, String type, String dlname)
+			throws Exception {
 		response.setContentType(type);
 		if (!UtilValidate.isEmpty(dlname)) {
 			response.setHeader("Content-Disposition", "attachment; filename=\"" + dlname + "\"");
 		}
 		response.setHeader("Pragma", "No-cache");
-		response.setHeader("Cache-Control", "no-cache");
+		response.setHeader("Cache-Control", "no-store");
 		response.setDateHeader("Expires", 0);
 		OutputStream toClient = response.getOutputStream();
 		try {

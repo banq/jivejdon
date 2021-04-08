@@ -3,7 +3,6 @@
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-
 <header>
 	<!--Top-->
 	<nav id="top">
