@@ -2,7 +2,7 @@
 
 Jivejdon is a full DDD application with Event Soucing/CQRS and clean architecture/Hexagonalarchitecture, powered by [jdonframework](https://github.com/banq/jdonframework) .
 
-chinese Book : [here](https://union-click.jd.com/jdc?e=&p=AyIGZRprFQEaA1wfXxwyVlgNRQQlW1dCFFlQCxxKQgFHRE5XDVULR0UVARoDXB9fHB1LQglGaxVcDFcrXilIYkcAFGIYFUNgARRBDGUOHjdUK1kRBxYOVhJeJTISAGVNNRUDEwZUGl4UBhE3VCtbEgIUDlwbXhYHGwRQK1wVCyLew4mDpaAiN2UYayUyEjdWKxl7UkVSAR9fHQoXV1YTXkULFVRcTF9AABpQAEwIRgAaBQErWRQDFg4%3D)
+chinese Book : [here](https://union-click.jd.com/jdc?e=&p=AyIGZRhfHQARDlMTWRUyEgZUGF8VABYAUR5aFgMiQwpDBUoyS0IQWhkeHAxBFQQAQB1AWQkFGk1dRFkRdQtUWgxxAV4pVEBkRAtfGhtASEM7Qw4ZAhMGVh9bFwYVA1AaWBQVRUQLR1dHQ1AQAlgFSQ5ARhcrExAGb0UNHV12RlJcV24lfkFmXgBtKxkOIgZlGV8QBhsEXB5rJQIVNxR1WxQGFQRTGlolAyIHUhtdHAsRBVAfWxAEIgBVEmvMlIDf5blrJTIRN2UrWyUBIkU7H18VBxoAAhxTFAURAlEaDkUBEQBSS10XVxQHURpSQQQiBVQaXxw%3D)
 
 # Domain centric Architecture
 
