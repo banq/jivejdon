@@ -139,7 +139,7 @@ public class PropertyFactoryDao implements PropertyFactory {
 			} else
 				return new ArrayList<Property>();
 		}
-		return cc.getList<Property>();
+		return cc.getList();
 	}
 
 	/*
@@ -149,8 +149,7 @@ public class PropertyFactoryDao implements PropertyFactory {
 	 * getThreadPropertys(int)
 	 */
 	public Collection<Property> getThreadPropertys(int threadID) {
-		Collection<Property> props = (Collection<Property>) containerUtil.getCacheManager().getCache()
-				.get(new Integer(threadID));
+		Collection<Property> props = (Collection) containerUtil.getCacheManager().getCache().get(new Integer(threadID));
 		if (props == null) {
 			props = propertyDao.getProperties(Constants.THREAD, new Long(threadID));
 			if ((props != null) && (props.size() != 0))
