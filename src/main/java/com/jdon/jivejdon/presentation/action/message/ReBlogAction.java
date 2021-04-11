@@ -37,13 +37,16 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * Response for post a reply message.
  * 
+ * it try to connect a aggregates to another aggregates
+ * 
  * @author banq
  * 
  */
 public class ReBlogAction extends Action {
 	private final static Logger logger = LogManager.getLogger(ReBlogAction.class);
 
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		logger.debug("enter ReBlogAction");
 
 		MessageForm messageReplyForm = (MessageForm) form;
@@ -66,11 +69,13 @@ public class ReBlogAction extends Action {
 
 	protected void onlyreBlog(MessageForm messageReplyForm, HttpServletRequest request) throws Exception {
 		try {
-			if (messageReplyForm.getParentMessage() == null || messageReplyForm.getParentMessage().getMessageId() == null) {
+			if (messageReplyForm.getParentMessage() == null
+					|| messageReplyForm.getParentMessage().getMessageId() == null) {
 				throw new Exception("parentMessage.messageId is null");
 			}
 			Long pmessageId = messageReplyForm.getParentMessage().getMessageId();
-			ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
+			ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService",
+					request);
 			ForumMessage pmsg = forumMessageService.getMessage(pmessageId);
 			if (pmsg == null) {
 				throw new Exception("parentMessage is null");
@@ -101,7 +106,8 @@ public class ReBlogAction extends Action {
 			if (replyMessageId == null)
 				throw new Exception(Constants.ERRORS);
 
-			ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
+			ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService",
+					request);
 			forumMessageService.reBlog(replyMessageId, topicMessageId);
 
 			messageReplyForm.setMessageId(replyMessageId);
@@ -113,7 +119,8 @@ public class ReBlogAction extends Action {
 	}
 
 	protected Long createTopic(MessageForm messageReplyForm, HttpServletRequest request) throws Exception {
-		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
+		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService",
+				request);
 
 		AnemicMessageDTO anemicMessageDTO = new AnemicMessageDTO();
 		Long topicMessageId = null;
@@ -141,7 +148,8 @@ public class ReBlogAction extends Action {
 			EventModel em = new EventModel();
 			em = new EventModel();
 			em.setModelIF(anemicMessageDTO);
-			ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
+			ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService",
+					request);
 			replyMessageId = forumMessageService.createReplyMessage(em);
 			if (em.getErrors() != null) {
 				throw new Exception(em.getErrors());
@@ -164,7 +172,8 @@ public class ReBlogAction extends Action {
 			throw new Exception(error);
 
 		} catch (Exception e) {
-			String error = " ModelForm:" + form.getClass().getName() + " copy To Model:" + model.getClass().getName() + " error:" + e;
+			String error = " ModelForm:" + form.getClass().getName() + " copy To Model:" + model.getClass().getName()
+					+ " error:" + e;
 			throw new Exception(error);
 		}
 	}

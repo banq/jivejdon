@@ -17,18 +17,20 @@ package com.jdon.jivejdon.infrastructure.repository.property;
 
 import java.util.Collection;
 
+import com.jdon.jivejdon.domain.model.property.Property;
+
 public interface PropertyFactory {
 
-	public abstract void saveForumPropertys(int id, Collection props);
+	public abstract void saveForumPropertys(int id, Collection<Property> props);
 
-	public abstract void saveThreadPropertys(int threadID, Collection props);
+	public abstract void saveThreadPropertys(int threadID, Collection<Property> props);
 
-	public abstract Collection getForumPropertys(Long id);
+	public abstract Collection<Property> getForumPropertys(Long id);
 
-	public abstract Collection getThreadPropertys(int threadID);
+	public abstract Collection<Property> getThreadPropertys(int threadID);
 
-	public void saveUserPropertys(Long userId, Collection props);
+	public void saveUserPropertys(Long userId, Collection<Property> props);
 
-	Collection getUserPropertys(Long userId);
+	Collection<Property> getUserPropertys(Long userId);
 
 }

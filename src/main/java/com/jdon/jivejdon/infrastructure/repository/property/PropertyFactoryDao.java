@@ -45,13 +45,13 @@ public class PropertyFactoryDao implements PropertyFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jdon.jivejdon.infrastructure.repository.property.PropertyFactory#saveForumPropertys(int,
-	 * java.util.Collection)
+	 * @see com.jdon.jivejdon.infrastructure.repository.property.PropertyFactory#
+	 * saveForumPropertys(int, java.util.Collection)
 	 */
-	public void saveForumPropertys(int id, Collection props) {
+	public void saveForumPropertys(int id, Collection<Property> props) {
 		try {
-			Collection propss = new ArrayList();
-			Iterator iter = props.iterator();
+			Collection<Property> propss = new ArrayList<Property>();
+			Iterator<Property> iter = props.iterator();
 			while (iter.hasNext()) {
 				Property prop = (Property) iter.next();
 				if (!UtilValidate.isEmpty(prop.getName()) && !UtilValidate.isEmpty(prop.getValue()))
@@ -70,14 +70,13 @@ public class PropertyFactoryDao implements PropertyFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jdon.jivejdon.infrastructure.repository.property.PropertyFactory#saveThreadPropertys(int,
-	 * java.util.Collection)
+	 * @see com.jdon.jivejdon.infrastructure.repository.property.PropertyFactory#
+	 * saveThreadPropertys(int, java.util.Collection)
 	 */
-	public void saveThreadPropertys(int threadID, Collection props) {
+	public void saveThreadPropertys(int threadID, Collection<Property> props) {
 		try {
-			Collection propss = new ArrayList();
-			Iterator iter = props.iterator();
+			Collection<Property> propss = new ArrayList<Property>();
+			Iterator<Property> iter = props.iterator();
 			while (iter.hasNext()) {
 				Property prop = (Property) iter.next();
 				if (!UtilValidate.isEmpty(prop.getName()) && !UtilValidate.isEmpty(prop.getValue()))
@@ -95,27 +94,26 @@ public class PropertyFactoryDao implements PropertyFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jdon.jivejdon.infrastructure.repository.property.PropertyFactory#getForumPropertys(java.lang
-	 * .Long)
+	 * @see com.jdon.jivejdon.infrastructure.repository.property.PropertyFactory#
+	 * getForumPropertys(java.lang .Long)
 	 */
-	public Collection getForumPropertys(Long id) {
+	public Collection<Property> getForumPropertys(Long id) {
 		CachedCollection cc = (CachedCollection) containerUtil.getModelFromCache(id, CachedCollection.class);
 		if (cc == null) {
-			Collection props = propertyDao.getProperties(Constants.FORUM, id);
+			Collection<Property> props = propertyDao.getProperties(Constants.FORUM, id);
 			if ((props != null) && (props.size() != 0)) {
 				cc = new CachedCollection(Integer.toString(Constants.FORUM), props);
 				containerUtil.addModeltoCache(id, cc);
 			} else
-				return new ArrayList();
+				return new ArrayList<Property>();
 		}
 		return cc.getList();
 	}
 
-	public void saveUserPropertys(Long userId, Collection props) {
+	public void saveUserPropertys(Long userId, Collection<Property> props) {
 		try {
-			Collection propss = new ArrayList();
-			Iterator iter = props.iterator();
+			Collection<Property> propss = new ArrayList<Property>();
+			Iterator<Property> iter = props.iterator();
 			while (iter.hasNext()) {
 				Property prop = (Property) iter.next();
 				if (!UtilValidate.isEmpty(prop.getName()) && !UtilValidate.isEmpty(prop.getValue()))
@@ -131,32 +129,34 @@ public class PropertyFactoryDao implements PropertyFactory {
 		}
 	}
 
-	public Collection getUserPropertys(Long userId) {
+	public Collection<Property> getUserPropertys(Long userId) {
 		CachedCollection cc = (CachedCollection) containerUtil.getModelFromCache(userId, CachedCollection.class);
 		if (cc == null) {
-			Collection props = propertyDao.getProperties(Constants.USER, userId);
+			Collection<Property> props = propertyDao.getProperties(Constants.USER, userId);
 			if ((props != null) && (props.size() != 0)) {
 				cc = new CachedCollection(Integer.toString(Constants.USER), props);
 				containerUtil.addModeltoCache(userId, cc);
 			} else
-				return new ArrayList();
+				return new ArrayList<Property>();
 		}
-		return cc.getList();
+		return cc.getList<Property>();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jdon.jivejdon.infrastructure.repository.property.PropertyFactory#getThreadPropertys(int)
+	 * @see com.jdon.jivejdon.infrastructure.repository.property.PropertyFactory#
+	 * getThreadPropertys(int)
 	 */
-	public Collection getThreadPropertys(int threadID) {
-		Collection props = (Collection) containerUtil.getCacheManager().getCache().get(new Integer(threadID));
+	public Collection<Property> getThreadPropertys(int threadID) {
+		Collection<Property> props = (Collection<Property>) containerUtil.getCacheManager().getCache()
+				.get(new Integer(threadID));
 		if (props == null) {
 			props = propertyDao.getProperties(Constants.THREAD, new Long(threadID));
 			if ((props != null) && (props.size() != 0))
 				containerUtil.getCacheManager().getCache().put(threadID, props);
 			else
-				return new ArrayList();
+				return new ArrayList<Property>();
 		}
 		return props;
 	}

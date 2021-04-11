@@ -22,6 +22,7 @@ import com.jdon.jivejdon.domain.event.MessageOwnershipChangedEvent;
 import com.jdon.jivejdon.domain.command.MessageRemoveCommand;
 import com.jdon.jivejdon.domain.event.MessageRemovedEvent;
 import com.jdon.jivejdon.domain.event.ThreadNameRevisedEvent;
+import com.jdon.jivejdon.domain.model.property.Property;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.domain.model.realtime.ForumMessageDTO;
 import com.jdon.jivejdon.domain.model.realtime.LobbyPublisherRoleIF;
@@ -68,14 +69,13 @@ public class ForumThread {
 	// same as rootMessage's creationDate
 	private String creationDate;
 	// contain some abstract properties
-	private Collection propertys;
+	private Collection<Property> propertys;
 	private ThreadTagsVO threadTagsVO;
 	private volatile Forum forum;
 	/**
-	 * the root message of a thread. The root message is a special first
-	 * message
-	 * that is intimately tied to the thread for most forumViews. All other
-	 * messages in the thread are children of the root message.
+	 * the root message of a thread. The root message is a special first message
+	 * that is intimately tied to the thread for most forumViews. All other messages
+	 * in the thread are children of the root message.
 	 */
 	private volatile ForumMessage rootMessage;
 	private volatile AtomicReference<ForumThreadState> state;
@@ -88,7 +88,6 @@ public class ForumThread {
 
 	private boolean solid;
 
-
 	/**
 	 * normal can be cached reused
 	 *
@@ -100,22 +99,21 @@ public class ForumThread {
 		this.forum = forum;
 		this.state = new AtomicReference(new ForumThreadState(this));
 		this.threadTagsVO = new ThreadTagsVO(this, new ArrayList());
-		this.propertys = new ArrayList();
+		this.propertys = new ArrayList<Property>();
 		this.viewCounter = new ViewCounter(this);
 	}
 
-//	/**
-//	 * DTO object, limited usage
-//	 */
-//	private ForumThread() {
-//		this.threadId = null;
-//		this.threadTagsVO = new ThreadTagsVO(this, new ArrayList());
-//		this.propertys = new ArrayList();
-//		this.state = new AtomicReference(new ForumThreadState(this));
-//		this.viewCounter = new ViewCounter(this);
-////		this.rootMessage = new ForumMessage();
-//	}
-
+	// /**
+	// * DTO object, limited usage
+	// */
+	// private ForumThread() {
+	// this.threadId = null;
+	// this.threadTagsVO = new ThreadTagsVO(this, new ArrayList());
+	// this.propertys = new ArrayList();
+	// this.state = new AtomicReference(new ForumThreadState(this));
+	// this.viewCounter = new ViewCounter(this);
+	//// this.rootMessage = new ForumMessage();
+	// }
 
 	public String getCreationDate() {
 		return creationDate;
@@ -140,65 +138,60 @@ public class ForumThread {
 		return forum;
 	}
 
-
 	private void setForum(Forum forum) {
 		this.forum = forum;
-//		if (this.rootMessage != null) {
-//			rootMessage.setForum(forum);
-//		}
+		// if (this.rootMessage != null) {
+		// rootMessage.setForum(forum);
+		// }
 	}
-
 
 	public Long getThreadId() {
 		return threadId;
 	}
 
 	public String getName() {
-		if (this.getRootMessage() == null){
+		if (this.getRootMessage() == null) {
 			System.err.println("getName(): thread rootmessage is null" + threadId);
 			return "null";
 		}
 		return this.getRootMessage().getMessageVO().getSubject();
 	}
 
-	//from threadForm getName calling
-	public void setName(String name){
+	// from threadForm getName calling
+	public void setName(String name) {
 		this.getRootMessage().updateSubject(name);
 	}
 
 	public void updateName(String name) {
 		this.getRootMessage().updateSubject(name);
-		eventSourcing.saveName(new ThreadNameRevisedEvent(this.getThreadId(),
-				name));
+		eventSourcing.saveName(new ThreadNameRevisedEvent(this.getThreadId(), name));
 	}
-
-
 
 	public String getShortname() {
 		return StringUtil.shorten(getName());
 	}
 
-	public Collection getPropertys() {
+	public Collection<Property> getPropertys() {
 		return propertys;
 	}
 
-
-	public void setPropertys(Collection propertys) {
+	public void setPropertys(Collection<Property> propertys) {
 		this.propertys = propertys;
 	}
 
 	public ForumMessage getRootMessage() {
-		if (rootMessage == null){
+		if (rootMessage == null) {
 			System.err.println("getRootMessage: rootMessage is null! threadId:" + threadId);
 		}
 		return rootMessage;
 	}
 
-
 	private void setRootMessage(ForumMessage rootMessage) {
-		if (rootMessage == null) return;
-		if (rootMessage instanceof ForumMessageReply){
-			System.err.println("root message must be ForumMessage threadId=" + this.threadId + " messageId="+rootMessage.getMessageId());
+		if (rootMessage == null)
+			return;
+		if (rootMessage instanceof ForumMessageReply) {
+			System.err.println("root message must be ForumMessage threadId=" + this.threadId + " messageId="
+					+ rootMessage.getMessageId());
 			return;
 		}
 		this.rootMessage = rootMessage;
@@ -213,8 +206,7 @@ public class ForumThread {
 
 	public boolean isRoot(ForumMessage message) {
 		try {
-			if (message.getMessageId().longValue() == getRootMessage()
-					.getMessageId().longValue())
+			if (message.getMessageId().longValue() == getRootMessage().getMessageId().longValue())
 				return true;
 		} catch (Exception e) {
 		}
@@ -222,35 +214,31 @@ public class ForumThread {
 	}
 
 	/**
-	 * after inserted into DB, change the state, so it is Eventually consistent;
-	 * in MessageListNav2Action, client will be waiting  until Eventually consistent!
+	 * after inserted into DB, change the state, so it is Eventually consistent; in
+	 * MessageListNav2Action, client will be waiting until Eventually consistent!
 	 *
 	 * @param forumMessageReply
 	 */
 	private void changeState(ForumMessageReply forumMessageReply) {
-        this.state.get().setLatestPost(forumMessageReply);
-        this.state.get().addMessageCount();
-        this.forum.addNewMessage(forumMessageReply);
+		this.state.get().setLatestPost(forumMessageReply);
+		this.state.get().addMessageCount();
+		this.forum.addNewMessage(forumMessageReply);
 	}
 
-	public void addNewMessage(ForumMessage forumMessageParent,
-							  ForumMessageReply forumMessageReply) {
+	public void addNewMessage(ForumMessage forumMessageParent, ForumMessageReply forumMessageReply) {
 		try {
 			ForumMessage oldmessage = this.getState().getLatestPost();
-            changeState(forumMessageReply);
+			changeState(forumMessageReply);
 			getForumThreadTreeModel().addChildAction(forumMessageReply);
 
 			notifyLobby(forumMessageReply);
 
-			Date olddate = Constants.parseDateTime(oldmessage.getCreationDate
-					());
+			Date olddate = Constants.parseDateTime(oldmessage.getCreationDate());
 			if (Constants.timeAfter(1, olddate)) {// a pubsub per one hour
-				subPublisherRole.subscriptionNotify(new
-						ThreadSubscribedNotifyEvent(this.getThreadId()));
+				subPublisherRole.subscriptionNotify(new ThreadSubscribedNotifyEvent(this.getThreadId()));
 			}
 		} catch (Exception e) {
-			System.err.print("error in forumThread:" + this.threadId + " " +
-					e);
+			System.err.print("error in forumThread:" + this.threadId + " " + e);
 		}
 	}
 
@@ -263,14 +251,13 @@ public class ForumThread {
 
 	public Forum moveForum(ForumMessage forumMessage, Forum newForum) {
 		if ((isRoot(forumMessage)) && (forumMessage.isLeaf())) {
-			DomainMessage dm = this.lazyLoaderRole.loadForum(newForum
-					.getForumId());
+			DomainMessage dm = this.lazyLoaderRole.loadForum(newForum.getForumId());
 			newForum = (Forum) dm.getBlockEventResult();
-//			forumMessage.setForum(newForum);
+			// forumMessage.setForum(newForum);
 			setForum(newForum);
 
-			eventSourcing.moveMessage(new MessageOwnershipChangedEvent(forumMessage
-					.getMessageId(), newForum.getForumId()));
+			eventSourcing
+					.moveMessage(new MessageOwnershipChangedEvent(forumMessage.getMessageId(), newForum.getForumId()));
 			dm.clear();
 		}
 		return newForum;
@@ -285,11 +272,9 @@ public class ForumThread {
 		this.forum.updateNewMessage(forumMessage);
 	}
 
-
 	public boolean isLeaf(ForumMessage forumMessage) {
 		if (!this.isSolid()) {
-			System.err.print("this thread is not embedded, threadId = " +
-					threadId + " " + this.hashCode());
+			System.err.print("this thread is not embedded, threadId = " + threadId + " " + this.hashCode());
 			return false;
 		}
 
@@ -298,8 +283,7 @@ public class ForumThread {
 			TreeModel treeModel = getForumThreadTreeModel().getTreeModel();
 			ret = treeModel.isLeaf(forumMessage.getMessageId());
 		} catch (Exception e) {
-			String error = e + " isLeaf forumMessageId=" + forumMessage
-					.getMessageId();
+			String error = e + " isLeaf forumMessageId=" + forumMessage.getMessageId();
 			System.err.print(error);
 		}
 		return ret;
@@ -307,8 +291,7 @@ public class ForumThread {
 
 	public ForumThreadTreeModel getForumThreadTreeModel() {
 		if (forumThreadTreeModel == null)
-			forumThreadTreeModel = new ForumThreadTreeModel(threadId, this
-					.lazyLoaderRole);
+			forumThreadTreeModel = new ForumThreadTreeModel(threadId, this.lazyLoaderRole);
 		return forumThreadTreeModel;
 	}
 
@@ -330,8 +313,7 @@ public class ForumThread {
 		this.viewCounter = viewCounter;
 	}
 
-	public void acceptTreeModelVisitor(long startMessageId, TreeVisitor
-			treeVisitor) {
+	public void acceptTreeModelVisitor(long startMessageId, TreeVisitor treeVisitor) {
 		getForumThreadTreeModel().acceptVisitor(startMessageId, treeVisitor);
 	}
 
@@ -344,7 +326,7 @@ public class ForumThread {
 		setRootMessageTitles();
 	}
 
-	private void setRootMessageTitles(){
+	private void setRootMessageTitles() {
 		String[] tagTitles = threadTagsVO.getTags().stream().map(ThreadTag::getTitle).toArray(String[]::new);
 		getRootMessage().setTagTitle(tagTitles);
 	}
@@ -363,9 +345,9 @@ public class ForumThread {
 		return getRootMessage().getTagTitle();
 	}
 
-
 	/**
 	 * all dig for reply messages add to root Message
+	 * 
 	 * @param message
 	 */
 	public void addDig(ForumMessage message) {
@@ -384,20 +366,21 @@ public class ForumThread {
 
 	}
 
+	public void postReBlog(Long messageFromId, Long messageToId) {
+		OneOneDTO oneOneDTO = new OneOneDTO(messageFromId, messageToId);
+		eventSourcing.postReBlog(oneOneDTO);
+	}
 
-    public void postReBlog(Long messageFromId, Long messageToId) {
-        OneOneDTO oneOneDTO = new OneOneDTO(messageFromId, messageToId);
-        eventSourcing.postReBlog(oneOneDTO);
-    }
+	public void delete(ForumMessage delforumMessage) {
+		DomainMessage domainMessage = eventSourcing
+				.deleteMessage(new MessageRemoveCommand(delforumMessage.getMessageId()));
+		eventSourcing.delThread(new MessageRemovedEvent(delforumMessage));
 
-    public void delete(ForumMessage delforumMessage) {
-        DomainMessage domainMessage = eventSourcing.deleteMessage(new MessageRemoveCommand(delforumMessage.getMessageId()));
-        eventSourcing.delThread(new MessageRemovedEvent(delforumMessage));
+	}
 
-    }
-
-	public synchronized void build(Forum forum, ForumMessage rootMessage, ThreadTagsVO threadTagsVO){
-        if (isSolid()) return;
+	public synchronized void build(Forum forum, ForumMessage rootMessage, ThreadTagsVO threadTagsVO) {
+		if (isSolid())
+			return;
 		this.setForum(forum);
 		this.setRootMessage(rootMessage);
 		this.setThreadTagsVO(threadTagsVO);
