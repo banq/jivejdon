@@ -41,8 +41,7 @@ public abstract class MessageDaoSql implements MessageDao {
 
 	private MessageInitFactory messageFactory;
 
-	public MessageDaoSql(JdbcTempSource jdbcTempSource, MessageInitFactory messageFactory,
-						 Constants constants) {
+	public MessageDaoSql(JdbcTempSource jdbcTempSource, MessageInitFactory messageFactory, Constants constants) {
 		this.jdbcTempSource = jdbcTempSource;
 		this.constants = constants;
 		this.messageFactory = messageFactory;
@@ -50,8 +49,7 @@ public abstract class MessageDaoSql implements MessageDao {
 
 	public AnemicMessageDTO getAnemicMessage(Long messageId) {
 		logger.debug("enter getMessage  for id:" + messageId);
-		String LOAD_MESSAGE = "SELECT threadID, forumID, userID, subject, body, modValue, " +
-				"rewardPoints, "
+		String LOAD_MESSAGE = "SELECT threadID, forumID, userID, subject, body, modValue, " + "rewardPoints, "
 				+ "creationDate, modifiedDate, parentMessageID FROM jiveMessage WHERE messageID=?";
 		List queryParams = new ArrayList();
 		queryParams.add(messageId);
@@ -91,11 +89,9 @@ public abstract class MessageDaoSql implements MessageDao {
 		return pmessageId;
 	}
 
-
 	public MessageVO getMessageVOCore(ForumMessage forumMessage) {
 		logger.debug("enter MessageVO  for id:" + forumMessage.getMessageId());
-		String LOAD_MESSAGE = "SELECT threadID, forumID, userID, subject, body, modValue, " +
-				"rewardPoints, "
+		String LOAD_MESSAGE = "SELECT threadID, forumID, userID, subject, body, modValue, " + "rewardPoints, "
 				+ "creationDate, modifiedDate, parentMessageID FROM jiveMessage WHERE messageID=?";
 		List queryParams = new ArrayList();
 		queryParams.add(forumMessage.getMessageId());
@@ -106,8 +102,7 @@ public abstract class MessageDaoSql implements MessageDao {
 			Iterator iter = list.iterator();
 			if (iter.hasNext()) {
 				Map map = (Map) iter.next();
-				messageVO = messageFactory.createMessageVOCore(forumMessage.getMessageId(), map,
-						forumMessage);
+				messageVO = messageFactory.createMessageVOCore(forumMessage.getMessageId(), map, forumMessage);
 			}
 		} catch (Exception e) {
 			logger.error("messageId=" + forumMessage.getMessageId() + " happend messageVO " + e);
@@ -122,8 +117,7 @@ public abstract class MessageDaoSql implements MessageDao {
 	 */
 	public ForumThread getThreadCore(Long threadId, ForumMessage rootMessage) {
 		logger.debug("enter getThread for id:" + threadId);
-		String LOAD_THREAD = "SELECT forumID, rootMessageID, modValue, rewardPoints, " +
-				"creationDate, "
+		String LOAD_THREAD = "SELECT forumID, rootMessageID, modValue, rewardPoints, " + "creationDate, "
 				+ "modifiedDate FROM jiveThread WHERE threadID=?";
 		List queryParams = new ArrayList();
 		queryParams.add(threadId);
@@ -134,7 +128,7 @@ public abstract class MessageDaoSql implements MessageDao {
 			Iterator iter = list.iterator();
 			if (iter.hasNext()) {
 				Map map = (Map) iter.next();
-				forumThread = messageFactory.createThreadCore(threadId, map,  rootMessage);
+				forumThread = messageFactory.createThreadCore(threadId, map, rootMessage);
 			}
 		} catch (Exception e) {
 			logger.error("threadId=" + threadId + " happend  " + e);
@@ -164,8 +158,8 @@ public abstract class MessageDaoSql implements MessageDao {
 	}
 
 	/*
-	 * topic message insert, no parentMessageID value,so the table's field
-	 * default value must be null
+	 * topic message insert, no parentMessageID value,so the table's field default
+	 * value must be null
 	 */
 	public void createMessage(AnemicMessageDTO forumMessagePostDTO) throws Exception {
 		logger.debug("enter createTopicMessage for id:" + forumMessagePostDTO.getMessageId());
@@ -174,8 +168,8 @@ public abstract class MessageDaoSql implements MessageDao {
 		if (messageVO.getSubject().length() == 0 || messageVO.getBody().length() == 0)
 			return;
 		String INSERT_MESSAGE = "INSERT INTO jiveMessage(messageID, threadID, forumID, "
-				+ "userID, subject, body, modValue, rewardPoints, creationDate, modifiedDate) " +
-				"VALUES(?,?,?,?,?,?,?,?,?,?)";
+				+ "userID, subject, body, modValue, rewardPoints, creationDate, modifiedDate) "
+				+ "VALUES(?,?,?,?,?,?,?,?,?,?)";
 		List queryParams = new ArrayList();
 		queryParams.add(forumMessagePostDTO.getMessageId());
 		queryParams.add(forumMessagePostDTO.getForumThread().getThreadId());
@@ -185,7 +179,7 @@ public abstract class MessageDaoSql implements MessageDao {
 		queryParams.add(messageVO.getSubject());
 		queryParams.add(messageVO.getBody());
 		queryParams.add(new Integer(0));
-		//getRewardPoints
+		// getRewardPoints
 		queryParams.add(new Integer(0));
 
 		long now = System.currentTimeMillis();
@@ -208,16 +202,11 @@ public abstract class MessageDaoSql implements MessageDao {
 			// differnce with createTopicMessage: parentMessageID,
 			if (this.getAnemicMessage(forumMessage.getParentMessage().getMessageId()) == null)
 				throw new Exception(" this message=" + forumMessage.getMessageId() + "'s parent= "
-						+ forumMessage.getParentMessage().getMessageId()
-						+ " has deleted");
+						+ forumMessage.getParentMessage().getMessageId() + " has deleted");
 
-			String INSERT_MESSAGE = "INSERT INTO jiveMessage(messageID, parentMessageID, " +
-					"threadID," +
-					" forumID, "
-					+ "userID, subject, body, modValue, rewardPoints, creationDate, " +
-					"modifiedDate)" +
-					" " +
-					"" + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+			String INSERT_MESSAGE = "INSERT INTO jiveMessage(messageID, parentMessageID, " + "threadID," + " forumID, "
+					+ "userID, subject, body, modValue, rewardPoints, creationDate, " + "modifiedDate)" + " " + ""
+					+ "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 			List queryParams = new ArrayList();
 			queryParams.add(forumMessage.getMessageId());
 			queryParams.add(forumMessage.getParentMessage().getMessageId());
@@ -228,7 +217,7 @@ public abstract class MessageDaoSql implements MessageDao {
 			queryParams.add(messageVO.getSubject());
 			queryParams.add(messageVO.getBody());
 			queryParams.add(new Integer(0));
-			//getRewardPoints
+			// getRewardPoints
 			queryParams.add(new Integer(0));
 
 			long now = System.currentTimeMillis();
@@ -239,8 +228,8 @@ public abstract class MessageDaoSql implements MessageDao {
 			jdbcTempSource.getJdbcTemp().operate(queryParams, INSERT_MESSAGE);
 		} catch (Exception e) {
 			logger.error(e);
-			throw new Exception("messageId=" + forumMessage.getMessageId() + " happend " +
-					forumMessage.getForum().getForumId() + e);
+			throw new Exception("messageId=" + forumMessage.getMessageId() + " happend "
+					+ forumMessage.getForum().getForumId() + e);
 
 		}
 	}
@@ -253,10 +242,10 @@ public abstract class MessageDaoSql implements MessageDao {
 		queryParams.add(forumMessagePostDTO.getForumThread().getForum().getForumId());
 		queryParams.add(forumMessagePostDTO.getMessageId());
 		queryParams.add(new Integer(0));
-//		MessageVO messageVO = forumThread.getRootMessage().getMessageVO();
-		//getRewardPoints
+		// MessageVO messageVO = forumThread.getRootMessage().getMessageVO();
+		// getRewardPoints
 		queryParams.add(new Integer(0));
-//		queryParams.add(new Integer(messageVO.getRewardPoints()));
+		// queryParams.add(new Integer(messageVO.getRewardPoints()));
 
 		long now = System.currentTimeMillis();
 		String saveDateTime = ToolsUtil.dateToMillis(now);
@@ -312,11 +301,11 @@ public abstract class MessageDaoSql implements MessageDao {
 	}
 
 	public void saveReBlog(OneOneDTO oneOneDTO) throws Exception {
-		String INSERT_S = "REPLACE INTO reblog(reblogToID,reblogFromID) VALUES(?,?)";
+		String INSERT_S = "REPLACE INTO reblog(reblogFromID, reblogToID) VALUES(?,?)";
 		List queryParams = new ArrayList();
 		try {
-			queryParams.add((Long) oneOneDTO.getChild());
 			queryParams.add((Long) oneOneDTO.getParent());
+			queryParams.add((Long) oneOneDTO.getChild());
 			jdbcTempSource.getJdbcTemp().operate(queryParams, INSERT_S);
 		} catch (Exception e) {
 			logger.error("reBlog=" + oneOneDTO.getParent() + " happend " + e);
@@ -358,23 +347,23 @@ public abstract class MessageDaoSql implements MessageDao {
 		return reblogToIDs;
 	}
 
-	public Long getReBlogByTo(Long reblogToID) throws Exception {
+	public Collection<Long> getReBlogByTo(Long reblogToID) throws Exception {
 		String LOAD_S = "SELECT reblogFromID FROM reblog WHERE reblogToID=?";
 		List queryParams = new ArrayList();
 		queryParams.add(reblogToID);
-		Long reblogFromID = null;
+		Collection<Long> reblogFromIDs = new ArrayList();
 		try {
 			List list = jdbcTempSource.getJdbcTemp().queryMultiObject(queryParams, LOAD_S);
 			Iterator iter = list.iterator();
-			if (iter.hasNext()) {
+			while (iter.hasNext()) {
 				Map map = (Map) iter.next();
-				reblogFromID = (Long) map.get("reblogFromID");
+				reblogFromIDs.add((Long) map.get("reblogFromID"));
 			}
 		} catch (Exception e) {
 			logger.error("getReBlogByThreadId threadId=" + reblogToID + " happend " + e);
 			throw new Exception(e);
 		}
-		return reblogFromID;
+		return reblogFromIDs;
 	}
 
 	public void updateMovingForum(Long messageId, Long threadId, Long forumId) throws Exception {
@@ -406,16 +395,16 @@ public abstract class MessageDaoSql implements MessageDao {
 	 */
 	public void updateMessage(AnemicMessageDTO forumMessage) throws Exception {
 		String SAVE_MESSAGE = "";
-		SAVE_MESSAGE = "UPDATE jiveMessage SET  subject=?, body=?, modValue=?, " +
-				"rewardPoints=?, modifiedDate=? WHERE messageID=?";
+		SAVE_MESSAGE = "UPDATE jiveMessage SET  subject=?, body=?, modValue=?, "
+				+ "rewardPoints=?, modifiedDate=? WHERE messageID=?";
 		List queryParams = new ArrayList();
 		MessageVO messageVO = forumMessage.getMessageVO();
 		queryParams.add(messageVO.getSubject());
 		queryParams.add(messageVO.getBody());
 		queryParams.add(new Integer(0));
-		//getRewardPoints
+		// getRewardPoints
 		queryParams.add(new Integer(0));
-//		queryParams.add(new Integer(messageVO.getRewardPoints()));
+		// queryParams.add(new Integer(messageVO.getRewardPoints()));
 
 		long now = System.currentTimeMillis();
 		String saveDateTime = ToolsUtil.dateToMillis(now);

@@ -44,16 +44,17 @@ import java.util.Collection;
 /**
  * Aggregate Root
  * <p>
- * This model  is Aggregate Root Entity when being RootMessage in ForumThread.
- * ForumThread is another Aggregate Root; in this system, there are two aggregate roots.
- * like Car and Enginee!
+ * This model is Aggregate Root Entity when being RootMessage in ForumThread.
+ * ForumThread is another Aggregate Root; in this system, there are two
+ * aggregate roots. like Car and Enginee!
  *
- * ForumMessage take care of all in a post such as content, ForumThread take care of all outsied a post.
+ * ForumMessage take care of all in a post such as content, ForumThread take
+ * care of all outsied a post.
  * <p>
  *
  * <p>
-
  *
+ * 
  * @author <a href="mailto:banq@163.com">banq</a>
  */
 @Model
@@ -88,8 +89,8 @@ public class ForumMessage implements Cloneable {
     }
 
     public static RequireMessageId messageBuilder() {
-        return messageId -> parentMessage-> messageVO -> forum -> forumThread -> account -> creationDate ->modifiedDate-> filterPipleSpec
-                -> uploads -> properties -> new FinalStageVO(messageId, parentMessage, messageVO, forum, forumThread, account,  creationDate,  modifiedDate,
+        return messageId -> parentMessage -> messageVO -> forum -> forumThread -> account -> creationDate -> modifiedDate -> filterPipleSpec -> uploads -> properties -> new FinalStageVO(
+                messageId, parentMessage, messageVO, forum, forumThread, account, creationDate, modifiedDate,
                 filterPipleSpec, uploads, properties);
     }
 
@@ -109,8 +110,8 @@ public class ForumMessage implements Cloneable {
         return this.forumThread.isRoot(this);
     }
 
-    public ForumMessage getParentMessage(){
-        return isRoot()?null:((ForumMessageReply)this).getParentMessage();
+    public ForumMessage getParentMessage() {
+        return isRoot() ? null : ((ForumMessageReply) this).getParentMessage();
     }
 
     public MessageVO getMessageVO() {
@@ -119,22 +120,21 @@ public class ForumMessage implements Cloneable {
 
     private void setMessageVO(MessageVO messageVO) {
         if (messageVO.getForumMessage() == null || messageVO.getForumMessage() != this) {
-            messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO
-                    .getBody()).build();
-        } if(messageVO.getSubject().length() == 0 || messageVO.getBody().length() == 0)
+            messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO.getBody()).build();
+        }
+        if (messageVO.getSubject().length() == 0 || messageVO.getBody().length() == 0)
             System.err.println("messageVO is null for messageId=" + this.messageId);
-        else if (filterPipleSpec == null){
+        else if (filterPipleSpec == null) {
             System.err.println("filterPipleSpec is null for messageId=" + this.messageId);
         }
 
-        //apply complex business filter logic to messageVO;
+        // apply complex business filter logic to messageVO;
         this.messageVO = filterPipleSpec.apply(messageVO);
 
     }
 
-    public void updateSubject(String subject){
-        this.messageVO = this.messageVOBuilder().subject(subject).body(this.messageVO
-                .getBody()).build();
+    public void updateSubject(String subject) {
+        this.messageVO = this.messageVOBuilder().subject(subject).body(this.messageVO.getBody()).build();
     }
 
     public MessageVO getMessageVOClone() throws Exception {
@@ -142,20 +142,19 @@ public class ForumMessage implements Cloneable {
     }
 
     /**
-     * there are two kinds MessageVO;
-     * 1. applied business rule filter
-     * 2. original that saved in repository
+     * there are two kinds MessageVO; 1. applied business rule filter 2. original
+     * that saved in repository
      */
     public void reloadMessageVOOrignal() {
         DomainMessage em = lazyLoaderRole.reloadMessageVO(this.messageId);
         this.messageVO = (MessageVO) em.getBlockEventResult();
-        //not with setMessageVO, no filter
+        // not with setMessageVO, no filter
         em.clear();
     }
 
-    public boolean isSubjectRepeated(String subject){
-        String lastSubject  = getMessageVO().getSubject();
-        return lastSubject.equals(subject)?true:false;
+    public boolean isSubjectRepeated(String subject) {
+        String lastSubject = getMessageVO().getSubject();
+        return lastSubject.equals(subject) ? true : false;
     }
 
     /**
@@ -166,18 +165,13 @@ public class ForumMessage implements Cloneable {
         try {
             long modifiedDate = System.currentTimeMillis();
             String creationDate = Constants.getDefaultDateTimeDisp(modifiedDate);
-            ForumMessageReply forumMessageReply= (ForumMessageReply)ForumMessage.messageBuilder()
-                    .messageId(postRepliesMessageCommand.getMessageId())
-                    .parentMessage(this)
-                    .messageVO(postRepliesMessageCommand.getMessageVO())
-                    .forum(this.forum).forumThread(this.forumThread)
-                    .acount(postRepliesMessageCommand.getAccount())
-                    .creationDate(creationDate)
-                    .modifiedDate(modifiedDate)
-                    .filterPipleSpec(this.filterPipleSpec)
+            ForumMessageReply forumMessageReply = (ForumMessageReply) ForumMessage.messageBuilder()
+                    .messageId(postRepliesMessageCommand.getMessageId()).parentMessage(this)
+                    .messageVO(postRepliesMessageCommand.getMessageVO()).forum(this.forum).forumThread(this.forumThread)
+                    .acount(postRepliesMessageCommand.getAccount()).creationDate(creationDate)
+                    .modifiedDate(modifiedDate).filterPipleSpec(this.filterPipleSpec)
                     .uploads(postRepliesMessageCommand.getAttachment().getUploadFiles())
-                    .props(postRepliesMessageCommand.getMessagePropertysVO().getPropertys())
-                    .build();
+                    .props(postRepliesMessageCommand.getMessagePropertysVO().getPropertys()).build();
 
             forumThread.addNewMessage(this, forumMessageReply);
             forumMessageReply.getAccount().updateMessageCount(1);
@@ -191,8 +185,8 @@ public class ForumMessage implements Cloneable {
     public void revise(ReviseForumMessageCommand reviseForumMessageCommand) {
         try {
             setModifiedDate(System.currentTimeMillis());
-            MessageVO messageVO = this.messageVOBuilder().subject(reviseForumMessageCommand.getMessageVO().getSubject()).body(reviseForumMessageCommand.getMessageVO()
-                    .getBody()).build();
+            MessageVO messageVO = this.messageVOBuilder().subject(reviseForumMessageCommand.getMessageVO().getSubject())
+                    .body(reviseForumMessageCommand.getMessageVO().getBody()).build();
             setMessageVO(messageVO);
             forumThread.updateMessage(this);
             Collection<UploadFile> uploads = reviseForumMessageCommand.getAttachment().getUploadFiles();
@@ -209,8 +203,8 @@ public class ForumMessage implements Cloneable {
             eventSourcing.saveMessage(new MessageRevisedEvent(reviseForumMessageCommand));
 
             // merge with old properties;
-            eventSourcing.saveMessageProperties(new MessagePropertiesRevisedEvent(this.messageId,
-                    getMessagePropertysVO().getPropertys()));
+            eventSourcing.saveMessageProperties(
+                    new MessagePropertiesRevisedEvent(this.messageId, getMessagePropertysVO().getPropertys()));
         } catch (Exception e) {
             System.err.print(" updateMessage error:" + e + this.messageId);
         }
@@ -225,14 +219,14 @@ public class ForumMessage implements Cloneable {
     public void updateMasked(boolean masked) {
         this.getAccount().setMasked(masked);
         this.getMessagePropertysVO().updateMasked(masked);
-        eventSourcing.saveMessageProperties(new MessagePropertiesRevisedEvent(this.messageId,
-                getMessagePropertysVO().getPropertys()));
+        eventSourcing.saveMessageProperties(
+                new MessagePropertiesRevisedEvent(this.messageId, getMessagePropertysVO().getPropertys()));
         this.getForumThread().updateMessage(this);
         this.reloadMessageVOOrignal();
     }
 
     public AttachmentsVO getAttachment() {
-         return attachmentsVO;
+        return attachmentsVO;
     }
 
     private void setAttachment(AttachmentsVO attachmentsVO) {
@@ -292,8 +286,8 @@ public class ForumMessage implements Cloneable {
     }
 
     private void setForum(Forum forum) {
-        if (forum.lazyLoaderRole == null || forum.getName() == null){
-            System.err.println("forum not solid for messageId=" + messageId + " forumId="+ forum.getForumId());
+        if (forum.lazyLoaderRole == null || forum.getName() == null) {
+            System.err.println("forum not solid for messageId=" + messageId + " forumId=" + forum.getForumId());
         }
         this.forum = forum;
     }
@@ -321,8 +315,8 @@ public class ForumMessage implements Cloneable {
     public void messaegDigAction() {
         this.getMessagePropertysVO().addMessageDigCount();
         this.forumThread.addDig(this);
-        eventSourcing.saveMessageProperties(new MessagePropertiesRevisedEvent(this.messageId,
-                getMessagePropertysVO().getPropertys()));
+        eventSourcing.saveMessageProperties(
+                new MessagePropertiesRevisedEvent(this.messageId, getMessagePropertysVO().getPropertys()));
     }
 
     public String getPostip() {
@@ -331,7 +325,7 @@ public class ForumMessage implements Cloneable {
 
     public ReBlogVO getReBlogVO() {
         if (reBlogVO == null)
-            reBlogVO = new ReBlogVO(this.messageId, this.lazyLoaderRole);
+            reBlogVO = new ReBlogVO(this.forumThread.getThreadId(), this.lazyLoaderRole);
         return reBlogVO;
     }
 
@@ -366,7 +360,6 @@ public class ForumMessage implements Cloneable {
         return subject -> body -> new MessageVO.MessageVOFinalStage(subject, body, this);
     }
 
-
     @FunctionalInterface
     public interface RequireMessageId {
         RequireParentMessage messageId(long messageId);
@@ -376,7 +369,6 @@ public class ForumMessage implements Cloneable {
     public interface RequireParentMessage {
         RequireMessageVO parentMessage(ForumMessage parentMessage);
     }
-
 
     @FunctionalInterface
     public interface RequireMessageVO {
@@ -413,7 +405,6 @@ public class ForumMessage implements Cloneable {
         OptionsUploadFile filterPipleSpec(FilterPipleSpec filterPipleSpec);
     }
 
-
     @FunctionalInterface
     public interface OptionsUploadFile {
         OptionsProperties uploads(Collection<UploadFile> uploads);
@@ -434,8 +425,6 @@ public class ForumMessage implements Cloneable {
         MessageVO.MessageVOFinalStage body(String body);
     }
 
-
-
     public static class FinalStageVO {
         private final long messageId;
         private final ForumMessage parentMessage;
@@ -449,9 +438,9 @@ public class ForumMessage implements Cloneable {
         private final Collection<UploadFile> uploads;
         private final Collection<Property> props;
 
-        public FinalStageVO(long messageId, ForumMessage parentMessage, MessageVO messageVO, Forum
-                forum, ForumThread forumThread, Account account, String creationDate, long modifiedDate,FilterPipleSpec filterPipleSpec,
-                            Collection<UploadFile> uploads, Collection<Property> props) {
+        public FinalStageVO(long messageId, ForumMessage parentMessage, MessageVO messageVO, Forum forum,
+                ForumThread forumThread, Account account, String creationDate, long modifiedDate,
+                FilterPipleSpec filterPipleSpec, Collection<UploadFile> uploads, Collection<Property> props) {
             this.messageId = messageId;
             this.parentMessage = parentMessage;
             this.messageVO = messageVO;
@@ -467,19 +456,18 @@ public class ForumMessage implements Cloneable {
 
         public ForumMessage build() {
             try {
-                if (parentMessage != null ) {
+                if (parentMessage != null) {
                     ForumMessageReply forumMessageRely = new ForumMessageReply();
-                    forumMessageRely.build(messageId, messageVO, forum, forumThread, account,
-                            creationDate, modifiedDate, filterPipleSpec, uploads,
-                            props, parentMessage);
+                    forumMessageRely.build(messageId, messageVO, forum, forumThread, account, creationDate,
+                            modifiedDate, filterPipleSpec, uploads, props, parentMessage);
                     return forumMessageRely;
                 } else {
                     ForumMessage forumMessage = new ForumMessage();
-                    forumMessage.build(messageId, messageVO, forum, forumThread, account,
-                            creationDate, modifiedDate, filterPipleSpec, uploads, props);
+                    forumMessage.build(messageId, messageVO, forum, forumThread, account, creationDate, modifiedDate,
+                            filterPipleSpec, uploads, props);
                     return forumMessage;
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.err.println("build Exception:" + e.getMessage() + " messageId=" + messageId);
                 return null;
             }
@@ -487,9 +475,9 @@ public class ForumMessage implements Cloneable {
         }
     }
 
-    public void build(long messageId, MessageVO messageVO, Forum
-            forum, ForumThread forumThread, Account account,String creationDate, long modifiedDate ,FilterPipleSpec filterPipleSpec,
-                      Collection<UploadFile> uploads, Collection<Property> props) {
+    public void build(long messageId, MessageVO messageVO, Forum forum, ForumThread forumThread, Account account,
+            String creationDate, long modifiedDate, FilterPipleSpec filterPipleSpec, Collection<UploadFile> uploads,
+            Collection<Property> props) {
         try {
             if (!this.isSolid())
                 synchronized (this) {
@@ -502,16 +490,16 @@ public class ForumMessage implements Cloneable {
                         setForumThread(forumThread);
                         setFilterPipleSpec(filterPipleSpec);
                         setAttachment(new AttachmentsVO(messageId, uploads));
-                        setMessagePropertysVO(new MessagePropertysVO(messageId ,props));
-                        //apply all filter specification , business rule!
-                        messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO
-                                .getBody()).build();
+                        setMessagePropertysVO(new MessagePropertysVO(messageId, props));
+                        // apply all filter specification , business rule!
+                        messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO.getBody())
+                                .build();
                         setMessageVO(messageVO);
-                        this.setSolid(true);//construt end
+                        this.setSolid(true);// construt end
                     }
                 }
         } catch (Exception e) {
-            System.err.println(" Message build error:"+ messageId);
+            System.err.println(" Message build error:" + messageId);
         }
 
     }

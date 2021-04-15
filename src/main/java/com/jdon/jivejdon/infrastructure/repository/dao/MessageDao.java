@@ -28,7 +28,6 @@ import java.util.Collection;
  */
 public interface MessageDao {
 
-
 	AnemicMessageDTO getAnemicMessage(Long messageId);
 
 	MessageVO getMessageVOCore(ForumMessage forumMessage);
@@ -61,6 +60,6 @@ public interface MessageDao {
 
 	public Collection<Long> getReBlogByFrom(Long messageId) throws Exception;
 
-	public Long getReBlogByTo(Long threadId) throws Exception;
+	public Collection<Long> getReBlogByTo(Long threadId) throws Exception;
 
 }

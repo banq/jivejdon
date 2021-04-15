@@ -21,6 +21,8 @@ import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.controller.pool.Poolable;
 import com.jdon.jivejdon.domain.model.thread.ThreadTagsVO;
+import com.jdon.jivejdon.domain.model.util.OneManyDTO;
+import com.jdon.jivejdon.domain.model.util.OneOneDTO;
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.HotKeys;
@@ -43,15 +45,15 @@ import java.util.regex.Pattern;
 @Service("othersService")
 public class TagServiceImp implements TagService, Poolable {
 	private final static Logger logger = LogManager.getLogger(TagServiceImp.class);
-	private final static Pattern illEscape = Pattern.compile
-			("[^\\/|^\\<|^\\>|^\\=|^\\?|^\\\\|^\\s|^\\(|^\\)|^\\{|^\\}|^\\[|^\\]|^\\+|^\\*]*");
+	private final static Pattern illEscape = Pattern
+			.compile("[^\\/|^\\<|^\\>|^\\=|^\\?|^\\\\|^\\s|^\\(|^\\)|^\\{|^\\}|^\\[|^\\]|^\\+|^\\*]*");
 	protected final JtaTransactionUtil jtaTransactionUtil;
 	private final HotKeysRepository hotKeysRepository;
 	private final TagRepository tagRepository;
 	private final MessageRepository messageRepository;
 
-	public TagServiceImp(HotKeysRepository hotKeysFactory, TagRepository tagRepository, MessageRepository messageRepository,
-			JtaTransactionUtil jtaTransactionUtil) {
+	public TagServiceImp(HotKeysRepository hotKeysFactory, TagRepository tagRepository,
+			MessageRepository messageRepository, JtaTransactionUtil jtaTransactionUtil) {
 		super();
 		this.hotKeysRepository = hotKeysFactory;
 		this.tagRepository = tagRepository;
@@ -139,8 +141,7 @@ public class TagServiceImp implements TagService, Poolable {
 		}
 		try {
 			tagRepository.saveTagTitle(threadId, tagTitles);
-			Optional<ForumThread> forumThreadOptional = messageRepository.getForumBuilder()
-					.getThread(threadId);
+			Optional<ForumThread> forumThreadOptional = messageRepository.getForumBuilder().getThread(threadId);
 			Collection<ThreadTag> newtags = tagRepository.getThreadTags(forumThreadOptional.get());
 			ThreadTagsVO threadTagsVO = new ThreadTagsVO(forumThreadOptional.get(), newtags);
 			// this is update thread in memory cache
@@ -156,6 +157,24 @@ public class TagServiceImp implements TagService, Poolable {
 
 	public HotKeys getHotKeys() {
 		return hotKeysRepository.getHotKeys();
+	}
+
+	public void saveReBlogLink(OneOneDTO oneOneDTO) {
+		try {
+			messageRepository.saveReBlog(oneOneDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public Collection<Long> getReBlogLink(Long messageId) {
+		try {
+			return messageRepository.getReBlogByFrom(messageId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
 }

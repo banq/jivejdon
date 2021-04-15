@@ -75,6 +75,11 @@
             page="/message/tag/thread.shtml?action=edit"
             paramId="threadId" paramName="forumMessage"
             paramProperty="forumThread.threadId" />' rel='nofollow'>编辑标签 </a>
+
+                    <a href='<html:rewrite
+            page="/message/reblogLink.shtml?action=edit"
+            paramId="threadId" paramName="forumMessage"
+            paramProperty="forumThread.threadId" />' rel='nofollow'>编辑互链 </a>
                   </logic:equal>
                 </logic:equal>
               </div>
@@ -102,6 +107,25 @@
                 </span>
               </div>
               <logic:equal name="forumMessage" property="root" value="true">    
+                <logic:notEmpty name="forumMessage" property="reBlogVO.threadFroms">
+                  <logic:iterate id="threadFrom" name="forumMessage" property="reBlogVO.threadFroms">
+                    <div class="reblogfrom"> 
+                      <a href="<%=request.getContextPath()%>/<bean:write name="threadFrom" property="threadId"/>">
+                         <bean:write name="threadFrom" property="name"/>
+                      </a>
+                    </div>
+                  </logic:iterate>  
+                </logic:notEmpty>
+                <logic:notEmpty name="forumMessage" property="reBlogVO.threadTos">
+                  <logic:iterate id="threadTo" name="forumMessage" property="reBlogVO.threadTos">
+                    <div class="reblogto"> 
+                      <a href="<%=request.getContextPath()%>/<bean:write name="threadTo" property="threadId"/>">
+                         <bean:write name="threadTo" property="name"/>
+                      </a>
+                    </div>
+                  </logic:iterate>
+                </logic:notEmpty>
+              
               <div class="post_titletag">
                 <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">
                   <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag">

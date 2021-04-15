@@ -40,11 +40,6 @@ public class MessageEventSourcingRole {
 		return new DomainMessage(event);
 	}
 
-	@Send("postReBlog")
-	public DomainMessage postReBlog(OneOneDTO oneOneDTO) {
-		return new DomainMessage(oneOneDTO);
-	}
-
 	@Send("deleteMessage")
 	public DomainMessage deleteMessage(MessageRemoveCommand event) {
 		return new DomainMessage(event);
@@ -54,7 +49,6 @@ public class MessageEventSourcingRole {
 	public DomainMessage delThread(MessageRemovedEvent event) {
 		return new DomainMessage(event);
 	}
-
 
 	@Send("updateMessageProperties")
 	public DomainMessage saveMessageProperties(MessagePropertiesRevisedEvent event) {

@@ -230,6 +230,23 @@
             <forward name="savetags" path="/message/tag/savetagsResult.jsp"/>
         </action>
 
+        <action name="threadForm" path="/message/reblogLink"
+                type="com.jdon.jivejdon.presentation.filter.ThreadEditAuthFilter" scope="request"
+                validate="false">
+            <forward name="success" path="/message/reblogLink2.shtml"/>
+        </action>
+
+        <action name="threadForm" path="/message/reblogLink2"
+              type="com.jdon.strutsutil.ModelViewAction" scope="request" validate="false">
+              <forward name="edit" path="/message/reblogLink3.shtml"/>
+        </action>
+
+        <action name="propertysForm" path="/message/reblogLink3" 
+               type="com.jdon.jivejdon.presentation.action.message.ReblogLinkAction" scope="request" validate="false">
+             <forward name="forward" path="/message/reblogLink.jsp" />
+        </action>
+
+
     </action-mappings>
 
 </struts-config>

@@ -366,11 +366,6 @@ public class ForumThread {
 
 	}
 
-	public void postReBlog(Long messageFromId, Long messageToId) {
-		OneOneDTO oneOneDTO = new OneOneDTO(messageFromId, messageToId);
-		eventSourcing.postReBlog(oneOneDTO);
-	}
-
 	public void delete(ForumMessage delforumMessage) {
 		DomainMessage domainMessage = eventSourcing
 				.deleteMessage(new MessageRemoveCommand(delforumMessage.getMessageId()));

@@ -9,7 +9,6 @@ import com.jdon.jivejdon.domain.command.PostTopicMessageCommand;
 import com.jdon.jivejdon.domain.command.ReviseForumMessageCommand;
 import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumMessage;
-import com.jdon.jivejdon.domain.model.util.OneOneDTO;
 import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import com.jdon.jivejdon.infrastructure.repository.builder.MessageRepositoryDao;
@@ -26,8 +25,8 @@ public class MessageCRUDService {
 	private final TagRepository tagRepository;
 	private final ForumFactory forumAbstractFactory;
 
-	public MessageCRUDService(JtaTransactionUtil jtaTransactionUtil, MessageRepositoryDao messageRepository, TagRepository tagRepository,
-							  ForumFactory forumAbstractFactory) {
+	public MessageCRUDService(JtaTransactionUtil jtaTransactionUtil, MessageRepositoryDao messageRepository,
+			TagRepository tagRepository, ForumFactory forumAbstractFactory) {
 		super();
 		this.jtaTransactionUtil = jtaTransactionUtil;
 		this.messageRepository = messageRepository;
@@ -49,18 +48,17 @@ public class MessageCRUDService {
 		}
 	}
 
-
-
 	/**
 	 * called by @Consumer("addReplyMessage") in AddReplyMessage that is listerner.
 	 */
 	public void insertReplyMessage(PostRepliesMessageCommand postRepliesMessageCommand) throws Exception {
 		logger.debug("enter createReplyMessage");
 		try {
-            AnemicMessageDTO anemicMessageDTO = AnemicMessageDTO.commandToDTO(postRepliesMessageCommand);
-            anemicMessageDTO.setParentMessage(new AnemicMessageDTO(postRepliesMessageCommand.getParentMessage().getMessageId()));
+			AnemicMessageDTO anemicMessageDTO = AnemicMessageDTO.commandToDTO(postRepliesMessageCommand);
+			anemicMessageDTO.setParentMessage(
+					new AnemicMessageDTO(postRepliesMessageCommand.getParentMessage().getMessageId()));
 			anemicMessageDTO.setForumThread(postRepliesMessageCommand.getParentMessage().getForumThread());
-            messageRepository.createReplyMessage(anemicMessageDTO);
+			messageRepository.createReplyMessage(anemicMessageDTO);
 			logger.debug("createReplyMessage ok!");
 		} catch (Exception e) {
 			String error = e + " createTopicMessage forumMessageId=" + postRepliesMessageCommand.getMessageId();
@@ -69,11 +67,10 @@ public class MessageCRUDService {
 		}
 	}
 
-
 	public void updateMessage(ReviseForumMessageCommand reviseForumMessageCommand) throws Exception {
 		logger.debug("enter updateMessage");
-        AnemicMessageDTO anemicMessageDTO = AnemicMessageDTO.commandToDTO(reviseForumMessageCommand);
-        try {
+		AnemicMessageDTO anemicMessageDTO = AnemicMessageDTO.commandToDTO(reviseForumMessageCommand);
+		try {
 			messageRepository.updateMessage(anemicMessageDTO);
 
 			// update the forumThread's updatetime
@@ -100,22 +97,6 @@ public class MessageCRUDService {
 		messageRepository.getMessageDaoFacade().getMessageDao().updateMovingForum(messageId, threadId, forumId);
 	}
 
-	@OnEvent("postReBlog")
-	public void postReBlog(OneOneDTO oneOneDTO) throws Exception {
-		logger.debug("enter postReBlog");
-		try {
-			jtaTransactionUtil.beginTransaction();
-			messageRepository.saveReBlog(oneOneDTO);
-			logger.debug("postReBlog ok!");
-			jtaTransactionUtil.commitTransaction();
-		} catch (Exception e) {
-			jtaTransactionUtil.rollback();
-			String error = e + " postReBlog oneManyDTO=" + oneOneDTO.getParent();
-			logger.error(error);
-			throw new Exception(error);
-		}
-	}
-
 	@OnEvent("deleteMessage")
 	public Long deleteMessage(MessageRemoveCommand event) throws Exception {
 		logger.debug("enter deleteMessage");
@@ -128,7 +109,8 @@ public class MessageCRUDService {
 
 			// if the root message was deleted, the thread that it be in
 			// will all be deleted
-			if (delforumMessage.getMessageId().longValue() == delforumMessage.getForumThread().getRootMessage().getMessageId().longValue()) {
+			if (delforumMessage.getMessageId().longValue() == delforumMessage.getForumThread().getRootMessage()
+					.getMessageId().longValue()) {
 				logger.debug("1. it is a root message, delete the forumThread");
 				tagRepository.deleteTagTitle(delforumMessage.getForumThread().getThreadId());
 				messageRepository.deleteThread(delforumMessage.getForumThread());

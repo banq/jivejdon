@@ -34,6 +34,7 @@ import java.util.regex.Pattern;
 
 /**
  * UI model
+ * 
  * @author <a href="mailto:banq@163.com">banq</a>
  * 
  */
@@ -78,7 +79,7 @@ public class MessageForm extends BaseForm {
 	public MessageForm() {
 		messageVO = new MessageVO();
 		forum = new Forum(); // for parameter forum.forumId=xxx
-		forumThread = new ForumThread(null,null, forum);
+		forumThread = new ForumThread(null, null, forum);
 		account = new Account();
 		parentMessage = new AnemicMessageDTO();
 
@@ -88,16 +89,13 @@ public class MessageForm extends BaseForm {
 		return account;
 	}
 
-
 	public void setAccount(Account account) {
 		this.account = account;
 	}
 
-
 	public Long getMessageId() {
 		return messageId;
 	}
-
 
 	public void setMessageId(Long messageId) {
 		this.messageId = messageId;
@@ -106,7 +104,6 @@ public class MessageForm extends BaseForm {
 	public AnemicMessageDTO getParentMessage() {
 		return parentMessage;
 	}
-
 
 	public void setParentMessage(AnemicMessageDTO parentMessage) {
 		this.parentMessage = parentMessage;
@@ -128,21 +125,17 @@ public class MessageForm extends BaseForm {
 		messageVO = messageVO.builder().subject(subject).body(this.getBody()).build();
 	}
 
-
 	public ForumThread getForumThread() {
 		return forumThread;
 	}
-
 
 	public void setForumThread(ForumThread forumThread) {
 		this.forumThread = forumThread;
 	}
 
-
 	public Forum getForum() {
 		return forum;
 	}
-
 
 	public void setForum(Forum forum) {
 		this.forum = forum;
@@ -163,18 +156,18 @@ public class MessageForm extends BaseForm {
 	public void setMasked(boolean masked) {
 		this.masked = masked;
 	}
-//
-//	public String getTagTitles() {
-//		if ((this.tagTitles != null) && (this.tagTitles.length != 0)) {
-//			return StringUtil.merge(this.tagTitles, " ");
-//		} else
-//			return "";
-//	}
-//
-//	public void setTagTitles(String tagTitle) {
-//		if (!UtilValidate.isEmpty(tagTitle))
-//			this.tagTitles = tagTitle.split("(\\s)+");
-//	}
+	//
+	// public String getTagTitles() {
+	// if ((this.tagTitles != null) && (this.tagTitles.length != 0)) {
+	// return StringUtil.merge(this.tagTitles, " ");
+	// } else
+	// return "";
+	// }
+	//
+	// public void setTagTitles(String tagTitle) {
+	// if (!UtilValidate.isEmpty(tagTitle))
+	// this.tagTitles = tagTitle.split("(\\s)+");
+	// }
 
 	public String[] getTagTitle() {
 
@@ -209,8 +202,8 @@ public class MessageForm extends BaseForm {
 	}
 
 	/**
-	 * donot need get method, upload is in uploadService.getAllUploadFiles
-	 * public AttachmentsVO getAttachment() { return attachment; }
+	 * donot need get method, upload is in uploadService.getAllUploadFiles public
+	 * AttachmentsVO getAttachment() { return attachment; }
 	 * 
 	 * @return
 	 */
@@ -253,11 +246,10 @@ public class MessageForm extends BaseForm {
 
 	public void doValidate(ActionMapping mapping, HttpServletRequest request, List errors) {
 		if (getMethod() == null || !getMethod().equalsIgnoreCase("delete")) {
-			if(addErrorIfStringEmpty(errors, "need subject", this.getSubject
-                    ()))
-			    return;
+			if (addErrorIfStringEmpty(errors, "need subject", this.getSubject()))
+				return;
 			if (addErrorIfStringEmpty(errors, "need.body", getBody()))
-                return;
+				return;
 
 			if (this.getParentMessage() == null)
 				if (this.getForum() == null || this.getForum().getForumId() == null) {
@@ -278,7 +270,7 @@ public class MessageForm extends BaseForm {
 				return;
 			}
 			if ((getBody() != null) && (getBody().length() >= bodyMaxLength)) {
-				errors.add("body.sizeerror" );
+				errors.add("body.sizeerror");
 				return;
 			}
 		}
@@ -295,8 +287,7 @@ public class MessageForm extends BaseForm {
 			e.printStackTrace();
 		}
 		Pattern unicodeOutliers = Pattern.compile("[^\\x00-\\x7F]",
-				Pattern.UNICODE_CASE | Pattern.CANON_EQ
-						| Pattern.CASE_INSENSITIVE);
+				Pattern.UNICODE_CASE | Pattern.CANON_EQ | Pattern.CASE_INSENSITIVE);
 		Matcher unicodeOutlierMatcher = unicodeOutliers.matcher(utf8tweet);
 
 		return unicodeOutlierMatcher.replaceAll(" ");

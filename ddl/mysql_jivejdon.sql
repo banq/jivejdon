@@ -72,10 +72,9 @@ CREATE TABLE jiveMessageProp (
 
 
 CREATE TABLE reblog (
-  reblogToID            BIGINT NOT NULL,
   reblogFromID          BIGINT NOT NULL,  
-  PRIMARY KEY  (reblogToID),
-  INDEX reblog_from_idx  (reblogFromID)
+  reblogToID            BIGINT NOT NULL,  
+  PRIMARY KEY  (reblogFromID,reblogToID) 
 );
 
 
