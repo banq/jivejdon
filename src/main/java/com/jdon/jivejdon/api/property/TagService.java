@@ -48,6 +48,8 @@ public interface TagService {
 
 	public void saveTag(Long threadId, String[] tagTitle);
 
+	public void deleteReBlogLink(Long fromId);
+
 	public void saveReBlogLink(OneOneDTO oneOneDTO);
 
 	public Collection<Long> getReBlogLink(Long messageId);

@@ -52,7 +52,8 @@ public class ReBlogVO extends LazyLoader {
 	}
 
 	private void loadAscResult() {
-		if (this.threadFroms == null && lazyLoaderRole != null && !load) {
+		if (!load) {
+			super.setDomainMessage(null);
 			Many2ManyDTO many2ManyDTO = (Many2ManyDTO) super.loadResult();
 			if (many2ManyDTO != null) {
 				threadTos = many2ManyDTO.getChildern();
@@ -67,4 +68,9 @@ public class ReBlogVO extends LazyLoader {
 	public DomainMessage getDomainMessage() {
 		return lazyLoaderRole.loadReBlog(Id);
 	}
+
+	public void refresh() {
+		load = false;
+	}
+
 }

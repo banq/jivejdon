@@ -15,15 +15,12 @@
  */
 package com.jdon.jivejdon.spi.pubsub.reconstruction.impl;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.google.common.base.Optional;
 import com.jdon.annotation.Component;
 import com.jdon.annotation.model.OnEvent;
-import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.util.Many2ManyDTO;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import com.jdon.jivejdon.infrastructure.repository.MessageRepository;

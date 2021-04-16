@@ -246,6 +246,10 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 		this.messageDaoFacade.getMessageDao().saveReBlog(oneOneDTO);
 	}
 
+	public void delReBlog(Long msgId) throws Exception {
+		this.messageDaoFacade.getMessageDao().delReBlog(msgId);
+	}
+
 	public Collection<Long> getReBlogByFrom(Long messageId) throws Exception {
 		return this.messageDaoFacade.getMessageDao().getReBlogByFrom(messageId);
 	}

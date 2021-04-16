@@ -1,27 +1,25 @@
 package com.jdon.jivejdon.presentation.action.message;
 
-import org.apache.struts.action.Action;
-
-import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.api.ForumMessageService;
-import com.jdon.strutsutil.FormBeanUtil;
-import com.jdon.util.Debug;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.api.ForumMessageService;
+import com.jdon.jivejdon.api.property.TagService;
+import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.Property;
 import com.jdon.jivejdon.domain.model.util.OneOneDTO;
 import com.jdon.jivejdon.presentation.form.PropertysForm;
-import com.jdon.jivejdon.api.property.TagService;
+import com.jdon.util.Debug;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.stream.Collectors;
-import com.jdon.jivejdon.domain.model.ForumThread;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
 public class ReblogLinkAction extends Action {
     public final static String module = ReblogLinkAction.class.getName();
@@ -30,16 +28,12 @@ public class ReblogLinkAction extends Action {
             HttpServletResponse response) throws Exception {
         PropertysForm df = (PropertysForm) actionForm;
         String threadFromId = request.getParameter("threadId");
-
         TagService othersService = (TagService) WebAppUtil.getService("othersService", request);
         Collection<String> urls = df.getPropertys().stream().map(e -> e.getValue()).collect(Collectors.toList());
-        for (String url : urls) {
-            if (extracted(url)) {
-                Long threadId = extractFromUrl(url, request);
-                if (threadId != null)
-                    othersService.saveReBlogLink(new OneOneDTO(Long.parseLong(threadFromId), threadId));
-
-            }
+        if (urls.stream().anyMatch(url -> url != null)) {
+            othersService.deleteReBlogLink(Long.parseLong(threadFromId));
+            for (String url : urls)
+                saveReblogLinkItem(Long.parseLong(threadFromId), url, request);
         }
         Collection<Long> tos = othersService.getReBlogLink(Long.parseLong(threadFromId));
         if (tos != null && tos.size() != 0) {
@@ -54,8 +48,16 @@ public class ReblogLinkAction extends Action {
         return actionMapping.findForward("forward");
     }
 
-    private boolean extracted(String url) {
-        return url != null && !url.equals("");
+    private void saveReblogLinkItem(Long threadFromId, String url, HttpServletRequest request) {
+        if (url != null && !url.equals("")) {
+            Long threadId = extractFromUrl(url, request);
+            if (threadId != null) {
+                TagService othersService = (TagService) WebAppUtil.getService("othersService", request);
+                othersService.saveReBlogLink(new OneOneDTO(threadFromId, threadId));
+            }
+
+        }
+
     }
 
     private Long extractFromUrl(String url, HttpServletRequest request) {
@@ -77,12 +79,6 @@ public class ReblogLinkAction extends Action {
             return null;
         }
         return thread.getThreadId();
-
-    }
-
-    private String includeUrl(Long threadId, HttpServletRequest request) {
-        String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
-        return domainUrl + "/" + threadId;
 
     }
 

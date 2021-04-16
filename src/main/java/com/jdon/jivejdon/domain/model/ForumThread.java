@@ -15,11 +15,16 @@
  */
 package com.jdon.jivejdon.domain.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.concurrent.atomic.AtomicReference;
+
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.domain.event.MessageOwnershipChangedEvent;
 import com.jdon.jivejdon.domain.command.MessageRemoveCommand;
+import com.jdon.jivejdon.domain.event.MessageOwnershipChangedEvent;
 import com.jdon.jivejdon.domain.event.MessageRemovedEvent;
 import com.jdon.jivejdon.domain.event.ThreadNameRevisedEvent;
 import com.jdon.jivejdon.domain.model.property.Property;
@@ -31,18 +36,12 @@ import com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF;
 import com.jdon.jivejdon.domain.model.subscription.event.ThreadSubscribedNotifyEvent;
 import com.jdon.jivejdon.domain.model.thread.ThreadTagsVO;
 import com.jdon.jivejdon.domain.model.thread.ViewCounter;
-import com.jdon.jivejdon.domain.model.util.OneOneDTO;
-import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 import com.jdon.jivejdon.spi.pubsub.publish.MessageEventSourcingRole;
+import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.treepatterns.TreeVisitor;
 import com.jdon.treepatterns.model.TreeModel;
 import com.jdon.util.StringUtil;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * ForumThread is the aggregation root, be composed of roo message and its reply

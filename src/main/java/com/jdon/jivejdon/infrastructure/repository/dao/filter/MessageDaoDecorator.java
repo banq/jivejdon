@@ -20,6 +20,8 @@ import com.jdon.annotation.pointcut.Around;
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.util.OneOneDTO;
+import com.jdon.jivejdon.infrastructure.cqrs.CacheQueryRefresher;
 import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.infrastructure.repository.builder.MessageInitFactory;
 import com.jdon.jivejdon.infrastructure.repository.dao.AccountDao;
@@ -27,6 +29,7 @@ import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
 import com.jdon.jivejdon.infrastructure.repository.dao.UploadFileDao;
 import com.jdon.jivejdon.infrastructure.repository.dao.sql.JdbcTempSource;
 import com.jdon.jivejdon.infrastructure.repository.dao.sql.MessageDaoSql;
+import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
 import com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository;
 import com.jdon.jivejdon.util.ContainerUtil;
 
@@ -39,18 +42,17 @@ import com.jdon.jivejdon.util.ContainerUtil;
 @Introduce("modelCache")
 public class MessageDaoDecorator extends MessageDaoSql {
 
-	protected MessageSearchRepository messageSearchProxy;
+	protected final MessageSearchRepository messageSearchProxy;
 
-	public MessageDaoDecorator(JdbcTempSource jdbcTempSource, ContainerUtil containerUtil, AccountDao accountDao, PropertyDao propertyDao,
-			UploadFileDao uploadFileDao, MessageSearchRepository messageSearchProxy, MessageInitFactory messageFactory, Constants constants) {
+	public MessageDaoDecorator(JdbcTempSource jdbcTempSource, ContainerUtil containerUtil, AccountDao accountDao,
+			PropertyDao propertyDao, UploadFileDao uploadFileDao, MessageSearchRepository messageSearchProxy,
+			MessageInitFactory messageFactory, Constants constants) {
 		super(jdbcTempSource, messageFactory, constants);
 		this.messageSearchProxy = messageSearchProxy;
 	}
 
-
-
 	public AnemicMessageDTO getAnemicMessage(Long messageId) {
-		return  super.getAnemicMessage(messageId);
+		return super.getAnemicMessage(messageId);
 	}
 
 	@Around()
@@ -64,8 +66,7 @@ public class MessageDaoDecorator extends MessageDaoSql {
 	}
 
 	/**
-	 * if this deleted message is the last message, we must refresh the forum
-	 * state.
+	 * if this deleted message is the last message, we must refresh the forum state.
 	 */
 	public void deleteMessage(Long forumMessageId) throws Exception {
 		// second delete the message from database

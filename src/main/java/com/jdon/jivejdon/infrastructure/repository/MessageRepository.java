@@ -42,6 +42,8 @@ public interface MessageRepository {
 
 	void saveReBlog(OneOneDTO oneOneDTO) throws Exception;
 
+	void delReBlog(Long msgId) throws Exception;
+
 	Collection<Long> getReBlogByFrom(Long messageId) throws Exception;
 
 	Collection<Long> getReBlogByTo(Long messageId) throws Exception;

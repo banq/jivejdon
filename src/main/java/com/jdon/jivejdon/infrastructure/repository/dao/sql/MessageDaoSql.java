@@ -301,7 +301,7 @@ public abstract class MessageDaoSql implements MessageDao {
 	}
 
 	public void saveReBlog(OneOneDTO oneOneDTO) throws Exception {
-		String INSERT_S = "REPLACE INTO reblog(reblogFromID, reblogToID) VALUES(?,?)";
+		String INSERT_S = "INSERT INTO reblog(reblogFromID, reblogToID) VALUES(?,?)";
 		List queryParams = new ArrayList();
 		try {
 			queryParams.add((Long) oneOneDTO.getParent());
@@ -315,12 +315,10 @@ public abstract class MessageDaoSql implements MessageDao {
 
 	public void delReBlog(Long msgId) throws Exception {
 		String S1 = "Delete from reblog where reblogFromID =?";
-		String S2 = "Delete from reblog where reblogToID =?";
-		List queryParams = new ArrayList();
+		List<Long> queryParams = new ArrayList<>();
 		try {
 			queryParams.add(msgId);
 			jdbcTempSource.getJdbcTemp().operate(queryParams, S1);
-			jdbcTempSource.getJdbcTemp().operate(queryParams, S2);
 		} catch (Exception e) {
 			logger.error("delete reBlog error: " + msgId + e);
 			throw new Exception(e);
