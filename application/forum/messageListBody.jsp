@@ -124,15 +124,7 @@
                       </a>
                     </div>
                   </logic:iterate>
-                </logic:notEmpty>
-              
-              <div class="post_titletag">
-                <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">
-                  <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag">
-                    #<bean:write name="threadTag" property="title"/>
-                  </a> &nbsp;&nbsp;&nbsp;&nbsp;
-                </logic:iterate>
-                </div>
+                </logic:notEmpty>              
               </logic:equal>
               <p></p>
 </div>
@@ -155,6 +147,24 @@
 		<li><a href="javascript:shareto('qzone')"><i class="fa fa-qq"></i></a></li>		
 	  </ul>
   </div>		
+  <div class="post_titletag">
+    <div class="row">
+      <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">                  
+          <div class="col-md-3">
+            <div class="linkblock">	
+               <div class="box">
+                   <img src="https://static.jdon.com/simgs/thumb/<%=1 + (int) (Math.random() * 4)%>.jpg" border="0" class="thumbnail" loading="lazy"> 
+                   <h3> <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag"> 
+                          #<bean:write name="threadTag" property="title"/>
+                          </a>
+                   </h3>  
+	             </div>
+            </div>        
+          </div>                    
+      </logic:iterate>
+    </div>
+  </div>
+
 </logic:equal>
 </div>
 </div>
