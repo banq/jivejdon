@@ -50,6 +50,60 @@
         <div id="messageListBody">
           <logic:iterate id="forumMessage" name="messageListForm" property="list" indexId="i">
             <%@include file="messageListBody.jsp" %>
+            <logic:equal name="forumMessage" property="root" value="true">
+              <div class="diggArea list-inline  top-social" >
+                <DIV class=diggNum id="digNumber_<bean:write name="forumMessage" property="messageId"/>">
+                  <logic:notEqual name="forumMessage" property="digCount" value="0">
+                    <bean:write name="forumMessage" property="digCount"/>
+                  </logic:notEqual>
+                </DIV>
+	            <DIV class="diggLink top8"
+                     id="textArea_<bean:write name="forumMessage" property="messageId"/>"><a
+                    href="javascript:digMessage('<bean:write name="forumMessage" property="messageId"/>')"><i class="fa fa-thumbs-o-up"></i></a>
+                </DIV> 
+              </div>
+              <div style="margin: 0 auto;width: 85px">
+	             <ul class="list-inline  top-social">
+		            <li><a href="javascript:shareto('sina')"><i class="fa fa-weibo"></i></a></li>
+		            <li><a href="javascript:shareto('weixin')"><i class="fa fa-weixin"></i></a></li>
+		            <li><a href="javascript:shareto('qzone')"><i class="fa fa-qq"></i></a></li>		
+	              </ul>
+              </div>
+              <logic:notEmpty name="forumMessage" property="reBlogVO.threadFroms">
+                <logic:iterate id="threadFrom" name="forumMessage" property="reBlogVO.threadFroms">
+                  <div class="reblogfrom">
+                    <bean:define id="reglogThread" name="threadFrom"/> 
+                    <%@include file="messageListBodyReBlogLink.jsp"%>
+                  </div>
+                </logic:iterate>  
+              </logic:notEmpty>
+              <logic:notEmpty name="forumMessage" property="reBlogVO.threadTos">
+                <logic:iterate id="threadTo" name="forumMessage" property="reBlogVO.threadTos">
+                  <div class="reblogto"> 
+                    <bean:define id="reglogThread" name="threadTo"/> 
+                    <%@include file="messageListBodyReBlogLink.jsp"%>
+                  </div>
+                </logic:iterate>
+              </logic:notEmpty>              
+              <div class="box">
+                <div class="row">
+                  <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">                  
+                      <div class="col-md-3">
+                        <div class="linkblock">	
+                           <div class="box">
+                               <img src="https://static.jdon.com/simgs/thumb/<%=1 + (int) (Math.random() * 4)%>.jpg" border="0" class="thumbnail" loading="lazy"> 
+                               <h3> <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag"> 
+                                      #<bean:write name="threadTag" property="title"/>
+                                      </a>
+                               </h3>  
+	                         </div>
+                        </div>        
+                      </div>                    
+                  </logic:iterate>
+                </div>
+              </div>
+            
+            </logic:equal>
           </logic:iterate>
         </div>
 
