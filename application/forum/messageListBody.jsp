@@ -143,7 +143,7 @@
       </div>
     </logic:iterate>
   </logic:notEmpty>              
-  <div class="post_titletag">
+  <div class="box">
     <div class="row">
       <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">                  
           <div class="col-md-3">
