@@ -105,27 +105,7 @@
                 <span id='body_<bean:write name="forumMessage" property="messageId"/>'>
                      <bean:write name="forumMessage" property="messageVO.body" filter="false"/>
                 </span>
-              </div>
-              <logic:equal name="forumMessage" property="root" value="true">    
-                <logic:notEmpty name="forumMessage" property="reBlogVO.threadFroms">
-                  <logic:iterate id="threadFrom" name="forumMessage" property="reBlogVO.threadFroms">
-                    <div class="reblogfrom"> 
-                      <a href="<%=request.getContextPath()%>/<bean:write name="threadFrom" property="threadId"/>">
-                         <bean:write name="threadFrom" property="name"/>
-                      </a>
-                    </div>
-                  </logic:iterate>  
-                </logic:notEmpty>
-                <logic:notEmpty name="forumMessage" property="reBlogVO.threadTos">
-                  <logic:iterate id="threadTo" name="forumMessage" property="reBlogVO.threadTos">
-                    <div class="reblogto"> 
-                      <a href="<%=request.getContextPath()%>/<bean:write name="threadTo" property="threadId"/>">
-                         <bean:write name="threadTo" property="name"/>
-                      </a>
-                    </div>
-                  </logic:iterate>
-                </logic:notEmpty>              
-              </logic:equal>
+              </div>              
               <p></p>
 </div>
 <logic:equal name="forumMessage" property="root" value="true">
@@ -140,13 +120,29 @@
         href="javascript:digMessage('<bean:write name="forumMessage" property="messageId"/>')"><i class="fa fa-thumbs-o-up"></i></a>
     </DIV> 
   </div>
-   <div style="margin: 0 auto;width: 85px">
+  <div style="margin: 0 auto;width: 85px">
 	 <ul class="list-inline  top-social">
 		<li><a href="javascript:shareto('sina')"><i class="fa fa-weibo"></i></a></li>
 		<li><a href="javascript:shareto('weixin')"><i class="fa fa-weixin"></i></a></li>
 		<li><a href="javascript:shareto('qzone')"><i class="fa fa-qq"></i></a></li>		
 	  </ul>
-  </div>		
+  </div>
+  <logic:notEmpty name="forumMessage" property="reBlogVO.threadFroms">
+    <logic:iterate id="threadFrom" name="forumMessage" property="reBlogVO.threadFroms">
+      <div class="reblogfrom">
+        <bean:define id="reglogThread" name="threadFrom"/> 
+        <%@include file="messageListBodyReBlogLink.jsp"%>
+      </div>
+    </logic:iterate>  
+  </logic:notEmpty>
+  <logic:notEmpty name="forumMessage" property="reBlogVO.threadTos">
+    <logic:iterate id="threadTo" name="forumMessage" property="reBlogVO.threadTos">
+      <div class="reblogto"> 
+        <bean:define id="reglogThread" name="threadTo"/> 
+        <%@include file="messageListBodyReBlogLink.jsp"%>
+      </div>
+    </logic:iterate>
+  </logic:notEmpty>              
   <div class="post_titletag">
     <div class="row">
       <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">                  
