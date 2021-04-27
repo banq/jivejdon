@@ -40,6 +40,7 @@ import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 import com.jdon.jivejdon.util.Constants;
 
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * Aggregate Root
@@ -351,6 +352,25 @@ public class ForumMessage implements Cloneable {
 
     public void setMessageUrlVO(MessageUrlVO messageUrlVO) {
         this.messageUrlVO = messageUrlVO;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        ForumMessage forumMessage = (ForumMessage) o;
+        if (forumMessage.getMessageId() == null || this.messageId == null)
+            return false;
+        return this.messageId.longValue() == forumMessage.getMessageId().longValue();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.messageId);
     }
 
     /**

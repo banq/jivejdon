@@ -18,6 +18,7 @@ package com.jdon.jivejdon.domain.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 import com.jdon.annotation.Model;
@@ -370,6 +371,25 @@ public class ForumThread {
 				.deleteMessage(new MessageRemoveCommand(delforumMessage.getMessageId()));
 		eventSourcing.delThread(new MessageRemovedEvent(delforumMessage));
 
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		ForumThread forumThread = (ForumThread) o;
+		if (this.threadId == null || forumThread.getThreadId() == null)
+			return false;
+		return this.threadId.longValue() == forumThread.getThreadId().longValue();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.threadId);
 	}
 
 	public synchronized void build(Forum forum, ForumMessage rootMessage, ThreadTagsVO threadTagsVO) {
