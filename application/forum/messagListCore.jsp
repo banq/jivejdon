@@ -90,12 +90,12 @@
                   <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">                  
                       <div class="col-md-3">
                         <div class="linkblock">	
-                           <div class="box">
-                               <img src="https://static.jdon.com/simgs/thumb/<%=1 + (int) (Math.random() * 4)%>.jpg" border="0" class="thumbnail" loading="lazy"> 
+                           <div class="box">                               
                                <h3> <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag"> 
                                       #<bean:write name="threadTag" property="title"/>
                                       </a>
-                               </h3>  
+                               </h3>
+                               <img src="https://static.jdon.com/simgs/thumb/<%=1 + (int) (Math.random() * 10)%>.jpg" border="0" class="thumbnail" loading="lazy">  
 	                         </div>
                         </div>        
                       </div>                    
