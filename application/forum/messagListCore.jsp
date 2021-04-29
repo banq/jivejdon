@@ -91,11 +91,11 @@
                       <div class="col-md-3">
                         <div class="linkblock">	
                            <div class="box">                               
-                               <h3> <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag"> 
+                               <h3 class="center"><a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag"> 
                                       #<bean:write name="threadTag" property="title"/>
                                       </a>
                                </h3>
-                               <img src="https://static.jdon.com/simgs/thumb/<%=1 + (int) (Math.random() * 10)%>.jpg" border="0" class="thumbnail" loading="lazy">  
+                               <img src="https://static.jdon.com/simgs/thumb/<%=1 + (int) (Math.random() * 10)%>.jpg" border="0" class="thumbnail center" loading="lazy">  
 	                         </div>
                         </div>        
                       </div>                    
