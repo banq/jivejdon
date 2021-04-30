@@ -86,9 +86,9 @@
                 </logic:iterate>
               </logic:notEmpty>              
               <div class="box">
-                <div class="row">
-                  <div class="col-md-6">
+                <div class="row">                  
                     <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi" length="2" offset="0">                  
+                      <div class="col-md-6">
                         <div class="linkblock">	
                            <div class="box">                               
                                <h4 class="center"><a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag"> 
@@ -98,24 +98,25 @@
                                <img src="https://static.jdon.com/simgs/thumb/<%=1 + (int) (Math.random() * 10)%>.jpg" border="0" class="thumbnail center" loading="lazy">  
 	                         </div>
                         </div>        
-                    </logic:iterate>              
-                  </div>
-                  <div class="col-md-6">
-                    <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi" length="2" offset="2">                  
-                        <div class="linkblock">	
-                           <div class="box">                               
-                               <h4 class="center"><a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag"> 
-                                      #<bean:write name="threadTag" property="title"/>
-                                      </a>
-                               </h4>
-                               <img src="https://static.jdon.com/simgs/thumb/<%=1 + (int) (Math.random() * 10)%>.jpg" border="0" class="thumbnail center" loading="lazy">  
-	                         </div>
-                        </div>        
+                      </div>  
                     </logic:iterate>
-                  </div>
+                </div>    
+                <div class="row">                                                  
+                    <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi" length="2" offset="2">                  
+                      <div class="col-md-6">
+                        <div class="linkblock">	
+                           <div class="box">                               
+                               <h4 class="center"><a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag"> 
+                                      #<bean:write name="threadTag" property="title"/>
+                                      </a>
+                               </h4>
+                               <img src="https://static.jdon.com/simgs/thumb/<%=1 + (int) (Math.random() * 10)%>.jpg" border="0" class="thumbnail center" loading="lazy">  
+	                         </div>
+                        </div>
+                      </div>    
+                    </logic:iterate>                  
                 </div>
-              </div>
-            
+              </div>            
             </logic:equal>
           </logic:iterate>
         </div>
