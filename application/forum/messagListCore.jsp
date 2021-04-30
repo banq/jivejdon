@@ -87,7 +87,7 @@
               </logic:notEmpty>              
               <div class="box">
                 <div class="row">                  
-                    <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi" length="2" offset="0">                  
+                    <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="i" length="2" offset="0">                  
                       <div class="col-md-6">
                         <div class="linkblock">	
                            <div class="box">                               
@@ -95,14 +95,14 @@
                                       #<bean:write name="threadTag" property="title"/>
                                       </a>
                                </h4>
-                               <img src="https://static.jdon.com/simgs/thumb/<%=1 + (int) (Math.random() * 4)%>.jpg" border="0" class="thumbnail center" loading="lazy">  
+                               <img src="https://static.jdon.com/simgs/thumb/<%=1 + i%>.jpg" border="0" class="thumbnail center" loading="lazy">  
 	                         </div>
                         </div>        
                       </div>  
                     </logic:iterate>
                 </div>    
                 <div class="row">                                                  
-                    <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi" length="2" offset="2">                  
+                    <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="i" length="2" offset="2">                  
                       <div class="col-md-6">
                         <div class="linkblock">	
                            <div class="box">                               
@@ -110,7 +110,7 @@
                                       #<bean:write name="threadTag" property="title"/>
                                       </a>
                                </h4>
-                               <img src="https://static.jdon.com/simgs/thumb/<%=5 + (int) (Math.random() * 4)%>.jpg" border="0" class="thumbnail center" loading="lazy">  
+                               <img src="https://static.jdon.com/simgs/thumb/<%=3 + i%>.jpg" border="0" class="thumbnail center" loading="lazy">  
 	                         </div>
                         </div>
                       </div>    
