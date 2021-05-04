@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob {
 	private final static Logger logger = LogManager.getLogger(ThreadViewCounterJobImp.class);
 
-	private final List<ViewCounter> viewcounters;
+	private final Set<ViewCounter> viewcounters;
 
 	private final PropertyDao propertyDao;
 	private final ThreadViewCountParameter threadViewCountParameter;
@@ -48,7 +48,7 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 
 	public ThreadViewCounterJobImp(final PropertyDao propertyDao,
 			final ThreadViewCountParameter threadViewCountParameter, ScheduledExecutorUtil scheduledExecutorUtil) {
-		this.viewcounters = new ArrayList<>();
+		this.viewcounters = new TreeSet<>(new ThreadViewComparator());
 		this.propertyDao = propertyDao;
 		this.threadViewCountParameter = threadViewCountParameter;
 		this.scheduledExecutorUtil = scheduledExecutorUtil;

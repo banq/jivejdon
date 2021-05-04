@@ -15,6 +15,8 @@
  */
 package com.jdon.jivejdon.domain.model.thread;
 
+import java.util.Objects;
+
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 
@@ -30,10 +32,11 @@ public class ViewCounter {
 	}
 
 	public void loadinitCount() {
-		if (this.viewCount != -1) return;
+		if (this.viewCount != -1)
+			return;
 		DomainMessage dm = this.thread.lazyLoaderRole.loadViewCount(thread.getThreadId());
 		try {
-//			this.viewCount = 0;//flag it
+			// this.viewCount = 0;//flag it
 			Integer count = (Integer) dm.getEventResult();
 			if (count != null) {
 				this.viewCount = count;
@@ -58,7 +61,7 @@ public class ViewCounter {
 			viewCount++;
 	}
 
-	public long getLastSavedCount() {
+	public int getLastSavedCount() {
 		return lastSavedCount;
 	}
 
@@ -68,6 +71,25 @@ public class ViewCounter {
 
 	public ForumThread getThread() {
 		return thread;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		ViewCounter viewCounter = (ViewCounter) o;
+		if (this.thread.getThreadId() == null || viewCounter.getThread().getThreadId() == null)
+			return false;
+		return this.thread.getThreadId().longValue() == viewCounter.getThread().getThreadId().longValue();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.thread.getThreadId());
 	}
 
 }
