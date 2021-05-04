@@ -15,10 +15,9 @@
  */
 package com.jdon.jivejdon.spi.component.viewcount;
 
-import java.util.concurrent.ConcurrentMap;
+import java.util.List;
 
 import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.thread.ViewCounter;
 
 public interface ThreadViewCounterJob {
 	/**
@@ -28,6 +27,6 @@ public interface ThreadViewCounterJob {
 	 */
 	public abstract void saveViewCounter(ForumThread thread);
 
-	public ConcurrentMap<Long, ViewCounter> getConcurrentHashMap();
+	public List<Long> getThreadIdsList();
 
 }
