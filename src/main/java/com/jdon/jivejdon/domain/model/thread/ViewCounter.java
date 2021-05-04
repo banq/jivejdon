@@ -20,7 +20,7 @@ import java.util.Objects;
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 
-public class ViewCounter {
+public class ViewCounter implements Comparable<ViewCounter> {
 
 	private final ForumThread thread;
 	private int viewCount = -1;
@@ -90,6 +90,22 @@ public class ViewCounter {
 	@Override
 	public int hashCode() {
 		return Objects.hash(this.thread.getThreadId());
+	}
+
+	@Override
+	public int compareTo(ViewCounter o) {
+		int diff1 = getViewCount() - getLastSavedCount();
+		int diff2 = o.getViewCount() - o.getLastSavedCount();
+		if (diff1 == diff2) {
+			if (thread.getThreadId() > o.getThread().getThreadId())
+				return -1;
+			else if (thread.getThreadId() < o.getThread().getThreadId())
+				return 1;
+		} else if (diff1 > diff2)
+			return -1;
+		else
+			return 1;
+		return 0;
 	}
 
 }
