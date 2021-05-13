@@ -188,7 +188,7 @@
 
     <rule>
         <from>^/tags$</from>
-        <to>/query/tagsList.shtml?count=6</to>
+        <to>/query/tagsList.shtml?count=240&amp;start=0</to>
     </rule>
     <rule>
         <from>^/tags/p$</from>
