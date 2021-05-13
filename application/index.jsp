@@ -263,7 +263,7 @@
 <%@ include file="./common/IncludeBottomBody.jsp" %> 
 <script src="./common/js/jquery.lazyload-any.js"></script>
 <script>       
-    $('.lazyload').lazyload({load: load});
+    $('.lazyload').lazyload();
 </script>
 </body>
 </html>

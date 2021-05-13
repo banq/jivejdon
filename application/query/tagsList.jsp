@@ -47,12 +47,6 @@ int h = 0 ;
   <br>
   <br>
   <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
     </div>
       <div class="lazyload" >
 	    <!-- 
@@ -112,7 +106,7 @@ int h = 0 ;
 <script src="../common/js/jquery.lazyload-any.js"></script>
 
 <script>
-    $('.lazyload').lazyload({load: load});
+    $('.lazyload').lazyload();
 </script>
   
 </body>
