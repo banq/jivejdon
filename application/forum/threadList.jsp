@@ -5,6 +5,9 @@
 <%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+<bean:parameter id="noheader" name="noheader"  value=""/>
+<logic:notEqual name="noheader" value="on">
+
 <bean:define id="threadList" name="threadListForm" property="list" />
 <logic:empty name="threadListForm" property="oneModel">
   <% 
@@ -91,9 +94,38 @@ pageContext.setAttribute("title", titleStr);
         </b>贴
      
       </div>
-	</ul>          
-    
+	</ul>              
+</logic:notEqual>    
    <%@ include file="threadListCore.jsp" %>
+<logic:notEqual name="noheader" value="on">       
+  
+  <bean:define id="pagestart" name="threadListForm" property="start" />
+  <bean:define id="pagecount" name="threadListForm" property="count" />
+  <bean:define id="pageallCount" name="threadListForm" property="allCount" />
+  <%  
+    int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
+    int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
+    int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
+    int pageNo = (pageAllcountInt / pageCountInt);
+    if(pageAllcountInt % pageCountInt !=0){ 
+        pageNo = pageNo + 1;
+    }
+    for (int i = pageStartInt + pageCountInt; i < pageAllcountInt; i=i+pageCountInt) {     
+  %>
+   <span id="nextPage<%=i%>">
+    <br><br><br><br><br><br><br><br>
+   </span>
+
+  <div class="lazyload" >      
+          <!--
+		  <script>
+		  load('/forum/threadList.shtml?start=<%=i%>&count=<%=pageCountInt%>&noheader=on', function (xhr) {
+               document.getElementById("nextPage<%=i%>").innerHTML = xhr.responseText;
+            }); 
+		  </script>
+          --> 
+   </div>            
+   <%}%>
       
 	<div class="tres">
                     <logic:empty name="forum" property="forumId">
@@ -125,4 +157,12 @@ pageContext.setAttribute("title", titleStr);
 <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-<%@include file="../common/IncludeBottom.jsp"%>
+<%@ include file="../common/IncludeBottomBody.jsp" %> 
+<script src="../common/js/jquery.lazyload-any.js"></script>
+
+<script>       
+     $('.lazyload').lazyload();
+</script>
+</body>
+</html>
+</logic:notEqual>    
