@@ -112,13 +112,9 @@ pageContext.setAttribute("title", titleStr);
     }
     
   %>
-  <div id="nextPage"></div>
-  <script>
-   document.getElementById("nextPage").value = "<%=pageStartInt+pageCountInt%>";
-  </script>
-
- 
-	<div class="tres" id="dddd">
+  <div id="nextPageContent"></div>
+  <div id="nextPage"></div> 
+	<div class="tres">
                     <logic:empty name="forum" property="forumId">
                       <MultiPagesREST:pager actionFormName="threadListForm" page="/threads" >
                         <MultiPagesREST:prev name=" 上一页 " />
@@ -140,16 +136,20 @@ pageContext.setAttribute("title", titleStr);
 </div>
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
 <script>
+  document.getElementById("nextPage").value = "<%=pageStartInt+pageCountInt%>";
   $(window).scroll(function() {
-    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+    var hT = $('#nextPage').offset().top,
+       hH = $('#nextPage').outerHeight(),
+       wH = $(window).height(),
+       wS = $(this).scrollTop();
+    if (wS > (hT+hH-wH)){
            var start = document.getElementById("nextPage").value ;           
            load('/forum/threadList.shtml?start='+ start +'&count=<%=pageCountInt%>&noheader=on', function (xhr) {
-               document.getElementById("dddd").innerHTML = document.getElementById("dddd").innerHTML + xhr.responseText;
+               document.getElementById("nextPageContent").innerHTML = document.getElementById("nextPageContent").innerHTML + xhr.responseText;
                document.getElementById("nextPage").value = document.getElementById("nextPage").value/1 + <%=pageCountInt%>;                              
             }); 
     }
    });
-  
   </script>   
 </body>
 </html>
