@@ -5,6 +5,9 @@
 <%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+<bean:parameter id="noheader" name="noheader"  value=""/>
+<logic:notEqual name="noheader" value="on">
+
 <bean:define id="threadList" name="threadListForm" property="list" />
 <logic:empty name="threadListForm" property="oneModel">
   <% 
@@ -91,11 +94,31 @@ pageContext.setAttribute("title", titleStr);
         </b>贴
      
       </div>
-	</ul>          
-    
+	</ul>              
+</logic:notEqual>    
    <%@ include file="threadListCore.jsp" %>
-      
-	<div class="tres">
+<logic:notEqual name="noheader" value="on">       
+  
+  <bean:define id="pagestart" name="threadListForm" property="start" />
+  <bean:define id="pagecount" name="threadListForm" property="count" />
+  <bean:define id="pageallCount" name="threadListForm" property="allCount" />
+  <%  
+    int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
+    int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
+    int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
+    int pageNo = (pageAllcountInt / pageCountInt);
+    if(pageAllcountInt % pageCountInt !=0){ 
+        pageNo = pageNo + 1;
+    }
+    
+  %>
+  <div id="nextPage"></div>
+  <script>
+   document.getElementById("nextPage").value = "<%=pageStartInt+pageCountInt%>";
+  </script>
+
+ 
+	<div class="tres" id="dddd">
                     <logic:empty name="forum" property="forumId">
                       <MultiPagesREST:pager actionFormName="threadListForm" page="/threads" >
                         <MultiPagesREST:prev name=" 上一页 " />
@@ -115,14 +138,19 @@ pageContext.setAttribute("title", titleStr);
             </div>	
 	</div>
 </div>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 自动调整尺寸 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="9040920314"
-     data-ad-format="auto"></ins>
+<%@ include file="../common/IncludeBottomBody.jsp" %> 
 <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-<%@include file="../common/IncludeBottom.jsp"%>
+  $(window).scroll(function() {
+    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+           var start = document.getElementById("nextPage").value ;           
+           load('/forum/threadList.shtml?start='+ start +'&count=<%=pageCountInt%>&noheader=on', function (xhr) {
+               document.getElementById("dddd").innerHTML = document.getElementById("dddd").innerHTML + xhr.responseText;
+               document.getElementById("nextPage").value = document.getElementById("nextPage").value/1 + <%=pageCountInt%>;                              
+            }); 
+    }
+   });
+  
+  </script>   
+</body>
+</html>
+</logic:notEqual>    
