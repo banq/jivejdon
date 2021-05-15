@@ -98,20 +98,6 @@ pageContext.setAttribute("title", titleStr);
 </logic:notEqual>    
    <%@ include file="threadListCore.jsp" %>
 <logic:notEqual name="noheader" value="on">       
-  
-  <bean:define id="pagestart" name="threadListForm" property="start" />
-  <bean:define id="pagecount" name="threadListForm" property="count" />
-  <bean:define id="pageallCount" name="threadListForm" property="allCount" />
-  <%  
-    int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
-    int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
-    int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
-    int pageNo = (pageAllcountInt / pageCountInt);
-    if(pageAllcountInt % pageCountInt !=0){ 
-        pageNo = pageNo + 1;
-    }
-    
-  %>
   <div id="nextPageContent"></div>
   <div id="nextPage"></div> 
 	<div class="tres">
@@ -135,6 +121,19 @@ pageContext.setAttribute("title", titleStr);
 	</div>
 </div>
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
+  
+<bean:define id="pagestart" name="threadListForm" property="start" />
+<bean:define id="pagecount" name="threadListForm" property="count" />
+<bean:define id="pageallCount" name="threadListForm" property="allCount" />
+<%  
+    int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
+    int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
+    int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
+    int pageNo = (pageAllcountInt / pageCountInt);
+    if(pageAllcountInt % pageCountInt !=0){ 
+        pageNo = pageNo + 1;
+    }    
+%>
 <script>
   document.getElementById("nextPage").value = "<%=pageStartInt+pageCountInt%>";
   $(window).scroll(function() {
