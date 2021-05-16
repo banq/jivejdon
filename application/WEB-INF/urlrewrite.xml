@@ -100,7 +100,7 @@
 
     <rule>
         <from>^/approval$</from>
-        <to>/query/approvedListOther.shtml?start=0&amp;count=8</to>
+        <to>/query/approvedListOther.shtml?start=0&amp;count=15</to>
     </rule>
 
     <rule>

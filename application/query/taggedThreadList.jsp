@@ -7,11 +7,12 @@
 <%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
+<bean:parameter id="noheader" name="noheader"  value=""/>
+<logic:notEqual name="noheader" value="on">
+
 <bean:parameter name="queryType" id="queryType" value=""/>
 <bean:parameter name="tagID" id="tagID" value=""/>
-<logic:present name="threadListForm">
-    <logic:greaterThan name="threadListForm" property="allCount" value="0">
-    <%
+<%
 String titleStr = (String)request.getAttribute("TITLE");
 pageContext.setAttribute("title", titleStr);
 %>
@@ -64,7 +65,7 @@ pageContext.setAttribute("title", titleStr);
          </div>
        </div>
       </div>
-     	 
+</logic:notEqual>        	 
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
     <logic:equal name="i" value="3">
         <div class="box">
@@ -90,6 +91,9 @@ pageContext.setAttribute("title", titleStr);
     </logic:equal>
 <%@ include file="threadListCore.jsp" %>
 </logic:iterate>
+<logic:notEqual name="noheader" value="on">       
+  <div id="nextPageContent"></div>
+
 	<div class="tres" > 共有<b>
             <bean:write name="threadListForm" property="allCount"/>
             </b>贴
@@ -180,19 +184,44 @@ pageContext.setAttribute("title", titleStr);
   </div>
 </div>  
 	
-	
-    </logic:greaterThan>
-    </logic:present>
-    <script>
-
-var initTagsW = function (e){          
- TooltipManager.init('Tags', 
-  {url: getContextPath() +'/query/tt.shtml?tablewidth=300&count=20', 
-   options: {method: 'get'}},
-   {className:"mac_os_x", width:300});   
-TooltipManager.showNow(e);   
-}
-
-</script>
+<%@ include file="../common/IncludeBottomBody.jsp" %> 
   
-    <%@include file="../common/IncludeBottom.jsp"%>
+<bean:define id="pagestart" name="threadListForm" property="start" />
+<bean:define id="pagecount" name="threadListForm" property="count" />
+<bean:define id="pageallCount" name="threadListForm" property="allCount" />
+<%  
+    int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
+    int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
+    int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
+    int pageNo = (pageAllcountInt / pageCountInt);
+    if(pageAllcountInt % pageCountInt !=0){ 
+        pageNo = pageNo + 1;
+    }    
+%>
+<script>
+function scrollLoader(url){
+  var start = "<%=pageStartInt+pageCountInt%>";
+  var loading = false;
+  $(window).scroll(function() {
+    var hT = $('#nextPageContent').offset().top,
+       hH = $('#nextPageContent').outerHeight(),
+       wH = $(window).height(),
+       wS = $(this).scrollTop();       
+    if (wS > (hT+hH-wH) && !loading){           
+         loading = true;          
+         if (start <= <%=pageAllcountInt%> ){                  
+           surl = (url.indexOf("?")==-1)?(url+"?"):(url+"&");           
+           load(surl +'start=' + start +'&count=<%=pageCountInt%>&noheader=on', function (xhr) {
+               document.getElementById("nextPageContent").innerHTML = document.getElementById("nextPageContent").innerHTML + xhr.responseText;               
+               start = start/1 + <%=pageCountInt%>;                              
+               loading = false;
+           });          
+         }   
+    }
+   });
+}
+scrollLoader('/query/taggedThreadList.shtml?tagID=<bean:write name="tagID" />');   
+</script>   
+</body>
+</html>
+</logic:notEqual>    

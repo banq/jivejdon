@@ -5,29 +5,11 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
-
-<logic:present name="threadListForm">
-<logic:greaterThan name="threadListForm" property="allCount" value="0">
+<bean:parameter id="noheader" name="noheader"  value=""/>
+<logic:notEqual name="noheader" value="on">
 
 <bean:define id="title"  value=" 精华帖" />
 <%@ include file="../common/IncludeTop.jsp" %>
-
-<script>
-function digMessage(id)
-{            
-	var pars = 'messageId='+id;   
-    new Ajax.Updater('digNumber_'+id, getContextPath() +'/query/updateDigCount.shtml', { method: 'get', parameters: pars });
-    $('textArea_'+id).update("赞");
-    
-}
-
-function viewcount(threadId, sId)
-{            	
-	 var pars = 'thread=' + threadId + "&sId=" + sId;   
-   new Ajax.Updater({success: 'viewcount'}, getContextPath() +'/query/viewThread.shtml', { method: 'get', parameters: pars });
-}
-
-</script>
 
 <!-- /////////////////////////////////////////Content -->
 <div id="page-content" class="single-page container">
@@ -64,7 +46,7 @@ function viewcount(threadId, sId)
                     </div>
                 </div>
             </div>
-
+</logic:notEqual>   
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
     <logic:equal name="i" value="3">
         <div class="box">
@@ -87,10 +69,11 @@ function viewcount(threadId, sId)
                 </div>
             </div>
         </div>
-    </logic:equal>
+    </logic:equal>    
 <%@ include file="threadListCore.jsp" %>
 </logic:iterate>
-
+<logic:notEqual name="noheader" value="on">       
+  <div id="nextPageContent"></div>
 
           <div class="pagination">
             <MultiPagesREST:pager actionFormName="threadListForm" page="/approval">
@@ -184,11 +167,46 @@ function viewcount(threadId, sId)
 </div>  	
 	
 
-</logic:greaterThan>
-</logic:present>
-
-
-
-<%@include file="../common/IncludeBottom.jsp"%>
+<%@ include file="../common/IncludeBottomBody.jsp" %> 
+  
+<bean:define id="pagestart" name="threadListForm" property="start" />
+<bean:define id="pagecount" name="threadListForm" property="count" />
+<bean:define id="pageallCount" name="threadListForm" property="allCount" />
+<%  
+    int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
+    int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
+    int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
+    int pageNo = (pageAllcountInt / pageCountInt);
+    if(pageAllcountInt % pageCountInt !=0){ 
+        pageNo = pageNo + 1;
+    }    
+%>
+<script>
+function scrollLoader(url){
+  var start = "<%=pageStartInt+pageCountInt%>";
+  var loading = false;
+  $(window).scroll(function() {
+    var hT = $('#nextPageContent').offset().top,
+       hH = $('#nextPageContent').outerHeight(),
+       wH = $(window).height(),
+       wS = $(this).scrollTop();       
+    if (wS > (hT+hH-wH) && !loading){           
+         loading = true;          
+         if (start <= <%=pageAllcountInt%> ){                  
+           surl = (url.indexOf("?")==-1)?(url+"?"):(url+"&");           
+           load(surl +'start=' + start +'&count=<%=pageCountInt%>&noheader=on', function (xhr) {
+               document.getElementById("nextPageContent").innerHTML = document.getElementById("nextPageContent").innerHTML + xhr.responseText;               
+               start = start/1 + <%=pageCountInt%>;                              
+               loading = false;
+           });          
+         }   
+    }
+   });
+}
+scrollLoader('/query/approvedListOther.shtml');   
+</script>   
+</body>
+</html>
+</logic:notEqual>    
 
 

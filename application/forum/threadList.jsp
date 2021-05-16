@@ -99,7 +99,7 @@ pageContext.setAttribute("title", titleStr);
    <%@ include file="threadListCore.jsp" %>
 <logic:notEqual name="noheader" value="on">       
   <div id="nextPageContent"></div>
-  <div id="nextPage"></div> 
+  
 	<div class="tres">
                     <logic:empty name="forum" property="forumId">
                       <MultiPagesREST:pager actionFormName="threadListForm" page="/threads" >
@@ -135,21 +135,29 @@ pageContext.setAttribute("title", titleStr);
     }    
 %>
 <script>
-  document.getElementById("nextPage").value = "<%=pageStartInt+pageCountInt%>";
+function scrollLoader(url){
+  var start = "<%=pageStartInt+pageCountInt%>";
+  var loading = false;
   $(window).scroll(function() {
-    var hT = $('#nextPage').offset().top,
-       hH = $('#nextPage').outerHeight(),
+    var hT = $('#nextPageContent').offset().top,
+       hH = $('#nextPageContent').outerHeight(),
        wH = $(window).height(),
-       wS = $(this).scrollTop();
-    if (wS > (hT+hH-wH)){
-           var start = document.getElementById("nextPage").value ;           
-           load('/forum/threadList.shtml?start='+ start +'&count=<%=pageCountInt%>&noheader=on', function (xhr) {
-               document.getElementById("nextPageContent").innerHTML = document.getElementById("nextPageContent").innerHTML + xhr.responseText;
-               document.getElementById("nextPage").value = document.getElementById("nextPage").value/1 + <%=pageCountInt%>;                              
-            }); 
+       wS = $(this).scrollTop();       
+    if (wS > (hT+hH-wH) && !loading){           
+         loading = true;          
+         if (start <= <%=pageAllcountInt%> ){                  
+           surl = (url.indexOf("?")==-1)?(url+"?"):(url+"&");           
+           load(surl +'start=' + start +'&count=<%=pageCountInt%>&noheader=on', function (xhr) {
+               document.getElementById("nextPageContent").innerHTML = document.getElementById("nextPageContent").innerHTML + xhr.responseText;               
+               start = start/1 + <%=pageCountInt%>;                              
+               loading = false;
+           });          
+         }   
     }
    });
-  </script>   
+}
+scrollLoader('/forum/threadList.shtml');   
+</script>   
 </body>
 </html>
 </logic:notEqual>    
