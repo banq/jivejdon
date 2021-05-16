@@ -115,22 +115,22 @@
 
     <rule>
         <from>^/query/stickyList$</from>
-        <to>/query/stickyList.shtml?length=8&amp;tablewidth=300&amp;count=8</to>
+        <to>/query/stickyList.shtml?length=8&amp;tablewidth=300&amp;count=15</to>
     </rule>
 
     <rule>
         <from>^/query/digList$</from>
-        <to>/query/threadDigList2.shtml?length=8&amp;tablewidth=300&amp;count=8</to>
+        <to>/query/threadDigList2.shtml?length=8&amp;tablewidth=300&amp;count=15</to>
     </rule>
 
     <rule>
         <from>^/query/approved$</from>
-        <to>/query/threadApprovedTagsList.shtml?count=8</to>
+        <to>/query/threadApprovedTagsList.shtml?count=15</to>
     </rule>
 
     <rule>
         <from>^/query/approved/([0-9]+)$</from>
-        <to>/query/threadApprovedTagsList.shtml?count=8&amp;tagID=$1</to>
+        <to>/query/threadApprovedTagsList.shtml?count=15&amp;tagID=$1</to>
     </rule>
 
     <rule>
@@ -145,7 +145,7 @@
 
     <rule>
         <from>^/query/tagThreads/([0-9]+)$</from>
-        <to>/query/tagThreads.shtml?count=8&amp;tagID=$1</to>
+        <to>/query/tagThreads.shtml?count=15&amp;tagID=$1</to>
     </rule>
 
     <rule>
@@ -192,19 +192,19 @@
     </rule>
     <rule>
         <from>^/tags/p$</from>
-        <to>/query/tagsList.shtml?count=8</to>
+        <to>/query/tagsList.shtml?count=15</to>
     </rule>
     <rule>
         <from>^/tags/p/([0-9]+)$</from>
-        <to>/query/tagsList.shtml?count=6&amp;start=$1</to>
+        <to>/query/tagsList.shtml?count=15&amp;start=$1</to>
     </rule>
     <rule>
         <from>^/tags/([0-9]+)$</from>
-        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=8</to>
+        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=15</to>
     </rule>
     <rule>
         <from>^/tags/([0-9]+)/([0-9]+)$</from>
-        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=8&amp;start=$2</to>
+        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=15&amp;start=$2</to>
     </rule>
 
     <rule>
