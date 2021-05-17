@@ -157,7 +157,7 @@ function scrollLoader(url){
    });
 }
 <logic:notEmpty name="forum" property="name">
-  scrollLoader('/forum/threadList.shtml??forum=<bean:write name="forum" property="forumId"/>');      
+  scrollLoader('/forum/threadList.shtml?forumId=<bean:write name="forum" property="forumId"/>');      
 </logic:notEmpty>
 <logic:empty name="forum" property="name">
   scrollLoader('/forum/threadList.shtml');   
