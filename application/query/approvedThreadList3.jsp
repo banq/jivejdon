@@ -6,24 +6,17 @@
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%          
-    com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(30 * 60, request, response);
-	
+    com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(60, request, response);	
 %>
-<logic:iterate indexId="i" id="forumThread" name="threadListForm" property="list" offset="1">
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-store">
+    <META HTTP-EQUIV="Expires" CONTENT="0">   
+<%
+int offset = 0;
+if (request.getParameter("offset")!=null){
+   offset = Integer.parseInt(request.getParameter("offset"));
+}
+%>
+<logic:iterate indexId="i" id="forumThread" name="threadListForm" property="list" offset="<%=Integer.toString(offset)%>" length="1">
   <%@ include file="threadListCore.jsp" %>
 </logic:iterate>
-
-
-<table cellpadding="3" cellspacing="0" border="0" width="100%">
-  <tr>
-    <td class="smallgray" align="center">
-      <div class="tres">
-        <MultiPagesREST:pager actionFormName="threadListForm" page="/approval">
-          <MultiPagesREST:prev name=" 上一页 "/>
-          <MultiPagesREST:index displayCount="3"/>
-          <MultiPagesREST:next name=" 下一页 "/>
-        </MultiPagesREST:pager>
-      </div>
-    </td>
-  </tr>
-</table>

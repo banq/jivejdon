@@ -3,6 +3,7 @@
 <%@ taglib uri="struts-logic" prefix="logic" %>
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>
+<%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%          
     com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(30 * 60, request, response);
@@ -73,7 +74,7 @@
  if(document.getElementById("home-thumbnai") != null)
 	          if(document.getElementById("home-thumbnai").getAttribute("data-src") != null)
 				   //document.getElementById("home-thumbnai").src = document.getElementById("home-thumbnai").getAttribute("data-src") ;
-				   $("#home-thumbnai").attr('src',$("#home-thumbnai").attr('data-src'));
+				   $("#home-thumbnai").attr('src',$(this).attr('data-src'));
 	          else
                    //document.getElementById("home-thumbnai").src = "https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
                    $("#home-thumbnai").attr('src','https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg');
@@ -100,17 +101,30 @@
     </div>
   </div>
 </div>
-          <span id="threadApprovedNewListOthers"></span>
- 		  <div class="lazyload" >
+          
+<logic:iterate indexId="i" id="forumThread" name="threadListForm" property="list" offset="1">
+      <div id="approvedItem<bean:write name="i"/>">
+	  <br>
+	  <br>
+	  <br>
+	  <br>
+	  </div>
+  	  <div class="lazyload" >
           <!--
 		  <script>
-		  load('/approvedNewList3', function (xhr) {
-               document.getElementById("threadApprovedNewListOthers").innerHTML = xhr.responseText;
+		  load('/query/threadApprovedNewList3.shtml?offset=<bean:write name="i"/>', function (xhr) {
+               document.getElementById("approvedItem<bean:write name="i"/>").innerHTML = xhr.responseText;
             }); 
 		  </script>
           -->
         </div>
-
+</logic:iterate>
+      <div class="box"> 
+	    <div class="tres center">        
+           <html:link page="/approval"><b>更多精华</b></html:link>
+		</div>
+      </div>
+		  
         </div>
         <div class="box">
 					<div class="box-header header-natural">

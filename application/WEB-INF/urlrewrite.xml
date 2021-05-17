@@ -133,10 +133,10 @@
         <to>/query/threadApprovedTagsList.shtml?count=15&amp;tagID=$1</to>
     </rule>
 
-    <rule>
+    <!-- <rule>
         <from>^/approvedNewList3$</from>
         <to>/query/threadApprovedNewList3.shtml?count=15</to>
-    </rule>
+    </rule> -->
 
     <rule>
         <from>^/query/tt/([0-9]+)$</from>
