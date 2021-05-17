@@ -103,13 +103,7 @@
 </div>
           
 <logic:iterate indexId="i" id="forumThread" name="threadListForm" property="list" offset="1">
-      <div id="approvedItem<bean:write name="i"/>">
-	  <br>
-	  <br>
-	  <br>
-	  <br>
-	  </div>
-  	  <div class="lazyload" >
+	<div class="lazyload" >
           <!--
 		  <script>
 		  load('/query/threadApprovedNewList3.shtml?offset=<bean:write name="i"/>', function (xhr) {
@@ -117,7 +111,12 @@
             }); 
 		  </script>
           -->
-        </div>
+      </div>
+      <div id="approvedItem<bean:write name="i"/>">
+	  <br>
+	  <br>
+	  </div>
+
 </logic:iterate>
       <div class="box"> 
 	    <div class="tres center">        
