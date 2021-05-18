@@ -250,11 +250,11 @@
   <%-- include LAB.js --%>
   <%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
   <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
-  <script src="//static.jdon.com/common/login2.js"></script>
-  <script src="/common/messageList7.js"></script>
+  <script src="https://static.jdon.com/common/login2.js"></script>
+  <script src="https://static.jdon.com/common/messageList7.js"></script>
   <script>    
    $(document).ready(function() { 
-      scrollLoadByElementId('//cdn.jdon.com/query/threadDigList',"digList");            
+      scrollLoadByElementId('https://cdn.jdon.com/query/threadDigList',"digList");            
       $('.reblogfrom').each(function(i, obj) {        
         scrollLoadByElementId('/forum/thread.shtml?threadId='+ obj.id,obj.id); 
       });
