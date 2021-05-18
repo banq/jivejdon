@@ -69,20 +69,14 @@
 		            <li><a href="javascript:shareto('qzone')"><i class="fa fa-qq"></i></a></li>		
 	              </ul>
               </div>
-              <logic:notEmpty name="forumMessage" property="reBlogVO.threadFroms">
-                <logic:iterate id="threadFrom" name="forumMessage" property="reBlogVO.threadFroms">
-                  <div class="reblogfrom">
-                    <bean:define id="reglogThread" name="threadFrom"/> 
-                    <%@include file="messageListBodyReBlogLink.jsp"%>
-                  </div>
-                </logic:iterate>  
+              <logic:notEmpty name="forumMessage" property="reBlogVO.threadFroms">          
+                <logic:iterate id="threadFrom" name="forumMessage" property="reBlogVO.threadFroms">                
+                  <div class="reblogfrom" id='<bean:write name="threadFrom" property="threadId"/>'></div>                  
+                </logic:iterate>                  
               </logic:notEmpty>
               <logic:notEmpty name="forumMessage" property="reBlogVO.threadTos">
                 <logic:iterate id="threadTo" name="forumMessage" property="reBlogVO.threadTos">
-                  <div class="reblogto"> 
-                    <bean:define id="reglogThread" name="threadTo"/> 
-                    <%@include file="messageListBodyReBlogLink.jsp"%>
-                  </div>
+                  <div class="reblogto" id='<bean:write name="threadTo" property="threadId"/>'></div>
                 </logic:iterate>
               </logic:notEmpty>              
               <div class="box">
@@ -223,6 +217,18 @@
           </script>
         </div>
       </div>
+
+	    <!-- Start Widget newList -->
+			<div class="widget">
+        <div class="content">
+          <div class="post wrap-vid">
+              <ul>
+                  <div id="digNewList"></div>
+              </ul>
+          </div>
+        </div>				
+			</div>
+
     </div>
   </div>    
 </div>
@@ -245,16 +251,20 @@
   <%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
   <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
   <script src="//static.jdon.com/common/login2.js"></script>
-  <script src="https://static.jdon.com/common/messageList7.js"></script>
-  <script>
-      load('https://cdn.jdon.com/query/threadDigList', function (xhr) {
-          document.getElementById("digList").innerHTML = xhr.responseText;
+  <script src="/common/messageList7.js"></script>
+  <script>    
+   $(document).ready(function() { 
+      scrollLoadByElementId('//cdn.jdon.com/query/threadDigList',"digList");            
+      $('.reblogfrom').each(function(i, obj) {        
+        scrollLoadByElementId('/forum/thread.shtml?threadId='+ obj.id,obj.id); 
       });
+      $('.reblogto').each(function(i, obj) {        
+        scrollLoadByElementId('/forum/thread.shtml?threadId='+ obj.id,obj.id); 
+       });
+      scrollLoadByElementId('/query/threadNewDigList.shtml?count=20',"digNewList");
+   });      
   </script>
 
   </body>
   </html>
 </logic:empty>
-    
-    
-    

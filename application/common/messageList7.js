@@ -1,10 +1,3 @@
-function viewcount(threadId, sId) {
-    var pars = 'thread=' + threadId + "&sId=" + sId;
-    load(getContextPath() + '/query/viewThread.shtml?' + pars, function (xhr) {
-
-    });
-}
-
 function digMessage(id) {
     var pars = 'messageId=' + id;
     load(getContextPath() + '/query/updateDigCount.shtml?' + pars, function (xhr) {
@@ -14,32 +7,8 @@ function digMessage(id) {
 
 }
 
-
-function tagthreads(length, tablewidth, count, tagID) {
-// window.onload = function() {
-    $.ajax({
-        url: 'https://cdn.jdon.com/query/tagThreads/' + tagID,
-        success: function (response) {
-            $('#tagthreads_' + tagID).html(response);
-        }
-    });
-// }
-
-//    load(getContextPath() +'/query/tagThreads/'+tagID, function(xhr) {
-//  	       document.getElementById('tagthreads_'+tagID).innerHTML = xhr.responseText;
-//			});
-//    cross domain
-}
-
-function approveList() {
-    load('https://cdn.jdon.com/query/approved', function (xhr) {
-        document.getElementById('approved').innerHTML = xhr.responseText;
-    });
-}
-
 var formSubmitcheck = false;
 var subjectold = "";
-
 function checkPost(theForm) {
 
     if (document.getElementById('forumId_select') != null
@@ -86,7 +55,7 @@ $(document).ready(function(){
     let el = document.getElementById('page-content');//触摸区域。
     function cons() {
         if (Math.abs(startx - endx) > Math.abs(starty - endy)) { // 确保用户在横向的操作距离大于纵向的操作距离。
-            if (startx + 10 < endx) {  //从左向右滑动距离大于30时生效
+            if (startx + 30 < endx) {  //从左向右滑动距离大于30时生效
                 location.href=document.referrer  // 返回，document.referrer为上一页URL。
             }
         }
@@ -104,3 +73,24 @@ $(document).ready(function(){
     });
 
 })
+
+function scrollLoadByElementId(url,nextPageContent){
+    var loading = false;
+    document.getElementById(nextPageContent).innerHTML = "loading";
+    $(window).on('scroll',function() {
+      var hT = $('#'+nextPageContent).offset().top,
+         hH = $('#'+nextPageContent).outerHeight(),
+         wH = $(window).height(),
+         wS = $(window).scrollTop();       
+      if (wS > (hT+hH-wH) && !loading && document.getElementById(nextPageContent).innerHTML == "loading"){           
+           loading = true;                     
+           surl = (url.indexOf("?")==-1)?(url+"?"):(url+"&");           
+           load(surl , function (xhr) {
+                 document.getElementById(nextPageContent).innerHTML = xhr.responseText;                   
+                 loading = false;                 
+           });          
+      }
+     });
+}
+
+  

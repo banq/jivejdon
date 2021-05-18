@@ -186,11 +186,11 @@
         <!--<forward name="success" path="/forum/stickyThreadList.jsp"/>-->
         <!--</action>-->
 
-        <action path="/query/viewThread"
+        <!-- <action path="/query/viewThread"
                 type="com.jdon.jivejdon.presentation.action.ViewThreadAction"
                 scope="request" validate="false">
             <forward name="error" path="/"/>
-        </action>
+        </action> -->
 
         <action name="threadForm" path="/message/updateViewAction"
                 type="com.jdon.jivejdon.presentation.filter.ThreadEditAuthFilter" scope="request"
@@ -244,6 +244,11 @@
         <action name="propertysForm" path="/message/reblogLink3" 
                type="com.jdon.jivejdon.presentation.action.message.ReblogLinkAction" scope="request" validate="false">
              <forward name="forward" path="/message/reblogLink.jsp" />
+        </action>
+
+        <action name="threadForm" path="/forum/thread"
+              type="com.jdon.strutsutil.ModelDispAction" scope="request" validate="false">
+             <forward name="success" path="/forum/messageListBodyReBlogLink.jsp"/>
         </action>
 
 
