@@ -251,7 +251,7 @@
   <%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
   <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
   <script src="https://static.jdon.com/common/login2.js"></script>
-  <script src="https://static.jdon.com/common/messageList7.js"></script>
+  <script src="https://static.jdon.com/common/messageList8.js"></script>
   <script>    
    $(document).ready(function() { 
       scrollLoadByElementId('https://cdn.jdon.com/query/threadDigList',"digList");            
