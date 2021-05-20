@@ -15,6 +15,13 @@ import com.jdon.jivejdon.domain.model.property.Property;
  * aggregates
  */
 public class RootMessage {
+    protected volatile boolean isCreated;
+
+    public static RequireMessageId messageBuilder() {
+        return messageId -> parentMessage -> messageVO -> forum -> forumThread -> account -> creationDate -> modifiedDate -> filterPipleSpec -> uploads -> properties -> hotKeys -> new FinalStageVO(
+                messageId, parentMessage, messageVO, forum, forumThread, account, creationDate, modifiedDate,
+                filterPipleSpec, uploads, properties, hotKeys);
+    }
 
     @FunctionalInterface
     public interface RequireMessageId {
@@ -137,12 +144,6 @@ public class RootMessage {
             }
 
         }
-    }
-
-    public static RequireMessageId messageBuilder() {
-        return messageId -> parentMessage -> messageVO -> forum -> forumThread -> account -> creationDate -> modifiedDate -> filterPipleSpec -> uploads -> properties -> hotKeys -> new FinalStageVO(
-                messageId, parentMessage, messageVO, forum, forumThread, account, creationDate, modifiedDate,
-                filterPipleSpec, uploads, properties, hotKeys);
     }
 
 }

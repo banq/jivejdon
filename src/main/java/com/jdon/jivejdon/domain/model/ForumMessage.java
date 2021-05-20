@@ -84,7 +84,6 @@ public class ForumMessage extends RootMessage implements Cloneable {
     private MessagePropertysVO messagePropertysVO;
     private ReBlogVO reBlogVO;
     private HotKeys hotKeys;
-    private volatile boolean solid;
 
     // new ForumMessage() is banned, use RootMessage.messageBuilder()
     protected ForumMessage() {
@@ -272,7 +271,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
     }
 
     public ForumThread getForumThread() {
-        if (!this.isSolid()) {
+        if (!this.isCreated) {
             System.err.println("forumMessage is be constructing. thread is half");
             return null;
         }
@@ -389,9 +388,9 @@ public class ForumMessage extends RootMessage implements Cloneable {
             String creationDate, long modifiedDate, FilterPipleSpec filterPipleSpec, Collection<UploadFile> uploads,
             Collection<Property> props, HotKeys hotKeys) {
         try {
-            if (!this.isSolid())
+            if (!isCreated)
                 synchronized (this) {
-                    if (!this.isSolid()) {
+                    if (!isCreated) {
                         setMessageId(messageId);
                         setAccount(account);
                         setCreationDate(creationDate);
@@ -406,7 +405,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
                         messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO.getBody())
                                 .build();
                         setMessageVO(messageVO);
-                        this.setSolid(true);// construt end
+                        isCreated = true;// construt end
                     }
                 }
         } catch (Exception e) {
@@ -415,11 +414,4 @@ public class ForumMessage extends RootMessage implements Cloneable {
 
     }
 
-    public boolean isSolid() {
-        return solid;
-    }
-
-    private void setSolid(boolean solid) {
-        this.solid = solid;
-    }
 }
