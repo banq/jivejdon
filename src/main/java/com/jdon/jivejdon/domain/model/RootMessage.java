@@ -9,6 +9,11 @@ import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.jivejdon.domain.model.property.HotKeys;
 import com.jdon.jivejdon.domain.model.property.Property;
 
+/**
+ * RootMessage is the root entity of aggregates! default ForumMessage is a
+ * RootMessage. RootMessage make aggregates objects just like Factory for
+ * aggregates
+ */
 public class RootMessage {
 
     @FunctionalInterface
