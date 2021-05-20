@@ -69,8 +69,6 @@ public class Forum {
 
 	private volatile AtomicReference<ForumState> forumState;
 
-	private HotKeys hotKeys;
-
 	@Inject
 	public LazyLoaderRole lazyLoaderRole;
 
@@ -207,14 +205,6 @@ public class Forum {
 	// if (forumState != null)
 	// this.forumState.lazySet(forumState);
 	// }
-
-	public HotKeys getHotKeys() {
-		return hotKeys;
-	}
-
-	public void setHotKeys(HotKeys hotKeys) {
-		this.hotKeys = hotKeys;
-	}
 
 	public void addNewMessage(ForumMessageReply forumMessageReply) {
 		forumState.get().addMessageCount();

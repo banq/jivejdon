@@ -25,14 +25,12 @@ import org.apache.logging.log4j.Logger;
 public class ForumDirector {
 	private final static Logger logger = LogManager.getLogger(ForumDirector.class);
 
-	private final HotKeysRepository hotKeysFactory;
-
 	private final ForumDao forumDao;
 
-	public ForumDirector(ForumDao forumDao,  HotKeysRepository hotKeysFactory) {
-		this.hotKeysFactory = hotKeysFactory;
+	public ForumDirector(ForumDao forumDao) {
 		this.forumDao = forumDao;
 	}
+
 	public Forum getForum(Long forumId) {
 		logger.debug(" enter getForum for forumId=" + forumId);
 		if (forumId == null)
@@ -43,7 +41,5 @@ public class ForumDirector {
 			return null;
 		}
 	}
-
-
 
 }

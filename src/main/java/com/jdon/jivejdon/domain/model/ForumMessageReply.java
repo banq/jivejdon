@@ -20,6 +20,7 @@ import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.attachment.UploadFile;
 import com.jdon.jivejdon.domain.model.message.FilterPipleSpec;
 import com.jdon.jivejdon.domain.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.property.HotKeys;
 import com.jdon.jivejdon.domain.model.property.Property;
 
 import java.util.Collection;
@@ -38,8 +39,8 @@ public final class ForumMessageReply extends ForumMessage {
 	}
 
 	/**
-	 * parentMessage is not full Object, only has messageId if you use it ,you
-	 * must getMessage() again by its messageId
+	 * parentMessage is not full Object, only has messageId if you use it ,you must
+	 * getMessage() again by its messageId
 	 * 
 	 * @return Returns the parentMessage.
 	 */
@@ -48,8 +49,7 @@ public final class ForumMessageReply extends ForumMessage {
 	}
 
 	/**
-	 * @param parentMessage
-	 *            The parentMessage to set.
+	 * @param parentMessage The parentMessage to set.
 	 */
 	private void setParentMessage(ForumMessage parentMessage) {
 		this.parentMessage = parentMessage;
@@ -59,12 +59,11 @@ public final class ForumMessageReply extends ForumMessage {
 		return false;
 	}
 
-	public void build(long messageId, MessageVO messageVO, Forum
-			forum, ForumThread forumThread, Account account, String creationDate, long modifiedDate , FilterPipleSpec filterPipleSpec,
-					  Collection<UploadFile> uploads, Collection<Property>
-							  props, ForumMessage parentMessage) {
-		super.build(messageId, messageVO, forum, forumThread, account,
-				creationDate,  modifiedDate, filterPipleSpec, uploads, props);
+	public void build(long messageId, MessageVO messageVO, Forum forum, ForumThread forumThread, Account account,
+			String creationDate, long modifiedDate, FilterPipleSpec filterPipleSpec, Collection<UploadFile> uploads,
+			Collection<Property> props, HotKeys hotKeys, ForumMessage parentMessage) {
+		super.build(messageId, messageVO, forum, forumThread, account, creationDate, modifiedDate, filterPipleSpec,
+				uploads, props, hotKeys);
 		this.setParentMessage(parentMessage);
 
 	}

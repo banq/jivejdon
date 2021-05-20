@@ -103,6 +103,10 @@ public class ForumThread {
 		this.viewCounter = new ViewCounter(this);
 	}
 
+	// new ForumThread() is Banned
+	private ForumThread() {
+		this(null, null, null);
+	}
 	// /**
 	// * DTO object, limited usage
 	// */

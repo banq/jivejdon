@@ -31,6 +31,7 @@ import com.jdon.jivejdon.domain.model.attachment.UploadFile;
 import com.jdon.jivejdon.domain.model.message.FilterPipleSpec;
 import com.jdon.jivejdon.domain.model.message.MessageUrlVO;
 import com.jdon.jivejdon.domain.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.property.HotKeys;
 import com.jdon.jivejdon.domain.model.property.MessagePropertysVO;
 import com.jdon.jivejdon.domain.model.property.Property;
 import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
@@ -82,17 +83,20 @@ public class ForumMessage implements Cloneable {
     private AttachmentsVO attachmentsVO;
     private MessagePropertysVO messagePropertysVO;
     private ReBlogVO reBlogVO;
+    private HotKeys hotKeys;
     private volatile boolean solid;
 
+    // new ForumMessage() is banned, use messageBuilder()
     protected ForumMessage() {
         this.messageVO = this.messageVOBuilder().subject("").body("").build();
         this.messageUrlVO = new MessageUrlVO("", "");
     }
 
+    // create a ForumMessage
     public static RequireMessageId messageBuilder() {
-        return messageId -> parentMessage -> messageVO -> forum -> forumThread -> account -> creationDate -> modifiedDate -> filterPipleSpec -> uploads -> properties -> new FinalStageVO(
+        return messageId -> parentMessage -> messageVO -> forum -> forumThread -> account -> creationDate -> modifiedDate -> filterPipleSpec -> uploads -> properties -> hotKeys -> new FinalStageVO(
                 messageId, parentMessage, messageVO, forum, forumThread, account, creationDate, modifiedDate,
-                filterPipleSpec, uploads, properties);
+                filterPipleSpec, uploads, properties, hotKeys);
     }
 
     public Account getAccount() {
@@ -172,7 +176,7 @@ public class ForumMessage implements Cloneable {
                     .acount(postRepliesMessageCommand.getAccount()).creationDate(creationDate)
                     .modifiedDate(modifiedDate).filterPipleSpec(this.filterPipleSpec)
                     .uploads(postRepliesMessageCommand.getAttachment().getUploadFiles())
-                    .props(postRepliesMessageCommand.getMessagePropertysVO().getPropertys()).build();
+                    .props(postRepliesMessageCommand.getMessagePropertysVO().getPropertys()).hotKeys(hotKeys).build();
 
             forumThread.addNewMessage(this, forumMessageReply);
             forumMessageReply.getAccount().updateMessageCount(1);
@@ -354,6 +358,10 @@ public class ForumMessage implements Cloneable {
         this.messageUrlVO = messageUrlVO;
     }
 
+    public HotKeys getHotKeys() {
+        return hotKeys;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -432,7 +440,12 @@ public class ForumMessage implements Cloneable {
 
     @FunctionalInterface
     public interface OptionsProperties {
-        FinalStageVO props(Collection<Property> props);
+        OptionsHotKeys props(Collection<Property> props);
+    }
+
+    @FunctionalInterface
+    public interface OptionsHotKeys {
+        FinalStageVO hotKeys(HotKeys hotKeys);
     }
 
     @FunctionalInterface
@@ -457,10 +470,12 @@ public class ForumMessage implements Cloneable {
         private final FilterPipleSpec filterPipleSpec;
         private final Collection<UploadFile> uploads;
         private final Collection<Property> props;
+        private final HotKeys hotKeys;
 
         public FinalStageVO(long messageId, ForumMessage parentMessage, MessageVO messageVO, Forum forum,
                 ForumThread forumThread, Account account, String creationDate, long modifiedDate,
-                FilterPipleSpec filterPipleSpec, Collection<UploadFile> uploads, Collection<Property> props) {
+                FilterPipleSpec filterPipleSpec, Collection<UploadFile> uploads, Collection<Property> props,
+                HotKeys hotKeys) {
             this.messageId = messageId;
             this.parentMessage = parentMessage;
             this.messageVO = messageVO;
@@ -472,6 +487,7 @@ public class ForumMessage implements Cloneable {
             this.filterPipleSpec = filterPipleSpec;
             this.uploads = uploads;
             this.props = props;
+            this.hotKeys = hotKeys;
         }
 
         public ForumMessage build() {
@@ -479,12 +495,12 @@ public class ForumMessage implements Cloneable {
                 if (parentMessage != null) {
                     ForumMessageReply forumMessageRely = new ForumMessageReply();
                     forumMessageRely.build(messageId, messageVO, forum, forumThread, account, creationDate,
-                            modifiedDate, filterPipleSpec, uploads, props, parentMessage);
+                            modifiedDate, filterPipleSpec, uploads, props, hotKeys, parentMessage);
                     return forumMessageRely;
                 } else {
                     ForumMessage forumMessage = new ForumMessage();
                     forumMessage.build(messageId, messageVO, forum, forumThread, account, creationDate, modifiedDate,
-                            filterPipleSpec, uploads, props);
+                            filterPipleSpec, uploads, props, hotKeys);
                     return forumMessage;
                 }
             } catch (Exception e) {
@@ -497,7 +513,7 @@ public class ForumMessage implements Cloneable {
 
     public void build(long messageId, MessageVO messageVO, Forum forum, ForumThread forumThread, Account account,
             String creationDate, long modifiedDate, FilterPipleSpec filterPipleSpec, Collection<UploadFile> uploads,
-            Collection<Property> props) {
+            Collection<Property> props, HotKeys hotKeys) {
         try {
             if (!this.isSolid())
                 synchronized (this) {
@@ -511,6 +527,7 @@ public class ForumMessage implements Cloneable {
                         setFilterPipleSpec(filterPipleSpec);
                         setAttachment(new AttachmentsVO(messageId, uploads));
                         setMessagePropertysVO(new MessagePropertysVO(messageId, props));
+                        this.hotKeys = hotKeys;
                         // apply all filter specification , business rule!
                         messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO.getBody())
                                 .build();
