@@ -1,6 +1,6 @@
 # Jivejdon
 
-Jivejdon is a DDD application with Event Soucing/CQRS and clean architecture/Hexagonalarchitecture, powered by [jdonframework](https://github.com/banq/jdonframework) . [online](https://www.jdon.com/forum/)
+Jivejdon is a Wordpress-like Blog/Forum application with DDD + DomainEvents/Event Soucing/CQRS + clean architecture/Hexagonalarchitecture, powered by [jdonframework](https://github.com/banq/jdonframework) . [online](https://www.jdon.com/forum/)
 
 chinese Book : [here](https://union-click.jd.com/jdc?e=&p=AyIGZRhfHQARDlMTWRUyEgZUGF8VABYAUR5aFgMiQwpDBUoyS0IQWhkeHAxBFQQAQB1AWQkFGk1dRFkRdQtUWgxxAV4pVEBkRAtfGhtASEM7Qw4ZAhMGVh9bFwYVA1AaWBQVRUQLR1dHQ1AQAlgFSQ5ARhcrExAGb0UNHV12RlJcV24lfkFmXgBtKxkOIgZlGV8QBhsEXB5rJQIVNxR1WxQGFQRTGlolAyIHUhtdHAsRBVAfWxAEIgBVEmvMlIDf5blrJTIRN2UrWyUBIkU7H18VBxoAAhxTFAURAlEaDkUBEQBSS10XVxQHURpSQQQiBVQaXxw%3D)
 
