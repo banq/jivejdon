@@ -24,6 +24,7 @@ import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.RootMessage;
 import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.domain.model.message.FilterPipleSpec;
 import com.jdon.jivejdon.domain.model.property.HotKeys;
@@ -134,7 +135,7 @@ public class MessageDirector implements MessageDirectorIF {
 		Collection props = propertyDao.getProperties(Constants.MESSAGE, anemicMessageDTO.getMessageId());
 		Collection uploads = uploadRepository.getUploadFiles(anemicMessageDTO.getMessageId().toString());
 		HotKeys hotKeys = hotKeysFactory.getHotKeys();
-		ForumMessage forumMessage = ForumMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId())
+		ForumMessage forumMessage = RootMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId())
 				.parentMessage(null).messageVO(anemicMessageDTO.getMessageVO()).forum(forum).forumThread(forumThread)
 				.acount(accountOptional.orElse(new Account())).creationDate(anemicMessageDTO.getCreationDate())
 				.modifiedDate(anemicMessageDTO.getModifiedDate()).filterPipleSpec(filterPipleSpec).uploads(uploads)
@@ -182,7 +183,7 @@ public class MessageDirector implements MessageDirectorIF {
 		Collection props = propertyDao.getProperties(Constants.MESSAGE, anemicMessageDTO.getMessageId());
 		Collection uploads = uploadRepository.getUploadFiles(anemicMessageDTO.getMessageId().toString());
 		HotKeys hotKeys = hotKeysFactory.getHotKeys();
-		ForumMessage forumMessage = ForumMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId())
+		ForumMessage forumMessage = RootMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId())
 				.parentMessage(parentforumMessage).messageVO(anemicMessageDTO.getMessageVO()).forum(forum)
 				.forumThread(parentforumMessage.getForumThread()).acount(accountOptional.orElse(new Account()))
 				.creationDate(anemicMessageDTO.getCreationDate()).modifiedDate(anemicMessageDTO.getModifiedDate())

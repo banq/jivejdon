@@ -60,7 +60,7 @@ import java.util.Objects;
  * @author <a href="mailto:banq@163.com">banq</a>
  */
 @Model
-public class ForumMessage implements Cloneable {
+public class ForumMessage extends RootMessage implements Cloneable {
     private static final long serialVersionUID = 1L;
     @Inject
     public LazyLoaderRole lazyLoaderRole;
@@ -86,17 +86,10 @@ public class ForumMessage implements Cloneable {
     private HotKeys hotKeys;
     private volatile boolean solid;
 
-    // new ForumMessage() is banned, use messageBuilder()
+    // new ForumMessage() is banned, use RootMessage.messageBuilder()
     protected ForumMessage() {
         this.messageVO = this.messageVOBuilder().subject("").body("").build();
         this.messageUrlVO = new MessageUrlVO("", "");
-    }
-
-    // create a ForumMessage
-    public static RequireMessageId messageBuilder() {
-        return messageId -> parentMessage -> messageVO -> forum -> forumThread -> account -> creationDate -> modifiedDate -> filterPipleSpec -> uploads -> properties -> hotKeys -> new FinalStageVO(
-                messageId, parentMessage, messageVO, forum, forumThread, account, creationDate, modifiedDate,
-                filterPipleSpec, uploads, properties, hotKeys);
     }
 
     public Account getAccount() {
@@ -170,7 +163,7 @@ public class ForumMessage implements Cloneable {
         try {
             long modifiedDate = System.currentTimeMillis();
             String creationDate = Constants.getDefaultDateTimeDisp(modifiedDate);
-            ForumMessageReply forumMessageReply = (ForumMessageReply) ForumMessage.messageBuilder()
+            ForumMessageReply forumMessageReply = (ForumMessageReply) RootMessage.messageBuilder()
                     .messageId(postRepliesMessageCommand.getMessageId()).parentMessage(this)
                     .messageVO(postRepliesMessageCommand.getMessageVO()).forum(this.forum).forumThread(this.forumThread)
                     .acount(postRepliesMessageCommand.getAccount()).creationDate(creationDate)
@@ -390,129 +383,6 @@ public class ForumMessage implements Cloneable {
      */
     public RequireSubject messageVOBuilder() {
         return subject -> body -> new MessageVO.MessageVOFinalStage(subject, body, this);
-    }
-
-    @FunctionalInterface
-    public interface RequireMessageId {
-        RequireParentMessage messageId(long messageId);
-    }
-
-    @FunctionalInterface
-    public interface RequireParentMessage {
-        RequireMessageVO parentMessage(ForumMessage parentMessage);
-    }
-
-    @FunctionalInterface
-    public interface RequireMessageVO {
-        RequireForum messageVO(MessageVO messageVO);
-    }
-
-    @FunctionalInterface
-    public interface RequireForum {
-        RequireForumThread forum(Forum forum);
-    }
-
-    @FunctionalInterface
-    public interface RequireForumThread {
-        RequireAccount forumThread(ForumThread forumThread);
-    }
-
-    @FunctionalInterface
-    public interface RequireAccount {
-        RequireCreationDate acount(Account account);
-    }
-
-    @FunctionalInterface
-    public interface RequireCreationDate {
-        RequireModifiedDate creationDate(String creationDate);
-    }
-
-    @FunctionalInterface
-    public interface RequireModifiedDate {
-        RequireFilterPipleSpec modifiedDate(long modifiedDate);
-    }
-
-    @FunctionalInterface
-    public interface RequireFilterPipleSpec {
-        OptionsUploadFile filterPipleSpec(FilterPipleSpec filterPipleSpec);
-    }
-
-    @FunctionalInterface
-    public interface OptionsUploadFile {
-        OptionsProperties uploads(Collection<UploadFile> uploads);
-    }
-
-    @FunctionalInterface
-    public interface OptionsProperties {
-        OptionsHotKeys props(Collection<Property> props);
-    }
-
-    @FunctionalInterface
-    public interface OptionsHotKeys {
-        FinalStageVO hotKeys(HotKeys hotKeys);
-    }
-
-    @FunctionalInterface
-    public interface RequireSubject {
-        MessageVO.RequireBody subject(String subject);
-    }
-
-    @FunctionalInterface
-    public interface RequireBody {
-        MessageVO.MessageVOFinalStage body(String body);
-    }
-
-    public static class FinalStageVO {
-        private final long messageId;
-        private final ForumMessage parentMessage;
-        private final MessageVO messageVO;
-        private final Account account;
-        private final String creationDate;
-        private final long modifiedDate;
-        private final Forum forum;
-        private final ForumThread forumThread;
-        private final FilterPipleSpec filterPipleSpec;
-        private final Collection<UploadFile> uploads;
-        private final Collection<Property> props;
-        private final HotKeys hotKeys;
-
-        public FinalStageVO(long messageId, ForumMessage parentMessage, MessageVO messageVO, Forum forum,
-                ForumThread forumThread, Account account, String creationDate, long modifiedDate,
-                FilterPipleSpec filterPipleSpec, Collection<UploadFile> uploads, Collection<Property> props,
-                HotKeys hotKeys) {
-            this.messageId = messageId;
-            this.parentMessage = parentMessage;
-            this.messageVO = messageVO;
-            this.account = account;
-            this.creationDate = creationDate;
-            this.modifiedDate = modifiedDate;
-            this.forum = forum;
-            this.forumThread = forumThread;
-            this.filterPipleSpec = filterPipleSpec;
-            this.uploads = uploads;
-            this.props = props;
-            this.hotKeys = hotKeys;
-        }
-
-        public ForumMessage build() {
-            try {
-                if (parentMessage != null) {
-                    ForumMessageReply forumMessageRely = new ForumMessageReply();
-                    forumMessageRely.build(messageId, messageVO, forum, forumThread, account, creationDate,
-                            modifiedDate, filterPipleSpec, uploads, props, hotKeys, parentMessage);
-                    return forumMessageRely;
-                } else {
-                    ForumMessage forumMessage = new ForumMessage();
-                    forumMessage.build(messageId, messageVO, forum, forumThread, account, creationDate, modifiedDate,
-                            filterPipleSpec, uploads, props, hotKeys);
-                    return forumMessage;
-                }
-            } catch (Exception e) {
-                System.err.println("build Exception:" + e.getMessage() + " messageId=" + messageId);
-                return null;
-            }
-
-        }
     }
 
     public void build(long messageId, MessageVO messageVO, Forum forum, ForumThread forumThread, Account account,
