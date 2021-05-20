@@ -279,6 +279,10 @@ public class ForumMessage implements Cloneable {
     }
 
     public ForumThread getForumThread() {
+        if (!this.isSolid()) {
+            System.err.println("forumMessage is be constructing. thread is half");
+            return null;
+        }
         return forumThread;
     }
 
