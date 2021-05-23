@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <a name="<bean:write name="forumMessage" property="messageId"/>"></a>
-<logic:equal name="i" value="0">
+<%-- <logic:equal name="i" value="0">
   <logic:notEmpty name="principal">
     <logic:equal name="loginAccount" property="roleName" value="Admin">
       <p> <a
@@ -12,7 +12,7 @@
       <a href="javascript:stickyThread('<bean:write name="forumMessage" property="forumThread.threadId"/>','announce_all','delete','<bean:write name="forumMessage" property="forumThread.forum.forumId"/>')">取消</a>
     </logic:equal>
   </logic:notEmpty>
-</logic:equal>
+</logic:equal> --%>
 
 <div class="row">
   <div class="col-md-12">
