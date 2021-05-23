@@ -67,6 +67,7 @@ pageContext.setAttribute("title", titleStr);
   <li><a href="<%=request.getContextPath()%>/approval" rel="nofollow">精华</a></li>    
    <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">回复</a></li>
   <li class="active"><a href="#">按点赞数排序</a></li>
+  <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" rel="nofollow">搜索</a></li>
   
 	               <div class="tres" style="float: right;">
         <logic:empty name="forum" property="forumId">
