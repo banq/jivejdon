@@ -15,32 +15,27 @@
  */
 package com.jdon.jivejdon.domain.model;
 
+import java.util.Collection;
+import java.util.Date;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
+
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
 import com.jdon.annotation.model.OnCommand;
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.domain.command.PostTopicMessageCommand;
 import com.jdon.jivejdon.domain.event.TopicMessagePostedEvent;
-import com.jdon.jivejdon.domain.model.property.HotKeys;
 import com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF;
 import com.jdon.jivejdon.domain.model.subscription.event.ForumSubscribedNotifyEvent;
 import com.jdon.jivejdon.spi.pubsub.publish.ThreadEventSourcingRole;
 import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 import com.jdon.jivejdon.util.Constants;
-import org.compass.annotations.Searchable;
-import org.compass.annotations.SearchableId;
-import org.compass.annotations.SearchableProperty;
-
-import java.util.Collection;
-import java.util.Date;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
  * 
  */
-@Searchable
 @Model
 public class Forum {
 
@@ -49,10 +44,8 @@ public class Forum {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@SearchableId
 	private Long forumId;
 
-	@SearchableProperty
 	private String name;
 	private String description;
 	private String creationDate;

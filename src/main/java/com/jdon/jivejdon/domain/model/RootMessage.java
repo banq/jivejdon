@@ -17,6 +17,10 @@ import com.jdon.jivejdon.domain.model.property.Property;
 public class RootMessage {
     protected volatile boolean isCreated;
 
+    public boolean isCreated() {
+        return isCreated;
+    }
+
     public static RequireMessageId messageBuilder() {
         return messageId -> parentMessage -> messageVO -> forum -> forumThread -> account -> creationDate -> modifiedDate -> filterPipleSpec -> uploads -> properties -> hotKeys -> new FinalStageVO(
                 messageId, parentMessage, messageVO, forum, forumThread, account, creationDate, modifiedDate,

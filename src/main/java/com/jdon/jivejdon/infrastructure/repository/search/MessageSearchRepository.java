@@ -23,16 +23,11 @@ public interface MessageSearchRepository {
 
 	public abstract void createMessage(AnemicMessageDTO forumMessage);
 
-//
-//	public abstract void createMessageReply(AnemicMessageDTO forumMessageReply);
-
 	public void createMessageTimer(AnemicMessageDTO forumMessage);
-
-//	public void createMessageReplyTimer(AnemicMessageDTO forumMessageReply);
 
 	public abstract void updateMessage(AnemicMessageDTO forumMessage);
 
-	public abstract void deleteMessage(Long forumMessageId);
+	public abstract void deleteMessage(Long messageId);
 
 	int findThreadsAllCount(String query);
 

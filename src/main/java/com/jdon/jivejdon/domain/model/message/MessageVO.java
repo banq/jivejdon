@@ -2,8 +2,6 @@ package com.jdon.jivejdon.domain.model.message;
 
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.util.StringUtil;
-import org.compass.annotations.Searchable;
-import org.compass.annotations.SearchableProperty;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -16,7 +14,6 @@ import java.util.regex.Pattern;
  * FilterPipleSpec 2. original that saved in repository
  *
  */
-@Searchable(root = false)
 public final class MessageVO implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = 1L;
@@ -27,10 +24,8 @@ public final class MessageVO implements Serializable, Cloneable {
 
 	private final ForumMessage forumMessage;
 
-	@SearchableProperty
 	private final String subject;
 
-	@SearchableProperty
 	private final String body;
 
 	/**

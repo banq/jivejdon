@@ -92,7 +92,7 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 		boolean allowEdit = false;
 		if (forumMessage == null)
 			return allowEdit;
-		if (!forumMessage.isSolid())
+		if (!forumMessage.isCreated())
 			return allowEdit;// forumMessage is null or only has mesageId
 		Account account = sessionContextUtil.getLoginAccount(sessionContext);
 		allowEdit = resourceAuthorization.isAuthenticated(forumMessage, account);

@@ -4,11 +4,6 @@ import com.jdon.jivejdon.domain.model.ForumMessage;
 
 public class MessageSearchSpec {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	private ForumMessage message;
 
 	private Long messageId;
