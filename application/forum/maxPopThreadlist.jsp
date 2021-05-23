@@ -63,9 +63,10 @@ pageContext.setAttribute("title", titleStr);
 			<div id="main-content" class="col-md-12">
 				<div class="box">	
 					<ul class="nav nav-tabs">
-  <li ><a href="<%=request.getContextPath()%>/threads">时间</a></li>
+  <li ><a href="<%=request.getContextPath()%>/threads">最新</a></li>
+  <li><a href="<%=request.getContextPath()%>/approval" rel="nofollow">精华</a></li>  
   <li class="active"><a href="#">按回复数排序</a></li>
- <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">点赞</a></li>	
+  <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">点赞</a></li>	
   
 	               <div class="tres" style="float: right;">
         <logic:empty name="forum" property="forumId">

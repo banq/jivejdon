@@ -63,7 +63,8 @@ pageContext.setAttribute("title", titleStr);
 			<div id="main-content" class="col-md-12">
 				<div class="box">	
 					<ul class="nav nav-tabs">
-  <li ><a href="<%=request.getContextPath()%>/threads">时间</a></li>
+  <li ><a href="<%=request.getContextPath()%>/threads">最新</a></li>
+  <li><a href="<%=request.getContextPath()%>/approval" rel="nofollow">精华</a></li>    
    <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">回复</a></li>
   <li class="active"><a href="#">按点赞数排序</a></li>
   
