@@ -146,7 +146,7 @@
           </div>
         </div>
       </div>
-      <%if (request.getUserPrincipal() != null){%>
+      <%if (request.getSession(false) != null){%>
        <div class="box">
         <jsp:include page="../message/messagePostReply2.jsp" flush="true">
           <jsp:param name="forumId" value="${forumThread.forum.forumId}"/>
