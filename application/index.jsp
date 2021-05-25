@@ -6,7 +6,7 @@
 <%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%          
-    com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(30 * 60, request, response);
+    com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(10 * 60, request, response);
 	
 %>
 <%@ page trimDirectiveWhitespaces="true" %>
