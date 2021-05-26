@@ -19,9 +19,9 @@ String coutlength = (String)pageContext.getAttribute("count");
     <div class="linkblock">
       <div class="row">
         <div class="col-sm-12">
-          <div class="box">
-           <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>"><bean:write name="forumThread" property="name"/></a></h3>
-           <div class="wrap-vid">
+          
+            <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>"><bean:write name="forumThread" property="name"/></a></h3>
+            <div class="wrap-vid">
               <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">
                   <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail" loading="lazy"/>
               </logic:notEmpty>
@@ -41,8 +41,9 @@ String coutlength = (String)pageContext.getAttribute("count");
                          <bean:write name="forumMessage" property="digCount"/>
 					             </span>
                 </logic:notEqual>     			 
-             </div>
-          </div>   
+              </div>
+            </div>   
+          
         </div>       
       </div>
     </div>
