@@ -25,22 +25,24 @@ String coutlength = (String)pageContext.getAttribute("count");
               <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">
                   <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail" loading="lazy"/>
               </logic:notEmpty>
-              <div class="info">			 
-                <span><i class="fa fa-calendar"></i>
+              <div class="widget">			 
+                <div class="info">	
+                  <span><i class="fa fa-calendar"></i>
                   <bean:define id="cdate" name="forumThread" property="creationDate" ></bean:define>
-                 <%String cdateS = (String)pageContext.getAttribute("cdate"); %><%=cdateS.substring(2, 11) %>
-                      </span>
-			          <logic:notEqual name="forumThread" property="state.messageCount" value="0">
+                  <%String cdateS = (String)pageContext.getAttribute("cdate"); %><%=cdateS.substring(2, 11) %>
+                  </span>
+			            <logic:notEqual name="forumThread" property="state.messageCount" value="0">
                       <span><i class="fa fa-comment"></i> <bean:write name="forumThread" property="state.messageCount" />
                       </span>
-		             </logic:notEqual>  
+		              </logic:notEqual>  
                       <span><i class="fa fa-eye"></i><bean:write name="forumThread" property="viewCount" />
                       </span>
-			           <logic:notEqual name="forumMessage" property="digCount" value="0">
+			            <logic:notEqual name="forumMessage" property="digCount" value="0">
                       <span><i class="fa fa-heart"></i>
                          <bean:write name="forumMessage" property="digCount"/>
 					             </span>
-                </logic:notEqual>     			 
+                  </logic:notEqual>     			 
+                </div>  
               </div>
             </div>   
           
