@@ -1,8 +1,10 @@
 package com.jdon.jivejdon.infrastructure.repository.search;
 
-import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
@@ -15,7 +17,6 @@ import com.jdon.jivejdon.util.ThreadTimer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field.Store;
 import org.apache.lucene.document.TextField;
@@ -24,6 +25,8 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.Term;
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
@@ -37,6 +40,8 @@ import org.apache.lucene.search.highlight.Scorer;
 import org.apache.lucene.search.highlight.SimpleFragmenter;
 import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 import org.apache.lucene.util.Version;
+import org.wltea.analyzer.core.IKSegmenter;
+import org.wltea.analyzer.core.Lexeme;
 
 public class MessageSearchProxy implements Startable, MessageSearchRepository {
 	private final static Logger logger = LogManager.getLogger(MessageSearchProxy.class);
@@ -51,14 +56,14 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 			.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
 
 	public MessageSearchProxy(MessageUtilSQL messageUtilSQL, ThreadTimer threadTimer) {
-		this.caches = new ConcurrentHashMap();
+		this.caches = new ConcurrentHashMap<Long, MessageSearchSpec>();
 		this.messageUtilSQL = messageUtilSQL;
 		this.threadTimer = threadTimer;
 	}
 
 	// for directly invoked.
 	public MessageSearchProxy(boolean rebuild) {
-		this.caches = new ConcurrentHashMap();
+		this.caches = new ConcurrentHashMap<Long, MessageSearchSpec>();
 		start();
 	}
 
@@ -162,9 +167,25 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 
 	}
 
-	public Collection find(String querykey, int start, int count) {
+	public static Map<String, Integer> getTextDef(String text) throws IOException {
+		Map<String, Integer> wordsFren = new HashMap<String, Integer>();
+		IKSegmenter ikSegmenter = new IKSegmenter(new StringReader(text), true);
+		Lexeme lexeme;
+		while ((lexeme = ikSegmenter.next()) != null) {
+			if (lexeme.getLexemeText().length() > 1) {
+				if (wordsFren.containsKey(lexeme.getLexemeText())) {
+					wordsFren.put(lexeme.getLexemeText(), wordsFren.get(lexeme.getLexemeText()) + 1);
+				} else {
+					wordsFren.put(lexeme.getLexemeText(), 1);
+				}
+			}
+		}
+		return wordsFren;
+	}
+
+	public Collection<MessageSearchSpec> find(String querykey, int start, int count) {
 		logger.debug("MessageSearchProxy.find");
-		Collection<MessageSearchSpec> result = new ArrayList();
+		Collection<MessageSearchSpec> result = new ArrayList<MessageSearchSpec>();
 
 		MessageSearchSpec messageSearchSpec = null;
 		try {
@@ -174,13 +195,17 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 			// 索引搜索器
 			IndexSearcher indexSearcher = new IndexSearcher(indexReader);
 			// 给出要查询的关键字
-			Query query = new TermQuery(new Term("body", querykey));
-			TopDocs topDocs = indexSearcher.search(query, 100);
+			BooleanQuery booleanquery = new BooleanQuery();
+			Map<String, Integer> wordsFrenMaps = getTextDef(querykey);
+			wordsFrenMaps.keySet()
+					.forEach(e -> booleanquery.add(new TermQuery(new Term("body", e)), BooleanClause.Occur.MUST));
+
+			TopDocs topDocs = indexSearcher.search(booleanquery, 100);
 			logger.debug("总命中数1：" + topDocs.totalHits);
 
 			// 设置关键字高亮
 			Formatter formatter = new SimpleHTMLFormatter("<font color='red'>", "</font>");
-			Scorer scorer = new QueryScorer(query);
+			Scorer scorer = new QueryScorer(booleanquery);
 			Highlighter highlighter = new Highlighter(formatter, scorer);
 
 			Fragmenter fragmenter = new SimpleFragmenter(100);
@@ -243,7 +268,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 	 * com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#
 	 * findThread (java.lang.String, int, int)
 	 */
-	public Collection findThread(String query, int start, int count) {
+	public Collection<MessageSearchSpec> findThread(String query, int start, int count) {
 		return find(query, start, count);
 	}
 

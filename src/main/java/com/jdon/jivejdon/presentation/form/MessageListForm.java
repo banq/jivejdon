@@ -31,7 +31,7 @@ public class MessageListForm extends ModelListForm {
 	private boolean[] authenticateds;
 
 	public MessageListForm() {
-		this.setCount(5); // default there are #count# messages in one page
+		this.setCount(15); // default there are #count# messages in one page
 	}
 
 	public boolean getAuthenticated(int index) {

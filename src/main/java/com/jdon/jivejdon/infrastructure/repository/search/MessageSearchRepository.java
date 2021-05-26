@@ -15,9 +15,10 @@
  */
 package com.jdon.jivejdon.infrastructure.repository.search;
 
-import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
-
 import java.util.Collection;
+
+import com.jdon.jivejdon.domain.model.query.MessageSearchSpec;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 
 public interface MessageSearchRepository {
 
@@ -31,7 +32,7 @@ public interface MessageSearchRepository {
 
 	int findThreadsAllCount(String query);
 
-	Collection findThread(String query, int start, int count);
+	Collection<MessageSearchSpec> findThread(String query, int start, int count);
 
-	Collection find(String query, int start, int count);
+	Collection<MessageSearchSpec> find(String query, int start, int count);
 }
