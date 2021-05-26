@@ -31,6 +31,7 @@ String coutlength = (String)pageContext.getAttribute("count");
            </div>
         </div>  
         <div class="col-sm-6">
+          <div class="box">
             <div class="info">			 
               <span><i class="fa fa-calendar"></i>
                 <bean:define id="cdate" name="forumThread" property="creationDate" ></bean:define>
@@ -48,6 +49,7 @@ String coutlength = (String)pageContext.getAttribute("count");
 					             </span>
                 </logic:notEqual>     			 
              </div>
+          </div>   
         </div>       
       </div>
     </div>
