@@ -8,7 +8,7 @@
 com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(10 * 60, request, response);
 %>
 <a href="<%=request.getContextPath()%>/threads"><b>别人在看</b></a>
-<div class="important" >
+<div>
 <bean:parameter id="count" name="count" value="8"/>
 <%
 String coutlength = (String)pageContext.getAttribute("count");
@@ -16,9 +16,12 @@ String coutlength = (String)pageContext.getAttribute("count");
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='<%=coutlength%>' >
   <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
   <div class="box"> 
-  <div class="linkblock">
-  <div class="row">
-       <div class="col-sm-12">
+    <div class="linkblock">
+      <div class="row">
+        <div class="col-sm-12">
+           <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>"><bean:write name="forumThread" property="name"/></a></h3>
+        </div> 
+        <div class="col-sm-6">
            <div class="wrap-vid">
               <div class="thumbn">
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">
@@ -26,13 +29,8 @@ String coutlength = (String)pageContext.getAttribute("count");
                 </logic:notEmpty>
               </div>         
            </div>
-       </div> 
-       <div class="col-sm-12">
-         <div class="box">
-             <bean:define id="body" name="forumMessage" property="messageVO.body" />
-
-             <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>"><bean:write name="forumThread" property="name"/></a></h3>
-      
+        </div>  
+        <div class="col-sm-6">
             <div class="info">			 
               <span><i class="fa fa-calendar"></i>
                 <bean:define id="cdate" name="forumThread" property="creationDate" ></bean:define>
@@ -49,12 +47,10 @@ String coutlength = (String)pageContext.getAttribute("count");
                          <bean:write name="forumMessage" property="digCount"/>
 					             </span>
                 </logic:notEqual>     			 
-                      
              </div>
-         </div>
+        </div>       
       </div>
-  </div>
-  </div>
-  </div>      
+    </div>
+  </div> 
 </logic:iterate>
 </div>
