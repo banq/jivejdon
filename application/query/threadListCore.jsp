@@ -3,6 +3,7 @@
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@ page session="false" %>
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
    <div class="box"> 
   <div class="linkblock" itemscope itemtype="http://schema.org/BlogPosting">
