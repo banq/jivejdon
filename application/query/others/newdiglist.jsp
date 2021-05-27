@@ -7,13 +7,10 @@
 <% 
 com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(10 * 60, request, response);
 %>
-<a href="<%=request.getContextPath()%>/threads"><b>别人在看</b></a>
 <div>
-<bean:parameter id="count" name="count" value="8"/>
-<%
-String coutlength = (String)pageContext.getAttribute("count");
-%>        
-<logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='<%=coutlength%>' >
+<bean:parameter id="start" name="start" value="0"/>
+<bean:parameter id="count" name="count" value="1"/>
+<logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='<%=count%>' offset="<%=start%>" >
   <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
   <div class="box"> 
     <div class="linkblock">

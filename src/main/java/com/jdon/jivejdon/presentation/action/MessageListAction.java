@@ -45,21 +45,21 @@ public class MessageListAction extends ModelListAction {
 
 	public ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
-			forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService", this.servlet.getServletContext());
+			forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService",
+					this.servlet.getServletContext());
 		return forumMessageQueryService;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jdon.strutsutil.ModelListAction#getPageIterator(javax.servlet.http
+	 * @see com.jdon.strutsutil.ModelListAction#getPageIterator(javax.servlet.http
 	 * .HttpServletRequest, int, int)
 	 */
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
 		Debug.logVerbose("enter getPageIterator", module);
 		String threadId = request.getParameter("thread");
-		if ((threadId == null) || (!UtilValidate.isInteger(threadId)) || threadId.length()>10) {
+		if ((threadId == null) || (!UtilValidate.isInteger(threadId)) || threadId.length() > 10) {
 			Debug.logError(" getPageIterator error : threadId is null", module);
 			return new PageIterator();
 		}
@@ -70,8 +70,7 @@ public class MessageListAction extends ModelListAction {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jdon.strutsutil.ModelListAction#findModelByKey(javax.servlet.http
+	 * @see com.jdon.strutsutil.ModelListAction#findModelByKey(javax.servlet.http
 	 * .HttpServletRequest, java.lang.Object)
 	 */
 	public Object findModelIFByKey(HttpServletRequest request, Object key) {
@@ -91,10 +90,10 @@ public class MessageListAction extends ModelListAction {
 		return false;
 	}
 
-	public void customizeListForm(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, ModelListForm modelListForm)
-			throws Exception {
+	public void customizeListForm(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request,
+			ModelListForm modelListForm) throws Exception {
 		String threadId = request.getParameter("thread");
-		if ((threadId == null) || (!UtilValidate.isInteger(threadId))  || threadId.length()>10) {
+		if ((threadId == null) || (!UtilValidate.isInteger(threadId)) || threadId.length() > 10) {
 			Debug.logError("customizeListForm error : threadId is null", module);
 			return;
 		}
@@ -108,6 +107,7 @@ public class MessageListAction extends ModelListAction {
 
 			forumThread.addViewCount();
 			getThreadViewCounterJob().saveViewCounter(forumThread);
+			request.setAttribute("allCount", getThreadViewCounterJob().getThreadIdsList().size());
 
 			if (request.getSession(false) != null) {
 				boolean[] authenticateds = getAuthedListForm(actionForm, request);
@@ -134,7 +134,8 @@ public class MessageListAction extends ModelListAction {
 		if (account == null)
 			return authenticateds;// if login need auth check
 
-		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
+		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService",
+				request);
 		int i = 0;
 		for (Object o : messageListForm.getList()) {
 			ForumMessage forumMessage = (ForumMessage) o;
@@ -145,11 +146,10 @@ public class MessageListAction extends ModelListAction {
 		return authenticateds;
 	}
 
-
 	private ThreadViewCounterJob getThreadViewCounterJob() {
 		if (threadViewCounterJob == null)
-			threadViewCounterJob = (ThreadViewCounterJob) WebAppUtil.getComponentInstance
-					("threadViewCounterJob", this.servlet.getServletContext());
+			threadViewCounterJob = (ThreadViewCounterJob) WebAppUtil.getComponentInstance("threadViewCounterJob",
+					this.servlet.getServletContext());
 		return threadViewCounterJob;
 	}
 

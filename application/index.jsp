@@ -226,7 +226,7 @@
 					    <div class="wid-vid">
 							<ul>
                 <div>
-					<jsp:include page="/query/threadNewList.shtml?count=20" flush="true"></jsp:include>
+					<jsp:include page="/query/threadNewList.shtml?count=5" flush="true"></jsp:include>
 				</div>
 							</ul>
 							</div>
@@ -256,7 +256,7 @@
 							    <div class="lazyload" >
 							     <!-- 
 							     <script>
-                                    load('/query/threadNewDigList.shtml?count=20', function (xhr) {				
+                                    load('/query/threadNewDigList.shtml?count=5', function (xhr) {				
   	                                    document.getElementById("digNewList").innerHTML = xhr.responseText;
 			                        });			
 							     </script> -->

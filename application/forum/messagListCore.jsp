@@ -116,7 +116,7 @@
         </div>
 
         <div class="box">
-          <blockquote><em>猜你喜欢</em></blockquote>
+          <blockquote><em class="smallgray">猜你喜欢</em></blockquote>
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
           <ins class="adsbygoogle"
                style="display:block"
@@ -127,6 +127,7 @@
               (adsbygoogle = window.adsbygoogle || []).push({});
           </script>
         </div>
+        <div id="pageEnd"></div>
 
         <!-- 导航区  -->
         <div class="post_pages_end">
@@ -225,7 +226,8 @@
         <div class="content">
           <div class="post wrap-vid">
               <ul>
-                  <div id="digNewList"></div>
+                <blockquote><em class="smallgray">其他人在看</em></blockquote>
+                <div id="othersonline"></div>
               </ul>
           </div>
         </div>				
@@ -251,11 +253,16 @@
 
   <%-- include LAB.js --%>
   <%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
-  <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
-  <script src="https://static.jdon.com/common/login2.js"></script>
-  <script src="https://static.jdon.com/common/messageList8.js"></script>
-  <script>    
-   $(document).ready(function() { 
+<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
+<script src="https://static.jdon.com/common/login2.js"></script>
+<script>
+  var start = 0;
+  var count = 1;  
+  var allCount = <bean:write name="allCount"/>; 
+</script>
+<script src="https://static.jdon.com/common/messageList9.js"></script>
+<script>        
+  $(document).ready(function() { 
       scrollLoadByElementId('https://cdn.jdon.com/query/threadDigList',"digList");            
       $('.reblogfrom').each(function(i, obj) {        
         scrollLoadByElementId('/forum/thread.shtml?threadId='+ obj.id,obj.id); 
@@ -263,9 +270,9 @@
       $('.reblogto').each(function(i, obj) {        
         scrollLoadByElementId('/forum/thread.shtml?threadId='+ obj.id,obj.id); 
        });
-      scrollLoadByElementId('/query/threadNewDigList.shtml?count=20',"digNewList");
-   });      
-  </script>
+      scrollAppendByElementId('/query/threadNewDigList.shtml',"othersonline","pageEnd",returnAllCount,sumStart,returnStart);
+  });      
+</script>
 
   </body>
   </html>
