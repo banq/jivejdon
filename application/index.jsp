@@ -226,7 +226,7 @@
 					    <div class="wid-vid">
 							<ul>
                 <div>
-					<jsp:include page="/query/threadNewList.shtml?count=5" flush="true"></jsp:include>
+					<jsp:include page="/query/threadNewList.shtml?count=15" flush="true"></jsp:include>
 				</div>
 							</ul>
 							</div>
