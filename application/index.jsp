@@ -43,11 +43,6 @@
       <script src="https://static.jdon.com/js/html5shiv.min.js"></script>
       <script src="https://static.jdon.com/js/respond.min.js"></script>
   <![endif]-->
-  <style>
-  #home-thumbnai {
-    width: 100%;
-  }
-  </style>	
 </head>
 <body>
 <%@ include file="./common/body_header.jsp" %>
