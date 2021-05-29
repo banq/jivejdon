@@ -28,7 +28,6 @@ public class SearchAction extends ModelListAction {
 			logger.error(" getPageIterator error : query is null " + request.getRemoteAddr());
 			return new PageIterator();
 		}
-
 		String useGBK = request.getParameter("useGBK");
 		if (useGBK != null) {
 			try {
@@ -39,23 +38,16 @@ public class SearchAction extends ModelListAction {
 				e.printStackTrace();
 			}
 		}
-		Map paramsMap = new HashMap();
-		request.setAttribute("paramsMap", paramsMap);
-		String userId = request.getParameter("userId");
-		paramsMap.put("query", query);
-		if (!UtilValidate.isEmpty(userId)) {
-			paramsMap.put("userId", userId);
-		}
-		// request.setAttribute("query", query);
-		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService",
-				this.servlet.getServletContext());
+		query = query.replaceAll("[^(a-zA-Z0-9\\u4e00-\\u9fa5)]", "");
+		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil
+				.getService("forumMessageQueryService", this.servlet.getServletContext());
 		return forumMessageQueryService.searchMessages(query, start, count);
 	}
 
 	// null method not be run.
 	public Object findModelIFByKey(HttpServletRequest request, Object key) {
-		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil
-				.getService("forumMessageService", this.servlet.getServletContext());
+		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService",
+				this.servlet.getServletContext());
 		logger.debug(" key calss type = " + key.getClass().getName());
 		return forumMessageService.getMessage((Long) key);
 	}
