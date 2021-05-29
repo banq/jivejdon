@@ -14,6 +14,7 @@
 				        <a href="/forum"><i class="fa fa-home"></i>道场</a>
 						<a href="/threads"><i class="fa fa-list-ul"></i>最新</a>
 						<a href="/tags"><i class="fa fa-star-half-full"></i>推荐</a>
+						<a href="/query/threadViewQuery.shtml"><i class="fa fa-search"></i>搜索</a>
 						<a href="/followus.html"><i class="fa fa-feed"></i>订阅</a>
                          <%--<%if (request.getSession(false) == null){%> --%>
 							 <%--<a data-toggle="modal" data-target="#login" href=""><i class="fa fa-sign-in"></i>登陆 </a>--%>
