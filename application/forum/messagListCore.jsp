@@ -257,7 +257,7 @@
 <script src="https://static.jdon.com/common/login2.js"></script>
 <script>
   var start = 0;
-  var count = 1;  
+  var count = 5;  
   var allCount = <bean:write name="allCount"/>; 
 </script>
 <script src="https://static.jdon.com/common/messageList9.js"></script>
