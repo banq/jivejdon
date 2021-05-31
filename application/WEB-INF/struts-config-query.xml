@@ -15,6 +15,7 @@
     <action-mappings>
         <action path="/query/threadViewQuery" type="com.jdon.jivejdon.presentation.action.query.QueryViewAction" name="queryForm" scope="request" validate="false">
             <forward name="view" path="/query/queryView.jsp" />
+            <forward name="search" path="/query/searchAction.shtml" />
         </action>
 
         <action path="/message/threadViewQuery" type="com.jdon.jivejdon.presentation.action.query.QueryViewAction" name="queryForm" scope="request" validate="false">
