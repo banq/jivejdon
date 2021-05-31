@@ -101,23 +101,37 @@
     </div>
   </div>
 </div>
-          
-<logic:iterate indexId="i" id="forumThread" name="threadListForm" property="list" offset="1">
+    <div id="approvedItem1"><br><br><br><br><br><br></div>          
 	<div class="lazyload" >
           <!--
 		  <script>
-		  load('/query/threadApprovedNewList3.shtml?offset=<bean:write name="i"/>', function (xhr) {
-               document.getElementById("approvedItem<bean:write name="i"/>").innerHTML = xhr.responseText;
+		  load('/query/threadApprovedNewList3.shtml?offset=1&count=4', function (xhr) {
+               document.getElementById("approvedItem1").innerHTML = xhr.responseText;
+            }); 
+		  </script>
+          -->
+    </div>  
+	<div id="approvedItem2"><br><br><br><br><br><br></div>       
+	<div class="lazyload" >
+          <!--
+		  <script>
+	      load('/query/threadApprovedNewList3.shtml?offset=5&count=5', function (xhr) {
+               document.getElementById("approvedItem2").innerHTML = xhr.responseText;
+            }); 
+		  </script>
+          -->
+      </div>	     
+    <div id="approvedItem3"><br><br><br><br><br><br></div>     	  
+	<div class="lazyload" >
+          <!--
+		  <script>
+	      load('/query/threadApprovedNewList3.shtml?offset=10&count=5', function (xhr) {
+               document.getElementById("approvedItem3").innerHTML = xhr.responseText;
             }); 
 		  </script>
           -->
       </div>
-      <div id="approvedItem<bean:write name="i"/>">
-	  <br>
-	  <br>
-	  </div>
 
-</logic:iterate>
       <div class="box"> 
 	    <div class="tres center">        
            <html:link page="/approval"><b>更多精华</b></html:link>

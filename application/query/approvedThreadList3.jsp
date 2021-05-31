@@ -12,11 +12,15 @@
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-store">
     <META HTTP-EQUIV="Expires" CONTENT="0">   
 <%
-int offset = 0;
+String offset = "0";
 if (request.getParameter("offset")!=null){
-   offset = Integer.parseInt(request.getParameter("offset"));
+   offset = request.getParameter("offset");
+}
+String count = "5";
+if (request.getParameter("count")!=null){
+   count = request.getParameter("count");
 }
 %>
-<logic:iterate indexId="i" id="forumThread" name="threadListForm" property="list" offset="<%=Integer.toString(offset)%>" length="1">
+<logic:iterate indexId="i" id="forumThread" name="threadListForm" property="list" offset="<%=offset%>" length="<%=count%>">
   <%@ include file="threadListCore.jsp" %>
 </logic:iterate>
