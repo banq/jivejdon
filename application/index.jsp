@@ -288,7 +288,7 @@
 	<script src="//static.jdon.com/common/login2.js"></script>
 	<%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
 <%@ include file="./common/IncludeBottomBody.jsp" %> 
-<script src="./common/js/jquery.lazyload-any.js"></script>
+<script src="/common/js/jquery.lazyload-any.js"></script>
 <script>       
     $('.lazyload').lazyload();
 </script>

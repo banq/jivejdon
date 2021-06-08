@@ -103,7 +103,7 @@ int h = 0 ;
 <%@ include file="searchInputView.jsp" %>
 <%@include file="../common/IncludeBottomBody.jsp"%>
 <%@include file="../account/loginAJAX.jsp"%>
-<script src="../common/js/jquery.lazyload-any.js"></script>
+<script src="/common/js/jquery.lazyload-any.js"></script>
 
 <script>
     $('.lazyload').lazyload();
