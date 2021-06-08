@@ -58,7 +58,7 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 				Property prop = (Property) iter.next();
 				String regEx = prefix_regEx + prop.getName() + suffix_regEx;
 				String replcaement = getKeyUrlStr(prop.getName(), prop.getValue());
-				body = Pattern.compile(regEx).matcher(body).replaceAll("$1" + replcaement);
+				body = Pattern.compile(regEx).matcher(body).replaceFirst("$1" + replcaement);
 			}
 		} catch (Exception e) {
 			Debug.logError("" + e, module);
