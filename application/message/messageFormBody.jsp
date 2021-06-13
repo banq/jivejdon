@@ -24,9 +24,9 @@
     </div>
   </div>
 </div>
-<script src="//static.jdon.com/common/form.js"></script>
-<script src="//static.jdon.com/common/ckeditor/ckeditor.js"></script>
-<script src="//static.jdon.com/common/ckeditor/sample.js"></script>
+<script src="/common/form.js"></script>
+<script src="/common/ckeditor/ckeditor.js"></script>
+<script src="/common/ckeditor/sample.js"></script>
 
 <script>
     initSample();
