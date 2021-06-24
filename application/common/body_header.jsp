@@ -9,13 +9,13 @@
 		<div class="container">
 			<div class="row">
                 <div class="col-md-12 ">
-                    <a href="/"><img src="https://static.jdon.com/simgs/jdon100.png" width="100" height="40"/></a>
+                    <a href="/"><img src="<%=request.getContextPath() %>/simgs/jdon100.png" width="100" height="40"/></a>
                     <span class="list-inline top-link link" style="float:right;">
-				        <a href="/forum"><i class="fa fa-home"></i>道场</a>
-						<a href="/threads"><i class="fa fa-list-ul"></i>最新</a>
-						<a href="/tags"><i class="fa fa-star-half-full"></i>推荐</a>
-						<a href="/query/threadViewQuery.shtml"><i class="fa fa-search"></i>搜索</a>
-						<a href="/followus.html"><i class="fa fa-feed"></i>订阅</a>
+				        <a href="<%=request.getContextPath() %>/forum"><i class="fa fa-home"></i>道场</a>
+						<a href="<%=request.getContextPath() %>/threads"><i class="fa fa-list-ul"></i>最新</a>
+						<a href="<%=request.getContextPath() %>/tags"><i class="fa fa-star-half-full"></i>推荐</a>
+						<a href="<%=request.getContextPath() %>/query/threadViewQuery.shtml"><i class="fa fa-search"></i>搜索</a>
+						<a href="<%=request.getContextPath() %>/followus.html"><i class="fa fa-feed"></i>订阅</a>
                          <%--<%if (request.getSession(false) == null){%> --%>
 							 <%--<a data-toggle="modal" data-target="#login" href=""><i class="fa fa-sign-in"></i>登陆 </a>--%>
 						<%--<%}%>  --%>

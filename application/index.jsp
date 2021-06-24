@@ -77,7 +77,7 @@
 				   $("#home-thumbnai").attr('src',$("#home-thumbnai").attr('data-src'));
 	          else
                    //document.getElementById("home-thumbnai").src = "https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
-                   $("#home-thumbnai").attr('src','https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg');
+                   $("#home-thumbnai").attr('src','https://cdn.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg');
 </script>
 -->
 </div>
@@ -172,7 +172,7 @@
 				<div class="widget wid-post">
                     <div class="content">
                        <div class="wrap-vid">
-			               <div class="thumbn"><img src="https://static.jdon.com/simgs/forum/ddd-book.png" class="thumbnail" loading="lazy"></div> 
+			               <div class="thumbn"><img src="<%=request.getContextPath() %>/simgs/forum/ddd-book.png" class="thumbnail" loading="lazy"></div> 
 						      <p><br>本站原创<br><a href="/54881" target="_blank">《复杂软件设计之道：领域驱动设计全面解析与实战》</a></p>
                         </div>
                     </div>

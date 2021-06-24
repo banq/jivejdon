@@ -13,6 +13,6 @@ com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(600 * 60 * 60, request, response
         <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail center" loading="lazy"/>
     </logic:notEmpty>
 	<logic:empty name="forumMessage" property="messageUrlVO.thumbnailUrl">
-        <img src="https://static.jdon.com/simgs/thumb/<%=1 + i%>.jpg" border="0" class="thumbnail center" loading="lazy">  
+        <img src="<%=request.getContextPath() %>/simgs/thumb/<%=1 + i%>.jpg" border="0" class="thumbnail center" loading="lazy">  
 	</logic:empty>	
 </logic:iterate>
