@@ -89,7 +89,7 @@
                                       #<bean:write name="threadTag" property="title"/>
                                       </a>
                                </h4>
-                               <img src="<%=request.getContextPath() %>/simgs/thumb/<%=1 + i%>.jpg" border="0" class="thumbnail center" loading="lazy">  
+                               <img src="//cdn.jdon.com/simgs/thumb/<%=1 + i%>.jpg" border="0" class="thumbnail center" loading="lazy">  
 	                         </div>
                         </div>        
                       </div>  
