@@ -84,12 +84,19 @@
                     <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="i" length="2" offset="0">                  
                       <div class="col-md-6">
                         <div class="linkblock">	
-                           <div class="box">                               
-                               <h4 class="center"><a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag"> 
-                                      #<bean:write name="threadTag" property="title"/>
-                                      </a>
-                               </h4>
-                               <img src="//cdn.jdon.com/simgs/thumb/<%=1 + i%>.jpg" border="0" class="thumbnail center" loading="lazy">  
+                           <div class="box">        
+                           <div class="wrap-vid">
+                              <div class="thumbn">
+                                 <img src="//cdn.jdon.com/simgs/thumb/<%=1 + i%>.jpg" border="0" class="thumbnail" loading="lazy">  
+                              </div>  
+                              <div class="widget">			 
+                                 <div class="info">	
+                                    <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag"> 
+                                      <bean:write name="threadTag" property="title"/>
+                                    </a>                               
+			                           </div>  
+                              </div>
+                           </div>                                                      
 	                         </div>
                         </div>        
                       </div>  
@@ -99,12 +106,19 @@
                     <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="i" length="2" offset="2">                  
                       <div class="col-md-6">
                         <div class="linkblock">	
-                           <div class="box">                               
-                               <h4 class="center"><a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag"> 
-                                      #<bean:write name="threadTag" property="title"/>
+                           <div class="box">       
+                           <div class="wrap-vid">
+                              <div class="thumbn">
+                                 <img src="//cdn.jdon.com/simgs/thumb/<%=3 + i%>.jpg" border="0" class="thumbnail" loading="lazy">  
+                              </div>  
+                              <div class="widget">			 
+                                 <div class="info">	
+                                    <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag"> 
+                                      <bean:write name="threadTag" property="title"/>
                                       </a>
-                               </h4>
-                               <img src="<%=request.getContextPath() %>/simgs/thumb/<%=3 + i%>.jpg" border="0" class="thumbnail center" loading="lazy">  
+			                           </div>  
+                              </div>
+                           </div>                                                      
 	                         </div>
                         </div>
                       </div>    
@@ -172,7 +186,7 @@
       <div class="widget wid-post">
         <div class="content">
           <div class="wrap-vid">
-			      <div class="thumbn"><img src="//cdn.jdon.com/simgs/forum/ddd-book.png" class="thumbnail" loading="lazy"></div> 
+			      <div class="thumbn"><img src="//static.jdon.com/simgs/forum/ddd-book.png" class="thumbnail" loading="lazy"></div> 
 						<p><br>本站原创<br><a href="/54881" target="_blank">《复杂软件设计之道：领域驱动设计全面解析与实战》</a></p>
           </div>
         </div>
