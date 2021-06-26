@@ -49,7 +49,9 @@ public class TopicsFilter implements Function<MessageVO, MessageVO> {
 			Matcher matcher = topicRegEx.matcher(body);
 			while (matcher.find()) {
 				String topocStr = matcher.group();
-				body = Pattern.compile(topocStr).matcher(body).replaceAll(getKeyUrlStr(topocStr.replaceAll("#", "")));
+				if (topocStr.length() < 15)
+					body = Pattern.compile(topocStr).matcher(body)
+							.replaceAll(getKeyUrlStr(topocStr.replaceAll("#", "")));
 			}
 		} catch (Exception e) {
 			Debug.logError("" + e, module);
