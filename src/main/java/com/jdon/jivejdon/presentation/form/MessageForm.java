@@ -260,11 +260,6 @@ public class MessageForm extends BaseForm {
 				errors.add("subject.or.body.is.null");
 				return;
 			}
-			if (UtilValidate.isEmpty(this.getSubject().replaceAll("[^\\p{L}\\p{N}]", ""))
-					|| UtilValidate.isEmpty(this.getBody().replaceAll("[^\\p{L}\\p{N}]", ""))) {
-				errors.add("subject.or.body.is.null");
-				return;
-			}
 			if ((this.getSubject() != null) && (this.getSubject().length() > subjectMaxLength)) {
 				errors.add("subject.length.too.long");
 				return;
@@ -273,6 +268,12 @@ public class MessageForm extends BaseForm {
 				errors.add("body.sizeerror");
 				return;
 			}
+			if (UtilValidate.isEmpty(this.getSubject().replaceAll("[^\\p{L}\\p{N}]", ""))
+					|| UtilValidate.isEmpty(this.getBody().replaceAll("[^\\p{L}\\p{N}]", ""))) {
+				errors.add("subject.or.body.is.null");
+				return;
+			}
+
 		}
 	}
 
