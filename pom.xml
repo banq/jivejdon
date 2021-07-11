@@ -18,39 +18,39 @@
              if failed, please replcae "https://www.jdon.com" with "http://en.jdon.com" -->
         <repository>
             <id>jdon-struts1x</id>
-            <url>https://gitee.com/banqjdon/jdon-mvn-repo/releases</url>
+            <url>https://github.com/banq/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>jdonaccessory</id>
-            <url>https://gitee.com/banqjdon/jdon-mvn-repo/releases</url>
+            <url>https://github.com/banq/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>jdon-jdbcTemp</id>
-            <url>https://gitee.com/banqjdon/jdon-mvn-repo/releases</url>
+            <url>https://github.com/banq/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>jdon-treepattern</id>
-            <url>https://gitee.com/banqjdon/jdon-mvn-repo/releases</url>
+            <url>https://github.com/banq/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>weibo4j</id>
-            <url>https://gitee.com/banqjdon/jdon-mvn-repo/releases</url>
+            <url>https://github.com/banq/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>tecentweibo</id>
-            <url>https://gitee.com/banqjdon/jdon-mvn-repo/releases</url>
+            <url>https://github.com/banq/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>compass</id>
-            <url>https://gitee.com/banqjdon/jdon-mvn-repo/releases</url>
+            <url>https://github.com/banq/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>lucene</id>
-            <url>https://gitee.com/banqjdon/jdon-mvn-repo/releases</url>
+            <url>https://github.com/banq/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>urlrewrite</id>
-            <url>https://gitee.com/banqjdon/jdon-mvn-repo/releases</url>
+            <url>https://github.com/banq/jdon-mvn-repo/releases</url>
         </repository>
     </repositories>
 
