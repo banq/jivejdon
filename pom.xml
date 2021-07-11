@@ -19,6 +19,8 @@
               "https://cdn.jdon.com" with "http://en.jdon.com"  or "https://www.jdon.com"
 
               mvn clean install -U
+             or
+              checkout from : https://github.com/banq/jdon-mvn-repo, and manual install your maven repository
         -->
         <repository>
             <id>jdon-struts1x</id>
