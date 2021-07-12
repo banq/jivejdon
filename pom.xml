@@ -16,7 +16,7 @@
     <repositories>
         <!--
              if failed, please replcae：
-              "https://cdn.jdon.com" with "http://en.jdon.com"  or "https://www.jdon.com"
+              "https://en.jdon.com/jdon-mvn-repo/releases/" with  "https://cdn.jdon.com/jdon-mvn-repo/releases"
 
               mvn clean install -U
              or
@@ -24,39 +24,39 @@
         -->
         <repository>
             <id>jdon-struts1x</id>
-            <url>https://cdn.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://en.jdon.com/jdon-mvn-repo/releases/</url>
         </repository>
         <repository>
             <id>jdonaccessory</id>
-            <url>https://cdn.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://en.jdon.com/jdon-mvn-repo/releases/</url>
         </repository>
         <repository>
             <id>jdon-jdbcTemp</id>
-            <url>https://cdn.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://en.jdon.com/jdon-mvn-repo/releases/</url>
         </repository>
         <repository>
             <id>jdon-treepattern</id>
-            <url>https://cdn.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://en.jdon.com/jdon-mvn-repo/releases/</url>
         </repository>
         <repository>
             <id>weibo4j</id>
-            <url>https://cdn.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://en.jdon.com/jdon-mvn-repo/releases/</url>
         </repository>
         <repository>
             <id>tecentweibo</id>
-            <url>https://cdn.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://en.jdon.com/jdon-mvn-repo/releases/</url>
         </repository>
         <repository>
             <id>compass</id>
-            <url>https://cdn.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://en.jdon.com/jdon-mvn-repo/releases/</url>
         </repository>
         <repository>
             <id>lucene</id>
-            <url>https://cdn.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://en.jdon.com/jdon-mvn-repo/releases/</url>
         </repository>
         <repository>
             <id>urlrewrite</id>
-            <url>https://cdn.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://en.jdon.com/jdon-mvn-repo/releases/</url>
         </repository>
     </repositories>
 
