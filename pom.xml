@@ -15,9 +15,10 @@
 
     <repositories>
         <!--
+             test : https://gitee.com/banqjdon/jdon-mvn-repo/raw/master/releases/com/jdon/jdon-jdbc/6.6.4/jdon-jdbc-6.6.4.jar
              if failed, please replcae：
               "https://gitee.com/banqjdon/jdon-mvn-repo/raw/master/releases" with  "https://cdn.jdon.com/jdon-mvn-repo/releases"
-
+               
               mvn clean install -U
              or
               checkout from : https://github.com/banq/jdon-mvn-repo, and manual install your maven repository
