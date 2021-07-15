@@ -24,61 +24,58 @@
 </script>
 <logic:present name="tagsListForm">
 <logic:greaterThan name="tagsListForm" property="allCount" value="0">
+<%
+int i = 3;
+int h = 0 ;
+%>
+<logic:iterate id="threadTag" name="tagsListForm" property="list" >
+ <%
+  if(i % 3==0){ 
+ %>
+ <div class="row">	
+ <%}%>
 
-<div class="box">
-	
-<div class="col-md-4">
-<logic:iterate id="threadTag" name="tagsListForm" property="list"  length="2">
-<div class="box">	
- <div class="linkblock">
-	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' style="width:300px; border:none; overflow:hidden;">
-     <script>
+ <div class="col-md-4">
+ <div class="box">	
+  <div class="linkblock">
+	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' style="width:300px; heigh:500px; border:none;overflow:hidden;">
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+    </div>
+      <div class="lazyload" >
+	    <!-- 
+        <script>
          load('/query/tt/${threadTag.tagID}', function(xhr) {
   	       document.getElementById('ajax_tagID=<bean:write name="threadTag" property="tagID"/>').innerHTML = xhr.responseText;
          });
         </script>
+        -->
 	</div>	
-</div>  
+   </div>  
+ </div>
 </div>
+ 
+<% i = i+1;%>
+<%
+  if(i % 3==0){ 
+ %>
+  </div>
+ <%}%>
+
 </logic:iterate>
-</div>
 
-<div class="col-md-4">
-<logic:iterate id="threadTag" name="tagsListForm" property="list"  length="2" offset="2">
-<div class="box">	
- <div class="linkblock">
-	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' style="width:300px; border:none; overflow:hidden;">
-       <script>
-          load('/query/tt/${threadTag.tagID}', function(xhr) {
-  	       document.getElementById('ajax_tagID=<bean:write name="threadTag" property="tagID"/>').innerHTML = xhr.responseText;
-         });
-        </script> 
-     
-	</div>	
-</div>  
-</div>
-</logic:iterate>
-</div>
+<%
+  if(i % 3 !=0){ 
+ %>
+  </div>
+ <%}%>
 
-
-<div class="col-md-4">
-<logic:iterate id="threadTag" name="tagsListForm" property="list"  length="2" offset="4">
-<div class="box">	
- <div class="linkblock">	
-
-	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' style="width:300px; border:none; overflow:hidden;">
-        <script>
-        load('/query/tt/${threadTag.tagID}', function(xhr) {
-  	       document.getElementById('ajax_tagID=<bean:write name="threadTag" property="tagID"/>').innerHTML = xhr.responseText;
-         });
-        </script> 
-	</div>	
-</div>  
-</div>
-</logic:iterate>
-</div>
-
-</div>
 <div class="box">
 <div class="tres">        
   
@@ -104,5 +101,13 @@
 </script>
 
 <%@ include file="searchInputView.jsp" %>
+<%@include file="../common/IncludeBottomBody.jsp"%>
+<%@include file="../account/loginAJAX.jsp"%>
+<script src="/common/js/jquery.lazyload-any.js"></script>
 
-<%@include file="../common/IncludeBottom.jsp"%>
+<script>
+    $('.lazyload').lazyload();
+</script>
+  
+</body>
+</html>

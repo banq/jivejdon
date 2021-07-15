@@ -71,8 +71,9 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 	private final RenderingFilterManager renderingFilterManager;
 	protected SessionContext sessionContext;
 
-	public ForumMessageServiceImpl(SessionContextUtil sessionContextUtil, ResourceAuthorization messageServiceAuth, InFilterManager inFilterManager,
-								   MessageDomainService messageKernel, UploadService uploadService, ForumFactory forumBuilder, RenderingFilterManager renderingFilterManager) {
+	public ForumMessageServiceImpl(SessionContextUtil sessionContextUtil, ResourceAuthorization messageServiceAuth,
+			InFilterManager inFilterManager, MessageDomainService messageKernel, UploadService uploadService,
+			ForumFactory forumBuilder, RenderingFilterManager renderingFilterManager) {
 		this.sessionContextUtil = sessionContextUtil;
 		this.resourceAuthorization = messageServiceAuth;
 		this.inFilterManager = inFilterManager;
@@ -89,8 +90,9 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 	 */
 	public boolean checkIsAuthenticated(ForumMessage forumMessage) {
 		boolean allowEdit = false;
-		if (forumMessage == null) return allowEdit;
-		if (!forumMessage.isSolid())
+		if (forumMessage == null)
+			return allowEdit;
+		if (!forumMessage.isCreated())
 			return allowEdit;// forumMessage is null or only has mesageId
 		Account account = sessionContextUtil.getLoginAccount(sessionContext);
 		allowEdit = resourceAuthorization.isAuthenticated(forumMessage, account);
@@ -101,7 +103,7 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 	 * create Topic Message
 	 */
 	public Long createTopicMessage(EventModel em) throws Exception {
-        AnemicMessageDTO forumMessagePostDTO = (AnemicMessageDTO) em.getModelIF();
+		AnemicMessageDTO forumMessagePostDTO = (AnemicMessageDTO) em.getModelIF();
 		if (!prepareCreate(forumMessagePostDTO))
 			return null;
 		Forum forum = forumBuilder.getForum(forumMessagePostDTO.getForum().getForumId());
@@ -116,12 +118,11 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 			properties.add(new Property(MessagePropertysVO.PROPERTY_IP, operator.getPostIP()));
 			MessagePropertysVO messagePropertysVO = new MessagePropertysVO(mIDInt, properties);
 
-			if (!UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getBody()) ||
-					!UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getSubject())) {
-				PostTopicMessageCommand postTopicMessageCommand  =
-						new PostTopicMessageCommand(mIDInt, forum, operator,
-								inFilterManager.applyFilters(forumMessagePostDTO.getMessageVO()),
-								attachmentsVO, messagePropertysVO, forumMessagePostDTO.getTagTitle());
+			if (!UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getBody())
+					|| !UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getSubject())) {
+				PostTopicMessageCommand postTopicMessageCommand = new PostTopicMessageCommand(mIDInt, forum, operator,
+						inFilterManager.applyFilters(forumMessagePostDTO.getMessageVO()), attachmentsVO,
+						messagePropertysVO, forumMessagePostDTO.getTagTitle());
 				messageKernel.post(forum.getForumId(), forum, postTopicMessageCommand);
 			}
 
@@ -131,7 +132,7 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 		} finally {
 			uploadService.clearSession(sessionContext);
 		}
-		//for MessageListNavAction
+		// for MessageListNavAction
 		forumMessagePostDTO.setMessageId(mIDInt);
 		return mIDInt;
 	}
@@ -140,10 +141,11 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 	 * set the login account into the domain model
 	 */
 	public Long createReplyMessage(EventModel em) throws Exception {
-        AnemicMessageDTO forumMessageReplyPostDTO = (AnemicMessageDTO) em.getModelIF();
+		AnemicMessageDTO forumMessageReplyPostDTO = (AnemicMessageDTO) em.getModelIF();
 		if (UtilValidate.isEmpty(forumMessageReplyPostDTO.getMessageVO().getBody()))
 			return null;
-		if ((forumMessageReplyPostDTO.getParentMessage() == null || forumMessageReplyPostDTO.getParentMessage().getMessageId() == null)) {
+		if ((forumMessageReplyPostDTO.getParentMessage() == null
+				|| forumMessageReplyPostDTO.getParentMessage().getMessageId() == null)) {
 			return null;
 		}
 		ForumMessage parentMessage = getMessage(forumMessageReplyPostDTO.getParentMessage().getMessageId());
@@ -161,23 +163,23 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 
 			Account operator = sessionContextUtil.getLoginAccount(sessionContext);
 			forumMessageReplyPostDTO.setOperator(operator);
-            forumMessageReplyPostDTO.setAccount(operator);
+			forumMessageReplyPostDTO.setAccount(operator);
 
 			Collection properties = new ArrayList();
 			properties.add(new Property(MessagePropertysVO.PROPERTY_IP, operator.getPostIP()));
 			MessagePropertysVO messagePropertysVO = new MessagePropertysVO(mIDInt, properties);
-			PostRepliesMessageCommand postRepliesMessageCommand =
-					new PostRepliesMessageCommand(parentMessage, mIDInt, operator,
-							inFilterManager.applyFilters(forumMessageReplyPostDTO.getMessageVO()),
-							attachmentsVO, messagePropertysVO, forumMessageReplyPostDTO.getTagTitle());
-			messageKernel.addreply(parentMessage.getForumThread().getThreadId(), parentMessage, postRepliesMessageCommand);
+			PostRepliesMessageCommand postRepliesMessageCommand = new PostRepliesMessageCommand(parentMessage, mIDInt,
+					operator, inFilterManager.applyFilters(forumMessageReplyPostDTO.getMessageVO()), attachmentsVO,
+					messagePropertysVO, forumMessageReplyPostDTO.getTagTitle());
+			messageKernel.addreply(parentMessage.getForumThread().getThreadId(), parentMessage,
+					postRepliesMessageCommand);
 		} catch (Exception e) {
 			logger.error(e);
 			em.setErrors(Constants.ERRORS);
 		} finally {
 			uploadService.clearSession(sessionContext);
 		}
-		//for MessageListNav2Action
+		// for MessageListNav2Action
 		forumMessageReplyPostDTO.setMessageId(mIDInt);
 		return mIDInt;
 	}
@@ -189,16 +191,6 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 			return false;
 		forumMessage.setAccount(account);
 		return true;
-	}
-
-	// reblog retweet
-	public void reBlog(Long replyMessageId, Long topicMessageId) throws Exception {
-//
-//		threadManagerContext.postReBlog(replyMessageId, topicMessageId);
-	}
-
-	public void associateThread(EventModel em) throws Exception {
-
 	}
 
 	private boolean isAuthenticated(ForumMessage forumMessage) {
@@ -213,16 +205,15 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 	}
 
 	/**
-	 * 1. auth check: amdin and the owner can modify this nessage. 2. if the
-	 * message has childern, only admin can update it. before business logic, we
-	 * must get a true message from persistence layer, now the ForumMessage
-	 * packed in EventModel object is not full, it is a DTO from prensentation
-	 * layer.
+	 * 1. auth check: amdin and the owner can modify this nessage. 2. if the message
+	 * has childern, only admin can update it. before business logic, we must get a
+	 * true message from persistence layer, now the ForumMessage packed in
+	 * EventModel object is not full, it is a DTO from prensentation layer.
 	 * 
 	 * 
 	 */
 	public void updateMessage(EventModel em) throws Exception {
-        AnemicMessageDTO newForumMessageInputparamter = (AnemicMessageDTO) em.getModelIF();
+		AnemicMessageDTO newForumMessageInputparamter = (AnemicMessageDTO) em.getModelIF();
 		ForumMessage oldforumMessage = messageKernel.getMessage(newForumMessageInputparamter.getMessageId());
 		if (oldforumMessage == null)
 			return;
@@ -232,15 +223,18 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 		}
 		try {
 			Account operator = sessionContextUtil.getLoginAccount(sessionContext);
-			Collection uploads = uploadService.loadAllUploadFilesOfMessage(oldforumMessage.getMessageId(), this.sessionContext);
+			Collection uploads = uploadService.loadAllUploadFilesOfMessage(oldforumMessage.getMessageId(),
+					this.sessionContext);
 			AttachmentsVO attachmentsVO = new AttachmentsVO(newForumMessageInputparamter.getMessageId(), uploads);
 			Collection properties = new ArrayList();
 			properties.add(new Property(MessagePropertysVO.PROPERTY_IP, operator.getPostIP()));
-			MessagePropertysVO messagePropertysVO = new MessagePropertysVO(newForumMessageInputparamter.getMessageId(), properties);
+			MessagePropertysVO messagePropertysVO = new MessagePropertysVO(newForumMessageInputparamter.getMessageId(),
+					properties);
 			ReviseForumMessageCommand reviseForumMessageCommand = new ReviseForumMessageCommand(oldforumMessage,
-					inFilterManager.applyFilters(newForumMessageInputparamter.getMessageVO()),
-					attachmentsVO, messagePropertysVO);
-			messageKernel.revise(oldforumMessage.getForumThread().getThreadId(), oldforumMessage, reviseForumMessageCommand);
+					inFilterManager.applyFilters(newForumMessageInputparamter.getMessageVO()), attachmentsVO,
+					messagePropertysVO);
+			messageKernel.revise(oldforumMessage.getForumThread().getThreadId(), oldforumMessage,
+					reviseForumMessageCommand);
 		} catch (Exception e) {
 			logger.error(e);
 			em.setErrors(Constants.ERRORS);
@@ -249,7 +243,7 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 		}
 	}
 
-	public void updateThreadName(Long threadId, String name) throws Exception{
+	public void updateThreadName(Long threadId, String name) throws Exception {
 		Optional<ForumThread> forumThreadOptional = messageKernel.getThread(threadId);
 		if (!forumThreadOptional.isPresent())
 			return;
@@ -266,15 +260,14 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 	 */
 	public void deleteMessage(EventModel em) throws Exception {
 		AnemicMessageDTO anemicMessageDTO = (AnemicMessageDTO) em.getModelIF();
-		ForumMessage forumMessage = messageKernel.getMessage(anemicMessageDTO.getMessageId
-				());
+		ForumMessage forumMessage = messageKernel.getMessage(anemicMessageDTO.getMessageId());
 		if (forumMessage == null)
 			return;
 		if (!isAuthenticated(forumMessage)) {
 			em.setErrors(Constants.NOPERMISSIONS);
 			return;
 		}
-//		em.setModelIF(forumMessage);
+		// em.setModelIF(forumMessage);
 		try {
 			messageKernel.deleteMessage(anemicMessageDTO);
 
@@ -335,8 +328,8 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 	}
 
 	/*
-	 * return message with body filter to client; return a full ForumMessage
-	 * need solve the relations with Forum ForumThread
+	 * return message with body filter to client; return a full ForumMessage need
+	 * solve the relations with Forum ForumThread
 	 */
 	public ForumMessage getMessage(Long messageId) {
 		if (messageId == null)
@@ -373,10 +366,9 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 		return null;
 	}
 
-
 	/**
-	 * return a full ForumThread one ForumThread has one rootMessage need solve
-	 * the realtion with Forum rootForumMessage latestPost
+	 * return a full ForumThread one ForumThread has one rootMessage need solve the
+	 * realtion with Forum rootForumMessage latestPost
 	 * 
 	 * @param threadId
 	 * @return
@@ -397,8 +389,7 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 	}
 
 	/**
-	 * @param sessionContext
-	 *            The sessionContext to set.
+	 * @param sessionContext The sessionContext to set.
 	 */
 	@SessionContextAcceptable
 	public void setSessionContext(SessionContext sessionContext) {

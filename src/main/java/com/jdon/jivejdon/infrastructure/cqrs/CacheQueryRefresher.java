@@ -37,6 +37,7 @@ public class CacheQueryRefresher {
 		messagePageIteratorSolver.clearPageIteratorSolver(forumMessage.getForum().getForumId().toString());
 		messagePageIteratorSolver.clearPageIteratorSolver(forumMessage.getForumThread().getThreadId().toString());
 		messagePageIteratorSolver.clearPageIteratorSolver(forumMessage.getAccount().getUserId());
+		messagePageIteratorSolver.clearPageIteratorSolver(forumMessage.getMessageId().toString());
 
 	}
 }

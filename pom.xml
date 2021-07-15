@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jdon</groupId>
@@ -16,43 +14,49 @@
     </properties>
 
     <repositories>
-        <!--mvn clean install -U
-             if failed, please replcae "https://www.jdon.com" with "http://en.jdon.com" -->
+        <!--
+             if failed, please replcae：
+              "https://en.jdon.com/jdon-mvn-repo/releases/" with  "https://cdn.jdon.com/jdon-mvn-repo/releases"
+
+              mvn clean install -U
+             or
+              checkout from : https://github.com/banq/jdon-mvn-repo, and manual install your maven repository
+        -->
         <repository>
             <id>jdon-struts1x</id>
-            <url>https://www.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://en.jdon.com/jdon-mvn-repo/releases/</url>
         </repository>
         <repository>
             <id>jdonaccessory</id>
-            <url>https://www.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://en.jdon.com/jdon-mvn-repo/releases/</url>
         </repository>
         <repository>
             <id>jdon-jdbcTemp</id>
-            <url>https://www.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://en.jdon.com/jdon-mvn-repo/releases/</url>
         </repository>
         <repository>
             <id>jdon-treepattern</id>
-            <url>https://www.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://en.jdon.com/jdon-mvn-repo/releases/</url>
         </repository>
         <repository>
             <id>weibo4j</id>
-            <url>https://www.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://en.jdon.com/jdon-mvn-repo/releases/</url>
         </repository>
         <repository>
             <id>tecentweibo</id>
-            <url>https://www.jdon.com/jdon-mvn-repo/releases</url>
-        </repository> 
+            <url>https://en.jdon.com/jdon-mvn-repo/releases/</url>
+        </repository>
         <repository>
             <id>compass</id>
-            <url>https://www.jdon.com/jdon-mvn-repo/releases</url>
-        </repository> 
+            <url>https://en.jdon.com/jdon-mvn-repo/releases/</url>
+        </repository>
         <repository>
             <id>lucene</id>
-            <url>https://www.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://en.jdon.com/jdon-mvn-repo/releases/</url>
         </repository>
         <repository>
             <id>urlrewrite</id>
-            <url>https://www.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://en.jdon.com/jdon-mvn-repo/releases/</url>
         </repository>
     </repositories>
 
@@ -62,38 +66,52 @@
             <artifactId>jdonframework</artifactId>
             <version>6.9</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.compass-project/compass -->
-        <!-- https://mvnrepository.com/artifact/compass/compass -->
-        <!-- https://mvnrepository.com/artifact/compass/compass -->
-        <dependency>
-            <groupId>compass</groupId>
-            <artifactId>compass</artifactId>
-            <version>1.0.0</version>
-        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-core -->
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-core</artifactId>
-            <version>1.9.1</version>
+            <version>4.10.3</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/lucene/lucene-analyzers -->
+        <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-analyzers-common -->
         <dependency>
-            <groupId>lucene</groupId>
-            <artifactId>lucene-analyzers</artifactId>
-            <version>2.0.0</version>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-analyzers-common</artifactId>
+            <version>4.10.3</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-queryparser -->
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-queryparser</artifactId>
+            <version>4.10.3</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-highlighter -->
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-highlighter</artifactId>
-            <version>1.9.1</version>
+            <version>4.10.3</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-snowball -->
+
+        <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
         <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-snowball</artifactId>
-            <version>1.9.1</version>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.4</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.janeluo/ikanalyzer -->
+        <dependency>
+            <groupId>com.janeluo</groupId>
+            <artifactId>ikanalyzer</artifactId>
+            <version>2012_u6</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.0.0</version>
+            <scope>test</scope>
         </dependency>
 
 
@@ -290,7 +308,7 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.5.2</version>
         </dependency>
-   
+
         <!-- https://mvnrepository.com/artifact/com.github.qcloudsms/qcloudsms -->
         <dependency>
             <groupId>com.github.qcloudsms</groupId>

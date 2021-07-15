@@ -15,37 +15,40 @@
  */
 package com.jdon.jivejdon.spi.pubsub.reconstruction.impl;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.jdon.annotation.Component;
 import com.jdon.annotation.model.OnEvent;
-import com.jdon.jivejdon.domain.model.ForumMessage;
-import com.jdon.jivejdon.domain.model.util.OneManyDTO;
+import com.jdon.jivejdon.domain.model.util.Many2ManyDTO;
+import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import com.jdon.jivejdon.infrastructure.repository.MessageRepository;
 
 @Component
 public class LoadReBlog {
+	private ForumFactory forumFactory;
 	private MessageRepository messageRepository;
 
-	public LoadReBlog(MessageRepository messageRepository) {
+	public LoadReBlog(ForumFactory forumFactory, MessageRepository messageRepository) {
+		this.forumFactory = forumFactory;
 		this.messageRepository = messageRepository;
 	}
 
 	@OnEvent("loadReBlog")
-	public OneManyDTO loadReBlogTos(Long messageId) {
-		OneManyDTO oneManyDTO = null;
+	public Many2ManyDTO loadReBlogTos(Long Id) {
 		try {
-			ForumMessage messageFrom = messageRepository.getReBlogByTo(messageId);
-			Collection<ForumMessage> messageTos = messageRepository.getReBlogByFrom(messageId);
-			if (messageTos == null)
-				return new OneManyDTO(messageFrom, new ArrayList());
-			else
-				return new OneManyDTO(messageFrom, messageTos);
+			Collection<Long> froms = messageRepository.getReBlogByTo(Id);
+			Collection threadfroms = froms.stream().map(forumFactory::getThread)
+					.flatMap(o -> o.isPresent() ? Stream.of(o.get()) : Stream.empty()).collect(Collectors.toList());
+			Collection<Long> tos = messageRepository.getReBlogByFrom(Id);
+			Collection threadtos = tos.stream().map(forumFactory::getThread)
+					.flatMap(o -> o.isPresent() ? Stream.of(o.get()) : Stream.empty()).collect(Collectors.toList());
+			return new Many2ManyDTO(threadfroms, threadtos);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return oneManyDTO;
+		return null;
 	}
 
 }

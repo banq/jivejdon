@@ -24,9 +24,12 @@ import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.RootMessage;
 import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.domain.model.message.FilterPipleSpec;
+import com.jdon.jivejdon.domain.model.property.HotKeys;
 import com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactory;
+import com.jdon.jivejdon.infrastructure.repository.property.HotKeysRepository;
 import com.jdon.jivejdon.infrastructure.repository.property.UploadRepository;
 import com.jdon.jivejdon.infrastructure.repository.dao.MessageDao;
 import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
@@ -56,10 +59,13 @@ public class MessageDirector implements MessageDirectorIF {
 
 	private final UploadRepository uploadRepository;
 
+	private final HotKeysRepository hotKeysFactory;
+
 	private ThreadDirectorIF threadDirectorIF;
 
-	public MessageDirector(ForumDirector forumDirector, MessageDao messageDao,  AccountFactory accountFactory,
-						   OutFilterManager outFilterManager, PropertyDao propertyDao, UploadRepository uploadRepository) {
+	public MessageDirector(ForumDirector forumDirector, MessageDao messageDao, AccountFactory accountFactory,
+			OutFilterManager outFilterManager, PropertyDao propertyDao, UploadRepository uploadRepository,
+			HotKeysRepository hotKeysFactory) {
 		super();
 		this.forumDirector = forumDirector;
 		this.messageDao = messageDao;
@@ -67,6 +73,7 @@ public class MessageDirector implements MessageDirectorIF {
 		this.outFilterManager = outFilterManager;
 		this.propertyDao = propertyDao;
 		this.uploadRepository = uploadRepository;
+		this.hotKeysFactory = hotKeysFactory;
 
 	}
 
@@ -86,7 +93,7 @@ public class MessageDirector implements MessageDirectorIF {
 	}
 
 	@Around()
-	public ForumMessage getRootMessage(Long messageId, ForumThread forumThread){
+	public ForumMessage getRootMessage(Long messageId, ForumThread forumThread) {
 		if (messageId == null || messageId == 0)
 			return null;
 		try {
@@ -96,12 +103,9 @@ public class MessageDirector implements MessageDirectorIF {
 		}
 	}
 
-
-
 	/*
-	 * builder pattern with lambdas
-	 * return a full ForumMessage need solve the relations with Forum
-	 * ForumThread parentMessage
+	 * builder pattern with lambdas return a full ForumMessage need solve the
+	 * relations with Forum ForumThread parentMessage
 	 */
 	private ForumMessage buildRootMessage(Long messageId, ForumThread forumThread) throws Exception {
 		logger.debug(" enter createMessage for id=" + messageId);
@@ -111,36 +115,37 @@ public class MessageDirector implements MessageDirectorIF {
 				logger.error("no this message in database id=" + messageId);
 				return null;
 			}
-			if (anemicMessageDTO.getParentMessage() != null && anemicMessageDTO.getParentMessage().getMessageId() != null) {
+			if (anemicMessageDTO.getParentMessage() != null
+					&& anemicMessageDTO.getParentMessage().getMessageId() != null) {
 				logger.error("this message is not root message  id=" + messageId);
 				return null;
 			}
 			return createRootMessage(anemicMessageDTO, forumThread);
 
-		}catch (Exception e){
-			logger.error("getMessage exception "+ e.getMessage() + " messageId=" + messageId);
+		} catch (Exception e) {
+			logger.error("getMessage exception " + e.getMessage() + " messageId=" + messageId);
 			return null;
 		}
 	}
 
-	private ForumMessage createRootMessage(AnemicMessageDTO anemicMessageDTO, ForumThread forumThread){
+	private ForumMessage createRootMessage(AnemicMessageDTO anemicMessageDTO, ForumThread forumThread) {
 		Optional<Account> accountOptional = createAccount(anemicMessageDTO.getAccount());
 		FilterPipleSpec filterPipleSpec = new FilterPipleSpec(outFilterManager.getOutFilters());
 		Forum forum = forumDirector.getForum(anemicMessageDTO.getForum().getForumId());
 		Collection props = propertyDao.getProperties(Constants.MESSAGE, anemicMessageDTO.getMessageId());
 		Collection uploads = uploadRepository.getUploadFiles(anemicMessageDTO.getMessageId().toString());
-		ForumMessage forumMessage = ForumMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId())
-				.parentMessage(null)
-				.messageVO(anemicMessageDTO.getMessageVO())
-				.forum(forum).forumThread(forumThread)
-				.acount(accountOptional.orElse(new Account())).creationDate(anemicMessageDTO.getCreationDate()).modifiedDate(anemicMessageDTO.getModifiedDate()).filterPipleSpec(filterPipleSpec)
-				.uploads(uploads).props(props).build();
+		HotKeys hotKeys = hotKeysFactory.getHotKeys();
+		ForumMessage forumMessage = RootMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId())
+				.parentMessage(null).messageVO(anemicMessageDTO.getMessageVO()).forum(forum).forumThread(forumThread)
+				.acount(accountOptional.orElse(new Account())).creationDate(anemicMessageDTO.getCreationDate())
+				.modifiedDate(anemicMessageDTO.getModifiedDate()).filterPipleSpec(filterPipleSpec).uploads(uploads)
+				.props(props).hotKeys(hotKeys).build();
 		return forumMessage;
 	}
 
 	/*
-	 * builder pattern with lambdas
-	 * return a full ForumMessage need solve the relations with Forum
+	 * builder pattern with lambdas return a full ForumMessage need solve the
+	 * relations with Forum
 	 *
 	 */
 	private ForumMessage buildMessage(Long messageId) throws Exception {
@@ -153,37 +158,38 @@ public class MessageDirector implements MessageDirectorIF {
 			}
 			ForumThread forumThread = threadDirectorIF.getThread(anemicMessageDTO.getForumThread().getThreadId());
 			ForumMessage parentforumMessage = null;
-			if (anemicMessageDTO.getParentMessage() != null && anemicMessageDTO.getParentMessage().getMessageId() != null) {
-				if(anemicMessageDTO.getParentMessage().getMessageId().longValue() == forumThread.getRootMessage().getMessageId().longValue())
+			if (anemicMessageDTO.getParentMessage() != null
+					&& anemicMessageDTO.getParentMessage().getMessageId() != null) {
+				if (anemicMessageDTO.getParentMessage().getMessageId().longValue() == forumThread.getRootMessage()
+						.getMessageId().longValue())
 					parentforumMessage = forumThread.getRootMessage();
 				else
-				    parentforumMessage = buildMessage(anemicMessageDTO.getParentMessage().getMessageId());
+					parentforumMessage = buildMessage(anemicMessageDTO.getParentMessage().getMessageId());
 				return createRepliesMessage(anemicMessageDTO, parentforumMessage);
-			}else{
+			} else {
 				return forumThread.getRootMessage();
 			}
 
-		}catch (Exception e){
-			logger.error("getMessage exception "+ e.getMessage() + " messageId=" + messageId);
+		} catch (Exception e) {
+			logger.error("getMessage exception " + e.getMessage() + " messageId=" + messageId);
 			return null;
 		}
 	}
 
-	private ForumMessage createRepliesMessage(AnemicMessageDTO anemicMessageDTO, ForumMessage parentforumMessage){
+	private ForumMessage createRepliesMessage(AnemicMessageDTO anemicMessageDTO, ForumMessage parentforumMessage) {
 		Optional<Account> accountOptional = createAccount(anemicMessageDTO.getAccount());
 		FilterPipleSpec filterPipleSpec = new FilterPipleSpec(outFilterManager.getOutFilters());
 		Forum forum = forumDirector.getForum(anemicMessageDTO.getForum().getForumId());
 		Collection props = propertyDao.getProperties(Constants.MESSAGE, anemicMessageDTO.getMessageId());
 		Collection uploads = uploadRepository.getUploadFiles(anemicMessageDTO.getMessageId().toString());
-		ForumMessage forumMessage = ForumMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId())
-				.parentMessage(parentforumMessage)
-				.messageVO(anemicMessageDTO.getMessageVO())
-				.forum(forum).forumThread(parentforumMessage.getForumThread())
-				.acount(accountOptional.orElse(new Account())).creationDate(anemicMessageDTO.getCreationDate()).modifiedDate(anemicMessageDTO.getModifiedDate()).filterPipleSpec(filterPipleSpec)
-				.uploads(uploads).props(props).build();
+		HotKeys hotKeys = hotKeysFactory.getHotKeys();
+		ForumMessage forumMessage = RootMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId())
+				.parentMessage(parentforumMessage).messageVO(anemicMessageDTO.getMessageVO()).forum(forum)
+				.forumThread(parentforumMessage.getForumThread()).acount(accountOptional.orElse(new Account()))
+				.creationDate(anemicMessageDTO.getCreationDate()).modifiedDate(anemicMessageDTO.getModifiedDate())
+				.filterPipleSpec(filterPipleSpec).uploads(uploads).props(props).hotKeys(hotKeys).build();
 		return forumMessage;
 	}
-
 
 	private Optional<Account> createAccount(Account accountIn) {
 		Account account = null;
@@ -191,8 +197,8 @@ public class MessageDirector implements MessageDirectorIF {
 			logger.debug(" embed getAccount ");
 			account = accountFactory.getFullAccount(accountIn);
 			if (account == null || account.getUserId().isEmpty())
-				throw new Exception("set null account or userId is null " );
-//			forumMessage.setAccount(account);
+				throw new Exception("set null account or userId is null ");
+			// forumMessage.setAccount(account);
 		} catch (Exception e) {
 			String error = e + " embedAccount accountIn=null";
 			logger.error(error);

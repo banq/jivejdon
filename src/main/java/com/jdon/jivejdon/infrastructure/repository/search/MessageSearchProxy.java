@@ -1,84 +1,79 @@
 package com.jdon.jivejdon.infrastructure.repository.search;
 
-import com.jdon.container.pico.Startable;
-import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
-import com.jdon.jivejdon.domain.model.message.MessageVO;
-import com.jdon.jivejdon.domain.model.query.MessageSearchSpec;
-import com.jdon.jivejdon.infrastructure.repository.dao.sql.MessageUtilSQL;
-import com.jdon.jivejdon.util.ThreadTimer;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.compass.annotations.config.CompassAnnotationsConfiguration;
-import org.compass.core.*;
-import org.compass.core.config.CompassConfiguration;
-import org.compass.core.config.CompassEnvironment;
-import org.compass.core.config.ConfigurationException;
-import org.compass.core.engine.SearchEngineException;
-
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
+import com.jdon.container.pico.Startable;
+import com.jdon.jivejdon.domain.model.query.MessageSearchSpec;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
+import com.jdon.jivejdon.infrastructure.repository.dao.sql.MessageUtilSQL;
+import com.jdon.jivejdon.util.ThreadTimer;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field.Store;
+import org.apache.lucene.document.TextField;
+import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.index.Term;
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.Query;
+import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.TermQuery;
+import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.highlight.Formatter;
+import org.apache.lucene.search.highlight.Fragmenter;
+import org.apache.lucene.search.highlight.Highlighter;
+import org.apache.lucene.search.highlight.QueryScorer;
+import org.apache.lucene.search.highlight.Scorer;
+import org.apache.lucene.search.highlight.SimpleFragmenter;
+import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
+import org.apache.lucene.util.Version;
+import org.wltea.analyzer.core.IKSegmenter;
+import org.wltea.analyzer.core.Lexeme;
+
 public class MessageSearchProxy implements Startable, MessageSearchRepository {
 	private final static Logger logger = LogManager.getLogger(MessageSearchProxy.class);
 	private final Map<Long, MessageSearchSpec> caches;
-	private Compass compass;
 	private MessageUtilSQL messageUtilSQL;
 
 	private ThreadTimer threadTimer;
 	private final static Pattern quoteEscape = Pattern.compile("\\[.*?\\](.*)\\[\\/.*?\\]");
 	private final static Pattern htmlEscape = Pattern.compile("\\<.*?\\>|<[^>]+");
 
-	private final static Pattern urlEscape = Pattern.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
+	private final static Pattern urlEscape = Pattern
+			.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
 
 	public MessageSearchProxy(MessageUtilSQL messageUtilSQL, ThreadTimer threadTimer) {
-		this.caches = new ConcurrentHashMap();
+		this.caches = new ConcurrentHashMap<Long, MessageSearchSpec>();
 		this.messageUtilSQL = messageUtilSQL;
 		this.threadTimer = threadTimer;
 	}
 
 	// for directly invoked.
 	public MessageSearchProxy(boolean rebuild) {
-		this.caches = new ConcurrentHashMap();
+		this.caches = new ConcurrentHashMap<Long, MessageSearchSpec>();
 		start();
 	}
 
 	public void start() {
-		init();
+		// init();
 
 	}
 
 	public void stop() {
 		this.caches.clear();
-		this.compass.close();
-		this.compass = null;
-	}
-
-	public void init() {
-		try {
-			logger.debug("compass init");
-			CompassConfiguration config = new CompassAnnotationsConfiguration();
-			config.setSetting(CompassEnvironment.CONNECTION, "/target/testindex");
-			config.setSetting("compass.engine.highlighter.default.formatter.simple.pre", "<font color=CC0033>");
-			config.setSetting("compass.engine.highlighter.default.formatter.simple.post", "</font>");
-			config.setSetting("compass.engine.optimizer.schedule.period", "3600");
-			config.addClass(AnemicMessageDTO.class);
-			config.addClass(com.jdon.jivejdon.domain.model.Forum.class);
-			config.addClass(com.jdon.jivejdon.domain.model.message.MessageVO.class);
-			compass = config.buildCompass();
-			// compassTemplate = new CompassTemplate(compass);
-		} catch (ConfigurationException e) {
-			logger.error(e);
-			e.printStackTrace();
-		} catch (SearchEngineException e) {
-			logger.error(e);
-			e.printStackTrace();
-		} catch (CompassException e) {
-			logger.error(e);
-			e.printStackTrace();
-		}
 	}
 
 	public void createMessageTimer(AnemicMessageDTO forumMessage) {
@@ -86,188 +81,155 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 		thread.setMessageSearchProxy(this);
 		threadTimer.offer(thread);
 	}
-//
-//	public void createMessageReplyTimer(AnemicMessageDTO forumMessageReply) {
-//		AppendMessageThread thread = new AppendMessageThread(forumMessageReply);
-//		thread.setMessageSearchProxy(this);
-//		threadTimer.offer(thread);
-//	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#createMessage
-	 * (com.jdon.jivejdon.domain.model.ForumMessage)
-	 */
 	public void createMessage(AnemicMessageDTO forumMessage) {
 		logger.debug("MessageSearchProxy.createMessage");
 		if (forumMessage == null) {
 			logger.error("forumMessage is null");
 			return;
 		}
-
-		CompassSession session = compass.openSession();
-		CompassTransaction tx = null;
+		IndexWriter indexWriter = null;
 		try {
-			tx = session.beginTransaction();
-			session.save(forumMessage);
-			tx.commit();
+			MessageSearchSpec messageSearchSpec = convertToSearchSpec(forumMessage);
+			Document document = new Document();
+			document.add(new TextField("messageId", messageSearchSpec.getMessageId().toString(), Store.YES));
+			document.add(new TextField("body", messageSearchSpec.getBody(), Store.YES));
+			indexWriter = new IndexWriter(LuceneUtils.getDirectory(),
+					new IndexWriterConfig(Version.LATEST, LuceneUtils.getAnalyzer()));
+			indexWriter.addDocument(document);
 		} catch (Exception ce) {
-			if (tx != null)
-				tx.rollback();
 			logger.error(ce);
 		} finally {
-			session.close();
+			if (indexWriter != null)
+				try {
+					indexWriter.close();
+				} catch (Exception ce) {
+				}
 		}
 	}
 
+	private MessageSearchSpec convertToSearchSpec(AnemicMessageDTO anemicMessageDTO) {
+		MessageSearchSpec messageSearchSpec = new MessageSearchSpec();
+		messageSearchSpec.setMessageId(anemicMessageDTO.getMessageId());
+		messageSearchSpec.setSubject(anemicMessageDTO.getMessageVO().getSubject());
+		messageSearchSpec.setBody(escapeHtmlURL(anemicMessageDTO.getMessageVO().getBody()));
+		return messageSearchSpec;
+	}
 
-//	/*
-//	 * (non-Javadoc)
-//	 *
-//	 * @see com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#
-//	 * createMessageReply(com.jdon.jivejdon.domain.model.ForumMessageReply)
-//	 */
-//	@Override
-//	public void createMessageReply(ForumMessageReply forumMessageReply) {
-//		logger.debug("MessageSearchProxy.createMessageReply");
-//		if (forumMessageReply == null) {
-//			logger.error("forumMessageReply is null");
-//			return;
-//		}
-//
-//		CompassSession session = compass.openSession();
-//		CompassTransaction tx = null;
-//		try {
-//			tx = session.beginTransaction();
-//			session.save(forumMessageReply);
-//			tx.commit();
-//		} catch (SearchEngineException ex) {
-//
-//		} catch (Exception ce) {
-//			if (tx != null)
-//				tx.rollback();
-//			logger.error(ce);
-//		} finally {
-//			session.close();
-//		}
-//	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#updateMessage
-	 * (com.jdon.jivejdon.domain.model.ForumMessage)
-	 */
 	public void updateMessage(AnemicMessageDTO forumMessage) {
 		logger.debug("MessageSearchProxy.updateMessage");
 		if (forumMessage == null) {
 			logger.error("forumMessage is null");
 			return;
 		}
-
-		CompassSession session = compass.openSession();
-		CompassTransaction tx = null;
+		IndexWriter indexWriter = null;
 		try {
-			AnemicMessageDTO messageS = (AnemicMessageDTO) session.load(AnemicMessageDTO.class, forumMessage.getMessageId());
-			messageS.setMessageVO(forumMessage.getMessageVO());
-			tx = session.beginTransaction();
-			session.save(messageS);
-			tx.commit();
-		} catch (SearchEngineException ex) {
-
+			MessageSearchSpec messageSearchSpec = convertToSearchSpec(forumMessage);
+			Document document = new Document();
+			document.add(new TextField("messageId", messageSearchSpec.getMessageId().toString(), Store.YES));
+			document.add(new TextField("body", messageSearchSpec.getBody(), Store.YES));
+			Term term = new Term("messageId", Long.toString(forumMessage.getMessageId()));
+			indexWriter = new IndexWriter(LuceneUtils.getDirectory(),
+					new IndexWriterConfig(Version.LATEST, LuceneUtils.getAnalyzer()));
+			indexWriter.updateDocument(term, document);
 		} catch (Exception ce) {
-			if (tx != null)
-				tx.rollback();
 			logger.error(ce);
 		} finally {
-			session.close();
+			if (indexWriter != null)
+				try {
+					indexWriter.close();
+				} catch (Exception ce) {
+				}
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#deleteMessage
-	 * (java.lang.Long)
-	 */
-	@Override
-	public void deleteMessage(Long forumMessageId) {
-		logger.debug("MessageSearchProxy.deleteMessage");
-		if (forumMessageId == null) {
-			logger.error("forumMessageId is null");
+	public void deleteMessage(Long messageId) {
+		logger.debug("MessageSearchProxy.updateMessage");
+		if (messageId == null) {
+			logger.error("messageId is null");
 			return;
 		}
-
-		CompassSession session = compass.openSession();
-		CompassTransaction tx = null;
+		IndexWriter indexWriter = null;
 		try {
-			tx = session.beginTransaction();
-			AnemicMessageDTO messageS = (AnemicMessageDTO) session.load(AnemicMessageDTO.class, forumMessageId);
-			session.delete(messageS);
-			tx.commit();
+			Term term = new Term("messageId", messageId.toString());
+			indexWriter = new IndexWriter(LuceneUtils.getDirectory(),
+					new IndexWriterConfig(Version.LATEST, LuceneUtils.getAnalyzer()));
+			indexWriter.deleteDocuments(term);
 		} catch (Exception ce) {
-			if (tx != null)
-				tx.rollback();
 			logger.error(ce);
 		} finally {
-			session.close();
+			if (indexWriter != null)
+				try {
+					indexWriter.close();
+				} catch (Exception ce) {
+				}
 		}
+
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#find(java
-	 * .lang.String, int, int)
-	 */
-	public Collection find(String query, int start, int count) {
+	public static Map<String, Integer> getTextDef(String text) throws IOException {
+		Map<String, Integer> wordsFren = new HashMap<String, Integer>();
+		IKSegmenter ikSegmenter = new IKSegmenter(new StringReader(text), true);
+		Lexeme lexeme;
+		while ((lexeme = ikSegmenter.next()) != null) {
+			if (lexeme.getLexemeText().length() > 1) {
+				if (wordsFren.containsKey(lexeme.getLexemeText())) {
+					wordsFren.put(lexeme.getLexemeText(), wordsFren.get(lexeme.getLexemeText()) + 1);
+				} else {
+					wordsFren.put(lexeme.getLexemeText(), 1);
+				}
+			}
+		}
+		return wordsFren;
+	}
+
+	public Collection<MessageSearchSpec> find(String querykey, int start, int count) {
 		logger.debug("MessageSearchProxy.find");
-		Collection<MessageSearchSpec> result = new ArrayList();
-		CompassSession session = compass.openSession();
-		CompassTransaction tx = null;
+		Collection<MessageSearchSpec> result = new ArrayList<MessageSearchSpec>();
+
 		MessageSearchSpec messageSearchSpec = null;
-		CompassHits hits = null;
 		try {
-			tx = session.beginTransaction();
-			hits = session.find(query);
-			logger.debug("Found [" + hits.getLength() + "] hits for [" + query + "] query");
+
+			// 索引读取器
+			IndexReader indexReader = DirectoryReader.open(LuceneUtils.getDirectory());
+			// 索引搜索器
+			IndexSearcher indexSearcher = new IndexSearcher(indexReader);
+			// 给出要查询的关键字
+			BooleanQuery booleanquery = new BooleanQuery();
+			Map<String, Integer> wordsFrenMaps = getTextDef(querykey);
+			wordsFrenMaps.keySet()
+					.forEach(e -> booleanquery.add(new TermQuery(new Term("body", e)), BooleanClause.Occur.MUST));
+
+			TopDocs topDocs = indexSearcher.search(booleanquery, 100);
+			logger.debug("总命中数1：" + topDocs.totalHits);
+
+			// 设置关键字高亮
+			Formatter formatter = new SimpleHTMLFormatter("<font color='red'>", "</font>");
+			Scorer scorer = new QueryScorer(booleanquery);
+			Highlighter highlighter = new Highlighter(formatter, scorer);
+
+			Fragmenter fragmenter = new SimpleFragmenter(100);
+			highlighter.setTextFragmenter(fragmenter);
+
 			int end = start + count;
-			if (end >= hits.getLength())
-				end = hits.getLength();
+			if (end >= topDocs.scoreDocs.length)
+				end = topDocs.scoreDocs.length;
 
 			for (int i = start; i < end; i++) {
-				logger.debug("create  messageSearchSpec collection");
-				AnemicMessageDTO smessage = (AnemicMessageDTO) hits.data(i);
+				ScoreDoc sdoc = topDocs.scoreDocs[i];
+				Document document = indexSearcher.doc(sdoc.doc);
+				// 设置内容高亮
+				String highlighterContent = highlighter.getBestFragment(LuceneUtils.getAnalyzer(), "body",
+						document.get("body"));
+
 				messageSearchSpec = new MessageSearchSpec();
-				messageSearchSpec.setMessageId(smessage.getMessageId());
-
-				String body = hits.highlighter(i).fragment("body");
-				String subject = hits.highlighter(i).fragment("subject");
-				messageSearchSpec.setSubject(subject);
-				MessageVO messageVO = new MessageVO();
-				messageSearchSpec.setBody(escapeHtmlURL(body));
-
-				// String tagTitle[] =
-				// hits.highlighter(i).fragments("tagTitle");
-				// messageSearchSpec.setTagTitle(tagTitle);
-				messageSearchSpec.setResultAllCount(hits.getLength());
+				messageSearchSpec.setMessageId(Long.parseLong(document.get("messageId")));
+				messageSearchSpec.setBody(highlighterContent);
+				messageSearchSpec.setResultAllCount(topDocs.scoreDocs.length);
 				result.add(messageSearchSpec);
 			}
-			hits.close();
-			tx.commit();
 		} catch (Exception ce) {
-			if (hits != null)
-				hits.close();
-			if (tx != null)
-				tx.rollback();
 			logger.error(ce);
-		} finally {
-			session.close();
 		}
 		return result;
 	}
@@ -275,26 +237,26 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#
+	 * @see
+	 * com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#
 	 * findThreadsAllCount(java.lang.String)
 	 */
-	public int findThreadsAllCount(String query) {
+	public int findThreadsAllCount(String querykey) {
 		logger.debug("findThreadsAllCount.find");
-		CompassSession session = compass.openSession();
-		CompassTransaction tx = null;
 		int allCount = 0;
 		try {
-			tx = session.beginTransaction();
-			CompassHits hits = session.find(query);
-			allCount = hits.getLength();
-			hits.close();
-			tx.commit();
+
+			// 索引读取器
+			IndexReader indexReader = DirectoryReader.open(LuceneUtils.getDirectory());
+			// 索引搜索器
+			IndexSearcher indexSearcher = new IndexSearcher(indexReader);
+			// 给出要查询的关键字
+			Query query = new TermQuery(new Term("body", querykey));
+			TopDocs topDocs = indexSearcher.search(query, 100);
+			allCount = topDocs.scoreDocs.length;
+
 		} catch (Exception ce) {
-			if (tx != null)
-				tx.rollback();
 			logger.error(ce);
-		} finally {
-			session.close();
 		}
 		return allCount;
 	}
@@ -303,74 +265,18 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#findThread
-	 * (java.lang.String, int, int)
+	 * com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#
+	 * findThread (java.lang.String, int, int)
 	 */
-	public Collection findThread(String query, int start, int count) {
-		logger.debug("MessageSearchProxy.find");
-		Collection result = new ArrayList();
-		CompassSession session = compass.openSession();
-		CompassTransaction tx = null;
-		MessageSearchSpec messageSearchSpec = null;
-		try {
-			tx = session.beginTransaction();
-			CompassHits hits = session.find(query);
-			logger.debug("Found [" + hits.getLength() + "] hits for [" + query + "] query");
-			start = getNewStart(hits, start);
-			int j = start;
-			for (int i = start; j < start + count; i++) {
-				if (i >= hits.getLength())
-					break;
-				logger.debug("create  messageSearchSpec collection");
-				AnemicMessageDTO smessage = (AnemicMessageDTO) hits.data(i);
-				messageSearchSpec = getMessageSearchSpec(smessage.getMessageId());
-				if (messageSearchSpec.isRoot()) {
-					messageSearchSpec.setMessageId(smessage.getMessageId());
-
-					String body = hits.highlighter(i).fragment("body");
-					String subject = hits.highlighter(i).fragment("subject");
-					messageSearchSpec.setSubject(subject);
-					messageSearchSpec.setBody(escapeHtmlURL(body));
-					messageSearchSpec.setResultAllCount(hits.getLength());
-					result.add(messageSearchSpec);
-					j++;
-				}
-			}
-			hits.close();
-			tx.commit();
-		} catch (Exception ce) {
-			if (tx != null)
-				tx.rollback();
-			logger.error(ce);
-		} finally {
-			session.close();
-		}
-		return result;
-	}
-
-	private int getNewStart(CompassHits hits, int end) {
-		int newStart = 0;
-		int j = 0;
-		MessageSearchSpec messageSearchSpec;
-		for (int i = 0; j < end; i++) {
-			newStart = i;
-			if (i >= hits.getLength())
-				break;
-			logger.debug("create  messageSearchSpec collection");
-			AnemicMessageDTO smessage = (AnemicMessageDTO) hits.data(i);
-			messageSearchSpec = getMessageSearchSpec(smessage.getMessageId());
-			if (messageSearchSpec.isRoot()) {
-				j++;
-			}
-
-		}
-		return newStart;
+	public Collection<MessageSearchSpec> findThread(String query, int start, int count) {
+		return find(query, start, count);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#
+	 * @see
+	 * com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository#
 	 * getMessageSearchSpec(java.lang.Long)
 	 */
 	public MessageSearchSpec getMessageSearchSpec(Long messageId) {
@@ -386,7 +292,7 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 		return mss;
 	}
 
-	private String escapeHtmlURL(String s){
+	private String escapeHtmlURL(String s) {
 		String nohtml = htmlEscape.matcher(s).replaceAll(" ");
 		String noQuote = quoteEscape.matcher(nohtml).replaceAll(" ");
 		return urlEscape.matcher(noQuote).replaceAll(" ");

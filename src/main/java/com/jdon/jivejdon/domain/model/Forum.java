@@ -15,43 +15,37 @@
  */
 package com.jdon.jivejdon.domain.model;
 
+import java.util.Collection;
+import java.util.Date;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
+
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
 import com.jdon.annotation.model.OnCommand;
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.domain.command.PostTopicMessageCommand;
 import com.jdon.jivejdon.domain.event.TopicMessagePostedEvent;
-import com.jdon.jivejdon.domain.model.property.HotKeys;
 import com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF;
 import com.jdon.jivejdon.domain.model.subscription.event.ForumSubscribedNotifyEvent;
 import com.jdon.jivejdon.spi.pubsub.publish.ThreadEventSourcingRole;
 import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 import com.jdon.jivejdon.util.Constants;
-import org.compass.annotations.Searchable;
-import org.compass.annotations.SearchableId;
-import org.compass.annotations.SearchableProperty;
-
-import java.util.Collection;
-import java.util.Date;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
  * 
  */
-@Searchable
 @Model
-public class Forum  {
+public class Forum {
 
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@SearchableId
 	private Long forumId;
 
-	@SearchableProperty
 	private String name;
 	private String description;
 	private String creationDate;
@@ -68,38 +62,38 @@ public class Forum  {
 
 	private volatile AtomicReference<ForumState> forumState;
 
-	private HotKeys hotKeys;
-
 	@Inject
 	public LazyLoaderRole lazyLoaderRole;
 
 	@Inject
 	public SubPublisherRoleIF publisherRole;
-//
-//	@Inject
-//	private ForumStateFactory forumStateManager;
+	//
+	// @Inject
+	// private ForumStateFactory forumStateManager;
 
 	@Inject
 	public ThreadEventSourcingRole eventSourcingRole;
 
 	@OnCommand("postTopicMessageCommand")
 	public void postMessage(PostTopicMessageCommand postTopicMessageCommand) {
-		//fill the business rule for post a topic message
-		if (isRepeatedMessage(postTopicMessageCommand)){
+		// fill the business rule for post a topic message
+		if (isRepeatedMessage(postTopicMessageCommand)) {
 			System.err.println("repeat message error: " + postTopicMessageCommand.getMessageVO().getSubject());
 			return;
 		}
 		DomainMessage domainMessage = eventSourcingRole.saveTopicMessage(postTopicMessageCommand);
-		ForumMessage rootForumMessage = (ForumMessage)domainMessage.getBlockEventResult();
-		if (rootForumMessage != null) {//make sure repostiory finish save new message
+		ForumMessage rootForumMessage = (ForumMessage) domainMessage.getBlockEventResult();
+		if (rootForumMessage != null) {// make sure repostiory finish save new message
 			threadPosted(rootForumMessage);
 			eventSourcingRole.topicMessagePosted(new TopicMessagePostedEvent(rootForumMessage));
 		}
 	}
 
-	private boolean isRepeatedMessage(PostTopicMessageCommand postTopicMessageCommand){
-		if (this.forumState.get().getLatestPost() == null) return false;
-		return this.forumState.get().getLatestPost().isSubjectRepeated(postTopicMessageCommand.getMessageVO().getSubject())?true:false;
+	private boolean isRepeatedMessage(PostTopicMessageCommand postTopicMessageCommand) {
+		if (this.forumState.get().getLatestPost() == null)
+			return false;
+		return this.forumState.get().getLatestPost()
+				.isSubjectRepeated(postTopicMessageCommand.getMessageVO().getSubject()) ? true : false;
 
 	}
 
@@ -111,7 +105,7 @@ public class Forum  {
 
 	public Forum() {
 		// init state
-  	    forumState = new AtomicReference(new ForumState(this));
+		forumState = new AtomicReference(new ForumState(this));
 	}
 
 	/**
@@ -122,8 +116,7 @@ public class Forum  {
 	}
 
 	/**
-	 * @param creationDate
-	 *            The creationDate to set.
+	 * @param creationDate The creationDate to set.
 	 */
 	public void setCreationDate(String creationDate) {
 		this.creationDate = creationDate;
@@ -137,8 +130,7 @@ public class Forum  {
 	}
 
 	/**
-	 * @param description
-	 *            The description to set.
+	 * @param description The description to set.
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -152,8 +144,7 @@ public class Forum  {
 	}
 
 	/**
-	 * @param forumId
-	 *            The forumId to set.
+	 * @param forumId The forumId to set.
 	 */
 	public void setForumId(Long forumId) {
 		this.forumId = forumId;
@@ -176,31 +167,25 @@ public class Forum  {
 		return mdate.getTime();
 	}
 
-
 	public void setModifiedDate(String modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
-
 
 	public String getName() {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public Collection getPropertys() {
 		return propertys;
 	}
 
-
 	public void setPropertys(Collection propertys) {
 		this.propertys = propertys;
 	}
-
 
 	public ForumState getForumState() {
 		try {
@@ -208,19 +193,11 @@ public class Forum  {
 		} finally {
 		}
 	}
-//
-//	public void setForumState(ForumState forumState) {
-//		if (forumState != null)
-//			this.forumState.lazySet(forumState);
-//	}
-
-	public HotKeys getHotKeys() {
-		return hotKeys;
-	}
-
-	public void setHotKeys(HotKeys hotKeys) {
-		this.hotKeys = hotKeys;
-	}
+	//
+	// public void setForumState(ForumState forumState) {
+	// if (forumState != null)
+	// this.forumState.lazySet(forumState);
+	// }
 
 	public void addNewMessage(ForumMessageReply forumMessageReply) {
 		forumState.get().addMessageCount();
@@ -237,6 +214,23 @@ public class Forum  {
 		forumState.get().setLatestPost(forumMessage);
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Forum forum = (Forum) o;
+		if (forum.getForumId() == null || this.forumId == null)
+			return false;
+		return this.forumId.longValue() == forum.getForumId().longValue();
+	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.forumId);
+	}
 
 }

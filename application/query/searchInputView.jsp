@@ -3,6 +3,21 @@
 <logic:notPresent name="query">
     <bean:parameter name="query" id="query" value=""/>
 </logic:notPresent>
+<table class="table table-striped">
+    <tbody>
+    <tr>
+        <td align="middle">
+          <html:form action="/query/searchAction.shtml" method="get"
+                     styleClass="search">
+                <input type="text" name="query"
+                       value="<bean:write name="query"/>" id="queryId" size="40"/>
+                <html:submit value="道场搜索"/>
+            </html:form>
+            <p><jsp:include page="/query/tagHotList.shtml" flush="true"></jsp:include>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 <table class="table table-striped">
     <tbody>
@@ -16,22 +31,6 @@
             <input name=si type=hidden value="www.jdon.com">
             </form>
     </td></tr>
-    </tbody>
-</table>
-
-<table class="table table-striped">
-    <tbody>
-    <tr>
-        <td align="middle">
-          <html:form action="/query/searchAction.shtml" method="post"
-                     styleClass="search">
-                <input type="text" name="query"
-                       value="<bean:write name="query"/>" id="queryId" size="40"/>
-                <html:submit value="道场搜索"/>
-            </html:form>
-            <p><jsp:include page="/query/tagHotList.shtml" flush="true"></jsp:include>
-        </td>
-    </tr>
     </tbody>
 </table>
 

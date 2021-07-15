@@ -15,28 +15,24 @@
  */
 package com.jdon.jivejdon.infrastructure.repository.search;
 
-import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
-
 import java.util.Collection;
+
+import com.jdon.jivejdon.domain.model.query.MessageSearchSpec;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 
 public interface MessageSearchRepository {
 
 	public abstract void createMessage(AnemicMessageDTO forumMessage);
 
-//
-//	public abstract void createMessageReply(AnemicMessageDTO forumMessageReply);
-
 	public void createMessageTimer(AnemicMessageDTO forumMessage);
-
-//	public void createMessageReplyTimer(AnemicMessageDTO forumMessageReply);
 
 	public abstract void updateMessage(AnemicMessageDTO forumMessage);
 
-	public abstract void deleteMessage(Long forumMessageId);
+	public abstract void deleteMessage(Long messageId);
 
 	int findThreadsAllCount(String query);
 
-	Collection findThread(String query, int start, int count);
+	Collection<MessageSearchSpec> findThread(String query, int start, int count);
 
-	Collection find(String query, int start, int count);
+	Collection<MessageSearchSpec> find(String query, int start, int count);
 }

@@ -19,62 +19,58 @@ import java.util.Collection;
 
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
-import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.util.LazyLoader;
-import com.jdon.jivejdon.domain.model.util.OneManyDTO;
+import com.jdon.jivejdon.domain.model.util.Many2ManyDTO;
 
 public class ReBlogVO extends LazyLoader {
 
-	private final long messageId;
+	private final long Id;
 
 	private LazyLoaderRole lazyLoaderRole;
 
-	private volatile Collection<ForumMessage> messageTos;
+	private volatile Collection<ForumThread> threadTos;
 
-	private volatile ForumMessage messageFrom;
+	private volatile Collection<ForumThread> threadFroms;
 
 	private volatile boolean load;
 
-	public ReBlogVO(long messageId, LazyLoaderRole lazyLoaderRole) {
+	public ReBlogVO(long Id, LazyLoaderRole lazyLoaderRole) {
 		super();
-		this.messageId = messageId;
+		this.Id = Id;
 		this.lazyLoaderRole = lazyLoaderRole;
 	}
 
-	public Collection<ForumMessage> getMessageTos() {
-		if (this.messageTos == null && lazyLoaderRole != null && !load) {
-			OneManyDTO oneManyDTO = (OneManyDTO) super.loadResult();
-			if (oneManyDTO != null) {
-				loadAscResult(oneManyDTO);
+	public Collection<ForumThread> getThreadTos() {
+		loadAscResult();
+		return threadTos;
+	}
+
+	public Collection<ForumThread> getThreadFroms() {
+		loadAscResult();
+		return threadFroms;
+	}
+
+	private void loadAscResult() {
+		if (!load) {
+			super.setDomainMessage(null);
+			Many2ManyDTO many2ManyDTO = (Many2ManyDTO) super.loadResult();
+			if (many2ManyDTO != null) {
+				threadTos = many2ManyDTO.getChildern();
+				threadFroms = many2ManyDTO.getParent();
+				load = true;
 			}
 		}
-		return messageTos;
-	}
 
-	public void associateThread(ForumThread thread) {
-		Collection<ForumMessage> messageTos = getMessageTos();
-		messageTos.add(thread.getRootMessage());
-	}
-
-	public ForumMessage getMessageFrom() {
-		if (this.messageFrom == null && lazyLoaderRole != null && !load) {
-			OneManyDTO oneManyDTO = (OneManyDTO) super.loadResult();
-			if (oneManyDTO != null) {
-				loadAscResult(oneManyDTO);
-			}
-		}
-		return messageFrom;
-	}
-
-	private void loadAscResult(OneManyDTO oneManyDTO) {
-		messageTos = oneManyDTO.getChildern();
-		messageFrom = (ForumMessage) oneManyDTO.getParent();
-		load = true;
 	}
 
 	@Override
 	public DomainMessage getDomainMessage() {
-		return lazyLoaderRole.loadReBlog(messageId);
+		return lazyLoaderRole.loadReBlog(Id);
 	}
+
+	public void refresh() {
+		load = false;
+	}
+
 }

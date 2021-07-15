@@ -21,7 +21,9 @@ import com.jdon.annotation.pointcut.Around;
 import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.property.HotKeys;
 import com.jdon.jivejdon.domain.model.thread.ThreadTagsVO;
+import com.jdon.jivejdon.infrastructure.repository.property.HotKeysRepository;
 import com.jdon.jivejdon.infrastructure.repository.property.TagRepository;
 import com.jdon.jivejdon.infrastructure.repository.dao.MessageDao;
 import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
@@ -44,8 +46,8 @@ public class ThreadDirector implements ThreadDirectorIF {
 
 	private final ForumDirector forumDirector;
 
-	public ThreadDirector(ForumDirector forumDirector, MessageDao messageDao, TagRepository tagRepository,  PropertyDao propertyDao,MessageDirectorIF
-			messageDirectorIF) {
+	public ThreadDirector(ForumDirector forumDirector, MessageDao messageDao, TagRepository tagRepository,
+			PropertyDao propertyDao, MessageDirectorIF messageDirectorIF) {
 		this.forumDirector = forumDirector;
 		this.messageDao = messageDao;
 		this.tagRepository = tagRepository;
@@ -65,10 +67,9 @@ public class ThreadDirector implements ThreadDirectorIF {
 		}
 	}
 
-
 	/**
-	 * return a full ForumThread one ForumThread has one rootMessage need solve
-	 * the realtion with Forum rootForumMessage latestPost
+	 * return a full ForumThread one ForumThread has one rootMessage need solve the
+	 * realtion with Forum rootForumMessage latestPost
 	 *
 	 * @param threadId
 	 * @return
@@ -88,7 +89,7 @@ public class ThreadDirector implements ThreadDirectorIF {
 	}
 
 	private ForumThread build(final Long threadId, ForumMessage rootMessage) throws Exception {
-		ForumThread forumThread = messageDao.getThreadCore(threadId , rootMessage);
+		ForumThread forumThread = messageDao.getThreadCore(threadId, rootMessage);
 		if (forumThread == null) {
 			logger.error("no threadId=" + threadId);
 			return null;
@@ -98,7 +99,7 @@ public class ThreadDirector implements ThreadDirectorIF {
 			Long rootmessageId = this.messageDao.getThreadRootMessageId(forumThread.getThreadId());
 			rootMessage = messageDirectorIF.getRootMessage(rootmessageId, forumThread);
 		}
-			//init viewcount
+		// init viewcount
 		forumThread.getViewCounter().loadinitCount();
 		Collection tags = tagRepository.getThreadTags(forumThread);
 		ThreadTagsVO threadTagsVO = new ThreadTagsVO(forumThread, tags);

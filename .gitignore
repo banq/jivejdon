@@ -80,3 +80,5 @@ application/blog/js/
 src/main/java/com/jdon/jivejdon/manager/throttle/img/
 src/test/
 log-camel-lsp.out
+.obsidian/
+.history/

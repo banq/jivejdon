@@ -12,11 +12,21 @@ import com.jdon.jivejdon.util.ScheduledExecutorUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.SortedSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * a cache used for holding view count of ForumThread the data that in the cache
@@ -30,7 +40,7 @@ import java.util.concurrent.TimeUnit;
 public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob {
 	private final static Logger logger = LogManager.getLogger(ThreadViewCounterJobImp.class);
 
-	private final ConcurrentMap<Long, ViewCounter> concurrentHashMap;
+	private final List<ViewCounter> viewcounters;
 
 	private final PropertyDao propertyDao;
 	private final ThreadViewCountParameter threadViewCountParameter;
@@ -38,7 +48,7 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 
 	public ThreadViewCounterJobImp(final PropertyDao propertyDao,
 			final ThreadViewCountParameter threadViewCountParameter, ScheduledExecutorUtil scheduledExecutorUtil) {
-		this.concurrentHashMap = new ConcurrentHashMap<Long, ViewCounter>();
+		this.viewcounters = new ArrayList<>();
 		this.propertyDao = propertyDao;
 		this.threadViewCountParameter = threadViewCountParameter;
 		this.scheduledExecutorUtil = scheduledExecutorUtil;
@@ -58,16 +68,15 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 	// when container down or undeploy, active this method.
 	public void stop() {
 		writeDB();
-		concurrentHashMap.clear();
+		viewcounters.clear();
 		this.scheduledExecutorUtil.stop();
 	}
 
 	public void writeDB() {
-		// construct a immutable map, not effect old map.
-		Map<Long, ViewCounter> viewCounters = new HashMap(concurrentHashMap);
-		concurrentHashMap.clear();
-		for (long threadId : viewCounters.keySet()) {
-			ViewCounter viewCounter = viewCounters.get(threadId);
+		// construct a immutable set
+		List<ViewCounter> viewCounters2 = new ArrayList<>(this.viewcounters);
+		this.viewcounters.clear();
+		for (ViewCounter viewCounter : viewCounters2) {
 			if (viewCounter.getViewCount() != viewCounter.getLastSavedCount() && viewCounter.getViewCount() != -1
 					&& viewCounter.getViewCount() != 0) {
 				saveItem(viewCounter);
@@ -96,11 +105,14 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 	 */
 	@Override
 	public void saveViewCounter(ForumThread thread) {
-		concurrentHashMap.computeIfAbsent(thread.getThreadId(), unused -> thread.getViewCounter());
+		if (!viewcounters.contains(thread.getViewCounter()))
+			viewcounters.add(thread.getViewCounter());
 	}
 
-	public ConcurrentMap<Long, ViewCounter> getConcurrentHashMap() {
-		return this.concurrentHashMap;
+	public List<Long> getThreadIdsList() {
+		SortedSet<ViewCounter> sortedset = new TreeSet<ViewCounter>();
+		sortedset.addAll(viewcounters);
+		return sortedset.parallelStream().map(e -> e.getThread().getThreadId()).collect(Collectors.toList());
 	}
 
 }

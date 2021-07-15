@@ -21,7 +21,7 @@
 		    </div> 
 		    <div class="title_right"> 
 		    <a href="<%=request.getContextPath()%>/message/post.jsp">
-            <img src="https://static.jdon.com/images/newtopic.gif" width="110" height="20" border="0" alt="发表新帖子" /></a></div>
+            <img src="<%=request.getContextPath() %>/images/newtopic.gif" width="110" height="20" border="0" alt="发表新帖子" /></a></div>
 		 </div> 
 		 <div class="content"> 	 
              <div class="b_content_title2">

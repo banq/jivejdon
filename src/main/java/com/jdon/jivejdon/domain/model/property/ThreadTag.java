@@ -99,6 +99,8 @@ public class ThreadTag {
 			return false;
 		}
 		ThreadTag t = (ThreadTag) obj;
+		if (this.title == null || t.getTitle() == null)
+			return false;
 		if (this.title.equalsIgnoreCase(t.getTitle())) {
 			return true;
 		}

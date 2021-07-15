@@ -25,9 +25,12 @@ import java.util.Collection;
 public interface MessageRepository {
 
 	void createTopicMessage(AnemicMessageDTO forumMessage) throws Exception;
+
 	void createReplyMessage(AnemicMessageDTO forumMessageReply) throws Exception;
+
 	void updateMessage(AnemicMessageDTO forumMessage) throws Exception;
-    void deleteMessageComposite(ForumMessage delforumMessage) throws Exception;
+
+	void deleteMessageComposite(ForumMessage delforumMessage) throws Exception;
 
 	void deleteMessage(Long messageId) throws Exception;
 
@@ -39,7 +42,9 @@ public interface MessageRepository {
 
 	void saveReBlog(OneOneDTO oneOneDTO) throws Exception;
 
-	Collection<ForumMessage> getReBlogByFrom(Long messageId) throws Exception;
+	void delReBlog(Long msgId) throws Exception;
 
-	ForumMessage getReBlogByTo(Long threadId) throws Exception;
+	Collection<Long> getReBlogByFrom(Long messageId) throws Exception;
+
+	Collection<Long> getReBlogByTo(Long messageId) throws Exception;
 }

@@ -95,8 +95,8 @@ public class LazyLoaderRole {
 	}
 
 	@Send("loadReBlog")
-	public DomainMessage loadReBlog(Long messageId) {
-		return new DomainMessage(messageId);
+	public DomainMessage loadReBlog(Long Id) {
+		return new DomainMessage(Id);
 	}
 
 }

@@ -29,7 +29,7 @@
             <%@ include file="../common/IncludeTop.jsp" %>
 <%
 response.setHeader("Pragma", "No-cache");
-response.setHeader("Cache-Control", "no-store);
+response.setHeader("Cache-Control", "no-store");
 response.setDateHeader("Expires", 0);
 response.setStatus(HttpServletResponse.SC_OK);
 %>

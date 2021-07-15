@@ -3,9 +3,10 @@
 <%@ taglib uri="struts-logic" prefix="logic" %>
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>
+<%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%          
-    com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(30 * 60, request, response);
+    com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(10 * 60, request, response);
 	
 %>
 <%@ page trimDirectiveWhitespaces="true" %>
@@ -17,8 +18,7 @@
   <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
   <link rel="preconnect" href="https://www.googletagservices.com/">
   <link rel="preconnect" href="https://tpc.googlesyndication.com/">
-  <link rel="prefetch" href="//static.jdon.com/common/login2.js" />
-  <link rel="prefetch" href="/approvedNewList3" />
+  <link rel="prefetch" href="//static.jdon.com/common/login2.js" />  
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>解道jdon - 传道解惑的架构师博客</title>
@@ -41,7 +41,7 @@
   <!--[if lt IE 9]>
       <script src="https://static.jdon.com/js/html5shiv.min.js"></script>
       <script src="https://static.jdon.com/js/respond.min.js"></script>
-  <![endif]-->	
+  <![endif]-->
 </head>
 <body>
 <%@ include file="./common/body_header.jsp" %>
@@ -53,9 +53,35 @@
 			<div id="main-content" class="col-md-8">
 				<div class="box">
           <jsp:include page="/query/threadApprovedNewList2.shtml?count=1" flush="true"></jsp:include>
-				<div style="display:none">
-				
-				    </div>
+<%
+    String imagesize = "10";
+		if (request.getParameter("imagesize") != null)
+		    imagesize = request.getParameter("imagesize");
+    String mythreadId = "";
+    if (application.getAttribute("thumbthreadId") != null) {
+        mythreadId = ((Long) application.getAttribute("thumbthreadId")).toString();
+    }
+    Integer homethumbnai = (Integer) application.getAttribute(mythreadId);
+    if (homethumbnai == null) {
+        homethumbnai = 1 + (int) (Math.random() * Integer.parseInt(imagesize));
+        application.setAttribute(mythreadId, homethumbnai);
+    }	
+%>
+<div class="lazyload" >
+<!-- 
+<script> 
+ if(document.getElementById("home-thumbnai") != null)
+	          if(document.getElementById("home-thumbnai").getAttribute("data-src") != null)
+				   //document.getElementById("home-thumbnai").src = document.getElementById("home-thumbnai").getAttribute("data-src") ;
+				   $("#home-thumbnai").attr('src',$("#home-thumbnai").attr('data-src'));
+	          else
+                   //document.getElementById("home-thumbnai").src = "https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
+                   $("#home-thumbnai").attr('src','https://cdn.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg');
+</script>
+-->
+</div>
+
+
 <div class="box"> 
   <div class="linkblock">
     <div class="row">
@@ -74,7 +100,43 @@
     </div>
   </div>
 </div>
-          <span id="threadApprovedNewListOthers"></span>
+    <div id="approvedItem1"><br><br><br><br><br><br></div>          
+	<div class="lazyload" >
+          <!--
+		  <script>
+		  load('/query/threadApprovedNewList3.shtml?offset=1&count=4', function (xhr) {
+               document.getElementById("approvedItem1").innerHTML = xhr.responseText;
+            }); 
+		  </script>
+          -->
+    </div>  
+	<div id="approvedItem2"><br><br><br><br><br><br></div>       
+	<div class="lazyload" >
+          <!--
+		  <script>
+	      load('/query/threadApprovedNewList3.shtml?offset=5&count=5', function (xhr) {
+               document.getElementById("approvedItem2").innerHTML = xhr.responseText;
+            }); 
+		  </script>
+          -->
+      </div>	     
+    <div id="approvedItem3"><br><br><br><br><br><br></div>     	  
+	<div class="lazyload" >
+          <!--
+		  <script>
+	      load('/query/threadApprovedNewList3.shtml?offset=10&count=5', function (xhr) {
+               document.getElementById("approvedItem3").innerHTML = xhr.responseText;
+            }); 
+		  </script>
+          -->
+      </div>
+
+      <div class="box"> 
+	    <div class="tres center">        
+           <html:link page="/approval"><b>更多精华</b></html:link>
+		</div>
+      </div>
+		  
         </div>
         <div class="box">
 					<div class="box-header header-natural">
@@ -109,7 +171,7 @@
 				<div class="widget wid-post">
                     <div class="content">
                        <div class="wrap-vid">
-			               <div class="thumbn"><img src="https://static.jdon.com/simgs/forum/ddd-book.png" class="thumbnail" loading="lazy"></div> 
+			               <div class="thumbn"><img src="//static.jdon.com/simgs/forum/ddd-book.png" class="thumbnail" loading="lazy"></div> 
 						      <p><br>本站原创<br><a href="/54881" target="_blank">《复杂软件设计之道：领域驱动设计全面解析与实战》</a></p>
                         </div>
                     </div>
@@ -141,6 +203,15 @@
 					    <div class="wid-vid">
 							<ul>
 							  <div id="digList"></div>   
+							    <div class="lazyload" >
+							     <!-- 
+							     <script>
+							  	  load('/query/threadDigList', function (xhr) {				
+  	                                  document.getElementById("digList").innerHTML = xhr.responseText;
+			                     });
+							  </script> -->
+							  </div>
+
 							</ul>
 							</div>
 				</div>
@@ -168,7 +239,7 @@
 					    <div class="wid-vid">
 							<ul>
                 <div>
-					<jsp:include page="/query/threadNewList.shtml?count=20" flush="true"></jsp:include>
+					<jsp:include page="/query/threadNewList.shtml?count=15" flush="true"></jsp:include>
 				</div>
 							</ul>
 							</div>
@@ -195,6 +266,15 @@
 					    <div class="wid-vid">
 							<ul>
 							    <div id="digNewList"></div>   
+							    <div class="lazyload" >
+							     <!-- 
+							     <script>
+                                    load('/query/threadNewDigList.shtml?count=5', function (xhr) {				
+  	                                    document.getElementById("digNewList").innerHTML = xhr.responseText;
+			                        });			
+							     </script> -->
+							  </div>
+
 							</ul>
 						</div>
 				</div>
@@ -207,62 +287,9 @@
 	<script src="//static.jdon.com/common/login2.js"></script>
 	<%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
 <%@ include file="./common/IncludeBottomBody.jsp" %> 
-<%
-    String imagesize = "10";
-		if (request.getParameter("imagesize") != null)
-		    imagesize = request.getParameter("imagesize");
-    String mythreadId = "";
-    if (application.getAttribute("thumbthreadId") != null) {
-        mythreadId = ((Long) application.getAttribute("thumbthreadId")).toString();
-    }
-    Integer homethumbnai = (Integer) application.getAttribute(mythreadId);
-    if (homethumbnai == null) {
-        homethumbnai = 1 + (int) (Math.random() * Integer.parseInt(imagesize));
-        application.setAttribute(mythreadId, homethumbnai);
-    }
-%>
-<script> 
-$(document).ready(function(){
-    // 获取页面视口高度
-    var viewportHeight = $(window).height();
-    var lazyload = function() {
-        // 获取窗口滚动条距离
-        var scrollTop = $(window).scrollTop();
-        $('img').each(function(){
-        // 判断 视口高度+滚动条距离 与 图片元素距离文档原点的高度        
-        var x = scrollTop + viewportHeight - $(this).position().top;
-        // 如果大于0 即该元素能被浏览者看到，则将暂存于自定义属性loadpic的值赋值给真正的src           
-        if (x > 0)
-        {
-            if(document.getElementById("home-thumbnai") != null)
-	          if(document.getElementById("home-thumbnai").getAttribute("data-src") != null)
-				   //document.getElementById("home-thumbnai").src = document.getElementById("home-thumbnai").getAttribute("data-src") ;
-				   $("#home-thumbnai").attr('src',$(this).attr('data-src'));
-	          else
-                   //document.getElementById("home-thumbnai").src = "https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
-                   $("#home-thumbnai").attr('src','https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg');
-        }
-    })
-    }
-    // 创建定时器 “实时”计算每个元素的src是否应该被赋值
-	//setInterval(lazyload,100);
-	lazyload();
-});
-
-</script> 	
+<script src="/common/js/jquery.lazyload-any.js"></script>
 <script>       
-    load('/approvedNewList3', function (xhr) {
-        document.getElementById("threadApprovedNewListOthers").innerHTML = xhr.responseText;
-    });
+    $('.lazyload').lazyload();
 </script>
-<script>       
-    load('https://cdn.jdon.com/query/threadDigList', function (xhr) {
-  	       document.getElementById("digList").innerHTML = xhr.responseText;
-			});
-    load('/query/threadNewDigList.shtml?count=20', function (xhr) {
-  	       document.getElementById("digNewList").innerHTML = xhr.responseText;
-			});
-			
-</script> 
 </body>
 </html>

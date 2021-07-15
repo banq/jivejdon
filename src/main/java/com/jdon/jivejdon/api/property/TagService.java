@@ -21,6 +21,8 @@ import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.domain.model.property.HotKeys;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.domain.model.query.specification.TaggedThreadListSpec;
+import com.jdon.jivejdon.domain.model.util.OneManyDTO;
+import com.jdon.jivejdon.domain.model.util.OneOneDTO;
 
 import java.util.Collection;
 
@@ -45,5 +47,11 @@ public interface TagService {
 	public void deleteThreadTag(EventModel em);
 
 	public void saveTag(Long threadId, String[] tagTitle);
+
+	public void deleteReBlogLink(Long fromId);
+
+	public void saveReBlogLink(OneOneDTO oneOneDTO);
+
+	public Collection<Long> getReBlogLink(Long messageId);
 
 }

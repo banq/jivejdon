@@ -51,8 +51,9 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	protected PropertyDao propertyDao;
 	private TagRepository tagRepository;
 
-	public MessageRepositoryDao(MessageDaoFacade messageDaoFacade, ForumFactory forumBuilder, ContainerUtil containerUtil,
-			TagRepository tagRepository, UploadRepository uploadRepository, PropertyDao propertyDao) {
+	public MessageRepositoryDao(MessageDaoFacade messageDaoFacade, ForumFactory forumBuilder,
+			ContainerUtil containerUtil, TagRepository tagRepository, UploadRepository uploadRepository,
+			PropertyDao propertyDao) {
 		super(messageDaoFacade);
 		this.messageDaoFacade = messageDaoFacade;
 		this.forumBuilder = forumBuilder;
@@ -67,9 +68,8 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jdon.jivejdon.infrastructure.repository.MessageRepository#createTopicMessage(com
-	 * .jdon.jivejdon.model.ForumMessage)
+	 * @see com.jdon.jivejdon.infrastructure.repository.MessageRepository#
+	 * createTopicMessage(com .jdon.jivejdon.model.ForumMessage)
 	 */
 	public void createTopicMessage(AnemicMessageDTO forumMessagePostDTO) throws Exception {
 		try {
@@ -81,18 +81,19 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 			}
 			Long tIDInt = messageDaoFacade.getSequenceDao().getNextId(Constants.THREAD);
 			forumMessagePostDTO.setForum(forum);
-			forumMessagePostDTO.setForumThread(new ForumThread(null, tIDInt,
-					forumMessagePostDTO.getForum()));
+			forumMessagePostDTO.setForumThread(new ForumThread(null, tIDInt, forumMessagePostDTO.getForum()));
 			messageDaoFacade.getMessageDao().createMessage(forumMessagePostDTO);
 			super.createThread(forumMessagePostDTO);
-			uploadRepository.saveAllUploadFiles(forumMessagePostDTO.getMessageId().toString(), forumMessagePostDTO.getAttachment().getUploadFiles());
+			uploadRepository.saveAllUploadFiles(forumMessagePostDTO.getMessageId().toString(),
+					forumMessagePostDTO.getAttachment().getUploadFiles());
 
-			propertyDao.saveProperties(Constants.MESSAGE, forumMessagePostDTO.getMessageId(), forumMessagePostDTO.getMessagePropertysVO()
-					.getPropertys());
+			propertyDao.saveProperties(Constants.MESSAGE, forumMessagePostDTO.getMessageId(),
+					forumMessagePostDTO.getMessagePropertysVO().getPropertys());
 
 			// tag title can be updated between in thread with repository
 			// so it can be used in model ForumThread's changetags method
-			tagRepository.saveTagTitle(forumMessagePostDTO.getForumThread().getThreadId(), forumMessagePostDTO.getTagTitle());
+			tagRepository.saveTagTitle(forumMessagePostDTO.getForumThread().getThreadId(),
+					forumMessagePostDTO.getTagTitle());
 
 		} catch (Exception e) {
 			try {
@@ -103,8 +104,7 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 				messageDaoFacade.getMessageDao().deleteMessage(forumMessagePostDTO.getMessageId());
 			} finally {
 			}
-			String error = e + " createTopicMessage forumMessageId=" + forumMessagePostDTO
-					.getMessageId();
+			String error = e + " createTopicMessage forumMessageId=" + forumMessagePostDTO.getMessageId();
 			logger.error(error);
 			throw new Exception(error);
 		}
@@ -113,9 +113,8 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jdon.jivejdon.infrastructure.repository.MessageRepository#createReplyMessage(com
-	 * .jdon.jivejdon.model.ForumMessageReply)
+	 * @see com.jdon.jivejdon.infrastructure.repository.MessageRepository#
+	 * createReplyMessage(com .jdon.jivejdon.model.ForumMessageReply)
 	 */
 	public void createReplyMessage(AnemicMessageDTO forumMessageReplyPostDTO) throws Exception {
 		try {
@@ -124,11 +123,11 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 			// create
 			messageDaoFacade.getMessageDao().createMessageReply(forumMessageReplyPostDTO);
 
-			uploadRepository.saveAllUploadFiles(forumMessageReplyPostDTO.getMessageId().toString(), forumMessageReplyPostDTO.getAttachment()
-					.getUploadFiles());
+			uploadRepository.saveAllUploadFiles(forumMessageReplyPostDTO.getMessageId().toString(),
+					forumMessageReplyPostDTO.getAttachment().getUploadFiles());
 
-			propertyDao.saveProperties(Constants.MESSAGE, forumMessageReplyPostDTO.getMessageId(), forumMessageReplyPostDTO.getMessagePropertysVO()
-					.getPropertys());
+			propertyDao.saveProperties(Constants.MESSAGE, forumMessageReplyPostDTO.getMessageId(),
+					forumMessageReplyPostDTO.getMessagePropertysVO().getPropertys());
 
 			super.updateThread(forumMessageReplyPostDTO.getForumThread());
 		} catch (Exception e) {
@@ -139,16 +138,16 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	}
 
 	/*
-	 * update the message, update the message's subject and body we must mark
-	 * the message that has been updated. there are two kinds of parameters: the
-	 * primary key /new entity data in DTO ForumMessage of the method patameter
+	 * update the message, update the message's subject and body we must mark the
+	 * message that has been updated. there are two kinds of parameters: the primary
+	 * key /new entity data in DTO ForumMessage of the method patameter
 	 */
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.infrastructure.repository.MessageRepository#updateMessage(com.jdon
-	 * .jivejdon.model.ForumMessage)
+	 * com.jdon.jivejdon.infrastructure.repository.MessageRepository#updateMessage(
+	 * com.jdon .jivejdon.model.ForumMessage)
 	 */
 	public void updateMessage(AnemicMessageDTO newForumMessageInputparamter) throws Exception {
 		logger.debug(" enter updateMessage id =" + newForumMessageInputparamter.getMessageId());
@@ -168,14 +167,14 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jdon.jivejdon.infrastructure.repository.MessageRepository#updateMessageProperties
-	 * (com.jdon.jivejdon.domain.model.ForumMessage)
+	 * @see com.jdon.jivejdon.infrastructure.repository.MessageRepository#
+	 * updateMessageProperties (com.jdon.jivejdon.domain.model.ForumMessage)
 	 */
 	public void updateMessageProperties(ForumMessage forumMessage) throws Exception {
 		try {
 			propertyDao.deleteProperties(Constants.MESSAGE, forumMessage.getMessageId());
-			propertyDao.saveProperties(Constants.MESSAGE, forumMessage.getMessageId(), forumMessage.getMessagePropertysVO().getPropertys());
+			propertyDao.saveProperties(Constants.MESSAGE, forumMessage.getMessageId(),
+					forumMessage.getMessagePropertysVO().getPropertys());
 		} catch (Exception e) {
 			String error = e + " updateMessageProperties forumMessageId=" + forumMessage.getMessageId();
 			logger.error(error);
@@ -186,20 +185,18 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.jdon.jivejdon.infrastructure.repository.MessageRepository#deleteMessageComposite
-	 * (com.jdon.jivejdon.domain.model.ForumMessage)
+	 * @see com.jdon.jivejdon.infrastructure.repository.MessageRepository#
+	 * deleteMessageComposite (com.jdon.jivejdon.domain.model.ForumMessage)
 	 */
 	public void deleteMessageComposite(ForumMessage delforumMessage) throws Exception {
 		Long key = delforumMessage.getMessageId();
 		logger.debug("deleteNode messageId =" + key);
 		try {
-			Optional<ForumThread> forumThreadOptional = forumBuilder.getThread(delforumMessage
-					.getForumThread().getThreadId());
+			Optional<ForumThread> forumThreadOptional = forumBuilder
+					.getThread(delforumMessage.getForumThread().getThreadId());
 			TreeVisitor messageDeletor = new MessageDeletor(this);
 			logger.debug(" begin to walk into tree, and delete them");
-			forumThreadOptional.get().acceptTreeModelVisitor(delforumMessage.getMessageId(),
-					messageDeletor);
+			forumThreadOptional.get().acceptTreeModelVisitor(delforumMessage.getMessageId(), messageDeletor);
 		} catch (Exception e) {
 			String error = e + " deleteMessageComposite forumMessageId=" + delforumMessage.getMessageId();
 			logger.error(error);
@@ -211,8 +208,8 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.infrastructure.repository.MessageRepository#deleteMessage(java.lang
-	 * .Long)
+	 * com.jdon.jivejdon.infrastructure.repository.MessageRepository#deleteMessage(
+	 * java.lang .Long)
 	 */
 	public void deleteMessage(Long messageId) throws Exception {
 		try {
@@ -231,7 +228,8 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jdon.jivejdon.infrastructure.repository.MessageRepository#getNextId(int)
+	 * @see
+	 * com.jdon.jivejdon.infrastructure.repository.MessageRepository#getNextId(int)
 	 */
 	public synchronized Long getNextId(int idType) throws Exception {
 		try {
@@ -248,39 +246,24 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 		this.messageDaoFacade.getMessageDao().saveReBlog(oneOneDTO);
 	}
 
-	public Collection<ForumMessage> getReBlogByFrom(Long messageId) throws Exception {
-		ForumMessage message = this.forumBuilder.getMessage(messageId);
-		if (message == null)
-			return null;
-
-		Collection<Long> reblogIdTos = this.messageDaoFacade.getMessageDao().getReBlogByFrom(messageId);
-		if (reblogIdTos == null || reblogIdTos.size() == 0)
-			return null;
-		Collection<ForumMessage> forumMessageTos = new ArrayList();
-		for (Long reblogIdTo : reblogIdTos) {
-			ForumMessage messageTo = forumBuilder.getMessage(reblogIdTo);
-			if (messageTo != null)
-				forumMessageTos.add(messageTo);
-		}
-
-		return forumMessageTos;
-
+	public void delReBlog(Long msgId) throws Exception {
+		this.messageDaoFacade.getMessageDao().delReBlog(msgId);
 	}
 
-	public ForumMessage getReBlogByTo(Long messageId) throws Exception {
-		ForumMessage messageTo = forumBuilder.getMessage(messageId);
-		if (messageTo == null)
-			return null;
+	public Collection<Long> getReBlogByFrom(Long messageId) throws Exception {
+		return this.messageDaoFacade.getMessageDao().getReBlogByFrom(messageId);
+	}
 
-		Long reblogFromId = this.messageDaoFacade.getMessageDao().getReBlogByTo(messageId);
-		return forumBuilder.getMessage(reblogFromId);
-
+	public Collection<Long> getReBlogByTo(Long messageId) throws Exception {
+		return this.messageDaoFacade.getMessageDao().getReBlogByTo(messageId);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jdon.jivejdon.infrastructure.repository.MessageRepository#getForumBuilder()
+	 * @see
+	 * com.jdon.jivejdon.infrastructure.repository.MessageRepository#getForumBuilder
+	 * ()
 	 */
 	public ForumFactory getForumBuilder() {
 		return forumBuilder;
@@ -289,7 +272,8 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jdon.jivejdon.infrastructure.repository.MessageRepository#getMessageDaoFacade()
+	 * @see com.jdon.jivejdon.infrastructure.repository.MessageRepository#
+	 * getMessageDaoFacade()
 	 */
 	public MessageDaoFacade getMessageDaoFacade() {
 		return messageDaoFacade;

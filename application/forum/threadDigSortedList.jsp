@@ -5,6 +5,9 @@
 <%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+<bean:parameter id="noheader" name="noheader"  value=""/>
+<logic:notEqual name="noheader" value="on">
+
 <bean:define id="threadList" name="threadListForm" property="list" />
 <logic:empty name="threadListForm" property="oneModel">
   <% 
@@ -43,6 +46,16 @@ pageContext.setAttribute("title", titleStr);
   contextpath = "<%=request.getContextPath()%>";
  </script> 
 <script language="javascript" defer="defer" src="<html:rewrite page="/forum/js/threadList.js"/>"></script>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 自动调整尺寸 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="9040920314"
+     data-ad-format="auto"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 <!-- /////////////////////////////////////////Content -->
 <div id="page-content" class="single-page container">
 		<div class="row">
@@ -50,9 +63,11 @@ pageContext.setAttribute("title", titleStr);
 			<div id="main-content" class="col-md-12">
 				<div class="box">	
 					<ul class="nav nav-tabs">
-  <li ><a href="<%=request.getContextPath()%>/threads">时间</a></li>
+  <li ><a href="<%=request.getContextPath()%>/threads">最新</a></li>
+  <li><a href="<%=request.getContextPath()%>/approval" rel="nofollow">精华</a></li>    
    <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">回复</a></li>
   <li class="active"><a href="#">按点赞数排序</a></li>
+  <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" rel="nofollow">搜索</a></li>
   
 	               <div class="tres" style="float: right;">
         <logic:empty name="forum" property="forumId">
@@ -69,8 +84,10 @@ pageContext.setAttribute("title", titleStr);
        
       </div>
 	</ul>          
-                    
+</logic:notEqual>                        
   <%@ include file="threadListCore.jsp" %>
+<logic:notEqual name="noheader" value="on">       
+  <div id="nextPageContent"></div>  
       
 	  <div class="tres">有<b>
                     <bean:write name="threadListForm" property="allCount"/>
@@ -88,4 +105,47 @@ pageContext.setAttribute("title", titleStr);
             </div>	
 	</div>
 </div>
-<%@include file="../common/IncludeBottom.jsp"%>
+
+<%@ include file="../common/IncludeBottomBody.jsp" %> 
+  
+<bean:define id="pagestart" name="threadListForm" property="start" />
+<bean:define id="pagecount" name="threadListForm" property="count" />
+<bean:define id="pageallCount" name="threadListForm" property="allCount" />
+<%  
+    int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
+    int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
+    int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
+    int pageNo = (pageAllcountInt / pageCountInt);
+    if(pageAllcountInt % pageCountInt !=0){ 
+        pageNo = pageNo + 1;
+    }    
+%>
+<script>
+function scrollLoader(url){
+  var start = "<%=pageStartInt+pageCountInt%>";
+  var loading = false;
+  $(window).scroll(function() {
+    var hT = $('#nextPageContent').offset().top,
+       hH = $('#nextPageContent').outerHeight(),
+       wH = $(window).height(),
+       wS = $(this).scrollTop();       
+    if (wS > (hT+hH-wH) && !loading){           
+         loading = true;          
+         if (start <= <%=pageAllcountInt%> ){                  
+           surl = (url.indexOf("?")==-1)?(url+"?"):(url+"&");           
+           load(surl +'start=' + start +'&count=<%=pageCountInt%>&noheader=on', function (xhr) {
+               document.getElementById("nextPageContent").innerHTML = document.getElementById("nextPageContent").innerHTML + xhr.responseText;               
+               start = start/1 + <%=pageCountInt%>;                              
+               loading = false;
+           });          
+         }   
+    }
+   });
+}
+scrollLoader('/forum/threadDigSortedList.shtml');   
+
+</script>   
+</body>
+</html>
+</logic:notEqual>    
+

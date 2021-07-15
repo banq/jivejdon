@@ -2,37 +2,30 @@ package com.jdon.jivejdon.domain.model.message;
 
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.util.StringUtil;
-import org.compass.annotations.Searchable;
-import org.compass.annotations.SearchableProperty;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
- * ForumMessage's value object
- * created by MessageVOCreatedBuilder
+ * ForumMessage's value object created by MessageVOCreatedBuilder
  *
- *  there are two kinds MessageVO;
- *  1. applied business rule filter in FilterPipleSpec
- *  2. original that saved in repository
+ * there are two kinds MessageVO; 1. applied business rule filter in
+ * FilterPipleSpec 2. original that saved in repository
  *
  */
-@Searchable(root = false)
 public final class MessageVO implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = 1L;
 
 	private final static Pattern quoteEscape = Pattern.compile("\\[.*?\\](.*)\\[\\/.*?\\]");
 	private final static Pattern htmlEscape = Pattern.compile("\\<.*?\\>|<[^>]+");
-	private final static Pattern newlineEscape = Pattern.compile("\\<br\\>|\\<p\\>", Pattern
-			.CASE_INSENSITIVE);
+	private final static Pattern newlineEscape = Pattern.compile("\\<br\\>|\\<p\\>", Pattern.CASE_INSENSITIVE);
 
 	private final ForumMessage forumMessage;
 
-	@SearchableProperty
 	private final String subject;
 
-	@SearchableProperty
 	private final String body;
 
 	/**
@@ -46,7 +39,7 @@ public final class MessageVO implements Serializable, Cloneable {
 		this.body = body;
 	}
 
-	//used for compass lucene search
+	// used for compass lucene search
 	public MessageVO() {
 		this("", "", null);
 	}
@@ -100,6 +93,22 @@ public final class MessageVO implements Serializable, Cloneable {
 		return forumMessage;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		MessageVO that = (MessageVO) o;
+		return subject.equals(that.getSubject()) && body.equals(that.getBody());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(subject, body);
+	}
 
 	@FunctionalInterface
 	public interface RequireSubject {

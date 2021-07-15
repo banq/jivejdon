@@ -73,7 +73,7 @@
 			</div>
 			<!-- /////////////////右边 -->
              <div id="sidebar" class="col-md-4">
-				<%-- <!---- Start Widget ---->
+				<!---- Start Widget ---->
 				<div class="widget wid-follow">
 					<div class="content">
 						<ul class="list-inline">
@@ -82,14 +82,14 @@
 							</form>
 						</ul>						
 					</div>
-				</div> --%>
+				</div>
 
                  <!---- Start tags ---->
-                 <div class="widget wid-post">
+                 <%-- <div class="widget wid-post">
                      <div class="info">
                          <jsp:include page="/query/tagHotList.shtml" flush="true"></jsp:include>
                      </div>
-                 </div>
+                 </div> --%>
 			
 				<!---- Start Widget ---->
 				<div class="widget">

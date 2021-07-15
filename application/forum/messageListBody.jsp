@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <a name="<bean:write name="forumMessage" property="messageId"/>"></a>
-<logic:equal name="i" value="0">
+<%-- <logic:equal name="i" value="0">
   <logic:notEmpty name="principal">
     <logic:equal name="loginAccount" property="roleName" value="Admin">
       <p> <a
@@ -12,7 +12,7 @@
       <a href="javascript:stickyThread('<bean:write name="forumMessage" property="forumThread.threadId"/>','announce_all','delete','<bean:write name="forumMessage" property="forumThread.forum.forumId"/>')">取消</a>
     </logic:equal>
   </logic:notEmpty>
-</logic:equal>
+</logic:equal> --%>
 
 <div class="row">
   <div class="col-md-12">
@@ -75,6 +75,11 @@
             page="/message/tag/thread.shtml?action=edit"
             paramId="threadId" paramName="forumMessage"
             paramProperty="forumThread.threadId" />' rel='nofollow'>编辑标签 </a>
+
+                    <a href='<html:rewrite
+            page="/message/reblogLink.shtml?action=edit"
+            paramId="threadId" paramName="forumMessage"
+            paramProperty="forumThread.threadId" />' rel='nofollow'>编辑互链 </a>
                   </logic:equal>
                 </logic:equal>
               </div>
@@ -100,38 +105,9 @@
                 <span id='body_<bean:write name="forumMessage" property="messageId"/>'>
                      <bean:write name="forumMessage" property="messageVO.body" filter="false"/>
                 </span>
-              </div>
-              <logic:equal name="forumMessage" property="root" value="true">    
-              <div class="post_titletag">
-                <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="tagsi">
-                  <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag">
-                    #<bean:write name="threadTag" property="title"/>
-                  </a> &nbsp;&nbsp;&nbsp;&nbsp;
-                </logic:iterate>
-                </div>
-              </logic:equal>
+              </div>              
               <p></p>
 </div>
-<logic:equal name="forumMessage" property="root" value="true">
-  <div class="diggArea list-inline  top-social" >
-    <DIV class=diggNum id="digNumber_<bean:write name="forumMessage" property="messageId"/>">
-      <logic:notEqual name="forumMessage" property="digCount" value="0">
-        <bean:write name="forumMessage" property="digCount"/>
-      </logic:notEqual>
-    </DIV>
-	<DIV class="diggLink top8"
-         id="textArea_<bean:write name="forumMessage" property="messageId"/>"><a
-        href="javascript:digMessage('<bean:write name="forumMessage" property="messageId"/>')"><i class="fa fa-thumbs-o-up"></i></a>
-    </DIV> 
-  </div>
-   <div style="margin: 0 auto;width: 85px">
-	 <ul class="list-inline  top-social">
-		<li><a href="javascript:shareto('sina')"><i class="fa fa-weibo"></i></a></li>
-		<li><a href="javascript:shareto('weixin')"><i class="fa fa-weixin"></i></a></li>
-		<li><a href="javascript:shareto('qzone')"><i class="fa fa-qq"></i></a></li>		
-	  </ul>
-  </div>		
-</logic:equal>
 </div>
 </div>
 <logic:equal name="forumMessage" property="root" value="false">

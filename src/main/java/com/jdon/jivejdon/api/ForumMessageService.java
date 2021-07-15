@@ -32,14 +32,14 @@ import com.jdon.jivejdon.domain.model.message.output.RenderingFilterManager;
  */
 public interface ForumMessageService {
 
-    AnemicMessageDTO initMessage(EventModel em);
+	AnemicMessageDTO initMessage(EventModel em);
 
-    AnemicMessageDTO initReplyMessage(EventModel em);
+	AnemicMessageDTO initReplyMessage(EventModel em);
 
 	/**
-	 * has Authorization ; no cache Intercepts it, it is Called by message's
-	 * modify or deletion first time accessing this method must be checked. it
-	 * is configured in jdonframework.xml
+	 * has Authorization ; no cache Intercepts it, it is Called by message's modify
+	 * or deletion first time accessing this method must be checked. it is
+	 * configured in jdonframework.xml
 	 * 
 	 * <getMethod name="findMessage"/>
 	 */
@@ -52,7 +52,6 @@ public interface ForumMessageService {
 	 * now MessageListAction or MessageRecursiveListAction call this method
 	 */
 	ForumMessage getMessage(Long messageId);
-
 
 	/**
 	 * create a topic message, it is a root message
@@ -84,8 +83,6 @@ public interface ForumMessageService {
 
 	// /message/messageMaskAction.shtml?method=maskMessage
 	void maskMessage(EventModel em) throws Exception;
-
-	public void reBlog(Long replyMessageId, Long topicMessageId) throws Exception;
 
 	public void updateThreadName(Long threadId, String name) throws Exception;
 

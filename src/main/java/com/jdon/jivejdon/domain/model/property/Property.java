@@ -15,16 +15,12 @@
  */
 package com.jdon.jivejdon.domain.model.property;
 
-import org.compass.annotations.Searchable;
-import org.compass.annotations.SearchableProperty;
-
 import java.io.Serializable;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
  * 
  */
-@Searchable
 public class Property implements Serializable {
 
 	/**
@@ -34,7 +30,6 @@ public class Property implements Serializable {
 
 	private String name;
 
-	@SearchableProperty
 	private String value;
 
 	private String type;
@@ -60,8 +55,7 @@ public class Property implements Serializable {
 	}
 
 	/**
-	 * @param name
-	 *            The name to set.
+	 * @param name The name to set.
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -75,8 +69,7 @@ public class Property implements Serializable {
 	}
 
 	/**
-	 * @param value
-	 *            The value to set.
+	 * @param value The value to set.
 	 */
 	public void setValue(String value) {
 		this.value = value;
@@ -94,8 +87,7 @@ public class Property implements Serializable {
 	}
 
 	/**
-	 * @param type
-	 *            The type to set.
+	 * @param type The type to set.
 	 */
 	public void setType(String type) {
 		this.type = type;

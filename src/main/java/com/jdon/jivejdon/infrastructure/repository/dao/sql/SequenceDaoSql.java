@@ -18,13 +18,13 @@ package com.jdon.jivejdon.infrastructure.repository.dao.sql;
 import com.jdon.jivejdon.infrastructure.repository.dao.SequenceDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.compass.core.util.backport.java.util.concurrent.ConcurrentHashMap;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -59,7 +59,9 @@ public class SequenceDaoSql implements SequenceDao {
 		return currentIDs.get(idType).longValue();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.jdon.jivejdon.dao.SequenceDao#getNextId(java.lang.String)
 	 */
 	public Long getNextId(int idType) throws SQLException {
@@ -87,8 +89,8 @@ public class SequenceDaoSql implements SequenceDao {
 				currentID = (Long) map.get("id");
 			}
 			if (currentID == null) {
-				throw new SQLException("Error: A null sequence was returned from the database " +
-						"(could not get next " + idType + " sequence).");
+				throw new SQLException("Error: A null sequence was returned from the database " + "(could not get next "
+						+ idType + " sequence).");
 			}
 
 			// Increment the id to define our block.

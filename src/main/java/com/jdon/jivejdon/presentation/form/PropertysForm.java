@@ -33,12 +33,12 @@ public class PropertysForm extends BaseForm {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Collection propertys;
+	private Collection<Property> propertys;
 
 	private int maxSize = 50;
 
 	public PropertysForm() {
-		propertys = new ArrayList();
+		propertys = new ArrayList<Property>();
 		for (int i = 0; i < maxSize; i++) {
 			propertys.add(new Property());
 		}
@@ -52,7 +52,7 @@ public class PropertysForm extends BaseForm {
 		this.maxSize = maxSize;
 	}
 
-	public Collection getPropertys() {
+	public Collection<Property> getPropertys() {
 		return propertys;
 	}
 
@@ -64,7 +64,7 @@ public class PropertysForm extends BaseForm {
 		propertys.add(property);
 	}
 
-	public void setPropertys(Collection propertys) {
+	public void setPropertys(Collection<Property> propertys) {
 		this.propertys = propertys;
 	}
 

@@ -8,53 +8,43 @@ import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.attachment.AttachmentsVO;
 import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.jivejdon.domain.model.property.MessagePropertysVO;
-import org.compass.annotations.Searchable;
-import org.compass.annotations.SearchableComponent;
-import org.compass.annotations.SearchableId;
-import org.compass.annotations.SearchableReference;
 
 /**
- * ForumMessage DTO, it is a anemic model
- * used for presentation MessageForm
- * and for persistence MessageCore of jiveMessage database table
+ * ForumMessage DTO, it is a anemic model used for presentation MessageForm and
+ * for persistence MessageCore of jiveMessage database table
  */
-@Searchable
 public class AnemicMessageDTO {
-    @SearchableId
     private Long messageId;
     private String creationDate;
     private long modifiedDate;
     private ForumThread forumThread;
-    @SearchableReference
     private Forum forum;
     private Account account;
-    @SearchableComponent
     private MessageVO messageVO;
     private AnemicMessageDTO parentMessage;
     // for upload files
     private AttachmentsVO attachment;;
     private MessagePropertysVO messagePropertysVO;
     private Account operator; // operator this message,maybe Admin or others;
-    private boolean authenticated ;// default false
+    private boolean authenticated;// default false
 
     private boolean masked;
     private boolean replyNotify;
-    //for messageForm inject
+    // for messageForm inject
     private String[] tagTitle;
 
     public AnemicMessageDTO() {
         messageVO = new MessageVO();
-//
-//        forum = new Forum(); // for parameter forum.forumId=xxx
-//        account = new Account();
-//        forumThread = new ForumThread();
+        //
+        // forum = new Forum(); // for parameter forum.forumId=xxx
+        // account = new Account();
+        // forumThread = new ForumThread();
     }
 
     public AnemicMessageDTO(Long messageId) {
-       super();
-       this.messageId = messageId;
+        super();
+        this.messageId = messageId;
     }
-
 
     public Long getMessageId() {
         return messageId;
@@ -160,8 +150,6 @@ public class AnemicMessageDTO {
         this.tagTitle = tagTitle;
     }
 
-
-
     public MessagePropertysVO getMessagePropertysVO() {
         return messagePropertysVO;
     }
@@ -178,7 +166,7 @@ public class AnemicMessageDTO {
         this.operator = operator;
     }
 
-    public static AnemicMessageDTO commandToDTO(PostTopicMessageCommand postTopicMessageCommand){
+    public static AnemicMessageDTO commandToDTO(PostTopicMessageCommand postTopicMessageCommand) {
         AnemicMessageDTO forumMessageDTO = new AnemicMessageDTO(postTopicMessageCommand.getMessageId());
         forumMessageDTO.setAccount(postTopicMessageCommand.getAccount());
         forumMessageDTO.setMessageVO(postTopicMessageCommand.getMessageVO());
@@ -189,8 +177,9 @@ public class AnemicMessageDTO {
         return forumMessageDTO;
     }
 
-    public static AnemicMessageDTO commandToDTO(ReviseForumMessageCommand reviseForumMessageCommand){
-        AnemicMessageDTO forumMessageDTO = new AnemicMessageDTO(reviseForumMessageCommand.getOldforumMessage().getMessageId());
+    public static AnemicMessageDTO commandToDTO(ReviseForumMessageCommand reviseForumMessageCommand) {
+        AnemicMessageDTO forumMessageDTO = new AnemicMessageDTO(
+                reviseForumMessageCommand.getOldforumMessage().getMessageId());
         forumMessageDTO.setAccount(reviseForumMessageCommand.getOldforumMessage().getAccount());
         forumMessageDTO.setMessageVO(reviseForumMessageCommand.getMessageVO());
         forumMessageDTO.setAttachment(reviseForumMessageCommand.getAttachment());

@@ -26,8 +26,7 @@ import java.util.function.Function;
 import java.util.regex.Pattern;
 
 /**
- * removing
- * replace hot keywords with HotKeys added by administrator
+ * removing replace hot keywords with HotKeys added by administrator
  * 
  * @author banq
  * 
@@ -39,11 +38,10 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 	// whitespace
 	private String suffix_regEx = "";
 
-	//by pass
+	//
 	public MessageVO apply(MessageVO messageVO) {
-		return messageVO;
+		return messageVO.builder().subject(messageVO.getSubject()).body(applyFilteredBody(messageVO)).build();
 	}
-
 
 	/**
 	 * space + keyword + space will be replaced
@@ -51,7 +49,7 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 	public String applyFilteredBody(MessageVO messageVO) {
 		String body = messageVO.getBody();
 		try {
-			HotKeys hotKeys = messageVO.getForumMessage().getForum().getHotKeys();
+			HotKeys hotKeys = messageVO.getForumMessage().getHotKeys();
 			if (hotKeys == null)
 				return body;
 
@@ -60,7 +58,7 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 				Property prop = (Property) iter.next();
 				String regEx = prefix_regEx + prop.getName() + suffix_regEx;
 				String replcaement = getKeyUrlStr(prop.getName(), prop.getValue());
-				body = Pattern.compile(regEx).matcher(body).replaceAll("$1" + replcaement);
+				body = Pattern.compile(regEx).matcher(body).replaceFirst("$1" + replcaement);
 			}
 		} catch (Exception e) {
 			Debug.logError("" + e, module);
@@ -73,10 +71,10 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 		bf.append("<a href='");
 		bf.append(url);
 
-		bf.append("'  ");
-		// class="hotkeys ajax_query=cache"
-		bf.append(" class='hotkeys ajax_query=").append(name).append("' ");
-		bf.append(" id='id_").append(url).append("' ><b>");
+		bf.append("'><b>");
+		// // class="hotkeys ajax_query=cache"
+		// bf.append(" class='hotkeys ajax_query=").append(name).append("' ");
+		// bf.append(" id='id_").append(url).append("' ><b>");
 		bf.append(name);
 		bf.append("</b></a>");
 		return bf.toString();

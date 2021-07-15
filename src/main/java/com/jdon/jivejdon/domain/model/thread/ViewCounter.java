@@ -15,10 +15,12 @@
  */
 package com.jdon.jivejdon.domain.model.thread;
 
+import java.util.Objects;
+
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 
-public class ViewCounter {
+public class ViewCounter implements Comparable<ViewCounter> {
 
 	private final ForumThread thread;
 	private int viewCount = -1;
@@ -30,10 +32,11 @@ public class ViewCounter {
 	}
 
 	public void loadinitCount() {
-		if (this.viewCount != -1) return;
+		if (this.viewCount != -1)
+			return;
 		DomainMessage dm = this.thread.lazyLoaderRole.loadViewCount(thread.getThreadId());
 		try {
-//			this.viewCount = 0;//flag it
+			// this.viewCount = 0;//flag it
 			Integer count = (Integer) dm.getEventResult();
 			if (count != null) {
 				this.viewCount = count;
@@ -58,7 +61,7 @@ public class ViewCounter {
 			viewCount++;
 	}
 
-	public long getLastSavedCount() {
+	public int getLastSavedCount() {
 		return lastSavedCount;
 	}
 
@@ -68,6 +71,41 @@ public class ViewCounter {
 
 	public ForumThread getThread() {
 		return thread;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		ViewCounter viewCounter = (ViewCounter) o;
+		if (this.thread.getThreadId() == null || viewCounter.getThread().getThreadId() == null)
+			return false;
+		return this.thread.getThreadId().longValue() == viewCounter.getThread().getThreadId().longValue();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.thread.getThreadId());
+	}
+
+	@Override
+	public int compareTo(ViewCounter o) {
+		int diff1 = getViewCount() - getLastSavedCount();
+		int diff2 = o.getViewCount() - o.getLastSavedCount();
+		if (diff1 == diff2) {
+			if (thread.getThreadId() > o.getThread().getThreadId())
+				return -1;
+			else if (thread.getThreadId() < o.getThread().getThreadId())
+				return 1;
+		} else if (diff1 > diff2)
+			return -1;
+		else
+			return 1;
+		return 0;
 	}
 
 }

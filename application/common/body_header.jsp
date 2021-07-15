@@ -9,25 +9,21 @@
 		<div class="container">
 			<div class="row">
                 <div class="col-md-12 ">
-                    <a href="/"><img src="https://static.jdon.com/simgs/jdon100.png" width="100" height="40"/></a>
+                    <a href="/"><img src="//static.jdon.com/simgs/jdon100.png" width="100" height="40" loading="lazy"/></a>
                     <span class="list-inline top-link link" style="float:right;">
-					    <logic:present name="principal" ><i class="smallgray"> 欢迎<bean:write name="principal" /></i> </logic:present>
-				        <a href="/forum"><i class="fa fa-home"></i>道场</a>
-						<a href="/threads"><i class="fa fa-list-ul"></i>最新</a>
-						<a href="/tags"><i class="fa fa-star-half-full"></i>推荐</a>
-						<a href="/followus.html"><i class="fa fa-feed"></i>订阅</a>
-                         <%--<logic:notPresent name="principal" >--%>
+				        <a href="<%=request.getContextPath() %>/forum"><i class="fa fa-home"></i>道场</a>
+						<a href="<%=request.getContextPath() %>/threads"><i class="fa fa-list-ul"></i>最新</a>
+						<a href="<%=request.getContextPath() %>/tags"><i class="fa fa-star-half-full"></i>推荐</a>
+						<a href="<%=request.getContextPath() %>/query/threadViewQuery.shtml"><i class="fa fa-search"></i>搜索</a>
+						<a href="<%=request.getContextPath() %>/followus.html"><i class="fa fa-feed"></i>订阅</a>
+                         <%--<%if (request.getSession(false) == null){%> --%>
 							 <%--<a data-toggle="modal" data-target="#login" href=""><i class="fa fa-sign-in"></i>登陆 </a>--%>
-						<%--</logic:notPresent>--%>
-						<%--<logic:present name="principal" > --%>
-							<%--<a href="<%=request.getContextPath()%>/message/post.jsp"><i class=" fa fa-share-square"></i>发布</a>--%>
-						<%--</logic:present>--%>
-                        <%--<logic:present name="principal" > --%>
-							<%--<a href="<%=request.getContextPath()%>/blog/<bean:write name="principal"/>"><i class="fa fa-newspaper-o"></i>博客</a>--%>
-						<%--</logic:present>--%>
-                       <%--<logic:present name="principal" >--%>
-						   <%--<html:link page="/jasslogin?logout"><i class="fa fa-sign-out"></i>退出 </html:link>--%>
-                        <%--</logic:present>--%>
+						<%--<%}%>  --%>
+						<%if (request.getSession(false) != null && request.getUserPrincipal() != null){%>
+							<a href="<%=request.getContextPath()%>/message/post.jsp"><i class=" fa fa-share-square"></i>发布</a>						
+							<a href="<%=request.getContextPath()%>/blog/<%=request.getUserPrincipal()%>"><i class="fa fa-newspaper-o"></i>博客</a>
+						    <html:link page="/jasslogin?logout"><i class="fa fa-sign-out"></i>退出 </html:link>
+                        <%}%>                       
                     </span>
 				</div>
 			</div>

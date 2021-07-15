@@ -65,7 +65,7 @@ public class ThreadNewDigListAction extends ModelListAction {
 	 */
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
 		Collection<Long> allIds = new ArrayList<Long>();
-		allIds.addAll(getThreadViewCounterJob().getConcurrentHashMap().keySet());
+		allIds.addAll(getThreadViewCounterJob().getThreadIdsList());
 		return new PageIterator(allIds.size(), allIds.toArray());
 	}
 
