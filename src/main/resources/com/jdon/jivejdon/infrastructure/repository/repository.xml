@@ -1,53 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE app PUBLIC "-//Jdon//DTD 2005 1.0 Framework//EN" "https://raw.githubusercontent.com/banq/jdonframework/master/src/main/resources/META-INF/jdonframework.dtd">
+<!DOCTYPE app PUBLIC "-//Jdon//DTD 2005 1.0 Framework//EN" "http://www.jdon.com/jdonframework.dtd">
 <!-- qucik manual http://www.jdon.com/jdonframework/threemin.htm 
      english version: https://jdon.dev.java.net/steps.html -->
 
-<app>
+<app>	
 	<services>
+       
+	    <!--  business components  start-->
+	    <component name="hotKeysRepository"
+			class="com.jdon.jivejdon.infrastructure.repository.property.HotKeysRepository"/>
+	    
+	    
+    	<component name="messageRepository"
+			class="com.jdon.jivejdon.infrastructure.repository.builder.MessageRepositoryDao"/>
+			
+    	<component name="uploadRepository"
+			class="com.jdon.jivejdon.infrastructure.repository.property.UploadRepositoryDao"/>
+			
 
-		<!--  business components  start-->
-		<component name="hotKeysRepository" class="com.jdon.jivejdon.infrastructure.repository.property.HotKeysRepository" />
+         <component name="forumAbstractFactory"
+			class="com.jdon.jivejdon.infrastructure.repository.builder.ForumAbstractFactory"/>
+
+		<component name="MessageFactory"
+			class="com.jdon.jivejdon.infrastructure.repository.builder.MessageInitFactory"/>
+
+		<component name="MessageDirector"
+				   class="com.jdon.jivejdon.infrastructure.repository.builder.MessageDirector"/>
+
+		<component name="ThreadDirector"
+				   class="com.jdon.jivejdon.infrastructure.repository.builder.ThreadDirector"/>
+
+		<component name="ForumDirector"
+				   class="com.jdon.jivejdon.infrastructure.repository.builder.ForumDirector"/>
 
 
-		<component name="messageRepository" class="com.jdon.jivejdon.infrastructure.repository.builder.MessageRepositoryDao" />
-
-		<component name="uploadRepository" class="com.jdon.jivejdon.infrastructure.repository.property.UploadRepositoryDao" />
-
-
-		<component name="forumAbstractFactory" class="com.jdon.jivejdon.infrastructure.repository.builder.ForumAbstractFactory" />
-
-		<component name="MessageFactory" class="com.jdon.jivejdon.infrastructure.repository.builder.MessageInitFactory" />
-
-		<component name="MessageDirector" class="com.jdon.jivejdon.infrastructure.repository.builder.MessageDirector" />
-
-		<component name="ThreadDirector" class="com.jdon.jivejdon.infrastructure.repository.builder.ThreadDirector" />
-
-		<component name="ForumDirector" class="com.jdon.jivejdon.infrastructure.repository.builder.ForumDirector" />
+		<component name="AccountInitFactory"
+			class="com.jdon.jivejdon.infrastructure.repository.acccount.AccountInitFactory"/>
 
 
-		<component name="AccountInitFactory" class="com.jdon.jivejdon.infrastructure.repository.acccount.AccountInitFactory" />
+        <component name="accountFactory"
+			class="com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactoryDao"/>
+		
+		<component name="propertyFactory"
+			class="com.jdon.jivejdon.infrastructure.repository.property.PropertyFactoryDao"/>
+			
+				
+		<component name="shortMessageRepository"
+			class="com.jdon.jivejdon.infrastructure.repository.shortmessage.ShortMessageRepositoryDao"/>
 
-
-		<component name="accountFactory" class="com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactoryDao" />
-
-		<component name="propertyFactory" class="com.jdon.jivejdon.infrastructure.repository.property.PropertyFactoryDao" />
-
-
-		<component name="shortMessageRepository" class="com.jdon.jivejdon.infrastructure.repository.shortmessage.ShortMessageRepositoryDao" />
-
-		<component name="tagRepository" class="com.jdon.jivejdon.infrastructure.repository.property.TagRepositoryDao" />
-
+		<component name="tagRepository"
+			class="com.jdon.jivejdon.infrastructure.repository.property.TagRepositoryDao"/>
+			
 		<!-- search   -->
-		<component name="messageSearchProxy" class="com.jdon.jivejdon.infrastructure.repository.search.MessageSearchProxy" />
-
-		<!--  Old jive2.5 DB Update to New JiveJdon3 DB Util 
+    	<component name="messageSearchProxy"
+			class="com.jdon.jivejdon.infrastructure.repository.search.MessageSearchProxy"/>
+			
+    	<!--  Old jive2.5 DB Update to New JiveJdon3 DB Util 
 		<component name="oldUpdateNewUtil"
 			class="com.jdon.jivejdon.infrastructure.repository.dao.util.OldUpdateNewUtil"/>
 			-->
-		<!--  re Build luncene Index-->
-		<component name="reBuildIndex" class="com.jdon.jivejdon.infrastructure.repository.search.ReBuildIndex" />
-
-
+        <!--  re Build luncene Index-->
+		<component name="reBuildIndex"
+			class="com.jdon.jivejdon.infrastructure.repository.search.ReBuildIndex"/>
+			
+			
+      
 	</services>
 </app>
