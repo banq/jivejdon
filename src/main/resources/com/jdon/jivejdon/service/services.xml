@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE app PUBLIC "-//Jdon//DTD 2005 1.0 Framework//EN" "https://raw.githubusercontent.com/banq/jdonframework/master/src/main/resources/META-INF/jdonframework.dtd">
+<!DOCTYPE app PUBLIC "-//Jdon//DTD 2005 1.0 Framework//EN" "http://www.jdon.com/jdonframework.dtd">
 <!-- qucik manual http://www.jdon.com/jdonframework/threemin.htm 
      english version: https://jdon.dev.java.net/steps.html -->
 
 <app>
-
+	
 	<services>
-		<!--  business services  start-->
-		<pojoService name="forumService" class="com.jdon.jivejdon.api.impl.ForumServiceImp" />
-
-		<!-- replaced by annotation
+        <!--  business services  start-->
+		<pojoService name="forumService"
+			class="com.jdon.jivejdon.api.impl.ForumServiceImp"/>
+			
+       <!-- replaced by annotation
 		<pojoService name="forumMessageService"
 			class="com.jdon.jivejdon.api.impll.message.ForumMessageServiceImplceImpl"/>
 			
@@ -21,31 +22,38 @@
 			class="com.jdon.jivejdon.api.impll.message.ForumMessageQueryServiceImp"/>
 			
 			-->
+	     
+		<pojoService name="uploadService"
+			class="com.jdon.jivejdon.api.impl.upload.UploadServiceShell"/>
+		
+		
+     	<pojoService name="accountService"
+			class="com.jdon.jivejdon.api.impl.account.AccountServiceShell"/>
 
-		<pojoService name="uploadService" class="com.jdon.jivejdon.api.impl.upload.UploadServiceShell" />
-
-
-		<pojoService name="accountService" class="com.jdon.jivejdon.api.impl.account.AccountServiceShell" />
-
-		<pojoService name="uploadInfoVOService" class="com.jdon.jivejdon.api.impl.upload.UploadInfoVOServiceImp"></pojoService>
-
-		<!--  business services  end-->
-
-
+		<pojoService name="uploadInfoVOService" 
+			class="com.jdon.jivejdon.api.impl.upload.UploadInfoVOServiceImp">
+		</pojoService>
+			
+         <!--  business services  end-->
+		
+		
+	  
 		<!--  relation with the micro container  start-->
+		
 
-
-		<component name="sessionContextUtil" class="com.jdon.jivejdon.api.util.SessionContextUtil" />
-		<!--  relation with the micro container end -->
-
-
-		<!-- Tansaction JNDI   -->
-		<component name="jtaTransactionUtil" class="com.jdon.jivejdon.api.util.JtaTransactionUtil">
-			<!--<constructor value="JTA"/>  
+        <component name="sessionContextUtil"
+			class="com.jdon.jivejdon.api.util.SessionContextUtil"/>
+        <!--  relation with the micro container end -->					
+        			
+		
+        <!-- Tansaction JNDI   -->
+        <component name="jtaTransactionUtil"
+			class="com.jdon.jivejdon.api.util.JtaTransactionUtil">
+			 <!--<constructor value="JTA"/>  
 			    <constructor value="java:/TransactionManager"/> -->
-			<constructor value="JDBC" />
-
-		</component>
-
+			  <constructor value="JDBC"/> 
+	        
+        </component>
+        		
 	</services>
 </app>
