@@ -65,7 +65,7 @@ public class ThreadDigList {
 	public PageIterator getRandomPageIterator(int count) {
 		List<Long> threads = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			int randstart = ThreadLocalRandom.current().nextInt(sortedAll.size() + 1);
+			int randstart = ThreadLocalRandom.current().nextInt(sortedAll.size());
 			threads.addAll(sortedAll.stream().skip(randstart).limit(1).collect(Collectors.toList()));
 		}
 		return new PageIterator(sortedAll.size(), threads.toArray());
