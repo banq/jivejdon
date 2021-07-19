@@ -20,9 +20,7 @@ public class HomePageComparator implements Comparator<ForumThread> {
 		return compareResult(countRs1, countRs2, thread1, thread2);
 	}
 
-
-	private int compareResult(double countRs1, double countRs2, ForumThread thread1, ForumThread
-			thread2) {
+	private int compareResult(double countRs1, double countRs2, ForumThread thread1, ForumThread thread2) {
 		if (countRs1 > countRs2)
 			return -1; // returning the first object
 		else if (countRs1 < countRs2)
@@ -43,14 +41,14 @@ public class HomePageComparator implements Comparator<ForumThread> {
 		if (thread.getTags().size() > 3) {
 			tagsCount = tagsCount * 3;
 		}
-		double messageCount = Math.pow(thread.getState()
-				.getMessageCount() + 1, thread.getState()
-				.getMessageCount() + 1);
-		double digCount = Math.pow(thread.getRootMessage().getDigCount() + 1,thread.getRootMessage().getDigCount()+1);
-		double viewcount = thread.getViewCount()*Math.ceil(thread.getViewCount()/100)+1;
+		double messageCount = Math.pow(thread.getState().getMessageCount() + 1,
+				thread.getState().getMessageCount() + 1);
+		double digCount = Math.pow(thread.getRootMessage().getDigCount() + 1,
+				thread.getRootMessage().getDigCount() + 1);
+		double viewcount = thread.getViewCount() * Math.ceil(thread.getViewCount() / 100) + 1;
 		double p = tagsCount * viewcount * messageCount * digCount;
 
-		double t = System.currentTimeMillis() - thread.getState().getModifiedDate2() + 1000;
+		double t = System.currentTimeMillis() - thread.getState().getModifiedDate2() + 5000;
 
 		double G = 1.5;
 		double tg = Math.pow(t, G);
