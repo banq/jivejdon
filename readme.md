@@ -206,6 +206,7 @@ Most of stuffs in aggregate root "ForumThread" mapping to jiveThread table, but 
 In jiveMessage table there are two kinds of ForumMessage: root message and replies messages, one thread only has one root message, but has many replies messages, these replies messages are replies-posted event log.
 in domain model,repliese messages (FormMessageReply) is a sub class of Root Message(FormMessage).
 
+There is a new pattern between strictly eventsourcing and CRUD, it is DomainEvents List, any element in List can be removed, no appending!
 # Compile & Package & Install
 
 ```
