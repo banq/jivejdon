@@ -48,10 +48,6 @@
             <url>https://en.jdon.com/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
-            <id>lucene</id>
-            <url>https://en.jdon.com/jdon-mvn-repo/releases</url>
-        </repository>
-        <repository>
             <id>urlrewrite</id>
             <url>https://en.jdon.com/jdon-mvn-repo/releases</url>
         </repository>
