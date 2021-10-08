@@ -107,7 +107,7 @@ public class MessageListAction extends ModelListAction {
 
 			forumThread.addViewCount();
 			getThreadViewCounterJob().saveViewCounter(forumThread);
-			request.setAttribute("allCount", getThreadViewCounterJob().getThreadIdsList().size());
+			request.setAttribute("threadsInMemallCount", getThreadViewCounterJob().getThreadIdsList().size());
 
 			if (request.getSession(false) != null) {
 				boolean[] authenticateds = getAuthedListForm(actionForm, request);
