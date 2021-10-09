@@ -82,7 +82,7 @@ public class RSSGenServlet extends HttpServlet {
 		if (!UtilValidate.isEmpty(description)) {
 			channel_des = description;
 		}
-		
+
 		servletContext = config.getServletContext();
 
 	}
@@ -98,7 +98,8 @@ public class RSSGenServlet extends HttpServlet {
 
 	private boolean checkSpamHit(HttpServletRequest request) {
 		if (customizedThrottle == null) {
-			customizedThrottle = (CustomizedThrottle) WebAppUtil.getComponentInstance("customizedThrottle", servletContext);
+			customizedThrottle = (CustomizedThrottle) WebAppUtil.getComponentInstance("customizedThrottle",
+					servletContext);
 		}
 		HitKeyIF hitKey = new HitKeySame(request.getRemoteAddr(), "RSS");
 		return customizedThrottle.processHitFilter(hitKey);
@@ -108,7 +109,8 @@ public class RSSGenServlet extends HttpServlet {
 		doPost(req, resp);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		if (!checkModifiedEtagFilter(request, response)) {
 			return;
 		}
@@ -150,24 +152,26 @@ public class RSSGenServlet extends HttpServlet {
 				}
 			} else {
 				// it is threads
-				List<SyndEntrySorted> entries = addThreads(request, url);				
-			//	String username = request.getParameter("username");
-			//	if (!UtilValidate.isEmpty(username)) {
-			//		Account account = getAccount(request, username);
-			//		if (account != null) {
-			//			feed.setTitle(account.getUsername());
-			//			feed.setLink(url + "/blog/" + account.getUsername());
-			//			feed.setDescription(account.getUsername());
-			//		}
-			//	}else{
-					entries.addAll(this.addsitemap(request, url));
-					Collections.sort(entries);
-					Collections.reverse(entries);
-					feed.setEntries(entries.subList(0, 10));
-				//}
+				List<SyndEntrySorted> entries = addThreads(request, url);
+				// String username = request.getParameter("username");
+				// if (!UtilValidate.isEmpty(username)) {
+				// Account account = getAccount(request, username);
+				// if (account != null) {
+				// feed.setTitle(account.getUsername());
+				// feed.setLink(url + "/blog/" + account.getUsername());
+				// feed.setDescription(account.getUsername());
+				// }
+				// }else{
+				entries.addAll(this.addsitemap(request, url));
+				Collections.sort(entries);
+				Collections.reverse(entries);
+				feed.setEntries(entries.subList(0, 10));
+				// }
 			}
 
+			request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/plain; charset=utf-8");
 			Writer writer = response.getWriter();
 			SyndFeedOutput output = new SyndFeedOutput();
 			output.output(feed, writer);
@@ -240,8 +244,8 @@ public class RSSGenServlet extends HttpServlet {
 
 				queryCriteria.setFromDate("2000-01-01");// from begin
 
-				ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService",
-						this.getServletContext());
+				ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil
+						.getService("forumMessageQueryService", this.getServletContext());
 				pi = forumMessageQueryService.getThreads(queryCriteria, start, count);
 			}
 		} else {
@@ -250,8 +254,8 @@ public class RSSGenServlet extends HttpServlet {
 			resultSort.setOrder_DESCENDING();
 			threadListSpec.setResultSort(resultSort);
 
-			ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService",
-					this.getServletContext());
+			ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil
+					.getService("forumMessageQueryService", this.getServletContext());
 			pi = forumMessageQueryService.getThreads(start, count, threadListSpec);
 		}
 
@@ -265,7 +269,7 @@ public class RSSGenServlet extends HttpServlet {
 		return entries;
 
 	}
-	
+
 	private List<SyndEntrySorted> addsitemap(HttpServletRequest request, String url) {
 		String startS = request.getParameter("start");
 		if (UtilValidate.isEmpty(startS)) {
@@ -282,7 +286,8 @@ public class RSSGenServlet extends HttpServlet {
 		List<SyndEntrySorted> entries = new ArrayList<SyndEntrySorted>();
 
 		PageIterator pi = null;
-		SitemapRepository sitemapRepository = (SitemapRepository) WebAppUtil.getComponentInstance("sitemapRepository", servletContext);
+		SitemapRepository sitemapRepository = (SitemapRepository) WebAppUtil.getComponentInstance("sitemapRepository",
+				servletContext);
 		try {
 			pi = sitemapRepository.getUrls(start, count);
 		} catch (Exception e) {
@@ -290,16 +295,16 @@ public class RSSGenServlet extends HttpServlet {
 		}
 
 		SitemapService entityFactory = (SitemapService) WebAppUtil.getService("sitemapService", servletContext);
-			
+
 		while (pi.hasNext()) {
-			Url urlsm = (Url)entityFactory.getUrl((Long) pi.next());			
+			Url urlsm = (Url) entityFactory.getUrl((Long) pi.next());
 			addSitemapUrl(url, entries, urlsm, request);
 		}
 
 		return entries;
 
 	}
-	
+
 	private void addSitemapUrl(String url, List<SyndEntrySorted> entries, Url urlsm, HttpServletRequest request) {
 		try {
 			SyndEntrySorted entry = new SyndEntrySorted();
@@ -321,16 +326,15 @@ public class RSSGenServlet extends HttpServlet {
 		}
 	}
 
-	
-
 	private Account getAccount(HttpServletRequest request, String username) {
-		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", this.getServletContext());
+		AccountService accountService = (AccountService) WebAppUtil.getService("accountService",
+				this.getServletContext());
 		return accountService.getAccountByName(username);
 	}
 
 	public ForumThread getForumThread(HttpServletRequest request, Long key) {
-		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService", this
-				.getServletConfig().getServletContext());
+		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil
+				.getService("forumMessageQueryService", this.getServletConfig().getServletContext());
 		try {
 			return forumMessageQueryService.getThread(key);
 		} catch (Exception e) {
@@ -340,12 +344,13 @@ public class RSSGenServlet extends HttpServlet {
 	}
 
 	public ForumMessage getForumMessage(HttpServletRequest request, Long key) {
-		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", this.getServletContext());
+		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService",
+				this.getServletContext());
 		return forumMessageService.getMessage(key);
 	}
 
-
-	private void addMessage(String url, List<SyndEntrySorted> entries, ForumMessage message, HttpServletRequest request) {
+	private void addMessage(String url, List<SyndEntrySorted> entries, ForumMessage message,
+			HttpServletRequest request) {
 		try {
 			SyndEntrySorted entry = new SyndEntrySorted();
 			entry.setTitle(message.getMessageVO().getSubject());
@@ -382,15 +387,15 @@ public class RSSGenServlet extends HttpServlet {
 
 	private String getItemLink(String url, ForumMessage message, HttpServletRequest request) {
 
-				String relativeLink = "/" + message.getForumThread().getThreadId().toString();
-				return url + relativeLink;
-		
+		String relativeLink = "/" + message.getForumThread().getThreadId().toString();
+		return url + relativeLink;
+
 	}
 
 	public void destroy() {
 		super.destroy();
 	}
-	
+
 	private class SyndEntrySorted extends SyndEntryImpl implements Comparable<SyndEntry> {
 
 		private static final long serialVersionUID = 1L;
@@ -399,6 +404,6 @@ public class RSSGenServlet extends HttpServlet {
 		public int compareTo(SyndEntry syndEntry2) {
 			return getPublishedDate().compareTo(syndEntry2.getPublishedDate());
 		}
-		
+
 	}
 }
