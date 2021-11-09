@@ -19,10 +19,12 @@ import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.TreeSet;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 /**
@@ -56,22 +58,28 @@ public class ThreadDigList {
 	}
 
 	public PageIterator getPageIterator(int start, int count) {
-		List<Long> threads = sortedAll.stream().skip(start).limit(count).collect(Collectors.toList
-				());
+		List<Long> threads = sortedAll.stream().skip(start).limit(count).collect(Collectors.toList());
+		return new PageIterator(sortedAll.size(), threads.toArray());
+	}
+
+	public PageIterator getRandomPageIterator(int count) {
+		List<Long> threads = new ArrayList<>();
+		for (int i = 0; i < count; i++) {
+			int randstart = ThreadLocalRandom.current().nextInt(sortedAll.size());
+			threads.addAll(sortedAll.stream().skip(randstart).limit(1).collect(Collectors.toList()));
+		}
 		return new PageIterator(sortedAll.size(), threads.toArray());
 	}
 
 	public Collection<ForumThread> getDigs() {
-		return sortedWindows.stream().limit(DigsListMAXSize).map
-				(forumMessageQueryService::getThread).collect(Collectors.toList());
+		return sortedWindows.stream().limit(DigsListMAXSize).map(forumMessageQueryService::getThread)
+				.collect(Collectors.toList());
 
 	}
-
 
 	public void clear() {
 		sortedAll.clear();
 		sortedWindows.clear();
 	}
-
 
 }

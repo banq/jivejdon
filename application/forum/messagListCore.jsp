@@ -272,7 +272,10 @@
 <script>
   var start = 0;
   var count = 5;  
-  var allCount = <bean:write name="allCount"/>; 
+  var allCount = 0;
+  <logic:notEmpty name="threadsInMemallCount">
+    allCount = <bean:write name="threadsInMemallCount"/>; 
+  </logic:notEmpty>
 </script>
 <script src="https://static.jdon.com/common/messageList9.js"></script>
 <script>        

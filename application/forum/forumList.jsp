@@ -7,6 +7,22 @@
 
 <bean:define id="title"  value="编程道场Coding Dojos" />
 <%@ include file="../common/IncludeTop.jsp" %>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-7573657117119544",
+            enable_page_level_ads: true
+        });
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-32868073-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-32868073-1');
+    </script>
 <link rel="alternate" type="application/rss+xml" title="<bean:write name="title" />" href="/rss/messages" />
 <meta http-equiv="refresh" content="3600">
 <script>
@@ -28,7 +44,39 @@
 <div id="page-content" class="single-page container">
 		<div class="row">
 			<!-- /////////////////左边 -->
-			<div id="main-content" class="col-md-8">
+           <div id="sidebar" class="col-md-4">
+				<!---- Start Widget ---->
+				<div class="widget wid-follow">
+					<div class="content">
+						<ul class="list-inline">
+<form role="form" class="form-horizontal" method="post" action="/query/threadViewQuery.shtml">
+								<input type="text" placeholder="Search" value="" name="query" id="v_search" class="form-control">
+							</form>
+						</ul>						
+					</div>
+				</div>
+
+                 <!---- Start tags ---->
+                 <%-- <div class="widget wid-post">
+                     <div class="info">
+                         <jsp:include page="/query/tagHotList.shtml" flush="true"></jsp:include>
+                     </div>
+                 </div> --%>
+			
+				<!---- Start Widget ---->
+				<div class="widget">
+					    <div class="wid-vid">
+						   <ul>
+								 <div>
+                  <jsp:include page="/query/threadRandomDigList.shtml?count=15" flush="true"></jsp:include>
+                 </div>    
+							</ul>
+							</div>
+				</div>
+		
+		</div>			
+			<!-- /////////////////右边 -->
+            <div id="main-content" class="col-md-8">
 				<div class="box">		
                      <table class="table table-striped">
 	 <thead>
@@ -71,38 +119,7 @@
 </table>
                </div>	
 			</div>
-			<!-- /////////////////右边 -->
-             <div id="sidebar" class="col-md-4">
-				<!---- Start Widget ---->
-				<div class="widget wid-follow">
-					<div class="content">
-						<ul class="list-inline">
-<form role="form" class="form-horizontal" method="post" action="/query/threadViewQuery.shtml">
-								<input type="text" placeholder="Search" value="" name="query" id="v_search" class="form-control">
-							</form>
-						</ul>						
-					</div>
-				</div>
-
-                 <!---- Start tags ---->
-                 <%-- <div class="widget wid-post">
-                     <div class="info">
-                         <jsp:include page="/query/tagHotList.shtml" flush="true"></jsp:include>
-                     </div>
-                 </div> --%>
-			
-				<!---- Start Widget ---->
-				<div class="widget">
-					    <div class="wid-vid">
-						   <ul>
-								 <div>
-                  <jsp:include page="/query/threadNewList.shtml?count=17" flush="true"></jsp:include>
-                 </div>    
-							</ul>
-							</div>
-				</div>
-		
-		</div>
+        
 	
 	   </div>
 </div>

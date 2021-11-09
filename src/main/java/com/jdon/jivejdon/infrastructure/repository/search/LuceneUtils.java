@@ -11,9 +11,6 @@ public class LuceneUtils {
     private static Directory directory;
     private static Analyzer analyzer;
 
-    private LuceneUtils() {
-    }
-
     static {
         try {
             directory = FSDirectory.open(new File("/temp/jivejdonLuceneDB"));

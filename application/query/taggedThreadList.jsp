@@ -17,6 +17,22 @@ String titleStr = (String)request.getAttribute("TITLE");
 pageContext.setAttribute("title", titleStr);
 %>
       <%@ include file="../common/IncludeTop.jsp" %>
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-7573657117119544",
+            enable_page_level_ads: true
+        });
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-32868073-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-32868073-1');
+    </script>
 		 
 	<!-- /////////////////////////////////////////Content -->
 <div id="page-content" class="single-page container">
@@ -189,7 +205,7 @@ pageContext.setAttribute("title", titleStr);
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
 <bean:define id="pageallCount" name="threadListForm" property="allCount" />
-<%  
+<%-- <%  
     int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
     int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
     int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
@@ -221,7 +237,7 @@ function scrollLoader(url){
    });
 }
 scrollLoader('/query/taggedThreadList.shtml?tagID=<bean:write name="tagID" />');   
-</script>   
+</script>    --%>
 </body>
 </html>
 </logic:notEqual>    
