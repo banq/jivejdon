@@ -205,7 +205,7 @@ pageContext.setAttribute("title", titleStr);
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
 <bean:define id="pageallCount" name="threadListForm" property="allCount" />
-<%  
+<%-- <%  
     int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
     int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
     int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
@@ -237,7 +237,7 @@ function scrollLoader(url){
    });
 }
 scrollLoader('/query/taggedThreadList.shtml?tagID=<bean:write name="tagID" />');   
-</script>   
+</script>    --%>
 </body>
 </html>
 </logic:notEqual>    

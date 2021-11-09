@@ -142,7 +142,7 @@ pageContext.setAttribute("title", titleStr);
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
 <bean:define id="pageallCount" name="threadListForm" property="allCount" />
-<%  
+<%-- <%  
     int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
     int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
     int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
@@ -179,7 +179,7 @@ function scrollLoader(url){
 <logic:empty name="forum" property="name">
   scrollLoader('/forum/threadList.shtml');   
 </logic:empty>
-</script>   
+</script>    --%>
 </body>
 </html>
 </logic:notEqual>    
