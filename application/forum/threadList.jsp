@@ -83,41 +83,41 @@ pageContext.setAttribute("title", titleStr);
 			<!-- /////////////////左边 -->
 			<div id="main-content" class="col-md-12">
 				<div class="box">	
-			 <logic:empty name="forum" property="forumId">
-					<ul class="nav nav-tabs">
+<ul class="nav nav-tabs">        
   <li class="active"><a href="#">最新</a></li>
-  <li><a href="<%=request.getContextPath()%>/approval" rel="nofollow">精华</a></li>
+  <li><a href="<%=request.getContextPath()%>/approval">精华</a></li>
   <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">回复</a></li>
   <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">点赞</a></li>            
-  <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" rel="nofollow">搜索</a></li>
-	<div class="tres" style="float: right;">
-     
+  <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" rel="nofollow">搜索</a></li>  
+  <div class="tres" style="float: right;">       
+			 <logic:empty name="forum" property="forumId">						        
           <MultiPagesREST:pager actionFormName="threadListForm" page="/threads" >
             <MultiPagesREST:prev name=" 上一页 " />
             <MultiPagesREST:index displayCount="3" />
             <MultiPagesREST:next  name=" 下一页 " />
-          </MultiPagesREST:pager>
+          </MultiPagesREST:pager>          
         </logic:empty>
-        <logic:notEmpty name="forum" property="forumId">
-			<div class="tres" style="float: right;">
+        <logic:notEmpty name="forum" property="forumId">			    
           <MultiPagesREST:pager actionFormName="threadListForm" page="/forum" paramId="forum" paramName="forum" paramProperty="forumId">
             <MultiPagesREST:prev name=" 上一页 " />
             <MultiPagesREST:index displayCount="3" />
             <MultiPagesREST:next  name=" 下一页 " />
           </MultiPagesREST:pager>
-        </logic:notEmpty>
-         有<b>
-        <bean:write name="threadListForm" property="allCount"/>
-        </b>贴
-     
-      </div>
-	</ul>              
+           有<b><bean:write name="threadListForm" property="allCount"/></b>贴          
+        </logic:notEmpty>           
+  </div>                                  
+</ul>        
 </logic:notEqual>    
    <%@ include file="threadListCore.jsp" %>
 <logic:notEqual name="noheader" value="on">       
   <div id="nextPageContent"></div>
-  
-	<div class="tres">
+  <ul class="nav nav-tabs">
+  <li class="active"><a href="#">最新</a></li>
+  <li><a href="<%=request.getContextPath()%>/approval">精华</a></li>
+  <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">回复</a></li>
+  <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">点赞</a></li>            
+  <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" rel="nofollow">搜索</a></li>  
+	  <div class="tres" style="float: right;">
                     <logic:empty name="forum" property="forumId">
                       <MultiPagesREST:pager actionFormName="threadListForm" page="/threads" >
                         <MultiPagesREST:prev name=" 上一页 " />
@@ -132,7 +132,9 @@ pageContext.setAttribute("title", titleStr);
                         <MultiPagesREST:next  name=" 下一页 " />
                       </MultiPagesREST:pager>
                     </logic:notEmpty>
-                  </div>
+    </div>
+  </ul>   
+
 				</div>
             </div>	
 	</div>

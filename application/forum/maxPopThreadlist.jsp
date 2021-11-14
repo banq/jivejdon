@@ -64,7 +64,7 @@ pageContext.setAttribute("title", titleStr);
 				<div class="box">	
 					<ul class="nav nav-tabs">
   <li ><a href="<%=request.getContextPath()%>/threads">最新</a></li>
-  <li><a href="<%=request.getContextPath()%>/approval" rel="nofollow">精华</a></li>  
+  <li><a href="<%=request.getContextPath()%>/approval">精华</a></li>  
   <li class="active"><a href="#">按回复数排序</a></li>
   <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">点赞</a></li>	
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" rel="nofollow">搜索</a></li>
@@ -89,7 +89,7 @@ pageContext.setAttribute("title", titleStr);
 <logic:notEqual name="noheader" value="on">       
   <div id="nextPageContent"></div>
       
-	    	         <div class="tres">有<b>
+	    	         <div class="tres" style="float: right;">有<b>
                     <bean:write name="threadListForm" property="allCount"/>
                     </b>贴
                     <logic:empty name="forum" property="forumId">
@@ -121,6 +121,7 @@ pageContext.setAttribute("title", titleStr);
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
 <bean:define id="pageallCount" name="threadListForm" property="allCount" />
+<%-- 
 <%  
     int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
     int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
@@ -154,6 +155,7 @@ function scrollLoader(url){
 }
 scrollLoader('/forum/maxPopThreadlist.shtml?dateRange=100000');   
 </script>   
+--%>
 </body>
 </html>
 </logic:notEqual>    
