@@ -188,10 +188,8 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 		Collection<MessageSearchSpec> result = new ArrayList<MessageSearchSpec>();
 
 		MessageSearchSpec messageSearchSpec = null;
-		try {
-
-			// 索引读取器
-			IndexReader indexReader = DirectoryReader.open(LuceneUtils.getDirectory());
+		// 索引读取器
+		try (IndexReader indexReader = DirectoryReader.open(LuceneUtils.getDirectory())) {
 			// 索引搜索器
 			IndexSearcher indexSearcher = new IndexSearcher(indexReader);
 			// 给出要查询的关键字
