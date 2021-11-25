@@ -91,7 +91,7 @@
 <logic:notEqual name="noheader" value="on">       
   <div id="nextPageContent"></div>
 
-          <div class="pagination">
+          <div class="pagination" style="float: right;">
             <MultiPagesREST:pager actionFormName="threadListForm" page="/approval">
               <MultiPagesREST:prev name=" 上一页 "/>
               <MultiPagesREST:next name=" 下一页 "/>
