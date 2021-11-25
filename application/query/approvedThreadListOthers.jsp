@@ -188,7 +188,7 @@
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
 <bean:define id="pageallCount" name="threadListForm" property="allCount" />
-<%  
+<%--
     int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
     int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
     int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
@@ -196,7 +196,7 @@
     if(pageAllcountInt % pageCountInt !=0){ 
         pageNo = pageNo + 1;
     }    
-%>
+
 <script>
 function scrollLoader(url){
   var start = "<%=pageStartInt+pageCountInt%>";
@@ -221,6 +221,7 @@ function scrollLoader(url){
 }
 scrollLoader('/query/approvedListOther.shtml');   
 </script>   
+--%>
 </body>
 </html>
 </logic:notEqual>    
