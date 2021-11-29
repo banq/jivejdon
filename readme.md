@@ -2,8 +2,6 @@
 
 Jivejdon is a wordpress-like Blog/Forum and production-ready application with DDD + DomainEvents/Event Soucing/CQRS + clean architecture/Hexagonalarchitecture, powered by [jdonframework](https://github.com/banq/jdonframework) . [online](https://www.jdon.com/forum/)
 
-chinese Book : [here](https://union-click.jd.com/jdc?e=&p=AyIGZRhfHQARDlMTWRUyEgZUGF8VABYAUR5aFgMiQwpDBUoyS0IQWhkeHAxBFQQAQB1AWQkFGk1dRFkRdQtUWgxxAV4pVEBkRAtfGhtASEM7Qw4ZAhMGVh9bFwYVA1AaWBQVRUQLR1dHQ1AQAlgFSQ5ARhcrExAGb0UNHV12RlJcV24lfkFmXgBtKxkOIgZlGV8QBhsEXB5rJQIVNxR1WxQGFQRTGlolAyIHUhtdHAsRBVAfWxAEIgBVEmvMlIDf5blrJTIRN2UrWyUBIkU7H18VBxoAAhxTFAURAlEaDkUBEQBSS10XVxQHURpSQQQiBVQaXxw%3D)
-
 # Domain centric Architecture
 
 Domain centric architecture is a new way to design the morden world entreprise applications.
@@ -216,6 +214,8 @@ mvn clean install -U
 ```
 
 if clone error, please remove all downloaded files in Maven local repository and try "mvn clean install -U" again, or clone from https://gitee.com/banqjdon/jivejdon
+
+if Unable to download com.jdon dependency, Pls. replace en.jdon.com with cdn.jdon.com in pom.xml
 
 if mvn compile error, please configure your mirror Maven center repository.
 
