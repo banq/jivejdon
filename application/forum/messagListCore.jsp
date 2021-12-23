@@ -280,7 +280,7 @@
 <script src="https://static.jdon.com/common/messageList9.js"></script>
 <script>        
   $(document).ready(function() { 
-      scrollLoadByElementId('https://cdn.jdon.com/query/threadDigList',"digList");            
+      scrollLoadByElementId('/query/threadDigList',"digList");            
       $('.reblogfrom').each(function(i, obj) {        
         scrollLoadByElementId('/forum/thread.shtml?threadId='+ obj.id,obj.id); 
       });
