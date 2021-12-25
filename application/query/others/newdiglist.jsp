@@ -5,7 +5,7 @@
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <% 
-com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(10 * 60, request, response);
+com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(1 * 60 * 60, request, response);
 %>
 <div>
 <bean:parameter id="start" name="start" value="0"/>
