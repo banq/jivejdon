@@ -5,7 +5,7 @@
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <% 
-com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(6 * 60 * 60, request, response);
+com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(240 * 60 * 60, request, response);
 %>
 <a href="<%=request.getContextPath()%>/forum/threadDigSortedList"><b>点赞</b></a>
 <div class="important" >
