@@ -5,7 +5,7 @@
 <%@ taglib uri="/WEB-INF/MultiPages.tld" prefix="MultiPages" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<bean:define id="title"  value="编程道场Coding Dojos" />
+<bean:define id="title"  value="编程道场Coding Dojo" />
 <%@ include file="../common/IncludeTop.jsp" %>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>

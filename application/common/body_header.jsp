@@ -11,7 +11,7 @@
                 <div class="col-md-12 ">
                     <a href="/"><img src="//static.jdon.com/simgs/jdon100.png" width="100" height="40" loading="lazy"/></a>
                     <span class="list-inline top-link link" style="float:right;">
-				        <a href="<%=request.getContextPath() %>/forum"><i class="fa fa-home"></i>道场</a>
+				        <a href="<%=request.getContextPath() %>/forum"><i class="fa fa-home"></i>Dojo</a>
 						<a href="<%=request.getContextPath() %>/threads"><i class="fa fa-list-ul"></i>最新</a>
 						<a href="<%=request.getContextPath() %>/tags"><i class="fa fa-star-half-full"></i>推荐</a>
 						<a href="<%=request.getContextPath() %>/query/threadViewQuery.shtml"><i class="fa fa-search"></i>搜索</a>
