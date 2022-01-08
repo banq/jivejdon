@@ -89,7 +89,7 @@ function Juge(theForm)
 <tr><td>
     验证码：</td><td>
             <input type="text" name="registerCode" size="10" maxlength="50" >
-            <html:img page="/account/registerCodeAction" border="0" />
+            <html:img page="/account/protected/registerCodeAction" border="0" />
   </td></tr>
   
 <tr><td colspan="2" align="center">

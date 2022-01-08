@@ -26,9 +26,9 @@ if (errorBlocker.checkCount(request.getRemoteAddr(), 10)){
     </head>
     <body>
         哦，您看累了吧，该休息一会儿了，不知您是不是机器爬虫呢？验证成功后，请活动一下再来：
-        <form action="<%=request.getContextPath() %>/account/registerCodeAction" name="vform">
+        <form action="<%=request.getContextPath() %>/account/protected/registerCodeAction" name="vform">
             <br>输入验证码：<input type="text" name="registerCode" size="10" maxlength="10">
-            <img id="theImg" src="<%=request.getContextPath()%>/account/registerCodeAction" border="0" width="60" height="20"/>
+            <img id="theImg" src="<%=request.getContextPath()%>/account/protected/registerCodeAction" border="0" width="60" height="20"/>
             <input type="submit" value="验证">
             <br>如果很不幸没看到验证码，请稍后再访问，谢谢。
             <p>

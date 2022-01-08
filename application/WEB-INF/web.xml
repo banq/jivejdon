@@ -174,7 +174,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RandomcodeServlet</servlet-name>
-        <url-pattern>/account/registerCodeAction</url-pattern>
+        <url-pattern>/account/protected/registerCodeAction</url-pattern>
     </servlet-mapping>
 
 

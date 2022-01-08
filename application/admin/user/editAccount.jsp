@@ -102,7 +102,7 @@ function checkUsername(){
                      <th align="right">验证码:</th>
                      <td align="left">
                        <input type="text" name="registerCode" size="10" maxlength="50" >
-                       <html:img page="/account/registerCodeAction" border="0" />
+                       <html:img page="/account/protected/registerCodeAction" border="0" />
                     </td>
                  </tr>
   

@@ -89,11 +89,11 @@ public class RegisterCodeAction extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (!isPermitted(request)) {
-			Debug.logError(" is not Permitted ", module);
-			response.sendError(404);
-			return;
-		}
+		// if (!isPermitted(request)) {
+		// Debug.logError(" is not Permitted ", module);
+		// response.sendError(404);
+		// return;
+		// }
 
 		// if it is a robot, not output
 		if (isRobot(request)) {

@@ -57,7 +57,7 @@
 			</td>
 			<td><input type="text" name="registerCode" size="10"
 				maxlength="50" tabindex="102"> <html:img
-				page="/account/registerCodeAction" border="0" /> <br>
+				page="/account/protected/registerCodeAction" border="0" /> <br>
 			</td>
 		</tr>
 	</table>
