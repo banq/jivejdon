@@ -13,7 +13,7 @@
                     <span class="list-inline top-link link" style="float:right;">
 				        <a href="<%=request.getContextPath() %>/forum"><i class="fa fa-home"></i>Dojo</a>
 						<a href="<%=request.getContextPath() %>/threads"><i class="fa fa-list-ul"></i>最新</a>
-						<a href="<%=request.getContextPath() %>/tags"><i class="fa fa-star-half-full"></i>推荐</a>
+						<a href="<%=request.getContextPath() %>/tags"><i class="fa fa-star-half-full"></i>话题</a>
 						<a href="<%=request.getContextPath() %>/query/threadViewQuery.shtml"><i class="fa fa-search"></i>搜索</a>
 						<a href="<%=request.getContextPath() %>/followus.html"><i class="fa fa-feed"></i>订阅</a>
                          <%--<%if (request.getSession(false) == null){%> --%>
