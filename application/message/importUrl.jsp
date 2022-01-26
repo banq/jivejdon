@@ -12,16 +12,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
  <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css"  type="text/css">
+    <link rel="stylesheet" href="https://static.jdon.com/js/bootstrap.min.css"  type="text/css">
 	<!-- Custom Fonts -->
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"  type="text/css">
+    <link rel="stylesheet" href="https://static.jdon.com/js/font-awesome.min.css"  type="text/css">
 	<!-- Custom CSS -->
     <link rel="stylesheet" href="https://static.jdon.com/common/js/styles/style.css">
   <!-- jQuery and Modernizr-->
-  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>
 
   <!-- Core JavaScript Files -->
-  <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="https://static.jdon.com/js/bootstrap.min.js"></script>
   <script src="//static.jdon.com/common/login2.js"></script>
 <title>享道</title>
 <%-- 

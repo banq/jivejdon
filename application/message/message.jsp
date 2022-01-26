@@ -10,10 +10,10 @@
 <bean:define id="title" name="forum" property="name" />
 <%@ include file="../common/IncludeTop.jsp" %>
   <!-- jQuery and Modernizr-->
-  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>
 
   <!-- Core JavaScript Files -->
-  <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="https://static.jdon.com/js/bootstrap.min.js"></script>
 <%
 response.setHeader("Pragma", "No-cache");
 response.setHeader("Cache-Control", "no-store");
