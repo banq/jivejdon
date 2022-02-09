@@ -128,7 +128,7 @@ CREATE TABLE upload (
   contentType         varchar(50) default '',
   PRIMARY KEY  (objectId),
   KEY messageId (messageId)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+) ;
 
 CREATE TABLE tag (
   tagID         BIGINT NOT NULL,

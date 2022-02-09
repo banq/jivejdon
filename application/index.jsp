@@ -133,7 +133,7 @@
 
       <div class="box"> 
 	    <div class="tres center">        
-           <html:link page="/approval"><b>更多精华</b></html:link>
+           每日更新 <html:link page="/approval"><b>更多精华</b></html:link>
 		</div>
       </div>
 		  
