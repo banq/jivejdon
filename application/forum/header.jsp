@@ -44,7 +44,7 @@ String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
         gtag('config', 'UA-32868073-1');
     </script>
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://static.jdon.com/js/bootstrap.min.css"  type="text/css">
+    <link rel="stylesheet" href="https://libs.baidu.com/bootstrap/3.1.1/css/bootstrap.min.css"  type="text/css">
     <!-- Custom Fonts -->
     <link rel="stylesheet" href="https://static.jdon.com/js/font-awesome.min.css"  type="text/css">
     <!-- Custom CSS -->

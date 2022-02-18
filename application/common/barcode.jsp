@@ -20,7 +20,7 @@ if (request.getParameter("threadId") != null){
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex">
-<script type="text/javascript" src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="/common/js/jquery-qrcode-min.js"></script>
 <style>
 body {
