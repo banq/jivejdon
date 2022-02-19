@@ -33,17 +33,20 @@
       <!-- /////////////////左边 -->
       <div id="main-content" class="col-md-8">
         <div class="box"> 
-        <!-- 填写 -->
-			
-<center> <h3>推荐热点精华</h3> </center>
-
-          <div class="pagination">
+<ul class="nav nav-tabs">        
+  <li><a href="<%=request.getContextPath()%>/threads">最新</a></li>
+  <li class="active"><a href="#">精华</a></li>
+  <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">回复</a></li>
+  <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">点赞</a></li>            
+  <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" rel="nofollow">搜索</a></li>  
+          
+          <div class="pagination" style="float: right;">
 <MultiPagesREST:pager actionFormName="threadListForm" page="/approval" >
 <MultiPagesREST:prev name=" 上一页 " />
 <MultiPagesREST:next  name=" 下一页 " />
 </MultiPagesREST:pager>
           </div>
-
+</ul>   
             <div class="box">
                 <div class="linkblock">
                     <div class="row">
