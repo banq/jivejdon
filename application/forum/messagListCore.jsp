@@ -186,7 +186,7 @@
       <div class="widget wid-post">
         <div class="content">
           <div class="wrap-vid">
-			      <div class="thumbn"><img src="//static.jdon.com/simgs/forum/ddd-book.png" class="thumbnail" loading="lazy"></div> 
+			      <div class="thumbn"><img src="//cdn.jdon.com/simgs/forum/ddd-book.png" class="thumbnail" loading="lazy"></div> 
 						<p><br>本站原创<br><a href="/54881" target="_blank">《复杂软件设计之道：领域驱动设计全面解析与实战》</a></p>
           </div>
         </div>
@@ -268,7 +268,7 @@
   <%-- include LAB.js --%>
   <%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
-<script src="https://static.jdon.com/common/login2.js"></script>
+<script src="https://cdn.jdon.com/common/login2.js"></script>
 <script>
   var start = 0;
   var count = 5;  
@@ -277,7 +277,7 @@
     allCount = <bean:write name="threadsInMemallCount"/>; 
   </logic:notEmpty>
 </script>
-<script src="https://static.jdon.com/common/messageList9.js"></script>
+<script src="https://cdn.jdon.com/common/messageList9.js"></script>
 <script>        
   $(document).ready(function() { 
       scrollLoadByElementId('https://cdn.jdon.com/query/threadDigList',"digList");            

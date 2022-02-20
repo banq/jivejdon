@@ -11,9 +11,9 @@
 <title>
 编辑注册资料
 </title>
-  <link rel="stylesheet" href="//static.jdon.com/common/jivejdon5.css" type="text/css"/>
+  <link rel="stylesheet" href="//cdn.jdon.com/common/jivejdon5.css" type="text/css"/>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-  <script type="text/javascript" src="//static.jdon.com/common/js/prototype.js"></script>
+  <script type="text/javascript" src="//cdn.jdon.com/common/js/prototype.js"></script>
 <body>
 <html:errors/>
 

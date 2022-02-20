@@ -58,8 +58,8 @@
             contextpath = "<%=request.getContextPath()%>";
         </script>
         <script language="javascript"
-                src="//static.jdon.com/forum/js/threadList.js"></script>
-      <link href="//static.jdon.com/common/mListAll.css" rel="stylesheet" type="text/css"/>
+                src="//cdn.jdon.com/forum/js/threadList.js"></script>
+      <link href="//cdn.jdon.com/common/mListAll.css" rel="stylesheet" type="text/css"/>
 
         <div class="tres">
           <MultiPages:pager actionFormName="messageListForm"

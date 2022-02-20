@@ -13,7 +13,7 @@
     if (top !== self) top.location = self.location;
     contextpath = "<%=request.getContextPath()%>";
 </script>
-<link href="<html:rewrite page="//static.jdon.com/common/mListAll.css"/>" rel="stylesheet"
+<link href="<html:rewrite page="//cdn.jdon.com/common/mListAll.css"/>" rel="stylesheet"
       type="text/css"/>
 
 

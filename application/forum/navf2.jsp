@@ -23,7 +23,7 @@ response.setDateHeader("Expires", 0);
   <script src="https://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
   <!-- Core JavaScript Files -->
   <script src="https://libs.baidu.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  <script src="https://static.jdon.com/common/js/waitingfor.js"></script>
+  <script src="https://cdn.jdon.com/common/js/waitingfor.js"></script>
 </head>
 <body>
 <script>
