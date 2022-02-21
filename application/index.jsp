@@ -13,6 +13,13 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PFPM5XC');</script>
+<!-- End Google Tag Manager -->
   <meta charset="utf-8" />
   <link rel="preconnect" href="https://adservice.google.com/">
   <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
@@ -47,6 +54,10 @@
   <link rel="stylesheet" href="https://cdn.jdon.com/common/js/styles/style.css">
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFPM5XC"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 <%@ include file="./common/body_header.jsp" %>
 
 	<!-- /////////////////////////////////////////Content -->
