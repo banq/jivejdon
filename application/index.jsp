@@ -89,8 +89,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				   //document.getElementById("home-thumbnai").src = document.getElementById("home-thumbnai").getAttribute("data-src") ;
 				   $("#home-thumbnai").attr('src',$("#home-thumbnai").attr('data-src'));
 	          else
-                   //document.getElementById("home-thumbnai").src = "https://cdn.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
-                   $("#home-thumbnai").attr('src','https://cdn.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg');
+                   //document.getElementById("home-thumbnai").src = "https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
+                   $("#home-thumbnai").attr('src','https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg');
 </script>
 -->
 </div>
