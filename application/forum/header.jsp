@@ -59,12 +59,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <script src="https://cdn.jdon.com/js/html5shiv.min.js"></script>
         <script src="https://cdn.jdon.com/js/respond.min.js"></script>
     <![endif]-->
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://libs.baidu.com/bootstrap/3.1.1/css/bootstrap.min.css"  type="text/css">
-    <!-- Custom Fonts -->
-    <link rel="stylesheet" href="https://cdn.jdon.com/js/font-awesome.min.css"  type="text/css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="https://cdn.jdon.com/common/js/styles/style.css">  
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
