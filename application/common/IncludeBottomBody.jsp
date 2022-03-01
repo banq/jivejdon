@@ -53,6 +53,13 @@
 		</div>
 	</footer>
 	<!-- Footer -->
+	<!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://libs.baidu.com/bootstrap/3.1.1/css/bootstrap.min.css"  type="text/css">
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="https://cdn.jdon.com/js/font-awesome.min.css"  type="text/css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdn.jdon.com/common/js/styles/style.css">  
+
 	<!-- jQuery and Modernizr-->
 	<script src="https://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>	
 	<!-- Core JavaScript Files -->  	 

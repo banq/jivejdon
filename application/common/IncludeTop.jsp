@@ -20,13 +20,7 @@
         <script src="https://cdn.jdon.com/js/html5shiv.min.js></script>
         <script src="https://cdn.jdon.com/js/respond.min.js"></script>
     <![endif]-->    
-    <script src="//cdn.jdon.com/common/login2.js"></script>
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://libs.baidu.com/bootstrap/3.1.1/css/bootstrap.min.css"  type="text/css">
-    <!-- Custom Fonts -->
-    <link rel="stylesheet" href="https://cdn.jdon.com/js/font-awesome.min.css"  type="text/css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="https://cdn.jdon.com/common/js/styles/style.css">
+    <script src="//cdn.jdon.com/common/login2.js"></script>    
 </head>
 <body>
 <%@ include file="./body_header.jsp" %>
