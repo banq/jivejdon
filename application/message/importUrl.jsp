@@ -4,6 +4,7 @@
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@page import="com.jdon.jivejdon.util.ToolsUtil"%>
 <%@page import="com.jdon.jivejdon.presentation.form.MessageForm"%>
+<bean:parameter id="forumId" name="forumId" value="" />
 <!doctype html>
 <html>
 <head>
@@ -51,12 +52,7 @@ if (request.getParameter("url") != null)
 
 <center>
 <a name="post"></a>
-<jsp:include page="threadPost.jsp" flush="true">   
-   <jsp:param name="forumId">
-      <jsp:attribute name="value" >        
-     </jsp:attribute>
-   </jsp:param>   
-</jsp:include>
+<jsp:include page="threadPost.jsp" flush="true"/>   
 </center>
 <script>
 

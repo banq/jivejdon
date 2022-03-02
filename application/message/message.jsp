@@ -33,8 +33,8 @@ response.setStatus(HttpServletResponse.SC_OK);
 <html:hidden property="action" />
 <html:hidden property="messageId" />
 <html:hidden property="forumThread.threadId" />
-
-<div class="row">
+<html:hidden property="forum.forumId" />
+<%-- <div class="row">
 	<div class="col-md-6">       
         <div class="form-group">    
      <html:select name="messageForm" styleClass="form-control" property="forum.forumId" styleId="forumId_select">
@@ -46,7 +46,7 @@ response.setStatus(HttpServletResponse.SC_OK);
     </div>
     <div class="col-md-6">
     </div>
-</div>
+</div> --%>
 <logic:equal name="messageForm" property="authenticated"  value="false">
  <center>  <h2><font color="red" >对不起，现在没有权限操作本帖。</font> </h2></center>
 </logic:equal>   
@@ -105,5 +105,6 @@ response.setStatus(HttpServletResponse.SC_OK);
 <br>
 <br>
 <div></div>
+ <%@include file="../common/IncludeBottomBody.jsp"%>
 </body></html>
 
