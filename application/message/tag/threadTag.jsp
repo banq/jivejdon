@@ -82,5 +82,8 @@
              <bean:write name="forumThread" property="name"/></span></b></a>
 </div>
 
+ <%@include file="../../common/IncludeBottomBody.jsp"%>
+</body></html>
+
 
 
