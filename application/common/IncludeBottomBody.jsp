@@ -53,8 +53,8 @@
 		</div>
 	</footer>
 	<!-- Footer -->
-<!-- Bootstrap Core CSS -->
    <noscript id="deferred-styles">
+   <!-- Bootstrap Core CSS -->
 	<link rel="stylesheet" href="https://libs.baidu.com/bootstrap/3.1.1/css/bootstrap.min.css"  type="text/css">
 	<!-- Custom Fonts -->
     <link rel="stylesheet" href="https://cdn.jdon.com/js/font-awesome.min.css"  type="text/css">
