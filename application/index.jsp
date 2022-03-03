@@ -25,7 +25,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
   <link rel="preconnect" href="https://www.googletagservices.com/">
   <link rel="preconnect" href="https://tpc.googlesyndication.com/">  
-  <link rel="prefetch" href="//cdn.jdon.com/common/login2.js" />  
+  <link rel="prefetch" href="//static.jdon.com/common/login2.js" />  
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="https://libs.baidu.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
   <!-- Custom Fonts -->
@@ -292,7 +292,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		</div>
 	</div>
 	<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
-	<script src="//cdn.jdon.com/common/login2.js"></script>
+	<script src="//static.jdon.com/common/login2.js"></script>
 	<%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
 <%@ include file="./common/IncludeBottomBody.jsp" %> 
 <script src="/common/js/jquery.lazyload-any.js"></script>

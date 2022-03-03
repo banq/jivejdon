@@ -23,7 +23,7 @@
 
   <!-- Core JavaScript Files -->
   <script src="https://libs.baidu.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  <script src="//cdn.jdon.com/common/login2.js"></script>
+  <script src="//static.jdon.com/common/login2.js"></script>
 <title>享道</title>
 <%-- 
 <%@ include file="/common/security.jsp" %>

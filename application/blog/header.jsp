@@ -61,7 +61,7 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCache(expire, modelLastModified
   <link href="//cdn.jdon.com/common/blog/themes/default/style/blog.css" rel="stylesheet" type="text/css"/>
 <script src="//cdn.jdon.com/common/js/prototype.js"></script>
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
-<script src="//cdn.jdon.com/common/login2.js"></script>
+<script src="//static.jdon.com/common/login2.js"></script>
     <logic:present name="principal" >
 <script src="<html:rewrite page="/account/protected/js/account.jsp"/>"></script>
     </logic:present>
