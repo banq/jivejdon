@@ -25,11 +25,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
   <link rel="preconnect" href="https://www.googletagservices.com/">
   <link rel="preconnect" href="https://tpc.googlesyndication.com/">
-  <link rel="preload" as="style" href="https://cdn.jdon.com/fonts/fontawesome-webfont.eot">
-  <link rel="preload" as="style" href="https://cdn.jdon.com/fonts/fontawesome-webfont.svg">
-  <link rel="preload" as="style" href="https://cdn.jdon.com/fonts/fontawesome-webfont.ttf">
-  <link rel="preload" as="style" href="https://cdn.jdon.com/fonts/fontawesome-webfont.woff">
-  <link rel="preload" as="style" href="https://cdn.jdon.com/fonts/fontawesome-webfont.woff2">  
+  <link rel="preload" as="style" href="https://cdn.jdon.com/fonts/fontawesome-webfont.woff2?v=4.4.0">        
   <link rel="prefetch" href="//cdn.jdon.com/common/login2.js" />  
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="https://libs.baidu.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
