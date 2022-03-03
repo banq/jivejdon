@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://tpc.googlesyndication.com/">
     <link rel="preload" as="style" href="https://cdn.jdon.com/fonts/fontawesome-webfont.eot">
     <link rel="preload" as="style" href="https://cdn.jdon.com/fonts/fontawesome-webfont.svg">
-    <link rel="preload" as="style" href="https://cdn.jdon.com/fonts/fontawesome-webfont.tff">
+    <link rel="preload" as="style" href="https://cdn.jdon.com/fonts/fontawesome-webfont.ttf">
     <link rel="preload" as="style" href="https://cdn.jdon.com/fonts/fontawesome-webfont.woff">
     <link rel="preload" as="style" href="https://cdn.jdon.com/fonts/fontawesome-webfont.woff2">
     <!-- Bootstrap Core CSS -->
