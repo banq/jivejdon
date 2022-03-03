@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
     <link rel="preconnect" href="https://www.googletagservices.com/">
     <link rel="preconnect" href="https://tpc.googlesyndication.com/">
-    <link rel="preload" as="style" href="https://cdn.jdon.com/fonts/fontawesome-webfont.woff2?v=4.4.0">          
     <!-- Bootstrap Core CSS -->
 	<link rel="stylesheet" href="https://libs.baidu.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
 	<!-- Custom Fonts -->
