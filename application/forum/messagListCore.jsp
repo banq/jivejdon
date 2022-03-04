@@ -109,7 +109,7 @@
                            <div class="box">       
                            <div class="wrap-vid">
                               <div class="thumbn">
-                                 <img src="//cdn.jdon.com/simgs/thumb/<%=3 + i%>.jpg" border="0" class="thumbnail" loading="lazy">  
+                                 <img src="//static.jdon.com/simgs/thumb/<%=3 + i%>.jpg" border="0" class="thumbnail" loading="lazy">  
                               </div>  
                               <div class="widget">			 
                                  <div class="info">	
