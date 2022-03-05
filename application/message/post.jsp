@@ -14,6 +14,39 @@
   
 
 <%@include file="../common/IncludeBottom.jsp"%> 
+
+<!-- at first load jquery , cannot load jquery twice -->
+  <link rel="stylesheet" href="/common/autocomplete/jquery-ui.css" type="text/css">
+  <script src="/common/autocomplete/jquery-ui.js"></script>
+
+  <script>
+      $( function() {
+          $( "#searchV_0" ).autocomplete({
+              source: "/message/tags.shtml?method=tags",
+              minLength: 2,
+              delay: 1500
+          });
+          $( "#searchV_1" ).autocomplete({
+              source: "/message/tags.shtml?method=tags",
+              minLength: 2,
+              delay: 1500
+          });
+          $( "#searchV_2" ).autocomplete({
+              source: "/message/tags.shtml?method=tags",
+              minLength: 2,
+              delay: 1500
+          });
+          $( "#searchV_3" ).autocomplete({
+              source: "/message/tags.shtml?method=tags",
+              minLength: 2,
+              delay: 1500
+          });
+
+
+
+      } );
+  </script>
+
 <%
 if (request.getParameter("to") != null){
 %>

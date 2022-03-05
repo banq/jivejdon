@@ -10,18 +10,6 @@
 <bean:define id="title" value=" 添加标签"/>
 <%@ include file="../messageHeader.jsp" %>
 
-<link rel="stylesheet" href="/common/autocomplete/jquery-ui.css" type="text/css">
-<script src="/common/autocomplete/jquery-ui.js"></script>
-<script>
-    function loadAcJS(thisId) {
-       $("#" + thisId).autocomplete({
-            source: "/message/tags.shtml?method=tags",
-            minLength: 1,
-            autoFocus: false,
-            delay: 500
-        });
-    }
-</script>
 
 <bean:define id="ForumMessage" name="threadForm" property="rootMessage"/>
 
@@ -77,6 +65,20 @@
 </div>
 
  <%@include file="../../common/IncludeBottomBody.jsp"%>
+
+ 
+<link rel="stylesheet" href="/common/autocomplete/jquery-ui.css" type="text/css">
+<script src="/common/autocomplete/jquery-ui.js"></script>
+<script>
+    function loadAcJS(thisId) {
+       $("#" + thisId).autocomplete({
+            source: "/message/tags.shtml?method=tags",
+            minLength: 1,
+            autoFocus: false,
+            delay: 500
+        });
+    }
+</script>
 </body></html>
 
 
