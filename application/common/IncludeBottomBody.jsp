@@ -12,30 +12,9 @@
 						</div>
 					</div>
 					<div class="col-md-4 col-footer footer-2">
-						<div class="footer-heading"><h4>标签</h4></div>
-						<div class="content">
-							<a href="/tags/272">DDD</a>
-							<a href="/tags/249">软件架构</a>
-							<a href="/tags/619">软件观点</a>
-							<a href="/tags/9958">CQRS</a>
-							<a href="/tags/266">多层架构</a>
-							<a href="/tags/300">性能调优</a>
-							<a href="/tags/395">Java学习</a>
-							<a href="/tags/17268">EventSourcing</a>
-							<a href="/tags/25407">微服务</a>
-							<a href="/springboot.html">Spring Boot</a>
-							<a href="/tags/20358">Saga</a>
-							<a href="/tags/14594">Actor</a>
-							<a href="/tags/24484">Reactive</a>
-							<a href="/tags/210">数据库</a>
-							<a href="/agile.html">敏捷</a>
-							<a href="/tags/598">工作流</a>
-							<a href="/tags/1159">算法</a>
-							<a href="/tags/1093">分布式事务</a>
-						</div>
+									
 					</div>
 					<div class="col-md-4 col-footer footer-3">
-						<div class="footer-heading"><h4>网站列表</h4></div>
 						<div class="content">
 							<ul>
 								<li><a href="/followus.html">关注解道 </a></li>

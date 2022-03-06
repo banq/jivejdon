@@ -36,8 +36,8 @@
 <ul class="nav nav-tabs">        
   <li><a href="<%=request.getContextPath()%>/threads">最新</a></li>
   <li class="active"><a href="#">精华</a></li>
-  <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">回复</a></li>
-  <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">点赞</a></li>            
+  <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">最热</a></li>
+  <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">最佳</a></li>            
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" rel="nofollow">搜索</a></li>  
           
           <div class="pagination" style="float: right;">
