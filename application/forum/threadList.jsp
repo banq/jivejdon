@@ -113,9 +113,9 @@ pageContext.setAttribute("title", titleStr);
   <div id="nextPageContent"></div>
   <ul class="nav nav-tabs">
   <li class="active"><a href="#">最新</a></li>
-  <li><a href="<%=request.getContextPath()%>/approval">精华</a></li>
-  <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">回复</a></li>
-  <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">点赞</a></li>            
+  <li><a href="<%=request.getContextPath()%>/approval">最佳</a></li>
+  <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">最热</a></li>
+  <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">最赞</a></li>            
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" rel="nofollow">搜索</a></li>  
 	  <div class="tres" style="float: right;">
                     <logic:empty name="forum" property="forumId">

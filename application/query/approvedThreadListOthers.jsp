@@ -8,7 +8,7 @@
 <bean:parameter id="noheader" name="noheader"  value=""/>
 <logic:notEqual name="noheader" value="on">
 
-<bean:define id="title"  value=" 精华帖" />
+<bean:define id="title"  value=" 最佳精华文章 " />
 <%@ include file="../common/IncludeTop.jsp" %>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
