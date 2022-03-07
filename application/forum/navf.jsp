@@ -20,11 +20,11 @@ response.setDateHeader("Expires", 0);
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="robots" content="noindex">
   <!-- Bootstrap Core CSS -->
-  <link rel="stylesheet" href="https://libs.baidu.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="https://cdn.jdon.com/js/bootstrap.min.css" type="text/css">
   <!-- jQuery and Modernizr-->
-  <script src="https://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>
   <!-- Core JavaScript Files -->
-  <script src="https://libs.baidu.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="https://static.jdon.com/js/bootstrap.min.js"></script>
   <script src="https://cdn.jdon.com/common/js/waitingfor.js"></script>
 </head>
 <body>
