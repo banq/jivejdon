@@ -43,7 +43,7 @@
 					<li><a href="/ddd.html">领域驱动设计</a></li>
 				   	<li><a href="/design.htm">架构设计</a></li>
                     <li><a href="/tags/37546">幽默模因</a></li>					   					   
-    				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">编程 <i class="fa fa-arrow-circle-o-down"></i></a>
+    				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">热点话题<i class="fa fa-arrow-circle-o-down"></i></a>
 					    <div class="dropdown-menu">
 						    <div class="dropdown-inner">
 							<ul class="list-unstyled">
