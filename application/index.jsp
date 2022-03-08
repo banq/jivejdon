@@ -178,12 +178,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </div>
                     </div>
                 </div>
-               	<!---- Start tags ---->
-				<div class="widget wid-post">
-                    <div class="info">
-                      <jsp:include page="/query/tagHotList.shtml" flush="true"></jsp:include>  
-                    </div>     
-                </div>				
 				<!---- Start Widget digList---->
 				<div class="widget">
 					<div class="wid-vid">
