@@ -17,41 +17,41 @@
         <!--       
               mvn clean install -U
              or
-             replace static.jdon.com with cdn.jdon.com or en.jdon.com
+             replace https://gitee.com/banqjdon with https://en.jdon.com
              or
               checkout from : https://github.com/banq/jdon-mvn-repo, and manual install your maven repository
         -->
         <repository>
             <id>jdon-struts1x</id>
-            <url>https://static.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://gitee.com/banqjdon/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>jdonaccessory</id>
-            <url>https://static.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://gitee.com/banqjdon/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>jdon-jdbcTemp</id>
-            <url>https://static.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://gitee.com/banqjdon/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>jdon-treepattern</id>
-            <url>https://static.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://gitee.com/banqjdon/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>weibo4j</id>
-            <url>https://static.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://gitee.com/banqjdon/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>tecentweibo</id>
-            <url>https://static.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://gitee.com/banqjdon/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>compass</id>
-            <url>https://static.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://gitee.com/banqjdon/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>urlrewrite</id>
-            <url>https://static.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://gitee.com/banqjdon/jdon-mvn-repo/releases</url>
         </repository>
     </repositories>
 
