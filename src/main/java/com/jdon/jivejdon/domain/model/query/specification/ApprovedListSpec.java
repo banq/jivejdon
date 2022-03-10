@@ -1,6 +1,9 @@
 package com.jdon.jivejdon.domain.model.query.specification;
 
 import com.jdon.jivejdon.domain.model.account.Account;
+
+import org.apache.commons.io.filefilter.TrueFileFilter;
+
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 
@@ -19,11 +22,24 @@ public class ApprovedListSpec extends ThreadListSpec {
 		sorttableName = "creationDate";
 	}
 
-	public boolean isApproved(ForumThread thread, Account account) {
-		if (isGoodBlog(thread, account) || isExcelledDiscuss(thread)) {
+	public boolean isApproved(ForumThread thread, Account account, ForumThread threadPrev) {
+		if (isGoodBlog(thread, account) || isExcelledDiscuss(thread) || isGreaterThanPrev(threadPrev, threadPrev)) {
 			return true;
 		} else
 			return false;
+	}
+
+	public boolean isApprovedToBest(ForumThread thread, Account account, int count, ForumThread threadPrev){		
+		return isApproved(thread, account, threadPrev) && count < getNeedCount();
+	}
+
+	public boolean isGreaterThanPrev(ForumThread thread, ForumThread threadPrev){
+		if (threadPrev == null || threadPrev.getViewCount() == 0)
+			return false;
+		if (thread.getViewCount() > threadPrev.getViewCount()){
+			return (thread.getViewCount() >= threadPrev.getViewCount()*3/2)?true:false;
+		}
+		return false;
 	}
 
 	protected boolean isGoodBlog(ForumThread thread, Account account) {

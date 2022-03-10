@@ -14,8 +14,8 @@ public class HomePageComparator implements Comparator<ForumThread> {
 		if (thread1.getThreadId().longValue() == thread2.getThreadId().longValue())
 			return 0;
 
-		double countRs1 = algorithm(thread1);
-		double countRs2 = algorithm(thread2);
+		double countRs1 = algorithm(thread1, thread2);
+		double countRs2 = algorithm(thread2, thread1);
 
 		return compareResult(countRs1, countRs2, thread1, thread2);
 	}
@@ -34,7 +34,7 @@ public class HomePageComparator implements Comparator<ForumThread> {
 		return 0;
 	}
 
-	private double algorithm(ForumThread thread) {
+	private double algorithm(ForumThread thread, ForumThread threadPrev) {
 		// int tagsCount = thread.getTags().stream().mapToInt(tag ->
 		// tag.getAssonum()).sum();
 		// if (thread.getTags().size() > 3) {
@@ -47,6 +47,9 @@ public class HomePageComparator implements Comparator<ForumThread> {
 		if (thread.getViewCount() > thread.getViewCounter().getLastSavedCount()) {
 			p = Math.pow(p, thread.getViewCount() - thread.getViewCounter().getLastSavedCount());
 		}
+		//getViewCounter bigger than other thread
+		if (thread.getViewCount() > threadPrev.getViewCount())
+			p = Math.pow(p, thread.getViewCount() - threadPrev.getViewCount());
 
 		double t = System.currentTimeMillis() - thread.getState().getModifiedDate2() + 5000;
 
