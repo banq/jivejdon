@@ -71,7 +71,7 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 		bf.append("<a href='");
 		bf.append(url);
 
-		bf.append("'><b>");
+		bf.append("' target=_blank><b>");
 		// // class="hotkeys ajax_query=cache"
 		// bf.append(" class='hotkeys ajax_query=").append(name).append("' ");
 		// bf.append(" id='id_").append(url).append("' ><b>");

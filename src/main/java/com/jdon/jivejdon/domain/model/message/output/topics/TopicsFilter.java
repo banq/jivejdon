@@ -70,7 +70,7 @@ public class TopicsFilter implements Function<MessageVO, MessageVO> {
 		bf.append("<a href='");
 		bf.append(topicUrl);
 		bf.append(topic);
-		bf.append("'><b>");
+		bf.append("' target=_blank><b>");
 		bf.append(topic);
 		bf.append("</b></a>");
 		return bf.toString();

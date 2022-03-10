@@ -17,7 +17,7 @@
         <!--       
               mvn clean install -U
              or
-             replace https://gitee.com/banqjdon with https://en.jdon.com
+             replace https://gitee.com/banqjdon with https://cdn.jdon.com
              or
               checkout from : https://github.com/banq/jdon-mvn-repo, and manual install your maven repository
         -->
