@@ -23,7 +23,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	public boolean isApproved(ForumThread thread, Account account, ForumThread threadPrev) {
-		if (isGoodBlog(thread, account) || isExcelledDiscuss(thread) || isGreaterThanPrev(threadPrev, threadPrev)) {
+		if (isGoodBlog(thread, account) || isExcelledDiscuss(thread) || isGreaterThanPrev(thread, threadPrev)) {
 			return true;
 		} else
 			return false;
@@ -37,7 +37,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 		if (threadPrev == null || threadPrev.getViewCount() == 0)
 			return false;
 		if (thread.getViewCount() > threadPrev.getViewCount()){
-			return (thread.getViewCount() *0.8 <= threadPrev.getViewCount())?true:false;
+			return (thread.getViewCount() *0.8 > threadPrev.getViewCount())?true:false;
 		}
 		return false;
 	}
