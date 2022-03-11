@@ -11,6 +11,6 @@ com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(6 * 60 * 60, request, response);
 <%
 String coutlength = (String)pageContext.getAttribute("count");
 %>        
-<logic:iterate indexId="i"   id="ThreadTag" name="tagsListForm" property="list" length='<%=coutlength%>' >
+<logic:iterate indexId="i"   id="ThreadTag" name="tagsHotListForm" property="list" length='<%=coutlength%>' >
   <li><a href='<%=request.getContextPath() %>/tags/<bean:write name="ThreadTag" property="tagID"/>'><bean:write name="ThreadTag" property="title"/></a></li>
 </logic:iterate>                

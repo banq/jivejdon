@@ -30,11 +30,11 @@ public class ThreadTagHotListAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest
 			request, HttpServletResponse response) throws Exception {
 
-		ModelListForm tagsListForm = (ModelListForm) form;
+		ModelListForm tagsHotListForm = (ModelListForm) form;
 		ThreadTagList threadTagList = getThreadApprovedNewList().getThreadTagList();
 		Collection<ThreadTag> tagThreads = threadTagList.getThreadTags();
-		tagsListForm.setList(tagThreads);
-		tagsListForm.setAllCount(tagThreads.size());
+		tagsHotListForm.setList(tagThreads);
+		tagsHotListForm.setAllCount(tagThreads.size());
 		return mapping.findForward("success");
 	}
 }
