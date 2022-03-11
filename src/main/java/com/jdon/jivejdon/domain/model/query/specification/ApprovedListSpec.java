@@ -37,7 +37,8 @@ public class ApprovedListSpec extends ThreadListSpec {
 		if (threadPrev == null || threadPrev.getViewCount() == 0)
 			return false;
 		if (thread.getViewCount() > threadPrev.getViewCount()){
-			return (thread.getViewCount() *0.8 > threadPrev.getViewCount())?true:false;
+			if (thread.getCreationDate().equals(threadPrev.getCreationDate()))
+				return (thread.getViewCount() * 0.8 > threadPrev.getViewCount()) ? true : false;
 		}
 		return false;
 	}
