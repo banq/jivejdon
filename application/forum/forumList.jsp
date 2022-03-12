@@ -69,7 +69,7 @@
 						   <ul>
 								 <div>
                   <%-- <jsp:include page="/query/threadRandomDigList.shtml?count=15" flush="true"></jsp:include> --%>
-                  <jsp:include page="/query/threadNewDigList.shtml?count=15" flush="true"></jsp:include>
+                  <jsp:include page="/query/threadNewDigList2.shtml?count=15" flush="true"></jsp:include>
                  </div>    
 							</ul>
 							</div>

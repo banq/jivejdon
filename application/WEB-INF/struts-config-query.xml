@@ -203,6 +203,11 @@
             <forward name="success" path="/query/others/newdiglist.jsp" />
         </action>
 
+        
+        <action path="/query/threadNewDigList2" type="com.jdon.jivejdon.presentation.action.query.ThreadNewDigListAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/query/others/newdiglist2.jsp" />
+        </action>
+
 
         <action path="/query/threadNewList2" type="com.jdon.jivejdon.presentation.action.ThreadListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/newlist.jsp" />
