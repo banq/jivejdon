@@ -6,11 +6,28 @@
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
+<%
+    String imagesize = "10";
+		if (request.getParameter("imagesize") != null)
+		    imagesize = request.getParameter("imagesize");
+    String mythreadId = "";
+    if (application.getAttribute("thumbthreadId") != null) {
+        mythreadId = ((Long) application.getAttribute("thumbthreadId")).toString();
+    }
+    Integer homethumbnai = (Integer) application.getAttribute(mythreadId);
+    if (homethumbnai == null) {
+        homethumbnai = 1 + (int) (Math.random() * Integer.parseInt(imagesize));
+        application.setAttribute(mythreadId, homethumbnai);
+    }	
+%>
+
+
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='1' >
-    <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
-  <bean:define id="thumbthreadId" name="forumThread" property="threadId" toScope="application"/>
+   <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
+   <bean:define id="thumbthreadId" name="forumThread" property="threadId" toScope="application"/>
+   
      <div class="box"> 
   <div class="linkblock" itemscope itemtype="http://schema.org/BlogPosting">
   <div class="row">
@@ -20,14 +37,14 @@
 				<div>
                <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">
                   <logic:match name="forumMessage" property="messageUrlVO.thumbnailUrl" value="/simgs/thumb/">
-                    <img id="home-thumbnai" src="" border='0' class="thumbnail" style="width: 100%"/>
+                    <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg" border='0' class="thumbnail" style="width: 100%"/>
                   </logic:match>
                   <logic:notMatch name="forumMessage" property="messageUrlVO.thumbnailUrl" value="/simgs/thumb/">
-                    <img id="home-thumbnai" src="" border='0' class="thumbnail" style="width: 100%" data-src='<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>'/>
+                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail" style="width: 100%" />
                   </logic:notMatch>
                </logic:notEmpty>
                <logic:empty name="forumMessage" property="messageUrlVO.thumbnailUrl">
-                    <img id="home-thumbnai" src="" border='0' class="thumbnail" style="width: 100%"/>
+                    <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg" border='0' class="thumbnail" style="width: 100%"/>
                </logic:empty>
                   
             </div>
@@ -66,5 +83,5 @@
 </div>
 </div>
 </div>
-</logic:iterate>
 
+</logic:iterate>

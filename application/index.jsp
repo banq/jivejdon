@@ -54,35 +54,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<div class="row">
 			<div id="main-content" class="col-md-8">
 				<div class="box">
-          <jsp:include page="/query/threadApprovedNewList2.shtml?count=1" flush="true"></jsp:include>
-<%
-    String imagesize = "10";
-		if (request.getParameter("imagesize") != null)
-		    imagesize = request.getParameter("imagesize");
-    String mythreadId = "";
-    if (application.getAttribute("thumbthreadId") != null) {
-        mythreadId = ((Long) application.getAttribute("thumbthreadId")).toString();
-    }
-    Integer homethumbnai = (Integer) application.getAttribute(mythreadId);
-    if (homethumbnai == null) {
-        homethumbnai = 1 + (int) (Math.random() * Integer.parseInt(imagesize));
-        application.setAttribute(mythreadId, homethumbnai);
-    }	
-%>
-<div class="lazyload" >
-<!-- 
-<script> 
- if(document.getElementById("home-thumbnai") != null)
-	          if(document.getElementById("home-thumbnai").getAttribute("data-src") != null)
-				   //document.getElementById("home-thumbnai").src = document.getElementById("home-thumbnai").getAttribute("data-src") ;
-				   $("#home-thumbnai").attr('src',$("#home-thumbnai").attr('data-src'));
-	          else
-                   //document.getElementById("home-thumbnai").src = "https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg";
-                   $("#home-thumbnai").attr('src','https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg');
-</script>
--->
-</div>
 
+          <%-- <jsp:include page="/query/threadApprovedNewList2.shtml?count=1" flush="true"></jsp:include> --%>
+	<div id="approvedItem0"><br><br><br><br><br><br></div>          
+	<div class="lazyload" >
+          <!--
+		  <script>
+		  load('/query/threadApprovedNewList2.shtml?count=1', function (xhr) {
+               document.getElementById("approvedItem0").innerHTML = xhr.responseText;
+            }); 
+		  </script>
+          -->
+    </div>  
 
 <div class="box"> 
   <div class="linkblock">
