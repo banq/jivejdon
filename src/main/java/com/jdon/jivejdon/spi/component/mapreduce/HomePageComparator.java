@@ -45,16 +45,12 @@ public class HomePageComparator implements Comparator<ForumThread> {
 		double viscount = thread.getViewCount() * Math.ceil(thread.getViewCount() / 100) + 1;
 		double p = Math.pow(messageCount * viscount, digCount);
 
-		// //getViewCounter greater than other thread
-		// if (thread.getViewCount() > threadPrev.getViewCount())
-		// 	p = Math.pow(p, thread.getViewCount() - threadPrev.getViewCount());
-
-		if (thread.getViewCount() > thread.getViewCounter().getLastSavedCount()) {
-			p = Math.pow(p, thread.getViewCount() - thread.getViewCounter().getLastSavedCount() + 2);
-		}
-
 		double t = System.currentTimeMillis() - thread.getState().getModifiedDate2() + 5000;
 
-		return Math.pow(p, 2) / (t + 1);
+		if (thread.getViewCount() > thread.getViewCounter().getLastSavedCount()) {
+			p = Math.pow(p/(t + 1), thread.getViewCount() - thread.getViewCounter().getLastSavedCount() + 2);
+		}
+
+		return p;
 	}
 }
