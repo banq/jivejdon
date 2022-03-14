@@ -35,7 +35,7 @@ public class HomePageComparator implements Comparator<ForumThread> {
 	}
 
 	private double algorithm(ForumThread thread, ForumThread threadPrev) {
-		int tagsCount = thread.getTags().stream().mapToInt(tag -> tag.getAssonum()).sum();
+		int tagsCount = thread.getTags().stream().mapToInt(tag -> tag.getAssonum()).sum() + 1;
 		if (thread.getTags().size() > 3) {
 			tagsCount = tagsCount * 3;
 		}
@@ -43,9 +43,7 @@ public class HomePageComparator implements Comparator<ForumThread> {
 		double digCount = thread.getRootMessage().getDigCount() + 1;
 		double viscount = thread.getViewCount() * Math.ceil(thread.getViewCount() / 100) + 1;
 		double t = System.currentTimeMillis() - thread.getState().getModifiedDate2() + 5000;
-
-		double p = Math.pow((messageCount * viscount * tagsCount)/ (t/1000000000 + 1), digCount) ;
-		p = 10000 * p;
+		double p =  10000 * (messageCount * viscount * tagsCount * digCount)/ (t/1000000000 + 1);				
 		if (thread.getViewCount() > thread.getViewCounter().getLastSavedCount()) {
 			p = p * (thread.getViewCount() - thread.getViewCounter().getLastSavedCount() + 1);
 		}
