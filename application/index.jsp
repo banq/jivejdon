@@ -217,9 +217,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<div class="widget">
 					    <div class="wid-vid">
 							<ul>
-                <div>
+                              <div id="newList"></div>   
+							    <div class="lazyload" >
+							     <!-- 
+							     <script>
+							  	  load('/query/threadNewList.shtml?count=15', function (xhr) {				
+  	                                  document.getElementById("newList").innerHTML = xhr.responseText;
+			                     });
+							  </script> -->
+							  </div>							
+                <%-- <div>
 					<jsp:include page="/query/threadNewList.shtml?count=15" flush="true"></jsp:include>
-				</div>
+				</div> --%>
 							</ul>
 							</div>
 				</div>
