@@ -37,14 +37,14 @@
 				<div>
                <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">
                   <logic:match name="forumMessage" property="messageUrlVO.thumbnailUrl" value="/simgs/thumb/">
-                    <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg" border='0' class="thumbnail" style="width: 100%"/>
+                    <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg" border='0' class="thumbnail" style="width: 100%" loading="lazy"/>
                   </logic:match>
                   <logic:notMatch name="forumMessage" property="messageUrlVO.thumbnailUrl" value="/simgs/thumb/">
-                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail" style="width: 100%" />
+                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail" style="width: 100%" loading="lazy"/>
                   </logic:notMatch>
                </logic:notEmpty>
                <logic:empty name="forumMessage" property="messageUrlVO.thumbnailUrl">
-                    <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg" border='0' class="thumbnail" style="width: 100%"/>
+                    <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=homethumbnai%>.jpg" border='0' class="thumbnail" style="width: 100%" loading="lazy"/>
                </logic:empty>
                   
             </div>
