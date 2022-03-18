@@ -226,9 +226,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			                     });
 							  </script> -->
 							  </div>							
-                <%-- <div>
-					<jsp:include page="/query/threadNewList.shtml?count=15" flush="true"></jsp:include>
-				</div> --%>
 							</ul>
 							</div>
 				</div>
@@ -254,15 +251,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					    <div class="wid-vid">
 							<ul>
 							    <div id="digNewList"></div>   
-							    <div class="lazyload" >
-							     <!-- 
-							     <script>
-                                    load('/query/threadNewDigList.shtml?count=5', function (xhr) {				
-  	                                    document.getElementById("digNewList").innerHTML = xhr.responseText;
-			                        });			
-							     </script> -->
-							  </div>
-
 							</ul>
 						</div>
 				</div>
