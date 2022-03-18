@@ -109,7 +109,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<div class="lazyload" >
           <!--
 		  <script>
-	      load('/query/threadApprovedNewList3.shtml?offset=10&count=5', function (xhr) {
+	      load('/query/threadApprovedNewList4.shtml?count=5', function (xhr) {
                document.getElementById("approvedItem3").innerHTML = xhr.responseText;
             }); 
 		  </script>

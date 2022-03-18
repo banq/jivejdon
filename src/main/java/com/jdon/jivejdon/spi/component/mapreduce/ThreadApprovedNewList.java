@@ -196,7 +196,7 @@ public class ThreadApprovedNewList implements Startable {
 							|| approvedListSpec.getCurrentIndicator() == 0) {
 						final ForumThread thread = forumMessageQueryService
 								.getThread(threadId);																						
-						if (thread == null) continue;
+						if (thread == null || thread.getRootMessage() == null) continue;
 						Long userId = thread.getRootMessage().getAccount()
 								.getUserIdLong();
 						final Account account = accountService
