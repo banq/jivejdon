@@ -5,12 +5,11 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<%          
-    com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(60, request, response);	
-%>
-    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-    <META HTTP-EQUIV="Cache-Control" CONTENT="no-store">
-    <META HTTP-EQUIV="Expires" CONTENT="0">   
+<%
+response.setHeader("Pragma", "No-cache");
+response.setHeader("Cache-Control", "no-store");
+response.setDateHeader("Expires", 0);
+%>    
 <%
 String offset = "0";
 if (request.getParameter("offset")!=null){
