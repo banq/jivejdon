@@ -41,19 +41,18 @@
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav navbar-inverse">
 					<li><a href="/ddd.html">领域驱动设计</a></li>
-				   	<li><a href="/design.htm">架构设计</a></li>
-                    <li><a href="/tags/37546">幽默模因</a></li>					   					   
+				   	<li><a href="/design.htm">架构设计</a></li>                    
     				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">热点话题<i class="fa fa-arrow-circle-o-down"></i></a>
 					    <div class="dropdown-menu">
 						    <div class="dropdown-inner">
 							<ul class="list-unstyled">
 								<jsp:include page="/query/tagHotList_menu.shtml" flush="true"/>								
-								<li><a href="/tags">更多话题</a></li>	
+								<li><a href="/tags/37546">幽默模因</a></li>					   					   								
 							</ul>
 						    </div> 
 					    </div>
 			    	</li>					
-					
+                    <li><a href="/tags">更多话题</a></li>						
 			</ul>
 			<ul class="list-inline navbar-right top-social">
 				<li><a href="javascript:shareto('sina')"><i class="fa fa-weibo"></i></a></li>
