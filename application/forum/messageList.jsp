@@ -16,7 +16,6 @@
       response.sendError(404);
      %>
     </logic:empty>
-
    <%@include file="./messagListCore.jsp"%>
   </logic:greaterThan>
 </logic:notEmpty>

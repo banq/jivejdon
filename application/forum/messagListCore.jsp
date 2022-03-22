@@ -91,8 +91,8 @@
                               </div>  
                               <div class="widget">			 
                                  <div class="info">	
-                                    <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag"> 
-                                      <bean:write name="threadTag" property="title"/>
+                                    <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag" title="有<bean:write name="threadTag" property="assonum"/>篇"> 
+                                      <bean:write name="threadTag" property="assonum"/>篇<bean:write name="threadTag" property="title"/>
                                     </a>                               
 			                           </div>  
                               </div>
@@ -113,8 +113,8 @@
                               </div>  
                               <div class="widget">			 
                                  <div class="info">	
-                                    <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag"> 
-                                      <bean:write name="threadTag" property="title"/>
+                                    <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag" title="有<bean:write name="threadTag" property="assonum"/>篇"> 
+                                      <bean:write name="threadTag" property="assonum"/>篇<bean:write name="threadTag" property="title"/>
                                       </a>
 			                           </div>  
                               </div>
