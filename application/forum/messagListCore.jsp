@@ -79,54 +79,11 @@
                   <div class="reblogto" id='<bean:write name="threadTo" property="threadId"/>'></div>
                 </logic:iterate>
               </logic:notEmpty>              
-              <div class="box">
-                <div class="row">                  
-                    <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="i" length="2" offset="0">                  
-                      <div class="col-md-6">
-                        <div class="linkblock">	
-                           <div class="box">        
-                           <div class="wrap-vid">
-                              <div class="thumbn">
-                                 <img src="//static.jdon.com/simgs/thumb/<%=1 + i%>.jpg" border="0" class="thumbnail" loading="lazy">  
-                              </div>  
-                              <div class="widget">			 
-                                 <div class="info">	
-                                    <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag" title="有<bean:write name="threadTag" property="assonum"/>篇"> 
-                                      <bean:write name="threadTag" property="assonum"/>篇<bean:write name="threadTag" property="title"/>
-                                    </a>                               
-			                           </div>  
-                              </div>
-                           </div>                                                      
-	                         </div>
-                        </div>        
-                      </div>  
-                    </logic:iterate>
-                </div>    
-                <div class="row">                                                  
-                    <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="i" length="2" offset="2">                  
-                      <div class="col-md-6">
-                        <div class="linkblock">	
-                           <div class="box">       
-                           <div class="wrap-vid">
-                              <div class="thumbn">
-                                 <img src="//static.jdon.com/simgs/thumb/<%=3 + i%>.jpg" border="0" class="thumbnail" loading="lazy">  
-                              </div>  
-                              <div class="widget">			 
-                                 <div class="info">	
-                                    <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag" title="有<bean:write name="threadTag" property="assonum"/>篇"> 
-                                      <bean:write name="threadTag" property="assonum"/>篇<bean:write name="threadTag" property="title"/>
-                                      </a>
-			                           </div>  
-                              </div>
-                           </div>                                                      
-	                         </div>
-                        </div>
-                      </div>    
-                    </logic:iterate>                  
-                </div>
-              </div>            
             </logic:equal>
           </logic:iterate>
+          <div class="box">
+            <div class="threadTagList" id='<bean:write name="forumThread" property="threadId"/>'></div>                
+          </div>            
         </div>
 
         <div class="box">
@@ -287,6 +244,9 @@
       $('.reblogto').each(function(i, obj) {        
         scrollLoadByElementId('/forum/thread.shtml?threadId='+ obj.id,obj.id); 
        });
+       $('.threadTagList').each(function(i, obj) {        
+        scrollLoadByElementId('/forum/threadTagList.shtml?threadId='+ obj.id,obj.id); 
+       });             
       scrollAppendByElementId('/query/threadNewDigList.shtml',"othersonline","pageEnd",returnAllCount,sumStart,returnStart);
   });      
 </script>
