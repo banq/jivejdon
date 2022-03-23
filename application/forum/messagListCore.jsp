@@ -81,9 +81,11 @@
               </logic:notEmpty>              
             </logic:equal>
           </logic:iterate>
+          <logic:notEmpty name="forumThread" property="tags">          
           <div class="box">
             <div class="threadTagList" id='<bean:write name="forumThread" property="threadId"/>'></div>                
           </div>            
+          </logic:notEmpty>
         </div>
 
         <div class="box">
