@@ -84,10 +84,12 @@ public class ThreadTagListAction extends Action {
 		while (pageIterator.hasNext()) {
 			Long threadId1 = (Long) pageIterator.next();
 			if (threadId1.longValue() != threadId.longValue()) {
-				thread1 = getForumMessageQueryService().getThread((Long) threadId1);
+				thread1 = getForumMessageQueryService().getThread(threadId1);
 				break;
 			}
-
+		}
+		if (thread1 == null) {
+			thread1 = getForumMessageQueryService().getThread(threadId);
 		}
 		return thread1;
 	}
