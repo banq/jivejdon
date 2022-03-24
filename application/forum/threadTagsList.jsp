@@ -22,15 +22,14 @@ int j = 0;
                  <div class="info">	
                     <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag" title="有<bean:write name="threadTag" property="assonum"/>篇"> 
                       <bean:write name="threadTag" property="assonum"/>篇<bean:write name="threadTag" property="title"/>
-                    </a>               
-                    <p>
-                       <logic:iterate id="forumThread1" name="threadListForm" property="list" length="1" offset="<%=Integer.toString(j)%>" >
-	                           <div class="info"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread1" property="threadId"/>" target="_blank" class="smallgray">
+                    </a>  
+                 </div> 
+                 <logic:iterate id="forumThread1" name="threadListForm" property="list" length="1" offset="<%=Integer.toString(j)%>" >
+                 <div class="post">
+                     <a href="<%=request.getContextPath()%>/<bean:write name="forumThread1" property="threadId"/>" target="_blank" class="smallgray">
                                     <bean:write name="forumThread1" property="name" /></a>
-                             </div>
-                       </logic:iterate>
-                    </p>
-			           </div>  
+                 </div> 
+                 </logic:iterate>
               </div>
             </div>      
 	         </div>
