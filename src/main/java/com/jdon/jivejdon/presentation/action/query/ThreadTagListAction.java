@@ -37,6 +37,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ThreadTagListAction extends Action {
@@ -67,8 +69,9 @@ public class ThreadTagListAction extends Action {
 			return mapping.findForward("failure");
 
 		ModelListForm threadListForm = (ModelListForm) form;
+		Set<Long> foundThreadIds = new HashSet<Long>();
 		Collection<ForumThread> threadList = thread.getTags().stream()
-				.map(threadTag -> getForumThreadsForTag(threadTag, Long.parseLong(threadId)))
+				.map(threadTag -> getForumThreadsForTag(threadTag, Long.parseLong(threadId), foundThreadIds))
 				.collect(Collectors.toList());
 
 		threadListForm.setList(threadList);
@@ -76,15 +79,17 @@ public class ThreadTagListAction extends Action {
 		return mapping.findForward("success");
 	}
 
-	private ForumThread getForumThreadsForTag(ThreadTag threadTag, final Long threadId) {
+	private ForumThread getForumThreadsForTag(ThreadTag threadTag, final Long threadId,
+			final Set<Long> foundThreadIds) {
 		TaggedThreadListSpec taggedThreadListSpec = new TaggedThreadListSpec();
 		taggedThreadListSpec.setTagID(threadTag.getTagID());
-		PageIterator pageIterator = getTagService().getTaggedThread(taggedThreadListSpec, 0, 2);
+		PageIterator pageIterator = getTagService().getTaggedThread(taggedThreadListSpec, 0, 10);
 		ForumThread thread1 = null;
 		while (pageIterator.hasNext()) {
 			Long threadId1 = (Long) pageIterator.next();
-			if (threadId1.longValue() != threadId.longValue()) {
+			if (threadId1.longValue() != threadId.longValue() && !foundThreadIds.contains(threadId1)) {
 				thread1 = getForumMessageQueryService().getThread(threadId1);
+				foundThreadIds.add(threadId1);
 				break;
 			}
 		}
