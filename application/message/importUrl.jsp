@@ -14,8 +14,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
  <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://cdn.jdon.com/js/bootstrap.min.css"  type="text/css">
-	<!-- Custom Fonts -->
-    <link rel="stylesheet" href="https://cdn.jdon.com/js/font-awesome.min.css"  type="text/css">
 	<!-- Custom CSS -->
     <link rel="stylesheet" href="https://cdn.jdon.com/common/js/styles/style.css">
   <!-- jQuery and Modernizr-->

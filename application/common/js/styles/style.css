@@ -1,3 +1,62 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?or1tgc');
+  src:  url('fonts/icomoon.eot?or1tgc#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?or1tgc') format('truetype'),
+    url('fonts/icomoon.woff?or1tgc') format('woff'),
+    url('fonts/icomoon.svg?or1tgc#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="fa-"], [class*=" fa-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon';
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-search:before {
+  content: "\f002";
+}
+.fa-star-half-full:before {
+  content: "\f006";
+}
+.fa-home:before {
+  content: "\f015";
+}
+.fa-feed:before {
+  content: "\f09e";
+}
+.fa-rss:before {
+  content: "\f09e";
+}
+.fa-list-ul:before {
+  content: "\f0ca";
+}
+.fa-weibo:before {
+  content: "\f18a";
+}
+.fa-qq:before {
+  content: "\f1d6";
+}
+.fa-wechat:before {
+  content: "\f1d7";
+}
+.fa-weixin:before {
+  content: "\f1d7";
+}
+.fa-arrow-circle-o-down:before {
+content: "\f01a";
+}
+.fa-bars:before {
+content: "\f039";
+}
+.fa-arrow-circle-up:before {
+content: "\f062";
+}
 body {
   background: url(/common/js/img/bg2.png) fixed;
   color: #666;

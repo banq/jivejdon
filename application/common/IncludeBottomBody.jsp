@@ -39,7 +39,6 @@
 
    <noscript id="deferred-styles">
 	<link rel="stylesheet" href="https://cdn.jdon.com/js/bootstrap.min.css"  type="text/css">
-    <link rel="stylesheet" href="https://cdn.jdon.com/js/font-awesome.min.css"  type="text/css">
     <link rel="stylesheet" href="https://cdn.jdon.com/common/js/styles/style.css">
    </noscript>
    <script>
