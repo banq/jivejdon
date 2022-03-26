@@ -78,6 +78,9 @@ content: "\f062";
 .fa-comment:before {
   content: "\f0e5";
 }
+.fa-share-square:before {
+  content: "\f0e5";
+}
 .fa-newspaper-o:before {
   content: "\f0f6";
 }
