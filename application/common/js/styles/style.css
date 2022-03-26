@@ -51,11 +51,50 @@
 .fa-arrow-circle-o-down:before {
 content: "\f01a";
 }
+.fa-circle-o:before {
+  content: "\f01a";
+}  
 .fa-bars:before {
 content: "\f039";
 }
 .fa-arrow-circle-up:before {
 content: "\f062";
+}
+.fa-eye:before {
+  content: "\f06e";
+}
+.fa-calendar:before {
+  content: "\f073";
+}
+.fa-sign-out:before {
+  content: "\f08b";
+}
+.fa-sign-in:before {
+  content: "\f090";
+}
+.fa-list-ul:before {
+  content: "\f0ca";
+}
+.fa-comment:before {
+  content: "\f0e5";
+}
+.fa-newspaper-o:before {
+  content: "\f0f6";
+}
+.fa-print:before {
+  content: "\f162";
+}
+.fa-thumbs-o-up:before {
+  content: "\f164";
+}
+.fa-heart:before {
+  content: "\f164";
+}
+.icon-star-o:before {
+  content: "\f006";
+}
+.fa-user:before {
+  content: "\f007";
 }
 body {
   background: url(/common/js/img/bg2.png) fixed;
