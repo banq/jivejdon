@@ -17,6 +17,7 @@ package com.jdon.jivejdon.presentation.action.query;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,6 +27,7 @@ import com.jdon.jivejdon.api.ForumService;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.spi.component.mapreduce.HomepageListSolver;
 import com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
@@ -42,6 +44,14 @@ public class ThreadNewDigListAction extends ModelListAction {
 	private final static String module = ThreadNewDigListAction.class.getName();
 	private ForumMessageQueryService forumMessageQueryService;
 	private ThreadViewCounterJob threadViewCounterJob;
+	private HomepageListSolver homepageListSolver;
+
+	public HomepageListSolver getHomepageListSolver() {
+		if (homepageListSolver == null)
+			homepageListSolver = (HomepageListSolver) WebAppUtil
+					.getComponentInstance("homepageListSolver", this.servlet.getServletContext());
+		return homepageListSolver;
+	}
 
 	public ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
@@ -64,8 +74,8 @@ public class ThreadNewDigListAction extends ModelListAction {
 	 * .HttpServletRequest, int, int)
 	 */
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
-		Collection<Long> allIds = new ArrayList<Long>();
-		allIds.addAll(getThreadViewCounterJob().getThreadIdsList());
+		Collection<Long> allIds = getThreadViewCounterJob().getThreadIdsList().stream()
+				.filter(e -> getHomepageListSolver().getList().contains(e)).collect(Collectors.toList());
 		return new PageIterator(allIds.size(), allIds.toArray());
 	}
 
