@@ -107,7 +107,7 @@ public class Newline implements Function<MessageVO, MessageVO> {
 	 */
 	public MessageVO apply(MessageVO messageVO) {
 		String s = messageVO.getBody();
-		s = ToolsUtil.convertTags(s, "\n\\[", new String(P_TAG) + "\\[");
+		s = ToolsUtil.convertTags(s, "\n\\[", "\n" + new String(P_TAG) + "\\[");
 		return messageVO.builder().subject(messageVO.getSubject()).body
 				(convertNewlinesAroundCode(s)).build();
 	}
