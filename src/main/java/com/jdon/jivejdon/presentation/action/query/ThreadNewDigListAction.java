@@ -74,8 +74,9 @@ public class ThreadNewDigListAction extends ModelListAction {
 	 * .HttpServletRequest, int, int)
 	 */
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
-		Collection<Long> allIds = getThreadViewCounterJob().getThreadIdsList().stream()
-				.filter(e -> getHomepageListSolver().getList().contains(e)).collect(Collectors.toList());
+		Collection<Long> allIds = new ArrayList<Long>();
+		allIds = getThreadViewCounterJob().getThreadIdsList().stream()
+				.filter(e -> !getHomepageListSolver().getList().contains(e)).collect(Collectors.toList());
 		return new PageIterator(allIds.size(), allIds.toArray());
 	}
 
