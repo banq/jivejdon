@@ -4,8 +4,10 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<% 
-com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(6 * 60 * 60, request, response);
+<%
+response.setHeader("Pragma", "No-cache");
+response.setHeader("Cache-Control", "no-store");
+response.setDateHeader("Expires", 0);
 %>
 <a href="<%=request.getContextPath()%>/threads"><b>新文</b></a>
 <div class="important" >
