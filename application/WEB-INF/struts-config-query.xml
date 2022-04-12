@@ -208,7 +208,7 @@
             <forward name="success" path="/query/others/newdiglist2.jsp" />
         </action>
 
-        <action path="/query/threadApprovedNewList4" type="com.jdon.jivejdon.presentation.action.query.ThreadDigListAction" name="threadListForm" scope="request" validate="false">            
+        <action path="/query/threadApprovedNewList4" type="com.jdon.jivejdon.presentation.action.query.ThreadDigSortedListAction" name="threadListForm" scope="request" validate="false">            
             <forward name="success" path="/query/approvedThreadList3.jsp" />        
         </action>
 
