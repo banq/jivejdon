@@ -32,8 +32,6 @@ import java.util.stream.Collectors;
  */
 public class ThreadDigList {
 
-	public final static int DigsListMAXSize = 30;
-
 	private final static int TIME_WINDOWS = 100;
 
 	private final static int TAGSLIST_SIZE = 10;
@@ -71,7 +69,7 @@ public class ThreadDigList {
 		return new PageIterator(sortedAll.size(), threads.toArray());
 	}
 
-	public Collection<ForumThread> getDigs() {
+	public Collection<ForumThread> getDigs(int DigsListMAXSize) {
 		return sortedWindows.stream().limit(DigsListMAXSize).map(forumMessageQueryService::getThread)
 				.collect(Collectors.toList());
 

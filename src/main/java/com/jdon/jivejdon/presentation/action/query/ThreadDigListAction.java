@@ -33,11 +33,16 @@ public class ThreadDigListAction extends Action {
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		int DigsListMAXSize = 30;
+		String wSize = request.getParameter("wSize") ;
+		if(wSize != null && wSize.length() > 0){
+			DigsListMAXSize = Integer.parseInt(wSize);
+		}
 		ModelListForm threadListForm = (ModelListForm) form;
 		ThreadApprovedNewList threadApprovedNewList = (ThreadApprovedNewList) WebAppUtil.getComponentInstance("threadApprovedNewList",
 				this.servlet.getServletContext());
 		ThreadDigList messageDigList = threadApprovedNewList.getThreadDigList();
-		Collection<ForumThread> digThreads = messageDigList.getDigs();
+		Collection<ForumThread> digThreads = messageDigList.getDigs(DigsListMAXSize);
 		threadListForm.setList(digThreads);
 		threadListForm.setAllCount(digThreads.size());
 		return mapping.findForward("success");
