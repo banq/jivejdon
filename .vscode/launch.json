@@ -6,7 +6,8 @@
     "configurations": [
     {
         "type": "java",
-        "name": "jivejdon",
+        "name": "remote tomcat server/debug.bat",
+        "projectName":"jivejdon",
         "request": "attach",
         "hostName": "localhost",
         "port": "8000"
