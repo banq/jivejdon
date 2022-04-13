@@ -28,6 +28,7 @@ import org.apache.struts.action.ActionMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 public class ThreadDigListAction extends Action {
 
@@ -41,8 +42,8 @@ public class ThreadDigListAction extends Action {
 		ModelListForm threadListForm = (ModelListForm) form;
 		ThreadApprovedNewList threadApprovedNewList = (ThreadApprovedNewList) WebAppUtil.getComponentInstance("threadApprovedNewList",
 				this.servlet.getServletContext());
-		ThreadDigList messageDigList = threadApprovedNewList.getThreadDigList();
-		Collection<ForumThread> digThreads = messageDigList.getDigs(DigsListMAXSize);
+		Collection<ForumThread> digList = threadApprovedNewList.getThreadDigList().getDigs(DigsListMAXSize);
+		Collection<ForumThread> digThreads = digList.stream().skip((int) (digList.size() * Math.random())).collect(Collectors.toList());
 		threadListForm.setList(digThreads);
 		threadListForm.setAllCount(digThreads.size());
 		return mapping.findForward("success");
