@@ -16,6 +16,7 @@
 package com.jdon.jivejdon.presentation.action.query;
 
 import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.spi.component.mapreduce.HomepageListSolver;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadDigList;
 import com.jdon.jivejdon.domain.model.ForumThread;
@@ -31,6 +32,14 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class ThreadDigListAction extends Action {
+	private HomepageListSolver homepageListSolver;
+	
+	public HomepageListSolver getHomepageListSolver() {
+		if (homepageListSolver == null)
+			homepageListSolver = (HomepageListSolver) WebAppUtil
+					.getComponentInstance("homepageListSolver", this.servlet.getServletContext());
+		return homepageListSolver;
+	}
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -43,7 +52,8 @@ public class ThreadDigListAction extends Action {
 		ThreadApprovedNewList threadApprovedNewList = (ThreadApprovedNewList) WebAppUtil.getComponentInstance("threadApprovedNewList",
 				this.servlet.getServletContext());
 		Collection<ForumThread> digList = threadApprovedNewList.getThreadDigList().getDigs(DigsListMAXSize);
-		Collection<ForumThread> digThreads = digList.stream().skip((int) (digList.size() * Math.random())).collect(Collectors.toList());
+		Collection<ForumThread> digThreads = digList.stream().skip((int) (digList.size() * Math.random()))
+				.filter(e -> !getHomepageListSolver().getList().contains(e)).collect(Collectors.toList());
 		threadListForm.setList(digThreads);
 		threadListForm.setAllCount(digThreads.size());
 		return mapping.findForward("success");
