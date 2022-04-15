@@ -75,6 +75,11 @@ public class ThreadDigList {
 
 	}
 
+	public Collection<Long> getDigThreadIds(int DigsListMAXSize) {
+		return sortedWindows.stream().limit(DigsListMAXSize).collect(Collectors.toList());
+
+	}
+
 	public void clear() {
 		sortedAll.clear();
 		sortedWindows.clear();
