@@ -134,6 +134,10 @@
             <forward name="success" path="/query/approvedThreadList3.jsp" />            
         </action>
 
+        <action path="/query/threadApprovedNewList4" type="com.jdon.jivejdon.presentation.action.query.ThreadDigListAction" name="threadListForm" scope="request" validate="false">            
+            <forward name="success" path="/query/approvedThreadList3.jsp" />        
+        </action>
+
         <!-- from next page  reference in homepage   -->
         <action path="/query/approvedListOther" type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedNewListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/approvedThreadListOthers.jsp" />
@@ -208,9 +212,6 @@
             <forward name="success" path="/query/others/newdiglist2.jsp" />
         </action>
 
-        <action path="/query/threadApprovedNewList4" type="com.jdon.jivejdon.presentation.action.query.ThreadDigListAction" name="threadListForm" scope="request" validate="false">            
-            <forward name="success" path="/query/approvedThreadList3.jsp" />        
-        </action>
 
         <action path="/query/threadNewList2" type="com.jdon.jivejdon.presentation.action.ThreadListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/newlist.jsp" />
