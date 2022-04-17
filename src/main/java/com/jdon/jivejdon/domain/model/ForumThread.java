@@ -393,7 +393,7 @@ public class ForumThread {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(this.threadId);
+		return Objects.hashCode(this.threadId);
 	}
 
 	public synchronized void build(Forum forum, ForumMessage rootMessage, ThreadTagsVO threadTagsVO) {

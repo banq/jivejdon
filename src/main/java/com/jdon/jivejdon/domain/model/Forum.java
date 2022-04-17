@@ -230,7 +230,7 @@ public class Forum {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(this.forumId);
+		return Objects.hashCode(this.forumId);
 	}
 
 }
