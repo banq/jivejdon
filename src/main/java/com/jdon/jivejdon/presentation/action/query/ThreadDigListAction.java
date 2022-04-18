@@ -30,6 +30,8 @@ import org.apache.struts.action.ActionMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -63,9 +65,14 @@ public class ThreadDigListAction extends Action {
 		ThreadApprovedNewList threadApprovedNewList = (ThreadApprovedNewList) WebAppUtil.getComponentInstance("threadApprovedNewList",
 				this.servlet.getServletContext());
 		Collection<Long> digList = threadApprovedNewList.getThreadDigList().getDigThreadIds(DigsListMAXSize);
-		Collection<ForumThread> digThreads = digList.stream().skip((int) (digList.size() * Math.random()))
-				.filter(e -> getThreadViewCounterJob().getThreadIdsList().contains(e))
-				.map(e -> getForumMessageQueryService().getThread(e)).collect(Collectors.toList());
+		Collection<ForumThread> digThreads = new ArrayList<>();
+		if (wSize != null) {
+			digThreads = digList.stream().skip((int) (digList.size() * Math.random()))
+					.filter(e -> getThreadViewCounterJob().getThreadIdsList().contains(e))
+					.map(e -> getForumMessageQueryService().getThread(e)).collect(Collectors.toList());
+		}else{
+			digThreads = digList.stream().map(e -> getForumMessageQueryService().getThread(e)).collect(Collectors.toList());
+		}
 		threadListForm.setList(digThreads);
 		threadListForm.setAllCount(digThreads.size());
 		return mapping.findForward("success");
