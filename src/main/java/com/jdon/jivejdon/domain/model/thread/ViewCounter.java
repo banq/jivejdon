@@ -89,7 +89,7 @@ public class ViewCounter implements Comparable<ViewCounter> {
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(this.thread.getThreadId());
+		return Objects.hash(this.thread.getThreadId());
 	}
 
 	@Override

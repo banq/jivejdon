@@ -374,7 +374,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(this.messageId);
+        return Objects.hash(this.messageId);
     }
 
     /**
