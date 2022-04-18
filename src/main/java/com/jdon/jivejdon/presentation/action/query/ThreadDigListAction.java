@@ -67,7 +67,7 @@ public class ThreadDigListAction extends Action {
 		Collection<Long> digList = threadApprovedNewList.getThreadDigList().getDigThreadIds(DigsListMAXSize);
 		Collection<ForumThread> digThreads = new ArrayList<>();
 		if (wSize != null) {
-			digThreads = digList.stream().skip((int) (digList.size() * Math.random()))
+			digThreads = digList.stream()
 					.filter(e -> getThreadViewCounterJob().getThreadIdsList().contains(e))
 					.map(e -> getForumMessageQueryService().getThread(e)).collect(Collectors.toList());
 		}else{
