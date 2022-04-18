@@ -9,6 +9,8 @@ import com.jdon.strutsutil.ModelListAction;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ThreadApprovedHomeListAction extends ModelListAction {
 	private HomepageListSolver homepageListSolver;
@@ -42,12 +44,27 @@ public class ThreadApprovedHomeListAction extends ModelListAction {
 		if (start >= 150 || start % count != 0)
 			return new PageIterator();
 
-//		Collection<Long> list = getThreadApprovedNewList().getApprovedThreads(start);
-		Collection<Long> list = getHomepageListSolver().getList();
+		Collection<Long> list = getThreadApprovedNewList().getApprovedThreads(start);
 		int maxSize = 150;
 		if (getThreadApprovedNewList().getMaxSize() != -1) {
 			maxSize = getThreadApprovedNewList().getMaxSize();
 		}
+
+		String countS = request.getParameter("count");
+		if (countS != null && countS.length() > 0){
+		   if (Integer.parseInt(countS) == 1){
+			   list = getHomepageListSolver().getList();
+		   }  
+		}
+
+		String offsetS = request.getParameter("offset");
+		if (offsetS != null && offsetS.length() > 0){
+		   if (Integer.parseInt(offsetS) == 1){
+			   List<Long> HomeThreadId = getHomepageListSolver().getList().stream().limit(1).collect(Collectors.toList());
+			   list = list.stream().filter(e -> !HomeThreadId.contains(e)).collect(Collectors.toList());
+		   }  
+		}
+
 		if (list != null)
 			return new PageIterator(maxSize, list.toArray(new Long[0]));
 		else
