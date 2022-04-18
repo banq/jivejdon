@@ -89,22 +89,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<div class="lazyload" >
           <!--
 		  <script>
-		  load('/query/threadApprovedNewList3.shtml?offset=1&count=4', function (xhr) {
+		  load('/query/threadApprovedNewList3.shtml?offset=1&count=10', function (xhr) {
                document.getElementById("approvedItem1").innerHTML = xhr.responseText;
             }); 
 		  </script>
           -->
     </div>  
-	<div id="approvedItem2"><br><br><br><br><br><br></div>       
-	<div class="lazyload" >
-          <!--
-		  <script>
-	      load('/query/threadApprovedNewList3.shtml?offset=5&count=5', function (xhr) {
-               document.getElementById("approvedItem2").innerHTML = xhr.responseText;
-            }); 
-		  </script>
-          -->
-      </div>	     
     <div id="approvedItem3"><br><br><br><br><br><br></div>     	  
 	<div class="lazyload" >
           <!--
