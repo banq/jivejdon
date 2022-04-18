@@ -114,9 +114,7 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 	}
 
 	public List<Long> getThreadIdsList() {
-		SortedSet<ViewCounter> sortedset = new TreeSet<ViewCounter>();
-		sortedset.addAll(viewcounters);
-		return sortedset.parallelStream().map(e -> e.getThread().getThreadId()).collect(Collectors.toList());
+		return viewcounters.parallelStream().map(e -> e.getThread().getThreadId()).collect(Collectors.toList());
 	}
 
 }
