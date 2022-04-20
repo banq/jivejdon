@@ -77,6 +77,9 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 	public void writeDB() {
 		// construct a immutable set
 		List<ViewCounter> viewCounters2 = new ArrayList<>(this.viewcounters);
+		if (this.viewcounters.size() > MAXSIZE) {
+			this.viewcounters.clear();
+		}
 		for (ViewCounter viewCounter : viewCounters2) {
 			if (viewCounter.getViewCount() != viewCounter.getLastSavedCount() && viewCounter.getViewCount() != -1
 					&& viewCounter.getViewCount() != 0) {
@@ -84,9 +87,7 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 				viewCounter.setLastSavedCount(viewCounter.getViewCount());
 			}
 		}
-		if (this.viewcounters.size()>MAXSIZE) {
-			this.viewcounters.clear();
-		}
+	
 	}
 
 	private void saveItem(ViewCounter viewCounter) {
