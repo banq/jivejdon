@@ -35,12 +35,10 @@ public class HomePageComparator implements Comparator<ForumThread> {
 	}
 
 	private double algorithm(ForumThread thread, ForumThread threadPrev) {
-		int tagsCount = thread.getTags().stream().mapToInt(tag -> tag.getAssonum()).sum() + 1;
-		double messageCount = thread.getState().getMessageCount() + 1;
 		double digCount = thread.getRootMessage().getDigCount() + 1;
 		double viscount = thread.getViewCount() * Math.ceil(thread.getViewCount() / 100) + 1;
 		double t = System.currentTimeMillis() - thread.getState().getModifiedDate2() + 5000;
-		double p = 10000 * (messageCount * viscount * digCount * tagsCount) / (t / 1000000000 + 1);
+		double p = 10000 * ( viscount * digCount ) / (t / 1000000000 + 1);
 		if (thread.getViewCount() > (thread.getViewCounter().getLastSavedCount() + 1) || digCount > 0) {
 			p = Math.pow(p, thread.getViewCount() - thread.getViewCounter().getLastSavedCount() + 1);
 		}
