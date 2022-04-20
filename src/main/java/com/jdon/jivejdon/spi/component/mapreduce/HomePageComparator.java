@@ -2,7 +2,9 @@ package com.jdon.jivejdon.spi.component.mapreduce;
 
 import com.jdon.jivejdon.domain.model.ForumThread;
 
+import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Home page approve threads Comparator
@@ -37,8 +39,9 @@ public class HomePageComparator implements Comparator<ForumThread> {
 	private double algorithm(ForumThread thread, ForumThread threadPrev) {
 		double digCount = thread.getRootMessage().getDigCount() + 1;
 		double viscount = thread.getViewCount() * Math.ceil(thread.getViewCount() / 100) + 1;
-		double t = System.currentTimeMillis() - thread.getState().getModifiedDate2() + 5000;
-		double p = 10000 * ( viscount * digCount ) / (t / 1000000000 + 1);
+		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getState().getModifiedDate2() );
+		long diff = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MINUTES);
+		double p =  ( viscount * digCount ) / diff;
 		if (thread.getViewCount() > (thread.getViewCounter().getLastSavedCount() + 1) || digCount > 0) {
 			p = Math.pow(p, thread.getViewCount() - thread.getViewCounter().getLastSavedCount() + 1);
 		}
