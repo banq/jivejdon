@@ -42,8 +42,6 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 
 	private final List<ViewCounter> viewcounters;
 
-	private final int MAXSIZE = 5000;
-
 	private final PropertyDao propertyDao;
 	private final ThreadViewCountParameter threadViewCountParameter;
 	private final ScheduledExecutorUtil scheduledExecutorUtil;
@@ -77,9 +75,7 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 	public void writeDB() {
 		// construct a immutable set
 		List<ViewCounter> viewCounters2 = new ArrayList<>(this.viewcounters);
-		if (this.viewcounters.size() > MAXSIZE) {
-			this.viewcounters.clear();
-		}
+		this.viewcounters.clear();
 		for (ViewCounter viewCounter : viewCounters2) {
 			if (viewCounter.getViewCount() != viewCounter.getLastSavedCount() && viewCounter.getViewCount() != -1
 					&& viewCounter.getViewCount() != 0) {
