@@ -42,7 +42,7 @@ public class HomePageComparator implements Comparator<ForumThread> {
 		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getState().getModifiedDate2() );
 		long diff = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 		double p =  ( viscount * digCount ) / diff;
-		if (thread.getViewCount() > (thread.getViewCounter().getLastSavedCount() + 1) || digCount > 0) {
+		if (thread.getViewCount() > (thread.getViewCounter().getLastSavedCount() + 1) && digCount > 0) {
 			p = Math.pow(p, thread.getViewCount() - thread.getViewCounter().getLastSavedCount() + 1);
 		}
 		return p;
