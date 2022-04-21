@@ -37,8 +37,8 @@ public class HomePageComparator implements Comparator<ForumThread> {
 	}
 
 	private double algorithm(ForumThread thread, ForumThread threadPrev) {
-		double digCount = thread.getRootMessage().getDigCount() + 1;
-		double viscount = thread.getViewCount()  + 1;
+		long digCount = thread.getRootMessage().getDigCount() + 1L;
+		long viscount = thread.getViewCount()  + 1L;
 		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getState().getModifiedDate2() );
 		long diff = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 		double p =  ( viscount * digCount );
