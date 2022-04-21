@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  */
 public class ThreadDigList {
 
-	private final static int TIME_WINDOWS = 100;
+	public final static int TIME_WINDOWS = 1000;
 
 	private final static int TAGSLIST_SIZE = 10;
 	private final TreeSet<Long> sortedAll;
