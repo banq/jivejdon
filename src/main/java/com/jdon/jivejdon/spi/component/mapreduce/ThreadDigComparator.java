@@ -21,8 +21,8 @@ public class ThreadDigComparator implements Comparator<Long> {
 			return 0;
 		ForumThread thread1 = forumMessageQueryService.getThread(threadId1);
 		ForumThread thread2 = forumMessageQueryService.getThread(threadId2);
-		int thread1Count = thread1.getRootMessage().getDigCount();
-		int thread2Count = thread2.getRootMessage().getDigCount();
+		double thread1Count = thread1.getRootMessage().getDigCount() * thread1.getViewCount();
+		double thread2Count = thread2.getRootMessage().getDigCount() * thread2.getViewCount();
 
 		if (thread1Count > thread2Count)
 			return -1; // returning the first object
