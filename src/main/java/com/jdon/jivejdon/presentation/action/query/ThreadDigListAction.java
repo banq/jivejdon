@@ -38,6 +38,7 @@ import java.util.stream.Collectors;
 public class ThreadDigListAction extends Action {
 	private ThreadViewCounterJob threadViewCounterJob;
 	private ForumMessageQueryService forumMessageQueryService;
+	private ThreadApprovedNewList threadApprovedNewList;
 	
 	private ThreadViewCounterJob getThreadViewCounterJob() {
 		if (threadViewCounterJob == null)
@@ -48,10 +49,19 @@ public class ThreadDigListAction extends Action {
 
 	private ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
-		forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getComponentInstance("forumMessageQueryService",
+		    forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getComponentInstance("forumMessageQueryService",
 					this.servlet.getServletContext());
 		return forumMessageQueryService;
 	}
+
+	private ThreadApprovedNewList getThreadApprovedNewList(){
+		if (threadApprovedNewList == null)
+		   threadApprovedNewList = (ThreadApprovedNewList) WebAppUtil.getComponentInstance("threadApprovedNewList",
+				this.servlet.getServletContext());
+	    return threadApprovedNewList;
+	}
+
+
 
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -62,9 +72,7 @@ public class ThreadDigListAction extends Action {
 			DigsListMAXSize = Integer.parseInt(wSize);
 		}
 		ModelListForm threadListForm = (ModelListForm) form;
-		ThreadApprovedNewList threadApprovedNewList = (ThreadApprovedNewList) WebAppUtil.getComponentInstance("threadApprovedNewList",
-				this.servlet.getServletContext());
-		Collection<Long> digList = threadApprovedNewList.getThreadDigList().getDigThreadIds(DigsListMAXSize);
+		Collection<Long> digList = getThreadApprovedNewList().getThreadDigList().getDigThreadIds(DigsListMAXSize);
 		Collection<ForumThread> digThreads = new ArrayList<>();
 		if (wSize != null) {
 			digThreads = digList.stream().filter(e -> getThreadViewCounterJob().getThreadIdsList().contains(e))

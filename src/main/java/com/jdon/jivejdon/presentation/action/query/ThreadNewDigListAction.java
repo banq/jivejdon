@@ -28,6 +28,7 @@ import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.spi.component.mapreduce.HomepageListSolver;
+import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
 import com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
@@ -45,6 +46,15 @@ public class ThreadNewDigListAction extends ModelListAction {
 	private ForumMessageQueryService forumMessageQueryService;
 	private ThreadViewCounterJob threadViewCounterJob;
 	private HomepageListSolver homepageListSolver;
+	private ThreadApprovedNewList threadApprovedNewList;
+
+	
+	private ThreadApprovedNewList getThreadApprovedNewList(){
+		if (threadApprovedNewList == null)
+		   threadApprovedNewList = (ThreadApprovedNewList) WebAppUtil.getComponentInstance("threadApprovedNewList",
+				this.servlet.getServletContext());
+	    return threadApprovedNewList;
+	}
 
 	public HomepageListSolver getHomepageListSolver() {
 		if (homepageListSolver == null)
@@ -74,9 +84,15 @@ public class ThreadNewDigListAction extends ModelListAction {
 	 * .HttpServletRequest, int, int)
 	 */
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
+		int DigsListMAXSize = 720;
 		Collection<Long> allIds = new ArrayList<Long>();
-		allIds = getThreadViewCounterJob().getThreadIdsList().stream()
-				.filter(e -> !getHomepageListSolver().getList().contains(e)).collect(Collectors.toList());
+		allIds = getThreadApprovedNewList().getThreadDigList().getDigs(DigsListMAXSize).stream()
+				.filter(e -> e.getRootMessage().getDigCount() > 1).map(e -> e.getThreadId())
+				.collect(Collectors.toList());
+
+		// Collection<Long> allIds = new ArrayList<Long>();
+		// allIds = getThreadViewCounterJob().getThreadIdsList().stream()
+		// 		.filter(e -> !getHomepageListSolver().getList().contains(e)).collect(Collectors.toList());
 		return new PageIterator(allIds.size(), allIds.toArray());
 	}
 
