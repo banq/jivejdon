@@ -2,7 +2,6 @@ package com.jdon.jivejdon.spi.component.mapreduce;
 
 import com.jdon.jivejdon.domain.model.ForumThread;
 
-import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.concurrent.TimeUnit;
 

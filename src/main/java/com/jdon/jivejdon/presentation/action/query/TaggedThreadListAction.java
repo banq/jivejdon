@@ -23,6 +23,7 @@ import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.domain.model.query.specification.TaggedThreadListSpec;
 import com.jdon.jivejdon.spi.component.mapreduce.HomePageComparator;
+import com.jdon.jivejdon.spi.component.mapreduce.ThreadDigComparator;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
 import com.jdon.util.Debug;
@@ -33,6 +34,8 @@ import org.apache.struts.action.ActionMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,9 +54,13 @@ public class TaggedThreadListAction extends ModelListAction {
 	}
 
 	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ActionForward actionForward = super.execute(actionMapping, actionForm,request,response);
+		ActionForward actionForward = super.execute(actionMapping, actionForm, request, response);
 		ModelListForm listForm = this.getModelListForm(actionMapping, actionForm, request);
-		List sortedList = (List)listForm.getList().stream().sorted(new HomePageComparator()).collect(Collectors.toList());
+		Collection<ForumThread> getList = (Collection) listForm.getList();
+		Collection<ForumThread> sortedList = getList.stream().sorted(
+				(ForumThread t1, ForumThread t2) -> new Long(t1.getRootMessage().getDigCount() * t1.getViewCount())
+						.compareTo(t2.getRootMessage().getDigCount() * t2.getViewCount()))
+				.collect(Collectors.toList());
 		listForm.setList(sortedList);
 		return actionForward;
 	}
