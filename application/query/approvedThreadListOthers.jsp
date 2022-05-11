@@ -8,7 +8,7 @@
 <bean:parameter id="noheader" name="noheader"  value=""/>
 <logic:notEqual name="noheader" value="on">
 
-<bean:define id="title"  value=" 最佳精华文章 " />
+<bean:define id="title"  value=" 推荐文章 " />
 <%@ include file="../common/IncludeTop.jsp" %>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
@@ -35,9 +35,8 @@
         <div class="box"> 
 <ul class="nav nav-tabs">        
   <li><a href="<%=request.getContextPath()%>/threads">最新</a></li>
-  <li class="active"><a href="#">最佳</a></li>
-  <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">最热</a></li>
   <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">最赞</a></li>            
+  <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">最热</a></li>
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" rel="nofollow">搜索</a></li>  
           
           <div class="pagination" style="float: right;">
