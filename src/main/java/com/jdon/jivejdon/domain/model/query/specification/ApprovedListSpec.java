@@ -23,7 +23,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	public boolean isApproved(ForumThread thread, Account account, ForumThread threadPrev) {
-		if (isGoodBlog(thread, account) || isExcelledDiscuss(thread) || isGreaterThanPrev(thread, threadPrev)) {
+		if (isDigged(thread, 1) || isExcelledDiscuss(thread) || isGreaterThanPrev(thread, threadPrev)) {
 			return true;
 		} else
 			return false;
