@@ -25,6 +25,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -48,7 +49,7 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 
 	public ThreadViewCounterJobImp(final PropertyDao propertyDao,
 			final ThreadViewCountParameter threadViewCountParameter, ScheduledExecutorUtil scheduledExecutorUtil) {
-		this.viewcounters = new ArrayList<>();
+		this.viewcounters = new CopyOnWriteArrayList<>();
 		this.propertyDao = propertyDao;
 		this.threadViewCountParameter = threadViewCountParameter;
 		this.scheduledExecutorUtil = scheduledExecutorUtil;
@@ -111,7 +112,7 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 	}
 
 	public List<Long> getThreadIdsList() {
-		return viewcounters.stream().map(e -> e.getThread().getThreadId()).collect(Collectors.toList());
+		return viewcounters.parallelStream().map(e -> e.getThread().getThreadId()).collect(Collectors.toList());
 	}
 
 }
