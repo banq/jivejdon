@@ -10,6 +10,7 @@ import com.jdon.jivejdon.domain.model.ForumThread;
 import java.util.Collection;
 
 public class ApprovedListSpec extends ThreadListSpec {
+	private final int initViewCount = 500;
 
 	//this value is display count on one page
 	private final int needCount = 15;
@@ -23,7 +24,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	public boolean isApproved(ForumThread thread, Account account, ForumThread threadPrev) {
-		if (isDigged(thread, 1) || isExcelledDiscuss(thread) || isGreaterThanPrev(thread, threadPrev)) {
+		if (thread.getViewCount() > initViewCount || isDigged(thread, 1) || isExcelledDiscuss(thread) || isGreaterThanPrev(thread, threadPrev)) {
 			return true;
 		} else
 			return false;
