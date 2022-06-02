@@ -36,16 +36,19 @@ public class HomePageComparator implements Comparator<ForumThread> {
 	}
 
 	private double algorithm(ForumThread thread, ForumThread threadPrev) {
-		long digCount = thread.getRootMessage().getDigCount() + 1L;
-		long viscount = thread.getViewCount()  + 1L;
-		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getState().getModifiedDate2() );
+		double p = thread.getViewCount();
+		if (thread.getRootMessage().getDigCount() > 0)
+			p = p * thread.getRootMessage().getDigCount();
+
+		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getState().getModifiedDate2());
 		long diff = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
-		double p =  ( viscount * digCount );
 		if (diff > 2)
 			p = p / diff;
+
 		long diff2 = thread.getViewCount() - thread.getViewCounter().getLastSavedCount();
-		if (diff2 > 2) 
+		if (diff2 > 2)
 			p = p * diff2;
+			
 		return p;
 	}
 }
