@@ -39,11 +39,11 @@ public class HomePageComparator implements Comparator<ForumThread> {
 		long digCount = thread.getRootMessage().getDigCount() + 1L;
 		long viscount = thread.getViewCount()  + 1L;
 		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getState().getModifiedDate2() );
-		long diff = TimeUnit.HOURS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+		long diff = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 		double p =  ( viscount * digCount );
-		if (diff > 1)
+		if (diff > 2)
 			p = p / diff;
-		if (thread.getViewCount() > (thread.getViewCounter().getLastSavedCount() + 1)
+		if (thread.getViewCount() > (thread.getViewCounter().getLastSavedCount() + 5)
 				&& thread.getRootMessage().getDigCount() > 0) {
 			p = p * (thread.getViewCount() - thread.getViewCounter().getLastSavedCount() + 1);
 		}
