@@ -42,7 +42,7 @@ public class HomePageComparator implements Comparator<ForumThread> {
 
 		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getState().getModifiedDate2());
 		long diff = TimeUnit.HOURS.convert(diffInMillis, TimeUnit.MILLISECONDS);
-		if (diff > 24)
+		if (diff > 48)
 			p = p / diff;
 
 		long diff2 = thread.getViewCount() - thread.getViewCounter().getLastSavedCount();
