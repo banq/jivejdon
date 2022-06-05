@@ -28,10 +28,10 @@ public class HomepageListSolver {
 //		TreeMap<ForumThread, Long> sorted_map = new TreeMap<ForumThread, Long>(new
 //				HomePageComparator());
         Collection<Long> list = new ArrayList<>();
-		for(int i = 0; i < 60; i = i + 15){
+		for(int i = 0; i < 120; i = i + 15){
 			list.addAll(threadApprovedNewList.getApprovedThreads(i));
 		}
-		list = list.stream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
+		list = list.parallelStream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
 				.getThread(threadId), threadId -> threadId, (e1, e2) ->
 				e1, () -> new TreeMap<ForumThread, Long>(new HomePageComparator()))).values();
 		return list.parallelStream().skip(0).limit(10).collect(Collectors.toList());
