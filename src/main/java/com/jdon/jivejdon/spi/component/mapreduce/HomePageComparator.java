@@ -37,17 +37,17 @@ public class HomePageComparator implements Comparator<ForumThread> {
 
 	private double algorithm(ForumThread thread, ForumThread threadPrev) {
 		double p = thread.getViewCount();
-		if (thread.getRootMessage().getDigCount() > 0)
+		if (thread.getRootMessage().getDigCount() > 1)
 			p = Math.pow(p, thread.getRootMessage().getDigCount());
+
+		long diff2 = thread.getViewCount() - thread.getViewCounter().getLastSavedCount();
+		if (diff2 > 1)
+			p = Math.pow(p, diff2);
 
 		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getState().getModifiedDate2());
 		long diff = TimeUnit.HOURS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 		if (diff > 48)
 			p = p / diff;
-
-		long diff2 = thread.getViewCount() - thread.getViewCounter().getLastSavedCount();
-		if (diff2 > 2)
-			p = p * diff2;
 
 		return p;
 	}
