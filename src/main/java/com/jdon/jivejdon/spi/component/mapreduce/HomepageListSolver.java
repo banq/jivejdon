@@ -4,6 +4,7 @@ import com.jdon.annotation.Component;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -26,10 +27,15 @@ public class HomepageListSolver {
 	public Collection<Long> getList() {
 //		TreeMap<ForumThread, Long> sorted_map = new TreeMap<ForumThread, Long>(new
 //				HomePageComparator());
-		Collection<Long> list = threadApprovedNewList.getApprovedThreads(0);
-		return list.stream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
+        Collection<Long> list = new ArrayList<>();
+		for(int i = 0; i < 5; i++){
+			list.addAll(threadApprovedNewList.getApprovedThreads(i));
+		}
+		list = list.stream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
 				.getThread(threadId), threadId -> threadId, (e1, e2) ->
 				e1, () -> new TreeMap<ForumThread, Long>(new HomePageComparator()))).values();
+		return list.parallelStream().skip(0).limit(10).collect(Collectors.toList());
+			
 
 	}
 
