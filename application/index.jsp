@@ -21,7 +21,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-PFPM5XC');</script>
 <!-- End Google Tag Manager -->
   <meta charset="utf-8" />
-  <link rel="preconnect" href="/query/threadApprovedNewList2.shtml">
+  <link rel="prefetch" href="/query/threadApprovedNewList2.shtml">
   <link rel="preconnect" href="https://adservice.google.com/">
   <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
   <link rel="preconnect" href="https://www.googletagservices.com/">
