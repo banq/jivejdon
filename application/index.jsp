@@ -25,7 +25,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
   <link rel="preconnect" href="https://www.googletagservices.com/">
   <link rel="preconnect" href="https://tpc.googlesyndication.com/">  
-  <link rel="prefetch" href="//static.jdon.com/common/login2.js">  
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>解道jdon - 传道解惑的架构师博客</title>

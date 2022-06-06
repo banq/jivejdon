@@ -7,6 +7,7 @@ import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.TreeMap;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -17,6 +18,8 @@ public class HomepageListSolver {
 
 	private final ThreadApprovedNewList threadApprovedNewList;
 	private final ForumMessageQueryService forumMessageQueryService;
+	private Collection<Long> list;
+	private long lastFetchTime;
 
 	public HomepageListSolver(ThreadApprovedNewList threadApprovedNewList,
 							  ForumMessageQueryService forumMessageQueryService) {
@@ -25,17 +28,30 @@ public class HomepageListSolver {
 	}
 
 	public Collection<Long> getList() {
-//		TreeMap<ForumThread, Long> sorted_map = new TreeMap<ForumThread, Long>(new
-//				HomePageComparator());
-        Collection<Long> list = new ArrayList<>();
-		for(int i = 0; i < 120; i = i + 15){
+		if (list == null) {
+			list = fetchList();
+			lastFetchTime = System.currentTimeMillis();
+		}
+
+		long diff = TimeUnit.HOURS.convert(Math.abs(System.currentTimeMillis() - lastFetchTime), TimeUnit.MILLISECONDS);
+		if (diff > 5) {
+			list = fetchList();
+			lastFetchTime = System.currentTimeMillis();
+		}
+
+		return list;
+
+	}
+
+	public Collection<Long> fetchList() {
+		Collection<Long> list = new ArrayList<>();
+		for (int i = 0; i < 120; i = i + 15) {
 			list.addAll(threadApprovedNewList.getApprovedThreads(i));
 		}
 		list = list.parallelStream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
-				.getThread(threadId), threadId -> threadId, (e1, e2) ->
-				e1, () -> new TreeMap<ForumThread, Long>(new HomePageComparator()))).values();
+				.getThread(threadId), threadId -> threadId, (e1, e2) -> e1,
+				() -> new TreeMap<ForumThread, Long>(new HomePageComparator()))).values();
 		return list.parallelStream().skip(0).limit(10).collect(Collectors.toList());
-			
 
 	}
 
