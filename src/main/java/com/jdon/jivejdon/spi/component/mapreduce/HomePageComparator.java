@@ -37,8 +37,8 @@ public class HomePageComparator implements Comparator<ForumThread> {
 
 	private double algorithm(ForumThread thread, ForumThread threadPrev) {
 		double p = thread.getViewCount();
-		if (thread.getRootMessage().getDigCount() > 1)
-			p = Math.pow(p, thread.getRootMessage().getDigCount());
+		if (thread.getRootMessage().getDigCount() > 0)
+			p = Math.pow(p, thread.getRootMessage().getDigCount() + 1);
 
 		long diff2 = thread.getViewCount() - thread.getViewCounter().getLastSavedCount();
 		if (diff2 > 1)
@@ -46,8 +46,10 @@ public class HomePageComparator implements Comparator<ForumThread> {
 
 		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getState().getModifiedDate2());
 		long diff = TimeUnit.HOURS.convert(diffInMillis, TimeUnit.MILLISECONDS);
-		if (diff > 48)
+		if (diff >= 72)
 			p = p / diff;
+		else if (thread.getRootMessage().getDigCount() > 0)
+			p = Math.pow(p, thread.getRootMessage().getDigCount() + 1) * (72 - diff);
 
 		return p;
 	}
