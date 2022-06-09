@@ -25,6 +25,11 @@ public class ResultSort {
     public static final int ASCENDING = 1;
     
     private int sortOrder = DESCENDING;
+
+    public ResultSort() {
+        this.setOrder_DESCENDING();
+    }
+
             
 	public int getSortOrder() {
 		return sortOrder;

@@ -1,10 +1,15 @@
 package com.jdon.jivejdon.spi.component.mapreduce;
 
 import com.jdon.annotation.Component;
+import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.query.ResultSort;
+import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
+import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpecForMod;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
@@ -34,7 +39,7 @@ public class HomepageListSolver {
 		}
 
 		long diff = TimeUnit.HOURS.convert(Math.abs(System.currentTimeMillis() - lastFetchTime), TimeUnit.MILLISECONDS);
-		if (diff > 5) {
+		if (diff > 1) {
 			list = fetchList();
 			lastFetchTime = System.currentTimeMillis();
 		}
@@ -53,6 +58,19 @@ public class HomepageListSolver {
 				() -> new TreeMap<ForumThread, Long>(new HomePageComparator()))).values();
 		return list.parallelStream().skip(0).limit(10).collect(Collectors.toList());
 
+	}
+
+	private Collection<Long> fetchNewThreadList(){
+		PageIterator pageIterator = forumMessageQueryService.getThreads(0, 15, new ThreadListSpecForMod());
+		Collection<Long> list = new ArrayList<>();
+		int i = 0;
+		while (pageIterator.hasNext()) {
+			list.add((Long) pageIterator.next());
+			i++;
+			if (i > 5)
+				break;
+		}
+		return list;
 	}
 
 //		for (Long threadId : list) {

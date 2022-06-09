@@ -15,10 +15,13 @@
  */
 package com.jdon.jivejdon.domain.model.query.specification;
 
+import com.jdon.jivejdon.domain.model.query.ResultSort;
+
 public class ThreadListSpecForMod extends ThreadListSpec {
 
 	public ThreadListSpecForMod() {
 		sorttableName = "modifiedDate";
+		setResultSort( new ResultSort());
 	}
 
 }

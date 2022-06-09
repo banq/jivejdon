@@ -11,6 +11,7 @@ public class ThreadListSpec {
 
 	public ThreadListSpec() {
 		sorttableName = "creationDate";
+		this.resultSort = new ResultSort();
 	}
 
 	public String getResultSortSQL() {
