@@ -249,7 +249,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		</div>
 	</div>
 	<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
-	<script src="//static.jdon.com/common/login2.js"></script>
+	<script src="//cdn.jdon.com/common/login2.js"></script>
 	<%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
 <%@ include file="./common/IncludeBottomBody.jsp" %> 
 <script src="/common/js/jquery.lazyload-any.js"></script>
