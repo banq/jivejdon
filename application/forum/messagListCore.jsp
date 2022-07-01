@@ -236,7 +236,7 @@
     allCount = <bean:write name="threadsInMemallCount"/>; 
   </logic:notEmpty>
 </script>
-<script src="https://static.jdon.com/common/messageList9.js"></script>
+<script src="https://cdn.jdon.com/common/messageList9.js"></script>
 <script>        
   $(document).ready(function() { 
       scrollLoadByElementId('https://cdn.jdon.com/query/threadDigList',"digList");            
