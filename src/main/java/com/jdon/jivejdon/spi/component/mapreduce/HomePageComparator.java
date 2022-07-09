@@ -6,7 +6,10 @@ import java.util.Comparator;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Home page approve threads Comparator
+ * Home page approve/rank threads Comparator
+ * ranking algorithm:
+ * https://www.jdon.com/61442
+ * https://herman.bearblog.dev/a-better-ranking-algorithm/
  */
 public class HomePageComparator implements Comparator<ForumThread> {
 	@Override
