@@ -8,7 +8,6 @@
 						<div class="footer-heading"><h3><span style="color: #fff;">Jdon.com</span></h3></div>
 						<div class="content">
 							<p>搬砖、铺道、搭桥</p>
-							<p><a href="https://www.jdon.com/54881">《复杂软件设计之道：领域驱动设计全面解析与实战》</a></p>
 						</div>
 					</div>
 					<div class="col-md-4 col-footer footer-2">
