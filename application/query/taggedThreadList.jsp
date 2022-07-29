@@ -38,7 +38,7 @@ pageContext.setAttribute("title", titleStr);
 <div id="page-content" class="single-page container">
     <div class="row">
       <!-- /////////////////左边 -->
-      <div id="main-content" class="col-md-8">
+      <div id="main-content" class="col-md-12">
         <div class="box"> 
         <!-- 填写 -->
 			
@@ -121,80 +121,7 @@ pageContext.setAttribute("title", titleStr);
           </div>
         </div>
       </div>  
-      <!-- /////////////////右边 -->
-       <div id="sidebar" class="col-md-4">
-        <!---- Start Widget ---->
-        <div class="widget wid-follow">
-          <div class="content">
-            <ul class="list-inline">
-              <form role="form" class="form-horizontal" method="post" action="/query/threadViewQuery.shtml">
-						 <input type="text" placeholder="Search" value="" name="query" id="v_search" class="form-control">
-					 </form>
-            </ul>           
-          </div>
-        </div>
-        <div class="widget wid-post">
-            <div class="content">
-                <div class="wrap-vid">
-                </div>
-            </div>
-        </div>              
-           <!---- Start tags ---->
-           <div class="widget wid-post">
-               <div class="info">
-                   <jsp:include page="/query/tagHotList.shtml" flush="true"></jsp:include>
-               </div>
-           </div>
-           <!---- Start Widget ---->
-        <div class="widget wid-post">
-          <div class="content">
-              <div class="post wrap-vid">
-                  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                  <!-- 页面右侧上部336x280 20-06-18 -->
-                  <ins class="adsbygoogle"
-                       style="display:block"
-                       data-ad-client="ca-pub-7573657117119544"
-                       data-ad-slot="6751585519"
-                       data-ad-format="auto"
-                       data-full-width-responsive="true"></ins>
-                  <script>
-                      (adsbygoogle = window.adsbygoogle || []).push({});
-                  </script>
-              </div>
-          </div>
-        </div>
-        <!---- Start Widget ---->
-        <div class="widget">
-              <div class="wid-vid">
-                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                  <ins class="adsbygoogle"
-                       style="display:block"
-                       data-ad-format="autorelaxed"
-                       data-ad-client="ca-pub-7573657117119544"
-                       data-ad-slot="7669317912"></ins>
-                  <script>
-                      (adsbygoogle = window.adsbygoogle || []).push({});
-                  </script>
-              </div>
-        </div>
 
-           <div class="widget">
-               <div class="wid-vid">
-           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-           <!-- 右侧中部300x600 20-06-18 -->
-           <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-7573657117119544"
-                data-ad-slot="3352261515"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-           <script>
-               (adsbygoogle = window.adsbygoogle || []).push({});
-           </script>
-               </div>
-           </div>
-    
-    </div>
   </div>
 </div>  
 	
