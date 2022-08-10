@@ -25,6 +25,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
   <link rel="preconnect" href="https://www.googletagservices.com/">
   <link rel="preconnect" href="https://tpc.googlesyndication.com/">  
+  <link rel="prefetch" href="https://static.jdon.com/js/jquery-2.1.1.min.js">   
+  <link rel="prefetch" href="https://static.jdon.com/js/bootstrap.min.js">
+  <link rel="prefetch" href="https://cdn.jdon.com/js/bootstrap.min.css">   
+  <link rel="prefetch" href="https://cdn.jdon.com/common/js/styles/style.css">
   <link rel="prefetch" href="https://cdn.jdon.com/common/js/jquery.lazyload-any.js">  
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
