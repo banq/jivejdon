@@ -25,6 +25,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
   <link rel="preconnect" href="https://www.googletagservices.com/">
   <link rel="preconnect" href="https://tpc.googlesyndication.com/">  
+  <link rel="prefetch" href="https://cdn.jdon.com/common/js/jquery.lazyload-any.js">  
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>解道jdon - 传道解惑的架构师博客</title>
@@ -251,7 +252,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<script src="//cdn.jdon.com/common/login2.js"></script>
 	<%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
 <%@ include file="./common/IncludeBottomBody.jsp" %> 
-<script src="/common/js/jquery.lazyload-any.js"></script>
+<script src="https://cdn.jdon.com/common/js/jquery.lazyload-any.js"></script>
 <script>       
     $('.lazyload').lazyload();
 </script>
