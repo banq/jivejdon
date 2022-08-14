@@ -66,9 +66,11 @@ public class SinaWeiboAction implements SubscriptionAction {
 				shortMessage.setAccount(subscription.getAccount());
 				shortMessage.setMessageTo(subscription.getAccount().getUsername());
 				subscriptionNotify.shortMessageFactory.sendShortMessage(shortMessage);
-			} else
-				subscriptionNotify.sinaWeboSubmitter.submitWeibo(notifySubscribed.createShortMessage(subscription).getMessageBody(),
-						userConnectorAuth);
+			} else{
+				String content = notifySubscribed.createShortMessage(subscription).getMessageBody();
+				String rip = notifySubscribed.createShortMessage(subscription).getAccount().getPostIP();
+				subscriptionNotify.sinaWeboSubmitter.submitWeibo(content, userConnectorAuth, rip);
+					}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

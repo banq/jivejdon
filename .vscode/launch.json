@@ -4,13 +4,20 @@
     // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-    {
-        "type": "java",
-        "name": "remote tomcat server/debug.bat",
-        "projectName":"jivejdon",
-        "request": "attach",
-        "hostName": "localhost",
-        "port": "8000"
-    }
+        {
+            "type": "java",
+            "name": "Launch SinaOAuthSubmitter",
+            "request": "launch",
+            "mainClass": "com.jdon.jivejdon.spi.component.account.SinaOAuthSubmitter",
+            "projectName": "jivejdon"
+        },
+        {
+            "type": "java",
+            "name": "remote tomcat server/debug.bat",
+            "projectName": "jivejdon",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": "8000"
+        }
     ]
 }

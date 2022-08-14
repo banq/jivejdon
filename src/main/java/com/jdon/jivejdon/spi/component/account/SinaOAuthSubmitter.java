@@ -72,7 +72,7 @@ public class SinaOAuthSubmitter {
 							"status", "【SpringBoot 2的普通servlet与WebFlux性能对比】:  Spring-boot 2.0  " +
 							"最近" +
 							" " +
-							"发布，每个人都对新功能和改进感到兴奋。Spring 5引入了W https://jdon.com/50407")}, token);
+							"发布，每个人都对新功能和改进感到兴奋。Spring 5引入了W https://jdon.com/50407"),new PostParameter("rip","101.86.20.11")}, token);
 			Status status = new Status(rs);
 			System.out.println("############status=" + status);
 
@@ -85,10 +85,10 @@ public class SinaOAuthSubmitter {
 		}
 	}
 
-	public void submitWeibo(String content, UserConnectorAuth userConnectorAuth) {
+	public void submitWeibo(String content, UserConnectorAuth userConnectorAuth, String rip) {
 		try {
 			AccessToken accessToken = (AccessToken) userConnectorAuth.getAccessToken();
-			update(accessToken, content);
+			update(accessToken, content, rip);
 		} catch (Exception e) {
 			logger.error("submitWeibo error:" + e);
 		}
@@ -117,13 +117,12 @@ public class SinaOAuthSubmitter {
 		return new AccessToken(rs);
 	}
 
-	public void update(AccessToken access, String content) throws Exception {
+	public void update(AccessToken access, String content, String rip) throws Exception {
 		try {
 //			content = content + " https://jdon.com";
 			Response rs = client.post(oAuthParamVO.baseURL + "statuses/share" +
 							".json",
-					new PostParameter[]{new PostParameter(
-							"status", content)}, access.getAccessToken());
+					new PostParameter[]{new PostParameter("status", content),new PostParameter("rip",rip)}, access.getAccessToken());
 			Status status = new Status(rs);
 
 			if (status != null && UtilValidate.isEmpty(status.getText())) {
