@@ -34,22 +34,5 @@
 	<script src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>	
 	<!-- Core JavaScript Files -->  	 
     <script src="https://static.jdon.com/js/bootstrap.min.js"></script>
-	<div id="to_top" style="display:block; width:20px; height:20px;position:fixed;  bottom:50px; right:40px; border-radius:10px 10px 10px 10px;   text-decoration:none;" onClick="document.documentElement.scrollTop = document.body.scrollTop =0"><a href="#" title="返回顶部"><i class="fa fa-arrow-circle-up"></i></a></div>
-
-   <noscript id="deferred-styles">
-	<link rel="stylesheet" href="https://cdn.jdon.com/js/bootstrap.min.css"  type="text/css">
-    <link rel="stylesheet" href="https://cdn.jdon.com/common/js/styles/style.css">
-   </noscript>
-   <script>
-	var loadDeferredStyles = function() {
-	  var addStylesNode = document.getElementById("deferred-styles");
-	  var replacement = document.createElement("div");
-	  replacement.innerHTML = addStylesNode.textContent;
-	  document.body.appendChild(replacement)
-	  addStylesNode.parentElement.removeChild(addStylesNode);
-	};
-	var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-		window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-	if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
-	else window.addEventListener('load', loadDeferredStyles);
-  </script> 
+	
+	
