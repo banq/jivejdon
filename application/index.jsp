@@ -260,7 +260,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
    <noscript id="deferred-styles">
 	  <link rel="stylesheet" href="https://cdn.jdon.com/js/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="https://cdn.jdon.com/common/js/styles/style.css" type="text/css">
+      <link rel="stylesheet" href="https://cdn.jdon.com/common/js/styles/style.css" type="text/css">
    </noscript>
    <script>
 	var loadDeferredStyles = function() {
