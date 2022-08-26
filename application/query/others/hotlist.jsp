@@ -10,13 +10,13 @@
 <%          
     com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(5 * 24 * 60 * 60, request, response);
 %>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="content-language" content="zh-CN" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8"/>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+<meta http-equiv="" content="IE=edge,chrome=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>热点贴列表</title>
 <style>
 A{font-size: 14px; line-height:23px;text-decoration:none;color:#888;}a:visited{text-decoration:none;color: #666;font-weight:lighter;}A:hover{text-decoration:underline;color:#eab30d;}

@@ -6,13 +6,13 @@ response.setHeader("Pragma","No-cache");
 response.setHeader("Cache-Control","no-cache"); 
 response.setDateHeader("Expires", 0); 
 %>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="content-language" content="zh-CN" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8"/>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+<meta http-equiv="" content="IE=edge,chrome=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 <META HTTP-EQUIV="Cache-Control" CONTENT="no-store">
 <META HTTP-EQUIV="Expires" CONTENT="0">

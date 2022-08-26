@@ -11,8 +11,12 @@
 %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
+<meta charset="utf-8"/>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+<meta http-equiv="" content="IE=edge,chrome=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -30,8 +34,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="prefetch" href="https://cdn.jdon.com/js/bootstrap.min.css">   
   <link rel="prefetch" href="https://cdn.jdon.com/common/js/styles/style.css">
   <link rel="prefetch" href="https://cdn.jdon.com/common/js/jquery.lazyload-any.js">  
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>解道jdon - 传道解惑的架构师博客</title>
   <meta name="Description" content="领域驱动设计DDD,微服务,<jsp:include page="/query/tagHotList2.shtml" flush="true"></jsp:include>"/>
   <meta name="Keywords" content="微服务,SOA,DDD,体系结构,架构,Gof设计模式,Java框架,大数据,云原生,面向对象,函数编程,SpringBoot,EDA,java,JavaEE,CQRS,eventsourcing" />

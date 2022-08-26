@@ -5,8 +5,12 @@
 String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
 %>
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
+<meta charset="utf-8"/>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+<meta http-equiv="" content="IE=edge,chrome=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -14,13 +18,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-PFPM5XC');</script>
 <!-- End Google Tag Manager -->
-    <meta charset="utf-8" />
     <link rel="preconnect" href="https://adservice.google.com/">
     <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
     <link rel="preconnect" href="https://www.googletagservices.com/">
     <link rel="preconnect" href="https://tpc.googlesyndication.com/">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title><logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty></title>
     <meta property="og:type" content="article"/>
     <meta property="og:url" content="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />"/>
