@@ -12,15 +12,10 @@
 [class^="fa-"], [class*=" fa-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon';
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.fa {
   display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
   text-rendering: auto;
+  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
