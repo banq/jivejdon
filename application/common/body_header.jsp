@@ -56,7 +56,7 @@
 								<li><a href="/eda.html">事件驱动</a></li>
 								<li><a href="/cache.html">缓存设计</a></li>
 								<li><a href="/tags/619">架构师观点</a></li>
-								<li><a href="/tags/249">Java企业架构</a></li>
+								<li><a href="/tags/249">技术架构</a></li>
 							</ul>
 						</div>
 					</div>
