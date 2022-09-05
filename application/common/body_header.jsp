@@ -49,13 +49,14 @@
 							<ul class="list-unstyled">
 								<li><a href="/soa.html">SOA</a></li>
 							    <li><a href="/workflow-bpm.html">工作流BPM</a></li>
+								<li><a href="/tags/26738">规则引擎</a></li>	
 								<li><a href="/colorUML.html">业务分析</a></li>								
 								<li><a href="/scalable.html">可伸缩性</a></li>
-								<li><a href="/performance.html">性能设计</a></li>
-								<li><a href="/transaction.html">事务</a></li>	
-								<li><a href="/rest.html">RESTful</a></li>	
+								<li><a href="/rest.html">REST API设计</a></li>	
 								<li><a href="/eda.html">事件驱动</a></li>
 								<li><a href="/cache.html">缓存设计</a></li>
+								<li><a href="/tags/619">架构师观点</a></li>
+								<li><a href="/tags/249">Java企业架构</a></li>
 							</ul>
 						</div>
 					</div>
@@ -85,6 +86,8 @@
 						<div class="dropdown-inner">
 							<ul class="list-unstyled">
 								<li><a href="/DistributedSystems.html">分布式设计</a></li>
+								<li><a href="/tags/11205">CAP定理</a></li>
+								<li><a href="/transaction.html">分布式事务</a></li>	
 								<li><a href="/springcloud.html">SpringCloud</a></li>
 								<li><a href="/event.html">事件溯源</a></li>
 								<li><a href="/cqrs.html">CQRS</a></li>
