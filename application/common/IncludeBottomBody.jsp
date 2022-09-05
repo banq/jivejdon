@@ -17,7 +17,7 @@
 						<div class="content">
 							<ul>
 								<li><a href="/followus.html">关注解道 </a></li>
-								<li><a href="/tags">解道主题</a></li>		
+								<li><a href="/aboutsite.htm">关于解道</a></li>		
 							</ul>
 						</div>
 					</div>
