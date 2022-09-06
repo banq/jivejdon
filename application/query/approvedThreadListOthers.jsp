@@ -10,22 +10,6 @@
 
 <bean:define id="title"  value=" 推荐文章 " />
 <%@ include file="../common/IncludeTop.jsp" %>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-7573657117119544",
-            enable_page_level_ads: true
-        });
-    </script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-32868073-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-32868073-1');
-    </script>
     
 <!-- /////////////////////////////////////////Content -->
 <div id="page-content" class="single-page container">
@@ -50,16 +34,6 @@
                 <div class="linkblock">
                     <div class="row">
                         <div class="col-sm-12">
-                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                            <ins class="adsbygoogle"
-                                 style="display:block; text-align:center;"
-                                 data-ad-layout="in-article"
-                                 data-ad-format="fluid"
-                                 data-ad-client="ca-pub-7573657117119544"
-                                 data-ad-slot="6913243852"></ins>
-                            <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
                         </div>
                     </div>
                 </div>
@@ -72,16 +46,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="box">
-                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                            <ins class="adsbygoogle"
-                                 style="display:block"
-                                 data-ad-format="fluid"
-                                 data-ad-layout-key="-e3+4a-2h-5p+v6"
-                                 data-ad-client="ca-pub-7573657117119544"
-                                 data-ad-slot="4250528285"></ins>
-                            <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
+                            
                         </div>
                     </div>
                 </div>
@@ -132,49 +97,21 @@
         <div class="widget wid-post">
           <div class="content">
               <div class="post wrap-vid">
-                  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                  <!-- 页面右侧上部336x280 20-06-18 -->
-                  <ins class="adsbygoogle"
-                       style="display:block"
-                       data-ad-client="ca-pub-7573657117119544"
-                       data-ad-slot="6751585519"
-                       data-ad-format="auto"
-                       data-full-width-responsive="true"></ins>
-                  <script>
-                      (adsbygoogle = window.adsbygoogle || []).push({});
-                  </script>
+                  
               </div>
           </div>
         </div>
         <!---- Start Widget ---->
         <div class="widget">
               <div class="wid-vid">
-                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                  <ins class="adsbygoogle"
-                       style="display:block"
-                       data-ad-format="autorelaxed"
-                       data-ad-client="ca-pub-7573657117119544"
-                       data-ad-slot="7669317912"></ins>
-                  <script>
-                      (adsbygoogle = window.adsbygoogle || []).push({});
-                  </script>
+                  
 
               </div>
         </div>
 
            <div class="widget">
                <div class="wid-vid">
-                   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                   <!-- 右侧中部300x600 20-06-18 -->
-                   <ins class="adsbygoogle"
-                        style="display:block"
-                        data-ad-client="ca-pub-7573657117119544"
-                        data-ad-slot="3352261515"
-                        data-ad-format="auto"
-                        data-full-width-responsive="true"></ins>
-                   <script>
-                       (adsbygoogle = window.adsbygoogle || []).push({});
-                   </script>
+                   
                </div>
            </div>
     

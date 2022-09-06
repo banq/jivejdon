@@ -7,37 +7,12 @@
 
 <bean:define id="title"  value="编程道场Coding Dojo" />
 <%@ include file="../common/IncludeTop.jsp" %>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-7573657117119544",
-            enable_page_level_ads: true
-        });
-    </script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-32868073-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-32868073-1');
-    </script>
+   
 <link rel="alternate" type="application/rss+xml" title="<bean:write name="title" />" href="/rss/messages" />
 <meta http-equiv="refresh" content="3600">
 <script>
  if(top !== self) top.location = self.location;
   contextpath = "<%=request.getContextPath()%>";
-</script>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 自动调整尺寸 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="9040920314"
-     data-ad-format="auto"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 
 <!-- /////////////////////////////////////////Content -->
@@ -125,16 +100,6 @@
 	   </div>
 </div>
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 自动调整尺寸 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="9040920314"
-     data-ad-format="auto"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <%@include file="../common/IncludeBottom.jsp"%> 
 

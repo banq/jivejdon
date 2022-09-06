@@ -151,17 +151,7 @@
       <!---- Start Widget digList---->
       <div class="widget">
         <div class="wid-vid">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- 页面右侧上部336x280 20-06-18 -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-7573657117119544"
-                 data-ad-slot="6751585519"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            
         </div>
       </div>
       <!-- Start Widget -->
@@ -178,17 +168,7 @@
       <!-- Start Widget -->
       <div class="widget">
         <div class="wid-vid">
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <!-- 右侧中部300x600 20-06-18 -->
-          <ins class="adsbygoogle"
-               style="display:block"
-               data-ad-client="ca-pub-7573657117119544"
-               data-ad-slot="3352261515"
-               data-ad-format="auto"
-               data-full-width-responsive="true"></ins>
-          <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
+          
         </div>
       </div>
 

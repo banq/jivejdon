@@ -17,22 +17,6 @@ String titleStr = (String)request.getAttribute("TITLE");
 pageContext.setAttribute("title", titleStr);
 %>
       <%@ include file="../common/IncludeTop.jsp" %>
-      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-7573657117119544",
-            enable_page_level_ads: true
-        });
-    </script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-32868073-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-32868073-1');
-    </script>
 		 
 	<!-- /////////////////////////////////////////Content -->
 <div id="page-content" class="single-page container">
@@ -67,16 +51,6 @@ pageContext.setAttribute("title", titleStr);
        <div class="linkblock">
          <div class="row">
           <div class="col-sm-12">
-              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-              <ins class="adsbygoogle"
-                   style="display:block; text-align:center;"
-                   data-ad-layout="in-article"
-                   data-ad-format="fluid"
-                   data-ad-client="ca-pub-7573657117119544"
-                   data-ad-slot="6913243852"></ins>
-              <script>
-                  (adsbygoogle = window.adsbygoogle || []).push({});
-              </script>
           </div>
          </div>
        </div>
@@ -89,16 +63,6 @@ pageContext.setAttribute("title", titleStr);
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="box">
-                                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                                <ins class="adsbygoogle"
-                                     style="display:block"
-                                     data-ad-format="fluid"
-                                     data-ad-layout-key="-e3+4a-2h-5p+v6"
-                                     data-ad-client="ca-pub-7573657117119544"
-                                     data-ad-slot="4250528285"></ins>
-                                <script>
-                                    (adsbygoogle = window.adsbygoogle || []).push({});
-                                </script>
                         </div>
                     </div>
                 </div>
