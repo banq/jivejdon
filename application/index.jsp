@@ -117,16 +117,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					</div>
 					<div class="box-content">
 						<div class="row">
-							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-							<ins class="adsbygoogle"
-								 style="display:block"
-								 data-ad-format="fluid"
-								 data-ad-layout-key="-e3+4a-2h-5p+v6"
-								 data-ad-client="ca-pub-7573657117119544"
-								 data-ad-slot="4250528285"></ins>
-							<script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-							</script>
+							
 						</div>
 					</div>
 				</div>
@@ -151,17 +142,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<!---- Start Widget digList---->
 				<div class="widget">
 					<div class="wid-vid">
-						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-						<!-- 页面右侧上部336x280 20-06-18 -->
-						<ins class="adsbygoogle"
-							 style="display:block"
-							 data-ad-client="ca-pub-7573657117119544"
-							 data-ad-slot="6751585519"
-							 data-ad-format="auto"
-							 data-full-width-responsive="true"></ins>
-						<script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-						</script>
+						
 					</div>
 				</div>
 				<!---- Start Widget digList---->
@@ -186,17 +167,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<!-- Start Widget -->
                 <div class="widget">
                   <div class="wid-vid">
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <!-- 右侧中部300x600 20-06-18 -->
-          <ins class="adsbygoogle"
-               style="display:block"
-               data-ad-client="ca-pub-7573657117119544"
-               data-ad-slot="3352261515"
-               data-ad-format="auto"
-               data-full-width-responsive="true"></ins>
-          <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
+          
                    </div>
                 </div>
 				
@@ -220,15 +191,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<!-- Start Widget urlList -->
 				<div class="widget">
 					    <div class="wid-vid">
-							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-							<ins class="adsbygoogle"
-								 style="display:block"
-								 data-ad-format="autorelaxed"
-								 data-ad-client="ca-pub-7573657117119544"
-								 data-ad-slot="7669317912"></ins>
-							<script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-							</script>
+							
 						</div>
 				</div>
 
