@@ -243,7 +243,7 @@
        $('.threadTagList').each(function(i, obj) {        
         scrollLoadByElementId('/forum/threadTagList.shtml?threadId='+ obj.id,obj.id); 
        });             
-      scrollAppendByElementId('/query/threadNewDigList.shtml',"othersonline","pageEnd",returnAllCount,sumStart,returnStart);
+      //scrollAppendByElementId('/query/threadNewDigList.shtml',"othersonline","pageEnd",returnAllCount,sumStart,returnStart);
   });      
 </script>
 
