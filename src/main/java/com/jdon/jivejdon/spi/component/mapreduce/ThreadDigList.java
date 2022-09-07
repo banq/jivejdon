@@ -21,8 +21,10 @@ import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
@@ -35,14 +37,14 @@ public class ThreadDigList {
 	public final static int TIME_WINDOWS = 1000;
 
 	private final static int TAGSLIST_SIZE = 10;
-	private final TreeSet<Long> sortedAll;
-	private final TreeSet<Long> sortedWindows;
+	private final SortedSet<Long> sortedAll;
+	private final SortedSet<Long> sortedWindows;
 	private final ForumMessageQueryService forumMessageQueryService;
 
 	public ThreadDigList(ForumMessageQueryService forumMessageQueryService) {
 		this.forumMessageQueryService = forumMessageQueryService;
-		this.sortedAll = new TreeSet<>(new ThreadDigComparator(forumMessageQueryService));
-		this.sortedWindows = new TreeSet<>(new ThreadDigComparator(forumMessageQueryService));
+		this.sortedAll = Collections.synchronizedSortedSet(new TreeSet<>(new ThreadDigComparator(forumMessageQueryService)));
+		this.sortedWindows = Collections.synchronizedSortedSet(new TreeSet<>(new ThreadDigComparator(forumMessageQueryService)));
 	}
 
 	public void addForumThread(ForumThread forumThread) {
@@ -70,7 +72,7 @@ public class ThreadDigList {
 	}
 
 	public Collection<ForumThread> getDigs(int DigsListMAXSize) {
-		return sortedWindows.stream().limit(DigsListMAXSize).map(forumMessageQueryService::getThread)
+		return sortedWindows.parallelStream().limit(DigsListMAXSize).map(forumMessageQueryService::getThread)
 				.collect(Collectors.toList());
 
 	}
