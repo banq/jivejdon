@@ -177,8 +177,8 @@
         <div class="content">
           <div class="post wrap-vid">
               <ul>
-                <blockquote><em class="smallgray">其他人在看</em></blockquote>
-                <div id="othersonline"></div>
+                <%-- <blockquote><em class="smallgray">其他人在看</em></blockquote>
+                <div id="othersonline"></div> --%>
               </ul>
           </div>
         </div>				
