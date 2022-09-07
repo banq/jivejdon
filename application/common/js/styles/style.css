@@ -274,7 +274,7 @@ body.sub-page .logo {
 }
 #menu {
   border-radius: 0;
-  background-color: #444;
+  background-color: #000;
 }
 #menu a.navbar-brand:hover {
   color: #fff;
@@ -410,7 +410,6 @@ body.sub-page .logo {
       display:block !important;
   }
 }
-
   #menu div.dropdown-inner > ul.list-unstyled {
     display: block;
   }
@@ -523,7 +522,7 @@ body.sub-page .logo {
   background-color: #fff;
 }
 .box {
-  padding: 15px 20px 10px;
+  padding: 10px 10px 10px;
   background-color: #fff;
 }
 
@@ -810,35 +809,6 @@ ul.pagination li a {
 .widget.wid-tags a:hover {
   border: 1px solid #999;
   color: #41872d;
-}
-.box-facebook,
-.box-google,
-.box-twitter {
-  padding: 15px;
-  width: 95px;
-  height: 95px;
-  color: #fff;
-  text-align: center;
-}
-.box-facebook:hover,
-.box-google:hover,
-.box-twitter:hover {
-  background-color: #000;
-}
-.box-facebook {
-  background-color: #3b5998;
-}
-.box-twitter {
-  background-color: #1dcaff;
-}
-.box-google {
-  background-color: #dd4b39;
-}
-.box-facebook span,
-.box-google span,
-.box-twitter span {
-  display: block;
-  line-height: 1;
 }
 .icon {
   margin-bottom: 10px;
