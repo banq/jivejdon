@@ -42,11 +42,11 @@
 			<ul class="nav navbar-nav navbar-inverse">
 				<li><a href="/ddd.html">领域驱动设计</a></li>
 				<li><a href="/microservice.html">微服务</a></li>
-				<li><a href="/design.htm">架构设计</a></li>     
 				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">企业架构 <i class="fa fa-arrow-circle-o-down"></i></a>
 					<div class="dropdown-menu">
 						<div class="dropdown-inner">
 							<ul class="list-unstyled">
+				                <li><a href="/design.htm">架构设计</a></li>     							
 								<li><a href="/soa.html">SOA</a></li>
 							    <li><a href="/workflow-bpm.html">工作流BPM</a></li>
 								<li><a href="/tags/26738">规则引擎</a></li>	
