@@ -50,7 +50,8 @@
         <div id="messageListBody">
           <logic:iterate id="forumMessage" name="messageListForm" property="list" indexId="i">
             <%@include file="messageListBody.jsp" %>
-            <logic:equal name="forumMessage" property="root" value="true">
+          </logic:iterate>            
+          <logic:equal name="forumMessage" property="root" value="true">
               <div class="diggArea list-inline  top-social" >
                 <DIV class=diggNum id="digNumber_<bean:write name="forumMessage" property="messageId"/>">
                   <logic:notEqual name="forumMessage" property="digCount" value="0">
@@ -79,16 +80,9 @@
                   <div class="reblogto" id='<bean:write name="threadTo" property="threadId"/>'></div>
                 </logic:iterate>
               </logic:notEmpty>              
-            </logic:equal>
-          </logic:iterate>
-          <logic:notEmpty name="forumThread" property="tags">          
-          <div class="box">
-            <div class="threadTagList" id='<bean:write name="forumThread" property="threadId"/>'></div>                
-          </div>            
-          </logic:notEmpty>
-        </div>
+          </logic:equal>
 
-        <div class="box">
+          <div class="box">
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
           <ins class="adsbygoogle"
                style="display:block; text-align:center;"
@@ -99,7 +93,15 @@
           <script>
               (adsbygoogle = window.adsbygoogle || []).push({});
           </script>
+          </div>
+
+          <logic:notEmpty name="forumThread" property="tags">          
+          <div class="box">
+            <div class="threadTagList" id='<bean:write name="forumThread" property="threadId"/>'></div>                
+          </div>            
+          </logic:notEmpty>
         </div>
+
         <div id="pageEnd"></div>
 
         <!-- 导航区  -->
