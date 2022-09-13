@@ -86,6 +86,18 @@
             </div>
           </div>
         </div>
+        <logic:equal name="forumMessage" property="root" value="true"><div>
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <ins class="adsbygoogle"
+               style="display:block; text-align:center;"
+               data-ad-layout="in-article"
+               data-ad-format="fluid"
+               data-ad-client="ca-pub-7573657117119544"
+               data-ad-slot="6913243852"></ins>
+          <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+         </div></logic:equal>        
           <div class="post_body">
           <div class="post_bodyin">
             <div class="post_body_content">
