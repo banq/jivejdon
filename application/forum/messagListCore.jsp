@@ -89,13 +89,13 @@
         </div>
 
         <div class="box">
+         <blockquote><em class="smallgray">猜你喜欢</em></blockquote>
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
           <ins class="adsbygoogle"
-               style="display:block; text-align:center;"
-               data-ad-layout="in-article"
-               data-ad-format="fluid"
+               style="display:block"
+               data-ad-format="autorelaxed"
                data-ad-client="ca-pub-7573657117119544"
-               data-ad-slot="6913243852"></ins>
+               data-ad-slot="7669317912"></ins>
           <script>
               (adsbygoogle = window.adsbygoogle || []).push({});
           </script>
