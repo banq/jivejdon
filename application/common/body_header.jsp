@@ -51,13 +51,12 @@
 								<li><a href="/colorUML.html">商业分析</a></li>														
 							    <li><a href="/workflow-bpm.html">工作流BPM</a></li>
 								<li><a href="/tags/26738">规则引擎</a></li>	
-								<li><a href="/tags/38726">复杂性系统</a></li>	                                
 								<li><a href="/tags/16355">形式逻辑</a></li>								
 								<li><a href="/tags/619">架构师观点</a></li>
-								<li><a href="/tags/249">技术架构</a></li>
 								<li><a href="/soa.html">SOA</a></li>
 								<li><a href="/tags/49580">数据工程</a></li>
-								
+								<li><a href="/tags/57874">团队拓扑</a></li>
+								<li><a href="/tags/38587">产品经理</a></li>								
 							</ul>
 						</div>
 					</div>
@@ -66,17 +65,16 @@
 					<div class="dropdown-menu">
 						<div class="dropdown-inner">
 							<ul class="list-unstyled">
+								<li><a href="/tags/395">菜鸟入门</a></li>
 								<li><a href="/oo.html">面向对象</a></li>
 								<li><a href="/functional.html">函数编程</a></li>
 				                <li><a href="/designpatterns/">设计模式</a></li>	
-						        <li><a href="/idea.html">Java基础</a></li>		
-								<li><a href="/dl/best/spring.htm">Spring框架</a></li>
+								<li><a href="/springboot.html">SpringBoot</a></li>
 								<li><a href="/jdonframework/">Jdon框架</a></li>
 								<li><a href="/concurrency.html">并发编程</a></li>
 								<li><a href="/asynchronous.html">异步编程</a></li>
 								<li><a href="/reactive.html">响应编程</a></li>
-								<li><a href="/aop.html">AOP编程</a></li>			
-								<li><a href="/course.html">菜鸟教程</a></li>		
+								<li><a href="/aop.html">AOP编程</a></li>											
 			                    <li><a href="/js.html">Javascript</a></li>
                                 <li><a href="/tags/31545">前端编程</a></li>																								
 								<li><a href="/tags/29134">DevOps</a></li>
@@ -86,20 +84,23 @@
 						</div> 
 					</div>
 				</li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">分布式 <i class="fa fa-arrow-circle-o-down"></i></a>
+				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">系统设计 <i class="fa fa-arrow-circle-o-down"></i></a>
 					<div class="dropdown-menu">
 						<div class="dropdown-inner">
 							<ul class="list-unstyled">
+								<li><a href="/tags/38726">复杂性系统</a></li>
+								<li><a href="/tags/42486">系统设计</a></li>			
+								<li><a href="/tags/249">系统架构</a></li>													
 								<li><a href="/DistributedSystems.html">分布式设计</a></li>
 								<li><a href="/tags/11205">CAP定理</a></li>
-								<li><a href="/transaction.html">分布式事务</a></li>	
-								<li><a href="/springcloud.html">SpringCloud</a></li>
+								<li><a href="/transaction.html">分布式事务</a></li>									
 								<li><a href="/event.html">事件溯源</a></li>
 								<li><a href="/cqrs.html">CQRS</a></li>
 								<li><a href="/nosql.html">NoSQL</a></li>
-								<li><a href="/blockchain.html">区块链</a></li>
-								<li><a href="/cloudcompute.html">云计算</a></li>
+								<li><a href="/blockchain.html">区块链</a></li>								
 								<li><a href="/bigdata.html">大数据</a></li>
+								<li><a href="/tags/17472">敏捷方法</a></li>								
+								<li><a href="/tags/58254">认知谬论</a></li>
 							</ul>
 						</div> 
 					</div>
