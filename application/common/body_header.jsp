@@ -53,7 +53,8 @@
 								<li><a href="/tags/26738">规则引擎</a></li>	
 								<li><a href="/tags/16355">形式逻辑</a></li>								
 								<li><a href="/tags/619">架构师观点</a></li>
-								<li><a href="/soa.html">SOA</a></li>
+								<li><a href="/tags/40250">clean架构</a></li>
+								<li><a href="/soa.html">SOA</a></li>							
 								<li><a href="/tags/49580">数据工程</a></li>
 								<li><a href="/tags/57874">团队拓扑</a></li>
 								<li><a href="/tags/38587">产品经理</a></li>								
