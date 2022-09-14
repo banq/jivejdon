@@ -50,13 +50,13 @@
 								<li><a href="/soa.html">SOA</a></li>
 							    <li><a href="/workflow-bpm.html">工作流BPM</a></li>
 								<li><a href="/tags/26738">规则引擎</a></li>	
-								<li><a href="/colorUML.html">业务分析</a></li>								
-								<li><a href="/scalable.html">可伸缩性</a></li>
-								<li><a href="/rest.html">REST API设计</a></li>	
-								<li><a href="/eda.html">事件驱动</a></li>
-								<li><a href="/cache.html">缓存设计</a></li>
+								<li><a href="/tags/38726">复杂性系统</a></li>	                                
+								<li><a href="/colorUML.html">业务分析</a></li>
+								<li><a href="tags/16355">形式逻辑</a></li>								
 								<li><a href="/tags/619">架构师观点</a></li>
 								<li><a href="/tags/249">技术架构</a></li>
+								<li><a href="tags/49580">数据工程</a></li>
+								
 							</ul>
 						</div>
 					</div>
