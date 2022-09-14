@@ -46,16 +46,17 @@
 					<div class="dropdown-menu">
 						<div class="dropdown-inner">
 							<ul class="list-unstyled">
-				                <li><a href="/design.htm">架构设计</a></li>     							
-								<li><a href="/soa.html">SOA</a></li>
+				                <li><a href="/design.htm">架构设计</a></li>   
+								<li><a href="/tags/10740">战略建模</a></li>   								  	
+								<li><a href="/colorUML.html">商业分析</a></li>														
 							    <li><a href="/workflow-bpm.html">工作流BPM</a></li>
 								<li><a href="/tags/26738">规则引擎</a></li>	
 								<li><a href="/tags/38726">复杂性系统</a></li>	                                
-								<li><a href="/colorUML.html">业务分析</a></li>
-								<li><a href="tags/16355">形式逻辑</a></li>								
+								<li><a href="/tags/16355">形式逻辑</a></li>								
 								<li><a href="/tags/619">架构师观点</a></li>
 								<li><a href="/tags/249">技术架构</a></li>
-								<li><a href="tags/49580">数据工程</a></li>
+								<li><a href="/soa.html">SOA</a></li>
+								<li><a href="/tags/49580">数据工程</a></li>
 								
 							</ul>
 						</div>
@@ -76,7 +77,11 @@
 								<li><a href="/reactive.html">响应编程</a></li>
 								<li><a href="/aop.html">AOP编程</a></li>			
 								<li><a href="/course.html">菜鸟教程</a></li>		
-			                    <li><a href="/js.html">Javascript</a></li>									
+			                    <li><a href="/js.html">Javascript</a></li>
+                                <li><a href="/tags/31545">前端编程</a></li>																								
+								<li><a href="/tags/29134">DevOps</a></li>
+								<li><a href="/tags/320">软件工程</a></li>	
+								<li><a href="/tags/30661">人工智能</a></li>																	
 							</ul>
 						</div> 
 					</div>
