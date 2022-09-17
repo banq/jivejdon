@@ -75,7 +75,7 @@
 								<li><a href="/concurrency.html">并发编程</a></li>
 								<li><a href="/asynchronous.html">异步编程</a></li>
 								<li><a href="/reactive.html">响应编程</a></li>
-								<li><a href="/aop.html">AOP编程</a></li>											
+								<li><a href="/idea/rust.html">Rust语言</a></li>											
                                 <li><a href="/tags/31545">前端编程</a></li>																								
 								<li><a href="/springboot.html">SpringBoot</a></li>
 								<li><a href="/jdonframework/">Jdon框架</a></li>
@@ -101,6 +101,7 @@
 								<li><a href="/nosql.html">NoSQL</a></li>
 								<li><a href="/blockchain.html">区块链</a></li>								
 								<li><a href="/bigdata.html">大数据</a></li>
+								<li><a href="/soa/serverless.html">无服务器</a></li>								
 								<li><a href="/tags/17472">敏捷方法</a></li>								
 								<li><a href="/tags/58254">认知谬论</a></li>
 							</ul>
