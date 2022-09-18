@@ -8,6 +8,21 @@ String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
 <html>
 <head>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
+	<meta http-equiv="x-dns-prefetch-control" content="on"/>
+    <link rel="dns-prefetch" href="//static.jdon.com"/>
+    <link rel="dns-prefetch" href="//cdn.jdon.com"/>
+	<link href='//fonts.googleapis.com' rel='dns-prefetch'/>
+    <link href='//ajax.googleapis.com' rel='dns-prefetch'/>
+	<link href='//apis.google.com' rel='dns-prefetch'/>
+	<link href='//www.google-analytics.com' rel='dns-prefetch'/>
+	<link href='//ade.googlesyndication.com' rel='dns-prefetch'/>
+	<link href='//googleads.g.doubleclick.net' rel='dns-prefetch'/>
+	<link href='//www.gstatic.com' rel='dns-prefetch'/>
+	<link href='//fonts.gstatic.com' rel='dns-prefetch'/>	
+	<link href='//www.googletagservices.com' rel='dns-prefetch'/>
+	<link href='//tpc.googlesyndication.com' rel='dns-prefetch'/>
+	<link href='//static.googleadsserving.cn' rel='dns-prefetch'/>
+	<link href='//adservice.google.com' rel='dns-prefetch'/>				
     <meta charset="utf-8"/>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta http-equiv="" content="IE=edge,chrome=1"/>

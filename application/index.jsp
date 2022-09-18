@@ -14,6 +14,21 @@
 <html>
 <head>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
+  <meta http-equiv="x-dns-prefetch-control" content="on"/>
+  <link rel="dns-prefetch" href="//static.jdon.com"/>
+  <link rel="dns-prefetch" href="//cdn.jdon.com"/>
+  <link href='//fonts.googleapis.com' rel='dns-prefetch'/>
+  <link href='//ajax.googleapis.com' rel='dns-prefetch'/>
+  <link href='//apis.google.com' rel='dns-prefetch'/>
+  <link href='//www.google-analytics.com' rel='dns-prefetch'/>
+  <link href='//ade.googlesyndication.com' rel='dns-prefetch'/>
+  <link href='//googleads.g.doubleclick.net' rel='dns-prefetch'/>
+  <link href='//www.gstatic.com' rel='dns-prefetch'/>
+  <link href='//fonts.gstatic.com' rel='dns-prefetch'/>	
+  <link href='//www.googletagservices.com' rel='dns-prefetch'/>
+  <link href='//tpc.googlesyndication.com' rel='dns-prefetch'/>
+  <link href='//static.googleadsserving.cn' rel='dns-prefetch'/>
+  <link href='//adservice.google.com' rel='dns-prefetch'/>				
   <meta charset="utf-8"/>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
   <meta http-equiv="" content="IE=edge,chrome=1"/>
@@ -62,16 +77,17 @@
   <div class="linkblock">
     <div class="row">
         <div class="col-sm-12">
-			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-			<ins class="adsbygoogle"
-				 style="display:block; text-align:center;"
-				 data-ad-layout="in-article"
-				 data-ad-format="fluid"
-				 data-ad-client="ca-pub-7573657117119544"
-				 data-ad-slot="6913243852"></ins>
-			<script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-			</script>
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
+        <!-- 自适应主广告 -->
+		<ins class="adsbygoogle"
+     		style="display:block"
+     		data-ad-client="ca-pub-7573657117119544"
+     		data-ad-slot="5184711902"
+     		data-ad-format="auto"
+     		data-full-width-responsive="true"></ins>
+		<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
         </div>
     </div>
   </div>
@@ -109,16 +125,17 @@
 					</div>
 					<div class="box-content">
 						<div class="row">
-							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-							<ins class="adsbygoogle"
-								 style="display:block"
-								 data-ad-format="fluid"
-								 data-ad-layout-key="-e3+4a-2h-5p+v6"
-								 data-ad-client="ca-pub-7573657117119544"
-								 data-ad-slot="4250528285"></ins>
-							<script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-							</script>							
+							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
+							        <!-- 自适应主广告 -->
+									<ins class="adsbygoogle"
+     									style="display:block"
+     									data-ad-client="ca-pub-7573657117119544"
+     									data-ad-slot="5184711902"
+     									data-ad-format="auto"
+     									data-full-width-responsive="true"></ins>
+									<script>
+     							(adsbygoogle = window.adsbygoogle || []).push({});
+          							</script>							
 						</div>
 					</div>
 				</div>
@@ -143,17 +160,17 @@
 				<!---- Start Widget digList---->
 				<div class="widget">
 					<div class="wid-vid">
-						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-						<!-- 页面右侧上部336x280 20-06-18 -->
-						<ins class="adsbygoogle"
-							 style="display:block"
-							 data-ad-client="ca-pub-7573657117119544"
-							 data-ad-slot="6751585519"
-							 data-ad-format="auto"
-							 data-full-width-responsive="true"></ins>
-						<script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-						</script>						
+							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
+							        <!-- 自适应主广告 -->
+									<ins class="adsbygoogle"
+     									style="display:block"
+     									data-ad-client="ca-pub-7573657117119544"
+     									data-ad-slot="5184711902"
+     									data-ad-format="auto"
+     									data-full-width-responsive="true"></ins>
+									<script>
+     							(adsbygoogle = window.adsbygoogle || []).push({});
+          							</script>						
 					</div>
 				</div>
 				<!---- Start Widget digList---->
@@ -178,17 +195,17 @@
 				<!-- Start Widget -->
                 <div class="widget">
                   <div class="wid-vid">
-           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <!-- 右侧中部300x600 20-06-18 -->
-          <ins class="adsbygoogle"
-               style="display:block"
-               data-ad-client="ca-pub-7573657117119544"
-               data-ad-slot="3352261515"
-               data-ad-format="auto"
-               data-full-width-responsive="true"></ins>
-          <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>         
+							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
+							        <!-- 自适应主广告 -->
+									<ins class="adsbygoogle"
+     									style="display:block"
+     									data-ad-client="ca-pub-7573657117119544"
+     									data-ad-slot="5184711902"
+     									data-ad-format="auto"
+     									data-full-width-responsive="true"></ins>
+									<script>
+     							(adsbygoogle = window.adsbygoogle || []).push({});
+          							</script>		   
                    </div>
                 </div>
 				
@@ -212,15 +229,17 @@
 				<!-- Start Widget urlList -->
 				<div class="widget">
 					    <div class="wid-vid">
-	                      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-							<ins class="adsbygoogle"
-								 style="display:block"
-								 data-ad-format="autorelaxed"
-								 data-ad-client="ca-pub-7573657117119544"
-								 data-ad-slot="7669317912"></ins>
-							<script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-							</script>							
+							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
+							        <!-- 自适应主广告 -->
+									<ins class="adsbygoogle"
+     									style="display:block"
+     									data-ad-client="ca-pub-7573657117119544"
+     									data-ad-slot="5184711902"
+     									data-ad-format="auto"
+     									data-full-width-responsive="true"></ins>
+									<script>
+     							(adsbygoogle = window.adsbygoogle || []).push({});
+          							</script>								
 						</div>
 				</div>
 

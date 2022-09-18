@@ -87,16 +87,17 @@
           </div>
         </div>
         <logic:equal name="forumMessage" property="root" value="true"><div>
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <ins class="adsbygoogle"
-               style="display:block; text-align:center;"
-               data-ad-layout="in-article"
-               data-ad-format="fluid"
-               data-ad-client="ca-pub-7573657117119544"
-               data-ad-slot="6913243852"></ins>
-          <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
+							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
+							        <!-- 自适应主广告 -->
+									<ins class="adsbygoogle"
+     									style="display:block"
+     									data-ad-client="ca-pub-7573657117119544"
+     									data-ad-slot="5184711902"
+     									data-ad-format="auto"
+     									data-full-width-responsive="true"></ins>
+							<script>
+     					  	(adsbygoogle = window.adsbygoogle || []).push({});
+          		</script>		
          </div></logic:equal>        
           <div class="post_body">
           <div class="post_bodyin">
