@@ -81,7 +81,7 @@
 								<li><a href="/jdonframework/">Jdon框架</a></li>
 								<li><a href="/tags/29134">DevOps</a></li>
 								<li><a href="/tags/320">软件工程</a></li>	
-								<li><a href="/tags/30661">人工智能</a></li>																	
+								<li><a href="/tags/23644">机器学习</a></li>																	
 							</ul>
 						</div> 
 					</div>
