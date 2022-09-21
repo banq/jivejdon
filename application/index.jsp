@@ -227,8 +227,8 @@
 				</div>
 					
 				<!-- Start Widget urlList -->
-				<div style="height: 1800px;">
-					    <div style="position: sticky;top: 10px;">
+				<div class="widget">
+					    <div class="wid-vid">
 							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
 							        <!-- 自适应主广告 -->
 									<ins class="adsbygoogle"
