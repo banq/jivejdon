@@ -15,10 +15,6 @@
 
     <repositories>
         <!--       
-              mvn clean install -U
-             or
-             replace https://en.jdon.com with https://www.jdon.com
-             or
               checkout from : https://github.com/banq/jdon-mvn-repo, and manual install your maven repository
         -->
         <repository>
