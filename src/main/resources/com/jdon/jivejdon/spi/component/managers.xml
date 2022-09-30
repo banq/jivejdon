@@ -89,8 +89,8 @@
 			class="com.jdon.jivejdon.spi.component.throttle.post.NewUserThrottleConf">
             <constructor value="1"/>       <!-- register limit for post.ThrottleManager-->
             <constructor value="86400"/>        <!-- second 86400=one day -->
-            <constructor value="7"/>   <!--  time  limit start hour -->
-            <constructor value="20"/>    <!--  time  limit end  hour -->
+            <constructor value="6"/>   <!--  time  limit start hour -->
+            <constructor value="23"/>    <!--  time  limit end  hour -->
 		</component>
 		
 		<component name="hitConf"
