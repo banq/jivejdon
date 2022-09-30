@@ -59,8 +59,15 @@ response.setDateHeader("Expires", 0);
                       <bean:write name="forumMessage" property="digCount"/>
 					   </span>
                       </logic:notEqual>     
-			 <span><i class="fa fa-user"></i><bean:write name="forumThread" property="rootMessage.account.username" />
-               </span>
+		         	 <%
+             com.jdon.jivejdon.domain.model.ForumThread thread = (com.jdon.jivejdon.domain.model.ForumThread)pageContext.getAttribute("forumThread");
+             int bodylength = thread.getRootMessage().getMessageVO().getBody().length();
+             java.text.DecimalFormat df  = new java.text.DecimalFormat("#.000");
+             int bl = bodylength/1024;
+             if (bl >0){
+             %>
+               <span class="fa fa-print"> <%=bl %>k </span>
+             <% }%> 
                       
             </div>
         
