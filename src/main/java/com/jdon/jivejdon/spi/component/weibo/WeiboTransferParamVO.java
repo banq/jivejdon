@@ -27,18 +27,8 @@ public class WeiboTransferParamVO {
 
 	public final String SINA_DES_name;
 
-	public final String TECENT_NIKCNAME_Prefix;
 
-	public final String TECENT_EMAIL_URL_Suffix;
-
-	public final String TECENT_URL_name;
-
-	public final String TECENT_URL_Prefix;
-
-	public final String TECENT_DES_name;
-
-	public WeiboTransferParamVO(String sINA_NIKCNAME, String sINA_EMAIL_URL, String sINA_URL, String sINA_URL_Prefix, String sINA_DES,
-			String tECENT_NIKCNAME, String tECENT_EMAIL_URL, String tECENT_URL, String tECENT_URL_Prefix, String tECENT_DES) {
+	public WeiboTransferParamVO(String sINA_NIKCNAME, String sINA_EMAIL_URL, String sINA_URL, String sINA_URL_Prefix, String sINA_DES) {
 		super();
 		this.SINA_NIKCNAME_Prefix = sINA_NIKCNAME;
 		this.SINA_EMAIL_URL_Suffix = sINA_EMAIL_URL;
@@ -46,11 +36,6 @@ public class WeiboTransferParamVO {
 		this.SINA_URL_Prefix = sINA_URL_Prefix;
 		this.SINA_DES_name = sINA_DES;
 
-		this.TECENT_NIKCNAME_Prefix = tECENT_NIKCNAME;
-		this.TECENT_EMAIL_URL_Suffix = tECENT_EMAIL_URL;
-		this.TECENT_URL_name = tECENT_URL;
-		this.TECENT_URL_Prefix = tECENT_URL_Prefix;
-		this.TECENT_DES_name = tECENT_DES;
 	}
 
 }

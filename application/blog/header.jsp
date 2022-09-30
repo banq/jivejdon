@@ -216,9 +216,6 @@ var openUploadWindow = function(url){
                   <logic:equal name="accountProfileForm" property="account.roleName" value="SinaUser">                 
                      <img  src="<bean:write name="accountProfileForm" property="account.uploadFile.description"/>"  border='0' class="post_author_pic"/>
                   </logic:equal>
-                  <logic:equal name="accountProfileForm" property="account.roleName" value="TecentUser">                 
-                      <img  src="<bean:write name="accountProfileForm" property="account.uploadFile.description"/>"  border='0' class="post_author_pic"/>
-                  </logic:equal>                                    
 				  				  
 				</logic:notEmpty>
 				

@@ -286,7 +286,6 @@
         <auth-constraint>
             <role-name>User</role-name>
             <role-name>SinaUser</role-name>
-            <role-name>TecentUser</role-name>
             <role-name>OAuthUser</role-name>
 
             <role-name>Admin</role-name>
@@ -311,10 +310,6 @@
     <security-role>
         <description>Sina weibo user</description>
         <role-name>SinaUser</role-name>
-    </security-role>
-    <security-role>
-        <description>Tecent weibo user</description>
-        <role-name>TecentUser</role-name>
     </security-role>
     <security-role>
         <description>OAuthUser user</description>

@@ -39,9 +39,6 @@ String coutlength = (String)pageContext.getAttribute("count");
             <logic:equal name="account" property="roleName" value="SinaUser">                 
                <img  src="<bean:write name="account" property="uploadFile.description"/>"  border='0' class="post_author_pic" />
             </logic:equal>
-            <logic:equal name="account" property="roleName" value="TecentUser">                 
-               <img  src="<bean:write name="account" property="uploadFile.description"/>"  border='0' class="post_author_pic"/>
-            </logic:equal>                                    
            </logic:notEmpty>
            <logic:empty name="account" property="uploadFile">
            	    <img  src="/images/emavatar.png"  border='0' width="75" height="75" />

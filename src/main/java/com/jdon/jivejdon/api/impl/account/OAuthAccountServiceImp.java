@@ -26,7 +26,6 @@ import com.jdon.jivejdon.spi.component.account.GoogleOAuthSubmitter;
 import com.jdon.jivejdon.spi.component.account.GoolgeOAuthParamVO;
 import com.jdon.jivejdon.spi.component.account.SinaOAuthSubmitter;
 import com.jdon.jivejdon.spi.component.account.sina.AccessToken;
-import com.jdon.jivejdon.spi.component.weibo.TecentWeiboSubmitter;
 import com.jdon.jivejdon.spi.component.weibo.UserConnectorAuth;
 import com.jdon.jivejdon.spi.component.weibo.WeiboTransferParamVO;
 import com.jdon.jivejdon.domain.model.account.Account;
@@ -45,7 +44,6 @@ import com.jdon.jivejdon.api.account.OAuthAccountService;
 import com.jdon.jivejdon.api.util.JtaTransactionUtil;
 import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
-import com.tencent.weibo.oauthv2.OAuthV2;
 
 @Service("oAuthAccountService")
 public class OAuthAccountServiceImp implements OAuthAccountService {
@@ -61,8 +59,6 @@ public class OAuthAccountServiceImp implements OAuthAccountService {
 
 	private final WeiboTransferParamVO weiboTransferParamVO;
 
-	private final TecentWeiboSubmitter tecentWeiboSubmitter;
-
 	private final GoogleOAuthSubmitter googleOAuthSubmitter;
 
 	protected final AccountRepository accountRepository;
@@ -75,7 +71,7 @@ public class OAuthAccountServiceImp implements OAuthAccountService {
 
 	public OAuthAccountServiceImp(SinaOAuthSubmitter sinaWeiboSubmitter, SequenceDao sequenceDao, Userconnector userconnector,
 			AccountFactory accountFactory, WeiboTransferParamVO weiboTransferParamVO, AccountRepository accountRepository,
-			TecentWeiboSubmitter tecentWeiboSubmitter, GoogleOAuthSubmitter googleOAuthSubmitter, AccountService accountService,
+			 GoogleOAuthSubmitter googleOAuthSubmitter, AccountService accountService,
 			UploadRepository uploadRepository, JtaTransactionUtil jtaTransactionUtil) {
 		super();
 		this.sequenceDao = sequenceDao;
@@ -84,7 +80,6 @@ public class OAuthAccountServiceImp implements OAuthAccountService {
 		this.accountFactory = accountFactory;
 		this.weiboTransferParamVO = weiboTransferParamVO;
 		this.accountRepository = accountRepository;
-		this.tecentWeiboSubmitter = tecentWeiboSubmitter;
 		this.googleOAuthSubmitter = googleOAuthSubmitter;
 		this.accountService = accountService;
 		this.uploadRepository = uploadRepository;
@@ -217,82 +212,7 @@ public class OAuthAccountServiceImp implements OAuthAccountService {
 			return uid;
 	}
 
-	public Account saveTecent(OAuthV2 oAuthV2) {
-		if (oAuthV2 == null)
-			return null;
-
-		Account account = null;
-		try {
-			OAuthUserVO oAuthUserVO = tecentWeiboSubmitter.getUserInfo(oAuthV2);
-			if (oAuthUserVO == null)
-				return account;
-
-			boolean isNew = false;
-			String userId = userconnector.getUserId(oAuthUserVO.getOAuthUserId());
-			if (userId == null) {
-				// not exist, create new
-				Long userIDInt = sequenceDao.getNextId(Constants.USER);
-				Debug.logVerbose("new userIDInt =" + userIDInt, module);
-				userId = Long.toString(userIDInt);
-				isNew = true;
-			}
-
-			UserConnectorAuth userConnectorAuth = new UserConnectorAuth(userId, SubscriptionInitFactory.TECENTWEIBO, oAuthV2);
-			oAuthUserVO.setUserConnectorAuth(userConnectorAuth);
-
-			jtaTransactionUtil.beginTransaction();
-			userconnector.saveUserConnectorAuth(userConnectorAuth);
-			userconnector.saveOAuthUserVO(oAuthUserVO);
-
-			// if (isNew) {
-			Account accountnew = transferTecent(oAuthUserVO);
-			saveAccount(accountnew);
-			saveTecentAccountProfile(accountnew, oAuthUserVO);
-			saveProfileImg(oAuthUserVO, "png");
-			// }
-			jtaTransactionUtil.commitTransaction();
-			account = accountFactory.getFullAccount(userId);
-		} catch (Exception e) {
-			Debug.logError("saveTecent AccessToken error:" + e, module);
-			jtaTransactionUtil.rollback();
-		}
-		return account;
-
-	}
-
-	private void saveTecentAccountProfile(Account accountnew, OAuthUserVO weiboUser) {
-		List propertys = new ArrayList();
-		Property property = new Property();
-		property.setName(weiboTransferParamVO.TECENT_URL_name);
-		String weiboUrl = "<a href='" + weiboTransferParamVO.TECENT_URL_Prefix + weiboUser.getUrl() + "'>@" + weiboUser.getNickname() + "</a>";
-		property.setValue(weiboUrl);
-		propertys.add(property);
-
-		property = new Property();
-		property.setName(weiboTransferParamVO.TECENT_DES_name);
-		property.setValue(weiboUser.getDescription());
-		propertys.add(property);
-
-		accountService.saveUserpropertys(accountnew.getUserId(), propertys);
-	}
-
-	public Account transferTecent(OAuthUserVO weiboUser) {
-		Account account = new Account();
-		account.setUserId(weiboUser.getUserConnectorAuth().getUserId());
-		String weibouesr = weiboUser.getOAuthUserId();
-		if (weibouesr.length() > 5)
-			weibouesr = weibouesr.substring(weibouesr.length() - 5, weibouesr.length());
-
-		account.setUsername(weiboTransferParamVO.TECENT_NIKCNAME_Prefix + weibouesr);
-		OAuthV2 at = (OAuthV2) weiboUser.getUserConnectorAuth().getAccessToken();
-		String password = createPassword(at.getAccessToken());
-		account.setPassword(password);
-		account.setEmail(weibouesr + weiboTransferParamVO.TECENT_EMAIL_URL_Suffix);
-		account.setEmailVisible(false);
-		// different with normal user :Role.user
-		account.setRoleName(Role.TECENTUSER);
-		return account;
-	}
+	
 
 	@Override
 	public Account saveGoogle(OAuthAccessor accessToken) {

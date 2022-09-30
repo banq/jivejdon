@@ -16,7 +16,6 @@ package com.jdon.jivejdon.presentation.form;
 
 import com.jdon.util.Debug;
 import com.jdon.util.StringUtil;
-import net.sf.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,28 +58,6 @@ public class SkinUtils {
     }
 
 
-    public static boolean verifyQQRegisterCode(String registerCodeIn,
-                                               String randstr, String userip) {
-        boolean isTrue = false;
-        try {
-            String url = "https://ssl.captcha.qq" +
-                    ".com/ticket/verify?aid=2050847547&AppSecretKey" +
-                    "=0gRRG_bSpnphbFfz7q125mQ**&Randstr=" + randstr + "&UserIP" +
-                    "=" + userip + "&Ticket=" + registerCodeIn;
-            String json = loadJSON(url);
-            JSONObject jsonObj = JSONObject.fromObject(json);
-            String result = jsonObj.getString("response");
-            if (result.equals("1"))
-                isTrue = true;
-            else
-                Debug.logError("QQRegisterCode=" + result + " ip=" + userip,
-                        module);
-        } catch (Exception ex) {
-            System.err.println(" QQverifyRegisterCode : " + ex);
-        }
-
-        return isTrue;
-    }
 
     public static boolean verifyRegisterCode(String registerCodeIn,
                                              HttpServletRequest request) {

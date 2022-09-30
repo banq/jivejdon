@@ -31,36 +31,7 @@
 		
 
 		
-	
-		
-		
-		<!-- tecent weibo -->
-		<action  path="/account/oauth/tecentCallAction"
-			type="com.jdon.jivejdon.presentation.action.account.oauth.TecentUserCallAction" scope="request" validate="false">
-			<forward name="success" path="/account/oauth/tecentUserCallBackAction.shtml" />
-			<forward name="failure" path="/account/oauth/error.jsp" />
-		</action>
 
-        <action  path="/account/oauth/tecentUserCallBackAction"
-			type="com.jdon.jivejdon.presentation.action.account.oauth.TecentUserCallBackAction" scope="request" validate="false">
-			<forward name="success" path="/account/protected/oauthlogin.jsp" />
-			<forward name="success2" path="/account/protected/sub/subSaveAction.shtml" />
-			<forward name="failure" path="/account/oauth/error.jsp" />
-		</action>
-
-
-        <!-- google  oauth 1.0-->
-		<action  path="/account/oauth/googleCallAction"
-			type="com.jdon.jivejdon.presentation.action.account.oauth.GoogleCallAction" scope="request" validate="false">
-			<forward name="success" path="/account/oauth/googleCallBackAction.shtml" />
-			<forward name="failure" path="/account/oauth/error.jsp" />
-		</action>
-     
-      <action  path="/account/oauth/googleCallBackAction"
-			type="com.jdon.jivejdon.presentation.action.account.oauth.GoogleCallBackAction" scope="request" validate="false">
-			<forward name="success" path="/account/protected/oauthlogin.jsp" />
-			<forward name="failure" path="/account/oauth/error.jsp" />
-		</action>
 
 
     </action-mappings>

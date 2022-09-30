@@ -19,28 +19,24 @@
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
         </method>
 
         <method name="createTopicMessage">
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
         </method>
 
         <method name="createReplyMessage">
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
         </method>
 
         <method name="updateMessage">
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
             <role>Moderator</role>
             <role>Admin</role>
         </method>
@@ -48,7 +44,6 @@
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
             <role>Moderator</role>
             <role>Admin</role>
         </method>
@@ -68,7 +63,6 @@
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
             <role>Moderator</role>
             <role>Admin</role>
         </method>
@@ -76,7 +70,6 @@
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
             <role>Moderator</role>
             <role>Admin</role>
         </method>
@@ -125,7 +118,6 @@
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
             <role>Admin</role>
             <role>Moderator</role>
         </method>
@@ -139,63 +131,54 @@
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
             <role>Admin</role>
         </method>
         <method name="createShortMessage">
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
             <role>Admin</role>
         </method>
         <method name="sendInDraftMessage">
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
             <role>Admin</role>
         </method>
         <method name="saveInDraftMessage">
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
             <role>Admin</role>
         </method>
         <method name="deleInDraftMessage">
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
             <role>Admin</role>
         </method>
         <method name="initShortMessage">
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
             <role>Admin</role>
         </method>
         <method name="getFromShortMessage">
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
             <role>Admin</role>
         </method>
         <method name="getToShortMessage">
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
             <role>Admin</role>
         </method>
         <method name="findShortMessage">
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
             <role>Admin</role>
         </method>
 
@@ -203,28 +186,24 @@
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
             <role>Admin</role>
         </method>
         <method name="saveShortMessage">
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
             <role>Admin</role>
         </method>
         <method name="updateShortMessage">
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
             <role>Admin</role>
         </method>
         <method name="deleteShortMessage">
             <role>User</role>
             <role>SinaUser</role>
             <role>OAuthUser</role>
-            <role>TecentUser</role>
             <role>Admin</role>
         </method>
     </service>

@@ -243,19 +243,8 @@
     	    <constructor value="新浪微博" />
     	    <constructor value="http://weibo.com/" />
     	    <constructor value="个人介绍" />
-    	    <!--  tecent -->
-			<constructor value="tecentID" />
-    	    <constructor value="@qq.com" />
-            <constructor value="腾讯微博" />
-            <constructor value="http://t.qq.com/" />
-            <constructor value="个人介绍" />    	        	        	    
 		</component>
 
-		<component name="tecentWeiboOAuthParamVO"
-			class="com.jdon.jivejdon.spi.component.weibo.TecentWeiboOAuthParamVO">
-			<constructor value="801210431" /><!-- CONSUMER_KEY -->
-    	    <constructor value="ab5aa7fc9eb0c29957aa2cf605d8aa89" /> <!--  CONSUMER_SECRET -->
-		</component>
 
 		<component name="goolgeOAuthParamVO"
 			class="com.jdon.jivejdon.spi.component.account.GoolgeOAuthParamVO">

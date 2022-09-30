@@ -20,13 +20,10 @@ import net.oauth.OAuthAccessor;
 import com.jdon.jivejdon.spi.component.account.sina.AccessToken;
 import com.jdon.jivejdon.spi.component.weibo.UserConnectorAuth;
 import com.jdon.jivejdon.domain.model.account.Account;
-import com.tencent.weibo.oauthv2.OAuthV2;
 
 public interface OAuthAccountService {
 
 	public Account saveSina(AccessToken accessToken);
-
-	public Account saveTecent(OAuthV2 accessToken);
 
 	public Account saveGoogle(OAuthAccessor accessToken);
 

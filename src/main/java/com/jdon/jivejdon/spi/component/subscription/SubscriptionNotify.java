@@ -13,7 +13,6 @@ import com.jdon.jivejdon.spi.component.shortmessage.ShortMessageFactory;
 import com.jdon.jivejdon.spi.component.subscription.action.QueueListerner;
 import com.jdon.jivejdon.spi.component.subscription.action.ShortMsgAction;
 import com.jdon.jivejdon.spi.component.subscription.action.ShortMsgActionList;
-import com.jdon.jivejdon.spi.component.weibo.TecentWeiboSubmitter;
 import com.jdon.jivejdon.domain.model.subscription.Subscription;
 import com.jdon.jivejdon.domain.model.subscription.event.SubscribedNotifyEvent;
 import com.jdon.jivejdon.domain.model.subscription.notifysubscribed.NotifySubscribed;
@@ -30,7 +29,6 @@ public class SubscriptionNotify {
 
 	public final SubscriptionEmail subscriptionEmail;
 	public final SinaOAuthSubmitter sinaWeboSubmitter;
-	public final TecentWeiboSubmitter tecentWeboSubmitter;
 
 	public final ShortMessageFactory shortMessageFactory;
 
@@ -39,14 +37,13 @@ public class SubscriptionNotify {
 	private final NotifySubscribedFactory notifySubscribedFactory;
 
 	public SubscriptionNotify(SubscriptionDao subscriptionDao, ShortMessageFactory shortMessageFactory, AccountFactory accountFactory,
-			SubscriptionEmail subscriptionEmail, SinaOAuthSubmitter sinaWeboSubmitter, TecentWeiboSubmitter tecentWeboSubmitter,
+			SubscriptionEmail subscriptionEmail, SinaOAuthSubmitter sinaWeboSubmitter, 
 			QueueListerner queueListerner, NotifySubscribedFactory notifySubscribedFactory) {
 		this.subscriptionDao = subscriptionDao;
 		this.shortMessageFactory = shortMessageFactory;
 		this.accountFactory = accountFactory;
 		this.subscriptionEmail = subscriptionEmail;
 		this.sinaWeboSubmitter = sinaWeboSubmitter;
-		this.tecentWeboSubmitter = tecentWeboSubmitter;
 		this.queueListerner = queueListerner;
 		this.notifySubscribedFactory = notifySubscribedFactory;
 

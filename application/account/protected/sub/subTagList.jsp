@@ -98,11 +98,7 @@
 				<td class="contact" align="center" >
 				   <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.spi.component.subscription.action.SinaWeiboAction)" disabled="true"/>
 				</td>
-				
-			     <td class="contact" align="center" >
-				   <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.spi.component.subscription.action.TecentWeiboAction)" disabled="true"/>
-				</td>
-			
+							
 				
 			</tr>
 		</logic:iterate>

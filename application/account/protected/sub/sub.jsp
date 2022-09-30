@@ -113,11 +113,7 @@ function submitAction(){
 if (notifymode == "sinaweibo"){
    document.subscriptionForm.action="<%=request.getContextPath()%>/account/oauth/sinaCallAction.shtml";
    document.subscriptionForm.submit();
-   
-}else if (notifymode == "tecentweibo"){
-	document.subscriptionForm.action="<%=request.getContextPath()%>/account/oauth/tecentCallAction.shtml";
-       document.subscriptionForm.submit();
-          
+             
  }else
    document.subscriptionForm.submit();
 }

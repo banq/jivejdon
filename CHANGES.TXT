@@ -26,9 +26,9 @@ JiveJdon 4.8  (09/2012)
 2012.Augest.7 (4.7)
 * New Function:
     ---------
-    * add Sina Weibo and Tecent Weibo account login directly.
+    * add Sina Weibo account login directly.
     
-    * add Sina Weibo and Tecent Weibo notify mode, when there is a new message,
+    * add Sina Weibo Weibo notify mode, when there is a new message,
         it will be auto sent to User's weibo.
         
     

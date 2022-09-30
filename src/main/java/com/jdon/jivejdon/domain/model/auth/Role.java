@@ -49,10 +49,6 @@ public interface Role {
 	 */
 	String OAuthUSER = "OAuthUser";
 
-	/**
-	 * Tecent weibo register user
-	 */
-	String TECENTUSER = "TecentUser";
 
 	String MODERATOR = "Moderator";
 

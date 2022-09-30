@@ -15,6 +15,7 @@
 
     <repositories>
         <!--       
+            mvn clean install -U
               checkout from : https://github.com/banq/jdon-mvn-repo, and manual install your maven repository
         -->
         <repository>
@@ -37,10 +38,6 @@
             <id>weibo4j</id>
             <url>https://en.jdon.com/jdon-mvn-repo/releases</url>
         </repository>
-        <repository>
-            <id>tecentweibo</id>
-            <url>https://en.jdon.com/jdon-mvn-repo/releases</url>
-        </repository>    
         <repository>
             <id>urlrewrite</id>
             <url>https://en.jdon.com/jdon-mvn-repo/releases</url>
@@ -125,11 +122,6 @@
         <dependency>
             <groupId>weibo4j</groupId>
             <artifactId>weibo4j</artifactId>
-            <version>6.6.4</version>
-        </dependency>
-        <dependency>
-            <groupId>tecentweibo</groupId>
-            <artifactId>tecentweibo</artifactId>
             <version>6.6.4</version>
         </dependency>
         <dependency>

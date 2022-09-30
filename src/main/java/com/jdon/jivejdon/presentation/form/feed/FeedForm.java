@@ -41,11 +41,11 @@ public class FeedForm extends BaseForm {
 
 		}
 
-		if (!SkinUtils.verifyQQRegisterCode(registerCode, randstr,
-				request.getRemoteAddr())) {
-			errors.add("registerCode  dismatch");
-			return;
-		}
+		// if (!SkinUtils.verifyQQRegisterCode(registerCode, randstr,
+		// 		request.getRemoteAddr())) {
+		// 	errors.add("registerCode  dismatch");
+		// 	return;
+		// }
 
 	}
 

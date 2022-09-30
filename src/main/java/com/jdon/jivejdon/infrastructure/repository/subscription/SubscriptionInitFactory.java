@@ -21,7 +21,6 @@ import com.jdon.jivejdon.spi.component.subscription.SubscriptionAction;
 import com.jdon.jivejdon.spi.component.subscription.action.EmailAction;
 import com.jdon.jivejdon.spi.component.subscription.action.ShortMsgAction;
 import com.jdon.jivejdon.spi.component.subscription.action.SinaWeiboAction;
-import com.jdon.jivejdon.spi.component.subscription.action.TecentWeiboAction;
 import com.jdon.jivejdon.spi.component.weibo.UserConnectorAuth;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.subscription.Subscription;
@@ -33,7 +32,6 @@ import java.util.Map;
 @Component
 public class SubscriptionInitFactory {
 	public static final String SINAWEIBO = "sinaweibo";
-	public static final String TECENTWEIBO = "tecentweibo";
 
 	protected Constants constants;
 	private UserconnectorSql userconnectorSql;
@@ -50,8 +48,6 @@ public class SubscriptionInitFactory {
 		SubscriptionAction subscriptionAction = null;
 		if (notifymode.equals(SINAWEIBO)) {
 			subscriptionAction = new SinaWeiboAction(weiboExpiredNotifyMessage);
-		} else if (notifymode.equals(TECENTWEIBO)) {
-			subscriptionAction = new TecentWeiboAction(weiboExpiredNotifyMessage);
 		}
 		return subscriptionAction;
 

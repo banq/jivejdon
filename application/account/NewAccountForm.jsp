@@ -29,9 +29,9 @@
 
     String randstr = (String)request.getParameter("randstr");
     if(randstr == null) return;
-    if (!SkinUtils.verifyQQRegisterCode((String)request.getParameter("registerCode"), randstr,request.getRemoteAddr())) {
+    <%-- if (!SkinUtils.verifyQQRegisterCode((String)request.getParameter("registerCode"), randstr,request.getRemoteAddr())) {
         return;
-    }
+    } --%>
     request.getSession().setAttribute("randstr", randstr);
 
 

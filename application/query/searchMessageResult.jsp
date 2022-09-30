@@ -103,13 +103,6 @@
                                      border='0' width="50" height="50"
                                      class="post_author_pic"/>
                             </logic:equal>
-                            <logic:equal name="account"
-                                         property="roleName"
-                                         value="TecentUser">
-                                <img src="<bean:write name="account" property="uploadFile.description"/>"
-                                     border='0' width="50" height="50"
-                                     class="post_author_pic"/>
-                            </logic:equal>
 
                         </logic:notEmpty>
 
