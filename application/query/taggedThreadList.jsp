@@ -40,8 +40,8 @@ pageContext.setAttribute("title", titleStr);
         %>
       
         
-       <%--&nbsp;&nbsp;--%>
-		<%--<a href="//www.jdon.com/rss/tag/<bean:write name="tagID" />"><i class="fa fa-feed"></i></a>--%>
+       &nbsp;&nbsp;
+		<a href="/tags/<bean:write name="tagID" />/rss"><i class="fa fa-feed"></i></a>
     <%--&nbsp;&nbsp;--%>
         <%--<a href="<%=request.getContextPath()%>/tags">更多分类</a>--%>
 		  
