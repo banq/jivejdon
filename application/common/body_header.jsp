@@ -40,8 +40,8 @@
         </div>
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav navbar-inverse">
-				<li><a href="/ddd.html">领域驱动设计</a></li>
-				<li><a href="/microservice.html">微服务</a></li>
+				<li><a href="/ddd.html">领域驱动设计</a></li>				
+				<li><a href="/designpatterns/">设计模式</a></li>									
 				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">企业架构 <i class="fa fa-arrow-circle-o-down"></i></a>
 					<div class="dropdown-menu">
 						<div class="dropdown-inner">
@@ -54,6 +54,7 @@
 								<li><a href="/tags/16355">形式逻辑</a></li>								
 								<li><a href="/tags/619">架构师观点</a></li>
 								<li><a href="/tags/40250">clean架构</a></li>
+								<li><a href="/microservice.html">微服务</a></li>
 								<li><a href="/soa.html">SOA</a></li>							
 								<li><a href="/tags/49580">数据工程</a></li>
 								<li><a href="/tags/57874">团队拓扑</a></li>
@@ -69,8 +70,7 @@
 								<li><a href="/tags/395">菜鸟入门</a></li>
 								<li><a href="/tags/222">编程语言比较</a></li>
 								<li><a href="/tags/38692">编程工具比较</a></li>								
-								<li><a href="/oo.html">面向对象</a></li>
-				                <li><a href="/designpatterns/">设计模式</a></li>									
+								<li><a href="/oo.html">面向对象</a></li>				                
 								<li><a href="/functional.html">函数式编程</a></li>
 								<li><a href="/concurrency.html">并发编程</a></li>
 								<li><a href="/asynchronous.html">异步编程</a></li>
