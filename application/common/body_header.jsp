@@ -67,20 +67,17 @@
 					<div class="dropdown-menu">
 						<div class="dropdown-inner">
 							<ul class="list-unstyled">
-								<li><a href="/tags/395">菜鸟入门</a></li>
+								<li><a href="/tags/395">Java入门</a></li>
+								<li><a href="/idea/rust.html">Rust语言</a></li>																											
 								<li><a href="/tags/222">编程语言比较</a></li>
 								<li><a href="/tags/38692">编程工具比较</a></li>								
 								<li><a href="/oo.html">面向对象</a></li>				                
 								<li><a href="/functional.html">函数式编程</a></li>
-								<li><a href="/concurrency.html">并发编程</a></li>
-								<li><a href="/asynchronous.html">异步编程</a></li>
-								<li><a href="/reactive.html">响应编程</a></li>
-								<li><a href="/idea/rust.html">Rust语言</a></li>											
-                                <li><a href="/tags/31545">前端编程</a></li>																								
 								<li><a href="/springboot.html">SpringBoot</a></li>
 								<li><a href="/jdonframework/">Jdon框架</a></li>
+                                <li><a href="/tags/31545">前端编程</a></li>										
+								<li><a href="/reactive.html">Reactive编程</a></li>								
 								<li><a href="/tags/29134">DevOps</a></li>
-								<li><a href="/tags/320">软件工程</a></li>	
 								<li><a href="/tags/23644">机器学习</a></li>																	
 							</ul>
 						</div> 
@@ -98,10 +95,9 @@
 								<li><a href="/transaction.html">分布式事务</a></li>									
 								<li><a href="/event.html">事件溯源</a></li>
 								<li><a href="/cqrs.html">CQRS</a></li>
-								<li><a href="/nosql.html">NoSQL</a></li>
-								<li><a href="/blockchain.html">区块链</a></li>								
-								<li><a href="/bigdata.html">大数据</a></li>
 								<li><a href="/soa/serverless.html">无服务器</a></li>								
+								<li><a href="/bigdata.html">大数据</a></li>								
+								<li><a href="/blockchain.html">区块链</a></li>								
 								<li><a href="/tags/17472">敏捷方法</a></li>								
 								<li><a href="/tags/58254">认知谬论</a></li>
 							</ul>
