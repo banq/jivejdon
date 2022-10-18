@@ -28,7 +28,7 @@ pageContext.setAttribute("title", titleStr);
 			
        <center>
         <logic:notEmpty  name="TITLE">
-        <h3>#<bean:write  name="TITLE"/></h3>
+        <h3><bean:write  name="TITLE"/></h3>
       </logic:notEmpty>
         <% 
             if (request.getSession(false) != null){
