@@ -258,7 +258,7 @@
 <script src="https://cdn.jdon.com/common/messageList9.js"></script>
 <script>        
   $(document).ready(function() { 
-      scrollLoadByElementId('/query/threadDigList',"digList");                  
+      scrollLoadByElementId('https://cdn.jdon.com/query/threadDigList',"digList");                  
       $('.reblogfrom').each(function(i, obj) {        
         scrollLoadByElementId('/forum/thread.shtml?threadId='+ obj.id,obj.id); 
       });
@@ -268,7 +268,7 @@
        $('.threadTagList').each(function(i, obj) {        
         scrollLoadByElementId('/forum/threadTagList.shtml?threadId='+ obj.id,obj.id); 
        });             
-      scrollLoadByElementId('/tags/tagcloud',"tagcloud");  
+      scrollLoadByElementId('https://cdn.jdon.com/tags/tagcloud',"tagcloud");  
       //scrollAppendByElementId('/query/threadNewDigList.shtml',"othersonline","pageEnd",returnAllCount,sumStart,returnStart);
   });      
 </script>
