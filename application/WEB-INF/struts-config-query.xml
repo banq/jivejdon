@@ -92,6 +92,10 @@
             <forward name="success" path="/query/tagsList.jsp" />
         </action>
 
+        <action path="/query/tagsList2" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" name="tagsHotListForm" scope="request" validate="false">
+            <forward name="success" path="/query/others/tagHotList.jsp" />
+        </action>
+
         <action path="/query/tt" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/tt.jsp" />
         </action>

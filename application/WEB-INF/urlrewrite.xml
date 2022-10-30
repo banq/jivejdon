@@ -185,7 +185,10 @@
 
 
     <!-- tags -->
-
+        <rule>
+        <from>^/tags/tagcloud$</from>
+        <to>/query/tagsList2.shtml</to>
+    </rule>
     <rule>
         <from>^/tags$</from>
         <to>/query/tagsList.shtml?count=90&amp;start=0</to>

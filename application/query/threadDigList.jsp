@@ -7,6 +7,17 @@
 <% 
 com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(240 * 60 * 60, request, response);
 %>
+<style>
+.important {
+  margin: 1px 20px 1px 1px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 15px 10px -15px rgba(0, 0, 0, .4);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+</style>
 <a href="<%=request.getContextPath()%>/forum/threadDigSortedList"><b>点赞</b></a>
 <div class="important" >
 <bean:parameter id="count" name="count" value="8"/>

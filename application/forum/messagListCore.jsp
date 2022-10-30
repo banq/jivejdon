@@ -200,6 +200,8 @@
         <div class="content">
           <div class="post wrap-vid">
               <ul>
+                <div id="tagcloud"></div>
+                <%-- <jsp:include page="/query/tagsList2.shtml" flush="true"></jsp:include> --%>
                 <%-- <blockquote><em class="smallgray">其他人在看</em></blockquote>
                 <div id="othersonline"></div> --%>
               </ul>
@@ -256,7 +258,7 @@
 <script src="https://cdn.jdon.com/common/messageList9.js"></script>
 <script>        
   $(document).ready(function() { 
-      scrollLoadByElementId('https://cdn.jdon.com/query/threadDigList',"digList");            
+      scrollLoadByElementId('/query/threadDigList',"digList");                  
       $('.reblogfrom').each(function(i, obj) {        
         scrollLoadByElementId('/forum/thread.shtml?threadId='+ obj.id,obj.id); 
       });
@@ -266,6 +268,7 @@
        $('.threadTagList').each(function(i, obj) {        
         scrollLoadByElementId('/forum/threadTagList.shtml?threadId='+ obj.id,obj.id); 
        });             
+      scrollLoadByElementId('/tags/tagcloud',"tagcloud");  
       //scrollAppendByElementId('/query/threadNewDigList.shtml',"othersonline","pageEnd",returnAllCount,sumStart,returnStart);
   });      
 </script>
