@@ -55,7 +55,7 @@
 								<li><a href="/tags/619">架构师观点</a></li>
 								<li><a href="/tags/40250">clean架构</a></li>
 								<li><a href="/microservice.html">微服务</a></li>
-								<li><a href="/soa.html">SOA</a></li>							
+								<li><a href="/tags/33426">API设计</a></li>			
 								<li><a href="/tags/49580">数据工程</a></li>
 								<li><a href="/tags/57874">团队拓扑</a></li>
 								<li><a href="/tags/38587">产品经理</a></li>								
@@ -87,8 +87,7 @@
 					<div class="dropdown-menu">
 						<div class="dropdown-inner">
 							<ul class="list-unstyled">
-								<li><a href="/tags/38726">复杂性系统</a></li>
-								<li><a href="/tags/33426">API设计</a></li>			
+								<li><a href="/tags/38726">复杂性系统</a></li>								
 								<li><a href="/tags/249">系统架构</a></li>													
 								<li><a href="/DistributedSystems.html">分布式设计</a></li>
 								<li><a href="/tags/11205">CAP定理</a></li>
