@@ -248,7 +248,15 @@
 				<div class="widget">
 					    <div class="wid-vid">
 							<ul>
-							    <div id="digNewList"></div>   
+							    <div id="tagcloud"></div>   
+								 <div class="lazyload" >
+							     <!-- 
+							     <script>
+							  	  load('https://cdn.jdon.com/tags/tagcloud', function (xhr) {				
+  	                                  document.getElementById("tagcloud").innerHTML = xhr.responseText;
+			                     });
+							     </script> -->
+							    </div>
 							</ul>
 						</div>
 				</div>
