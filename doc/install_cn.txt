@@ -28,38 +28,31 @@ ddl目录下SQL 导入数据库 jivejdon
 
 部署前提：JDK1.6以上更高版本，mysql5.0或者更高版本
 
-(1)把jivejdon/doc/tomcat/lib下的jaas.jar拷贝到tomcat的lib目录下
-把doc\tomcat\conf\jaas.config复制到tomcat/conf下
-将\lib\mysql\mysql-connector-java-5.0.8-bin.jar mysql数据库JDBC驱动包拷贝到tomcat/lib下。
+(1)在Tomcat启动配置中加入授权JAAS配置。
 
-(2)在Tomcat启动配置中加入授权JAAS配置。
-在tomcat/bin目录建立一个debug.bat，将下面两行加入：
-set JAVA_OPTS=-XX:+UseStringCache -Djava.security.auth.login.config=../conf/jaas.config
-catalina.bat jpda start
-
-第一行是启用tomcat/conf/jaas.config（该文件在jivejdon项目的doc\tomcat\conf下，复制到tomcat/conf下），也就是启用tomcat容器安全。
+配置tomcat/conf/jaas.config（该文件在jivejdon项目的doc\tomcat\conf下，复制到tomcat/conf下），也就是启用tomcat容器安全。
 jaas.config内容：
 JiveJdonRealm {
 	com.jdon.jivejdon.auth.jaas.JiveJdonLoginMoudle required;
 };
 
-如果有报错：Cannot find message associated with key jaasRealm.unexpectedError
-java.lang.SecurityException: 无法定位登录配置
-大部分原因在此没有正确配置。
+然后再启动tomcat时，激活指定这个文件：
+在catalina.sh或catalina.bat 中加入：
+-Djava.security.auth.login.config=$CATALINA_BASE/conf/jaas.config
 
-配置JAAS授权第二步： 将jaas.jar复制到tomcat/lib目录
-jaas.jar中包含了jaas.config中的com.jdon.jivejdon.auth.jaas.JiveJdonLoginMoudle
+分下面三种情况：
+1.如linux的catalina.sh：
+JAVA_OPTS="$JAVA_OPTS -Djava.security.auth.login.config=$CATALINA_BASE/conf/jaas.config"
 
-配置JAAS授权第三步：将jaas.properties复制到tomcat/lib目录
-jaas.properties内容如下
-JAAS_DATASOURCE=java:comp/env/jdbc/JiveJdonDS
-这是告诉Tomcat授权数据到这个数据源对应的数据库去读取。
-mysql_security.sql中数据表是关于授权的表。
-如果mysql_security.sql中数据表放入其他数据源如jdbc/SecurityDS，需要修改jdbc/JiveJdonDS为jdbc/SecurityDS，
-jdbc/JiveJdonDS是JNDI数据源名称
-数据源JNDI名称是在tomcat/conf/context.xml中配置，见下面步骤
+2.或win的catalina.bat：
+set JAVA_OPTS=-Xms128m -Xmx512m  -Djava.security.auth.login.config=%CATALINA_BASE%/conf/jaas.config
 
-配置JAAS授权第四步：在conf/server.xml的Host之前加入:
+3.或调试测试环节：在tomcat/bin目录建立一个debug.bat，将下面两行加入：
+set JAVA_OPTS=-XX:+UseStringCache -Djava.security.auth.login.config=../conf/jaas.config
+catalina.bat jpda start
+（激活 jpda以后，可以在IDE如idea或vscode中链接到这个tomcat，实现运行中断点调试。）
+
+(2)配置JAAS授权第二步：在conf/context.xml中加入:
         
       <Realm
 		className="org.apache.catalina.realm.JAASRealm"
@@ -67,11 +60,10 @@ jdbc/JiveJdonDS是JNDI数据源名称
 		userClassNames="com.jdon.jivejdon.auth.jaas.User"
 		roleClassNames="com.jdon.jivejdon.auth.jaas.Role"/>
 
-这两个class也是包含在tomcat/lib/jaas.jar包中的，告诉tomcat用户和角色类用我们自己定义的。
 
 至此以上有关基于Tomcat容器认证授权的机制配置完成，下面是数据库源配置：
 
-(4)配置数据库源，在tomcat/conf/context.xml中配置数据源Datasource:
+(3)配置数据库源，在tomcat/conf/context.xml中配置数据源Datasource:
  <Resource name="jdbc/JiveJdonDS" 
               auth="Container" 
               type="javax.sql.DataSource"  
@@ -97,7 +89,7 @@ jdbc/JiveJdonDS是JNDI数据源名称
 
         
 
-(5)将jivejdon.war复制到Tomcat/webapps目录下，启动debug.bat：
+(4)将jivejdon.war复制到Tomcat/webapps目录下，启动debug.bat：
     http://localhost:8080/
 
 ##########################################################################################################

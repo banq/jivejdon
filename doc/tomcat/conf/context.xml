@@ -32,6 +32,13 @@
     <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
     -->
 
+ <Realm
+		className="org.apache.catalina.realm.JAASRealm"
+		appName="JiveJdonRealm"
+		userClassNames="com.jdon.jivejdon.auth.jaas.User"
+		roleClassNames="com.jdon.jivejdon.auth.jaas.Role"/>
+        
+
  <Resource name="jdbc/JiveJdonDS" 
               auth="Container" 
               type="javax.sql.DataSource"  
