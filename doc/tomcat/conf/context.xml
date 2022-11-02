@@ -50,15 +50,5 @@
               driverClassName="com.mysql.jdbc.Driver"
               url="jdbc:mysql://localhost/jivejdon?useUnicode=true&amp;characterEncoding=UTF-8" />
               
-  <Resource name="jdbc/SecurityDS" 
-              auth="Container" 
-              type="javax.sql.DataSource"  
-              maxActive="100" 
-              maxIdle="30"    
-              maxWait="10000"   
-              username="root"       
-              password=""
-              driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost/jivejdon?useUnicode=true&amp;characterEncoding=UTF-8" />      
                         
 </Context>

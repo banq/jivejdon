@@ -58,7 +58,7 @@
 		<component name="jdbcTempSSOSource"
 			class="com.jdon.jivejdon.infrastructure.repository.dao.sql.JdbcTempSSOSource">
        <!-- tomcat jndi     --> 
-           <constructor value="java:comp/env/jdbc/SecurityDS"/>
+           <constructor value="java:comp/env/jdbc/JiveJdonDS"/>
                <!-- tomcat jndi  if context.xml not configure Security data soure, use below
                              <constructor value="java:comp/env/jdbc/JiveJdonDS"/>-->
         </component>

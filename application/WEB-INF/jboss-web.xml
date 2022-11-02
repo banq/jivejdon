@@ -5,9 +5,4 @@
         <res-type>javax.sql.DataSource</res-type>
         <jndi-name>java:/JiveJdonDS</jndi-name>
     </resource-ref>
-      <resource-ref>
-        <res-ref-name>jdbc/SecurityDS</res-ref-name>
-        <res-type>javax.sql.DataSource</res-type>
-        <jndi-name>java:/Security</jndi-name>
-    </resource-ref>    
 </jboss-web>

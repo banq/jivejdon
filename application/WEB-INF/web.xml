@@ -233,12 +233,6 @@
         <res-auth>Container</res-auth>
     </resource-ref>
     <resource-ref>
-        <description>DB Connection</description>
-        <res-ref-name>jdbc/SecurityDS</res-ref-name>
-        <res-type>javax.sql.DataSource</res-type>
-        <res-auth>Container</res-auth>
-    </resource-ref>
-    <resource-ref>
         <description>JavaMail</description>
         <res-ref-name>mail/Session</res-ref-name>
         <res-type>javax.mail.Session</res-type>

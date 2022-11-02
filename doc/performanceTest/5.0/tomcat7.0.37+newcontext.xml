@@ -46,21 +46,6 @@
               removeAbandoned="true"
               url="jdbc:mysql://127.0.0.1/jivejdon?useUnicode=true&amp;characterEncoding=UTF-8" />
 
-<Resource name="jdbc/SecurityDS"
-              auth="Container" 
-              type="javax.sql.DataSource"
-              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
-              username="banq"    
-              password=" "
-              removeAbandoned="true"
-              driverClassName="com.mysql.jdbc.Driver"
-              validationQuery="SELECT 1"
-              testOnBorrow="true"
-              maxActive="10"
-              maxIdle="5"
-              minIdle="1"  
-              url="jdbc:mysql://127.0.0.1/security?useUnicode=true&amp;characterEncoding=UTF-8" />
-
 
   	<Resource name="mail/Session" auth="Container"
 		type="javax.mail.Session"
