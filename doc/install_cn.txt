@@ -38,12 +38,28 @@ set JAVA_OPTS=-XX:+UseStringCache -Djava.security.auth.login.config=../conf/jaas
 catalina.bat jpda start
 
 第一行是启用tomcat/conf/jaas.config（该文件在jivejdon项目的doc\tomcat\conf下，复制到tomcat/conf下），也就是启用tomcat容器安全。
+jaas.config内容：
+JiveJdonRealm {
+	com.jdon.jivejdon.auth.jaas.JiveJdonLoginMoudle required;
+};
 
 如果有报错：Cannot find message associated with key jaasRealm.unexpectedError
 java.lang.SecurityException: 无法定位登录配置
 大部分原因在此没有正确配置。
 
-(3)配置JAAS数据源，在conf/server.xml的Host之前加入:
+配置JAAS授权第二步： 将jaas.jar复制到tomcat/lib目录
+jaas.jar中包含了jaas.config中的com.jdon.jivejdon.auth.jaas.JiveJdonLoginMoudle
+
+配置JAAS授权第三步：将jaas.properties复制到tomcat/lib目录
+jaas.properties内容如下
+JAAS_DATASOURCE=java:comp/env/jdbc/JiveJdonDS
+这是告诉Tomcat授权数据到这个数据源对应的数据库去读取。
+mysql_security.sql中数据表是关于授权的表。
+如果mysql_security.sql中数据表放入其他数据源如jdbc/SecurityDS，需要修改jdbc/JiveJdonDS为jdbc/SecurityDS，
+jdbc/JiveJdonDS是JNDI数据源名称
+数据源JNDI名称是在tomcat/conf/context.xml中配置，见下面步骤
+
+配置JAAS授权第四步：在conf/server.xml的Host之前加入:
         
       <Realm
 		className="org.apache.catalina.realm.JAASRealm"
@@ -51,6 +67,7 @@ java.lang.SecurityException: 无法定位登录配置
 		userClassNames="com.jdon.jivejdon.auth.jaas.User"
 		roleClassNames="com.jdon.jivejdon.auth.jaas.Role"/>
 
+这两个class也是包含在tomcat/lib/jaas.jar包中的，告诉tomcat用户和角色类用我们自己定义的。
 
 至此以上有关基于Tomcat容器认证授权的机制配置完成，下面是数据库源配置：
 
@@ -78,7 +95,8 @@ java.lang.SecurityException: 无法定位登录配置
     password="你的密码" 
     />                                    
 
-           
+        
+
 (5)将jivejdon.war复制到Tomcat/webapps目录下，启动debug.bat：
     http://localhost:8080/
 

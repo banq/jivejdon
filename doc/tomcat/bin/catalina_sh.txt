@@ -1,0 +1,3 @@
+
+# ----- Execute The Requested Command -----------------------------------------
+JAVA_OPTS="$JAVA_OPTS  -server -Xms1500m -Xmx1500m -XX:+UseAdaptiveGCBoundary -XX:MaxGCPauseMillis=50 -XX:+DisableExplicitGC -XX:+UseParNewGC  -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:CMSInitiatingOccupancyFraction=90 -XX:+UseCMSInitiatingOccupancyOnly -XX:+ScavengeBeforeFullGC -XX:+CMSScavengeBeforeRemark -Dorg.apache.jasper.runtime.BodyContentImpl.LIMIT_BUFFER=true  -Djava.awt.headless=true -Djava.security.auth.login.config=$CATALINA_BASE/conf/jaas.config"
