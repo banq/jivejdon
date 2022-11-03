@@ -13,8 +13,7 @@ com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(240 * 60 * 60, request, response
   padding: 10px;
   border: 1px solid #ddd;
   box-shadow: 0 15px 10px -15px rgba(0, 0, 0, .4);
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  text-overflow: ellipsis;  
   overflow: hidden;
 }
 </style>

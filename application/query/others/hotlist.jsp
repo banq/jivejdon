@@ -27,8 +27,7 @@ A{font-size: 14px; line-height:23px;text-decoration:none;color:#888;}a:visited{t
 	background-color: #F7F7F7;
 	border: 1px solid #ddd;
 	border-radius: 3px;
-	box-shadow: 0 15px 10px -15px rgba(0,0,0,0.4);
-	white-space:nowrap;
+	box-shadow: 0 15px 10px -15px rgba(0,0,0,0.4);	
 	overflow:hidden;
 	text-overflow:ellipsis;
 
