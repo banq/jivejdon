@@ -9,7 +9,7 @@
 <logic:notEmpty name="forum">
 <bean:define id="title" name="forum" property="name" />
 <%@ include file="messageHeader.jsp" %>
-<link rel="stylesheet" href="/common/jivejdon5.css"  type="text/css">
+
 
     <bean:define id="ForumMessage" name="threadForm" property="rootMessage"  />
 

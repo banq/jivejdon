@@ -37,7 +37,7 @@
             com.jdon.jivejdon.presentation.filter.DisableUrlSessionFilter
         </filter-class>
     </filter>
-    <filter>
+    <!-- <filter>
         <filter-name>ExpiresFilter</filter-name>
         <filter-class>com.jdon.jivejdon.presentation.filter.ExpiresFilter</filter-class>
         <init-param>
@@ -56,7 +56,7 @@
             <param-name>ExpiresByType text/javascript</param-name>
             <param-value>access plus 30 days</param-value>
         </init-param>
-    </filter>
+    </filter> -->
     <filter-mapping>
         <filter-name>IPForwardingFilter</filter-name>
         <url-pattern>/*</url-pattern>
@@ -74,15 +74,15 @@
         <filter-name>rewriteFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    <filter-mapping>
+    <!-- <filter-mapping>
         <filter-name>ExpiresFilter</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <listener>
+    </filter-mapping> -->
+    <!-- <listener>
         <listener-class>
             com.jdon.jivejdon.presentation.listener.UserCounterListener
         </listener-class>
-    </listener>
+    </listener> -->
     <servlet>
         <servlet-name>action</servlet-name>
         <servlet-class>
@@ -188,7 +188,7 @@
     </servlet-mapping>
 
     <session-config>
-        <session-timeout>5</session-timeout>
+        <session-timeout>30</session-timeout>
         <!-- <tracking-mode>COOKIE</tracking-mode> -->
     </session-config>
     <error-page>
