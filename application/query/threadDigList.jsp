@@ -14,7 +14,7 @@ com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(240 * 60 * 60, request, response
   border: 1px solid #ddd;
   box-shadow: 0 15px 10px -15px rgba(0, 0, 0, .4);
   text-overflow: ellipsis;  
-  white-space: normal;
+  white-space: normal !important;
   overflow: hidden;
 }
 </style>
