@@ -29,6 +29,7 @@ A{font-size: 14px; line-height:23px;text-decoration:none;color:#888;}a:visited{t
 	border-radius: 3px;
 	box-shadow: 0 15px 10px -15px rgba(0,0,0,0.4);	
 	overflow:hidden;
+	white-space: normal;
 	text-overflow:ellipsis;
 
 }
