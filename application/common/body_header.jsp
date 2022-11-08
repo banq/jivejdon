@@ -96,7 +96,7 @@
 								<li><a href="/cqrs.html">CQRS</a></li>
 								<li><a href="/soa/serverless.html">无服务器</a></li>								
 								<li><a href="/bigdata.html">大数据</a></li>								
-								<li><a href="/blockchain.html">区块链</a></li>								
+								<li><a href="/tags/58439">Web3</a></li>								
 								<li><a href="/tags/17472">敏捷方法</a></li>								
 								<li><a href="/tags/58254">认知谬论</a></li>
 							</ul>
