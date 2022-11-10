@@ -1,5 +1,7 @@
 package com.jdon.jivejdon.presentation.action.message;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -61,12 +63,13 @@ public class ReblogLinkAction extends Action {
     }
 
     private Long extractFromUrl(String url, HttpServletRequest request) {
-        String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
-        if (!url.startsWith(domainUrl)) {
-            Debug.logError("domainUrl error:" + domainUrl, module);
-            return null;
+        String threadId = null;
+        try {
+            URI uri = new URI(url);
+            threadId = uri.getPath().replaceAll("/", "");            
+        } catch (URISyntaxException e) {
+            Debug.logError("Url error:" + url, module);
         }
-        String threadId = url.replaceAll(domainUrl + "/", "");
         if (threadId == null) {
             Debug.logError("threadId error:" + threadId, module);
             return null;
