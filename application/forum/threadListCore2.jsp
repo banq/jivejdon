@@ -42,13 +42,22 @@
                       
             </div>
           <div class="wrap-vid">
-              <div class="thumbn">
-
-                <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">
-                  <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail" loading="lazy" width="100" height="70"/>
+                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">                  
+                  <div>                      
+                    <img src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="thumbnail" loading="lazy"/>                  
+                  </div>
+                  <div>
+                     <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>" target="_blank" class="smallgray">详细</a>
+                  </div>
                 </logic:notEmpty>
-              </div>
-              <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>" target="_blank" class="smallgray">详细</a></p>
+                 
+                <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">                  
+                  <div class="thumbn">
+                    <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail" loading="lazy" width="100" height="70"/>                  
+                  </div>  
+                   <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>" target="_blank" class="smallgray">详细</a></p>
+                          
+                </logic:notEmpty>      
       </div>
   
              </div>
