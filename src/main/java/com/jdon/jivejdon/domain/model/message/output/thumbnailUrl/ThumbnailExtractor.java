@@ -22,15 +22,19 @@ public class ThumbnailExtractor implements Function<MessageVO, MessageVO> {
 	@Override
 	public MessageVO apply(MessageVO messageVO) {
 		String thumbnailUrl = messageVO.getForumMessage().getMessageUrlVO().getThumbnailUrl();
-		Matcher matcher = imgPattern.matcher(messageVO.getBody());
+		String imageUrl = messageVO.getForumMessage().getMessageUrlVO().getImageUrl();
+		Matcher matcher = imgPattern.matcher(messageVO.getBody());		
 		if (matcher.find()) {
-			thumbnailUrl = matcher.group(4);
+			imageUrl = matcher.group(4);
+			thumbnailUrl = "";
 		} else {
-			if (thumbnailUrl == null || thumbnailUrl.length() == 0)
+			if (thumbnailUrl == null || thumbnailUrl.length() == 0){
 				thumbnailUrl = this.getRandomDefaulThumb();
+				imageUrl = "";
+			}
 		}
 		messageVO.getForumMessage().setMessageUrlVO(new MessageUrlVO(messageVO
-				.getForumMessage().getMessageUrlVO().getLinkUrl(), thumbnailUrl));
+				.getForumMessage().getMessageUrlVO().getLinkUrl(), thumbnailUrl, imageUrl));
 		return messageVO;
 	}
 

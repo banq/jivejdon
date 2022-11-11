@@ -30,7 +30,8 @@ public class LinkUrlExtractor implements Function<MessageVO, MessageVO> {
 			newbody = messageVO.getBody();
 
 		messageVO.getForumMessage().setMessageUrlVO(new MessageUrlVO(linkUrl, messageVO
-				.getForumMessage().getMessageUrlVO().getThumbnailUrl()));
+				.getForumMessage().getMessageUrlVO().getThumbnailUrl(), messageVO
+				.getForumMessage().getMessageUrlVO().getImageUrl()));
 		return messageVO.builder().subject(messageVO.getSubject()).body(newbody).build();
 	}
 }

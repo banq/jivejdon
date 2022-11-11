@@ -88,7 +88,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
     // new ForumMessage() is banned, use RootMessage.messageBuilder()
     protected ForumMessage() {
         this.messageVO = this.messageVOBuilder().subject("").body("").build();
-        this.messageUrlVO = new MessageUrlVO("", "");
+        this.messageUrlVO = new MessageUrlVO("", "", "");
     }
 
     public Account getAccount() {
