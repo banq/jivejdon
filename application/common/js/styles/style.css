@@ -102,7 +102,7 @@ content: "\f062";
   content: "\f007";
 }
 body {
-  background: url(/common/js/img/bg2.png) fixed;
+  background: url(../img/bg2.png) fixed;
   color: #666;
   font-weight: 400;
   font-size: 15px;
@@ -1079,7 +1079,7 @@ DIV.diggArea {
   background-repeat: no-repeat;
   width: 45px;
   height: 53px;
-  background: url(/images/dig.png);
+  background: url(../../../images/dig.png);
 }
 .diggArea .diggNum {
   margin: 0 auto;
