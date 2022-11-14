@@ -15,18 +15,10 @@ int j = 0;
          <div class="row">        
            <div class="col-md-12">
             <div class="wrap-vid">
-              <div class="thumbn">
-                 <img src="//static.jdon.com/simgs/thumb/<%=1 + i%>.jpg" border="0" class="thumbnail" loading="lazy">  
-              </div>  
               <div class="widget">			 
-                 <div class="info">	
-                    <a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag" title="有<bean:write name="threadTag" property="assonum"/>篇"> 
-                      <bean:write name="threadTag" property="assonum"/>篇<bean:write name="threadTag" property="title"/>
-                    </a>  
-                 </div> 
-                 <logic:iterate id="forumThread1" name="threadListForm" property="list" length="1" offset="<%=Integer.toString(j)%>" >
-                 <div class="post">
-                     <a href="<%=request.getContextPath()%>/<bean:write name="forumThread1" property="threadId"/>" target="_blank" class="smallgray">
+                 <logic:iterate id="forumThread1" name="threadListForm" property="list" length="4" offset="<%=Integer.toString(j)%>" >
+                 <div class="info">
+                     <a href="<%=request.getContextPath()%>/<bean:write name="forumThread1" property="threadId"/>" target="_blank">
                                     <bean:write name="forumThread1" property="name" /></a>
                  </div> 
                  </logic:iterate>

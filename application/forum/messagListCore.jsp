@@ -96,11 +96,6 @@
           		</script>		
           </div>
 
-          <logic:notEmpty name="forumThread" property="tags">          
-          <div class="box">
-            <div class="threadTagList" id='<bean:write name="forumThread" property="threadId"/>'></div>                
-          </div>            
-          </logic:notEmpty>
         </div>
 
         <div id="pageEnd"></div>
@@ -171,8 +166,8 @@
       <div class="widget wid-post">
         <div class="content">
           <div class="post wrap-vid">
-              <ul>
-                  <div id="digList"></div>
+              <ul>                  
+                  <div class="threadTagList" id='<bean:write name="forumThread" property="threadId"/>'></div>                
               </ul>
           </div>
         </div>
@@ -200,10 +195,18 @@
         <div class="content">
           <div class="post wrap-vid">
               <ul>
+                <logic:notEmpty name="forumThread" property="tags">          
+                  <div class="widget_tag_cloud">
+                   <div class="tagcloud">
+                     <logic:iterate id="threadTag" name="forumThread" property="tags"> 
+                        <a href="<%=request.getContextPath()%>/tags/<bean:write name="threadTag" property="tagID"/>" class="tag-cloud-link"><bean:write name="threadTag" property="title"/></a>
+                           &nbsp;&nbsp; 
+                     </logic:iterate>
+                   </div>
+                  </div>
+                </logic:notEmpty>
+                                
                 <div id="tagcloud"></div>
-                <%-- <jsp:include page="/query/tagsList2.shtml" flush="true"></jsp:include> --%>
-                <%-- <blockquote><em class="smallgray">其他人在看</em></blockquote>
-                <div id="othersonline"></div> --%>
               </ul>
           </div>
         </div>				
@@ -258,7 +261,7 @@
 <script src="https://cdn.jdon.com/common/messageList9.js"></script>
 <script>        
   $(document).ready(function() { 
-      scrollLoadByElementId('https://cdn.jdon.com/query/threadDigList',"digList");                  
+             
       $('.reblogfrom').each(function(i, obj) {        
         scrollLoadByElementId('/forum/thread.shtml?threadId='+ obj.id,obj.id); 
       });
