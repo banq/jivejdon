@@ -199,8 +199,7 @@
 			<div class="widget">
         <div class="content">
           <div class="post wrap-vid">
-              <ul>
-                <div id="tagcloud"></div>
+              <ul>                
                 <logic:notEmpty name="forumThread" property="tags">          
                   <div class="widget_tag_cloud">
                    <div class="tagcloud">
@@ -211,6 +210,7 @@
                    </div>
                   </div>
                 </logic:notEmpty>                                                
+                <div id="tagcloud"></div>
               </ul>
           </div>
         </div>				
