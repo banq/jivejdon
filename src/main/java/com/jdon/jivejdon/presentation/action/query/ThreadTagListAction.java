@@ -37,6 +37,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -64,38 +65,32 @@ public class ThreadTagListAction extends Action {
 		if (threadId == null || !UtilValidate.isInteger(threadId) || threadId.length() > 10) {
 			return mapping.findForward("failure");
 		}
-		ForumThread thread = getForumMessageQueryService().getThread(Long.parseLong(threadId));
-		if (thread == null)
+		String tagID = request.getParameter("tagID");
+		if (tagID == null || !UtilValidate.isInteger(tagID) || tagID.length() > 10) {
 			return mapping.findForward("failure");
+		}
+
+		Collection<ForumThread> threadList = getForumThreadsForTag(tagID, Long.parseLong(threadId));				
 
 		ModelListForm threadListForm = (ModelListForm) form;
-		Set<Long> foundThreadIds = new HashSet<Long>();
-		Collection<ForumThread> threadList = thread.getTags().stream()
-				.map(threadTag -> getForumThreadsForTag(threadTag, Long.parseLong(threadId), foundThreadIds))
-				.collect(Collectors.toList());
-
 		threadListForm.setList(threadList);
 		threadListForm.setAllCount(threadList.size());
 		return mapping.findForward("success");
 	}
 
-	private ForumThread getForumThreadsForTag(ThreadTag threadTag, final Long threadId,
-			final Set<Long> foundThreadIds) {
+	private Collection<ForumThread> getForumThreadsForTag(String tagID, final Long threadId) {
 		TaggedThreadListSpec taggedThreadListSpec = new TaggedThreadListSpec();
-		taggedThreadListSpec.setTagID(threadTag.getTagID());
+		taggedThreadListSpec.setTagID(Long.parseLong(tagID));
 		PageIterator pageIterator = getTagService().getTaggedThread(taggedThreadListSpec, 0, 10);
-		ForumThread thread1 = null;
+		Collection<ForumThread> threads = new ArrayList<ForumThread>();
+		Set<Long> foundThreadIds = new HashSet<Long>();
 		while (pageIterator.hasNext()) {
 			Long threadId1 = (Long) pageIterator.next();
 			if (threadId1.longValue() != threadId.longValue() && !foundThreadIds.contains(threadId1)) {
-				thread1 = getForumMessageQueryService().getThread(threadId1);
-				foundThreadIds.add(threadId1);
-				break;
+				threads.add( getForumMessageQueryService().getThread(threadId1));
+				foundThreadIds.add(threadId1);				
 			}
-		}
-		if (thread1 == null) {
-			thread1 = getForumMessageQueryService().getThread(threadId);
-		}
-		return thread1;
+		}		
+		return threads;
 	}
 }

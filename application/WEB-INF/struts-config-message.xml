@@ -177,11 +177,7 @@
             <forward name="success" path="/forum/messageListBodyReBlogLink.jsp" />
         </action>
 
-        <action name="threadForm" path="/forum/threadTagList" type="com.jdon.jivejdon.presentation.action.ViewThreadAction" scope="request" validate="false">
-            <forward name="success" path="/forum/threadTagList2.shtml" />
-        </action>
-
-        <action path="/forum/threadTagList2" type="com.jdon.jivejdon.presentation.action.query.ThreadTagListAction" name="threadListForm" scope="request" validate="false">
+        <action path="/forum/threadTagList" type="com.jdon.jivejdon.presentation.action.query.ThreadTagListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/forum/threadTagsList.jsp" />
         </action>
 
