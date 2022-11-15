@@ -1122,7 +1122,7 @@ DIV.diggArea {
   text-overflow: ellipsis;
   word-break: break-all;
   white-space: normal;
-  padding: 5px 15px;
+  padding: 5px 5px;
   border: 1px solid #ddd;
   border-radius: 3px;
   background: #fff;
