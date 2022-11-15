@@ -200,6 +200,7 @@
         <div class="content">
           <div class="post wrap-vid">
               <ul>
+                <div id="tagcloud"></div>
                 <logic:notEmpty name="forumThread" property="tags">          
                   <div class="widget_tag_cloud">
                    <div class="tagcloud">
@@ -209,9 +210,7 @@
                      </logic:iterate>
                    </div>
                   </div>
-                </logic:notEmpty>
-                                
-                <div id="tagcloud"></div>
+                </logic:notEmpty>                                                
               </ul>
           </div>
         </div>				
