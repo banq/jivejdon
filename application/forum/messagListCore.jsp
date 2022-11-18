@@ -271,8 +271,7 @@
         scrollLoadByElementId('/forum/thread.shtml?threadId='+ obj.id,obj.id); 
        });
       scrollLoadByElementId('/forum/threadTagList.shtml?threadId=<bean:write name="forumThread" property="threadId"/>',"threadTagList");   
-      scrollLoadByElementId('https://cdn.jdon.com/tags/tagcloud',"tagcloud");  
-      //scrollAppendByElementId('/query/threadNewDigList.shtml',"othersonline","pageEnd",returnAllCount,sumStart,returnStart);
+      scrollLoadByElementId('https://cdn.jdon.com/tags/tagcloud',"tagcloud");        
   });      
 </script>
 
