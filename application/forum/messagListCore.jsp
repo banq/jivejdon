@@ -167,11 +167,7 @@
         <div class="content">
           <div class="post wrap-vid">
               <ul>                  
-                  <logic:notEmpty name="forumThread" property="tags">       
-                    <logic:iterate id="threadTag" name="forumThread" property="tags"> 
-                       <div class="threadTagList" id='<bean:write name="threadTag" property="tagID"/>'></div>          
-                    </logic:iterate>
-                  </logic:notEmpty>                          
+                  <div id="threadTagList"></div>             
                      
               </ul>
           </div>
@@ -272,9 +268,7 @@
       $('.reblogto').each(function(i, obj) {        
         scrollLoadByElementId('/forum/thread.shtml?threadId='+ obj.id,obj.id); 
        });
-       $('.threadTagList').each(function(i, obj) {        
-        scrollLoadByElementId('/forum/threadTagList.shtml?threadId=<bean:write name="forumThread" property="threadId"/>&tagID='+ obj.id,obj.id); 
-       });             
+      scrollLoadByElementId('/forum/threadTagList.shtml?threadId=<bean:write name="forumThread" property="threadId"/>',"threadTagList");   
       scrollLoadByElementId('https://cdn.jdon.com/tags/tagcloud',"tagcloud");  
       //scrollAppendByElementId('/query/threadNewDigList.shtml',"othersonline","pageEnd",returnAllCount,sumStart,returnStart);
   });      

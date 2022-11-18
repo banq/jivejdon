@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -65,22 +66,29 @@ public class ThreadTagListAction extends Action {
 		if (threadId == null || !UtilValidate.isInteger(threadId) || threadId.length() > 10) {
 			return mapping.findForward("failure");
 		}
-		String tagID = request.getParameter("tagID");
-		if (tagID == null || !UtilValidate.isInteger(tagID) || tagID.length() > 10) {
+		ForumThread thread = getForumMessageQueryService().getThread(Long.parseLong(threadId));
+		if (thread == null)
 			return mapping.findForward("failure");
-		}
 
-		Collection<ForumThread> threadList = getForumThreadsForTag(tagID, Long.parseLong(threadId));				
+		Collection<String> lists = new ArrayList<String>();
+		int index = 0;
+		for(ThreadTag tag:thread.getTags()) {
+			Collection<ForumThread> threadList = getForumThreadsForTag(tag.getTagID(), Long.parseLong(threadId));					
+			lists.add(Long.toString(tag.getTagID()));
+			request.setAttribute("tagID"+Integer.toString(index), threadList);
+			index++;
+		}
+				
 
 		ModelListForm threadListForm = (ModelListForm) form;
-		threadListForm.setList(threadList);
-		threadListForm.setAllCount(threadList.size());
+		threadListForm.setList(lists);
+		threadListForm.setAllCount(lists.size());
 		return mapping.findForward("success");
 	}
 
-	private Collection<ForumThread> getForumThreadsForTag(String tagID, final Long threadId) {
+	private Collection<ForumThread> getForumThreadsForTag(Long tagID, final Long threadId) {
 		TaggedThreadListSpec taggedThreadListSpec = new TaggedThreadListSpec();
-		taggedThreadListSpec.setTagID(Long.parseLong(tagID));
+		taggedThreadListSpec.setTagID(tagID);
 		PageIterator pageIterator = getTagService().getTaggedThread(taggedThreadListSpec, 0, 10);
 		Collection<ForumThread> threads = new ArrayList<ForumThread>();
 		Set<Long> foundThreadIds = new HashSet<Long>();
