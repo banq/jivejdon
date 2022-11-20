@@ -13,31 +13,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>  
   <meta http-equiv="x-dns-prefetch-control" content="on"/>
-  <link rel="dns-prefetch" href="//static.jdon.com"/>
-  <link rel="dns-prefetch" href="//cdn.jdon.com"/>
-  <link href='//fonts.googleapis.com' rel='dns-prefetch'/>
-  <link href='//ajax.googleapis.com' rel='dns-prefetch'/>
-  <link href='//apis.google.com' rel='dns-prefetch'/>
-  <link href='//www.google-analytics.com' rel='dns-prefetch'/>
-  <link href='//ade.googlesyndication.com' rel='dns-prefetch'/>
-  <link href='//googleads.g.doubleclick.net' rel='dns-prefetch'/>
-  <link href='//www.gstatic.com' rel='dns-prefetch'/>
-  <link href='//fonts.gstatic.com' rel='dns-prefetch'/>	
-  <link href='//www.googletagservices.com' rel='dns-prefetch'/>
-  <link href='//tpc.googlesyndication.com' rel='dns-prefetch'/>
-  <link href='//static.googleadsserving.cn' rel='dns-prefetch'/>
-  <link href='//adservice.google.com' rel='dns-prefetch'/>				
+  <link rel="prefetch" href="https://static.jdon.com/js/jquery-2.1.1.min.js">   
+  <link rel="prefetch" href="https://static.jdon.com/js/bootstrap.min.js">
+  <link rel="prefetch" href="https://cdn.jdon.com/common/js/jquery.lazyload-any.js">  
   <meta charset="utf-8"/>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
   <meta http-equiv="" content="IE=edge,chrome=1"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="prefetch" href="https://static.jdon.com/js/jquery-2.1.1.min.js">   
-  <link rel="prefetch" href="https://static.jdon.com/js/bootstrap.min.js">
-  <link rel="prefetch" href="https://cdn.jdon.com/js/bootstrap.min.css">   
-  <link rel="prefetch" href="https://cdn.jdon.com/common/js/styles/style.css">
-  <link rel="prefetch" href="https://cdn.jdon.com/common/js/jquery.lazyload-any.js">  
   <title>解道jdon - 传道解惑的架构师博客</title>
   <meta name="Description" content="领域驱动设计DDD,微服务,<jsp:include page="/query/tagHotList2.shtml" flush="true"></jsp:include>"/>
   <meta name="Keywords" content="微服务,SOA,DDD,体系结构,架构,Gof设计模式,Java框架,大数据,云原生,面向对象,函数编程,SpringBoot,EDA,java,JavaEE,CQRS,eventsourcing" />
@@ -270,24 +254,6 @@
 	<%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
   
    <%@ include file="./common/IncludeBottomBody.jsp" %> 
-
-   <noscript id="deferred-styles">
-	  <link rel="stylesheet" href="https://cdn.jdon.com/js/bootstrap.min.css" type="text/css">
-      <link rel="stylesheet" href="https://cdn.jdon.com/common/js/styles/style.css" type="text/css">
-   </noscript>
-   <script>
-	var loadDeferredStyles = function() {
-	  var addStylesNode = document.getElementById("deferred-styles");
-	  var replacement = document.createElement("div");
-	  replacement.innerHTML = addStylesNode.textContent;
-	  document.body.appendChild(replacement)
-	  addStylesNode.parentElement.removeChild(addStylesNode);
-	};
-	var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-		window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-	if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
-	else window.addEventListener('load', loadDeferredStyles);
-  </script> 
 
 <script src="https://cdn.jdon.com/common/js/jquery.lazyload-any.js"></script>
 <script>       
