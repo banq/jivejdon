@@ -66,10 +66,10 @@
       <forward name="success" path="/forum/forumListJSON.jsp"/>
     </action>	
     
-    <action name="feedForm" path="/forum/feed/feedbackAction" type="com.jdon.strutsutil.ServiceMethodAction"
+    <!-- <action name="feedForm" path="/forum/feed/feedbackAction" type="com.jdon.strutsutil.ServiceMethodAction"
 	  scope="request" validate="true" input="/forum/feed/feedback.jsp" >
       <forward name="send" path="/forum/feed/result.jsp"/>		
-    </action>
+    </action> -->
     
     
     
