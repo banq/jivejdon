@@ -21,6 +21,7 @@ String coutlength = (String)pageContext.getAttribute("count");
 	<a href='<%=request.getContextPath() %>/tags/<bean:write name="threadTag" property="tagID"/>' target="_blank" class="post-tag">
 		<bean:write name="threadTag" property="title" />
 	</a>
+	<a href="/tags/<bean:write name="threadTag" property="tagID"/>/rss"><i class="fa fa-feed"></i></a>
 	&nbsp;&nbsp;
 	<%--<a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=2&subscribeId=<bean:write name="threadTag" property="tagID"/>" target="_blank" title="当本标签有新内容加入 自动通知我"  rel="nofollow">--%>
 		<%--<i class="fa fa-heart"></i>--%>
