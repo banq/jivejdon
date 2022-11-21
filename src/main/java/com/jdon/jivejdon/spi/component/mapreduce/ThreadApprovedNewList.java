@@ -38,9 +38,9 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
+ * Home Mixer
  * prepare all approved thread list
- *
+ * 
  * @author banq
  */
 @Component("threadApprovedNewList")
@@ -84,7 +84,7 @@ public class ThreadApprovedNewList implements Startable {
 				getApprovedThreads(maxSize);
 			}
 		};
-		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(task, 60 * 60 * 6,
+		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(task, 60 * 60 * 3,
 				60 * 60 * 3, TimeUnit.SECONDS);
 
 	}
