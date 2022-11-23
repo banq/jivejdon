@@ -137,6 +137,7 @@
 				<div class="widget wid-post">
                     <div class="content">
                        <div class="wrap-vid">
+					      <jsp:include page="/query/tagHotList.shtml" flush="true"></jsp:include>
                         </div>
                     </div>
                 </div>

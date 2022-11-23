@@ -5,10 +5,8 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
-<bean:parameter id="noheader" name="noheader"  value=""/>
-<logic:notEqual name="noheader" value="on">
 
-<bean:define id="title"  value=" 推荐文章 " />
+<bean:define id="title"  value=" 新佳文章 " />
 <%@ include file="../common/IncludeTop.jsp" %>
     
 <!-- /////////////////////////////////////////Content -->
@@ -39,7 +37,6 @@
                     </div>
                 </div>
             </div>
-</logic:notEqual>   
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
     <logic:equal name="i" value="3">
         <div class="box">
@@ -56,7 +53,6 @@
     </logic:equal>    
 <%@ include file="threadListCore.jsp" %>
 </logic:iterate>
-<logic:notEqual name="noheader" value="on">       
   <div id="nextPageContent"></div>
 
           <div class="pagination" style="float: right;">
@@ -98,20 +94,52 @@
         <div class="widget wid-post">
           <div class="content">
               <div class="post wrap-vid">
-                  
+                 <ul>
+							  <div id="digList"></div>   
+							    <div class="lazyload" >
+							     <!-- 
+							     <script>
+							  	  load('https://cdn.jdon.com/query/threadDigList', function (xhr) {				
+  	                                  document.getElementById("digList").innerHTML = xhr.responseText;
+			                     });
+							  </script> -->
+							  </div>
+
+							  </ul>
               </div>
           </div>
         </div>
         <!---- Start Widget ---->
         <div class="widget">
               <div class="wid-vid">
-                  
+                 <ul>
+                  <div id="newList"></div>   
+							    <div class="lazyload" >
+							     <!-- 
+							     <script>
+							  	  load('/query/threadNewList.shtml?count=15', function (xhr) {				
+  	                                  document.getElementById("newList").innerHTML = xhr.responseText;
+			                     });
+							  </script> -->
+							  </div>							
+							</ul>                  
 
               </div>
         </div>
 
            <div class="widget">
                <div class="wid-vid">
+							<ul>
+							    <div id="tagcloud"></div>   
+								 <div class="lazyload" >
+							     <!-- 
+							     <script>
+							  	  load('https://cdn.jdon.com/tags/tagcloud', function (xhr) {				
+  	                                  document.getElementById("tagcloud").innerHTML = xhr.responseText;
+			                     });
+							     </script> -->
+							    </div>
+							</ul>
                    
                </div>
            </div>
@@ -121,47 +149,10 @@
 </div>  	
 	
 
-<%@ include file="../common/IncludeBottomBody.jsp" %> 
-  
-<bean:define id="pagestart" name="threadListForm" property="start" />
-<bean:define id="pagecount" name="threadListForm" property="count" />
-<bean:define id="pageallCount" name="threadListForm" property="allCount" />
-<%--
-    int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
-    int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
-    int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
-    int pageNo = (pageAllcountInt / pageCountInt);
-    if(pageAllcountInt % pageCountInt !=0){ 
-        pageNo = pageNo + 1;
-    }    
+<%@ include file="../common/IncludeBottom.jsp" %> 
 
-<script>
-function scrollLoader(url){
-  var start = "<%=pageStartInt+pageCountInt%>";
-  var loading = false;
-  $(window).scroll(function() {
-    var hT = $('#nextPageContent').offset().top,
-       hH = $('#nextPageContent').outerHeight(),
-       wH = $(window).height(),
-       wS = $(this).scrollTop();       
-    if (wS > (hT+hH-wH) && !loading){           
-         loading = true;          
-         if (start <= <%=pageAllcountInt%> ){                  
-           surl = (url.indexOf("?")==-1)?(url+"?"):(url+"&");           
-           load(surl +'start=' + start +'&count=<%=pageCountInt%>&noheader=on', function (xhr) {
-               document.getElementById("nextPageContent").innerHTML = document.getElementById("nextPageContent").innerHTML + xhr.responseText;               
-               start = start/1 + <%=pageCountInt%>;                              
-               loading = false;
-           });          
-         }   
-    }
-   });
-}
-scrollLoader('/query/approvedListOther.shtml');   
-</script>   
---%>
-</body>
-</html>
-</logic:notEqual>    
-
+<script src="https://cdn.jdon.com/common/js/jquery.lazyload-any.js"></script>
+<script>       
+    $('.lazyload').lazyload();
+</script>
 
