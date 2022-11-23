@@ -44,11 +44,11 @@ public class HomePageComparator implements Comparator<ForumThread> {
 		long diff = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 		if (diff >= 4)
 			p = p / diff;
-		else if (thread.getRootMessage().getDigCount() > 0)
-			p = Math.pow(p, thread.getRootMessage().getDigCount() + 1) * (4 - diff);
-
-		long diff2 = thread.getViewCount() - thread.getViewCounter().getLastSavedCount();
-		p = (diff + diff2 + thread.getRootMessage().getDigCount()) * p;
+		else {
+			long diff2 = thread.getViewCount() - thread.getViewCounter().getLastSavedCount();	
+			p = Math.pow(p, diff2 + 1) * (4 - diff);
+		}					
+		p = (diff + thread.getRootMessage().getDigCount()) * p;
 		return p;
 	}
 }
