@@ -322,10 +322,10 @@ public class SitemapServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		long modelLastModifiedDate = ForumUtil.getForumsLastModifiedDate(
 				this.getServletContext());
-		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request,
-				response)) {
-			return;
-		}
+		// if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request,
+		// 		response)) {
+		// 	return;
+		// }
 
 		if (!checkSpamHit(request)) {
 			((HttpServletResponse) response).sendError(404);

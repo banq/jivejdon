@@ -29,11 +29,6 @@
   %>
   <%@ include file="header.jsp" %>
 </logic:empty>
-<logic:notEmpty name="noheaderfooter">
-  <%
-    com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(0, request, response);
-  %>
-</logic:notEmpty>
 <!-- /////////////////////////////////////////Content -->
 <div id="page-content" class="single-page container">
   <div class="row">

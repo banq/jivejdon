@@ -57,9 +57,9 @@ public class EtagModificationFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
 		long modelLastModifiedDate = ForumUtil.getForumsLastModifiedDate(servletContext);
-		if (!ToolsUtil.checkHeaderCache(default_expireSeconds, modelLastModifiedDate, (HttpServletRequest) request, (HttpServletResponse) response)) {
-			return;
-		}
+		// if (!ToolsUtil.checkHeaderCache(default_expireSeconds, modelLastModifiedDate, (HttpServletRequest) request, (HttpServletResponse) response)) {
+		// 	return;
+		// }
 		chain.doFilter(request, response);
 		return;
 	}

@@ -4,9 +4,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<% 
-com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(6 * 60 * 60, request, response);
-%>
+
 <a href="<%=request.getContextPath()%>/forum/threadDigSortedList"><b>点赞</b></a>
 <div class="important" >
 <bean:parameter id="count" name="count" value="8"/>

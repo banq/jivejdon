@@ -3,9 +3,7 @@
 <%@ taglib uri="struts-bean" prefix="bean"%>
 <%@ taglib uri="struts-html" prefix="html"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%
-com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(60 * 60, request, response);
-%>
+
 <%@ include file="../common/security.jsp" %>
 
 <logic:notEmpty name="Notification">

@@ -6,9 +6,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <bean:parameter id="noheader" name="noheader"  value=""/>
 <logic:notEqual name="noheader" value="on">
-<%          
-    com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(5 * 24 * 60 * 60, request, response);
-%>
 <style>
 body,table,td,select,input,div,form{font-size: 12px; }
 A{text-decoration:none;color:#036;}a:visited{text-decoration:none;color: #666;font-weight:lighter;}A:hover{text-decoration:underline;color:#eab30d;}

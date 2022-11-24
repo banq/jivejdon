@@ -84,9 +84,9 @@ public class ThreadEtagFilter extends Action {
 		// expire = 24 * 60 * 60;
 		// }
 
-		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
-			return null;// response is 304
-		}
+		// if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
+		// 	return null;// response is 304
+		// }
 
 		return actionMapping.findForward(FormBeanUtil.FORWARD_SUCCESS_NAME);
 	}

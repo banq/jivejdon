@@ -3,8 +3,6 @@
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ page session="false" %>
   
-<%  com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(5 * 24 * 60 * 60, request, response);
-%>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <logic:greaterThan name="tagForm" property="subscriptionCount" value="0">

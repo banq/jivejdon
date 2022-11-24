@@ -4,9 +4,6 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<% 
-com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(240 * 60 * 60, request, response);
-%>
 <style>
 .important {
   margin: 1px 20px 1px 1px;

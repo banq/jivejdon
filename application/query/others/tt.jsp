@@ -5,9 +5,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<% 
-com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(6 * 60 * 60, request, response);
-%>
+
 <logic:empty name="threadTag">
   <%response.setStatus(HttpServletResponse.SC_NOT_FOUND);%>
 </logic:empty>

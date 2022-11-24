@@ -4,9 +4,6 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<% 
-com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(600 * 60 * 60, request, response);
-%>
 <logic:iterate indexId="i" id="forumThread" name="threadListForm" property="list" length='1' >
     <bean:define id="forumMessage" name="forumThread" property="rootMessage" />	
     <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">

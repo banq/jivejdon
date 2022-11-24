@@ -6,9 +6,6 @@
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-<%          
-    com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(5 * 24 * 60 * 60, request, response);
-%>
 
 <logic:notEmpty name="accountProfileForm" property="account">
 <logic:notEmpty name="accountProfileForm" property="account.username">

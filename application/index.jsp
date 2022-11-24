@@ -5,11 +5,6 @@
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<%          
-    com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(7 * 24 * 60 * 60, request, response);
-	
-%>
-<%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
 <head>

@@ -35,12 +35,6 @@ if (pagecountInt > 0) {
 String titleStr = (String)pageContext.getAttribute("title");
 if (currentPageNo > 1){
 	titleStr = titleStr + "  - 第"+ currentPageNo + "页";
-	int expire =5 * 60;
-  long modelLastModifiedDate = com.jdon.jivejdon.presentation.action.util.ForumUtil.getForumsLastModifiedDate(this.getServletContext());
-	if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
-		return ;
-	}
-
 }
 pageContext.setAttribute("title", titleStr);
 %>

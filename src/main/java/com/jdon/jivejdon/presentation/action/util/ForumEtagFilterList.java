@@ -45,9 +45,9 @@ public abstract class ForumEtagFilterList extends ModelListAction {
 		int expire = 24 * 60 * 60;
 		long modelLastModifiedDate = ForumUtil.getForumsLastModifiedDate(this.servlet
 				.getServletContext());
-		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
-			return null;
-		}
+		// if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
+		// 	return null;
+		// }
 		return super.execute(actionMapping, actionForm, request, response);
 
 	}

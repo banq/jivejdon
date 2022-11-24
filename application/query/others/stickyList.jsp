@@ -4,9 +4,6 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<%          
-    com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(5 * 24 * 60 * 60, request, response);
-%>
    <bean:parameter id="count" name="count" value="8"/>
       <%
 String coutlength = (String)pageContext.getAttribute("count");

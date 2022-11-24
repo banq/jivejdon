@@ -3,10 +3,6 @@
 <%@ taglib uri="struts-bean" prefix="bean"%>
 <%@ taglib uri="struts-html" prefix="html"%>
 
-  
-<%
-com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(30 * 24 * 60 * 60, request, response);	
-%>
 
 <logic:iterate id="key" name="HOTKEYS" property="props">
 	<a href="<bean:write name="key" property="value"/>"><bean:write

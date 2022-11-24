@@ -1,9 +1,6 @@
 <%@ page contentType="text/css; charset=UTF-8" %>
 <%@ page session="false"  %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<%          
-    com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(50 * 24 * 60 * 60, request, response);
-%>
 body,table,td,select,input,div,form{color:#444;font:400 15px/1.8 "Microsoft YaHei",Rajdhani,Play,Helvetica Neue,Helvetica,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.8em}body{
 	margin-top: 0px;
 	background: #fff url('<%=request.getContextPath()%>/images/body_bg_verlauf.png') repeat-x;

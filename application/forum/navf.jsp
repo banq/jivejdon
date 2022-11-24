@@ -1,6 +1,6 @@
 <%--  /forum/messageNavList.shtml  == > MessageListNavAction ==>navf.jsp ==> (urlrewrite.xml)/([0-9]+)/([0-9]+) --%>
 <%
-  com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(1, request, response);
+  
   long forumId = ((Long) request.getAttribute("forumId")).longValue();
   long messageId = ((Long) request.getAttribute("messageId")).longValue();
 

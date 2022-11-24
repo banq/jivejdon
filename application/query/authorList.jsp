@@ -9,9 +9,7 @@
 
 <bean:parameter id="noheader" name="noheader"  value=""/>
 <logic:notEqual name="noheader" value="on">
-<% 
-com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(6 * 60 * 60, request, response);
-%>
+
 <bean:define id="title"  value=" 活跃用户列表 " />
 <%@ include file="../common/IncludeTop.jsp" %>
 

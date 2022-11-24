@@ -52,9 +52,9 @@ public class ForumEtagFilterAction extends Action {
 
 		long modelLastModifiedDate = ForumUtil.getForumsLastModifiedDate(this.servlet
 				.getServletContext());
-		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
-			return null;
-		}
+		// if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
+		// 	return null;
+		// }
 		return actionMapping.findForward("success");
 
 	}

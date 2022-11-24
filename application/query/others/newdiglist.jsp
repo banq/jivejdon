@@ -4,9 +4,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<% 
-com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(1 * 60 * 60, request, response);
-%>
 <div>
 <bean:parameter id="start" name="start" value="0"/>
 <bean:parameter id="count" name="count" value="1"/>

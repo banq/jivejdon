@@ -4,9 +4,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<% 
-com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(6 * 60 * 60, request, response);
-%>
 <b></b>
 <a href="<%=request.getContextPath()%>/forum/maxPopThreads"><b>热文</b></a>
 <div class="important" >

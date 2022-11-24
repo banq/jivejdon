@@ -88,11 +88,11 @@ public class RSSGenServlet extends HttpServlet {
 	}
 
 	protected boolean checkModifiedEtagFilter(HttpServletRequest request, HttpServletResponse response) {
-		int expire = 24 * 60 * 60;
-		long modelLastModifiedDate = ForumUtil.getForumsLastModifiedDate(this.getServletContext());
-		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
-			return false;
-		}
+		// int expire = 24 * 60 * 60;
+		// long modelLastModifiedDate = ForumUtil.getForumsLastModifiedDate(this.getServletContext());
+		// if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
+		// 	return false;
+		// }
 		return true;
 	}
 

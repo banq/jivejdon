@@ -1,9 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false"  %>
 <%@ page trimDirectiveWhitespaces="true" %>	
-<%          
-    com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(50 * 24 * 60 * 60, request, response);
-%>
 
 <!DOCTYPE html>
 <html>

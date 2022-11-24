@@ -1,5 +1,4 @@
 <%
-com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(90 * 24 * 60 * 60, request, response);
 response.setContentType ("text/css");
  %> input {
 	BORDER-RIGHT: #668235 1px solid;

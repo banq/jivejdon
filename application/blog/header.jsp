@@ -5,15 +5,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<%     
-int expire = 24 * 60 * 60;
-
-  long modelLastModifiedDate = com.jdon.jivejdon.presentation.action.util.ForumUtil.getForumsLastModifiedDate(this.getServletContext());
-if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
-	return ;
-}
-
-%>  
 
 <%@ include file="../../common/security.jsp" %>
 <%@ include file="../../common/loginAccount.jsp" %>

@@ -63,7 +63,6 @@ public class MessageDigAction extends Action {
 			  message.messaegDigAction();
 			try {				
 				response.setContentType("text/html");
-//				com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(60 * 60, request, response);
 				response.getWriter().print(message.getDigCount());
 				response.getWriter().close();
 			} catch (Exception e) {

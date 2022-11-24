@@ -7,9 +7,6 @@
 
 <bean:parameter id="noheader" name="noheader"  value=""/>
 <logic:notEqual name="noheader" value="on">
-<%          
-    com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(5 * 24 * 60 * 60, request, response);
-%>
 <!DOCTYPE html>
 <html>
 <head>
