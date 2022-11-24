@@ -6,8 +6,8 @@
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<bean:parameter id="noheaderfooter" name="noheaderfooter" value=""/>
-<logic:empty name="noheaderfooter">
+
+
   <bean:define id="forumThread" name="messageListForm" property="oneModel"/>
   <bean:define id="forum" name="forumThread" property="forum"/>
   <bean:define id="title" name="forumThread" property="name"/>
@@ -28,7 +28,7 @@
     pageContext.setAttribute("currentPageNo", currentPageNo);
   %>
   <%@ include file="header.jsp" %>
-</logic:empty>
+
 <!-- /////////////////////////////////////////Content -->
 <div id="page-content" class="single-page container">
   <div class="row">
@@ -214,7 +214,7 @@
 </div>
 
 
-<logic:empty name="noheaderfooter">
+
   <div id="reply" style="display:none">
 
     <input type="hidden" id="replySubject" name="replySubject" value="<bean:write name="forumThread" property="rootMessage.messageVO.subject"/>"/>
@@ -253,4 +253,3 @@
 
   </body>
   </html>
-</logic:empty>
