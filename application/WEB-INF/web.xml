@@ -11,7 +11,7 @@
         <filter-name>IPForwardingFilter</filter-name>
         <filter-class>com.jdon.jivejdon.presentation.filter.IPForwardingFilter</filter-class>
     </filter> -->
-    <filter>
+    <!-- <filter>
         <filter-name>Set Character Encoding</filter-name>
         <filter-class>
             com.jdon.util.SetCharacterEncodingFilter
@@ -24,7 +24,7 @@
             <param-name>ignore</param-name>
             <param-value>true</param-value>
         </init-param>
-    </filter>
+    </filter> -->
     <filter>
         <filter-name>rewriteFilter</filter-name>
         <filter-class>
@@ -65,10 +65,10 @@
         <filter-name>DisableUrlSessionFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping> -->
-    <filter-mapping>
+    <!-- <filter-mapping>
         <filter-name>Set Character Encoding</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    </filter-mapping> -->
 
     <filter-mapping>
         <filter-name>rewriteFilter</filter-name>
