@@ -228,18 +228,9 @@
   <%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 <script src="https://cdn.jdon.com/common/login2.js"></script>
-<script>
-  var start = 0;
-  var count = 5;  
-  var allCount = 0;
-  <logic:notEmpty name="threadsInMemallCount">
-    allCount = <bean:write name="threadsInMemallCount"/>; 
-  </logic:notEmpty>
-</script>
 <script src="https://cdn.jdon.com/common/messageList9.js"></script>
 <script>        
-  $(document).ready(function() { 
-             
+  $(document).ready(function() {              
       $('.reblogfrom').each(function(i, obj) {        
         scrollLoadByElementId('/forum/thread.shtml?threadId='+ obj.id,obj.id); 
       });
