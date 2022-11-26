@@ -447,21 +447,21 @@ public class ToolsUtil {
 	// 	return true;
 	// }
 
-	public static void setEtagHaeder(HttpServletResponse response, long modelLastModifiedDate) {
-		response.setHeader("ETag", Long.toString(modelLastModifiedDate));
-	}
+	// public static void setEtagHaeder(HttpServletResponse response, long modelLastModifiedDate) {
+	// 	response.setHeader("ETag", Long.toString(modelLastModifiedDate));
+	// }
 
-	public static boolean setRespHeaderCache(long adddays, HttpServletRequest request, HttpServletResponse response) {
-		request.setAttribute("myExpire", adddays);
+	// public static boolean setRespHeaderCache(long adddays, HttpServletRequest request, HttpServletResponse response) {
+	// 	request.setAttribute("myExpire", adddays);
 
-		long adddaysM = new Long(adddays) * 1000;
-		String maxAgeDirective = "max-age=" + adddays;
-		response.setHeader("Cache-Control", maxAgeDirective);
-		response.setStatus(HttpServletResponse.SC_OK);
-		response.addDateHeader("Last-Modified", System.currentTimeMillis());
-		response.addDateHeader("Expires", System.currentTimeMillis() + adddaysM);
-		return true;
-	}
+	// 	long adddaysM = new Long(adddays) * 1000;
+	// 	String maxAgeDirective = "max-age=" + adddays;
+	// 	response.setHeader("Cache-Control", maxAgeDirective);
+	// 	response.setStatus(HttpServletResponse.SC_OK);
+	// 	response.addDateHeader("Last-Modified", System.currentTimeMillis());
+	// 	response.addDateHeader("Expires", System.currentTimeMillis() + adddaysM);
+	// 	return true;
+	// }
 
 	public static String convertURL(String s) {
 		Pattern patt = Pattern
