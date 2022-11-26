@@ -8,5 +8,7 @@
 <%
 String coutlength = (String)pageContext.getAttribute("count");
 %>        
-<logic:iterate indexId="i"   id="ThreadTag" name="tagsHotListForm" property="list" length='<%=coutlength%>' ><bean:write name="ThreadTag" property="title"/>,</logic:iterate>
+<logic:notEmpty name="tagsHotListForm" property="list">
+  <logic:iterate id="ThreadTag" name="tagsHotListForm" property="list" length='<%=coutlength%>' ><bean:write name="ThreadTag" property="title"/>,</logic:iterate>
+</logic:notEmpty>
 
