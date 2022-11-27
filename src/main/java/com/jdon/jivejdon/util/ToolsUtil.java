@@ -481,6 +481,9 @@ public class ToolsUtil {
 
 	}
 
+	public static String getAppURL(HttpServletRequest request) {
+		return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+	 }
 
 	public static void removeSessionCookie(HttpServletRequest request, HttpServletResponse response) {
 

@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 public class CallUtil {
 
 	public static String getDomainUrl(HttpServletRequest request, String forwdUrl, Map params) {
-        String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
+        String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         domainUrl = domainUrl + request.getContextPath();
 		domainUrl = domainUrl + forwdUrl + "?Referer=" + domainUrl;
 
@@ -37,7 +37,7 @@ public class CallUtil {
 	}
 
 	public static String getCleanDomainUrl(HttpServletRequest request, String forwdUrl) {
-        String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
+        String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         domainUrl = domainUrl + request.getContextPath();
 		domainUrl = domainUrl + forwdUrl + "?Referer=" + domainUrl;
 

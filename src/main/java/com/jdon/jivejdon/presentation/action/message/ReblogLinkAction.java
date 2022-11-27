@@ -40,7 +40,7 @@ public class ReblogLinkAction extends Action {
         Collection<Long> tos = othersService.getReBlogLink(Long.parseLong(threadFromId));
         if (tos != null && tos.size() != 0) {
             Collection<Property> props = new ArrayList<>();
-            String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
+            String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
             for (Long threadId : tos) {
                 props.add(new Property("", domainUrl + "/" + Long.toString(threadId)));
             }

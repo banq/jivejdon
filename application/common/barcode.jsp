@@ -2,7 +2,7 @@
 <%@ page session="false"  %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%
-    String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
+    String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     domainUrl = domainUrl + request.getContextPath();
 String url = "";
 if (request.getParameter("threadId") != null){

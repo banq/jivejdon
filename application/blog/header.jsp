@@ -46,7 +46,7 @@
     <meta name="robots" content="noindex">
 <title><bean:write name="accountProfileForm" property="account.username"/>的博客</title> 
 <%
-    String domainUrl = com.jdon.util.RequestUtil.getAppURL(request);
+    String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 %>
 <link rel="canonical" href="<%=domainUrl %>/blog/<bean:write name="accountProfileForm" property="account.username"/>" />
   <link href="//cdn.jdon.com/common/jivejdon5.css" rel="stylesheet" type="text/css"/>
