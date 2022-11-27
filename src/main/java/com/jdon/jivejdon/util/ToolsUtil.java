@@ -481,9 +481,22 @@ public class ToolsUtil {
 
 	}
 
-	public static String getAppURL(HttpServletRequest request) {
-		//return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-		return "https://www.jdon.com";
+	public static String getAppURL(HttpServletRequest request) {		
+		StringBuffer url = new StringBuffer();
+		int port = request.getServerPort();
+		if (port < 0) {
+			port = 80; // Work around java.net.URL bug
+		}
+		String scheme = request.getScheme();
+		// url.append(scheme);
+		// url.append("://");
+		url.append("//");		
+		url.append(request.getServerName());
+		if ((scheme.equals("http") && (port != 80)) || (scheme.equals("https") && (port != 443))) {
+			url.append(':');
+			url.append(port);
+		}
+		return url.toString();
 	 }
 
 	public static void removeSessionCookie(HttpServletRequest request, HttpServletResponse response) {
