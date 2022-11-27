@@ -11,18 +11,13 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 	<meta http-equiv="x-dns-prefetch-control" content="on"/>
     <link rel="prefetch" href="https://static.jdon.com/js/jquery-2.1.1.min.js">   
     <link rel="prefetch" href="https://static.jdon.com/js/bootstrap.min.js">
-    <link href='//fonts.googleapis.com' rel='dns-prefetch'/>
-    <link href='//ajax.googleapis.com' rel='dns-prefetch'/>
-    <link href='//apis.google.com' rel='dns-prefetch'/>
-    <link href='//www.google-analytics.com' rel='dns-prefetch'/>
-    <link href='//ade.googlesyndication.com' rel='dns-prefetch'/>
-    <link href='//googleads.g.doubleclick.net' rel='dns-prefetch'/>
-    <link href='//www.gstatic.com' rel='dns-prefetch'/>
-    <link href='//fonts.gstatic.com' rel='dns-prefetch'/>	
-    <link href='//www.googletagservices.com' rel='dns-prefetch'/>
-    <link href='//tpc.googlesyndication.com' rel='dns-prefetch'/>
-    <link href='//static.googleadsserving.cn' rel='dns-prefetch'/>
-    <link href='//adservice.google.com' rel='dns-prefetch'/>		     
+    <link href='https://ajax.googleapis.com' rel='preconnect'/>
+    <link href='https://apis.google.com' rel='preconnect'/>
+    <link href='https://googleads.g.doubleclick.net' rel='preconnect'/>
+    <link href='https://www.googletagservices.com' rel='preconnect'/>
+    <link href='https://tpc.googlesyndication.com' rel='preconnect'/>
+    <link href='https://static.googleadsserving.cn' rel='preconnect'/>
+    <link href='https://adservice.google.com' rel='preconnect'/>		
     <meta charset="utf-8"/>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta http-equiv="" content="IE=edge,chrome=1"/>
