@@ -481,6 +481,19 @@ public class ToolsUtil {
 
 	}
 
+	
+	/**
+	 * //nginx : proxy_set_header X-Forwarded-Proto  $scheme;
+	 * tomcat <Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+                    scheme="https"
+      redirectPort="8443"  proxyPort="443" /
+
+	 * 
+	 * scheme="https"
+	 * @param request
+	 * @return
+	 */
 	public static String getAppURL(HttpServletRequest request) {		
 		StringBuffer url = new StringBuffer();
 		int port = request.getServerPort();
@@ -488,9 +501,9 @@ public class ToolsUtil {
 			port = 80; // Work around java.net.URL bug
 		}
 		String scheme = request.getScheme();
-		// url.append(scheme);
-		// url.append("://");
-		url.append("//");		
+		url.append(scheme);
+		url.append("://");
+		// url.append("//");		
 		url.append(request.getServerName());
 		if ((scheme.equals("http") && (port != 80)) || (scheme.equals("https") && (port != 443))) {
 			url.append(':');
