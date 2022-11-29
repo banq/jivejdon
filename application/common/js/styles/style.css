@@ -1187,3 +1187,8 @@ DIV.diggArea {
     color:#FFF;
     text-decoration: none;
 }
+button, html input[type=button], input[type=reset], input[type=submit] {
+  background-color: #41872d;
+  color: white;
+  border: 0;
+}
