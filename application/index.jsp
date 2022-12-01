@@ -136,13 +136,24 @@
 						</ul>						
 					</div>
 				</div>
-				<div class="widget wid-post">
-                    <div class="content">
-                       <div class="wrap-vid">
-					      <jsp:include page="/query/tagHotList.shtml" flush="true"></jsp:include>
-                        </div>
-                    </div>
-                </div>
+
+				<div class="widget">
+					    <div class="wid-vid">
+							<ul>
+							  <div id="tagHotList"></div>   
+							    <div class="lazyload" >
+							     <!-- 
+							     <script>
+							  	  load('https://cdn.jdon.com/query/tagHotList', function (xhr) {				
+  	                                  document.getElementById("tagHotList").innerHTML = xhr.responseText;
+			                     });
+							  </script> -->
+							  </div>
+
+							</ul>
+							</div>
+				</div>
+
 				<!---- Start Widget digList---->
 				<div class="widget">
 					<div class="wid-vid">
@@ -177,24 +188,6 @@
 							</div>
 				</div>
 
-
-				<!-- Start Widget -->
-                <div class="widget">
-                  <div class="wid-vid">
-							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
-							        <!-- 自适应主广告 -->
-									<ins class="adsbygoogle"
-     									style="display:block"
-     									data-ad-client="ca-pub-7573657117119544"
-     									data-ad-slot="5184711902"
-     									data-ad-format="auto"
-     									data-full-width-responsive="true"></ins>
-									<script>
-     							(adsbygoogle = window.adsbygoogle || []).push({});
-          							</script>		   
-                   </div>
-                </div>
-				
 				<!-- Start Widget newList -->
 				<div class="widget">
 					    <div class="wid-vid">

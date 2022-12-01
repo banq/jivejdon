@@ -139,16 +139,7 @@
         <div class="content">
           <div class="post wrap-vid">
               <ul>                
-                <logic:notEmpty name="forumThread" property="tags">          
-                  <div class="widget_tag_cloud">
-                   <div class="tagcloud">
-                     <logic:iterate id="threadTag" name="forumThread" property="tags"> 
-                        <a href="<%=request.getContextPath()%>/tags/<bean:write name="threadTag" property="tagID"/>" class="tag-cloud-link"><bean:write name="threadTag" property="title"/></a>
-                           &nbsp;&nbsp; 
-                     </logic:iterate>
-                   </div>
-                  </div>
-                </logic:notEmpty>                                                            
+                <div id="tagHotList"></div>                                                    
               </ul>
           </div>
         </div>				
@@ -237,6 +228,7 @@
       $('.reblogto').each(function(i, obj) {        
         scrollLoadByElementId('/forum/thread.shtml?threadId='+ obj.id,obj.id); 
        });
+      scrollLoadByElementId('https://cdn.jdon.com/query/tagHotList',"tagHotList");     
       scrollLoadByElementId('/forum/threadTagList.shtml?threadId=<bean:write name="forumThread" property="threadId"/>',"threadTagList");   
       scrollLoadByElementId('https://cdn.jdon.com/tags/tagcloud',"tagcloud");        
   });      

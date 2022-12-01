@@ -149,6 +149,13 @@
     </rule>
 
     <rule>
+        <from>^/query/tagHotList$</from>
+        <to>/query/tagHotList.shtml</to>
+    </rule>    
+
+    
+
+    <rule>
         <from>^/forum/maxPopThreads$</from>
         <to>/forum/maxPopThreadlist.shtml?dateRange=100000&amp;count=15&amp;start=0</to>
     </rule>
