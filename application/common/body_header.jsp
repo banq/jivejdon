@@ -103,19 +103,7 @@
 						</div> 
 					</div>
 				</li>
-    			<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">热点话题<i class="fa fa-arrow-circle-o-down"></i></a>
-					    <div class="dropdown-menu">
-						    <div class="dropdown-inner">
-							<ul class="list-unstyled">
-								<li><a href="/tags/37546">幽默模因</a></li>		
-								<li><a href="/tags">更多话题</a></li>	
-								<jsp:include page="/query/tagHotList_menu.shtml" flush="true"/>								
-			   					   								
-							</ul>
-						    </div> 
-					    </div>
-			    </li>					
-                					
+				<li><a href="/tags">话题</a></li>                					
 			</ul>
 			<ul class="list-inline navbar-right top-social">
 				<li><a href="javascript:shareto('sina')"><i class="fa fa-weibo"></i></a></li>
