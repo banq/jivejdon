@@ -77,18 +77,23 @@
             </ul>           
           </div>
         </div>
-        <div class="widget wid-post">
-            <div class="content">
-                <div class="wrap-vid">
-                </div>
-            </div>
-        </div>        
         <!---- Start tags ---->
-        <div class="widget wid-post">
-             <div class="info">
-                <jsp:include page="/query/tagHotList.shtml" flush="true"></jsp:include>
-             </div>
-        </div>
+        <div class="widget">
+					    <div class="wid-vid">
+							<ul>
+							  <div id="tagHotList"></div>   
+							    <div class="lazyload" >
+							     <!-- 
+							     <script>
+							  	  load('https://cdn.jdon.com/query/tagHotList', function (xhr) {				
+  	                                  document.getElementById("tagHotList").innerHTML = xhr.responseText;
+			                     });
+							  </script> -->
+							  </div>
+
+							</ul>
+							</div>
+				</div>
 
         <!---- Start Widget ---->
         <div class="widget wid-post">
