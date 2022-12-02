@@ -139,7 +139,15 @@
         <div class="content">
           <div class="post wrap-vid">
               <ul>                
-                <div id="tagHotList"></div>                                                    
+                <div id="tagHotList"></div>       
+                 <div class="lazyload" >
+							     <!-- 
+							     <script>
+							  	  load('https://cdn.jdon.com/query/tagHotList', function (xhr) {				
+  	                                  document.getElementById("tagHotList").innerHTML = xhr.responseText;
+			                     });
+							  </script> -->
+							  </div>                                             
               </ul>
           </div>
         </div>				
@@ -166,7 +174,14 @@
           <div class="post wrap-vid">
               <ul>                  
                   <div id="threadTagList"></div>             
-                     
+                   <div class="lazyload" >
+							     <!-- 
+							     <script>
+							  	  load('/forum/threadTagList.shtml?threadId=<bean:write name="forumThread" property="threadId"/>', function (xhr) {				
+  	                                  document.getElementById("threadTagList").innerHTML = xhr.responseText;
+			                     });
+							     </script> -->
+							   </div>							   
               </ul>
           </div>
         </div>
@@ -195,6 +210,14 @@
           <div class="post wrap-vid">
               <ul>                
                 <div id="tagcloud"></div>
+                 <div class="lazyload" >
+							     <!-- 
+							     <script>
+							  	  load('https://cdn.jdon.com/tags/tagcloud', function (xhr) {				
+  	                                  document.getElementById("tagcloud").innerHTML = xhr.responseText;
+			                     });
+							     </script> -->
+							    </div>
               </ul>
           </div>
         </div>				
@@ -218,7 +241,12 @@
   <%-- include LAB.js --%>
   <%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
+
 <script src="https://cdn.jdon.com/common/login2.js"></script>
+<script src="https://cdn.jdon.com/common/js/jquery.lazyload-any.js"></script>
+<script>       
+    $('.lazyload').lazyload();
+</script>
 <script src="https://cdn.jdon.com/common/messageList9.js"></script>
 <script>        
   $(document).ready(function() {              
@@ -228,9 +256,6 @@
       $('.reblogto').each(function(i, obj) {        
         scrollLoadByElementId('/forum/thread.shtml?threadId='+ obj.id,obj.id); 
        });
-      scrollLoadByElementId('https://cdn.jdon.com/query/tagHotList',"tagHotList");     
-      scrollLoadByElementId('/forum/threadTagList.shtml?threadId=<bean:write name="forumThread" property="threadId"/>',"threadTagList");   
-      scrollLoadByElementId('https://cdn.jdon.com/tags/tagcloud',"tagcloud");        
   });      
 </script>
 

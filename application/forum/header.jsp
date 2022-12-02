@@ -11,6 +11,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 	<meta http-equiv="x-dns-prefetch-control" content="on"/>
     <link rel="prefetch" href="https://static.jdon.com/js/jquery-2.1.1.min.js">   
     <link rel="prefetch" href="https://static.jdon.com/js/bootstrap.min.js">
+    <link rel="prefetch" href="https://cdn.jdon.com/common/js/jquery.lazyload-any.js">      
     <link href="https://ajax.googleapis.com" rel="preconnect"/>
     <link href="https://apis.google.com" rel="preconnect"/>
     <link href="https://googleads.g.doubleclick.net" rel="preconnect"/>
