@@ -29,28 +29,7 @@
 </MultiPagesREST:pager>
           </div>
 </ul>   
-            <div class="box">
-                <div class="linkblock">
-                    <div class="row">
-                        <div class="col-sm-12">
-                        </div>
-                    </div>
-                </div>
-            </div>
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
-    <logic:equal name="i" value="3">
-        <div class="box">
-            <div class="linkblock" itemscope itemtype="http://schema.org/BlogPosting">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="box">
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </logic:equal>    
 <%@ include file="threadListCore.jsp" %>
 </logic:iterate>
   <div id="nextPageContent"></div>
