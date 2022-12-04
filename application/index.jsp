@@ -25,7 +25,7 @@
   <meta http-equiv="" content="IE=edge,chrome=1"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>解道jdon - 传道解惑的架构师博客</title>
-  <meta name="Description" content="领域驱动设计DDD,微服务,<jsp:include page="/query/tagHotList2.shtml" flush="true"></jsp:include>"/>
+  <meta name="Description" content="领域驱动设计DDD、微服务、设计模式、软件架构、编程设计"/>
   <meta name="Keywords" content="微服务,SOA,DDD,体系结构,架构,Gof设计模式,Java框架,大数据,云原生,面向对象,函数编程,SpringBoot,EDA,java,JavaEE,CQRS,eventsourcing" />
   <meta name="domain_verify" content="pmrgi33nmfuw4ir2ejvgi33ofzrw63jcfqrgo5ljmqrduirtmu2wczlcgvrtomzyha2dcylfhfqtmntemmydezbvme4gmmrugarcyitunfwwku3bozsseorrgq2dmmjrgu4teobrgqzh2">
   <meta http-equiv="refresh" content="3600">
