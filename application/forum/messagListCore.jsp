@@ -139,15 +139,16 @@
         <div class="content">
           <div class="post wrap-vid">
               <ul>                
-                <div id="tagHotList"></div>       
-                 <div class="lazyload" >
-							     <!-- 
-							     <script>
-							  	  load('https://cdn.jdon.com/query/tagHotList', function (xhr) {				
-  	                                  document.getElementById("tagHotList").innerHTML = xhr.responseText;
-			                     });
-							  </script> -->
-							  </div>                                             
+              <logic:notEmpty name="forumThread" property="tags">          
+                  <div class="widget_tag_cloud">
+                   <div class="tagcloud">
+                     <logic:iterate id="threadTag" name="forumThread" property="tags"> 
+                        <a href="<%=request.getContextPath()%>/tags/<bean:write name="threadTag" property="tagID"/>" class="tag-cloud-link"><bean:write name="threadTag" property="title"/></a>
+                           &nbsp;&nbsp; 
+                     </logic:iterate>
+                   </div>
+                  </div>
+                </logic:notEmpty>             
               </ul>
           </div>
         </div>				
