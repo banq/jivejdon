@@ -32,8 +32,7 @@
                       </logic:notEqual>     
 			       <%
              com.jdon.jivejdon.domain.model.ForumThread thread = (com.jdon.jivejdon.domain.model.ForumThread)pageContext.getAttribute("forumThread");
-             int bodylength = thread.getRootMessage().getMessageVO().getBody().length();
-             java.text.DecimalFormat df  = new java.text.DecimalFormat("#.000");
+             int bodylength = thread.getRootMessage().getMessageVO().getBody().length();             
              int bl = bodylength/1024;
              if (bl >0){
              %>
