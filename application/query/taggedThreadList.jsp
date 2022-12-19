@@ -43,28 +43,20 @@ pageContext.setAttribute("title", titleStr);
 		  
       </center>
 
-      <div class="box"> 
-       <div class="linkblock">
-         <div class="row">
-          <div class="col-sm-12">
-          </div>
-         </div>
-       </div>
-      </div>
+    
+<div class="tres"  style="float: right;"> 共有<b>
+            <bean:write name="threadListForm" property="allCount"/>
+            </b>贴
+            <MultiPagesREST:pager actionFormName="threadListForm" page="/tags"  paramId="tagID" paramName="tagID" >
+              <MultiPagesREST:prev name=" 上一页 " />
+              <MultiPagesREST:index displayCount="3" />
+              <MultiPagesREST:next  name=" 下一页 " />
+            </MultiPagesREST:pager>
+</div>
+
 
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
-    <logic:equal name="i" value="3">
-        <div class="box">
-            <div class="linkblock" itemscope itemtype="http://schema.org/BlogPosting">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="box">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </logic:equal>
+
 <%@ include file="threadListCore.jsp" %>
 </logic:iterate>
 
