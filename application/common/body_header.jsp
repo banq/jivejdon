@@ -87,9 +87,9 @@
 					<div class="dropdown-menu">
 						<div class="dropdown-inner">
 							<ul class="list-unstyled">
-								<li><a href="/tags/38726">复杂性系统</a></li>								
-								<li><a href="/tags/249">系统架构</a></li>													
-								<li><a href="/DistributedSystems.html">分布式设计</a></li>
+								<li><a href="/tags/38726">系统思维</a></li>								
+								<li><a href="/tags/16355">形式逻辑</a></li>													
+								<li><a href="/DistributedSystems.html">分布式系统</a></li>
 								<li><a href="/tags/11205">CAP定理</a></li>
 								<li><a href="/transaction.html">分布式事务</a></li>									
 								<li><a href="/event.html">事件溯源</a></li>
