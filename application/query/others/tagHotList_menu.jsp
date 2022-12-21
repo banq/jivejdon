@@ -10,6 +10,6 @@ String coutlength = (String)pageContext.getAttribute("count");
 %>
 <logic:notEmpty name="tagsHotListForm" property="list">
 <logic:iterate indexId="i"   id="ThreadTag" name="tagsHotListForm" property="list" length='<%=coutlength%>' >
-  <li><a href='<%=request.getContextPath() %>/tags/<bean:write name="ThreadTag" property="tagID"/>'><bean:write name="ThreadTag" property="title"/></a></li>
+  <li><a href='<%=request.getContextPath() %>/tag-<bean:write name="ThreadTag" property="tagID"/>/'><bean:write name="ThreadTag" property="title"/></a></li>
 </logic:iterate>
 </logic:notEmpty>                

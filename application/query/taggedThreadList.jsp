@@ -36,8 +36,8 @@ pageContext.setAttribute("title", titleStr);
       
         
        &nbsp;&nbsp;       
-		<a href="/tags/<bean:write name="tagID"/>/rss"><i class="fa fa-feed"></i></a>
-    <link rel="alternate" type="application/rss+xml" title="Feed订阅" href="/tags/<bean:write name="tagID"/>/rss"/>
+		<a href="/tag-<bean:write name="tagID"/>/rss"><i class="fa fa-feed"></i></a>
+    <link rel="alternate" type="application/rss+xml" title="Feed订阅" href="/tag-<bean:write name="tagID"/>/rss"/>
     <%--&nbsp;&nbsp;--%>
         <%--<a href="<%=request.getContextPath()%>/tags">更多分类</a>--%>
 		  

@@ -47,18 +47,18 @@
 						<div class="dropdown-inner">
 							<ul class="list-unstyled">
 				                <li><a href="/design.htm">架构设计</a></li>   
-								<li><a href="/tags/10740">战略建模</a></li>   		
-								<li><a href="/tags/20044">领域语言UL</a></li>						  	
+								<li><a href="/tag-10740/">战略建模</a></li>   		
+								<li><a href="/tag-20044/">领域语言UL</a></li>						  	
 								<li><a href="/colorUML.html">商业分析</a></li>														
 							    <li><a href="/workflow-bpm.html">工作流BPM</a></li>
-								<li><a href="/tags/26738">规则引擎</a></li>																
-								<li><a href="/tags/619">架构师观点</a></li>
-								<li><a href="/tags/40250">clean架构</a></li>
+								<li><a href="/tag-26738/">规则引擎</a></li>																
+								<li><a href="/tag-619/">架构师观点</a></li>
+								<li><a href="/tag-40250/">clean架构</a></li>
 								<li><a href="/microservice.html">微服务</a></li>
-								<li><a href="/tags/33426">API设计</a></li>			
-								<li><a href="/tags/49580">数据工程</a></li>
-								<li><a href="/tags/57874">团队拓扑</a></li>
-								<li><a href="/tags/38587">产品经理</a></li>								
+								<li><a href="/tag-33426/">API设计</a></li>			
+								<li><a href="/tag-49580/">数据工程</a></li>
+								<li><a href="/tag-57874/">团队拓扑</a></li>
+								<li><a href="/tag-38587/">产品经理</a></li>								
 							</ul>
 						</div>
 					</div>
@@ -67,18 +67,18 @@
 					<div class="dropdown-menu">
 						<div class="dropdown-inner">
 							<ul class="list-unstyled">
-								<li><a href="/tags/395">Java入门</a></li>
+								<li><a href="/tag-395/">Java入门</a></li>
 								<li><a href="/idea/rust.html">Rust语言</a></li>																											
-								<li><a href="/tags/222">编程语言比较</a></li>
-								<li><a href="/tags/38692">编程工具比较</a></li>								
+								<li><a href="/tag-222/">编程语言比较</a></li>
+								<li><a href="/tag-38692/">编程工具比较</a></li>								
 								<li><a href="/oo.html">面向对象</a></li>				                
 								<li><a href="/functional.html">函数式编程</a></li>
 								<li><a href="/springboot.html">SpringBoot</a></li>
 								<li><a href="/jdonframework/">Jdon框架</a></li>
-                                <li><a href="/tags/31545">前端编程</a></li>										
+                                <li><a href="/tag-31545/">前端编程</a></li>										
 								<li><a href="/reactive.html">Reactive编程</a></li>								
-								<li><a href="/tags/29134">DevOps</a></li>
-								<li><a href="/tags/23644">机器学习</a></li>																	
+								<li><a href="/tag-29134/">DevOps</a></li>
+								<li><a href="/tag-23644/">机器学习</a></li>																	
 							</ul>
 						</div> 
 					</div>
@@ -87,18 +87,18 @@
 					<div class="dropdown-menu">
 						<div class="dropdown-inner">
 							<ul class="list-unstyled">
-								<li><a href="/tags/38726">系统思维</a></li>								
-								<li><a href="/tags/16355">形式逻辑</a></li>													
+								<li><a href="/tag-38726/">系统思维</a></li>								
+								<li><a href="/tag-16355/">形式逻辑</a></li>													
 								<li><a href="/DistributedSystems.html">分布式系统</a></li>
-								<li><a href="/tags/11205">CAP定理</a></li>
+								<li><a href="/tag-11205/">CAP定理</a></li>
 								<li><a href="/transaction.html">分布式事务</a></li>									
 								<li><a href="/event.html">事件溯源</a></li>
 								<li><a href="/cqrs.html">CQRS</a></li>
 								<li><a href="/soa/serverless.html">无服务器</a></li>								
 								<li><a href="/bigdata.html">大数据</a></li>								
-								<li><a href="/tags/58439">Web3</a></li>								
-								<li><a href="/tags/17472">敏捷方法</a></li>								
-								<li><a href="/tags/58254">认知谬论</a></li>
+								<li><a href="/tag-58439/">Web3</a></li>								
+								<li><a href="/tag-17472/">敏捷方法</a></li>								
+								<li><a href="/tag-58254/">认知谬论</a></li>
 							</ul>
 						</div> 
 					</div>

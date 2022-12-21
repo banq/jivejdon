@@ -147,7 +147,7 @@ public class RSSGenServlet extends HttpServlet {
 				ThreadTag tag = getTag(request, tagId);
 				if (tag != null) {
 					feed.setTitle(tag.getTitle());
-					feed.setLink(url + "/tags/" + tag.getTagID());
+					feed.setLink(url + "/tag-" + tag.getTagID() + "/");
 					feed.setDescription(tag.getTitle());
 				}
 			} else {
@@ -373,7 +373,7 @@ public class RSSGenServlet extends HttpServlet {
 					ThreadTag tag = (ThreadTag) o;
 					SyndCategory cat = new SyndCategoryImpl();
 
-					cat.setTaxonomyUri(url + "/tags/" + tag.getTagID());
+					cat.setTaxonomyUri(url + "/tag-" + tag.getTagID() + "/");
 					cat.setName(tag.getTitle());
 					cats.add(cat);
 				}

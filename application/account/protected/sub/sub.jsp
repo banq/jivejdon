@@ -50,7 +50,7 @@ pageContext.setAttribute("role", role);
 		 </div> 
 		 <div class="content"> 	 
              <div class="b_content_title2">
-                <div id=content><a href="<%=request.getContextPath()%>/tags/<bean:write name="subscriptionForm" property="subscribeId"/>" 
+                <div id=content><a href="<%=request.getContextPath()%>/tag-<bean:write name="subscriptionForm" property="subscribeId"/>/" 
               target="_blank"><bean:write name="subscriptionForm" property="subscribed.name"/></a>
                 </div>
            </div>

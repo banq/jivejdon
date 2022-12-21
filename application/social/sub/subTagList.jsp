@@ -7,7 +7,7 @@
 
 <logic:iterate id="subscription" name="subscriptionListForm" property="list"  length="5">
 	<bean:define id="subscribed" name="subscription" property="subscribed"/>	
-	<a href="<%=request.getContextPath()%>/tags/<bean:write name="subscribed" property="subscribeId"/>" 
+	<a href="<%=request.getContextPath()%>/tag-<bean:write name="subscribed" property="subscribeId"/>/" 
               target="_blank" class="post-tag">		
 		<bean:write name="subscribed" property="name" />
 	</a>

@@ -143,7 +143,7 @@
                   <div class="widget_tag_cloud">
                    <div class="tagcloud">
                      <logic:iterate id="threadTag" name="forumThread" property="tags"> 
-                        <a href="<%=request.getContextPath()%>/tags/<bean:write name="threadTag" property="tagID"/>" class="tag-cloud-link"><bean:write name="threadTag" property="title"/></a>
+                        <a href="<%=request.getContextPath()%>/tag-<bean:write name="threadTag" property="tagID"/>/" class="tag-cloud-link"><bean:write name="threadTag" property="title"/></a>
                            &nbsp;&nbsp; 
                      </logic:iterate>
                    </div>

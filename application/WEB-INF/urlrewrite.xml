@@ -209,6 +209,18 @@
         <to>/query/tagsList.shtml?count=15&amp;start=$1</to>
     </rule>
     <rule>
+        <from>^/tag-([0-9]+)/$</from>
+        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=15</to>
+    </rule>
+   <rule>
+        <from>^/tag-([0-9]+)/([0-9]+)$</from>
+        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=15&amp;start=$2</to>
+    </rule>
+    <rule>
+        <from>^/tag-([a-zA-Z0-9]+)/rss$</from>
+        <to>/RSServlet?tagId=$1</to>
+    </rule>    
+    <rule>
         <from>^/tags/([0-9]+)$</from>
         <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=15</to>
     </rule>
@@ -292,10 +304,7 @@
         <from>^/rss$</from>
         <to>/RSServlet</to>
     </rule>
-    <rule>
-        <from>^/tags/([a-zA-Z0-9]+)/rss$</from>
-        <to>/RSServlet?tagId=$1</to>
-    </rule>
+
 
 
     <!--
