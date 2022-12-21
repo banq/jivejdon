@@ -42,7 +42,7 @@ public class ReblogLinkAction extends Action {
             Collection<Property> props = new ArrayList<>();
             String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
             for (Long threadId : tos) {
-                props.add(new Property("", domainUrl + "/" + Long.toString(threadId)));
+                props.add(new Property("", domainUrl + "/" + Long.toString(threadId) + ".html"));
             }
             df.setPropertys(props);
         } else

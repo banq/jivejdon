@@ -6,7 +6,7 @@
     domainUrl = domainUrl + request.getContextPath();
 String url = "";
 if (request.getParameter("threadId") != null){
-  url = domainUrl + "/" + request.getParameter("threadId");
+  url = domainUrl + "/" + request.getParameter("threadId") + ".html";
 }else if (request.getParameter("fullurl") != null){
   url = request.getParameter("fullurl");
 }

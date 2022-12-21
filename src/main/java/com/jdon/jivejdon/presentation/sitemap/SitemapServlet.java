@@ -211,7 +211,7 @@ public class SitemapServlet extends HttpServlet {
 			PageIterator pi = getThreadPI(request, startInt);
 			while (pi.hasNext()) {
 				Long threadId = (Long) pi.next();
-				urlsets.add(new UrlSet(threadUrl + threadId, "1"));
+				urlsets.add(new UrlSet(threadUrl + threadId + ".html", "1"));
 			}
 			return urlsets;
 

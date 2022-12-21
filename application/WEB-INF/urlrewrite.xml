@@ -176,6 +176,10 @@
     </rule>
     <!--  thread -->
     <rule>
+        <from>^/([0-9]+)\.html$</from>
+        <to>/forum/messageList.shtml?thread=$1</to>
+    </rule>
+    <rule>
         <from>^/([0-9]+)$</from>
         <to>/forum/messageList.shtml?thread=$1</to>
     </rule>
