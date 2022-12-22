@@ -68,7 +68,7 @@
 <logic:iterate indexId="i"   id="forum" name="forumListForm" property="list" >
         <tr id='<bean:write name="forum" property="forumId" />_<bean:write name="forum" property="modifiedDate" />'>
             <td>
-                 <a href="<%=request.getContextPath()%>/forum/<bean:write name="forum" property="forumId" />">                
+                 <a href="<%=request.getContextPath()%>/forum/<bean:write name="forum" property="forumId" />/">                
                        <b><span class="threadTitle"><bean:write name="forum" property="name" /></span></b>
                  </a>
                  <% 
