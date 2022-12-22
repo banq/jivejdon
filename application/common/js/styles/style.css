@@ -1194,4 +1194,5 @@ button, html input[type=button], input[type=reset], input[type=submit] {
 }
 .displaycode{
   white-space: pre-wrap;
+  word-wrap: break-word;
 }
