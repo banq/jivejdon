@@ -57,7 +57,7 @@
 	</logic:equal>
 <br><br><br><br>
 
-<a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>"
+<a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"
    target="_blank">
     <b><span
             class="tooltip html_tooltip_content_<bean:write name="forumThread" property="threadId"/>">

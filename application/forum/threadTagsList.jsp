@@ -14,7 +14,7 @@
               <div class="widget">		                                  
                  <logic:iterate id="forumThread1" name="tagID0" length="4">
                  <div class="info">
-                     <a href="<%=request.getContextPath()%>/<bean:write name="forumThread1" property="threadId"/>" target="_blank">
+                     <a href="<%=request.getContextPath()%>/<bean:write name="forumThread1" property="threadId"/>.html" target="_blank">
                                     <bean:write name="forumThread1" property="name" /></a>
                  </div> 
                  </logic:iterate>
@@ -35,7 +35,7 @@
               <div class="widget">		                                  
                  <logic:iterate id="forumThread1" name="tagID1" length="4">
                  <div class="info">
-                     <a href="<%=request.getContextPath()%>/<bean:write name="forumThread1" property="threadId"/>" target="_blank">
+                     <a href="<%=request.getContextPath()%>/<bean:write name="forumThread1" property="threadId"/>.html" target="_blank">
                                     <bean:write name="forumThread1" property="name" /></a>
                  </div> 
                  </logic:iterate>
@@ -56,7 +56,7 @@
               <div class="widget">		                                  
                  <logic:iterate id="forumThread1" name="tagID2" length="4">
                  <div class="info">
-                     <a href="<%=request.getContextPath()%>/<bean:write name="forumThread1" property="threadId"/>" target="_blank">
+                     <a href="<%=request.getContextPath()%>/<bean:write name="forumThread1" property="threadId"/>.html" target="_blank">
                                     <bean:write name="forumThread1" property="name" /></a>
                  </div> 
                  </logic:iterate>
@@ -77,7 +77,7 @@
               <div class="widget">		                                  
                  <logic:iterate id="forumThread1" name="tagID3" length="4">
                  <div class="info">
-                     <a href="<%=request.getContextPath()%>/<bean:write name="forumThread1" property="threadId"/>" target="_blank">
+                     <a href="<%=request.getContextPath()%>/<bean:write name="forumThread1" property="threadId"/>.html" target="_blank">
                                     <bean:write name="forumThread1" property="name" /></a>
                  </div> 
                  </logic:iterate>

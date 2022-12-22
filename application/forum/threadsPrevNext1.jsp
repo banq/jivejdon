@@ -28,9 +28,9 @@ if (iter.hasPrevious()){
   %>
    <logic:notEmpty name="forumThreadPrev" >
      <script>
-        prevThreadUrl = '<%=request.getContextPath()%>/<bean:write name="forumThreadPrev" property="threadId"/>';
+        prevThreadUrl = '<%=request.getContextPath()%>/<bean:write name="forumThreadPrev" property="threadId"/>.html';
      </script>
-     <a href="<%=request.getContextPath()%>/<bean:write name="forumThreadPrev" property="threadId"/>" 
+     <a href="<%=request.getContextPath()%>/<bean:write name="forumThreadPrev" property="threadId"/>.html" 
       title="<bean:write name="forumThreadPrev" property="name"/>" class="forum">
     <html:img page="/images/prev.gif" width="10" height="10" hspace="2" altKey="forumThreadPrev.name" />
      <span class="smallgray">上一主题</span>
@@ -71,10 +71,10 @@ if (iter.hasNext()){
   %>
     <logic:notEmpty name="forumThreadNext" >
      <script>
-        nextThreadUrl = '<%=request.getContextPath()%>/<bean:write name="forumThreadNext" property="threadId"/>';
+        nextThreadUrl = '<%=request.getContextPath()%>/<bean:write name="forumThreadNext" property="threadId"/>.html';
      </script>
     
-     <a href="<%=request.getContextPath()%>/<bean:write name="forumThreadNext" property="threadId"/>"
+     <a href="<%=request.getContextPath()%>/<bean:write name="forumThreadNext" property="threadId"/>.html"
       title="<bean:write name="forumThreadNext" property="name"/>" class="forum">
     <html:img page="/images/next.gif" width="10" height="10" hspace="2" altKey="forumThreadNext.name"/>
      <span class="smallgray">下一主题</span>

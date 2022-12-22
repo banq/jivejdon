@@ -27,7 +27,7 @@ if (iter3.hasPrevious()){
    iter3.next();
   %>
    <logic:notEmpty name="forumThreadPrev" >
-     <a href="<%=request.getContextPath()%>/<bean:write name="forumThreadPrev" property="threadId"/>"
+     <a href="<%=request.getContextPath()%>/<bean:write name="forumThreadPrev" property="threadId"/>.html"
       title="<bean:write name="forumThreadPrev" property="name"/>" class="forum">
         <bean:write name="forumThreadPrev" property="shortname"/>
         </a>
@@ -46,7 +46,7 @@ if (iter3.hasNext()){
    request.setAttribute("forumThreadNext", forumThreadNext);
   %>
   <logic:notEmpty name="forumThreadNext" >
-     <a href="<%=request.getContextPath()%>/<bean:write name="forumThreadNext" property="threadId"/>"
+     <a href="<%=request.getContextPath()%>/<bean:write name="forumThreadNext" property="threadId"/>.html"
       title="<bean:write name="forumThreadNext" property="name"/>" class="forum">
         <bean:write name="forumThreadNext" property="shortname"/>
     </a>       
