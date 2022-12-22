@@ -1192,3 +1192,6 @@ button, html input[type=button], input[type=reset], input[type=submit] {
   color: white;
   border: 0;
 }
+.displaycode{
+  white-space: pre-wrap;
+}
