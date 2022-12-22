@@ -387,7 +387,7 @@ public class RSSGenServlet extends HttpServlet {
 
 	private String getItemLink(String url, ForumMessage message, HttpServletRequest request) {
 
-		String relativeLink = "/" + message.getForumThread().getThreadId().toString();
+		String relativeLink = "/" + message.getForumThread().getThreadId().toString() + ".html";
 		return url + relativeLink;
 
 	}
