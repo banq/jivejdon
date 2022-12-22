@@ -75,7 +75,10 @@
         <from>^/forum/$</from>
         <to>/forum/forumList.shtml</to>
     </rule>
-
+    <rule>
+        <from>^/forum/([0-9]+)/$</from>
+        <to>/forum/threadList.shtml?forum=$1</to>
+    </rule>
     <rule>
         <from>^/forum/([0-9]+)$</from>
         <to>/forum/threadList.shtml?forum=$1</to>
