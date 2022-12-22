@@ -56,7 +56,7 @@
 			<td>
 				
        <div class="b_content_title2">
-         <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>" target="_blank"><bean:write name="forumMessage" property="messageVO.subject"/>
+         <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank"><bean:write name="forumMessage" property="messageVO.subject"/>
         </a>
         <span>(<bean:write name="forumMessage" property="creationDate" />)</span>
       

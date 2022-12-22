@@ -120,7 +120,7 @@
                                 &nbsp;&nbsp;<bean:write name="account"
                                                         property="username"/>
                             </b>
-                            <a href='<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId" />'
+                            <a href='<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId" />.html'
                                target="_blank">
                                 <bean:write name="forumThread" property="name"/></a>
                             <div id="xsnazzy">

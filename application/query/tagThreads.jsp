@@ -20,7 +20,7 @@
     %>
 
     <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='<%=coutlength%>' >
-        <li class="fa fa-circle-o"> <a  class="smallgray" href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>"
+        <li class="fa fa-circle-o"> <a  class="smallgray" href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"
                title="<bean:write name="forumThread" property="name" />" target="_blank">
                 <bean:write name="forumThread" property="name" /></a>
         </li>

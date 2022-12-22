@@ -54,7 +54,7 @@ String coutlength = (String)pageContext.getAttribute("count");
                 <td width="100%" style='word-WRAP: break-word'>
                 <img src="/images/dot.gif" width="18" height="18" border="0" align="absmiddle" /> 
                              
-                  <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>" 
+                  <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" 
              title="<bean:write name="forumThread" property="name" />" target="_blank">
              <bean:write name="forumThread" property="name" /></a>
                          

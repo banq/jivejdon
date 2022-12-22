@@ -43,7 +43,7 @@
 
                 <tr bgcolor="#FFFFEC">
                     <td>
-                        <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>"
+                        <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"
                            target="_blank"><b><bean:write name="forumThread" property="name"/></b>
                         </a>
                     </td>

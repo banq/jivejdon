@@ -42,7 +42,7 @@ response.setDateHeader("Expires", 0);
 			</div>
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
-         <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>"><bean:write name="forumThread" property="name"/></a></h3>
+         <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"><bean:write name="forumThread" property="name"/></a></h3>
       
          <div class="info">			 
               <span><i class="fa fa-calendar"></i>
@@ -73,7 +73,7 @@ response.setDateHeader("Expires", 0);
             </div>
         
           <div class="wrap-vid">
-              <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>" target="_blank" class="smallgray">详细</a></p>
+              <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank" class="smallgray">详细</a></p>
       </div>
   
              </div>

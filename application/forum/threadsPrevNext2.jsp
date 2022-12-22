@@ -39,7 +39,7 @@ if (iter2.hasPrevious()){
     <logic:notEmpty name="forumThread">
 	<td nowrap>
         &nbsp;
-        <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>">
+        <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html">
                      <html:img page="/images/back_to.gif" width="12" height="12" alt="Go back to the topic " border="0"/><span class="smallgray">返回本主题</span>
         </a>
     </td>
