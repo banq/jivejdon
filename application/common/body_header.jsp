@@ -103,7 +103,7 @@
 						</div> 
 					</div>
 				</li>
-				<li><a href="/tags/">#</a></li>                					
+				<li><a href="/tags/">#(.*)</a></li>                					
 			</ul>
 			<ul class="list-inline navbar-right top-social">
 				<li><a href="javascript:shareto('sina')"><i class="fa fa-weibo"></i></a></li>
