@@ -66,7 +66,7 @@ public class ReblogLinkAction extends Action {
         String threadId = null;
         try {
             URI uri = new URI(url);
-            threadId = uri.getPath().replaceAll("/", "");            
+            threadId = uri.getPath().replaceAll("/", "").replaceAll(".html", "");            
         } catch (URISyntaxException e) {
             Debug.logError("Url error:" + url, module);
         }
