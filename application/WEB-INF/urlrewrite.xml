@@ -299,7 +299,7 @@
     </rule>
 	<rule>
         <from>^/query/popularList$</from>
-        <to>/query/popularlist.shtml?count=20&amp;dateRange=180</to>
+        <to>/query/popularlist.shtml?count=8&amp;dateRange=180</to>
     </rule>
 	<rule>
         <from>^/query/threadDigList$</from>
