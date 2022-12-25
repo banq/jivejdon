@@ -4,7 +4,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-
+<div  style="width: 330px">
 <logic:notEmpty name="tagID0">    
    <div class="box">
       <div class="linkblock">	
@@ -90,4 +90,4 @@
 </logic:notEmpty>
 
 
-
+</div>

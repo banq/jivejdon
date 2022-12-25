@@ -9,8 +9,15 @@ response.setHeader("Pragma", "No-cache");
 response.setHeader("Cache-Control", "no-store");
 response.setDateHeader("Expires", 0);
 %>
+<div style="width: 330px">
 <a href="<%=request.getContextPath()%>/threads"><b>新文</b></a>
-<div class="important" >
+<div class="box">
+      <div class="linkblock">	
+         <div class="row">        
+          <div class="col-md-12">
+          <div class="wrap-vid">
+              <div class="widget">		 
+
 <bean:parameter id="count" name="count" value="8"/>
 <%
 String coutlength = (String)pageContext.getAttribute("count");
@@ -21,3 +28,8 @@ String coutlength = (String)pageContext.getAttribute("count");
       </div>
 </logic:iterate>
 </div>
+<div>
+<div>
+</div>
+<div>
+<div>

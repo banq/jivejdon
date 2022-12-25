@@ -4,27 +4,28 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<style>
-.important {
-  margin: 1px 20px 1px 1px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  box-shadow: 0 15px 10px -15px rgba(0, 0, 0, .4);
-  text-overflow: ellipsis;  
-  white-space: normal !important;
-  overflow: hidden;
-}
-</style>
+
+<div style="width: 330px">
 <a href="<%=request.getContextPath()%>/forum/threadDigSortedList"><b>点赞</b></a>
-<div class="important" >
+<div class="box">
+      <div class="linkblock">	
+         <div class="row">        
+          <div class="col-md-12">
+          <div class="wrap-vid">
+              <div class="widget">		 
+
 <bean:parameter id="count" name="count" value="8"/>
 <%
 String coutlength = (String)pageContext.getAttribute("count");
 %>        
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='<%=coutlength%>' >
-	<div class="info"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank" class="smallgray">
+	<div class="info"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank">
              <bean:write name="forumThread" property="name" /></a>
       </div>
 </logic:iterate>
 </div>
-
+<div>
+<div>
+</div>
+<div>
+<div>

@@ -171,25 +171,7 @@
 					</div>
 				</div>
 				<!---- Start Widget digList---->
-				<div class="widget">
-					    <div class="wid-vid">
-							<ul>
-							  <div id="digList"></div>   
-							    <div class="lazyload" >
-							     <!-- 
-							     <script>
-							  	  load('https://cdn.jdon.com/query/threadDigList', function (xhr) {				
-  	                                  document.getElementById("digList").innerHTML = xhr.responseText;
-			                     });
-							  </script> -->
-							  </div>
-
-							</ul>
-							</div>
-				</div>
-
-				<!-- Start Widget newList -->
-				<div class="widget">
+				<%-- <div class="widget">
 					    <div class="wid-vid">
 							<ul>
                               <div id="newList"></div>   
@@ -201,6 +183,24 @@
 			                     });
 							  </script> -->
 							  </div>							
+							 
+							</ul>
+							</div>
+				</div> --%>
+
+				<!-- Start Widget newList -->
+				<div class="widget">
+					    <div class="wid-vid">
+							<ul>
+							 <div id="digList" class="digList2"></div>   
+							    <div class="lazyload" >
+							     <!-- 
+							     <script>
+							  	  load('https://cdn.jdon.com/query/threadDigList', function (xhr) {				
+  	                                  document.getElementById("digList").innerHTML = xhr.responseText;
+			                     });
+							  </script> -->
+							  </div>
 							</ul>
 							</div>
 				</div>
@@ -221,7 +221,6 @@
           							</script>								
 						</div>
 				</div>
-
 				
 				<!-- Start Widget newList -->
 				<div class="widget">
@@ -253,6 +252,17 @@
 <script src="https://cdn.jdon.com/common/js/jquery.lazyload-any.js"></script>
 <script>       
     $('.lazyload').lazyload();
+</script>
+<script type="text/javascript"> 
+$(function() { 
+    var elm = $('.digList2'); 
+    var startPos = $(elm).offset().top; 
+    $.event.add(window, "scroll", function() { 
+        var p = $(window).scrollTop(); 
+        $(elm).css('position',((p) > startPos) ? 'fixed' : 'static'); 
+        $(elm).css('top',((p) > startPos) ? '20px' : ''); 
+    }); 
+}); 
 </script>
 </body>
 </html>

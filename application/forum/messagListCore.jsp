@@ -174,7 +174,7 @@
         <div class="content">
           <div class="post wrap-vid">
               <ul>                  
-                  <div id="threadTagList"></div>             
+                  <div id="threadTagList" class="threadTagList2"></div>             
                    <div class="lazyload" >
 							     <!-- 
 							     <script>
@@ -259,6 +259,16 @@
        });
   });      
 </script>
-
+<script type="text/javascript"> 
+$(function() { 
+    var elm = $('.threadTagList2'); 
+    var startPos = $(elm).offset().top; 
+    $.event.add(window, "scroll", function() { 
+        var p = $(window).scrollTop(); 
+        $(elm).css('position',((p) > startPos) ? 'fixed' : 'static'); 
+        $(elm).css('top',((p) > startPos) ? '20px' : ''); 
+    }); 
+}); 
+</script>
   </body>
   </html>
