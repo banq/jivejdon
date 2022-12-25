@@ -303,7 +303,7 @@
     </rule>
 	<rule>
         <from>^/query/threadDigList$</from>
-        <to>/query/threadDigList.shtml?count=20</to>
+        <to>/query/threadDigList.shtml?count=8</to>
     </rule>    
 	<rule>
         <from>^/query/urlListAction$</from>
