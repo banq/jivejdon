@@ -28,7 +28,7 @@ response.setDateHeader("Expires", 0);
                     <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="thumbnail" style="width: 100%" loading="lazy"/>
                 </logic:notEmpty>
 
-                <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">                  
+                <%-- <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">                  
                   <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">                  
                       <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=thumbthreadIdS.substring(thumbthreadIdS.length() - 1)%>.jpg" border='0' class="thumbnail" style="width: 100%" loading="lazy"/>
                   </logic:notEmpty>
@@ -36,7 +36,7 @@ response.setDateHeader("Expires", 0);
                   <logic:empty name="forumMessage" property="messageUrlVO.thumbnailUrl">
                       <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=thumbthreadIdS.substring(thumbthreadIdS.length() - 1)%>.jpg" border='0' class="thumbnail" style="width: 100%" loading="lazy"/>
                    </logic:empty>
-                 </logic:empty>
+                 </logic:empty> --%>
                   
             </div>
 			</div>
@@ -63,7 +63,6 @@ response.setDateHeader("Expires", 0);
 		         	 <%
              com.jdon.jivejdon.domain.model.ForumThread thread = (com.jdon.jivejdon.domain.model.ForumThread)pageContext.getAttribute("forumThread");
              int bodylength = thread.getRootMessage().getMessageVO().getBody().length();
-             java.text.DecimalFormat df  = new java.text.DecimalFormat("#.000");
              int bl = bodylength/1024;
              if (bl >0){
              %>

@@ -153,7 +153,7 @@
           </div>
         </div>				
 			</div>
-      <!---- Start Widget digList---->
+      <%-- <!---- Start Widget digList---->
       <div class="widget">
         <div class="wid-vid">
 							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
@@ -168,7 +168,7 @@
      					  	(adsbygoogle = window.adsbygoogle || []).push({});
           		</script>		       
         </div>
-      </div>
+      </div> --%>
       <!-- Start Widget -->
       <div class="widget wid-post">
         <div class="content">
