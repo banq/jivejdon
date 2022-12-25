@@ -4,7 +4,14 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<div  style="width: 330px">
+<style>
+@media (min-width:992px) {
+   .limitWidth{
+     width: 330px;
+   }
+}
+</style>
+<div class="limitWidth">
 <logic:notEmpty name="tagID0">    
    <div class="box">
       <div class="linkblock">	
