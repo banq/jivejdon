@@ -295,7 +295,7 @@
     <!--</rule>-->
 	<rule>
         <from>^/query/threadNewList$</from>
-        <to>/query/threadNewList.shtml?count=20</to>
+        <to>/query/threadNewList.shtml?count=8</to>
     </rule>
 	<rule>
         <from>^/query/popularList$</from>

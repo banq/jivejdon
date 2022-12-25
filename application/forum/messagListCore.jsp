@@ -189,7 +189,7 @@
       </div>
 
       <!-- Start Widget -->
-      <div class="widget">
+      <%-- <div class="widget">
         <div class="wid-vid">
 							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
 							        <!-- 自适应主广告 -->
@@ -203,10 +203,10 @@
      					  	(adsbygoogle = window.adsbygoogle || []).push({});
           		</script>		      
         </div>
-      </div>
+      </div> --%>
 
 	    <!-- Start Widget newList -->
-			<div class="widget">
+			<%-- <div class="widget">
         <div class="content">
           <div class="post wrap-vid">
               <ul>                
@@ -222,7 +222,7 @@
               </ul>
           </div>
         </div>				
-			</div>
+			</div> --%>
 
     </div>
   </div>    
