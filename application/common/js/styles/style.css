@@ -1195,3 +1195,6 @@ button, html input[type=button], input[type=reset], input[type=submit] {
   white-space: pre-wrap;
   word-wrap: break-word;
 }
+ins.adsbygoogle[data-ad-status='unfilled'] {
+  display: none !important;
+}
