@@ -358,6 +358,11 @@ public class ForumMessage extends RootMessage implements Cloneable {
         return hotKeys;
     }
 
+    public boolean hasImage() {
+		String imageUrl = getMessageUrlVO().getImageUrl();
+		return (imageUrl == null) || (imageUrl.trim().length() == 0) ? false : true;
+	}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

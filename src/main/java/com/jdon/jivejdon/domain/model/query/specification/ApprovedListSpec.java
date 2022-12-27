@@ -24,7 +24,11 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	public boolean isApproved(ForumThread thread, Account account, ForumThread threadPrev) {
-		if (thread.getViewCount() > initViewCount || isDigged(thread, 1) || isExcelledDiscuss(thread) || isGreaterThanPrev(thread, threadPrev) || hasImage(thread)) {
+		if (thread.getViewCount() > initViewCount || 
+		        isDigged(thread, 1) || 
+				isExcelledDiscuss(thread) || 
+				isGreaterThanPrev(thread, threadPrev) || 
+				thread.getRootMessage().hasImage()) {
 			return true;
 		} else
 			return false;
@@ -86,11 +90,6 @@ public class ApprovedListSpec extends ThreadListSpec {
 			return true;
 		else
 			return false;
-	}
-
-	protected boolean hasImage(ForumThread thread) {
-		String imageUrl = thread.getRootMessage().getMessageUrlVO().getImageUrl();
-		return (imageUrl == null) || (imageUrl.trim().length() == 0) ? false : true;
 	}
 
 	public int getNeedCount() {
