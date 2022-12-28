@@ -10,7 +10,19 @@
                    property="list">
      <logic:equal name="i" value="2">
      <span  class="list-group-item">
-     <h3 class="list-group-item-heading"></h3>
+     <h3 class="list-group-item-heading">
+     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
+        <!-- 自适应主广告 -->
+		<ins class="adsbygoogle"
+     		style="display:block"
+     		data-ad-client="ca-pub-7573657117119544"
+     		data-ad-slot="5184711902"
+     		data-ad-format="auto"
+     		data-full-width-responsive="true"></ins>
+		<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+     </h3>
      </span>
      </logic:equal>
   
