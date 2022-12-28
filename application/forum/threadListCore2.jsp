@@ -5,11 +5,11 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ page session="false" %>
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
-   <div class="box"> 
-  <div class="linkblock" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="row">
-        <div class="col-sm-12">
-       <div class="box">
+  <div class="box"> 
+    <div class="linkblock">
+     <div class="row">
+      <div class="col-sm-12">
+        <div class="box">
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
          <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"><bean:write name="forumThread" property="name"/></a></h3>

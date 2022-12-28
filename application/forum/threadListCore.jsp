@@ -8,10 +8,13 @@
 
  <logic:iterate indexId="i" id="forumThread" name="threadListForm"
                    property="list">
-     <logic:equal name="i" value="2">
-     <span  class="list-group-item">
-     <h3 class="list-group-item-heading">
-     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
+     <logic:equal name="i" value="3">
+        <div class="box">
+            <div class="linkblock">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="box">
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
         <!-- 自适应主广告 -->
 		<ins class="adsbygoogle"
      		style="display:block"
@@ -21,10 +24,13 @@
      		data-full-width-responsive="true"></ins>
 		<script>
      (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
-     </h3>
-     </span>
-     </logic:equal>
+          </script>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </logic:equal>
   
     <%@ include file="threadListCore2.jsp" %>
     
