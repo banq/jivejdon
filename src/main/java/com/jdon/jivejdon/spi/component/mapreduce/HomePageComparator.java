@@ -44,7 +44,7 @@ public class HomePageComparator implements Comparator<ForumThread> {
 		long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);		
 		long diffHours = TimeUnit.HOURS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 		if (diffDays >= 7)
-		   p = p / (diffDays + 10);
+		   p = p / (diffDays * 100);
 		else if (diffDays >= 3)
 			p = p / diffDays;
 		else{

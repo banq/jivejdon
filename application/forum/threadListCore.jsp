@@ -8,7 +8,7 @@
 
  <logic:iterate indexId="i" id="forumThread" name="threadListForm"
                    property="list">
-     <logic:equal name="i" value="3">
+     <logic:equal name="i" value="1">
         <div class="box">
             <div class="linkblock">
                 <div class="row">
