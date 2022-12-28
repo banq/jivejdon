@@ -178,21 +178,21 @@
 			class="com.jdon.jivejdon.domain.model.subscription.messsage.ThreadNotifyMessage">
 			<constructor value=" 您关注的主题贴有新回复  " />
 			<constructor
-                    value="https://www.jdon.com/threadId.html"/>
+                    value="https://jdon.com/threadId.html"/>
 			<constructor value="admin" />
 		</component>
 		
 		<component name="forumNotifyMessage"
 			class="com.jdon.jivejdon.domain.model.subscription.messsage.ForumNotifyMessage">
 			<constructor value="您关注的论坛有新贴 " />
-            <constructor value="https://www.jdon.com/threadId.html"/>
+            <constructor value="https://jdon.com/threadId.html"/>
 			<constructor value="admin" />
 		</component>
 		
 		<component name="accountNotifyMessage"
 			class="com.jdon.jivejdon.domain.model.subscription.messsage.AccountNotifyMessage">
 			<constructor value="您关注的作者有新主题贴   " />
-            <constructor value="https://www.jdon.com/threadId.html"/>
+            <constructor value="https://jdon.com/threadId.html"/>
 			<constructor value="admin" />
 		</component>
 		
