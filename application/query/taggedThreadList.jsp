@@ -58,7 +58,7 @@ pageContext.setAttribute("title", titleStr);
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
     <logic:equal name="i" value="3">
         <div class="box">
-            <div class="linkblock" itemscope itemtype="http://schema.org/BlogPosting">
+            <div class="linkblock">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="box">
