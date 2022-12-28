@@ -46,9 +46,9 @@ public class HomePageComparator implements Comparator<ForumThread> {
 		if (diffDays >= 7)
 		   p = p / (diffDays * 100);
 		else if (diffDays >= 3)
-			p = p / diffDays;
+			p = p / (diffDays * 10);
 		else{
-			if (diffHours>0)
+			if (diffHours > 0)
 			   p = p / diffHours;
     		if (thread.getRootMessage().hasImage())
 	    	   p = p * 2;
