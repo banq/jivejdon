@@ -40,7 +40,7 @@ public class HomePageComparator implements Comparator<ForumThread> {
 
 	private double algorithm(ForumThread thread, ForumThread threadPrev) {
 		double p = thread.getViewCount();
-		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getState().getModifiedDate2());
+		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
 		long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);		
 		if (diffDays >= 7)
 		   p = p / (diffDays * 100);
