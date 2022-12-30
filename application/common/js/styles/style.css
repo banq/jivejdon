@@ -1068,6 +1068,7 @@ footer .footer-3 ul li a:hover {
   font-family: "Microsoft YaHei", 微软雅黑, "冬青黑体简体中文 w3";
   font-size: 17px;
   line-height: 33px;
+  letter-spacing: 0.3px;
   color: #555555;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
