@@ -68,6 +68,7 @@
 							<ul class="list-unstyled">
 				            	<li><a href="/microservice.html">微服务介绍</a></li>                                   
                                 <li><a href="/tag-25407/">微服务专辑</a></li>
+								<li><a href="/tag-9899/">模块化设计</a></li>
                             	<li><a href="/tag-619/">架构师观点</a></li>
 								<li><a href="/tag-40250/">clean架构</a></li>
                                 <li><a href="/springboot.html">SpringBoot</a></li>
