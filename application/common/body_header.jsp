@@ -40,6 +40,7 @@
         </div>
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav navbar-inverse">
+			   <li><a href="/design.htm">架构设计</a></li>	
 			   <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">领域驱动 <i class="fa fa-arrow-circle-o-down"></i></a>
 					<div class="dropdown-menu">
 						<div class="dropdown-inner">
