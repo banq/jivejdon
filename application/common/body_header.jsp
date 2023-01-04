@@ -40,12 +40,12 @@
         </div>
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav navbar-inverse">
-			   <li><a href="/design.htm">架构设计</a></li>	
-               <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">领域驱动 <i class="fa fa-arrow-circle-o-down"></i></a>
+			   <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">领域驱动 <i class="fa fa-arrow-circle-o-down"></i></a>
 					<div class="dropdown-menu">
 						<div class="dropdown-inner">
 							<ul class="list-unstyled">
-				                <li><a href="/ddd.html">领域驱动设计</a></li>
+				                <li><a href="/ddd.html">DDD介绍</a></li>
+                                <li><a href="/tag-272/">DDD专辑</a></li>
 								<li><a href="/tag-10740/">战略建模</a></li>   		
 								<li><a href="/tag-20044/">领域语言UL</a></li>						  	
 								<li><a href="/colorUML.html">商业分析</a></li>														
@@ -65,7 +65,8 @@
 					<div class="dropdown-menu">
 						<div class="dropdown-inner">
 							<ul class="list-unstyled">
-				            	<li><a href="/microservice.html">微服务架构</a></li>                                
+				            	<li><a href="/microservice.html">微服务介绍</a></li>                                   
+                                <li><a href="/tag-25407/">微服务专辑</a></li>
                             	<li><a href="/tag-619/">架构师观点</a></li>
 								<li><a href="/tag-40250/">clean架构</a></li>
                                 <li><a href="/springboot.html">SpringBoot</a></li>
@@ -86,6 +87,7 @@
 						<div class="dropdown-inner">
 							<ul class="list-unstyled">								
                                 <li><a href="/designpatterns/">GoF设计模式</a></li>	
+                                <li><a href="/tag-324/">模式专辑</a></li>	                                
                                 <li><a href="/oo.html">面向对象</a></li>				                
 								<li><a href="/functional.html">函数式编程</a></li>							
 								<li><a href="/tag-222/">编程语言比较</a></li>
