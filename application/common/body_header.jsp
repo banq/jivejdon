@@ -68,17 +68,14 @@
 							<ul class="list-unstyled">
 				            	<li><a href="/microservice.html">微服务介绍</a></li>                                   
                                 <li><a href="/tag-25407/">微服务专辑</a></li>
-								<li><a href="/tag-9899/">模块化设计</a></li>
-								<li><a href="/soa.html">SOA</a></li>
+                                <li><a href="/tag-9899/">模块化设计</a></li>
+                                <li><a href="/soa.html">SOA</a></li>
                             	<li><a href="/tag-619/">架构师观点</a></li>
 								<li><a href="/tag-40250/">clean架构</a></li>
                                 <li><a href="/springboot.html">SpringBoot</a></li>
-								<li><a href="/DistributedSystems.html">分布式系统</a></li>
-								<li><a href="/tag-11205/">CAP定理</a></li>
-								<li><a href="/transaction.html">分布式事务</a></li>									
+								<li><a href="/tag-20358/">Saga事务</a></li>									
 								<li><a href="/event.html">事件溯源</a></li>
-								<li><a href="/cqrs.html">CQRS</a></li>
-								<li><a href="/soa/serverless.html">无服务器</a></li>	
+								<li><a href="/tag-34196/">Kubernetes</a></li>	
                                 <li><a href="/tag-29134/">DevOps</a></li>
                                 <li><a href="/tag-17472/">敏捷方法</a></li>								
 							</ul>
