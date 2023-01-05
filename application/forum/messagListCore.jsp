@@ -139,7 +139,7 @@
         <div class="content">
           <div class="post wrap-vid">
               <ul>                
-              <logic:notEmpty name="forumThread" property="tags">          
+                <logic:notEmpty name="forumThread" property="tags">          
                   <div class="widget_tag_cloud">
                    <div class="tagcloud">
                      <logic:iterate id="threadTag" name="forumThread" property="tags"> 
@@ -148,32 +148,29 @@
                      </logic:iterate>
                    </div>
                   </div>
-                </logic:notEmpty>             
+                </logic:notEmpty> 
+                <logic:empty name="forumThread" property="tags">    
+                  <div id="tagHotList"></div>   
+							      <div class="lazyload" >
+							     <!-- 
+							     <script>
+							  	  load('https://cdn.jdon.com/query/tagHotList', function (xhr) {				
+  	                                  document.getElementById("tagHotList").innerHTML = xhr.responseText;
+			                     });
+							      </script> -->
+							     </div>
+                </logic:empty>          
               </ul>
           </div>
         </div>				
 			</div>
-      <%-- <!---- Start Widget digList---->
-      <div class="widget">
-        <div class="wid-vid">
-							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
-							        <!-- 自适应主广告 -->
-									<ins class="adsbygoogle"
-     									style="display:block"
-     									data-ad-client="ca-pub-7573657117119544"
-     									data-ad-slot="5184711902"
-     									data-ad-format="auto"
-     									data-full-width-responsive="true"></ins>
-							<script>
-     					  	(adsbygoogle = window.adsbygoogle || []).push({});
-          		</script>		       
-        </div>
-      </div> --%>
+     
       <!-- Start Widget -->
       <div class="widget wid-post">
         <div class="content">
           <div class="post wrap-vid">
-              <ul>                  
+              <ul>          
+                 <logic:notEmpty name="forumThread" property="tags">          
                   <div id="threadTagList" class="threadTagList2"></div>             
                    <div class="lazyload" >
 							     <!-- 
@@ -182,7 +179,19 @@
   	                                  document.getElementById("threadTagList").innerHTML = xhr.responseText;
 			                     });
 							     </script> -->
-							   </div>							   
+							   </div>	
+                 </logic:notEmpty>		
+                 <logic:empty name="forumThread" property="tags">    
+                  <div id="digList" class="digList2"></div>   
+							     <div class="lazyload" >
+							     <!-- 
+							     <script>
+							  	  load('https://cdn.jdon.com/query/threadDigList', function (xhr) {				
+  	                                  document.getElementById("digList").innerHTML = xhr.responseText;
+			                     });
+							      </script> -->
+							     </div>
+                </logic:empty>   				   
               </ul>
           </div>
         </div>

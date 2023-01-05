@@ -154,40 +154,6 @@
 							</div>
 				</div>
 
-				<!---- Start Widget digList---->
-				<%-- <div class="widget">
-					<div class="wid-vid">
-							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
-							        <!-- 自适应主广告 -->
-									<ins class="adsbygoogle"
-     									style="display:block"
-     									data-ad-client="ca-pub-7573657117119544"
-     									data-ad-slot="5184711902"
-     									data-ad-format="auto"
-     									data-full-width-responsive="true"></ins>
-									<script>
-     							(adsbygoogle = window.adsbygoogle || []).push({});
-          							</script>						
-					</div>
-				</div> --%>
-				<!---- Start Widget digList---->
-				<%-- <div class="widget">
-					    <div class="wid-vid">
-							<ul>
-                              <div id="newList"></div>   
-							    <div class="lazyload" >
-							     <!-- 
-							     <script>
-							  	  load('/query/threadNewList.shtml?count=15', function (xhr) {				
-  	                                  document.getElementById("newList").innerHTML = xhr.responseText;
-			                     });
-							  </script> -->
-							  </div>							
-							 
-							</ul>
-							</div>
-				</div> --%>
-
 				<!-- Start Widget newList -->
 				<div class="widget">
 					    <div class="wid-vid">
@@ -204,41 +170,6 @@
 							</ul>
 							</div>
 				</div>
-					
-				<!-- Start Widget urlList -->
-				<%-- <div class="widget">
-					    <div class="wid-vid">
-							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
-							        <!-- 自适应主广告 -->
-									<ins class="adsbygoogle"
-     									style="display:block"
-     									data-ad-client="ca-pub-7573657117119544"
-     									data-ad-slot="5184711902"
-     									data-ad-format="auto"
-     									data-full-width-responsive="true"></ins>
-									<script>
-     							(adsbygoogle = window.adsbygoogle || []).push({});
-          							</script>								
-						</div>
-				</div>
-				
-				<!-- Start Widget newList -->
-				<div class="widget">
-					    <div class="wid-vid">
-							<ul>
-							    <div id="tagcloud"></div>   
-								 <div class="lazyload" >
-							     <!-- 
-							     <script>
-							  	  load('https://cdn.jdon.com/tags/tagcloud', function (xhr) {				
-  	                                  document.getElementById("tagcloud").innerHTML = xhr.responseText;
-			                     });
-							     </script> -->
-							    </div>
-							</ul>
-						</div>
-				</div> --%>
-					
 			
 			</div>
 		</div>
