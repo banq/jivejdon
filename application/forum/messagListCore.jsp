@@ -171,7 +171,7 @@
           <div class="post wrap-vid">
               <ul>          
                  <logic:notEmpty name="forumThread" property="tags">          
-                  <div id="threadTagList" class="threadTagList2"></div>             
+                  <div id="threadTagList" class="scrolldiv"></div>             
                    <div class="lazyload" >
 							     <!-- 
 							     <script>
@@ -182,7 +182,7 @@
 							   </div>	
                  </logic:notEmpty>		
                  <logic:empty name="forumThread" property="tags">    
-                  <div id="digList" class="digList2"></div>   
+                  <div id="digList" class="scrolldiv"></div>   
 							     <div class="lazyload" >
 							     <!-- 
 							     <script>
@@ -234,7 +234,7 @@
 </script>
 <script type="text/javascript"> 
 $(function() { 
-    var elm = $('.threadTagList2'); 
+    var elm = $('.scrolldiv'); 
     var startPos = $(elm).offset().top; 
     if (window.matchMedia('(min-width: 992px)').matches) { 
     $.event.add(window, "scroll", function() { 

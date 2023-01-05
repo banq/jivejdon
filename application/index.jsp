@@ -158,7 +158,7 @@
 				<div class="widget">
 					    <div class="wid-vid">
 							<ul>
-							 <div id="digList" class="digList2"></div>   
+							 <div id="digList" class="scrolldiv"></div>   
 							    <div class="lazyload" >
 							     <!-- 
 							     <script>
@@ -186,7 +186,7 @@
 </script>
 <script type="text/javascript"> 
 $(function() { 
-    var elm = $('.digList2'); 
+    var elm = $('.scrolldiv'); 
     var startPos = $(elm).offset().top; 
     if (window.matchMedia('(min-width: 992px)').matches) { 
     $.event.add(window, "scroll", function() { 
