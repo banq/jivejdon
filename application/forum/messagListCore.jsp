@@ -197,42 +197,6 @@
         </div>
       </div>
 
-      <!-- Start Widget -->
-      <%-- <div class="widget">
-        <div class="wid-vid">
-							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
-							        <!-- 自适应主广告 -->
-									<ins class="adsbygoogle"
-     									style="display:block"
-     									data-ad-client="ca-pub-7573657117119544"
-     									data-ad-slot="5184711902"
-     									data-ad-format="auto"
-     									data-full-width-responsive="true"></ins>
-							<script>
-     					  	(adsbygoogle = window.adsbygoogle || []).push({});
-          		</script>		      
-        </div>
-      </div> --%>
-
-	    <!-- Start Widget newList -->
-			<%-- <div class="widget">
-        <div class="content">
-          <div class="post wrap-vid">
-              <ul>                
-                <div id="tagcloud"></div>
-                 <div class="lazyload" >
-							     <!-- 
-							     <script>
-							  	  load('https://cdn.jdon.com/tags/tagcloud', function (xhr) {				
-  	                                  document.getElementById("tagcloud").innerHTML = xhr.responseText;
-			                     });
-							     </script> -->
-							    </div>
-              </ul>
-          </div>
-        </div>				
-			</div> --%>
-
     </div>
   </div>    
 </div>
