@@ -8,11 +8,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>  
-  <meta http-equiv="x-dns-prefetch-control" content="on"/>
-  <link rel="prefetch" href="https://static.jdon.com/js/jquery-2.1.1.min.js">   
-  <link rel="prefetch" href="https://static.jdon.com/js/bootstrap.min.js">
-  <link rel="prefetch" href="https://cdn.jdon.com/common/js/jquery.lazyload-any.js">     
   <meta charset="utf-8"/>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
   <meta http-equiv="" content="IE=edge,chrome=1"/>
@@ -27,7 +22,17 @@
   <link rel="canonical" href="https://www.jdon.com/" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 256 256%22><text y=%22203%22 font-size=%22224%22>☯</text></svg>"/>   
   <link rel="stylesheet" href="https://cdn.jdon.com/js/bootstrap.min.css"  type="text/css">
-  <link rel="stylesheet" href="https://cdn.jdon.com/common/js/styles/style.css" type="text/css">        
+  <link rel="stylesheet" href="https://cdn.jdon.com/common/js/styles/style.css" type="text/css">    
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jdon.com/js/html5shiv.min.js"></script>
+        <script src="https://cdn.jdon.com/js/respond.min.js"></script>
+    <![endif]-->    
+  <link rel="prefetch" href="https://static.jdon.com/js/jquery-2.1.1.min.js">   
+  <link rel="prefetch" href="https://static.jdon.com/js/bootstrap.min.js">
+  <link rel="prefetch" href="https://cdn.jdon.com/common/js/jquery.lazyload-any.js">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>           
 </head>
 <body>
 <%@ include file="./common/body_header.jsp" %>

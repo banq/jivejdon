@@ -7,11 +7,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <!DOCTYPE html>
 <html>
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
-	<meta http-equiv="x-dns-prefetch-control" content="on"/>
-    <link rel="prefetch" href="https://static.jdon.com/js/jquery-2.1.1.min.js">   
-    <link rel="prefetch" href="https://static.jdon.com/js/bootstrap.min.js">
-    <link rel="prefetch" href="https://cdn.jdon.com/common/js/jquery.lazyload-any.js">      
     <meta charset="utf-8"/>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta http-equiv="" content="IE=edge,chrome=1"/>
@@ -38,6 +33,10 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         <script src="https://cdn.jdon.com/js/html5shiv.min.js"></script>
         <script src="https://cdn.jdon.com/js/respond.min.js"></script>
     <![endif]-->
+    <link rel="prefetch" href="https://static.jdon.com/js/jquery-2.1.1.min.js">   
+    <link rel="prefetch" href="https://static.jdon.com/js/bootstrap.min.js">
+    <link rel="prefetch" href="https://cdn.jdon.com/common/js/jquery.lazyload-any.js">      
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
