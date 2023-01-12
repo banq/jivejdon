@@ -103,7 +103,22 @@
 						</div> 
 					</div>
 				</li>
-				<li><a href="/tags/">#(.*)</a></li>                					
+				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">模因梗 <i class="fa fa-arrow-circle-o-down"></i></a>
+					<div class="dropdown-menu">
+						<div class="dropdown-inner">
+							<ul class="list-unstyled">								
+                                <li><a href="/tag-37546/">幽默梗</a></li>									
+                                <li><a href="/tag-297/">程序员职场</a></li>
+                                <li><a href="/tag-21915/">职业规划</a></li>
+                                <li><a href="/tag-20618/">面试技巧</a></li>
+                                <li><a href="/tag-5676/">道德经</a></li>
+                                <li><a href="/tag-58254/">认知偏差</a></li>
+								<li><a href="/tag-395/">Java入门</a></li>
+                                <li><a href="/tags/">更多话题</a></li>
+							</ul>
+						</div> 
+					</div>
+				</li>                					
 			</ul>
 			<ul class="list-inline navbar-right top-social">
 				<li><a href="javascript:shareto('sina')"><i class="fa fa-weibo"></i></a></li>
