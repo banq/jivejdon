@@ -34,9 +34,8 @@ import java.util.stream.Collectors;
  */
 public class ThreadDigList {
 
-	public final static int TIME_WINDOWS = 1000;
+	public final static int TIME_WINDOWS = 10000;
 
-	private final static int TAGSLIST_SIZE = 10;
 	private final SortedSet<Long> sortedAll;
 	private final SortedSet<Long> sortedWindows;
 	private final ForumMessageQueryService forumMessageQueryService;
