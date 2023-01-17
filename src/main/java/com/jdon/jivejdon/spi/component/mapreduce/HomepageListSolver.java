@@ -24,7 +24,6 @@ public class HomepageListSolver {
 	private final ThreadApprovedNewList threadApprovedNewList;
 	private final ForumMessageQueryService forumMessageQueryService;
 	private Collection<Long> list;
-	private long lastFetchTime;
 
 	public HomepageListSolver(ThreadApprovedNewList threadApprovedNewList,
 							  ForumMessageQueryService forumMessageQueryService) {
@@ -35,17 +34,8 @@ public class HomepageListSolver {
 	public Collection<Long> getList(int maxSize) {
 		if (list == null) {
 			list = fetchList(maxSize);
-			lastFetchTime = System.currentTimeMillis();
 		}
-
-		long diff = TimeUnit.HOURS.convert(Math.abs(System.currentTimeMillis() - lastFetchTime), TimeUnit.MILLISECONDS);
-		if (diff > 1) {
-			list = fetchList(maxSize);
-			lastFetchTime = System.currentTimeMillis();
-		}
-
 		return list;
-
 	}
 
 	public Collection<Long> fetchList(int maxSize) {
@@ -53,10 +43,10 @@ public class HomepageListSolver {
 		for (int i = 0; i < 120; i = i + 15) {
 			list.addAll(threadApprovedNewList.getApprovedThreads(i));
 		}
-		list = list.parallelStream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
+		list = list.stream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
 				.getThread(threadId), threadId -> threadId, (e1, e2) -> e1,
 				() -> new TreeMap<ForumThread, Long>(new HomePageComparator()))).values();
-		return list.parallelStream().skip(0).limit(maxSize).collect(Collectors.toList());
+		return list.stream().skip(0).limit(maxSize).collect(Collectors.toList());
 
 	}
 
