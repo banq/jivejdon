@@ -25,8 +25,8 @@ public class ThreadDigComparator implements Comparator<Long> {
 		double thread1Count = thread1.getRootMessage().getDigCount()>0?thread1.getViewCount() *  (thread1.getRootMessage().getDigCount() + 1):thread1.getViewCount();
 		double thread2Count = thread2.getRootMessage().getDigCount()>0?thread2.getViewCount() *  (thread2.getRootMessage().getDigCount() + 1):thread2.getViewCount();
 
-		long diff1 = TimeUnit.DAYS.convert(Math.abs(System.currentTimeMillis() - thread1.getState().getModifiedDate2()), TimeUnit.MILLISECONDS);
-		long diff2 = TimeUnit.DAYS.convert(Math.abs(System.currentTimeMillis() - thread2.getState().getModifiedDate2()), TimeUnit.MILLISECONDS);
+		long diff1 = TimeUnit.DAYS.convert(Math.abs(System.currentTimeMillis() - thread1.getCreationDate2()), TimeUnit.MILLISECONDS);
+		long diff2 = TimeUnit.DAYS.convert(Math.abs(System.currentTimeMillis() - thread2.getCreationDate2()), TimeUnit.MILLISECONDS);
 
 		thread1Count = thread1Count / (diff1 + 1);
 		thread2Count = thread2Count/ (diff2 + 1);

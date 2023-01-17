@@ -34,7 +34,7 @@ public class ThreadTagList {
 	}
 
 	public void addForumThread(ForumThread forumThread) {
-		Date mDate = new Date(forumThread.getState().getModifiedDate2());
+		Date mDate = new Date(forumThread.getCreationDate2());
 		Date nowDate = new Date();
 		long daysBetween = (nowDate.getTime() - mDate.getTime() + 1000000) / (60 * 60 * 24 * 1000);
 		if (daysBetween < TIME_WINDOWS) {
