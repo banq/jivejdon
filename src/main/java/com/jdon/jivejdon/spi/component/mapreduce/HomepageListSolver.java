@@ -32,13 +32,12 @@ public class HomepageListSolver {
 	}
 
 	public Collection<Long> getList(int maxSize) {
-		if (list == null) {
-			list = new ArrayList<>();
-			for (int i = 0; i < 75; i = i + 15) {
-				list.addAll(threadApprovedNewList.getApprovedThreads(i));
-			}
+		
+		Collection<Long> list = new ArrayList<>();
+		for (int i = 0; i < 75; i = i + 15) {
+			list.addAll(threadApprovedNewList.getApprovedThreads(i));
 		}
-
+		
 		list = list.stream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
 				.getThread(threadId), threadId -> threadId, (e1, e2) -> e1,
 				() -> new TreeMap<ForumThread, Long>(new HomePageComparator()))).values();
