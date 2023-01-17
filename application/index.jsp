@@ -79,7 +79,7 @@
 	<div class="lazyload" >
           <!--
 		  <script>
-		  load('/query/threadApprovedNewList3.shtml?offset=1&count=10', function (xhr) {
+		  load('/query/threadApprovedNewList3.shtml?offset=1&count=50', function (xhr) {
                document.getElementById("approvedItem1").innerHTML = xhr.responseText;
             }); 
 		  </script>
@@ -89,7 +89,7 @@
 	<div class="lazyload" >
           <!--
 		  <script>
-	      load('/query/threadApprovedNewList4.shtml?count=5&wSize=720', function (xhr) {
+	      load('/query/threadApprovedNewList4.shtml?count=50&wSize=720', function (xhr) {
                document.getElementById("approvedItem3").innerHTML = xhr.responseText;
             }); 
 		  </script>
