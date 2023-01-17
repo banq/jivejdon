@@ -33,6 +33,7 @@ public class HomepageListSolver {
 
 	public Collection<Long> getList(int maxSize) {
 		if (list == null) {
+			list = new ArrayList<>();
 			for (int i = 0; i < 75; i = i + 15) {
 				list.addAll(threadApprovedNewList.getApprovedThreads(i));
 			}
