@@ -33,35 +33,18 @@ public class HomepageListSolver {
 
 	public Collection<Long> getList(int maxSize) {
 		if (list == null) {
-			list = fetchList(maxSize);
+			for (int i = 0; i < 120; i = i + 15) {
+				list.addAll(threadApprovedNewList.getApprovedThreads(i));
+			}
 		}
-		return list;
-	}
 
-	public Collection<Long> fetchList(int maxSize) {
-		Collection<Long> list = new ArrayList<>();
-		for (int i = 0; i < 120; i = i + 15) {
-			list.addAll(threadApprovedNewList.getApprovedThreads(i));
-		}
 		list = list.stream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
 				.getThread(threadId), threadId -> threadId, (e1, e2) -> e1,
 				() -> new TreeMap<ForumThread, Long>(new HomePageComparator()))).values();
 		return list.stream().skip(0).limit(maxSize).collect(Collectors.toList());
-
 	}
 
-	private Collection<Long> fetchNewThreadList(){
-		PageIterator pageIterator = forumMessageQueryService.getThreads(0, 15, new ThreadListSpecForMod());
-		Collection<Long> list = new ArrayList<>();
-		int i = 0;
-		while (pageIterator.hasNext()) {
-			list.add((Long) pageIterator.next());
-			i++;
-			if (i > 5)
-				break;
-		}
-		return list;
-	}
+	
 
 //		for (Long threadId : list) {
 //			ForumThread thread = forumMessageQueryService.getThread(threadId);
