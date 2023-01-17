@@ -45,7 +45,7 @@ public class ThreadApprovedHomeListAction extends ModelListAction {
 			return new PageIterator();
 
 //		Collection<Long> list = getThreadApprovedNewList().getApprovedThreads(start);
-		Collection<Long> list = getHomepageListSolver().getList();
+		Collection<Long> list = getHomepageListSolver().getList(count);
 		if (list != null)
 			return new PageIterator(list.size(), list.toArray(new Long[0]));
 		else
