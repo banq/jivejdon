@@ -31,17 +31,17 @@ public class HomepageListSolver {
 		this.forumMessageQueryService = forumMessageQueryService;
 	}
 
-	public Collection<Long> getList(int maxSize) {
-		
-		Collection<Long> list = new ArrayList<>();
-		for (int i = 0; i < 75; i = i + 15) {
-			list.addAll(threadApprovedNewList.getApprovedThreads(i));
-		}
-		
-		list = list.stream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
+	public Collection<Long> getList(int start, int count) {
+		if (start == 0 || list  == null){
+		    list = new ArrayList<>();
+		    for (int i = 0; i < 75; i = i + 15) {
+			   list.addAll(threadApprovedNewList.getApprovedThreads(i));
+		    }
+			list = list.stream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
 				.getThread(threadId), threadId -> threadId, (e1, e2) -> e1,
 				() -> new TreeMap<ForumThread, Long>(new HomePageComparator()))).values();
-		return list.stream().skip(0).limit(maxSize).collect(Collectors.toList());
+	    }   
+		return list.stream().skip(start).limit(count).collect(Collectors.toList());
 	}
 
 	

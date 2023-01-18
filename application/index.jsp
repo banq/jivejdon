@@ -79,18 +79,58 @@
 	<div class="lazyload" >
           <!--
 		  <script>
-		  load('/query/threadApprovedNewList3.shtml?offset=1&count=50', function (xhr) {
+		  load('/query/threadApprovedNewList3.shtml?offset=1&start=0&count=10', function (xhr) {
                document.getElementById("approvedItem1").innerHTML = xhr.responseText;
             }); 
 		  </script>
           -->
     </div>  
-    <div id="approvedItem3"><br><br><br><br><br><br></div>     	  
+	<div id="approvedItem2"><br><br><br><br><br><br></div>          
+	<div class="lazyload" >
+          <!--
+		  <script>
+		  load('/query/threadApprovedNewList3.shtml?start=10&count=10', function (xhr) {
+               document.getElementById("approvedItem2").innerHTML = xhr.responseText;
+            }); 
+		  </script>
+          -->
+    </div>  
+	<div id="approvedItem3"><br><br><br><br><br><br></div>          
+	<div class="lazyload" >
+          <!--
+		  <script>
+		  load('/query/threadApprovedNewList3.shtml?start=20&count=10', function (xhr) {
+               document.getElementById("approvedItem3").innerHTML = xhr.responseText;
+            }); 
+		  </script>
+          -->
+    </div>  
+	<div id="approvedItem4"><br><br><br><br><br><br></div>          
+	<div class="lazyload" >
+          <!--
+		  <script>
+		  load('/query/threadApprovedNewList3.shtml?start=30&count=10', function (xhr) {
+               document.getElementById("approvedItem4").innerHTML = xhr.responseText;
+            }); 
+		  </script>
+          -->
+    </div>  
+	<div id="approvedItem5"><br><br><br><br><br><br></div>          
+	<div class="lazyload" >
+          <!--
+		  <script>
+		  load('/query/threadApprovedNewList3.shtml?start=40&count=10', function (xhr) {
+               document.getElementById("approvedItem5").innerHTML = xhr.responseText;
+            }); 
+		  </script>
+          -->
+    </div>  
+    <div id="approvedItem6"><br><br><br><br><br><br></div>     	  
 	<div class="lazyload" >
           <!--
 		  <script>
 	      load('/query/threadApprovedNewList4.shtml?count=50&wSize=720', function (xhr) {
-               document.getElementById("approvedItem3").innerHTML = xhr.responseText;
+               document.getElementById("approvedItem6").innerHTML = xhr.responseText;
             }); 
 		  </script>
           -->
