@@ -3,13 +3,11 @@
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@ page session="false" %>
 
-<div class="list-group">
-
- <logic:iterate indexId="i" id="forumThread" name="threadListForm"
-                   property="list">
-    <logic:notEmpty name="noheader">               
-     <logic:equal name="i" value="1">
+<logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
+<logic:notEmpty name="noheader">        
+<logic:equal name="i" value="1">
         <div class="box">
             <div class="linkblock">
                 <div class="row">
@@ -31,13 +29,7 @@
                 </div>
             </div>
         </div>
-    </logic:equal>
-    </logic:notEmpty>
-    <%@ include file="threadListCore2.jsp" %>
-    
- </logic:iterate>
-
-
-</div>
-	
-    
+</logic:equal>
+</logic:notEmpty>
+<%@ include file="threadListCore.jsp" %>
+</logic:iterate>

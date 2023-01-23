@@ -53,7 +53,7 @@ pageContext.setAttribute("title", titleStr);
   <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">精华</a></li>
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" rel="nofollow">搜索</a></li>
   
-	               <div class="tres" style="float: right;">
+	<div class="tres" style="float: right;">
         <logic:empty name="forum" property="forumId">
           <MultiPagesREST:pager actionFormName="threadListForm" page="/forum/threadDigSortedList" >
             <MultiPagesREST:prev name=" 上一页 " />
@@ -66,36 +66,28 @@ pageContext.setAttribute("title", titleStr);
         <bean:write name="threadListForm" property="allCount"/>
         </b>贴
        
-      </div>
+  </div>
 	</ul>          
 </logic:notEqual>                        
-  <%@ include file="threadListCore.jsp" %>
-<logic:notEqual name="noheader" value="on">       
-  <div id="nextPageContent"></div>  
+  
+<%@ include file="threadListCore.jsp" %>
+
+<logic:notEqual name="noheader" value="on">   
+
+<div id="nextPageContent"></div>  
       
-	  <div class="tres" style="float: right;">有<b>
-                    <bean:write name="threadListForm" property="allCount"/>
-                    </b>贴
-                    <logic:empty name="forum" property="forumId">
-                      <MultiPagesREST:pager actionFormName="threadListForm" page="/forum/threadDigSortedList" >
-                        <MultiPagesREST:prev name=" 上一页 " />
-                        <MultiPagesREST:index displayCount="3" />
-                        <MultiPagesREST:next  name=" 下一页 " />
-                      </MultiPagesREST:pager>
-                    </logic:empty>
-               
-                  </div>
+
 				</div>
-            </div>	
+      </div>	
 	</div>
 </div>
 
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
-  
+
+
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
 <bean:define id="pageallCount" name="threadListForm" property="allCount" />
-<%--
 <%  
     int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
     int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
@@ -129,7 +121,7 @@ function scrollLoader(url){
 }
 scrollLoader('/forum/threadDigSortedList.shtml');   
 </script>   
---%>
+
 </body>
 </html>
 </logic:notEqual>    

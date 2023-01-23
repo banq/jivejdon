@@ -54,50 +54,55 @@ pageContext.setAttribute("title", titleStr);
             </MultiPagesREST:pager>
 </div>
 
+<%@ include file="threadList.jsp" %>
 
-<logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
-    <logic:equal name="i" value="1">
-        <div class="box">
-            <div class="linkblock">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="box">
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
-        <!-- 自适应主广告 -->
-		<ins class="adsbygoogle"
-     		style="display:block"
-     		data-ad-client="ca-pub-7573657117119544"
-     		data-ad-slot="5184711902"
-     		data-ad-format="auto"
-     		data-full-width-responsive="true"></ins>
-		<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>                        
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </logic:equal>
-<%@ include file="threadListCore.jsp" %>
-</logic:iterate>
+<div id="nextPageContent"></div>
 
-  <div id="nextPageContent"></div>
 
-	<div class="tres" > 共有<b>
-            <bean:write name="threadListForm" property="allCount"/>
-            </b>贴
-            <MultiPagesREST:pager actionFormName="threadListForm" page="/tags"  paramId="tagID" paramName="tagID" >
-              <MultiPagesREST:prev name=" 上一页 " />
-              <MultiPagesREST:index displayCount="3" />
-              <MultiPagesREST:next  name=" 下一页 " />
-            </MultiPagesREST:pager>
-          </div>
         </div>
       </div>  
 
   </div>
 </div>  
 	
-<%@ include file="../common/IncludeBottom.jsp" %> 
-  
+<%@ include file="../common/IncludeBottomBody.jsp" %> 
+
+<bean:define id="pagestart" name="threadListForm" property="start" />
+<bean:define id="pagecount" name="threadListForm" property="count" />
+<bean:define id="pageallCount" name="threadListForm" property="allCount" />
+<%  
+    int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
+    int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
+    int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
+    int pageNo = (pageAllcountInt / pageCountInt);
+    if(pageAllcountInt % pageCountInt !=0){ 
+        pageNo = pageNo + 1;
+    }    
+%>
+<script>
+function scrollLoader(url){
+  var start = "<%=pageStartInt+pageCountInt%>";
+  var loading = false;
+  $(window).scroll(function() {
+    var hT = $('#nextPageContent').offset().top,
+       hH = $('#nextPageContent').outerHeight(),
+       wH = $(window).height(),
+       wS = $(this).scrollTop();       
+    if (wS > (hT+hH-wH) && !loading){           
+         loading = true;          
+         if (start <= <%=pageAllcountInt%> ){                  
+           surl = (url.indexOf("?")==-1)?(url+"?"):(url+"&");           
+           load(surl +'start=' + start +'&count=<%=pageCountInt%>&noheader=on', function (xhr) {
+               document.getElementById("nextPageContent").innerHTML = document.getElementById("nextPageContent").innerHTML + xhr.responseText;               
+               start = start/1 + <%=pageCountInt%>;                              
+               loading = false;
+           });          
+         }   
+    }
+   });
+}
+scrollLoader('/query/taggedThreadListNoheader.shtml?tagID=<bean:write name="tagID"/>');   
+</script>   
+
+</body>
+</html>

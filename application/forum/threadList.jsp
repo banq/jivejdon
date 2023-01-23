@@ -76,7 +76,11 @@ pageContext.setAttribute("title", titleStr);
   </div>                                  
 </ul>        
 </logic:notEqual>    
-   <%@ include file="threadListCore.jsp" %>
+   
+   
+<%@ include file="threadListCore.jsp" %>
+
+
 <logic:notEqual name="noheader" value="on">       
   <div id="nextPageContent"></div>
   <ul class="nav nav-tabs">
@@ -108,11 +112,12 @@ pageContext.setAttribute("title", titleStr);
 	</div>
 </div>
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
-  
+
+
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
 <bean:define id="pageallCount" name="threadListForm" property="allCount" />
-<%-- <%  
+<%  
     int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
     int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
     int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
@@ -149,7 +154,8 @@ function scrollLoader(url){
 <logic:empty name="forum" property="name">
   scrollLoader('/forum/threadList.shtml');   
 </logic:empty>
-</script>    --%>
+</script>    
+
 </body>
 </html>
 </logic:notEqual>    

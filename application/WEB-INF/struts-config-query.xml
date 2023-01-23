@@ -76,16 +76,12 @@
             <forward name="tags" path="/query/others/tags.jsp" />
         </action>
 
-        <action path="/query/taggedThreadList" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
-            <forward name="success" path="/query/taggedThreadList2.shtml" />
-        </action>
-
-        <action path="/query/taggedThreadList2" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
-            <forward name="success" path="/query/taggedThread-tags.shtml" />
-        </action>
-
-        <action path="/query/taggedThread-tags" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" name="tagsListForm" scope="request" validate="false">
+        <action path="/query/taggedThreadList" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/taggedThreadList.jsp" />
+        </action>
+
+        <action path="/query/taggedThreadListNoheader" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">   
+            <forward name="success" path="/query/threadList.jsp" />
         </action>
 
         <action path="/query/tagsList" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" name="tagsListForm" scope="request" validate="false">
@@ -145,6 +141,10 @@
         <!-- from next page  reference in homepage   -->
         <action path="/query/approvedListOther" type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedNewListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/approvedThreadListOthers.jsp" />
+        </action>
+
+        <action path="/query/approvedListOtherNoheader" type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedNewListAction" name="threadListForm" scope="request" validate="false">   
+            <forward name="success" path="/query/threadList.jsp" />
         </action>
 
         <action path="/query/approvedMyTags" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" name="tagsListForm" scope="request" validate="false">

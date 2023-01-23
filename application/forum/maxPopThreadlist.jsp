@@ -69,24 +69,16 @@ pageContext.setAttribute("title", titleStr);
       </div>
 	</ul>          
 </logic:notEqual>      
-    <%@ include file="threadListCore.jsp" %>
+
+<%@ include file="threadListCore.jsp" %>
+
 <logic:notEqual name="noheader" value="on">       
-  <div id="nextPageContent"></div>
+
+<div id="nextPageContent"></div>
       
-	    	         <div class="tres" style="float: right;">有<b>
-                    <bean:write name="threadListForm" property="allCount"/>
-                    </b>贴
-                    <logic:empty name="forum" property="forumId">
-                      <MultiPagesREST:pager actionFormName="threadListForm" page="/forum/maxPopThreads" >
-                        <MultiPagesREST:prev name=" 上一页 " />
-                        <MultiPagesREST:index displayCount="3" />
-                        <MultiPagesREST:next  name=" 下一页 " />
-                      </MultiPagesREST:pager>
-                    </logic:empty>
-               
-                  </div>
+	    	         
 				</div>
-            </div>	
+    </div>	
 	</div>
 </div>
 
@@ -95,7 +87,7 @@ pageContext.setAttribute("title", titleStr);
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
 <bean:define id="pageallCount" name="threadListForm" property="allCount" />
-<%-- 
+
 <%  
     int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
     int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
@@ -129,7 +121,7 @@ function scrollLoader(url){
 }
 scrollLoader('/forum/maxPopThreadlist.shtml?dateRange=100000');   
 </script>   
---%>
+
 </body>
 </html>
 </logic:notEqual>    
