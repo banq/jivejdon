@@ -8,7 +8,7 @@
 
  <logic:iterate indexId="i" id="forumThread" name="threadListForm"
                    property="list">
-    <logic:notEmpty name="noheader">               
+    <logic:empty name="noheader">               
      <logic:equal name="i" value="1">
         <div class="box">
             <div class="linkblock">
@@ -32,7 +32,7 @@
             </div>
         </div>
     </logic:equal>
-    </logic:notEmpty>
+    </logic:empty>
     <%@ include file="threadListCore2.jsp" %>
     
  </logic:iterate>
