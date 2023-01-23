@@ -72,7 +72,7 @@
           <div class="content">
               <div class="post wrap-vid">
                  <ul>
-							  <div id="digList"></div>   
+							    <div id="digList" class="scrolldiv"></div>   
 							    <div class="lazyload" >
 							     <!-- 
 							     <script>
@@ -86,40 +86,7 @@
               </div>
           </div>
         </div>
-        <!---- Start Widget ---->
-        <div class="widget">
-              <div class="wid-vid">
-                 <ul>
-                  <div id="newList"></div>   
-							    <div class="lazyload" >
-							     <!-- 
-							     <script>
-							  	  load('/query/threadNewList.shtml?count=15', function (xhr) {				
-  	                                  document.getElementById("newList").innerHTML = xhr.responseText;
-			                     });
-							  </script> -->
-							  </div>							
-							</ul>                  
 
-              </div>
-        </div>
-
-           <div class="widget">
-               <div class="wid-vid">
-							<ul>
-							    <div id="tagcloud"></div>   
-								 <div class="lazyload" >
-							     <!-- 
-							     <script>
-							  	  load('https://cdn.jdon.com/tags/tagcloud', function (xhr) {				
-  	                                  document.getElementById("tagcloud").innerHTML = xhr.responseText;
-			                     });
-							     </script> -->
-							    </div>
-							</ul>
-                   
-               </div>
-           </div>
     
     </div>
   </div>
@@ -166,6 +133,25 @@ function scrollLoader(url){
 }
 scrollLoader('/query/approvedListOtherNoheader.shtml');   
 </script>   
+
+
+<script src="https://cdn.jdon.com/common/js/jquery.lazyload-any.js"></script>
+<script>       
+    $('.lazyload').lazyload();
+</script>
+<script type="text/javascript"> 
+$(function() { 
+    var elm = $('.scrolldiv'); 
+    var startPos = $(elm).offset().top; 
+    if (window.matchMedia('(min-width: 992px)').matches) { 
+    $.event.add(window, "scroll", function() { 
+        var p = $(window).scrollTop(); 
+        $(elm).css('position',((p) > startPos) ? 'fixed' : 'static'); 
+        $(elm).css('top',((p) > startPos) ? '20px' : ''); 
+    }); 
+    };
+}); 
+</script>
 
 </body>
 </html>
