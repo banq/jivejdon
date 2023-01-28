@@ -63,7 +63,7 @@ function scrollLoadByElementId(url, nextPageContent) {
       document.getElementById(nextPageContent).innerHTML == "loading"
     ) {
       loading = true;
-      surl = url.indexOf("?") == -1 ? url + "?" : url + "&";
+      var surl = url.indexOf("?") == -1 ? url + "?" : url + "&";
       load(surl, function (xhr) {
         document.getElementById(nextPageContent).innerHTML = xhr.responseText;
         loading = false;
@@ -100,7 +100,7 @@ function scrollAppendByElementId(
     if (wS > hT + hH - wH && !loading && wS < hT2 + hH2 - wH) {
       if (returnAllCount()) {
         loading = true;
-        surl = url.indexOf("?") == -1 ? url + "?" : url + "&";
+        var surl = url.indexOf("?") == -1 ? url + "?" : url + "&";
         load(surl + returnStart(), function (xhr) {
           document.getElementById(nextPageContent).innerHTML =
             document.getElementById(nextPageContent).innerHTML +
