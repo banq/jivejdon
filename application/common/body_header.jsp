@@ -73,8 +73,7 @@
 								<li><a href="/tag-40250/">clean架构</a></li>
                                 <li><a href="/springboot.html">SpringBoot</a></li>
 								<li><a href="/tag-1093/">分布式事务</a></li>	
-								<li><a href="/tag-17268/">事件溯源</a></li>
-								<li><a href="/tag-30969/">Kafka消息</a></li>
+                                <li><a href="/tag-212/">分布式架构</a></li>								
 								<li><a href="/tag-34196/">Kubernetes</a></li>	
                                 <li><a href="/tag-29134/">DevOps</a></li>
 							</ul>
