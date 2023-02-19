@@ -9,7 +9,7 @@
 
 <bean:define id="title"  value="分类主题" />
 <%@ include file="../common/IncludeTop.jsp" %>
-<meta name="robots" content="noindex">
+<meta name="robots" content="noindex,nofollow">
 <bean:parameter name="queryType" id="queryType" value=""/>
 
 <logic:present name="tagsListForm">
