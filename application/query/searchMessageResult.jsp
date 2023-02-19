@@ -13,6 +13,7 @@
     pageContext.setAttribute("title", title);
 %>
 <%@ include file="../common/IncludeTop.jsp" %>
+<meta name="robots" content="noindex,nofollow">
 
 
 <logic:notPresent name="query">
