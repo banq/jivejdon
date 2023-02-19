@@ -12,7 +12,7 @@ String titleStr = (String)request.getAttribute("TITLE");
 pageContext.setAttribute("title", titleStr);
 %>
       <%@ include file="../common/IncludeTop.jsp" %>
-		 
+		 <meta name="robots" content="nofollow"/>
 	<!-- /////////////////////////////////////////Content -->
 <div id="page-content" class="single-page container">
     <div class="row">
