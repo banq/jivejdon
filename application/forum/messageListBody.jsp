@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+
+<logic:iterate id="forumMessage" name="messageListForm" property="list" indexId="i">
+
 <a name="<bean:write name="forumMessage" property="messageId"/>"></a>
 <%-- <logic:equal name="i" value="0">
   <logic:notEmpty name="principal">
@@ -118,3 +121,4 @@
 </div>
 </div>
 	
+ </logic:iterate>   

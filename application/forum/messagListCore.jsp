@@ -43,9 +43,9 @@
 
         <!--  内容-->
         <div id="messageListBody">
-          <logic:iterate id="forumMessage" name="messageListForm" property="list" indexId="i">
-            <%@include file="messageListBody.jsp" %>
-          </logic:iterate>            
+          
+          <%@include file="messageListBody.jsp" %>
+                  
           <logic:equal name="forumMessage" property="root" value="true">
               <div class="diggArea list-inline  top-social" >
                 <DIV class=diggNum id="digNumber_<bean:write name="forumMessage" property="messageId"/>">
