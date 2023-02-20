@@ -67,12 +67,16 @@
 
         <!-- message List start  -->
 
-        <action path="/forum/messageList" type="com.jdon.jivejdon.presentation.action.util.ThreadEtagFilter" scope="request" validate="false">
+        <!-- <action path="/forum/messageList" type="com.jdon.jivejdon.presentation.action.util.ThreadEtagFilter" scope="request" validate="false">
             <forward name="success" path="/forum/messageListBody.shtml" />
+        </action> -->
+
+        <action path="/forum/messageList" type="com.jdon.jivejdon.presentation.action.MessageListAction" name="messageListForm" scope="request" validate="false">
+            <forward name="success" path="/forum/messageList.jsp" />
         </action>
 
-        <action path="/forum/messageListBody" type="com.jdon.jivejdon.presentation.action.MessageListAction" name="messageListForm" scope="request" validate="false">
-            <forward name="success" path="/forum/messageList.jsp" />
+        <action path="/forum/messageListBodyNoheader" type="com.jdon.jivejdon.presentation.action.MessageListAction" name="messageListForm" scope="request" validate="false">   
+            <forward name="success" path="/forum/messageListBody.jsp" />
         </action>
 
         <action path="/forum/messageForumList" type="com.jdon.jivejdon.presentation.action.MessageForumListAction" name="messageListForm" scope="request" validate="false">

@@ -94,8 +94,9 @@
         </div>
 
         <div id="pageEnd"></div>
+        <div id="nextPageContent"></div>
 
-        <!-- 导航区  -->
+        <%-- <!-- 导航区  -->
         <div class="post_pages_end">
           <div class="table-button-left">
             <div class="table-button-right">
@@ -111,7 +112,7 @@
               </logic:greaterThan>
             </div>
           </div>
-        </div>
+        </div> --%>
       </div>
       <%if (request.getSession(false) != null){%>
        <div class="box">
@@ -245,5 +246,44 @@ $(function() {
     };
 }); 
 </script>
+
+<bean:parameter name="thread" id="thread" value=""/>
+<bean:define id="pagestart" name="messageListForm" property="start" />
+<bean:define id="pagecount" name="messageListForm" property="count" />
+<bean:define id="pageallCount" name="messageListForm" property="allCount" />
+<%  
+    int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
+    int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
+    int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
+    int pageNo = (pageAllcountInt / pageCountInt);
+    if(pageAllcountInt % pageCountInt !=0){ 
+        pageNo = pageNo + 1;
+    }    
+%>
+<script>
+function scrollLoader(url){
+  var start = "<%=pageStartInt+pageCountInt%>";
+  var loading = false;
+  $(window).scroll(function() {
+    var hT = $('#nextPageContent').offset().top,
+       hH = $('#nextPageContent').outerHeight(),
+       wH = $(window).height(),
+       wS = $(this).scrollTop();       
+    if (wS > (hT+hH-wH) && !loading){           
+         loading = true;          
+         if (start <= <%=pageAllcountInt%> ){                  
+           surl = (url.indexOf("?")==-1)?(url+"?"):(url+"&");           
+           load(surl +'start=' + start +'&count=<%=pageCountInt%>&noheader=on', function (xhr) {
+               document.getElementById("nextPageContent").innerHTML = document.getElementById("nextPageContent").innerHTML + xhr.responseText;               
+               start = start/1 + <%=pageCountInt%>;                              
+               loading = false;
+           });          
+         }   
+    }
+   });
+}
+scrollLoader('/forum/messageListBodyNoheader.shtml?thread=<bean:write name="thread"/>');   
+</script>   
+
   </body>
   </html>
