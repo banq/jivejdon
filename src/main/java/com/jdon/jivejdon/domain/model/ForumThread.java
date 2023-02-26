@@ -299,8 +299,8 @@ public class ForumThread {
 		return forumThreadTreeModel;
 	}
 
-	public void addViewCount() {
-		viewCounter.addViewCount();
+	public boolean addViewCount(String ip) {
+		return viewCounter.addViewCount(ip);
 	}
 
 	// return count

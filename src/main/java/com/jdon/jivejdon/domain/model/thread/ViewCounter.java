@@ -19,16 +19,20 @@ import java.util.Objects;
 
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
+import java.util.Queue;
+import com.google.common.collect.EvictingQueue;
 
 public class ViewCounter implements Comparable<ViewCounter> {
 
 	private final ForumThread thread;
 	private int viewCount = -1;
 	private int lastSavedCount;
+	Queue<String> fifo; 
 
 	public ViewCounter(ForumThread thread) {
 		this.thread = thread;
 		this.lastSavedCount = -1;
+		this.fifo = EvictingQueue.create(5); 
 	}
 
 	public void loadinitCount() {
@@ -56,9 +60,19 @@ public class ViewCounter implements Comparable<ViewCounter> {
 		return this.viewCount;
 	}
 
-	public void addViewCount() {
-		if (getViewCount() != -1)
-			viewCount++;
+	public boolean addViewCount(String ip) {
+		if (getViewCount() != -1){
+			if (!fifo.contains(ip)){
+			    viewCount++;
+		    	fifo.add(ip); 
+			    return true;
+		    }
+		}		
+		return false;
+	}
+
+	public boolean checkIP(String ip){
+		return fifo.contains(ip);
 	}
 
 	public int getLastSavedCount() {

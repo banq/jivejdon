@@ -17,7 +17,7 @@ package com.jdon.jivejdon.spi.component.viewcount;
 
 import java.util.List;
 
-import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.thread.ViewCounter;
 
 public interface ThreadViewCounterJob {
 	/**
@@ -25,7 +25,7 @@ public interface ThreadViewCounterJob {
 	 * 
 	 * @param thread
 	 */
-	public abstract void saveViewCounter(ForumThread thread);
+	public abstract void saveViewCounter(ViewCounter viewCounter);
 
 	public List<Long> getThreadIdsList();
 
