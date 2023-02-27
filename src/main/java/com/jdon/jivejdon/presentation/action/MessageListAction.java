@@ -32,6 +32,9 @@ import com.jdon.util.UtilValidate;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -42,6 +45,7 @@ public class MessageListAction extends ModelListAction {
 	private final static String module = MessageListAction.class.getName();
 	private ForumMessageQueryService forumMessageQueryService;
 	private ThreadViewCounterJob threadViewCounterJob;
+	private final ExecutorService executor = Executors.newFixedThreadPool(5);
 
 	public ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
@@ -105,10 +109,13 @@ public class MessageListAction extends ModelListAction {
 
 			modelListForm.setOneModel(forumThread);
 
-			new Thread(() -> { // Lambda Expression
-				if(forumThread.addViewCount(request.getRemoteAddr()))
-				    getThreadViewCounterJob().saveViewCounter(forumThread.getViewCounter());
-			 }).start();
+			executor.submit(new Runnable() {
+				public void run() { // this run method's body will be executed by the service
+				  if(forumThread.addViewCount(request.getRemoteAddr()))
+			     	getThreadViewCounterJob().saveViewCounter(forumThread.getViewCounter());
+			    }
+			});
+
 
 			request.setAttribute("threadsInMemallCount", getThreadViewCounterJob().getThreadIdsList().size());
 
