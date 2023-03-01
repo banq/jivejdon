@@ -45,7 +45,7 @@ public class MessageListAction extends ModelListAction {
 	private final static String module = MessageListAction.class.getName();
 	private ForumMessageQueryService forumMessageQueryService;
 	private ThreadViewCounterJob threadViewCounterJob;
-	private final ExecutorService executor = Executors.newFixedThreadPool(5);
+	private final ExecutorService executor = Executors.newFixedThreadPool(10);
 
 	public ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
