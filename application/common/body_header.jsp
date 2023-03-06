@@ -95,7 +95,7 @@
 								<li><a href="/reactive.html">Reactive编程</a></li>
 								<li><a href="/jdonframework/">Jdon框架</a></li>
                                 <li><a href="/idea/rust.html">Rust语言</a></li>	
-								<li><a href="/tag-30661/">人工智能</a></li>		
+								<li><a href="/tag-48335/">ChatGPT</a></li>	
                                 <li><a href="/tag-58439/">Web3</a></li>															
 							</ul>
 						</div> 
