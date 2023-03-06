@@ -57,23 +57,6 @@ pageContext.setAttribute("title", titleStr);
   <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">最佳</a></li>            
   <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">精华</a></li>
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" rel="nofollow">搜索</a></li>  
-  <div class="tres" style="float: right;">       
-			 <logic:empty name="forum" property="forumId">						        
-          <MultiPagesREST:pager actionFormName="threadListForm" page="/threads" >
-            <MultiPagesREST:prev name=" 上一页 " />
-            <MultiPagesREST:index displayCount="3" />
-            <MultiPagesREST:next  name=" 下一页 " />
-          </MultiPagesREST:pager>          
-        </logic:empty>
-        <logic:notEmpty name="forum" property="forumId">			    
-          <MultiPagesREST:pager actionFormName="threadListForm" page="/forum" paramId="forum" paramName="forum" paramProperty="forumId">
-            <MultiPagesREST:prev name=" 上一页 " />
-            <MultiPagesREST:index displayCount="3" />
-            <MultiPagesREST:next  name=" 下一页 " />
-          </MultiPagesREST:pager>
-           有<b><bean:write name="threadListForm" property="allCount"/></b>贴          
-        </logic:notEmpty>           
-  </div>                                  
 </ul>        
 </logic:notEqual>    
    
@@ -89,22 +72,7 @@ pageContext.setAttribute("title", titleStr);
   <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">最佳</a></li>            
   <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">精华</a></li>
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" rel="nofollow">搜索</a></li>  
-	  <div class="tres" style="float: right;">
-                    <logic:empty name="forum" property="forumId">
-                      <MultiPagesREST:pager actionFormName="threadListForm" page="/threads" >
-                        <MultiPagesREST:prev name=" 上一页 " />
-                        <MultiPagesREST:index displayCount="3" />
-                        <MultiPagesREST:next  name=" 下一页 " />
-                      </MultiPagesREST:pager>
-                    </logic:empty>
-                    <logic:notEmpty name="forum" property="forumId">
-                      <MultiPagesREST:pager actionFormName="threadListForm" page="/forum" paramId="forum" paramName="forum" paramProperty="forumId">
-                        <MultiPagesREST:prev name=" 上一页 " />
-                        <MultiPagesREST:index displayCount="3" />
-                        <MultiPagesREST:next  name=" 下一页 " />
-                      </MultiPagesREST:pager>
-                    </logic:notEmpty>
-    </div>
+	  
   </ul>   
 
 				</div>

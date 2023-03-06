@@ -46,28 +46,13 @@ pageContext.setAttribute("title", titleStr);
 			<!-- /////////////////左边 -->
 			<div id="main-content" class="col-md-12">
 				<div class="box">	
-					<ul class="nav nav-tabs">
+<ul class="nav nav-tabs">
   <li ><a href="<%=request.getContextPath()%>/threads">最新</a></li>
   <li><a href="<%=request.getContextPath()%>/approval">新佳</a></li>
   <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">最佳</a></li>	
   <li class="active"><a href="#">精华</a></li>
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" rel="nofollow">搜索</a></li>
-  
-	               <div class="tres" style="float: right;">
-        <logic:empty name="forum" property="forumId">
-          <MultiPagesREST:pager actionFormName="threadListForm" page="/forum/maxPopThreads" >
-            <MultiPagesREST:prev name=" 上一页 " />
-            <MultiPagesREST:index displayCount="3" />
-            <MultiPagesREST:next  name=" 下一页 " />
-          </MultiPagesREST:pager>
-        </logic:empty>
-      
-         有<b>
-        <bean:write name="threadListForm" property="allCount"/>
-        </b>贴
-      
-      </div>
-	</ul>          
+</ul>          
 </logic:notEqual>      
 
 <%@ include file="threadListCore.jsp" %>
