@@ -71,6 +71,8 @@ public class ThreadDigList {
 	}
 
 	public Collection<ForumThread> getDigs(int DigsListMAXSize) {
+		if (sortedWindows.size() < DigsListMAXSize)
+		    DigsListMAXSize = sortedWindows.size();
 		return sortedWindows.stream().limit(DigsListMAXSize).map(forumMessageQueryService::getThread)
 				.collect(Collectors.toList());
 
