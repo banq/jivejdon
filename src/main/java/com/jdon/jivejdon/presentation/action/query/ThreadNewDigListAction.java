@@ -84,7 +84,7 @@ public class ThreadNewDigListAction extends ModelListAction {
 	 * .HttpServletRequest, int, int)
 	 */
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
-		int DigsListMAXSize = 720;
+		int DigsListMAXSize = 20;
 		Collection<Long> allIds = new ArrayList<Long>();
 		allIds = getThreadApprovedNewList().getThreadDigList().getDigs(DigsListMAXSize).stream()
 				.filter(e -> e.getRootMessage().getDigCount() > 1).map(e -> e.getThreadId())

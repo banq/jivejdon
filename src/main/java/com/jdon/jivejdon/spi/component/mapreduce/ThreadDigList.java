@@ -71,7 +71,7 @@ public class ThreadDigList {
 	}
 
 	public Collection<ForumThread> getDigs(int DigsListMAXSize) {
-		return sortedWindows.parallelStream().limit(DigsListMAXSize).map(forumMessageQueryService::getThread)
+		return sortedWindows.stream().limit(DigsListMAXSize).map(forumMessageQueryService::getThread)
 				.collect(Collectors.toList());
 
 	}

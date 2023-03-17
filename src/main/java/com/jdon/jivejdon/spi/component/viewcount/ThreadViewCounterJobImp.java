@@ -112,7 +112,7 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 	}
 
 	public List<Long> getThreadIdsList() {
-		return viewcounters.parallelStream().map(e -> e.getThread().getThreadId()).collect(Collectors.toList());
+		return viewcounters.stream().map(e -> e.getThread().getThreadId()).collect(Collectors.toList());
 	}
 
 }
