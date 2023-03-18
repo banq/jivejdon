@@ -51,7 +51,7 @@ function loadCkeditJS() {
 
 function scrollLoadByElementId(url, nextPageContent) {
   var loading = false;
-  document.getElementById(nextPageContent).innerHTML = "";
+  document.getElementById(nextPageContent).innerHTML = "loading";
   $(window).on("scroll", function () {
     var hT = $("#" + nextPageContent).offset().top,
       hH = $("#" + nextPageContent).outerHeight(),
@@ -60,7 +60,7 @@ function scrollLoadByElementId(url, nextPageContent) {
     if (
       wS > hT + hH - wH &&
       !loading &&
-      document.getElementById(nextPageContent).innerHTML == ""
+      document.getElementById(nextPageContent).innerHTML == "loading"
     ) {
       loading = true;
       var surl = url.indexOf("?") == -1 ? url + "?" : url + "&";
