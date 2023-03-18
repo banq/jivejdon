@@ -83,8 +83,12 @@ public class ViewCounter implements Comparable<ViewCounter> {
 		this.lastSavedCount = lastSavedCount;
 	}
 
-	public ForumThread getThread() {
-		return thread;
+	// public ForumThread getThread() {
+	// 	return thread;
+	// }
+
+	public Long getThreadId() {
+		return thread.getThreadId();
 	}
 
 	@Override
@@ -96,9 +100,9 @@ public class ViewCounter implements Comparable<ViewCounter> {
 			return false;
 		}
 		ViewCounter viewCounter = (ViewCounter) o;
-		if (this.thread.getThreadId() == null || viewCounter.getThread().getThreadId() == null)
+		if (this.thread.getThreadId() == null || viewCounter.getThreadId() == null)
 			return false;
-		return this.thread.getThreadId().longValue() == viewCounter.getThread().getThreadId().longValue();
+		return this.thread.getThreadId().longValue() == viewCounter.getThreadId().longValue();
 	}
 
 	@Override
@@ -111,9 +115,9 @@ public class ViewCounter implements Comparable<ViewCounter> {
 		int diff1 = getViewCount() - getLastSavedCount();
 		int diff2 = o.getViewCount() - o.getLastSavedCount();
 		if (diff1 == diff2) {
-			if (thread.getThreadId() > o.getThread().getThreadId())
+			if (thread.getThreadId() > o.getThreadId())
 				return -1;
-			else if (thread.getThreadId() < o.getThread().getThreadId())
+			else if (thread.getThreadId() < o.getThreadId())
 				return 1;
 		} else if (diff1 > diff2)
 			return -1;

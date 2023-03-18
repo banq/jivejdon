@@ -92,7 +92,7 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 			Property property = new Property();
 			property.setName(ThreadPropertys.VIEW_COUNT);
 			property.setValue(Long.toString(viewCounter.getViewCount()));
-			propertyDao.updateProperty(Constants.THREAD, viewCounter.getThread().getThreadId(), property);
+			propertyDao.updateProperty(Constants.THREAD, viewCounter.getThreadId(), property);
 		} catch (Exception e) {
 			logger.error(e);
 		} finally {
@@ -107,7 +107,7 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 	 */
 	@Override
 	public ViewCounter saveViewCounter(ViewCounter viewCounter, String ip) {
-		ViewCounter viewCounter2 = viewcounters.putIfAbsent(viewCounter.getThread().getThreadId(), viewCounter);
+		ViewCounter viewCounter2 = viewcounters.putIfAbsent(viewCounter.getThreadId(), viewCounter);
 		viewCounter2.addViewCount(ip);
 		return viewCounter2;
 	}
@@ -117,7 +117,7 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 	}
 
 	public List<Long> getThreadIdsList() {
-		return viewcounters.values().stream().map(e -> e.getThread().getThreadId()).collect(Collectors.toList());
+		return viewcounters.values().stream().map(e -> e.getThreadId()).collect(Collectors.toList());
 	}
 
 }
