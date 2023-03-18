@@ -106,9 +106,10 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 	 * saveViewCounter (com.jdon.jivejdon.domain.model.ForumThread)
 	 */
 	@Override
-	public void saveViewCounter(ViewCounter viewCounter, String ip) {
+	public ViewCounter saveViewCounter(ViewCounter viewCounter, String ip) {
 		ViewCounter viewCounter2 = viewcounters.putIfAbsent(viewCounter.getThread().getThreadId(), viewCounter);
 		viewCounter2.addViewCount(ip);
+		return viewCounter2;
 	}
 
 	public ViewCounter getViewCounter(Long threadId){
