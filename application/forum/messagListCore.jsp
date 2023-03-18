@@ -176,7 +176,7 @@
                    <div class="lazyload" >
 							     <!-- 
 							     <script>
-							  	  load('/forum/threadTagList.shtml?threadId=<bean:write name="forumThread" property="threadId"/>', function (xhr) {				
+							  	  load('/forum/threadTagList.shtml?othread=<bean:write name="forumThread" property="threadId"/>&threadId=<bean:write name="forumThread" property="threadId"/>', function (xhr) {				
   	                                  document.getElementById("threadTagList").innerHTML = xhr.responseText;
 			                     });
 							     </script> -->
@@ -226,10 +226,10 @@
 <script>        
   $(document).ready(function() {              
       $('.reblogfrom').each(function(i, obj) {        
-        scrollLoadByElementId('/forum/thread.shtml?threadId='+ obj.id,obj.id); 
+        scrollLoadByElementId('/forum/thread.shtml?othread=<bean:write name="forumThread" property="threadId"/>&threadId='+ obj.id,obj.id); 
       });
       $('.reblogto').each(function(i, obj) {        
-        scrollLoadByElementId('/forum/thread.shtml?threadId='+ obj.id,obj.id); 
+        scrollLoadByElementId('/forum/thread.shtml?othread=<bean:write name="forumThread" property="threadId"/>&threadId='+ obj.id,obj.id); 
        });
   });      
 </script>
@@ -282,7 +282,7 @@ function scrollLoader(url){
     }
    });
 }
-scrollLoader('/forum/messageListBodyNoheader.shtml?thread=<bean:write name="thread"/>');   
+scrollLoader('/forum/messageListBodyNoheader.shtml?thread=<bean:write name="thread"/>&othread=<bean:write name="forumThread" property="threadId"/>');   
 </script>   
 
   </body>

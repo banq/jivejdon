@@ -20,6 +20,7 @@ import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.domain.model.thread.ViewCounter;
 import com.jdon.jivejdon.presentation.form.MessageListForm;
 import com.jdon.jivejdon.api.account.AccountService;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
@@ -109,14 +110,8 @@ public class MessageListAction extends ModelListAction {
 
 			modelListForm.setOneModel(forumThread);
 
-			executor.submit(new Runnable() {
-				public void run() { // this run method's body will be executed by the service
-				  if(forumThread.addViewCount(request.getRemoteAddr()))
-			     	getThreadViewCounterJob().saveViewCounter(forumThread.getViewCounter());
-			    }
-			});
-
-
+			getThreadViewCounterJob().saveViewCounter(forumThread.getViewCounter(), request.getRemoteAddr());
+		
 			request.setAttribute("threadsInMemallCount", getThreadViewCounterJob().getThreadIdsList().size());
 
 			if (request.getSession(false) != null) {

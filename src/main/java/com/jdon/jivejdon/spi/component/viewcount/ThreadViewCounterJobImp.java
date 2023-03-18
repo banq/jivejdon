@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
 public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob {
 	private final static Logger logger = LogManager.getLogger(ThreadViewCounterJobImp.class);
 
-	private final List<ViewCounter> viewcounters;
+	private final Map<Long,ViewCounter> viewcounters;
 
 	private final PropertyDao propertyDao;
 	private final ThreadViewCountParameter threadViewCountParameter;
@@ -49,7 +49,7 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 
 	public ThreadViewCounterJobImp(final PropertyDao propertyDao,
 			final ThreadViewCountParameter threadViewCountParameter, ScheduledExecutorUtil scheduledExecutorUtil) {
-		this.viewcounters = new CopyOnWriteArrayList<>();
+		this.viewcounters = new ConcurrentHashMap<>();
 		this.propertyDao = propertyDao;
 		this.threadViewCountParameter = threadViewCountParameter;
 		this.scheduledExecutorUtil = scheduledExecutorUtil;
@@ -75,7 +75,7 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 
 	public void writeDB() {
 		// construct a immutable set
-		List<ViewCounter> viewCounters2 = new ArrayList<>(this.viewcounters);
+		List<ViewCounter> viewCounters2 = new ArrayList<>(this.viewcounters.values());
 		this.viewcounters.clear();
 		for (ViewCounter viewCounter : viewCounters2) {
 			if (viewCounter.getViewCount() != viewCounter.getLastSavedCount() && viewCounter.getViewCount() != -1
@@ -106,13 +106,17 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 	 * saveViewCounter (com.jdon.jivejdon.domain.model.ForumThread)
 	 */
 	@Override
-	public void saveViewCounter(ViewCounter viewCounter) {
-		if (!viewcounters.contains(viewCounter))
-			  viewcounters.add(viewCounter);
+	public void saveViewCounter(ViewCounter viewCounter, String ip) {
+		ViewCounter viewCounter2 = viewcounters.putIfAbsent(viewCounter.getThread().getThreadId(), viewCounter);
+		viewCounter2.addViewCount(ip);
+	}
+
+	public ViewCounter getViewCounter(Long threadId){
+		return viewcounters.get(threadId);
 	}
 
 	public List<Long> getThreadIdsList() {
-		return viewcounters.stream().map(e -> e.getThread().getThreadId()).collect(Collectors.toList());
+		return viewcounters.values().stream().map(e -> e.getThread().getThreadId()).collect(Collectors.toList());
 	}
 
 }
