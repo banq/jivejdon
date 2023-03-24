@@ -59,6 +59,13 @@
 			<forward name="failure" path="/account/protected/sub/result.jsp" />
 		</action>
 
+		<action name="subscriptionForm" path="/account/protected/sub/subSaveAction2"
+			type="com.jdon.strutsutil.ModelSaveAction" scope="request" validate="true"
+			input="/account/protected/sub/result.jsp">
+			<forward name="success" path="/message/importUrl.jsp" />
+			<forward name="failure" path="/account/protected/sub/result.jsp" />
+		</action>
+
 <!--  /account/protected/sub/checkSub.shtml?service=subscriptionService&method=checkSubscription&id=xxx  -->
      <action name="messageForm" path="/account/protected/sub/checkSub" type="com.jdon.jivejdon.presentation.action.util.ServiceMethodSimpleAction" scope="request"
 		validate="false">
