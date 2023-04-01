@@ -90,7 +90,7 @@ public class ThreadTagListAction extends Action {
 	private Collection<ForumThread> getForumThreadsForTag(Long tagID, final Long threadId, Set<Long> checkDoubles) {
 		TaggedThreadListSpec taggedThreadListSpec = new TaggedThreadListSpec();
 		taggedThreadListSpec.setTagID(tagID);
-		PageIterator pageIterator = getTagService().getTaggedThread(taggedThreadListSpec, 0, 20);
+		PageIterator pageIterator = getTagService().getTaggedRandomThreads(taggedThreadListSpec, 0, 20);
 		Collection<ForumThread> threads = new ArrayList<ForumThread>();
 		Set<Long> foundThreadIds = new HashSet<Long>();
 		while (pageIterator.hasNext()) {
