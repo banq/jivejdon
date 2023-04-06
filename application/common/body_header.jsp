@@ -54,7 +54,7 @@
 							    <li><a href="/workflow-bpm.html">工作流BPM</a></li>
 								<li><a href="/tag-26738/">规则引擎</a></li>						
 								<li><a href="/tag-619/">架构师观点</a></li>			
-								<li><a href="/tag-49580/">数据工程</a></li>
+								<li><a href="/tag-49580/">数据中台</a></li>
 								<li><a href="/tag-38587/">产品经理</a></li>                               
                                 <li><a href="/tag-38726/">系统思维</a></li>	
 							</ul>
