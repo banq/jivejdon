@@ -107,8 +107,10 @@ public class MessageListAction extends ModelListAction {
 
 			modelListForm.setOneModel(forumThread);
 
-			ViewCounter viewCounter = getThreadViewCounterJob().saveViewCounter(forumThread.getViewCounter(), request.getRemoteAddr());
-			forumThread.setViewCounter(viewCounter);
+			ViewCounter viewCounter = getThreadViewCounterJob().saveViewCounter(forumThread.getViewCounter());
+			if(viewCounter != null)
+				forumThread.setViewCounter(viewCounter);
+			forumThread.addViewCount(request.getRemoteAddr());
 		
 			request.setAttribute("threadsInMemallCount", getThreadViewCounterJob().getThreadIdsList().size());
 
