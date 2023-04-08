@@ -108,8 +108,13 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 	@Override
 	public ViewCounter saveViewCounter(ViewCounter viewCounter, String ip) {
 		ViewCounter viewCounter2 = viewcounters.putIfAbsent(viewCounter.getThreadId(), viewCounter);
-		viewCounter2.addViewCount(ip);
-		return viewCounter2;
+		if(viewCounter2 != null){
+		   viewCounter2.addViewCount(ip);
+		   return viewCounter2;
+		}else{		   
+		   viewCounter.addViewCount(ip);
+           return viewCounter;
+		}	
 	}
 
 	public ViewCounter getViewCounter(Long threadId){

@@ -33,8 +33,6 @@ import com.jdon.util.UtilValidate;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -46,7 +44,6 @@ public class MessageListAction extends ModelListAction {
 	private final static String module = MessageListAction.class.getName();
 	private ForumMessageQueryService forumMessageQueryService;
 	private ThreadViewCounterJob threadViewCounterJob;
-	private final ExecutorService executor = Executors.newFixedThreadPool(10);
 
 	public ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
@@ -122,6 +119,7 @@ public class MessageListAction extends ModelListAction {
 			}
 
 		} catch (Exception e) {
+			Debug.logError(" customizeListForm err:", module);
 			return;
 		}
 
