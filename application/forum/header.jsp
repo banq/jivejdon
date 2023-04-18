@@ -38,7 +38,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <![endif]-->
     <link rel="prefetch" href="https://static.jdon.com/js/jquery-2.1.1.min.js">   
     <link rel="prefetch" href="https://static.jdon.com/js/bootstrap.min.js">
-    <link rel="prefetch" href="https://cdn.jdon.com/common/js/jquery.lazyload-any.js">      
+    <link rel="prefetch" href="https://static.jdon.com/common/js/jquery.lazyload-any.js">      
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->

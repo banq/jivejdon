@@ -34,7 +34,7 @@
     <![endif]-->    
   <link rel="prefetch" href="https://static.jdon.com/js/jquery-2.1.1.min.js">   
   <link rel="prefetch" href="https://static.jdon.com/js/bootstrap.min.js">
-  <link rel="prefetch" href="https://cdn.jdon.com/common/js/jquery.lazyload-any.js">
+  <link rel="prefetch" href="https://static.jdon.com/common/js/jquery.lazyload-any.js">
 </head>
 <body>
 <%@ include file="./common/body_header.jsp" %>
@@ -215,12 +215,12 @@
 		</div>
 	</div>
 	<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
-	<script src="//cdn.jdon.com/common/login2.js"></script>
+	<script src="//static.jdon.com/common/login2.js"></script>
 	<%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
   
    <%@ include file="./common/IncludeBottomBody.jsp" %> 
 
-<script src="https://cdn.jdon.com/common/js/jquery.lazyload-any.js"></script>
+<script src="https://static.jdon.com/common/js/jquery.lazyload-any.js"></script>
 <script>       
     $('.lazyload').lazyload();
 </script>

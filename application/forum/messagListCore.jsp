@@ -217,12 +217,12 @@
   <%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
-<script src="https://cdn.jdon.com/common/login2.js"></script>
-<script src="https://cdn.jdon.com/common/js/jquery.lazyload-any.js"></script>
+<script src="https://static.jdon.com/common/login2.js"></script>
+<script src="https://static.jdon.com/common/js/jquery.lazyload-any.js"></script>
 <script>       
     $('.lazyload').lazyload();
 </script>
-<script src="https://cdn.jdon.com/common/messageList9.js"></script>
+<script src="https://static.jdon.com/common/messageList9.js"></script>
 <script>        
   $(document).ready(function() {              
       $('.reblogfrom').each(function(i, obj) {        

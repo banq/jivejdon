@@ -13,7 +13,7 @@
     <title><logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty></title>
     <link rel="stylesheet" href="https://cdn.jdon.com/js/bootstrap.min.css"  type="text/css">
     <link rel="stylesheet" href="https://cdn.jdon.com/common/js/styles/style.css" type="text/css">        
-    <script src="//cdn.jdon.com/common/login2.js"></script>     
+    <script src="https://static.jdon.com/common/login2.js"></script>     
     <link rel="prefetch" href="https://static.jdon.com/js/jquery-2.1.1.min.js">   
     <link rel="prefetch" href="https://static.jdon.com/js/bootstrap.min.js">
 </head>

@@ -128,7 +128,7 @@ scrollLoader('/query/approvedListOtherNoheader.shtml');
 </script>   
 
 
-<script src="https://cdn.jdon.com/common/js/jquery.lazyload-any.js"></script>
+<script src="https://static.jdon.com/common/js/jquery.lazyload-any.js"></script>
 <script>       
     $('.lazyload').lazyload();
 </script>
