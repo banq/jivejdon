@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>           
   <meta charset="utf-8"/>
   <link rel="dns-prefetch" href="https://cdn.jdon.com/"/>
   <link rel="dns-prefetch" href="https://static.jdon.com/"/>
@@ -34,7 +35,6 @@
   <link rel="prefetch" href="https://static.jdon.com/js/jquery-2.1.1.min.js">   
   <link rel="prefetch" href="https://static.jdon.com/js/bootstrap.min.js">
   <link rel="prefetch" href="https://cdn.jdon.com/common/js/jquery.lazyload-any.js">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>           
 </head>
 <body>
 <%@ include file="./common/body_header.jsp" %>
