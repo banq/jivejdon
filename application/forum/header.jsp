@@ -36,15 +36,12 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         <script src="https://cdn.jdon.com/js/html5shiv.min.js"></script>
         <script src="https://cdn.jdon.com/js/respond.min.js"></script>
     <![endif]-->
-    <link rel="prefetch" href="https://static.jdon.com/js/jquery-2.1.1.min.js">   
-    <link rel="prefetch" href="https://static.jdon.com/js/bootstrap.min.js">
-    <link rel="prefetch" href="https://static.jdon.com/common/js/jquery.lazyload-any.js">      
+    <script defer src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>
+    <script defer src="https://static.jdon.com/js/bootstrap.min.js"></script>
+    <script defer src="https://static.jdon.com/common/js/jquery.lazyload-any.js"></script>  
+    <script defer src="https://static.jdon.com/common/login2.js"></script>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFPM5XC"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 <%@ include file="../common/body_header.jsp" %>
 <%@ include file="../common/header_errors.jsp" %>
  

@@ -32,9 +32,10 @@
         <script src="https://cdn.jdon.com/js/html5shiv.min.js"></script>
         <script src="https://cdn.jdon.com/js/respond.min.js"></script>
     <![endif]-->    
-  <link rel="prefetch" href="https://static.jdon.com/js/jquery-2.1.1.min.js">   
-  <link rel="prefetch" href="https://static.jdon.com/js/bootstrap.min.js">
-  <link rel="prefetch" href="https://static.jdon.com/common/js/jquery.lazyload-any.js">
+    <script defer src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>
+    <script defer src="https://static.jdon.com/js/bootstrap.min.js"></script>
+    <script defer src="https://static.jdon.com/common/js/jquery.lazyload-any.js"></script>  
+    <script defer src="https://static.jdon.com/common/login2.js"></script>
 </head>
 <body>
 <%@ include file="./common/body_header.jsp" %>
@@ -220,7 +221,6 @@
   
    <%@ include file="./common/IncludeBottomBody.jsp" %> 
 
-<script src="https://static.jdon.com/common/js/jquery.lazyload-any.js"></script>
 <script>       
     $('.lazyload').lazyload();
 </script>
