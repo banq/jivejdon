@@ -30,9 +30,6 @@
 		</div>
 	</footer>
 	<!-- Footer -->	
-	<!-- jQuery and Modernizr-->
-	<script src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>	
-	<!-- Core JavaScript Files -->  	 
-    <script src="https://static.jdon.com/js/bootstrap.min.js"></script>
+
 	
 	
