@@ -46,17 +46,7 @@
 			<div id="main-content" class="col-md-8">
 				<div class="box">
 
-          <%-- <jsp:include page="/query/threadApprovedNewList2.shtml?count=1" flush="true"></jsp:include> --%>
-	<div id="approvedItem0"><br><br><br><br><br><br></div>          
-	<div class="lazyload" >
-          <!--
-		  <script>
-		  load('/query/threadApprovedNewList2.shtml?count=1', function (xhr) {
-               document.getElementById("approvedItem0").innerHTML = xhr.responseText;
-            }); 
-		  </script>
-          -->
-    </div>  
+          <jsp:include page="/query/threadApprovedNewList2.shtml?count=1" flush="true"></jsp:include>
 
 <div class="box"> 
   <div class="linkblock">
