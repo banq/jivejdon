@@ -34,8 +34,8 @@
     <![endif]-->    
     <script defer src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>
     <script defer src="https://static.jdon.com/js/bootstrap.min.js"></script>
-    <script defer src="https://static.jdon.com/common/js/jquery.lazyload-any.js"></script>  
-    <script defer src="https://static.jdon.com/common/login2.js"></script>
+	<script defer src="https://static.jdon.com/common/js/jquery.lazyload-any.js"></script>  
+	<script defer src="https://static.jdon.com/common/login2.js"></script>
 </head>
 <body>
 <%@ include file="./common/body_header.jsp" %>
@@ -221,10 +221,11 @@
   
    <%@ include file="./common/IncludeBottomBody.jsp" %> 
 
-<script>       
-    $('.lazyload').lazyload();
-</script>
-<script type="text/javascript"> 
+<script>
+window.onload = function () {
+
+$('.lazyload').lazyload();
+
 $(function() { 
     var elm = $('.scrolldiv'); 
     var startPos = $(elm).offset().top; 
@@ -236,6 +237,8 @@ $(function() {
     }); 
     };
 }); 
+
+}
 </script>
 </body>
 </html>
