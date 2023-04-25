@@ -87,7 +87,11 @@ int h = 0 ;
 <script src="/common/js/jquery.lazyload-any.js"></script>
 
 <script>
+window.onload = function () {
+  
     $('.lazyload').lazyload();
+
+}
 </script>
   
 </body>
