@@ -80,6 +80,8 @@ pageContext.setAttribute("title", titleStr);
     }    
 %>
 <script>
+window.onload = function () {
+
 function scrollLoader(url){
   var start = "<%=pageStartInt+pageCountInt%>";
   var loading = false;
@@ -102,6 +104,8 @@ function scrollLoader(url){
    });
 }
 scrollLoader('/query/taggedThreadListNoheader.shtml?tagID=<bean:write name="tagID"/>');   
+
+}
 </script>   
 
 </body>

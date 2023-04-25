@@ -103,6 +103,9 @@
     }    
 %>
 <script>
+window.onload = function () {
+
+
 function scrollLoader(url){
   var start = "<%=pageStartInt+pageCountInt%>";
   var loading = false;
@@ -125,14 +128,9 @@ function scrollLoader(url){
    });
 }
 scrollLoader('/query/approvedListOtherNoheader.shtml');   
-</script>   
 
+$('.lazyload').lazyload();
 
-<script src="https://static.jdon.com/common/js/jquery.lazyload-any.js"></script>
-<script>       
-    $('.lazyload').lazyload();
-</script>
-<script type="text/javascript"> 
 $(function() { 
     var elm = $('.scrolldiv'); 
     var startPos = $(elm).offset().top; 
@@ -144,6 +142,8 @@ $(function() {
     }); 
     };
 }); 
+
+}
 </script>
 
 </body>

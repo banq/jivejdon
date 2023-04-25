@@ -83,6 +83,9 @@ pageContext.setAttribute("title", titleStr);
     }    
 %>
 <script>
+window.onload = function () {
+
+
 function scrollLoader(url){
   var start = "<%=pageStartInt+pageCountInt%>";
   var loading = false;
@@ -105,6 +108,8 @@ function scrollLoader(url){
    });
 }
 scrollLoader('/forum/threadDigSortedList.shtml');   
+
+}
 </script>   
 
 </body>

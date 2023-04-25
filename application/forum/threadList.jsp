@@ -95,6 +95,9 @@ pageContext.setAttribute("title", titleStr);
     }    
 %>
 <script>
+window.onload = function () {
+
+
 function scrollLoader(url){
   var start = "<%=pageStartInt+pageCountInt%>";
   var loading = false;
@@ -122,6 +125,8 @@ function scrollLoader(url){
 <logic:empty name="forum" property="name">
   scrollLoader('/forum/threadList.shtml');   
 </logic:empty>
+
+}
 </script>    
 
 </body>
