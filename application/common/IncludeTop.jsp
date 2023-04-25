@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jdon.com/common/js/styles/style.css" type="text/css">           
 	<script defer src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>	
     <script defer src="https://static.jdon.com/js/bootstrap.min.js"></script>
+    <script defer src="https://static.jdon.com/common/js/jquery.lazyload-any.js"></script>  
     <script defer src="https://static.jdon.com/common/login2.js"></script>  
 </head>
 <body>
