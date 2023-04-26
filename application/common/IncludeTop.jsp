@@ -11,8 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 256 256%22><text y=%22203%22 font-size=%22224%22>☯</text></svg>"/>
     <title><logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty></title>
-    <link rel="stylesheet" href="https://cdn.jdon.com/js/bootstrap.min.css"  type="text/css">
-    <link rel="stylesheet" href="https://cdn.jdon.com/common/js/styles/style.css" type="text/css">           
+    <link rel="stylesheet" href="https://www.jdon.com/js/jdon.css"  type="text/css">      
 	<script defer src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>	
     <script defer src="https://static.jdon.com/js/bootstrap.min.js"></script>
     <script defer src="https://static.jdon.com/common/js/jquery.lazyload-any.js"></script>  

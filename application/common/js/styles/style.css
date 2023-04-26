@@ -102,7 +102,7 @@ content: "\f062";
   content: "\f007";
 }
 body {
-  background: url(../img/bg2.png) fixed;
+  background: url(/comnmon/js/img/bg2.png) fixed;
   color: #666;
   font-weight: 400;
   font-size: 15px;
