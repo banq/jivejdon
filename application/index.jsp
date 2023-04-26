@@ -34,7 +34,7 @@
     <script defer src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>
     <script defer src="https://static.jdon.com/js/bootstrap.min.js"></script>
 	<script defer src="https://static.jdon.com/common/js/jquery.lazyload-any.js"></script>  
-	<script defer src="https://static.jdon.com/common/login2.js"></script>
+	<script src="https://static.jdon.com/common/login2.js"></script>
 </head>
 <body>
 <%@ include file="./common/body_header.jsp" %>
@@ -58,14 +58,14 @@
   </div>
 </div>
     <div id="approvedItem1"><br><br><br><br><br><br></div>          
-	<div class="lazyload" >
-          <!--
+	<div>
+         
 		  <script>
 		  load('/query/threadApprovedNewList3.shtml?offset=1&start=0&count=10', function (xhr) {
                document.getElementById("approvedItem1").innerHTML = xhr.responseText;
             }); 
 		  </script>
-          -->
+          
     </div>  
 	<div id="approvedItem2"><br><br><br><br><br><br></div>          
 	<div class="lazyload" >
