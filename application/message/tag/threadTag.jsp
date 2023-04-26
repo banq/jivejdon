@@ -68,8 +68,9 @@
 
  
 <link rel="stylesheet" href="/common/autocomplete/jquery-ui.css" type="text/css">
-<script src="/common/autocomplete/jquery-ui.js"></script>
+<script defer src="/common/autocomplete/jquery-ui.js"></script>
 <script>
+window.onload = function () {
     function loadAcJS(thisId) {
        $("#" + thisId).autocomplete({
             source: "/message/tags.shtml?method=tags",
@@ -78,6 +79,7 @@
             delay: 500
         });
     }
+}
 </script>
 </body></html>
 

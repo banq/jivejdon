@@ -55,9 +55,10 @@ if (request.getParameter("url") != null)
 
 <!-- ensure jquery was loaded, cannot load jquery twice -->
   <link rel="stylesheet" href="/common/autocomplete/jquery-ui.css" type="text/css">
-  <script src="/common/autocomplete/jquery-ui.js"></script>
+  <script defer src="/common/autocomplete/jquery-ui.js"></script>
 
   <script>
+window.onload = function () {
       $( function() {
           $( "#searchV_0" ).autocomplete({
               source: "/message/tags.shtml?method=tags",
@@ -83,6 +84,7 @@ if (request.getParameter("url") != null)
 
 
       } );
+}
   </script>
 
 <script>
