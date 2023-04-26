@@ -13,7 +13,7 @@
 <meta http-equiv="" content="IE=edge,chrome=1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
  <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://cdn.jdon.com/js/bootstrap.min.css"  type="text/css">
+    <link rel="stylesheet" href="https://www.jdon.com/js/jdon.css"  type="text/css">  
 	<!-- Custom CSS -->
     <link rel="stylesheet" href="https://cdn.jdon.com/common/js/styles/style.css">
   <!-- jQuery and Modernizr-->

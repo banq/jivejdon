@@ -20,7 +20,7 @@ response.setDateHeader("Expires", 0);
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="robots" content="noindex">
   <!-- Bootstrap Core CSS -->
-  <link rel="stylesheet" href="https://cdn.jdon.com/js/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="https://www.jdon.com/js/jdon.css"  type="text/css">  
   <!-- jQuery and Modernizr-->
   <script src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>
   <!-- Core JavaScript Files -->
