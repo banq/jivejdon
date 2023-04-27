@@ -48,15 +48,7 @@
 
           <jsp:include page="/query/threadApprovedNewList2.shtml?count=1" flush="true"></jsp:include>
 
-<div class="box"> 
-  <div class="linkblock">
-    <div class="row">
-        <div class="col-sm-12">
 
-        </div>
-    </div>
-  </div>
-</div>
     <div id="approvedItem1"><br><br><br><br><br><br></div>          
 	<div>
          
