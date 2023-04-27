@@ -84,8 +84,8 @@ public class ThreadApprovedNewList implements Startable {
 				getApprovedThreads(maxSize);
 			}
 		};
-		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(task, 60 * 60 * 3,
-				60 * 60 * 3, TimeUnit.SECONDS);
+		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(task, 60 * 60 * 1,
+				60 * 60 * 1, TimeUnit.SECONDS);
 
 	}
 
