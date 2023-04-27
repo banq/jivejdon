@@ -223,7 +223,7 @@
 %>
 <script>
 
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", function(event) { 
 
     $('.lazyload').lazyload();
   
@@ -272,7 +272,7 @@ function scrollLoader(url){
 }
 scrollLoader('/forum/messageListBodyNoheader.shtml?thread=<bean:write name="thread"/>&othread=<bean:write name="forumThread" property="threadId"/>');   
 
-}
+});
 </script>   
 
   </body>

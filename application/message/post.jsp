@@ -20,7 +20,8 @@
   <script defer src="/common/autocomplete/jquery-ui.js"></script>
 
   <script>
-  window.onload = function () {
+document.addEventListener("DOMContentLoaded", function(event) { 
+
       $( function() {
           $( "#searchV_0" ).autocomplete({
               source: "/message/tags.shtml?method=tags",
@@ -46,7 +47,8 @@
 
 
       } );
-  }
+
+});
   </script>
 
 <%

@@ -83,7 +83,7 @@ pageContext.setAttribute("title", titleStr);
     }    
 %>
 <script>
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", function(event) { 
 
 function scrollLoader(url){
   var start = "<%=pageStartInt+pageCountInt%>";
@@ -108,7 +108,7 @@ function scrollLoader(url){
 }
 scrollLoader('/forum/maxPopThreadlist.shtml?dateRange=100000');   
 
-}
+});
 </script>   
 
 </body>

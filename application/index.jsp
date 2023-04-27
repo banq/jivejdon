@@ -191,7 +191,7 @@
    <%@ include file="./common/IncludeBottomBody.jsp" %> 
 
 <script>
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", function(event) { 
 
 $('.lazyload').lazyload();
 
@@ -207,7 +207,7 @@ $(function() {
     };
 }); 
 
-}
+});
 </script>
  
 </body>

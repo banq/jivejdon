@@ -103,7 +103,7 @@
     }    
 %>
 <script>
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", function(event) { 
 
 
 function scrollLoader(url){
@@ -143,7 +143,8 @@ $(function() {
     };
 }); 
 
-}
+});
+
 </script>
 
 </body>

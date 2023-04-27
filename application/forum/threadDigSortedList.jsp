@@ -83,7 +83,7 @@ pageContext.setAttribute("title", titleStr);
     }    
 %>
 <script>
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", function(event) { 
 
 
 function scrollLoader(url){
@@ -109,7 +109,7 @@ function scrollLoader(url){
 }
 scrollLoader('/forum/threadDigSortedList.shtml');   
 
-}
+});
 </script>   
 
 </body>
