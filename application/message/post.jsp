@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="/common/autocomplete/jquery-ui.css" type="text/css">
   <script defer src="/common/autocomplete/jquery-ui.js"></script>
 
-  <script>
+  <script defer>
 document.addEventListener("DOMContentLoaded", function(event) { 
 
       $( function() {

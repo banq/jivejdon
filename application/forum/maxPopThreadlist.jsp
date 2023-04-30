@@ -82,7 +82,7 @@ pageContext.setAttribute("title", titleStr);
         pageNo = pageNo + 1;
     }    
 %>
-<script>
+<script defer>
 document.addEventListener("DOMContentLoaded", function(event) { 
 
 function scrollLoader(url){

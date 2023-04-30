@@ -86,7 +86,7 @@ int h = 0 ;
 <%@include file="../account/loginAJAX.jsp"%>
 <script src="/common/js/jquery.lazyload-any.js"></script>
 
-<script>
+<script defer>
 document.addEventListener("DOMContentLoaded", function(event) { 
   
     $('.lazyload').lazyload();

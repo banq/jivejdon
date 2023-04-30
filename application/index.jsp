@@ -182,7 +182,7 @@
   
    <%@ include file="./common/IncludeBottomBody.jsp" %> 
 
-<script>
+<script defer>
 document.addEventListener("DOMContentLoaded", function(event) { 
 
 $('.lazyload').lazyload();

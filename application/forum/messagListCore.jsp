@@ -221,7 +221,7 @@
         pageNo = pageNo + 1;
     }    
 %>
-<script>
+<script defer>
 
 document.addEventListener("DOMContentLoaded", function(event) { 
 
