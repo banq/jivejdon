@@ -29,7 +29,18 @@
 			<forward name="failure" path="/account/oauth/error.jsp" />
 		</action>
 		
+       <action  path="/account/oauth/sinaCallAction2"
+			type="com.jdon.jivejdon.presentation.action.account.oauth.SinaUserCallAction" scope="request" validate="false">
+			<forward name="success" path="/account/oauth/sinaUserCallBack2.shtml" />
+			<forward name="failure" path="/account/oauth/error.jsp" />
+		</action>
 
+        <action  path="/account/oauth/sinaUserCallBack2"
+			type="com.jdon.jivejdon.presentation.action.account.oauth.SinaUserCallBackAction" scope="request" validate="false">
+			<forward name="success" path="/account/protected/oauthlogin.jsp" />
+			<forward name="success2" path="/account/protected/sub/subSaveAction2.shtml" />
+			<forward name="failure" path="/account/oauth/error.jsp" />
+		</action>
 		
 
 
