@@ -224,8 +224,6 @@
 <script defer>
 
 document.addEventListener("DOMContentLoaded", function(event) { 
-
-    $('.lazyload').lazyload();
   
   $(document).ready(function() {              
       $('.reblogfrom').each(function(i, obj) {        
@@ -235,19 +233,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         scrollLoadByElementId('/forum/thread.shtml?othread=<bean:write name="forumThread" property="threadId"/>&threadId='+ obj.id,obj.id); 
        });
   });      
-
-$(function() { 
-    var elm = $('.scrolldiv'); 
-    var startPos = $(elm).offset().top; 
-    if (window.matchMedia('(min-width: 992px)').matches) { 
-    $.event.add(window, "scroll", function() { 
-        var p = $(window).scrollTop(); 
-        $(elm).css('position',((p) > startPos) ? 'fixed' : 'static'); 
-        $(elm).css('top',((p) > startPos) ? '20px' : ''); 
-    }); 
-    };
-}); 
-
 
 function scrollLoader(url){
   var start = "<%=pageStartInt+pageCountInt%>";

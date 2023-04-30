@@ -34,7 +34,8 @@
     <script defer src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>
     <script defer src="https://static.jdon.com/js/bootstrap.min.js"></script>
 	<script defer src="https://static.jdon.com/common/js/jquery.lazyload-any.js"></script>  
-	<script src="https://static.jdon.com/common/login2.js"></script>
+	<script defer src="https://static.jdon.com/common/js/index.js"></script>  
+	<script async src="https://static.jdon.com/common/login2.js"></script>
 </head>
 <body>
 <%@ include file="./common/body_header.jsp" %>
@@ -182,25 +183,6 @@
   
    <%@ include file="./common/IncludeBottomBody.jsp" %> 
 
-<script defer>
-document.addEventListener("DOMContentLoaded", function(event) { 
-
-$('.lazyload').lazyload();
-
-$(function() { 
-    var elm = $('.scrolldiv'); 
-    var startPos = $(elm).offset().top; 
-    if (window.matchMedia('(min-width: 992px)').matches) { 
-    $.event.add(window, "scroll", function() { 
-        var p = $(window).scrollTop(); 
-        $(elm).css('position',((p) > startPos) ? 'fixed' : 'static'); 
-        $(elm).css('top',((p) > startPos) ? '20px' : ''); 
-    }); 
-    };
-}); 
-
-});
-</script>
  
 </body>
 </html>
