@@ -33,9 +33,9 @@
     <![endif]-->    
     <script defer src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>
     <script defer src="https://static.jdon.com/js/bootstrap.min.js"></script>
-	<script defer src="https://static.jdon.com/common/js/jquery.lazyload-any.js"></script>  
-	<script defer src="https://static.jdon.com/common/js/index2.js"></script>  
+	<script defer src="https://static.jdon.com/common/js/jquery.lazyload-any.js"></script>   
 	<script src="https://static.jdon.com/common/login2.js"></script>
+	<script defer src="https://static.jdon.com/common/js/index2.js"></script>
 </head>
 <body>
 <%@ include file="./common/body_header.jsp" %>
