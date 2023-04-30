@@ -113,6 +113,8 @@ function scrollAppendByElementId(
   });
 }
 
+document.addEventListener("DOMContentLoaded", function(event) { 
+
 $(function() { 
   var elm = $('.scrolldiv'); 
   var startPos = $(elm).offset().top; 
@@ -126,3 +128,6 @@ $(function() {
 }); 
 
 $('.lazyload').lazyload();
+
+
+});

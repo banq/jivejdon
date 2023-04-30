@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", function(event) { 
 
 $('.lazyload').lazyload();
 
@@ -12,3 +13,5 @@ $(function() {
     }); 
     };
 }); 
+
+});

@@ -39,7 +39,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <script defer src="https://static.jdon.com/js/bootstrap.min.js"></script>
     <script defer src="https://static.jdon.com/common/js/jquery.lazyload-any.js"></script>
     <script defer src="https://static.jdon.com/common/login2.js"></script>
-    <script defer src="https://static.jdon.com/common/messageList10.js"></script>
+    <script defer src="https://static.jdon.com/common/messageList11.js"></script>
 </head>
 <body>
 <%@ include file="../common/body_header.jsp" %>
