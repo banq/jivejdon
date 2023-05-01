@@ -121,7 +121,6 @@
 								<li><a href="/tag-354/">事务架构</a></li>
 								<li><a href="/tag-29768/">流处理</a></li>
 								<li><a href="/tag-216/">多线程</a></li>
-								<li><a href="/jdonframework/">Jdon框架</a></li>
                                 <li><a href="/idea/rust.html">Rust语言</a></li>	
 								<li><a href="/tag-23644/">机器学习</a></li>	
 								<li><a href="/tag-48335/">ChatGPT</a></li>	
@@ -133,7 +132,7 @@
 					<div class="dropdown-menu">
 						<div class="dropdown-inner">
 							<ul class="list-unstyled">								
-                                <li><a href="/tag-37546/">幽默梗</a></li>                                                     
+                               <li><a href="/tag-37546/">幽默梗</a></li>                                                     
                                 <li><a href="/tag-297/">程序员吐槽</a></li>                               
                                 <li><a href="/tag-20618/">面试技巧</a></li>                               
                                 <li><a href="/tag-395/">Java入门</a></li>
@@ -144,6 +143,7 @@
 								<li><a href="/tag-1159/">算法</a></li>
 								<li><a href="/tag-36094/">最佳实践</a></li>
 								<li><a href="/tag-42486/">系统设计</a></li>
+                                <li><a href="/consultant.html">企业咨询</a></li>
                                 <li><a href="/tags/">更多话题</a></li>	
 							</ul>
 						</div> 
