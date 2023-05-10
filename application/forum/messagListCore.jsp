@@ -43,8 +43,9 @@
 
         <!--  内容-->
         <div id="messageListBody">
-          
+          <article>  
           <%@include file="messageListBody.jsp" %>
+          </article>    
                   
           <logic:equal name="forumMessage" property="root" value="true">
               <div class="diggArea list-inline  top-social" >

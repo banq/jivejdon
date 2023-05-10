@@ -29,6 +29,7 @@
       <logic:equal name="forumMessage" property="root" value="false">
       <div class="frame-yy">
       </logic:equal>
+        <header>
         <div class="post_header">
           <div class="post_title">
             <logic:equal name="forumMessage" property="root" value="true">
@@ -95,21 +96,22 @@
             </div>
           </div>
         </div>
-        <logic:equal name="forumMessage" property="root" value="true"><div>
+        </header>   
 
-         </div></logic:equal>        
-          <div class="post_body">
+        <div class="post_body">
           <div class="post_bodyin">
             <div class="post_body_content">
               <div class="article">
+                <main> 
                 <span id='body_<bean:write name="forumMessage" property="messageId"/>'>
                      <bean:write name="forumMessage" property="messageVO.body" filter="false"/>
                 </span>
+                </main>
               </div>              
               <p></p>
-</div>
-</div>
-</div>
+            </div>
+          </div>
+        </div>
 <logic:equal name="forumMessage" property="root" value="false">
   </div>
 </logic:equal>
