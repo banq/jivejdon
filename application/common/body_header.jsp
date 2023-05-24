@@ -122,7 +122,6 @@
 								<li><a href="/tag-29768/">流处理</a></li>
 								<li><a href="/tag-216/">多线程</a></li>
                                 <li><a href="/idea/rust.html">Rust语言</a></li>	
-								<li><a href="/tag-23644/">机器学习</a></li>	
 								<li><a href="/tag-48335/">ChatGPT</a></li>	
 							</ul>
 						</div> 
