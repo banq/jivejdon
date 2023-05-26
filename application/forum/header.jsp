@@ -7,8 +7,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="dns-prefetch" href="https://cdn.jdon.com/"/>
-    <link rel="dns-prefetch" href="https://cdn.jdon.com/"/>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	
     <meta charset="utf-8"/>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
