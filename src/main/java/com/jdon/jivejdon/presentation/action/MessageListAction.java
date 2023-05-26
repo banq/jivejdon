@@ -33,6 +33,8 @@ import com.jdon.util.UtilValidate;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -44,6 +46,7 @@ public class MessageListAction extends ModelListAction {
 	private final static String module = MessageListAction.class.getName();
 	private ForumMessageQueryService forumMessageQueryService;
 	private ThreadViewCounterJob threadViewCounterJob;
+	private final ExecutorService executor = Executors.newFixedThreadPool(10);
 
 	public ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
@@ -107,11 +110,15 @@ public class MessageListAction extends ModelListAction {
 
 			modelListForm.setOneModel(forumThread);
 
-			ViewCounter viewCounter = getThreadViewCounterJob().saveViewCounter(forumThread.getViewCounter());
-			if(viewCounter != null)
-				forumThread.setViewCounter(viewCounter);
-			forumThread.addViewCount(request.getRemoteAddr());
-		
+			executor.submit(new Runnable() {
+				public void run() { // this run method's body will be executed by the service
+				    ViewCounter viewCounter = getThreadViewCounterJob().saveViewCounter(forumThread.getViewCounter());
+			    	if(viewCounter != null)
+				    	forumThread.setViewCounter(viewCounter);
+				    forumThread.addViewCount(request.getRemoteAddr());
+			    }
+			});
+
 			request.setAttribute("threadsInMemallCount", getThreadViewCounterJob().getThreadIdsList().size());
 
 			if (request.getSession(false) != null) {
