@@ -53,7 +53,7 @@
         </div>
    </div> 
 </logic:notEmpty>
-
+<%-- 
 <logic:notEmpty name="tagID2">    
    <div class="box">
       <div class="linkblock">	
@@ -94,7 +94,7 @@
           </div>        
         </div>
    </div> 
-</logic:notEmpty>
+</logic:notEmpty> --%>
 
 
 </div>
