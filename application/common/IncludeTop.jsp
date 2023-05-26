@@ -3,8 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="dns-prefetch" href="https://cdn.jdon.com/"/>
-    <link rel="dns-prefetch" href="https://cdn.jdon.com/"/>
     <meta charset="utf-8"/>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta http-equiv="" content="IE=edge,chrome=1"/>
