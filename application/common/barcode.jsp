@@ -19,7 +19,7 @@ if (request.getParameter("threadId") != null){
 <meta http-equiv="" content="IE=edge,chrome=1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="robots" content="noindex">
-<script type="text/javascript" src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jdon.com/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/common/js/jquery-qrcode-min.js"></script>
 <style>
 body {

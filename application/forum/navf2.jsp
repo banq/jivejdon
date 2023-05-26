@@ -20,10 +20,10 @@ response.setDateHeader("Expires", 0);
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="https://www.jdon.com/js/jdon.css"  type="text/css">  
   <!-- jQuery and Modernizr-->
-  <script src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>
+  <script src="https://cdn.jdon.com/js/jquery-2.1.1.min.js"></script>
   <!-- Core JavaScript Files -->
-  <script src="https://static.jdon.com/js/bootstrap.min.js"></script>
-  <script src="https://static.jdon.com/common/js/waitingfor.js"></script>
+  <script src="https://cdn.jdon.com/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jdon.com/common/js/waitingfor.js"></script>
 </head>
 <body>
 <script>

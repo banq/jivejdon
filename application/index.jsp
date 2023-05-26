@@ -8,8 +8,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="dns-prefetch" href="https://cdn.jdon.com/"/>
-  <link rel="dns-prefetch" href="https://static.jdon.com/"/>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script> 
   <meta charset="utf-8"/>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
@@ -31,11 +29,11 @@
         <script src="https://cdn.jdon.com/js/html5shiv.min.js"></script>
         <script src="https://cdn.jdon.com/js/respond.min.js"></script>
     <![endif]-->    
-    <script defer src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>
-    <script defer src="https://static.jdon.com/js/bootstrap.min.js"></script>
-	<script defer src="https://static.jdon.com/common/js/jquery.lazyload-any.js"></script>   
-	<script src="https://static.jdon.com/common/login2.js"></script>
-	<script defer src="https://static.jdon.com/common/js/index2.js"></script>
+    <script defer src="https://cdn.jdon.com/js/jquery-2.1.1.min.js"></script>
+    <script defer src="https://cdn.jdon.com/js/bootstrap.min.js"></script>
+	<script defer src="https://cdn.jdon.com/common/js/jquery.lazyload-any.js"></script>   
+	<script src="https://cdn.jdon.com/common/login2.js"></script>
+	<script defer src="https://cdn.jdon.com/common/js/index2.js"></script>
 </head>
 <body>
 <%@ include file="./common/body_header.jsp" %>
@@ -178,7 +176,7 @@
 		</div>
 	</div>
 	<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
-	<script src="//static.jdon.com/common/login2.js"></script>
+	<script src="//cdn.jdon.com/common/login2.js"></script>
 	<%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
   
    <%@ include file="./common/IncludeBottomBody.jsp" %> 

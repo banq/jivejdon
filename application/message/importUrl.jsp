@@ -17,11 +17,11 @@
 	<!-- Custom CSS -->
     <link rel="stylesheet" href="https://cdn.jdon.com/common/js/styles/style.css">
   <!-- jQuery and Modernizr-->
-  <script src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>
+  <script src="https://cdn.jdon.com/js/jquery-2.1.1.min.js"></script>
 
   <!-- Core JavaScript Files -->
-  <script src="https://static.jdon.com/js/bootstrap.min.js"></script>
-  <script src="//static.jdon.com/common/login2.js"></script>
+  <script src="https://cdn.jdon.com/js/bootstrap.min.js"></script>
+  <script src="//cdn.jdon.com/common/login2.js"></script>
 <title>享道</title>
 <%-- 
 <%@ include file="/common/security.jsp" %>

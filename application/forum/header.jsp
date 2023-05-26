@@ -8,7 +8,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <html>
 <head>
     <link rel="dns-prefetch" href="https://cdn.jdon.com/"/>
-    <link rel="dns-prefetch" href="https://static.jdon.com/"/>
+    <link rel="dns-prefetch" href="https://cdn.jdon.com/"/>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	
     <meta charset="utf-8"/>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
@@ -35,11 +35,11 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         <script src="https://cdn.jdon.com/js/html5shiv.min.js"></script>
         <script src="https://cdn.jdon.com/js/respond.min.js"></script>
     <![endif]-->
-    <script defer src="https://static.jdon.com/js/jquery-2.1.1.min.js"></script>
-    <script defer src="https://static.jdon.com/js/bootstrap.min.js"></script>
-    <script defer src="https://static.jdon.com/common/js/jquery.lazyload-any.js"></script>
-    <script defer src="https://static.jdon.com/common/login2.js"></script>
-    <script defer src="https://static.jdon.com/common/messageList11.js"></script>
+    <script defer src="https://cdn.jdon.com/js/jquery-2.1.1.min.js"></script>
+    <script defer src="https://cdn.jdon.com/js/bootstrap.min.js"></script>
+    <script defer src="https://cdn.jdon.com/common/js/jquery.lazyload-any.js"></script>
+    <script defer src="https://cdn.jdon.com/common/login2.js"></script>
+    <script defer src="https://cdn.jdon.com/common/messageList11.js"></script>
 </head>
 <body>
 <%@ include file="../common/body_header.jsp" %>
