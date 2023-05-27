@@ -22,18 +22,12 @@
   <link rel="alternate" type="application/rss+xml" title="解道订阅" href="https://www.jdon.com/rss"/>
   <link rel="canonical" href="https://www.jdon.com/" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 256 256%22><text y=%22203%22 font-size=%22224%22>☯</text></svg>"/>   
-  <link rel="stylesheet" href="https://www.jdon.com/js/jdon.css"  type="text/css">  
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://cdn.jdon.com/js/html5shiv.min.js"></script>
-        <script src="https://cdn.jdon.com/js/respond.min.js"></script>
-    <![endif]-->    
-    <script defer src="https://cdn.jdon.com/js/jquery-2.1.1.min.js"></script>
-    <script defer src="https://cdn.jdon.com/js/bootstrap.min.js"></script>
-	<script defer src="https://cdn.jdon.com/common/js/jquery.lazyload-any.js"></script>   
-	<script src="https://cdn.jdon.com/common/login2.js"></script>
-	<script defer src="https://cdn.jdon.com/common/js/index2.js"></script>
+  <link rel="stylesheet" href="/js/jdon.css"  type="text/css">  
+  <script defer src="/js/jquery-2.1.1.min.js"></script>
+  <script defer src="/js/bootstrap.min.js"></script>
+  <script defer src="https://cdn.jdon.com/common/js/jquery.lazyload-any.js"></script>   
+  <script src="https://cdn.jdon.com/common/login2.js"></script>
+  <script defer src="https://cdn.jdon.com/common/js/index2.js"></script>
 </head>
 <body>
 <%@ include file="./common/body_header.jsp" %>
