@@ -27,9 +27,9 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <link rel="stylesheet" href="/js/jdon.css"  type="text/css">  
     <script defer src="/js/jquery-2.1.1.min.js"></script>
     <script defer src="/js/bootstrap.min.js"></script>
-    <script defer src="https://cdn.jdon.com/common/js/jquery.lazyload-any.js"></script>
-    <script defer src="https://cdn.jdon.com/common/login2.js"></script>
-    <script defer src="https://cdn.jdon.com/common/messageList11.js"></script>
+    <script defer src="/common/js/jquery.lazyload-any.js"></script>
+    <script defer src="/common/login2.js"></script>
+    <script defer src="/common/messageList11.js"></script>
 </head>
 <body>
 <%@ include file="../common/body_header.jsp" %>

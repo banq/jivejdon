@@ -25,9 +25,9 @@
   <link rel="stylesheet" href="/js/jdon.css"  type="text/css">  
   <script defer src="/js/jquery-2.1.1.min.js"></script>
   <script defer src="/js/bootstrap.min.js"></script>
-  <script defer src="https://cdn.jdon.com/common/js/jquery.lazyload-any.js"></script>   
-  <script src="https://cdn.jdon.com/common/login2.js"></script>
-  <script defer src="https://cdn.jdon.com/common/js/index2.js"></script>
+  <script defer src="/common/js/jquery.lazyload-any.js"></script>   
+  <script src="/common/login2.js"></script>
+  <script defer src="/common/js/index2.js"></script>
 </head>
 <body>
 <%@ include file="./common/body_header.jsp" %>
