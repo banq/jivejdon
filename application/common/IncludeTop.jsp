@@ -10,10 +10,9 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 256 256%22><text y=%22203%22 font-size=%22224%22>☯</text></svg>"/>
     <title><logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty></title>
     <link rel="stylesheet" href="/js/jdon.css"  type="text/css">      
-	<script defer src="/js/jquery-2.1.1.min.js"></script>	
-    <script defer src="/js/bootstrap.min.js"></script>
-    <script defer src="/common/js/jquery.lazyload-any.js"></script>  
-    <script defer src="/common/login2.js"></script>  
+    <script defer src="/js/jquery-bootstrap.js"></script>
+    <script defer src="/js/jquery.lazyload-any.js"></script>  
+    <script defer src="/js/login2.js"></script> 
 </head>
 <body>
 <%@ include file="./body_header.jsp" %>
