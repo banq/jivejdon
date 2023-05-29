@@ -66,6 +66,20 @@
 		            <li><a href="javascript:shareto('qzone')"><i class="fa fa-qq"></i></a></li>		
 	              </ul>
               </div>
+
+              <div class="box">
+              <!-- 自适应主广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="5184711902"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>							
+              </div>
+
               <logic:notEmpty name="forumMessage" property="reBlogVO.threadFroms">          
                 <logic:iterate id="threadFrom" name="forumMessage" property="reBlogVO.threadFroms">                
                   <div class="reblogfrom" id='<bean:write name="threadFrom" property="threadId"/>'></div>                  
@@ -78,18 +92,6 @@
               </logic:notEmpty>              
           </logic:equal>
 
-          <div class="box">
-<!-- 自适应主广告 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="5184711902"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>							
-          </div>
 
         </div>
 
