@@ -11,8 +11,7 @@
     <title><logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty></title>
     <link rel="stylesheet" href="/js/jdon.css"  type="text/css">      
     <script defer src="/js/jquery-bootstrap.js"></script>
-    <script defer src="/js/jquery.lazyload-any.js"></script>  
-    <script defer src="/js/login2.js"></script> 
+    <script defer src="/js/login3.js"></script> 
 </head>
 <body>
 <%@ include file="./body_header.jsp" %>
