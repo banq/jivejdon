@@ -2,8 +2,6 @@ package com.jdon.jivejdon.domain.model.query.specification;
 
 import com.jdon.jivejdon.domain.model.account.Account;
 
-import org.apache.commons.io.filefilter.TrueFileFilter;
-
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 
@@ -28,6 +26,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 		        isDigged(thread, 1) || 
 				isExcelledDiscuss(thread) || 
 				isGreaterThanPrev(thread, threadPrev) || 
+				isLongText(thread) || 
 				thread.getRootMessage().hasImage()) {
 			return true;
 		} else
@@ -51,6 +50,16 @@ public class ApprovedListSpec extends ThreadListSpec {
 	protected boolean isGoodBlog(ForumThread thread, Account account) {
 		return (hasTags(thread, 1) && isGoodAuthor(account, 2) && isDigged(
 				thread, 1));
+	}
+
+	protected boolean isLongText(ForumThread thread){
+		int bodylength = thread.getRootMessage().getMessageVO().getBody().length();
+		if (bodylength<=0) return false;
+
+		if (bodylength / 1024 > 3)
+			return true;
+		else
+			return false;
 	}
 
 	protected boolean isExcelledDiscuss(ForumThread thread) {
