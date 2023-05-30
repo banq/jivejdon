@@ -56,7 +56,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 		int bodylength = thread.getRootMessage().getMessageVO().getBody().length();
 		if (bodylength<=0) return false;
 
-		if (bodylength / 1024 > 3)
+		if (bodylength / 1024 > 2)
 			return true;
 		else
 			return false;
