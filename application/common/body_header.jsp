@@ -74,7 +74,7 @@
 				            	<li><a href="/microservice.html">微服务介绍</a></li>  
                                 <li><a href="/tag-25407/">微服务专辑</a></li>
                                 <li><a href="/tag-9899/">模块化设计</a></li>
-								<li><a href="/tag-40250/">clean架构</a></li>
+								<li><a href="/tag-40250/">Clean架构</a></li>
                                 <li><a href="/soa.html">SOA</a></li>
                                 <li><a href="/tag-33426/">API设计</a></li>
 								<li><a href="/tag-1109/">RESTful</a></li>
@@ -84,15 +84,13 @@
 								<li><a href="/tag-2513/">伸缩性</a></li>	
 								<li><a href="/tag-35487/">弹性工程</a></li>
 								<li><a href="/tag-11205/">CAP定理</a></li>	
-								<li><a href="/tag-34196/">Kubernetes</a></li>	
-								<li><a href="/tag-28110/">docker</a></li>
-                                <li><a href="/tag-29134/">DevOps</a></li>
 								<li><a href="/tag-17268/">事件溯源</a></li>
-								<li><a href="/tag-9958/">CQRS</a></li>
-								<li><a href="/tag-30969/">Kafka</a></li>
-								<li><a href="/tag-26269/">消息队列</a></li>	
-								<li><a href="/tag-3380/">EDA</a></li>	
-								<li><a href="/tag-30114/">Redis</a></li>		
+								<li><a href="/cqrs.html">CQRS</a></li>
+                                <li><a href="/tag-20358/">Saga模式</a></li>
+								<li><a href="/tag-30114/">Redis</a></li>
+                                <li><a href="/tag-34196/">Kubernetes</a></li>	
+								<li><a href="/tag-28110/">docker</a></li>
+                                <li><a href="/tag-29134/">DevOps</a></li>	
 							</ul>
 						</div>
 					</div>
