@@ -140,7 +140,6 @@
 								<li><a href="/tag-1159/">算法</a></li>
 								<li><a href="/tag-36094/">最佳实践</a></li>
 								<li><a href="/tag-42486/">系统设计</a></li>
-                                <li><a href="/consultant.html">企业咨询</a></li>
                                 <li><a href="/tags/">更多话题</a></li>	
 							</ul>
 						</div> 
