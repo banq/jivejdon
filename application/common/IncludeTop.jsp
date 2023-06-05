@@ -2,7 +2,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%
 response.setHeader("Pragma", "no-cache");
-response.setHeader("Cache-Control", "no-store");
+response.setHeader("Cache-Control", "no-cache, no-store");
 response.setDateHeader("Expires", 0);
 %>
 <!DOCTYPE html>
