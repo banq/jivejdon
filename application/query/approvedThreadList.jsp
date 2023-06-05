@@ -25,7 +25,7 @@ response.setDateHeader("Expires", 0);
 				<div>
                <% String thumbthreadIdS = ((Long)pageContext.getAttribute("thumbthreadId")).toString(); %>               
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">                  
-                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="thumbnail" style="width: 100%" loading="lazy"/>
+                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="thumbnail" style="width: 100%" fetchpriority="high"/>
                 </logic:notEmpty>
 
                 <%-- <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">                  
