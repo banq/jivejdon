@@ -23,9 +23,6 @@ response.setHeader("Expires", "0"); // Proxies.
   <meta name="Keywords" content="微服务,SOA,DDD,体系结构,架构,Gof设计模式,Java框架,大数据,云原生,面向对象,函数编程,SpringBoot,EDA,java,JavaEE,CQRS,eventsourcing" />
   <meta name="domain_verify" content="pmrgi33nmfuw4ir2ejvgi33ofzrw63jcfqrgo5ljmqrduirtmu2wczlcgvrtomzyha2dcylfhfqtmntemmydezbvme4gmmrugarcyitunfwwku3bozsseorrgq2dmmjrgu4teobrgqzh2">
   <meta http-equiv="refresh" content="3600">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache"> 
-  <meta http-equiv="Expires" content="0">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap" />
   <link rel="alternate" type="application/rss+xml" title="解道订阅" href="https://www.jdon.com/rss"/>
   <link rel="canonical" href="https://www.jdon.com/" />
