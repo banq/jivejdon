@@ -414,8 +414,9 @@ function shareto(id){
 
 document.addEventListener("DOMContentLoaded", function(event) { 
 
-    $('.lazyload').lazyload();
+ $('.lazyload').lazyload();
     
+ if ($('div.scrolldiv').length)
     $(function() { 
         var elm = $('.scrolldiv'); 
         var startPos = $(elm).offset().top; 
