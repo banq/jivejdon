@@ -147,11 +147,6 @@
     </rule>
 
     <rule>
-        <from>^/query/tagThreads/([0-9]+)$</from>
-        <to>/query/tagThreads.shtml?count=15&amp;tagID=$1</to>
-    </rule>
-
-    <rule>
         <from>^/query/tagHotList$</from>
         <to>/query/tagHotList.shtml</to>
     </rule>    

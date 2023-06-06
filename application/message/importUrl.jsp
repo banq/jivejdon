@@ -12,16 +12,11 @@
 <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
 <meta http-equiv="" content="IE=edge,chrome=1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
- <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://www.jdon.com/js/jdon.css"  type="text/css">  
-	<!-- Custom CSS -->
-    <link rel="stylesheet" href="https://cdn.jdon.com/common/js/styles/style.css">
+   <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="/js/jdon.css"  type="text/css">  
   <!-- jQuery and Modernizr-->
-  <script src="https://cdn.jdon.com/js/jquery-2.1.1.min.js"></script>
+  <script src="/js/jquery-bootstrap2.js"></script>
 
-  <!-- Core JavaScript Files -->
-  <script src="https://cdn.jdon.com/js/bootstrap.min.js"></script>
-  <script src="//cdn.jdon.com/common/login2.js"></script>
 <title>享道</title>
 <%-- 
 <%@ include file="/common/security.jsp" %>

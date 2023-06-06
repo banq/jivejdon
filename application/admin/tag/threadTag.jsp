@@ -10,10 +10,8 @@
 <bean:define id="title"  value=" 添加标签" />
 <%@ include file="../header.jsp" %>
 <!-- jQuery and Modernizr-->
-<script src="https://cdn.jdon.com/js/jquery-2.1.1.min.js"></script>
+<script src="/js/jquery-bootstrap2.js"></script>
 
-<!-- Core JavaScript Files -->
-<script src="https://cdn.jdon.com/js/bootstrap.min.js"></script>
 
  <form action="<%=request.getContextPath()%>/admin/tag/thread.shtml" method="post" >
    帖子编号：<input name="threadId" type="text">   

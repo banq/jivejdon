@@ -16,8 +16,6 @@ response.setHeader("Expires", "0"); // Proxies.
     <title><logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty></title>
     <link rel="stylesheet" href="/js/jdon.css"  type="text/css">      
     <script defer src="/js/jquery-bootstrap2.js"></script>
-    <link rel="dns-prefetch" href="//cdn.jdon.com">
-    <link rel="dns-prefetch" href="//static.jdon.com">
 </head>
 <body>
 <%@ include file="./body_header.jsp" %>

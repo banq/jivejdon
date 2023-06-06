@@ -15,8 +15,8 @@
 <title>
 <bean:write name="title" />
 </title>
-<link rel="stylesheet" href="https://cdn.jdon.com/common/jivejdon5.css" type="text/css" />
-<link rel="stylesheet" href="https://cdn.jdon.com/common/portlet.css" type="text/css">
+<link rel="stylesheet" href="/common/jivejdon5.css" type="text/css" />
+<link rel="stylesheet" href="/common/portlet.css" type="text/css">
 </head>
 <script>
 try{

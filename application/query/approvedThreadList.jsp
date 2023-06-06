@@ -28,15 +28,6 @@ response.setDateHeader("Expires", 0);
                     <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="thumbnail" style="width: 100%" fetchpriority="high"/>
                 </logic:notEmpty>
 
-                <%-- <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">                  
-                  <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">                  
-                      <img id="home-thumbnai" src="https://cdn.jdon.com/simgs/thumb2/<%=thumbthreadIdS.substring(thumbthreadIdS.length() - 1)%>.jpg" border='0' class="thumbnail" style="width: 100%" loading="lazy"/>
-                  </logic:notEmpty>
-
-                  <logic:empty name="forumMessage" property="messageUrlVO.thumbnailUrl">
-                      <img id="home-thumbnai" src="https://cdn.jdon.com/simgs/thumb2/<%=thumbthreadIdS.substring(thumbthreadIdS.length() - 1)%>.jpg" border='0' class="thumbnail" style="width: 100%" loading="lazy"/>
-                   </logic:empty>
-                 </logic:empty> --%>
                   
             </div>
 			</div>

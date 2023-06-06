@@ -23,7 +23,6 @@ response.setHeader("Expires", "0"); // Proxies.
   <meta name="Keywords" content="微服务,SOA,DDD,体系结构,架构,Gof设计模式,Java框架,大数据,云原生,面向对象,函数编程,SpringBoot,EDA,java,JavaEE,CQRS,eventsourcing" />
   <link rel="stylesheet" href="/js/jdon.css" type="text/css"> 
   <script src="/js/jquery-bootstrap2.js"></script>
-  <link rel="dns-prefetch" href="//cdn.jdon.com">
   <link rel="dns-prefetch" href="//static.jdon.com">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap" />
   <link rel="alternate" type="application/rss+xml" title="解道订阅" href="https://www.jdon.com/rss"/>
@@ -142,7 +141,7 @@ response.setHeader("Expires", "0"); // Proxies.
 							    <div class="lazyload" >
 							     <!-- 
 							     <script>
-							  	  load('https://cdn.jdon.com/query/tagHotList', function (xhr) {				
+							  	  load('/query/tagHotList', function (xhr) {				
   	                                  document.getElementById("tagHotList").innerHTML = xhr.responseText;
 			                     });
 							  </script> -->
@@ -160,7 +159,7 @@ response.setHeader("Expires", "0"); // Proxies.
 							    <div class="lazyload" >
 							     <!-- 
 							     <script>
-							  	  load('https://cdn.jdon.com/query/threadDigList', function (xhr) {				
+							  	  load('/query/threadDigList', function (xhr) {				
   	                                  document.getElementById("digList").innerHTML = xhr.responseText;
 			                     });
 							  </script> -->
@@ -173,7 +172,7 @@ response.setHeader("Expires", "0"); // Proxies.
 		</div>
 	</div>
 	<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
-	<script src="//cdn.jdon.com/common/login2.js"></script>
+
 	<%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
   
    <%@ include file="./common/IncludeBottomBody.jsp" %> 

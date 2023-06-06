@@ -50,7 +50,7 @@
 							    <div class="lazyload" >
 							     <!-- 
 							     <script>
-							  	  load('https://cdn.jdon.com/query/tagHotList', function (xhr) {				
+							  	  load('/query/tagHotList', function (xhr) {				
   	                                  document.getElementById("tagHotList").innerHTML = xhr.responseText;
 			                     });
 							  </script> -->
@@ -69,7 +69,7 @@
 							    <div class="lazyload" >
 							     <!-- 
 							     <script>
-							  	  load('https://cdn.jdon.com/query/threadDigList', function (xhr) {				
+							  	  load('/query/threadDigList', function (xhr) {				
   	                                  document.getElementById("digList").innerHTML = xhr.responseText;
 			                     });
 							  </script> -->

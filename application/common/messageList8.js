@@ -40,9 +40,9 @@ var lazyloaded = false;
 function loadCkeditJS() {
   if (lazyloaded) return;
   $LAB
-    .script("https://cdn.jdon.com/common/ckeditor/ckeditor.js")
+    .script("/common/ckeditor/ckeditor.js")
     .wait()
-    .script("https://cdn.jdon.com/common/ckeditor/sample.js")
+    .script("/common/ckeditor/sample.js")
     .wait(function () {
       initSample();
       lazyloaded = true;

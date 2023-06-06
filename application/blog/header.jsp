@@ -49,11 +49,11 @@
     String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 %>
 <link rel="canonical" href="<%=domainUrl %>/blog/<bean:write name="accountProfileForm" property="account.username"/>" />
-  <link href="//cdn.jdon.com/common/jivejdon5.css" rel="stylesheet" type="text/css"/>
-  <link href="//cdn.jdon.com/common/blog/themes/default/style/blog.css" rel="stylesheet" type="text/css"/>
-<script src="//cdn.jdon.com/common/js/prototype.js"></script>
+  <link href="/common/jivejdon5.css" rel="stylesheet" type="text/css"/>
+  <link href="/common/blog/themes/default/style/blog.css" rel="stylesheet" type="text/css"/>
+<script src="/common/js/prototype.js"></script>
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
-<script src="//cdn.jdon.com/common/login2.js"></script>
+<script src="/common/login2.js"></script>
     <logic:present name="principal" >
 <script src="<html:rewrite page="/account/protected/js/account.jsp"/>"></script>
     </logic:present>
