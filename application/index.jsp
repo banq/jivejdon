@@ -13,6 +13,8 @@ response.setHeader("Expires", "0"); // Proxies.
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="/js/jdon.css" type="text/css"> 
+  <script src="/js/jquery-bootstrap2.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script> 
   <meta charset="utf-8"/>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
@@ -21,8 +23,6 @@ response.setHeader("Expires", "0"); // Proxies.
   <title>解道jdon - 传道解惑的架构师博客</title>
   <meta name="Description" content="有关领域驱动设计DDD、微服务、设计模式、软件架构、编程设计等主题，开拓软件开发思路，介绍各种编程工具库包"/>
   <meta name="Keywords" content="微服务,SOA,DDD,体系结构,架构,Gof设计模式,Java框架,大数据,云原生,面向对象,函数编程,SpringBoot,EDA,java,JavaEE,CQRS,eventsourcing" />
-  <link rel="stylesheet" href="/js/jdon.css" type="text/css"> 
-  <script src="/js/jquery-bootstrap2.js"></script>
   <link rel="dns-prefetch" href="//static.jdon.com">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap" />
   <link rel="alternate" type="application/rss+xml" title="解道订阅" href="https://www.jdon.com/rss"/>

@@ -7,6 +7,8 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="/js/jdon.css"  type="text/css">  
+    <script defer src="/js/jquery-bootstrap2.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	
     <meta charset="utf-8"/>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
@@ -21,8 +23,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <meta name="description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[140]" /> "/>
     <meta name="og:title" content="<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>"/>
     <meta name="og:description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[140]" /> "/>
-    <link rel="stylesheet" href="/js/jdon.css"  type="text/css">  
-    <script defer src="/js/jquery-bootstrap2.js"></script>
     <script defer src="/common/messageList12.js"></script> 
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap" />
     <link rel="alternate" type="application/rss+xml" title="解道订阅" href="/rss" />
