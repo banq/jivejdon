@@ -11,6 +11,7 @@ import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -33,13 +34,15 @@ public class HomepageListSolver {
 
 	public Collection<Long> getList(int start, int count) {
 		if (start == 0 || list  == null){
-		    list = new ArrayList<>();
+		 synchronized(this) {
+		    list = Collections.synchronizedList(new ArrayList<>());;
 		    for (int i = 0; i < 75; i = i + 15) {
 			   list.addAll(threadApprovedNewList.getApprovedThreads(i));
 		    }
 			list = list.stream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
 				.getThread(threadId), threadId -> threadId, (e1, e2) -> e1,
 				() -> new TreeMap<ForumThread, Long>(new HomePageComparator()))).values();
+		 }		
 	    }   
 		return list.stream().skip(start).limit(count).collect(Collectors.toList());
 	}
