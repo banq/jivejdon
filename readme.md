@@ -1,6 +1,8 @@
 # Jivejdon
 
-Jivejdon is a WordPress-like Blog/Forum and production-ready application with DDD + DomainEvents/Event Soucing/CQRS + clean architecture/Hexagonalarchitecture, powered by [jdonframework](https://github.com/banq/jdonframework). [online](https://www.jdon.com/forum/)
+Jivejdon is a WordPress-like Blog/Forum and production-ready application with DDD + DomainEvents/Event Soucing/CQRS + clean architecture/Hexagonalarchitecture, powered by [jdonframework](https://github.com/banq/jdonframework). 
+
+[online:https://www.jdon.com/](https://www.jdon.com/forum/)
 
 ![avatar](https://static.jdon.com/simgs/2023/jdongtmetrix.jpg)
 
