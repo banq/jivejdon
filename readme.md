@@ -2,6 +2,8 @@
 
 Jivejdon is a WordPress-like Blog/Forum and production-ready application with DDD + DomainEvents/Event Soucing/CQRS + clean architecture/Hexagonalarchitecture, powered by [jdonframework](https://github.com/banq/jdonframework). [online](https://www.jdon.com/forum/)
 
+![avatar](https://static.jdon.com/simgs/2023/jdongtmetrix.jpg)
+
 # Domain-centric Architecture.
 
 Domain-centric architecture is a new way to design modern world enterprise applications.
