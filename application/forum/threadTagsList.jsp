@@ -5,90 +5,50 @@
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-<div style="width: 300px">
+
 <logic:notEmpty name="tagID0">    
-   <div class="box">
-      <div class="linkblock">	
-         <div class="row">        
-           <div class="col-md-12">
-            <div class="wrap-vid">
-              <div class="widget">		                                  
+                              
                  <logic:iterate id="forumThread0" name="tagID0" length="4">
                  <div class="info">
                      <a href="<%=request.getContextPath()%>/<bean:write name="forumThread0" property="threadId"/>.html" target="_blank">
                                     <bean:write name="forumThread0" property="name" /></a>
                  </div> 
                  </logic:iterate>
-              </div>
-            </div>      
-	         </div>
-          </div>        
-        </div>
-   </div> 
+             
 </logic:notEmpty>
 
 <logic:notEmpty name="tagID1">    
-   <div class="box">
-      <div class="linkblock">	
-         <div class="row">        
-           <div class="col-md-12">
-            <div class="wrap-vid">
-              <div class="widget">		                                  
+                            
                  <logic:iterate id="forumThread1" name="tagID1" length="4">
                  <div class="info">
                      <a href="<%=request.getContextPath()%>/<bean:write name="forumThread1" property="threadId"/>.html" target="_blank">
                                     <bean:write name="forumThread1" property="name" /></a>
                  </div> 
                  </logic:iterate>
-              </div>
-            </div>      
-	         </div>
-          </div>        
-        </div>
-   </div> 
+             
 </logic:notEmpty>
 <%-- 
 <logic:notEmpty name="tagID2">    
-   <div class="box">
-      <div class="linkblock">	
-         <div class="row">        
-           <div class="col-md-12">
-            <div class="wrap-vid">
-              <div class="widget">		                                  
+                         
                  <logic:iterate id="forumThread2" name="tagID2" length="4">
                  <div class="info">
                      <a href="<%=request.getContextPath()%>/<bean:write name="forumThread2" property="threadId"/>.html" target="_blank">
                                     <bean:write name="forumThread2" property="name" /></a>
                  </div> 
                  </logic:iterate>
-              </div>
-            </div>      
-	         </div>
-          </div>        
-        </div>
-   </div> 
+             
 </logic:notEmpty>
 
 <logic:notEmpty name="tagID3">    
-   <div class="box">
-      <div class="linkblock">	
-         <div class="row">        
-           <div class="col-md-12">
-            <div class="wrap-vid">
-              <div class="widget">		                                  
+                         
                  <logic:iterate id="forumThread3" name="tagID3" length="4">
                  <div class="info">
                      <a href="<%=request.getContextPath()%>/<bean:write name="forumThread3" property="threadId"/>.html" target="_blank">
                                     <bean:write name="forumThread3" property="name" /></a>
                  </div> 
                  </logic:iterate>
-              </div>
-            </div>      
-	         </div>
-          </div>        
-        </div>
-   </div> 
+            
 </logic:notEmpty> --%>
 
 
-</div>
+
