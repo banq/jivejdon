@@ -65,16 +65,18 @@
           <div class="content">
               <div class="post wrap-vid">
                  <ul>
-							    <div id="digList" class="scrolldiv"></div>   
-							    <div class="lazyload" >
-							     <!-- 
-							     <script>
-							  	  load('/query/threadDigList', function (xhr) {				
-  	                                  document.getElementById("digList").innerHTML = xhr.responseText;
-			                     });
-							  </script> -->
-							  </div>
-
+							    <div>
+<!-- 自适应主广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="5184711902"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>		                  
+                  </div>   
 							  </ul>
               </div>
           </div>
@@ -130,20 +132,6 @@ function scrollLoader(url){
 scrollLoader('/query/approvedListOtherNoheader.shtml');   
 
 $('.lazyload').lazyload();
-
-$(function() { 
-    var elm = $('.scrolldiv'); 
-    var startPos = $(elm).offset().top; 
-    if (window.matchMedia('(min-width: 992px)').matches) { 
-    $.event.add(window, "scroll", function() { 
-        var p = $(window).scrollTop(); 
-        $(elm).css('position',((p) > startPos) ? 'fixed' : 'static'); 
-        $(elm).css('top',((p) > startPos) ? '20px' : ''); 
-    }); 
-    };
-}); 
-
-});
 
 </script>
 

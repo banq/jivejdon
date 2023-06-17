@@ -155,15 +155,18 @@ response.setHeader("Expires", "0"); // Proxies.
 				<div class="widget">
 					    <div class="wid-vid">
 							<ul>
-							 <div id="digList" class="scrolldiv"></div>   
-							    <div class="lazyload" >
-							     <!-- 
-							     <script>
-							  	  load('/query/threadDigList', function (xhr) {				
-  	                                  document.getElementById("digList").innerHTML = xhr.responseText;
-			                     });
-							  </script> -->
-							  </div>
+							 <div>
+<!-- 自适应主广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="5184711902"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>											 
+							 </div>   
 							</ul>
 							</div>
 				</div>

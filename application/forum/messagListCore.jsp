@@ -125,29 +125,19 @@
       <div class="widget wid-post">
         <div class="content">
           <div class="post wrap-vid">
-              <ul>          
-                 <logic:notEmpty name="forumThread" property="tags">          
-                  <div id="threadTagList" class="scrolldiv"></div>             
-                   <div class="lazyload" >
-							     <!-- 
-							     <script>
-							  	  load('/forum/threadTagList.shtml?othread=<bean:write name="forumThread" property="threadId"/>&threadId=<bean:write name="forumThread" property="threadId"/>', function (xhr) {				
-  	                                  document.getElementById("threadTagList").innerHTML = xhr.responseText;
-			                     });
-							     </script> -->
-							   </div>	
-                 </logic:notEmpty>		
-                 <logic:empty name="forumThread" property="tags">    
-                  <div id="digList" class="scrolldiv"></div>   
-							     <div class="lazyload" >
-							     <!-- 
-							     <script>
-							  	  load('/query/threadDigList', function (xhr) {				
-  	                                  document.getElementById("digList").innerHTML = xhr.responseText;
-			                     });
-							      </script> -->
-							     </div>
-                </logic:empty>   				   
+              <ul>                           
+                <div>
+<!-- 自适应主广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="5184711902"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>		                
+                </div>   
               </ul>
           </div>
         </div>
