@@ -120,13 +120,45 @@
           </div>
         </div>				
 			</div>
-     
+
+  <div class="widget wid-post">
+        <div class="content">
+          <div class="post wrap-vid">
+              <ul>          
+                 <logic:notEmpty name="forumThread" property="tags">          
+                  <div id="threadTagList"></div>             
+                   <div class="lazyload" >
+							     <!-- 
+							     <script>
+							  	  load('/forum/threadTagList.shtml?othread=<bean:write name="forumThread" property="threadId"/>&threadId=<bean:write name="forumThread" property="threadId"/>', function (xhr) {				
+  	                                  document.getElementById("threadTagList").innerHTML = xhr.responseText;
+			                     });
+							     </script> -->
+							   </div>	
+                 </logic:notEmpty>		
+                 <logic:empty name="forumThread" property="tags">    
+                  <div id="digList"></div>   
+							     <div class="lazyload" >
+							     <!-- 
+							     <script>
+							  	  load('/query/threadDigList', function (xhr) {				
+  	                                  document.getElementById("digList").innerHTML = xhr.responseText;
+			                     });
+							      </script> -->
+							     </div>
+                </logic:empty>   				   
+              </ul>
+          </div>
+        </div>
+      </div>     
+
+
       <!-- Start Widget -->
       <div class="widget wid-post">
         <div class="content">
           <div class="post wrap-vid">
               <ul>                           
-                <div class="scrolldiv">
+                <div>
 <!-- 自适应主广告 -->
 <ins class="adsbygoogle"
      style="display:block"

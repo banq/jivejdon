@@ -151,7 +151,23 @@ response.setHeader("Expires", "0"); // Proxies.
 							</div>
 				</div>
 
-				<!-- Start Widget newList -->
+
+				<div class="widget">
+					    <div class="wid-vid">
+							<ul>
+							 <div id="digList"></div>   
+							 <div class="lazyload" >
+							    <!-- 
+							     <script>
+							  	  load('/query/threadDigList', function (xhr) {				
+  	                                  document.getElementById("digList").innerHTML = xhr.responseText;
+			                     });
+							    </script> -->
+							  </div>
+							</ul>
+						</div>
+				</div>		
+
 				<div class="widget">
 					    <div class="wid-vid">
 							<ul>
@@ -170,6 +186,7 @@ response.setHeader("Expires", "0"); // Proxies.
 							</ul>
 							</div>
 				</div>
+		
 			
 			</div>
 		</div>

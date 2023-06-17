@@ -65,6 +65,27 @@
           <div class="content">
               <div class="post wrap-vid">
                  <ul>
+							    <div id="digList"></div>   
+							    <div class="lazyload" >
+							     <!-- 
+							     <script>
+							  	  load('/query/threadDigList', function (xhr) {				
+  	                                  document.getElementById("digList").innerHTML = xhr.responseText;
+			                     });
+							  </script> -->
+							  </div>
+
+							  </ul>
+              </div>
+          </div>
+        </div>
+
+
+        <!---- Start Widget ---->
+        <div class="widget wid-post">
+          <div class="content">
+              <div class="post wrap-vid">
+                 <ul>
 							    <div class="scrolldiv">
 <!-- 自适应主广告 -->
 <ins class="adsbygoogle"
