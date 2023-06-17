@@ -11,7 +11,7 @@
    }
 }
 </style>
-<div class="limitWidth">
+<div style="width: 300px">
 <a href="<%=request.getContextPath()%>/forum/threadDigSortedList"><b>点赞</b></a>
 <div class="box">
       <div class="linkblock">	
