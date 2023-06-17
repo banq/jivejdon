@@ -171,7 +171,7 @@ response.setHeader("Expires", "0"); // Proxies.
 				<div class="widget">
 					    <div class="wid-vid">
 							<ul>
-							 <div class="scrolldiv">
+							 <div>
 <!-- 自适应主广告 -->
 <ins class="adsbygoogle"
      style="display:block"
