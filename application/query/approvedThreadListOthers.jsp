@@ -65,7 +65,7 @@
           <div class="content">
               <div class="post wrap-vid">
                  <ul>
-							    <div>
+							    <div class="scrolldiv">
 <!-- 自适应主广告 -->
 <ins class="adsbygoogle"
      style="display:block"
