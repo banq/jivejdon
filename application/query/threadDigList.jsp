@@ -6,6 +6,11 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 
+<div class="box">
+      <div class="linkblock">	
+         <div class="row">        
+         
+
 <bean:parameter id="count" name="count" value="8"/>
 <%
 String coutlength = (String)pageContext.getAttribute("count");
@@ -16,3 +21,6 @@ String coutlength = (String)pageContext.getAttribute("count");
       </div>
 </logic:iterate>
 
+</div>
+<div>
+<div>
