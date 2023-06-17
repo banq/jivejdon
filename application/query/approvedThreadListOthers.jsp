@@ -86,7 +86,8 @@
           <div class="content">
               <div class="post wrap-vid">
                  <ul>
-							    <div>
+							    <div class="scrolldiv">
+							     <div style="width: 300px"> 
 <!-- 自适应主广告 -->
 <ins class="adsbygoogle"
      style="display:block"
@@ -97,7 +98,8 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>		                  
-                  </div>   
+                   </div> 
+							    </div>    
 							  </ul>
               </div>
           </div>

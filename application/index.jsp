@@ -171,7 +171,8 @@ response.setHeader("Expires", "0"); // Proxies.
 				<div class="widget">
 					    <div class="wid-vid">
 							<ul>
-							 <div>
+							 <div class="scrolldiv">
+							   <div style="width: 300px"> 
 <!-- 自适应主广告 -->
 <ins class="adsbygoogle"
      style="display:block"
@@ -181,7 +182,8 @@ response.setHeader("Expires", "0"); // Proxies.
      data-full-width-responsive="true"></ins>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
-</script>											 
+</script>											
+                              </div> 
 							 </div>   
 							</ul>
 							</div>
