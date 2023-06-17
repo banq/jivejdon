@@ -9,9 +9,10 @@
 
 <div class="box">
       <div class="linkblock">	
-       
           <div class="wrap-vid">
-              <div class="widget">		    
+              <div class="widget">		  
+
+
 <logic:notEmpty name="tagID0">    
                               
                  <logic:iterate id="forumThread0" name="tagID0" length="4">
@@ -22,10 +23,11 @@
                  </logic:iterate>
              
 </logic:notEmpty>
-<div>
+
 </div>
-<div>
-<div>
+</div>
+</div>
+</div>
 
 
 
@@ -45,10 +47,11 @@
                  </logic:iterate>
              
 </logic:notEmpty>
-<div>
+
 </div>
-<div>
-<div>
+</div>
+</div>
+</div>
 
 
 <%-- 

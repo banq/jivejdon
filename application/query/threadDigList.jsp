@@ -8,7 +8,6 @@
 
 <div class="box">
       <div class="linkblock">	
-       
           <div class="wrap-vid">
               <div class="widget">		 
 
@@ -22,7 +21,8 @@ String coutlength = (String)pageContext.getAttribute("count");
       </div>
 </logic:iterate>
 
-<div>
 </div>
-<div>
-<div>
+</div>
+</div>
+</div>
+
