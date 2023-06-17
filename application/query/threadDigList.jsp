@@ -8,8 +8,9 @@
 
 <div class="box">
       <div class="linkblock">	
-         <div class="row">        
-         
+       
+          <div class="wrap-vid">
+              <div class="widget">		 
 
 <bean:parameter id="count" name="count" value="8"/>
 <%
@@ -21,6 +22,7 @@ String coutlength = (String)pageContext.getAttribute("count");
       </div>
 </logic:iterate>
 
+<div>
 </div>
 <div>
 <div>

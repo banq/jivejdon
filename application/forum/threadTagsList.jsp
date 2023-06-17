@@ -6,9 +6,12 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 
+
 <div class="box">
       <div class="linkblock">	
-         <div class="row">        
+       
+          <div class="wrap-vid">
+              <div class="widget">		    
 <logic:notEmpty name="tagID0">    
                               
                  <logic:iterate id="forumThread0" name="tagID0" length="4">
@@ -19,13 +22,19 @@
                  </logic:iterate>
              
 </logic:notEmpty>
+<div>
 </div>
 <div>
 <div>
 
+
+
 <div class="box">
       <div class="linkblock">	
-         <div class="row">        
+       
+          <div class="wrap-vid">
+              <div class="widget">		 
+   
 <logic:notEmpty name="tagID1">    
                             
                  <logic:iterate id="forumThread1" name="tagID1" length="4">
@@ -36,9 +45,11 @@
                  </logic:iterate>
              
 </logic:notEmpty>
+<div>
 </div>
 <div>
 <div>
+
 
 <%-- 
 <logic:notEmpty name="tagID2">    
