@@ -9,10 +9,10 @@ ADD doc/tomcat/conf/server.xml /usr/local/tomcat/conf/
 ADD doc/tomcat/conf/jaas.config /usr/local/tomcat/conf/
 ADD doc/tomcat/lib/jaas.jar /usr/local/tomcat/lib/
 
-#add javamail and activation.jar
+#add javamail and activation.jar ,atfirst please download these jar into doc/tomcat/lib
 ADD doc/tomcat/lib/email.jar      /usr/local/tomcat/lib/
 
-# # add MySQL JDBC driver jar
+# # add MySQL JDBC driver jar, at first please download these jar into doc/tomcat/lib
 ADD doc/tomcat/lib/mysql-connector-java-5.1.36-bin.jar /usr/local/tomcat/lib/
 RUN rm -rf /usr/local/tomcat/webapps/
 ADD target/ROOT.war /usr/local/tomcat/webapps/
