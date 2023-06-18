@@ -46,7 +46,7 @@
               maxIdle="30"    
               maxWait="10000"   
               username="root"       
-              password=""
+              password="123456"
               driverClassName="com.mysql.jdbc.Driver"
               url="jdbc:mysql://localhost/jivejdon?useUnicode=true&amp;characterEncoding=UTF-8" />
               

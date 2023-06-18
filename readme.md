@@ -226,7 +226,23 @@ if mvn compile error, please configure your mirror Maven center repository.
 
 ```
 1. docker pull mysql:latest
-2. docker run  -p 3306:3306  -e MYSQL_ROOT_PASSWORD=123456 jivejdondb
+2. docker run -itd --name mysql-test -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql
+   
+   docker ps 
+   
+   docker cp ddl/mysql_jivejdon.sql  container_id:/mysql_jivejdon.sql
+   docker cp ddlmysql_security.sql  container_id:/mysql_security.sql
+   
+   
+   docker exec -it container_id bash
+   
+
+   mysql -u root -p 
+   create database jivejdon character set utf8;
+
+   mysql -u root -p jivejdon < ddl/mysql_jivejdon.sql
+   mysql -u root -p jivejdon < ddl/mysql_security.sql
+
 3. docker build -t jivejdonweb -f Dockerfile.web .
 4. docker run  -p 8080:8080 jivejdonweb
 ```
