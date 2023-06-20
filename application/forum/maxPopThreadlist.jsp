@@ -6,7 +6,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <bean:parameter id="noheader" name="noheader"  value=""/>
-<logic:notEqual name="noheader" value="on">
+
 
 <bean:define id="threadList" name="threadListForm" property="list" />
 <logic:empty name="threadListForm" property="oneModel">
@@ -66,13 +66,23 @@ pageContext.setAttribute("title", titleStr);
         </b>贴      
    </div>
 </ul>          
-</logic:notEqual>      
 
 <%@ include file="threadListCore.jsp" %>
+ 
+<div class="tres" style="float: right;">
+        <logic:empty name="forum" property="forumId">
+          <MultiPagesREST:pager actionFormName="threadListForm" page="/forum/maxPopThreads" >
+            <MultiPagesREST:prev name=" 上一页 " />
+            <MultiPagesREST:index displayCount="15" />
+            <MultiPagesREST:next  name=" 下一页 " />
+          </MultiPagesREST:pager>
+        </logic:empty>
+      
+         有<b>
+        <bean:write name="threadListForm" property="allCount"/>
+        </b>贴      
+   </div>
 
-<logic:notEqual name="noheader" value="on">       
-
-<div id="nextPageContent"></div>
       
 	    	         
 				</div>
@@ -82,48 +92,7 @@ pageContext.setAttribute("title", titleStr);
 
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
   
-<bean:define id="pagestart" name="threadListForm" property="start" />
-<bean:define id="pagecount" name="threadListForm" property="count" />
-<bean:define id="pageallCount" name="threadListForm" property="allCount" />
-
-<%  
-    int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
-    int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
-    int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
-    int pageNo = (pageAllcountInt / pageCountInt);
-    if(pageAllcountInt % pageCountInt !=0){ 
-        pageNo = pageNo + 1;
-    }    
-%>
-<script defer>
-document.addEventListener("DOMContentLoaded", function(event) { 
-
-function scrollLoader(url){
-  var start = "<%=pageStartInt+pageCountInt%>";
-  var loading = false;
-  $(window).scroll(function() {
-    var hT = $('#nextPageContent').offset().top,
-       hH = $('#nextPageContent').outerHeight(),
-       wH = $(window).height(),
-       wS = $(this).scrollTop();       
-    if (wS > (hT+hH-wH) && !loading){           
-         loading = true;          
-         if (start <= <%=pageAllcountInt%> ){                  
-           surl = (url.indexOf("?")==-1)?(url+"?"):(url+"&");           
-           load(surl +'start=' + start +'&count=<%=pageCountInt%>&noheader=on', function (xhr) {
-               document.getElementById("nextPageContent").innerHTML = document.getElementById("nextPageContent").innerHTML + xhr.responseText;               
-               start = start/1 + <%=pageCountInt%>;                              
-               loading = false;
-           });          
-         }   
-    }
-   });
-}
-scrollLoader('/forum/maxPopThreadlist.shtml?dateRange=100000');   
-
-});
-</script>   
 
 </body>
 </html>
-</logic:notEqual>    
+
