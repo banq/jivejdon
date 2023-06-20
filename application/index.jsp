@@ -41,7 +41,8 @@ response.setHeader("Expires", "0"); // Proxies.
 			<div id="main-content" class="col-md-8">
 				<div class="box">
 
-          <jsp:include page="/query/threadApprovedNewList2.shtml?count=1" flush="true"></jsp:include>
+
+       <jsp:include page="/query/threadApprovedNewList2.shtml?count=1" flush="true"></jsp:include>
 
 <div class="box"> 
   <div class="linkblock">
