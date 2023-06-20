@@ -21,14 +21,14 @@
   <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">最佳</a></li>            
   <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">精华</a></li>
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" rel="nofollow">搜索</a></li>   
+  <li style="float: right">
+         <MultiPagesREST:pager actionFormName="threadListForm" page="/approval" >
+         <MultiPagesREST:prev name=" 上一页 " />
+         <MultiPagesREST:next  name=" 下一页 " />
+         </MultiPagesREST:pager>
+   </li> 
 </ul>   
 
-<div class="pagination">
-<MultiPagesREST:pager actionFormName="threadListForm" page="/approval" >
-<MultiPagesREST:prev name=" 上一页 " />
-<MultiPagesREST:next  name=" 下一页 " />
-</MultiPagesREST:pager>
-</div>
 
 <%@ include file="threadList.jsp" %>
 
