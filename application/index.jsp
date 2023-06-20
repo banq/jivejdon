@@ -43,9 +43,28 @@ response.setHeader("Expires", "0"); // Proxies.
 
           <jsp:include page="/query/threadApprovedNewList2.shtml?count=1" flush="true"></jsp:include>
 
+<div class="box"> 
+  <div class="linkblock">
+    <div class="row">
+        <div class="col-sm-12">
+	    <!-- 自适应主广告 -->
+		<ins class="adsbygoogle"
+     		style="display:block"
+     		data-ad-client="ca-pub-7573657117119544"
+     		data-ad-slot="5184711902"
+     		data-ad-format="auto"
+     		data-full-width-responsive="true"></ins>
+		<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+    </div>
+  </div>
+</div>
+
     <div class="box"> 
 	    <div class="tres center">        
-           每日更新 <html:link page="/approval"><b>更多最佳文章</b></html:link>		   
+           每日更新 <html:link page="/forum/threadDigSortedList"><b>更多最佳文章</b></html:link>		   
 		</div>
     </div>
 
