@@ -43,6 +43,11 @@ response.setHeader("Expires", "0"); // Proxies.
 
           <jsp:include page="/query/threadApprovedNewList2.shtml?count=1" flush="true"></jsp:include>
 
+    <div class="box"> 
+	    <div class="tres center">        
+           每日更新 <html:link page="/approval"><b>更多最佳文章</b></html:link>		   
+		</div>
+    </div>
 
     <div id="approvedItem1"><br><br><br><br><br><br></div>          
 	<div>
@@ -105,11 +110,6 @@ response.setHeader("Expires", "0"); // Proxies.
           -->
       </div>
 
-      <div class="box"> 
-	    <div class="tres center">        
-           每日更新 <html:link page="/approval"><b>更多最佳文章</b></html:link>		   
-		</div>
-      </div>
 		  
         </div>
         <div class="box">

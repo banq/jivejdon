@@ -23,6 +23,13 @@
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" rel="nofollow">搜索</a></li>   
 </ul>   
 
+<div class="pagination">
+<MultiPagesREST:pager actionFormName="threadListForm" page="/approval" >
+<MultiPagesREST:prev name=" 上一页 " />
+<MultiPagesREST:next  name=" 下一页 " />
+</MultiPagesREST:pager>
+</div>
+
 <%@ include file="threadList.jsp" %>
 
 <div id="nextPageContent"></div>  
