@@ -127,7 +127,7 @@ public class RSSGenServlet extends HttpServlet {
 			// or atom_0.3
 			String rssType = request.getParameter("rssType");
 			if (UtilValidate.isEmpty(rssType)) {
-				rssType = "atom_0.3";
+				rssType = "rss_2.0";
 			}
 			feed.setFeedType(rssType);
 
