@@ -115,10 +115,10 @@ public class RSSGenServlet extends HttpServlet {
 			return;
 		}
 
-		if (!checkSpamHit(request)) {
-			((HttpServletResponse) response).sendError(404);
-			return;
-		}
+		// if (!checkSpamHit(request)) {
+		// 	((HttpServletResponse) response).sendError(404);
+		// 	return;
+		// }
 
 		try {
 
@@ -127,7 +127,7 @@ public class RSSGenServlet extends HttpServlet {
 			// or atom_0.3
 			String rssType = request.getParameter("rssType");
 			if (UtilValidate.isEmpty(rssType)) {
-				rssType = "rss_2.0";
+				rssType = "atom_0.3";
 			}
 			feed.setFeedType(rssType);
 
