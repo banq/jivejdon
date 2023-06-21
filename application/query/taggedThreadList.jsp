@@ -44,19 +44,27 @@ pageContext.setAttribute("title", titleStr);
       </center>
 
     
-<%-- <div class="tres"  style="float: right;"> 共有<b>
+<div class="tres"  style="float: right;"> 共有<b>
             <bean:write name="threadListForm" property="allCount"/>
             </b>贴
             <MultiPagesREST:pager actionFormName="threadListForm" page="/tags"  paramId="tagID" paramName="tagID" >
               <MultiPagesREST:prev name=" 上一页 " />
-              <MultiPagesREST:index displayCount="3" />
+              <MultiPagesREST:index displayCount="15" />
               <MultiPagesREST:next  name=" 下一页 " />
             </MultiPagesREST:pager>
-</div> --%>
+</div>
 
 <%@ include file="threadList.jsp" %>
 
-<div id="nextPageContent"></div>
+<div class="tres"  style="float: right;"> 共有<b>
+            <bean:write name="threadListForm" property="allCount"/>
+            </b>贴
+            <MultiPagesREST:pager actionFormName="threadListForm" page="/tags"  paramId="tagID" paramName="tagID" >
+              <MultiPagesREST:prev name=" 上一页 " />
+              <MultiPagesREST:index displayCount="15" />
+              <MultiPagesREST:next  name=" 下一页 " />
+            </MultiPagesREST:pager>
+</div>
 
 
         </div>
@@ -67,46 +75,6 @@ pageContext.setAttribute("title", titleStr);
 	
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
 
-<bean:define id="pagestart" name="threadListForm" property="start" />
-<bean:define id="pagecount" name="threadListForm" property="count" />
-<bean:define id="pageallCount" name="threadListForm" property="allCount" />
-<%  
-    int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
-    int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
-    int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
-    int pageNo = (pageAllcountInt / pageCountInt);
-    if(pageAllcountInt % pageCountInt !=0){ 
-        pageNo = pageNo + 1;
-    }    
-%>
-<script defer>
-document.addEventListener("DOMContentLoaded", function(event) { 
-
-function scrollLoader(url){
-  var start = "<%=pageStartInt+pageCountInt%>";
-  var loading = false;
-  $(window).scroll(function() {
-    var hT = $('#nextPageContent').offset().top,
-       hH = $('#nextPageContent').outerHeight(),
-       wH = $(window).height(),
-       wS = $(this).scrollTop();       
-    if (wS > (hT+hH-wH) && !loading){           
-         loading = true;          
-         if (start <= <%=pageAllcountInt%> ){                  
-           surl = (url.indexOf("?")==-1)?(url+"?"):(url+"&");           
-           load(surl +'start=' + start +'&count=<%=pageCountInt%>&noheader=on', function (xhr) {
-               document.getElementById("nextPageContent").innerHTML = document.getElementById("nextPageContent").innerHTML + xhr.responseText;               
-               start = start/1 + <%=pageCountInt%>;                              
-               loading = false;
-           });          
-         }   
-    }
-   });
-}
-scrollLoader('/query/taggedThreadListNoheader.shtml?tagID=<bean:write name="tagID"/>');   
-
-});
-</script>   
 
 </body>
 </html>
