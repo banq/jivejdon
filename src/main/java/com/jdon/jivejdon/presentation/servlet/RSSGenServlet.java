@@ -50,6 +50,7 @@ import com.sun.syndication.feed.synd.SyndEntryImpl;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.SyndFeedOutput;
+import com.sun.syndication.io.WireFeedOutput;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -57,12 +58,20 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.jdom.Document;
+import org.jdom.ProcessingInstruction;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
+
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RSSGenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -70,6 +79,7 @@ public class RSSGenServlet extends HttpServlet {
 	private String channel_title = "";
 	private String channel_des = "";
 	private ServletContext servletContext;
+	private final int LENGTH = 15;
 
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
@@ -130,7 +140,7 @@ public class RSSGenServlet extends HttpServlet {
 				rssType = "rss_2.0";
 			}
 			feed.setFeedType(rssType);
-
+            
 			String url = RequestUtil.getAppURL(request);
 			feed.setTitle(channel_title);
 			feed.setLink(url + "/");
@@ -165,16 +175,32 @@ public class RSSGenServlet extends HttpServlet {
 				entries.addAll(this.addsitemap(request, url));
 				Collections.sort(entries);
 				Collections.reverse(entries);
-				feed.setEntries(entries.subList(0, 10));
+				feed.setEntries(entries.subList(0, LENGTH));
 				// }
 			}
 
-			request.setCharacterEncoding("UTF-8");
+			// request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
-			response.setContentType("text/plain; charset=utf-8");
+			response.setContentType("application/xml; charset=utf-8");
 			Writer writer = response.getWriter();
-			SyndFeedOutput output = new SyndFeedOutput();
-			output.output(feed, writer);
+			
+			WireFeedOutput feedOutput = new WireFeedOutput();
+            Document doc = feedOutput.outputJDom(feed.createWireFeed());
+            // create the XSL processing instruction
+            Map<String,String> xsl = new HashMap<>();
+			xsl.put("href", "/js/rss-style.xsl");
+			xsl.put("type", "text/xsl");
+            ProcessingInstruction pXsl = new ProcessingInstruction("xml-stylesheet", xsl);
+            doc.addContent(0, pXsl);
+
+			// write the document to the servlet response
+            XMLOutputter outputter = new XMLOutputter(Format.getCompactFormat() );
+            outputter.output(doc,writer);
+
+            // SyndFeedOutput output = new SyndFeedOutput();
+			// // output.output(feed, writer);
+			
+
 			writer.close();
 
 		} catch (Exception e) {
@@ -190,10 +216,11 @@ public class RSSGenServlet extends HttpServlet {
 		int start = Integer.parseInt(startS);
 
 		String countS = request.getParameter("count");
-		if (UtilValidate.isEmpty(countS)) {
-			countS = "5";
+		int count = LENGTH;
+		if (!UtilValidate.isEmpty(countS)) {
+			count = Integer.parseInt(countS);
 		}
-		int count = Integer.parseInt(countS);
+	
 
 		List<SyndEntrySorted> entries = new ArrayList<SyndEntrySorted>();
 		ThreadTag tag = getTag(request, tagId);
@@ -227,10 +254,11 @@ public class RSSGenServlet extends HttpServlet {
 		int start = Integer.parseInt(startS);
 
 		String countS = request.getParameter("count");
-		if (UtilValidate.isEmpty(countS)) {
-			countS = "10";
+		int count = LENGTH;
+		if (!UtilValidate.isEmpty(countS)) {
+			count = Integer.parseInt(countS);
 		}
-		int count = Integer.parseInt(countS);
+	
 
 		List<SyndEntrySorted> entries = new ArrayList<SyndEntrySorted>();
 
@@ -278,10 +306,11 @@ public class RSSGenServlet extends HttpServlet {
 		int start = Integer.parseInt(startS);
 
 		String countS = request.getParameter("count");
-		if (UtilValidate.isEmpty(countS)) {
-			countS = "10";
+		int count = LENGTH;
+		if (!UtilValidate.isEmpty(countS)) {
+			count = Integer.parseInt(countS);
 		}
-		int count = Integer.parseInt(countS);
+	
 
 		List<SyndEntrySorted> entries = new ArrayList<SyndEntrySorted>();
 
