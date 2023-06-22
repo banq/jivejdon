@@ -85,7 +85,9 @@ pageContext.setAttribute("title", titleStr);
         </b>贴
        
 </ul>
-  <!-- 自适应主广告 -->
+ <div class="row">
+    <div class="col-sm-12">
+    <!-- 自适应主广告 -->
 		<ins class="adsbygoogle"
      		style="display:block"
      		data-ad-client="ca-pub-7573657117119544"
@@ -94,7 +96,9 @@ pageContext.setAttribute("title", titleStr);
      		data-full-width-responsive="true"></ins>
 		<script>
      (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>                              
+          </script>                        
+    </div>         
+ </div>  
 
 				</div>
       </div>	

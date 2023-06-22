@@ -105,6 +105,8 @@ pageContext.setAttribute("title", titleStr);
            有<b><bean:write name="threadListForm" property="allCount"/></b>贴          
         </logic:notEmpty>           
   </ul> 
+  <div class="row">
+    <div class="col-sm-12">
     <!-- 自适应主广告 -->
 		<ins class="adsbygoogle"
      		style="display:block"
@@ -115,7 +117,8 @@ pageContext.setAttribute("title", titleStr);
 		<script>
      (adsbygoogle = window.adsbygoogle || []).push({});
           </script>                        
-          
+    </div>         
+ </div>
 
 				</div>
             </div>	
