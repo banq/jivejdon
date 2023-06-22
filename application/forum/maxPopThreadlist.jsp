@@ -56,7 +56,7 @@ pageContext.setAttribute("title", titleStr);
         <logic:empty name="forum" property="forumId">
           <MultiPagesREST:pager actionFormName="threadListForm" page="/forum/maxPopThreads" >
             <MultiPagesREST:prev name=" 上一页 " />
-            <MultiPagesREST:index displayCount="15" />
+            <MultiPagesREST:index displayCount="10" />
             <MultiPagesREST:next  name=" 下一页 " />
           </MultiPagesREST:pager>
         </logic:empty>
@@ -73,7 +73,7 @@ pageContext.setAttribute("title", titleStr);
         <logic:empty name="forum" property="forumId">
           <MultiPagesREST:pager actionFormName="threadListForm" page="/forum/maxPopThreads" >
             <MultiPagesREST:prev name=" 上一页 " />
-            <MultiPagesREST:index displayCount="15" />
+            <MultiPagesREST:index displayCount="10" />
             <MultiPagesREST:next  name=" 下一页 " />
           </MultiPagesREST:pager>
         </logic:empty>

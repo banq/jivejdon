@@ -49,7 +49,7 @@ pageContext.setAttribute("title", titleStr);
             </b>贴
             <MultiPagesREST:pager actionFormName="threadListForm" page="/tags"  paramId="tagID" paramName="tagID" >
               <MultiPagesREST:prev name=" 上一页 " />
-              <MultiPagesREST:index displayCount="15" />
+              <MultiPagesREST:index displayCount="10" />
               <MultiPagesREST:next  name=" 下一页 " />
             </MultiPagesREST:pager>
 </div>
@@ -61,7 +61,7 @@ pageContext.setAttribute("title", titleStr);
             </b>贴
             <MultiPagesREST:pager actionFormName="threadListForm" page="/tags"  paramId="tagID" paramName="tagID" >
               <MultiPagesREST:prev name=" 上一页 " />
-              <MultiPagesREST:index displayCount="15" />
+              <MultiPagesREST:index displayCount="10" />
               <MultiPagesREST:next  name=" 下一页 " />
             </MultiPagesREST:pager>
 </div>

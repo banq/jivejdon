@@ -60,14 +60,14 @@ pageContext.setAttribute("title", titleStr);
   		 <logic:empty name="forum" property="forumId">						        
           <MultiPagesREST:pager actionFormName="threadListForm" page="/threads" >
             <MultiPagesREST:prev name=" 上一页 " />
-            <MultiPagesREST:index displayCount="15" />
+            <MultiPagesREST:index displayCount="10" />
             <MultiPagesREST:next  name=" 下一页 " />
           </MultiPagesREST:pager>          
         </logic:empty>
         <logic:notEmpty name="forum" property="forumId">			    
           <MultiPagesREST:pager actionFormName="threadListForm" page="/forum" paramId="forum" paramName="forum" paramProperty="forumId">
             <MultiPagesREST:prev name=" 上一页 " />
-            <MultiPagesREST:index displayCount="15" />
+            <MultiPagesREST:index displayCount="10" />
             <MultiPagesREST:next  name=" 下一页 " />
           </MultiPagesREST:pager>
            有<b><bean:write name="threadListForm" property="allCount"/></b>贴          
@@ -90,14 +90,14 @@ pageContext.setAttribute("title", titleStr);
   		 <logic:empty name="forum" property="forumId">						        
           <MultiPagesREST:pager actionFormName="threadListForm" page="/threads" >
             <MultiPagesREST:prev name=" 上一页 " />
-            <MultiPagesREST:index displayCount="15" />
+            <MultiPagesREST:index displayCount="10" />
             <MultiPagesREST:next  name=" 下一页 " />
           </MultiPagesREST:pager>          
         </logic:empty>
         <logic:notEmpty name="forum" property="forumId">			    
           <MultiPagesREST:pager actionFormName="threadListForm" page="/forum" paramId="forum" paramName="forum" paramProperty="forumId">
             <MultiPagesREST:prev name=" 上一页 " />
-            <MultiPagesREST:index displayCount="15" />
+            <MultiPagesREST:index displayCount="10" />
             <MultiPagesREST:next  name=" 下一页 " />
           </MultiPagesREST:pager>
            有<b><bean:write name="threadListForm" property="allCount"/></b>贴          
