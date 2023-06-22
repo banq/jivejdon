@@ -52,11 +52,12 @@ pageContext.setAttribute("title", titleStr);
   <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">最佳</a></li>	
   <li class="active"><a href="#">精华</a></li>
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" rel="nofollow">搜索</a></li>
-  <div class="tres" style="float: right;">
+</ul>          
+<ul class="pagination pull-right">
         <logic:empty name="forum" property="forumId">
           <MultiPagesREST:pager actionFormName="threadListForm" page="/forum/maxPopThreads" >
             <MultiPagesREST:prev name=" 上一页 " />
-            <MultiPagesREST:index displayCount="10" />
+            <MultiPagesREST:index displayCount="8" />
             <MultiPagesREST:next  name=" 下一页 " />
           </MultiPagesREST:pager>
         </logic:empty>
@@ -64,16 +65,15 @@ pageContext.setAttribute("title", titleStr);
          有<b>
         <bean:write name="threadListForm" property="allCount"/>
         </b>贴      
-   </div>
-</ul>          
+</ul>
 
 <%@ include file="threadListCore.jsp" %>
  
-<div class="tres" style="float: right;">
+<ul class="pagination pull-right">
         <logic:empty name="forum" property="forumId">
           <MultiPagesREST:pager actionFormName="threadListForm" page="/forum/maxPopThreads" >
             <MultiPagesREST:prev name=" 上一页 " />
-            <MultiPagesREST:index displayCount="10" />
+            <MultiPagesREST:index displayCount="8" />
             <MultiPagesREST:next  name=" 下一页 " />
           </MultiPagesREST:pager>
         </logic:empty>
@@ -81,7 +81,7 @@ pageContext.setAttribute("title", titleStr);
          有<b>
         <bean:write name="threadListForm" property="allCount"/>
         </b>贴      
-   </div>
+</ul>
 
       
 	    	         

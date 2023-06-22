@@ -44,27 +44,27 @@ pageContext.setAttribute("title", titleStr);
       </center>
 
     
-<div class="tres"  style="float: right;"> 共有<b>
+<ul class="pagination pull-right"> 有<b>
             <bean:write name="threadListForm" property="allCount"/>
             </b>贴
             <MultiPagesREST:pager actionFormName="threadListForm" page="/tags"  paramId="tagID" paramName="tagID" >
               <MultiPagesREST:prev name=" 上一页 " />
-              <MultiPagesREST:index displayCount="10" />
+              <MultiPagesREST:index displayCount="8" />
               <MultiPagesREST:next  name=" 下一页 " />
             </MultiPagesREST:pager>
-</div>
+</ul>
 
 <%@ include file="threadList.jsp" %>
 
-<div class="tres"  style="float: right;"> 共有<b>
+<ul class="pagination pull-right"> 有<b>
             <bean:write name="threadListForm" property="allCount"/>
             </b>贴
             <MultiPagesREST:pager actionFormName="threadListForm" page="/tags"  paramId="tagID" paramName="tagID" >
               <MultiPagesREST:prev name=" 上一页 " />
-              <MultiPagesREST:index displayCount="10" />
+              <MultiPagesREST:index displayCount="8" />
               <MultiPagesREST:next  name=" 下一页 " />
             </MultiPagesREST:pager>
-</div>
+</ul>
 
 
         </div>
