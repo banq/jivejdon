@@ -22,17 +22,26 @@
   <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">精华</a></li>
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" rel="nofollow">搜索</a></li>   
   <li style="float: right">
-         <MultiPagesREST:pager actionFormName="threadListForm" page="/approval" >
+        
+   </li> 
+</ul>   
+<ul class="pagination pull-right">
+      <MultiPagesREST:pager actionFormName="threadListForm" page="/approval" >
          <MultiPagesREST:prev name=" 上一页 " />
          <MultiPagesREST:next  name=" 下一页 " />
          </MultiPagesREST:pager>
-   </li> 
-</ul>   
-
+       
+</ul>
 
 <%@ include file="threadList.jsp" %>
 
-<div id="nextPageContent"></div>  
+<ul class="pagination pull-right">
+      <MultiPagesREST:pager actionFormName="threadListForm" page="/approval" >
+         <MultiPagesREST:prev name=" 上一页 " />
+         <MultiPagesREST:next  name=" 下一页 " />
+         </MultiPagesREST:pager>
+       
+</ul>
 
 
         </div>
@@ -120,50 +129,6 @@
 
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
 
-
-
-<bean:define id="pagestart" name="threadListForm" property="start" />
-<bean:define id="pagecount" name="threadListForm" property="count" />
-<bean:define id="pageallCount" name="threadListForm" property="allCount" />
-<%  
-    int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
-    int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
-    int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
-    int pageNo = (pageAllcountInt / pageCountInt);
-    if(pageAllcountInt % pageCountInt !=0){ 
-        pageNo = pageNo + 1;
-    }    
-%>
-<script defer>
-document.addEventListener("DOMContentLoaded", function(event) { 
-
-
-function scrollLoader(url){
-  var start = "<%=pageStartInt+pageCountInt%>";
-  var loading = false;
-  $(window).scroll(function() {
-    var hT = $('#nextPageContent').offset().top,
-       hH = $('#nextPageContent').outerHeight(),
-       wH = $(window).height(),
-       wS = $(this).scrollTop();       
-    if (wS > (hT+hH-wH) && !loading){           
-         loading = true;          
-         if (start <= <%=pageAllcountInt%> ){                  
-           surl = (url.indexOf("?")==-1)?(url+"?"):(url+"&");           
-           load(surl +'start=' + start +'&count=<%=pageCountInt%>&noheader=on', function (xhr) {
-               document.getElementById("nextPageContent").innerHTML = document.getElementById("nextPageContent").innerHTML + xhr.responseText;               
-               start = start/1 + <%=pageCountInt%>;                              
-               loading = false;
-           });          
-         }   
-    }
-   });
-}
-scrollLoader('/query/approvedListOtherNoheader.shtml');   
-
-$('.lazyload').lazyload();
-
-</script>
 
 </body>
 </html>
