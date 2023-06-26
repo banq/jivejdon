@@ -99,16 +99,15 @@
         </header>   
         
         <logic:equal name="forumMessage" property="root" value="true"><div>
-							        <!-- 自适应主广告 -->
-									<ins class="adsbygoogle"
-     									style="display:block"
-     									data-ad-client="ca-pub-7573657117119544"
-     									data-ad-slot="5184711902"
-     									data-ad-format="auto"
-     									data-full-width-responsive="true"></ins>
-							<script>
-     					  	(adsbygoogle = window.adsbygoogle || []).push({});
-          		</script>		
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="3121124104"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
          </div></logic:equal>     
 
         <div class="post_body">
@@ -144,16 +143,14 @@
               </div>
 
               <div class="box">
-              <!-- 自适应主广告 -->
 <ins class="adsbygoogle"
      style="display:block"
+     data-ad-format="autorelaxed"
      data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="5184711902"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
+     data-ad-slot="3540211914"></ins>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
-</script>							
+</script>		
               </div>
 
               <logic:notEmpty name="forumMessage" property="reBlogVO.threadFroms">          
