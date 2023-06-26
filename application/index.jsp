@@ -43,6 +43,7 @@ response.setHeader("Expires", "0"); // Proxies.
 
 
        <jsp:include page="/query/threadApprovedNewList2.shtml?count=1" flush="true"></jsp:include>
+	   
 
 <div class="box"> 
   <div class="linkblock">
@@ -152,6 +153,15 @@ response.setHeader("Expires", "0"); // Proxies.
 							</form>
 						</ul>						
 					</div>
+				</div>
+
+				<div class="widget">
+					    <div class="wid-vid">
+							<ul>
+                              <div id="newList"><jsp:include page="/query/threadNewList.shtml?count=15" flush="true"></jsp:include></div>   
+							   
+							</ul>
+							</div>
 				</div>
 
 				<div class="widget">
