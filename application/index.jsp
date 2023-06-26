@@ -158,15 +158,6 @@ response.setHeader("Expires", "0"); // Proxies.
 				<div class="widget">
 					    <div class="wid-vid">
 							<ul>
-                              <div id="newList"><jsp:include page="/query/threadNewList.shtml?count=15" flush="true"></jsp:include></div>   
-							   
-							</ul>
-							</div>
-				</div>
-
-				<div class="widget">
-					    <div class="wid-vid">
-							<ul>
 							  <div id="tagHotList"></div>   
 							    <div class="lazyload" >
 							     <!-- 
@@ -181,6 +172,14 @@ response.setHeader("Expires", "0"); // Proxies.
 							</div>
 				</div>
 
+                <div class="widget">
+					    <div class="wid-vid">
+							<ul>
+                              <div id="newList"><jsp:include page="/query/threadNewList.shtml?count=15" flush="true"></jsp:include></div>   
+							   
+							</ul>
+							</div>
+				</div>
 
 				<div class="widget">
 					    <div class="wid-vid">
