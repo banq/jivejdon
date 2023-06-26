@@ -107,16 +107,17 @@ pageContext.setAttribute("title", titleStr);
   </ul> 
   <div class="row">
     <div class="col-sm-12">
-    <!-- 自适应主广告 -->
-		<ins class="adsbygoogle"
-     		style="display:block"
-     		data-ad-client="ca-pub-7573657117119544"
-     		data-ad-slot="5184711902"
-     		data-ad-format="auto"
-     		data-full-width-responsive="true"></ins>
-		<script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="fluid"
+     data-ad-layout-key="-ev-1p-5j-ot+26n"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="3378777426"></ins>
+<script>
      (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>                        
+</script>
     </div>         
  </div>
 
