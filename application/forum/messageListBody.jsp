@@ -99,7 +99,7 @@
         </header>   
         
         <logic:equal name="forumMessage" property="root" value="true"><div>
-<script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
      crossorigin="anonymous"></script>
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
@@ -145,7 +145,7 @@
               </div>
 
               <div class="box">
-<script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
      crossorigin="anonymous"></script>
 <ins class="adsbygoogle"
      style="display:block"

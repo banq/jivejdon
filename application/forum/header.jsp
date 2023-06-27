@@ -10,6 +10,10 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <link rel="stylesheet" href="/js/jdon.css"  type="text/css">  
     <script defer src="/js/jquery-bootstrap2.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	
+    <link rel="preconnect" href="https://adservice.google.com/">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
+    <link rel="preconnect" href="https://www.googletagservices.com/">
+    <link rel="preconnect" href="https://tpc.googlesyndication.com/">    
     <meta charset="utf-8"/>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta http-equiv="" content="IE=edge,chrome=1"/>
