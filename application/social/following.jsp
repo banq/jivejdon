@@ -62,31 +62,31 @@
    <br>
 关注  
     <logic:greaterThan name="account" property="subscriptionCount" value="0">
-      <a href="<%=request.getContextPath()%>/social/following.shtml?subscribeType=3&userId=<bean:write name="account" property="userId"/>"  target="_blank"  rel="nofollow">
+      <a href="<%=request.getContextPath()%>/social/following.shtml?subscribeType=3&userId=<bean:write name="account" property="userId"/>"  target="_blank"  >
            <span class="smallgray"><bean:write name="account" property="subscriptionCount"/></span>
       </a>
    </logic:greaterThan>             
 &nbsp;| 粉丝 
     <logic:greaterThan name="account" property="subscribedCount" value="0">
-      <a href="<%=request.getContextPath()%>/social/follower.shtml?subscribeType=3&userId=<bean:write name="account" property="userId"/>"  target="_blank"  rel="nofollow">
+      <a href="<%=request.getContextPath()%>/social/follower.shtml?subscribeType=3&userId=<bean:write name="account" property="userId"/>"  target="_blank"  >
             <span class="smallgray"><bean:write name="account" property="subscribedCount"/></span>
       </a>
     </logic:greaterThan>
              
 &nbsp; | 微博              
     <logic:greaterThan name="account" property="messageCount" value="0">
-       <a href="<%=request.getContextPath()%>/blog/messages/<bean:write name="account" property="username"/>"  target="_blank"  rel="nofollow">
+       <a href="<%=request.getContextPath()%>/blog/messages/<bean:write name="account" property="username"/>"  target="_blank"  >
            <span class="smallgray"><bean:write name="account" property="messageCount"/></span>
                  </a>
     </logic:greaterThan>
    
    <br> 	
    <a href="<%=request.getContextPath()%>/blog/<bean:write name="account" property="username"/>" >
-       博客：<span rel="nofollow"><bean:write name="account" property="username"/>.jdon.com</span>
+       博客：<span ><bean:write name="account" property="username"/>.jdon.com</span>
    </a>
      <br>
    <a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=3&subscribeId=<bean:write name="account" property="userId"/>"
-                  target="_blank" title="加关注"  rel="nofollow">            
+                  target="_blank" title="加关注"  >            
                  <img src="/images/user_add.gif" width="18" height="18" alt="关注本主题" border="0" /><span class="blackgray">+关注</span>
      </a>         
    </td>

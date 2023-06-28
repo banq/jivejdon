@@ -10,14 +10,14 @@
  <logic:equal name="Integer" value="1">
     关注你了 &nbsp;
       <a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=3&subscribeId=<bean:write name="id"/>"
-                  target="_blank" title="加关注"  rel="nofollow">            
+                  target="_blank" title="加关注"  >            
                  <img src="/images/user_add.gif" width="18" height="18" alt="关注本主题" border="0" /><span class="blackgray">+关注</span>
        </a>    
  </logic:equal>  
  <logic:equal name="Integer" value="2">
     已关注&nbsp;
       <a href="/account/protected/sub/delSub.shtml?service=subscriptionService&method=deleteSubscription&id=<bean:write name="id"/>"
-                  target="_blank"  rel="nofollow">            
+                  target="_blank"  >            
                  <span class="blackgray">取消关注</span>
        </a>    
         
@@ -25,13 +25,13 @@
  <logic:equal name="Integer" value="3">
     相互关注&nbsp;
       <a href="/account/protected/sub/delSub.shtml?service=subscriptionService&method=deleteSubscription&id=<bean:write name="id"/>"
-                  target="_blank"  rel="nofollow">            
+                  target="_blank"  >            
                  <span class="blackgray">取消关注</span>
        </a>    
  </logic:equal>  
  <logic:equal name="Integer" value="0">
   <a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=3&subscribeId=<bean:write name="id"/>"
-                  target="_blank" title="加关注"  rel="nofollow">            
+                  target="_blank" title="加关注"  >            
                  <img src="/images/user_add.gif" width="18" height="18" alt="关注本主题" border="0" /><span class="blackgray">+关注</span>
                 </a>
  </logic:equal>        

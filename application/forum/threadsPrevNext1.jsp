@@ -53,7 +53,7 @@ if (iter.hasPrevious()){
 <a title="手机条码扫描浏览本页" href="JavaScript:void(0);" onclick='loadWLJS(qtCode)'  >&nbsp;&nbsp;</a>
 </div>
 <div class="box3">
-<a title="关注本主题" href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=1&subscribeId=<bean:write name="forumThread" property="threadId" />"  rel="nofollow">&nbsp;&nbsp;</a>
+<a title="关注本主题" href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=1&subscribeId=<bean:write name="forumThread" property="threadId" />"  >&nbsp;&nbsp;</a>
 </div>
 <div class="box4">
 <a title="加入本帖到收藏夹" href="JavaScript:void(0);" onclick="addfavorite('<bean:write name="forumThread" property="rootMessage.messageVO.subject"/>')" >&nbsp;&nbsp;</a>

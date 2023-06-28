@@ -226,7 +226,7 @@ var openUploadWindow = function(url){
               <br/>              	
               <logic:notPresent name="principal" >
                <a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=3&subscribeId=<bean:write name="accountProfileForm" property="account.userId"/>"
-                  target="_blank" title="加关注"  rel="nofollow">            
+                  target="_blank" title="加关注"  >            
                  <img src="<%=request.getContextPath() %>/images/user_add.gif " width="18" height="18" alt="关注本主题" border="0" /><span class="blackgray">+关注</span>
                 </a>                
               </logic:notPresent>
@@ -244,7 +244,7 @@ var openUploadWindow = function(url){
               <tr><td>
               <logic:notEmpty name="accountProfileForm" property="account.subscriptionCount">
                 <logic:greaterThan name="accountProfileForm" property="account.subscriptionCount" value="0">
-                <a href="<%=request.getContextPath()%>/social/following.shtml?subscribeType=3&userId=<bean:write name="accountProfileForm" property="account.userId"/>"  target="_blank"  rel="nofollow">
+                <a href="<%=request.getContextPath()%>/social/following.shtml?subscribeType=3&userId=<bean:write name="accountProfileForm" property="account.userId"/>"  target="_blank"  >
                  <bean:write name="accountProfileForm" property="account.subscriptionCount"/>
                  </a>
                 </logic:greaterThan>
@@ -253,7 +253,7 @@ var openUploadWindow = function(url){
               </td><td>
               <logic:notEmpty name="accountProfileForm" property="account.subscribedCount">
                 <logic:greaterThan name="accountProfileForm" property="account.subscribedCount" value="0">
-                <a href="<%=request.getContextPath()%>/social/follower.shtml?subscribeType=3&userId=<bean:write name="accountProfileForm" property="account.userId"/>"  target="_blank"  rel="nofollow">
+                <a href="<%=request.getContextPath()%>/social/follower.shtml?subscribeType=3&userId=<bean:write name="accountProfileForm" property="account.userId"/>"  target="_blank"  >
                  <bean:write name="accountProfileForm" property="account.subscribedCount"/>
                  </a>
                 </logic:greaterThan>
@@ -262,7 +262,7 @@ var openUploadWindow = function(url){
               </td><td>
               <logic:notEmpty name="accountProfileForm" property="account.messageCount">
                 <logic:greaterThan name="accountProfileForm" property="account.messageCount" value="0">
-                <a href="<%=request.getContextPath()%>/blog/messages/<bean:write name="accountProfileForm" property="account.username"/>"  target="_blank"  rel="nofollow">
+                <a href="<%=request.getContextPath()%>/blog/messages/<bean:write name="accountProfileForm" property="account.username"/>"  target="_blank"  >
                  <bean:write name="accountProfileForm" property="account.messageCount"/>
                  </a>
                 </logic:greaterThan>
@@ -333,7 +333,7 @@ var openUploadWindow = function(url){
 		 <div class="content">
  	 <div class="list_div">
 		 	  <ul><li>
-		 <a href="/social/interest.shtml?userId=<bean:write name="accountProfileForm" property="account.userId"/>" rel="nofollow">
+		 <a href="/social/interest.shtml?userId=<bean:write name="accountProfileForm" property="account.userId"/>" >
 	               近期关注情况
 	      </a>
 		 </li></ul>

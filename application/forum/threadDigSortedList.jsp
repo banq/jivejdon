@@ -50,7 +50,7 @@ pageContext.setAttribute("title", titleStr);
   <li><a href="<%=request.getContextPath()%>/approval">新佳</a></li>
   <li class="active"><a href="#">最佳</a></li>
   <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">精华</a></li>
-  <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" rel="nofollow">搜索</a></li>
+  <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" >搜索</a></li>
 </ul>          
 <ul class="pagination pull-right">
         <logic:empty name="forum" property="forumId">

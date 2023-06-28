@@ -20,7 +20,7 @@
   <li><a href="<%=request.getContextPath()%>/approval">新佳</a></li>
   <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">最佳</a></li>	
   <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">精华</a></li>
-  <li class="active"><a href="#" rel="nofollow">搜索</a></li>
+  <li class="active"><a href="#" >搜索</a></li>
 </ul>
 
 </div>
