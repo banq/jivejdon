@@ -20,7 +20,7 @@ if (errorBlocker.checkRate(request.getRemoteAddr(), 10)){
 <meta http-equiv="" content="IE=edge,chrome=1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta http-equiv="refresh" content="3;url=https://www.jdon.com" />
-    <meta name="robots" content="noindex">
+    
     <title>该页无法找到404 ERROR</title>
     <link rel="stylesheet" type="text/css" href="/common/style/cmstop-error.css" media="all">
 </head>

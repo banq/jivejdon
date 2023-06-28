@@ -25,7 +25,7 @@ if (errorBlocker.checkCount(request.getRemoteAddr(), 10)){
 <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
 <meta http-equiv="" content="IE=edge,chrome=1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="robots" content="noindex">
+    
 <title></title>
 </head>
 <body>

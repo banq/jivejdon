@@ -7,7 +7,6 @@
 
 <bean:define id="title"  value=" 道场查询" />
 <%@ include file="../common/IncludeTop.jsp" %>
-<meta name="robots" content="noindex,nofollow">
 
 <div id="page-content" class="single-page container">
 		<div class="row">

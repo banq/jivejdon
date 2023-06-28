@@ -72,24 +72,24 @@
 
               <div class="post_titleother">
                 <logic:equal name="messageListForm" property='<%= "authenticated[" + i + "]" %>' value="true">
-                  <a href='<html:rewrite page="/message/messageAction.shtml?action=edit" paramId="messageId" paramName="forumMessage" paramProperty="messageId" />' rel='nofollow'>
+                  <a href='<html:rewrite page="/message/messageAction.shtml?action=edit" paramId="messageId" paramName="forumMessage" paramProperty="messageId" />'>
                     编辑
                   </a>
                   <logic:equal name="forumMessage" property="root" value="true">
                     <a href='<html:rewrite
             page="/message/updateViewAction.shtml?action=edit"
             paramId="threadId" paramName="forumMessage"
-            paramProperty="forumThread.threadId" />' rel='nofollow'>编辑标题 </a>
+            paramProperty="forumThread.threadId" />'>编辑标题 </a>
 
                     <a href='<html:rewrite
             page="/message/tag/thread.shtml?action=edit"
             paramId="threadId" paramName="forumMessage"
-            paramProperty="forumThread.threadId" />' rel='nofollow'>编辑标签 </a>
+            paramProperty="forumThread.threadId" />'>编辑标签 </a>
 
                     <a href='<html:rewrite
             page="/message/reblogLink.shtml?action=edit"
             paramId="threadId" paramName="forumMessage"
-            paramProperty="forumThread.threadId" />' rel='nofollow'>编辑互链 </a>
+            paramProperty="forumThread.threadId" />'>编辑互链 </a>
                   </logic:equal>
                 </logic:equal>
               </div>
