@@ -44,14 +44,14 @@ int h = 0 ;
  <div class="col-md-4">
  <div class="box">	
   <div class="linkblock">
-	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' style="width:300px; heigh:500px; border:none;overflow:hidden;">
-  
-    
-      <div>
+     <div>
         <a href='<%=request.getContextPath() %>/tag-<bean:write name="threadTag" property="tagID"/>/' target="_blank" class="post-tag">
 		    <bean:write name="threadTag" property="title" /></a>
 	      <a href="/tag-<bean:write name="threadTag" property="tagID"/>/rss"><i class="fa fa-feed"></i></a>
       </div>
+	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' style="width:300px; heigh:500px; border:none;overflow:hidden;">
+  
+  
          <div class="lazyload" >
 	    <!-- 
         <script>
