@@ -13,6 +13,18 @@
 
 <logic:present name="tagsListForm">
 <logic:greaterThan name="tagsListForm" property="allCount" value="0">
+
+
+<ul class="pagination pull-right">
+<MultiPagesREST:pager actionFormName="tagsListForm" page="/tags/p"  >
+<MultiPagesREST:prev name=" 上一页 " />
+<MultiPagesREST:index displayCount="8" />
+<MultiPagesREST:next  name=" 下一页 " />
+</MultiPagesREST:pager>
+
+</ul>
+
+
 <%
 int i = 3;
 int h = 0 ;
@@ -65,17 +77,14 @@ int h = 0 ;
   </div>
  <%}%>
 
-<div class="box">
-<div class="tres">        
-  
+<ul class="pagination pull-right">
 <MultiPagesREST:pager actionFormName="tagsListForm" page="/tags/p"  >
 <MultiPagesREST:prev name=" 上一页 " />
-<MultiPagesREST:index displayCount="3" />
+<MultiPagesREST:index displayCount="8" />
 <MultiPagesREST:next  name=" 下一页 " />
 </MultiPagesREST:pager>
-      </div>
-   
-</div>	
+
+</ul>
 </logic:greaterThan>
 </logic:present>
 
