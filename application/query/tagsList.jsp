@@ -53,7 +53,7 @@ int h = 0 ;
 	      <a href="/tag-<bean:write name="threadTag" property="tagID"/>/rss"><i class="fa fa-feed"></i></a>
       </div>
       <div>
-      <jsp:include page="/query/tt.shtml?start=0&length=10&tablewidth=160&count=10&tagID=${threadTag.tagID}" flush="true"></jsp:include>
+      <jsp:include page="/query/tt.shtml?start=0&length=10&tablewidth=160&count=10&tagID=${threadTag.tagID}"></jsp:include>
 	  
       </div>  
   </div>  
