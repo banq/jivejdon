@@ -15,6 +15,10 @@
 <logic:present name="tagsListForm">
 <logic:greaterThan name="tagsListForm" property="allCount" value="0">
 
+<div class="row">
+  <div class="col-md-12">
+    <div class="box"> 
+
 
 <ul class="pagination pull-right">
 <MultiPagesREST:pager actionFormName="tagsListForm" page="/tags/p"  >
@@ -41,27 +45,22 @@ int h = 0 ;
  <div class="box">	
   <div class="linkblock">
 	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' style="width:300px; heigh:500px; border:none;overflow:hidden;">
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-    </div>
-      <div class="lazyload" >
-	    <!-- 
-        <script>
-         load('/query/tt/${threadTag.tagID}', function(xhr) {
-  	       document.getElementById('ajax_tagID=<bean:write name="threadTag" property="tagID"/>').innerHTML = xhr.responseText;
-         });
-        </script>
-        -->
+  
+    
+      <div>
+        <a href='<%=request.getContextPath() %>/tag-<bean:write name="threadTag" property="tagID"/>/' target="_blank" class="post-tag">
+		    <bean:write name="threadTag" property="title" /></a>
+	      <a href="/tag-<bean:write name="threadTag" property="tagID"/>/rss"><i class="fa fa-feed"></i></a>
+      </div>
+      <div>
+      <jsp:include page="/query/tt.shtml?start=0&length=10&tablewidth=160&count=10&tagID=${threadTag.tagID}" flush="true"></jsp:include>
+	  
+      </div>  
+  </div>  
 	</div>	
-   </div>  
- </div>
+</div>  
 </div>
+
  
 <% i = i+1;%>
 <%
@@ -86,6 +85,9 @@ int h = 0 ;
 </MultiPagesREST:pager>
 
 </ul>
+    </div>
+  </div>
+</div>
 </logic:greaterThan>
 </logic:present>
 
@@ -94,13 +96,6 @@ int h = 0 ;
 <%@include file="../common/IncludeBottomBody.jsp"%>
 <%@include file="../account/loginAJAX.jsp"%>
 
-<script defer>
-document.addEventListener("DOMContentLoaded", function(event) { 
-  
-    $('.lazyload').lazyload();
-
-});
-</script>
   
 </body>
 </html>
