@@ -52,8 +52,14 @@ int h = 0 ;
 		    <bean:write name="threadTag" property="title" /></a>
 	      <a href="/tag-<bean:write name="threadTag" property="tagID"/>/rss"><i class="fa fa-feed"></i></a>
       </div>
-      <div>
-      <jsp:include page="/query/tt.shtml?start=0&length=10&tablewidth=160&count=10&tagID=${threadTag.tagID}"></jsp:include>
+         <div class="lazyload" >
+	    <!-- 
+        <script>
+         load('/query/tt/${threadTag.tagID}', function(xhr) {
+  	       document.getElementById('ajax_tagID=<bean:write name="threadTag" property="tagID"/>').innerHTML = xhr.responseText;
+         });
+        </script>
+        -->
 	  
       </div>  
   </div>  
