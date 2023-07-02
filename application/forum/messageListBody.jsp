@@ -112,9 +112,7 @@
 </script>        
          </div></logic:equal>     
 
-        <div class="post_body">
-          <div class="post_bodyin">
-            <div class="post_body_content">
+       
               <div class="article">
                 <main id='body_<bean:write name="forumMessage" property="messageId"/>'>
                   <p>
@@ -170,9 +168,6 @@
           </logic:equal>
 
               
-            </div>
-          </div>
-        </div>
 <logic:equal name="forumMessage" property="root" value="false">
   </div>
 </logic:equal>

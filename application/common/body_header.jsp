@@ -10,7 +10,7 @@
 			<div class="row">
                 <div class="col-md-12 ">
                     <a href="/"><img src="/simgs/jdon100.png" width="100" height="40" loading="lazy"/></a>
-                    <span class="list-inline top-link link" style="float:right;">
+                    <span class="list-inline top-link link pull-right">
 				        <a href="<%=request.getContextPath() %>/forum"><i class="fa fa-home"></i>Dojo</a>
 						<a href="<%=request.getContextPath() %>/threads"><i class="fa fa-list-ul"></i>最新</a>
 						<a href="<%=request.getContextPath() %>/forum/threadDigSortedList"><i class="fa fa-star-half-full"></i>最佳</a>
