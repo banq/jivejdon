@@ -128,23 +128,21 @@
                  <logic:notEmpty name="forumThread" property="tags">          
                   <div id="threadTagList"></div>             
                    <div class="lazyload" >
-							     <!-- 
 							     <script>
 							  	  load('/forum/threadTagList.shtml?othread=<bean:write name="forumThread" property="threadId"/>&threadId=<bean:write name="forumThread" property="threadId"/>', function (xhr) {				
   	                                  document.getElementById("threadTagList").innerHTML = xhr.responseText;
 			                     });
-							     </script> -->
+							     </script> 
 							   </div>	
                  </logic:notEmpty>		
                  <logic:empty name="forumThread" property="tags">    
                   <div id="digList"></div>   
 							     <div class="lazyload" >
-							     <!-- 
 							     <script>
 							  	  load('/query/threadDigList', function (xhr) {				
   	                                  document.getElementById("digList").innerHTML = xhr.responseText;
 			                     });
-							      </script> -->
+							      </script>
 							     </div>
                 </logic:empty>   				   
               </ul>
