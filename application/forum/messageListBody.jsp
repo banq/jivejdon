@@ -7,6 +7,11 @@
 <%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
+<logic:empty name="forumThread">
+   <bean:define id="forumThread" name="messageListForm" property="oneModel"/>
+   <bean:define id="forum" name="forumThread" property="forum"/>
+</logic:empty>
+
 <logic:iterate id="forumMessage" name="messageListForm" property="list" indexId="i">
 
 <a name="<bean:write name="forumMessage" property="messageId"/>"></a>

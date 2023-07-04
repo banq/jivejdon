@@ -36,11 +36,6 @@
     <div id="main-content" class="col-md-8">
       <div class="box">
 
-        <logic:empty name="forumThread">
-          <bean:define id="forumThread" name="messageListForm" property="oneModel"/>
-          <bean:define id="forum" name="forumThread" property="forum"/>
-        </logic:empty>
-
         <!--  内容-->
         <div id="messageListBody">
           <article>  
