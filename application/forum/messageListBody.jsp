@@ -183,35 +183,29 @@
 
               <logic:notEmpty name="forumMessage" property="reBlogVO.threadFroms">          
                 <logic:iterate id="threadFrom" name="forumMessage" property="reBlogVO.threadFroms">                
-                  <div class="reblogfrom" id='<bean:write name="threadFrom" property="threadId"/>'></div>                  
-                </logic:iterate>         
-     
-<script defer>
-document.addEventListener("DOMContentLoaded", function(event) { 
-  $(document).ready(function() {              
-      $('.reblogfrom').each(function(i, obj) {        
-        scrollLoadByElementId('/forum/thread.shtml?othread=<bean:write name="forumThread" property="threadId"/>&threadId='+ obj.id,obj.id); 
-      });   
-  });            
-});  
-</script>                        
+                  <div class="reblogfrom" id='<bean:write name="threadFrom" property="threadId"/>'></div>    
+                  <script defer>
+                  document.addEventListener("DOMContentLoaded", function(event) { 
+                    $(document).ready(function() {              
+                          scrollLoadByElementId('/forum/thread.shtml?othread=<bean:write name="forumThread" property="threadId"/>&threadId=<bean:write name="threadFrom" property="threadId"/>','<bean:write name="threadFrom" property="threadId"/>'); 
+                    });            
+                  });  
+                  </script>                  
+                </logic:iterate>                           
               </logic:notEmpty>
 
 
               <logic:notEmpty name="forumMessage" property="reBlogVO.threadTos">
                 <logic:iterate id="threadTo" name="forumMessage" property="reBlogVO.threadTos">
                   <div class="reblogto" id='<bean:write name="threadTo" property="threadId"/>'></div>
+                  <script defer>
+                  document.addEventListener("DOMContentLoaded", function(event) { 
+                    $(document).ready(function() {              
+                          scrollLoadByElementId('/forum/thread.shtml?othread=<bean:write name="forumThread" property="threadId"/>&threadId=<bean:write name="threadTo" property="threadId"/>','<bean:write name="threadTo" property="threadId"/>'); 
+                    });            
+                  });  
+                  </script>                  
                 </logic:iterate>
-    
-<script defer>
-document.addEventListener("DOMContentLoaded", function(event) { 
-  $(document).ready(function() {                
-      $('.reblogto').each(function(i, obj) {        
-        scrollLoadByElementId('/forum/thread.shtml?othread=<bean:write name="forumThread" property="threadId"/>&threadId='+ obj.id,obj.id); 
-       });
-  });            
-});  
-</script>                
               </logic:notEmpty>   
               
 
