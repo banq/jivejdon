@@ -79,7 +79,7 @@ response.setHeader("Expires", "0"); // Proxies.
 
     <div class="box"> 
 	    <div class="tres center">        
-           每日更新 更多<html:link page="/approval"><b>新佳</b></html:link> <html:link page="/forum/maxPopThreads"><b>精华</b></html:link>		   
+           实时前沿追踪 更多<html:link page="/approval"><b>新佳</b></html:link> <html:link page="/forum/maxPopThreads"><b>精华</b></html:link>		   
 		</div>
     </div>
 
