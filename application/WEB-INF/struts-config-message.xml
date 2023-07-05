@@ -185,8 +185,8 @@
             <forward name="success" path="/forum/thread2.shtml" />
         </action> -->
 
-        <action name="threadForm" path="/forum/thread" type="com.jdon.jivejdon.presentation.action.ViewThreadAction" scope="request" validate="false">
-            <forward name="success" path="/forum/messageListBodyReBlogLink.jsp" />
+        <action name="threadListForm" path="/forum/threadLinkList" type="com.jdon.jivejdon.presentation.action.query.ThreadLinkListAction" scope="request" validate="false">
+            <forward name="success" path="/forum/threadLinkList.jsp" />
         </action>
 
          <!-- <action path="/forum/threadTagList" type="com.jdon.jivejdon.presentation.action.MessageListIPFilterAction" name="threadListForm" scope="request" validate="false">
