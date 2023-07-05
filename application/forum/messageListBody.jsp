@@ -127,7 +127,9 @@
                 </main>
               </div>    
 
-             <logic:equal name="forumMessage" property="root" value="true">
+<logic:equal name="forumMessage" property="root" value="true">
+
+
               <div class="diggArea list-inline  top-social" >
                 <DIV class=diggNum id="digNumber_<bean:write name="forumMessage" property="messageId"/>">
                   <logic:notEqual name="forumMessage" property="digCount" value="0">
@@ -147,6 +149,25 @@
 	              </ul>
               </div>
 
+ 
+   <!-- 导航区  -->
+        <div class="post_pages_end">
+          <div class="table-button-left">
+            <div class="table-button-right">
+              <logic:greaterThan name="messageListForm" property="numPages" value="1">
+                <div class="tres">
+                  有<b><bean:write name="messageListForm" property="numPages"/></b>页 
+                  <MultiPagesREST:pager actionFormName="messageListForm" page="" paramId="thread" paramName="forumThread" paramProperty="threadId">
+                    <MultiPagesREST:prev name=" 上一页 "/>
+                    <MultiPagesREST:index displayCount="3"/>
+                    <MultiPagesREST:next name=" 下一页 "/>
+                  </MultiPagesREST:pager>
+                </div>
+              </logic:greaterThan>
+            </div>
+          </div>
+        </div>             
+
               <div class="box">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
      crossorigin="anonymous"></script>
@@ -163,14 +184,40 @@
               <logic:notEmpty name="forumMessage" property="reBlogVO.threadFroms">          
                 <logic:iterate id="threadFrom" name="forumMessage" property="reBlogVO.threadFroms">                
                   <div class="reblogfrom" id='<bean:write name="threadFrom" property="threadId"/>'></div>                  
-                </logic:iterate>                  
+                </logic:iterate>         
+     
+<script defer>
+document.addEventListener("DOMContentLoaded", function(event) { 
+  $(document).ready(function() {              
+      $('.reblogfrom').each(function(i, obj) {        
+        scrollLoadByElementId('/forum/thread.shtml?othread=<bean:write name="forumThread" property="threadId"/>&threadId='+ obj.id,obj.id); 
+      });   
+  });            
+});  
+</script>                        
               </logic:notEmpty>
+
+
               <logic:notEmpty name="forumMessage" property="reBlogVO.threadTos">
                 <logic:iterate id="threadTo" name="forumMessage" property="reBlogVO.threadTos">
                   <div class="reblogto" id='<bean:write name="threadTo" property="threadId"/>'></div>
                 </logic:iterate>
-              </logic:notEmpty>              
-          </logic:equal>
+    
+<script defer>
+document.addEventListener("DOMContentLoaded", function(event) { 
+  $(document).ready(function() {                
+      $('.reblogto').each(function(i, obj) {        
+        scrollLoadByElementId('/forum/thread.shtml?othread=<bean:write name="forumThread" property="threadId"/>&threadId='+ obj.id,obj.id); 
+       });
+  });            
+});  
+</script>                
+              </logic:notEmpty>   
+              
+
+
+
+</logic:equal>
 
               
 <logic:equal name="forumMessage" property="root" value="false">

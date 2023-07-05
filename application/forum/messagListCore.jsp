@@ -44,25 +44,9 @@
         </div>
 
         <div id="pageEnd"></div>
-        <div id="nextPageContent"></div>
+  
+        <div id="nextPageContent"></div> 
 
-        <%-- <!-- 导航区  -->
-        <div class="post_pages_end">
-          <div class="table-button-left">
-            <div class="table-button-right">
-              <logic:greaterThan name="messageListForm" property="numPages" value="1">
-                <div class="tres">
-                  有<b><bean:write name="messageListForm" property="numPages"/></b>页 
-                  <MultiPagesREST:pager actionFormName="messageListForm" page="" paramId="thread" paramName="forumThread" paramProperty="threadId">
-                    <MultiPagesREST:prev name=" 上一页 "/>
-                    <MultiPagesREST:index displayCount="3"/>
-                    <MultiPagesREST:next name=" 下一页 "/>
-                  </MultiPagesREST:pager>
-                </div>
-              </logic:greaterThan>
-            </div>
-          </div>
-        </div> --%>
       </div>
       <%if (request.getSession(false) != null){%>
        <div class="box">
@@ -191,6 +175,7 @@
   <%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
+ <logic:greaterThan name="messageListForm" property="allCount" value="1">         
 
 <bean:parameter name="thread" id="thread" value=""/>
 <bean:define id="pagestart" name="messageListForm" property="start" />
@@ -209,15 +194,6 @@
 
 document.addEventListener("DOMContentLoaded", function(event) { 
   
-  $(document).ready(function() {              
-      $('.reblogfrom').each(function(i, obj) {        
-        scrollLoadByElementId('/forum/thread.shtml?othread=<bean:write name="forumThread" property="threadId"/>&threadId='+ obj.id,obj.id); 
-      });
-      $('.reblogto').each(function(i, obj) {        
-        scrollLoadByElementId('/forum/thread.shtml?othread=<bean:write name="forumThread" property="threadId"/>&threadId='+ obj.id,obj.id); 
-       });
-  });      
-
 function scrollLoader(url){
   var start = "<%=pageStartInt+pageCountInt%>";
   var loading = false;
@@ -243,6 +219,6 @@ scrollLoader('/forum/messageListBodyNoheader.shtml?thread=<bean:write name="thre
 
 });
 </script>   
-
+</logic:greaterThan>
   </body>
   </html>
