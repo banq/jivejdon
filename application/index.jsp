@@ -16,10 +16,10 @@ response.setHeader("Expires", "0"); // Proxies.
   <link rel="stylesheet" href="/js/jdon.css" type="text/css"> 
   <script src="/js/jquery-bootstrap2.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script> 
-  <link rel="preconnect" href="https://adservice.google.com/" crossorigin="anonymous">
-  <link rel="preconnect" href="https://googleads.g.doubleclick.net/" crossorigin="anonymous">
-  <link rel="preconnect" href="https://www.googletagservices.com/" crossorigin="anonymous">
-  <link rel="preconnect" href="https://tpc.googlesyndication.com/" crossorigin="anonymous">  
+  <link rel="preconnect dns-prefetch" href="//adservice.google.com" crossorigin>
+  <link rel="preconnect dns-prefetch" href="//googleads.g.doubleclick.net" crossorigin>
+  <link rel="preconnect dns-prefetch" href="//tpc.googlesyndication.com" crossorigin>
+  <link rel="preconnect dns-prefetch" href="//analytics.google.com" crossorigin> 
   <meta charset="utf-8"/>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
   <meta http-equiv="" content="IE=edge,chrome=1"/>
