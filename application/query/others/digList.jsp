@@ -12,10 +12,13 @@
 String coutlength = (String)pageContext.getAttribute("count");
 %>        
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='<%=coutlength%>' >
-<article>
-	<div class="info"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank" class="smallgray">
+
+	<div class="info">
+        <article>
+        <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank" class="smallgray">
              <bean:write name="forumThread" property="name" /></a>
+        </article>       
       </div>
-</article>      
+    
 </logic:iterate>
 </div>
