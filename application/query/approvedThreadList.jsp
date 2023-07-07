@@ -16,23 +16,24 @@ response.setDateHeader("Expires", 0);
    <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
    <bean:define id="thumbthreadId" name="forumThread" property="threadId"/>
    
-     <div class="box"> 
+<div class="box"> 
   <div class="linkblock" itemscope itemtype="http://schema.org/BlogPosting">
   <div class="row">
-        <div class="col-sm-12">
+      <div class="col-sm-12">
        <div class="box">
             <div class="zoom-container">
-				<div>
+			      	<div>
                <% String thumbthreadIdS = ((Long)pageContext.getAttribute("thumbthreadId")).toString(); %>               
-                <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">                  
+                <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">        
+                  <figure>          
                     <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="thumbnail" style="width: 100%" fetchpriority="high"/>
-                </logic:notEmpty>
-
-                  
-            </div>
-			</div>
+                  </figure>
+                </logic:notEmpty>                  
+              </div>
+			      </div>
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
+         <article>
          <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank"><bean:write name="forumThread" property="name"/></a></h3>
       
          <div class="info">			 
@@ -65,9 +66,10 @@ response.setDateHeader("Expires", 0);
         
           <div class="wrap-vid">
               <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank" class="smallgray">详细</a></p>
-      </div>
+          </div>
+      </article>
   
-             </div>
+      </div>
   </div>
 </div>
 </div>

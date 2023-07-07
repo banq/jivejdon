@@ -44,8 +44,10 @@
             </div>
           <div class="wrap-vid">
                  <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">                  
-                  <div>                      
+                  <div>                     
+                   <figure>  
                     <img src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="thumbnail" loading="lazy"/>                  
+                   </figure>  
                   </div>
                   <div>
                      <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank" class="smallgray">详细</a>
