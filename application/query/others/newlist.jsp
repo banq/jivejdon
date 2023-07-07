@@ -21,11 +21,13 @@ response.setDateHeader("Expires", 0);
 String coutlength = (String)pageContext.getAttribute("count");
 %>        
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='<%=coutlength%>' >
-<article>
+
 	<div class="info">
+      <article>
          <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank" class="smallgray"><bean:write name="forumThread" property="name" /></a>
-      </div>
-</article>      
+      </article>   
+    </div>
+   
 </logic:iterate>
 </div>
 </div>
