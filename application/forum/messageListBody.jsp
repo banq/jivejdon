@@ -119,16 +119,12 @@
 
        
               <div class="article">
-                <main id='body_<bean:write name="forumMessage" property="messageId"/>'>
-                  <p>
-                     <bean:write name="forumMessage" property="messageVO.body" filter="false"/>
-                  <br>
-                  </p>
-                </main>
+                <article><main><bean:write name="forumMessage" property="messageVO.body" filter="false"/></main></article>  
               </div>    
+             
 
 <logic:equal name="forumMessage" property="root" value="true">
-
+<aside>
 
               <div class="diggArea list-inline  top-social" >
                 <DIV class=diggNum id="digNumber_<bean:write name="forumMessage" property="messageId"/>">
@@ -181,7 +177,7 @@
 </script>
               </div>
 
-<aside>
+
               <logic:notEmpty name="forumMessage" property="reBlogVO.threadFroms">          
                   <div id='threadFroms'></div>    
                   <script defer>

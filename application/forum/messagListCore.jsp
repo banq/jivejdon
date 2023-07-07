@@ -38,9 +38,9 @@
 
         <!--  内容-->
         <div id="messageListBody">
-          <article>  
+   
           <%@include file="messageListBody.jsp" %>
-          </article>                      
+                  
         </div>
 
         <div id="pageEnd"></div>
@@ -160,6 +160,9 @@
 
     </div>
 </aside>
+
+</div>
+</div>
 
   <div id="reply" style="display:none">
 
