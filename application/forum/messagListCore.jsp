@@ -159,9 +159,6 @@
       </div>
 
     </div>
-  </div>    
-</div>
-
 </aside>
 
   <div id="reply" style="display:none">
