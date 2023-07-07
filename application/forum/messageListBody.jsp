@@ -54,7 +54,8 @@
                <logic:equal name="forumMessage" property="root" value="true">
                     <i class="fa fa-calendar"></i>
                     <bean:define id="cdate" name="forumThread" property="creationDate"></bean:define>
-                    <%String cdateS = (String) pageContext.getAttribute("cdate"); %><%=cdateS.substring(2, 11) %>
+                    <%String cdateS = (String) pageContext.getAttribute("cdate"); %>
+                    <time datetime="<%=cdateS.substring(2, 11) %>"><%=cdateS.substring(2, 11) %></time>
                   <span></span>
                 </logic:equal>
 				<span></span>  

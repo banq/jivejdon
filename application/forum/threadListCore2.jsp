@@ -12,13 +12,15 @@
         <div class="box">
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
+         <article> 
          <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"><bean:write name="forumThread" property="name"/></a></h3>
       
          <div class="info">			 
               <span><i class="fa fa-calendar"></i>
                 <bean:define id="cdate" name="forumThread" property="creationDate" ></bean:define>
-        <%String cdateS = (String)pageContext.getAttribute("cdate"); %><%=cdateS.substring(2, 11) %>
-                      </span>
+                <%String cdateS = (String)pageContext.getAttribute("cdate"); %>
+                <time datetime="<%=cdateS.substring(2, 11) %>"><%=cdateS.substring(2, 11) %></time>
+              </span>
 			 <logic:notEqual name="forumThread" property="state.messageCount" value="0">
               <span><i class="fa fa-comment"></i> <bean:write name="forumThread" property="state.messageCount" />
                       </span>
@@ -57,9 +59,10 @@
                    <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank" class="smallgray">详细</a></p>
                           
                 </logic:notEmpty>      
-      </div>
+          </div>
+          </article>
   
-             </div>
+    </div>
   </div>
 </div>
 </div>

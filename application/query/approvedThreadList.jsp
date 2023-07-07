@@ -38,8 +38,9 @@ response.setDateHeader("Expires", 0);
          <div class="info">			 
               <span><i class="fa fa-calendar"></i>
                 <bean:define id="cdate" name="forumThread" property="creationDate" ></bean:define>
-        <%String cdateS = (String)pageContext.getAttribute("cdate"); %><%=cdateS.substring(2, 11) %>
-                      </span>
+                <%String cdateS = (String)pageContext.getAttribute("cdate"); %>
+                <time datetime="<%=cdateS.substring(2, 11) %>"><%=cdateS.substring(2, 11) %></time>
+              </span>
 			 <logic:notEqual name="forumThread" property="state.messageCount" value="0">
               <span><i class="fa fa-comment"></i> <bean:write name="forumThread" property="state.messageCount" />
                       </span>

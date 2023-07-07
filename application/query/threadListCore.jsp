@@ -5,21 +5,22 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ page session="false" %>
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
-<article>  
+
   <div class="box"> 
     <div class="linkblock">
      <div class="row">
       <div class="col-sm-12">
         <div class="box">
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
-
+         <article> 
          <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"><bean:write name="forumThread" property="name"/></a></h3>
       
          <div class="info">			 
               <span><i class="fa fa-calendar"></i>
                 <bean:define id="cdate" name="forumThread" property="creationDate" ></bean:define>
-        <%String cdateS = (String)pageContext.getAttribute("cdate"); %><%=cdateS.substring(2, 11) %>
-                      </span>
+                <%String cdateS = (String)pageContext.getAttribute("cdate"); %>
+                <time datetime="<%=cdateS.substring(2, 11) %>"><%=cdateS.substring(2, 11) %></time>
+              </span>
 			 <logic:notEqual name="forumThread" property="state.messageCount" value="0">
               <span><i class="fa fa-comment"></i> <bean:write name="forumThread" property="state.messageCount" />
                       </span>
@@ -59,10 +60,10 @@
                           
                 </logic:notEmpty>              
           </div>
-  
-             </div>
+          </article> 
+     </div>
   </div>
 </div>
 </div>
 </div>
-</article>  
+ 
