@@ -58,6 +58,8 @@
        </div>
       <%}%>
     </div>
+
+<aside>
     <!-- /////////////////右边 -->
     <div id="sidebar" class="col-md-4">
       <!-- Start Widget -->
@@ -160,7 +162,7 @@
   </div>    
 </div>
 
-
+</aside>
 
   <div id="reply" style="display:none">
 

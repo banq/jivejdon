@@ -34,8 +34,10 @@ String coutlength = (String)pageContext.getAttribute("count");
 <div class="widget_tag_cloud">
 <div class="tagcloud">
 <logic:iterate indexId="i"   id="ThreadTag" name="tagsHotListForm" property="list" length='<%=coutlength%>' >
+<article>
     <a href="<%=request.getContextPath()%>/tag-<bean:write name="ThreadTag" property="tagID"/>/" class="tag-cloud-link"><bean:write name="ThreadTag" property="title"/></a>
                      &nbsp;&nbsp; 
+</article>                     
 </logic:iterate>
 </div>
 </div>

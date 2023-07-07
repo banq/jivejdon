@@ -5,6 +5,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ page session="false" %>
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
+<article>  
   <div class="box"> 
     <div class="linkblock">
      <div class="row">
@@ -64,3 +65,4 @@
 </div>
 </div>
 </div>
+</article>  

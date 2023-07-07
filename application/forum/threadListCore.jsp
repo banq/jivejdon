@@ -27,7 +27,9 @@
             </div>
 </div>
  <logic:iterate indexId="i" id="forumThread" name="threadListForm"  property="list">
+ <article>
     <%@ include file="threadListCore2.jsp" %>
+ </article>
  </logic:iterate>
 
 

@@ -181,12 +181,13 @@
 </script>
               </div>
 
+<aside>
               <logic:notEmpty name="forumMessage" property="reBlogVO.threadFroms">          
-                  <div id='<bean:write name="forumThread" property="threadId"/>'></div>    
+                  <div id='threadFroms'></div>    
                   <script defer>
                   document.addEventListener("DOMContentLoaded", function(event) { 
                     $(document).ready(function() {              
-                          scrollLoadByElementId('/forum/threadLinkList.shtml?threadId=<bean:write name="forumThread" property="threadId"/>','<bean:write name="forumThread" property="threadId"/>'); 
+                          scrollLoadByElementId('/forum/threadLinkList.shtml?threadId=<bean:write name="forumThread" property="threadId"/>','threadFroms'); 
                     });            
                   });  
                   </script>                  
@@ -194,18 +195,18 @@
 
               <logic:empty name="forumMessage" property="reBlogVO.threadFroms">  
               <logic:notEmpty name="forumMessage" property="reBlogVO.threadTos">
-                  <div id='<bean:write name="forumThread" property="threadId"/>'></div>    
+                  <div id='threadTos'></div>    
                   <script defer>
                   document.addEventListener("DOMContentLoaded", function(event) { 
                     $(document).ready(function() {              
-                          scrollLoadByElementId('/forum/threadLinkList.shtml?threadId=<bean:write name="forumThread" property="threadId"/>','<bean:write name="forumThread" property="threadId"/>'); 
+                          scrollLoadByElementId('/forum/threadLinkList.shtml?threadId=<bean:write name="forumThread" property="threadId"/>','threadTos'); 
                     });            
                   });  
                   </script>  
               </logic:notEmpty>   
               </logic:empty>
               
-
+</aside>
 
 
 </logic:equal>
