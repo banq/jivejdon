@@ -34,6 +34,7 @@
 int i = 3;
 int h = 0 ;
 %>
+<main>
 <logic:iterate id="threadTag" name="tagsListForm" property="list" >
  <%
   if(i % 3==0){ 
@@ -45,9 +46,11 @@ int h = 0 ;
  <div class="box">	
   <div class="linkblock">
      <div>
+       <section>
         <a href='<%=request.getContextPath() %>/tag-<bean:write name="threadTag" property="tagID"/>/' target="_blank" class="post-tag">
 		    <bean:write name="threadTag" property="title" /></a>
 	      <a href="/tag-<bean:write name="threadTag" property="tagID"/>/rss"><i class="fa fa-feed"></i></a>
+       </section> 
       </div>
 	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' style="width:300px; heigh:500px; border:none;overflow:hidden;">
   
@@ -76,7 +79,7 @@ int h = 0 ;
  <%}%>
 
 </logic:iterate>
-
+</main>
 <%
   if(i % 3 !=0){ 
  %>
