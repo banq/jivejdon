@@ -120,6 +120,8 @@
                                 &nbsp;&nbsp;<bean:write name="account"
                                                         property="username"/>
                             </b>
+                            <main>
+                            <article>
                             <a href='<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId" />.html'
                                target="_blank">
                                 <bean:write name="forumThread" property="name"/></a>
@@ -150,6 +152,9 @@
                             <p><span class="blackgray"><bean:write
                                     name="forumMessage"
                                     property="modifiedDate3"/></span>
+                                    
+                            </article>
+                            </main>        
 
                         </div>
                     </td>

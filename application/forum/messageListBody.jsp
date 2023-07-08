@@ -120,7 +120,7 @@
 
        
               <div class="article">
-                <article><main><bean:write name="forumMessage" property="messageVO.body" filter="false"/></main></article>  
+                <main><article><bean:write name="forumMessage" property="messageVO.body" filter="false"/></article></main>
               </div>    
              
 
