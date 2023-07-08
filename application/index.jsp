@@ -47,17 +47,17 @@ response.setHeader("Expires", "0"); // Proxies.
 <%@ include file="./common/body_header.jsp" %>
 
 	<!-- /////////////////////////////////////////Content -->
-	
+
 	<div id="page-content" class="single-page container">
 		<div class="row">
 			<div id="main-content" class="col-md-8">
+			   <main>	
 				<div class="box">
 
-<main>
-       <jsp:include page="/query/threadApprovedNewList2.shtml?count=1" flush="true"></jsp:include>
-</main>
-	   
 
+       <jsp:include page="/query/threadApprovedNewList2.shtml?count=1" flush="true"></jsp:include>
+
+	
 <div class="box"> 
   <div class="linkblock">
     <div class="row">
@@ -146,17 +146,22 @@ response.setHeader("Expires", "0"); // Proxies.
       </div>
 
 		  
-        </div>
+    </div>
+	</main> 
+
+
         <div class="box">
-					<div class="box-header header-natural">
-					</div>
-					<div class="box-content">
-						<div class="row">
-							
-						</div>
-					</div>
-				</div>
+			<div class="box-header header-natural">
 			</div>
+			<div class="box-content">
+			  <div class="row">
+							
+		      </div>
+		    </div>
+	    </div>
+</div>
+
+<aside>  			
 		   	<div id="sidebar" class="col-md-4">
 				<!---- Start Widget ---->
 				<div class="widget wid-follow">
@@ -234,8 +239,9 @@ response.setHeader("Expires", "0"); // Proxies.
 		
 			
 			</div>
-		</div>
-	</div>
+    </aside>
+  </div>
+</div>
 	<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
 	<%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
