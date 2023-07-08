@@ -20,6 +20,8 @@ if (request.getParameter("count")!=null){
    count = request.getParameter("count");
 }
 %>
+<main>
 <logic:iterate indexId="i" id="forumThread" name="threadListForm" property="list" offset="<%=offset%>" length="<%=count%>">
   <%@ include file="threadListCore.jsp" %>
 </logic:iterate>
+</main>
