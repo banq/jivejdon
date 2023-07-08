@@ -33,7 +33,7 @@ response.setDateHeader("Expires", 0);
 			      </div>
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
-         <article>
+         <section>
          <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank"><bean:write name="forumThread" property="name"/></a></h3>
       
          <div class="info">			 
@@ -67,7 +67,7 @@ response.setDateHeader("Expires", 0);
           <div class="wrap-vid">
               <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank" class="smallgray">详细</a></p>
           </div>
-      </article>
+      </section>
   
       </div>
   </div>

@@ -23,9 +23,9 @@ String coutlength = (String)pageContext.getAttribute("count");
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='<%=coutlength%>' >
 
 	<div class="info">
-      <article>
+      <section>
          <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank" class="smallgray"><bean:write name="forumThread" property="name" /></a>
-      </article>   
+      </section>   
     </div>
    
 </logic:iterate>

@@ -16,12 +16,12 @@
 <logic:notEmpty name="tagID0">    
                               
  <logic:iterate id="forumThread0" name="tagID0" length="4">
-    <article>                 
+    <section>                 
                  <div class="info">
                      <a href="<%=request.getContextPath()%>/<bean:write name="forumThread0" property="threadId"/>.html" target="_blank">
                                     <bean:write name="forumThread0" property="name" /></a>
                  </div>
-    </article>              
+    </section>              
  </logic:iterate>
              
 </logic:notEmpty>

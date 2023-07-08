@@ -12,7 +12,7 @@
         <div class="box">
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
-         <article> 
+         <section> 
          <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"><bean:write name="forumThread" property="name"/></a></h3>
       
          <div class="info">			 
@@ -62,7 +62,7 @@
                           
                 </logic:notEmpty>      
           </div>
-          </article>
+          </section>
   
     </div>
   </div>
