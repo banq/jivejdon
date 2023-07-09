@@ -64,13 +64,16 @@
 	<tbody>
 		
 	
-
+<main>
 <logic:iterate indexId="i"   id="forum" name="forumListForm" property="list" >
-        <tr id='<bean:write name="forum" property="forumId" />_<bean:write name="forum" property="modifiedDate" />'>
+        <tr>
+        <section>
             <td>
+              
                  <a href="<%=request.getContextPath()%>/forum/<bean:write name="forum" property="forumId" />/">                
                        <b><span class="threadTitle"><bean:write name="forum" property="name" /></span></b>
                  </a>
+               
                  <% 
                  if (request.getSession(false) != null){
                      %>
@@ -86,11 +89,11 @@
             <td>
                <span class="home_content" > <bean:write name="forum" property="forumState.threadCount" /> </span>
             </td>
-         
+        </section>
         </tr>
 
 </logic:iterate>
-
+</main>
 </tbody>
 </table>
                </div>	
