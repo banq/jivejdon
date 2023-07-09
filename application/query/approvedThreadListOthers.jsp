@@ -47,6 +47,7 @@
         </div>
       </div>  
       <!-- /////////////////右边 -->
+<aside>      
        <div id="sidebar" class="col-md-4">
         <!---- Start Widget ---->
         <div class="widget wid-follow">
@@ -120,10 +121,11 @@
               </div>
           </div>
         </div>
-
-    
+ 
     </div>
-  </div>
+
+</aside>  
+</div>
 </div>  	
 	
 
