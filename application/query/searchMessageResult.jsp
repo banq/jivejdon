@@ -53,7 +53,7 @@
 
 <!-- second query result -->
 <logic:present name="messageListForm">
-    <main>
+
     <logic:greaterThan name="messageListForm" property="allCount" value="0">
 
         <script>
@@ -75,6 +75,7 @@
 
         </div>
 
+        <main>
         <table class="table table-striped">
             <tbody>
             <logic:iterate indexId="i" id="messageSearchSpec"
@@ -121,7 +122,7 @@
                         <div class="box col-md-12">
                             
                             <section>
-                            
+
                             <b>
                                 &nbsp;&nbsp;<bean:write name="account"
                                                         property="username"/>
@@ -168,10 +169,11 @@
 
 
             </logic:iterate>
-
+             
             </tbody>
         </table>
-
+        </main>    
+        
         <div class="tres">
           <MultiPages:pager actionFormName="messageListForm"
                             page="/query/searchAction.shtml"
@@ -185,7 +187,7 @@
 
 
     </logic:greaterThan>
-     </main>        
+       
 </logic:present>
 
 
