@@ -5,6 +5,8 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script> 
 <%
     String title = "搜索所有贴 ";
     if (request.getAttribute("query") != null) {
@@ -51,6 +53,7 @@
 
 <!-- second query result -->
 <logic:present name="messageListForm">
+
     <logic:greaterThan name="messageListForm" property="allCount" value="0">
 
         <script>
@@ -72,6 +75,7 @@
 
         </div>
 
+        <main>
         <table class="table table-striped">
             <tbody>
             <logic:iterate indexId="i" id="messageSearchSpec"
@@ -116,12 +120,15 @@
                     </td>
                     <td>
                         <div class="box col-md-12">
+                            
+                            <section>
+
                             <b>
                                 &nbsp;&nbsp;<bean:write name="account"
                                                         property="username"/>
                             </b>
-                            <main>
-                            <section>
+                
+
                             <a href='<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId" />.html'
                                target="_blank">
                                 <bean:write name="forumThread" property="name"/></a>
@@ -154,7 +161,7 @@
                                     property="modifiedDate3"/></span>
 
                             </section>
-                            </main>        
+                           
 
                         </div>
                     </td>
@@ -162,10 +169,11 @@
 
 
             </logic:iterate>
-
+             
             </tbody>
         </table>
-
+        </main>    
+        
         <div class="tres">
           <MultiPages:pager actionFormName="messageListForm"
                             page="/query/searchAction.shtml"
@@ -179,6 +187,7 @@
 
 
     </logic:greaterThan>
+       
 </logic:present>
 
 
