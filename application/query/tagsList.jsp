@@ -53,9 +53,9 @@ int h = 0 ;
        </section> 
       </div>
 	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' style="width:300px; heigh:500px; border:none;overflow:hidden;">
-  
-  
-         <div class="lazyload" >
+  <br><br><br><br><br><br>     
+  </div>  
+  <div class="lazyload" >
 	    <!-- 
         <script>
          load('/query/tt/${threadTag.tagID}', function(xhr) {
@@ -64,7 +64,6 @@ int h = 0 ;
         </script>
         -->
 	  
-      </div>  
   </div>  
 	</div>	
 </div>  
