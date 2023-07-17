@@ -19,8 +19,6 @@ pageContext.setAttribute("title", titleStr);
       <!-- /////////////////左边 -->
       <div id="main-content" class="col-md-12">
         <div class="box"> 
-        <!-- 填写 -->
-			
        <center>
         <logic:notEmpty  name="TITLE">
         <h1><bean:write  name="TITLE"/></h1>

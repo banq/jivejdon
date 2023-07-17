@@ -46,10 +46,8 @@ int h = 0 ;
  <div class="box">	
   <div class="linkblock">
                 
-     <div>
-       <figure>                       
-          <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=1 + (int) (Math.random() * 49)%>.jpg" border='0' class="thumbnail" style="width: 100%" loading="lazy"/>   
-       </figure>               
+     <div>                    
+        <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=1 + (int) (Math.random() * 49)%>.jpg" border='0' class="thumbnail" style="width: 100%" loading="lazy"/>                  
      </div>
         
      <div>
