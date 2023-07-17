@@ -10,7 +10,7 @@
 <div class="box">
       <div class="linkblock">	
           <div>                    
-           <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=1 + (int) (Math.random() * 49)%>.jpg" border='0' class="thumbnail" style="width: 100%" loading="lazy"/>                  
+           <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=1 + (int) (Math.random() * 49)%>.jpg" border="0" class="thumbnail" style="width: 100%" loading="lazy"/>                  
           </div>
           <div class="wrap-vid">
               <div class="widget">		  
@@ -19,12 +19,14 @@
 <logic:notEmpty name="tagID0">    
                               
  <logic:iterate id="forumThread0" name="tagID0" length="4">
-    <section>                 
-                 <div class="info">
-                     <a href="<%=request.getContextPath()%>/<bean:write name="forumThread0" property="threadId"/>.html" target="_blank">
-                                    <bean:write name="forumThread0" property="name" /></a>
-                 </div>
-    </section>              
+
+ <div class="info">
+   <section>    
+    <a href="<%=request.getContextPath()%>/<bean:write name="forumThread0" property="threadId"/>.html" target="_blank">
+     <bean:write name="forumThread0" property="name" /></a>
+   </section>                
+ </div>
+            
  </logic:iterate>
              
 </logic:notEmpty>

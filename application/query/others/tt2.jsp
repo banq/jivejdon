@@ -7,7 +7,7 @@
 <logic:iterate indexId="i" id="forumThread" name="threadListForm" property="list" length='1' >
     <bean:define id="forumMessage" name="forumThread" property="rootMessage" />	
     <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">
-        <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail center" loading="lazy"/>
+        <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border="0" class="thumbnail center" loading="lazy"/>
     </logic:notEmpty>
 	<logic:empty name="forumMessage" property="messageUrlVO.thumbnailUrl">
         <img src="<%=request.getContextPath() %>/simgs/thumb/<%=1 + i%>.jpg" border="0" class="thumbnail center" loading="lazy">  

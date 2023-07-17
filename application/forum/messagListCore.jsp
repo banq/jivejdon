@@ -73,8 +73,8 @@
         </div>
       </div>
 			<div class="widget">
-        <div class="content">
-          <div class="post wrap-vid">
+        <div class="wid-vid">
+       
               <ul>                
                 <logic:notEmpty name="forumThread" property="tags">          
                   <div class="widget_tag_cloud">
@@ -98,13 +98,13 @@
 							     </div>
                 </logic:empty>          
               </ul>
-          </div>
+        
         </div>				
 			</div>
 
-  <div class="widget wid-post">
-        <div class="content">
-          <div class="post wrap-vid">
+     <div class="widget">
+        <div class="wid-vid">
+        
               <ul>          
                  <logic:notEmpty name="forumThread" property="tags">          
                   <div id="threadTagList"></div>             
@@ -129,15 +129,15 @@
 							     </div>
                 </logic:empty>   				   
               </ul>
-          </div>
+          
         </div>
       </div>     
 
 
       <!-- Start Widget -->
-      <div class="widget wid-post">
-        <div class="content">
-          <div class="post wrap-vid">
+     <div class="widget">
+        <div class="wid-vid">
+          
               <ul>                           
                 <div class="scrolldiv">
 							   <div style="width: 300px"> 
@@ -154,7 +154,7 @@
                  </div> 
 							 </div>   
               </ul>
-          </div>
+         
         </div>
       </div>
 

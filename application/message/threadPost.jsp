@@ -89,7 +89,7 @@
     
 
 <script>
-
+document.addEventListener("DOMContentLoaded", function(event) { 
      load(getContextPath() +'/forum/forumListJSON.shtml', function(xhr) {
      var dataArray = JSON.parse(xhr.responseText);  
          for (var i in dataArray){  
@@ -108,5 +108,5 @@ function forwardNewPage(fmainurl, fmainPars, anchor){
       window.location.href =  url;
       
 }
-
+});
 </script>    
