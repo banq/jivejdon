@@ -28,7 +28,7 @@ import java.util.function.Function;
 public class Newline implements Function<MessageVO, MessageVO> {
 	private final static String module = Newline.class.getName();
 	private static final char[] P_TAG = "<p class=\"indent\">".toCharArray();
-	private static final char[] BR_TAG = "<BR>".toCharArray();
+	private static final char[] BR_TAG = "<p>".toCharArray();
 
 	/**
 	 * Finds out whether a given index position resides within any boundaries of
