@@ -57,7 +57,7 @@ int h = 0 ;
 	      <a href="/tag-<bean:write name="threadTag" property="tagID"/>/rss"><i class="fa fa-feed"></i></a>
        </section> 
       </div>
-	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' style="width:300px; heigh:500px; border:none;overflow:hidden;">
+	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' >
   <br><br><br><br><br><br>     
   </div>  
   <div class="lazyload" >
