@@ -143,7 +143,7 @@
 
     <rule>
         <from>^/query/tt/([0-9]+)$</from>
-        <to>/query/tt.shtml?start=0&amp;length=10&amp;tablewidth=160&amp;count=10&amp;tagID=$1</to>
+        <to>/query/tt.shtml?start=0&amp;length=10&amp;tablewidth=160&amp;count=4&amp;tagID=$1</to>
     </rule>
 
     <rule>

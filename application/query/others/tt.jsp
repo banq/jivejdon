@@ -11,15 +11,15 @@
 </logic:empty>
 <logic:notEmpty name="threadTag">
 
-<bean:parameter id="count" name="count" value="8"/>
+<bean:parameter id="count" name="count" value="4"/>
 <%
 String coutlength = (String)pageContext.getAttribute("count");
 %>
-<div>
+<div class="widget">
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='<%=coutlength%>' >
 <div class="info">
   <section>
-	  <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank" class="smallgray"><bean:write name="forumThread" property="name" /></a>
+	  <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank" ><bean:write name="forumThread" property="name" /></a>
   </section>
 </div>
 </logic:iterate>
