@@ -80,7 +80,7 @@ response.setHeader("Expires", "0"); // Proxies.
 
     <div class="box"> 
 	    <div class="tres center">        
-           追踪前沿最新技术 <html:link page="/followus.html"><b>订阅</b>	   
+           追踪前沿最新技术 <a href="/followus.html"><b>订阅</b></a>	   
 		</div>
     </div>
 
