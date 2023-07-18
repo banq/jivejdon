@@ -80,7 +80,7 @@ response.setHeader("Expires", "0"); // Proxies.
 
     <div class="box"> 
 	    <div class="tres center">        
-           追踪前沿最新技术 更多<html:link page="/approval"><b>新佳</b></html:link> <html:link page="/forum/maxPopThreads"><b>精华</b></html:link>		   
+           追踪前沿最新技术 <html:link page="/followus.html"><b>订阅</b>	   
 		</div>
     </div>
 
