@@ -38,7 +38,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-FTT1M21HE8');
     </script>  
 </head>
