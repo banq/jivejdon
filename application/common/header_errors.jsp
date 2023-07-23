@@ -22,6 +22,4 @@
     </table>
   
 </logic:present>
-<center>
-  <html:errors/>
-</center>
+
