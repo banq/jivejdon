@@ -15,6 +15,7 @@
 <logic:present name="tagsListForm">
 <logic:greaterThan name="tagsListForm" property="allCount" value="0">
 
+<main>
 <div class="row">
   <div class="col-md-12">
     <div class="box"> 
@@ -34,7 +35,7 @@
 int i = 3;
 int h = 0 ;
 %>
-<main>
+
 <logic:iterate id="threadTag" name="tagsListForm" property="list" >
  <%
   if(i % 3==0){ 
@@ -83,7 +84,7 @@ int h = 0 ;
  <%}%>
 
 </logic:iterate>
-</main>
+
 <%
   if(i % 3 !=0){ 
  %>
@@ -101,6 +102,8 @@ int h = 0 ;
     </div>
   </div>
 </div>
+
+</main>
 </logic:greaterThan>
 </logic:present>
 

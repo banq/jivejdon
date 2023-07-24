@@ -45,12 +45,12 @@ response.setHeader("Expires", "0"); // Proxies.
 <body>
 <%@ include file="./common/body_header.jsp" %>
 
-	<!-- /////////////////////////////////////////Content -->
-
+	
+<main>	
 	<div id="page-content" class="single-page container">
 		<div class="row">
 			<div id="main-content" class="col-md-8">
-			   <main>	
+			  
 				<div class="box">
 
 
@@ -84,14 +84,14 @@ response.setHeader("Expires", "0"); // Proxies.
     </div>
 
     <div id="approvedItem1"><br><br><br><br><br><br></div>          
-	<div>
-         
+	<div class="lazyload" >
+          <!--
 		  <script>
 		  load('/query/threadApprovedNewList3.shtml?offset=1&start=0&count=10', function (xhr) {
                document.getElementById("approvedItem1").innerHTML = xhr.responseText;
             }); 
 		  </script>
-          
+		   -->
     </div>  
 	<div id="approvedItem2"><br><br><br><br><br><br></div>          
 	<div class="lazyload" >
@@ -146,18 +146,8 @@ response.setHeader("Expires", "0"); // Proxies.
 
 		  
     </div>
-	</main> 
+	
 
-
-        <div class="box">
-			<div class="box-header header-natural">
-			</div>
-			<div class="box-content">
-			  <div class="row">
-							
-		      </div>
-		    </div>
-	    </div>
 </div>
 
 <aside>  			
@@ -243,9 +233,10 @@ response.setHeader("Expires", "0"); // Proxies.
 </div>
 	<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
-	<%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
-  
-   <%@ include file="./common/IncludeBottomBody.jsp" %> 
+
+</main> 
+
+<%@ include file="./common/IncludeBottomBody.jsp" %> 
 
  
 </body>

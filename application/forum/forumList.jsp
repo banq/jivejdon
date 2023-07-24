@@ -15,7 +15,7 @@
   contextpath = "<%=request.getContextPath()%>";
 </script>
 
-<!-- /////////////////////////////////////////Content -->
+ <main>
 <div id="page-content" class="single-page container">
 		<div class="row">
 			<!-- /////////////////左边 -->
@@ -46,7 +46,7 @@
             </div>		
             </aside>	
 
-            <main>
+           
 			<!-- /////////////////右边 -->
             <div id="main-content" class="col-md-8">
 				<div class="box">		
@@ -95,11 +95,11 @@
     </div>	
     </div>
         
-	</main>
+	
 
 	   </div>
 </div>
-
+</main>
 
 <%@include file="../common/IncludeBottom.jsp"%> 
 
