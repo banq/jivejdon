@@ -26,11 +26,11 @@ response.setDateHeader("Expires", 0);
                <% String thumbthreadIdS = ((Long)pageContext.getAttribute("thumbthreadId")).toString(); %>               
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">        
                   <figure>          
-                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="thumbnail" style="width: 100%" fetchpriority="high"/>
+                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="thumbnail" style="width: 100%" loading="eager" fetchpriority="high"/>
                   </figure>
                 </logic:notEmpty>
                 <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">        
-                    <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=1 + (int) (Math.random() * 49)%>.jpg" border="0" class="thumbnail" style="width: 100%" fetchpriority="high"/> 
+                    <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=1 + (int) (Math.random() * 49)%>.jpg" border="0" class="thumbnail" style="width: 100%"  loading="eager" fetchpriority="high"/> 
                 </logic:empty>                        
               </div>
 			      </div>
