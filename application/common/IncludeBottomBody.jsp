@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-	<footer>
+<footer>
 		<div class="wrap-footer">
 			<div class="container">
 				<div class="row">
@@ -28,7 +28,7 @@
 			<p> <a href="https://beian.miit.gov.cn/" target="_blank" >沪ICP备12033263号-1</a> 本系统软件来自<a
       href="https://github.com/banq/jivejdon" >开源JiveJdon</a></p>
 		</div>
-	</footer>
+</footer>
 	
 
 	
