@@ -19,7 +19,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <meta http-equiv="" content="IE=edge,chrome=1"/>
     <meta http-equiv="refresh" content="3600">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-	  <title><logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty></title>
+    <title><logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty></title>
     <meta property="og:type" content="article"/>
     <meta property="og:url" content="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html"/>
     <meta property="og:release_date" content="<bean:write name="forumThread" property="creationDate" />"/>
@@ -32,7 +32,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <link rel="alternate" type="application/rss+xml" title="解道订阅" href="/rss" />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 256 256%22><text y=%22203%22 font-size=%22224%22>☯</text></svg>"/>
     <link rel="canonical" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html" />  
-     <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTT1M21HE8"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
