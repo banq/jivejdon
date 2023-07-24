@@ -29,7 +29,7 @@
       href="https://github.com/banq/jivejdon" >开源JiveJdon</a></p>
 		</div>
 	</footer>
-	<!-- Footer -->	
+	
 
 	
 	

@@ -24,12 +24,10 @@ var contextPath = "<%=request.getContextPath()%>";
 
 
 
-<!-- Support for non-traditional but simple message -->
 <logic:present name="message">
   <b><font color="BLUE"><bean:write name="message" /></font></b>
 </logic:present>
 
-<!-- Support for non-traditional but simpler use of errors... -->
 <logic:present name="errors">
   <logic:iterate id="error" name="errors">
     <B><FONT color=RED>

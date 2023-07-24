@@ -13,7 +13,7 @@
                     <span class="list-inline top-link link pull-right">
 				        <a href="<%=request.getContextPath() %>/forum"><i class="fa fa-home"></i>Dojo</a>
 						<a href="<%=request.getContextPath() %>/threads"><i class="fa fa-list-ul"></i>最新</a>
-						<a href="<%=request.getContextPath() %>/approval"><i class="fa fa-search"></i>新佳</a>
+						<a href="<%=request.getContextPath() %>/approval"><i class="fa fa-arrow-circle-up"></i>新佳</a>
 						<a href="<%=request.getContextPath() %>/forum/threadDigSortedList"><i class="fa fa-star-half-full"></i>最佳</a>
 						<a href="<%=request.getContextPath() %>/forum/maxPopThreads"><i class="fa fa-feed"></i>精华</a>
 						<a href="<%=request.getContextPath() %>/tags/"><i class="fa fa-arrow-circle-o-down"></i>话题</a>

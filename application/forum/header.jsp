@@ -44,4 +44,4 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <body>
 <%@ include file="../common/body_header.jsp" %>
 <%@ include file="../common/header_errors.jsp" %>
- 
+

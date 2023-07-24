@@ -27,9 +27,10 @@
     pageContext.setAttribute("title", titleStr);
     pageContext.setAttribute("currentPageNo", currentPageNo);
   %>
-  <%@ include file="header.jsp" %>
 
-<!-- /////////////////////////////////////////Content -->
+<%@ include file="header.jsp" %>
+
+<main>
 <div id="page-content" class="single-page container">
   <div class="row">
     <!-- /////////////////左边 -->
@@ -165,17 +166,13 @@
 </div>
 
   <div id="reply" style="display:none">
-
+    <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
     <input type="hidden" id="replySubject" name="replySubject" value="<bean:write name="forumThread" property="rootMessage.messageVO.subject"/>"/>
   </div>
 
-  <%@include file="../common/IncludeBottomBody.jsp"%>
+</main>
 
-	<div id="to_top" style="display:block; width:20px; height:20px;position:fixed;  bottom:50px; right:40px; border-radius:10px 10px 10px 10px;   text-decoration:none;" onClick="document.documentElement.scrollTop = document.body.scrollTop =0"><a href="#" title="返回顶部"><i class="fa fa-arrow-circle-up"></i></a></div>
-
-  <%-- include LAB.js --%>
-  <%-- <%@ include file="../account/loginAJAX.jsp" %> --%>
-<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
+<%@include file="../common/IncludeBottomBody.jsp"%>
 
  <logic:greaterThan name="messageListForm" property="allCount" value="1">         
 
