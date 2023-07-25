@@ -27,7 +27,6 @@ response.setHeader("Expires", "0"); // Proxies.
   <title>解道jdon - 最前沿的架构师博客</title>
   <meta name="Description" content="实时追踪全球最前沿软件技术和架构思想"/>
   <meta name="Keywords" content="微服务,SOA,DDD,体系结构,架构,Gof设计模式,Java框架,大数据,云原生,面向对象,函数编程,SpringBoot,EDA,java,JavaEE,CQRS,eventsourcing" />
-  <link rel="dns-prefetch" href="//static.jdon.com">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap" />
   <link rel="alternate" type="application/rss+xml" title="解道订阅" href="https://www.jdon.com/rss"/>
   <link rel="canonical" href="https://www.jdon.com/" />
