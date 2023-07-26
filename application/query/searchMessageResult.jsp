@@ -17,39 +17,27 @@
 <%@ include file="../common/IncludeTop.jsp" %>
 
 
-<logic:notPresent name="query">
-    <bean:parameter name="query" id="query" value=""/>
-</logic:notPresent>
-<table class="table table-striped">
-    <tbody>
-    <tr>
-        <td align="middle">
-          <html:form action="/query/searchAction.shtml" method="post"
-                     styleClass="search" >
-                <input type="text" name="query"
-                       value="<bean:write name="query"/>" id="queryId" size="40"/>
-                <html:submit value="道场搜索"/>
+<div id="page-content" class="single-page container">
+		<div class="row">
+			<!-- /////////////////左边 -->
+			<div id="main-content" class="col-md-12">
+				<div class="box">	
 
-            </html:form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<ul class="nav nav-tabs">
+  <li ><a href="<%=request.getContextPath()%>/threads">最新</a></li>
+  <li><a href="<%=request.getContextPath()%>/approval">新佳</a></li>
+  <li><a href="<%=request.getContextPath()%>/forum/threadDigSortedList">最佳</a></li>	
+  <li><a href="<%=request.getContextPath()%>/forum/maxPopThreads">精华</a></li>
+  <li class="active"><a href="#" >搜索</a></li>
+</ul>
 
-<table class="table table-striped">
-    <tbody>
-    <tr><td align="middle">
-         <form action="https://www.baidu.com/baidu">
-            <input type=text name=word  value="<bean:write name="query"/>" size="40">
-            <input type="submit" value="百度本道场">
-            <input name=tn type=hidden value="bds">
-            <input name=cl type=hidden value="3">
-            <input name=ct type=hidden value="2097152">
-            <input name=si type=hidden value="www.jdon.com">
-            </form>
-    </td></tr>
-    </tbody>
-</table>
+</div>
+</div>
+</div>
+</div>
+
+
+<%@ include file="searchInputView.jsp" %>
 
 <!-- second query result -->
 <logic:present name="messageListForm">

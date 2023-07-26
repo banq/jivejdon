@@ -18,6 +18,16 @@
     </tbody>
 </table>
 
+<div id="tagHotList"></div>   
+<div class="lazyload" >
+							     <!-- 
+							     <script>
+							  	  load('/query/tagHotList.shtml?count=20', function (xhr) {				
+  	                                  document.getElementById("tagHotList").innerHTML = xhr.responseText;
+			                     });
+							  </script> -->
+</div>
+
 <table class="table table-striped">
     <tbody>
     <tr><td align="middle">
