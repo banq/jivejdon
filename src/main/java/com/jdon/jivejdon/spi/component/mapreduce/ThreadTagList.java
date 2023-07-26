@@ -50,7 +50,7 @@ public class ThreadTagList {
 	}
 
 
-	public Collection<ThreadTag> getThreadTags() {
+	public List<ThreadTag> getThreadTags() {
 		if (tags_cachedWindows.isEmpty()) {
 			TreeSet<Long> tagIds = new TreeSet<Long>(new ThreadTagComparator(tags_countWindows));
 			tagIds.addAll(tags_countWindows.keySet());

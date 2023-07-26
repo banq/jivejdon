@@ -40,7 +40,9 @@ pageContext.setAttribute("title", titleStr);
   contextpath = "<%=request.getContextPath()%>";
  </script> 
 <script language="javascript" defer="defer" src="<html:rewrite page="/forum/js/threadList.js"/>"></script>
-<!-- /////////////////////////////////////////Content -->
+
+
+<main>
 <div id="page-content" class="single-page container">
 		<div class="row">
 			<!-- /////////////////左边 -->
@@ -103,6 +105,7 @@ pageContext.setAttribute("title", titleStr);
     </div>	
 	</div>
 </div>
+</main>
 
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
   

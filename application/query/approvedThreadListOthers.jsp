@@ -9,7 +9,7 @@
 <bean:define id="title"  value=" 新佳文章 " />
 <%@ include file="../common/IncludeTop.jsp" %>
     
-<!-- /////////////////////////////////////////Content -->
+<main>
 <div id="page-content" class="single-page container">
     <div class="row">
       <!-- /////////////////左边 -->
@@ -124,7 +124,7 @@
 </aside>  
 </div>
 </div>  	
-	
+</main>
 
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
 

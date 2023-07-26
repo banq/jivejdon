@@ -27,13 +27,13 @@
             </div>
 </div>
 
-<main>
+
  <logic:iterate indexId="i" id="forumThread" name="threadListForm"  property="list">
 
     <%@ include file="threadListCore2.jsp" %>
 
  </logic:iterate>
-</main>
+
 
 </div>
 	

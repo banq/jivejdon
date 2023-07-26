@@ -44,7 +44,8 @@ pageContext.setAttribute("title", titleStr);
  if(top !== self) top.location = self.location;
   contextpath = "<%=request.getContextPath()%>";
  </script>
-<!-- /////////////////////////////////////////Content -->
+
+<main>
 <div id="page-content" class="single-page container">
 		<div class="row">
 			<!-- /////////////////左边 -->
@@ -125,6 +126,8 @@ pageContext.setAttribute("title", titleStr);
             </div>	
 	</div>
 </div>
+
+</main>
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
 
 </body>

@@ -36,6 +36,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,7 +57,8 @@ public class TaggedThreadListAction extends ModelListAction {
 	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward actionForward = super.execute(actionMapping, actionForm, request, response);
 		ModelListForm listForm = this.getModelListForm(actionMapping, actionForm, request);
-		Collection<ForumThread> getList = (Collection) listForm.getList();
+		List<ForumThread> getList = (List<ForumThread>)listForm.getList();
+		Collections.shuffle(getList);
 		// Collection<ForumThread> sortedList = getList.parallelStream().sorted(
 		// 		(ForumThread t1, ForumThread t2) -> new Long(t2.getRootMessage().getDigCount() * t2.getViewCount())
 		// 				.compareTo(t1.getRootMessage().getDigCount() * t1.getViewCount()))
