@@ -34,7 +34,7 @@ pageContext.setAttribute("title", titleStr);
         %>
       
         
-             &nbsp;&nbsp;       
+       &nbsp;&nbsp;       
 		   <a href="/tag-<bean:write name="tagID"/>/rss"><i class="fa fa-feed"></i></a>
        &nbsp;&nbsp;  
        <a href="/tag-<bean:write name="tagID"/>/">
