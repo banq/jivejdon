@@ -2,23 +2,16 @@
 <%@ taglib uri="struts-logic" prefix="logic" %>
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>
-<%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
+<%@ taglib uri="/WEB-INF/MultiPages.tld" prefix="MultiPages" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <bean:parameter id="noheader" name="noheader"  value=""/>
 
 
 <bean:define id="threadList" name="threadListForm" property="list" />
-<logic:empty name="threadListForm" property="oneModel">
-  <% 
-  response.sendError(404);  
-  %>
-</logic:empty>
-<bean:define id="forum" name="threadListForm" property="oneModel"/>
-<bean:define id="title" name="forum" property="name" />
+<bean:define id="title" value="随机" />
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
-<bean:define id="lastModifiedDate" name="forum" property="modifiedDate2"/>
 <%
 
 int pagestartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
@@ -35,12 +28,6 @@ pageContext.setAttribute("title", titleStr);
 %>
 <%@ include file="../common/IncludeTop.jsp" %>
 <link rel="alternate" type="application/rss+xml" title="<bean:write name="title" /> " href="/rss" /> 
-<script>
- if(top !== self) top.location = self.location;
-  contextpath = "<%=request.getContextPath()%>";
- </script> 
-<script language="javascript" defer="defer" src="<html:rewrite page="/forum/js/threadList.js"/>"></script>
-
 
 <main>
 <div id="page-content" class="single-page container">
@@ -59,13 +46,12 @@ pageContext.setAttribute("title", titleStr);
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" ><i class="fa fa-search"></i></a></li>
 </ul>          
 <ul class="pagination pull-right">
-        <logic:empty name="forum" property="forumId">
-          <MultiPagesREST:pager actionFormName="threadListForm" page="/forum/maxPopThreads" >
-            <MultiPagesREST:prev name=" 上一页 " />
-            <MultiPagesREST:index displayCount="8" />
-            <MultiPagesREST:next  name=" 下一页 " />
-          </MultiPagesREST:pager>
-        </logic:empty>
+       
+          <MultiPages:pager actionFormName="threadListForm" page="/forum/threadRandomList.shtml" >
+            <MultiPages:prev name=" 上一页 " />
+            <MultiPages:index displayCount="8" />
+            <MultiPages:next  name=" 下一页 " />
+          </MultiPages:pager>
       
          有<b>
         <bean:write name="threadListForm" property="allCount"/>
@@ -75,13 +61,11 @@ pageContext.setAttribute("title", titleStr);
 <%@ include file="threadListCore.jsp" %>
  
 <ul class="pagination pull-right">
-        <logic:empty name="forum" property="forumId">
-          <MultiPagesREST:pager actionFormName="threadListForm" page="/forum/maxPopThreads" >
-            <MultiPagesREST:prev name=" 上一页 " />
-            <MultiPagesREST:index displayCount="8" />
-            <MultiPagesREST:next  name=" 下一页 " />
-          </MultiPagesREST:pager>
-        </logic:empty>
+        <MultiPages:pager actionFormName="threadListForm" page="/forum/threadRandomList.shtml" >
+            <MultiPages:prev name=" 上一页 " />
+            <MultiPages:index displayCount="8" />
+            <MultiPages:next  name=" 下一页 " />
+          </MultiPages:pager>
       
          有<b>
         <bean:write name="threadListForm" property="allCount"/>
