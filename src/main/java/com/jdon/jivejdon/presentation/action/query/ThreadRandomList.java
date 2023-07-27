@@ -1,7 +1,5 @@
 package com.jdon.jivejdon.presentation.action.query;
 
-import static com.jdon.strutsutil.ModelListAction.module;
-
 import javax.servlet.http.HttpServletRequest;
 
 import com.jdon.controller.WebAppUtil;
@@ -11,7 +9,6 @@ import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.query.ResultSort;
 import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
-import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.util.Debug;
 
