@@ -202,6 +202,10 @@
             <forward name="success" path="/query/others/newlist.jsp" />
         </action>
 
+        <action path="/query/threadRandomList" type="com.jdon.jivejdon.presentation.action.query.ThreadRandomList" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/query/others/randomlist.jsp" />
+        </action>
+
         <action path="/query/threadRandomDigList" type="com.jdon.jivejdon.presentation.action.query.ThreadRandomDigListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/randomdiglist.jsp" />
         </action>
