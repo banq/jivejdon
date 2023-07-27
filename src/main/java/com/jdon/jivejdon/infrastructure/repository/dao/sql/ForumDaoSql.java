@@ -48,8 +48,10 @@ public abstract class ForumDaoSql implements ForumDao {
 
 	private MessageInitFactory messageFactory;
 
-	public ForumDaoSql(JdbcTempSource jdbcTempSource, ContainerUtil containerUtil, MessageInitFactory messageFactory, Constants constants) {
-		this.pageIteratorSolver = new PageIteratorSolver(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
+	public ForumDaoSql(JdbcTempSource jdbcTempSource, ContainerUtil containerUtil, MessageInitFactory messageFactory,
+			Constants constants) {
+		this.pageIteratorSolver = new PageIteratorSolver(jdbcTempSource.getDataSource(),
+				containerUtil.getCacheManager());
 		this.jdbcTempSource = jdbcTempSource;
 		this.propertyDaoSql = new PropertyDaoSql(jdbcTempSource, containerUtil);
 		this.constants = constants;
@@ -68,7 +70,8 @@ public abstract class ForumDaoSql implements ForumDao {
 	public Forum getForum(Long id) {
 		logger.debug("enter getForum for id:" + id);
 		String LOAD_FORUM = "SELECT forumID, name, description, modDefaultThreadVal, "
-				+ "modDefaultMsgVal, modMinThreadVal, modMinMsgVal, modifiedDate, " + "creationDate FROM jiveForum WHERE forumID=?";
+				+ "modDefaultMsgVal, modMinThreadVal, modMinMsgVal, modifiedDate, "
+				+ "creationDate FROM jiveForum WHERE forumID=?";
 		List queryParams = new ArrayList();
 		queryParams.add(id);
 
@@ -90,12 +93,15 @@ public abstract class ForumDaoSql implements ForumDao {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jdon.jivejdon.dao.ForumDao#createForum(com.jdon.jivejdon.domain.model.Forum)
+	 * @see
+	 * com.jdon.jivejdon.dao.ForumDao#createForum(com.jdon.jivejdon.domain.model.
+	 * Forum)
 	 */
 	public void createForum(Forum forum) {
 		try {
 			String ADD_FORUM = "INSERT INTO jiveForum(forumID, name, description, modDefaultThreadVal, "
-					+ "modDefaultMsgVal, modMinThreadVal, modMinMsgVal, modifiedDate, creationDate)" + " VALUES (?,?,?,?,?,?,?,?,?)";
+					+ "modDefaultMsgVal, modMinThreadVal, modMinMsgVal, modifiedDate, creationDate)"
+					+ " VALUES (?,?,?,?,?,?,?,?,?)";
 			List queryParams = new ArrayList();
 			queryParams.add(forum.getForumId());
 			queryParams.add(forum.getName());
@@ -126,7 +132,9 @@ public abstract class ForumDaoSql implements ForumDao {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jdon.jivejdon.dao.ForumDao#updateForum(com.jdon.jivejdon.domain.model.Forum)
+	 * @see
+	 * com.jdon.jivejdon.dao.ForumDao#updateForum(com.jdon.jivejdon.domain.model.
+	 * Forum)
 	 */
 	public void updateForum(Forum forum) {
 		try {
@@ -160,7 +168,9 @@ public abstract class ForumDaoSql implements ForumDao {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.jdon.jivejdon.dao.ForumDao#deleteForum(com.jdon.jivejdon.domain.model.Forum)
+	 * @see
+	 * com.jdon.jivejdon.dao.ForumDao#deleteForum(com.jdon.jivejdon.domain.model.
+	 * Forum)
 	 */
 	public void deleteForum(Forum forum) {
 		try {
@@ -226,6 +236,23 @@ public abstract class ForumDaoSql implements ForumDao {
 		List queryParams2 = new ArrayList();
 		queryParams2.add(forumId);
 
+		int count = 0;
+		try {
+			Object counto = jdbcTempSource.getJdbcTemp().querySingleObject(queryParams2, ALL_MESSAGES);
+			if (counto instanceof Long)// for mysql 5
+				count = ((Long) counto).intValue();
+			else
+				count = ((Integer) counto).intValue(); // for mysql 4
+			logger.debug("found count:" + count);
+		} catch (Exception e) {
+			logger.error(e);
+		}
+		return count;
+	}
+
+	public int getThreadCount() {
+		String ALL_MESSAGES = "SELECT count(1) from jiveThread";
+		List queryParams2 = new ArrayList();
 		int count = 0;
 		try {
 			Object counto = jdbcTempSource.getJdbcTemp().querySingleObject(queryParams2, ALL_MESSAGES);

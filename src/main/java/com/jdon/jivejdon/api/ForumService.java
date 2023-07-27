@@ -29,6 +29,8 @@ public interface ForumService {
 
 	Forum getForum(Long id);
 
+	int getThreadAllCount();
+
 	void createForum(EventModel em);
 
 	void updateForum(EventModel em);

@@ -47,7 +47,8 @@ public class ForumServiceImp implements ForumService {
 	private SequenceDao sequenceDao;
 	private ReBuildIndex reBuildIndex;
 
-	public ForumServiceImp(ForumDao forumDao, ForumFactory forumBuilder, SequenceDao sequenceDao, ReBuildIndex reBuildIndex) {
+	public ForumServiceImp(ForumDao forumDao, ForumFactory forumBuilder, SequenceDao sequenceDao,
+			ReBuildIndex reBuildIndex) {
 		this.forumDao = forumDao;
 		this.sequenceDao = sequenceDao;
 		this.forumBuilder = forumBuilder;
@@ -147,6 +148,11 @@ public class ForumServiceImp implements ForumService {
 	public void doRebuildIndex() {
 		TaskEngine.addTask(reBuildIndex);
 		logger.debug("work is over");
+	}
+
+	@Override
+	public int getThreadAllCount() {
+		return forumDao.getThreadCount();
 	}
 
 }

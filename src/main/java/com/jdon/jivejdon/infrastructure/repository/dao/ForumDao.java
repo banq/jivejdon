@@ -34,7 +34,9 @@ public interface ForumDao {
 
 	PageIterator getForums(int start, int count);
 
-	public int getMessageCount(Long forumId);
+	int getMessageCount(Long forumId);
+
+	int getThreadCount();
 
 	/**
 	 * get the thread count from thread db.
