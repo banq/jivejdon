@@ -34,7 +34,7 @@ public class VerifySpammerAction extends HttpServlet {
 					.getComponentInstance("customizedThrottle", this.getServletContext());
 			customizedThrottle.removeBanned(request.getRemoteAddr());
 			response.setHeader("Pragma", "No-cache");
-			response.setHeader("Cache-Control", "no-store");
+			response.setHeader("Cache-Control", "no-cache");
 			response.setDateHeader("Expires", 0);
 			response.sendRedirect(request.getContextPath());
 			return;

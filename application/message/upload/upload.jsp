@@ -16,7 +16,7 @@ response.setDateHeader("Expires", 0);
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>上传文件</title>
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-    <META HTTP-EQUIV="Cache-Control" CONTENT="no-store">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" CONTENT="0">   
     <%@ include file="../../common/headerBody.jsp" %>
     

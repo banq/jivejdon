@@ -61,7 +61,7 @@ public class UploadShowAction extends Action {
 			response.setHeader("Content-Disposition", "attachment; filename=\"" + dlname + "\"");
 		}
 		response.setHeader("Pragma", "No-cache");
-		response.setHeader("Cache-Control", "no-store");
+		response.setHeader("Cache-Control", "no-cache");
 		response.setDateHeader("Expires", 0);
 		OutputStream toClient = response.getOutputStream();
 		try {
