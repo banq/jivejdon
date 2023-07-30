@@ -14,7 +14,7 @@
 </title>
      <%@ include file="../../../common/headerBody.jsp" %>
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-    <META HTTP-EQUIV="Cache-Control" CONTENT="no-store">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" CONTENT="0">   
 
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
