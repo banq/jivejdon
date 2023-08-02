@@ -24,7 +24,7 @@ response.setHeader("Expires", "0"); // Proxies.
   <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
   <meta http-equiv="" content="IE=edge,chrome=1"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>解道jdon - 最前沿的架构师博客</title>
+  <title>解道jdon - 前沿架构师博客</title>
   <meta name="Description" content="实时追踪全球最前沿软件技术和架构思想"/>
   <meta name="Keywords" content="微服务,SOA,DDD,体系结构,架构,Gof设计模式,Java框架,大数据,云原生,面向对象,函数编程,SpringBoot,EDA,java,JavaEE,CQRS,eventsourcing" />
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap" />
