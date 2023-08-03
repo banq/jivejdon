@@ -37,8 +37,8 @@ public class BlogPingSender extends Thread {
 
     public void run() {
         try {
-            // if (ToolsUtil.isDebug())
-            // return;
+            if (ToolsUtil.isDebug())
+            return;
             ForumMessageDTO message = (ForumMessageDTO) notification.getSource();
             if (message == null) {
                 return;
