@@ -15,21 +15,14 @@
  */
 package com.jdon.jivejdon.spi.pubsub.subscriber.postThread;
 
-import com.google.common.eventbus.AsyncEventBus;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.dci.RoleAssigner;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.infrastructure.cqrs.CacheQueryRefresher;
-import com.jdon.jivejdon.spi.component.pingrpc.BaiduSearchClient;
-import com.jdon.jivejdon.spi.component.pingrpc.BlogPingSender;
-import com.jdon.jivejdon.spi.pubsub.publish.LobbyPublisherRole;
-import com.jdon.jivejdon.util.ScheduledExecutorUtil;
-import com.jdon.jivejdon.util.ThreadTimer;
+import com.jdon.jivejdon.domain.event.TopicMessagePostedEvent;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
-import com.jdon.jivejdon.domain.event.TopicMessagePostedEvent;
 import com.jdon.jivejdon.domain.model.realtime.ForumMessageDTO;
 import com.jdon.jivejdon.domain.model.realtime.LobbyPublisherRoleIF;
 import com.jdon.jivejdon.domain.model.realtime.Notification;
@@ -38,8 +31,11 @@ import com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF;
 import com.jdon.jivejdon.domain.model.subscription.event.AccountSubscribedNotifyEvent;
 import com.jdon.jivejdon.domain.model.subscription.event.TagSubscribedNotifyEvent;
 import com.jdon.jivejdon.domain.model.subscription.event.ThreadSubscribedCreateEvent;
+import com.jdon.jivejdon.infrastructure.cqrs.CacheQueryRefresher;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
+import com.jdon.jivejdon.spi.component.pingrpc.BaiduSearchClient;
+import com.jdon.jivejdon.spi.pubsub.publish.LobbyPublisherRole;
 
 @Consumer("topicMessagePostedEvent")
 public class ThreadPostListener implements DomainEventHandler {
