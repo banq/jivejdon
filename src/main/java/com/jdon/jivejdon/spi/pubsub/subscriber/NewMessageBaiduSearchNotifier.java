@@ -19,22 +19,23 @@ import com.google.common.eventbus.AsyncEventBus;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.spi.component.pingrpc.BlogPingClient;
+import com.jdon.jivejdon.spi.component.pingrpc.BaiduSearchClient;
 import com.jdon.jivejdon.domain.model.realtime.Lobby;
 import com.jdon.jivejdon.domain.model.realtime.Notification;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;
 
-@Consumer("newForumMessageNotifier")
-public class NewMessageNotifier implements DomainEventHandler {
+@Consumer("newMessageBaiduSearchNotifier")
+public class NewMessageBaiduSearchNotifier implements DomainEventHandler {
 
 	private final Lobby lobby;
 	private final AsyncEventBus eventBus;
 
-	public NewMessageNotifier(Lobby lobby, BlogPingClient blogPingClient, ScheduledExecutorUtil scheduledExecutorUtil) {
+	public NewMessageBaiduSearchNotifier(Lobby lobby,
+			BaiduSearchClient baiduSearchClient, ScheduledExecutorUtil scheduledExecutorUtil) {
 		super();
 		this.lobby = lobby;
 		eventBus = new AsyncEventBus(scheduledExecutorUtil.getScheduExec());
-		eventBus.register(blogPingClient);
+		eventBus.register(baiduSearchClient);
 	}
 
 	@Override

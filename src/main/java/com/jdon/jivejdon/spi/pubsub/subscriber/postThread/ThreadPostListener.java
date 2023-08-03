@@ -15,12 +15,17 @@
  */
 package com.jdon.jivejdon.spi.pubsub.subscriber.postThread;
 
+import com.google.common.eventbus.AsyncEventBus;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.dci.RoleAssigner;
 import com.jdon.domain.message.DomainEventHandler;
 import com.jdon.jivejdon.infrastructure.cqrs.CacheQueryRefresher;
+import com.jdon.jivejdon.spi.component.pingrpc.BaiduSearchClient;
+import com.jdon.jivejdon.spi.component.pingrpc.BlogPingSender;
 import com.jdon.jivejdon.spi.pubsub.publish.LobbyPublisherRole;
+import com.jdon.jivejdon.util.ScheduledExecutorUtil;
+import com.jdon.jivejdon.util.ThreadTimer;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
@@ -39,24 +44,35 @@ import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolv
 @Consumer("topicMessagePostedEvent")
 public class ThreadPostListener implements DomainEventHandler {
 
-	private final ForumFactory forumFactory;
 	private final RoleAssigner roleAssigner;
 	private final CacheQueryRefresher eventHandler;
+	private final BaiduSearchClient baiduSearchClient;
 
-	public ThreadPostListener(RoleAssigner roleAssigner, ForumFactory forumFactory, MessagePageIteratorSolver messagePageIteratorSolver) {
+	public ThreadPostListener(RoleAssigner roleAssigner, ForumFactory forumFactory,
+			MessagePageIteratorSolver messagePageIteratorSolver, BaiduSearchClient baiduSearchClient) {
 		super();
-		this.forumFactory = forumFactory;
 		this.roleAssigner = roleAssigner;
 		eventHandler = new CacheQueryRefresher(forumFactory, messagePageIteratorSolver);
+		this.baiduSearchClient = baiduSearchClient;
 
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
-		TopicMessagePostedEvent topicMessagePostedEvent = (TopicMessagePostedEvent) event.getDomainMessage().getEventSource();
+		TopicMessagePostedEvent topicMessagePostedEvent = (TopicMessagePostedEvent) event.getDomainMessage()
+				.getEventSource();
 		ForumMessage forumMessage = topicMessagePostedEvent.getForumMessage();
-			// if there is a pubsub bus server, rewrite this code:
+		baiduSearchClient(forumMessage);
+		// messageLobbyNotifyAction(forumMessage);
+		// messageNotifyAction(false,forumMessage);
+		// if there is a pubsub bus server, rewrite this code:
 		eventHandler.refresh(forumMessage);
 
+	}
+
+	private void baiduSearchClient(ForumMessage forumMessage) {
+		Notification notification = new Notification();
+		notification.setSource(new ForumMessageDTO(forumMessage));
+		baiduSearchClient.send(notification);
 	}
 
 	/**
@@ -67,15 +83,21 @@ public class ThreadPostListener implements DomainEventHandler {
 	 * @param isReplyNotifyForAuthor
 	 * @param forumMessage
 	 */
-	public void messageNotifyAction(boolean isReplyNotifyForAuthor, ForumMessage forumMessage) {
+	public void messageLobbyNotifyAction(ForumMessage forumMessage) {
 		ForumMessageDTO forumMessageDTO = new ForumMessageDTO(forumMessage);
-		LobbyPublisherRoleIF lobbyPublisherRole = (LobbyPublisherRoleIF) roleAssigner.assign(forumMessageDTO, new LobbyPublisherRole());
+		LobbyPublisherRoleIF lobbyPublisherRole = (LobbyPublisherRoleIF) roleAssigner.assign(forumMessageDTO,
+				new LobbyPublisherRole());
 		Notification notification = new Notification();
 		notification.setSource(forumMessageDTO);
 		lobbyPublisherRole.notifyLobby(notification);
+	}
 
-		SubPublisherRoleIF subPublisherRole = (SubPublisherRoleIF) roleAssigner.assign(forumMessage, new SubPublisherRole());
-		AccountSubscribedNotifyEvent accountSubscribedNotifyEvent = new AccountSubscribedNotifyEvent(forumMessage.getAccount().getUserId(),
+	public void messageNotifyAction(boolean isReplyNotifyForAuthor, ForumMessage forumMessage) {
+
+		SubPublisherRoleIF subPublisherRole = (SubPublisherRoleIF) roleAssigner.assign(forumMessage,
+				new SubPublisherRole());
+		AccountSubscribedNotifyEvent accountSubscribedNotifyEvent = new AccountSubscribedNotifyEvent(
+				forumMessage.getAccount().getUserId(),
 				forumMessage.getMessageId());
 		// notify the author's fans
 		subPublisherRole.subscriptionNotify(accountSubscribedNotifyEvent);
@@ -85,12 +107,14 @@ public class ThreadPostListener implements DomainEventHandler {
 		for (Object o : forumThread.getTags()) {
 			ThreadTag tag = (ThreadTag) o;
 			// changeTags will notify subscription
-			subPublisherRole.subscriptionNotify(new TagSubscribedNotifyEvent(tag.getTagID(), forumThread.getThreadId()));
+			subPublisherRole
+					.subscriptionNotify(new TagSubscribedNotifyEvent(tag.getTagID(), forumThread.getThreadId()));
 		}
 
 		// if enable reply notify, so the author is the thread's fans
 		if (isReplyNotifyForAuthor) {
-			subPublisherRole.createSubscription(new ThreadSubscribedCreateEvent(forumMessage.getAccount().getUserId(), forumThread.getThreadId()));
+			subPublisherRole.createSubscription(
+					new ThreadSubscribedCreateEvent(forumMessage.getAccount().getUserId(), forumThread.getThreadId()));
 		}
 	}
 

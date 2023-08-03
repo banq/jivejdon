@@ -41,7 +41,7 @@ public class LobbyPublisherRole implements LobbyPublisherRoleIF {
 	 * .jdon.jivejdon.model.realtime.Notification)
 	 */
 	@Override
-	@Send("newForumMessageNotifier")
+	@Send("newMessageBaiduSearchNotifier")
 	public DomainMessage notifyLobby(Notification notification) {
 		return new DomainMessage(notification);
 	}

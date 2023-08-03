@@ -11,36 +11,27 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 package com.jdon.jivejdon.spi.component.pingrpc;
 
-public class BlogPingTempParams {
+import com.jdon.annotation.Component;
+import com.jdon.jivejdon.domain.model.realtime.Notification;
+import com.jdon.jivejdon.util.ThreadTimer;
 
-	private final String Title, blogUrl, UrlChanges, UrlRSS;
+@Component("baiduSearchClient")
+public class BaiduSearchClient {
 
-	public BlogPingTempParams(String title, String blogUrl, String urlChanges, String urlRSS) {
-		super();
-		Title = title;
-		this.blogUrl = blogUrl;
-		UrlChanges = urlChanges;
-		UrlRSS = urlRSS;
-	}
+    private final BaiduSearchTempParams baiduSearchTempParams;
+    private final ThreadTimer threadTimer;
 
-	public String getTitle() {
-		return Title;
-	}
+    public BaiduSearchClient(BaiduSearchTempParams baiduSearchTempParams, ThreadTimer threadTimer) {
+        this.baiduSearchTempParams = baiduSearchTempParams;
+        this.threadTimer = threadTimer;
+    }
 
-	public String getBlogUrl() {
-		return blogUrl;
-	}
-
-	public String getUrlChanges() {
-		return UrlChanges;
-	}
-
-	public String getUrlRSS() {
-		return UrlRSS;
-	}
+    public void send(Notification notification) {
+        threadTimer.offer(new BlogPingSender(notification, baiduSearchTempParams));
+    }
 
 }

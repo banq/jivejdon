@@ -204,6 +204,17 @@
 		</component>
 		
 		
+		<!-- <component name="baiduSearchNotifyMessage"
+			class="com.jdon.jivejdon.domain.model.subscription.messsage.BaiduSearchNotifyMessage">
+			<constructor value="http://data.zz.baidu.com/urls" />
+			<constructor value="https://www.jdon.com" />
+			<constructor value="L1DkbfaAzyEnmcbM" />
+			<constructor
+                    value="https://www.jdon.com/threadId.html"/>
+			
+		</component>
+		 -->
+		
 		<component name="threadViewCountParameter"
 			class="com.jdon.jivejdon.spi.component.viewcount.ThreadViewCountParameter">
             <constructor value="3600"/>
@@ -270,20 +281,33 @@
         <constructor value="500"/><!--  -->
 	</component>    
     
-		<component name="blogPingTempParams"
+		
+		<component name="baiduSearchTempParams"
+			class="com.jdon.jivejdon.domain.model.subscription.messsage.BaiduSearchTempParams">
+			<constructor value="http://data.zz.baidu.com/urls" />
+			<constructor value="data.zz.baidu.com" />
+			<constructor value="https://www.jdon.com" />
+			<constructor value="L1DkbfaAzyEnmcbM" />
+			<constructor
+                    value="https://www.jdon.com/#threadId#.html"/>
+			
+		</component>
+		
+		
+
+		<!-- <component name="blogPingTempParams"
 			class="com.jdon.jivejdon.spi.component.pingrpc.BlogPingTempParams">
-			<constructor value="Jdon" /><!-- blog title -->
-			<constructor value="https://www.jdon.com/" /> <!-- blog url -->
-    	    <constructor value="https://www.jdon.com/#threadId#" /> <!--
-    	     UrlChanges -->
-    	    <constructor value="https://www.jdon.com/rss" /> <!-- BLOG RSS -->
+			<constructor value="Jdon" />
+			<constructor value="https://www.jdon.com/" /> 
+    	    <constructor value="https://www.jdon.com/#threadId#.html" /> <
+    	    <constructor value="https://www.jdon.com/rss" /> 
 		</component>
 
 		<component name="blogPingServerUrl"
 			class="com.jdon.jivejdon.spi.component.pingrpc.BlogPingServerUrl">
 			<constructor value="http://ping.baidu.com/ping/RPC2" />
-<!--     	    <constructor value="http://blogsearch.google.com/ping/RPC2" /> --> 
-		</component>
+
+		</component> -->
 
         <component name="cdnRefreshUrls"
                    class="com.jdon.jivejdon.spi.pubsub.subscriber.postThread.CDNRefreshUrls">

@@ -15,15 +15,36 @@
  */
 package com.jdon.jivejdon.spi.component.pingrpc;
 
-public class BlogPingServerUrl {
-	private final String serviceUrl[];
+public class BaiduSearchTempParams {
 
-	public BlogPingServerUrl(String s[]) {
-		serviceUrl = s;
+	private final String linkSubmitUrl, host, domain, bdToken, urltemp;
+
+	public BaiduSearchTempParams(String linkSubmitUrl, String host, String domain, String bdToken, String urltemp) {
+		this.linkSubmitUrl = linkSubmitUrl;
+		this.host = host;
+		this.domain = domain;
+		this.bdToken = bdToken;
+		this.urltemp = urltemp;
 	}
 
-	public String[] getServiceUrl() {
-		return serviceUrl;
+	public String getLinkSubmitUrl() {
+		return linkSubmitUrl;
+	}
+
+	public String getDomain() {
+		return domain;
+	}
+
+	public String getBdToken() {
+		return bdToken;
+	}
+
+	public String getUrltemp() {
+		return urltemp;
+	}
+
+	public String getHost() {
+		return host;
 	}
 
 }
