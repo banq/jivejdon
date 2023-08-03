@@ -50,7 +50,6 @@ public class ThreadPostListener implements DomainEventHandler {
 		this.roleAssigner = roleAssigner;
 		eventHandler = new CacheQueryRefresher(forumFactory, messagePageIteratorSolver);
 		this.baiduSearchClient = baiduSearchClient;
-
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
