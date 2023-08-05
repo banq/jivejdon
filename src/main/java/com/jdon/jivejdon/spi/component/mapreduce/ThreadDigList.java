@@ -15,18 +15,15 @@
  */
 package com.jdon.jivejdon.spi.component.mapreduce;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.stream.Collectors;
 
 import com.jdon.controller.model.PageIterator;
@@ -44,8 +41,6 @@ public class ThreadDigList {
 	private final SortedSet<Long> sortedWindows;
 	private final ForumMessageQueryService forumMessageQueryService;
 
-	private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
-
 	public ThreadDigList(ForumMessageQueryService forumMessageQueryService) {
 		this.forumMessageQueryService = forumMessageQueryService;
 		this.sortedAll = new TreeSet<>(new ThreadDigComparator(forumMessageQueryService));
@@ -56,64 +51,40 @@ public class ThreadDigList {
 		Date mDate = new Date(forumThread.getCreationDate2());
 		Date nowDate = new Date();
 		long daysBetween = (nowDate.getTime() - mDate.getTime() + 1000000) / (60 * 60 * 24 * 1000);
-		readWriteLock.writeLock().lock(); // 加写锁
-		try {
-			if (daysBetween < TIME_WINDOWS) {
-				sortedWindows.add(forumThread.getThreadId());
-			}
-			sortedAll.add(forumThread.getThreadId());
-		} finally {
-			readWriteLock.writeLock().unlock(); // 释放写锁
+		if (daysBetween < TIME_WINDOWS) {
+			sortedWindows.add(forumThread.getThreadId());
 		}
+		sortedAll.add(forumThread.getThreadId());
 
 	}
 
 	public PageIterator getPageIterator(int start, int count) {
-		List<Long> threads = new ArrayList<>();
-		readWriteLock.readLock().lock();
-		try {
-			threads = sortedAll.stream().skip(start).limit(count).collect(Collectors.toList());
-		} finally {
-			readWriteLock.readLock().unlock();
-		}
-		return new PageIterator(sortedAll.size(), threads.toArray());
+		Set<Long> threads = Collections.unmodifiableSet(sortedAll);
+		threads = threads.stream().skip(start).limit(count).collect(Collectors.toSet());
+		return new PageIterator(threads.size(), threads.toArray());
 	}
 
 	public PageIterator getRandomPageIterator(int count) {
-		List<Long> threads = new ArrayList<>();
-		readWriteLock.readLock().lock();
+		Set<Long> threads = Collections.unmodifiableSet(sortedAll);
 		for (int i = 0; i < count; i++) {
-			int randstart = ThreadLocalRandom.current().nextInt(sortedAll.size());
-			threads.addAll(sortedAll.stream().skip(randstart).limit(1).collect(Collectors.toList()));
+			int randstart = ThreadLocalRandom.current().nextInt(threads.size());
+			threads.addAll(threads.stream().skip(randstart).limit(1).collect(Collectors.toSet()));
 		}
-		readWriteLock.readLock().unlock();
-		return new PageIterator(sortedAll.size(), threads.toArray());
+		return new PageIterator(threads.size(), threads.toArray());
 	}
 
 	public Collection<ForumThread> getDigs(int DigsListMAXSize) {
 		if (sortedWindows.size() < DigsListMAXSize)
 			DigsListMAXSize = sortedWindows.size();
-		List<ForumThread> threads = new ArrayList<>();
-		readWriteLock.readLock().lock();
-		try {
-			threads = sortedWindows.stream().limit(DigsListMAXSize).map(forumMessageQueryService::getThread)
-					.collect(Collectors.toList());
-		} finally {
-			readWriteLock.readLock().unlock();
-		}
-		return threads;
+		Set<Long> threads = Collections.unmodifiableSet(sortedWindows);
+		return threads.stream().limit(DigsListMAXSize).map(forumMessageQueryService::getThread)
+				.collect(Collectors.toList());
 
 	}
 
 	public Collection<Long> getDigThreadIds(int DigsListMAXSize) {
-		List<Long> threads = new ArrayList<>();
-		readWriteLock.readLock().lock();
-		try {
-			threads = sortedWindows.stream().limit(DigsListMAXSize).collect(Collectors.toList());
-		} finally {
-			readWriteLock.readLock().unlock();
-		}
-		return threads;
+		Set<Long> threads = Collections.unmodifiableSet(sortedWindows);
+		return threads.stream().limit(DigsListMAXSize).collect(Collectors.toSet());
 	}
 
 	public void clear() {
