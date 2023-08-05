@@ -59,16 +59,16 @@ public class ThreadDigList {
 	}
 
 	public PageIterator getPageIterator(int start, int count) {
-		Set<Long> threads = Collections.unmodifiableSet(sortedAll);
-		threads = threads.stream().skip(start).limit(count).collect(Collectors.toSet());
+		List<Long> threads = Collections.unmodifiableList(new ArrayList<Long>(sortedAll));
+		threads = threads.stream().skip(start).limit(count).collect(Collectors.toList());
 		return new PageIterator(threads.size(), threads.toArray());
 	}
 
 	public PageIterator getRandomPageIterator(int count) {
-		Set<Long> threads = Collections.unmodifiableSet(sortedAll);
+		List<Long> threads = Collections.unmodifiableList(new ArrayList<Long>(sortedAll));
 		for (int i = 0; i < count; i++) {
 			int randstart = ThreadLocalRandom.current().nextInt(threads.size());
-			threads.addAll(threads.stream().skip(randstart).limit(1).collect(Collectors.toSet()));
+			threads.addAll(threads.stream().skip(randstart).limit(1).collect(Collectors.toList()));
 		}
 		return new PageIterator(threads.size(), threads.toArray());
 	}
@@ -76,15 +76,15 @@ public class ThreadDigList {
 	public Collection<ForumThread> getDigs(int DigsListMAXSize) {
 		if (sortedWindows.size() < DigsListMAXSize)
 			DigsListMAXSize = sortedWindows.size();
-		Set<Long> threads = Collections.unmodifiableSet(sortedWindows);
+		List<Long> threads = Collections.unmodifiableList(new ArrayList<Long>(sortedWindows));
 		return threads.stream().limit(DigsListMAXSize).map(forumMessageQueryService::getThread)
 				.collect(Collectors.toList());
 
 	}
 
 	public Collection<Long> getDigThreadIds(int DigsListMAXSize) {
-		Set<Long> threads = Collections.unmodifiableSet(sortedWindows);
-		return threads.stream().limit(DigsListMAXSize).collect(Collectors.toSet());
+		List<Long> threads = Collections.unmodifiableList(new ArrayList<Long>(sortedWindows));
+		return threads.stream().limit(DigsListMAXSize).collect(Collectors.toList());
 	}
 
 	public void clear() {
