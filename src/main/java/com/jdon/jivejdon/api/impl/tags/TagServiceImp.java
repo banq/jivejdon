@@ -84,7 +84,7 @@ public class TagServiceImp implements TagService, Poolable {
 		if ((pi.getAllCount() == 0) || (count == 0))
 			return new PageIterator();
 		int pageCount = pi.getAllCount() / count;
-		int nowPage = ThreadLocalRandom.current().nextInt(pageCount);
+		int nowPage = (int) (Math.random() * pageCount);
 		start = nowPage * count;
 		return tagRepository.getTaggedThread(taggedThreadListSpec, start, count);
 	}
