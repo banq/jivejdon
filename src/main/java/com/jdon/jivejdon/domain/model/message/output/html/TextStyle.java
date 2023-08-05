@@ -47,7 +47,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 	 * @return a String will all instances of oldString replaced by newString
 	 */
 	public static final String replaceIgnoreCase(String line, String oldString, String newString,
-												 int[] count) {
+			int[] count) {
 		if (line == null) {
 			return null;
 		}
@@ -82,10 +82,9 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 	 *
 	 */
 	public MessageVO apply(MessageVO messageVO) {
-		return messageVO.builder().subject(convertTags(messageVO.getSubject())).body
-				(convertTags(messageVO.getBody())).build();
+		return messageVO.builder().subject(convertTags(messageVO.getSubject())).body(convertTags(messageVO.getBody()))
+				.build();
 	}
-
 
 	/**
 	 * Returns true if translation of [b][/b] tags to the HTML bold tag is
@@ -101,7 +100,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 	 * Toggles translation of [b][/b] tags to the HTML bold tag.
 	 *
 	 * @param boldEnabled
-	 *            toggles translation of [b][/b] tags.
+	 *                    toggles translation of [b][/b] tags.
 	 */
 	public void setBoldEnabled(boolean boldEnabled) {
 		this.boldEnabled = boldEnabled;
@@ -121,7 +120,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 	 * Toggles translation of [i][/i] tags to the HTML italic tag.
 	 *
 	 * @param italicEnabled
-	 *            toggles translation of [i][/i] tags.
+	 *                      toggles translation of [i][/i] tags.
 	 */
 	public void setItalicEnabled(boolean italicEnabled) {
 		this.italicEnabled = italicEnabled;
@@ -141,7 +140,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 	 * Toggles translation of [u][/u] tags to the HTML underline tag.
 	 *
 	 * @param underlineEnabled
-	 *            toggles translation of [u][/u] tags.
+	 *                         toggles translation of [u][/u] tags.
 	 */
 	public void setUnderlineEnabled(boolean underlineEnabled) {
 		this.underlineEnabled = underlineEnabled;
@@ -161,7 +160,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 	 * Toggles translation of [pre][/pre] tags to the HTML underline tag.
 	 *
 	 * @param preformatEnabled
-	 *            toggles translation of [pre][/pre] tags.
+	 *                         toggles translation of [pre][/pre] tags.
 	 */
 	public void setPreformatEnabled(boolean preformatEnabled) {
 		this.preformatEnabled = preformatEnabled;
@@ -180,7 +179,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 	 * Enables or disables filtering on the subject.
 	 *
 	 * @param filteringSubject
-	 *            toggle value for filtering on subject.
+	 *                         toggle value for filtering on subject.
 	 */
 	public void setFilteringSubject(boolean filteringSubject) {
 		this.filteringSubject = filteringSubject;
@@ -199,7 +198,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 	 * Enables or disables filtering on the body.
 	 *
 	 * @param filteringBody
-	 *            toggle value for filtering on body.
+	 *                      toggle value for filtering on body.
 	 */
 	public void setFilteringBody(boolean filteringBody) {
 		this.filteringBody = filteringBody;
@@ -210,7 +209,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 	 * converts them to their HTML equivalents.
 	 *
 	 * @param input
-	 *            the text to be converted.
+	 *              the text to be converted.
 	 * @return the input string with the [b][/b] and [i][/i] tags converted to
 	 *         their HTML equivalents.
 	 */
@@ -231,12 +230,12 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 			int[] preformatStartCount = new int[1];
 			int[] preformatEndCount = new int[1];
 			if (boldEnabled) {
-				input = replaceIgnoreCase(input, "[b]", "<b>", boldStartCount);
-				input = replaceIgnoreCase(input, "[/b]", "</b>", boldEndCount);
+				input = replaceIgnoreCase(input, "[b]", "<strong>", boldStartCount);
+				input = replaceIgnoreCase(input, "[/b]", "</strong>", boldEndCount);
 				int bStartCount = boldStartCount[0];
 				int bEndCount = boldEndCount[0];
 				while (bStartCount > bEndCount) {
-					input = input.concat("</b>");
+					input = input.concat("</strong>");
 					bEndCount++;
 				}
 			}
