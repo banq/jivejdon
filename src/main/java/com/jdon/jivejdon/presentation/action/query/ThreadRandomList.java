@@ -1,5 +1,7 @@
 package com.jdon.jivejdon.presentation.action.query;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.jdon.controller.WebAppUtil;
@@ -42,7 +44,7 @@ public class ThreadRandomList extends ModelListAction {
         if (allCount == 0)
             return new PageIterator();
         int pageCount = allCount / count;
-        int nowPage = (int) (Math.random() * pageCount);
+        int nowPage = ThreadLocalRandom.current().nextInt(pageCount);
         start = nowPage * count;
         return getForumMessageQueryService().getThreads(start, count, threadListSpec);
     }

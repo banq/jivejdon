@@ -19,6 +19,7 @@ package com.jdon.jivejdon.api.impl.tags;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Pattern;
 
 import com.jdon.annotation.Service;
@@ -83,7 +84,7 @@ public class TagServiceImp implements TagService, Poolable {
 		if ((pi.getAllCount() == 0) || (count == 0))
 			return new PageIterator();
 		int pageCount = pi.getAllCount() / count;
-		int nowPage = (int) (Math.random() * pageCount);
+		int nowPage = ThreadLocalRandom.current().nextInt(pageCount);
 		start = nowPage * count;
 		return tagRepository.getTaggedThread(taggedThreadListSpec, start, count);
 	}

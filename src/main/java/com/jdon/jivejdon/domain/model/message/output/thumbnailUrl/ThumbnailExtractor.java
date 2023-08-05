@@ -5,6 +5,7 @@ import com.jdon.jivejdon.domain.model.message.MessageVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,12 +24,12 @@ public class ThumbnailExtractor implements Function<MessageVO, MessageVO> {
 	public MessageVO apply(MessageVO messageVO) {
 		String thumbnailUrl = messageVO.getForumMessage().getMessageUrlVO().getThumbnailUrl();
 		String imageUrl = messageVO.getForumMessage().getMessageUrlVO().getImageUrl();
-		Matcher matcher = imgPattern.matcher(messageVO.getBody());		
+		Matcher matcher = imgPattern.matcher(messageVO.getBody());
 		if (matcher.find()) {
 			imageUrl = matcher.group(4);
 			thumbnailUrl = "";
 		} else {
-			if (thumbnailUrl == null || thumbnailUrl.length() == 0){
+			if (thumbnailUrl == null || thumbnailUrl.length() == 0) {
 				thumbnailUrl = this.getRandomDefaulThumb();
 				imageUrl = "";
 			}
@@ -45,7 +46,7 @@ public class ThumbnailExtractor implements Function<MessageVO, MessageVO> {
 			return "please add default thumbs UploadImageFilter";
 		}
 
-		int i = (int) (Math.random() * thumbs.length);
+		int i = ThreadLocalRandom.current().nextInt(thumbs.length);
 		return thumbs[i];
 
 	}
