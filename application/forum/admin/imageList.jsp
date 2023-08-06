@@ -6,12 +6,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8"/>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-<meta http-equiv="" content="IE=edge,chrome=1"/>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title>My JSP 'images.jsp' starting page</title>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
         <link rel="stylesheet" href="<html:rewrite page="/jivejdon_css.jsp"/>" type="text/css" /> 
 		<script type="text/JavaScript">
 			function delConfirm(){

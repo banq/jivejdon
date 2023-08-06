@@ -5,14 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8"/>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-<meta http-equiv="" content="IE=edge,chrome=1"/>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>
 Url
 </title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
 <meta   http-equiv="pragma"   content="no-cache">
 <link href="jdon.css" rel="stylesheet" type="text/css">
 </head>

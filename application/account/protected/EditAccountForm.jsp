@@ -5,15 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8"/>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-<meta http-equiv="" content="IE=edge,chrome=1"/>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>
 编辑注册资料
 </title>
   <link rel="stylesheet" href="/common/jivejdon5.css" type="text/css"/>
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
   <script type="text/javascript" src="/common/js/prototype.js"></script>
 <body>
 <html:errors/>

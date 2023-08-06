@@ -16,7 +16,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <link rel="preconnect dns-prefetch" href="//analytics.google.com" crossorigin>
     <meta charset="utf-8"/>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-    <meta http-equiv="" content="IE=edge,chrome=1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="refresh" content="3600">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title><logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty></title>
