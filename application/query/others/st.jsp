@@ -14,7 +14,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Jdon.com</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="/common/jivejdon5.css" type="text/css" />
 
 </head>
