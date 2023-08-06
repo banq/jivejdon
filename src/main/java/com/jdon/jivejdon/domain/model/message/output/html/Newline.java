@@ -110,10 +110,10 @@ public class Newline implements Function<MessageVO, MessageVO> {
 	 */
 	public MessageVO apply(MessageVO messageVO) {
 		Pattern pattern = Pattern.compile("\n\\[", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
-		String s = pattern.matcher(messageVO.getBody()).replaceFirst("\n<p class=\"indent\">\\[");
-		s = pattern.matcher(s).replaceAll("\n</p><p class=\"indent\">\\[");
+		String s = pattern.matcher(messageVO.getBody()).replaceFirst("\n<div class=\"indent\">\\[");
+		s = pattern.matcher(s).replaceAll("\n</div><div class=\"indent\">\\[");
 		if (pattern.matcher(messageVO.getBody()).find()) {
-			s = s.concat("</p>");
+			s = s.concat("</div>");
 		}
 		return messageVO.builder().subject(messageVO.getSubject()).body(convertNewlinesAroundCode(s)).build();
 	}
