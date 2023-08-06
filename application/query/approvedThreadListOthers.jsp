@@ -80,7 +80,6 @@
         <!---- Start Widget ---->
       <div class="widget">
         <div class="wid-vid">
-                 <ul>
 							    <div id="digList"></div>   
 							    <div class="lazyload" >
 							     <!-- 
@@ -91,8 +90,6 @@
 							  </script> -->
 							  </div>
 
-							  </ul>
-              
           </div>
         </div>
 
@@ -100,7 +97,6 @@
         <!---- Start Widget ---->
        <div class="widget">
            <div class="wid-vid">
-                 <ul>
 							    <div class="scrolldiv">
 							     <div style="width: 300px"> 
 <!-- 自适应主广告 -->
@@ -115,7 +111,6 @@
 </script>		                  
                    </div> 
 							    </div>    
-							  </ul>
           </div>
         </div>
  

@@ -104,7 +104,6 @@
      <div class="widget">
         <div class="wid-vid">
         
-              <ul>          
                  <logic:notEmpty name="forumThread" property="tags">          
                   <div id="threadTagList"></div>             
                    <div class="lazyload" >
@@ -127,7 +126,6 @@
 							      </script> -->
 							     </div>
                 </logic:empty>   				   
-              </ul>
           
         </div>
       </div>     
@@ -137,7 +135,6 @@
      <div class="widget">
         <div class="wid-vid">
           
-              <ul>                           
                 <div class="scrolldiv">
 							   <div style="width: 300px"> 
 <!-- 自适应主广告 -->
@@ -152,7 +149,6 @@
 </script>		                
                  </div> 
 							 </div>   
-              </ul>
          
         </div>
       </div>
@@ -165,7 +161,7 @@
 
   <div id="reply" style="display:none">
     <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
-    <input type="hidden" id="replySubject" name="replySubject" value="<bean:write name="forumThread" property="rootMessage.messageVO.subject"/>"/>
+    <input type="hidden" id="replySubject" name="replySubject" value="<bean:write name="forumThread" property="rootMessage.messageVO.subject"/>">
   </div>
 
 </main>
