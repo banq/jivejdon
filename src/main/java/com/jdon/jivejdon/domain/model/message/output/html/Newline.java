@@ -28,8 +28,9 @@ import java.util.regex.Pattern;
  * to work around the TextStyle filter.
  */
 public class Newline implements Function<MessageVO, MessageVO> {
-	private final static String module = Newline.class.getName();
-	private static final char[] P_TAG = "</section><section class=\"indent\">".toCharArray();
+	// private final static String module = Newline.class.getName();
+	// private static final char[] P_TAG = "</section><section
+	// class=\"indent\">".toCharArray();
 	private static final char[] BR_TAG = "<p>".toCharArray();
 
 	/**
@@ -109,10 +110,10 @@ public class Newline implements Function<MessageVO, MessageVO> {
 	 */
 	public MessageVO apply(MessageVO messageVO) {
 		Pattern pattern = Pattern.compile("\n\\[", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
-		String s = pattern.matcher(messageVO.getBody()).replaceFirst("\n<section class=\"indent\">\\[");
-		s = pattern.matcher(s).replaceAll("\n</section><section class=\"indent\">\\[");
+		String s = pattern.matcher(messageVO.getBody()).replaceFirst("\n<p class=\"indent\">\\[");
+		s = pattern.matcher(s).replaceAll("\n</p><p class=\"indent\">\\[");
 		if (pattern.matcher(messageVO.getBody()).find()) {
-			s = s.concat("</section>");
+			s = s.concat("</p>");
 		}
 		return messageVO.builder().subject(messageVO.getSubject()).body(convertNewlinesAroundCode(s)).build();
 	}
