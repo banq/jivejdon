@@ -5,19 +5,18 @@ import java.util.regex.Pattern;
 
 public class ToolsUtil {
 
-
 	/**
-	 * replace String [list] [/ist]  or [XX] [/XX] or XXX YYY
+	 * replace String [list] [/ist] or [XX] [/XX] or XXX YYY
 	 *
 	 * @param input
-	 * @param parentTagRegx [list] [/ist]  or [XX] [/XX] or XXX YYY
+	 * @param parentTagRegx [list] [/ist] or [XX] [/XX] or XXX YYY
 	 * @param parentHtml
 	 * @param childTagRex
 	 * @param childHtml
 	 * @return
 	 */
-	public static String convertTags(String input, String parentTagRegx, String parentHtml, String
-			childTagRex, String childHtml) {
+	public static String convertTags(String input, String parentTagRegx, String parentHtml, String childTagRex,
+			String childHtml) {
 		// Check if the string is null or zero length -- if so, return what was
 		// sent in.
 		if (input == null || input.length() == 0)
@@ -34,8 +33,7 @@ public class ToolsUtil {
 	}
 
 	public static String convertTagsFirst(String input, String parentTagRegx, String parentHtml,
-										  String
-												  childTagRex, String childHtml) {
+			String childTagRex, String childHtml) {
 		// Check if the string is null or zero length -- if so, return what was
 		// sent in.
 		if (input == null || input.length() == 0)
@@ -45,7 +43,7 @@ public class ToolsUtil {
 				.matcher(input);
 		StringBuilder sb = new StringBuilder();
 		if (matcher.find()) {
-			//remove \n ...
+			// remove \n ...
 			Pattern p = Pattern.compile("\t|\r|\n");
 			Matcher m = p.matcher(matcher.group(1));
 			String cleanS = m.replaceAll("");
