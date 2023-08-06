@@ -14,15 +14,17 @@
           <div class="wrap-vid">
               <div class="widget">		 
 
+<ul>
 <bean:parameter id="count" name="count" value="8"/>
 <%
 String coutlength = (String)pageContext.getAttribute("count");
 %>        
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='<%=coutlength%>' >
-	<div class="info"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank">
+	<li class="info"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank">
              <bean:write name="forumThread" property="name" /></a>
-      </div>
+  </li>
 </logic:iterate>
+</ul>
 
 </div>
 </div>
