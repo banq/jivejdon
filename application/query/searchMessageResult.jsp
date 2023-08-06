@@ -112,7 +112,6 @@
                     <td>
                         <div class="box col-md-12">
                             
-                            <section>
 
                             <b>
                                 &nbsp;&nbsp;<bean:write name="account"
@@ -151,7 +150,6 @@
                                     name="forumMessage"
                                     property="modifiedDate3"/></span>
 
-                            </section>
                            
 
                         </div>

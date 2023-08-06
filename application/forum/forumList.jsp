@@ -63,7 +63,6 @@
 
 <logic:iterate indexId="i"   id="forum" name="forumListForm" property="list" >
         <tr>
-        <section>
             <td>
               
                  <a href="<%=request.getContextPath()%>/forum/<bean:write name="forum" property="forumId" />/">                
@@ -85,7 +84,6 @@
             <td>
                <span class="home_content" > <bean:write name="forum" property="forumState.threadCount" /> </span>
             </td>
-        </section>
         </tr>
 
 </logic:iterate>

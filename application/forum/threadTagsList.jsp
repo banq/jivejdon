@@ -21,10 +21,8 @@
  <logic:iterate id="forumThread0" name="tagID0" length="4">
 
  <div class="info">
-   <section>    
     <a href="<%=request.getContextPath()%>/<bean:write name="forumThread0" property="threadId"/>.html" target="_blank">
      <bean:write name="forumThread0" property="name" /></a>
-   </section>                
  </div>
             
  </logic:iterate>

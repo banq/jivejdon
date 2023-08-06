@@ -52,11 +52,11 @@ int h = 0 ;
      </div>
         
      <div>
-       <section class="tagcloud">
+       <div class="tagcloud">
         <a href='<%=request.getContextPath() %>/tag-<bean:write name="threadTag" property="tagID"/>/' target="_blank" class="tag-cloud-link">
 		    <bean:write name="threadTag" property="title" /></a>
 	      <a href="/tag-<bean:write name="threadTag" property="tagID"/>/rss"><i class="fa fa-feed"></i></a>
-       </section> 
+       </div> 
       </div>
 	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' >
   <br><br><br><br><br><br>     
