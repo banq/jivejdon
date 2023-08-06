@@ -18,6 +18,8 @@ package com.jdon.jivejdon.domain.model.message.output.html;
 import com.jdon.jivejdon.domain.model.message.MessageVO;
 
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A ForumMessageFilter that converts newline characters into HTML &lt;br&gt;
@@ -27,7 +29,7 @@ import java.util.function.Function;
  */
 public class Newline implements Function<MessageVO, MessageVO> {
 	private final static String module = Newline.class.getName();
-	private static final char[] P_TAG = "<p class=\"indent\">".toCharArray();
+	private static final char[] P_TAG = "</section><section class=\"indent\">".toCharArray();
 	private static final char[] BR_TAG = "<p>".toCharArray();
 
 	/**
@@ -37,7 +39,7 @@ public class Newline implements Function<MessageVO, MessageVO> {
 	 * @param index      the index position to be tested.
 	 * @param boundaries the table containing a set of boundaries.
 	 * @return true if index resides within at least one boundary, false
-	 * otherwise.
+	 *         otherwise.
 	 */
 	private static boolean notInCodeSection(int index, int[][] boundaries) {
 		if (boundaries == null) {
@@ -106,12 +108,14 @@ public class Newline implements Function<MessageVO, MessageVO> {
 	 *
 	 */
 	public MessageVO apply(MessageVO messageVO) {
-		String s = messageVO.getBody();
-		s = ToolsUtil.convertTags(s, "\n\\[", "\n" + new String(P_TAG) + "\\[");
-		return messageVO.builder().subject(messageVO.getSubject()).body
-				(convertNewlinesAroundCode(s)).build();
+		Pattern pattern = Pattern.compile("\n\\[", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+		String s = pattern.matcher(messageVO.getBody()).replaceFirst("\n<section class=\"indent\">\\[");
+		s = pattern.matcher(s).replaceAll("\n</section><section class=\"indent\">\\[");
+		if (pattern.matcher(messageVO.getBody()).find()) {
+			s = s.concat("</section>");
+		}
+		return messageVO.builder().subject(messageVO.getSubject()).body(convertNewlinesAroundCode(s)).build();
 	}
-
 
 	/**
 	 * Replaces newline characters with the HTML equivalent. This method works
@@ -119,7 +123,7 @@ public class Newline implements Function<MessageVO, MessageVO> {
 	 * successfully performed.
 	 *
 	 * @param input
-	 *            the text to be converted.
+	 *              the text to be converted.
 	 * @return the input string with newline characters replaced with HTML
 	 *         newline tags..
 	 */
