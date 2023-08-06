@@ -4,7 +4,7 @@
 <%
 String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 %>
-<!DOCTYPE html>
+<html lang="zh-CN">
 <html>
 <head>
     <link rel="stylesheet" href="/js/jdon.css"  type="text/css">  

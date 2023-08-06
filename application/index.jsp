@@ -11,7 +11,7 @@ response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
 response.setHeader("Expires", "0"); // Proxies.
 %>
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
   <link rel="stylesheet" href="/js/jdon.css" type="text/css"> 
   <script defer src="/js/jquery-bootstrap2.js"></script>
