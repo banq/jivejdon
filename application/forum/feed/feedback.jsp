@@ -84,8 +84,8 @@ window.callback = function(res){
 </table>
   </html:form> --%>
   <p>
-    <p>公众号：</p>
-                    <p><img src="/simgs/weixin.png"></p>
+    <p>邮箱：BanQ <img src="/simgs/email23ghsd486-(%5Ek.gif"> 163.com</p>
+                   
 
 </div>
 	
