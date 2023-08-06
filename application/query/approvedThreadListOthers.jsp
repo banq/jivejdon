@@ -63,7 +63,7 @@
         <!---- Start tags ---->
         <div class="widget">
 					    <div class="wid-vid">
-							<ul>
+						
 							  <div id="tagHotList"></div>   
 							    <div class="lazyload" >
 							     <!-- 
@@ -74,7 +74,6 @@
 							  </script> -->
 							  </div>
 
-							</ul>
 							</div>
 				</div>
 

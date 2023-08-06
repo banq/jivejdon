@@ -163,7 +163,7 @@ response.setHeader("Expires", "0"); // Proxies.
 
 				<div class="widget">
 					    <div class="wid-vid">
-							<ul>
+							
 							  <div id="tagHotList"></div>   
 							    <div class="lazyload" >
 							     <!-- 
@@ -174,7 +174,7 @@ response.setHeader("Expires", "0"); // Proxies.
 							  </script> -->
 							  </div>
 
-							</ul>
+						
 							</div>
 				</div>
 

@@ -75,8 +75,7 @@
       </div>
 			<div class="widget">
         <div class="wid-vid">
-       
-              <ul>                
+              
                 <logic:notEmpty name="forumThread" property="tags">          
                   <div class="widget_tag_cloud">
                    <div class="tagcloud">
@@ -98,8 +97,7 @@
 							      </script> -->
 							     </div>
                 </logic:empty>          
-              </ul>
-        
+       
         </div>				
 			</div>
 
