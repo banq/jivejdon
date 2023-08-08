@@ -31,7 +31,7 @@ public class Newline implements Function<MessageVO, MessageVO> {
 	// private final static String module = Newline.class.getName();
 	// private static final char[] P_TAG = "</section><section
 	// class=\"indent\">".toCharArray();
-	private static final char[] BR_TAG = "<p>".toCharArray();
+	private static final char[] BR_TAG = "<br>".toCharArray();
 
 	/**
 	 * Finds out whether a given index position resides within any boundaries of
@@ -109,11 +109,11 @@ public class Newline implements Function<MessageVO, MessageVO> {
 	 *
 	 */
 	public MessageVO apply(MessageVO messageVO) {
-		Pattern pattern = Pattern.compile("\n\\[", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
-		String s = pattern.matcher(messageVO.getBody()).replaceFirst("\n<div class=\"indent\">\\[");
-		s = pattern.matcher(s).replaceAll("\n</div><div class=\"indent\">\\[");
-		if (pattern.matcher(messageVO.getBody()).find()) {
-			s = s.concat("</div>");
+		String s = "<p class=\"indent\">" + messageVO.getBody();
+		Pattern pattern = Pattern.compile("\r\n\r\n", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+		s = pattern.matcher(s).replaceAll("</p><p class=\"indent\">");
+		if (pattern.matcher(s).find()) {
+			s = s.concat("</p>");
 		}
 		return messageVO.builder().subject(messageVO.getSubject()).body(convertNewlinesAroundCode(s)).build();
 	}
