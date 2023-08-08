@@ -95,8 +95,8 @@
 		
 		<component name="hitConf"
 			class="com.jdon.jivejdon.spi.component.throttle.hitkey.HitConf">
-			<constructor value="30" />       <!-- access Read limit for CustomizedThrottle  min value is 5 for uploadShowAction five author pics -->
-			<constructor value="10" />    	<!-- second -->
+			<constructor value="5" />       <!-- access Read limit for CustomizedThrottle  min value is 5 for uploadShowAction five author pics -->
+			<constructor value="30" />    	<!-- second -->
 		</component>
 
 		<component name="whiteIPs"
