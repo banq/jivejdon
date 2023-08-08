@@ -27,7 +27,8 @@ public class MessageDigAction extends Action {
 
 	private CustomizedThrottle customizedThrottle;
 
-	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response)
+	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response)
 			throws Exception {
 
 		// remove search robot
@@ -58,19 +59,20 @@ public class MessageDigAction extends Action {
 			return null;
 		}
 		// who has read can dig it.
-//		if (message.getForumThread().getViewCounter().isContains(request.getRemoteAddr())) {
-//			if (!message.getPostip().equals(request.getRemoteAddr()))
-			  message.messaegDigAction();
-			try {				
-				response.setContentType("text/html");
-				response.getWriter().print(message.getDigCount());
+		if (message.getForumThread().getViewCounter().checkIP(request.getRemoteAddr()))
+			// if (!message.getPostip().equals(request.getRemoteAddr()))
+			message.messaegDigAction();
+
+		try {
+			response.setContentType("text/html");
+			response.getWriter().print(message.getDigCount());
+			response.getWriter().close();
+		} catch (Exception e) {
+			if (response != null && response.getWriter() != null) {
 				response.getWriter().close();
-			} catch (Exception e) {
-				if (response != null && response.getWriter() != null) {
-					response.getWriter().close();
-				}
 			}
-//		}
+		}
+		// }
 		return null;
 	}
 
@@ -78,7 +80,8 @@ public class MessageDigAction extends Action {
 		// if refer is null, 1. browser 2. google 3. otherspam
 		String userAgent = request.getHeader("User-Agent");
 		if (robotPattern != null) {
-			if (userAgent != null && userAgent.length() > 0 && robotPattern.matcher(userAgent.toLowerCase()).matches()) {
+			if (userAgent != null && userAgent.length() > 0
+					&& robotPattern.matcher(userAgent.toLowerCase()).matches()) {
 				return true;
 			}
 		}
@@ -87,7 +90,8 @@ public class MessageDigAction extends Action {
 
 	private boolean checkSpamHit(String id, HttpServletRequest request) {
 		if (customizedThrottle == null) {
-			customizedThrottle = (CustomizedThrottle) WebAppUtil.getComponentInstance("customizedThrottle", this.servlet.getServletContext());
+			customizedThrottle = (CustomizedThrottle) WebAppUtil.getComponentInstance("customizedThrottle",
+					this.servlet.getServletContext());
 		}
 		HitKeyIF hitKey = new HitKeySame(request.getRemoteAddr(), "threads");
 		return customizedThrottle.processHitFilter(hitKey);
