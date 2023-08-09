@@ -112,11 +112,9 @@ public class MessageListAction extends ModelListAction {
 
 			executor.submit(new Runnable() {
 				public void run() { // this run method's body will be executed by the service
-				    ViewCounter viewCounter = getThreadViewCounterJob().saveViewCounter(forumThread.getViewCounter());
-			    	if(viewCounter != null)
-				    	forumThread.setViewCounter(viewCounter);
-				    forumThread.addViewCount(request.getRemoteAddr());
-			    }
+					forumThread.addViewCount(request.getRemoteAddr());
+					getThreadViewCounterJob().saveViewCounter(forumThread.getViewCounter());
+				}
 			});
 
 			request.setAttribute("threadsInMemallCount", getThreadViewCounterJob().getThreadIdsList().size());

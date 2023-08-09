@@ -27,12 +27,12 @@ public class ViewCounter implements Comparable<ViewCounter> {
 	private final ForumThread thread;
 	private int viewCount = -1;
 	private int lastSavedCount;
-	Queue<String> fifo; 
+	Queue<String> fifo;
 
 	public ViewCounter(ForumThread thread) {
 		this.thread = thread;
 		this.lastSavedCount = -1;
-		this.fifo = EvictingQueue.create(5); 
+		this.fifo = EvictingQueue.create(5);
 	}
 
 	public void loadinitCount() {
@@ -61,17 +61,25 @@ public class ViewCounter implements Comparable<ViewCounter> {
 	}
 
 	public boolean addViewCount(String ip) {
-		if (getViewCount() != -1){
-			if (!fifo.contains(ip)){
-			    viewCount++;
-		    	fifo.add(ip); 
-			    return true;
-		    }
-		}		
+		if (getViewCount() != -1) {
+			if (!fifo.contains(ip)) {
+				viewCount++;
+				fifo.add(ip);
+				return true;
+			}
+		}
 		return false;
 	}
 
-	public boolean checkIP(String ip){
+	public void removeViewCount(String ip) {
+		if (getViewCount() != -1) {
+			if (fifo.contains(ip)) {
+				fifo.remove(ip);
+			}
+		}
+	}
+
+	public boolean checkIP(String ip) {
 		return fifo.contains(ip);
 	}
 
@@ -84,7 +92,7 @@ public class ViewCounter implements Comparable<ViewCounter> {
 	}
 
 	// public ForumThread getThread() {
-	// 	return thread;
+	// return thread;
 	// }
 
 	public Long getThreadId() {

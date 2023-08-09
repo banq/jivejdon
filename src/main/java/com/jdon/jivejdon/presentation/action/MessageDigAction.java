@@ -59,9 +59,11 @@ public class MessageDigAction extends Action {
 			return null;
 		}
 		// who has read can dig it.
-		if (message.getForumThread().getViewCounter().checkIP(request.getRemoteAddr()))
+		if (message.getForumThread().getViewCounter().checkIP(request.getRemoteAddr())) {
 			// if (!message.getPostip().equals(request.getRemoteAddr()))
 			message.messaegDigAction();
+			message.getForumThread().removeViewCount(request.getRemoteAddr());
+		}
 
 		try {
 			response.setContentType("text/html");

@@ -303,6 +303,10 @@ public class ForumThread {
 		return viewCounter.addViewCount(ip);
 	}
 
+	public void removeViewCount(String ip) {
+		viewCounter.removeViewCount(ip);
+	}
+
 	// return count
 	public long getViewCount() {
 		return viewCounter.getViewCount();
