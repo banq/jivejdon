@@ -28,11 +28,13 @@ public class ViewCounter implements Comparable<ViewCounter> {
 	private int viewCount = -1;
 	private int lastSavedCount;
 	Queue<String> fifo;
+	Queue<String> fifo2;
 
 	public ViewCounter(ForumThread thread) {
 		this.thread = thread;
 		this.lastSavedCount = -1;
 		this.fifo = EvictingQueue.create(5);
+		this.fifo2 = EvictingQueue.create(5);
 	}
 
 	public void loadinitCount() {
@@ -75,12 +77,21 @@ public class ViewCounter implements Comparable<ViewCounter> {
 		if (getViewCount() != -1) {
 			if (fifo.contains(ip)) {
 				fifo.remove(ip);
+				fifo2.add(ip);
 			}
 		}
 	}
 
 	public boolean checkIP(String ip) {
 		return fifo.contains(ip);
+	}
+
+	public boolean isIdempotent(String ip) {
+		if (!fifo.contains(ip))
+			return false;
+		if (fifo2.contains(ip))
+			return false;
+		return true;
 	}
 
 	public int getLastSavedCount() {
