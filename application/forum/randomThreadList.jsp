@@ -45,32 +45,10 @@ pageContext.setAttribute("title", titleStr);
   </a></li>
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" ><i class="fa fa-search"></i></a></li>
 </ul>          
-<ul class="pagination pull-right">
-       
-          <MultiPages:pager actionFormName="threadListForm" page="/forum/threadRandomList.shtml" >
-            <MultiPages:prev name=" 上一页 " />
-            <MultiPages:index displayCount="8" />
-            <MultiPages:next  name=" 下一页 " />
-          </MultiPages:pager>
-      
-         有<b>
-        <bean:write name="threadListForm" property="allCount"/>
-        </b>贴      
-</ul>
+
 
 <%@ include file="threadListCore.jsp" %>
  
-<ul class="pagination pull-right">
-        <MultiPages:pager actionFormName="threadListForm" page="/forum/threadRandomList.shtml" >
-            <MultiPages:prev name=" 上一页 " />
-            <MultiPages:index displayCount="8" />
-            <MultiPages:next  name=" 下一页 " />
-          </MultiPages:pager>
-      
-         有<b>
-        <bean:write name="threadListForm" property="allCount"/>
-        </b>贴      
-</ul>
  <div class="row">
     <div class="col-sm-12">
    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"

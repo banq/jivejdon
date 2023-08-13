@@ -57,7 +57,7 @@ pageContext.setAttribute("title", titleStr);
 		  
       </center>
 
-    
+<% if (request.getParameter("r") == null){ %>  
 <ul class="pagination pull-right"> 有<b>
             <bean:write name="threadListForm" property="allCount"/>
             </b>贴
@@ -67,9 +67,9 @@ pageContext.setAttribute("title", titleStr);
               <MultiPagesREST:next  name=" 下一页 " />
             </MultiPagesREST:pager>
 </ul>
-
+<% } %>  
 <%@ include file="threadList.jsp" %>
-
+<% if (request.getParameter("r") == null){ %>  
 <ul class="pagination pull-right"> 有<b>
             <bean:write name="threadListForm" property="allCount"/>
             </b>贴
@@ -79,6 +79,7 @@ pageContext.setAttribute("title", titleStr);
               <MultiPagesREST:next  name=" 下一页 " />
             </MultiPagesREST:pager>
 </ul>
+<% } %>  
 <div class="row">
     <div class="col-sm-12">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
