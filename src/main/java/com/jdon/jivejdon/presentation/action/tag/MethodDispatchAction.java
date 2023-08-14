@@ -38,10 +38,10 @@ public class MethodDispatchAction extends DispatchAction {
 		if (q.length() > 10)
 			return mapping.findForward("tags");
 
-		if (!checkSpamHit("tags", request)) {
-			logger.error("MethodDispatchAction this is spam =" + request.getRemoteAddr());
-			return mapping.findForward("tags");
-		}
+		// if (!checkSpamHit("tags", request)) {
+		// 	logger.error("MethodDispatchAction this is spam =" + request.getRemoteAddr());
+		// 	return mapping.findForward("tags");
+		// }
 
 		TagService othersService = (TagService) WebAppUtil.getService("othersService", this
 				.servlet.getServletContext());
