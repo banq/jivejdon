@@ -7,7 +7,6 @@
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script> 
 <bean:define id="title"  value="分类主题" />
 <%@ include file="../common/IncludeTop.jsp" %>
 <bean:parameter name="queryType" id="queryType" value=""/>
@@ -112,6 +111,7 @@ int h = 0 ;
 <%@include file="../common/IncludeBottomBody.jsp"%>
 <%@include file="../account/loginAJAX.jsp"%>
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script> 
   
 </body>
 </html>

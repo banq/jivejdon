@@ -7,7 +7,6 @@
 
 <bean:define id="title"  value="编程道场Coding Dojo" />
 <%@ include file="../common/IncludeTop.jsp" %>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>    
 <link rel="alternate" type="application/rss+xml" title="<bean:write name="title" />" href="/rss" />
 <meta http-equiv="refresh" content="3600">
 <script>
@@ -99,6 +98,9 @@
 </div>
 </main>
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>    
+
 <%@include file="../common/IncludeBottom.jsp"%> 
+
 
 
