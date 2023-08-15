@@ -5,6 +5,16 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <div class="list-group">
+
+
+ <logic:iterate indexId="i" id="forumThread" name="threadListForm"  property="list">
+
+    <%@ include file="threadListCore2.jsp" %>
+
+ </logic:iterate>
+
+</div>
+
 <div class="box">
                 <div class="row">
                     <div class="col-sm-12">
@@ -23,14 +33,5 @@
                 </div>
 </div>
 
-
- <logic:iterate indexId="i" id="forumThread" name="threadListForm"  property="list">
-
-    <%@ include file="threadListCore2.jsp" %>
-
- </logic:iterate>
-
-
-</div>
 	
     
