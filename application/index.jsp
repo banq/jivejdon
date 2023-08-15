@@ -56,7 +56,7 @@ response.setHeader("Expires", "0"); // Proxies.
 
 	
 <div class="box"> 
-  <div class="linkblock">
+  
     <div class="row">
         <div class="col-sm-12">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
@@ -72,7 +72,7 @@ response.setHeader("Expires", "0"); // Proxies.
 </script>
         </div>
     </div>
-  </div>
+ 
 </div>
 
     <div class="box"> 

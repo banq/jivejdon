@@ -6,7 +6,6 @@
 <%@ page session="false" %>
 
  <div class="box">
-            <div class="linkblock">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="box">
@@ -24,7 +23,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
 </div>
 
 
