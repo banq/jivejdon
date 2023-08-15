@@ -123,14 +123,13 @@ pageContext.setAttribute("title", titleStr);
 
 <div class="row">
     <div class="col-sm-12">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
      crossorigin="anonymous"></script>
+<!-- 内容首尾广告 -->
 <ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="fluid"
-     data-ad-layout-key="-ev-1p-5j-ot+26n"
+     style="display:inline-block;width:728px;height:90px"
      data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="3378777426"></ins>
+     data-ad-slot="5184711902"></ins>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
