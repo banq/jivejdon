@@ -5,14 +5,18 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ page session="false" %>
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
+<bean:define id="body" name="forumMessage" property="messageVO.body" />
+<%
+  if(i % 3==0){ 
+ %>
+ <div class="row">	
+ <%}%>
 
-  <div class="box"> 
-    <div class="linkblock">
-     <div class="row">
-      <div class="col-sm-12">
-        <div class="box">
-             <bean:define id="body" name="forumMessage" property="messageVO.body" />
-         <section> 
+ <div class="col-md-4">
+ <div class="box">	
+  <div class="linkblock">
+     <div class="box">	             
+        <section> 
          <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"><bean:write name="forumThread" property="name"/></a></h3>
       
          <div class="info">			 
@@ -63,9 +67,18 @@
                 </logic:notEmpty>              
           </div>
           </section> 
-     </div>
+	 </div>	
+  </div>	
+</div>  
+</div>
+
+ 
+<% i = i+1;%>
+<%
+  if(i % 3==0){ 
+ %>
   </div>
-</div>
-</div>
-</div>
+ <%}%>
+
+  
  

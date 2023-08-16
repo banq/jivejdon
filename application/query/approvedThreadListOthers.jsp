@@ -34,7 +34,7 @@
        
 </ul>
 
-<%@ include file="threadList.jsp" %>
+<%@ include file="../forum/threadListCore.jsp" %>
 
 <ul class="pagination pull-right">
       <MultiPagesREST:pager actionFormName="threadListForm" page="/approval" >
