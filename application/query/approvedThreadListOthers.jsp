@@ -37,7 +37,7 @@
 <div class="list-group">
 
  <logic:iterate indexId="i" id="forumThread" name="threadListForm"  property="list">
-  <%@ include file="./others/threadListCore2.jsp" %>
+  <%@ include file="../forum/threadListCore2.jsp" %>
  </logic:iterate>
 
 </div>
