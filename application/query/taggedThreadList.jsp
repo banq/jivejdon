@@ -21,7 +21,7 @@ pageContext.setAttribute("title", titleStr);
         <div class="box"> 
        <center>
         <logic:notEmpty  name="TITLE">
-        <h1 class="tagcloud"><a href="/tag-<bean:write name="tagID"/>/"><bean:write  name='TITLE'/></a></h1>
+        <h1 class="tagcloud"><a href="/tag-<bean:write name="tagID"/>/" class="tag-cloud-link"><bean:write  name='TITLE'/></a></h1>
       </logic:notEmpty>
       <div>
         <% 
