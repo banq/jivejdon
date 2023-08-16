@@ -22,6 +22,6 @@ if (request.getParameter("count")!=null){
 %>
 <main>
 <logic:iterate indexId="i" id="forumThread" name="threadListForm" property="list" offset="<%=offset%>" length="<%=count%>">
-  <%@ include file="threadListCore.jsp" %>
+<%@ include file="../forum/threadListCore.jsp" %>
 </logic:iterate>
 </main>
