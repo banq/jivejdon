@@ -85,7 +85,7 @@ response.setHeader("Expires", "0"); // Proxies.
 	<div class="lazyload" >
           <!--
 		  <script>
-		  load('/query/threadApprovedNewList3.shtml?offset=4&start=0&count=10', function (xhr) {
+		  load('/query/threadApprovedNewList3.shtml?offset=4&start=0&count=6', function (xhr) {
                document.getElementById("approvedItem1").innerHTML = xhr.responseText;
             }); 
 		  </script>
