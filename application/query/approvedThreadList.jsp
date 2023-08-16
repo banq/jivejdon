@@ -12,25 +12,30 @@ response.setDateHeader("Expires", 0);
 %>
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
-<logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='1' >
+<logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='6' >
    <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
    <bean:define id="thumbthreadId" name="forumThread" property="threadId"/>
    
-<div class="box"> 
-  <div class="linkblock" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="row">
-      <div class="col-sm-12">
-       <div class="box">
-            <div class="zoom-container">
+<%
+  if(i % 3==0){ 
+ %>
+ <div class="row">	
+ <%}%>
+
+ <div class="col-md-4">
+ <div class="box">	
+  <div class="linkblock">
+    <div class="box">	           
+      <div class="zoom-container">
 			      	<div>
                <% String thumbthreadIdS = ((Long)pageContext.getAttribute("thumbthreadId")).toString(); %>               
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">        
                   <figure>          
-                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="thumbnail" style="width: 100%;max-height: 500px" fetchpriority="high"/>
+                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="thumbnail" fetchpriority="high"/>
                   </figure>
                 </logic:notEmpty>
                 <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">        
-                    <img id="home-thumbnai" src="https://cdn.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="thumbnail" style="width: 100%;max-height: 500px" fetchpriority="high"/> 
+                    <img id="home-thumbnai" src="https://cdn.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="thumbnail" fetchpriority="high"/> 
                 </logic:empty>                        
               </div>
 			      </div>
@@ -71,11 +76,19 @@ response.setDateHeader("Expires", 0);
               <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank" class="smallgray">详细</a></p>
           </div>
       </section>
-  
-      </div>
+   	</div>	
+	</div>	
+</div>  
+</div>
+
+ 
+<% i = i+1;%>
+<%
+  if(i % 3==0){ 
+ %>
   </div>
-</div>
-</div>
-</div>
+ <%}%>
+
+
 
 </logic:iterate>

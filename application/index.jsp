@@ -52,7 +52,7 @@ response.setHeader("Expires", "0"); // Proxies.
 				<div class="box">
 
 
-       <jsp:include page="/query/threadApprovedNewList2.shtml?count=1" flush="true"></jsp:include>
+       <jsp:include page="/query/threadApprovedNewList2.shtml?count=6" flush="true"></jsp:include>
 
 	
 <div class="box"> 
@@ -85,7 +85,7 @@ response.setHeader("Expires", "0"); // Proxies.
 	<div class="lazyload" >
           <!--
 		  <script>
-		  load('/query/threadApprovedNewList3.shtml?offset=1&start=0&count=10', function (xhr) {
+		  load('/query/threadApprovedNewList3.shtml?offset=6&start=0&count=10', function (xhr) {
                document.getElementById("approvedItem1").innerHTML = xhr.responseText;
             }); 
 		  </script>
