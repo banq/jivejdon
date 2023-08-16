@@ -43,17 +43,7 @@ pageContext.setAttribute("title", titleStr);
 
        </div>
 
-       <div id="tagHotList"></div>   
-							    <div class="lazyload" >
-							     <!-- 
-							     <script>
-							  	  load('/query/tagHotList', function (xhr) {				
-  	                                  document.getElementById("tagHotList").innerHTML = xhr.responseText;
-			                     });
-							  </script> -->
-				</div>
-        <%--&nbsp;&nbsp;--%>
-        <%--<a href="<%=request.getContextPath()%>/tags">更多分类</a>--%>
+    
 		  
       </center>
 
@@ -87,8 +77,17 @@ pageContext.setAttribute("title", titleStr);
   </div>
 </div>  
 </main>
-
- 
+<aside>
+   <div id="tagHotList"></div>   
+							    <div class="lazyload" >
+							     <!-- 
+							     <script>
+							  	  load('/query/tagHotList', function (xhr) {				
+  	                                  document.getElementById("tagHotList").innerHTML = xhr.responseText;
+			                     });
+							  </script> -->
+				</div>
+</aside>
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
 
 
