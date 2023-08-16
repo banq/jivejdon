@@ -12,17 +12,17 @@ response.setDateHeader("Expires", 0);
 %>
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
-<logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='6' >
+<logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='4' >
    <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
    <bean:define id="thumbthreadId" name="forumThread" property="threadId"/>
    
 <%
-  if(i % 3==0){ 
+  if(i % 2==0){ 
  %>
  <div class="row">	
  <%}%>
 
- <div class="col-md-4">
+ <div class="col-md-6">
  <div class="box">	
   <div class="linkblock">
     <div class="box">	           
@@ -84,7 +84,7 @@ response.setDateHeader("Expires", 0);
  
 <% i = i+1;%>
 <%
-  if(i % 3==0){ 
+  if(i % 2==0){ 
  %>
   </div>
  <%}%>
