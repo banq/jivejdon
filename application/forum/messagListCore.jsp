@@ -87,7 +87,7 @@
                   </div>
                 </logic:notEmpty> 
                 <logic:empty name="forumThread" property="tags">    
-                  <div id="tagHotList"></div>   
+                  <div id="tagHotList"><br><br><br><br><br><br><br><br><br><br></div>   
 							      <div class="lazyload" >
 							     <!-- 
 							     <script>
@@ -105,7 +105,7 @@
         <div class="wid-vid">
         
                  <logic:notEmpty name="forumThread" property="tags">          
-                  <div id="threadTagList"></div>             
+                  <div id="threadTagList"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>             
                    <div class="lazyload" >
 							     <!-- 
 							     <script>
@@ -116,7 +116,7 @@
 							   </div>	
                  </logic:notEmpty>		
                  <logic:empty name="forumThread" property="tags">    
-                  <div id="digList"></div>   
+                  <div id="digList"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
 							     <div class="lazyload" >
 							     <!-- 
 							     <script>

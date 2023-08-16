@@ -34,7 +34,7 @@
        
 </ul>
 
-<%@ include file="../forum/threadListCore.jsp" %>
+<%@ include file="./others/threadListCore.jsp" %>
 
 <ul class="pagination pull-right">
       <MultiPagesREST:pager actionFormName="threadListForm" page="/approval" >
@@ -64,7 +64,7 @@
         <div class="widget">
 					    <div class="wid-vid">
 						
-							  <div id="tagHotList"></div>   
+							  <div id="tagHotList"><br><br><br><br><br><br><br><br><br><br></div>   
 							    <div class="lazyload" >
 							     <!-- 
 							     <script>
@@ -80,7 +80,7 @@
         <!---- Start Widget ---->
       <div class="widget">
         <div class="wid-vid">
-							    <div id="digList"></div>   
+							    <div id="digList"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
 							    <div class="lazyload" >
 							     <!-- 
 							     <script>
