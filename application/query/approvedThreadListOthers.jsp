@@ -34,7 +34,13 @@
        
 </ul>
 
-<%@ include file="./others/threadListCore.jsp" %>
+<div class="list-group">
+
+ <logic:iterate indexId="i" id="forumThread" name="threadListForm"  property="list">
+  <%@ include file="./others/threadListCore2.jsp" %>
+ </logic:iterate>
+
+</div>
 
 <ul class="pagination pull-right">
       <MultiPagesREST:pager actionFormName="threadListForm" page="/approval" >
