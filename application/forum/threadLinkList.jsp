@@ -9,6 +9,6 @@
  <logic:iterate id="forumThread" name="threadListForm"  property="list">
     <bean:define id="forumMessage" name="forumThread" property="rootMessage"  />
     <bean:define id="forumThread" name="forumMessage" property="forumThread" />
-    <%@ include file="../query/threadListCore.jsp" %>
+    <%@ include file="threadListCore2.jsp" %>
  </logic:iterate>
 </logic:notEmpty>   
