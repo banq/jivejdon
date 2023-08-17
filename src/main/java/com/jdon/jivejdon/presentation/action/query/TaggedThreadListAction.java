@@ -54,12 +54,12 @@ public class TaggedThreadListAction extends ModelListAction {
 		return forumMessageQueryService;
 	}
 
-	public void customizeListForm(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request,
-			ModelListForm modelListForm) throws Exception {
-		if (request.getParameter("r") != null){
-			Collections.shuffle((List<ForumThread>)modelListForm.getList());
-		}
-	}
+	// public void customizeListForm(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request,
+	// 		ModelListForm modelListForm) throws Exception {
+	// 	if (request.getParameter("r") != null){
+	// 		Collections.shuffle((List<ForumThread>)modelListForm.getList());
+	// 	}
+	// }
 
 		/*
 	 * (non-Javadoc)
@@ -81,7 +81,11 @@ public class TaggedThreadListAction extends ModelListAction {
 		request.setAttribute("threadTag", tag);
 		TaggedThreadListSpec taggedThreadListSpec = new TaggedThreadListSpec();
 		taggedThreadListSpec.setTagID(new Long(tagID));
-		return othersService.getTaggedThread(taggedThreadListSpec, start, count);
+		if (request.getParameter("r") != null){
+		   return othersService.getTaggedThread(taggedThreadListSpec, start, count);
+		}else{
+           return othersService.getTaggedRandomThreads(taggedThreadListSpec, start, count);
+		}
 	}
 
 	/*
