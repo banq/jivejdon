@@ -58,7 +58,11 @@ pageContext.setAttribute("title", titleStr);
             </MultiPagesREST:pager>
 </ul>
 <% } %>  
-<%@ include file="threadList.jsp" %>
+
+<logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
+  <%@ include file="threadListCore.jsp" %>
+</logic:iterate>
+
 <% if (request.getParameter("r") == null){ %>  
 <ul class="pagination pull-right"> 有<b>
             <bean:write name="threadListForm" property="allCount"/>
