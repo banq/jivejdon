@@ -72,7 +72,17 @@ pageContext.setAttribute("title", titleStr);
         </b>贴      
 </ul>
 
-<%@ include file="threadListCore.jsp" %>
+
+<div class="list-group">
+
+
+ <logic:iterate indexId="i" id="forumThread" name="threadListForm"  property="list">
+
+    <%@ include file="threadListCore.jsp" %>
+
+ </logic:iterate>
+
+</div>
  
 <ul class="pagination pull-right">
         <logic:empty name="forum" property="forumId">
