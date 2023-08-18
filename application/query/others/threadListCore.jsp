@@ -5,10 +5,9 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ page session="false" %>
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
-  <div class="box"> 
+
     <div class="linkblock">
-     <div class="row">
-      <div class="col-sm-12">
+
         <div class="box">
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
@@ -46,7 +45,6 @@
           </section>
   
     </div>
-  </div>
+
 </div>
-</div>
-</div>
+
