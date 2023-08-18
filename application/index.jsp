@@ -75,13 +75,7 @@ response.setHeader("Expires", "0"); // Proxies.
  
 </div>
 
-    <div class="box"> 
-	    <div class="tres center">        
-           追踪前沿最新技术 <a href="/followus.html"><b>订阅</b></a>	   
-		</div>
-    </div>
-
-    <div id="approvedItem1"><br><br><br><br><br><br></div>          
+  <div id="approvedItem1"><br><br><br><br><br><br></div>          
 	<div class="lazyload" >
           <!--
 		  <script>
@@ -142,6 +136,11 @@ response.setHeader("Expires", "0"); // Proxies.
           -->
       </div>
 
+    <div class="box"> 
+	    <div class="tres center">        
+           追踪前沿最新技术 <a href="https://www.jdon.com/approval"><b>更多</b></a>	   
+		</div>
+    </div>
 		  
     </div>
 	

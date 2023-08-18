@@ -7,7 +7,7 @@
 					<div class="col-md-4 col-footer footer-1">
 						<div class="footer-heading"><h3><span style="color: #fff;">Jdon.com</span></h3></div>
 						<div class="content">
-							<p>搬砖、铺道、搭桥</p>
+							<p>道可道 非常道</p>
 						</div>
 					</div>
 					<div class="col-md-4 col-footer footer-2">
