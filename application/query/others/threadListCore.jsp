@@ -5,12 +5,8 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ page session="false" %>
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
-
-    <div class="linkblock">
-
-        <div class="box">
-             <bean:define id="body" name="forumMessage" property="messageVO.body" />
-
+ <bean:define id="body" name="forumMessage" property="messageVO.body" />
+<div class="box">
          <section> 
          <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"><bean:write name="forumThread" property="name"/></a></h3>
       
@@ -43,8 +39,5 @@
             </div>
 
           </section>
-  
-    </div>
-
 </div>
 
