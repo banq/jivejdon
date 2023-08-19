@@ -23,7 +23,7 @@ response.setHeader("Expires", "0"); // Proxies.
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>极道 - 技术前沿博客</title>
+  <title>极道 - 技术前沿极客</title>
   <meta name="Description" content="实时追踪全球最前沿软件技术和架构思想">
   <meta name="Keywords" content="微服务,SOA,DDD,体系结构,架构,Gof设计模式,Java框架,大数据,云原生,面向对象,函数编程,SpringBoot,EDA,java,JavaEE,CQRS,eventsourcing">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap">
