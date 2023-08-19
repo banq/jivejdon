@@ -12,7 +12,7 @@
 
 <form action="" method="POST" name="listForm" >
 
-<table width="550" cellpadding=6 cellspacing=0 border=1  align="center">
+<table width="550" cellpadding=6 cellspacing=0 border=1  style="text-align: center">
   <tr  bgcolor="#C3C3C3">
 
 

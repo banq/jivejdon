@@ -6,9 +6,9 @@
 <bean:define id="title"  value=" 用户管理" />
 <%@ include file="../header.jsp" %>
 
-<h3 align="center">用户注册资料修改</h3>
+<h3 style="text-align: center">用户注册资料修改</h3>
 <center>*密码只能重新设定</center>
-<div align="center">
+<div style="text-align: center">
 
 <html:form method="post" action="/admin/user/editSaveAccount.shtml" onsubmit="return Juge(this);">
 
@@ -59,7 +59,7 @@ function checkUsername(){
 
 
 <table bgcolor="#cccccc"
- cellspacing="0" cellpadding="0" border="0" width="500" align="center">
+ cellspacing="0" cellpadding="0" border="0" width="500" style="text-align: center">
 <tr><td>
 <table bgcolor="#cccccc"
  cellspacing="1" cellpadding="3" border="0" width="100%">
@@ -72,7 +72,7 @@ function checkUsername(){
  </td>
 </tr>
 <tr bgcolor="#ffffff">
- <td align="center">
+ <td style="text-align: center">
  <table border="0" cellpadding="3" cellspacing="0"  >
                  <tr>
                      <th align="right">用户名:</th>
@@ -107,7 +107,7 @@ function checkUsername(){
                  </tr>
   
                 <tr>
-                    <td align="center" colspan="2">
+                    <td style="text-align: center" colspan="2">
                       <html:submit property="submit" value="确定"/>
                       <html:reset value ="Reset"/>
                   </td>

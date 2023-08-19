@@ -18,7 +18,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="refresh" content="3600">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty></title>
+    <title><logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty> - 极道</title>
     <meta property="og:type" content="article">
     <meta property="og:url" content="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html">
     <meta property="og:release_date" content="<bean:write name="forumThread" property="creationDate" />">
@@ -28,7 +28,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <meta name="og:description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[140]" /> ">
     <script defer src="/common/messageList12.js"></script> 
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap" >
-    <link rel="alternate" type="application/rss+xml" title="解道订阅" href="/rss" >
+    <link rel="alternate" type="application/rss+xml" title="极道订阅" href="/rss" >
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 256 256%22><text y=%22203%22 font-size=%22224%22>☯</text></svg>">
     <link rel="canonical" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html">  
     <!-- Google tag (gtag.js) -->

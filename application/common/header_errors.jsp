@@ -11,7 +11,7 @@
 
 <logic:present name="errors">
 
-    <table cellpadding="0" cellspacing="0" border="0"  align="center">
+    <table cellpadding="0" cellspacing="0" border="0"  style="text-align: center">
       <tr>
         <td valign="top" ><B><FONT color=RED> <BR>
           <bean:write name="errors" />

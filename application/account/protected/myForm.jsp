@@ -7,7 +7,7 @@
 <%@ include file="../../common/IncludeTop.jsp" %>
 
 <table bgcolor="#cccccc"
- cellspacing="0" cellpadding="0" border="0" width="500" align="center">
+ cellspacing="0" cellpadding="0" border="0" width="500" style="text-align: center">
 <tr><td>
 <table bgcolor="#cccccc"
  cellspacing="1" cellpadding="3" border="0" width="100%">
@@ -20,7 +20,7 @@
  </td>
 </tr>
 <tr bgcolor="#ffffff">
- <td align="center">
+ <td style="text-align: center">
  <table border="0" cellpadding="3" cellspacing="0"  >
                 <tr>
                      <td align="middle">
@@ -48,7 +48,7 @@
 <br><br>
 
 <table bgcolor="#cccccc"
- cellspacing="0" cellpadding="0" border="0" width="500" align="center">
+ cellspacing="0" cellpadding="0" border="0" width="500" style="text-align: center">
 <tr><td>
 <table bgcolor="#cccccc"
  cellspacing="1" cellpadding="3" border="0" width="100%">
@@ -61,7 +61,7 @@
  </td>
 </tr>
 <tr bgcolor="#ffffff">
- <td align="center">
+ <td style="text-align: center">
  <table border="0" cellpadding="3" cellspacing="0"  >
                 <tr>
                      <td align="middle">
@@ -89,7 +89,7 @@
 <br><br>
 
 <table bgcolor="#cccccc"
- cellspacing="0" cellpadding="0" border="0" width="500" align="center">
+ cellspacing="0" cellpadding="0" border="0" width="500" style="text-align: center">
 <tr><td>
 <table bgcolor="#cccccc"
  cellspacing="1" cellpadding="3" border="0" width="100%">
@@ -102,7 +102,7 @@
  </td>
 </tr>
 <tr bgcolor="#ffffff">
- <td align="center">
+ <td style="text-align: center">
  <table border="0" cellpadding="3" cellspacing="0"  >
                 <tr>
                      <td align="middle">
@@ -131,7 +131,7 @@
 <br><br>
 
 <table bgcolor="#cccccc"
- cellspacing="0" cellpadding="0" border="0" width="500" align="center">
+ cellspacing="0" cellpadding="0" border="0" width="500" style="text-align: center">
 <tr><td>
 <table bgcolor="#cccccc"
  cellspacing="1" cellpadding="3" border="0" width="100%">
@@ -144,7 +144,7 @@
  </td>
 </tr>
 <tr bgcolor="#ffffff">
- <td align="center">
+ <td style="text-align: center">
  <table border="0" cellpadding="3" cellspacing="0"  >
                 <tr>
                      <td align="middle">

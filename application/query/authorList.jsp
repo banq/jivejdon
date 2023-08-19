@@ -21,14 +21,14 @@
 
 
 <bean:parameter id="tablewidth" name="tablewidth" value="600"/>
-<table width="<bean:write name="tablewidth"/>" align="center"><tr><td>
+<table width="<bean:write name="tablewidth"/>" style="text-align: center"><tr><td>
 <bean:parameter id="count" name="count" value="8"/>
 <%
 String coutlength = (String)pageContext.getAttribute("count");
 %>        
 <logic:iterate id="account" name="accountListForm" property="list" length='<%=coutlength%>'>
 <div class="linkblock">  
-<table width="100%"><tr><td width="50%" align="center">
+<table width="100%"><tr><td width="50%" style="text-align: center">
       
            <logic:notEmpty name="account" property="uploadFile">
             <logic:equal name="account" property="roleName" value="User"> 

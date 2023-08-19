@@ -47,9 +47,9 @@ if (errorBlocker.checkCount(request.getRemoteAddr(), 5)){
 
 <table border="0" cellpadding="4" cellspacing="0" width="100%">
 <tr>
-<td align="center">
+<td style="text-align: center">
 
-<div align="center"><br>
+<div style="text-align: center"><br>
   <br>
   <br>
     <span class="small2">输入的用户名或密码错误，请按

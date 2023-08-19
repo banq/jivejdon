@@ -58,8 +58,8 @@ com.jdon.jivejdon.spi.component.block.ErrorBlockerIF"%>
 <body>
 
 <html:errors/>
-<p><h3 align="center">新用户注册准备阶段，请点击验证按钮验证</h3>
-<div align="center"><form action="/account/NewAccountForm.jsp" method="POST">
+<p><h3 style="text-align: center">新用户注册准备阶段，请点击验证按钮验证</h3>
+<div style="text-align: center"><form action="/account/NewAccountForm.jsp" method="POST">
     <input type="hidden" name="action" value="create"/>
     <div class="row">
         <div class="col-md-12">

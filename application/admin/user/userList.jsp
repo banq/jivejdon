@@ -12,11 +12,11 @@
 <hr size="0">
 
 <table bgcolor="#cccccc"
- cellpadding="1" cellspacing="0" border="0" width="100%" align="center">
+ cellpadding="1" cellspacing="0" border="0" width="100%" style="text-align: center">
 <tr>
     <td>
 <table bgcolor="#ffffff"
- cellpadding="3" cellspacing="0" border="0" width="100%" align="center">
+ cellpadding="3" cellspacing="0" border="0" width="100%" style="text-align: center">
 <tr><td>
 <bean:size id="userCount" name="userListForm" property="list"/>
 共有 <bean:write name="userCount"/> 个用户 [
@@ -44,26 +44,26 @@
 <tr><td> 
 <table bgcolor="#999999" cellpadding="3" cellspacing="1" border="0" width="100%">
 <tr bgcolor="#FFFFCC">
-    <td align="center" nowrap><b>用户ID</b></td>
-    <td align="center" nowrap><b>用户名</b>></td>
-    <td align="center" nowrap><b>EMAIL</b></td>
-    <td align="center" nowrap><b>编辑</b></td>
-    <td align="center" nowrap><b>删除</b></td>
+    <td style="text-align: center" nowrap><b>用户ID</b></td>
+    <td style="text-align: center" nowrap><b>用户名</b>></td>
+    <td style="text-align: center" nowrap><b>EMAIL</b></td>
+    <td style="text-align: center" nowrap><b>编辑</b></td>
+    <td style="text-align: center" nowrap><b>删除</b></td>
 </tr>
 
 <logic:iterate id="user" name="userListForm" property="list">
  
 
 <tr bgcolor="#ffffff">
-    <td align="center" width="2%"><bean:write name="user" property="userId"/></td>
+    <td style="text-align: center" width="2%"><bean:write name="user" property="userId"/></td>
     <td width="30%"><html:link page="/admin/user/editAccountForm.shtml?action=edit" paramId="username" paramName="user" paramProperty="username"
     ><bean:write name="user" property="username"/></html:link></td>
     <td width="30%"><bean:write name="user" property="email"/></td>
-    <td align="center" width="4%"
+    <td style="text-align: center" width="4%"
         ><html:link page="/admin/user/editAccountForm.shtml?action=edit" paramId="username" paramName="user" paramProperty="username">
         <img src="../images/button_edit.gif" width="17" height="17" alt="编辑用户属性..." border="0"
         ></html:link></td>
-    <td align="center" width="4%"
+    <td style="text-align: center" width="4%"
         ><html:link page="/admin/user/removeAccountForm.shtml?action=delete" paramId="username" paramName="user" paramProperty="username" onclick="return delConfirm()">
         <img src="../images/button_delete.gif" width="17" height="17" alt="删除用户..." border="0"
         ></html:link></td>
@@ -73,11 +73,11 @@
 </table>
 
 <table bgcolor="#cccccc"
- cellpadding="1" cellspacing="0" border="0" width="100%" align="center">
+ cellpadding="1" cellspacing="0" border="0" width="100%" style="text-align: center">
 <tr>
     <td>
 <table bgcolor="#ffffff"
- cellpadding="3" cellspacing="0" border="0" width="100%" align="center">
+ cellpadding="3" cellspacing="0" border="0" width="100%" style="text-align: center">
 <tr><td>
 共有 <bean:write name="userCount"/> 个用户 [
 <MultiPages:pager actionFormName="userListForm" page="/admin/user/userListAction.shtml">

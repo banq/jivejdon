@@ -11,20 +11,20 @@
 <input type="hidden" name="method" value="delete"/>
 	<table class="contacts" cellspacing="0" width="550">
 		<tr>
-			<td class="contactDept" align="center">
+			<td class="contactDept" style="text-align: center">
 				标题
 			</td>
-			<td class="contactDept" align="center">
+			<td class="contactDept" style="text-align: center">
 				发往
 			</td>
-				<td class="contactDept" align="center">
+				<td class="contactDept" style="text-align: center">
 				状态
 			</td>
-			<td class="contactDept" align="center">
+			<td class="contactDept" style="text-align: center">
 				时间
 			</td>
 			
-			<td class="contactDept" align="center">
+			<td class="contactDept" style="text-align: center">
 				操作
 			</td>
 			
@@ -36,17 +36,17 @@
 	                    <bean:define id="styleclass" value="contact"></bean:define>	
 	            </logic:match>
 			<tr>
-				<td class="<bean:write name='styleclass'/>" align="center">
+				<td class="<bean:write name='styleclass'/>" style="text-align: center">
 					<html:link
 						page="/account/protected/shortmsgInSendBoxAction.shtml"
 						paramId="msgId" paramName="message" paramProperty="msgId">
 						<bean:write name="message" property="messageTitle" />
 					</html:link>
 				</td>
-				<td class="<bean:write name='styleclass'/>" align="center" >
+				<td class="<bean:write name='styleclass'/>" style="text-align: center" >
 					<bean:write name="message" property="messageTo" />
 				</td>
-				<td class="<bean:write name='styleclass'/>" align="center" >
+				<td class="<bean:write name='styleclass'/>" style="text-align: center" >
 				  <logic:match name="message" property="shortMessageState.hasRead"  value="true">
 				    已读
 				  </logic:match>
@@ -54,11 +54,11 @@
 				    <b>未读</b>
 				  </logic:match>				  
 				</td>
-				<td class="<bean:write name='styleclass'/>" align="center" >
+				<td class="<bean:write name='styleclass'/>" style="text-align: center" >
 					<bean:write name="message" property="shortMessageState.sendTime" />
 				</td>
 				
-				<td class="<bean:write name='styleclass'/>" align="center" >
+				<td class="<bean:write name='styleclass'/>" style="text-align: center" >
 				    <html:link page="/account/protected/deletemsgAction.shtml?method=delete" 
 				    paramId="msgId" paramName="message" paramProperty="msgId">删 除</html:link>
 				</td>

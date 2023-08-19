@@ -36,11 +36,11 @@ df.setMinimumFractionDigits(2);
 </form>
 
 <table bgcolor="#cccccc"
- cellpadding="1" cellspacing="0" border="0" width="100%" align="center">
+ cellpadding="1" cellspacing="0" border="0" width="100%" style="text-align: center">
 <tr>
     <td>
 <table bgcolor="#ffffff"
- cellpadding="3" cellspacing="0" border="0" width="100%" align="center">
+ cellpadding="3" cellspacing="0" border="0" width="100%" style="text-align: center">
 <tr><td>
 共有 <bean:write name="keyListForm" property="allCount"/> 个
 <MultiPages:pager actionFormName="keyListForm" page="/admin/cachekeys.shtml" paramId="key" paramName="key">
@@ -65,9 +65,9 @@ df.setMinimumFractionDigits(2);
 <tr><td> 
 <table bgcolor="#999999" cellpadding="3" cellspacing="1" border="0" width="100%">
 <tr bgcolor="#FFFFCC">
-    <td align="center" nowrap><b>缓存主键</b></td>
-    <td align="center" nowrap><b>缓存值类型</b></td>
-    <td align="center" nowrap></td>
+    <td style="text-align: center" nowrap><b>缓存主键</b></td>
+    <td style="text-align: center" nowrap><b>缓存值类型</b></td>
+    <td style="text-align: center" nowrap></td>
 </tr>
 
 <logic:iterate id="oneOneDTO" name="keyListForm" property="list">

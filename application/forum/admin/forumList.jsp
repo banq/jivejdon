@@ -24,11 +24,11 @@
 <tr><td>
 <table bgcolor="#999999" cellpadding="3" cellspacing="1" border="0" width="100%">
 <tr bgcolor="#FFFFCC">
-    <td align="center"><b>论坛标题及描述</b></td>
-    <td align="center"><b>主题数</b></td>
-    <td align="center"><b>消息数</b></td>
-    <td align="center"><b>编辑</b></td>
-    <td align="center"><b>删除</b></td>
+    <td style="text-align: center"><b>论坛标题及描述</b></td>
+    <td style="text-align: center"><b>主题数</b></td>
+    <td style="text-align: center"><b>消息数</b></td>
+    <td style="text-align: center"><b>编辑</b></td>
+    <td style="text-align: center"><b>删除</b></td>
 </tr>
 <logic:iterate indexId="i"   id="forum" name="forumListForm" property="list" >
 <tr bgcolor="#ffffff">
@@ -38,12 +38,12 @@
          </html:link>
 
      <br><bean:write name="forum" property="description" /></td>
-    <td align="center"><bean:write name="forum" property="forumState.threadCount" /></td>
-    <td align="center"><bean:write name="forum" property="forumState.messageCount" /></td>
-    <td align="center"><html:link page="/forum/admin/forumAction.shtml?action=edit" paramId="forumId" paramName="forum" paramProperty="forumId">
+    <td style="text-align: center"><bean:write name="forum" property="forumState.threadCount" /></td>
+    <td style="text-align: center"><bean:write name="forum" property="forumState.messageCount" /></td>
+    <td style="text-align: center"><html:link page="/forum/admin/forumAction.shtml?action=edit" paramId="forumId" paramName="forum" paramProperty="forumId">
      <html:img  page="/admin/images/button_edit.gif" width="17" height="17" alt="Click to edit all forum properties" border="0"/>
     </html:link></td>
-    <td align="center">
+    <td style="text-align: center">
     <html:link page="/forum/admin/forumSaveAction.shtml?action=delete" paramId="forumId" paramName="forum" paramProperty="forumId" onclick="return delConfirm()">
    <html:img  page="/admin/images/button_delete.gif" width="17" height="17" alt="Confirm that you want to delete this forum..." border="0" />
     </html:link></td>

@@ -26,7 +26,7 @@
  
 
 <table bgcolor="#cccccc"
- cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+ cellpadding="0" cellspacing="0" border="0" width="100%" style="text-align: center">
 <tr>
  <td>
     <table bgcolor="#cccccc" cellpadding="6" cellspacing="1" border="0" width="100%">

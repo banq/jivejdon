@@ -109,7 +109,7 @@
               </logic:iterate>
 
             </td>
-            <td align="center">
+            <td style="text-align: center">
               <bean:write name="forumThread" property="state.messageCount"/>
             </td>
             <td><html:link page="/message/messageDeleAction.shtml?" paramId="messageId" paramName="forumThread" paramProperty="rootMessage.messageId" onclick="return delConfirm()" target="_blank">

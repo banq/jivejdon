@@ -19,7 +19,7 @@
 String subject = "";
 if (request.getParameter("subject") != null){
 	subject = request.getParameter("subject");
-    subject = subject.replaceAll("-解道Jdon", "");	
+    subject = subject.replaceAll("- 极道", "");	
     subject = ToolsUtil.replaceBlank(subject, "\t|\r|\n|\\s+");
     if (subject.length() >= MessageForm.subjectMaxLength)
        subject = subject.substring(0, MessageForm.subjectMaxLength);

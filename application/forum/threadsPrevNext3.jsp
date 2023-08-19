@@ -5,12 +5,12 @@
 <%@ taglib uri="/WEB-INF/MultiPages.tld" prefix="MultiPages" %>
 --%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<table cellpadding="0" cellspacing="2" border="0" width="100%" align="center">
+<table cellpadding="0" cellspacing="2" border="0" width="100%" style="text-align: center">
 <tr>
     <td width="1%" nowrap valign="top">
   &nbsp;
     </td>
-    <td width="98%" align="center">
+    <td width="98%" style="text-align: center">
 
 <table cellpadding="0" cellspacing="2" border="0" width="100%">
 

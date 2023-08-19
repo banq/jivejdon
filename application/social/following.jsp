@@ -35,7 +35,7 @@
   
   
   <div class="linkblock">  
-<table width="100%"><tr><td width="50%" align="center">
+<table width="100%"><tr><td width="50%" style="text-align: center">
          <a href='<%=request.getContextPath()%>/blog/<bean:write name="account" property="username" />'>          
            <logic:notEmpty name="account" property="uploadFile">
             <logic:equal name="account" property="roleName" value="User"> 

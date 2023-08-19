@@ -51,7 +51,7 @@ try{
 
     <table border="0" cellpadding="4" cellspacing="0" width="100%">
 <tr>
-<td align="center">
+<td style="text-align: center">
 
   <table border="0" cellpadding="0" cellspacing="2">
     <tr>
@@ -78,7 +78,7 @@ try{
       </td>
     </tr>
     <tr>
-      <td align="center" colspan="5">
+      <td style="text-align: center" colspan="5">
         <%--<a href="<%=request.getContextPath()%>/account/newAccountForm.shtml" target="_blank" >--%>
           <%--新用户注册--%>
         <%--</a>--%>
@@ -88,7 +88,7 @@ try{
       </td>
     </tr>
     <tr>
-      <td align="center" colspan="5">
+      <td style="text-align: center" colspan="5">
         <p>
           <a href="<%=request.getContextPath()%>/account/oauth/sinaCallAction.shtml" target="_blank" >
             <img src='/images/sina.png' width="16" height="16" alt="登录" border="0" />新浪微博

@@ -26,7 +26,7 @@
         <logic:equal name="action" value="delete">
             <bean:define id="title"  value=" 帖子删除成功" />
             <%@ include file="messageHeader.jsp" %>
-            <table cellpadding="0" cellspacing="0" border="0"  align="center">
+            <table cellpadding="0" cellspacing="0" border="0"  style="text-align: center">
                 <tr><td valign="top" >
                     <br><br>帖子删除成功 ， 由于您自己的缓存过10分钟后可能才会生效。
                     <br><br><br><p><html:link page="/">按这里返回首页</html:link>

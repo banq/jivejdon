@@ -11,16 +11,16 @@
 <input type="hidden" name="method" value="delete"/>
 	<table class="contacts" cellspacing="0" width="550">
 		<tr>
-			<td class="contactDept" align="center">
+			<td class="contactDept" style="text-align: center">
 				标题
 			</td>
-			<td class="contactDept" align="center">
+			<td class="contactDept" style="text-align: center">
 				来自
 			</td>
-			<td class="contactDept" align="center">
+			<td class="contactDept" style="text-align: center">
 				时间
 			</td>
-			<td class="contactDept" align="center">
+			<td class="contactDept" style="text-align: center">
 				操作
 			</td>
 		</tr>
@@ -34,7 +34,7 @@
 	            
 			<tr>
 			
-				<td class="<bean:write name='styleclass'/>" align="center" >
+				<td class="<bean:write name='styleclass'/>" style="text-align: center" >
 				  <logic:match name="message" property="shortMessageState.hasRead" value="false">
 	                    <html:img page="/images/new.gif" width="23" height="9" />
 	            </logic:match>
@@ -45,13 +45,13 @@
 						<bean:write name="message" property="messageTitle" />
 					</html:link>
 				</td>
-				<td class="<bean:write name='styleclass'/>" align="center" >
+				<td class="<bean:write name='styleclass'/>" style="text-align: center" >
 					<bean:write name="message" property="messageFrom" />
 				</td>
-				<td class="<bean:write name='styleclass'/>" align="center" >
+				<td class="<bean:write name='styleclass'/>" style="text-align: center" >
 					<bean:write name="message" property="shortMessageState.sendTime" />
 				</td>
-				<td class="<bean:write name='styleclass'/>" align="center" >
+				<td class="<bean:write name='styleclass'/>" style="text-align: center" >
 				    <html:link page="/account/protected/deletemsgAction.shtml?method=delete" 
 				    paramId="msgId" paramName="message" paramProperty="msgId">删 除</html:link>
 				</td>

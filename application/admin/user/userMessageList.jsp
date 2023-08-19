@@ -53,13 +53,13 @@
 <tr><td> 
 <table bgcolor="#999999" cellpadding="3" cellspacing="1" border="0" width="100%">
 <tr bgcolor="#FFFFCC">
-    <td align="center" nowrap="nowrap"><b>帖子ID</b></td>
-    <td align="center" nowrap="nowrap"><b>主题</b></td>
-        <td align="center" nowrap="nowrap"><b>IP</b></td>
-    <td align="center" nowrap="nowrap"><b>修改时间</b></td>
-    <td align="center" nowrap="nowrap"><b>编辑</b></td>
-    <td align="center" nowrap="nowrap"><b>屏蔽</b></td>
-    <td align="center" nowrap="nowrap"><b>删除</b></td>
+    <td style="text-align: center" nowrap="nowrap"><b>帖子ID</b></td>
+    <td style="text-align: center" nowrap="nowrap"><b>主题</b></td>
+        <td style="text-align: center" nowrap="nowrap"><b>IP</b></td>
+    <td style="text-align: center" nowrap="nowrap"><b>修改时间</b></td>
+    <td style="text-align: center" nowrap="nowrap"><b>编辑</b></td>
+    <td style="text-align: center" nowrap="nowrap"><b>屏蔽</b></td>
+    <td style="text-align: center" nowrap="nowrap"><b>删除</b></td>
 </tr>
 
 <logic:iterate indexId="i"   id="forumMessage" name="messageListForm" property="list" >
@@ -67,41 +67,41 @@
 <bean:define id="forumThread" name="forumMessage" property="forumThread"/>
 
 <tr bgcolor="#ffffff">
-    <td align="center" width="2%"><bean:write name="forumMessage" property="messageId"/></td>
+    <td style="text-align: center" width="2%"><bean:write name="forumMessage" property="messageId"/></td>
     <td width="30%">
       <a href='<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId" />?message=<bean:write name="forumMessage" property="messageId" />#<bean:write name="forumMessage" property="messageId" />'       
         title="<bean:write name="forumMessage" property="messageVO.body"/>"
         target="_blank" >
         <bean:write name="forumMessage" property="messageVO.subject"/></a>
     </td>   
-     <td align="center"><bean:write name="forumMessage" property="postip" />
+     <td style="text-align: center"><bean:write name="forumMessage" property="postip" />
         <form action="<%=request.getContextPath()%>/admin/user/banIPAction.shtml" method="post" target="_blank">
           <input name="ip" type="hidden" value="<bean:write name="forumMessage" property="postip" />"/>
           <input type="submit" value="屏蔽IP"/>
         </form>    
     </td>   
-     <td align="center" width="4%"
+     <td style="text-align: center" width="4%"
         ><bean:write name="forumMessage" property="modifiedDate3" /></td>
-    <td align="center"  width="4%"
+    <td style="text-align: center"  width="4%"
         > <html:link page="/message/messageAction.shtml?action=edit" paramId="messageId" paramName="forumMessage" paramProperty="messageId"
             ><img src="../images/button_edit.gif" width="17" height="17" alt="编辑该贴..." border="0"
         ></html:link></td>
         
     <logic:equal name="forumMessage" property="masked" value="true">
-      <td align="center" width="4%"
+      <td style="text-align: center" width="4%"
         > <html:link page="/message/messageMaskAction.shtml?method=maskMessage&masked=false" paramId="messageId" paramName="forumMessage" paramProperty="messageId" >
         <img src="../images/button_approve.gif" width="17" height="17" alt="取消屏蔽" border="0"
         ></html:link></td>   
      </logic:equal>           
         
     <logic:notEqual name="forumMessage" property="masked" value="true">
-      <td align="center" width="4%"
+      <td style="text-align: center" width="4%"
         > <html:link page="/message/messageMaskAction.shtml?method=maskMessage&masked=true" paramId="messageId" paramName="forumMessage" paramProperty="messageId" >
         <img src="../images/button_mask.gif" width="17" height="17" alt="屏蔽该贴..." border="0"
         ></html:link></td>    
      </logic:notEqual>                
        
-    <td align="center" width="4%"
+    <td style="text-align: center" width="4%"
         > <html:link page="/message/messageDeleAction.shtml?" paramId="messageId" paramName="forumMessage" paramProperty="messageId" onclick="return delConfirm()">
         <img src="../images/button_delete.gif" width="17" height="17" alt="删除该贴..." border="0"
         ></html:link></td>

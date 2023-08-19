@@ -16,7 +16,7 @@
 <body>
 <html:errors/>
 
-<div align="center">
+<div style="text-align: center">
 <center>注册资料修改 (密码只能重新设定)</center>
 <html:form method="post" action="/account/protected/editSaveAccount.shtml" onsubmit="return Juge(this);">
 

@@ -239,7 +239,7 @@ var openUploadWindow = function(url){
               </logic:present>
               
               
-              <table align="center"  cellpadding="5" cellspacing="5" border="0">
+              <table style="text-align: center"  cellpadding="5" cellspacing="5" border="0">
               <tr><td>
               <logic:notEmpty name="accountProfileForm" property="account.subscriptionCount">
                 <logic:greaterThan name="accountProfileForm" property="account.subscriptionCount" value="0">

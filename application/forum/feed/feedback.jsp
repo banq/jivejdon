@@ -57,8 +57,8 @@ window.callback = function(res){
 -->
 </script>
 <html:errors/>
-<p><h3 align="center">联系表单提交</h3>
-<%-- <div align="center"><html:form action="/forum/feed/feedbackAction.shtml" method="POST" onsubmit="return Juge(this);">
+<p><h3 style="text-align: center">联系表单提交</h3>
+<%-- <div style="text-align: center"><html:form action="/forum/feed/feedbackAction.shtml" method="POST" onsubmit="return Juge(this);">
   <html:hidden property="action" value="send"/>
   <table>
     <tr><td>您的信箱:</td><td><input type="text" name="email" size="20" value="<bean:write name="email"/>">(以便回复您结果)</td></tr>
@@ -79,7 +79,7 @@ window.callback = function(res){
                <input type="hidden" id="registerCode" name="registerCode"  > 
                 <input type="hidden" id="randstr" name="randstr"   > 
                 </td></tr>
-    <tr><td colspan="2" align="center"><html:submit property="submit" value="提交"/></td></tr>
+    <tr><td colspan="2" style="text-align: center"><html:submit property="submit" value="提交"/></td></tr>
   
 </table>
   </html:form> --%>

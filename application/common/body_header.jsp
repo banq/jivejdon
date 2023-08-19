@@ -9,7 +9,7 @@
 		<div class="container">
 			<div class="row">
                 <div class="col-md-12 ">
-                    <a href="/"><img src="/simgs/jdon100.png" width="100" height="40" fetchpriority="high"/></a>
+                    <a href="/"><img src="/simgs/jdon100.png" width="100" height="40" fetchpriority="high" alt="极道"/></a>
                     <span class="list-inline top-link link pull-right">
 				        <a href="<%=request.getContextPath() %>/forum"><i class="fa fa-home"></i>Dojo</a>
 						<a href="<%=request.getContextPath() %>/threads"><i class="fa fa-list-ul"></i>最新</a>
@@ -36,7 +36,7 @@
         <div class="navbar-header">
             <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
             <a class="navbar-brand" href="/">
-                <div class="logo"><span>解道Jdon</span></div>
+                <div class="logo"><span>极道</span></div>
             </a>
         </div>
 		<div class="collapse navbar-collapse navbar-ex1-collapse">

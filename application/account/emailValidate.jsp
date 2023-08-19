@@ -10,9 +10,9 @@
 
 <table border="0" cellpadding="4" cellspacing="0" width="100%">
 <tr>
-<td align="center">
+<td style="text-align: center">
 
-<div align="center">
+<div style="text-align: center">
 
 <logic:messagesPresent>
  验证错误。

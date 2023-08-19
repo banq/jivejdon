@@ -15,7 +15,7 @@
 	}
 </script>
 
-<table width="971" align="center"><tr><td valign="top" width="150">
+<table width="971" style="text-align: center"><tr><td valign="top" width="150">
 <div id="shortmessage_vertmenu">
 	<h1>
 		短消息
@@ -50,7 +50,7 @@
 		</li>
 	</ul>
 </div>
-</td><td align="center">
+</td><td style="text-align: center">
 <div id="shortmessage_content">
 	<iframe align="top" width="100%" height="400" id="product" frameborder="0"		
 		src="<%=request.getContextPath()%>/account/protected/receiveListAction.shtml?count=5"></iframe>

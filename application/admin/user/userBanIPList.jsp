@@ -27,21 +27,21 @@
 <tr><td> 
 <table bgcolor="#999999" cellpadding="3" cellspacing="1" border="0" width="100%" id="ejiaA1">
 <tr bgcolor="#FFFFCC">
-    <td align="center" nowrap="nowrap"><b>IP地址</b></td>   
-       <td align="center" nowrap="nowrap"><b>操作</b></td>
-         <td align="center" nowrap="nowrap"><b>查询</b></td>         
+    <td style="text-align: center" nowrap="nowrap"><b>IP地址</b></td>   
+       <td style="text-align: center" nowrap="nowrap"><b>操作</b></td>
+         <td style="text-align: center" nowrap="nowrap"><b>查询</b></td>         
 </tr>
 
 <logic:iterate id="ip" name="ips">
  
 
 <tr bgcolor="#ffffff">
-    <td align="center" ><bean:write name="ip" /></td>    
+    <td style="text-align: center" ><bean:write name="ip" /></td>    
         
-     <td align="center">
+     <td style="text-align: center">
        <input type="checkbox" name="ip" value="<bean:write name="ip"  />" >
     </td>     
-     <td align="center">
+     <td style="text-align: center">
         <input type="button" name="query" value="查询IP" onClick="copyIP('<bean:write name="ip" />');" >
     </td>    
 </tr>

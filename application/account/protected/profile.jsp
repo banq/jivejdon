@@ -11,7 +11,7 @@
 <input type="hidden" name="account.userId" value='<bean:write name="userId"/>'/>
 
 <table bgcolor="#cccccc"
- cellspacing="0" cellpadding="0" border="0" width="500" align="center">
+ cellspacing="0" cellpadding="0" border="0" width="500" style="text-align: center">
 <tr><td>
 <table bgcolor="#cccccc"
  cellspacing="1" cellpadding="3" border="0" width="100%">
@@ -24,7 +24,7 @@
  </td>
 </tr>
 <tr bgcolor="#ffffff">
- <td align="center">
+ <td style="text-align: center">
  以下输入项目可以自由定义你自己资料项目,
  <br>
  

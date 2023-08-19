@@ -5,7 +5,7 @@
 <%@ taglib uri="/WEB-INF/MultiPages.tld" prefix="MultiPages" %>
 --%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<table cellpadding="0" cellspacing="0" border="0" width="971" align="center">
+<table cellpadding="0" cellspacing="0" border="0" width="971" style="text-align: center">
 <tr><td>
     <b>
     <a href="/"

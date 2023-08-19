@@ -71,7 +71,7 @@ function checkEmail(){
 
 
 <table bgcolor="#cccccc"
- cellspacing="0" cellpadding="0" border="0" width="500" align="center">
+ cellspacing="0" cellpadding="0" border="0" width="500" style="text-align: center">
 <tr><td>
 <table bgcolor="#cccccc"
  cellspacing="1" cellpadding="3" border="0" width="100%">
@@ -84,7 +84,7 @@ function checkEmail(){
  </td>
 </tr>
 <tr bgcolor="#ffffff">
- <td align="center">
+ <td style="text-align: center">
  <table border="0" cellpadding="3" cellspacing="0"  >
                  <tr>
                      <th align="right">用户名:</th>
@@ -132,7 +132,7 @@ function checkEmail(){
                  </tr>
   
                 <tr>
-                    <td align="center" colspan="2">
+                    <td style="text-align: center" colspan="2">
                       <html:submit property="submit" value="确定"/>
                       <html:reset value ="Reset"/>
                   </td>

@@ -28,9 +28,9 @@
 
 <table border="0" cellpadding="4" cellspacing="0" width="100%">
 <tr>
-<td align="center">
+<td style="text-align: center">
 
-<div align="center">
+<div style="text-align: center">
       <script>
 <!--
 
@@ -59,7 +59,7 @@ function Juge(theForm)
   <tr><td>
     用户名：</td><td><input type="text" name="username"/><html:submit property="submit" value="确定"/>
   </td></tr>  
-<tr><td colspan="2" align="center">
+<tr><td colspan="2" style="text-align: center">
     
     </td></tr>
       </table>
@@ -92,7 +92,7 @@ function Juge(theForm)
             <html:img page="/account/protected/registerCodeAction" border="0" />
   </td></tr>
   
-<tr><td colspan="2" align="center">
+<tr><td colspan="2" style="text-align: center">
     <html:submit property="submit" value="确定"/>
     </td></tr>
     

@@ -14,7 +14,7 @@ response.setDateHeader("Expires", 0);
 	<logic:notEmpty name="NEWMESSAGES">
 		<logic:greaterThan name="NEWMESSAGES" value="0">
 		   <br><br>
-		   <div align="center">
+		   <div style="text-align: center">
 			<html:link page="/shortmessage.jsp" target="_blank">
 				<html:img page="/images/message.gif" width="16" height="12"
 					styleId="myblank" alt="新消息" title="新消息" border="0" />

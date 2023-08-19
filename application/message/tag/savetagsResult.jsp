@@ -5,7 +5,7 @@
 
 <bean:define id="title" value=" 帖子保存结果"/>
 <%@ include file="../messageHeader.jsp" %>
-<div align="center">
+<div style="text-align: center">
 <html:errors/>
 
 <logic:messagesNotPresent>

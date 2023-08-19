@@ -19,13 +19,13 @@
 
 <logic:empty name="winwidth" >
 <table bgcolor="#cccccc"
- cellspacing="0" cellpadding="0" border="0" width="500" align="center">
+ cellspacing="0" cellpadding="0" border="0" width="500" style="text-align: center">
 </logic:empty>
 
 <logic:notEmpty name="winwidth" >
 <link rel="stylesheet" href="/common/jivejdon5.css" type="text/css" />
 <table bgcolor="#fff"
- cellspacing="0" cellpadding="0" border="0" width="<bean:write name="winwidth" />" align="center">
+ cellspacing="0" cellpadding="0" border="0" width="<bean:write name="winwidth" />" style="text-align: center">
  </logic:notEmpty>
  
 <tr><td>
@@ -55,9 +55,9 @@
 <a href='<%=request.getContextPath()%>/blog/<bean:write name="accountProfileForm" property="account.username"/>' target="_blank" class="smallgray"><bean:write name="accountProfileForm" property="account.username"/></a>
 </td></tr>
 <tr>
- <td align="center">
+ <td style="text-align: center">
 
-<table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="text-align: center">
 <tr><td>
     <table cellpadding="3" cellspacing="1" border="0" width="100%">
 

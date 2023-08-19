@@ -28,7 +28,7 @@ var initUsersW = function (e){
 <logic:greaterThan name="accountListForm" property="allCount" value="0">
 
 
-<table cellpadding="3" cellspacing="0" border="0" width="600" align="center">
+<table cellpadding="3" cellspacing="0" border="0" width="600" style="text-align: center">
 <tr>
     <td>
 
@@ -37,7 +37,7 @@ var initUsersW = function (e){
 
   
   <div class="linkblock">  
-<table width="100%"><tr><td width="50%" align="center">
+<table width="100%"><tr><td width="50%" style="text-align: center">
          <a href='<%=request.getContextPath()%>/blog/<bean:write name="account" property="username" />'>          
            <logic:notEmpty name="account" property="uploadFile">
             <logic:equal name="account" property="roleName" value="User"> 

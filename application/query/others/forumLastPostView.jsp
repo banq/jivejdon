@@ -24,7 +24,7 @@
  
 
 <table bgcolor="#cccccc"
- cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+ cellpadding="0" cellspacing="0" border="0" width="100%" style="text-align: center">
 <tr>
  <td>
     <table bgcolor="#cccccc" cellpadding="6" cellspacing="1" border="0" width="100%">
@@ -45,7 +45,7 @@
           <bean:write name="forumMessage" property="creationDate" />
          </span>
         </td>
-       <td width="1%" nowrap="nowrap" align="center">
+       <td width="1%" nowrap="nowrap" style="text-align: center">
 
           </td>
     </tr>

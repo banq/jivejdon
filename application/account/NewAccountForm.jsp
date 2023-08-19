@@ -205,7 +205,7 @@
 
                        <% if (isTrue){ %>
                         <tr>
-                       <td align="center" colspan="2">
+                       <td style="text-align: center" colspan="2">
                          <html:submit property="submit" value="确定"/>
                          <html:reset value ="Reset"/>
                         </td>

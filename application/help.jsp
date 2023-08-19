@@ -37,16 +37,7 @@
                         </p>
                         <p>标签功能：发表新主题文章时，会出现标签输入，如果已经存在，会自动弹出可选标签，最好选择已经存在的标签，否则就不要输入标签，由管理员来补充。</p>
                         <p>支持新浪微博直接登入，用户名和密码自动生成，如果你修改了用户名，下次只能用该用户名登录，如果再次用微博等帐号登入，原来用户名密码将又被系统重新生成。</p>
-                        <p>社交媒体：</p>
-                        <p>
-                            <a href="http://weibo.com/ijdon" target="_blank">新浪微博：@解道jdon weibo.com/ijdon</a>
-                        </p>
-                        <p>
-                            <a href="https://twitter.com/jdon_com" target="_blank">twitter：@解道jdon twitter.com/jdon_com</a>
-                        </p>
-                        <p>
-                            <a href="https://www.facebook.com/jivejdon" target="_blank">facebook (www.facebook.com/jivejdon)</a>
-                        </p>
+                        
 
                         <p></p>
                     </td>

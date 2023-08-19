@@ -35,24 +35,24 @@
 <form action="" method="POST" name="listForm1" >
 <input type="hidden" name="subscribeType" value="1">
 
-<table class="contacts" width="600" cellpadding=3 cellspacing=0 border=1  align="center">
+<table class="contacts" width="600" cellpadding=3 cellspacing=0 border=1  style="text-align: center">
   <tr  bgcolor="#C3C3C3">
-              <td class="contactDept" align="center" width="2">
+              <td class="contactDept" style="text-align: center" width="2">
                              选择
 			</td>
-			<td class="contactDept" align="center">
+			<td class="contactDept" style="text-align: center">
 				主题
 			</td>
-			<td class="contactDept" align="center">
+			<td class="contactDept" style="text-align: center">
 				消息
 			</td>
-			<td class="contactDept" align="center" >
+			<td class="contactDept" style="text-align: center" >
 				邮件
 			</td>
-			<td class="contactDept" align="center" >
+			<td class="contactDept" style="text-align: center" >
 				新浪微博
 			</td>
-			<td class="contactDept" align="center" >
+			<td class="contactDept" style="text-align: center" >
 				腾讯微博
 			</td>
 			
@@ -63,7 +63,7 @@
 			<bean:define id="subscribed" name="subscription" property="subscribed"></bean:define>
 			<html:hidden name="subscribed" property="subscribeId" />
 			<tr bgcolor="#ffffff">
-			    <td class="contact" align="center" >
+			    <td class="contact" style="text-align: center" >
 				<logic:present name="isOwner" >
 				 <input type="radio" name="subscriptionId" value="<bean:write name="subscription" property="subscriptionId" />" >
 				 </logic:present>
@@ -75,13 +75,13 @@
 						<bean:write name="subscribed" property="name" />
 					</a>
 				</td>
-				<td class="contact" align="center" >
+				<td class="contact" style="text-align: center" >
 				    <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.spi.component.subscription.action.ShortMsgAction)" disabled="true"/>
 				</td>
-				<td class="contact" align="center" >
+				<td class="contact" style="text-align: center" >
 				   <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.spi.component.subscription.action.EmailAction)" disabled="true"/>
 				</td>
-				<td class="contact" align="center" >
+				<td class="contact" style="text-align: center" >
 				   <html:checkbox name="subscription" property="actionType(com.jdon.jivejdon.spi.component.subscription.action.SinaWeiboAction)" disabled="true"/>
 				</td>
 			

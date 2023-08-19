@@ -57,14 +57,14 @@ function properties(theForm) {
     <tr><td>
     <table cellpadding="4" cellspacing="1" border="0" width="100%">
 	<tr bgcolor="#FFFFCC">
-	<td align="center"><b>顺序</b></td>
-	<td align="center"><b>名称</b></td>
-	<td align="center"><b>描述</b></td>
+	<td style="text-align: center"><b>顺序</b></td>
+	<td style="text-align: center"><b>名称</b></td>
+	<td style="text-align: center"><b>描述</b></td>
 	<logic:greaterThan name="filtersForm" property="filterCount" value="1" >
-      <td align="center"><b>移动</b></td>
+      <td style="text-align: center"><b>移动</b></td>
     </logic:greaterThan>   
-	<td align="center"><b>编辑</b></td>
-	<td align="center"><b>删除</b></td>
+	<td style="text-align: center"><b>编辑</b></td>
+	<td style="text-align: center"><b>删除</b></td>
     </tr>
     
     <logic:iterate indexId="i" id="descriptor" name="filtersForm" property="descriptors" type="java.beans.BeanDescriptor">
@@ -94,7 +94,7 @@ function properties(theForm) {
 
         </td>
         </logic:greaterThan>   
-        <td align="center">
+        <td style="text-align: center">
         <%
         com.jdon.jivejdon.presentation.form.FiltersForm filtersForm = (com.jdon.jivejdon.presentation.form.FiltersForm)request.getAttribute("filtersForm");        
         Integer propDesLength = new Integer((filtersForm.getPropertyDescriptors(descriptor)).length);
@@ -113,7 +113,7 @@ function properties(theForm) {
             &nbsp;
          </logic:lessThan>     
         </td>
-        <td align="center">
+        <td style="text-align: center">
             <html:link page="/admin/filters/filtersAction.shtml?method=remove"  paramId="pos" paramName="i"
             ><img src="../images/button_delete.gif" width="17" height="17" alt="删除此过滤器" border="0"
             ></html:link>
@@ -189,7 +189,7 @@ function properties(theForm) {
     <tr><td>
 	<table cellpadding="4" cellspacing="1" border="0" width="100%">
 	<tr bgcolor="#FFFFCC">
-	<td align="center"><b>可用过滤器</b></td>
+	<td style="text-align: center"><b>可用过滤器</b></td>
     </tr>
 	<tr bgcolor="#ffffff">
 	<td>
@@ -227,7 +227,7 @@ function properties(theForm) {
             </td>
         </tr>
         <tr>
-            <td colspan="3" align="center">
+            <td colspan="3" style="text-align: center">
             <input type="submit" value="安装...">
             </td>
         </tr>

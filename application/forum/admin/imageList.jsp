@@ -43,7 +43,7 @@
 	<body>
 		上传文件管理
 		<br>
-		<table width="100%" align="center">
+		<table width="100%" style="text-align: center">
         <tr>
 
 		<% int count = 1; %>
@@ -53,19 +53,19 @@
 				
 					<table  width="110">
 						<tr>
-							<td align="center">
+							<td style="text-align: center">
 								<bean:write name="image" property="name" />
 							</td>
 						</tr>
 						<tr>
-							<td align="center">
+							<td style="text-align: center">
 									<img
 										src="<%=request.getContextPath()%>/img/uploadShowAction.shtml?id=<bean:write name="image" property="imageId" />&oid=<bean:write name="image" property="oid" />"
 										class="product_img" onload='ReSizeImg("product_img",200,180);'  >
 							</td>
 						</tr>
 						<tr>
-							<td align="center">
+							<td style="text-align: center">
 								<html:link page="/forum/admin/imageSaveAction.shtml?action=edit"
 									paramId="imageId" paramName="image" paramProperty="imageId">
 									编辑

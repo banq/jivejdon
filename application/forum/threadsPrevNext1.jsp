@@ -9,7 +9,7 @@
   var prevThreadUrl;
   var nextThreadUrl;
 </script>
-<table cellpadding="0" cellspacing="0" border="0" width="971" align="center">
+<table cellpadding="0" cellspacing="0" border="0" width="971" style="text-align: center">
 <tr><td colspan="3"><html:img page="/images/blank.gif" width="1" height="5" border="0"/></td></tr>
 <tr>
     <td width="1%" nowrap>
@@ -42,7 +42,7 @@ if (iter.hasPrevious()){
 } %>
 
     </td>
-    <td width="98%" align="center">
+    <td width="98%" style="text-align: center">
         <bean:define id="forumThread" name="messageListForm" property="oneModel" />
        
 <table><tr><td>       

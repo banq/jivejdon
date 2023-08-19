@@ -19,7 +19,7 @@
 
 <center>
 
-<p><h3 align="center">打赏支付</h3>
+<p><h3 style="text-align: center">打赏支付</h3>
  
      
       <p>　　感谢您的慷慨捐赠，感恩！</p>

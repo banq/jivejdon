@@ -15,7 +15,7 @@
 
 
 <br><br>
-<div align="center">
+<div style="text-align: center">
 
 	
 	<logic:equal name="threadForm" property="authenticated"

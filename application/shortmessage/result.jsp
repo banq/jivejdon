@@ -10,7 +10,7 @@
  <html:errors />
 <logic:present name="errors">
   <logic:iterate id="error" name="errors">
-  <table cellpadding="0" cellspacing="0" border="0"  align="center"> 
+  <table cellpadding="0" cellspacing="0" border="0"  style="text-align: center"> 
 <tr> 
     <td valign="top" > 
     <B><FONT color=RED>

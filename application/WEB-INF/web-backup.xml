@@ -192,7 +192,7 @@
 			</servlet-class>
 			<init-param>
 				<param-name>title</param-name>
-				<param-value> 解道jdon.com </param-value>
+				<param-value> 极道.com </param-value>
 			</init-param>
 			<init-param>
 				<param-name>description</param-name>
@@ -356,4 +356,3 @@
 		
   
 </web-app>
-

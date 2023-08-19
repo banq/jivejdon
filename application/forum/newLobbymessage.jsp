@@ -7,7 +7,7 @@
 <%@ include file="../common/security.jsp" %>
 
 <logic:notEmpty name="Notification">
-          <div align="center">
+          <div style="text-align: center">
            <br>
 			<bean:write name="Notification" property="content" filter="false" />
 			<br>

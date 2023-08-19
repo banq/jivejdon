@@ -32,7 +32,7 @@ String coutlength = (String)pageContext.getAttribute("count");
   <tr>
     <td bgcolor="#c3d9e7"><table width="100%" border="0" cellpadding="0" cellspacing="0">
       <tr>
-        <td height="25" align="center"  bordercolor="#eeeeee">       
+        <td height="25" style="text-align: center"  bordercolor="#eeeeee">       
         <font color="#ffffff" ><b> <bean:write name="query" /></b></font>        
         </td>
       </tr>
