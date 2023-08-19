@@ -311,6 +311,14 @@
         <to>/RSServlet</to>
     </rule>
 
+    <rule>
+        <from>^/sitemap.xml$</from>
+        <to>/sitemap</to>
+    </rule>
+    <rule>
+        <from>^/sitemap/([0-9]+)/([0-9]+).xml$</from>
+        <to>/sitemap?sub=$1&amp;start=$2</to>
+    </rule>
 
 
     <!--

@@ -121,8 +121,8 @@ public class SitemapServlet extends HttpServlet {
 						Url url = entityFactory.getUrl((Long) pi.next());
 						String lastUpdateDate = url.getCreationDate()
 								.substring(0, 10);
-						Sitemap sitemap = new Sitemap(sitemapUrl + "?sub=2"
-								+ "&start=" + start, lastUpdateDate);
+						Sitemap sitemap = new Sitemap(sitemapUrl + "/2/"
+								+ start + ".xml", lastUpdateDate);
 						sitemaps.add(sitemap);
 					}
 				} catch (NoSuchElementException e) {
@@ -138,28 +138,6 @@ public class SitemapServlet extends HttpServlet {
 		return sitemaps;
 	}
 
-	private Collection<Sitemap> genSitemaps2(HttpServletRequest request) {
-
-		Collection<Sitemap> sitemaps = new ArrayList();
-		SitemapRepository sitemapRepository = (SitemapRepository) WebAppUtil
-				.getComponentInstance("sitemapRepository", servletContext);
-		SitemapService entityFactory = (SitemapService) WebAppUtil.getService(
-				"sitemapService", servletContext);
-		try {
-			PageIterator pi = sitemapRepository.getUrls(0, 1);
-			if (pi.hasNext()) {
-				Long id = (Long) pi.next();
-				Url url = entityFactory.getUrl(id);
-				String lastUpdateDate = url.getCreationDate().substring(0, 10);
-				Sitemap sitemap = new Sitemap(sitemapUrl + "?sub=" + 2,
-						lastUpdateDate);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return sitemaps;
-	}
 
 	private Collection<Sitemap> genThreadSitemaps(HttpServletRequest request) {
 		Collection<Sitemap> sitemaps = new ArrayList();
@@ -188,8 +166,8 @@ public class SitemapServlet extends HttpServlet {
 				if (thread != null) {
 					String lastUpdateDate = thread.getState().getModifiedDate()
 							.substring(0, 10);
-					Sitemap sitemap = new Sitemap(sitemapUrl + "?sub=1&start="
-							+ start, lastUpdateDate);
+					Sitemap sitemap = new Sitemap(sitemapUrl + "/1/"
+							+ start + ".xml", lastUpdateDate);
 					sitemaps.add(sitemap);
 				}
 				start = start + count;
