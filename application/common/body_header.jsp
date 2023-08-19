@@ -34,6 +34,7 @@
 	<!--Navigation-->
     <nav id="menu" class="navbar container">
         <div class="navbar-header">
+		    <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
             <a class="navbar-brand" href="/">极道</a>
         </div>
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
