@@ -14,7 +14,7 @@ response.setHeader("Expires", "0"); // Proxies.
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 256 256%22><text y=%22203%22 font-size=%22224%22>☯</text></svg>">
-    <title><logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty></title>
+    <title><logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty> - 极道</title>
 </head>
 <body>
 <%@ include file="./body_header.jsp" %>
