@@ -56,7 +56,7 @@ public class SitemapServlet extends HttpServlet {
 	private static final int expire = 24 * 60 * 60;
 	private final static Logger logger = LogManager
 			.getLogger(SitemapServlet.class);
-	private static final int MAXCOUNT = 2000;
+	private static final int MAXCOUNT = 180;
 	/**
 	 * 
 	 */
