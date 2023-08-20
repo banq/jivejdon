@@ -31,6 +31,7 @@ import com.jdon.jivejdon.domain.model.query.ResultSort;
 import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
 import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpecForMod;
 import com.jdon.jivejdon.presentation.action.util.ForumUtil;
+import com.jdon.jivejdon.api.ForumService;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.util.ToolsUtil;
 import com.jdon.util.UtilValidate;
@@ -56,7 +57,7 @@ public class SitemapServlet extends HttpServlet {
 	private static final int expire = 24 * 60 * 60;
 	private final static Logger logger = LogManager
 			.getLogger(SitemapServlet.class);
-	private static final int MAXCOUNT = 180;
+	private static final int MAXCOUNT = 2000;
 	/**
 	 * 
 	 */
@@ -65,11 +66,8 @@ public class SitemapServlet extends HttpServlet {
 	private long lastModifiedDate = 0L;
 	private ServletContext servletContext;
 
-	private String sitemapUrl;
 	private String threadUrl;
-	private CharArrayWriter baosindex = null;
-	private Map<Integer, CharArrayWriter> baos1s = new TreeMap();
-	private Map<Integer, CharArrayWriter> baos2s = new TreeMap();
+	private CharArrayWriter charArrayWriterBuffer;
 
 	private boolean checkSpamHit(HttpServletRequest request) {
 		if (customizedThrottle == null) {
@@ -80,128 +78,32 @@ public class SitemapServlet extends HttpServlet {
 		return customizedThrottle.processHitFilter(hitKey);
 	}
 
-	private Collection<Sitemap> genSitemaps(HttpServletRequest request) {
-		Collection<Sitemap> sitemaps = new ArrayList();
+	private Collection<UrlSet> genThreadUrlSet(HttpServletRequest request) {
+		Collection<UrlSet> urlsets = new ArrayList();
 		try {
-			SitemapRepository sitemapRepository = (SitemapRepository) WebAppUtil
-					.getComponentInstance("sitemapRepository", servletContext);
-			try {
-				PageIterator pi = sitemapRepository.getUrls(0, 1);
-				return genSitemaps(pi.getAllCount());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} catch (Exception e) {
-			logger.error(e);
-		}
 
-		return sitemaps;
-	}
-
-	private Collection<Sitemap> genSitemaps(int allcount) {
-		Collection<Sitemap> sitemaps = new ArrayList();
-		try {
-			int numPages = 0;
-			int count = this.MAXCOUNT;
-			if (allcount != count) {
-				numPages = (int) Math.ceil((double) allcount / (double) count);
-			} else {
-				numPages = 1;
-			}
+			ForumService forumService = (ForumService) WebAppUtil
+					.getService("forumService", servletContext);
+			int allCount = forumService.getThreadAllCount();
 			int start = 0;
-			SitemapRepository sitemapRepository = (SitemapRepository) WebAppUtil
-					.getComponentInstance("sitemapRepository", servletContext);
-			SitemapService entityFactory = (SitemapService) WebAppUtil
-					.getService("sitemapService", servletContext);
-			for (int i = 1; i <= numPages; i++) {
-				try {
-					PageIterator pi = sitemapRepository.getUrls(start,
-							this.MAXCOUNT);
-					Url url = null;
-					while (pi.hasNext()) {
-						url = entityFactory.getUrl((Long) pi.next());
-					}
-					String lastUpdateDate = url.getCreationDate()
-							.substring(0, 10);
-					Sitemap sitemap = new Sitemap(sitemapUrl + "/2/"
-							+ start + ".xml", lastUpdateDate);
-					sitemaps.add(sitemap);
-				} catch (NoSuchElementException e) {
-					e.printStackTrace();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				start = start + count;
-			}
-		} catch (Exception e) {
-			logger.error(e);
-		}
-		return sitemaps;
-	}
+			int count = 180;
 
-
-	private Collection<Sitemap> genThreadSitemaps(HttpServletRequest request) {
-		Collection<Sitemap> sitemaps = new ArrayList();
-		try {
-			PageIterator pi = getThreadPI(request, 0);
-			int count = MAXCOUNT;
-			int allCount = pi.getAllCount();
-			int numPages = 0;
-			if (allCount != count) {
-				numPages = (int) Math.ceil((double) allCount / (double) count);
-			} else {
-				numPages = 1;
-			}
-			int start = 0;
-
-			for (int i = 1; i <= numPages; i++) {
-				pi = getThreadPI(request, start);
+			for (int i = 1; i <= allCount; i++) {
+				PageIterator pi = getThreadPI(request, start, count);
 				Long threadId = null;
 				while (pi.hasNext()) {
 					threadId = (Long) pi.next();
+					urlsets.add(new UrlSet(threadUrl + threadId + ".html"));
 				}
 				if (threadId == null) {
-					break;
-				}
-				ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil
-						.getService("forumMessageQueryService", request);
-				ForumThread thread = forumMessageQueryService
-						.getThread(threadId);
-				if (thread != null) {
-					String lastUpdateDate = thread.getState().getModifiedDate()
-							.substring(0, 10);
-					Sitemap sitemap = new Sitemap(sitemapUrl + "/1/"
-							+ start + ".xml", lastUpdateDate);
-					sitemaps.add(sitemap);
+					continue;
 				}
 				start = start + count;
 			}
 		} catch (Exception e) {
 			logger.error(e);
 		}
-		return sitemaps;
-	}
-
-	private Collection<UrlSet> genThreadUrlSet(HttpServletRequest request) {
-		int startInt = 0;
-		try {
-			String start = request.getParameter("start");
-			if (start != null) {
-				startInt = Integer.parseInt(start);
-			}
-			Collection<UrlSet> urlsets = new ArrayList();
-			PageIterator pi = getThreadPI(request, startInt);
-			while (pi.hasNext()) {
-				Long threadId = (Long) pi.next();
-				urlsets.add(new UrlSet(threadUrl + threadId + ".html", "1"));
-			}
-			return urlsets;
-
-		} catch (Exception e) {
-			logger.error(e);
-			return new ArrayList();
-		}
-
+		return urlsets;
 	}
 
 	private Collection<UrlSet> genUrlSet(HttpServletRequest request) {
@@ -221,7 +123,7 @@ public class SitemapServlet extends HttpServlet {
 			pi = sitemapRepository.getUrls(startInt, MAXCOUNT);
 			while (pi.hasNext()) {
 				Url url = entityFactory.getUrl((Long) pi.next());
-				urlsets.add(new UrlSet(url.getIoc(), "1"));
+				urlsets.add(new UrlSet(url.getIoc()));
 			}
 			return urlsets;
 
@@ -232,7 +134,7 @@ public class SitemapServlet extends HttpServlet {
 
 	}
 
-	private PageIterator getThreadPI(HttpServletRequest request, int startInt) {
+	private PageIterator getThreadPI(HttpServletRequest request, int startInt, int count) {
 		try {
 			ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil
 					.getService("forumMessageQueryService", servletContext);
@@ -241,7 +143,7 @@ public class SitemapServlet extends HttpServlet {
 			ThreadListSpec threadListSpec = new ThreadListSpecForMod();
 			threadListSpec.setResultSort(resultSort);
 
-			return forumMessageQueryService.getThreads(startInt, MAXCOUNT,
+			return forumMessageQueryService.getThreads(startInt, count,
 					threadListSpec);
 		} catch (Exception e) {
 			logger.error(e);
@@ -252,33 +154,12 @@ public class SitemapServlet extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		servletContext = config.getServletContext();
-		String domainurl = config.getInitParameter("sitemapUrl");
-		if (!UtilValidate.isEmpty(domainurl)) {
-			this.sitemapUrl = domainurl;
-		}
 
 		String threadUrl = config.getInitParameter("threadUrl");
 		if (!UtilValidate.isEmpty(threadUrl)) {
 			this.threadUrl = threadUrl;
 		}
 
-	}
-
-	private CharArrayWriter outIndex(Collection<Sitemap> sitemaps) {
-		CharArrayWriter writer = new CharArrayWriter();
-		try {
-			SitemapHelper.writeSitemapIndex(writer, sitemaps.iterator());
-		} catch (Exception e) {
-			logger.error(e);
-		} finally {
-			if (writer != null) {
-				try {
-					writer.close();
-				} catch (Exception e) {
-				}
-			}
-		}
-		return writer;
 	}
 
 	private CharArrayWriter outUrls(Collection<UrlSet> urls) {
@@ -305,8 +186,8 @@ public class SitemapServlet extends HttpServlet {
 		long modelLastModifiedDate = ForumUtil.getForumsLastModifiedDate(
 				this.getServletContext());
 		// if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request,
-		// 		response)) {
-		// 	return;
+		// response)) {
+		// return;
 		// }
 
 		if (!checkSpamHit(request)) {
@@ -320,82 +201,27 @@ public class SitemapServlet extends HttpServlet {
 		}
 
 		try {
-			String sub = request.getParameter("sub");
-			if (sub == null) {
-				if (baosindex == null) {
-					baosindex = new CharArrayWriter();
-					Collection<Sitemap> sitemaps = new ArrayList();
-					Collection<Sitemap> threadSitemaps = genThreadSitemaps(request);
-					if (!threadSitemaps.isEmpty())
-						sitemaps.addAll(genThreadSitemaps(request));
-					Collection<Sitemap> genSitemaps = genSitemaps(request);
-					if (!genSitemaps.isEmpty())
-						sitemaps.addAll(genSitemaps);
-
-					if (!sitemaps.isEmpty())
-						baosindex = outIndex(sitemaps);
-				}
-				writeToResponse(response, baosindex.toCharArray());
-
-			} else {
-				int startInt = 0;
-				String start = request.getParameter("start");
-				if (start != null) {
-					startInt = Integer.parseInt(start);
-				}
-				if (sub.equals("1")) {
-					CharArrayWriter baos1 = baos1s.get(startInt);
-					if (baos1 == null) {
-						baos1 = new CharArrayWriter();
-						Collection threadUrlSet = genThreadUrlSet(request);
-						if (!threadUrlSet.isEmpty()) {
-							baos1 = outUrls(threadUrlSet);
-							baos1s.put(startInt, baos1);
-						}
-
-					}
-					writeToResponse(response, baos1.toCharArray());
-				} else if (sub.equals("2")) {
-					CharArrayWriter baos2 = baos2s.get(startInt);
-					if (baos2 == null) {
-						baos2 = new CharArrayWriter();
-						Collection urlSet = genUrlSet(request);
-						if (!urlSet.isEmpty()) {
-							baos2 = outUrls(genUrlSet(request));
-							baos2s.put(startInt, baos2);
-						}
-					}
-					writeToResponse(response, baos2.toCharArray());
-				}
+			if (this.charArrayWriterBuffer == null) {
+				charArrayWriterBuffer = new CharArrayWriter();
+				Collection<UrlSet> urlSet = genUrlSet(request);
+				Collection<UrlSet> threadUrlSet = genThreadUrlSet(request);
+				if (!threadUrlSet.isEmpty()) 
+					urlSet.addAll(threadUrlSet);
+				if (!urlSet.isEmpty())
+					charArrayWriterBuffer = outUrls(urlSet);
 			}
+			writeToResponse(response, charArrayWriterBuffer.toCharArray());
 		} catch (Exception e) {
 			logger.error(e);
 		}
 	}
 
 	private void clearLast() {
-		if (!baos1s.isEmpty()) {
-			int lastKey = (Integer) getLastElement(this.baos1s.keySet());
-			this.baos1s.remove(lastKey);
-		}
-
-		if (!baos2s.isEmpty()) {
-			int lastKey = (Integer) getLastElement(this.baos2s.keySet());
-			this.baos2s.remove(lastKey);
-		}
+			this.charArrayWriterBuffer = null;
 
 	}
 
-	private Object getLastElement(final Collection c) {
-		if (c.isEmpty())
-			return null;
-		final Iterator itr = c.iterator();
-		Object lastElement = itr.next();
-		while (itr.hasNext()) {
-			lastElement = itr.next();
-		}
-		return lastElement;
-	}
+	
 
 	private void writeToResponse(HttpServletResponse response, char[] chararray) {
 		try {

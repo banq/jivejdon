@@ -22,19 +22,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class UrlSet {
 
 	private final String ioc;
-	private final String priority;//= "1"
 
 	public UrlSet() {
 		super();
 		this.ioc = "";
-		this.priority = "";
 	}
 
 	
-	public UrlSet(String ioc, String priority) {
+	public UrlSet(String ioc) {
 		super();
 		this.ioc = ioc;
-		this.priority = priority;
 	}
 
 	@XmlElement(name = "loc")
@@ -43,10 +40,6 @@ public class UrlSet {
 	}
 
 	
-	@XmlElement(name = "priority")
-	public String getPriority() {
-		return priority;
-	}
 
 	
 }
