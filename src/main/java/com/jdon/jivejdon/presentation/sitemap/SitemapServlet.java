@@ -46,6 +46,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.CharArrayWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -231,6 +232,8 @@ public class SitemapServlet extends HttpServlet {
 	private void writeToResponse(HttpServletResponse response, char[] chararray) {
 		try {
 			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/xml; charset=utf-8");
+			Writer writer = response.getWriter();
 			response.getWriter().write(chararray);
 			response.getWriter().flush();
 			response.getWriter().close();
