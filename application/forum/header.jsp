@@ -27,7 +27,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <meta name="og:title" content="<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>">
     <meta name="og:description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[140]" /> ">
     <script defer src="/common/messageList12.js"></script> 
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap" >
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" >
     <link rel="alternate" type="application/rss+xml" title="极道订阅" href="/rss" >
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 256 256%22><text y=%22203%22 font-size=%22224%22>☯</text></svg>">
     <link rel="canonical" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html">  
