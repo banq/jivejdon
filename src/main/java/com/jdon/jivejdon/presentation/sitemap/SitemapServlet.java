@@ -57,7 +57,6 @@ public class SitemapServlet extends HttpServlet {
 	private static final int expire = 24 * 60 * 60;
 	private final static Logger logger = LogManager
 			.getLogger(SitemapServlet.class);
-	private static final int MAXCOUNT = 2000;
 	/**
 	 * 
 	 */
@@ -86,9 +85,15 @@ public class SitemapServlet extends HttpServlet {
 					.getService("forumService", servletContext);
 			int allCount = forumService.getThreadAllCount();
 			int start = 0;
+			int numPages = 0;
 			int count = 180;
+			if (allCount != count) {
+				numPages = (int) Math.ceil((double) allCount / (double) count);
+			} else {
+				numPages = 1;
+			}
 
-			for (int i = 1; i <= allCount; i++) {
+			for (int i = 1; i <= numPages; i++) {
 				PageIterator pi = getThreadPI(request, start, count);
 				Long threadId = null;
 				while (pi.hasNext()) {
@@ -120,7 +125,7 @@ public class SitemapServlet extends HttpServlet {
 					.getComponentInstance("sitemapRepository", servletContext);
 			SitemapService entityFactory = (SitemapService) WebAppUtil
 					.getService("sitemapService", servletContext);
-			pi = sitemapRepository.getUrls(startInt, MAXCOUNT);
+			pi = sitemapRepository.getUrls(startInt, 180);
 			while (pi.hasNext()) {
 				Url url = entityFactory.getUrl((Long) pi.next());
 				urlsets.add(new UrlSet(url.getIoc()));
