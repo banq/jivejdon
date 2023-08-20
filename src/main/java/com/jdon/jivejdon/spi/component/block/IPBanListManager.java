@@ -166,7 +166,7 @@ public class IPBanListManager implements Runnable, IPBanListManagerIF {
 	private void saveBanIpList() {
 		try {
 			String saveS = ipHolder.addressLoad();
-			setupDao.saveSetupValue(PERSISTENCE_NAME, saveS);
+			// setupDao.saveSetupValue(PERSISTENCE_NAME, saveS);
 			myLastModified = true;
 		} finally {
 		}
@@ -182,7 +182,8 @@ public class IPBanListManager implements Runnable, IPBanListManagerIF {
 			// sort is low performance
 			// Set newBannedIpList = new TreeSet(new StringSortComparator());
 
-			String ipListText = setupDao.getSetupValue(PERSISTENCE_NAME);
+			// String ipListText = setupDao.getSetupValue(PERSISTENCE_NAME);
+			String ipListText = "";
 			BufferedReader in = new BufferedReader(new StringReader(ipListText));
 
 			String ip = null;
