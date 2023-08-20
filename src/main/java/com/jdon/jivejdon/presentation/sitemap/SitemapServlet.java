@@ -117,14 +117,15 @@ public class SitemapServlet extends HttpServlet {
 				try {
 					PageIterator pi = sitemapRepository.getUrls(start,
 							this.MAXCOUNT);
-					if (pi.hasNext()) {
-						Url url = entityFactory.getUrl((Long) pi.next());
-						String lastUpdateDate = url.getCreationDate()
-								.substring(0, 10);
-						Sitemap sitemap = new Sitemap(sitemapUrl + "/2/"
-								+ start + ".xml", lastUpdateDate);
-						sitemaps.add(sitemap);
+					Url url = null;
+					while (pi.hasNext()) {
+						url = entityFactory.getUrl((Long) pi.next());
 					}
+					String lastUpdateDate = url.getCreationDate()
+							.substring(0, 10);
+					Sitemap sitemap = new Sitemap(sitemapUrl + "/2/"
+							+ start + ".xml", lastUpdateDate);
+					sitemaps.add(sitemap);
 				} catch (NoSuchElementException e) {
 					e.printStackTrace();
 				} catch (Exception e) {
@@ -158,6 +159,9 @@ public class SitemapServlet extends HttpServlet {
 				Long threadId = null;
 				while (pi.hasNext()) {
 					threadId = (Long) pi.next();
+				}
+				if (threadId == null) {
+					break;
 				}
 				ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil
 						.getService("forumMessageQueryService", request);
