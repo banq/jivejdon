@@ -198,7 +198,7 @@
         </action>
 
 
-        <action path="/query/threadNewList" type="com.jdon.jivejdon.presentation.action.query.ThreadNewListAction" name="threadListForm" scope="request" validate="false">
+        <action path="/query/threadNewList" type="com.jdon.jivejdon.presentation.action.ThreadListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/newlist.jsp" />
         </action>
 
