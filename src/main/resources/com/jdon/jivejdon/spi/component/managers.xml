@@ -65,9 +65,9 @@
 		<!-- message input  filter -->
 		<component name="inFilterManager"
 			class="com.jdon.jivejdon.spi.component.filter.InFilterManager">
-            <constructor value="com.jdon.jivejdon.domain.model.message.weibo.EscapeUTFInFIlter"/>
-			<constructor value="com.jdon.jivejdon.domain.model.message.props.InFilterPosterIP" />
-			<constructor value="com.jdon.jivejdon.domain.model.message.weibo.InFilterAuthor" />
+            <constructor value="com.jdon.jivejdon.domain.model.message.infilter.EscapeUTFInFIlter"/>
+			<constructor value="com.jdon.jivejdon.domain.model.message.infilter.InFilterPosterIP" />
+			<constructor value="com.jdon.jivejdon.domain.model.message.infilter.InFilterAuthor" />
 		</component>
 
 		<component name="queryManager"

@@ -13,7 +13,7 @@
  * limitations under the License.
  * 
  */
-package com.jdon.jivejdon.domain.model.message.weibo;
+package com.jdon.jivejdon.domain.model.message.infilter;
 
 import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.util.UtilValidate;

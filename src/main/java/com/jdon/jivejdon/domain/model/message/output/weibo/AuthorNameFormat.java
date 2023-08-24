@@ -16,7 +16,7 @@
 package com.jdon.jivejdon.domain.model.message.output.weibo;
 
 import com.jdon.jivejdon.domain.model.message.MessageVO;
-import com.jdon.jivejdon.domain.model.message.weibo.InFilterAuthor;
+import com.jdon.jivejdon.domain.model.message.infilter.InFilterAuthor;
 import com.jdon.util.StringUtil;
 
 import java.util.function.Function;
