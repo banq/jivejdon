@@ -209,12 +209,13 @@ public class SitemapServlet extends HttpServlet {
 		try {
 			if (this.charArrayWriterBuffer == null) {
 				charArrayWriterBuffer = new CharArrayWriter();
-				Collection<UrlSet> urlSet = genUrlSet(request);
+				// Collection<UrlSet> urlSet = genUrlSet(request);
 				Collection<UrlSet> threadUrlSet = genThreadUrlSet(request);
 				if (!threadUrlSet.isEmpty()) 
-					urlSet.addAll(threadUrlSet);
-				if (!urlSet.isEmpty())
-					charArrayWriterBuffer = outUrls(urlSet);
+				    charArrayWriterBuffer = outUrls(threadUrlSet);
+				// 	urlSet.addAll(threadUrlSet);
+				// if (!urlSet.isEmpty())
+					// charArrayWriterBuffer = outUrls(urlSet);
 			}
 			writeToResponse(response, charArrayWriterBuffer.toCharArray());
 		} catch (Exception e) {
