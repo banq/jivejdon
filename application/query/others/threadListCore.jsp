@@ -50,7 +50,7 @@
              %>
                <span class="fa fa-print"> <%=bl %>k </span>
              <% }%>
-                      
+              <br><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[40]" />.             
             </div>
 
           </section>
