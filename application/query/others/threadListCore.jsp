@@ -12,14 +12,14 @@
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">                  
                   <div class="thumbn">
                     <figure>                       
-                    <img src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="thumbnail" loading="lazy" width="100" height="70" />    
+                    <img src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="thumbnail" loading="lazy" width="90" height="70" />    
                     </figure>               
                   </div>
                 </logic:notEmpty>
                  
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">                  
                   <div class="thumbn">
-                    <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail" loading="lazy" width="100" height="70"/>                  
+                    <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail" loading="lazy" width="90" height="70"/>                  
                   </div>  
                 </logic:notEmpty>              
           </div>
