@@ -12,7 +12,7 @@
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">                  
                   <div class="thumbn">
                     <figure>                       
-                    <img src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="thumbnail" loading="lazy" width="90" height="70" />    
+                    <img src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="thumbnail" loading="lazy" width="90" height="70"/>    
                     </figure>               
                   </div>
                 </logic:notEmpty>
