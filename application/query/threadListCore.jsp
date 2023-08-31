@@ -17,7 +17,7 @@
   <div class="linkblock">
      <div class="box">	             
         <section> 
-         <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"><bean:write name="forumThread" property="name"/></a></h3>
+         <h3><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"><bean:write name="forumThread" property="name"/></a></h3>
       
          <div class="info">			 
               <span><i class="fa fa-calendar"></i>
