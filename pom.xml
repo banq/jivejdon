@@ -20,27 +20,27 @@
         -->
         <repository>
             <id>jdon-struts1x</id>
-            <url>http://img.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://static.jdon.com/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>jdonaccessory</id>
-            <url>http://img.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://static.jdon.com/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>jdon-jdbcTemp</id>
-            <url>http://img.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://static.jdon.com/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>jdon-treepattern</id>
-            <url>http://img.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://static.jdon.com/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>weibo4j</id>
-            <url>http://img.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://static.jdon.com/jdon-mvn-repo/releases</url>
         </repository>
         <repository>
             <id>urlrewrite</id>
-            <url>http://img.jdon.com/jdon-mvn-repo/releases</url>
+            <url>https://static.jdon.com/jdon-mvn-repo/releases</url>
         </repository>
     </repositories>
 
