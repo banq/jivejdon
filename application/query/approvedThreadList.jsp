@@ -35,7 +35,7 @@ response.setDateHeader("Expires", 0);
                   </figure>
                 </logic:notEmpty>
                 <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">        
-                    <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="thumbnail" fetchpriority="high"/> 
+                    <img id="home-thumbnai" src="https://wsrv.nl/?url=img.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="thumbnail" fetchpriority="high"/> 
                 </logic:empty>                        
               </div>
 			      </div>
