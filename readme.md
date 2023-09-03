@@ -4,7 +4,7 @@ Jivejdon is a WordPress-like Blog/Forum and production-ready application with DD
 
 You can check out the canonical deployment of Jivejdon at [https://www.jdon.com/](https://www.jdon.com/forum/)(NginX+Tomcat+JDK8+MySQL)
 
-![avatar](https://cdn.jdon.com/simgs/2023/jdongtmetrix.jpg)
+![avatar](https://static.jdon.com/simgs/2023/jdongtmetrix.jpg)
 
 # Domain-centric Architecture.
 
@@ -216,7 +216,7 @@ mvn clean install -U
 
 if clone error, please remove all downloaded files in Maven local repository and try "mvn clean install -U" again, or clone from https://gitee.com/banqjdon/jivejdon
 
-if Unable to download com.jdon dependency, Pls. replace en.jdon.com with cdn.jdon.com in pom.xml, or clone from https://gitee.com/banqjdon/jivejdon
+if Unable to download com.jdon dependency, Pls. replace en.jdon.com with static.jdon.com in pom.xml, or clone from https://gitee.com/banqjdon/jivejdon
 
 if mvn compile error, please configure your mirror Maven center repository.
 
