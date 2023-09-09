@@ -10,7 +10,7 @@
 <div class="box">
       <div class="linkblock">	
           <div>                    
-           <img id="home-thumbnai" src="https://wsrv.nl/?url=img.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="thumbnail" style="width: 100%" loading="lazy"/>                  
+           <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="thumbnail" style="width: 100%" loading="lazy"/>                  
           </div>
           <div class="wrap-vid">
               <div class="widget">		  
@@ -40,7 +40,7 @@
 <div class="box">
       <div class="linkblock">	
          <div>                    
-           <img id="home-thumbnai" src="https://wsrv.nl/?url=img.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="thumbnail" style="width: 100%" loading="lazy"/>                  
+           <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="thumbnail" style="width: 100%" loading="lazy"/>                  
           </div>      
           <div class="wrap-vid">
               <div class="widget">		 
