@@ -62,7 +62,7 @@ var mycanvas1=document.getElementsByTagName('canvas')[0];
 var img=convertCanvasToImage(mycanvas1);
 $('#qrcode').html(img);     
 </script>		
-微信扫描或下载二维图片
+<a href="weixin://scanqrcode">点击打开微信扫描</a>
 
 </body></html>
 		
