@@ -1,6 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false"  %>
 <%@ page trimDirectiveWhitespaces="true" %>
+
+<%@page import="com.jdon.controller.WebAppUtil,
+com.jdon.jivejdon.spi.component.block.ErrorBlockerIF"%>
+<%
+ErrorBlockerIF errorBlocker = (ErrorBlockerIF) WebAppUtil.getComponentInstance("errorBlocker", this.getServletContext());
+if (errorBlocker.checkCount(request.getRemoteAddr(), 10)){
+	response.sendError(404);
+    return;
+}
+%>
+
 <%
     String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     domainUrl = domainUrl + request.getContextPath();
