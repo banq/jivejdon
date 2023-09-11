@@ -1,4 +1,4 @@
-<%--  called bu ThreadList http://127.0.0.1:8080/jivejdon/forum.jsp --%>
+
 <%@ page session="false"  %>
 <%@ taglib uri="struts-logic" prefix="logic" %>
 <%@ taglib uri="struts-bean" prefix="bean" %>

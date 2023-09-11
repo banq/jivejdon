@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title>My JSP 'images.jsp' starting page</title>
-        <link rel="stylesheet" href="<html:rewrite page="/jivejdon_css.jsp"/>" type="text/css" /> 
+   
 		<script type="text/JavaScript">
 			function delConfirm(){
   				if (confirm( '删除该图片 ! \n\n 你肯定吗?  '))
