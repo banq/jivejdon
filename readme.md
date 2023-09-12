@@ -216,7 +216,6 @@ mvn clean install -U
 
 if clone error, please remove all downloaded files in Maven local repository and try "mvn clean install -U" again, or clone from https://gitee.com/banqjdon/jivejdon
 
-if Unable to download com.jdon dependency, Pls. replace en.jdon.com with static.jdon.com in pom.xml, or clone from https://gitee.com/banqjdon/jivejdon
 
 if mvn compile error, please configure your mirror Maven center repository.
 
