@@ -69,9 +69,9 @@ public class UploadServiceShell implements UploadService {
 				uploads = getUploadFilesFromSession(this.sc);
 			}
 
-			if (uploads.size() != 0 && uploads.size() >= maxCount) {
-				uploads.remove(uploads.size() - 1);
-			}
+			// if (uploads.size() != 0 && uploads.size() >= maxCount) {
+			// 	uploads.remove(uploads.size() - 1);
+			// }
 			uploads.add(uploadFile);
 		} catch (Exception e) {
 			logger.error("addUploadFileSession error:" + e);
