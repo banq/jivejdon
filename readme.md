@@ -4,7 +4,7 @@ Jivejdon is a WordPress-like Blog/Forum and production-ready application with DD
 
 You can check out the canonical deployment of Jivejdon at [https://www.jdon.com/](https://www.jdon.com/forum/)(NginX+Tomcat+JDK8+MySQL)
 
-![avatar](https://static.jdon.com/simgs/2023/jdongtmetrix.jpg)
+![avatar](https://www.jdon.com/simgs/2023/jdongtmetrix.jpg)
 
 # Domain-centric Architecture.
 
