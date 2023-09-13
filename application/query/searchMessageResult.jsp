@@ -81,34 +81,7 @@
                 <bean:define id="account" name="forumMessage"
                              property="account"/>
                 <tr>
-                    <td valign="top">
-                        <logic:notEmpty name="account"
-                                        property="uploadFile">
-                            <logic:equal name="account"
-                                         property="roleName"
-                                         value="User">
-                                <img src="/img/account/<bean:write name="account" property="userId"/>"
-                                     border="0" width="50" height="50"
-                                     class="post_author_pic"/>
-                            </logic:equal>
-                            <logic:equal name="account"
-                                         property="roleName"
-                                         value="SinaUser">
-                                <img src="<bean:write name="account" property="uploadFile.description"/>"
-                                     border="0" width="50" height="50"
-                                     class="post_author_pic"/>
-                            </logic:equal>
-
-                        </logic:notEmpty>
-
-                        <logic:empty name="account"
-                                     property="uploadFile">
-                            <img src="/images/nouserface_1.gif"
-                                 width="50"
-                                 height="50" border="0">
-                        </logic:empty>
-
-                    </td>
+                  
                     <td>
                         <div class="box col-md-12">
                             
