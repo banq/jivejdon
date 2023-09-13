@@ -16,11 +16,14 @@
 package com.jdon.jivejdon.presentation.action;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.domain.model.attachment.UploadFile;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
@@ -58,7 +61,7 @@ public class UploadFileListAction extends Action {
 			logger.debug("no paramter parentId, it is create!");
 		}
 		UploadService uploadService = (UploadService) WebAppUtil.getService("uploadService", request);
-		Collection list = uploadService.getAllUploadFiles(messageIdL);
+		List<UploadFile> list = uploadService.getAllUploadFiles(messageIdL);
 		listForm.setList(list);
 
 		return actionMapping.findForward("success");

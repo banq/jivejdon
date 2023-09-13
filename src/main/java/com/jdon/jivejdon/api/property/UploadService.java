@@ -20,6 +20,7 @@ import com.jdon.controller.events.EventModel;
 import com.jdon.jivejdon.domain.model.attachment.UploadFile;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -28,12 +29,12 @@ import java.util.Collection;
 public interface UploadService {
 
 	// get all uploadFiles include DB and Session
-	Collection getAllUploadFiles(Long messageId);
+	List<UploadFile> getAllUploadFiles(Long messageId);
 
 	// get all uploadFiles only in Session that is work station
-	Collection getAllUploadFiles(SessionContext sessionContext);
+	List<UploadFile> getAllUploadFiles(SessionContext sessionContext);
 
-	Collection loadAllUploadFilesOfMessage(Long messageId, SessionContext sessionContext);
+	List<UploadFile> loadAllUploadFilesOfMessage(Long messageId, SessionContext sessionContext);
 
 	void clearSession(SessionContext sessionContext);
 

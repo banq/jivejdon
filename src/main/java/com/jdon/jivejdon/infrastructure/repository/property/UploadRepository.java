@@ -19,10 +19,11 @@ import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.domain.model.attachment.UploadFile;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface UploadRepository {
 
-	public abstract Collection getUploadFiles(String parentId);
+	public abstract List<UploadFile> getUploadFiles(String parentId);
 
 	public abstract UploadFile getSingleUploadFile(String parentId);
 

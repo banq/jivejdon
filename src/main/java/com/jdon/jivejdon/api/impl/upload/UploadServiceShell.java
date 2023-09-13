@@ -1,8 +1,9 @@
 package com.jdon.jivejdon.api.impl.upload;
 
-import java.util.Collection;
+import java.util.ArrayList;
+
 import java.util.Iterator;
-import java.util.TreeSet;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -63,15 +64,18 @@ public class UploadServiceShell implements UploadService {
 		try {
 			Long mIDInt = sequenceDao.getNextId(Constants.OTHERS);
 			uploadFile.setId(mIDInt.toString());
-			Collection<UploadFile> uploads = getUploadFilesFromSession(this.sc);
+			List<UploadFile> uploads = getUploadFilesFromSession(this.sc);
 			if (uploads == null) {
 				initSession(parentId, this.sc);
 				uploads = getUploadFilesFromSession(this.sc);
 			}
 
-			// if (uploads.size() != 0 && uploads.size() >= maxCount) {
-			// 	uploads.remove(uploads.size() - 1);
-			// }
+
+            int i = uploads.size();
+			while (uploads.size() != 0 && i >= maxCount) {
+				uploads.remove(i-1);
+				i--;
+			}
 			uploads.add(uploadFile);
 		} catch (Exception e) {
 			logger.error("addUploadFileSession error:" + e);
@@ -83,7 +87,7 @@ public class UploadServiceShell implements UploadService {
 		String pid = uploadFile.getParentId();
 		Long parentId = Long.parseLong(pid);
 		addUploadFileSession(parentId, uploadFile, 1);
-		Collection uploads = getAllUploadFiles(parentId);
+		List<UploadFile> uploads = getAllUploadFiles(parentId);
 		try {
 			uploadRepository.saveAllUploadFiles(pid, uploads);
 			clearSession();
@@ -101,7 +105,7 @@ public class UploadServiceShell implements UploadService {
 		if (account.isAnonymous())
 			return;
 		addUploadFileSession(parentId, uploadFile, 1);
-		Collection uploads = getAllUploadFiles(parentId);
+		List<UploadFile> uploads = getAllUploadFiles(parentId);
 		try {
 			uploadRepository.saveAllUploadFiles(pid, uploads);
 			clearSession();
@@ -113,8 +117,8 @@ public class UploadServiceShell implements UploadService {
 
 	}
 
-	public Collection getAllUploadFiles(Long messageId) {
-		Collection<UploadFile> uploads = getUploadFilesFromSession(this.sc);
+	public List<UploadFile> getAllUploadFiles(Long messageId) {
+		List<UploadFile> uploads = getUploadFilesFromSession(this.sc);
 		if (uploads == null) {
 			initSession(messageId, this.sc);
 			uploads = getUploadFilesFromSession(this.sc);
@@ -125,15 +129,15 @@ public class UploadServiceShell implements UploadService {
 	/**
 	 * get all UploadFiles include session but not exclude the old
 	 */
-	public Collection getAllUploadFiles(SessionContext sessionContext) {
+	public List<UploadFile> getAllUploadFiles(SessionContext sessionContext) {
 		logger.debug(" loadUploadFiles ");
-		Collection re = getUploadFilesFromSession(sessionContext);
+		List<UploadFile> re = getUploadFilesFromSession(sessionContext);
 		return re;
 	}
 
-	public Collection loadAllUploadFilesOfMessage(Long messageId, SessionContext sessionContext) {
+	public List<UploadFile> loadAllUploadFilesOfMessage(Long messageId, SessionContext sessionContext) {
 		logger.debug(" loadUploadFiles ");
-		Collection re = getUploadFilesFromSession(sessionContext);
+		List<UploadFile> re = getUploadFilesFromSession(sessionContext);
 		if (re != null)
 			for (Object o : re) {
 				UploadFile uploadFile = (UploadFile) o;
@@ -145,7 +149,7 @@ public class UploadServiceShell implements UploadService {
 	public void removeUploadFile(EventModel em) {
 		logger.debug(" uploadService.removeUploadFile ");
 		UploadFile newuploadFile = (UploadFile) em.getModelIF();
-		Collection<UploadFile> uploads = getUploadFilesFromSession(this.sc);
+		List<UploadFile> uploads = getUploadFilesFromSession(this.sc);
 		if (uploads == null)
 			return;
 
@@ -167,7 +171,7 @@ public class UploadServiceShell implements UploadService {
 	}
 
 	private UploadFile getUploadFileFromSession(String objectId) {
-		Collection<UploadFile> uploads = getUploadFilesFromSession(this.sc);
+		List<UploadFile> uploads = getUploadFilesFromSession(this.sc);
 		if (uploads == null)
 			return null;
 
@@ -179,24 +183,24 @@ public class UploadServiceShell implements UploadService {
 		return null;
 	}
 
-	private Collection<UploadFile> getUploadFilesFromSession(SessionContext sessionContext) {
+	private List<UploadFile> getUploadFilesFromSession(SessionContext sessionContext) {
 		if (sessionContext == null)
 			return null;
-		return (Collection) sessionContext.getArrtibute(UPLOAD_NAME);
+		return (List<UploadFile>) sessionContext.getArrtibute(UPLOAD_NAME);
 	}
 
 	private void initSession(Long parentId, SessionContext sessionContext) {
-		Collection<UploadFile> uploads = new TreeSet();
-		sessionContext.setArrtibute(UPLOAD_NAME, uploads);
+		List<UploadFile> uploads = new ArrayList<>();
 		logger.debug("first time init ");
 		if ((parentId != null) && (parentId.longValue() != 0)) {
-			Collection dbList = uploadRepository.getUploadFiles(parentId.toString());
-			Iterator iter = dbList.iterator();
+			List<UploadFile> dbList = uploadRepository.getUploadFiles(parentId.toString());
+			Iterator<UploadFile> iter = dbList.iterator();
 			while (iter.hasNext()) {
 				UploadFile uploadFile = (UploadFile) iter.next();
 				uploads.add(uploadFile);
 			}
 		}
+		sessionContext.setArrtibute(UPLOAD_NAME, uploads);
 	}
 
 	public void clearSession(SessionContext sessionContext) {

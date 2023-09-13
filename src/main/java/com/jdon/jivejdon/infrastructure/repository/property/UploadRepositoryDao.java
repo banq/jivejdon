@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 public class UploadRepositoryDao implements UploadRepository {
 	private final static Logger logger = LogManager.getLogger(UploadRepositoryDao.class);
@@ -28,8 +29,8 @@ public class UploadRepositoryDao implements UploadRepository {
 	 * com.jdon.jivejdon.infrastructure.repository.property.UploadRepository#getUploadFiles(java.lang
 	 * .String)
 	 */
-	public Collection getUploadFiles(String parentId) {
-		Collection uploads = new ArrayList();
+	public List<UploadFile> getUploadFiles(String parentId) {
+		List<UploadFile> uploads = new ArrayList<>();
 		Collection ids = uploadFileDao.getAdjunctIDs(parentId);
 		Iterator iter = ids.iterator();
 		while (iter.hasNext()) {

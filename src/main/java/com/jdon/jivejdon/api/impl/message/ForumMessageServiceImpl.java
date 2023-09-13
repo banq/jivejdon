@@ -33,6 +33,7 @@ import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.attachment.AttachmentsVO;
+import com.jdon.jivejdon.domain.model.attachment.UploadFile;
 import com.jdon.jivejdon.domain.model.message.output.RenderingFilterManager;
 import com.jdon.jivejdon.domain.model.property.MessagePropertysVO;
 import com.jdon.jivejdon.domain.model.property.Property;
@@ -47,6 +48,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -111,7 +113,7 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 			return null;
 		Long mIDInt = forumBuilder.getNextId(Constants.MESSAGE);
 		try {
-			Collection uploads = uploadService.loadAllUploadFilesOfMessage(mIDInt, sessionContext);
+			List<UploadFile> uploads = uploadService.loadAllUploadFilesOfMessage(mIDInt, sessionContext);
 			AttachmentsVO attachmentsVO = new AttachmentsVO(mIDInt, uploads);
 			Account operator = sessionContextUtil.getLoginAccount(sessionContext);
 			Collection properties = new ArrayList();
@@ -157,7 +159,7 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 			return null;
 		Long mIDInt = this.forumBuilder.getNextId(Constants.MESSAGE);
 		try {
-			Collection uploads = uploadService.loadAllUploadFilesOfMessage(mIDInt, sessionContext);
+			List<UploadFile> uploads = uploadService.loadAllUploadFilesOfMessage(mIDInt, sessionContext);
 			AttachmentsVO attachmentsVO = new AttachmentsVO(mIDInt, uploads);
 			forumMessageReplyPostDTO.setAttachment(attachmentsVO);
 
@@ -223,7 +225,7 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 		}
 		try {
 			Account operator = sessionContextUtil.getLoginAccount(sessionContext);
-			Collection uploads = uploadService.loadAllUploadFilesOfMessage(oldforumMessage.getMessageId(),
+			List<UploadFile> uploads = uploadService.loadAllUploadFilesOfMessage(oldforumMessage.getMessageId(),
 					this.sessionContext);
 			AttachmentsVO attachmentsVO = new AttachmentsVO(newForumMessageInputparamter.getMessageId(), uploads);
 			Collection properties = new ArrayList();
