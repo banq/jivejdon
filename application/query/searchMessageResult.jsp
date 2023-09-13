@@ -84,14 +84,7 @@
                   
                     <td>
                         <div class="box col-md-12">
-                            
-
-                            <b>
-                                &nbsp;&nbsp;<bean:write name="account"
-                                                        property="username"/>
-                            </b>
-                
-
+                       
                             <a href='<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId" />.html'
                                target="_blank">
                                 <bean:write name="forumThread" property="name"/></a>
