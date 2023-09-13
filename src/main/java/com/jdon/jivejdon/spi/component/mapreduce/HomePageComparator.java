@@ -54,7 +54,7 @@ public class HomePageComparator implements Comparator<ForumThread> {
 	    	   p = p * 2;
 		}
 		long diff2 = thread.getViewCount() - thread.getViewCounter().getLastSavedCount() + 1;
-		p = (thread.getRootMessage().getDigCount() + 1) * p * diff2 * (thread.getRootMessage().hasImage()?2:1);
+		p = (thread.getRootMessage().getDigCount() + 1) * p * (diff2 + (thread.getRootMessage().hasImage()?2:1));
 		return p;
 	}
 }
