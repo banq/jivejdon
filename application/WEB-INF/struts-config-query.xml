@@ -80,6 +80,10 @@
             <forward name="success" path="/query/taggedThreadList.jsp" />
         </action>
 
+        <action path="/random/taggedThreadList" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/query/taggedThreadList.jsp" />
+        </action>
+
         <action path="/query/taggedThreadListNoheader" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">   
             <forward name="success" path="/query/threadList.jsp" />
         </action>
@@ -202,11 +206,11 @@
             <forward name="success" path="/query/others/newlist.jsp" />
         </action>
 
-        <action path="/forum/threadRandomList" type="com.jdon.jivejdon.presentation.action.query.ThreadRandomList" name="threadListForm" scope="request" validate="false">
+        <action path="/random/threadRandomList" type="com.jdon.jivejdon.presentation.action.query.ThreadRandomList" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/forum/randomThreadList.jsp" />
         </action>
 
-        <action path="/query/threadRandomDigList" type="com.jdon.jivejdon.presentation.action.query.ThreadRandomDigListAction" name="threadListForm" scope="request" validate="false">
+        <action path="/random/threadRandomDigList" type="com.jdon.jivejdon.presentation.action.query.ThreadRandomDigListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/randomdiglist.jsp" />
         </action>
 
