@@ -5,11 +5,7 @@
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-<%
-response.setHeader("Pragma", "No-cache");
-response.setHeader("Cache-Control", "no-cache");
-response.setDateHeader("Expires", 0);
-%>
+
 
 <div class="important" >
 <bean:parameter id="count" name="count" value="8"/>

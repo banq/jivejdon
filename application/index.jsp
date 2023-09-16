@@ -5,11 +5,7 @@
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<%
-response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1.
-response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-response.setHeader("Expires", "0"); // Proxies.
-%>
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>

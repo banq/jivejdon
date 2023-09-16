@@ -5,11 +5,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<%
-response.setHeader("Pragma", "No-cache");
-response.setHeader("Cache-Control", "no-cache");
-response.setDateHeader("Expires", 0);
-%>
+
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='4' >

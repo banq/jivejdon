@@ -4,11 +4,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<%
-response.setHeader("Pragma", "No-cache");
-response.setHeader("Cache-Control", "no-cache");
-response.setDateHeader("Expires", 0);
-%>
+
 <bean:parameter id="count" name="count" value="8"/>
 <%
 String coutlength = (String)pageContext.getAttribute("count");

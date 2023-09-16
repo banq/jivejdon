@@ -41,11 +41,6 @@
 <%@ include file="../common/IncludeTop.jsp" %>
 <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
 
-<%
-    response.setHeader("Pragma", "No-cache");
-    response.setHeader("Cache-Control", "no-cache");
-    response.setDateHeader("Expires", 0);
-%>
 
 <div class="box">
     <h2 class="text-center">注册</h2>
