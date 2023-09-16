@@ -44,9 +44,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class MessageListAction extends ModelListAction {
 	private final static String module = MessageListAction.class.getName();
-	private ForumMessageQueryService forumMessageQueryService;
-	private ThreadViewCounterJob threadViewCounterJob;
-	private final ExecutorService executor = Executors.newFixedThreadPool(10);
+	private ForumMessageQueryService forumMessageQueryService;	
 
 	public ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
@@ -110,15 +108,6 @@ public class MessageListAction extends ModelListAction {
 
 			modelListForm.setOneModel(forumThread);
 
-			executor.submit(new Runnable() {
-				public void run() { // this run method's body will be executed by the service
-					forumThread.addViewCount(request.getRemoteAddr());
-					getThreadViewCounterJob().saveViewCounter(forumThread.getViewCounter());
-				}
-			});
-
-			request.setAttribute("threadsInMemallCount", getThreadViewCounterJob().getThreadIdsList().size());
-
 			if (request.getSession(false) != null) {
 				boolean[] authenticateds = getAuthedListForm(actionForm, request);
 				MessageListForm messageListForm = (MessageListForm) actionForm;
@@ -157,11 +146,5 @@ public class MessageListAction extends ModelListAction {
 		return authenticateds;
 	}
 
-	private ThreadViewCounterJob getThreadViewCounterJob() {
-		if (threadViewCounterJob == null)
-			threadViewCounterJob = (ThreadViewCounterJob) WebAppUtil.getComponentInstance("threadViewCounterJob",
-					this.servlet.getServletContext());
-		return threadViewCounterJob;
-	}
 
 }
