@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author <a href="mailto:banq@163.com">banq</a>
  * 
  */
-public class MessageListAction extends ModelListAction {
+public class MessageListOwnerAction extends ModelListAction {
 	private final static String module = MessageListAction.class.getName();
 	private ForumMessageQueryService forumMessageQueryService;	
 
@@ -108,7 +108,12 @@ public class MessageListAction extends ModelListAction {
 
 			modelListForm.setOneModel(forumThread);
 
-			
+			if (request.getSession(false) != null) {
+				boolean[] authenticateds = getAuthedListForm(actionForm, request);
+				MessageListForm messageListForm = (MessageListForm) actionForm;
+				messageListForm.setAuthenticateds(authenticateds);
+			}
+
 		} catch (Exception e) {
 			Debug.logError(" customizeListForm err:", module);
 			return;
@@ -116,6 +121,30 @@ public class MessageListAction extends ModelListAction {
 
 	}
 
-	
+	protected boolean[] getAuthedListForm(ActionForm actionForm, HttpServletRequest request) {
+		MessageListForm messageListForm = (MessageListForm) actionForm;
+		boolean[] authenticateds = new boolean[messageListForm.getList().size()];
+
+		// if there is no session, no login user, ignore it.
+		if (request.getSession(false) == null)
+			return authenticateds;
+
+		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
+		Account account = accountService.getloginAccount();
+		if (account == null)
+			return authenticateds;// if login need auth check
+
+		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService",
+				request);
+		int i = 0;
+		for (Object o : messageListForm.getList()) {
+			ForumMessage forumMessage = (ForumMessage) o;
+			boolean result = forumMessageService.checkIsAuthenticated(forumMessage);
+			authenticateds[i] = result;
+			i++;
+		}
+		return authenticateds;
+	}
+
 
 }

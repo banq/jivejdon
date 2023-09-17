@@ -84,12 +84,6 @@ public class MessageForumListAction extends MessageListAction {
 
 		modelListForm.setOneModel(forumThread);
 
-		if (request.getSession(false) != null) {
-			boolean[] authenticateds = getAuthedListForm(actionForm, request);
-			MessageListForm messageListForm = (MessageListForm) actionForm;
-			messageListForm.setAuthenticateds(authenticateds);
-		}
-
 
 	}
 
