@@ -15,28 +15,20 @@
  */
 package com.jdon.jivejdon.presentation.action;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.account.Account;
-import com.jdon.jivejdon.domain.model.thread.ViewCounter;
-import com.jdon.jivejdon.presentation.form.MessageListForm;
-import com.jdon.jivejdon.api.account.AccountService;
-import com.jdon.jivejdon.api.query.ForumMessageQueryService;
-import com.jdon.jivejdon.api.ForumMessageService;
-import com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
 import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
