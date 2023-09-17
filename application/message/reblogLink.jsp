@@ -88,7 +88,7 @@ function setValuesss(){
 
 <br><br>
 <input type="submit" value="确认"/>
-<a href="<%=request.getContextPath() %>/<bean:write name="threadForm" property="threadId"/>">返回</a>
+<a href="<%=request.getContextPath()%>/message/messageListOwner.shtml?thread=<bean:write name="threadForm" property="threadId"/>">返回</a>
 </html:form>
 
 <p><p><p>

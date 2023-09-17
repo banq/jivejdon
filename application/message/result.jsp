@@ -30,13 +30,13 @@
        <logic:notEmpty name="forumThread" property="forum" >
        <logic:notEqual name="action" value="delete">
           
-        <a href='<%=request.getContextPath()%>/<bean:write name="forumThread" 
-        property="threadId" />?message=<bean:write name="messageId" />#<bean:write name="messageId" />'        
+        <a href='<%=request.getContextPath()%>/message/messageListOwner.shtml?thread=<bean:write name="forumThread" 
+        property="threadId" />'        
         >按这里返回所发帖子</a>
         ....3秒后自动返回
        <script>      
          function reloadHref(){
-              window.location.href = "<a href='<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId" />?message=<bean:write name="messageId" />#<bean:write name="messageId" />'>";
+              window.location.href = "<a href='<%=request.getContextPath()%>//message/messageListOwner.shtml?thread=<bean:write name="forumThread" property="threadId" />'>";
           }
           //setTimeout(reloadHref, 3000);   
       </script>

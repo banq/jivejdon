@@ -21,7 +21,7 @@
                 操作成功！
 
 
-                <a href='<%=request.getContextPath()%>/<bean:write name="threadId" />?<%=System.currentTimeMillis() %> '>按这里返回，因为浏览器缓存需要重新刷新</a>
+                <a href='<%=request.getContextPath()%>/message/messageListOwner.shtml?thread=<bean:write name="threadId" />&<%=System.currentTimeMillis() %> '>按这里返回，因为浏览器缓存需要重新刷新</a>
                 </logic:empty>
                 </logic:messagesNotPresent>
         </td>
