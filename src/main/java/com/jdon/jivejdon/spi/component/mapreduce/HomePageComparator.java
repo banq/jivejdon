@@ -51,9 +51,9 @@ public class HomePageComparator implements Comparator<ForumThread> {
 			if (diffHours > 0)
 			   p = p / diffHours;
 		}
-		double textLength = thread.getRootMessage().getMessageVO().getBody().length()/p;
+		double textLength = thread.getRootMessage().getMessageVO().getBody().length()/1024;
 		long diff2 = thread.getViewCount() - thread.getViewCounter().getLastSavedCount() + 1;
-		p = diff2 * textLength * (thread.getRootMessage().getDigCount() + 1) * (thread.getRootMessage().hasImage()?2:1);
+		p = diff2 * p * textLength * (thread.getRootMessage().getDigCount() + 1) * (thread.getRootMessage().hasImage()?2:1);
 		return p;
 	}
 }
