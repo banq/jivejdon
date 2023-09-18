@@ -63,26 +63,24 @@ public final class MessageVO implements Serializable, Cloneable {
 	}
 
 	public String getShortBody(int length) {
-		return shortenNoHTML(getBody(), length);
+		String text = getBody().substring(0, Math.min(getBody().length(), length));
+		return shortenNoHTML(text);
 	}
 
 	public String getBodyText(int length) {
-		return shortenNoHTMLText(getBody(), length);
+		String text = getBody().substring(0, Math.min(getBody().length(), length));
+		return quoteEscape.matcher(text).replaceAll(" ");
 	}
 
-	public String shortenNoHTML(String in, int length) {
-		String s = StringUtil.shorten(in, length * 3);
-		String nohtml = htmlEscape.matcher(s).replaceAll(" ");
-		String noQuote = quoteEscape.matcher(nohtml).replaceAll(" ");
-		return StringUtil.shorten(noQuote, length);
+	public String shortenNoHTML(String in) {
+		String nohtml = htmlEscape.matcher(in).replaceAll(" ");
+		return quoteEscape.matcher(nohtml).replaceAll(" ");
 	}
 
-	public String shortenNoHTMLText(String in, int length) {
-		String s = StringUtil.shorten(in, length * 3);
-		String puretext = newlineEscape.matcher(s).replaceAll("\r\n");
+	public String shortenNoHTMLText(String in) {
+		String puretext = newlineEscape.matcher(in).replaceAll("\r\n");
 		String nohtml = htmlEscape.matcher(puretext).replaceAll(" ");
-		String noQuote = quoteEscape.matcher(nohtml).replaceAll(" ");
-		return StringUtil.shorten(noQuote, length);
+		return quoteEscape.matcher(nohtml).replaceAll(" ");
 	}
 
 	public Object clone() throws CloneNotSupportedException {
