@@ -106,7 +106,7 @@
 	<div class="lazyload" >
           <!--
 		  <script>
-	      load('/query/threadApprovedNewList4.shtml?count=50&wSize=720', function (xhr) {
+	      load('/random/threadApprovedNewList4.shtml?count=30', function (xhr) {
                document.getElementById("approvedItem6").innerHTML = xhr.responseText;
             }); 
 		  </script>
