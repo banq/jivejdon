@@ -75,7 +75,7 @@
 	<div class="lazyload" >
           <!--
 		  <script>
-		  load('/query/threadApprovedNewList3.shtml?offset=4&start=0&count=6', function (xhr) {
+		  load('/query/threadApprovedNewList3.shtml?offset=4&start=0&count=20', function (xhr) {
                document.getElementById("approvedItem1").innerHTML = xhr.responseText;
             }); 
 		  </script>
@@ -85,7 +85,7 @@
 	<div class="lazyload" >
           <!--
 		  <script>
-		  load('/query/threadApprovedNewList3.shtml?start=10&count=10', function (xhr) {
+		  load('/query/threadApprovedNewList3.shtml?start=20&count=20', function (xhr) {
                document.getElementById("approvedItem2").innerHTML = xhr.responseText;
             }); 
 		  </script>
@@ -95,7 +95,7 @@
 	<div class="lazyload" >
           <!--
 		  <script>
-		  load('/query/threadApprovedNewList3.shtml?start=20&count=10', function (xhr) {
+		  load('/query/threadApprovedNewList3.shtml?start=40&count=20', function (xhr) {
                document.getElementById("approvedItem3").innerHTML = xhr.responseText;
             }); 
 		  </script>
