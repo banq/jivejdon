@@ -5,14 +5,24 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ page session="false" %>
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
-  <div class="box"> 
-    <div class="linkblock">
-     <div class="row">
-      <div class="col-sm-12">
-        <div class="box">
-             <bean:define id="body" name="forumMessage" property="messageVO.body" />
-
+ <bean:define id="body" name="forumMessage" property="messageVO.body" />
+<div class="box">
          <section> 
+         <div class="wrap-vid">              
+                <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">                  
+                  <div class="thumbn">
+                    <figure>                       
+                    <img src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="thumbnail" loading="lazy" width="80" height="70"/>    
+                    </figure>               
+                  </div>
+                </logic:notEmpty>
+                 
+                <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">                  
+                  <div class="thumbn">
+                    <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail" loading="lazy" width="80" height="70"/>                  
+                  </div>  
+                </logic:notEmpty>              
+          </div>
          <h3><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"><bean:write name="forumThread" property="name"/></a></h3>
       
          <div class="info">			 
@@ -40,32 +50,9 @@
              %>
                <span class="fa fa-print"> <%=bl %>k </span>
              <% }%>
-                      
+              <br><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[40]" />.             
             </div>
-          <div class="wrap-vid">
-                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">                  
-                  <div>                     
-                   <figure>  
-                    <img src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" bborder="0" class="thumbnail" loading="lazy"/>                  
-                   </figure>  
-                  </div>
-                  <div>
-                     <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[150]" />. 
-                  </div>
-                </logic:notEmpty>
-                 
-                <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">                  
-                  <div class="thumbn">
-                    <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border="0" class="thumbnail" loading="lazy" width="100" height="70"/>                  
-                  </div>  
-                   <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[150]" />. </p>
-                          
-                </logic:notEmpty>      
-          </div>
+
           </section>
-  
-    </div>
-  </div>
 </div>
-</div>
-</div>
+

@@ -93,22 +93,22 @@
     </rule>
     <rule>
         <from>^/threads$</from>
-        <to>/forum/threadList.shtml?count=15</to>
+        <to>/forum/threadList.shtml?count=30</to>
     </rule>
 
     <rule>
         <from>^/threads/([0-9]+)$</from>
-        <to>/forum/threadList.shtml?start=$1&amp;count=15</to>
+        <to>/forum/threadList.shtml?start=$1&amp;count=30</to>
     </rule>
 
     <rule>
         <from>^/approval$</from>
-        <to>/query/approvedListOther.shtml?start=0&amp;count=15</to>
+        <to>/query/approvedListOther.shtml?start=0&amp;count=30</to>
     </rule>
 
     <rule>
         <from>^/approval/([0-9]+)$</from>
-        <to>/query/approvedListOther.shtml?start=$1&amp;count=15</to>
+        <to>/query/approvedListOther.shtml?start=$1&amp;count=30</to>
     </rule>
 
     <rule>
@@ -118,22 +118,22 @@
 
     <rule>
         <from>^/query/stickyList$</from>
-        <to>/query/stickyList.shtml?length=8&amp;tablewidth=300&amp;count=15</to>
+        <to>/query/stickyList.shtml?length=8&amp;tablewidth=300&amp;count=30</to>
     </rule>
 
     <rule>
         <from>^/query/digList$</from>
-        <to>/query/threadDigList2.shtml?length=8&amp;tablewidth=300&amp;count=15</to>
+        <to>/query/threadDigList2.shtml?length=8&amp;tablewidth=300&amp;count=30</to>
     </rule>
 
     <rule>
         <from>^/query/approved$</from>
-        <to>/query/threadApprovedTagsList.shtml?count=15</to>
+        <to>/query/threadApprovedTagsList.shtml?count=30</to>
     </rule>
 
     <rule>
         <from>^/query/approved/([0-9]+)$</from>
-        <to>/query/threadApprovedTagsList.shtml?count=15&amp;tagID=$1</to>
+        <to>/query/threadApprovedTagsList.shtml?count=30&amp;tagID=$1</to>
     </rule>
 
     <!-- <rule>
@@ -143,7 +143,7 @@
 
     <rule>
         <from>^/query/tt/([0-9]+)$</from>
-        <to>/query/tt.shtml?start=0&amp;length=10&amp;tablewidth=160&amp;count=4&amp;tagID=$1</to>
+        <to>/query/tt.shtml?start=0&amp;length=10&amp;tablewidth=160&amp;count=6&amp;tagID=$1</to>
     </rule>
 
     <rule>
@@ -155,22 +155,22 @@
 
     <rule>
         <from>^/forum/maxPopThreads$</from>
-        <to>/forum/maxPopThreadlist.shtml?dateRange=100000&amp;count=15&amp;start=0</to>
+        <to>/forum/maxPopThreadlist.shtml?dateRange=100000&amp;count=30&amp;start=0</to>
     </rule>
 
     <rule>
         <from>^/forum/maxPopThreads/([0-9]+)$</from>
-        <to>/forum/maxPopThreadlist.shtml?dateRange=100000&amp;count=15&amp;start=$1</to>
+        <to>/forum/maxPopThreadlist.shtml?dateRange=100000&amp;count=30&amp;start=$1</to>
     </rule>
          
     <rule>
         <from>^/forum/threadDigSortedList$</from>
-        <to>/forum/threadDigSortedList.shtml?count=15&amp;start=0</to>
+        <to>/forum/threadDigSortedList.shtml?count=30&amp;start=0</to>
     </rule>
     
      <rule>
         <from>^/forum/threadDigSortedList/([0-9]+)$</from>
-        <to>/forum/threadDigSortedList.shtml?count=15&amp;start=$1</to>
+        <to>/forum/threadDigSortedList.shtml?count=30&amp;start=$1</to>
     </rule>
     <!--  thread -->
     <rule>
@@ -208,19 +208,19 @@
     </rule>
     <rule>
         <from>^/tags/p$</from>
-        <to>/query/tagsList.shtml?count=15</to>
+        <to>/query/tagsList.shtml?count=30</to>
     </rule>
     <rule>
         <from>^/tags/p/([0-9]+)$</from>
-        <to>/query/tagsList.shtml?count=15&amp;start=$1</to>
+        <to>/query/tagsList.shtml?count=30&amp;start=$1</to>
     </rule>
     <rule>
         <from>^/tag-([0-9]+)/$</from>
-        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=15</to>
+        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=30</to>
     </rule>
    <rule>
         <from>^/tag-([0-9]+)/([0-9]+)$</from>
-        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=15&amp;start=$2</to>
+        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=30&amp;start=$2</to>
     </rule>
     <rule>
         <from>^/tag-([a-zA-Z0-9]+)/rss$</from>
@@ -228,11 +228,11 @@
     </rule>    
     <rule>
         <from>^/tags/([0-9]+)$</from>
-        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=15</to>
+        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=30</to>
     </rule>
     <rule>
         <from>^/tags/([0-9]+)/([0-9]+)$</from>
-        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=15&amp;start=$2</to>
+        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=30&amp;start=$2</to>
     </rule>
 
     <rule>

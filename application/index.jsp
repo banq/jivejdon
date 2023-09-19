@@ -71,48 +71,8 @@
  
 </div>
 
-  <div id="approvedItem1"><br><br><br><br><br><br></div>          
-	<div class="lazyload" >
-          <!--
-		  <script>
-		  load('/query/threadApprovedNewList3.shtml?offset=4&start=0&count=20', function (xhr) {
-               document.getElementById("approvedItem1").innerHTML = xhr.responseText;
-            }); 
-		  </script>
-		   -->
-    </div>  
-	<div id="approvedItem2"><br><br><br><br><br><br></div>          
-	<div class="lazyload" >
-          <!--
-		  <script>
-		  load('/query/threadApprovedNewList3.shtml?start=20&count=20', function (xhr) {
-               document.getElementById("approvedItem2").innerHTML = xhr.responseText;
-            }); 
-		  </script>
-          -->
-    </div>  
-	<div id="approvedItem3"><br><br><br><br><br><br></div>          
-	<div class="lazyload" >
-          <!--
-		  <script>
-		  load('/query/threadApprovedNewList3.shtml?start=40&count=20', function (xhr) {
-               document.getElementById("approvedItem3").innerHTML = xhr.responseText;
-            }); 
-		  </script>
-          -->
-    </div>  
+    <jsp:include page="/query/threadApprovedNewList3.shtml?count=30" flush="true"></jsp:include>        
 	
-    <div id="approvedItem6"><br><br><br><br><br><br></div>     	  
-	<div class="lazyload" >
-          <!--
-		  <script>
-	      load('/random/threadApprovedNewList4.shtml?count=30', function (xhr) {
-               document.getElementById("approvedItem6").innerHTML = xhr.responseText;
-            }); 
-		  </script>
-          -->
-      </div>
-
     <div class="box"> 
 	    <div class="tres center">        
            追踪前沿最新技术 <a href="https://www.jdon.com/approval"><b>更多</b></a>	   
