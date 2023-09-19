@@ -85,7 +85,7 @@ public class ForumState  {
 	}
 
 	public ForumMessage getLatestPost() {
-		if (this.messageCount.longValue() == 0) {
+		if (latestPost == null){
 			loadinitState();
 		}
 		return latestPost;
