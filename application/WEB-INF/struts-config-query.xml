@@ -138,9 +138,9 @@
             <forward name="success" path="/query/approvedThreadList3.jsp" />            
         </action>
 
-        <action path="/random/threadApprovedNewList4" type="com.jdon.jivejdon.presentation.action.query.ThreadRandomDigListAction" name="threadListForm" scope="request" validate="false">            
+        <!-- <action path="/random/threadApprovedNewList4" type="com.jdon.jivejdon.presentation.action.query.ThreadRandomDigListAction" name="threadListForm" scope="request" validate="false">            
             <forward name="success" path="/query/approvedThreadList3.jsp" />        
-        </action>
+        </action> -->
 
         <!-- from next page  reference in homepage   -->
         <action path="/query/approvedListOther" type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedNewListAction" name="threadListForm" scope="request" validate="false">
