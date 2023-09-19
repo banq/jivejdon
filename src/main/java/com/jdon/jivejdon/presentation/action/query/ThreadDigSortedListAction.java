@@ -3,6 +3,7 @@ package com.jdon.jivejdon.presentation.action.query;
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
+import com.jdon.jivejdon.spi.component.mapreduce.ThreadDigComparator;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadDigList;
 import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumThread;
@@ -13,6 +14,9 @@ import com.jdon.strutsutil.ModelListForm;
 import com.jdon.util.UtilValidate;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -40,8 +44,18 @@ public class ThreadDigSortedListAction extends ModelListAction {
 	public PageIterator getPageIterator(HttpServletRequest httpServletRequest, int start, int
 			count) {
 
+		if (start >= ThreadApprovedNewList.maxSize || start % count != 0)
+			return new PageIterator();
+
 		ThreadDigList messageDigList = getThreadApprovedNewList().getThreadDigList();
-		return messageDigList.getPageIterator(start, count);
+		int maxSize = ThreadApprovedNewList.maxSize;
+		if (getThreadApprovedNewList().getMaxSize() != -1) {
+			maxSize = getThreadApprovedNewList().getMaxSize();
+		}
+		
+		PageIterator pageIterator =  messageDigList.getPageIterator(start, count);
+		pageIterator.setAllCount(maxSize);
+		return pageIterator;
 	}
 
 	public Object findModelIFByKey(HttpServletRequest request, Object key) {

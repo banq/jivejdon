@@ -75,7 +75,7 @@
 	
     <div class="box"> 
 	    <div class="tres center">        
-           追踪前沿最新技术 <a href="https://www.jdon.com/approval"><b>更多</b></a>	   
+           追踪前沿最新技术 <a href="/tags/"><b>更多</b></a>	   
 		</div>
     </div>
 		  

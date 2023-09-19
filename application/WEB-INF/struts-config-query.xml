@@ -55,9 +55,9 @@
 
         <!--  /query/popularlist.shtml?count=8&length=8 call from fourmList.jsp
          popularlist is same as  /query/hotlist, but another way in SQL -->
-        <action path="/query/popularlist" type="com.jdon.jivejdon.presentation.action.query.ThreadPopularAction" name="threadListForm" scope="request" validate="false">
+        <!-- <action path="/query/popularlist" type="com.jdon.jivejdon.presentation.action.query.ThreadPopularAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/popularlist.jsp" />
-        </action>
+        </action> -->
 
         <action path="/forum/maxPopThreadlist" type="com.jdon.jivejdon.presentation.action.MaxThreadListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/forum/maxPopThreadlist.jsp" />
