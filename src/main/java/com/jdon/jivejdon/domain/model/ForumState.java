@@ -31,14 +31,14 @@ import java.util.concurrent.atomic.AtomicLong;
  * 
  */
 public class ForumState  {
-	private  AtomicLong threadCount;
+	private  AtomicLong threadCount = new AtomicLong(0);
 
 	/**
 	 * the number of messages in the thread. This includes the root message. So,
 	 * to find the number of replies to the root message, subtract one from the
 	 * answer of this method.
 	 */
-	private  AtomicLong messageCount;
+	private  AtomicLong messageCount = new AtomicLong(0);
 
 	private  ForumMessage latestPost;
 
@@ -55,13 +55,13 @@ public class ForumState  {
 	 * @return Returns the messageCount.
 	 */
 	public int getMessageCount() {
-		if (this.messageCount == null)
+		if (this.messageCount.longValue() == 0)
 			loadinitState();
 		return messageCount.intValue();
 	}
 
 	public long addMessageCount() {
-		if (messageCount == null) {
+		if (this.messageCount.longValue() == 0) {
 			loadinitState();
 		}
 		return this.messageCount.incrementAndGet();
@@ -71,21 +71,21 @@ public class ForumState  {
 	 * @return Returns the threadCount.
 	 */
 	public int getThreadCount() {
-		if (threadCount == null) {
+		if (threadCount.longValue() == 0) {
 			loadinitState();
 		}
 		return threadCount.intValue();
 	}
 
 	public long addThreadCount() {
-		if (threadCount == null) {
+		if (threadCount.longValue() == 0) {
 			loadinitState();
 		}
 		return this.threadCount.incrementAndGet();
 	}
 
 	public ForumMessage getLatestPost() {
-		if (latestPost == null) {
+		if (this.messageCount.longValue() == 0) {
 			loadinitState();
 		}
 		return latestPost;
@@ -133,9 +133,11 @@ public class ForumState  {
 			oneOneDTO = (OneOneDTO) dm.getEventResult();
 			if (oneOneDTO != null) {
 				OneOneDTO oneOneDTO2 = (OneOneDTO) oneOneDTO.getParent();
-				this.threadCount = new AtomicLong((Long)oneOneDTO.getChild());
-				latestPost = (ForumMessage) oneOneDTO2.getParent();
-				messageCount = new AtomicLong((Long) oneOneDTO2.getChild());
+				if(oneOneDTO2 != null){
+				   this.threadCount = new AtomicLong((Long)oneOneDTO.getChild());
+				   latestPost = (ForumMessage) oneOneDTO2.getParent();
+				   messageCount = new AtomicLong((Long) oneOneDTO2.getChild());
+				}
 				dm.clear();
 			}
 			// }

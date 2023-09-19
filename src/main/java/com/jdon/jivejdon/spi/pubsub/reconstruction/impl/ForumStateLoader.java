@@ -34,6 +34,8 @@ public class ForumStateLoader implements DomainEventHandler {
             Long lastMessageId = messageQueryDao.getForumLatestPostMessageId(forumId);
             if (lastMessageId == null) {
                 logger.warn("maybe first running, not found lastMessageId for forumId: " + forumId);
+                OneOneDTO oneOneDTO = new OneOneDTO(null, null);
+                event.getDomainMessage().setEventResult(oneOneDTO);
                 return;
             }
             ForumMessage latestPost = forumAbstractFactory.getMessage(lastMessageId);
