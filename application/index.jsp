@@ -20,8 +20,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>极道 - 技术前沿极客</title>
-  <meta name="Description" content="实时追踪全球最前沿软件技术和架构思想">
-  <meta name="Keywords" content="微服务,SOA,DDD,体系结构,架构,Gof设计模式,Java框架,大数据,云原生,面向对象,函数编程,SpringBoot,EDA,java,JavaEE,CQRS,eventsourcing">
+  <meta name="Description" content="实时追踪全球最前沿技术思想">
+  <meta name="Keywords" content="符号学,逻辑,微服务,SOA,DDD,体系结构,架构,设计模式,大数据,面向对象,函数式编程,SpringBoot,CQRS">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
   <link rel="alternate" type="application/rss+xml" title="极道订阅" href="https://www.jdon.com/rss">
   <link rel="canonical" href="https://www.jdon.com/">
