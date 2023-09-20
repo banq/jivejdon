@@ -8,7 +8,7 @@
 
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
-<logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='6' >
+<logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='4' >
    <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
    <bean:define id="thumbthreadId" name="forumThread" property="threadId"/>
    
