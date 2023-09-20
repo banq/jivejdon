@@ -134,7 +134,7 @@
             <forward name="success" path="/query/approvedThreadList.jsp" />
         </action>
 
-        <action path="/query/threadApprovedNewList3" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" name="tagsListForm" scope="request" validate="false">
+        <action path="/query/threadApprovedNewList3" type="com.jdon.jivejdon.presentation.action.query.ThreadTagHotListAction" name="tagsListForm" scope="request" validate="false">
             <forward name="success" path="/query/approvedThreadList3.jsp" />            
         </action>
 
