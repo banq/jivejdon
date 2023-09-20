@@ -60,7 +60,7 @@
 		       
 
             <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
-                <span class="fa fa-print"><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
+                <span><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
             </logic:greaterThan>   
                      
             </div>
