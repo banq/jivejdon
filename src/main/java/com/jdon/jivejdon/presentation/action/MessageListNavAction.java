@@ -2,6 +2,7 @@ package com.jdon.jivejdon.presentation.action;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.domain.model.Forum;
+import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.presentation.form.MessageListForm;
 import com.jdon.jivejdon.api.ForumService;
 import com.jdon.strutsutil.FormBeanUtil;
@@ -50,20 +51,20 @@ public class MessageListNavAction extends Action {
 			return mapping.findForward("failure");
 		}
 
-		Long lastMessageId = forum.getForumState().getLatestPost().getMessageId();
-		Long threadId = forum.getForumState().getLatestPost().getForumThread().getThreadId();
-		if (lastMessageId.longValue() >= (new Long(messageId)).longValue()) {
-			ActionRedirect redirect = new ActionRedirect(mapping.findForward("success"));
-			// redirect.addParameter("thread", threadId);
-			// redirect.addParameter("messageId", messageId);
-			redirect.setPath("/message/messageListOwner.shtml?thread=" + Long.toString(threadId));
-			return redirect;
-		} else {
-			request.setAttribute("forumId", new Long(forumIds));
-			request.setAttribute("messageId", new Long(messageId));
-			return mapping.findForward("navf");
+		ForumMessage lastPost = forum.getForumState().getLatestPost();
+		if (lastPost != null) {
+			Long lastMessageId = lastPost.getMessageId();
+			Long threadId = lastPost.getForumThread().getThreadId();
+			if (lastMessageId.longValue() >= (new Long(messageId)).longValue()) {
+				ActionRedirect redirect = new ActionRedirect(mapping.findForward("success"));
+				redirect.setPath("/message/messageListOwner.shtml?thread=" + Long.toString(threadId));
+				return redirect;
+			}
 		}
-
+		request.setAttribute("forumId", new Long(forumIds));
+		request.setAttribute("messageId", new Long(messageId));
+		return mapping.findForward("navf");
+	
 	}
 
 }
