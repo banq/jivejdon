@@ -83,6 +83,10 @@ public final class MessageVO implements Serializable, Cloneable {
 		return quoteEscape.matcher(nohtml).replaceAll(" ");
 	}
 
+	public int getBodyLengthK(){
+		return getBody().length()/1024;
+	}
+
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}

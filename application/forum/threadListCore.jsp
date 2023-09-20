@@ -42,14 +42,12 @@
                       <bean:write name="forumMessage" property="digCount"/>
 					   </span>
                       </logic:notEqual>     
-			       <%
-             com.jdon.jivejdon.domain.model.ForumThread thread = (com.jdon.jivejdon.domain.model.ForumThread)pageContext.getAttribute("forumThread");
-             int bodylength = thread.getRootMessage().getMessageVO().getBody().length();             
-             int bl = bodylength/1024;
-             if (bl >0){
-             %>
-               <span class="fa fa-print"> <%=bl %>k </span>
-             <% }%>
+
+            <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
+                <span class="fa fa-print"><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
+            </logic:greaterThan>     
+		        
+       
               <br><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />.             
             </div>
 
