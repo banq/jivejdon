@@ -28,7 +28,6 @@ public class ViewThreadAction extends ModelDispAction {
 	private ForumMessageQueryService forumMessageQueryService;
 	private ThreadViewCounterJob threadViewCounterJob;
 	private CustomizedThrottle customizedThrottle;
-	private final ExecutorService executor = Executors.newFixedThreadPool(10);
 
 	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -55,12 +54,9 @@ public class ViewThreadAction extends ModelDispAction {
 				response.sendError(404);
 				return null;
 			}
-			executor.submit(new Runnable() {
-				public void run() { // this run method's body will be executed by the service
-					forumThread.addViewCount(request.getRemoteAddr());
-					getThreadViewCounterJob().saveViewCounter(forumThread.getViewCounter());
-				}
-			});
+
+			forumThread.addViewCount(request.getRemoteAddr());
+			getThreadViewCounterJob().saveViewCounter(forumThread.getViewCounter());
 			return actionMapping.findForward(FormBeanUtil.FORWARD_SUCCESS_NAME);
 		} catch (Exception e) {
 			Debug.logError(" viewThread error:" + e);
