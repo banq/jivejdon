@@ -309,7 +309,7 @@
 
 		</component> -->
 
-        <component name="cdnRefreshUrls"
+        <!-- <component name="cdnRefreshUrls"
                    class="com.jdon.jivejdon.spi.pubsub.subscriber.postThread.CDNRefreshUrls">
             <constructor value="query/approved"/>
             <constructor value="rss"/>
@@ -318,7 +318,7 @@
             <constructor value="query/popularList"/>
             <constructor value="query/urlListAction"/>
             <constructor value=""/>
-        </component>
+        </component> -->
 			
 		</services>
 </app>
