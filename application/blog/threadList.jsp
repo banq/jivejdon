@@ -35,24 +35,7 @@
   <bean:define id="forum" name="forumMessage" property="forum" />
   	<bean:define id="account" name="forumThread" property="rootMessage.account" />
 	<table cellpadding="5" cellspacing="5" border="0">
-		<tr><td valign="top">
-<logic:present name="isOwner" >			
-   <logic:notEmpty name="account" property="uploadFile">
-   	    <b><bean:write name="account" property="username"/></b><br>
-                  <logic:equal name="account" property="roleName" value="User">
-     				  <img src="/img/account/<bean:write name="account" property="userId"/>"  border='0' width="50" height="50" class="post_author_pic"/>
-				  </logic:equal>
-                  <logic:equal name="account" property="roleName" value="SinaUser">                 
-                     <img  src="<bean:write name="account" property="uploadFile.description"/>"  border='0' width="50" height="50" class="post_author_pic"/>
-                  </logic:equal>
-				  				  
-				</logic:notEmpty>
-				
-			    <logic:empty name="account" property="uploadFile">
-				  <img src="<html:rewrite page="/blog/themes/default/images/nouserface_1.gif"/>" width="50" height="50" border="0" >
-	</logic:empty>
-</logic:present>      	
-			</td>
+		<tr>
 			<td>
 				
        <div class="b_content_title2">
