@@ -83,6 +83,9 @@ pageContext.setAttribute("title", titleStr);
 
 <div class="list-group">
 
+ <%if (request.getSession(false) != null && request.getUserPrincipal() != null)
+    request.setAttribute("username", request.getUserPrincipal());
+  %>
 
  <logic:iterate indexId="i" id="forumThread" name="threadListForm"  property="list">
 
