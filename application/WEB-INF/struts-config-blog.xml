@@ -18,7 +18,7 @@
     <action name="accountProfileForm" path="/blog/home" type="com.jdon.jivejdon.presentation.action.account.AccountProfileAction" scope="request"
 		validate="false">
 		<forward name="success" path="/blog/userThreads.shtml" />
-		<forward name="successlogin" path="/blog/userFollowingThreads.shtml" />
+		<forward name="successlogin" path="/blog/userThreads.shtml" />
        <forward name="failure" path="/404.jsp" />
     </action>
     

@@ -12,8 +12,8 @@
 		          我的主题
 		    </span>
 		    
-		    <a href="<%=request.getContextPath()%>/blog/messages/<bean:write name="accountProfileForm" property="account.username"/>" class="post-tag">
-		        我的评论
+		    <a href="<%=request.getContextPath()%>/blog/userFollowingThreads.shtml" class="post-tag">
+		        我的订阅
 		    </a>
 		    </div> 
 		    <div class="title_right"> 
