@@ -3,6 +3,7 @@
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@page isELIgnored="false" %>
 <%@ page session="false" %>
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
  <bean:define id="body" name="forumMessage" property="messageVO.body" />
@@ -47,10 +48,16 @@
                 <span><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
             </logic:greaterThan>     
 		        
+            <%if (request.getSession(false) != null && request.getUserPrincipal() != null){
+               request.setAttribute("username", request.getUserPrincipal());
+              %>
+                <logic:equal name="username" value="${forumMessage.account.username}" >
+						      <a href="<%=request.getContextPath() %>/message/messageListOwner.shtml?thread=<bean:write name="forumThread" property="threadId"/>" >编辑</a>
+                </logic:equal>
+            <%}%>                     
        
               <br><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />.             
             </div>
 
           </section>
 </div>
-
