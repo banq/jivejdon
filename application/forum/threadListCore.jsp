@@ -47,13 +47,7 @@
             <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
                 <span><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
             </logic:greaterThan>     
-		        
-           
-               <logic:equal name="username" value="${forumMessage.account.username}" >
-						      <a href="<%=request.getContextPath() %>/message/messageListOwner.shtml?thread=<bean:write name="forumThread" property="threadId"/>" >编辑</a>
-                </logic:equal>
-                        
-       
+		    
               <br><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />.             
             </div>
 
