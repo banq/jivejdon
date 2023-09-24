@@ -45,8 +45,6 @@ public class MessagePageIteratorSolver implements Startable {
 
 	private ContainerUtil containerUtil;
 
-	private final ConcurrentMap<String, PageIteratorSolver> fixedsolvers;
-
 	private final ConcurrentMap<String, PageIteratorSolver> permanentsolvers;
 
 	/**
@@ -56,34 +54,23 @@ public class MessagePageIteratorSolver implements Startable {
 	public MessagePageIteratorSolver(JdbcTempSource jdbcTempSource, ContainerUtil containerUtil) {
 		this.jdbcTempSource = jdbcTempSource;
 		this.containerUtil = containerUtil;
-		this.fixedsolvers = new ConcurrentHashMap<String, PageIteratorSolver>();
 		this.permanentsolvers = new ConcurrentHashMap<String, PageIteratorSolver>();
 
 	}
 
 	@Override
 	public void start() {
-		Runnable task = new Runnable() {
-			public void run() {
-				clearFixed();
-			}
-		};
-		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(task, 0, 60 * 60 * 6, TimeUnit.SECONDS);
+
 
 	}
 
-	public void clearFixed() {
-		for (PageIteratorSolver pageIteratorSolver : fixedsolvers.values()) {
-			pageIteratorSolver.clearCache();
-		}
-		fixedsolvers.clear();
-	}
+
 
 	public void clearPerm() {
 		for (PageIteratorSolver pageIteratorSolver : permanentsolvers.values()) {
 			pageIteratorSolver.clearCache();
 		}
-		fixedsolvers.clear();
+		permanentsolvers.clear();
 	}
 
 	/**
@@ -124,37 +111,16 @@ public class MessagePageIteratorSolver implements Startable {
 		permanentsolvers.remove(key);
 	}
 
-	/**
-	 * six hour refresh
-	 * 
-	 * @param key
-	 * @return
-	 */
-	public PageIteratorSolver getPageIteratorSolverCache(String key) {
-		PageIteratorSolver pageIteratorSolver = (PageIteratorSolver) fixedsolvers.get(key);
-		if (pageIteratorSolver == null) {
-			synchronized (this.fixedsolvers) {
-				if (pageIteratorSolver == null) {
-					pageIteratorSolver = new PageIteratorSolver(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
-					if (fixedsolvers.size() > 200)
-						clearFixed();
-					fixedsolvers.put(key, pageIteratorSolver);
-				}
-			}
-		}
-		return pageIteratorSolver;
-	}
+	
 
 	@Override
 	public void stop() {
-		synchronized (this.fixedsolvers) {
+		
 			try {
-				clearFixed();
 				clearPerm();
 				ScheduledExecutorUtil.scheduExecStatic.shutdownNow();
 			} catch (Exception e) {
 			}
-		}
 		jdbcTempSource = null;
 	}
 

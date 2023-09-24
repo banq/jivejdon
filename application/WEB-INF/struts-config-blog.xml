@@ -52,35 +52,6 @@
 		<forward name="failure" path="/common/permError.jsp" />
 	</action>
 	
-	<!-- mobile blog -->
-	<action name="accountProfileForm" path="/mobile/blog/home" type="com.jdon.jivejdon.presentation.action.account.AccountProfileAction" scope="request"
-		validate="false">
-       <forward name="success" path="/mobile/blog/userThreads.shtml" />
-       <!--  mobile weibo todo -->
-       <forward name="successlogin" path="/mobile/blog/userThreads.shtml" />
-       <forward name="failure" path="/404.jsp" />
-    </action>
-    
-	<action path="/mobile/blog/userThreads" type="com.jdon.jivejdon.presentation.action.blog.UserThreadListAction" 
-      name="threadListForm" scope="request" 
-      validate="false">
-       <forward name="success" path="/mobile/blog/threadList.jsp" />
-      <forward name="failure" path="/common/permError.jsp" />
-	</action>
-    
-    <action name="accountProfileForm" path="/mobile/blog/userMessages" type="com.jdon.jivejdon.presentation.action.account.AccountProfileAction" scope="request"
-		validate="false">
-       <forward name="success" path="/mobile/blog/userMessages2.shtml" />
-       <forward name="failure" path="/404.jsp" />
-    </action>
-    
-    <action path="/mobile/blog/userMessages2" type="com.jdon.jivejdon.presentation.action.blog.UserMessageListAction" 
-      name="messageListForm" scope="request" 
-      validate="false">
-		<forward name="success" path="/mobile/blog/messageList.jsp"/>
-		<forward name="failure" path="/common/permError.jsp" />
-	</action>
-	
 
     <action name="accountProfileForm" path="/social/following" type="com.jdon.jivejdon.presentation.action.account.AccountProfileAction" scope="request"
 		validate="false">

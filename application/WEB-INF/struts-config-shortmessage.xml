@@ -132,12 +132,6 @@
 		 <forward name="checklobbymsg" path="/forum/newLobbymessage.jsp"/>
 	</action>
 	
-	<!-- /mobile -->
-	<action path="/mobile/checknewmessage" type="com.jdon.jivejdon.presentation.action.NewMsgCheckerAction" 
-        scope="request"  validate="false">
-		 <forward name="checkshortmsg" path="/mobile/message/newmessage.jsp"/>
-		 <forward name="checklobbymsg" path="/forum/newLobbymessage.jsp"/>
-	</action>
 	
   </action-mappings>
 </struts-config>

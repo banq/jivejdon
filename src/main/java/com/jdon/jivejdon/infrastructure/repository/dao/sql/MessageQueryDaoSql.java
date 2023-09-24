@@ -106,7 +106,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 
 		Collection params = new ArrayList(1);
 		params.add(userId);
-		return messagePageIteratorSolver.getPageIteratorSolverCache(userId).getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, params, start,
+		return messagePageIteratorSolver.getPageIteratorSolver(userId).getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, params, start,
 				count);
 
 	}
@@ -118,7 +118,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 
 		Collection params = new ArrayList(1);
 		params.add(userId);
-		return messagePageIteratorSolver.getPageIteratorSolverCache(userId).getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, params, start,
+		return messagePageIteratorSolver.getPageIteratorSolver(userId).getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, params, start,
 				count);
 
 	}
@@ -258,7 +258,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 
 		Collection params = new ArrayList(1);
 		params.add(forumId);
-		return messagePageIteratorSolver.getPageIteratorSolverCache(forumId.toString()).getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS,
+		return messagePageIteratorSolver.getPageIteratorSolver(forumId.toString()).getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS,
 				params, start, count);
 	}
 
@@ -340,7 +340,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 			itemIDsSQL.append(qs.getWhereSQL());
 			itemIDsSQL.append(qs.getResultSortSQL());
 			logger.debug("GET_ALL_ITEMS=" + itemIDsSQL);
-			return messagePageIteratorSolver.getPageIteratorSolverCache("getQueryCriteriaResult").getPageIterator(allCountSQL.toString(),
+			return messagePageIteratorSolver.getPageIteratorSolver("getQueryCriteriaResult").getPageIterator(allCountSQL.toString(),
 					itemIDsSQL.toString(), qs.getParams(), start, count);
 
 		} catch (Exception e) {
@@ -363,7 +363,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 			itemIDsSQL.append(" and parentMessageID IS NOT NULL ");
 			itemIDsSQL.append(qs.getResultSortSQL());
 			logger.debug("GET_ALL_ITEMS=" + itemIDsSQL);
-			return messagePageIteratorSolver.getPageIteratorSolverCache("getMessageReplys").getPageIterator(allCountSQL.toString(),
+			return messagePageIteratorSolver.getPageIteratorSolver("getMessageReplys").getPageIterator(allCountSQL.toString(),
 					itemIDsSQL.toString(), qs.getParams(), start, count);
 
 		} catch (Exception e) {
@@ -385,7 +385,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 			itemIDsSQL.append(" and jiveMessage.parentMessageID IS NULL ");
 			itemIDsSQL.append(qs.getResultSortSQL("creationDate"));
 			logger.debug("GET_ALL_ITEMS=" + itemIDsSQL);
-			return messagePageIteratorSolver.getPageIteratorSolverCache("getThreads").getPageIterator(allCountSQL.toString(), itemIDsSQL.toString(),
+			return messagePageIteratorSolver.getPageIteratorSolver("getThreads").getPageIterator(allCountSQL.toString(), itemIDsSQL.toString(),
 					qs.getParams(), start, count);
 
 		} catch (Exception e) {
