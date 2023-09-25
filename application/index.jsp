@@ -21,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>极道 - 技术前沿极客</title>
   <meta name="Description" content="实时追踪全球最前沿技术思想">
-  <meta name="Keywords" content="符号学,形式逻辑,函数式编程,体系结构,架构,设计模式,大科技,认知,涌现,Context,上下文,领域,规则,DDD,微服务,SOA,大数据,面向对象,SpringBoot,CQRS">
+  <meta name="Keywords" content="符号学,形式逻辑,函数式编程,体系结构,架构,设计模式,大科技,认知,涌现,Context,上下文,领域,规则,DDD,微服务,SOA,大数据,人工智能,CQRS">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
   <link rel="alternate" type="application/rss+xml" title="极道订阅" href="https://www.jdon.com/rss">
   <link rel="canonical" href="https://www.jdon.com/">
