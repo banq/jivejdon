@@ -17,14 +17,6 @@
 						<a href="<%=request.getContextPath() %>/forum/threadDigSortedList"><i class="fa fa-star-half-full"></i>最佳</a>
 						<a href="<%=request.getContextPath() %>/forum/maxPopThreads"><i class="fa fa-feed"></i>精华</a>
 						<a href="<%=request.getContextPath() %>/tags/"><i class="fa fa-arrow-circle-o-down"></i>话题</a>
-                         <%--<%if (request.getSession(false) == null){%> --%>
-							 <%--<a data-toggle="modal" data-target="#login" href=""><i class="fa fa-sign-in"></i>登陆 </a>--%>
-						<%--<%}%>  --%>
-						<%if (request.getSession(false) != null && request.getUserPrincipal() != null){%>
-							<a href="<%=request.getContextPath()%>/message/post.jsp"><i class=" fa fa-share-square"></i>发布</a>						
-							<a href="<%=request.getContextPath()%>/blog/<%=request.getUserPrincipal()%>"><i class="fa fa-newspaper-o"></i>博客</a>
-						    <html:link page="/jasslogin?logout"><i class="fa fa-sign-out"></i>退出 </html:link>
-                        <%}%>                       
                     </span>
 				</div>
 			</div>
