@@ -34,25 +34,21 @@ public class ViewThreadAction extends ModelDispAction {
 	
 		Pattern robotPattern = (Pattern) this.servlet.getServletContext().getAttribute(SpamFilterTooFreq.BOTNAME);
 		if (robotPattern != null && isPermittedRobot(request, robotPattern)) {
-			response.sendError(404);
-			return null;
+			return actionMapping.findForward(FormBeanUtil.FORWARD_FAILURE_NAME);
 		}
 		
 
 		String threadId = request.getParameter("threadId");
 		if (threadId == null || threadId.length() == 0)
-			return null;
+			return actionMapping.findForward(FormBeanUtil.FORWARD_FAILURE_NAME);
 
 		if (!checkSpamHit(threadId, request)) {
-			response.sendError(404);
-			return null;
+			return actionMapping.findForward(FormBeanUtil.FORWARD_FAILURE_NAME);
 		}	
 		try {
 			ForumThread forumThread = getForumMessageQueryService().getThread(new Long(threadId));
-
 			if (forumThread == null) {
-				response.sendError(404);
-				return null;
+				return actionMapping.findForward(FormBeanUtil.FORWARD_FAILURE_NAME);
 			}
 
 			forumThread.addViewCount(request.getRemoteAddr());
@@ -61,7 +57,7 @@ public class ViewThreadAction extends ModelDispAction {
 		} catch (Exception e) {
 			Debug.logError(" viewThread error:" + e);
 		}
-		return null;
+		return actionMapping.findForward(FormBeanUtil.FORWARD_FAILURE_NAME);
 	}
 
 	public ForumMessageQueryService getForumMessageQueryService() {

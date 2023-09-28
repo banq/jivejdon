@@ -197,6 +197,7 @@
         </action> -->
         <action path="/forum/threadTagList" type="com.jdon.jivejdon.presentation.action.ViewThreadAction" scope="request" validate="false" >
             <forward name="success" path="/forum/threadTagList2.shtml" />
+            <forward name="failure" path="/forum/threadTagList2.shtml" />
         </action> 
     
         <action path="/forum/threadTagList2" type="com.jdon.jivejdon.presentation.action.query.ThreadTagListAction" name="threadListForm" scope="request" validate="false">
