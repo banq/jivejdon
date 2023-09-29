@@ -53,7 +53,7 @@ public class ForumNotifySubscribed implements NotifySubscribed {
 		String newSubscribedUrl = StringUtil.replace(forumNotifyMessage.getNotifyUrlTemp(), "threadId", message.getForumThread().getThreadId()
 				.toString());
 		newSubscribedUrl = StringUtil.replace(newSubscribedUrl, "messageId", message.getMessageId().toString());
-		String body = "【" + message.getMessageVO().getSubject() + "】: "
+		String body = "" + message.getMessageVO().getSubject() + ":"
 				+ message.getMessageVO().getShortBody(90);
 		shortMessage.setMessageBody(body.substring(0, body.length() > 90 ? 90 : body.length()) + " " + newSubscribedUrl);
 		// shortMessage.setMessageTitle(forum.getName() + "-" +

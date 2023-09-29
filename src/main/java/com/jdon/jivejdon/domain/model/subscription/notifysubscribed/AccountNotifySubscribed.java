@@ -47,7 +47,7 @@ public class AccountNotifySubscribed implements NotifySubscribed {
 
 		String newSubscribedUrl = StringUtil.replace(accountNotifyMessage.getNotifyUrlTemp(), "threadId", message.getForumThread().getThreadId()
 				.toString());
-		String body =  "【" + message.getForumThread().getName() + "】: " + message.getMessageVO().getShortBody(90);
+		String body =  "" + message.getForumThread().getName() + ":" + message.getMessageVO().getShortBody(90);
 		shortMessage.setMessageBody(body.substring(0, body.length() > 90 ? 90 : body.length()) + " " + newSubscribedUrl);
 		shortMessage.setMessageTitle(account.getUsername() + "-" + shortMessage.getMessageTitle());
 		return shortMessage;

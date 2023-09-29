@@ -46,7 +46,7 @@ public class TagNotifySubscribed implements NotifySubscribed {
 
 		// http://www.jdon.com/jivejdon/threadId#messageId
 		String newSubscribedUrl = StringUtil.replace(tagNotifyMessage.getNotifyUrlTemp(), "tagId", tag.getTagID().toString());
-		String body = "【" + thread.getName() + "】: " + newSubscribedUrl;
+		String body = "" + thread.getName() + ":" + newSubscribedUrl;
 		shortMessage.setMessageBody(body);
 		shortMessage.setMessageTitle(tag.getTitle() + "-" + shortMessage.getMessageTitle());
 
