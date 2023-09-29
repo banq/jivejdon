@@ -22,7 +22,7 @@
 <div class="lazyload" >
 							     <!-- 
 							     <script>
-							  	  load('/query/tagHotList.shtml?count=20', function (xhr) {				
+							  	  load('/query/tagHotList.shtml?count=6', function (xhr) {				
   	                                  document.getElementById("tagHotList").innerHTML = xhr.responseText;
 			                     });
 							  </script> -->

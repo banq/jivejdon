@@ -4,7 +4,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<bean:parameter id="count" name="count" value="8"/>
+<bean:parameter id="count" name="count" value="6"/>
 <%
 String coutlength = (String)pageContext.getAttribute("count");
 %>        
