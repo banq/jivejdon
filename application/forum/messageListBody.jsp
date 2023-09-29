@@ -165,29 +165,15 @@
               </div>
 
 
-              <logic:notEmpty name="forumMessage" property="reBlogVO.threadFroms">          
-                  <div id='threadFroms'></div>    
+                  <div id='threadLink'></div>    
                   <script defer>
                   document.addEventListener("DOMContentLoaded", function(event) { 
                     $(document).ready(function() {              
-                          scrollLoadByElementId('/forum/threadLinkList.shtml?threadId=<bean:write name="forumThread" property="threadId"/>','threadFroms'); 
+                          scrollLoadByElementId('/forum/threadLinkList.shtml?threadId=<bean:write name="forumThread" property="threadId"/>','threadLink'); 
                     });            
                   });  
                   </script>                  
-              </logic:notEmpty>
 
-              <logic:empty name="forumMessage" property="reBlogVO.threadFroms">  
-              <logic:notEmpty name="forumMessage" property="reBlogVO.threadTos">
-                  <div id='threadTos'></div>    
-                  <script defer>
-                  document.addEventListener("DOMContentLoaded", function(event) { 
-                    $(document).ready(function() {              
-                          scrollLoadByElementId('/forum/threadLinkList.shtml?threadId=<bean:write name="forumThread" property="threadId"/>','threadTos'); 
-                    });            
-                  });  
-                  </script>  
-              </logic:notEmpty>   
-              </logic:empty>
               
 </aside>
 
