@@ -24,6 +24,7 @@
     <div class="box">	           
       <div class="zoom-container">
 			      	<div>
+              <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank" title="<bean:write name="forumThread" property="name"/>">
                <% String thumbthreadIdS = ((Long)pageContext.getAttribute("thumbthreadId")).toString(); %>               
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">        
                   <figure>          
@@ -32,7 +33,8 @@
                 </logic:notEmpty>
                 <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">        
                     <img id="home-thumbnai" src="/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="thumbnail" fetchpriority="high"/> 
-                </logic:empty>                        
+                </logic:empty>      
+               </a>                   
               </div>
 			      </div>
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
