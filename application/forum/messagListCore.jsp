@@ -49,7 +49,7 @@
         <div id="nextPageContent"></div> 
 
       </div>
-      <%if (request.getSession(false) != null){%>
+      <%if (request.getSession(false) != null && request.getUserPrincipal() != null){%>
        <div class="box">
         <jsp:include page="../message/messagePostReply2.jsp" flush="true">
           <jsp:param name="forumId" value="${forumThread.forum.forumId}"/>

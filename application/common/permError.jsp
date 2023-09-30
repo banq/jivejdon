@@ -16,7 +16,7 @@ com.jdon.jivejdon.spi.component.block.ErrorBlockerIF,com.jdon.jivejdon.spi.compo
     	String body =  request.getHeader("Referer") + " " + request.getRequestURI() + " check: localhost.log ";
     	String toEmail = "banq@163.com";
     	String toName = "banq";
-    	String fromEmail = "429722485@qq.com";
+    	String fromEmail = "banq@163.com";
     	EmailVO emailVO = new EmailVO(toName, toEmail, "", fromEmail, subject, body + " from:" + fromEmail, com.jdon.jivejdon.util.EmailTask.NOHTML_FORMAT);
     	emailHelper.send(emailVO);
 		this.getServletContext().setAttribute(request.getRemoteAddr()+"500","true");
@@ -33,7 +33,7 @@ if (errorBlocker.checkRate(request.getRemoteAddr(), 5)){
 <bean:parameter id="error" name="error" value="" />
 <center>
 <H3>服务器内部错误......</H3>
-发生系统错误<bean:write name="error" />，<a href='javascript:contactAdmin()'>请反馈 帮助完善开源JiveJdon</a>
+发生系统错误<bean:write name="error" />，请反馈 帮助完善开源JiveJdon
 <br>
 <br>
 <br>
@@ -44,10 +44,7 @@ if (errorBlocker.checkRate(request.getRemoteAddr(), 5)){
          alert('ERROR: 发生系统错误 <bean:write name="error" /> ');
     }catch(ex){}
 
-    function contactAdmin(){
-    	location.href = '<%=request.getContextPath()%>/forum/feed/feedback.jsp?subject=fromjivejdon3&body=<%=request.getHeader("Referer")%>_<bean:write name="error" />'
-        	    + location.href;
-    }
+   
    </script>
 
 <%@include file="../common/IncludeBottom.jsp"%>
