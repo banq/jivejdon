@@ -14,7 +14,7 @@
         操作成功！
 
 
-        <a href='<%=request.getContextPath()%>/message/messageListOwner.shtml?thread=<bean:write name="forumThread" 
+        <a href='<%=request.getContextPath()%>/message/messageListOwner.shtml?thread=<bean:write name="threadForm" 
         property="threadId" /> '>按这里返回，因为浏览器缓存需要重新刷新</a>
     </logic:empty>
 </logic:messagesNotPresent>
