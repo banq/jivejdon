@@ -11,7 +11,7 @@ if ( request.getUserPrincipal() != null){
 <%
 }else{
 	request.removeAttribute("principal");
-	if (request.getSession(false) != null && request.getUserPrincipal() != null){
+	if (request.getSession(false) != null)
 	  request.getSession().removeAttribute("online");
 	%>
 <script>   isLogin = false;</script>
