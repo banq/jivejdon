@@ -39,7 +39,8 @@ public class HomePageComparator implements Comparator<ForumThread> {
 	}
 
 	private double algorithm(ForumThread thread, ForumThread threadPrev) {
-		double p = thread.getViewCount();
+		double textLength = thread.getRootMessage().getMessageVO().getBody().length()/2048 + 1;
+		double p = thread.getViewCount() + textLength +  (thread.getRootMessage().hasImage()?3:1);
 		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
 		long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);		
 		if (diffDays >= 5)
@@ -51,9 +52,9 @@ public class HomePageComparator implements Comparator<ForumThread> {
 			if (diffHours > 0)
 			   p = p / diffHours;
 		}
-		double textLength = thread.getRootMessage().getMessageVO().getBody().length()/1024 + 1;
+		
 		long diff2 = thread.getViewCount() - thread.getViewCounter().getLastSavedCount() + 1;
-		p = diff2 * (thread.getRootMessage().getDigCount() + 1) * (textLength + p + (thread.getRootMessage().hasImage()?3:1));
+		p = diff2 * (thread.getRootMessage().getDigCount() + 1) *  p ;
 		return p;
 	}
 }
