@@ -9,11 +9,32 @@
 com.jdon.jivejdon.spi.component.block.ErrorBlockerIF,com.jdon.jivejdon.spi.component.email.*"%>
 <%
    String isSendMail=(String)this.getServletContext().getAttribute(request.getRemoteAddr()+"500"); 
-   if (isSendMail == null)
+   if (isSendMail != null)
 	{		
 		EmailHelper emailHelper = (EmailHelper)WebAppUtil.getComponentInstance("emailHelper", this.getServletContext());
-     	String subject = request.getRemoteAddr();     	
-    	String body =  request.getHeader("Referer") + " " + request.getRequestURI() + " check: localhost.log ";
+     	String subject = request.getRemoteAddr();     
+		String body =  request.getRequestURI() + "<br>\r\n";
+
+		Enumeration<String> params = request.getParameterNames(); 
+        while(params.hasMoreElements()){
+               String paramName = params.nextElement();
+			   body=body + paramName +":" + request.getParameter(paramName) +"<br>\r\n";
+
+        }
+		
+		Enumeration<String> headerNames = request.getHeaderNames();
+		while (headerNames.hasMoreElements()) {
+			String key = (String) headerNames.nextElement();
+			// 排除Cookie字段
+			if (key.equalsIgnoreCase("Cookie")) {
+				continue;
+			}
+			String value = request.getHeader(key);
+			body=body + key  +":" +  value +"<br>\r\n";
+		}    	
+
+		
+
     	String toEmail = "banq@163.com";
     	String toName = "banq";
     	String fromEmail = "banq@163.com";
@@ -33,19 +54,19 @@ if (errorBlocker.checkRate(request.getRemoteAddr(), 5)){
 <bean:parameter id="error" name="error" value="" />
 <center>
 <H3>服务器内部错误......</H3>
-发生系统错误<bean:write name="error" />，请反馈 帮助完善开源JiveJdon
+发生系统错误<bean:write name="error" />
 <br>
 <br>
 <br>
 <p>返回<html:link page="/"> 首页</html:link>
 </center>
-<script>
+<%-- <script>
     try{
          alert('ERROR: 发生系统错误 <bean:write name="error" /> ');
     }catch(ex){}
 
    
-   </script>
+   </script> --%>
 
 <%@include file="../common/IncludeBottom.jsp"%>
 
