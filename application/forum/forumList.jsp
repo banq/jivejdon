@@ -53,7 +53,7 @@
 	 <thead>
 		 <tr>
 		 <th>道场</th>
-		 <th>主题</th>
+		 
 		</tr>
 	</thead>
 	<tbody>
@@ -78,9 +78,7 @@
                 <br>
                 <span class="home_content" ><bean:write name="forum" property="description" filter="false"/></span>
             </td>
-            <td>
-               <span class="home_content" > <bean:write name="forum" property="forumState.threadCount" /> </span>
-            </td>
+            
         </tr>
 
 </logic:iterate>
