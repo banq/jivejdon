@@ -49,7 +49,7 @@
         <div id="nextPageContent"></div> 
 
       </div>
-      <%if (request.getSession(false) != null && request.getUserPrincipal() != null){%>
+      <logic:present name="principal"> 
        <div class="box">
         <jsp:include page="../message/messagePostReply2.jsp" flush="true">
           <jsp:param name="forumId" value="${forumThread.forum.forumId}"/>
@@ -57,7 +57,7 @@
           <jsp:param name="parentMessageSubject" value="${forumThread.name}"/>
         </jsp:include>
        </div>
-      <%}%>
+      </logic:present>
     </div>
 
 <aside>

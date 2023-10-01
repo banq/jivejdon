@@ -112,6 +112,8 @@ public class MessageListOwnerAction extends ModelListAction {
 				boolean[] authenticateds = getAuthedListForm(actionForm, request);
 				MessageListForm messageListForm = (MessageListForm) actionForm;
 				messageListForm.setAuthenticateds(authenticateds);
+				
+				request.setAttribute("principal", request.getUserPrincipal());
 			}
 
 		} catch (Exception e) {

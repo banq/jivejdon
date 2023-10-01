@@ -100,6 +100,9 @@ public class MessageListAction extends ModelListAction {
 
 			modelListForm.setOneModel(forumThread);
 
+			//enbale message reply function
+			// if (request.getSession(false) != null)
+			//   request.setAttribute("principal", request.getUserPrincipal());
 			
 		} catch (Exception e) {
 			Debug.logError(" customizeListForm err:", module);
