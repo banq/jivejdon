@@ -53,7 +53,7 @@ public class HomePageComparator implements Comparator<ForumThread> {
 		}
 		double textLength = thread.getRootMessage().getMessageVO().getBody().length()/1024 + 1;
 		long diff2 = thread.getViewCount() - thread.getViewCounter().getLastSavedCount() + 1;
-		p = diff2 * p * (thread.getRootMessage().getDigCount() + 1) * (textLength +  (thread.getRootMessage().hasImage()?3:1));
+		p = diff2 * (thread.getRootMessage().getDigCount() + 1) * (textLength + p + (thread.getRootMessage().hasImage()?3:1));
 		return p;
 	}
 }
