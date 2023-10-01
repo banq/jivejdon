@@ -41,20 +41,19 @@ public class HomePageComparator implements Comparator<ForumThread> {
 	private double algorithm(ForumThread thread, ForumThread threadPrev) {
 		double textLength = thread.getRootMessage().getMessageVO().getBody().length()/2048 ;
 		double p = (thread.getViewCount() + textLength +  (thread.getRootMessage().hasImage()?1:0) + 1) * (thread.getRootMessage().getDigCount() + 1);
+		long diff2 = thread.getViewCount() - thread.getViewCounter().getLastSavedCount() + 1;
 		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
 		long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);		
 		if (diffDays >= 5)
-		   p = p / (diffDays * 100);
+		   p = diff2 * p / (diffDays * 100);
 		else if (diffDays >= 3)
-			p = p / (diffDays * 10);
+			p = diff2 * p / (diffDays * 10);
 		else{
-			long diffHours = TimeUnit.HOURS.convert(diffInMillis, TimeUnit.MILLISECONDS);
-			if (diffHours > 0)
-			   p = p / diffHours;
+			// long diffHours = TimeUnit.HOURS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+			// if (diffHours > 0)
+			//    p = p / diffHours;
+			p =  Math.pow(p, diff2);   
 		}
-		
-		long diff2 = thread.getViewCount() - thread.getViewCounter().getLastSavedCount() + 1;
-		p =  Math.pow(p, diff2);
 		return p;
 	}
 }
