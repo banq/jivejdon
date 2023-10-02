@@ -64,11 +64,11 @@ public class ThreadTagListAction extends Action {
 			HttpServletResponse response) throws Exception {
 		String threadId = request.getParameter("threadId");
 		if (threadId == null || !UtilValidate.isInteger(threadId) || threadId.length() > 10) {
-			return mapping.findForward("failure");
+			return null;
 		}
 		ForumThread thread = getForumMessageQueryService().getThread(Long.parseLong(threadId));
 		if (thread == null)
-			return mapping.findForward("failure");
+				return null;
 
 		Set<Long> checkDoubles = new HashSet<Long>();
 		Collection<String> lists = new ArrayList<String>();
