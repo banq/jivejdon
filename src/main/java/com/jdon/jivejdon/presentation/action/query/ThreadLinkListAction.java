@@ -19,7 +19,7 @@ import com.jdon.controller.WebAppUtil;
 
 import com.jdon.jivejdon.api.property.TagService;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
-
+import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 
 import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
@@ -65,7 +65,11 @@ public class ThreadLinkListAction extends Action {
 		if (thread == null)
 			return null;
 
-		ReBlogVO reBlogVO = thread.getRootMessage().getReBlogVO();
+        ForumMessage message = thread.getRootMessage();
+		if(message == null)
+		  return null;
+
+		ReBlogVO reBlogVO = message.getReBlogVO();
 		if(reBlogVO == null)
 		    return null;
 
