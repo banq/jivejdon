@@ -65,25 +65,25 @@ public class ThreadLinkListAction extends Action {
 		if (thread == null)
 			return null;
 
-        ForumMessage message = thread.getRootMessage();
-		if(message == null)
-		  return null;
+		try {
+			ReBlogVO reBlogVO = thread.getRootMessage().getReBlogVO();
+			if (reBlogVO == null)
+				return null;
 
-		ReBlogVO reBlogVO = message.getReBlogVO();
-		if(reBlogVO == null)
-		    return null;
-
-		final Collection<ForumThread> threadLinks = new ArrayList<>();
-		for (ForumThread threadLink : reBlogVO.getThreadFroms()) {
-			threadLinks.add(threadLink);
+			final Collection<ForumThread> threadLinks = new ArrayList<>();
+			for (ForumThread threadLink : reBlogVO.getThreadFroms()) {
+				threadLinks.add(threadLink);
+			}
+			for (ForumThread threadLink : reBlogVO.getThreadTos()) {
+				threadLinks.add(threadLink);
+			}
+			ModelListForm threadListForm = (ModelListForm) form;
+			threadListForm.setList(threadLinks);
+			threadListForm.setAllCount(threadLinks.size());
+			return mapping.findForward("success");
+		} catch (Exception e) {
+			return null;
 		}
-		for (ForumThread threadLink : reBlogVO.getThreadTos()) {
-			threadLinks.add(threadLink);
-		}
-		ModelListForm threadListForm = (ModelListForm) form;
-		threadListForm.setList(threadLinks);
-		threadListForm.setAllCount(threadLinks.size());
-		return mapping.findForward("success");
 
 	}
 

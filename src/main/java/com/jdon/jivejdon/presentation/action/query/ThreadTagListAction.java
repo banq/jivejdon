@@ -68,23 +68,27 @@ public class ThreadTagListAction extends Action {
 		}
 		ForumThread thread = getForumMessageQueryService().getThread(Long.parseLong(threadId));
 		if (thread == null)
-				return null;
+			return null;
 
-		Set<Long> checkDoubles = new HashSet<Long>();
-		Collection<String> lists = new ArrayList<String>();
-		int index = 0;
-		for(ThreadTag tag:thread.getTags()) {
-			Collection<ForumThread> threadList = getForumThreadsForTag(tag.getTagID(), Long.parseLong(threadId),checkDoubles);					
-			lists.add(Long.toString(tag.getTagID()));
-			request.setAttribute("tagID"+Integer.toString(index), threadList);
-			index++;
+		try {
+			Set<Long> checkDoubles = new HashSet<Long>();
+			Collection<String> lists = new ArrayList<String>();
+			int index = 0;
+			for (ThreadTag tag : thread.getTags()) {
+				Collection<ForumThread> threadList = getForumThreadsForTag(tag.getTagID(), Long.parseLong(threadId),
+						checkDoubles);
+				lists.add(Long.toString(tag.getTagID()));
+				request.setAttribute("tagID" + Integer.toString(index), threadList);
+				index++;
+			}
+
+			ModelListForm threadListForm = (ModelListForm) form;
+			threadListForm.setList(lists);
+			threadListForm.setAllCount(lists.size());
+			return mapping.findForward("success");
+		} catch (Exception e) {
+			return null;
 		}
-				
-
-		ModelListForm threadListForm = (ModelListForm) form;
-		threadListForm.setList(lists);
-		threadListForm.setAllCount(lists.size());
-		return mapping.findForward("success");
 	}
 
 	private Collection<ForumThread> getForumThreadsForTag(Long tagID, final Long threadId, Set<Long> checkDoubles) {
