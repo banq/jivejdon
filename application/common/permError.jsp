@@ -16,23 +16,6 @@ com.jdon.jivejdon.spi.component.block.ErrorBlockerIF,com.jdon.jivejdon.spi.compo
      	String subject = request.getRemoteAddr();     
 		String body =  request.getRequestURI() + "<br>\r\n"  ;
 
-		Enumeration<?> e = getServletContext().getAttributeNames();
-		while (e.hasMoreElements())
-		{
-    		String name = (String) e.nextElement();
-
-    		Object value = getServletContext().getAttribute(name);
-
-    		if (value instanceof Map) {
-        		for (Map.Entry<?, ?> entry : ((Map<?, ?>)value).entrySet()) {
-            		body=body +entry.getKey() + "=" + entry.getValue() + "<br>\r\n";
-    		    }
-    		} else if (value instanceof List) {
-    		    for (Object element : (List)value) {
-            		body=body +element + "<br>\r\n";
-       		 }
-		    }
-		}
 
 		Enumeration<String> params = request.getParameterNames(); 
         while(params.hasMoreElements()){
