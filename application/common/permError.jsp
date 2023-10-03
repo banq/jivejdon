@@ -8,6 +8,7 @@
 <%@page import="com.jdon.controller.WebAppUtil,
 com.jdon.jivejdon.spi.component.block.ErrorBlockerIF,com.jdon.jivejdon.spi.component.email.*"%>
 <%
+   response.setStatus(404);
    String isSendMail=(String)this.getServletContext().getAttribute(request.getRemoteAddr()+"500"); 
    if (isSendMail == null)
 	{		

@@ -205,6 +205,16 @@
         <location>/common/permError.jsp?error=500</location>
     </error-page>
 
+     <error-page>
+  <exception-type>javax.servlet.ServletException</exception-type>
+  <location>/common/permError.jsp?error=ServletException</location>
+  </error-page>
+
+  <error-page>
+  <exception-type>java.lang.Throwable</exception-type>
+  <location>/common/permError.jsp?error=Throwable</location>
+</error-page>
+
     <taglib>
         <taglib-uri>struts-bean</taglib-uri>
         <taglib-location>/WEB-INF/tld/struts-bean.tld</taglib-location>
