@@ -76,7 +76,7 @@
         </action>
 
 
-        <action path="/thread/messageListBodyNoheader" type="com.jdon.jivejdon.presentation.action.MessageListAction" name="messageListForm" scope="request" validate="false">   
+        <action path="/forum/messageListBodyNoheader" type="com.jdon.jivejdon.presentation.action.MessageListAction" name="messageListForm" scope="request" validate="false">   
             <forward name="success" path="/thread/messageListBody.jsp" />
         </action>
 

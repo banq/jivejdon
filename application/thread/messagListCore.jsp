@@ -208,7 +208,7 @@ function scrollLoader(url){
     }
    });
 }
-scrollLoader('/thread/messageListBodyNoheader.shtml?thread=<bean:write name="thread"/>&othread=<bean:write name="forumThread" property="threadId"/>');   
+scrollLoader('/forum/messageListBodyNoheader.shtml?thread=<bean:write name="thread"/>&othread=<bean:write name="forumThread" property="threadId"/>');   
 
 });
 </script>   
