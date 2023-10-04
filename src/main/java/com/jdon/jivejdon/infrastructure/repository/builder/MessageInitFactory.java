@@ -52,7 +52,7 @@ public class MessageInitFactory {
 				account.setUserIdLong((Long) o);
 				messageCore.setAccount(account);
 			} else {
-				logger.error("messageId=" + messageId + " no userID in DB ");
+				logger.warn("messageId=" + messageId + " no userID in DB ");
 				messageCore.setAccount(createAnonymous());				
 			}
 

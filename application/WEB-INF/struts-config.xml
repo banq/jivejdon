@@ -7,7 +7,7 @@
 <struts-config>
   <global-forwards>   	 
     <forward name="index" path="/forum/forumList.shtml"/>	  
-    <forward name="thread" path="/forum/messageList.shtml"/>	  
+    <forward name="thread" path="/thread.shtml"/>	  
     <forward name="forum" path="/forum/threadList.shtml"/>	
     <forward name="sign" path="/account/sign.shtml"/>	
   

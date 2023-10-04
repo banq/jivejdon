@@ -68,43 +68,26 @@
         <!-- message List start  -->
 
         <action path="/message/messageListOwner" type="com.jdon.jivejdon.presentation.action.MessageListOwnerAction" name="messageListForm" scope="request" validate="false">
-            <forward name="success" path="/forum/messageList.jsp" />
+            <forward name="success" path="/thread/messageList.jsp" />
         </action>
 
-        <action path="/forum/messageList" type="com.jdon.jivejdon.presentation.action.MessageListAction" name="messageListForm" scope="request" validate="false">
-            <forward name="success" path="/forum/messageList.jsp" />
+        <action path="/thread" type="com.jdon.jivejdon.presentation.action.MessageListAction" name="messageListForm" scope="request" validate="false">
+            <forward name="success" path="/thread/messageList.jsp" />
         </action>
 
-        <!-- <action path="/forum/messageListBodyNoheader" type="com.jdon.jivejdon.presentation.action.MessageListIPFilterAction" name="messageListForm" scope="request" validate="false">   
-            <forward name="success" path="/forum/messageListBodyNoheader2.shtml" />
-        </action> -->
 
-        <action path="/forum/messageListBodyNoheader" type="com.jdon.jivejdon.presentation.action.MessageListAction" name="messageListForm" scope="request" validate="false">   
-            <forward name="success" path="/forum/messageListBody.jsp" />
+        <action path="/thread/messageListBodyNoheader" type="com.jdon.jivejdon.presentation.action.MessageListAction" name="messageListForm" scope="request" validate="false">   
+            <forward name="success" path="/thread/messageListBody.jsp" />
         </action>
 
-        <!-- <action path="/forum/messageForumList" type="com.jdon.jivejdon.presentation.action.MessageForumListAction" name="messageListForm" scope="request" validate="false">
-            <forward name="success" path="/forum/messageList.jsp" />
-        </action> -->
-
+       
         <!-- All message List start  -->
 
         <action path="/forum/messageListAll" type="com.jdon.jivejdon.presentation.action.MessageListAllAction" name="messageListForm" scope="request" validate="false">
             <forward name="success" path="/forum/messageListAll.jsp" />
         </action>
 
-        <!--
-         <action path="/forum/threadPrevNexList" type="com.jdon.jivejdon.presentation.action.ThreadPrevNexListAction"
-           name="threadPrevNexListForm" scope="request"
-           validate="false">
-           <forward name="success" path="/forum/messageList.jsp"/>
-         </action>
-             -->
 
-        <!--  for after modfied messageList display -->
-        <!-- <action path="/message/messageSaveList" type="com.jdon.jivejdon.presentation.action.ThreadPrevNexListAction" name="threadPrevNexListForm" scope="request" validate="false">
-            <forward name="success" path="/forum/messageListBody.shtml" />
-        </action> -->
 
         <!--  for after modfied messageList display end -->
 
@@ -114,33 +97,17 @@
             <forward name="failure" path="/forum/" />
         </action>
 
-        <action path="/message/messageNavList2" type="com.jdon.jivejdon.presentation.action.MessageListNav2Action" name="messageListForm" scope="request" validate="false">
-            <forward name="success" path="/forum/messageList.shtml" />
+        <!-- <action path="/message/messageNavList2" type="com.jdon.jivejdon.presentation.action.MessageListNav2Action" name="messageListForm" scope="request" validate="false">
+            <forward name="success" path="/thread.shtml" />
             <forward name="navf2" path="//message/navf2.jsp" />
             <forward name="failure" path="/forum/" />
-        </action>
+        </action> -->
 
         <!-- message List end  -->
 
-        <!--<action path="/forum/latestPost"-->
-        <!--type="com.jdon.jivejdon.presentation.action.MessageViewAction"-->
-        <!--name="messageForm" scope="request"-->
-        <!--validate="false">-->
-        <!--<forward name="success" path="/forum/latestPost.jsp"/>-->
-        <!--</action>-->
+     
         <action path="/query/updateDigCount" type="com.jdon.jivejdon.presentation.action.MessageDigAction" scope="request" validate="false" />
 
-        <!--<action path="/forum/stickyList"-->
-        <!--type="com.jdon.jivejdon.presentation.action.StickyListAction"-->
-        <!--scope="request" validate="false">-->
-        <!--<forward name="success" path="/forum/stickyThreadList.jsp"/>-->
-        <!--</action>-->
-
-        <!-- <action path="/query/viewThread"
-                type="com.jdon.jivejdon.presentation.action.ViewThreadAction"
-                scope="request" validate="false">
-            <forward name="error" path="/"/>
-        </action> -->
 
         <action name="threadForm" path="/message/updateViewAction" type="com.jdon.jivejdon.presentation.filter.ThreadEditAuthFilter" scope="request" validate="false">
             <forward name="success" path="/message/updateViewAction2.shtml" />
