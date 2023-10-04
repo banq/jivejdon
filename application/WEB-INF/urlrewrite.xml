@@ -15,56 +15,7 @@
         <from>^(.*?)(?:\;jsessionid=[^\?#]*)?(\?[^#]*)?(#.*)?$</from>
         <to>$1$2$3</to>
     </outbound-rule>
-    <!-- permanent-redirect -->
-    <rule>
-        <from>^/thread/([0-9]+).html$</from>
-        <to type="permanent-redirect">../$1</to>
-    </rule>
 
-    <rule>
-        <from>^/thread/([0-9]+)(.*)count=([0-9]+)&amp;start=([0-9]+)$</from>
-        <to type="permanent-redirect">../$1/$4</to>
-    </rule>
-    <rule>
-        <from>^/forum/messageList.shtml?(.*)thread=([0-9]+)$</from>
-        <to type="permanent-redirect">../$2</to>
-    </rule>
-    <rule>
-        <from>^/forum/messageList.shtml?(.*)thread=([0-9]+)&amp;count=([0-9]+)$</from>
-        <to type="permanent-redirect">../$2</to>
-    </rule>
-    <rule>
-        <from>^/forum/messageList.shtml?(.*)thread=([0-9]+)&amp;count=([0-9]+)&amp;start=0$</from>
-        <to type="permanent-redirect">../$2</to>
-    </rule>
-    <rule>
-        <from>^/forum/messageList.shtml?(.*)thread=([0-9]+)&amp;count=([0-9]+)&amp;start=([1-9]+)$
-        </from>
-        <to type="permanent-redirect">../$2/$4</to>
-    </rule>
-    <rule>
-        <from>^/thread/([0-9]+)(.*)count=([0-9]+)&amp;start=0$</from>
-        <to type="permanent-redirect">../$1</to>
-    </rule>
-    <rule>
-        <from>^/thread/([0-9]+)/0$</from>
-        <to type="permanent-redirect">../$1</to>
-    </rule>
-
-
-    <!--  old thread /thread -->
-    <rule>
-        <from>^/thread/([0-9]+)$</from>
-        <to type="permanent-redirect">../$1</to>
-    </rule>
-    <rule>
-        <from>^/thread/([0-9]+)/([a-z]+)$</from>
-        <to type="permanent-redirect">../$1/$2</to>
-    </rule>
-    <rule>
-        <from>^/thread/([0-9]+)/([0-9]+)$</from>
-        <to type="permanent-redirect">../$1/$2</to>
-    </rule>
 
     <!-- core  -->
     <rule>
@@ -177,21 +128,7 @@
         <from>^/([0-9]+)\.html$</from>
         <to>/forum/messageList.shtml?thread=$1</to>
     </rule>
-    <rule>
-        <from>^/([0-9]+)$</from>
-        <to>/forum/messageList.shtml?thread=$1</to>
-    </rule>
-
-    <rule>
-        <from>^/([0-9]+)/([a-z]+)$</from>
-        <to>/message/messageSaveList.shtml?thread=$1&amp;$2=$2</to>
-    </rule>
-
-    <rule>
-        <from>^/([0-9]+)/([0-9]+)$</from>
-        <to>/forum/messageList.shtml?thread=$1&amp;start=$2</to>
-    </rule>
-
+    
 
     <!-- tags -->
         <rule>

@@ -67,10 +67,6 @@
 
         <!-- message List start  -->
 
-        <!-- <action path="/forum/messageList" type="com.jdon.jivejdon.presentation.action.util.ThreadEtagFilter" scope="request" validate="false">
-            <forward name="success" path="/forum/messageListBody.shtml" />
-        </action> -->
-
         <action path="/message/messageListOwner" type="com.jdon.jivejdon.presentation.action.MessageListOwnerAction" name="messageListForm" scope="request" validate="false">
             <forward name="success" path="/forum/messageList.jsp" />
         </action>
@@ -106,9 +102,9 @@
              -->
 
         <!--  for after modfied messageList display -->
-        <action path="/message/messageSaveList" type="com.jdon.jivejdon.presentation.action.ThreadPrevNexListAction" name="threadPrevNexListForm" scope="request" validate="false">
+        <!-- <action path="/message/messageSaveList" type="com.jdon.jivejdon.presentation.action.ThreadPrevNexListAction" name="threadPrevNexListForm" scope="request" validate="false">
             <forward name="success" path="/forum/messageListBody.shtml" />
-        </action>
+        </action> -->
 
         <!--  for after modfied messageList display end -->
 
