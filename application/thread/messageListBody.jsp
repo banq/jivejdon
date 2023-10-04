@@ -133,24 +133,6 @@
               </div>
 
  
-   <!-- 导航区  -->
-        <div class="post_pages_end">
-          <div class="table-button-left">
-            <div class="table-button-right">
-              <logic:greaterThan name="messageListForm" property="numPages" value="1">
-                <div class="tres">
-                  有<b><bean:write name="messageListForm" property="numPages"/></b>页 
-                  <MultiPagesREST:pager actionFormName="messageListForm" page="" paramId="thread" paramName="forumThread" paramProperty="threadId">
-                    <MultiPagesREST:prev name=" 上一页 "/>
-                    <MultiPagesREST:index displayCount="3"/>
-                    <MultiPagesREST:next name=" 下一页 "/>
-                  </MultiPagesREST:pager>
-                </div>
-              </logic:greaterThan>
-            </div>
-          </div>
-        </div>             
-
               <div class="box">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
      crossorigin="anonymous"></script>
