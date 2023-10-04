@@ -18,6 +18,11 @@
 
 
     <!-- core  -->
+        <!--  thread -->
+    <rule>
+        <from>^/([0-9]+)\.html$</from>
+        <to>/forum/messageList.shtml?thread=$1</to>
+    </rule>
     <rule>
         <from>^/$</from>
         <to>/forum/forumList.shtml</to>
@@ -123,11 +128,7 @@
         <from>^/forum/threadDigSortedList/([0-9]+)$</from>
         <to>/forum/threadDigSortedList.shtml?count=30&amp;start=$1</to>
     </rule>
-    <!--  thread -->
-    <rule>
-        <from>^/([0-9]+)\.html$</from>
-        <to>/forum/messageList.shtml?thread=$1</to>
-    </rule>
+
     
 
     <!-- tags -->
