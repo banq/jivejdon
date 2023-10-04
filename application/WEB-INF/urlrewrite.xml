@@ -28,7 +28,7 @@
         <to>/thread.shtml?thread=$1&amp;start=$2&amp;count=15</to>
     </rule> 
      <rule>
-        <from>^/([0-9]+)$</from>
+        <from>^/post/([0-9]+)$</from>
         <to type="permanent-redirect">../$1.html</to>
     </rule>
     <rule>
