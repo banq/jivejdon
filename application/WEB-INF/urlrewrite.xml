@@ -24,6 +24,14 @@
         <to>/thread.shtml?thread=$1</to>
     </rule>
     <rule>
+        <from>^/([0-9]+)/([0-9]+)$</from>
+        <to>/thread.shtml?thread=$1&amp;start=$2&amp;count=15</to>
+    </rule> 
+     <rule>
+        <from>^/([0-9]+)$</from>
+        <to type="permanent-redirect">../$1.html</to>
+    </rule>
+    <rule>
         <from>^/$</from>
         <to>/forum/forumList.shtml</to>
     </rule>
