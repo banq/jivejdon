@@ -97,11 +97,11 @@
             <forward name="failure" path="/forum/" />
         </action>
 
-        <!-- <action path="/message/messageNavList2" type="com.jdon.jivejdon.presentation.action.MessageListNav2Action" name="messageListForm" scope="request" validate="false">
+        <action path="/message/messageNavList2" type="com.jdon.jivejdon.presentation.action.MessageListNav2Action" name="messageListForm" scope="request" validate="false">
             <forward name="success" path="/thread.shtml" />
             <forward name="navf2" path="//message/navf2.jsp" />
             <forward name="failure" path="/forum/" />
-        </action> -->
+        </action>
 
         <!-- message List end  -->
 
