@@ -40,9 +40,10 @@
         <!--  内容-->
         <div id="messageListBody">
    
-      
+              
         <!-- 导航区  -->
               <logic:greaterThan name="messageListForm" property="numPages" value="1">
+              <div class="box">
                 <ul class="pagination pull-right">
                   有<b><bean:write name="messageListForm" property="numPages"/></b>页 
                   <MultiPagesREST:pager actionFormName="messageListForm" page="" paramId="thread" paramName="forumThread" paramProperty="threadId">
@@ -51,6 +52,7 @@
                     <MultiPagesREST:next name=" 下一页 "/>
                   </MultiPagesREST:pager>
                 </ul>
+                </div>
               </logic:greaterThan>
            
 
