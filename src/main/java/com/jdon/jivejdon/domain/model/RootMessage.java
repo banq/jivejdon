@@ -2,6 +2,9 @@ package com.jdon.jivejdon.domain.model;
 
 import java.util.Collection;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.attachment.UploadFile;
 import com.jdon.jivejdon.domain.model.message.FilterPipleSpec;
@@ -15,6 +18,7 @@ import com.jdon.jivejdon.domain.model.property.Property;
  * aggregates
  */
 public class RootMessage {
+    private final static Logger logger = LogManager.getLogger(RootMessage.class);
     protected volatile boolean isCreated;
 
     public boolean isCreated() {
@@ -143,7 +147,7 @@ public class RootMessage {
                     return forumMessage;
                 }
             } catch (Exception e) {
-                System.err.println("build Exception:" + e.getMessage() + " messageId=" + messageId);
+                logger.error("build Exception:" + e.getMessage() + " messageId=" + messageId);
                 return null;
             }
 

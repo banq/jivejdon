@@ -21,6 +21,9 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
 import com.jdon.domain.message.DomainMessage;
@@ -54,6 +57,7 @@ import com.jdon.util.StringUtil;
  */
 @Model
 public class ForumThread {
+	private final static Logger logger = LogManager.getLogger(ForumThread.class);
 	private static final long serialVersionUID = 1L;
 	@Inject
 	public LazyLoaderRole lazyLoaderRole;
@@ -94,6 +98,7 @@ public class ForumThread {
 	 * @param rootMessage
 	 */
 	public ForumThread(ForumMessage rootMessage, Long tIDInt, Forum forum) {
+		
 		this.rootMessage = rootMessage;
 		this.threadId = tIDInt;
 		this.forum = forum;
@@ -155,7 +160,7 @@ public class ForumThread {
 
 	public String getName() {
 		if (this.getRootMessage() == null) {
-			System.err.println("getName(): thread rootmessage is null" + threadId);
+			logger.error("getName(): thread rootmessage is null" + threadId);
 			return "null";
 		}
 		return this.getRootMessage().getMessageVO().getSubject();
@@ -185,7 +190,7 @@ public class ForumThread {
 
 	public ForumMessage getRootMessage() {
 		if (rootMessage == null) {
-			System.err.println("getRootMessage: rootMessage is null! threadId:" + threadId);
+			logger.error("getRootMessage: rootMessage is null! threadId:" + threadId);
 		}
 		return rootMessage;
 	}
@@ -194,7 +199,7 @@ public class ForumThread {
 		if (rootMessage == null)
 			return;
 		if (rootMessage instanceof ForumMessageReply) {
-			System.err.println("root message must be ForumMessage threadId=" + this.threadId + " messageId="
+			logger.error("root message must be ForumMessage threadId=" + this.threadId + " messageId="
 					+ rootMessage.getMessageId());
 			return;
 		}
@@ -242,7 +247,7 @@ public class ForumThread {
 				subPublisherRole.subscriptionNotify(new ThreadSubscribedNotifyEvent(this.getThreadId()));
 			}
 		} catch (Exception e) {
-			System.err.print("error in forumThread:" + this.threadId + " " + e);
+			logger.error("error in forumThread:" + this.threadId + " " + e);
 		}
 	}
 
@@ -278,7 +283,7 @@ public class ForumThread {
 
 	public boolean isLeaf(ForumMessage forumMessage) {
 		if (!this.isSolid()) {
-			System.err.print("this thread is not embedded, threadId = " + threadId + " " + this.hashCode());
+			logger.error("this thread is not embedded, threadId = " + threadId + " " + this.hashCode());
 			return false;
 		}
 
@@ -288,7 +293,7 @@ public class ForumThread {
 			ret = treeModel.isLeaf(forumMessage.getMessageId());
 		} catch (Exception e) {
 			String error = e + " isLeaf forumMessageId=" + forumMessage.getMessageId();
-			System.err.print(error);
+			logger.error(error);
 		}
 		return ret;
 	}

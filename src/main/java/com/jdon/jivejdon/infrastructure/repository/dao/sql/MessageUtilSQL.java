@@ -18,10 +18,15 @@ package com.jdon.jivejdon.infrastructure.repository.dao.sql;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.jdon.annotation.Component;
+import com.jdon.jivejdon.infrastructure.repository.builder.MessageInitFactory;
 
 @Component()
 public class MessageUtilSQL {
+	private final static Logger logger = LogManager.getLogger(MessageUtilSQL.class);
 
 	protected JdbcTempSource jdbcTempSource;
 
@@ -40,7 +45,7 @@ public class MessageUtilSQL {
 			if (list.size() > 0)
 				isRoot = true;
 		} catch (Exception e) {
-			System.err.print("isRoot error:" + e + " messageId=" + messageId);
+			logger.error("isRoot error:" + e + " messageId=" + messageId);
 		}
 		return isRoot;
 	}

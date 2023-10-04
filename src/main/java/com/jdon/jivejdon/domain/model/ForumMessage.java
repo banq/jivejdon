@@ -43,6 +43,9 @@ import com.jdon.jivejdon.util.Constants;
 import java.util.Collection;
 import java.util.Objects;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * Aggregate Root
  * <p>
@@ -61,6 +64,8 @@ import java.util.Objects;
  */
 @Model
 public class ForumMessage extends RootMessage implements Cloneable {
+    private final static Logger logger = LogManager.getLogger(ForumMessage.class);
+
     private static final long serialVersionUID = 1L;
     @Inject
     public LazyLoaderRole lazyLoaderRole;
@@ -120,9 +125,9 @@ public class ForumMessage extends RootMessage implements Cloneable {
             messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO.getBody()).build();
         }
         if (messageVO.getSubject().length() == 0 || messageVO.getBody().length() == 0)
-            System.err.println("messageVO is null for messageId=" + this.messageId);
+            logger.error("messageVO is null for messageId=" + this.messageId);
         else if (filterPipleSpec == null) {
-            System.err.println("filterPipleSpec is null for messageId=" + this.messageId);
+            logger.error("filterPipleSpec is null for messageId=" + this.messageId);
         }
 
         // apply complex business filter logic to messageVO;
@@ -174,7 +179,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
             forumMessageReply.getAccount().updateMessageCount(1);
             eventSourcing.addReplyMessage(new RepliesMessagePostedEvent(postRepliesMessageCommand));
         } catch (Exception e) {
-            System.err.print(" addReplyMessage error:" + e + this.messageId);
+            logger.error(" addReplyMessage error:" + e + this.messageId);
         }
     }
 
@@ -203,7 +208,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
             eventSourcing.saveMessageProperties(
                     new MessagePropertiesRevisedEvent(this.messageId, getMessagePropertysVO().getPropertys()));
         } catch (Exception e) {
-            System.err.print(" updateMessage error:" + e + this.messageId);
+            logger.error(" updateMessage error:" + e + this.messageId);
         }
     }
 
@@ -272,7 +277,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
 
     public ForumThread getForumThread() {
         if (!this.isCreated) {
-            System.err.println("forumMessage is be constructing. thread is half");
+            logger.error("forumMessage is be constructing. thread is half");
             return null;
         }
         return forumThread;
@@ -288,7 +293,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
 
     private void setForum(Forum forum) {
         if (forum.lazyLoaderRole == null || forum.getName() == null) {
-            System.err.println("forum not solid for messageId=" + messageId + " forumId=" + forum.getForumId());
+            logger.error("forum not solid for messageId=" + messageId + " forumId=" + forum.getForumId());
         }
         this.forum = forum;
     }
@@ -414,7 +419,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
                     }
                 }
         } catch (Exception e) {
-            System.err.println(" Message build error:" + messageId);
+            logger.error(" Message build error:" + messageId);
         }
 
     }

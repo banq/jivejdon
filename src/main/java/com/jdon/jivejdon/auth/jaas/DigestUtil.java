@@ -18,7 +18,13 @@ package com.jdon.jivejdon.auth.jaas;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.jdon.jivejdon.infrastructure.repository.dao.sql.MessageUtilSQL;
+
 public class DigestUtil {
+	private final static Logger logger = LogManager.getLogger(DigestUtil.class);
 
 	private static MessageDigest digest = null;
 
@@ -27,7 +33,7 @@ public class DigestUtil {
 			try {
 				digest = MessageDigest.getInstance("MD5");
 			} catch (NoSuchAlgorithmException nsae) {
-				System.err.println("Failed to load the MD5 MessageDigest. " + "Jive will be unable to function normally.");
+				logger.error("Failed to load the MD5 MessageDigest. " + "Jive will be unable to function normally.");
 				nsae.printStackTrace();
 			}
 		}

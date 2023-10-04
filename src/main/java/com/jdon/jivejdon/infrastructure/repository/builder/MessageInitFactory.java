@@ -21,11 +21,16 @@ import com.jdon.jivejdon.domain.model.*;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.auth.Role;
 import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
+import com.jdon.jivejdon.infrastructure.repository.dao.sql.MessageDaoSql;
 import com.jdon.jivejdon.domain.model.message.MessageVO;
 
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class MessageInitFactory {
+	private final static Logger logger = LogManager.getLogger(MessageInitFactory.class);
 
 	private Constants constants;
 
@@ -33,55 +38,6 @@ public class MessageInitFactory {
 		super();
 		this.constants = constants;
 	}
-
-//	public ForumMessage createMessageCore(Long messageId, Map map) {
-//		ForumMessage forumMessage = null;
-//		try {
-//			Long pID = (Long) map.get("parentMessageID");
-//			if (pID == null)
-//				forumMessage = new ForumMessage(messageId);
-//			else {
-//				forumMessage = new ForumMessageReply(messageId, new ForumMessage(pID));
-//			}
-//			Object o = map.get("userID");
-//			if (o != null) {
-//				com.jdon.jivejdon.domain.model.account.Account account = new com.jdon.jivejdon.domain.model.account.Account();
-//				account.setUserIdLong((Long) o);
-//				forumMessage.setAccount(account);
-//			} else {
-//				System.err.print("messageId=" + messageId + " no userID in DB");
-//				forumMessage.setAccount(createAnonymous());
-//			}
-//
-//			MessageVO messageVO = createMessageVOCore(messageId, map, forumMessage);
-//			forumMessage.setMessageVO(messageVO);
-//
-//			String saveDateTime = ((String) map.get("modifiedDate")).trim();
-//			String displayDateTime = constants.getDateTimeDisp(saveDateTime);
-//			forumMessage.setModifiedDate(Long.parseLong(saveDateTime));
-//
-//			saveDateTime = ((String) map.get("creationDate")).trim();
-//			displayDateTime = constants.getDateTimeDisp(saveDateTime);
-//			forumMessage.setCreationDate(displayDateTime);
-//			// get the formatter so later can transfer String to Date
-//
-//			ForumThread forumThread = new ForumThread();
-//			forumThread.setThreadId((Long) map.get("threadID"));
-//			forumMessage.setForumThread(forumThread);
-//
-//			Forum forum = new Forum();
-//			forum.setForumId((Long) map.get("forumID"));
-//			forumMessage.setForum(forum);
-//
-//			// lazy load
-//			// forumMessage.setPropertys(propertyDaoSql.getAllPropertys(Constants.MESSAGE,
-//			// messageId));
-//		} catch (Exception e) {
-//			System.err.println(e);
-//		} finally {
-//		}
-//		return forumMessage;
-//	}
 
 
 	public AnemicMessageDTO createAnemicMessage(Long messageId, Map map) {
@@ -96,8 +52,8 @@ public class MessageInitFactory {
 				account.setUserIdLong((Long) o);
 				messageCore.setAccount(account);
 			} else {
-				System.err.print("messageId=" + messageId + " no userID in DB");
-				messageCore.setAccount(createAnonymous());
+				logger.error("messageId=" + messageId + " no userID in DB ");
+				messageCore.setAccount(createAnonymous());				
 			}
 
 			MessageVO messageVO = new MessageVO();
@@ -124,7 +80,7 @@ public class MessageInitFactory {
 			// forumMessage.setPropertys(propertyDaoSql.getAllPropertys(Constants.MESSAGE,
 			// messageId));
 		} catch (Exception e) {
-			System.err.println(e);
+			logger.error(e);
 		} finally {
 		}
 		return messageCore;
@@ -137,7 +93,7 @@ public class MessageInitFactory {
 			subject = (String) map.get("subject");
 			body = (String) map.get("body");
 		} catch (Exception e) {
-			System.err.println("createMessageVOCore " + subject + " " + body + " error: " + e);
+			logger.error("createMessageVOCore " + subject + " " + body + " error: " + e);
 		} finally {
 		}
 		return forumMessage.messageVOBuilder().subject(subject).body(body).build();
@@ -181,7 +137,7 @@ public class MessageInitFactory {
 			displayDateTime = constants.getDateTimeDisp(saveDateTime);
 			ret.setCreationDate(displayDateTime);
 		} catch (Exception e) {
-			System.err.println(e);
+			logger.error(e);
 		} finally {
 		}
 		return ret;

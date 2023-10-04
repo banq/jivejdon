@@ -20,6 +20,9 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
 import com.jdon.annotation.model.OnCommand;
@@ -28,6 +31,7 @@ import com.jdon.jivejdon.domain.command.PostTopicMessageCommand;
 import com.jdon.jivejdon.domain.event.TopicMessagePostedEvent;
 import com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF;
 import com.jdon.jivejdon.domain.model.subscription.event.ForumSubscribedNotifyEvent;
+import com.jdon.jivejdon.infrastructure.repository.builder.MessageInitFactory;
 import com.jdon.jivejdon.spi.pubsub.publish.ThreadEventSourcingRole;
 import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 import com.jdon.jivejdon.util.Constants;
@@ -38,7 +42,7 @@ import com.jdon.jivejdon.util.Constants;
  */
 @Model
 public class Forum {
-
+	private final static Logger logger = LogManager.getLogger(Forum.class);
 	/**
 	 *
 	 */
@@ -78,7 +82,7 @@ public class Forum {
 	public void postMessage(PostTopicMessageCommand postTopicMessageCommand) {
 		// fill the business rule for post a topic message
 		if (isRepeatedMessage(postTopicMessageCommand)) {
-			System.err.println("repeat message error: " + postTopicMessageCommand.getMessageVO().getSubject());
+			logger.error("repeat message error: " + postTopicMessageCommand.getMessageVO().getSubject());
 			return;
 		}
 		DomainMessage domainMessage = eventSourcingRole.saveTopicMessage(postTopicMessageCommand);
