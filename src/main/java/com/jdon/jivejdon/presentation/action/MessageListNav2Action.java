@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <%-- /forum/messageNavList.shtml == > MessageListNavAction ==> navf.jsp ==>
+ * <%-- /message/messageNavList.shtml == > MessageListNavAction ==> navf.jsp ==>
  * (urlrewrite.xml)/([0-9]+)/([0-9]+) --%>
  *
  * @author banq

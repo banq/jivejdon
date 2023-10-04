@@ -234,7 +234,7 @@
 			class="com.jdon.jivejdon.spi.component.shortmessage.WeiBoShortMessageParams">
 			<constructor value="有贴提到你：" />
             <constructor
-                    value="在 &lt;a href=/forum/messageNavList.shtml?message=messageId target=_blank   &gt; subject &lt;/a&gt; 帖子中提到了你，去看看吧。"/>
+                    value="在帖子中提到了你，去看看吧。"/>
 		</component>
 		
 		<component name="sinaOAuthParamVO"

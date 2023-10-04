@@ -1,10 +1,9 @@
-<%--  /forum/messageNavList.shtml  == > MessageListNavAction ==>navf.jsp ==> (urlrewrite.xml)/([0-9]+)/([0-9]+) --%>
+<%--  /message/messageNavList2.shtml  == > MessageListNavAction ==>navf2.jsp ==> (urlrewrite.xml)/([0-9]+)/([0-9]+) --%>
 <%
-  
-  long forumId = ((Long) request.getAttribute("forumId")).longValue();
+  long pMessageId = ((Long) request.getAttribute("pMessageId")).longValue();
   long messageId = ((Long) request.getAttribute("messageId")).longValue();
 
-  String url = request.getContextPath() + "/forum/messageNavList.shtml?forum=" + forumId + "&message=" + messageId;
+  String url = request.getContextPath() + "/message/messageNavList2.shtml?pMessage=" + pMessageId + "&message=" + messageId;
   url = url + "&ver=" + java.util.UUID.randomUUID().toString();
 %>
 <%
@@ -12,7 +11,6 @@ response.setHeader("Pragma", "No-cache");
 response.setHeader("Cache-Control", "no-cache");
 response.setDateHeader("Expires", 0);
 %>
-
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -27,7 +25,7 @@ response.setDateHeader("Expires", 0);
 </head>
 <body>
 <script>
-    waitingDialog.show('新文已经收到，正在跳转..');
+    waitingDialog.show('回贴已经收到，正在跳转..');
     setTimeout(function () {
         window.top.location.href = '<%=url%>';
         waitingDialog.hide();
@@ -35,3 +33,4 @@ response.setDateHeader("Expires", 0);
 </script>
 </body>
 </html>
+

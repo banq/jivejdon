@@ -21,7 +21,7 @@
         <logic:notEqual name="action" value="delete">
           帖子保存成功
             <script>
-                window.top.location.href = '<%=request.getContextPath()%>/forum/messageNavList2.shtml?pMessage=<bean:write name="pMessageId"/>&message=<bean:write name="messageId"/>#<bean:write name="messageId"/>';
+                window.top.location.href = '<%=request.getContextPath()%>/message/messageNavList2.shtml?pMessage=<bean:write name="pMessageId"/>&message=<bean:write name="messageId"/>#<bean:write name="messageId"/>';
             </script>
         </logic:notEqual>
         <logic:equal name="action" value="delete">

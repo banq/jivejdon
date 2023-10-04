@@ -20,7 +20,7 @@
 
           帖子保存成功
           <script>
-              window.top.location.href = '<%=request.getContextPath()%>/forum/messageNavList.shtml?message=<bean:write name="messageId" />&forum=<bean:write name="messageForm" property="forum.forumId" />';
+              window.top.location.href = '<%=request.getContextPath()%>/message/messageNavList.shtml?message=<bean:write name="messageId" />&forum=<bean:write name="messageForm" property="forum.forumId" />';
           </script>
         </logic:notEqual>
         <logic:equal name="action" value="delete">
