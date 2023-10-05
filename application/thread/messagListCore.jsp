@@ -39,9 +39,14 @@
 
         <!--  内容-->
         <div id="messageListBody">
-   
-              
-        <!-- 导航区  -->
+ 
+          <%@include file="messageListBody.jsp" %>
+                  
+        </div>
+
+        <div id="pageEnd"></div>
+  
+  <!-- 导航区  -->
               <logic:greaterThan name="messageListForm" property="numPages" value="1">
               <div class="box">
                 <ul class="pagination pull-right">
@@ -54,16 +59,6 @@
                 </ul>
                 </div>
               </logic:greaterThan>
-           
-
-          <%@include file="messageListBody.jsp" %>
-                  
-        </div>
-
-        <div id="pageEnd"></div>
-  
-        <div id="nextPageContent"></div> 
-
       </div>
       <logic:present name="principal"> 
        <div class="box">
@@ -184,50 +179,6 @@
 
 <%@include file="../common/IncludeBottomBody.jsp"%>
 
- <logic:greaterThan name="messageListForm" property="allCount" value="1">         
-
-<bean:parameter name="thread" id="thread" value=""/>
-<bean:define id="pagestart" name="messageListForm" property="start" />
-<bean:define id="pagecount" name="messageListForm" property="count" />
-<bean:define id="pageallCount" name="messageListForm" property="allCount" />
-<%  
-    int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
-    int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
-    int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
-    int pageNo = (pageAllcountInt / pageCountInt);
-    if(pageAllcountInt % pageCountInt !=0){ 
-        pageNo = pageNo + 1;
-    }    
-%>
-<script defer>
-
-document.addEventListener("DOMContentLoaded", function(event) { 
-  
-function scrollLoader(url){
-  var start = "<%=pageStartInt+pageCountInt%>";
-  var loading = false;
-  $(window).scroll(function() {
-    var hT = $('#nextPageContent').offset().top,
-       hH = $('#nextPageContent').outerHeight(),
-       wH = $(window).height(),
-       wS = $(this).scrollTop();       
-    if (wS > (hT+hH-wH) && !loading){           
-         loading = true;          
-         if (start <= <%=pageAllcountInt%> ){                  
-           surl = (url.indexOf("?")==-1)?(url+"?"):(url+"&");           
-           load(surl +'start=' + start +'&count=<%=pageCountInt%>&noheader=on', function (xhr) {
-               document.getElementById("nextPageContent").innerHTML = document.getElementById("nextPageContent").innerHTML + xhr.responseText;               
-               start = start/1 + <%=pageCountInt%>;                              
-               loading = false;
-           });          
-         }   
-    }
-   });
-}
-scrollLoader('/forum/messageListBodyNoheader.shtml?thread=<bean:write name="thread"/>&othread=<bean:write name="forumThread" property="threadId"/>');   
-
-});
-</script>   
-</logic:greaterThan>
+ 
   </body>
   </html>
