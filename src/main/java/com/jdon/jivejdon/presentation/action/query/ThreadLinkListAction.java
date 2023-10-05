@@ -70,6 +70,9 @@ public class ThreadLinkListAction extends Action {
 			if (reBlogVO == null)
 				return null;
 
+			if(reBlogVO.getThreadFroms() == null && reBlogVO.getThreadTos() == null)	
+			    return null;
+
 			final Collection<ForumThread> threadLinks = new ArrayList<>();
 			for (ForumThread threadLink : reBlogVO.getThreadFroms()) {
 				threadLinks.add(threadLink);
