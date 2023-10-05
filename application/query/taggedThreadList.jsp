@@ -12,6 +12,7 @@ String titleStr = (String)request.getAttribute("TITLE");
 pageContext.setAttribute("title", titleStr);
 %>
 <%@ include file="../common/IncludeTop.jsp" %>
+<link rel="canonical" href="/tag-<bean:write name="tagID"/>/">  
 <link rel="alternate" type="application/rss+xml" title="Feed订阅" href="/tag-<bean:write name="tagID"/>/rss"/>		 
 <main>
 <div id="page-content" class="single-page container">
