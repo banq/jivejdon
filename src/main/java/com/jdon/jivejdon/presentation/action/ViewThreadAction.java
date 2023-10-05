@@ -53,6 +53,8 @@ public class ViewThreadAction extends ModelDispAction {
 
 			forumThread.addViewCount(request.getRemoteAddr());
 			getThreadViewCounterJob().saveViewCounter(forumThread.getViewCounter());
+                //prepare for next step
+			forumThread.getRootMessage().getReBlogVO().loadAscResult();
 			return actionMapping.findForward(FormBeanUtil.FORWARD_SUCCESS_NAME);
 		} catch (Exception e) {
 			Debug.logError(" viewThread error:" + e);

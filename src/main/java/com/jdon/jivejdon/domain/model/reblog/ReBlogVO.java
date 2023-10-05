@@ -51,7 +51,7 @@ public class ReBlogVO extends LazyLoader {
 		return threadFroms;
 	}
 
-	private void loadAscResult() {
+	public void loadAscResult() {
 		if (!load) {
 			super.setDomainMessage(null);
 			Many2ManyDTO many2ManyDTO = (Many2ManyDTO) super.loadResult();
