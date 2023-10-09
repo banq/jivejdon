@@ -7,7 +7,7 @@
 
 <bean:parameter name="queryType" id="queryType" value=""/>
 <bean:parameter name="tagID" id="tagID" value=""/>
-
+<logic:notEmpty  name="TITLE">
 <bean:define id="title" name="TITLE" />
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
@@ -60,9 +60,9 @@ pageContext.setAttribute("title", titleStr);
       <div id="main-content" class="col-md-12">
         <div class="box"> 
        <center>
-        <logic:notEmpty  name="TITLE">
+        
         <h1 class="tagcloud"><a href="/tag-<bean:write name="tagID"/>/" class="tag-cloud-link"><bean:write  name='TITLE'/></a></h1>
-      </logic:notEmpty>
+  
       <div>
        
              <%if (request.getSession(false) != null && request.getUserPrincipal() != null){%>
@@ -137,3 +137,5 @@ pageContext.setAttribute("title", titleStr);
 
 </body>
 </html>
+
+</logic:notEmpty>
