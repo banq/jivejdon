@@ -7,6 +7,9 @@
 
 <bean:parameter name="queryType" id="queryType" value=""/>
 <bean:parameter name="tagID" id="tagID" value=""/>
+<logic:empty  name="TITLE">
+<%response.setStatus(404);%>
+</logic:empty>   
 <logic:notEmpty  name="TITLE">
 <bean:define id="title" name="TITLE" />
 <bean:define id="pagestart" name="threadListForm" property="start" />
