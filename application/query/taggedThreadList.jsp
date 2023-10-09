@@ -7,13 +7,52 @@
 
 <bean:parameter name="queryType" id="queryType" value=""/>
 <bean:parameter name="tagID" id="tagID" value=""/>
+
+<bean:define id="title" name="TITLE" />
+<bean:define id="pagestart" name="threadListForm" property="start" />
+<bean:define id="pagecount" name="threadListForm" property="count" />
 <%
-String titleStr = (String)request.getAttribute("TITLE");
+
+int pagestartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
+int pagecountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
+int currentPageNo = 1;
+if (pagecountInt > 0) {
+	currentPageNo = (pagestartInt / pagecountInt) + 1;
+}
+String titleStr = (String)pageContext.getAttribute("title");
+if (currentPageNo > 1){
+	titleStr = titleStr + "  - 第"+ currentPageNo + "页";
+}
 pageContext.setAttribute("title", titleStr);
 %>
-<%@ include file="../common/IncludeTop.jsp" %>
-<link rel="canonical" href="/tag-<bean:write name="tagID"/>/">  
-<link rel="alternate" type="application/rss+xml" title="Feed订阅" href="/tag-<bean:write name="tagID"/>/rss"/>		 
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+   <%@include file="../common/IncludeTopHead.jsp"%>
+   <%if (currentPageNo > 1) {%>
+         <link rel="canonical" href="/tags/<bean:write name="tagID"/>/<%=pagestartInt%>"> 
+   <% }else{%>
+          <link rel="canonical" href="/tag-<bean:write name="tagID"/>/">  
+   <% }%>      
+
+<link rel="alternate" type="application/rss+xml" title="Feed订阅" href="/tag-<bean:write name="tagID"/>/rss"/>		
+
+<meta http-equiv="refresh" content="3600">
+<script>
+ if(top !== self) top.location = self.location;
+  contextpath = "<%=request.getContextPath()%>";
+ </script>
+</head>
+<body>
+<%@ include file="../common/body_header.jsp" %>
+<div id="page-content" class="single-page container">
+	<div class="row">
+		<!-- /////////////////左边 -->
+		<div id="main-content" class="col-md-12">
+
+<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
+ 
 <main>
 <div id="page-content" class="single-page container">
     <div class="row">

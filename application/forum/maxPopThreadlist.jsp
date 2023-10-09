@@ -15,10 +15,10 @@
   %>
 </logic:empty>
 <bean:define id="forum" name="threadListForm" property="oneModel"/>
-<bean:define id="title" name="forum" property="name" />
+
+<bean:define id="title"  value=" 精华文章 " />
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
-<bean:define id="lastModifiedDate" name="forum" property="modifiedDate2"/>
 <%
 
 int pagestartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
@@ -33,13 +33,33 @@ if (currentPageNo > 1){
 }
 pageContext.setAttribute("title", titleStr);
 %>
-<%@ include file="../common/IncludeTop.jsp" %>
-<link rel="alternate" type="application/rss+xml" title="<bean:write name="title" /> " href="/rss" /> 
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+   <%@include file="../common/IncludeTopHead.jsp"%>
+   <%if (currentPageNo > 1) {%>
+         <link rel="canonical" href="/forum/maxPopThreads/<%=pagestartInt%>"> 
+   <% }else{%>
+         <link rel="canonical" href="/forum/maxPopThreads">  
+   <% }%>      
+
+<meta http-equiv="refresh" content="3600">
 <script>
  if(top !== self) top.location = self.location;
   contextpath = "<%=request.getContextPath()%>";
- </script> 
-<script language="javascript" defer="defer" src="<html:rewrite page="/forum/js/threadList.js"/>"></script>
+ </script>
+</head>
+<body>
+<%@ include file="../common/body_header.jsp" %>
+<div id="page-content" class="single-page container">
+	<div class="row">
+		<!-- /////////////////左边 -->
+		<div id="main-content" class="col-md-12">
+
+<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
+
 
 
 <main>

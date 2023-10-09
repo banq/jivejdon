@@ -37,13 +37,40 @@ if (currentPageNo > 1){
 }
 pageContext.setAttribute("title", titleStr);
 %>
-<%@ include file="../common/IncludeTop.jsp" %>
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+   <%@include file="../common/IncludeTopHead.jsp"%>
+   <logic:empty name="forum" property="forumId">	
+       <%if (currentPageNo > 1) {%>
+         <link rel="canonical" href="/threads/<%=pagestartInt%>"> 
+       <% }else{%>
+          <link rel="canonical" href="/threads"> 
+       <% }%>   
+   </logic:empty>
+   <logic:notEmpty name="forum" property="forumId">		
+        <%if (currentPageNo > 1) {%>
+         <link rel="canonical" href="/forum/<bean:write name="forum" property="forumId"/>/<%=pagestartInt%>"> 
+       <% }else{%>
+          <link rel="canonical" href="/forum/<bean:write name="forum" property="forumId"/>/"> 
+       <% }%>   
+   </logic:notEmpty>         
 <link rel="alternate" type="application/rss+xml" title="<bean:write name="title" /> " href="/rss" /> 
 <meta http-equiv="refresh" content="3600">
 <script>
  if(top !== self) top.location = self.location;
   contextpath = "<%=request.getContextPath()%>";
  </script>
+</head>
+<body>
+<%@ include file="../common/body_header.jsp" %>
+<div id="page-content" class="single-page container">
+	<div class="row">
+		<!-- /////////////////左边 -->
+		<div id="main-content" class="col-md-12">
+
+<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
 <main>
 <div id="page-content" class="single-page container">

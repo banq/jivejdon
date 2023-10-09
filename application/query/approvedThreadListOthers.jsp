@@ -7,7 +7,48 @@
 <%@ page session="false" %>
 
 <bean:define id="title"  value=" 新佳文章 " />
-<%@ include file="../common/IncludeTop.jsp" %>
+<bean:define id="pagestart" name="threadListForm" property="start" />
+<bean:define id="pagecount" name="threadListForm" property="count" />
+<%
+
+int pagestartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
+int pagecountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
+int currentPageNo = 1;
+if (pagecountInt > 0) {
+	currentPageNo = (pagestartInt / pagecountInt) + 1;
+}
+String titleStr = (String)pageContext.getAttribute("title");
+if (currentPageNo > 1){
+	titleStr = titleStr + "  - 第"+ currentPageNo + "页";
+}
+pageContext.setAttribute("title", titleStr);
+%>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+   <%@include file="../common/IncludeTopHead.jsp"%>
+   <%if (currentPageNo > 1) {%>
+         <link rel="canonical" href="/approval/<%=pagestartInt%>"> 
+   <% }else{%>
+          <link rel="canonical" href="/approval">  
+   <% }%>      
+
+<meta http-equiv="refresh" content="3600">
+<script>
+ if(top !== self) top.location = self.location;
+  contextpath = "<%=request.getContextPath()%>";
+ </script>
+</head>
+<body>
+<%@ include file="../common/body_header.jsp" %>
+<div id="page-content" class="single-page container">
+	<div class="row">
+		<!-- /////////////////左边 -->
+		<div id="main-content" class="col-md-12">
+
+<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
     
 <main>
 <div id="page-content" class="single-page container">
