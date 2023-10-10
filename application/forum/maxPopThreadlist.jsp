@@ -38,6 +38,7 @@ pageContext.setAttribute("title", titleStr);
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	
    <%@include file="../common/IncludeTopHead.jsp"%>
    <%if (currentPageNo > 1) {%>
          <link rel="canonical" href="/forum/maxPopThreads/<%=pagestartInt%>"> 
