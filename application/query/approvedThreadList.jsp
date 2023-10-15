@@ -66,7 +66,7 @@
             </div>
         
           <div class="wrap-vid">
-              <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank" class="smallgray">详细</a></p>
+              <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[200]" />. </p>
           </div>
       </section>
    	</div>	
@@ -142,7 +142,7 @@
             </div>
         
           <div class="wrap-vid">
-              <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank" class="smallgray">详细</a></p>
+              <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. </p>
           </div>
       </section>
    	</div>	
