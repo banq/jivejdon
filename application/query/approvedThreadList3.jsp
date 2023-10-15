@@ -31,7 +31,7 @@ if (request.getParameter("count")!=null){
        <a href='<%=request.getContextPath() %>/tag-<bean:write name="threadTag" property="tagID"/>/' target="_blank" title="<bean:write name="threadTag" property="title" />">         
         <img id="home-thumbnai"  width="336"  src="/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="thumbnail"  loading="lazy"/>                  
        </a>
-      <div style="position: absolute;bottom: 0px;">
+      <div style="position: absolute;top:0px;">
        <div class="tagcloud">
         <a href='<%=request.getContextPath() %>/tag-<bean:write name="threadTag" property="tagID"/>/' target="_blank" class="tag-cloud-link">
 		    <bean:write name="threadTag" property="title" /></a>
