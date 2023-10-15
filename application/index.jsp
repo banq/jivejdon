@@ -47,7 +47,7 @@
 				<div class="box">
 
 
-       <jsp:include page="/query/threadApprovedNewList2.shtml?count=6" flush="true"></jsp:include>
+       <jsp:include page="/query/threadApprovedNewList2.shtml?count=7" flush="true"></jsp:include>
 
 	
 <div class="box"> 
