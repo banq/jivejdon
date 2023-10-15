@@ -19,20 +19,17 @@ if (request.getParameter("count")!=null){
 <main>
 <logic:iterate indexId="i" id="threadTag" name="tagsListForm"  property="list" offset="<%=offset%>" length="<%=count%>">
 
-<%
-  if(i % 2==0){ 
- %>
+
  <div class="row">	
- <%}%>
 
  
- <div class="col-md-6">
+ <div class="col-md-12">
  <div class="box">	
   <div class="linkblock">
  
-    <div style="position: relative;">           
+    <div style="position: relative;"  class="thumbn">           
        <a href='<%=request.getContextPath() %>/tag-<bean:write name="threadTag" property="tagID"/>/' target="_blank" title="<bean:write name="threadTag" property="title" />">         
-        <img id="home-thumbnai" src="/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="thumbnail" style="width: 100%" loading="lazy"/>                  
+        <img id="home-thumbnai"  width="336"  src="/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="thumbnail"  loading="lazy"/>                  
        </a>
       <div style="position: absolute;bottom: 0px;">
        <div class="tagcloud">
@@ -59,12 +56,8 @@ if (request.getParameter("count")!=null){
 </div>  
 </div>
  
-<% i = i+1;%>
-<%
-  if(i % 2==0){ 
- %>
   </div>
- <%}%>
+
 
 
 </logic:iterate>
