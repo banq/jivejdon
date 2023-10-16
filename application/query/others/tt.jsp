@@ -21,7 +21,7 @@ String coutlength = (String)pageContext.getAttribute("count");
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
  <bean:define id="body" name="forumMessage" property="messageVO.body" />
 <logic:equal name="i" value="0">
-<li class="info">
+<li>
 	<h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"><bean:write name="forumThread" property="name"/></a></h3>
       
          <div class="info">			 
