@@ -63,6 +63,8 @@ public class ThreadApprovedNewList implements Startable {
 	private final ApprovedListSpec approvedListSpec = new ApprovedListSpec();
 	private boolean refresh;
 	private int maxStart = -1;
+	private	long currentIndicator = 0;
+	private	int currentStartBlock = 0;
 	private int currentStartPage = 0;
 
 	public ThreadApprovedNewList(
@@ -103,6 +105,9 @@ public class ThreadApprovedNewList implements Startable {
 		approvedListSpec.setResultSort(resultSort);
 		refresh = true;
 		maxStart = -1;
+		currentIndicator = 0;
+	    currentStartBlock = 0;
+	    currentStartPage = 0;
 		threadDigList.clear();
 		authorList.clear();
 		threadTagList.clear();
@@ -179,10 +184,6 @@ public class ThreadApprovedNewList implements Startable {
 				approvedListSpec.getNeedCount());
 		final Date nowD = new Date();
 		try {
-			long currentIndicator = 0;
-			int currentStartBlock = 0;
-	
-
 			int i = 0;
 			int start = currentStartBlock;
 			int count = 100;
