@@ -60,7 +60,7 @@ public class ThreadApprovedNewList implements Startable {
 	private final ForumMessageQueryService forumMessageQueryService;
 	private final AccountService accountService;
 	// private Cache approvedThreadList = new LRUCache("approvedCache.xml");
-	private final ApprovedListSpec approvedListSpec;
+	private final ApprovedListSpec approvedListSpec = new ApprovedListSpec();
 	private boolean refresh;
 	private int maxStart = -1;
 
@@ -68,7 +68,6 @@ public class ThreadApprovedNewList implements Startable {
 			ForumMessageQueryService forumMessageQueryService,
 			AccountService accountService, TagService tagService) {
 		approvedThreadList = new HashMap();
-		approvedListSpec = new ApprovedListSpec();
 		this.accountService = accountService;
 		this.authorList = new AuthorList(accountService);
 		this.threadDigList = new ThreadDigList(forumMessageQueryService);
