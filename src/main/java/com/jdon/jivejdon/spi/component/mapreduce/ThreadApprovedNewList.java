@@ -63,6 +63,7 @@ public class ThreadApprovedNewList implements Startable {
 	private final ApprovedListSpec approvedListSpec = new ApprovedListSpec();
 	private boolean refresh;
 	private int maxStart = -1;
+	private int currentStartPage = 0;
 
 	public ThreadApprovedNewList(
 			ForumMessageQueryService forumMessageQueryService,
@@ -120,10 +121,10 @@ public class ThreadApprovedNewList implements Startable {
 		if (approvedThreadList.containsKey(start)) {
 			return approvedThreadList.get(start);
 		}
-		if (start < approvedListSpec.getCurrentStartPage()) {
+		if (start < currentStartPage) {
 			logger.error("start=" + start
 					+ " < approvedListSpec.getCurrentStartPage()"
-					+ approvedListSpec.getCurrentStartPage());
+					+ currentStartPage);
 			return null;
 		}
 		return appendList(start, approvedListSpec);
@@ -154,7 +155,7 @@ public class ThreadApprovedNewList implements Startable {
 		Collection<Long> resultSorteds = null;
 		logger.debug("not found it in cache, create it");
 		int count = approvedListSpec.getNeedCount();
-		int i = approvedListSpec.getCurrentStartPage();
+		int i = currentStartPage;
 		while (i < start + count) {
 			resultSorteds = loadApprovedThreads(approvedListSpec);
 			approvedThreadList.put(i, resultSorteds);
@@ -166,8 +167,8 @@ public class ThreadApprovedNewList implements Startable {
 			}
 			i = i + count;
 		}
-		if (i > approvedListSpec.getCurrentStartPage())
-			approvedListSpec.setCurrentStartPage(i);
+		if (i > currentStartPage)
+			currentStartPage = i;
 		return resultSorteds;
 
 	}
@@ -178,9 +179,14 @@ public class ThreadApprovedNewList implements Startable {
 				approvedListSpec.getNeedCount());
 		final Date nowD = new Date();
 		try {
+			long currentIndicator = 0;
+			int currentStartBlock = 0;
+	
+
 			int i = 0;
-			int start = approvedListSpec.getCurrentStartBlock();
+			int start = currentStartBlock;
 			int count = 100;
+		
 			while (i < approvedListSpec.getNeedCount()) {
 				PageIterator pi = forumMessageQueryService.getThreads(start,
 						count, approvedListSpec);
@@ -188,10 +194,11 @@ public class ThreadApprovedNewList implements Startable {
 					break;
 
 				ForumThread threadPrev = null;	
+
 				while (pi.hasNext()) {
 					Long threadId = (Long) pi.next();					
-					if (approvedListSpec.getCurrentIndicator() > threadId
-							|| approvedListSpec.getCurrentIndicator() == 0) {
+					if (currentIndicator > threadId
+							|| currentIndicator == 0) {
 						final ForumThread thread = forumMessageQueryService
 								.getThread(threadId);																						
 						if (thread == null || thread.getRootMessage() == null) continue;
@@ -211,8 +218,8 @@ public class ThreadApprovedNewList implements Startable {
 						threadPrev = thread;
 
 						if (i >= approvedListSpec.getNeedCount()) {
-							approvedListSpec.setCurrentIndicator(threadId);
-							approvedListSpec.setCurrentStartBlock(start);
+							currentIndicator = threadId;
+							currentStartBlock = start;
 							break;
 						}
 					}
