@@ -25,14 +25,13 @@ public class HomepageListSolver {
 
 	private final ThreadApprovedNewList threadApprovedNewList;
 	private final ForumMessageQueryService forumMessageQueryService;
-	private final ApprovedListSpec approvedListSpec;
+	private final ApprovedListSpec approvedListSpec = new ApprovedListSpec();
 	private Collection<Long> list;
 
 	public HomepageListSolver(ThreadApprovedNewList threadApprovedNewList,
 							  ForumMessageQueryService forumMessageQueryService) {
 		this.threadApprovedNewList = threadApprovedNewList;
 		this.forumMessageQueryService = forumMessageQueryService;
-		this.approvedListSpec = new ApprovedListSpec();
 	}
 
 	public Collection<Long> getList(int start, int count) {
