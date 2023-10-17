@@ -59,7 +59,7 @@ public class ViewThreadAction extends ModelDispAction {
   
 			return actionMapping.findForward(FormBeanUtil.FORWARD_SUCCESS_NAME);
 		} catch (Exception e) {
-			Debug.logError(" viewThread error:" + e);
+			Debug.logError(" viewThread error");
 		}
 		return actionMapping.findForward(FormBeanUtil.FORWARD_FAILURE_NAME);
 	}
