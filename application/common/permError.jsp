@@ -9,7 +9,7 @@
 com.jdon.jivejdon.spi.component.block.ErrorBlockerIF,com.jdon.jivejdon.spi.component.email.*"%>
 <%
    response.setStatus(404);
-   String isSendMail=(String)this.getServletContext().getAttribute(request.getRemoteAddr()+"500"); 
+   String isSendMail=(String)this.getServletContext().getAttribute("500"); 
    if (isSendMail == null)
 	{		
 		EmailHelper emailHelper = (EmailHelper)WebAppUtil.getComponentInstance("emailHelper", this.getServletContext());
@@ -42,7 +42,7 @@ com.jdon.jivejdon.spi.component.block.ErrorBlockerIF,com.jdon.jivejdon.spi.compo
     	String fromEmail = "banq@163.com";
     	EmailVO emailVO = new EmailVO(toName, toEmail, "", fromEmail, subject, body + " from:" + fromEmail, com.jdon.jivejdon.util.EmailTask.NOHTML_FORMAT);
     	emailHelper.send(emailVO);
-		this.getServletContext().setAttribute(request.getRemoteAddr()+"500","true");
+		this.getServletContext().setAttribute("500","true");
 	}
 ErrorBlockerIF errorBlocker = (ErrorBlockerIF) WebAppUtil.getComponentInstance("errorBlocker", this.getServletContext());
 if (errorBlocker.checkRate(request.getRemoteAddr(), 5)){
