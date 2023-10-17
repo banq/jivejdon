@@ -4,6 +4,7 @@ import com.jdon.annotation.Component;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.query.ResultSort;
+import com.jdon.jivejdon.domain.model.query.specification.ApprovedListSpec;
 import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
 import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpecForMod;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
@@ -24,12 +25,14 @@ public class HomepageListSolver {
 
 	private final ThreadApprovedNewList threadApprovedNewList;
 	private final ForumMessageQueryService forumMessageQueryService;
+	private final ApprovedListSpec approvedListSpec;
 	private Collection<Long> list;
 
 	public HomepageListSolver(ThreadApprovedNewList threadApprovedNewList,
 							  ForumMessageQueryService forumMessageQueryService) {
 		this.threadApprovedNewList = threadApprovedNewList;
 		this.forumMessageQueryService = forumMessageQueryService;
+		this.approvedListSpec = new ApprovedListSpec();
 	}
 
 	public Collection<Long> getList(int start, int count) {
@@ -41,7 +44,7 @@ public class HomepageListSolver {
 		    }
 			list = list.stream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
 				.getThread(threadId), threadId -> threadId, (e1, e2) -> e1,
-				() -> new TreeMap<ForumThread, Long>(new HomePageComparator()))).values();
+				() -> new TreeMap<ForumThread, Long>(new HomePageComparator(approvedListSpec)))).values();
 		 }		
 	    }   
 		return list.stream().skip(start).limit(count).collect(Collectors.toList());

@@ -60,7 +60,7 @@ public class ThreadApprovedNewList implements Startable {
 	private final ForumMessageQueryService forumMessageQueryService;
 	private final AccountService accountService;
 	// private Cache approvedThreadList = new LRUCache("approvedCache.xml");
-	private ApprovedListSpec approvedListSpec;
+	private final ApprovedListSpec approvedListSpec;
 	private boolean refresh;
 	private int maxStart = -1;
 
@@ -98,7 +98,6 @@ public class ThreadApprovedNewList implements Startable {
 
 	public void init() {
 		approvedThreadList.clear();
-		approvedListSpec = new ApprovedListSpec();
 		ResultSort resultSort = new ResultSort();
 		resultSort.setOrder_DESCENDING();
 		approvedListSpec.setResultSort(resultSort);

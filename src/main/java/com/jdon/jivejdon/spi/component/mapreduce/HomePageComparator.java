@@ -1,6 +1,8 @@
 package com.jdon.jivejdon.spi.component.mapreduce;
 
 import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.query.specification.ApprovedListSpec;
+import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
 
 import java.util.Comparator;
 import java.util.concurrent.TimeUnit;
@@ -12,19 +14,25 @@ import java.util.concurrent.TimeUnit;
  * https://herman.bearblog.dev/a-better-ranking-algorithm/
  */
 public class HomePageComparator implements Comparator<ForumThread> {
+    private final ApprovedListSpec approvedListSpec;
+
+	public HomePageComparator(ApprovedListSpec approvedListSpec){
+        this.approvedListSpec = approvedListSpec;
+	}
+
 	@Override
-	public int compare(ForumThread thread1, ForumThread thread2) {
+	public int compare(final ForumThread thread1, final ForumThread thread2) {
 
 		if (thread1.getThreadId().longValue() == thread2.getThreadId().longValue())
 			return 0;
 
-		double countRs1 = algorithm(thread1, thread2);
-		double countRs2 = algorithm(thread2, thread1);
+		final double countRs1 = algorithm(thread1, thread2);
+		final double countRs2 = algorithm(thread2, thread1);
 
 		return compareResult(countRs1, countRs2, thread1, thread2);
 	}
 
-	private int compareResult(double countRs1, double countRs2, ForumThread thread1, ForumThread thread2) {
+	private int compareResult(final double countRs1, final double countRs2, final ForumThread thread1, final ForumThread thread2) {
 		if (countRs1 > countRs2)
 			return -1; // returning the first object
 		else if (countRs1 < countRs2)
@@ -38,22 +46,7 @@ public class HomePageComparator implements Comparator<ForumThread> {
 		return 0;
 	}
 
-	private double algorithm(ForumThread thread, ForumThread threadPrev) {
-		double textLength = thread.getRootMessage().getMessageVO().getBody().length()/2048 ;
-		double p = (thread.getViewCount() + textLength +  (thread.getRootMessage().hasImage()?1:0) + 1) * (thread.getRootMessage().getDigCount() + 1);
-		long diff2 = thread.getViewCount() - thread.getViewCounter().getLastSavedCount() + 1;
-		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
-		long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);		
-		if (diffDays >= 5)
-		   p = diff2 * p / (diffDays * 100);
-		else if (diffDays >= 3)
-			p = diff2 * p / (diffDays * 10);
-		else{
-			// long diffHours = TimeUnit.HOURS.convert(diffInMillis, TimeUnit.MILLISECONDS);
-			// if (diffHours > 0)
-			//    p = p / diffHours;
-			p =  Math.pow(p, diff2);   
-		}
-		return p;
+	private double algorithm(final ForumThread thread, final ForumThread threadPrev) {
+		return approvedListSpec.sortedLeaderboard(thread, threadPrev);
 	}
 }
