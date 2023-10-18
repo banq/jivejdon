@@ -175,11 +175,11 @@
             <forward name="success" path="/query/authorList.jsp" />
         </action>
 
-        <action path="/query/threadDigList" type="com.jdon.jivejdon.presentation.action.query.ThreadRandomDigListAction" name="threadListForm" scope="request" validate="false">
+        <action path="/query/threadDigList" type="com.jdon.jivejdon.presentation.action.query.ThreadDigListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/threadDigList.jsp" />
         </action>
 
-        <action path="/query/threadDigList2" type="com.jdon.jivejdon.presentation.action.query.ThreadDigListAction" name="threadListForm" scope="request" validate="false">
+        <action path="/query/threadDigList2" type="com.jdon.jivejdon.presentation.action.query.ThreadRandomDigListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/digList.jsp" />
         </action>
 
