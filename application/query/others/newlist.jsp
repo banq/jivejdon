@@ -6,7 +6,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 
-<a href="<%=request.getContextPath()%>/threads"><b>新文</b></a>
+
 <div class="box">
       <div class="linkblock">	
         <div>                    

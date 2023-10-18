@@ -35,7 +35,7 @@
       gtag('config', 'G-FTT1M21HE8');
   </script>
 </head>
-<body>
+<body style="background-color:#FFF">
 <%@ include file="./common/body_header.jsp" %>
 
 	
