@@ -17,6 +17,8 @@ package com.jdon.jivejdon.presentation.action.query;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -60,10 +62,11 @@ public class ThreadTagListAction extends ModelListAction {
 			return null;
 
 		try {
-			Collection<Long> lists = new ArrayList<Long>();
+			List<Long> lists = new ArrayList<Long>();
 			for (ThreadTag tag : thread.getTags()) {
 				lists.addAll(getForumThreadsForTag(tag.getTagID()));
 			}
+			Collections.shuffle(lists);
 	        return new PageIterator(lists.size(), lists.toArray());
 		} catch (Exception e) {
 			return new PageIterator();
