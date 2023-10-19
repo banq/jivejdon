@@ -6,6 +6,7 @@
 <%@page isELIgnored="false" %>
 <%@ page session="false" %>
 
+<logic:notEmpty name="forumThread">
 <logic:notEmpty name="forumThread" property="rootMessage">
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
  <bean:define id="body" name="forumMessage" property="messageVO.body" />
@@ -57,3 +58,4 @@
 </div>
 
  </logic:notEmpty>
+</logic:notEmpty>    

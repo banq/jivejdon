@@ -4,7 +4,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ page session="false" %>
-
+<logic:notEmpty name="forumThread">
 <logic:notEmpty name="forumThread" property="rootMessage">
 
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
@@ -56,4 +56,5 @@
 </div>
 
  </logic:notEmpty>
+ </logic:notEmpty>    
 

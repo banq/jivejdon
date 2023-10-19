@@ -5,6 +5,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ page session="false" %>
 
+<logic:notEmpty name="forumThread">
 <logic:notEmpty name="forumThread" property="rootMessage">
 
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
@@ -81,3 +82,4 @@
 
   
  </logic:notEmpty>
+ </logic:notEmpty>    
