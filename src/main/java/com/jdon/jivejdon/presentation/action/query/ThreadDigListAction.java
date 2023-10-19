@@ -72,16 +72,12 @@ public class ThreadDigListAction extends Action {
 			DigsListMAXSize = Integer.parseInt(wSize);
 		}
 		ModelListForm threadListForm = (ModelListForm) form;
-		Collection<Long> digList = getThreadApprovedNewList().getThreadDigList().getDigThreadIds(DigsListMAXSize);
+
 		Collection<ForumThread> digThreads = new ArrayList<>();
-		if (wSize != null) {
-			digThreads = digList.stream().filter(e -> getThreadViewCounterJob().getThreadIdsList().contains(e))
-					.map(e -> getForumMessageQueryService().getThread(e))
-					.filter(e->e.getRootMessage().getDigCount()>1)
-					.collect(Collectors.toList());
-		}else{
-			digThreads = digList.stream().map(e -> getForumMessageQueryService().getThread(e)).collect(Collectors.toList());
-		}
+		Collection<Long> digList = getThreadApprovedNewList().getThreadDigList().getDigThreadIds(DigsListMAXSize);
+		if(getThreadViewCounterJob().getThreadIdsList() != null)
+			digList = getThreadViewCounterJob().getThreadIdsList();
+		digThreads = digList.stream().map(e -> getForumMessageQueryService().getThread(e)).collect(Collectors.toList());
 		threadListForm.setList(digThreads);
 		threadListForm.setAllCount(digThreads.size());
 		return mapping.findForward("success");
