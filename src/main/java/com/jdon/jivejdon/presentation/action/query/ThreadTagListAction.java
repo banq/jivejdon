@@ -66,7 +66,7 @@ public class ThreadTagListAction extends ModelListAction {
 			}
 	        return new PageIterator(lists.size(), lists.toArray());
 		} catch (Exception e) {
-			return null;
+			return new PageIterator();
 		}
 
 	}
