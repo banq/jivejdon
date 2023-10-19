@@ -75,7 +75,7 @@ public class ThreadDigListAction extends Action {
 
 		Collection<ForumThread> digThreads = new ArrayList<>();
 		Collection<Long> digList = getThreadApprovedNewList().getThreadDigList().getDigThreadIds(DigsListMAXSize);
-		if(getThreadViewCounterJob().getThreadIdsList() != null)
+		if(getThreadViewCounterJob().getThreadIdsList() != null && getThreadViewCounterJob().getThreadIdsList().size() !=0)
 			digList = getThreadViewCounterJob().getThreadIdsList();
 		digThreads = digList.stream().map(e -> getForumMessageQueryService().getThread(e)).collect(Collectors.toList());
 		threadListForm.setList(digThreads);

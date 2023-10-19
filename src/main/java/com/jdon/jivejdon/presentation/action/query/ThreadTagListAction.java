@@ -15,35 +15,24 @@
  */
 package com.jdon.jivejdon.presentation.action.query;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import javax.servlet.http.HttpServletRequest;
+
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
-import com.jdon.jivejdon.spi.component.mapreduce.ThreadDigList;
 import com.jdon.jivejdon.api.property.TagService;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.domain.model.query.specification.TaggedThreadListSpec;
-import com.jdon.strutsutil.ModelListForm;
+import com.jdon.strutsutil.ModelListAction;
+import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
 
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-public class ThreadTagListAction extends Action {
+public class ThreadTagListAction extends ModelListAction {
+	private final static String module = ThreadTagListAction.class.getName();
 	private TagService tagService;
 	private ForumMessageQueryService forumMessageQueryService;
 
@@ -60,8 +49,8 @@ public class ThreadTagListAction extends Action {
 		return tagService;
 	}
 
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	@Override
+	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
 		String threadId = request.getParameter("threadId");
 		if (threadId == null || !UtilValidate.isInteger(threadId) || threadId.length() > 10) {
 			return null;
@@ -71,40 +60,35 @@ public class ThreadTagListAction extends Action {
 			return null;
 
 		try {
-			Set<Long> checkDoubles = new HashSet<Long>();
-			Collection<String> lists = new ArrayList<String>();
-			int index = 0;
+			Collection<Long> lists = new ArrayList<Long>();
 			for (ThreadTag tag : thread.getTags()) {
-				Collection<ForumThread> threadList = getForumThreadsForTag(tag.getTagID(), Long.parseLong(threadId),
-						checkDoubles);
-				lists.add(Long.toString(tag.getTagID()));
-				request.setAttribute("tagID" + Integer.toString(index), threadList);
-				index++;
+				lists.addAll(getForumThreadsForTag(tag.getTagID()));
 			}
-
-			ModelListForm threadListForm = (ModelListForm) form;
-			threadListForm.setList(lists);
-			threadListForm.setAllCount(lists.size());
-			return mapping.findForward("success");
+	        return new PageIterator(lists.size(), lists.toArray());
 		} catch (Exception e) {
 			return null;
 		}
+
 	}
 
-	private Collection<ForumThread> getForumThreadsForTag(Long tagID, final Long threadId, Set<Long> checkDoubles) {
+	private Collection<Long> getForumThreadsForTag(Long tagID) {
 		TaggedThreadListSpec taggedThreadListSpec = new TaggedThreadListSpec();
 		taggedThreadListSpec.setTagID(tagID);
 		PageIterator pageIterator = getTagService().getTaggedRandomThreads(taggedThreadListSpec, 0, 20);
-		Collection<ForumThread> threads = new ArrayList<ForumThread>();
-		Set<Long> foundThreadIds = new HashSet<Long>();
+		Collection<Long> threadIds = new ArrayList<Long>();
 		while (pageIterator.hasNext()) {
-			Long threadId1 = (Long) pageIterator.next();
-			if (threadId1.longValue() != threadId.longValue() && !foundThreadIds.contains(threadId1) && !checkDoubles.contains(threadId1)) {
-				threads.add( getForumMessageQueryService().getThread(threadId1));
-				foundThreadIds.add(threadId1);				
-				checkDoubles.add(threadId1);				
-			}
+			threadIds.add( (Long) pageIterator.next());
 		}		
-		return threads;
+		return threadIds;
 	}
+
+	public Object findModelIFByKey(HttpServletRequest request, Object key) {
+        ForumThread thread = null;
+        try {
+            thread = getForumMessageQueryService().getThread((Long) key);
+        } catch (Exception e) {
+            Debug.logError("getThread error:" + e, module);
+        }
+        return thread;
+    }
 }

@@ -6,23 +6,10 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 
-<logic:notEmpty name="tagID0">    
- <logic:iterate id="forumThread" name="tagID0" length="4">
-      <logic:notEmpty name="forumThread" >
-      <%@ include file="threadListCore.jsp" %>   
-      </logic:notEmpty>        
+ <logic:iterate id="forumThread" name="threadListForm"  property="list" length="8">
+     <%@ include file="threadListCore.jsp" %>   
  </logic:iterate>
-</logic:notEmpty>
 
-
-
-<logic:notEmpty name="tagID1">    
-  <logic:iterate id="forumThread" name="tagID1" length="4">
-     <logic:notEmpty name="forumThread" >
-       <%@ include file="threadListCore.jsp" %>
-      </logic:notEmpty>             
- </logic:iterate>
-</logic:notEmpty>
 
 
 
