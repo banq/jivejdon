@@ -136,7 +136,7 @@ public class MessageDirector implements MessageDirectorIF {
 		Collection uploads = uploadRepository.getUploadFiles(anemicMessageDTO.getMessageId().toString());
 		HotKeys hotKeys = hotKeysFactory.getHotKeys();
 		ForumMessage forumMessage = RootMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId())
-				.parentMessage(null).messageVO(anemicMessageDTO.getMessageVO()).forum(forum)
+		        .messageVO(anemicMessageDTO.getMessageVO()).forum(forum)
 				.acount(accountOptional.orElse(new Account())).creationDate(anemicMessageDTO.getCreationDate())
 				.modifiedDate(anemicMessageDTO.getModifiedDate()).filterPipleSpec(filterPipleSpec).uploads(uploads)
 				.props(props).hotKeys(hotKeys).build(threadId);
@@ -184,7 +184,7 @@ public class MessageDirector implements MessageDirectorIF {
 		Collection uploads = uploadRepository.getUploadFiles(anemicMessageDTO.getMessageId().toString());
 		HotKeys hotKeys = hotKeysFactory.getHotKeys();
 		ForumMessage forumMessage = RootMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId())
-				.parentMessage(parentforumMessage).messageVO(anemicMessageDTO.getMessageVO()).forum(forum)
+				.messageVO(anemicMessageDTO.getMessageVO()).forum(forum)
 				.acount(accountOptional.orElse(new Account()))
 				.creationDate(anemicMessageDTO.getCreationDate()).modifiedDate(anemicMessageDTO.getModifiedDate())
 				.filterPipleSpec(filterPipleSpec).uploads(uploads).props(props).hotKeys(hotKeys).build(parentforumMessage);

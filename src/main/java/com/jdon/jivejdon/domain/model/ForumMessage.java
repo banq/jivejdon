@@ -173,7 +173,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
             long modifiedDate = System.currentTimeMillis();
             String creationDate = Constants.getDefaultDateTimeDisp(modifiedDate);
             ForumMessageReply forumMessageReply = (ForumMessageReply) RootMessage.messageBuilder()
-                    .messageId(postRepliesMessageCommand.getMessageId()).parentMessage(this)
+                    .messageId(postRepliesMessageCommand.getMessageId())
                     .messageVO(postRepliesMessageCommand.getMessageVO()).forum(this.forum)
                     .acount(postRepliesMessageCommand.getAccount()).creationDate(creationDate)
                     .modifiedDate(modifiedDate).filterPipleSpec(this.filterPipleSpec)

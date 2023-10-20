@@ -26,7 +26,7 @@ public class RootMessage {
         return isCreated;
     }
 
-    public RootMessage(Long threadId) {
+    protected RootMessage(Long threadId) {
         this.forumThread = new ForumThread(this, threadId);
     }
 
@@ -42,20 +42,17 @@ public class RootMessage {
     }
 
     public static RequireMessageId messageBuilder() {
-        return messageId -> parentMessage -> messageVO -> forum -> account -> creationDate -> modifiedDate -> filterPipleSpec -> uploads -> properties -> hotKeys -> new FinalStageVO(
-                messageId, parentMessage, messageVO, forum, account, creationDate, modifiedDate,
+        return messageId -> messageVO -> forum -> account -> creationDate -> modifiedDate -> filterPipleSpec -> uploads -> properties -> hotKeys -> new FinalStageVO(
+                messageId, messageVO, forum, account, creationDate, modifiedDate,
                 filterPipleSpec, uploads, properties, hotKeys);
     }
 
     @FunctionalInterface
     public interface RequireMessageId {
-        RequireParentMessage messageId(long messageId);
+        RequireMessageVO messageId(long messageId);
     }
 
-    @FunctionalInterface
-    public interface RequireParentMessage {
-        RequireMessageVO parentMessage(ForumMessage parentMessage);
-    }
+
 
     @FunctionalInterface
     public interface RequireMessageVO {
@@ -114,7 +111,6 @@ public class RootMessage {
 
     public static class FinalStageVO {
         private final long messageId;
-        private final ForumMessage parentMessage;
         private final MessageVO messageVO;
         private final Account account;
         private final String creationDate;
@@ -125,11 +121,10 @@ public class RootMessage {
         private final Collection<Property> props;
         private final HotKeys hotKeys;
 
-        public FinalStageVO(long messageId, ForumMessage parentMessage, MessageVO messageVO, Forum forum, Account account, String creationDate, long modifiedDate,
+        public FinalStageVO(long messageId,  MessageVO messageVO, Forum forum, Account account, String creationDate, long modifiedDate,
                 FilterPipleSpec filterPipleSpec, Collection<UploadFile> uploads, Collection<Property> props,
                 HotKeys hotKeys) {
             this.messageId = messageId;
-            this.parentMessage = parentMessage;
             this.messageVO = messageVO;
             this.account = account;
             this.creationDate = creationDate;
