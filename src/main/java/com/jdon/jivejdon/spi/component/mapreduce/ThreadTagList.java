@@ -19,7 +19,7 @@ public class ThreadTagList {
 
 	public final static int DigsListMAXSize = 30;
 
-	private final static int TIME_WINDOWS = 100;
+	private final static int TIME_WINDOWS = 50;
 
 	private final static int TAGSLIST_SIZE = 30;
 	private final ConcurrentHashMap<Long, Integer> tags_countWindows;
