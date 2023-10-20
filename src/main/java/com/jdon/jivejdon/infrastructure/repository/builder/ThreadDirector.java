@@ -21,6 +21,7 @@ import com.jdon.annotation.pointcut.Around;
 import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.RootMessage;
 import com.jdon.jivejdon.domain.model.property.HotKeys;
 import com.jdon.jivejdon.domain.model.thread.ThreadTagsVO;
 import com.jdon.jivejdon.infrastructure.repository.property.HotKeysRepository;
@@ -61,49 +62,30 @@ public class ThreadDirector implements ThreadDirectorIF {
 		if (threadId == null || threadId == 0)
 			return null;
 		try {
-			return build(threadId, null);
+			return build(threadId);
 		} catch (Exception e) {
 			throw new Exception(e);
 		}
 	}
 
-	/**
-	 * return a full ForumThread one ForumThread has one rootMessage need solve the
-	 * realtion with Forum rootForumMessage latestPost
-	 *
-	 * @param threadId
-	 * @return
-	 */
-	@Override
-	@Around
-	public ForumThread getThread(final Long threadId, ForumMessage rootMessage) throws Exception {
-		logger.debug("TH----> enter getThread, threadId=" + threadId);
-		if (threadId == null || threadId == 0)
-			return null;
+	
 
-		try {
-			return build(threadId, rootMessage);
-		} catch (Exception e) {
-			throw new Exception(e);
-		}
-	}
-
-	private ForumThread build(final Long threadId, ForumMessage rootMessage) throws Exception {
+	private ForumThread build(final Long threadId) throws Exception {
+		Long rootmessageId = this.messageDao.getThreadRootMessageId(threadId);
+		RootMessage	rootMessage = messageDirectorIF.getRootMessage(rootmessageId, threadId);
+	
 		ForumThread forumThread = messageDao.getThreadCore(threadId, rootMessage);
 		if (forumThread == null) {
 			logger.error("no threadId=" + threadId);
 			return null;
 		}
+
 		Forum forum = forumDirector.getForum(forumThread.getForum().getForumId());
-		if (rootMessage == null) {
-			Long rootmessageId = this.messageDao.getThreadRootMessageId(forumThread.getThreadId());
-			rootMessage = messageDirectorIF.getRootMessage(rootmessageId, forumThread);
-		}
 		// init viewcount
 		forumThread.getViewCounter().loadinitCount();
 		Collection tags = tagRepository.getThreadTags(forumThread);
 		ThreadTagsVO threadTagsVO = new ThreadTagsVO(forumThread, tags);
-		forumThread.build(forum, rootMessage, threadTagsVO);
+		forumThread.build(forum, threadTagsVO);
 		return forumThread;
 	}
 

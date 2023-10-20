@@ -18,6 +18,7 @@ package com.jdon.jivejdon.infrastructure.repository.dao.sql;
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.RootMessage;
 import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.jivejdon.domain.model.util.OneOneDTO;
@@ -115,7 +116,7 @@ public abstract class MessageDaoSql implements MessageDao {
 	 *
 	 * @see com.jdon.jivejdon.dao.MessageDao#getThread(java.lang.String)
 	 */
-	public ForumThread getThreadCore(Long threadId, ForumMessage rootMessage) {
+	public ForumThread getThreadCore(Long threadId, RootMessage rootMessage) {
 		logger.debug("enter getThread for id:" + threadId);
 		String LOAD_THREAD = "SELECT forumID, rootMessageID, modValue, rewardPoints, " + "creationDate, "
 				+ "modifiedDate FROM jiveThread WHERE threadID=?";

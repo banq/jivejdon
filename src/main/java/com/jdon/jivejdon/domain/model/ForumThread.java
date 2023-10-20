@@ -36,6 +36,7 @@ import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.domain.model.realtime.ForumMessageDTO;
 import com.jdon.jivejdon.domain.model.realtime.LobbyPublisherRoleIF;
 import com.jdon.jivejdon.domain.model.realtime.Notification;
+import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
 import com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF;
 import com.jdon.jivejdon.domain.model.subscription.event.ThreadSubscribedNotifyEvent;
 import com.jdon.jivejdon.domain.model.thread.ThreadTagsVO;
@@ -69,19 +70,21 @@ public class ForumThread {
 	public MessageEventSourcingRole eventSourcing;
 
 	private final Long threadId;
+	private final RootMessage rootMessage;
 
+	private Forum forum;
 	// same as rootMessage's creationDate
 	private String creationDate;
 	// contain some abstract properties
 	private Collection<Property> propertys;
 	private ThreadTagsVO threadTagsVO;
-	private volatile Forum forum;
+
 	/**
 	 * the root message of a thread. The root message is a special first message
 	 * that is intimately tied to the thread for most forumViews. All other messages
 	 * in the thread are children of the root message.
 	 */
-	private volatile ForumMessage rootMessage;
+	
 	private volatile AtomicReference<ForumThreadState> state;
 	// update mutable
 	private volatile ViewCounter viewCounter;
@@ -90,6 +93,8 @@ public class ForumThread {
 
 	private long creationDate2;
 
+	private ReBlogVO reBlogVO;
+
 	private boolean solid;
 
 	/**
@@ -97,11 +102,11 @@ public class ForumThread {
 	 *
 	 * @param rootMessage
 	 */
-	public ForumThread(ForumMessage rootMessage, Long tIDInt, Forum forum) {
+	public ForumThread(RootMessage rootMessage, Long tIDInt) {
 		
 		this.rootMessage = rootMessage;
 		this.threadId = tIDInt;
-		this.forum = forum;
+	
 		this.state = new AtomicReference(new ForumThreadState(this));
 		this.threadTagsVO = new ThreadTagsVO(this, new ArrayList());
 		this.propertys = new ArrayList<Property>();
@@ -110,7 +115,7 @@ public class ForumThread {
 
 	// new ForumThread() is Banned
 	private ForumThread() {
-		this(null, null, null);
+		this(null, Long.MAX_VALUE);
 	}
 	// /**
 	// * DTO object, limited usage
@@ -145,13 +150,6 @@ public class ForumThread {
 
 	public Forum getForum() {
 		return forum;
-	}
-
-	private void setForum(Forum forum) {
-		this.forum = forum;
-		// if (this.rootMessage != null) {
-		// rootMessage.setForum(forum);
-		// }
 	}
 
 	public Long getThreadId() {
@@ -192,19 +190,19 @@ public class ForumThread {
 		if (rootMessage == null) {
 			logger.error("getRootMessage: rootMessage is null! threadId:" + threadId);
 		}
-		return rootMessage;
+		return (ForumMessage)rootMessage;
 	}
 
-	private void setRootMessage(ForumMessage rootMessage) {
-		if (rootMessage == null)
-			return;
-		if (rootMessage instanceof ForumMessageReply) {
-			logger.error("root message must be ForumMessage threadId=" + this.threadId + " messageId="
-					+ rootMessage.getMessageId());
-			return;
-		}
-		this.rootMessage = rootMessage;
-	}
+	// private void setRootMessage(ForumMessage rootMessage) {
+	// 	if (rootMessage == null)
+	// 		return;
+	// 	if (rootMessage instanceof ForumMessageReply) {
+	// 		logger.error("root message must be ForumMessage threadId=" + this.threadId + " messageId="
+	// 				+ rootMessage.getMessageId());
+	// 		return;
+	// 	}
+	// 	this.rootMessage = rootMessage;
+	// }
 
 	/**
 	 * @return Returns the forumThreadState.
@@ -262,8 +260,8 @@ public class ForumThread {
 		if ((isRoot(forumMessage)) && (forumMessage.isLeaf())) {
 			DomainMessage dm = this.lazyLoaderRole.loadForum(newForum.getForumId());
 			newForum = (Forum) dm.getBlockEventResult();
-			// forumMessage.setForum(newForum);
-			setForum(newForum);
+			forumMessage.setForum(newForum);
+			this.forum = newForum;
 
 			eventSourcing
 					.moveMessage(new MessageOwnershipChangedEvent(forumMessage.getMessageId(), newForum.getForumId()));
@@ -274,7 +272,7 @@ public class ForumThread {
 
 	public void updateMessage(ForumMessage forumMessage) {
 		if (isRoot(forumMessage)) {
-			this.setRootMessage(forumMessage);
+			// this.setRootMessage(forumMessage);
 			setRootMessageTitles();
 		}
 		this.state.get().setLatestPost(forumMessage);
@@ -364,8 +362,8 @@ public class ForumThread {
 	 * @param message
 	 */
 	public void addDig(ForumMessage message) {
-		if (message.getMessageId().longValue() != rootMessage.getMessageId().longValue()) {
-			rootMessage.messaegDigAction();
+		if (message.getMessageId().longValue() != ((ForumMessage)rootMessage).getMessageId().longValue()) {
+			((ForumMessage)rootMessage).messaegDigAction();
 		}
 
 	}
@@ -405,11 +403,16 @@ public class ForumThread {
 		return Objects.hash(this.threadId);
 	}
 
-	public synchronized void build(Forum forum, ForumMessage rootMessage, ThreadTagsVO threadTagsVO) {
+
+	public void setForum(Forum forum) {
+		this.forum = forum;
+	}
+
+	public synchronized void build(Forum forum,ThreadTagsVO threadTagsVO) {
 		if (isSolid())
 			return;
-		this.setForum(forum);
-		this.setRootMessage(rootMessage);
+		this.forum = forum;
+		// this.setRootMessage(rootMessage);
 		this.setThreadTagsVO(threadTagsVO);
 		this.setSolid(true);
 	}
@@ -420,5 +423,11 @@ public class ForumThread {
 
 	private void setSolid(boolean solid) {
 		this.solid = solid;
+	}
+
+	public ReBlogVO getReBlogVO() {
+	    if (reBlogVO == null &&  lazyLoaderRole != null)
+	        reBlogVO = new ReBlogVO(getThreadId(), lazyLoaderRole);
+	    return reBlogVO;
 	}
 }

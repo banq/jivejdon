@@ -17,6 +17,7 @@ package com.jdon.jivejdon.infrastructure.repository.dao;
 
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.RootMessage;
 import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.jivejdon.domain.model.util.OneOneDTO;
@@ -40,7 +41,7 @@ public interface MessageDao {
 
 	void deleteMessage(Long forumMessageId) throws Exception;
 
-	ForumThread getThreadCore(Long threadId, ForumMessage rootMessage);
+	ForumThread getThreadCore(Long threadId, RootMessage rootMessage);
 
 	Long getThreadRootMessageId(Long threadId);
 

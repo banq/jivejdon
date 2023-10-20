@@ -66,7 +66,7 @@ public class ThreadLinkListAction extends Action {
 			return null;
 
 		try {
-			ReBlogVO reBlogVO = thread.getRootMessage().getReBlogVO();
+			ReBlogVO reBlogVO = thread.getReBlogVO();
 			if (reBlogVO == null)
 				return null;
 

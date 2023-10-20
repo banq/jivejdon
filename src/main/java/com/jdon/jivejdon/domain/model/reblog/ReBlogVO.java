@@ -27,7 +27,7 @@ public class ReBlogVO extends LazyLoader {
 
 	private final long Id;
 
-	private LazyLoaderRole lazyLoaderRole;
+	private final LazyLoaderRole lazyLoaderRole;
 
 	private volatile Collection<ForumThread> threadTos;
 
@@ -39,6 +39,11 @@ public class ReBlogVO extends LazyLoader {
 		super();
 		this.Id = Id;
 		this.lazyLoaderRole = lazyLoaderRole;
+	}
+
+	private ReBlogVO(){
+        this.Id = Long.MAX_VALUE;
+		this.lazyLoaderRole = null;
 	}
 
 	public Collection<ForumThread> getThreadTos() {

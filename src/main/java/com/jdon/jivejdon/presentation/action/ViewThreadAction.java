@@ -52,7 +52,7 @@ public class ViewThreadAction extends ModelDispAction {
 			}
 
 			//prepare for next step
-			forumThread.getRootMessage().getReBlogVO().loadAscResult();
+			forumThread.getReBlogVO().loadAscResult();
 
 			forumThread.addViewCount(request.getRemoteAddr());
 			getThreadViewCounterJob().saveViewCounter(forumThread.getViewCounter());

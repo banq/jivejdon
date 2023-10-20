@@ -81,7 +81,8 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 			}
 			Long tIDInt = messageDaoFacade.getSequenceDao().getNextId(Constants.THREAD);
 			forumMessagePostDTO.setForum(forum);
-			forumMessagePostDTO.setForumThread(new ForumThread(null, tIDInt, forumMessagePostDTO.getForum()));
+			forumMessagePostDTO.setForumThread(new ForumThread(null, tIDInt));
+			forumMessagePostDTO.getForumThread().setForum(forum);
 			messageDaoFacade.getMessageDao().createMessage(forumMessagePostDTO);
 			super.createThread(forumMessagePostDTO);
 			uploadRepository.saveAllUploadFiles(forumMessagePostDTO.getMessageId().toString(),

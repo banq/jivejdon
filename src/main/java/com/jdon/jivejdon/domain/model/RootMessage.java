@@ -20,14 +20,30 @@ import com.jdon.jivejdon.domain.model.property.Property;
 public class RootMessage {
     private final static Logger logger = LogManager.getLogger(RootMessage.class);
     protected volatile boolean isCreated;
+    public final ForumThread forumThread;
 
     public boolean isCreated() {
         return isCreated;
     }
 
+    public RootMessage(Long threadId) {
+        this.forumThread = new ForumThread(this, threadId);
+    }
+
+    private RootMessage(){this(Long.MAX_VALUE);}
+
+
+    public ForumThread getForumThread() {
+        if (!this.isCreated) {
+            logger.error("forumMessage is be constructing. thread is half");
+            return null;
+        }
+        return forumThread;
+    }
+
     public static RequireMessageId messageBuilder() {
-        return messageId -> parentMessage -> messageVO -> forum -> forumThread -> account -> creationDate -> modifiedDate -> filterPipleSpec -> uploads -> properties -> hotKeys -> new FinalStageVO(
-                messageId, parentMessage, messageVO, forum, forumThread, account, creationDate, modifiedDate,
+        return messageId -> parentMessage -> messageVO -> forum -> account -> creationDate -> modifiedDate -> filterPipleSpec -> uploads -> properties -> hotKeys -> new FinalStageVO(
+                messageId, parentMessage, messageVO, forum, account, creationDate, modifiedDate,
                 filterPipleSpec, uploads, properties, hotKeys);
     }
 
@@ -48,12 +64,7 @@ public class RootMessage {
 
     @FunctionalInterface
     public interface RequireForum {
-        RequireForumThread forum(Forum forum);
-    }
-
-    @FunctionalInterface
-    public interface RequireForumThread {
-        RequireAccount forumThread(ForumThread forumThread);
+        RequireAccount forum(Forum forum);
     }
 
     @FunctionalInterface
@@ -109,14 +120,12 @@ public class RootMessage {
         private final String creationDate;
         private final long modifiedDate;
         private final Forum forum;
-        private final ForumThread forumThread;
         private final FilterPipleSpec filterPipleSpec;
         private final Collection<UploadFile> uploads;
         private final Collection<Property> props;
         private final HotKeys hotKeys;
 
-        public FinalStageVO(long messageId, ForumMessage parentMessage, MessageVO messageVO, Forum forum,
-                ForumThread forumThread, Account account, String creationDate, long modifiedDate,
+        public FinalStageVO(long messageId, ForumMessage parentMessage, MessageVO messageVO, Forum forum, Account account, String creationDate, long modifiedDate,
                 FilterPipleSpec filterPipleSpec, Collection<UploadFile> uploads, Collection<Property> props,
                 HotKeys hotKeys) {
             this.messageId = messageId;
@@ -126,30 +135,37 @@ public class RootMessage {
             this.creationDate = creationDate;
             this.modifiedDate = modifiedDate;
             this.forum = forum;
-            this.forumThread = forumThread;
             this.filterPipleSpec = filterPipleSpec;
             this.uploads = uploads;
             this.props = props;
             this.hotKeys = hotKeys;
         }
 
-        public ForumMessage build() {
+        public ForumMessageReply build(ForumMessage parentMessage) {
             try {
-                if (parentMessage != null) {
-                    ForumMessageReply forumMessageRely = new ForumMessageReply();
-                    forumMessageRely.build(messageId, messageVO, forum, forumThread, account, creationDate,
-                            modifiedDate, filterPipleSpec, uploads, props, hotKeys, parentMessage);
-                    return forumMessageRely;
-                } else {
-                    ForumMessage forumMessage = new ForumMessage();
-                    forumMessage.build(messageId, messageVO, forum, forumThread, account, creationDate, modifiedDate,
-                            filterPipleSpec, uploads, props, hotKeys);
-                    return forumMessage;
-                }
+                ForumMessageReply forumMessageRely = new ForumMessageReply(parentMessage);
+                forumMessageRely.build(messageId, messageVO, forum, account, creationDate,
+                        modifiedDate, filterPipleSpec, uploads, props, hotKeys, parentMessage);
+                return forumMessageRely;
+
             } catch (Exception e) {
                 logger.error("build Exception:" + e.getMessage() + " messageId=" + messageId);
                 return null;
             }
+
+        }
+
+         public ForumMessage build(Long threadId) {
+             try {
+                 ForumMessage forumMessage = new ForumMessage(threadId);
+                 forumMessage.build(messageId, messageVO, forum, account, creationDate, modifiedDate,
+                         filterPipleSpec, uploads, props, hotKeys);
+                 return forumMessage;
+
+             } catch (Exception e) {
+                 logger.error("build Exception:" + e.getMessage() + " messageId=" + messageId);
+                 return null;
+             }
 
         }
     }

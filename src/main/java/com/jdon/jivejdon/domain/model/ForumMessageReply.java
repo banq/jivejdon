@@ -33,9 +33,11 @@ import java.util.Collection;
 public final class ForumMessageReply extends ForumMessage {
 	private static final long serialVersionUID = 1L;
 
-	private ForumMessage parentMessage;
+	private final ForumMessage parentMessage;
 
-	protected ForumMessageReply() {
+	protected ForumMessageReply(ForumMessage parentMessage) {
+		super(parentMessage.getForumThread().getThreadId());
+		this.parentMessage = parentMessage;
 	}
 
 	/**
@@ -48,23 +50,16 @@ public final class ForumMessageReply extends ForumMessage {
 		return parentMessage;
 	}
 
-	/**
-	 * @param parentMessage The parentMessage to set.
-	 */
-	private void setParentMessage(ForumMessage parentMessage) {
-		this.parentMessage = parentMessage;
-	}
-
+	
 	public boolean isRoot() {
 		return false;
 	}
 
-	public void build(long messageId, MessageVO messageVO, Forum forum, ForumThread forumThread, Account account,
+	public void build(long messageId, MessageVO messageVO, Forum forum, Account account,
 			String creationDate, long modifiedDate, FilterPipleSpec filterPipleSpec, Collection<UploadFile> uploads,
 			Collection<Property> props, HotKeys hotKeys, ForumMessage parentMessage) {
-		super.build(messageId, messageVO, forum, forumThread, account, creationDate, modifiedDate, filterPipleSpec,
+		super.build(messageId, messageVO, forum, account, creationDate, modifiedDate, filterPipleSpec,
 				uploads, props, hotKeys);
-		this.setParentMessage(parentMessage);
 
 	}
 

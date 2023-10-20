@@ -79,7 +79,8 @@ public class MessageForm extends BaseForm {
 	public MessageForm() {
 		messageVO = new MessageVO();
 		forum = new Forum(); // for parameter forum.forumId=xxx
-		forumThread = new ForumThread(null, null, forum);
+		forumThread = new ForumThread(null, null);
+		forumThread.setForum(forum);
 		account = new Account();
 		parentMessage = new AnemicMessageDTO();
 

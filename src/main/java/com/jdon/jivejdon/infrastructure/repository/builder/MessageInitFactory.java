@@ -74,7 +74,8 @@ public class MessageInitFactory {
 			messageCore.setForum(forum);
 
 			Long threadId = (Long) map.get("threadID");
-			ForumThread forumThread = new ForumThread(null, threadId, forum);
+			ForumThread forumThread = new ForumThread(null, threadId);
+			forumThread.setForum(forum);
 			messageCore.setForumThread(forumThread);
 			// lazy load
 			// forumMessage.setPropertys(propertyDaoSql.getAllPropertys(Constants.MESSAGE,
@@ -99,11 +100,12 @@ public class MessageInitFactory {
 		return forumMessage.messageVOBuilder().subject(subject).body(body).build();
 	}
 
-	public ForumThread createThreadCore(Long threadId, Map map, ForumMessage rootMessage) {
+	public ForumThread createThreadCore(Long threadId, Map map, RootMessage rootMessage) {
 
 			Forum forum = new Forum();
 			forum.setForumId((Long) map.get("forumID"));
-			ForumThread forumThread = new ForumThread(rootMessage, threadId,forum);
+			ForumThread forumThread = rootMessage.getForumThread();
+			forumThread.setForum(forum);
 
 //			forumThread.setForum(forum);
 

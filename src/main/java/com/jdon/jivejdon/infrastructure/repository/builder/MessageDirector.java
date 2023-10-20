@@ -93,11 +93,11 @@ public class MessageDirector implements MessageDirectorIF {
 	}
 
 	@Around()
-	public ForumMessage getRootMessage(Long messageId, ForumThread forumThread) {
+	public RootMessage getRootMessage(Long messageId, Long threadId) {
 		if (messageId == null || messageId == 0)
 			return null;
 		try {
-			return buildRootMessage(messageId, forumThread);
+			return buildRootMessage(messageId, threadId);
 		} catch (Exception e) {
 			return null;
 		}
@@ -107,7 +107,7 @@ public class MessageDirector implements MessageDirectorIF {
 	 * builder pattern with lambdas return a full ForumMessage need solve the
 	 * relations with Forum ForumThread parentMessage
 	 */
-	private ForumMessage buildRootMessage(Long messageId, ForumThread forumThread) throws Exception {
+	private RootMessage buildRootMessage(Long messageId, Long threadId) throws Exception {
 		logger.debug(" enter createMessage for id=" + messageId);
 		try {
 			final AnemicMessageDTO anemicMessageDTO = (AnemicMessageDTO) messageDao.getAnemicMessage(messageId);
@@ -120,7 +120,7 @@ public class MessageDirector implements MessageDirectorIF {
 				logger.error("this message is not root message  id=" + messageId);
 				return null;
 			}
-			return createRootMessage(anemicMessageDTO, forumThread);
+			return createRootMessage(anemicMessageDTO, threadId);
 
 		} catch (Exception e) {
 			logger.error("getMessage exception " + e.getMessage() + " messageId=" + messageId);
@@ -128,7 +128,7 @@ public class MessageDirector implements MessageDirectorIF {
 		}
 	}
 
-	private ForumMessage createRootMessage(AnemicMessageDTO anemicMessageDTO, ForumThread forumThread) {
+	private RootMessage createRootMessage(AnemicMessageDTO anemicMessageDTO, Long threadId) {
 		Optional<Account> accountOptional = createAccount(anemicMessageDTO.getAccount());
 		FilterPipleSpec filterPipleSpec = new FilterPipleSpec(outFilterManager.getOutFilters());
 		Forum forum = forumDirector.getForum(anemicMessageDTO.getForum().getForumId());
@@ -136,10 +136,10 @@ public class MessageDirector implements MessageDirectorIF {
 		Collection uploads = uploadRepository.getUploadFiles(anemicMessageDTO.getMessageId().toString());
 		HotKeys hotKeys = hotKeysFactory.getHotKeys();
 		ForumMessage forumMessage = RootMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId())
-				.parentMessage(null).messageVO(anemicMessageDTO.getMessageVO()).forum(forum).forumThread(forumThread)
+				.parentMessage(null).messageVO(anemicMessageDTO.getMessageVO()).forum(forum)
 				.acount(accountOptional.orElse(new Account())).creationDate(anemicMessageDTO.getCreationDate())
 				.modifiedDate(anemicMessageDTO.getModifiedDate()).filterPipleSpec(filterPipleSpec).uploads(uploads)
-				.props(props).hotKeys(hotKeys).build();
+				.props(props).hotKeys(hotKeys).build(threadId);
 		return forumMessage;
 	}
 
@@ -185,9 +185,9 @@ public class MessageDirector implements MessageDirectorIF {
 		HotKeys hotKeys = hotKeysFactory.getHotKeys();
 		ForumMessage forumMessage = RootMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId())
 				.parentMessage(parentforumMessage).messageVO(anemicMessageDTO.getMessageVO()).forum(forum)
-				.forumThread(parentforumMessage.getForumThread()).acount(accountOptional.orElse(new Account()))
+				.acount(accountOptional.orElse(new Account()))
 				.creationDate(anemicMessageDTO.getCreationDate()).modifiedDate(anemicMessageDTO.getModifiedDate())
-				.filterPipleSpec(filterPipleSpec).uploads(uploads).props(props).hotKeys(hotKeys).build();
+				.filterPipleSpec(filterPipleSpec).uploads(uploads).props(props).hotKeys(hotKeys).build(parentforumMessage);
 		return forumMessage;
 	}
 

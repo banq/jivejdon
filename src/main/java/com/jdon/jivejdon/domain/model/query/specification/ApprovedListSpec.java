@@ -53,7 +53,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 				p = Math.pow(p, diff2);
 			}
 
-			final ReBlogVO reBlogVO = thread.getRootMessage().getReBlogVO();
+			final ReBlogVO reBlogVO = thread.getReBlogVO();
 			p = p * (reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size() + 1);
 		} finally {
 		}
@@ -61,7 +61,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	protected boolean isLinked(ForumThread thread) {
-		final ReBlogVO reBlogVO = thread.getRootMessage().getReBlogVO();
+		final ReBlogVO reBlogVO = thread.getReBlogVO();
         return (reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size())>0?true:false;
 	}
 		

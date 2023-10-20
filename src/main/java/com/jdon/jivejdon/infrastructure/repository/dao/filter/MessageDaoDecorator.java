@@ -17,11 +17,8 @@ package com.jdon.jivejdon.infrastructure.repository.dao.filter;
 
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.pointcut.Around;
-import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.util.OneOneDTO;
-import com.jdon.jivejdon.infrastructure.cqrs.CacheQueryRefresher;
+import com.jdon.jivejdon.domain.model.RootMessage;
 import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.infrastructure.repository.builder.MessageInitFactory;
 import com.jdon.jivejdon.infrastructure.repository.dao.AccountDao;
@@ -29,8 +26,8 @@ import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
 import com.jdon.jivejdon.infrastructure.repository.dao.UploadFileDao;
 import com.jdon.jivejdon.infrastructure.repository.dao.sql.JdbcTempSource;
 import com.jdon.jivejdon.infrastructure.repository.dao.sql.MessageDaoSql;
-import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
 import com.jdon.jivejdon.infrastructure.repository.search.MessageSearchRepository;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.util.ContainerUtil;
 
 /**
@@ -56,7 +53,7 @@ public class MessageDaoDecorator extends MessageDaoSql {
 	}
 
 	@Around()
-	public ForumThread getThreadCore(Long threadId, ForumMessage rootMessage) {
+	public ForumThread getThreadCore(Long threadId, RootMessage rootMessage) {
 		return super.getThreadCore(threadId, rootMessage);
 	}
 

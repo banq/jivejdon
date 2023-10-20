@@ -81,20 +81,25 @@ public class ForumMessage extends RootMessage implements Cloneable {
     private String creationDate;
     private long modifiedDate;
     private Account account; // owner
-    private volatile ForumThread forumThread;
+
     private Forum forum;
 
     private String[] tagTitle;
     private AttachmentsVO attachmentsVO;
     private MessagePropertysVO messagePropertysVO;
-    private ReBlogVO reBlogVO;
+
     private HotKeys hotKeys;
 
     // new ForumMessage() is banned, use RootMessage.messageBuilder()
-    protected ForumMessage() {
+    protected ForumMessage(long threadId) {
+        super(threadId);
         this.messageVO = this.messageVOBuilder().subject("").body("").build();
         this.messageUrlVO = new MessageUrlVO("", "", "");
     }
+
+    private ForumMessage(){
+        this(Long.MAX_VALUE);
+    } 
 
     public Account getAccount() {
         return account;
@@ -169,11 +174,11 @@ public class ForumMessage extends RootMessage implements Cloneable {
             String creationDate = Constants.getDefaultDateTimeDisp(modifiedDate);
             ForumMessageReply forumMessageReply = (ForumMessageReply) RootMessage.messageBuilder()
                     .messageId(postRepliesMessageCommand.getMessageId()).parentMessage(this)
-                    .messageVO(postRepliesMessageCommand.getMessageVO()).forum(this.forum).forumThread(this.forumThread)
+                    .messageVO(postRepliesMessageCommand.getMessageVO()).forum(this.forum)
                     .acount(postRepliesMessageCommand.getAccount()).creationDate(creationDate)
                     .modifiedDate(modifiedDate).filterPipleSpec(this.filterPipleSpec)
                     .uploads(postRepliesMessageCommand.getAttachment().getUploadFiles())
-                    .props(postRepliesMessageCommand.getMessagePropertysVO().getPropertys()).hotKeys(hotKeys).build();
+                    .props(postRepliesMessageCommand.getMessagePropertysVO().getPropertys()).hotKeys(hotKeys).build(this);
 
             forumThread.addNewMessage(this, forumMessageReply);
             forumMessageReply.getAccount().updateMessageCount(1);
@@ -275,23 +280,12 @@ public class ForumMessage extends RootMessage implements Cloneable {
         return modifiedDate;
     }
 
-    public ForumThread getForumThread() {
-        if (!this.isCreated) {
-            logger.error("forumMessage is be constructing. thread is half");
-            return null;
-        }
-        return forumThread;
-    }
-
-    private void setForumThread(ForumThread forumThread) {
-        this.forumThread = forumThread;
-    }
 
     public Forum getForum() {
         return forum;
     }
 
-    private void setForum(Forum forum) {
+    public void setForum(Forum forum) {
         if (forum.lazyLoaderRole == null || forum.getName() == null) {
             logger.error("forum not solid for messageId=" + messageId + " forumId=" + forum.getForumId());
         }
@@ -327,16 +321,6 @@ public class ForumMessage extends RootMessage implements Cloneable {
 
     public String getPostip() {
         return this.getMessagePropertysVO().getPostip();
-    }
-
-    public ReBlogVO getReBlogVO() {
-        if (reBlogVO == null)
-            reBlogVO = new ReBlogVO(this.forumThread.getThreadId(), this.lazyLoaderRole);
-        return reBlogVO;
-    }
-
-    public void setReBlogVO(ReBlogVO reBlogVO) {
-        this.reBlogVO = reBlogVO;
     }
 
     public String[] getTagTitle() {
@@ -394,7 +378,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
         return subject -> body -> new MessageVO.MessageVOFinalStage(subject, body, this);
     }
 
-    public void build(long messageId, MessageVO messageVO, Forum forum, ForumThread forumThread, Account account,
+    public void build(long messageId, MessageVO messageVO, Forum forum,  Account account,
             String creationDate, long modifiedDate, FilterPipleSpec filterPipleSpec, Collection<UploadFile> uploads,
             Collection<Property> props, HotKeys hotKeys) {
         try {
@@ -406,7 +390,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
                         setCreationDate(creationDate);
                         setModifiedDate(modifiedDate);
                         setForum(forum);
-                        setForumThread(forumThread);
+                     
                         setFilterPipleSpec(filterPipleSpec);
                         setAttachment(new AttachmentsVO(messageId, uploads));
                         setMessagePropertysVO(new MessagePropertysVO(messageId, props));
