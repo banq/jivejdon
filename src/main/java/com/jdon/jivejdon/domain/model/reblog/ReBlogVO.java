@@ -25,9 +25,7 @@ import com.jdon.jivejdon.domain.model.util.Many2ManyDTO;
 
 public class ReBlogVO extends LazyLoader {
 
-	private final long Id;
-
-	private final LazyLoaderRole lazyLoaderRole;
+	private final ForumThread thread;
 
 	private volatile Collection<ForumThread> threadTos;
 
@@ -35,15 +33,12 @@ public class ReBlogVO extends LazyLoader {
 
 	private volatile boolean load;
 
-	public ReBlogVO(long Id, LazyLoaderRole lazyLoaderRole) {
-		super();
-		this.Id = Id;
-		this.lazyLoaderRole = lazyLoaderRole;
+	public ReBlogVO(ForumThread thread) {
+		this.thread = thread;
 	}
 
 	private ReBlogVO(){
-        this.Id = Long.MAX_VALUE;
-		this.lazyLoaderRole = null;
+        this.thread = null;
 	}
 
 	public Collection<ForumThread> getThreadTos() {
@@ -71,7 +66,7 @@ public class ReBlogVO extends LazyLoader {
 
 	@Override
 	public DomainMessage getDomainMessage() {
-		return lazyLoaderRole.loadReBlog(Id);
+		return this.thread.lazyLoaderRole.loadReBlog(thread.getThreadId());
 	}
 
 	public void refresh() {

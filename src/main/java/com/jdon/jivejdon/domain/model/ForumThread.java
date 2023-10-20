@@ -427,7 +427,7 @@ public class ForumThread {
 
 	public ReBlogVO getReBlogVO() {
 	    if (reBlogVO == null &&  lazyLoaderRole != null)
-	        reBlogVO = new ReBlogVO(getThreadId(), lazyLoaderRole);
+	        reBlogVO = new ReBlogVO(this);
 	    return reBlogVO;
 	}
 }
