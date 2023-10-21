@@ -78,22 +78,24 @@ public class ThreadDirector implements ThreadDirectorIF{
 	
 
 	public ForumThread build(Long threadId)  {
-		Long rootmessageId = this.messageDao.getThreadRootMessageId(threadId);
-		RootMessage	rootMessage = messageDirectorIF.getRootMessage(rootmessageId, threadId);
-	
-		ForumThread forumThread = messageDao.getThreadCore(threadId, rootMessage);
-		if (forumThread == null) {
-			logger.error("no threadId=" + threadId);
-			return null;
-		}
+		synchronized (threadId) {
+			Long rootmessageId = this.messageDao.getThreadRootMessageId(threadId);
+			RootMessage rootMessage = messageDirectorIF.getRootMessage(rootmessageId, threadId);
 
-		Forum forum = forumDirector.getForum(forumThread.getForum().getForumId());
-		// init viewcount
-		forumThread.getViewCounter().loadinitCount();
-		Collection tags = tagRepository.getThreadTags(forumThread);
-		ThreadTagsVO threadTagsVO = new ThreadTagsVO(forumThread, tags);
-		forumThread.build(forum, threadTagsVO);
-		return forumThread;
+			ForumThread forumThread = messageDao.getThreadCore(threadId, rootMessage);
+			if (forumThread == null) {
+				logger.error("no threadId=" + threadId);
+				return null;
+			}
+
+			Forum forum = forumDirector.getForum(forumThread.getForum().getForumId());
+			// init viewcount
+			forumThread.getViewCounter().loadinitCount();
+			Collection tags = tagRepository.getThreadTags(forumThread);
+			ThreadTagsVO threadTagsVO = new ThreadTagsVO(forumThread, tags);
+			forumThread.build(forum, threadTagsVO);
+			return forumThread;
+		}
 	}
 
 
