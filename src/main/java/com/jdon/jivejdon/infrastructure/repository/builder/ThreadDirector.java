@@ -28,31 +28,35 @@ import com.jdon.jivejdon.infrastructure.repository.property.HotKeysRepository;
 import com.jdon.jivejdon.infrastructure.repository.property.TagRepository;
 import com.jdon.jivejdon.infrastructure.repository.dao.MessageDao;
 import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
+
+import org.apache.log4j.chainsaw.Main;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Collection;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.function.Function;
 
 @Introduce("modelCache")
-public class ThreadDirector implements ThreadDirectorIF {
+public class ThreadDirector implements ThreadDirectorIF{
 	private final static Logger logger = LogManager.getLogger(ThreadDirector.class);
 
 	private final MessageDao messageDao;
 
 	private final TagRepository tagRepository;
 
-	private final PropertyDao propertyDao;
-
 	private final MessageDirectorIF messageDirectorIF;
 
 	private final ForumDirector forumDirector;
 
+	private final ConcurrentMap<Long, ForumThread> atomicFactorys = new ConcurrentHashMap<>();
+
 	public ThreadDirector(ForumDirector forumDirector, MessageDao messageDao, TagRepository tagRepository,
-			PropertyDao propertyDao, MessageDirectorIF messageDirectorIF) {
+			MessageDirectorIF messageDirectorIF) {
 		this.forumDirector = forumDirector;
 		this.messageDao = messageDao;
 		this.tagRepository = tagRepository;
-		this.propertyDao = propertyDao;
 		this.messageDirectorIF = messageDirectorIF;
 	}
 
@@ -62,7 +66,10 @@ public class ThreadDirector implements ThreadDirectorIF {
 		if (threadId == null || threadId == 0)
 			return null;
 		try {
-			return build(threadId);
+			ForumThread  forumThread = atomicFactorys.computeIfAbsent(threadId, this::build);
+			if(forumThread != null)
+				atomicFactorys.remove(threadId);
+			return forumThread;
 		} catch (Exception e) {
 			throw new Exception(e);
 		}
@@ -70,7 +77,7 @@ public class ThreadDirector implements ThreadDirectorIF {
 
 	
 
-	private ForumThread build(final Long threadId) throws Exception {
+	public ForumThread build(Long threadId)  {
 		Long rootmessageId = this.messageDao.getThreadRootMessageId(threadId);
 		RootMessage	rootMessage = messageDirectorIF.getRootMessage(rootmessageId, threadId);
 	
@@ -88,5 +95,6 @@ public class ThreadDirector implements ThreadDirectorIF {
 		forumThread.build(forum, threadTagsVO);
 		return forumThread;
 	}
+
 
 }
