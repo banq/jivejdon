@@ -6,6 +6,8 @@
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@page isELIgnored="false" %>
+
+
 <%
 String offset = "0";
 if (request.getParameter("offset")!=null){
@@ -15,9 +17,12 @@ String count = "5";
 if (request.getParameter("count")!=null){
    count = request.getParameter("count");
 }
+
+String[] imageUrls = (String[])request.getAttribute("Tags_ImageUrls");
+int i=0;
 %>
 <main>
-<logic:iterate indexId="i" id="threadTag" name="tagsListForm"  property="list" offset="<%=offset%>" length="<%=count%>">
+<logic:iterate  id="threadTag" name="tagsListForm"  property="list" offset="<%=offset%>" length="<%=count%>">
 
 
  <div class="row">	
@@ -28,8 +33,14 @@ if (request.getParameter("count")!=null){
   <div class="linkblock">
  
     <div style="position: relative;"  class="thumbn">           
-       <a href='<%=request.getContextPath() %>/tag-<bean:write name="threadTag" property="tagID"/>/' target="_blank" title="<bean:write name="threadTag" property="title" />">         
-        <img id="home-thumbnai"  width="300"  src="/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="thumbnail"  loading="lazy"/>                  
+       <a href='<%=request.getContextPath() %>/tag-<bean:write name="threadTag" property="tagID"/>/' target="_blank" title="<bean:write name="threadTag" property="title" />">    
+       <%
+       String imgeUrl = imageUrls[i];
+       if (imgeUrl==null)
+          imgeUrl = "/simgs/thumb2/"+java.util.concurrent.ThreadLocalRandom.current().nextInt(49)+".jpg";
+
+       %>     
+        <img id="home-thumbnai"  width="300"  src='<%=imgeUrl%>' border="0" class="thumbnail"  loading="lazy"/>                  
        </a>
       <div style="position: absolute;top:0px;">
        <div class="tagcloud">
@@ -59,6 +70,6 @@ if (request.getParameter("count")!=null){
   </div>
 
 
-
+<%i++;%>
 </logic:iterate>
 </main>
