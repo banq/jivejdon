@@ -81,7 +81,7 @@ public class ThreadTagList {
 					.getThreadTag(tagId)).collect(Collectors.toList());
 	}
 
-	private void sort() {
+	private synchronized void sort() {
 		tagIds.addAll(tags_countWindows.keySet());
 		threadIds.clear();
 	}
