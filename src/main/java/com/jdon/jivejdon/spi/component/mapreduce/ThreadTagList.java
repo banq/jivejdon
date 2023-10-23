@@ -43,7 +43,7 @@ public class ThreadTagList {
 		this.tags_countWindows = new ConcurrentHashMap<>();
 		this.tags_messageImageUrls = new ConcurrentHashMap<>();
 		this.tagThreadIds = new ConcurrentHashMap<>();
-		this.threadIds = new TreeSet<>(Comparator.comparing(Long::longValue));
+		this.threadIds = new TreeSet<>();
 		this.tagIds = new TreeSet<Long>(new ThreadTagComparator(this));
 	}
 
