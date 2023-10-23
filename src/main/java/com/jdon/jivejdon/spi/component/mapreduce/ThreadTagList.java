@@ -72,16 +72,23 @@ public class ThreadTagList {
 	}
 
 	public List<ThreadTag> getThreadTags() {
-		if ( tagIds == null && threadIds !=null) {
-			tagIds = new TreeSet<Long>(new ThreadTagComparator(tags_countWindows));
-			tagIds.addAll(tags_countWindows.keySet());	
-			threadIds.clear();	
-		}
+		if ( tagIds == null && threadIds !=null) 
+		    sort();
 		return tagIds.stream().limit(TAGSLIST_SIZE).map(tagId -> tagService
 					.getThreadTag(tagId)).collect(Collectors.toList());
 	}
 
+	private void sort() {
+		tagIds = new TreeSet<Long>(new ThreadTagComparator(this));
+		tagIds.addAll(tags_countWindows.keySet());
+		threadIds.clear();
+	}
+
 	
+	public ConcurrentHashMap<Long, Integer> getTags_countWindows() {
+		return tags_countWindows;
+	}
+
 	public boolean isEmpty(){
 		return (tagIds == null  && threadIds ==null)?true:false;
 	}
@@ -96,10 +103,8 @@ public class ThreadTagList {
 	}
 
 	public String[] getImageUrls() {
-		if (tagIds == null) {
-			tagIds = new TreeSet<Long>(new ThreadTagComparator(tags_countWindows));
-			tagIds.addAll(tags_countWindows.keySet());
-		}
+		if (tagIds == null && threadIds != null)
+			sort();
 		return tagIds.stream().limit(TAGSLIST_SIZE).map(tagId -> tags_messageImageUrls.get(tagId))
 				.toArray(String[]::new);
 	}
