@@ -27,13 +27,14 @@ public class ThreadTagList {
 	private final static int TIME_WINDOWS = 50;
 
 	private final static int TAGSLIST_SIZE = 30;
+	
+	private final TagService tagService;
+	private final ForumMessageQueryService forumMessageQueryService;
+
 	private final ConcurrentHashMap<Long, Integer> tags_countWindows;
 	private final ConcurrentHashMap<Long, TreeSet<Long>> tagThreadIds;
 	private TreeSet<Long> tagIds;
 	private final TreeSet<Long> threadIds;
-	private final TagService tagService;
-	private final ForumMessageQueryService forumMessageQueryService;
-
 	private final ConcurrentHashMap<Long, String> tags_messageImageUrls;
 
 	public ThreadTagList(TagService tagService, ForumMessageQueryService forumMessageQueryService) {
@@ -73,7 +74,7 @@ public class ThreadTagList {
 	}
 
 	public List<ThreadTag> getThreadTags() {
-		if ( tagIds == null && threadIds !=null) 
+		if ( tagIds == null ) 
 		    sort();
 		return tagIds.stream().limit(TAGSLIST_SIZE).map(tagId -> tagService
 					.getThreadTag(tagId)).collect(Collectors.toList());
@@ -104,7 +105,7 @@ public class ThreadTagList {
 	}
 
 	public String[] getImageUrls() {
-		if (tagIds == null && threadIds != null)
+		if (tagIds == null )
 			sort();
 		return tagIds.stream().limit(TAGSLIST_SIZE).map(tagId -> tags_messageImageUrls.get(tagId))
 				.toArray(String[]::new);
