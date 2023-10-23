@@ -82,7 +82,8 @@ public class ThreadTagList {
 	}
 
 	private synchronized void sort() {
-		tagIds.addAll(tags_countWindows.keySet());
+		if (!threadIds.isEmpty())
+		  tagIds.addAll(tags_countWindows.keySet());
 		threadIds.clear();
 	}
 
