@@ -114,6 +114,8 @@ public class ThreadApprovedNewList implements Startable {
 	}
 
 	public ThreadTagList getThreadTagList() {
+		if (threadTagList.isEmpty())
+	    	getApprovedThreads(maxSize);
 		return threadTagList;
 	}
 

@@ -29,11 +29,11 @@ public class ThreadTagList {
 	private final ConcurrentHashMap<Long, Integer> tags_countWindows;
 	private final ConcurrentHashMap<Long, TreeSet<Long>> tagThreadIds;
 	private TreeSet<Long> tagIds;
+	private final TreeSet<Long> threadIds;
 	private final TagService tagService;
 	private final ForumMessageQueryService forumMessageQueryService;
 
 	private final ConcurrentHashMap<Long, String> tags_messageImageUrls;
-	private final ApprovedListSpec approvedListSpec = new ApprovedListSpec();
 
 	public ThreadTagList(TagService tagService, ForumMessageQueryService forumMessageQueryService) {
 		this.tagService = tagService;
@@ -41,6 +41,7 @@ public class ThreadTagList {
 		this.tags_countWindows = new ConcurrentHashMap<>();
 		this.tags_messageImageUrls = new ConcurrentHashMap<>();
 		this.tagThreadIds = new ConcurrentHashMap<>();
+		this.threadIds = new TreeSet<>();
 	}
 
 	public void addForumThread(ForumThread forumThread) {
@@ -60,24 +61,37 @@ public class ThreadTagList {
 			if(forumThread.getRootMessage().hasImage())
 				tags_messageImageUrls.putIfAbsent(threadTag.getTagID(), forumThread.getRootMessage().getMessageUrlVO().getImageUrl());
 			
-			TreeSet<Long> threadIds = tagThreadIds.computeIfAbsent(threadTag.getTagID(), k -> new TreeSet<>(new ThreadDigComparator(forumMessageQueryService)));
-			threadIds.add(forumThread.getThreadId());
+			if(!threadIds.contains(forumThread.getThreadId())){	
+			  TreeSet<Long> threadIdsForTags = tagThreadIds.computeIfAbsent(threadTag.getTagID(), k -> new TreeSet<>(new ThreadDigComparator(forumMessageQueryService)));
+			  threadIdsForTags.add(forumThread.getThreadId());
+			  threadIds.add(forumThread.getThreadId());
+			}
 		}
 	}
 
 
 	public List<ThreadTag> getThreadTags() {
-		if ( tagIds == null) {
+		if ( tagIds == null && threadIds !=null) {
 			tagIds = new TreeSet<Long>(new ThreadTagComparator(tags_countWindows));
-			tagIds.addAll(tags_countWindows.keySet());		
+			tagIds.addAll(tags_countWindows.keySet());	
+			threadIds.clear();	
 		}
 		return tagIds.stream().limit(TAGSLIST_SIZE).map(tagId -> tagService
 					.getThreadTag(tagId)).collect(Collectors.toList());
 	}
 
+	
+	public boolean isEmpty(){
+		return (tagIds == null  && threadIds ==null)?true:false;
+	}
+
+
 	public void clear() {
 		tags_countWindows.clear();
 		tags_messageImageUrls.clear();
+		this.tagIds.clear();
+		this.tagThreadIds.clear();
+		this.threadIds.clear();
 	}
 
 	public String[] getImageUrls() {
