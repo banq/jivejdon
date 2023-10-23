@@ -33,7 +33,7 @@ public class ThreadTagList {
 
 	private final ConcurrentHashMap<Long, Integer> tags_countWindows;
 	private final ConcurrentHashMap<Long, TreeSet<Long>> tagThreadIds;
-	private TreeSet<Long> tagIds;
+	private final TreeSet<Long> tagIds;
 	private final TreeSet<Long> threadIds;
 	private final ConcurrentHashMap<Long, String> tags_messageImageUrls;
 
@@ -44,6 +44,7 @@ public class ThreadTagList {
 		this.tags_messageImageUrls = new ConcurrentHashMap<>();
 		this.tagThreadIds = new ConcurrentHashMap<>();
 		this.threadIds = new TreeSet<>(Comparator.comparing(Long::longValue));
+		this.tagIds = new TreeSet<Long>(new ThreadTagComparator(this));
 	}
 
 	public void addForumThread(ForumThread forumThread) {
@@ -74,14 +75,13 @@ public class ThreadTagList {
 	}
 
 	public List<ThreadTag> getThreadTags() {
-		if ( tagIds == null ) 
+		if (isEmpty()) 
 		    sort();
 		return tagIds.stream().limit(TAGSLIST_SIZE).map(tagId -> tagService
 					.getThreadTag(tagId)).collect(Collectors.toList());
 	}
 
 	private void sort() {
-		tagIds = new TreeSet<Long>(new ThreadTagComparator(this));
 		tagIds.addAll(tags_countWindows.keySet());
 		threadIds.clear();
 	}
@@ -92,7 +92,7 @@ public class ThreadTagList {
 	}
 
 	public boolean isEmpty(){
-		return (tagIds == null  && threadIds ==null)?true:false;
+		return (tagIds.isEmpty())?true:false;
 	}
 
 
@@ -105,7 +105,7 @@ public class ThreadTagList {
 	}
 
 	public String[] getImageUrls() {
-		if (tagIds == null )
+		if (isEmpty())
 			sort();
 		return tagIds.stream().limit(TAGSLIST_SIZE).map(tagId -> tags_messageImageUrls.get(tagId))
 				.toArray(String[]::new);
