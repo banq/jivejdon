@@ -10,6 +10,7 @@ import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.TreeSet;
@@ -41,7 +42,7 @@ public class ThreadTagList {
 		this.tags_countWindows = new ConcurrentHashMap<>();
 		this.tags_messageImageUrls = new ConcurrentHashMap<>();
 		this.tagThreadIds = new ConcurrentHashMap<>();
-		this.threadIds = new TreeSet<>();
+		this.threadIds = new TreeSet<>(Comparator.comparing(Long::longValue));
 	}
 
 	public void addForumThread(ForumThread forumThread) {
