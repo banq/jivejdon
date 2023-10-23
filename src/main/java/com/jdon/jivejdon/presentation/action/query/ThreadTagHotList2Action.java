@@ -13,6 +13,7 @@ import com.jdon.jivejdon.api.property.TagService;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
+import com.jdon.jivejdon.domain.model.query.specification.TaggedThreadListSpec;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadTagList;
 import com.jdon.strutsutil.ModelListAction;
@@ -55,6 +56,11 @@ public class ThreadTagHotList2Action extends ModelListAction {
 
 		ThreadTagList threadTagList = getThreadApprovedNewList().getThreadTagList();
 		TreeSet<Long> threadIds = threadTagList.getTagThreadIds(Long.parseLong(tagID));
+		if(threadIds.size()<4){
+			TaggedThreadListSpec taggedThreadListSpec = new TaggedThreadListSpec();
+		    taggedThreadListSpec.setTagID(new Long(tagID));
+			return othersService.getTaggedThread(taggedThreadListSpec, start, count);
+		}
 		return new PageIterator(threadIds.size(), threadIds.toArray());
 	}
 

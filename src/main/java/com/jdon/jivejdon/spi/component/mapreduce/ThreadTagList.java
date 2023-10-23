@@ -70,7 +70,8 @@ public class ThreadTagList {
 
 			TreeSet<Long> threadIdsForTags = tagThreadIds.computeIfAbsent(threadTag.getTagID(),
 					k -> new TreeSet<>(new ThreadDigComparator(forumMessageQueryService)));
-			threadIdsForTags.add(forumThread.getThreadId());
+			if (threadIdsForTags.size()<4)
+			   threadIdsForTags.add(forumThread.getThreadId());
 		}
 	}
 
