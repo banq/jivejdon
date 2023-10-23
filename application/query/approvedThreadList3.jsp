@@ -56,7 +56,7 @@ int i=0;
   <div class="lazyload" >
 	    <!-- 
         <script>
-         load('/query/tt2/${threadTag.tagID}', function(xhr) {
+         load('/query/tt/${threadTag.tagID}', function(xhr) {
   	       document.getElementById('ajax_tagID=<bean:write name="threadTag" property="tagID"/>').innerHTML = xhr.responseText;
          });
         </script>
