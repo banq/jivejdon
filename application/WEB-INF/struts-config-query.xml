@@ -100,6 +100,11 @@
             <forward name="success" path="/query/others/tt.jsp" />
         </action>
 
+        <action path="/query/tt2" type="com.jdon.jivejdon.presentation.action.query.ThreadTagHotList2Action" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/query/others/tt.jsp" />
+        </action>
+       
+
         <!-- <action path="/query/tagThreads" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/tagThreads.jsp" />
         </action> -->

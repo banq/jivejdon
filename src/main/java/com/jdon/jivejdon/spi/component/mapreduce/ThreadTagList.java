@@ -3,8 +3,11 @@ package com.jdon.jivejdon.spi.component.mapreduce;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.message.MessageUrlVO;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
+import com.jdon.jivejdon.domain.model.query.specification.ApprovedListSpec;
 import com.jdon.jivejdon.api.property.TagService;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -24,14 +27,20 @@ public class ThreadTagList {
 
 	private final static int TAGSLIST_SIZE = 30;
 	private final ConcurrentHashMap<Long, Integer> tags_countWindows;
+	private final ConcurrentHashMap<Long, TreeSet<Long>> tagThreadIds;
 	private TreeSet<Long> tagIds;
 	private final TagService tagService;
-	private final ConcurrentHashMap<Long, String> tags_messageImageUrls;
+	private final ForumMessageQueryService forumMessageQueryService;
 
-	public ThreadTagList(TagService tagService) {
+	private final ConcurrentHashMap<Long, String> tags_messageImageUrls;
+	private final ApprovedListSpec approvedListSpec = new ApprovedListSpec();
+
+	public ThreadTagList(TagService tagService, ForumMessageQueryService forumMessageQueryService) {
 		this.tagService = tagService;
+		this.forumMessageQueryService = forumMessageQueryService;
 		this.tags_countWindows = new ConcurrentHashMap<>();
 		this.tags_messageImageUrls = new ConcurrentHashMap<>();
+		this.tagThreadIds = new ConcurrentHashMap<>();
 	}
 
 	public void addForumThread(ForumThread forumThread) {
@@ -40,7 +49,7 @@ public class ThreadTagList {
 		long daysBetween = (nowDate.getTime() - mDate.getTime() + 1000000) / (60 * 60 * 24 * 1000);
 		if (daysBetween < TIME_WINDOWS) {
 			addTagsSorting(forumThread);
-		
+		   
 		}
 	}
 
@@ -51,6 +60,8 @@ public class ThreadTagList {
 			if(forumThread.getRootMessage().hasImage())
 				tags_messageImageUrls.putIfAbsent(threadTag.getTagID(), forumThread.getRootMessage().getMessageUrlVO().getImageUrl());
 			
+			TreeSet<Long> threadIds = tagThreadIds.computeIfAbsent(threadTag.getTagID(), k -> new TreeSet<>(new ThreadDigComparator(forumMessageQueryService)));
+			threadIds.add(forumThread.getThreadId());
 		}
 	}
 
@@ -76,6 +87,10 @@ public class ThreadTagList {
 		}
 		return tagIds.stream().limit(TAGSLIST_SIZE).map(tagId -> tags_messageImageUrls.get(tagId))
 				.toArray(String[]::new);
+	}
+
+	public TreeSet<Long> getTagThreadIds(Long tagID) {
+		return tagThreadIds.get(tagID);
 	}
 
 	

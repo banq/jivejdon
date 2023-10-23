@@ -74,7 +74,7 @@ public class ThreadApprovedNewList implements Startable {
 		this.accountService = accountService;
 		this.authorList = new AuthorList(accountService);
 		this.threadDigList = new ThreadDigList(forumMessageQueryService);
-		this.threadTagList = new ThreadTagList(tagService);
+		this.threadTagList = new ThreadTagList(tagService, forumMessageQueryService);
 		this.forumMessageQueryService = forumMessageQueryService;
 	}
 

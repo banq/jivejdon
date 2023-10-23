@@ -1,11 +1,9 @@
 package com.jdon.jivejdon.spi.component.mapreduce;
 
+import java.util.Comparator;
+
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.query.specification.ApprovedListSpec;
-import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
-
-import java.util.Comparator;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Home page Mixer: approve/rank threads Comparator

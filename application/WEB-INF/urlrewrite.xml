@@ -111,6 +111,11 @@
     </rule>
 
     <rule>
+        <from>^/query/tt2/([0-9]+)$</from>
+        <to>/query/tt2.shtml?start=0&amp;length=10&amp;tablewidth=160&amp;count=6&amp;tagID=$1</to>
+    </rule>
+
+    <rule>
         <from>^/query/tagHotList$</from>
         <to>/query/tagHotList.shtml</to>
     </rule>    
