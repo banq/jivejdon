@@ -49,8 +49,11 @@ public class ThreadTagList {
 		Date nowDate = new Date();
 		long daysBetween = (nowDate.getTime() - mDate.getTime() + 1000000) / (60 * 60 * 24 * 1000);
 		if (daysBetween < TIME_WINDOWS) {
-			addTagsSorting(forumThread);
-		   
+			if (!threadIds.contains(forumThread.getThreadId())) {
+				addTagsSorting(forumThread);
+				threadIds.add(forumThread.getThreadId());
+			}
+
 		}
 	}
 
@@ -58,17 +61,15 @@ public class ThreadTagList {
 		for (ThreadTag threadTag : forumThread.getTags()) {
 			tags_countWindows.merge(threadTag.getTagID(), 1, (oldValue, one) -> oldValue +
 					one);
-			if(forumThread.getRootMessage().hasImage())
-				tags_messageImageUrls.putIfAbsent(threadTag.getTagID(), forumThread.getRootMessage().getMessageUrlVO().getImageUrl());
-			
-			if(!threadIds.contains(forumThread.getThreadId())){	
-			  TreeSet<Long> threadIdsForTags = tagThreadIds.computeIfAbsent(threadTag.getTagID(), k -> new TreeSet<>(new ThreadDigComparator(forumMessageQueryService)));
-			  threadIdsForTags.add(forumThread.getThreadId());
-			  threadIds.add(forumThread.getThreadId());
-			}
+			if (forumThread.getRootMessage().hasImage())
+				tags_messageImageUrls.putIfAbsent(threadTag.getTagID(),
+						forumThread.getRootMessage().getMessageUrlVO().getImageUrl());
+
+			TreeSet<Long> threadIdsForTags = tagThreadIds.computeIfAbsent(threadTag.getTagID(),
+					k -> new TreeSet<>(new ThreadDigComparator(forumMessageQueryService)));
+			threadIdsForTags.add(forumThread.getThreadId());
 		}
 	}
-
 
 	public List<ThreadTag> getThreadTags() {
 		if ( tagIds == null && threadIds !=null) {
