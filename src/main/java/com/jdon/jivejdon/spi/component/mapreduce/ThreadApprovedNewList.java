@@ -110,7 +110,6 @@ public class ThreadApprovedNewList implements Startable {
 	    currentStartPage = 0;
 		threadDigList.clear();
 		authorList.clear();
-		threadTagList.clear();
 	}
 
 	public ThreadTagList getThreadTagList() {

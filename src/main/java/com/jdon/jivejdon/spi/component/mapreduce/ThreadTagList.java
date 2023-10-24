@@ -85,14 +85,6 @@ public class ThreadTagList {
 		return threadId_tagIDs;
 	}
 
-	public void clear() {
-		tags_countWindows.clear();
-		tags_messageImageUrls.clear();
-		this.tagIds.clear();
-		this.tagThreadIds.clear();
-		this.threadId_tagIDs.clear();
-	}
-
 	public String[] getImageUrls() {
 		if (tagIds.isEmpty())
 			tagIds.addAll(tags_countWindows.keySet());
