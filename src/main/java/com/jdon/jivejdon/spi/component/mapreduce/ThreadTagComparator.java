@@ -19,8 +19,8 @@ public class ThreadTagComparator implements Comparator<Long> {
 		if (tagID1.longValue() == tagID2.longValue())
 			return 0;
 
-		int num1 = threadTagList.getTagThreadIds(tagID1).size() * threadTagList.getTags_countWindows().get(tagID1);
-		int num2 = threadTagList.getTagThreadIds(tagID2).size() * threadTagList.getTags_countWindows().get(tagID2);
+		int num1 = threadTagList.getTags_countWindows().get(tagID1);
+		int num2 = threadTagList.getTags_countWindows().get(tagID2);
 
 		if (num1 > num2)
 			return -1; // returning the first object
