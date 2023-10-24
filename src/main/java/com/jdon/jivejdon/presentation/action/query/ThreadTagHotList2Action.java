@@ -2,6 +2,7 @@ package com.jdon.jivejdon.presentation.action.query;
 
 
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -15,6 +16,7 @@ import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.domain.model.query.specification.TaggedThreadListSpec;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
+import com.jdon.jivejdon.spi.component.mapreduce.ThreadDigComparator;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadTagList;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.util.Debug;
@@ -56,10 +58,21 @@ public class ThreadTagHotList2Action extends ModelListAction {
 
 		ThreadTagList threadTagList = getThreadApprovedNewList().getThreadTagList();
 		TreeSet<Long> threadIds = threadTagList.getTagThreadIds(Long.parseLong(tagID));
-		if(threadIds.size()<5){
+		if (threadIds.size() < 5) {
 			TaggedThreadListSpec taggedThreadListSpec = new TaggedThreadListSpec();
-		    taggedThreadListSpec.setTagID(new Long(tagID));
-			return othersService.getTaggedThread(taggedThreadListSpec, start, count);
+			taggedThreadListSpec.setTagID(new Long(tagID));
+			PageIterator pi = othersService.getTaggedThread(taggedThreadListSpec, 0, 100);
+			int i = 0;
+			while (pi.hasNext()) {
+				Long threadId = (Long) pi.next();
+				Long threadId_tagID = threadTagList.getThreadId_tagIDs().computeIfAbsent(threadId,
+						k -> new Long(tagID));
+				if (threadId_tagID.longValue() == Long.parseLong(tagID)) {
+					threadIds.add(threadId);
+					i++;
+				}
+				if (i>=5) break;
+			}
 		}
 		return new PageIterator(threadIds.size(), threadIds.toArray());
 	}
