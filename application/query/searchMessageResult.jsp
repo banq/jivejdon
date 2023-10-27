@@ -50,7 +50,7 @@
                 src="/forum/js/threadList.js"></script>
       <link href="/common/mListAll.css" rel="stylesheet" type="text/css"/>
 <div id="page-content" class="single-page container">
-	<div class="row">
+	<div>
 
 
         <div class="tres">
@@ -77,7 +77,7 @@
                              property="forum"/>
                 <bean:define id="account" name="forumMessage"
                              property="account"/>
-                   <div 
+                   <div class="row">
                         <div class="col-md-12">
                             <section> 
                             <header>
