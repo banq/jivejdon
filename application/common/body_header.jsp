@@ -31,8 +31,23 @@
         </div>
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav navbar-inverse">
-			   <li><a href="/design.htm">架构设计</a></li>	
-			   <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">领域驱动 <i class="fa fa-arrow-circle-o-down"></i></a>
+			   <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">认知哲学 <i class="fa fa-arrow-circle-o-down"></i></a>
+					<div class="dropdown-menu">
+						<div class="dropdown-inner">
+							<ul class="list-unstyled">
+				                <li><a href="/design.htm">原创思考</a></li>
+                                <li><a href="/tag-16355/">形式逻辑</a></li>	
+                                <li><a href="/tag-58254/">认知偏差</a></li>
+                                <li><a href="/tag-38982/">语言游戏</a></li>
+                                <li><a href="/tag-5676/">道德经</a></li>
+                                <li><a href="/tag-49140/">大语言模型</a></li>
+                                <li><a href="/tag-1159/">算法</a></li>
+                                <li><a href="/tag-77518/">大科技</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>    
+               <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">领域驱动 <i class="fa fa-arrow-circle-o-down"></i></a>
 					<div class="dropdown-menu">
 						<div class="dropdown-inner">
 							<ul class="list-unstyled">
@@ -53,7 +68,7 @@
 								<li><a href="/tag-49580/">数据中台</a></li>
 								<li><a href="/tag-38587/">产品经理</a></li>                               
                                 <li><a href="/tag-38726/">系统思维</a></li>	
-								<li><a href="/tag-16355/">形式逻辑</a></li>	
+								
 							</ul>
 						</div>
 					</div>
@@ -81,7 +96,7 @@
 								<li><a href="/tag-30114/">Redis</a></li>
                                 <li><a href="/tag-34196/">Kubernetes</a></li>	
 								<li><a href="/tag-28110/">docker</a></li>
-                                <li><a href="/tag-29134/">DevOps</a></li>	
+                                <li><a href="/tag-29134/">DevOps</a></li>
 							</ul>
 						</div>
 					</div>
@@ -111,31 +126,36 @@
 								<li><a href="/tag-29768/">流处理</a></li>
 								<li><a href="/tag-216/">多线程</a></li>
                                 <li><a href="/idea/rust.html">Rust语言</a></li>	
-								<li><a href="/tag-48335/">ChatGPT</a></li>	
+								<li><a href="/tag-48335/">ChatGPT</a></li>															
 							</ul>
 						</div> 
 					</div>
 				</li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">模因梗 <i class="fa fa-arrow-circle-o-down"></i></a>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">模因梗 <i class="fa fa-arrow-circle-o-down"></i></a>
 					<div class="dropdown-menu">
 						<div class="dropdown-inner">
 							<ul class="list-unstyled">								
-                               <li><a href="/tag-37546/">幽默梗</a></li>                                                     
+                                <li><a href="/tag-37546/">幽默梗</a></li>                                                     
                                 <li><a href="/tag-297/">程序员吐槽</a></li>                               
                                 <li><a href="/tag-20618/">面试技巧</a></li>                               
                                 <li><a href="/tag-395/">Java入门</a></li>
                                 <li><a href="/tag-49555/">数字化转型</a></li>
-                                <li><a href="/tag-58254/">认知偏差</a></li>
-                                <li><a href="/tag-5676/">道德经</a></li>
 								<li><a href="/tag-445/">GitHub</a></li>
-								<li><a href="/tag-1159/">算法</a></li>
 								<li><a href="/tag-36094/">最佳实践</a></li>
 								<li><a href="/tag-42486/">系统设计</a></li>
+                                <li><a href="/idea.html">Java教程</a></li>
+                                <li><a href="/dl/best/spring.htm">Spring教程</a></li>
+                                <li><a href="/course.html">编程教程</a></li>
+                                <li><a href="/android.html">安卓编程</a></li>
+                                <li><a href="/mybook/index.htm">Java实用书籍</a></li>
+                                <li><a href="/concurrency.html">并发教程</a></li>
+                                <li><a href="/DistributedSystems.html">分布式教程</a></li>
+                                <li><a href="/ bigdata.html">大数据教程</a></li>
                                 <li><a href="/tags/">更多话题</a></li>	
 							</ul>
 						</div> 
 					</div>
-				</li>                					
+				</li>            					
 			</ul>
 			<ul class="list-inline navbar-right top-social">
 				<li><a href="javascript:shareto('sina')"><i class="fa fa-weibo"></i></a></li>
