@@ -150,17 +150,7 @@ pageContext.setAttribute("title", titleStr);
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 
-<aside>
-   <div id="tagHotList"></div>   
-							    <div class="lazyload" >
-							     <!-- 
-							     <script>
-							  	  load('/query/tagHotList', function (xhr) {				
-  	                                  document.getElementById("tagHotList").innerHTML = xhr.responseText;
-			                     });
-							  </script> -->
-				</div>
-</aside>
+
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
 
 

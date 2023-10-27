@@ -130,28 +130,19 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 			<div class="widget">
         <div class="wid-vid">
               
-                <logic:notEmpty name="forumThread" property="tags">          
-                  <div class="widget_tag_cloud">
-                   <div class="tagcloud">
-                     <logic:iterate id="threadTag" name="forumThread" property="tags"> 
-                        <a href="<%=request.getContextPath()%>/tag-<bean:write name="threadTag" property="tagID"/>/" class="tag-cloud-link"><bean:write name="threadTag" property="title"/></a>
-                           &nbsp;&nbsp; 
-                     </logic:iterate>
-                   </div>
-                  </div>
-                </logic:notEmpty> 
-                <logic:empty name="forumThread" property="tags">    
-                  <div id="tagHotList"><br><br><br><br><br><br><br><br><br><br></div>   
-							      <div class="lazyload" >
-							     <!-- 
-							     <script>
-							  	  load('/query/tagHotList', function (xhr) {				
-  	                                  document.getElementById("tagHotList").innerHTML = xhr.responseText;
-			                     });
-							      </script> -->
-							     </div>
-                </logic:empty>          
-       
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
+     crossorigin="anonymous"></script>
+<!-- 内容右侧悬浮广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="5184711902"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
         </div>				
 			</div>
 

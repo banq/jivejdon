@@ -153,15 +153,18 @@ pageContext.setAttribute("title", titleStr);
         <div class="widget">
 					    <div class="wid-vid">
 						
-							  <div id="tagHotList"><br><br><br><br><br><br><br><br><br><br></div>   
-							    <div class="lazyload" >
-							     <!-- 
-							     <script>
-							  	  load('/query/tagHotList', function (xhr) {				
-  	                                  document.getElementById("tagHotList").innerHTML = xhr.responseText;
-			                     });
-							  </script> -->
-							  </div>
+							   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
+     crossorigin="anonymous"></script>
+<!-- 内容右侧悬浮广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="5184711902"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
 							</div>
 				</div>
