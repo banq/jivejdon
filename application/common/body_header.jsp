@@ -149,7 +149,7 @@
                                 <li><a href="/mybook/index.htm">Java实用书籍</a></li>
                                 <li><a href="/concurrency.html">并发教程</a></li>
                                 <li><a href="/DistributedSystems.html">分布式教程</a></li>
-                                <li><a href="/ bigdata.html">大数据教程</a></li>
+                                <li><a href="/bigdata.html">大数据教程</a></li>
                                 <li><a href="/tags/">更多话题</a></li>	
 							</ul>
 						</div> 
