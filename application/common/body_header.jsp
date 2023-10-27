@@ -68,7 +68,6 @@
 								<li><a href="/tag-49580/">数据中台</a></li>
 								<li><a href="/tag-38587/">产品经理</a></li>                               
                                 <li><a href="/tag-38726/">系统思维</a></li>	
-								
 							</ul>
 						</div>
 					</div>
