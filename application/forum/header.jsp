@@ -6,9 +6,9 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 %>
 <html lang="zh-CN">
 <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	
     <link rel="stylesheet" href="/js/jdon.css"  type="text/css">  
     <script defer src="/js/jquery-bootstrap2.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	
     <link rel="dns-prefetch" href="//googleads.g.doubleclick.net">
     <link rel="dns-prefetch" href="//tpc.googlesyndication.com">
     <meta charset="utf-8">
