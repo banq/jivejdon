@@ -34,11 +34,6 @@
   <li  class="active"><a href="#" ><i class="fa fa-search"></i></a></li>
 </ul>
 
-</div>
-</div>
-</div>
-</div>
-
 
 <%@ include file="searchInputView.jsp" %>
 
@@ -54,6 +49,9 @@
         <script language="javascript"
                 src="/forum/js/threadList.js"></script>
       <link href="/common/mListAll.css" rel="stylesheet" type="text/css"/>
+<div id="page-content" class="single-page container">
+	<div class="row">
+
 
         <div class="tres">
           <MultiPages:pager actionFormName="messageListForm"
@@ -67,8 +65,7 @@
         </div>
 
         <main>
-        <table class="table table-striped">
-            <tbody>
+     
             <logic:iterate indexId="i" id="messageSearchSpec"
                            name="messageListForm"
                            property="list">
@@ -80,21 +77,17 @@
                              property="forum"/>
                 <bean:define id="account" name="forumMessage"
                              property="account"/>
-                <tr>
-                  
-                    <td>
-                        <div class="box col-md-12">
-                       
+                   <div 
+                        <div class="col-md-12">
+                            <section> 
+                            <header>
                             <a href='<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId" />.html'
                                target="_blank">
                                 <bean:write name="forumThread" property="name"/></a>
-                            <div id="xsnazzy">
-                                <b class="xtop"><b
-                                        class="xb1"></b><b
-                                        class="xb2"></b><b
-                                        class="xb3"></b><b
-                                        class="xb4"></b></b>
-                                <div class="xboxcontent">
+                            </header>    
+                            <div>
+                               
+                                <div>
 
                                     <bean:write
                                         name="messageSearchSpec"
@@ -105,28 +98,22 @@
                                                  toScope="request"/>
 
                                 </div>
-                                <b class="xbottom"><b
-                                        class="xb4"></b><b
-                                        class="xb3"></b><b
-                                        class="xb2"></b><b
-                                        class="xb1"></b></b>
+                              
                             </div>
 
                             <p><span class="blackgray"><bean:write
                                     name="forumMessage"
                                     property="modifiedDate3"/></span>
 
-                           
+                            </section> 
 
                         </div>
-                    </td>
-                </tr>
+                  
+                </div>
 
 
             </logic:iterate>
-             
-            </tbody>
-        </table>
+       
         </main>    
         
         <div class="tres">
@@ -141,10 +128,15 @@
         </div>
 
 
+</div>
+</div>
     </logic:greaterThan>
        
 </logic:present>
-
+</div>
+</div>
+</div>
+</div>
 
 <%@include file="../common/IncludeBottom.jsp" %>
 

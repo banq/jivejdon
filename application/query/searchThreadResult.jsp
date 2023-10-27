@@ -67,16 +67,7 @@
           </MultiPages:pager>
           
         </div>
-
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>主题</th>
-                <th>作者</th>
-                <th>发布时间</th>
-            </tr>
-            </thead>
-            <tbody>
+        <div class="box">
             <logic:iterate indexId="i" id="messageSearchSpec"
                            name="messageListForm" property="list">
 
@@ -86,35 +77,10 @@
                 <bean:define id="forumThread" name="forumMessage"
                              property="forumThread"/>
 
-                <tr bgcolor="#FFFFEC">
-                    <td>
-                        <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"
-                           target="_blank"><b><bean:write name="forumThread"
-                                                          property="name"/></b></a>
-                        <p>
-                        <span class="article">
-                <bean:write name="messageSearchSpec" property="body"
-                            filter="false"/>
-             </span>
-                    </td>
-                    <td><bean:define id="rootMessage" name="forumThread"
-                                     property="rootMessage"></bean:define>
-                        <logic:notEmpty name="rootMessage" property="account">
-                          
-                                <bean:write name="rootMessage"
-                                            property="account.username"/>
-                          
-                        </logic:notEmpty>
-                    </td>
-                    <td><bean:write name="forumThread"
-                                    property="rootMessage.creationDateForDay"/></td>
-
-                </tr>
+               <%@ include file="./others/threadListCore.jsp" %> 
             </logic:iterate>
 
-            </tbody>
-        </table>
-
+        </div>   
 
         <div class="tres">
 
