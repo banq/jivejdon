@@ -32,7 +32,6 @@
 String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 %>
 <html lang="zh-CN">
-<html>
 <head>
     <link rel="stylesheet" href="/js/jdon.css"  type="text/css">  
     <script defer src="/js/jquery-bootstrap2.js"></script>
