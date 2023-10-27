@@ -57,6 +57,18 @@ pageContext.setAttribute("title", titleStr);
 
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
  
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="fluid"
+     data-ad-layout-key="-ev-1p-5j-ot+26n"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="3378777426"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 <main>
 <div id="page-content" class="single-page container">
     <div class="row">
@@ -125,6 +137,19 @@ pageContext.setAttribute("title", titleStr);
   </div>
 </div>  
 </main>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="fluid"
+     data-ad-layout-key="-ev-1p-5j-ot+26n"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="3378777426"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 <aside>
    <div id="tagHotList"></div>   
 							    <div class="lazyload" >

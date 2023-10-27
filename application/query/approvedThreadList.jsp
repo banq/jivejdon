@@ -80,6 +80,18 @@
 
 </logic:iterate>
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="fluid"
+     data-ad-layout-key="-ev-1p-5j-ot+26n"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="3378777426"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 <%int j = 0;%>
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" offset="1" >
    <bean:define id="forumMessage" name="forumThread" property="rootMessage" />

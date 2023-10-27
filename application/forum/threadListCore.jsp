@@ -9,7 +9,22 @@
 <logic:notEmpty name="forumThread">
 <logic:notEmpty name="forumThread" property="rootMessage">
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
- <bean:define id="body" name="forumMessage" property="messageVO.body" />
+<bean:define id="body" name="forumMessage" property="messageVO.body" />
+
+ <logic:equal name="i" value="2">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="fluid"
+     data-ad-layout-key="-ev-1p-5j-ot+26n"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="3378777426"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ </logic:equal>
+ 
 <div class="box">
          <section> 
          <div class="wrap-vid">              
