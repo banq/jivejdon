@@ -42,6 +42,7 @@
                                 <li><a href="/tag-5676/">道德经</a></li>
                                 <li><a href="/tag-49140/">大语言模型</a></li>
                                 <li><a href="/tag-1159/">算法</a></li>
+								<li><a href="/functional.html">函数语言</a></li>
                                 <li><a href="/tag-77518/">大科技</a></li>
 							</ul>
 						</div>
