@@ -40,7 +40,9 @@ public class ApprovedListSpec extends ThreadListSpec {
 		double p = 0;
 		try {
 			final double textLength = thread.getRootMessage().getMessageVO().getBody().length() / 2048;
-			p = (thread.getViewCount() + textLength + (thread.getRootMessage().hasImage() ? 1 : 0) + 1)
+			final ReBlogVO reBlogVO = thread.getReBlogVO();
+			final double linkCount = reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size() + 1;
+			p = (thread.getViewCount() + textLength + linkCount + (thread.getRootMessage().hasImage() ? 1 : 0) + 1)
 					* (thread.getRootMessage().getDigCount() + 1);
 			final long diff2 = thread.getViewCount() - thread.getViewCounter().getLastSavedCount() + 1;
 			final long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
@@ -52,9 +54,6 @@ public class ApprovedListSpec extends ThreadListSpec {
 			else {
 				p = Math.pow(p, diff2);
 			}
-
-			final ReBlogVO reBlogVO = thread.getReBlogVO();
-			p = p * (reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size() + 1);
 		} finally {
 		}
 		return p;
