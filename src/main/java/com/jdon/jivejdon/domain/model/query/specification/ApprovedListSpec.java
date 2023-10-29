@@ -39,8 +39,8 @@ public class ApprovedListSpec extends ThreadListSpec {
 	public double sortedLeaderboard(final ForumThread thread, final ForumThread threadPrev) {
 		double p = 0;
 		try {
-			final double textLength = thread.getRootMessage().getMessageVO().getBody().length() / 2048;
 			final ReBlogVO reBlogVO = thread.getReBlogVO();
+			final double textLength = thread.getRootMessage().getMessageVO().getBody().length() / 2048;
 			final double linkCount = reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size() + 1;
 			p = (thread.getViewCount() + textLength + linkCount + (thread.getRootMessage().hasImage() ? 1 : 0) + 1)
 					* (thread.getRootMessage().getDigCount() + 1);
