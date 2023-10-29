@@ -51,21 +51,17 @@
 
             <div class="post_title2">
               <div class="post_titleauthor info">
-               <logic:equal name="forumMessage" property="root" value="true">
+                <logic:equal name="forumMessage" property="root" value="true">
                     <i class="fa fa-calendar"></i>
                     <bean:define id="cdate" name="forumThread" property="creationDate"></bean:define>
                     <%String cdateS = (String) pageContext.getAttribute("cdate"); %>
                     <time datetime="<%=cdateS.substring(2, 11) %>"><%=cdateS.substring(2, 11) %></time>
-                  <span></span>
                 </logic:equal>
-				<span></span>  
-                <logic:notEmpty name="forumMessage" property="account">
-					<i class="fa fa-user"></i>
-                <bean:write name="forumMessage" property="account.username"/>
-				  <%-- <a href='<%=request.getContextPath()%>/blog/<bean:write name="forumMessage" property="account.username"/>' class="smallgray" rel="no">
-                    
-                  </a> --%>
-                </logic:notEmpty>      
+				         
+               <logic:notEmpty name="forumMessage" property="account">
+				           	<i class="fa fa-user"></i>
+                    <bean:write name="forumMessage" property="account.username"/>
+               </logic:notEmpty>      
               </div>
 
               <logic:equal name="forumMessage" property="root" value="false">
@@ -125,7 +121,7 @@
 
 <logic:equal name="forumMessage" property="root" value="true">
 <aside>
-
+        
               <div class="diggArea list-inline  top-social" >
                 <DIV class=diggNum id="digNumber_<bean:write name="forumMessage" property="messageId"/>">
                   <logic:notEqual name="forumMessage" property="digCount" value="0">
@@ -145,6 +141,18 @@
 	              </ul>
               </div>
         
+              <logic:notEmpty name="forumThread" property="tags">  
+                <div class="widget_tag_cloud">
+                   <div class="tagcloud">
+                     <logic:iterate id="threadTag" name="forumThread" property="tags"> 
+                        <a href="<%=request.getContextPath()%>/tag-<bean:write name="threadTag" property="tagID"/>/" class="tag-cloud-link"><bean:write name="threadTag" property="title"/></a>
+                           &nbsp;&nbsp; 
+                     </logic:iterate>
+                   </div>
+                  </div>
+              </logic:notEmpty> 	
+          
+
               <div class="box">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
      crossorigin="anonymous"></script>

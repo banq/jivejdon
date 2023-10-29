@@ -42,13 +42,6 @@
 
     <logic:greaterThan name="messageListForm" property="allCount" value="0">
 
-        <script>
-            if (top !== self) top.location = self.location;
-            contextpath = "<%=request.getContextPath()%>";
-        </script>
-        <script language="javascript"
-                src="/forum/js/threadList.js"></script>
-      <link href="/common/mListAll.css" rel="stylesheet" type="text/css"/>
 <div id="page-content" class="single-page container">
 	<div>
 
