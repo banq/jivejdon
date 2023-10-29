@@ -42,8 +42,11 @@
                                 <li><a href="/tag-5676/">道德经</a></li>
                                 <li><a href="/tag-49140/">大语言模型</a></li>
                                 <li><a href="/tag-1159/">算法</a></li>
-								<li><a href="/functional.html">函数语言</a></li>
+                                <li><a href="/functional.html">函数语言</a></li>
                                 <li><a href="/tag-77518/">大科技</a></li>
+                                <li><a href="/tag-49555/">数字化转型</a></li>
+                                <li><a href="/tag-49075/">数据科学</a></li>
+                                <li><a href="/tag-38726/">系统思维</a></li>	
 							</ul>
 						</div>
 					</div>
@@ -68,7 +71,6 @@
 								<li><a href="/tag-231/">UML建模</a></li>
 								<li><a href="/tag-49580/">数据中台</a></li>
 								<li><a href="/tag-38587/">产品经理</a></li>                               
-                                <li><a href="/tag-38726/">系统思维</a></li>	
 							</ul>
 						</div>
 					</div>
@@ -108,7 +110,6 @@
                                 <li><a href="/designpatterns/">GoF设计模式</a></li>	
                                 <li><a href="/tag-324/">模式专辑</a></li>	
                                 <li><a href="/oo.html">面向对象</a></li>
-								<li><a href="/functional.html">函数式编程</a></li>
 								<li><a href="/tag-222/">编程语言比较</a></li>
 								<li><a href="/tag-38692/">编程工具比较</a></li>
 								<li><a href="/tag-31545/">前端编程</a></li>	
@@ -138,8 +139,7 @@
                                 <li><a href="/tag-37546/">幽默梗</a></li>                                                     
                                 <li><a href="/tag-297/">程序员吐槽</a></li>                               
                                 <li><a href="/tag-20618/">面试技巧</a></li>                               
-                                <li><a href="/tag-395/">Java入门</a></li>
-                                <li><a href="/tag-49555/">数字化转型</a></li>
+                                <li><a href="/tag-395/">Java入门</a></li>                                
 								<li><a href="/tag-445/">GitHub</a></li>
 								<li><a href="/tag-36094/">最佳实践</a></li>
 								<li><a href="/tag-42486/">系统设计</a></li>
@@ -155,7 +155,7 @@
 							</ul>
 						</div> 
 					</div>
-				</li>            					
+				</li>        					
 			</ul>
 			<ul class="list-inline navbar-right top-social">
 				<li><a href="javascript:shareto('sina')"><i class="fa fa-weibo"></i></a></li>

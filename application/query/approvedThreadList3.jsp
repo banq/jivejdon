@@ -31,8 +31,9 @@ int i=0;
  <div class="col-md-12">
  <div class="box">	
   <div class="linkblock">
- 
-    <div style="position: relative;"  class="thumbn">           
+   <div class="box">
+     <div class="row">
+    <div style="position: relative;"  class="thumbn col-md-5">           
        <a href='<%=request.getContextPath() %>/tag-<bean:write name="threadTag" property="tagID"/>/' target="_blank" title="<bean:write name="threadTag" property="title" />">    
        <%
        String imgeUrl = imageUrls[i];
@@ -40,7 +41,7 @@ int i=0;
           imgeUrl = "/simgs/thumb2/"+java.util.concurrent.ThreadLocalRandom.current().nextInt(49)+".jpg";
 
        %>     
-        <img id="home-thumbnai"  width="300"  src='<%=imgeUrl%>' border="0" class="thumbnail"  loading="lazy"/>                  
+        <img id="home-thumbnai" src='<%=imgeUrl%>' border="0" class="thumbnail"  loading="lazy"/>                  
        </a>
       <div style="position: absolute;top:0px;">
        <div class="tagcloud">
@@ -50,7 +51,7 @@ int i=0;
        </div>
        </div> 
       </div>
-	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' >
+	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' class="col-md-6">
   <br><br><br><br><br><br>     
   </div>  
   <div class="lazyload" >
@@ -64,6 +65,8 @@ int i=0;
 	  
   </div>  
 	</div>	
+  </div>  
+</div>	
 </div>  
 </div>
  

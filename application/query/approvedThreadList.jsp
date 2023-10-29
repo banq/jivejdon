@@ -19,8 +19,9 @@
  <div class="col-md-12">
  <div class="box">	
   <div class="linkblock">
-    <div class="box">	           
-      <div class="zoom-container">
+    <div class="box">	  
+      <div class="row">	          
+      <div class="col-md-5">
 			      	<div class="thumbn">
               <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank" title="<bean:write name="forumThread" property="name"/>">
                <% String thumbthreadIdS = ((Long)pageContext.getAttribute("thumbthreadId")).toString(); %>               
@@ -37,7 +38,7 @@
 			      </div>
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
-         <section class="widget">
+         <section class="widget col-md-7">
          <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank"><bean:write name="forumThread" property="name"/></a></h3>
       
          <div class="info">			 
@@ -70,6 +71,7 @@
           </div>
       </section>
    	</div>	
+   	</div>	 
 	</div>	
 </div>  
 </div>
