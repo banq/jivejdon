@@ -55,7 +55,7 @@ public class ThreadTagList {
 	}
 
 	private void addTagsSorting(ForumThread forumThread, ThreadTag threadTag) {
-		tags_countWindows.merge(threadTag.getTagID(), 1, (oldValue, one) -> oldValue +
+		tags_countWindows.merge(threadTag.getTagID(), threadTag.getAssonum(), (oldValue, one) -> oldValue +
 				one);
 		if (forumThread.getRootMessage().hasImage())
 			tags_messageImageUrls.putIfAbsent(threadTag.getTagID(),
