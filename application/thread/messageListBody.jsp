@@ -51,7 +51,7 @@
 
             <div class="post_title2">
               <div class="post_titleauthor info">
-                <logic:equal name="forumMessage" property="root" value="true">
+                <%-- <logic:equal name="forumMessage" property="root" value="true">
                     <i class="fa fa-calendar"></i>
                     <bean:define id="cdate" name="forumThread" property="creationDate"></bean:define>
                     <%String cdateS = (String) pageContext.getAttribute("cdate"); %>
@@ -61,16 +61,16 @@
                <logic:notEmpty name="forumMessage" property="account">
 				           	<i class="fa fa-user"></i>
                     <bean:write name="forumMessage" property="account.username"/>
-               </logic:notEmpty>      
+               </logic:notEmpty>       --%>
               </div>
 
-              <logic:equal name="forumMessage" property="root" value="false">
+              <%-- <logic:equal name="forumMessage" property="root" value="false">
                 <div class="post_titledate">
                   <div class="smallgray" id='creationDate_<bean:write name="forumMessage" property="messageId"/>'>
                     <bean:write name="forumMessage" property="creationDate"/>
                   </div>
                 </div>
-              </logic:equal>
+              </logic:equal> --%>
 
               <div class="post_titleother">
                 <logic:equal name="messageListForm" property='<%= "authenticated[" + i + "]" %>' value="true">
