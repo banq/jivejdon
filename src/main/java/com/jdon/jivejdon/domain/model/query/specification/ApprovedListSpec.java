@@ -1,6 +1,7 @@
 package com.jdon.jivejdon.domain.model.query.specification;
 
 import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
@@ -42,7 +43,8 @@ public class ApprovedListSpec extends ThreadListSpec {
 			final ReBlogVO reBlogVO = thread.getReBlogVO();
 			final double textLength = thread.getRootMessage().getMessageVO().getBody().length() / 2048;
 			final double linkCount = reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size() + 1;
-			p = (thread.getViewCount() + textLength + linkCount + (thread.getRootMessage().hasImage() ? 1 : 0) + 1)
+			final double tagsCOunt = thread.getTags().stream().map(threadTag -> threadTag.getAssonum()).reduce(0, (subtotal, element) -> subtotal + element);
+			p = (thread.getViewCount() + textLength + linkCount + tagsCOunt + (thread.getRootMessage().hasImage() ? 1 : 0) + 1)
 					* (thread.getRootMessage().getDigCount() + 1);
 			final long diff2 = thread.getViewCount() - thread.getViewCounter().getLastSavedCount() + 1;
 			final long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
@@ -57,6 +59,11 @@ public class ApprovedListSpec extends ThreadListSpec {
 		} finally {
 		}
 		return p;
+	}
+
+	protected boolean isTagged(ForumThread thread) {
+		final double tagsCOunt = thread.getTags().stream().map(threadTag -> threadTag.getAssonum()).reduce(0, (subtotal, element) -> subtotal + element);
+        return tagsCOunt>0?true:false;
 	}
 
 	protected boolean isLinked(ForumThread thread) {
@@ -80,7 +87,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	protected boolean isGoodBlog(ForumThread thread, Account account) {
-		return (hasTags(thread, 1) && isGoodAuthor(account, 2) && isDigged(
+		return (isTagged(thread) && isGoodAuthor(account, 2) && isDigged(
 				thread, 1));
 	}
 
@@ -95,7 +102,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	protected boolean isExcelledDiscuss(ForumThread thread) {
-		return (hasTags(thread, 1) && hasReply(thread, 2));
+		return (isTagged(thread) && hasReply(thread, 2));
 
 	}
 
@@ -103,13 +110,6 @@ public class ApprovedListSpec extends ThreadListSpec {
 		return thread.getViewCount()>needViewcount;
 	}
 
-	private boolean hasTags(ForumThread thread, int throttle) {
-		Collection tags = thread.getTags();
-		if (tags != null && tags.size() >= throttle)
-			return true;
-		else
-			return false;
-	}
 
 	private boolean isGoodAuthor(Account account, int throttle) {
 		if (account.getMessageCountNow() >= throttle)
