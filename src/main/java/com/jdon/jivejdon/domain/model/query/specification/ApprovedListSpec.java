@@ -44,8 +44,8 @@ public class ApprovedListSpec extends ThreadListSpec {
 			final double textLength = thread.getRootMessage().getMessageVO().getBody().length() / 2048;
 			final double linkCount = reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size() + 1;
 			final double tagsCOunt = thread.getTags().stream().map(threadTag -> threadTag.getAssonum()).reduce(0, (subtotal, element) -> subtotal + element);
-			p = (thread.getViewCount() + textLength + linkCount + tagsCOunt + (thread.getRootMessage().hasImage() ? 1 : 0) + 1)
-					* (thread.getRootMessage().getDigCount() + 1);
+			p = (textLength + linkCount + tagsCOunt + (thread.getRootMessage().hasImage() ? 1 : 0) + 1)
+					* (thread.getRootMessage().getDigCount() + 1) * thread.getViewCount();
 			final long diff2 = thread.getViewCount() - thread.getViewCounter().getLastSavedCount() + 1;
 			final long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
 			final long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
