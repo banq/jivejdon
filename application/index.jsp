@@ -37,13 +37,11 @@
 <%@ include file="./common/body_header.jsp" %>
 
 	
-<main>	
-	<div id="page-content" class="single-page container">
-		<div class="row">
-			<div id="main-content" class="col-md-8">
-			  
-				<div class="box">
 
+<div id="page-content" class="single-page container">
+	<div class="row">
+       <main>	  
+	  <div id="main-content" class="col-md-8">
 
        <jsp:include page="/query/threadApprovedNewList2.shtml?count=7" flush="true"></jsp:include>
 
@@ -76,13 +74,11 @@
 		</div>
     </div>
 		  
-    </div>
-	
-
+   
 </div>
-
+</main> 
 <aside>  			
-		   	<div id="sidebar" class="col-md-4">
+    <div id="sidebar" class="col-md-4">
 				<!---- Start Widget ---->
 				<div class="widget wid-follow">
 					<div class="content">
@@ -111,8 +107,8 @@
 							</div>
 				</div>
 
-                <div class="widget">
-					    <div class="wid-vid">
+                <div>
+					    <div>
 					
                               <div id="newList"><jsp:include page="/query/threadNewList.shtml?count=15" flush="true"></jsp:include></div>   
 							   
@@ -155,12 +151,13 @@
 			
 			</div>
     </aside>
+    
   </div>
 </div>
 	<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
 
-</main> 
+
 
 <%@ include file="./common/IncludeBottomBody.jsp" %> 
 

@@ -29,11 +29,11 @@ int i=0;
 
  
  <div class="col-md-12">
- <div class="box">	
+
   <div class="linkblock">
    <div class="box">
      <div class="row">
-    <div style="position: relative;"  class="thumbn col-md-5">           
+    <div style="position: relative;"  class="thumbn col-md-4">           
        <a href='<%=request.getContextPath() %>/tag-<bean:write name="threadTag" property="tagID"/>/' target="_blank" title="<bean:write name="threadTag" property="title" />">    
        <%
        String imgeUrl = imageUrls[i];
@@ -51,7 +51,7 @@ int i=0;
        </div>
        </div> 
       </div>
-	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' class="col-md-6">
+	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' class="col-md-7">
   <br><br><br><br><br><br>     
   </div>  
   <div class="lazyload" >
@@ -67,7 +67,7 @@ int i=0;
 	</div>	
   </div>  
 </div>	
-</div>  
+
 </div>
  
   </div>

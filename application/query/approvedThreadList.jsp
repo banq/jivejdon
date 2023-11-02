@@ -17,7 +17,7 @@
 
 
  <div class="col-md-12">
- <div class="box">	
+
   <div class="linkblock">
     <div class="box">	  
       <div class="row">	          
@@ -73,7 +73,7 @@
    	</div>	
    	</div>	 
 	</div>	
-</div>  
+
 </div>
 
  
@@ -107,7 +107,7 @@
  <%}%>
 
  <div class="col-md-6">
- <div class="box">	
+
   <div class="linkblock">
     <div class="box">	           
       <div class="zoom-container">
@@ -161,7 +161,7 @@
       </section>
    	</div>	
 	</div>	
-</div>  
+
 </div>
 
  
