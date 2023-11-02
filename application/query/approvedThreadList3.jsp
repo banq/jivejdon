@@ -43,7 +43,7 @@ int i=0;
        %>     
         <img id="home-thumbnai" src='<%=imgeUrl%>' border="0" class="thumbnail"  loading="lazy"/>                  
        </a>
-      <div style="position: absolute;top:0px;">
+      <div style="position: absolute;top:0px;right:0px">
        <div class="tagcloud">
         <a href='<%=request.getContextPath() %>/tag-<bean:write name="threadTag" property="tagID"/>/' target="_blank" class="tag-cloud-link">
 		    <bean:write name="threadTag" property="title" /></a>
