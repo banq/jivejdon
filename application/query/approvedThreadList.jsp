@@ -27,11 +27,11 @@
                <% String thumbthreadIdS = ((Long)pageContext.getAttribute("thumbthreadId")).toString(); %>               
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">        
                   <figure>          
-                    <img id="home-thumbnai" width="336" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="thumbnail" fetchpriority="high"/>
+                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="thumbnail" fetchpriority="high"/>
                   </figure>
                 </logic:notEmpty>
                 <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">        
-                    <img id="home-thumbnai" width="336" src="/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="thumbnail" fetchpriority="high"/> 
+                    <img id="home-thumbnai" src="/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="thumbnail" fetchpriority="high"/> 
                 </logic:empty>      
                </a>                   
               </div>
@@ -39,7 +39,7 @@
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
          <section class="widget col-md-7">
-         <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank"><bean:write name="forumThread" property="name"/></a></h3>
+         <h2><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank"><bean:write name="forumThread" property="name"/></a></h2>
       
          <div class="info">			 
               <span><i class="fa fa-calendar"></i>
