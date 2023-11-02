@@ -21,7 +21,7 @@
   <div class="linkblock">
     <div class="box">	  
       <div class="row">	          
-      <div class="col-md-5">
+      <div class="col-md-4">
 			      	<div class="thumbn">
               <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank" title="<bean:write name="forumThread" property="name"/>">
                <% String thumbthreadIdS = ((Long)pageContext.getAttribute("thumbthreadId")).toString(); %>               
@@ -38,7 +38,7 @@
 			      </div>
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
-         <section class="widget col-md-7">
+         <section class="widget col-md-8">
          <h2><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank"><bean:write name="forumThread" property="name"/></a></h2>
       
          <div class="info">			 
