@@ -51,7 +51,7 @@ int i=0;
        </div>
        </div> 
       </div>
-	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' class="col-md-7">
+	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' class="col">
   <br><br><br><br><br><br>     
   </div>  
   <div class="lazyload" >

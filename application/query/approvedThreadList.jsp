@@ -38,7 +38,7 @@
 			      </div>
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
-         <section class="widget col-md-8">
+         <section class="widget col">
          <h2><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank"><bean:write name="forumThread" property="name"/></a></h2>
       
          <div class="info">			 
