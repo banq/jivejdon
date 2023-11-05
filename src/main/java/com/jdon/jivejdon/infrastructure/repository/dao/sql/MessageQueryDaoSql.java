@@ -102,7 +102,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 	public PageIterator getThreadListByUser(String userId, int start, int count) {
 		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from jiveMessage where parentMessageID IS NULL AND userID=? ";
 
-		String GET_ALL_ITEMS = "select threadID  from jiveMessage WHERE userID=? AND parentMessageID IS NULL ORDER BY creationDate DESC";
+		String GET_ALL_ITEMS = "select threadID  from jiveMessage WHERE userID=? AND parentMessageID IS NULL ORDER BY modifiedDate DESC";
 
 		Collection params = new ArrayList(1);
 		params.add(userId);
@@ -114,7 +114,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 	public PageIterator getMesageListByUser(String userId, int start, int count) {
 		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from jiveMessage where parentMessageID IS NOT NULL AND userID=? ";
 
-		String GET_ALL_ITEMS = "select messageID  from jiveMessage WHERE userID=? AND parentMessageID IS NOT NULL ORDER BY creationDate DESC";
+		String GET_ALL_ITEMS = "select messageID  from jiveMessage WHERE userID=? AND parentMessageID IS NOT NULL ORDER BY modifiedDate DESC";
 
 		Collection params = new ArrayList(1);
 		params.add(userId);
