@@ -1,13 +1,11 @@
 package com.jdon.jivejdon.domain.model.query.specification;
 
-import com.jdon.jivejdon.domain.model.account.Account;
-import com.jdon.jivejdon.domain.model.property.ThreadTag;
-import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
+import java.util.concurrent.TimeUnit;
+
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
-
-import java.util.Collection;
-import java.util.concurrent.TimeUnit;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
 
 public class ApprovedListSpec extends ThreadListSpec {
 	private final int initViewCount = 500;
@@ -27,9 +25,10 @@ public class ApprovedListSpec extends ThreadListSpec {
 						isDigged(thread, 1) ||
 						isExcelledDiscuss(thread) ||
 						isGreaterThanPrev(thread, threadPrev) ||
-						isLongText(thread) ||
+						isLongText(thread, 5) ||
 						thread.getRootMessage().hasImage()||
-						isLinked(thread)) {
+						isTagged(thread,3)||
+						isLinked(thread,2)) {
 					return true;
 				}
 			} finally {
@@ -61,14 +60,14 @@ public class ApprovedListSpec extends ThreadListSpec {
 		return p;
 	}
 
-	protected boolean isTagged(ForumThread thread) {
+	protected boolean isTagged(ForumThread thread, int count) {
 		final double tagsCOunt = thread.getTags().stream().map(threadTag -> threadTag.getAssonum()).reduce(0, (subtotal, element) -> subtotal + element);
-        return tagsCOunt>0?true:false;
+        return tagsCOunt>count?true:false;
 	}
 
-	protected boolean isLinked(ForumThread thread) {
+	protected boolean isLinked(ForumThread thread, int count) {
 		final ReBlogVO reBlogVO = thread.getReBlogVO();
-        return (reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size())>0?true:false;
+        return (reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size())>count?true:false;
 	}
 		
 
@@ -81,28 +80,28 @@ public class ApprovedListSpec extends ThreadListSpec {
 			return false;
 		if (thread.getViewCount() > threadPrev.getViewCount()){
 			if (thread.getCreationDate().substring(2, 11).equals(threadPrev.getCreationDate().substring(2, 11)))
-				return (thread.getViewCount() * 0.8 > threadPrev.getViewCount()) ? true : false;
+				return (thread.getViewCount() * 0.5 > threadPrev.getViewCount()) ? true : false;
 		}
 		return false;
 	}
 
 	protected boolean isGoodBlog(ForumThread thread, Account account) {
-		return (isTagged(thread) && isGoodAuthor(account, 2) && isDigged(
+		return (isTagged(thread,1) && isGoodAuthor(account, 2) && isDigged(
 				thread, 1));
 	}
 
-	protected boolean isLongText(ForumThread thread){
+	protected boolean isLongText(ForumThread thread, int count){
 		int bodylength = thread.getRootMessage().getMessageVO().getBody().length();
 		if (bodylength<=0) return false;
 
-		if (bodylength / 1024 > 1)
+		if (bodylength / 1024 > count)
 			return true;
 		else
 			return false;
 	}
 
 	protected boolean isExcelledDiscuss(ForumThread thread) {
-		return (isTagged(thread) && hasReply(thread, 2));
+		return (isTagged(thread,2) && hasReply(thread, 2));
 
 	}
 

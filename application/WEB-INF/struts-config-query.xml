@@ -152,9 +152,9 @@
             <forward name="success" path="/query/approvedThreadListOthers.jsp" />
         </action>
 
-        <action path="/query/approvedListOtherNoheader" type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedNewListAction" name="threadListForm" scope="request" validate="false">   
+        <!-- <action path="/query/approvedListOtherNoheader" type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedNewListAction" name="threadListForm" scope="request" validate="false">   
             <forward name="success" path="/query/threadList.jsp" />
-        </action>
+        </action> -->
 
         <action path="/query/approvedMyTags" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" name="tagsListForm" scope="request" validate="false">
             <forward name="success" path="/query/approvedThreadListOthers.jsp" />
