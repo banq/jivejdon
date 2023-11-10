@@ -24,7 +24,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 				if (thread.getViewCount() > initViewCount ||
 						isDigged(thread, 1) ||
 						isExcelledDiscuss(thread) ||
-						isGreaterThanPrev(thread, threadPrev,0.1) ||
+						isGreaterThanPrev(thread, threadPrev,0.6) ||
 						isLongText(thread, 5) ||
 						thread.getRootMessage().hasImage()||
 						(isTagged(thread,3) && isLinked(thread,3))){
