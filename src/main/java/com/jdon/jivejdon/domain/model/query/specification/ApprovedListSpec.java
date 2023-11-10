@@ -27,8 +27,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 						isGreaterThanPrev(thread, threadPrev,0.1) ||
 						isLongText(thread, 5) ||
 						thread.getRootMessage().hasImage()||
-						isTagged(thread,3)||
-						isLinked(thread,2)) {
+						(isTagged(thread,3) && isLinked(thread,3))){
 					return true;
 				}
 			} finally {
