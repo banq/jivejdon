@@ -56,16 +56,11 @@
        <div class="b_content_other">
         <div class="b_content_other_left">         
              &nbsp;阅<bean:write name="forumThread" property="viewCount" />
-    &nbsp;评<bean:write name="forumThread" property="state.messageCount" />
-        <logic:greaterThan name="forumThread" property="state.messageCount" value="0">
-           <logic:notEmpty name="forumThread" property="state.latestPost">
-            <bean:define id="latestPost" name="forumThread" property="state.latestPost"/>
-                   &nbsp;最近更新：
-            <bean:write name="latestPost" property="account.username" />
-            &nbsp; <bean:write name="latestPost" property="modifiedDate3" />
-          </logic:notEmpty>
-         </logic:greaterThan>       
-         
+    &nbsp;
+           <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
+                <span><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
+            </logic:greaterThan>     
+
 
         </div>
       </div>
