@@ -28,7 +28,7 @@
                   </div>  
                 </logic:notEmpty>              
           </div>
-         <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"><bean:write name="forumThread" property="name"/></a></h3>
+         <h2 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"><bean:write name="forumThread" property="name"/></a></h2>
       
          <div class="info">			 
               <span><i class="fa fa-calendar"></i>
