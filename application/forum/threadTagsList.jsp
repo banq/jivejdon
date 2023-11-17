@@ -7,7 +7,7 @@
 
 
  <logic:iterate id="forumThread" name="threadListForm"  property="list" length="8">
-     <%@ include file="threadListCore.jsp" %>   
+     <%@ include file="../query/others/threadListCore.jsp" %>   
  </logic:iterate>
 
 
