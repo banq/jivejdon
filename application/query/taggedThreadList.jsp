@@ -77,7 +77,7 @@ pageContext.setAttribute("title", titleStr);
         <div class="box"> 
        <center>
         
-        <h1 class="tagcloud"><a href="/tag-<bean:write name="tagID"/>/" class="tag-cloud-link"><bean:write  name='TITLE'/></a></h1>
+        <h2 class="tagcloud"><a href="/tag-<bean:write name="tagID"/>/" class="tag-cloud-link"><bean:write  name='TITLE'/></a></h2>
   
       <div>
        
