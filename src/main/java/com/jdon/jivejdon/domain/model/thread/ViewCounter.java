@@ -61,13 +61,9 @@ public class ViewCounter implements Comparable<ViewCounter> {
 	}
 
 	public void addViewCount() {
-		// if (getViewCount() != -1) {
-		// 	if (!fifo.contains(ip)) {
+		if (getViewCount() != -1) {
 				viewCount++;
-		// 		return true;
-		// 	}
-		// }
-		// return false;
+		}
 	}
 
 	public void removeViewCount(String ip) {

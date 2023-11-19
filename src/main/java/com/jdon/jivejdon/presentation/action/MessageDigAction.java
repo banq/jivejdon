@@ -58,12 +58,8 @@ public class MessageDigAction extends Action {
 			response.sendError(404);
 			return null;
 		}
-		// who has read can dig it.
-		if (message.getForumThread().getViewCounter().isIdempotent(request.getRemoteAddr())) {
-			// if (!message.getPostip().equals(request.getRemoteAddr()))
-			message.messaegDigAction();
-			message.getForumThread().removeViewCount(request.getRemoteAddr());
-		}
+
+		message.getForumThread().oncePerIP(request.getRemoteAddr());
 
 		try {
 			response.setContentType("text/html");

@@ -308,8 +308,11 @@ public class ForumThread {
 
 	}
 
-	public void removeViewCount(String ip) {
-		viewCounter.removeViewCount(ip);
+	public void oncePerIP(String ip) {
+		if (viewCounter.isIdempotent(ip)) {
+			getRootMessage().messaegDigAction();
+			viewCounter.removeViewCount(ip);
+		}
 	}
 
 	// return count
