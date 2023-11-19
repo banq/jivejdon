@@ -148,26 +148,24 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         <div class="wid-vid">
         
                  <logic:notEmpty name="forumThread" property="tags">          
-                  <div id="threadTagList"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>             
-                   <div class="lazyload" >
-							     <!-- 
-							     <script>
-							  	  load('/forum/threadTagList.shtml?othread=<bean:write name="forumThread" property="threadId"/>&threadId=<bean:write name="forumThread" property="threadId"/>', function (xhr) {				
-  	                                  document.getElementById("threadTagList").innerHTML = xhr.responseText;
-			                     });
-							     </script> -->
-							   </div>	
+                  <div id="threadTagList"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
+							    <script defer>
+					               document.addEventListener("DOMContentLoaded", function(event) { 
+                              $(document).ready(function() {      
+                                   $('#threadTagList').load("/forum/threadTagList.shtml?othread=<bean:write name="forumThread" property="threadId"/>&threadId=<bean:write name="forumThread" property="threadId"/>");                                
+                              });            
+                          });  
+                  </script>                                 
                  </logic:notEmpty>		
                  <logic:empty name="forumThread" property="tags">    
                   <div id="digList"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
-							     <div class="lazyload" >
-							     <!-- 
-							     <script>
-							  	  load('/query/threadDigList', function (xhr) {				
-  	                                  document.getElementById("digList").innerHTML = xhr.responseText;
-			                     });
-							      </script> -->
-							     </div>
+							    <script defer>
+					               document.addEventListener("DOMContentLoaded", function(event) { 
+                              $(document).ready(function() {      
+                                   $('#digList').load("/query/threadDigList");                                
+                              });            
+                          });  
+                  </script>           
                 </logic:empty>   				   
           
         </div>
