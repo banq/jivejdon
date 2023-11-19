@@ -302,8 +302,10 @@ public class ForumThread {
 		return forumThreadTreeModel;
 	}
 
-	public boolean addViewCount(String ip) {
-		return viewCounter.addViewCount(ip);
+	public ViewCounter addViewCount() {
+		viewCounter.addViewCount();
+		return viewCounter;
+
 	}
 
 	public void removeViewCount(String ip) {
