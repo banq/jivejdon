@@ -118,14 +118,13 @@
 				<div class="widget">
 					    <div class="wid-vid">
 							 <div id="digList"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
-							 <div class="lazyload" >
-							    <!-- 
-							     <script>
-							  	  load('/query/threadDigList', function (xhr) {				
-  	                                  document.getElementById("digList").innerHTML = xhr.responseText;
-			                     });
-							    </script> -->
-							  </div>
+							 <script defer>
+					               document.addEventListener("DOMContentLoaded", function(event) { 
+                                          $(document).ready(function() {      
+                                             $('#digList').load("/query/threadDigList");                                
+                                          });            
+                                        });  
+                  			      </script>           
 						</div>
 				</div>		
 
