@@ -115,8 +115,8 @@
 							</div>
 				</div>
 
-				<div class="widget">
-					    <div class="wid-vid">
+				<div>
+					    <div >
 							 <div id="digList"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
 							 <script defer>
 					               document.addEventListener("DOMContentLoaded", function(event) { 
