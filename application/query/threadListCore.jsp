@@ -49,7 +49,7 @@
           <div class="wrap-vid">              
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">                  
                   <div>
-                    <object data="/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(9)%>.jpg" type="image/png">                     
+                    <object data="/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(9)%>.jpg" type="image/png" class="thumbnail" loading="lazy" width="80" height="70">                     
                     <img src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="thumbnail" loading="lazy"/>    
                     </object>               
                   </div>
@@ -60,7 +60,7 @@
                  
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">                  
                   <div class="thumbn">
-                    <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail" loading="lazy" width="100" height="70"/>                  
+                    <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail" loading="lazy" width="80" height="70"/>                  
                   </div>  
                    <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. </p>
                           
