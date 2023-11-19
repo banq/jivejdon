@@ -87,8 +87,8 @@ public class ViewCounter implements Comparable<ViewCounter> {
 	}
 
 	public boolean isIdempotent(String ip) {
-		if (!fifo.contains(ip))
-			return false;
+		// if (!fifo.contains(ip))
+		// 	return false;
 		if (fifo2.contains(ip))
 			return false;
 		return true;
