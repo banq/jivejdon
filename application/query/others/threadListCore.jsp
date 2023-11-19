@@ -14,9 +14,9 @@
          <div class="wrap-vid">              
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">                  
                   <div class="thumbn">
-                    <figure>                       
-                    <img src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="thumbnail" loading="lazy" width="80" height="70"/>    
-                    </figure>               
+                    <object data="/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(9)%>.jpg" type="image/png">                       
+                       <img src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="thumbnail" loading="lazy" width="80" height="70"/>    
+                    </object>
                   </div>
                 </logic:notEmpty>
                  
