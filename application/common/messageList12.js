@@ -1,7 +1,7 @@
 function digMessage(id) {
   var pars = "messageId=" + id;
   load(
-    getContextPath() + "/query/updateDigCount.shtml?" + pars,
+    getContextPath() + "/forum/updateDigCount.shtml?" + pars,
     function (xhr) {
       document.getElementById("digNumber_" + id).innerHTML = xhr.responseText;
       document.getElementById("textArea_" + id).innerHTML = "  ";
