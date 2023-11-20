@@ -1,5 +1,8 @@
 package com.jdon.jivejdon.domain.model.subscription.notifysubscribed;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.shortmessage.ShortMessage;
 import com.jdon.jivejdon.domain.model.subscription.Subscription;
@@ -47,10 +50,9 @@ public class ThreadNotifySubscribed implements NotifySubscribed {
 		shortMessage.setMessageTo(subscription.getAccount().getUsername());
 
 		// http://www.jdon.com/jivejdon/threadId#messageId
-		String newSubscribedUrl = StringUtil.replace(threadNotifyMessage.getNotifyUrlTemp(), "threadId", forumThread.getThreadId().toString());
-		newSubscribedUrl = StringUtil.replace(newSubscribedUrl, "messageId", forumThread.getState().getLatestPost().getMessageId().toString());
-		String body = "" + forumThread.getState().getLatestPost().getMessageVO().getSubject() + ":"
-				+ forumThread.getState().getLatestPost().getMessageVO().getShortBody(50);
+		String newSubscribedUrl = StringUtil.replace(threadNotifyMessage.getNotifyUrlTemp(), "threadId", forumThread.getThreadId().toString());		
+		String body = "" + forumThread.getName() + " "
+				+ Arrays.asList(forumThread.getTagTitles()).stream().collect(Collectors.joining(" #", " #", " "));
 		shortMessage.setMessageBody(body.substring(0, body.length() > 80 ? 80 : body.length()) + " " + newSubscribedUrl);
 		shortMessage.setMessageTitle(forumThread.getName() + "-" + shortMessage.getMessageTitle());
 
