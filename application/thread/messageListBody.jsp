@@ -171,6 +171,7 @@
                   <script defer>
                   document.addEventListener("DOMContentLoaded", function(event) { 
                     $(document).ready(function() {              
+                        $('#threadLink').load("/query/threadDigList");
                           scrollLoadByElementId('/forum/threadLinkList.shtml?threadId=<bean:write name="forumThread" property="threadId"/>','threadLink'); 
                     });            
                   });  
