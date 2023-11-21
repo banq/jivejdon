@@ -13,7 +13,7 @@
     <outbound-rule encodefirst="true">
         <name>Strip URL Session ID's</name>
         <from>^(.*?)(?:\;jsessionid=[^\?#]*)?(\?[^#]*)?(#.*)?$</from>
-        <to>$1$2$3</to>
+        <to type="permanent-redirect">$1$2$3</to>
     </outbound-rule>
 
 
