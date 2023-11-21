@@ -106,7 +106,7 @@
  <div class="row">	
  <%}%>
 
- <div class="col-lg-6">
+ <div class="col-md-6">
  <div class="box">	
   <div class="linkblock">
     <div class="box">	           
