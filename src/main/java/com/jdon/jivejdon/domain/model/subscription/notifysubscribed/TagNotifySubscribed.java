@@ -1,5 +1,8 @@
 package com.jdon.jivejdon.domain.model.subscription.notifysubscribed;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.shortmessage.ShortMessage;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
@@ -46,7 +49,8 @@ public class TagNotifySubscribed implements NotifySubscribed {
 
 		// http://www.jdon.com/jivejdon/threadId#messageId
 		String newSubscribedUrl = StringUtil.replace(tagNotifyMessage.getNotifyUrlTemp(), "tagId", tag.getTagID().toString());
-		String body = "" + thread.getName() + ":" + newSubscribedUrl;
+		String body = thread.getName() + " " + Arrays.asList(thread.getTagTitles()).stream().collect(Collectors.joining(" #", " #", " "));
+		
 		shortMessage.setMessageBody(body);
 		shortMessage.setMessageTitle(tag.getTitle() + "-" + shortMessage.getMessageTitle());
 
