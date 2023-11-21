@@ -52,8 +52,8 @@ public class ThreadNotifySubscribed implements NotifySubscribed {
 		// http://www.jdon.com/jivejdon/threadId#messageId
 		String newSubscribedUrl = StringUtil.replace(threadNotifyMessage.getNotifyUrlTemp(), "threadId", forumThread.getThreadId().toString());		
 		String body = "" + forumThread.getName() + " "
-				+ Arrays.asList(forumThread.getTagTitles()).stream().collect(Collectors.joining(" #", " #", " "));
-		shortMessage.setMessageBody(body.substring(0, body.length() > 80 ? 80 : body.length()) + " " + newSubscribedUrl);
+				+ Arrays.asList(forumThread.getTagTitles()).stream().collect(Collectors.joining("# #", " #", "# "));
+		shortMessage.setMessageBody(body.substring(0, body.length() > 90 ? 90 : body.length()) + " " + newSubscribedUrl);
 		shortMessage.setMessageTitle(forumThread.getName() + "-" + shortMessage.getMessageTitle());
 
 		return shortMessage;

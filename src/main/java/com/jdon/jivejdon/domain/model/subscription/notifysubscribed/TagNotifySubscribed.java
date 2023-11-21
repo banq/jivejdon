@@ -49,9 +49,9 @@ public class TagNotifySubscribed implements NotifySubscribed {
 
 		// http://www.jdon.com/jivejdon/threadId#messageId
 		String newSubscribedUrl = StringUtil.replace(tagNotifyMessage.getNotifyUrlTemp(), "tagId", tag.getTagID().toString());
-		String body = thread.getName() + " " + Arrays.asList(thread.getTagTitles()).stream().collect(Collectors.joining(" #", " #", " "));
-		
-		shortMessage.setMessageBody(body);
+		String body = thread.getName() + " " + Arrays.asList(thread.getTagTitles()).stream().collect(Collectors.joining("# #", " #", "# "));
+		shortMessage.setMessageBody(
+				body.substring(0, body.length() > 90 ? 90 : body.length()) + " " + newSubscribedUrl);
 		shortMessage.setMessageTitle(tag.getTitle() + "-" + shortMessage.getMessageTitle());
 
 		return shortMessage;
