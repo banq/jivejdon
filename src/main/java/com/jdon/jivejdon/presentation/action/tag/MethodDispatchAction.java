@@ -50,14 +50,6 @@ public class MethodDispatchAction extends DispatchAction {
 		return mapping.findForward("tags");
 	}
 
-	private boolean checkSpamHit(String oid, HttpServletRequest request) {
-		if (customizedThrottle == null) {
-			customizedThrottle = (CustomizedThrottle) WebAppUtil.getComponentInstance
-					("customizedThrottle", this.servlet.getServletContext());
-		}
-		HitKeyIF hitKey = new HitKeySame(request.getRemoteAddr(), oid);
-		return customizedThrottle.processHitFilter(hitKey);
-	}
 
 	public ActionForward savetags(ActionMapping mapping, ActionForm form, HttpServletRequest
 			request, HttpServletResponse response) throws Exception {

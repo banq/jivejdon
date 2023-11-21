@@ -106,14 +106,14 @@ public class RSSGenServlet extends HttpServlet {
 		return true;
 	}
 
-	private boolean checkSpamHit(HttpServletRequest request) {
-		if (customizedThrottle == null) {
-			customizedThrottle = (CustomizedThrottle) WebAppUtil.getComponentInstance("customizedThrottle",
-					servletContext);
-		}
-		HitKeyIF hitKey = new HitKeySame(request.getRemoteAddr(), "RSS");
-		return customizedThrottle.processHitFilter(hitKey);
-	}
+	// private boolean checkSpamHit(HttpServletRequest request) {
+	// 	if (customizedThrottle == null) {
+	// 		customizedThrottle = (CustomizedThrottle) WebAppUtil.getComponentInstance("customizedThrottle",
+	// 				servletContext);
+	// 	}
+	// 	HitKeyIF hitKey = new HitKeySame(request.getRemoteAddr(), "RSS");
+	// 	return customizedThrottle.processHitFilter(hitKey);
+	// }
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doPost(req, resp);

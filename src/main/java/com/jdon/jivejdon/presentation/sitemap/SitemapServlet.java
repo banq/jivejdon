@@ -64,14 +64,6 @@ public class SitemapServlet extends HttpServlet {
 	private String threadUrl;
 	private CharArrayWriter charArrayWriterBuffer;
 
-	private boolean checkSpamHit(HttpServletRequest request) {
-		if (customizedThrottle == null) {
-			customizedThrottle = (CustomizedThrottle) WebAppUtil
-					.getComponentInstance("customizedThrottle", servletContext);
-		}
-		HitKeyIF hitKey = new HitKeySame(request.getRemoteAddr(), "SITEMAP");
-		return customizedThrottle.processHitFilter(hitKey);
-	}
 
 	private Collection<UrlSet> genThreadUrlSet(HttpServletRequest request) {
 		Collection<UrlSet> urlsets = new ArrayList();
@@ -191,10 +183,10 @@ public class SitemapServlet extends HttpServlet {
 		// return;
 		// }
 
-		if (!checkSpamHit(request)) {
-			((HttpServletResponse) response).sendError(404);
-			return;
-		}
+		// if (!checkSpamHit(request)) {
+		// 	((HttpServletResponse) response).sendError(404);
+		// 	return;
+		// }
 
 		if (lastModifiedDate == 0 || lastModifiedDate < modelLastModifiedDate) {
 			lastModifiedDate = modelLastModifiedDate;

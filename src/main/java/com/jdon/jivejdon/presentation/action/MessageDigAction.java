@@ -1,21 +1,20 @@
 package com.jdon.jivejdon.presentation.action;
 
-import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.spi.component.throttle.hitkey.CustomizedThrottle;
-import com.jdon.jivejdon.spi.component.throttle.hitkey.HitKeyIF;
-import com.jdon.jivejdon.spi.component.throttle.hitkey.HitKeySame;
-import com.jdon.jivejdon.domain.model.ForumMessage;
-import com.jdon.jivejdon.presentation.filter.SpamFilterTooFreq;
-import com.jdon.jivejdon.api.ForumMessageService;
-import com.jdon.util.UtilValidate;
+import java.util.regex.Pattern;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.regex.Pattern;
+import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.api.ForumMessageService;
+import com.jdon.jivejdon.domain.model.ForumMessage;
+import com.jdon.jivejdon.spi.component.throttle.hitkey.CustomizedThrottle;
+import com.jdon.util.UtilValidate;
 
 /**
  * response the ajax request for getting dig count
@@ -31,12 +30,6 @@ public class MessageDigAction extends Action {
 			HttpServletResponse response)
 			throws Exception {
 
-		// remove search robot
-		Pattern robotPattern = (Pattern) this.servlet.getServletContext().getAttribute(SpamFilterTooFreq.BOTNAME);
-		if (robotPattern != null && isPermittedRobot(request, robotPattern)) {
-			response.sendError(404);
-			return null;
-		}
 
 		String messageId = request.getParameter("messageId");
 		if (UtilValidate.isEmpty(messageId)) {
@@ -44,10 +37,6 @@ public class MessageDigAction extends Action {
 			return null;
 		}
 
-		if (!checkSpamHit(messageId, request)) {
-			response.sendError(404);
-			return null;
-		}
 
 		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil
 				.getService("forumMessageService", this.servlet.getServletContext());
@@ -86,13 +75,6 @@ public class MessageDigAction extends Action {
 		return false;
 	}
 
-	private boolean checkSpamHit(String id, HttpServletRequest request) {
-		if (customizedThrottle == null) {
-			customizedThrottle = (CustomizedThrottle) WebAppUtil.getComponentInstance("customizedThrottle",
-					this.servlet.getServletContext());
-		}
-		HitKeyIF hitKey = new HitKeySame(request.getRemoteAddr(), "threads");
-		return customizedThrottle.processHitFilter(hitKey);
-	}
+
 
 }
