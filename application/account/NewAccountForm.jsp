@@ -63,7 +63,7 @@
 
     <div class="box">
         <div class="row">
-            <html:form styleClass="form-horizontal col-md-offset-4 col-md-4" action="/account/newAccount.shtml" method="post" onsubmit="return Juge(this);">
+            <html:form styleClass="form-horizontal col-lg-offset-4 col-lg-4" action="/account/newAccount.shtml" method="post" onsubmit="return Juge(this);">
 
                 <html:hidden name="accountForm" property="action" value="create" />
                 <input type="hidden" name="actionType" value="createSave"/>

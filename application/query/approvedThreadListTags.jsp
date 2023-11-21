@@ -6,7 +6,7 @@
 <%@ page session="false" %>
 
 <div class="box">
-<div class="col-md-4">
+<div class="col-lg-4">
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length="2" >
 <div class="linkblock">	
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />	
@@ -20,7 +20,7 @@
 </logic:iterate>
 </div>
 
-<div class="col-md-4">
+<div class="col-lg-4">
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length="2" offset="2" >
 <div class="linkblock">	
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />	
@@ -34,7 +34,7 @@
 </logic:iterate>
 </div>
 
-	<div class="col-md-4">
+	<div class="col-lg-4">
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length="2" offset="4" >
 <div class="linkblock">	
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />	

@@ -13,7 +13,7 @@
 
     <bean:define id="ForumMessage" name="threadForm" property="rootMessage"  />
 
-<div class="col-md-offset-4 col-md-4">
+<div class="col-lg-offset-4 col-lg-4">
 
 <html:form action="/message/updateAction.shtml" method="post" >
 <html:hidden property="threadId" />

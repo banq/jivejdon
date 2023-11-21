@@ -62,7 +62,7 @@ com.jdon.jivejdon.spi.component.block.ErrorBlockerIF"%>
 <div style="text-align: center"><form action="/account/NewAccountForm.jsp" method="POST">
     <input type="hidden" name="action" value="create"/>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-lg-12">
             <div class="box">
                 为防止垃圾广告，新用户注册实现有条件限制。<br>
                 如果注册过程无法正常进行，请使用<a href='/account/oauth/sinaCallAction.shtml'>微博账号登入</a>。<br>

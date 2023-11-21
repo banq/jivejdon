@@ -21,22 +21,22 @@
 
 
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-lg-3">
       <div class="form-group">
         <input class="form-control" type="text" name="tagTitle" size="15" maxlength="25" id="searchV_0"  value=''/>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-lg-3">
       <div class="form-group">
         <input class="form-control" type="text" name="tagTitle" size="15" maxlength="25" id="searchV_1"  value=''/>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-lg-3">
       <div class="form-group">
         <input class="form-control" type="text" name="tagTitle" size="15" maxlength="25" id="searchV_2"  value=''/>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-lg-3">
       <div class="form-group">
 
         <input class="form-control" type="text" name="tagTitle" size="15" maxlength="25" id="searchV_3"  value=''/>
@@ -57,7 +57,7 @@
   
 
   <div class="row">
-	<div class="col-md-6">       
+	<div class="col-lg-6">       
         <div class="form-group">            
 <logic:notEmpty name="forumId">
   <input type="hidden" name="forum.forumId" value="<bean:write name="forumId"/>" id="forumId_select"/>
@@ -70,13 +70,13 @@
 <html:hidden property="action" value="create"/>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-lg-6">
     </div>
 </div>
     
 
 <div class="row">
-	<div class="col-md-12">       
+	<div class="col-lg-12">       
         <div class="form-group"> 
               <button type="submit" class="btn btn-4 btn-block" name="formButton" id="formSubmitButton" >发布</button>
         </div>

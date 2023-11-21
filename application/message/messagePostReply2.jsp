@@ -17,7 +17,7 @@
 <html:form action="/message/replySaveAction.sthml" method="post" target="target_reply" styleId="messageReply"  onsubmit="return checkPost(this);" >
 
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-lg-12">
        
         <div class="form-group">
             
@@ -37,7 +37,7 @@
 </div>
 
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-lg-12">
        
 		<div class="form-group">
           <textarea name="body" tabindex="6" cols="45" rows="9" onFocus="loadCkeditJS()" id="formBody" class="form-control"></textarea>

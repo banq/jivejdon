@@ -19,7 +19,7 @@
 <bean:define id="action" name="messageReplyForm" property="action"  />
 </logic:notEmpty>
 
-<div class="col-md-offset-4 col-md-4">
+<div class="col-lg-offset-4 col-lg-4">
 <html:errors />
    <logic:messagesNotPresent>
     <logic:empty name="errors">

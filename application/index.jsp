@@ -41,7 +41,7 @@
 <div id="page-content" class="single-page container">
 	<div class="row">
        <main>	  
-	  <div id="main-content" class="col-md-8">
+	  <div id="main-content" class="col-lg-8">
 
        <jsp:include page="/query/threadApprovedNewList2.shtml?count=7" flush="true"></jsp:include>
 
@@ -78,7 +78,7 @@
 </div>
 </main> 
 <aside>  			
-    <div id="sidebar" class="col-md-4">
+    <div id="sidebar" class="col-lg-4">
 				<!---- Start Widget ---->
 				<div>
 					<div class="content">

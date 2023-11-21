@@ -31,7 +31,7 @@ response.setStatus(HttpServletResponse.SC_OK);
 <html:hidden property="forumThread.threadId" />
 <html:hidden property="forum.forumId" />
 <%-- <div class="row">
-	<div class="col-md-6">       
+	<div class="col-lg-6">       
         <div class="form-group">    
      <html:select name="messageForm" styleClass="form-control" property="forum.forumId" styleId="forumId_select">
        <html:option value="">请选择</html:option>
@@ -40,7 +40,7 @@ response.setStatus(HttpServletResponse.SC_OK);
   
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-lg-6">
     </div>
 </div> --%>
 <logic:equal name="messageForm" property="authenticated"  value="false">
@@ -55,7 +55,7 @@ response.setStatus(HttpServletResponse.SC_OK);
  
 
 <div class="row">
-	<div class="col-md-12">       
+	<div class="col-lg-12">       
         <div class="form-group"> 
               <button type="submit" class="btn btn-4 btn-block" name="formButton" id="formSubmitButton">发布</button>
         </div>

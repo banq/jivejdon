@@ -75,7 +75,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <div id="page-content" class="single-page container">
   <div class="row">
     <!-- /////////////////左边 -->
-    <div id="main-content" class="col-md-8">
+    <div id="main-content" class="col-lg-8">
       <div class="box">
 
         <!--  内容-->
@@ -114,7 +114,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
 <aside>
     <!-- /////////////////右边 -->
-    <div id="sidebar" class="col-md-4">
+    <div id="sidebar" class="col-lg-4">
       <!-- Start Widget -->
       <div class="widget wid-follow">
         <div class="content">

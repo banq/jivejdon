@@ -16,12 +16,12 @@
  <div class="row">	
 
 
- <div class="col-md-12">
+ <div class="col-lg-12">
  <div class="box">	
   <div class="linkblock">
     <div class="box">	  
       <div class="row">	          
-      <div class="col-md-4">
+      <div class="col-lg-4">
 			      	<div class="thumbn">
               <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank" title="<bean:write name="forumThread" property="name"/>">
                <% String thumbthreadIdS = ((Long)pageContext.getAttribute("thumbthreadId")).toString(); %>               
@@ -106,7 +106,7 @@
  <div class="row">	
  <%}%>
 
- <div class="col-md-6">
+ <div class="col-lg-6">
  <div class="box">	
   <div class="linkblock">
     <div class="box">	           

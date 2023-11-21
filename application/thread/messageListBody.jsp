@@ -29,7 +29,7 @@
 </logic:equal> --%>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-lg-12">
     <div class="box">
       <logic:equal name="forumMessage" property="root" value="false">
       <div class="frame-yy">

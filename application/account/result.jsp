@@ -17,7 +17,7 @@
 <%@ include file="../common/IncludeTop.jsp" %>
 
 
-<div class="col-md-offset-4 col-md-4">
+<div class="col-lg-offset-4 col-lg-4">
 <logic:messagesNotPresent>
     注册资料操作成功  
     <p>

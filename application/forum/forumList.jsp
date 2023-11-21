@@ -19,7 +19,7 @@
 		<div class="row">
 			<!-- /////////////////左边 -->
            <aside>
-           <div id="sidebar" class="col-md-4">
+           <div id="sidebar" class="col-lg-4">
 				<!---- Start Widget ---->
 				<div class="widget wid-follow">
 					<div class="content">
@@ -47,7 +47,7 @@
 
            
 			<!-- /////////////////右边 -->
-            <div id="main-content" class="col-md-8">
+            <div id="main-content" class="col-lg-8">
 				<div class="box">		
                      <table class="table table-striped">
 	 <thead>

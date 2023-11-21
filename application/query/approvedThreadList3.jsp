@@ -28,12 +28,12 @@ int i=0;
  <div class="row">	
 
  
- <div class="col-md-12">
+ <div class="col-lg-12">
  <div class="box">	
   <div class="linkblock">
    <div class="box">
      <div class="row">
-    <div style="position: relative;"  class="thumbn col-md-4">           
+    <div style="position: relative;"  class="thumbn col-lg-4">           
        <a href='<%=request.getContextPath() %>/tag-<bean:write name="threadTag" property="tagID"/>/' target="_blank" title="<bean:write name="threadTag" property="title" />">    
        <%
        String imgeUrl = imageUrls[i];

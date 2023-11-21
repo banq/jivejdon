@@ -7,7 +7,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <div class="box">
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-lg-12">
     <div class="form-group">
       <html:textarea styleClass="form-control" property="subject" styleId="replySubject" cols="100" rows="2" tabindex="5"
                      onfocus="if(value=='标题/评论限140字'){value=''}"
@@ -17,7 +17,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-lg-12">
     <div class="form-group">
       <html:textarea styleClass="form-control" property="body" cols="100" rows="40" styleId="formBody" tabindex="6"></html:textarea>
 

@@ -8,7 +8,7 @@
 	<nav id="top">
 		<div class="container">
 			<div class="row">
-                <div class="col-md-12 ">
+                <div class="col-lg-12 ">
                     <a href="/"><img src="/simgs/jdon100.png" width="100" height="40" fetchpriority="high" alt="极道"/></a>
                     <span class="list-inline top-link link pull-right">
 				        <a href="<%=request.getContextPath() %>/forum"><i class="fa fa-home"></i>Dojo</a>

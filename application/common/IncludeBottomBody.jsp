@@ -4,16 +4,16 @@
 		<div class="wrap-footer">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-4 col-footer footer-1">
+					<div class="col-lg-4 col-footer footer-1">
 						<div class="footer-heading"><h3><span style="color: #fff;">Jdon.com</span></h3></div>
 						<div class="content">
 							<p>道可道 极常道</p>
 						</div>
 					</div>
-					<div class="col-md-4 col-footer footer-2">
+					<div class="col-lg-4 col-footer footer-2">
 									
 					</div>
-					<div class="col-md-4 col-footer footer-3">
+					<div class="col-lg-4 col-footer footer-3">
 						<div class="content">
 							<ul>
 								<li><a href="/followus.html">关注极道 </a></li>

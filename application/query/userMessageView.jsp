@@ -67,7 +67,7 @@
 
                         </td>
                         <td>
-                            <div class="box col-md-12">
+                            <div class="box col-lg-12">
                                 <b>
                                     &nbsp;&nbsp;<bean:write name="account"
                                                             property="username"/>
