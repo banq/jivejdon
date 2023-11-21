@@ -333,15 +333,6 @@ public class ForumThread {
 		return threadTagsVO;
 	}
 
-	private void setThreadTagsVO(ThreadTagsVO threadTagsVO) {
-		this.threadTagsVO = threadTagsVO;
-	}
-
-	// private void setRootMessageTitles() {
-	// 	String[] tagTitles = threadTagsVO.getTags().stream().map(ThreadTag::getTitle).toArray(String[]::new);
-	// 	getRootMessage().setTagTitle(tagTitles);
-	// }
-
 	public Collection<ThreadTag> getTags() {
 		return this.threadTagsVO.getTags();
 	}
@@ -411,8 +402,7 @@ public class ForumThread {
 		if (isSolid())
 			return;
 		this.forum = forum;
-		// this.setRootMessage(rootMessage);
-		this.setThreadTagsVO(threadTagsVO);
+		this.threadTagsVO = threadTagsVO;
 		this.setSolid(true);
 	}
 
