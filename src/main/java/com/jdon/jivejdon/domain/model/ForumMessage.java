@@ -84,7 +84,6 @@ public class ForumMessage extends RootMessage implements Cloneable {
 
     private Forum forum;
 
-    private String[] tagTitle;
     private AttachmentsVO attachmentsVO;
     private MessagePropertysVO messagePropertysVO;
 
@@ -324,11 +323,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
     }
 
     public String[] getTagTitle() {
-        return tagTitle;
-    }
-
-    public void setTagTitle(String[] tagTitle) {
-        this.tagTitle = tagTitle;
+        return getForumThread().getTagTitles();
     }
 
     private void setFilterPipleSpec(FilterPipleSpec filterPipleSpec) {

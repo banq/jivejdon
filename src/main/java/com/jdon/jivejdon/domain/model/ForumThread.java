@@ -270,11 +270,7 @@ public class ForumThread {
 		return newForum;
 	}
 
-	public void updateMessage(ForumMessage forumMessage) {
-		if (isRoot(forumMessage)) {
-			// this.setRootMessage(forumMessage);
-			setRootMessageTitles();
-		}
+	public void updateMessage(ForumMessage forumMessage) {		
 		this.state.get().setLatestPost(forumMessage);
 		this.forum.updateNewMessage(forumMessage);
 	}
@@ -339,13 +335,12 @@ public class ForumThread {
 
 	private void setThreadTagsVO(ThreadTagsVO threadTagsVO) {
 		this.threadTagsVO = threadTagsVO;
-		setRootMessageTitles();
 	}
 
-	private void setRootMessageTitles() {
-		String[] tagTitles = threadTagsVO.getTags().stream().map(ThreadTag::getTitle).toArray(String[]::new);
-		getRootMessage().setTagTitle(tagTitles);
-	}
+	// private void setRootMessageTitles() {
+	// 	String[] tagTitles = threadTagsVO.getTags().stream().map(ThreadTag::getTitle).toArray(String[]::new);
+	// 	getRootMessage().setTagTitle(tagTitles);
+	// }
 
 	public Collection<ThreadTag> getTags() {
 		return this.threadTagsVO.getTags();
@@ -354,11 +349,10 @@ public class ForumThread {
 	public void changeTags(ThreadTagsVO threadTagsVO) {
 		this.getThreadTagsVO().subscriptionNotify(threadTagsVO.getTags());
 		this.threadTagsVO = threadTagsVO;
-		setRootMessageTitles();
 	}
 
 	public String[] getTagTitles() {
-		return getRootMessage().getTagTitle();
+		return threadTagsVO.getTags().stream().map(ThreadTag::getTitle).toArray(String[]::new);
 	}
 
 	/**
