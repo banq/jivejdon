@@ -167,7 +167,7 @@
               </div>
 
 
-                  <div id='threadLink'></div>    
+                  <div id='threadLink' class="linkblock"></div>    
                   <script defer>
                   document.addEventListener("DOMContentLoaded", function(event) { 
                     $(document).ready(function() {              
