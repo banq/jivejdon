@@ -45,7 +45,7 @@ pageContext.setAttribute("title", titleStr);
 <div id="page-content" class="single-page container">
 	<div class="row">
 		<!-- /////////////////左边 -->
-		<div id="main-content" class="col-lg-12">
+		<div id="main-content" class="col-md-12">
 
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
@@ -68,7 +68,7 @@ pageContext.setAttribute("title", titleStr);
 
 <main>
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-md-12">
     <div class="box"> 
 
 
@@ -94,7 +94,7 @@ int h = 0 ;
  <div class="row">	
  <%}%>
 
- <div class="col-lg-4">
+ <div class="col-md-4">
  <div class="box">	
   <div class="linkblock">
                 
