@@ -26,7 +26,7 @@
               <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank" title="<bean:write name="forumThread" property="name"/>">
                <% String thumbthreadIdS = ((Long)pageContext.getAttribute("thumbthreadId")).toString(); %>               
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">        
-                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="thumbnail" fetchpriority="high" style="max-width:400px;  width:100%;"/>
+                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="thumbnail" fetchpriority="high" style="max-width:400px;  width:100%;" onerror="this.src='/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg'"/>
                 </logic:notEmpty>
                 <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">        
                     <img id="home-thumbnai" src="/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="thumbnail" fetchpriority="high" style="max-width:400px;  width:100%;"/> 
@@ -113,7 +113,7 @@
               <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank" title="<bean:write name="forumThread" property="name"/>">
                <% String thumbthreadIdS = ((Long)pageContext.getAttribute("thumbthreadId")).toString(); %>               
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">        
-                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="thumbnail" fetchpriority="high"/>
+                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="thumbnail" fetchpriority="high"  onerror="this.src='/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg'"/>
                 </logic:notEmpty>
                 <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">        
                     <img id="home-thumbnai" src="/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="thumbnail" fetchpriority="high"/> 
