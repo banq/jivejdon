@@ -12,7 +12,7 @@
   <div class="box"> 
     <div class="linkblock">
       <div class="row">
-        <div class="col-sm-12">
+        <div class="col-lg-12">
           
             <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"><bean:write name="forumThread" property="name"/></a></h3>
             <div class="wrap-vid">

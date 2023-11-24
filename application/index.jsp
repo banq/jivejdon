@@ -47,9 +47,6 @@
 
 	
 <div class="box"> 
-  
-    <div class="row">
-        <div class="col-sm-12">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
      crossorigin="anonymous"></script>
 <ins class="adsbygoogle"
@@ -61,8 +58,6 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-        </div>
-    </div>
  
 </div>
 
