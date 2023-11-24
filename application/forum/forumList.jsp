@@ -22,15 +22,7 @@
             <div id="main-content" class="col-lg-8">
 				<div class="box">		
                      <table class="table table-striped">
-	 <thead>
-		 <tr>
-		 <th>道场Dojo</th>
-		 
-		</tr>
-	</thead>
 	<tbody>
-		
-	
 
 <logic:iterate indexId="i"   id="forum" name="forumListForm" property="list" >
         <tr>
