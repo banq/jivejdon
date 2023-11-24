@@ -51,9 +51,7 @@
                   <div class="lazyload" >
 	    	    	    <!-- 
         	    	    	    <script>
-         	    	    	    load('/query/threadNewList.shtml?count=5&forumId=${forum.forumId}', function(xhr) {
-  	       	    	    	    document.getElementById('threadNewList_<bean:write name="forum" property="forumId"/>').innerHTML = xhr.responseText;
-         	    	    	    });
+         	    	    	    $('#threadNewList_<bean:write name="forum" property="forumId"/>').load("/query/threadNewList.shtml?count=5&forumId=${forum.forumId}");                         
         	    	    	    </script>
         	    	    	    -->
   	    	    	    </div>  
