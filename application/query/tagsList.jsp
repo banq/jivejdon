@@ -110,15 +110,13 @@ int h = 0 ;
        </div>
        </div> 
       </div>
-	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' >
+	<div id='ajax_<bean:write name="threadTag" property="tagID"/>' >
   <br><br><br><br><br><br>     
   </div>  
   <div class="lazyload" >
 	    <!-- 
         <script>
-         load('/query/tt/${threadTag.tagID}', function(xhr) {
-  	       document.getElementById('ajax_tagID=<bean:write name="threadTag" property="tagID"/>').innerHTML = xhr.responseText;
-         });
+         $('#ajax_<bean:write name="threadTag" property="tagID"/>').load("/query/tt/${threadTag.tagID}");        
         </script>
         -->
 	  

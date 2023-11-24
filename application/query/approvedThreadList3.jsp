@@ -51,15 +51,13 @@ int i=0;
        </div>
        </div> 
       </div>
-	<div id='ajax_tagID=<bean:write name="threadTag" property="tagID"/>' class="col">
+	<div id='ajax_<bean:write name="threadTag" property="tagID"/>' class="col">
   <br><br><br><br><br><br>     
   </div>  
   <div class="lazyload" >
 	    <!-- 
         <script>
-         load('/query/tt2/${threadTag.tagID}', function(xhr) {
-  	       document.getElementById('ajax_tagID=<bean:write name="threadTag" property="tagID"/>').innerHTML = xhr.responseText;
-         });
+         $('#ajax_<bean:write name="threadTag" property="tagID"/>').load("/query/tt2/${threadTag.tagID}");                         
         </script>
         -->
 	  
