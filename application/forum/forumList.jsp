@@ -55,8 +55,9 @@
                 <br>
                 <span class="home_content" ><bean:write name="forum" property="description" filter="false"/></span>
                 <div class="linkblock">
-                <jsp:include page="/query/threadNewList.shtml?count=5" flush="true">
-                <jsp:param name="forumId" value="${forum.forumId}"/>
+                <jsp:include page="/query/threadNewList.shtml" flush="true">
+                 <jsp:param name="count" value="5"/>
+                 <jsp:param name="forumId" value="${forum.forumId}"/>
                 </jsp:include>
                 </div>
                 <div class="box">
