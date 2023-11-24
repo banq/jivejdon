@@ -18,10 +18,6 @@
  <main>
 <div id="page-content" class="single-page container">
 		<div class="row">
-			<!-- /////////////////右边 -->
-         
-
-           
 			<!-- /////////////////左边 -->
             <div id="main-content" class="col-lg-8">
 				<div class="box">		
@@ -55,11 +51,21 @@
 
                 <br>
                 <span class="home_content" ><bean:write name="forum" property="description" filter="false"/></span>
-                <div class="linkblock">
-                <jsp:include page="/query/threadNewList.shtml" flush="true">
+                <div id="threadNewList_<bean:write name="forum" property="forumId"/>" class="linkblock">
+                <%-- <jsp:include page="/query/threadNewList.shtml" flush="true">
                  <jsp:param name="count" value="5"/>
                  <jsp:param name="forumId" value="${forum.forumId}"/>
-                </jsp:include>
+                </jsp:include> --%>
+                  <div class="lazyload" >
+	    	    	    <!-- 
+        	    	    	    <script>
+         	    	    	    load('/query/threadNewList.shtml?count=5&forumId=${forum.forumId}', function(xhr) {
+  	       	    	    	    document.getElementById('threadNewList_<bean:write name="forum" property="forumId"/>').innerHTML = xhr.responseText;
+         	    	    	    });
+        	    	    	    </script>
+        	    	    	    -->
+  	    	    	    </div>  
+
                 </div>
                 <div class="box">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
