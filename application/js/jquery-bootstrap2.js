@@ -7064,7 +7064,7 @@ function shareto(id) {
   } else if (id == "weixin") {
     _gaq.push(["_trackEvent", "SocialShare", "Share", "weixin", 1]);
     window.open(
-      "weixin://scanqrcode",
+      "/simgs/weixin.png",
       "newwindow",
       "height=300,width=300,top=0,left=0,toolbar=no,menubar=no,location=no, status=no"
     );
