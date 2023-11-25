@@ -13,8 +13,6 @@
                     <span class="list-inline top-link link pull-right">
 				        <a href="/forum"><i class="fa fa-home"></i>Dojo</a>
                         <a href="/tags/"><i class="fa fa-arrow-circle-o-down"></i>话题</a>
-						<a href="/threads"><i class="fa fa-list-ul"></i>最新</a>
-                        <a href="/approval"><i class="fa fa-arrow-circle-up"></i>新佳</a>
 						<a href="/forum/threadDigSortedList"><i class="fa fa-star-half-full"></i>最佳</a>
                         <a href="/followus.html"><i class="fa fa-feed"></i>订阅</a>
                     </span>
