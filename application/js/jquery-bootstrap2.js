@@ -7084,7 +7084,8 @@ function shareto(id) {
       " http://service.weibo.com/share/share.php?url=" +
         url +
         "&appkey=2879276008&title=" +
-        title,
+        title +
+        " @极道Jdon",
       "_blank",
       "width=615,height=505"
     );
