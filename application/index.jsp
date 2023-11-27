@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>极道 - 技术前沿极客</title>
   <meta name="Description" content="实时追踪全球最前沿技术思想">
-  <meta name="Keywords" content="认知,逻辑,教程,企业架构,大语言模型,编程,规则引擎,流程,领域驱动,微服务,数据工程,平台,人工智能,程序,算法,模式">
+  <meta name="Keywords" content="认知,逻辑,教程,企业架构,大语言模型,编程,规则引擎,流程,领域驱动,微服务,数据工程,平台,人工智能,程序,算法,模式,Java,Go,Python,Rust">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
   <link rel="alternate" type="application/rss+xml" title="极道订阅" href="https://www.jdon.com/rss">
   <link rel="canonical" href="https://www.jdon.com/">
