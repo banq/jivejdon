@@ -15,8 +15,11 @@
  */
 package com.jdon.jivejdon.presentation.action.query;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -61,7 +64,8 @@ public class ThreadTagListAction extends ModelListAction {
 
 		try {
 			ThreadContext threadContext = (ThreadContext)WebAppUtil.getComponentInstance("threadContext", request);
-		    Set<Long> threadIdsPN = threadContext.getThreadListInContext(thread);
+		    List<Long> threadIdsPN = threadContext.getThreadListInContext(thread).stream().collect(Collectors.toList());
+			Collections.shuffle(threadIdsPN);
 	        return new PageIterator(threadIdsPN.size(), threadIdsPN.toArray());
 		} catch (Exception e) {
 			return new PageIterator();
