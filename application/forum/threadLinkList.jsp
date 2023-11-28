@@ -6,7 +6,7 @@
 <%@ page session="false" %>
 
  <logic:notEmpty name="threadListForm" property="list">          
- <logic:iterate id="forumThread" name="threadListForm"  property="list" length="10">
+ <logic:iterate id="forumThread" name="threadListForm"  property="list">
    <logic:notEmpty name="forumThread" property="rootMessage">
     <bean:define id="forumMessage" name="forumThread" property="rootMessage"  />
     <%@ include file="../query/others/threadListCore.jsp" %>  

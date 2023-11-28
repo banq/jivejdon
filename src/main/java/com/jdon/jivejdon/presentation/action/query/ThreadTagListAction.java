@@ -61,7 +61,7 @@ public class ThreadTagListAction extends ModelListAction {
 
 		try {
 			ThreadContext threadContext = (ThreadContext)WebAppUtil.getComponentInstance("threadContext", request);
-		    Set<Long> threadIdsPN = threadContext.getPrevNextInTag(thread);
+		    Set<Long> threadIdsPN = threadContext.getThreadListInContext(thread);
 	        return new PageIterator(threadIdsPN.size(), threadIdsPN.toArray());
 		} catch (Exception e) {
 			return new PageIterator();
