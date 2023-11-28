@@ -37,7 +37,7 @@ public class ThreadContext {
            resultIds.add(prevThreadId);
        }
        if (index < (threadListInContext.size() - 1)) {
-           Long nextThreadId = (Long) resultIds.get(index + 1);
+           Long nextThreadId = (Long) threadListInContext.get(index + 1);
             resultIds.add(nextThreadId);
        }
        return resultIds;
