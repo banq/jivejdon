@@ -21,22 +21,21 @@ public class ThreadContext {
         this.cachePrevNexts= new ConcurrentHashMap<>();
     }
 
-
     public List<Long> getPrevNextInTag(ForumThread thread){
         return cachePrevNexts.computeIfAbsent(thread.getThreadId(), k ->getForumThreadsInTag(thread));
     }
 
 	private List<Long> getForumThreadsInTag(ForumThread thread) {
         List<Long> threadIds = new ArrayList<>();
-		for (ThreadTag tag : thread.getTags()) {
-				threadIds.addAll(messageQueryDao.getThreadsPrevNextInTag(tag.getTagID(),thread.getThreadId()));
-		}
-        if(threadIds.isEmpty()){
-            threadIds.addAll(messageQueryDao.getThreadsPrevNext(thread.getForum().getForumId(),thread.getThreadId()));
+        for (ThreadTag tag : thread.getTags()) {
+            threadIds.addAll(messageQueryDao.getThreadsPrevNextInTag(tag.getTagID(), thread.getThreadId()));
+        }
+        if (threadIds.isEmpty()) {
+            threadIds.addAll(messageQueryDao.getThreadsPrevNext(thread.getForum().getForumId(), thread.getThreadId()));
         }
         threadIds.remove(thread.getThreadId());
         return threadIds;
-	}
+    }
 
     
 }
