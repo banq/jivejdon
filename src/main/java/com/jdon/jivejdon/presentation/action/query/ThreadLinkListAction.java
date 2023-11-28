@@ -76,8 +76,8 @@ public class ThreadLinkListAction extends Action {
 				threadLinks.addAll(threadList);
 			}
 			ModelListForm threadListForm = (ModelListForm) form;
-			threadListForm.setList(threadLinks.subList(0, 20));
-			threadListForm.setAllCount(20);
+			threadListForm.setList(threadLinks);
+			threadListForm.setAllCount(threadLinks.size());
 			return mapping.findForward("success");
 		} catch (Exception e) {
 			return null;
