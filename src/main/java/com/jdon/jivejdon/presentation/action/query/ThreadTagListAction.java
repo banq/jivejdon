@@ -29,6 +29,7 @@ import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.domain.model.query.specification.TaggedThreadListSpec;
+import com.jdon.jivejdon.spi.component.mapreduce.ThreadContext;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
@@ -37,6 +38,7 @@ public class ThreadTagListAction extends ModelListAction {
 	private final static String module = ThreadTagListAction.class.getName();
 	private TagService tagService;
 	private ForumMessageQueryService forumMessageQueryService;
+
 
 	public ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
@@ -62,28 +64,15 @@ public class ThreadTagListAction extends ModelListAction {
 			return null;
 
 		try {
-			List<Long> lists = new ArrayList<Long>();
-			for (ThreadTag tag : thread.getTags()) {
-				lists.addAll(getForumThreadsForTag(tag.getTagID()));
-			}
-			Collections.shuffle(lists);
-	        return new PageIterator(lists.size(), lists.toArray());
+			ThreadContext threadContext = (ThreadContext)WebAppUtil.getComponentInstance("threadContext", request);
+		    List<Long> threadIdsPN = threadContext.getPrevNextInTag(thread);
+	        return new PageIterator(threadIdsPN.size(), threadIdsPN.toArray());
 		} catch (Exception e) {
 			return new PageIterator();
 		}
 
 	}
 
-	private Collection<Long> getForumThreadsForTag(Long tagID) {
-		TaggedThreadListSpec taggedThreadListSpec = new TaggedThreadListSpec();
-		taggedThreadListSpec.setTagID(tagID);
-		PageIterator pageIterator = getTagService().getTaggedRandomThreads(taggedThreadListSpec, 0, 20);
-		Collection<Long> threadIds = new ArrayList<Long>();
-		while (pageIterator.hasNext()) {
-			threadIds.add( (Long) pageIterator.next());
-		}		
-		return threadIds;
-	}
 
 	public Object findModelIFByKey(HttpServletRequest request, Object key) {
         ForumThread thread = null;

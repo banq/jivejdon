@@ -48,6 +48,8 @@ public interface MessageQueryDao {
 	 */
 	List getThreadsPrevNext(Long forumId, Long currentThreadId);
 
+	List getThreadsPrevNextInTag(Long tagId, Long currentThreadId);
+
 	int getMessageCountOfUser(Long userId);
 
 	PageIterator getMessages(QueryCriteria qc, int start, int count);

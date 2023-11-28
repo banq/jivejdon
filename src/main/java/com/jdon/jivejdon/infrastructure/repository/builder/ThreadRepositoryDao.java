@@ -45,18 +45,6 @@ public class ThreadRepositoryDao implements ThreadRepository {
 		messageDaoFacade.getMessageDao().updateThreadName(name, forumThread);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.jdon.jivejdon.api.ForumMessageService#getThreadsPrevNext(java
-	 *      .lang.String, int)
-	 */
-	/* (non-Javadoc)
-	 * @see com.jdon.jivejdon.infrastructure.repository.ThreadRepository#getThreadsPrevNext(java.lang.Long, java
-	 * .lang.Long)
-	 */
-	public List getThreadsPrevNext(Long forumId, Long currentThreadId) {
-		return messageDaoFacade.getMessageQueryDao().getThreadsPrevNext(forumId, currentThreadId);
-	}
+	
 
 }

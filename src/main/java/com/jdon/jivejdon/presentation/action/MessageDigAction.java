@@ -24,8 +24,6 @@ import com.jdon.util.UtilValidate;
  */
 public class MessageDigAction extends Action {
 
-	private CustomizedThrottle customizedThrottle;
-
 	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response)
 			throws Exception {

@@ -21,17 +21,10 @@ import java.util.List;
 
 public interface ThreadRepository {
 
-	public abstract void updateThread(ForumThread thread) throws Exception;
+	void updateThread(ForumThread thread) throws Exception;
 
-	public abstract void deleteThread(ForumThread thread) throws Exception;
+	void deleteThread(ForumThread thread) throws Exception;
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.jdon.jivejdon.api.ForumMessageService#getThreadsPrevNext(java
-	 *      .lang.String, int)
-	 */
-	public abstract List getThreadsPrevNext(Long forumId, Long currentThreadId);
 
 	void updateThreadName(String name, ForumThread forumThread);
 
