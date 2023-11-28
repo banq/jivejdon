@@ -19,22 +19,18 @@ import java.util.Objects;
 
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
-import java.util.Queue;
-import com.google.common.collect.EvictingQueue;
 
 public class ViewCounter implements Comparable<ViewCounter> {
 
 	private final ForumThread thread;
 	private int viewCount = -1;
 	private int lastSavedCount;
-	Queue<String> fifo;
-	Queue<String> fifo2;
+	private volatile String lastIP ;
 
 	public ViewCounter(ForumThread thread) {
 		this.thread = thread;
 		this.lastSavedCount = -1;
-		this.fifo = EvictingQueue.create(2);
-		this.fifo2 = EvictingQueue.create(2);
+		this.lastIP = "";
 	}
 
 	public void loadinitCount() {
@@ -64,24 +60,21 @@ public class ViewCounter implements Comparable<ViewCounter> {
 
 	public void addViewCount(String ip) {
 		if (getViewCount() != -1) 
-			if (!fifo.contains(ip)){
+			if (!lastIP.equals(ip)){
                 viewCount++;
-				fifo.add(ip);
+				lastIP = ip;
 			}
 				
 		
 	}
 
-	public void removeViewCount(String ip) {
-			fifo2.add(ip);
-	}
 
 	public boolean isIdempotent(String ip) {
-		// if (!fifo.contains(ip))
-		// 	return false;
-		if (fifo2.contains(ip))
+		if (!lastIP.equals(ip)) {
+			lastIP = ip;
+			return true;
+		} else
 			return false;
-		return true;
 	}
 
 	public int getLastSavedCount() {

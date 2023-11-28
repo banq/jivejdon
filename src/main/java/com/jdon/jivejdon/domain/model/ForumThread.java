@@ -307,7 +307,6 @@ public class ForumThread {
 	public void oncePerIP(String ip) {
 		if (viewCounter.isIdempotent(ip)) {
 			getRootMessage().messaegDigAction();
-			viewCounter.removeViewCount(ip);
 		}
 	}
 
