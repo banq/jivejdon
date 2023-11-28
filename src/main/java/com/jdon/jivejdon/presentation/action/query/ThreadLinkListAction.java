@@ -15,35 +15,33 @@
  */
 package com.jdon.jivejdon.presentation.action.query;
 
-import com.jdon.controller.WebAppUtil;
-import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.api.property.TagService;
-import com.jdon.jivejdon.api.query.ForumMessageQueryService;
-import com.jdon.jivejdon.domain.model.ForumMessage;
-import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.property.ThreadTag;
-import com.jdon.jivejdon.domain.model.query.specification.TaggedThreadListSpec;
-import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
-import com.jdon.jivejdon.domain.model.thread.ThreadTagsVO;
-import com.jdon.strutsutil.ModelListForm;
-import com.jdon.util.UtilValidate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.ListIterator;
+import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.api.property.TagService;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
+import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
+import com.jdon.jivejdon.spi.component.mapreduce.ThreadContext;
+import com.jdon.strutsutil.ModelListForm;
 
 
 public class ThreadLinkListAction extends Action {
 	private TagService tagService;
 	private ForumMessageQueryService forumMessageQueryService;
+	
 
 	public ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
@@ -69,16 +67,17 @@ public class ThreadLinkListAction extends Action {
 			return null;
 
 		try {
-			final Collection<ForumThread> threadLinks = loadReblog(thread);
-			if(threadLinks.size() == 0){
-
-
+			final List<ForumThread> threadLinks = loadReblog(thread);
+			if (threadLinks.isEmpty()) {
+				ThreadContext threadContext = (ThreadContext) WebAppUtil.getComponentInstance("threadContext", request);
+				List<ForumThread> threadList = threadContext.getPrevNextInTag(thread).stream()
+						.map(e -> getForumMessageQueryService().getThread(e))
+						.filter(Objects::nonNull).collect(Collectors.toList());
+				threadLinks.addAll(threadList);
 			}
-
-			
 			ModelListForm threadListForm = (ModelListForm) form;
-			threadListForm.setList(threadLinks);
-			threadListForm.setAllCount(threadLinks.size());
+			threadListForm.setList(threadLinks.subList(0, 20));
+			threadListForm.setAllCount(20);
 			return mapping.findForward("success");
 		} catch (Exception e) {
 			return null;
@@ -86,8 +85,8 @@ public class ThreadLinkListAction extends Action {
 
 	}
 
-	private Collection<ForumThread> loadReblog(ForumThread thread) {
-		final Collection<ForumThread> threadLinks = new ArrayList<>();
+	private List<ForumThread> loadReblog(ForumThread thread) {
+		final List<ForumThread> threadLinks = new ArrayList<>();
 		ReBlogVO reBlogVO = thread.getReBlogVO();
 		if (reBlogVO == null)
 			return threadLinks;
@@ -107,23 +106,6 @@ public class ThreadLinkListAction extends Action {
 		return threadLinks;
 	}
 
-	private Collection<ForumThread> loadTagNextPre(ForumThread thread) {
-		final Collection<ForumThread> threadLinks = new ArrayList<>();
-		ThreadTagsVO threadTagsVO = thread.getThreadTagsVO();
-		if (threadTagsVO == null || threadTagsVO.getTags().isEmpty())
-			return threadLinks;
-
-		TagService othersService = (TagService) WebAppUtil.getService("othersService",
-				this.servlet.getServletContext());
-		PageIterator pageIterator = new PageIterator();		
-		for (ThreadTag threadTag : threadTagsVO.getTags()) {
-			TaggedThreadListSpec taggedThreadListSpec = new TaggedThreadListSpec();
-			taggedThreadListSpec.setTagID(threadTag.getTagID());
-			pageIterator = othersService.getTaggedThread(taggedThreadListSpec, 0, 2);
-		}
-
-		return threadLinks;
-	}
-
+	
 	
 }
