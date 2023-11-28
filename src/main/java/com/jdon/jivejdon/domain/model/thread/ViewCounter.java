@@ -33,8 +33,8 @@ public class ViewCounter implements Comparable<ViewCounter> {
 	public ViewCounter(ForumThread thread) {
 		this.thread = thread;
 		this.lastSavedCount = -1;
-		this.fifo = EvictingQueue.create(5);
-		this.fifo2 = EvictingQueue.create(5);
+		this.fifo = EvictingQueue.create(2);
+		this.fifo2 = EvictingQueue.create(2);
 	}
 
 	public void loadinitCount() {
