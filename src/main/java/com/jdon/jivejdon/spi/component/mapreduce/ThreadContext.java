@@ -1,10 +1,13 @@
 package com.jdon.jivejdon.spi.component.mapreduce;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
@@ -43,10 +46,15 @@ public class ThreadContext {
        return resultIds;
     }
 
+   
 	private Set<Long> getForumThreadsInTag(ForumThread thread) {
-        Set<Long> threadIds = new HashSet<>();
+        Set<Long> threadIds = createSortedSet();
         for (ThreadTag tag : thread.getTags()) {
-            threadIds.addAll(messageQueryDao.getThreadsPrevNextInTag(tag.getTagID(), thread.getThreadId()));
+            List list = messageQueryDao.getThreadsPrevNextInTag(tag.getTagID(), thread.getThreadId());
+            if(list.contains(thread.getThreadId())){
+                threadIds.addAll(list);
+                break;
+            }
         }
         if (threadIds.isEmpty()) {
             threadIds.addAll(messageQueryDao.getThreadsPrevNext(thread.getForum().getForumId(), thread.getThreadId()));
@@ -55,4 +63,18 @@ public class ThreadContext {
     }
 
     
+     private SortedSet<Long> createSortedSet() {
+        return new TreeSet<Long>(new Comparator<Long>() {
+            public int compare(Long thread1, Long thread2) {
+                if (thread1 > thread2)
+                    return -1;
+                else if (thread1 == thread2)
+                    return 0;
+                else
+                    return 1;
+            }
+        });
+    }
+
+
 }

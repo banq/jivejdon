@@ -1,33 +1,23 @@
 package com.jdon.jivejdon.spi.component.viewcount;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.jdon.annotation.Component;
 import com.jdon.container.pico.Startable;
-import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.Property;
 import com.jdon.jivejdon.domain.model.property.ThreadPropertys;
 import com.jdon.jivejdon.domain.model.thread.ViewCounter;
 import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.SortedSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 /**
  * a cache used for holding view count of ForumThread the data that in the cache
