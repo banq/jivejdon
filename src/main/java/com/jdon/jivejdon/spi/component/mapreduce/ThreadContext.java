@@ -50,15 +50,14 @@ public class ThreadContext {
 	private Set<Long> getForumThreadsInTag(ForumThread thread) {
         Set<Long> threadIds = createSortedSet();
         for (ThreadTag tag : thread.getTags()) {
-            List list = messageQueryDao.getThreadsPrevNextInTag(tag.getTagID(), thread.getThreadId());
-            if(list.contains(thread.getThreadId())){
-                threadIds.addAll(list);
-                break;
-            }
+            threadIds.addAll(messageQueryDao.getThreadsPrevNextInTag(tag.getTagID(), thread.getThreadId()));
+            break;
         }
         if (threadIds.isEmpty()) {
             threadIds.addAll(messageQueryDao.getThreadsPrevNext(thread.getForum().getForumId(), thread.getThreadId()));
         }
+        if(!threadIds.contains(thread.getThreadId()))
+            threadIds.add(thread.getThreadId());//new item not be inconsistency with DB
         return threadIds;
     }
 
@@ -66,9 +65,9 @@ public class ThreadContext {
      private SortedSet<Long> createSortedSet() {
         return new TreeSet<Long>(new Comparator<Long>() {
             public int compare(Long thread1, Long thread2) {
-                if (thread1 > thread2)
+                if (thread1.longValue() > thread2.longValue())
                     return -1;
-                else if (thread1 == thread2)
+                else if (thread1.longValue() == thread2.longValue())
                     return 0;
                 else
                     return 1;
