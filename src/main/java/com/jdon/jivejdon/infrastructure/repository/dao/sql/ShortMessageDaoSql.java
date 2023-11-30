@@ -252,7 +252,7 @@ public class ShortMessageDaoSql implements ShortMessageDao {
 
 		String GET_ALL_ITEMS = "select msgId from jiveshortmsg where userId=" + userId;
 
-		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "", start, count);
+		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "getShortMessages", start, count);
 	}
 
 	/**
@@ -266,7 +266,7 @@ public class ShortMessageDaoSql implements ShortMessageDao {
 		String GET_ALL_ITEMS = "select msgId from jiveshortmsg where  hasSent=1 and  messageTo='" + account.getUsername()
 				+ "' order by sendTime desc ";
 
-		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "", start, count);
+		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "getReceiveShortMessages", start, count);
 	}
 
 	/**
@@ -280,7 +280,7 @@ public class ShortMessageDaoSql implements ShortMessageDao {
 		String GET_ALL_ITEMS = "select msgId from jiveshortmsg where hasSent =0 and messageFrom='" + account.getUsername()
 				+ "' order by sendTime desc";
 
-		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "", start, count);
+		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "getSaveShortMessages", start, count);
 	}
 
 	/**
@@ -294,7 +294,7 @@ public class ShortMessageDaoSql implements ShortMessageDao {
 		String GET_ALL_ITEMS = "select msgId from jiveshortmsg  where hasSent = 1 and messageFrom='" + account.getUsername()
 				+ "' order by sendTime desc";
 
-		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "", start, count);
+		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "getSendShortMessages", start, count);
 	}
 
 	/**

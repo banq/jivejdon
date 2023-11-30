@@ -220,7 +220,7 @@ public abstract class UploadFileDaoSql implements com.jdon.jivejdon.infrastructu
 
 		String GET_ALL_ITEMS = "select objectId from upload ORDER BY creationDate DESC  ";
 
-		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "", start, count);
+		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "getUploadFiles", start, count);
 
 	}
 

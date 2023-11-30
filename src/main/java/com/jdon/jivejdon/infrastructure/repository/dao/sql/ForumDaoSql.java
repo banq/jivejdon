@@ -198,7 +198,7 @@ public abstract class ForumDaoSql implements ForumDao {
 
 		String GET_ALL_ITEMS = "select forumID from jiveForum ";
 
-		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "", start, count);
+		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "getForums", start, count);
 	}
 
 	/**

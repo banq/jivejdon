@@ -257,7 +257,7 @@ public class TagDaoSql implements TagDao {
 		logger.debug("enter getThreadTags ..");
 		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from tag order by assonum DESC";
 		String GET_ALL_ITEMS = "select tagID from tag order by assonum DESC";
-		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "", start, count);
+		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "getThreadTags", start, count);
 	}
 
 	/*
@@ -266,12 +266,12 @@ public class TagDaoSql implements TagDao {
 	 * @see com.jdon.jivejdon.dao.sql.TagDao#getTaggedThread(java.lang.Long,
 	 * int, int)
 	 */
-	public PageIterator getTaggedThread(TaggedThreadListSpec taggedThreadListSpec, int start, int count) {
+	public PageIterator getTaggedThread(Long tagID, int start, int count) {
 		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from threadTag where tagID =? ";
-		String GET_ALL_ITEMS = "select threadID  from threadTag where tagID =? " + taggedThreadListSpec.getResultSortSQL();
+		String GET_ALL_ITEMS = "select threadID  from threadTag where tagID =? order by threadID DESC" ;
 		Collection params = new ArrayList(1);
-		params.add(taggedThreadListSpec.getTagID());
-		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, params, start, count);
+		params.add(tagID);
+		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "tagID-"+tagID, start, count);
 	}
 
 	/*
