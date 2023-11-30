@@ -16,7 +16,7 @@
 </logic:empty>
 <bean:define id="forum" name="threadListForm" property="oneModel"/>
 
-<bean:define id="title"  value=" 精华文章 " />
+<bean:define id="title"  value=" 精华教程 " />
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
 <%

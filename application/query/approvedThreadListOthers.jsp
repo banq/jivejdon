@@ -6,7 +6,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
 
-<bean:define id="title"  value=" 新佳文章 " />
+<bean:define id="title"  value=" 新佳教程 " />
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
 <%
