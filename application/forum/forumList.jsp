@@ -6,9 +6,14 @@
 <%@ taglib uri="/WEB-INF/MultiPages.tld" prefix="MultiPages" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<bean:define id="title"  value="编程道场Coding Dojo" />
-<%@ include file="../common/IncludeTop.jsp" %>
-<meta name="Description" content="软件技术设计与编程道场">
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	
+   <bean:define id="title"  value="教程道场Coding Dojo" />
+   <%@include file="../common/IncludeTopHead.jsp"%>
+   <meta name="Description" content="软件技术设计与编程道场">
 <meta name="Keywords" content="前后端,语言平台,领域驱动设计,领域建模,逻辑方法,SpringBoot和SpringCloud,平台架构,DevOps,Github工具,企业软件,架构设计,大科技、自然科学,产品领域,科普,大语言模型,数据科学,认知偏见">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 <link rel="alternate" type="application/rss+xml" title="极道订阅" href="https://www.jdon.com/rss">
@@ -16,8 +21,10 @@
 <script>
  if(top !== self) top.location = self.location;
   contextpath = "<%=request.getContextPath()%>";
-</script>
-
+ </script>
+</head>
+<body>
+<%@ include file="../common/body_header.jsp" %>
  <main>
 <div id="page-content" class="single-page container">
 		<div class="row">
@@ -164,7 +171,12 @@
 </div>
 </main>
 
-<%@include file="../common/IncludeBottom.jsp"%> 
+
+<%@ include file="../common/IncludeBottomBody.jsp" %> 
+
+
+</body>
+</html>
 
 
 
