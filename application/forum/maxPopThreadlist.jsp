@@ -40,6 +40,10 @@ pageContext.setAttribute("title", titleStr);
 <head>
    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	
    <%@include file="../common/IncludeTopHead.jsp"%>
+   <meta name="Description" content="编程精华历史与网友编程实践精彩观点">
+<meta name="Keywords" content="Java心得,实战经验,Java最佳实践,Java模式,Java实战,数据库,ORM,struts,j2se,JDK,java6,hibernate,EJB,j2ee,Javaee,it,设计模式,weblogic,spring,工作流,权限,ioc,依赖注射">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+<link rel="alternate" type="application/rss+xml" title="极道订阅" href="https://www.jdon.com/rss">
    <%if (currentPageNo > 1) {%>
          <link rel="canonical" href="/forum/maxPopThreads/<%=pagestartInt%>"> 
    <% }else{%>

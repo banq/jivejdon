@@ -43,6 +43,10 @@ pageContext.setAttribute("title", titleStr);
 <head>
    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	
    <%@include file="../common/IncludeTopHead.jsp"%>
+   <meta name="Description" content="最新免费在线编程教程">
+<meta name="Keywords" content="最新技术,前沿技术,编码前沿,编程动态,Java21,Java22,JVM,最新Java,Java动态,Java版本发布,DDD最新,DDD源码,DDD实战,定义,数据分析,科技新闻,Java新闻,SpringBoot新闻,Java发布,SpringBoot发布,Java版本,SpringBoot版本,微服务,认知负担">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+<link rel="alternate" type="application/rss+xml" title="极道订阅" href="https://www.jdon.com/rss">   
    <logic:empty name="forum" property="forumId">	
        <%if (currentPageNo > 1) {%>
          <link rel="canonical" href="/threads/<%=pagestartInt%>"> 
