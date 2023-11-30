@@ -67,12 +67,10 @@ public class TaggedThreadListAction extends ModelListAction {
 			return new PageIterator();
 		request.setAttribute("TITLE", tag.getTitle());
 		request.setAttribute("threadTag", tag);
-		TaggedThreadListSpec taggedThreadListSpec = new TaggedThreadListSpec();
-		taggedThreadListSpec.setTagID(new Long(tagID));
 		if (request.getParameter("r") == null){
-		   return othersService.getTaggedThread(taggedThreadListSpec, start, count);
+		   return othersService.getTaggedThread(new Long(tagID), start, count);
 		}else{
-           return othersService.getTaggedRandomThreads(taggedThreadListSpec, start, count);
+           return othersService.getTaggedRandomThreads(new Long(tagID), start, count);
 		}
 	}
 

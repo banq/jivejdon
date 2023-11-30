@@ -61,9 +61,8 @@ public class ThreadTagHotList2Action extends ModelListAction {
 		if(threadIds == null)
 		    threadIds = new TreeSet<>(new ThreadDigComparator(forumMessageQueryService));
 		if (threadIds.size() < 5) {
-			TaggedThreadListSpec taggedThreadListSpec = new TaggedThreadListSpec();
-			taggedThreadListSpec.setTagID(new Long(tagID));
-			PageIterator pi = othersService.getTaggedThread(taggedThreadListSpec, 0, 100);
+
+			PageIterator pi = othersService.getTaggedThread(new Long(tagID), 0, 100);
 			int i = 0;
 			while (pi.hasNext()) {
 				Long threadId = (Long) pi.next();

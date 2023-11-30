@@ -59,9 +59,7 @@ public class ApprovedAction extends ModelListAction {
 			return new PageIterator();
 		request.setAttribute("TITLE", tag.getTitle());
 		request.setAttribute("threadTag", tag);
-		TaggedThreadListSpec taggedThreadListSpec = new TaggedThreadListSpec();
-		taggedThreadListSpec.setTagID(new Long(tagID));
-		return othersService.getTaggedThread(taggedThreadListSpec, start, count);
+		return othersService.getTaggedThread(new Long(tagID), start, count);
 	}
 
 	public Object findModelIFByKey(HttpServletRequest request, Object key) {

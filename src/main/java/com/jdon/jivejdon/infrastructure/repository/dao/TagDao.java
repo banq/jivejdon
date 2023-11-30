@@ -20,7 +20,6 @@ import java.util.Collection;
 
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
-import com.jdon.jivejdon.domain.model.query.specification.TaggedThreadListSpec;
 
 public interface TagDao {
 
@@ -38,7 +37,7 @@ public interface TagDao {
 
 	PageIterator getThreadTags(int start, int count);
 
-	PageIterator getTaggedThread(TaggedThreadListSpec taggedThreadListSpec, int start, int count);
+	PageIterator getTaggedThread(Long tagID, int start, int count);
 
 	void addThreadTag(Long tagID, Long threadID) throws Exception;
 

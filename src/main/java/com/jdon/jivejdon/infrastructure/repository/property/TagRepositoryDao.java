@@ -56,8 +56,8 @@ public class TagRepositoryDao implements TagRepository {
 	 * com.jdon.jivejdon.infrastructure.repository.property.TagRepository#getTaggedThread(com.jdon.jivejdon
 	 * .model.query.specification.TaggedThreadListSpec, int, int)
 	 */
-	public PageIterator getTaggedThread(TaggedThreadListSpec taggedThreadListSpec, int start, int count) {
-		return tagDao.getTaggedThread(taggedThreadListSpec, start, count);
+	public PageIterator getTaggedThread(Long tagID, int start, int count) {
+		return tagDao.getTaggedThread(tagID, start, count);
 	}
 
 	/*

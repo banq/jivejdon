@@ -323,14 +323,14 @@ public class AccountDaoSql implements AccountDao, AccountRepository {
 		logger.debug("enter getAccounts");
 		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from jiveUser ";
 		String GET_ALL_ITEMS = "select userID from jiveUser ORDER BY creationDate ASC";
-		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "getAccounts", start, count);
+		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "", start, count);
 	}
 
 	public PageIterator getAccountByNameLike(String username, int start, int count) {
 		logger.debug("enter getAccounts");
 		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from jiveUser where username like '" + username + "'";
 		String GET_ALL_ITEMS = "select userID from jiveUser  where username like '" + username + "'";
-		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "getAccountByNameLike", start, count);
+		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "", start, count);
 
 	}
 

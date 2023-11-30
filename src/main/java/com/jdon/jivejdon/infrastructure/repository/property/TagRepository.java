@@ -26,7 +26,7 @@ public interface TagRepository {
 
 	public abstract Collection<Long> searchTitle(String s);
 
-	public abstract PageIterator getTaggedThread(TaggedThreadListSpec taggedThreadListSpec, int start, int count);
+	public abstract PageIterator getTaggedThread(Long tagID, int start, int count);
 
 	public abstract PageIterator getThreadTags(int start, int count);
 

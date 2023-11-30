@@ -226,10 +226,8 @@ public class RSSGenServlet extends HttpServlet {
 		ThreadTag tag = getTag(request, tagId);
 		if (tag == null)
 			return entries;
-		TaggedThreadListSpec taggedThreadListSpec = new TaggedThreadListSpec();
-		taggedThreadListSpec.setTagID(new Long(tagId));
 		TagService othersService = (TagService) WebAppUtil.getService("othersService", this.getServletContext());
-		PageIterator pi = othersService.getTaggedThread(taggedThreadListSpec, start, count);
+		PageIterator pi = othersService.getTaggedThread(new Long(tagId), start, count);
 		while (pi.hasNext()) {
 			Long threadId = (Long) pi.next();
 			ForumThread thread = getForumThread(request, threadId);

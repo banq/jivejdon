@@ -96,8 +96,8 @@ public class ReBuildIndex implements Runnable {
 		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from jiveThread ";
 
 		String GET_ALL_ITEMS = "select threadID  from jiveThread ";
-
-		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "getAllThreadsebuild", start, count);
+		Collection params = new ArrayList(1);
+		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, params, start, count);
 	}
 
 }

@@ -75,18 +75,18 @@ public class TagServiceImp implements TagService, Poolable {
 		return tags;
 	}
 
-	public PageIterator getTaggedThread(TaggedThreadListSpec taggedThreadListSpec, int start, int count) {
-		return tagRepository.getTaggedThread(taggedThreadListSpec, start, count);
+	public PageIterator getTaggedThread(Long tagID, int start, int count) {
+		return tagRepository.getTaggedThread(tagID, start, count);
 	}
 
-	public PageIterator getTaggedRandomThreads(TaggedThreadListSpec taggedThreadListSpec, int start, int count) {
-		PageIterator pi = tagRepository.getTaggedThread(taggedThreadListSpec, start, count);
+	public PageIterator getTaggedRandomThreads(Long tagID, int start, int count) {
+		PageIterator pi = tagRepository.getTaggedThread(tagID, start, count);
 		if ((pi.getAllCount() == 0) || (count == 0))
 			return new PageIterator();
 		int pageCount = pi.getAllCount() / count;
 		int nowPage = (int) (Math.random() * pageCount);
 		start = nowPage * count;
-		return tagRepository.getTaggedThread(taggedThreadListSpec, start, count);
+		return tagRepository.getTaggedThread(tagID, start, count);
 	}
 
 	public void updateThreadTag(EventModel em) {

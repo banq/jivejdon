@@ -34,9 +34,9 @@ public interface TagService {
 
 	public Collection tags(String s);
 
-	public PageIterator getTaggedThread(TaggedThreadListSpec taggedThreadListSpec, int start, int count);
+	public PageIterator getTaggedThread(Long tagID, int start, int count);
 
-	public PageIterator getTaggedRandomThreads(TaggedThreadListSpec taggedThreadListSpec, int start, int count);
+	public PageIterator getTaggedRandomThreads(Long tagID, int start, int count);
 
 	public PageIterator getThreadTags(int start, int count);
 
