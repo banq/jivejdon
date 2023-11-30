@@ -268,7 +268,7 @@ public class TagDaoSql implements TagDao {
 	 */
 	public PageIterator getTaggedThread(Long tagID, int start, int count) {
 		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from threadTag where tagID =? ";
-		String GET_ALL_ITEMS = "select threadID  from threadTag where tagID =? order by threadID DESC" ;
+		String GET_ALL_ITEMS = "select threadID  from threadTag where tagID=? order by threadID DESC" ;
 		Collection params = new ArrayList(1);
 		params.add(tagID);
 		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, params, start, count);
