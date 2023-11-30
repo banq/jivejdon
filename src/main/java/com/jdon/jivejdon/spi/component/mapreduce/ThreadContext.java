@@ -36,7 +36,7 @@ public class ThreadContext {
         return resultIds;
     }
 
-    private Set<Long> getThreadListInContext(ForumThread thread) {
+    public Set<Long> getThreadListInContext(ForumThread thread) {
         Set<Long> threadIds = createSortedSet();
         for (ThreadTag tag : thread.getTags()) {
             threadIds.addAll(messageQueryDao.getThreadsPrevNextInTag(tag.getTagID(), thread.getThreadId()));
