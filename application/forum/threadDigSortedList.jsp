@@ -43,6 +43,10 @@ pageContext.setAttribute("title", titleStr);
 <head>
    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	
    <%@include file="../common/IncludeTopHead.jsp"%>
+<meta name="Description" content="最佳热点博文教程">
+<meta name="Keywords" content="认知,逻辑,编程,技巧,模式,编程心得,有趣项目,Java教程,SpringBoot教程,软件架构,系统设计,大科技、自然科学,科普,AI,自然语言,大模型">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+<link rel="alternate" type="application/rss+xml" title="极道订阅" href="https://www.jdon.com/rss">
    <%if (currentPageNo > 1) {%>
          <link rel="canonical" href="/forum/threadDigSortedList/<%=pagestartInt%>"> 
    <% }else{%>
