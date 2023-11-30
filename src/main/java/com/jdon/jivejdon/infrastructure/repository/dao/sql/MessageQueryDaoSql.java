@@ -277,7 +277,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 		String GET_ALL_ITEMS = "select threadID  from jiveThread WHERE forumId=? ORDER BY modifiedDate DESC ";
 		Collection params = new ArrayList(1);
 		params.add(forumId);
-		Block block = messagePageIteratorSolver.getPageIteratorSolver(forumId.toString()).locate(GET_ALL_ITEMS, params, currentThreadId);
+		Block block = messagePageIteratorSolver.getPageIteratorSolver(forumId.toString())+currentThreadId.toString().locate(GET_ALL_ITEMS, params, currentThreadId);
 		if (block == null) {
 			return new ArrayList();
 		} else {
