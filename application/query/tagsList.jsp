@@ -7,7 +7,7 @@
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
 
-<bean:define id="title"  value="所有话题" />
+<bean:define id="title"  value="编程教程全系列" />
 <bean:define id="pagestart" name="tagsListForm" property="start" />
 <bean:define id="pagecount" name="tagsListForm" property="count" />
 <%
