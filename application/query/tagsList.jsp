@@ -29,6 +29,10 @@ pageContext.setAttribute("title", titleStr);
 <head>
    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	
    <%@include file="../common/IncludeTopHead.jsp"%>
+   <meta name="Description" content="教程，免费在线教程，编码教程和面试问题">
+   <meta name="Keywords" content="Java教程,SpringBoot教程,程序,算法,模式,数据库,计算机科学,Python,Java,JavaScript,安卓,SQL,数据科学,机器学习,Web开发,系统设计,技术博客,面试,HTML,CSS,golang,Rust">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <link rel="alternate" type="application/rss+xml" title="极道订阅" href="https://www.jdon.com/rss">
     <%if (currentPageNo > 1) {%>
        <link rel="canonical" href="/tags/p/<%=pagestartInt%>">      
    <% }else{%>
