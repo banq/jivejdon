@@ -108,7 +108,7 @@ public class ForumThread {
 		this.threadId = tIDInt;
 	
 		this.state = new AtomicReference(new ForumThreadState(this));
-		this.threadTagsVO = new ThreadTagsVO(this, new ArrayList());
+		// this.threadTagsVO = new ThreadTagsVO(this, new ArrayList());
 		this.propertys = new ArrayList<Property>();
 		this.viewCounter = new ViewCounter(this);
 	}

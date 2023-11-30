@@ -40,13 +40,13 @@
       <div class="form-group">
 
         <input class="form-control" type="text" name="tagTitle" size="15" maxlength="25" id="searchV_3"  value=''/>
-        <logic:notEmpty name="messageForm" property="forumThread.tags">
+        <logic:present name="messageForm" property="forumThread.tags">
           <logic:iterate id="threadTag" name="messageForm" property="forumThread.tags" indexId="i">
             <script>
                 document.getElementById('searchV_<bean:write name="i"/>').value = '<bean:write name="threadTag" property="title" />';
             </script>
           </logic:iterate>
-        </logic:notEmpty>
+        </logic:present>
         <span id='json_info'></span>
 
 

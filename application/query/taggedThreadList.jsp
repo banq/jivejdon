@@ -34,13 +34,16 @@ pageContext.setAttribute("title", titleStr);
 <head>
    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	
    <%@include file="../common/IncludeTopHead.jsp"%>
+   <meta name="Description" content="有关<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>系列文章">
+<meta name="Keywords" content="<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>,最佳实践,教材,论文,文章,技巧,模式,编程心得,面试,设计">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
    <%if (currentPageNo > 1) {%>
          <link rel="canonical" href="/tags/<bean:write name="tagID"/>/<%=pagestartInt%>"> 
    <% }else{%>
           <link rel="canonical" href="/tag-<bean:write name="tagID"/>/">  
    <% }%>      
 
-<link rel="alternate" type="application/rss+xml" title="Feed订阅" href="/tag-<bean:write name="tagID"/>/rss"/>		
+<link rel="alternate" type="application/rss+xml" title="<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>" href="/tag-<bean:write name="tagID"/>/rss"/>		
 
 <meta http-equiv="refresh" content="3600">
 <script>
