@@ -17,19 +17,16 @@ package com.jdon.jivejdon.infrastructure.cqrs;
 
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
-import com.jdon.jivejdon.infrastructure.repository.dao.TagDao;
 import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
 
 public class CacheQueryRefresher {
 
 	protected final ForumFactory forumAbstractFactory;
 	private final MessagePageIteratorSolver messagePageIteratorSolver;
-	private final TagDao tagDao;
 
-	public CacheQueryRefresher(ForumFactory forumAbstractFactory, MessagePageIteratorSolver messagePageIteratorSolver, TagDao tagDao) {
+	public CacheQueryRefresher(ForumFactory forumAbstractFactory, MessagePageIteratorSolver messagePageIteratorSolver) {
 		this.forumAbstractFactory = forumAbstractFactory;
 		this.messagePageIteratorSolver = messagePageIteratorSolver;
-		this.tagDao = tagDao;
 	}
 
 	public void refresh(ForumMessage forumMessage) {
