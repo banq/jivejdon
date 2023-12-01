@@ -17,6 +17,7 @@
 package com.jdon.jivejdon.infrastructure.repository.dao;
 
 import java.util.Collection;
+import java.util.List;
 
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
@@ -38,6 +39,8 @@ public interface TagDao {
 	PageIterator getThreadTags(int start, int count);
 
 	PageIterator getTaggedThread(Long tagID, int start, int count);
+
+	List getThreadsPrevNextInTag(Long tagId, Long currentThreadId);
 
 	void addThreadTag(Long tagID, Long threadID) throws Exception;
 

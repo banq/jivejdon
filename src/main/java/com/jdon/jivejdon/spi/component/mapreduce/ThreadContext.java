@@ -12,13 +12,16 @@ import com.jdon.annotation.Component;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.infrastructure.repository.dao.MessageQueryDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.TagDao;
 
 @Component("threadContext")
 public class ThreadContext {
     private final MessageQueryDao messageQueryDao;
+    private final TagDao tagDao;
 
-    public ThreadContext(MessageQueryDao messageQueryDao) {
+    public ThreadContext(MessageQueryDao messageQueryDao, TagDao tagDao) {
         this.messageQueryDao = messageQueryDao;
+        this.tagDao = tagDao;
     }
 
     public List<Long> getPrevNextInTag(ForumThread thread) {
@@ -39,7 +42,7 @@ public class ThreadContext {
     public Set<Long> getThreadListInContext(ForumThread thread) {
         Set<Long> threadIds = createSortedSet();
         for (ThreadTag tag : thread.getTags()) {
-            threadIds.addAll(messageQueryDao.getThreadsPrevNextInTag(tag.getTagID(), thread.getThreadId()));
+            threadIds.addAll(tagDao.getThreadsPrevNextInTag(tag.getTagID(), thread.getThreadId()));
             break;
         }
         if (threadIds.isEmpty()) {

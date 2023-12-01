@@ -286,22 +286,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 
 	}
 
-		/*
-	 * get the threads collection include prev/cuurent/next threads in tag.
-	 */
-	public List getThreadsPrevNextInTag(Long tagId, Long currentThreadId) {
-		String GET_ALL_ITEMS = "select threadID  from threadTag where tagID=? order by threadID DESC";
-		Collection params = new ArrayList(1);
-		params.add(tagId);
-		Block block = messagePageIteratorSolver.getPageIteratorSolver(tagId.toString()+currentThreadId.toString()).locate(GET_ALL_ITEMS, params, currentThreadId);
-		if (block == null) {
-			return new ArrayList();
-		} else {
-			return block.getList();
-		}
-
-	}
-
+	
 
 	/**
 	 * return all threadId satify by QueryCriteria

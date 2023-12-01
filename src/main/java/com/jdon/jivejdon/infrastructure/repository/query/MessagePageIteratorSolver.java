@@ -92,16 +92,7 @@ public class MessagePageIteratorSolver implements Startable {
 	 * @return Returns the pageIteratorSolver.
 	 */
 	public PageIteratorSolver getPageIteratorSolver(String key) {
-		PageIteratorSolver pageIteratorSolver = (PageIteratorSolver) permanentsolvers.get(key);
-		if (pageIteratorSolver == null) {
-			synchronized (this.permanentsolvers) {
-				if (pageIteratorSolver == null) {
-					pageIteratorSolver = new PageIteratorSolver(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
-					permanentsolvers.put(key, pageIteratorSolver);
-				}
-			}
-		}
-		return pageIteratorSolver;
+		return permanentsolvers.computeIfAbsent(key, k->new PageIteratorSolver(jdbcTempSource.getDataSource(), containerUtil.getCacheManager()));
 	}
 
 	public void clearPageIteratorSolver(String key) {
@@ -109,6 +100,10 @@ public class MessagePageIteratorSolver implements Startable {
 		if (pageIteratorSolver != null)
 			pageIteratorSolver.clearCache();
 		permanentsolvers.remove(key);
+	}
+
+	public void clearPageIteratorSolver() {
+		permanentsolvers.clear();
 	}
 
 	

@@ -33,6 +33,7 @@ import com.jdon.jivejdon.infrastructure.repository.dao.SequenceDao;
 import com.jdon.jivejdon.infrastructure.repository.dao.TagDao;
 import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.model.query.PageIteratorSolver;
+import com.jdon.model.query.block.Block;
 
 public class TagDaoSql implements TagDao {
 	private final static Logger logger = LogManager.getLogger(TagDaoSql.class);
@@ -273,6 +274,22 @@ public class TagDaoSql implements TagDao {
 		params.add(tagID);
 		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, params, start, count);
 	}
+
+		/*
+	 * get the threads collection include prev/cuurent/next threads in tag.
+	 */
+	public List getThreadsPrevNextInTag(Long tagId, Long currentThreadId) {
+		String GET_ALL_ITEMS = "select threadID  from threadTag where tagID=? order by threadID DESC";
+		Collection params = new ArrayList(1);
+		params.add(tagId);
+		Block block = pageIteratorSolver.locate(GET_ALL_ITEMS, params, currentThreadId);
+		if (block == null) {
+			return new ArrayList();
+		} else {
+			return block.getList();
+		}
+	}
+
 
 	/*
 	 * (non-Javadoc)
