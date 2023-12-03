@@ -38,7 +38,9 @@ public class MessageCRUDService {
 	public ForumMessage insertTopicMessage(PostTopicMessageCommand postTopicMessageCommand) {
 		logger.debug("enter createTopicMessage");
 		try {
-			messageRepository.createTopicMessage(AnemicMessageDTO.commandToDTO(postTopicMessageCommand));
+			synchronized (postTopicMessageCommand) {
+				messageRepository.createTopicMessage(AnemicMessageDTO.commandToDTO(postTopicMessageCommand));
+			}
 			logger.debug("createTopicMessage ok!");
 			return forumAbstractFactory.getMessage(postTopicMessageCommand.getMessageId());
 		} catch (Exception e) {
