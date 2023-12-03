@@ -83,8 +83,7 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 			forumMessagePostDTO.setForum(forum);
 			forumMessagePostDTO.setForumThread(new ForumThread(null, tIDInt));
 			forumMessagePostDTO.getForumThread().setForum(forum);
-			messageDaoFacade.getMessageDao().createMessage(forumMessagePostDTO);
-			super.createThread(forumMessagePostDTO);
+
 			uploadRepository.saveAllUploadFiles(forumMessagePostDTO.getMessageId().toString(),
 					forumMessagePostDTO.getAttachment().getUploadFiles());
 
@@ -95,6 +94,9 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 			// so it can be used in model ForumThread's changetags method
 			tagRepository.saveTagTitle(forumMessagePostDTO.getForumThread().getThreadId(),
 					forumMessagePostDTO.getTagTitle());
+
+			messageDaoFacade.getMessageDao().createMessage(forumMessagePostDTO);
+			super.createThread(forumMessagePostDTO);		
 
 		} catch (Exception e) {
 			try {
