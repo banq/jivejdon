@@ -38,9 +38,9 @@ public class MessageCRUDService {
 	public ForumMessage insertTopicMessage(PostTopicMessageCommand postTopicMessageCommand) {
 		logger.debug("enter createTopicMessage");
 		try {
-			synchronized (postTopicMessageCommand) {
+			//synchronized (postTopicMessageCommand) {// no need synchronized, the event is atomic,any time only one thread do inserting for UUID  
 				messageRepository.createTopicMessage(AnemicMessageDTO.commandToDTO(postTopicMessageCommand));
-			}
+			//}
 			logger.debug("createTopicMessage ok!");
 			return forumAbstractFactory.getMessage(postTopicMessageCommand.getMessageId());
 		} catch (Exception e) {
