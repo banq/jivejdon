@@ -72,13 +72,17 @@ pageContext.setAttribute("title", titleStr);
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" ><i class="fa fa-search"></i></a></li>
 
 </ul>   
-<ul class="pagination pull-right">
-      <MultiPagesREST:pager actionFormName="threadListForm" page="/approval" >
+
+<div class="box">  
+<MultiPagesREST:pager actionFormName="threadListForm" page="/approval" >
+        <span class="pull-left">
          <MultiPagesREST:prev name=" 上页 " />
+                 </span>
+         <span class="pull-right">
          <MultiPagesREST:next  name=" 下页 " />
-         </MultiPagesREST:pager>
-       
-</ul>
+         </span>
+</MultiPagesREST:pager>
+</div>
 
 <div class="list-group">
 
@@ -88,14 +92,16 @@ pageContext.setAttribute("title", titleStr);
 
 </div>
 
-<ul class="pagination pull-right">
-      <MultiPagesREST:pager actionFormName="threadListForm" page="/approval" >
+<div class="box">  
+<MultiPagesREST:pager actionFormName="threadListForm" page="/approval" >
+        <span class="pull-left">
          <MultiPagesREST:prev name=" 上页 " />
+                 </span>
+         <span class="pull-right">
          <MultiPagesREST:next  name=" 下页 " />
-         </MultiPagesREST:pager>
-       
-</ul>
-
+         </span>
+</MultiPagesREST:pager>
+</div>
 
         </div>
       </div>  
