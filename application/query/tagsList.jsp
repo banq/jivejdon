@@ -10,10 +10,12 @@
 <bean:define id="title"  value="编程教程全系列" />
 <bean:define id="pagestart" name="tagsListForm" property="start" />
 <bean:define id="pagecount" name="tagsListForm" property="count" />
+<bean:define id="pageallCount" name="tagsListForm" property="allCount" />
 <%
 
 int pagestartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
 int pagecountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
+int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
 int currentPageNo = 1;
 if (pagecountInt > 0) {
 	currentPageNo = (pagestartInt / pagecountInt) + 1;
@@ -33,7 +35,23 @@ pageContext.setAttribute("title", titleStr);
    <meta name="Keywords" content="Java教程,SpringBoot教程,程序,算法,模式,数据库,计算机科学,面试技巧,程序员职场,幽默,meme,Python,Java,JavaScript,安卓,SQL,数据科学,机器学习,Web开发,系统设计,技术博客,面试,HTML,CSS,golang,Rust">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
   <link rel="alternate" type="application/rss+xml" title="极道订阅" href="https://www.jdon.com/rss">
-  <link rel="canonical" href="/tags/">  
+ 
+<%if(pagestartInt != 0 ) {%> 
+    <%if(pagestartInt-pagecountInt>0 ) {%>  
+        <link rel="prev" href="/tags/<%=(pagestartInt-pagecountInt)%>"/>
+    <%}else{%>
+        <link rel="prev" href="/tags/"/>
+     <%}%>
+ <%}%>
+<%if (currentPageNo > 1) {%>
+       <link rel="canonical" href="/tags/<%=pagestartInt%>"/>      
+   <% }else{%>
+         <link rel="canonical" href="/tags/"/>  
+   <% }%>
+          
+ <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
+    <link rel="next" href="/tags/<%=pagestartInt+pagecountInt%>"/>
+ <%}%>
 
 <meta http-equiv="refresh" content="3600">
 <script>
@@ -134,24 +152,15 @@ int h = 0 ;
  <%}%>
 
 
-
-<bean:define id="pagestart" name="tagsListForm" property="start" />
-<bean:define id="pagecount" name="tagsListForm" property="count" />
-<bean:define id="pageallCount" name="tagsListForm" property="allCount" />
-<%  
-    int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
-    int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
-    int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
-%>
 <div class="box">
 <div class="row">
 <div class="col-lg-4">
- <%if(pageStartInt != 0 ) {%> 
+ <%if(pagestartInt != 0 ) {%> 
  <span class="pull-left">
-    <%if(pageStartInt-pageCountInt>0 ) {%>  
-        <a href="/tags/<%=(pageStartInt-pageCountInt)%>" >上页</a>
+    <%if(pagestartInt-pagecountInt>0 ) {%>  
+        <a href="/tags/<%=(pagestartInt-pagecountInt)%>" rel="prev">上页</a>
     <%}else{%>
-        <a href="/tags/" >上页</a>
+        <a href="/tags/" rel="prev">上页</a>
      <%}%>
  </span>
  <%}%>
@@ -159,8 +168,8 @@ int h = 0 ;
 <div class="col-lg-4"></div>
 <div class="col-lg-4">
 <span class="pull-right"> 
-    <%if((pageStartInt+pageCountInt) < pageAllcountInt ) {%> 
-    <a href="/tags/<%=pageStartInt+pageCountInt%>" >下页</a>
+    <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
+    <a href="/tags/<%=pagestartInt+pagecountInt%>" rel="next">下页</a>
     <%}%>
 </span>
 

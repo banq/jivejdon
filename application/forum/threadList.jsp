@@ -22,11 +22,13 @@
 </logic:notEmpty>
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
+<bean:define id="pageallCount" name="threadListForm" property="allCount" />
 <bean:define id="lastModifiedDate" name="forum" property="modifiedDate2"/>
 <%
 
 int pagestartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
 int pagecountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
+int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
 int currentPageNo = 1;
 if (pagecountInt > 0) {
 	currentPageNo = (pagestartInt / pagecountInt) + 1;
@@ -48,18 +50,43 @@ pageContext.setAttribute("title", titleStr);
 <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 <link rel="alternate" type="application/rss+xml" title="极道订阅" href="https://www.jdon.com/rss">   
    <logic:empty name="forum" property="forumId">	
-       <%if (currentPageNo > 1) {%>
-         <link rel="canonical" href="/threads/<%=pagestartInt%>"> 
+     
+       <%if(pagestartInt != 0 ) {%> 
+        <%if(pagestartInt-pagecountInt>0 ) {%>  
+            <link rel="prev" href="/threads/<%=(pagestartInt-pagecountInt)%>"/>
+        <%}else{%>
+            <link rel="prev" href="/threads"/>
+         <%}%>
+        <%}%>
+
+        <%if (currentPageNo > 1) {%>
+         <link rel="canonical" href="/threads/<%=pagestartInt%>"/> 
        <% }else{%>
-          <link rel="canonical" href="/threads"> 
+          <link rel="canonical" href="/threads"/> 
        <% }%>   
+
+         <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
+            <link rel="next" href="/threads/<%=pagestartInt+pagecountInt%>"/>
+         <%}%>
    </logic:empty>
    <logic:notEmpty name="forum" property="forumId">		
+      
+       <%if(pagestartInt != 0 ) {%> 
+        <%if(pagestartInt-pagecountInt>0 ) {%>  
+            <link rel="prev" href="/forum/<bean:write name="forum" property="forumId"/>/<%=(pagestartInt-pagecountInt)%>"/>
+        <%}else{%>
+            <link rel="prev" href="/forum/<bean:write name="forum" property="forumId"/>"/>
+         <%}%>
+        <%}%>
         <%if (currentPageNo > 1) {%>
-         <link rel="canonical" href="/forum/<bean:write name="forum" property="forumId"/>/<%=pagestartInt%>"> 
+         <link rel="canonical" href="/forum/<bean:write name="forum" property="forumId"/>/<%=pagestartInt%>"/> 
        <% }else{%>
-          <link rel="canonical" href="/forum/<bean:write name="forum" property="forumId"/>/"> 
+          <link rel="canonical" href="/forum/<bean:write name="forum" property="forumId"/>"/> 
        <% }%>   
+
+         <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
+            <link rel="next" href="/forum/<bean:write name="forum" property="forumId"/>/<%=pagestartInt+pagecountInt%>"/>
+         <%}%>       
    </logic:notEmpty>         
 <link rel="alternate" type="application/rss+xml" title="<bean:write name="title" /> " href="/rss" /> 
 <meta http-equiv="refresh" content="3600">

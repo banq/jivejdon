@@ -9,10 +9,12 @@
 <bean:define id="title"  value=" 新佳教程 " />
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
+<bean:define id="pageallCount" name="threadListForm" property="allCount" />
 <%
 
 int pagestartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
 int pagecountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
+int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
 int currentPageNo = 1;
 if (pagecountInt > 0) {
 	currentPageNo = (pagestartInt / pagecountInt) + 1;
@@ -34,11 +36,25 @@ pageContext.setAttribute("title", titleStr);
 <meta name="Keywords" content="编码经典,又新又好教程,技术热点,IT新闻,产品经理,产品新闻,科技新闻,前沿大技术,未来大技术,架构动态,SpringBoot,微服务,软件架构,企业架构,系统设计,架构设计,企业IT,IT设计,IT平台,平台工程,Devops,运维,维护工程,敏捷,软件工程,程序工艺,编码手艺,码农">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 <link rel="alternate" type="application/rss+xml" title="极道订阅" href="https://www.jdon.com/rss">     
+ 
+
+   <%if(pagestartInt != 0 ) {%> 
+        <%if(pagestartInt-pagecountInt>0 ) {%>  
+            <link rel="prev" href="/approval/<%=(pagestartInt-pagecountInt)%>"/>
+        <%}else{%>
+            <link rel="prev" href="/approval"/>
+         <%}%>
+        <%}%>
+
    <%if (currentPageNo > 1) {%>
          <link rel="canonical" href="/approval/<%=pagestartInt%>"> 
    <% }else{%>
           <link rel="canonical" href="/approval">  
    <% }%>      
+
+         <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
+            <link rel="next" href="/approval/<%=pagestartInt+pagecountInt%>"/>
+         <%}%>
 
 <meta http-equiv="refresh" content="3600">
 <script>

@@ -19,10 +19,12 @@
 <bean:define id="title"  value=" 精华教程 " />
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
+<bean:define id="pageallCount" name="threadListForm" property="allCount" />
 <%
 
 int pagestartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
 int pagecountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
+int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
 int currentPageNo = 1;
 if (pagecountInt > 0) {
 	currentPageNo = (pagestartInt / pagecountInt) + 1;
@@ -44,12 +46,25 @@ pageContext.setAttribute("title", titleStr);
 <meta name="Keywords" content="Java心得,实战经验,Java最佳实践,Java模式,Java实战,数据库,ORM,struts,j2se,JDK,java6,hibernate,EJB,j2ee,Javaee,it,设计模式,weblogic,spring,工作流,权限,ioc,依赖注射">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 <link rel="alternate" type="application/rss+xml" title="极道订阅" href="https://www.jdon.com/rss">
-   <%if (currentPageNo > 1) {%>
+  
+
+   <%if(pagestartInt != 0 ) {%> 
+        <%if(pagestartInt-pagecountInt>0 ) {%>  
+            <link rel="prev" href="/forum/maxPopThreads/<%=(pagestartInt-pagecountInt)%>"/>
+        <%}else{%>
+            <link rel="prev" href="/forum/maxPopThreads"/>
+         <%}%>
+        <%}%>
+
+  <%if (currentPageNo > 1) {%>
          <link rel="canonical" href="/forum/maxPopThreads/<%=pagestartInt%>"> 
    <% }else{%>
          <link rel="canonical" href="/forum/maxPopThreads">  
    <% }%>      
 
+         <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
+            <link rel="next" href="/forum/maxPopThreads/<%=pagestartInt+pagecountInt%>"/>
+         <%}%>
 <meta http-equiv="refresh" content="3600">
 <script>
  if(top !== self) top.location = self.location;

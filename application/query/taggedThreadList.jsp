@@ -14,10 +14,12 @@
 <bean:define id="title" name="TITLE" />
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
+<bean:define id="pageallCount" name="threadListForm" property="allCount" />
 <%
 
 int pagestartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
 int pagecountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
+int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
 int currentPageNo = 1;
 if (pagecountInt > 0) {
 	currentPageNo = (pagestartInt / pagecountInt) + 1;
@@ -37,11 +39,26 @@ pageContext.setAttribute("title", titleStr);
    <meta name="Description" content="有关<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>系列文章">
 <meta name="Keywords" content="<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>,最佳实践,教材,论文,文章,技巧,模式,编程心得,面试,设计">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  
+<% if (request.getParameter("r") == null){ %>  
+<%if(pagestartInt != 0 ) {%> 
+    <%if(pagestartInt-pagecountInt>0 ) {%>  
+        <link rel="prev" href="/tag-<bean:write name="tagID"/>/<%=(pagestartInt-pagecountInt)%>"/>
+    <%}else{%>
+        <link rel="prev" href="/tag-<bean:write name="tagID"/>/"/>
+     <%}%>
+ <%}%>
+ 
    <%if (currentPageNo > 1) {%>
-         <link rel="canonical" href="/tag-<bean:write name="tagID"/>/<%=pagestartInt%>"> 
+         <link rel="canonical" href="/tag-<bean:write name="tagID"/>/<%=pagestartInt%>"/> 
    <% }else{%>
-          <link rel="canonical" href="/tag-<bean:write name="tagID"/>/">  
-   <% }%>      
+          <link rel="canonical" href="/tag-<bean:write name="tagID"/>/"/>  
+   <% }%>    
+
+ <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
+    <link rel="next" href="/tag-<bean:write name="tagID"/>/<%=pagestartInt+pagecountInt%>"/>
+ <%}%>
+<% } %>  
 
 <link rel="alternate" type="application/rss+xml" title="<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>" href="/tag-<bean:write name="tagID"/>/rss"/>		
 
@@ -115,21 +132,13 @@ pageContext.setAttribute("title", titleStr);
 
 <% if (request.getParameter("r") == null){ %>  
 
-<bean:define id="pagestart" name="threadListForm" property="start" />
-<bean:define id="pagecount" name="threadListForm" property="count" />
-<bean:define id="pageallCount" name="threadListForm" property="allCount" />
-<%  
-    int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
-    int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
-    int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
-%>
 <div class="box">
 <div class="row">
 <div class="col-lg-4">
- <%if(pageStartInt != 0 ) {%> 
+ <%if(pagestartInt != 0 ) {%> 
  <span class="pull-left">
-    <%if(pageStartInt-pageCountInt>0 ) {%>  
-        <a href="/tag-<bean:write name="tagID"/>/<%=(pageStartInt-pageCountInt)%>" >上页</a>
+    <%if(pagestartInt-pagecountInt>0 ) {%>  
+        <a href="/tag-<bean:write name="tagID"/>/<%=(pagestartInt-pagecountInt)%>" >上页</a>
     <%}else{%>
         <a href="/tag-<bean:write name="tagID"/>/" >上页</a>
      <%}%>
@@ -139,8 +148,8 @@ pageContext.setAttribute("title", titleStr);
 <div class="col-lg-4"></div>
 <div class="col-lg-4">
 <span class="pull-right"> 
-    <%if((pageStartInt+pageCountInt) < pageAllcountInt ) {%> 
-    <a href="/tag-<bean:write name="tagID"/>/<%=pageStartInt+pageCountInt%>" >下页</a>
+    <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
+    <a href="/tag-<bean:write name="tagID"/>/<%=pagestartInt+pagecountInt%>" >下页</a>
     <%}%>
 </span>
 
