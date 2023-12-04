@@ -65,9 +65,9 @@
     <div class="box">
      <div class="tres">
     <MultiPagesREST:pager actionFormName="messageListForm" page="/forum/messageListAll" >
-                        <MultiPagesREST:prev name=" 上一页 " />
+                        <MultiPagesREST:prev name=" 上页 " />
                         <MultiPagesREST:index displayCount="3" />
-                        <MultiPagesREST:next  name=" 下一页 " />
+                        <MultiPagesREST:next  name=" 下页 " />
      </MultiPagesREST:pager>
           
 

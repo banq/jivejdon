@@ -44,9 +44,9 @@ df.setMinimumFractionDigits(2);
 <tr><td>
 共有 <bean:write name="keyListForm" property="allCount"/> 个
 <MultiPages:pager actionFormName="keyListForm" page="/admin/cachekeys.shtml" paramId="key" paramName="key">
-<MultiPages:prev name="上一页" />
+<MultiPages:prev name="上页" />
 <MultiPages:index />
-<MultiPages:next name="下一页" />
+<MultiPages:next name="下页" />
 </MultiPages:pager>
     <td><td >
 

@@ -78,9 +78,9 @@
 <div class="tres" >    
      共有<b><bean:write name="threadListForm" property="allCount"/></b>贴  
 <MultiPagesREST:pager actionFormName="threadListForm" page="/blog" paramId="username" paramName="accountProfileForm" paramProperty="account.username">
-<MultiPagesREST:prev name=" 上一页 " />
+<MultiPagesREST:prev name=" 上页 " />
 <MultiPagesREST:index displayCount="3" />
-<MultiPagesREST:next  name=" 下一页 " />
+<MultiPagesREST:next  name=" 下页 " />
 </MultiPagesREST:pager>
 </div>
 </div>

@@ -39,9 +39,9 @@
       <div class="tres">
         符合查询主题贴共有<b><bean:write name="threadListForm" property="allCount"/></b>贴
         <MultiPages:pager actionFormName="threadListForm" page="/admin/tag/threadTagList.shtml">
-          <MultiPages:prev name=" 上一页 "/>
+          <MultiPages:prev name=" 上页 "/>
           <MultiPages:index displayCount="3"/>
-          <MultiPages:next name=" 下一页 "/>
+          <MultiPages:next name=" 下页 "/>
         </MultiPages:pager>
         <a href="JavaScript:void(0);" class="tooltip html_tooltip_content_go">Go</a>
 
@@ -141,9 +141,9 @@
         符合查询主题共有<b><bean:write name="threadListForm" property="allCount"/></b>贴
         <MultiPages:pager actionFormName="threadListForm" page="/admin/tag/threadTagList.shtml">
           <a href="JavaScript:void(0);" class="tooltip html_tooltip_content_go">Go</a>
-          <MultiPages:prev name=" 上一页 "/>
+          <MultiPages:prev name=" 上页 "/>
           <MultiPages:index displayCount="3"/>
-          <MultiPages:next name=" 下一页 "/>
+          <MultiPages:next name=" 下页 "/>
         </MultiPages:pager>
       </div>
     </td>

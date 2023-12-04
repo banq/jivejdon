@@ -93,9 +93,9 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                 <ul class="pagination pull-right">
                   有<b><bean:write name="messageListForm" property="numPages"/></b>页 
                   <MultiPagesREST:pager actionFormName="messageListForm" page="/post" paramId="thread" paramName="forumThread" paramProperty="threadId">
-                    <MultiPagesREST:prev name=" 上一页 "/>
+                    <MultiPagesREST:prev name=" 上页 "/>
                     <MultiPagesREST:index displayCount="6"/>
-                    <MultiPagesREST:next name=" 下一页 "/>
+                    <MultiPagesREST:next name=" 下页 "/>
                   </MultiPagesREST:pager>
                 </ul>
                 </div>

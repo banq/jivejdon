@@ -61,9 +61,9 @@
           <MultiPages:pager actionFormName="messageListForm"
                             page="/query/searchThreadAction.shtml"
                             paramId="query" paramName="query">
-            <MultiPages:prev name=" 上一页 "/>
+            <MultiPages:prev name=" 上页 "/>
 
-            <MultiPages:next name=" 下一页 "/>
+            <MultiPages:next name=" 下页 "/>
           </MultiPages:pager>
           
         </div>
@@ -87,9 +87,9 @@
           <MultiPages:pager actionFormName="messageListForm"
                             page="/query/searchThreadAction.shtml"
                             paramId="query" paramName="query">
-            <MultiPages:prev name=" 上一页 "/>
+            <MultiPages:prev name=" 上页 "/>
 
-            <MultiPages:next name=" 下一页 "/>
+            <MultiPages:next name=" 下页 "/>
           </MultiPages:pager>
         </div>
 

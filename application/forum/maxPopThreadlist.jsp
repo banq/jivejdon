@@ -86,9 +86,9 @@ pageContext.setAttribute("title", titleStr);
 <ul class="pagination pull-right">
         <logic:empty name="forum" property="forumId">
           <MultiPagesREST:pager actionFormName="threadListForm" page="/forum/maxPopThreads" >
-            <MultiPagesREST:prev name=" 上一页 " />
+            <MultiPagesREST:prev name=" 上页 " />
             <MultiPagesREST:index displayCount="8" />
-            <MultiPagesREST:next  name=" 下一页 " />
+            <MultiPagesREST:next  name=" 下页 " />
           </MultiPagesREST:pager>
         </logic:empty>
       
@@ -124,9 +124,9 @@ pageContext.setAttribute("title", titleStr);
 <ul class="pagination pull-right">
         <logic:empty name="forum" property="forumId">
           <MultiPagesREST:pager actionFormName="threadListForm" page="/forum/maxPopThreads" >
-            <MultiPagesREST:prev name=" 上一页 " />
+            <MultiPagesREST:prev name=" 上页 " />
             <MultiPagesREST:index displayCount="8" />
-            <MultiPagesREST:next  name=" 下一页 " />
+            <MultiPagesREST:next  name=" 下页 " />
           </MultiPagesREST:pager>
         </logic:empty>
       

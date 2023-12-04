@@ -78,9 +78,9 @@ pageContext.setAttribute("title", titleStr);
 
 <ul class="pagination pull-right">
 <MultiPagesREST:pager actionFormName="tagsListForm" page="/tags/p"  >
-<MultiPagesREST:prev name=" 上一页 " />
+<MultiPagesREST:prev name=" 上页 " />
 <MultiPagesREST:index displayCount="8" />
-<MultiPagesREST:next  name=" 下一页 " />
+<MultiPagesREST:next  name=" 下页 " />
 </MultiPagesREST:pager>
 
 </ul>
@@ -147,9 +147,9 @@ int h = 0 ;
 
 <ul class="pagination pull-right">
 <MultiPagesREST:pager actionFormName="tagsListForm" page="/tags/p"  >
-<MultiPagesREST:prev name=" 上一页 " />
+<MultiPagesREST:prev name=" 上页 " />
 <MultiPagesREST:index displayCount="8" />
-<MultiPagesREST:next  name=" 下一页 " />
+<MultiPagesREST:next  name=" 下页 " />
 </MultiPagesREST:pager>
 
 </ul>

@@ -86,8 +86,8 @@ pageContext.setAttribute("title", titleStr);
 </ul>          
 <ul class="pagination pull-right">
       <MultiPagesREST:pager actionFormName="threadListForm" page="/forum/threadDigSortedList" >
-         <MultiPagesREST:prev name=" 上一页 " />
-         <MultiPagesREST:next  name=" 下一页 " />
+         <MultiPagesREST:prev name=" 上页 " />
+         <MultiPagesREST:next  name=" 下页 " />
          </MultiPagesREST:pager>
        
 </ul>
@@ -120,8 +120,8 @@ pageContext.setAttribute("title", titleStr);
 
 <ul class="pagination pull-right">
        <MultiPagesREST:pager actionFormName="threadListForm" page="/forum/threadDigSortedList" >
-         <MultiPagesREST:prev name=" 上一页 " />
-         <MultiPagesREST:next  name=" 下一页 " />
+         <MultiPagesREST:prev name=" 上页 " />
+         <MultiPagesREST:next  name=" 下页 " />
          </MultiPagesREST:pager>
        
 </ul>

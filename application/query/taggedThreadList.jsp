@@ -106,35 +106,52 @@ pageContext.setAttribute("title", titleStr);
 		  
       </center>
 
-<% if (request.getParameter("r") == null){ %>  
-<ul class="pagination pull-right"> 有<b>
-            <bean:write name="threadListForm" property="allCount"/>
-            </b>贴
-            <MultiPagesREST:pager actionFormName="threadListForm" page="/tags"  paramId="tagID" paramName="tagID" >
-              <MultiPagesREST:prev name=" 上一页 " />
-              <MultiPagesREST:index displayCount="8" />
-              <MultiPagesREST:next  name=" 下一页 " />
-            </MultiPagesREST:pager>
-</ul>
-<% } %>  
 
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
   <%@ include file="threadListCore.jsp" %>
 </logic:iterate>
 
-<% if (request.getParameter("r") == null){ %>  
-<ul class="pagination pull-right"> 有<b>
-            <bean:write name="threadListForm" property="allCount"/>
-            </b>贴
-            <MultiPagesREST:pager actionFormName="threadListForm" page="/tags"  paramId="tagID" paramName="tagID" >
-              <MultiPagesREST:prev name=" 上一页 " />
-              <MultiPagesREST:index displayCount="8" />
-              <MultiPagesREST:next  name=" 下一页 " />
-            </MultiPagesREST:pager>
-</ul>
-<% } %>  
 
         </div>
+
+
+ 
+
+<% if (request.getParameter("r") == null){ %>  
+
+<bean:define id="pagestart" name="threadListForm" property="start" />
+<bean:define id="pagecount" name="threadListForm" property="count" />
+<bean:define id="pageallCount" name="threadListForm" property="allCount" />
+<%  
+    int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
+    int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
+    int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
+%>
+<div class="box">
+<div class="row">
+<div class="col-lg-4">
+ <%if(pageStartInt != 0 ) {%> 
+ <span class="pull-left">
+    <%if(pageStartInt-pageCountInt>0 ) {%>  
+        <a href="/tag-<bean:write name="tagID"/>/<%=(pageStartInt-pageCountInt)%>" >上页</a>
+    <%}else{%>
+        <a href="/tag-<bean:write name="tagID"/>/" >上页</a>
+     <%}%>
+ </span>
+ <%}%>
+</div>
+<div class="col-lg-4"></div>
+<div class="col-lg-4">
+<span class="pull-right"> 
+    <%if((pageStartInt+pageCountInt) < pageAllcountInt ) {%> 
+    <a href="/tag-<bean:write name="tagID"/>/<%=pageStartInt+pageCountInt%>" >下页</a>
+    <%}%>
+</span>
+<% } %>  
+</div>
+</div>
+</div>
+
       </div>  
 
   </div>

@@ -96,16 +96,16 @@ pageContext.setAttribute("title", titleStr);
  <ul class="pagination pull-right">
   		 <logic:empty name="forum" property="forumId">						        
           <MultiPagesREST:pager actionFormName="threadListForm" page="/threads" >
-            <MultiPagesREST:prev name=" 上一页 " />
+            <MultiPagesREST:prev name=" 上页 " />
             <MultiPagesREST:index displayCount="8" />
-            <MultiPagesREST:next  name=" 下一页 " />
+            <MultiPagesREST:next  name=" 下页 " />
           </MultiPagesREST:pager>          
         </logic:empty>
         <logic:notEmpty name="forum" property="forumId">			    
           <MultiPagesREST:pager actionFormName="threadListForm" page="/forum" paramId="forum" paramName="forum" paramProperty="forumId">
-            <MultiPagesREST:prev name=" 上一页 " />
+            <MultiPagesREST:prev name=" 上页 " />
             <MultiPagesREST:index displayCount="8" />
-            <MultiPagesREST:next  name=" 下一页 " />
+            <MultiPagesREST:next  name=" 下页 " />
           </MultiPagesREST:pager>
            有<b><bean:write name="threadListForm" property="allCount"/></b>贴          
         </logic:notEmpty>           
@@ -151,16 +151,16 @@ pageContext.setAttribute("title", titleStr);
   <ul class="pagination pull-right">
   		 <logic:empty name="forum" property="forumId">						        
           <MultiPagesREST:pager actionFormName="threadListForm" page="/threads" >
-            <MultiPagesREST:prev name=" 上一页 " />
+            <MultiPagesREST:prev name=" 上页 " />
             <MultiPagesREST:index displayCount="8" />
-            <MultiPagesREST:next  name=" 下一页 " />
+            <MultiPagesREST:next  name=" 下页 " />
           </MultiPagesREST:pager>          
         </logic:empty>
         <logic:notEmpty name="forum" property="forumId">			    
           <MultiPagesREST:pager actionFormName="threadListForm" page="/forum" paramId="forum" paramName="forum" paramProperty="forumId">
-            <MultiPagesREST:prev name=" 上一页 " />
+            <MultiPagesREST:prev name=" 上页 " />
             <MultiPagesREST:index displayCount="8" />
-            <MultiPagesREST:next  name=" 下一页 " />
+            <MultiPagesREST:next  name=" 下页 " />
           </MultiPagesREST:pager>
            有<b><bean:write name="threadListForm" property="allCount"/></b>贴          
         </logic:notEmpty>           

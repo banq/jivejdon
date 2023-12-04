@@ -22,9 +22,9 @@
     <%-- request.setAttribute("paramMaps", qForm.getParamMaps());  in ThreadQueryAction --%>    
     共有<b><bean:write name="tagsListForm" property="allCount"/></b>标签 
 <MultiPages:pager actionFormName="tagsListForm" page="/admin/tag/tagsList.shtml?count=100"  >
-<MultiPages:prev name=" 上一页 " />
+<MultiPages:prev name=" 上页 " />
 <MultiPages:index displayCount="3" />
-<MultiPages:next  name=" 下一页 " />
+<MultiPages:next  name=" 下页 " />
 </MultiPages:pager>
 <a href="JavaScript:void(0);" class="tooltip html_tooltip_content_go">Go</a>
 
@@ -80,9 +80,9 @@ int i = 0;
     共有<b><bean:write name="tagsListForm" property="allCount"/></b>标签  
 <MultiPages:pager actionFormName="tagsListForm" page="/admin/tag/tagsList.shtml?count=100"  >
 <a href="JavaScript:void(0);" class="tooltip html_tooltip_content_go">Go</a>
-<MultiPages:prev name=" 上一页 " />
+<MultiPages:prev name=" 上页 " />
 <MultiPages:index displayCount="3" />
-<MultiPages:next  name=" 下一页 " />
+<MultiPages:next  name=" 下页 " />
 </MultiPages:pager>     
       </div>
     </td>
