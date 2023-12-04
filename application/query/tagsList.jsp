@@ -192,10 +192,11 @@ int h = 0 ;
 </logic:greaterThan>
 </logic:present>
 
+</div>
+</div>
+</div>
 
-<%@ include file="searchInputView.jsp" %>
 <%@include file="../common/IncludeBottomBody.jsp"%>
-<%@include file="../account/loginAJAX.jsp"%>
-  
+
 </body>
 </html>

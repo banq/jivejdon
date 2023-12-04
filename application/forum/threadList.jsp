@@ -250,6 +250,10 @@ pageContext.setAttribute("title", titleStr);
 
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
 
+</div>
+</div>
+</div>
+
 </body>
 </html>
 
