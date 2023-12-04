@@ -15,18 +15,20 @@
  */
 package com.jdon.jivejdon.infrastructure.repository.property;
 
+import java.util.Collection;
+import java.util.List;
+
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
-import com.jdon.jivejdon.domain.model.query.specification.TaggedThreadListSpec;
-
-import java.util.Collection;
 
 public interface TagRepository {
 
 	public abstract Collection<Long> searchTitle(String s);
 
 	public abstract PageIterator getTaggedThread(Long tagID, int start, int count);
+
+	public abstract List<Long> getTaggedThread(Long tagID);
 
 	public abstract PageIterator getThreadTags(int start, int count);
 

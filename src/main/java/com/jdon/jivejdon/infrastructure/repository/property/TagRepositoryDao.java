@@ -27,6 +27,7 @@ import com.jdon.jivejdon.infrastructure.repository.dao.TagDao;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 public class TagRepositoryDao implements TagRepository {
 
@@ -58,6 +59,10 @@ public class TagRepositoryDao implements TagRepository {
 	 */
 	public PageIterator getTaggedThread(Long tagID, int start, int count) {
 		return tagDao.getTaggedThread(tagID, start, count);
+	}
+
+	public List<Long> getTaggedThread(Long tagID){
+		return tagDao.getTaggedThread(tagID);
 	}
 
 	/*

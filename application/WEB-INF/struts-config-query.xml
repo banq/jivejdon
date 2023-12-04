@@ -143,9 +143,6 @@
             <forward name="success" path="/query/approvedThreadList3.jsp" />            
         </action>
 
-        <!-- <action path="/random/threadApprovedNewList4" type="com.jdon.jivejdon.presentation.action.query.ThreadRandomDigListAction" name="threadListForm" scope="request" validate="false">            
-            <forward name="success" path="/query/approvedThreadList3.jsp" />        
-        </action> -->
 
         <!-- from next page  reference in homepage   -->
         <action path="/query/approvedListOther" type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedNewListAction" name="threadListForm" scope="request" validate="false">
@@ -215,9 +212,7 @@
             <forward name="success" path="/forum/randomThreadList.jsp" />
         </action>
 
-        <action path="/random/threadRandomDigList" type="com.jdon.jivejdon.presentation.action.query.ThreadRandomDigListAction" name="threadListForm" scope="request" validate="false">
-            <forward name="success" path="/query/others/randomdiglist.jsp" />
-        </action>
+
 
 
         <action path="/query/threadNewDigList" type="com.jdon.jivejdon.presentation.action.query.ThreadNewDigListAction" name="threadListForm" scope="request" validate="false">

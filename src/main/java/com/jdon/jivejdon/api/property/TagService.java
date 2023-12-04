@@ -16,15 +16,14 @@
  */
 package com.jdon.jivejdon.api.property;
 
+import java.util.Collection;
+import java.util.List;
+
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.domain.model.property.HotKeys;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
-import com.jdon.jivejdon.domain.model.query.specification.TaggedThreadListSpec;
-import com.jdon.jivejdon.domain.model.util.OneManyDTO;
 import com.jdon.jivejdon.domain.model.util.OneOneDTO;
-
-import java.util.Collection;
 
 public interface TagService {
 
@@ -36,7 +35,7 @@ public interface TagService {
 
 	public PageIterator getTaggedThread(Long tagID, int start, int count);
 
-	public PageIterator getTaggedRandomThreads(Long tagID, int start, int count);
+	public List<Long> getTaggedThreads(Long tagID);
 
 	public PageIterator getThreadTags(int start, int count);
 

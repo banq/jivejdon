@@ -275,6 +275,24 @@ public class TagDaoSql implements TagDao {
 		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, params, start, count);
 	}
 
+	public List<Long> getTaggedThread(Long tagID) {
+		String LOAD_SQL = "SELECT threadID FROM threadTag where tagID=?";
+		List queryParams = new ArrayList();
+		queryParams.add(tagID);
+		List<Long> ret = new ArrayList<>();
+		try {
+			List list = jdbcTempSource.getJdbcTemp().queryMultiObject(queryParams, LOAD_SQL);
+			Iterator iter = list.iterator();
+			while (iter.hasNext()) {
+				Map map = (Map) iter.next();
+				ret.add((Long) map.get("threadID"));
+			}
+		} catch (Exception se) {
+			logger.error(se);
+		}
+		return ret;
+	}
+
 		/*
 	 * get the threads collection include prev/cuurent/next threads in tag.
 	 */

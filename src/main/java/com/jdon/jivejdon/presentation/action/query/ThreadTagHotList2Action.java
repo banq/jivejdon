@@ -60,20 +60,23 @@ public class ThreadTagHotList2Action extends ModelListAction {
 		TreeSet<Long> threadIds = threadTagList.getTagThreadIds(Long.parseLong(tagID));
 		if(threadIds == null)
 		    threadIds = new TreeSet<>(new ThreadDigComparator(forumMessageQueryService));
-		if (threadIds.size() < 5) {
-
-			PageIterator pi = othersService.getTaggedThread(new Long(tagID), 0, 100);
-			int i = 0;
-			while (pi.hasNext()) {
-				Long threadId = (Long) pi.next();
-				Long threadId_tagID = threadTagList.getThreadId_tagIDs().computeIfAbsent(threadId,
-						k -> new Long(tagID));
-				if (threadId_tagID.longValue() == Long.parseLong(tagID)) {
-					threadIds.add(threadId);
-					i++;
+		try{	
+			if (threadIds.size() < 5) {
+				PageIterator pi = othersService.getTaggedThread(new Long(tagID), 0, 100);
+				int i = 0;
+				while (pi.hasNext()) {
+					Long threadId = (Long) pi.next();
+					Long threadId_tagID = threadTagList.getThreadId_tagIDs().computeIfAbsent(threadId,
+							k -> new Long(tagID));
+					if (threadId_tagID.longValue() == Long.parseLong(tagID)) {
+						threadIds.add(threadId);
+						i++;
+					}
+					if (i >= 5)
+						break;
 				}
-				if (i>=5) break;
 			}
+		} catch (Exception e) {
 		}
 		return new PageIterator(threadIds.size(), threadIds.toArray());
 	}

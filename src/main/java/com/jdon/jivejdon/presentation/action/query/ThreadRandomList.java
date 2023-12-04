@@ -43,9 +43,7 @@ public class ThreadRandomList extends ModelListAction {
         int allCount = getForumService().getThreadAllCount();
         if (allCount == 0 || count == 0)
             return new PageIterator();
-        int pageCount = allCount / count;
-        int nowPage = ThreadLocalRandom.current().nextInt(pageCount);
-        start = nowPage * count;
+        start = ThreadLocalRandom.current().nextInt(allCount);
         return getForumMessageQueryService().getThreads(start, count, threadListSpec);
     }
 

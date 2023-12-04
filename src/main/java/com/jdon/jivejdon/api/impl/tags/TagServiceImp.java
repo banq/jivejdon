@@ -18,9 +18,12 @@ package com.jdon.jivejdon.api.impl.tags;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Pattern;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.jdon.annotation.Service;
 import com.jdon.controller.events.EventModel;
@@ -30,7 +33,6 @@ import com.jdon.jivejdon.api.property.TagService;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.HotKeys;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
-import com.jdon.jivejdon.domain.model.query.specification.TaggedThreadListSpec;
 import com.jdon.jivejdon.domain.model.thread.ThreadTagsVO;
 import com.jdon.jivejdon.domain.model.util.OneOneDTO;
 import com.jdon.jivejdon.infrastructure.repository.MessageRepository;
@@ -38,9 +40,6 @@ import com.jdon.jivejdon.infrastructure.repository.property.HotKeysRepository;
 import com.jdon.jivejdon.infrastructure.repository.property.TagRepository;
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.util.UtilValidate;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 @Service("othersService")
 public class TagServiceImp implements TagService, Poolable {
@@ -79,14 +78,11 @@ public class TagServiceImp implements TagService, Poolable {
 		return tagRepository.getTaggedThread(tagID, start, count);
 	}
 
-	public PageIterator getTaggedRandomThreads(Long tagID, int start, int count) {
-		PageIterator pi = tagRepository.getTaggedThread(tagID, start, count);
-		if ((pi.getAllCount() == 0) || (count == 0))
-			return new PageIterator();
-		int pageCount = pi.getAllCount() / count;
-		int nowPage = (int) (Math.random() * pageCount);
-		start = nowPage * count;
-		return tagRepository.getTaggedThread(tagID, start, count);
+	public List<Long>  getTaggedThreads(Long tagID) {
+		List<Long> pi = tagRepository.getTaggedThread(tagID);
+		if (pi.isEmpty())
+			return new ArrayList<>();
+		return pi;
 	}
 
 	public void updateThreadTag(EventModel em) {

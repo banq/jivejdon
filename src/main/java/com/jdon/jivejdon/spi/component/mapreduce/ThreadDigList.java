@@ -66,12 +66,11 @@ public class ThreadDigList {
 
 	public PageIterator getRandomPageIterator(int count) {
 		List<Long> threads = Collections.unmodifiableList(new ArrayList<Long>(sortedAll));
-		List<Long> results = new ArrayList<>();
-		for (int i = 0; i < count; i++) {
-			int randstart = ThreadLocalRandom.current().nextInt(threads.size());
-			results.addAll(threads.stream().skip(randstart).limit(1).collect(Collectors.toList()));
-		}
-		return new PageIterator(results.size(), results.toArray());
+		if (threads.size() == 0 )
+		  return new PageIterator();
+		Collections.shuffle(threads);
+		List<Long> cutList = threads.subList(0, threads.size() > count ? count : threads.size());
+		return new PageIterator(cutList.size(), cutList.toArray());
 	}
 
 	public Collection<ForumThread> getDigs(int DigsListMAXSize) {
