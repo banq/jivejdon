@@ -158,11 +158,7 @@
         <to>/query/tagsList.shtml?count=90&amp;start=0</to>
     </rule>
     <rule>
-        <from>^/tags/p$</from>
-        <to>/query/tagsList.shtml?count=30</to>
-    </rule>
-    <rule>
-        <from>^/tags/p/([0-9]+)$</from>
+        <from>^/tags/([0-9]+)$</from>
         <to>/query/tagsList.shtml?count=30&amp;start=$1</to>
     </rule>
     <rule>
@@ -176,16 +172,7 @@
     <rule>
         <from>^/tag-([a-zA-Z0-9]+)/rss$</from>
         <to>/RSServlet?tagId=$1</to>
-    </rule>    
-    <rule>
-        <from>^/tags/([0-9]+)$</from>
-        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=30</to>
-    </rule>
-    <rule>
-        <from>^/tags/([0-9]+)/([0-9]+)$</from>
-        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=30&amp;start=$2</to>
-    </rule>
-
+    </rule>      
     <rule>
         <from>^/query/hotkeys$</from>
         <to>/query/hotKeys.shtml?method=hotkeys</to>

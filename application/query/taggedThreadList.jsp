@@ -147,10 +147,11 @@ pageContext.setAttribute("title", titleStr);
     <a href="/tag-<bean:write name="tagID"/>/<%=pageStartInt+pageCountInt%>" >下页</a>
     <%}%>
 </span>
+
+</div>
+</div>
+</div>
 <% } %>  
-</div>
-</div>
-</div>
 
       </div>  
 

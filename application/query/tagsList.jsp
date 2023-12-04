@@ -34,7 +34,7 @@ pageContext.setAttribute("title", titleStr);
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
   <link rel="alternate" type="application/rss+xml" title="极道订阅" href="https://www.jdon.com/rss">
     <%if (currentPageNo > 1) {%>
-       <link rel="canonical" href="/tags/p/<%=pagestartInt%>">      
+       <link rel="canonical" href="/tags/<%=pagestartInt%>">      
    <% }else{%>
          <link rel="canonical" href="/tags/">  
    <% }%>      
@@ -75,15 +75,6 @@ pageContext.setAttribute("title", titleStr);
   <div class="col-md-12">
     <div class="box"> 
 
-
-<ul class="pagination pull-right">
-<MultiPagesREST:pager actionFormName="tagsListForm" page="/tags/p"  >
-<MultiPagesREST:prev name=" 上页 " />
-<MultiPagesREST:index displayCount="8" />
-<MultiPagesREST:next  name=" 下页 " />
-</MultiPagesREST:pager>
-
-</ul>
 
 
 <%
@@ -145,14 +136,41 @@ int h = 0 ;
   </div>
  <%}%>
 
-<ul class="pagination pull-right">
-<MultiPagesREST:pager actionFormName="tagsListForm" page="/tags/p"  >
-<MultiPagesREST:prev name=" 上页 " />
-<MultiPagesREST:index displayCount="8" />
-<MultiPagesREST:next  name=" 下页 " />
-</MultiPagesREST:pager>
 
-</ul>
+
+<bean:define id="pagestart" name="tagsListForm" property="start" />
+<bean:define id="pagecount" name="tagsListForm" property="count" />
+<bean:define id="pageallCount" name="tagsListForm" property="allCount" />
+<%  
+    int pageStartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
+    int pageCountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
+    int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
+%>
+<div class="box">
+<div class="row">
+<div class="col-lg-4">
+ <%if(pageStartInt != 0 ) {%> 
+ <span class="pull-left">
+    <%if(pageStartInt-pageCountInt>0 ) {%>  
+        <a href="/tags/<%=(pageStartInt-pageCountInt)%>" >上页</a>
+    <%}else{%>
+        <a href="/tags/" >上页</a>
+     <%}%>
+ </span>
+ <%}%>
+</div>
+<div class="col-lg-4"></div>
+<div class="col-lg-4">
+<span class="pull-right"> 
+    <%if((pageStartInt+pageCountInt) < pageAllcountInt ) {%> 
+    <a href="/tags/<%=pageStartInt+pageCountInt%>" >下页</a>
+    <%}%>
+</span>
+
+</div>
+</div>
+</div>
+
     </div>
   </div>
 </div>
