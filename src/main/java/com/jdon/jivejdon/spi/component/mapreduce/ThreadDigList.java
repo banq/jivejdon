@@ -65,7 +65,7 @@ public class ThreadDigList {
 	}
 
 	public PageIterator getRandomPageIterator(int count) {
-		List<Long> threads = Collections.unmodifiableList(new ArrayList<Long>(sortedAll));
+		List<Long> threads = new ArrayList<Long>(sortedAll);
 		if (threads.size() == 0 )
 		  return new PageIterator();
 		Collections.shuffle(threads);
