@@ -16,9 +16,9 @@
  */
 package com.jdon.jivejdon.infrastructure.repository.property;
 
-import com.jdon.jivejdon.domain.model.property.HotKeys;
-
 import java.util.Collection;
+
+import com.jdon.jivejdon.domain.model.property.HotKeys;
 
 public class HotKeysRepository {
 	
@@ -31,7 +31,7 @@ public class HotKeysRepository {
 
 	public HotKeys getHotKeys(){
 		HotKeys hotKeys = new HotKeys();
-		Collection props = forumPropertyFactory.getForumPropertys(new Long(hotKeys.getId()));
+		Collection props = forumPropertyFactory.getForumPropertys(hotKeys.getId());
 		hotKeys.setProps(props);
 		return hotKeys;
 	}

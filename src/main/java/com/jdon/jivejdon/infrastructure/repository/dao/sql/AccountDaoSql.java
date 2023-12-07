@@ -26,12 +26,12 @@ import org.apache.logging.log4j.Logger;
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.pointcut.Around;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.account.PasswordassitVO;
-import com.jdon.jivejdon.infrastructure.repository.acccount.AccountRepository;
 import com.jdon.jivejdon.infrastructure.repository.acccount.AccountInitFactory;
+import com.jdon.jivejdon.infrastructure.repository.acccount.AccountRepository;
 import com.jdon.jivejdon.infrastructure.repository.dao.AccountDao;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.jivejdon.util.ToolsUtil;
 import com.jdon.model.query.PageIteratorSolver;
@@ -72,10 +72,10 @@ public class AccountDaoSql implements AccountDao, AccountRepository {
 		logger.debug("enter getAccount");
 		String LOAD_USER_BY_ID = "select userID,username,passwordHash,name,nameVisible,email,emailVisible,"
 				+ "rewardPoints,creationDate,modifiedDate from jiveUser where userID=?";
-		List queryParams = new ArrayList();
-		queryParams.add(new Long(userId));
 		Account account = null;
+		List queryParams = new ArrayList();
 		try {
+			queryParams.add(Long.parseLong(userId));
 			List list = jdbcTempSource.getJdbcTemp().queryMultiObject(queryParams, LOAD_USER_BY_ID);
 			Iterator iter = list.iterator();
 			if (iter.hasNext()) {

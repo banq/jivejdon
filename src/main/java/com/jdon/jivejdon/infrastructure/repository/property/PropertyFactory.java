@@ -21,13 +21,13 @@ import com.jdon.jivejdon.domain.model.property.Property;
 
 public interface PropertyFactory {
 
-	public abstract void saveForumPropertys(int id, Collection<Property> props);
+	public abstract void saveForumPropertys(Long id, Collection<Property> props);
 
-	public abstract void saveThreadPropertys(int threadID, Collection<Property> props);
+	public abstract void saveThreadPropertys(Long threadID, Collection<Property> props);
 
 	public abstract Collection<Property> getForumPropertys(Long id);
 
-	public abstract Collection<Property> getThreadPropertys(int threadID);
+	public abstract Collection<Property> getThreadPropertys(Long threadID);
 
 	public void saveUserPropertys(Long userId, Collection<Property> props);
 

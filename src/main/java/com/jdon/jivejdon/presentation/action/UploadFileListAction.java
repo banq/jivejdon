@@ -15,14 +15,10 @@
  */
 package com.jdon.jivejdon.presentation.action;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.jdon.jivejdon.domain.model.account.Account;
-import com.jdon.jivejdon.domain.model.attachment.UploadFile;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,11 +28,13 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.domain.model.ForumMessage;
-import com.jdon.jivejdon.presentation.form.UpLoadFileForm;
-import com.jdon.jivejdon.api.account.AccountService;
 import com.jdon.jivejdon.api.ForumMessageService;
+import com.jdon.jivejdon.api.account.AccountService;
 import com.jdon.jivejdon.api.property.UploadService;
+import com.jdon.jivejdon.domain.model.ForumMessage;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.domain.model.attachment.UploadFile;
+import com.jdon.jivejdon.presentation.form.UpLoadFileForm;
 import com.jdon.strutsutil.FormBeanUtil;
 import com.jdon.strutsutil.ModelListForm;
 import com.jdon.util.UtilValidate;
@@ -55,7 +53,7 @@ public class UploadFileListAction extends Action {
 		String messageId = request.getParameter("parentId");
 		Long messageIdL = new Long(0);
 		if (!UtilValidate.isEmpty(messageId)) {
-			messageIdL = new Long(messageId);
+			messageIdL = Long.parseLong(messageId);
 			authFilter(request, messageIdL);
 		} else {
 			logger.debug("no paramter parentId, it is create!");

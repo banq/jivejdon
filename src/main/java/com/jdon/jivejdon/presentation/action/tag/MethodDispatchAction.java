@@ -1,15 +1,11 @@
 package com.jdon.jivejdon.presentation.action.tag;
 
-import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.spi.component.throttle.hitkey.CustomizedThrottle;
-import com.jdon.jivejdon.spi.component.throttle.hitkey.HitKeyIF;
-import com.jdon.jivejdon.spi.component.throttle.hitkey.HitKeySame;
-import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.account.Account;
-import com.jdon.jivejdon.api.account.AccountService;
-import com.jdon.jivejdon.api.ForumMessageService;
-import com.jdon.jivejdon.api.property.TagService;
-import com.jdon.util.UtilValidate;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.ActionForm;
@@ -17,10 +13,14 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.Collection;
+import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.api.ForumMessageService;
+import com.jdon.jivejdon.api.account.AccountService;
+import com.jdon.jivejdon.api.property.TagService;
+import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.spi.component.throttle.hitkey.CustomizedThrottle;
+import com.jdon.util.UtilValidate;
 
 public class MethodDispatchAction extends DispatchAction {
 	private final static Logger logger = LogManager.getLogger(MethodDispatchAction.class);
@@ -61,7 +61,7 @@ public class MethodDispatchAction extends DispatchAction {
 			mapping.findForward("savetags");
 		}
 		TagService othersService = (TagService) WebAppUtil.getService("othersService", request);
-		othersService.saveTag(new Long(threadId), tagTitle);
+		othersService.saveTag(Long.parseLong(threadId), tagTitle);
 		return mapping.findForward("savetags");
 	}
 

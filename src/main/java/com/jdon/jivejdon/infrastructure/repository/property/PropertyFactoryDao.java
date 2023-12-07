@@ -16,18 +16,19 @@
  */
 package com.jdon.jivejdon.infrastructure.repository.property;
 
-import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.domain.model.property.Property;
-import com.jdon.jivejdon.domain.model.util.CachedCollection;
-import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
-import com.jdon.jivejdon.util.ContainerUtil;
-import com.jdon.util.UtilValidate;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.jdon.jivejdon.domain.model.property.Property;
+import com.jdon.jivejdon.domain.model.util.CachedCollection;
+import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
+import com.jdon.jivejdon.util.Constants;
+import com.jdon.jivejdon.util.ContainerUtil;
+import com.jdon.util.UtilValidate;
 
 public class PropertyFactoryDao implements PropertyFactory {
 	private final static Logger logger = LogManager.getLogger(PropertyFactoryDao.class);
@@ -48,7 +49,7 @@ public class PropertyFactoryDao implements PropertyFactory {
 	 * @see com.jdon.jivejdon.infrastructure.repository.property.PropertyFactory#
 	 * saveForumPropertys(int, java.util.Collection)
 	 */
-	public void saveForumPropertys(int id, Collection<Property> props) {
+	public void saveForumPropertys(Long id, Collection<Property> props) {
 		try {
 			Collection<Property> propss = new ArrayList<Property>();
 			Iterator<Property> iter = props.iterator();
@@ -57,10 +58,10 @@ public class PropertyFactoryDao implements PropertyFactory {
 				if (!UtilValidate.isEmpty(prop.getName()) && !UtilValidate.isEmpty(prop.getValue()))
 					propss.add(prop);
 			}
-			propertyDao.deleteProperties(Constants.FORUM, new Long(id));
-			containerUtil.getCacheManager().getCache().remove(new Long(id));
-			containerUtil.clearCache(new Long(id));
-			propertyDao.saveProperties(Constants.FORUM, new Long(id), propss);
+			propertyDao.deleteProperties(Constants.FORUM, id);
+			containerUtil.getCacheManager().getCache().remove(id);
+			containerUtil.clearCache(id);
+			propertyDao.saveProperties(Constants.FORUM, id, propss);
 		} catch (Exception e) {
 			logger.error(" savePropertys error: " + e);
 
@@ -73,7 +74,7 @@ public class PropertyFactoryDao implements PropertyFactory {
 	 * @see com.jdon.jivejdon.infrastructure.repository.property.PropertyFactory#
 	 * saveThreadPropertys(int, java.util.Collection)
 	 */
-	public void saveThreadPropertys(int threadID, Collection<Property> props) {
+	public void saveThreadPropertys(Long threadID, Collection<Property> props) {
 		try {
 			Collection<Property> propss = new ArrayList<Property>();
 			Iterator<Property> iter = props.iterator();
@@ -82,9 +83,9 @@ public class PropertyFactoryDao implements PropertyFactory {
 				if (!UtilValidate.isEmpty(prop.getName()) && !UtilValidate.isEmpty(prop.getValue()))
 					propss.add(prop);
 			}
-			propertyDao.deleteProperties(Constants.THREAD, new Long(threadID));
-			containerUtil.getCacheManager().getCache().remove(new Integer(threadID));
-			propertyDao.saveProperties(Constants.THREAD, new Long(threadID), propss);
+			propertyDao.deleteProperties(Constants.THREAD, threadID);
+			containerUtil.getCacheManager().getCache().remove(threadID);
+			propertyDao.saveProperties(Constants.THREAD, threadID, propss);
 		} catch (Exception e) {
 			logger.error(" savePropertys error: " + e);
 
@@ -148,10 +149,10 @@ public class PropertyFactoryDao implements PropertyFactory {
 	 * @see com.jdon.jivejdon.infrastructure.repository.property.PropertyFactory#
 	 * getThreadPropertys(int)
 	 */
-	public Collection<Property> getThreadPropertys(int threadID) {
-		Collection<Property> props = (Collection) containerUtil.getCacheManager().getCache().get(new Integer(threadID));
+	public Collection<Property> getThreadPropertys(Long threadID) {
+		Collection<Property> props = (Collection) containerUtil.getCacheManager().getCache().get(threadID);
 		if (props == null) {
-			props = propertyDao.getProperties(Constants.THREAD, new Long(threadID));
+			props = propertyDao.getProperties(Constants.THREAD, threadID);
 			if ((props != null) && (props.size() != 0))
 				containerUtil.getCacheManager().getCache().put(threadID, props);
 			else

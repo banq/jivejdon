@@ -46,7 +46,7 @@ public class MessageListNavAction extends Action {
 		}
 		ForumService forumService = (ForumService) WebAppUtil.getService("forumService",
 				this.servlet.getServletContext());
-		Forum forum = forumService.getForum(new Long(forumIds));
+		Forum forum = forumService.getForum(Long.parseLong(forumIds));
 		if (forum == null) {
 			logger.error(" MessageListNavAction error : not found forum =" + forumIds);
 			return mapping.findForward("failure");
@@ -56,7 +56,7 @@ public class MessageListNavAction extends Action {
 		if (lastPost != null) {
 			Long lastMessageId = lastPost.getMessageId();
 			Long threadId = lastPost.getForumThread().getThreadId();
-			if (lastMessageId.longValue() >= (new Long(messageId)).longValue()) {
+			if (lastMessageId.longValue() >= (Long.parseLong(messageId))) {
 				ActionRedirect redirect = new ActionRedirect(mapping.findForward("success"));
 				redirect.setPath("/message/messageListOwner.shtml?thread=" + Long.toString(threadId));
 				return redirect;

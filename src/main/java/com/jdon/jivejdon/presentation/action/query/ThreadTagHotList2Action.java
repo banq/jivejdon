@@ -48,7 +48,7 @@ public class ThreadTagHotList2Action extends ModelListAction {
 
 		TagService othersService = (TagService) WebAppUtil.getService("othersService",
 				this.servlet.getServletContext());
-		ThreadTag tag = othersService.getThreadTag(new Long(tagID));
+		ThreadTag tag = othersService.getThreadTag(Long.parseLong(tagID));
 		if (tag == null)
 			return new PageIterator();
 		request.setAttribute("TITLE", tag.getTitle());
@@ -60,12 +60,12 @@ public class ThreadTagHotList2Action extends ModelListAction {
 		    threadIds = new TreeSet<>(new ThreadDigComparator(forumMessageQueryService));
 		try{	
 			if (threadIds.size() < 5) {
-				PageIterator pi = othersService.getTaggedThread(new Long(tagID), 0, 100);
+				PageIterator pi = othersService.getTaggedThread(Long.parseLong(tagID), 0, 100);
 				int i = 0;
 				while (pi.hasNext()) {
 					Long threadId = (Long) pi.next();
 					Long threadId_tagID = threadTagList.getThreadId_tagIDs().computeIfAbsent(threadId,
-							k -> new Long(tagID));
+							k -> Long.parseLong(tagID));
 					if (threadId_tagID.longValue() == Long.parseLong(tagID)) {
 						threadIds.add(threadId);
 						i++;

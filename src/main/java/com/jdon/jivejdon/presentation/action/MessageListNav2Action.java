@@ -56,14 +56,14 @@ public class MessageListNav2Action extends Action {
 		}
 
 		ForumThread thread = forumMessageParent.getForumThread();
-		long threadId = thread.getThreadId();
 		// AddReplyMessageZ will update state
 		Long lastMessageId = thread.getState().getLatestPost().getMessageId();
-		if (lastMessageId.longValue() >= (new Long(messageId)).longValue()) {
-			int start = locateTheMessage(new Long(threadId), lastMessageId, new Long(messageId),
+		Long messageIdL = Long.parseLong(messageId);
+		if (lastMessageId.longValue() >= messageIdL.longValue()) {
+			int start = locateTheMessage(thread.getThreadId(), lastMessageId, messageIdL,
 					messageListForm.getCount());
 			ActionRedirect redirect = new ActionRedirect(mapping.findForward("success"));
-			redirect.addParameter("thread", threadId);
+			redirect.addParameter("thread", thread.getThreadId());
 			redirect.addParameter("start", start);
 			redirect.addParameter("messageId", messageId);
 			redirect.addParameter("nocache", "true");
@@ -71,8 +71,8 @@ public class MessageListNav2Action extends Action {
 			redirect.setAnchor(messageId);
 			return redirect;
 		} else {// forward to /forum/navf2.jsp to waiting a minute until all ok
-			request.setAttribute("pMessageId", new Long(pMessageId));
-			request.setAttribute("messageId", new Long(messageId));
+			request.setAttribute("pMessageId", messageIdL);
+			request.setAttribute("messageId", messageIdL);
 			return mapping.findForward("navf2");
 		}
 	}

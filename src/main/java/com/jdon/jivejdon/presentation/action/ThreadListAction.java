@@ -75,7 +75,7 @@ public class ThreadListAction extends ModelListAction {
 		if ((forumId == null) || !StringUtils.isNumeric(forumId) || forumId.length()>10) {
 			return forumMessageQueryService.getThreads(start, count, threadListSpec);
 		} else
-			return forumMessageQueryService.getThreads(new Long(forumId), start, count,
+			return forumMessageQueryService.getThreads(Long.parseLong(forumId), start, count,
 					resultSort);
 	}
 
@@ -119,7 +119,7 @@ public class ThreadListAction extends ModelListAction {
 			forum = new Forum();
 			forum.setName("");
 		} else {
-			forum = forumService.getForum(new Long(forumId));
+			forum = forumService.getForum(Long.parseLong(forumId));
 		}
 		if (forum == null)
 			throw new Exception("forum is null forumid=" + forumId);

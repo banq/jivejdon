@@ -63,7 +63,7 @@ public class MessageListOwnerAction extends ModelListAction {
 			return new PageIterator();
 		}
 
-		return getForumMessageQueryService().getMessages(new Long(threadId), start, count);
+		return getForumMessageQueryService().getMessages(Long.parseLong(threadId), start, count);
 	}
 
 	/*
@@ -98,7 +98,7 @@ public class MessageListOwnerAction extends ModelListAction {
 		}
 
 		try {
-			ForumThread forumThread = getForumMessageQueryService().getThread(new Long(threadId));
+			ForumThread forumThread = getForumMessageQueryService().getThread(Long.parseLong(threadId));
 			if (forumThread == null)
 				throw new Exception("thread is null " + threadId);
 

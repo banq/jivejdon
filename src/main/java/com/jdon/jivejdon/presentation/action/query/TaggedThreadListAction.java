@@ -62,20 +62,21 @@ public class TaggedThreadListAction extends ModelListAction {
 			if (tagID == null || !StringUtils.isNumeric(tagID) || tagID.length() > 10) {
 				return new PageIterator();
 			}
-			ThreadTag tag = othersService.getThreadTag(new Long(tagID));
+			Long tagIDL = Long.parseLong(tagID);
+			ThreadTag tag = othersService.getThreadTag(tagIDL);
 			if (tag == null)
 				return new PageIterator();
 			request.setAttribute("TITLE", tag.getTitle());
 			request.setAttribute("threadTag", tag);
 			if (request.getParameter("r") == null) {
-				return othersService.getTaggedThread(new Long(tagID), start, count);
+				return othersService.getTaggedThread(tagIDL, start, count);
 			} else {
-				int allCount = cache.computeIfAbsent(new Long(tagID),
-						k -> othersService.getTaggedThreads(new Long(tagID)).size());
+				int allCount = cache.computeIfAbsent(tagIDL,
+						k -> othersService.getTaggedThreads(tagIDL).size());
 				if (allCount == 0 || count == 0)
 					return new PageIterator();
 				start = ThreadLocalRandom.current().nextInt(allCount);
-				return othersService.getTaggedThread(new Long(tagID), start, count);
+				return othersService.getTaggedThread(tagIDL, start, count);
 			}
 	}
 

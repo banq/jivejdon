@@ -86,7 +86,7 @@ public class ThreadRandomDigListAction extends ModelListAction {
 			forum = new Forum();
 			forum.setName("主题总表");
 		} else {
-			forum = forumService.getForum(new Long(forumId));
+			forum = forumService.getForum(Long.parseLong(forumId));
 		}
 		if (forum == null)
 			throw new Exception("forum is null forumid=" + forumId);

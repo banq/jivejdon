@@ -54,12 +54,12 @@ public class ApprovedAction extends ModelListAction {
 		if (tagID == null || !StringUtils.isNumeric(tagID) || tagID.length()>10) {
 			return new PageIterator();
 		}
-		ThreadTag tag = othersService.getThreadTag(new Long(tagID));
+		ThreadTag tag = othersService.getThreadTag(Long.parseLong(tagID));
 		if (tag == null)
 			return new PageIterator();
 		request.setAttribute("TITLE", tag.getTitle());
 		request.setAttribute("threadTag", tag);
-		return othersService.getTaggedThread(new Long(tagID), start, count);
+		return othersService.getTaggedThread(Long.parseLong(tagID), start, count);
 	}
 
 	public Object findModelIFByKey(HttpServletRequest request, Object key) {

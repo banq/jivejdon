@@ -16,41 +16,14 @@
  */
 package com.jdon.jivejdon.presentation.servlet;
 
-import com.jdon.controller.WebAppUtil;
-import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.spi.component.sitemap.SitemapRepository;
-import com.jdon.jivejdon.spi.component.sitemap.SitemapService;
-import com.jdon.jivejdon.spi.component.sitemap.Url;
-import com.jdon.jivejdon.spi.component.throttle.hitkey.CustomizedThrottle;
-import com.jdon.jivejdon.spi.component.throttle.hitkey.HitKeyIF;
-import com.jdon.jivejdon.spi.component.throttle.hitkey.HitKeySame;
-import com.jdon.jivejdon.domain.model.account.Account;
-import com.jdon.jivejdon.domain.model.ForumMessage;
-import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.property.ThreadTag;
-import com.jdon.jivejdon.domain.model.query.MultiCriteria;
-import com.jdon.jivejdon.domain.model.query.ResultSort;
-import com.jdon.jivejdon.domain.model.query.specification.TaggedThreadListSpec;
-import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
-import com.jdon.jivejdon.presentation.action.util.ForumUtil;
-import com.jdon.jivejdon.api.account.AccountService;
-import com.jdon.jivejdon.api.query.ForumMessageQueryService;
-import com.jdon.jivejdon.api.ForumMessageService;
-import com.jdon.jivejdon.api.property.TagService;
-import com.jdon.jivejdon.util.ToolsUtil;
-import com.jdon.util.RequestUtil;
-import com.jdon.util.UtilValidate;
-import com.sun.syndication.feed.synd.SyndCategory;
-import com.sun.syndication.feed.synd.SyndCategoryImpl;
-import com.sun.syndication.feed.synd.SyndContent;
-import com.sun.syndication.feed.synd.SyndContentImpl;
-import com.sun.syndication.feed.synd.SyndEntry;
-import com.sun.syndication.feed.synd.SyndEntryImpl;
-import com.sun.syndication.feed.synd.SyndFeed;
-import com.sun.syndication.feed.synd.SyndFeedImpl;
-import com.sun.syndication.io.SyndFeedOutput;
-import com.sun.syndication.io.WireFeedOutput;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -64,14 +37,35 @@ import org.jdom.ProcessingInstruction;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
-import java.io.IOException;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.jdon.controller.WebAppUtil;
+import com.jdon.controller.model.PageIterator;
+import com.jdon.jivejdon.api.ForumMessageService;
+import com.jdon.jivejdon.api.account.AccountService;
+import com.jdon.jivejdon.api.property.TagService;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
+import com.jdon.jivejdon.domain.model.ForumMessage;
+import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.domain.model.property.ThreadTag;
+import com.jdon.jivejdon.domain.model.query.MultiCriteria;
+import com.jdon.jivejdon.domain.model.query.ResultSort;
+import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
+import com.jdon.jivejdon.spi.component.sitemap.SitemapRepository;
+import com.jdon.jivejdon.spi.component.sitemap.SitemapService;
+import com.jdon.jivejdon.spi.component.sitemap.Url;
+import com.jdon.jivejdon.spi.component.throttle.hitkey.CustomizedThrottle;
+import com.jdon.jivejdon.util.Constants;
+import com.jdon.util.RequestUtil;
+import com.jdon.util.UtilValidate;
+import com.sun.syndication.feed.synd.SyndCategory;
+import com.sun.syndication.feed.synd.SyndCategoryImpl;
+import com.sun.syndication.feed.synd.SyndContent;
+import com.sun.syndication.feed.synd.SyndContentImpl;
+import com.sun.syndication.feed.synd.SyndEntry;
+import com.sun.syndication.feed.synd.SyndEntryImpl;
+import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.feed.synd.SyndFeedImpl;
+import com.sun.syndication.io.WireFeedOutput;
 
 public class RSSGenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -227,7 +221,7 @@ public class RSSGenServlet extends HttpServlet {
 		if (tag == null)
 			return entries;
 		TagService othersService = (TagService) WebAppUtil.getService("othersService", this.getServletContext());
-		PageIterator pi = othersService.getTaggedThread(new Long(tagId), start, count);
+		PageIterator pi = othersService.getTaggedThread(Long.parseLong(tagId), start, count);
 		while (pi.hasNext()) {
 			Long threadId = (Long) pi.next();
 			ForumThread thread = getForumThread(request, threadId);
@@ -240,7 +234,7 @@ public class RSSGenServlet extends HttpServlet {
 
 	private ThreadTag getTag(HttpServletRequest request, String tagId) {
 		TagService othersService = (TagService) WebAppUtil.getService("othersService", this.getServletContext());
-		return othersService.getThreadTag(new Long(tagId));
+		return othersService.getThreadTag(Long.parseLong(tagId));
 
 	}
 

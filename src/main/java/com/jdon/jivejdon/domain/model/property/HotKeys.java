@@ -20,11 +20,11 @@ import java.util.Collection;
 
 public class HotKeys {
 	
-	private int id = 44444444;
+	private long id = 44444444;
 	
 	private Collection props;
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	/**

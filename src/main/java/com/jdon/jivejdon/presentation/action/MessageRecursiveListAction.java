@@ -17,15 +17,16 @@ package com.jdon.jivejdon.presentation.action;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.domain.model.ForumMessage;
-import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.api.ForumMessageService;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
+import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
 
@@ -50,7 +51,7 @@ public class MessageRecursiveListAction extends ModelListAction {
 			logger.error(" getPageIterator error : messageId is null");
 			return new PageIterator();
 		}
-		return forumMessageQueryService.getRecursiveMessages(new Long(messageId), start, count);
+		return forumMessageQueryService.getRecursiveMessages(Long.parseLong(messageId), start, count);
 	}
 
 	/*
@@ -72,7 +73,7 @@ public class MessageRecursiveListAction extends ModelListAction {
 		if (messageId == null) {
 			logger.error("customizeListForm error : messageId is null");
 		}
-		ForumMessage forumParentMessage = forumMessageService.getMessage(new Long(messageId));
+		ForumMessage forumParentMessage = forumMessageService.getMessage(Long.parseLong(messageId));
 		modelListForm.setOneModel(forumParentMessage);
 	}
 

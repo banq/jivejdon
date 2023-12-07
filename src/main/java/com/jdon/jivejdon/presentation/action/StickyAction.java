@@ -9,9 +9,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.api.property.PropertyService;
 import com.jdon.jivejdon.domain.model.property.Property;
 import com.jdon.jivejdon.domain.model.property.ThreadPropertys;
-import com.jdon.jivejdon.api.property.PropertyService;
 
 /**
  * change the ui_statie of thread one thread just only have one state(see
@@ -38,11 +38,11 @@ public class StickyAction extends Action {
 		// if admin want to reset the thread to common state, he should delete
 		// the property record directly
 		if (action.equals("delete")) {
-			propertyService.deleteThreadProperty(new Long(threadId), property);
+			propertyService.deleteThreadProperty(Long.parseLong(threadId), property);
 			return null;
 		}
 
-		propertyService.updateThreadProperty(new Long(threadId), property);
+		propertyService.updateThreadProperty(Long.parseLong(threadId), property);
 
 		return null;
 	}

@@ -14,10 +14,10 @@ import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
+import com.jdon.jivejdon.api.property.PropertyService;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadPropertys;
-import com.jdon.jivejdon.api.query.ForumMessageQueryService;
-import com.jdon.jivejdon.api.property.PropertyService;
 
 /**
  * displays the sticky thread list
@@ -54,8 +54,8 @@ public class StickyListAction extends Action {
 		List<ForumThread> announceList = getThreadList(announceids);
 
 		if (forumId != null && !forumId.equals("")) {
-			filterForumThread(stickyList, new Long(forumId));
-			filterForumThread(announceList, new Long(forumId));
+			filterForumThread(stickyList, Long.parseLong(forumId));
+			filterForumThread(announceList, Long.parseLong(forumId));
 		}
 
 		request.setAttribute("stickyList", stickyList);

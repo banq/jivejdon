@@ -16,7 +16,6 @@
 package com.jdon.jivejdon.presentation.action.query;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -62,7 +61,7 @@ public class ThreadLinkListAction extends Action {
 		if (threadId == null || threadId.length() == 0)
 			return null;
 
-		ForumThread thread = getForumMessageQueryService().getThread(new Long(threadId));
+		ForumThread thread = getForumMessageQueryService().getThread(Long.parseLong(threadId));
 		if (thread == null)
 			return null;
 

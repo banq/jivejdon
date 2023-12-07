@@ -29,7 +29,6 @@ import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
 import com.jdon.util.Debug;
-import com.jdon.util.UtilValidate;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -99,7 +98,7 @@ public class MessageListAction extends ModelListAction {
 		}
 
 		try {
-			ForumThread forumThread = getForumMessageQueryService().getThread(new Long(threadId));
+			ForumThread forumThread = getForumMessageQueryService().getThread(Long.parseLong(threadId));
 			if (forumThread == null)
 				throw new Exception("thread is null " + threadId);
 

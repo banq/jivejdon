@@ -50,7 +50,7 @@ public class ThreadPrevNexListAction extends Action {
 			return actionMapping.findForward(FormBeanUtil.FORWARD_SUCCESS_NAME);
 		}
 		try {
-			Long currentThreadIdL = new Long(currentThreadId);
+			Long currentThreadIdL = Long.parseLong(currentThreadId);
 			ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService",
 					this.servlet.getServletContext());
 			List threads = forumMessageQueryService.getThreadsPrevNext(currentThreadIdL);
