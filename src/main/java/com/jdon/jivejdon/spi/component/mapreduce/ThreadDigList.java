@@ -77,14 +77,14 @@ public class ThreadDigList {
 	public Collection<ForumThread> getDigs(int DigsListMAXSize) {
 		if (sortedWindows.size() < DigsListMAXSize)
 			DigsListMAXSize = sortedWindows.size();
-		List<Long> threads = Collections.unmodifiableList(new ArrayList<Long>(sortedWindows));
+		List<Long> threads = new CopyOnWriteArrayList<Long>(sortedWindows);
 		return threads.stream().limit(DigsListMAXSize).map(forumMessageQueryService::getThread)
 				.collect(Collectors.toList());
 
 	}
 
 	public Collection<Long> getDigThreadIds(int DigsListMAXSize) {
-		List<Long> threads = Collections.unmodifiableList(new ArrayList<Long>(sortedWindows));
+		List<Long> threads = new CopyOnWriteArrayList<Long>(sortedWindows);
 		return threads.stream().limit(DigsListMAXSize).collect(Collectors.toList());
 	}
 
