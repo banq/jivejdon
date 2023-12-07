@@ -39,7 +39,7 @@ public class MessageListNavAction extends Action {
 
 		String messageId = request.getParameter("message");
 		String forumIds = request.getParameter("forum");
-		if ((messageId == null) || (!UtilValidate.isInteger(messageId)) || (forumIds == null)) {
+		if ((messageId == null) || (!StringUtils.isNumeric(messageId)) || (forumIds == null)) {
 			logger.error(" MessageListNavAction error : message  or forum is null");
 			return mapping.findForward("failure");
 		}

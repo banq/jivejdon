@@ -17,6 +17,7 @@ package com.jdon.jivejdon.presentation.action;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
@@ -54,12 +55,16 @@ public class MessageListAction extends ModelListAction {
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
 		Debug.logVerbose("enter getPageIterator", module);
 		String threadId = request.getParameter("thread");
-		if ((threadId == null) || (!UtilValidate.isInteger(threadId)) || threadId.length() > 10) {
+		if ((threadId == null) || threadId.length() > 12 || !StringUtils.isNumeric(threadId)) {
 			Debug.logError(" getPageIterator error : threadId is null", module);
 			return new PageIterator();
 		}
-
-		return getForumMessageQueryService().getMessages(new Long(threadId), start, count);
+		try {
+			Long threadIdL = Long.parseLong(threadId);
+			return getForumMessageQueryService().getMessages(threadIdL, start, count);
+		} catch (NumberFormatException nfe) {
+			return new PageIterator();
+		}
 	}
 
 	/*
@@ -88,7 +93,7 @@ public class MessageListAction extends ModelListAction {
 	public void customizeListForm(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request,
 			ModelListForm modelListForm) throws Exception {
 		String threadId = request.getParameter("thread");
-		if ((threadId == null) || (!UtilValidate.isInteger(threadId)) || threadId.length() > 10) {
+		if ((threadId == null) || (!StringUtils.isNumeric(threadId)) || threadId.length() > 10) {
 			Debug.logError("customizeListForm error : threadId is null", module);
 			return;
 		}

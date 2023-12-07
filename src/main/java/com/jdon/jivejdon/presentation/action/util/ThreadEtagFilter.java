@@ -53,7 +53,7 @@ public class ThreadEtagFilter extends Action {
 		// browser cache expire time; default is one hour
 		int expire = 1 * 60 * 60;
 		String threadId = request.getParameter("thread");
-		if ((threadId == null) || (!UtilValidate.isInteger(threadId)) || threadId.length() > 10) {
+		if ((threadId == null) || (!StringUtils.isNumeric(threadId)) || threadId.length() > 10) {
 			response.sendError(404);
 			return null;
 		}

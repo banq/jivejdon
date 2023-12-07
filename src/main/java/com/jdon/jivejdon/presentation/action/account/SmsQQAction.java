@@ -46,7 +46,7 @@ public class SmsQQAction extends Action {
 
 
 		String phoneNumber = request.getParameter("phoneNumber");
-		if (phoneNumber == null || phoneNumber.length() == 0 || !UtilValidate.isInteger
+		if (phoneNumber == null || phoneNumber.length() == 0 || !StringUtils.isNumeric
 				(phoneNumber)) {
 			logger.error("SmsQQAction phoneNumber is null:" + phoneNumber);
 			return null;

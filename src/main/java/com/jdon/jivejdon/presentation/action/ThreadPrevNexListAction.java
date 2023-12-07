@@ -44,7 +44,7 @@ public class ThreadPrevNexListAction extends Action {
 			throws Exception {
 
 		String currentThreadId = request.getParameter("thread");
-		if ((UtilValidate.isEmpty(currentThreadId)) || (!UtilValidate.isInteger(currentThreadId))) {
+		if ((UtilValidate.isEmpty(currentThreadId)) || (!StringUtils.isNumeric(currentThreadId))) {
 			Debug.logError("require the paramters : currentThreadId ");
 			return actionMapping.findForward(FormBeanUtil.FORWARD_SUCCESS_NAME);
 		}

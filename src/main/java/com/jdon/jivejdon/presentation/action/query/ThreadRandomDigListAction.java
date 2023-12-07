@@ -82,7 +82,7 @@ public class ThreadRandomDigListAction extends ModelListAction {
 			forumId = request.getParameter("forumId");
 
 		Forum forum = null;
-		if ((forumId == null) || !UtilValidate.isInteger(forumId) || forumId.length() > 10) {
+		if ((forumId == null) || !StringUtils.isNumeric(forumId) || forumId.length() > 10) {
 			forum = new Forum();
 			forum.setName("主题总表");
 		} else {

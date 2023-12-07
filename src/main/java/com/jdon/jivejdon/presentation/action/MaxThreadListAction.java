@@ -68,14 +68,17 @@ public class MaxThreadListAction extends ModelListAction {
             forumId = request.getParameter("forumId");
 
         Forum forum = null;
-        if ((forumId == null) || !UtilValidate.isInteger(forumId) || forumId.length()>10) {
+        if ((forumId == null) || forumId.length()>10) {
             forum = new Forum();
             forum.setName("主题总表");
         } else {
-            forum = forumService.getForum(new Long(forumId));
+            try {
+                Long forumIdL = Long.parseLong(forumId);
+                forum = forumService.getForum(forumIdL);
+            } catch (NumberFormatException nfe) {
+                throw new Exception("forum is null forumid=" + forumId);
+            }
         }
-        if (forum == null)
-            throw new Exception("forum is null forumid=" + forumId);
         modelListForm.setOneModel(forum);
     }
 

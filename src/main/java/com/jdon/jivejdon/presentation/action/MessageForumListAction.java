@@ -48,7 +48,7 @@ public class MessageForumListAction extends MessageListAction {
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
 		Debug.logVerbose("enter getPageIterator", module);
 		String forumId = request.getParameter("forum");
-		if (forumId == null || (!UtilValidate.isInteger(forumId)) || forumId.length() > 10) {
+		if (forumId == null || (!StringUtils.isNumeric(forumId)) || forumId.length() > 10) {
 			Debug.logError(" getPageIterator error : forum is null", module);
 			return new PageIterator();
 		}
@@ -70,7 +70,7 @@ public class MessageForumListAction extends MessageListAction {
 								  HttpServletRequest request, ModelListForm modelListForm)
 			throws Exception {
 		String forumId = request.getParameter("forum");
-		if (forumId == null || (!UtilValidate.isInteger(forumId)) || forumId.length() > 10) {
+		if (forumId == null || (!StringUtils.isNumeric(forumId)) || forumId.length() > 10) {
 			Debug.logError("customizeListForm error : forumId  is not Integer or > 10, ip=" +
 					request.getRemoteAddr(), module);
 			return;

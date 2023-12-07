@@ -52,7 +52,7 @@ public class ThreadTagListAction extends ModelListAction {
 	@Override
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
 		String threadId = request.getParameter("threadId");
-		if (threadId == null || !UtilValidate.isInteger(threadId) || threadId.length() > 10) {
+		if (threadId == null || !StringUtils.isNumeric(threadId) || threadId.length() > 10) {
 			return null;
 		}
 		ForumThread thread = getForumMessageQueryService().getThread(Long.parseLong(threadId));

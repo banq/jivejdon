@@ -44,7 +44,7 @@ public class ThreadTagHotList2Action extends ModelListAction {
 
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
 		String tagID = request.getParameter("tagID");
-		if (tagID == null || !UtilValidate.isInteger(tagID) || tagID.length() > 10) {
+		if (tagID == null || !StringUtils.isNumeric(tagID) || tagID.length() > 10) {
 			return new PageIterator();
 		}
 

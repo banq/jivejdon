@@ -343,10 +343,12 @@
             <artifactId>qcloudsms</artifactId>
             <version>1.0.6</version>
         </dependency>
+        
+
         <dependency>
-            <groupId>com.qiniu</groupId>
-            <artifactId>qiniu-java-sdk</artifactId>
-            <version>7.2.18</version>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-lang3</artifactId>
+          <version>3.13.0</version>
         </dependency>
     </dependencies>
 

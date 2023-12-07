@@ -58,7 +58,7 @@ public class TaggedThreadListAction extends ModelListAction {
 			TagService othersService = (TagService) WebAppUtil.getService("othersService",
 					this.servlet.getServletContext());
 			String tagID = request.getParameter("tagID");
-			if (tagID == null || !UtilValidate.isInteger(tagID) || tagID.length() > 10) {
+			if (tagID == null || !StringUtils.isNumeric(tagID) || tagID.length() > 10) {
 				return new PageIterator();
 			}
 			ThreadTag tag = othersService.getThreadTag(new Long(tagID));

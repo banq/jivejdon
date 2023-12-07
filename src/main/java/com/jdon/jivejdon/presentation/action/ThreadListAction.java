@@ -71,7 +71,7 @@ public class ThreadListAction extends ModelListAction {
 				.getService("forumMessageQueryService", this.servlet.getServletContext());
 		if (forumId == null)
 			forumId = request.getParameter("forumId");
-		if ((forumId == null) || !UtilValidate.isInteger(forumId) || forumId.length()>10) {
+		if ((forumId == null) || !StringUtils.isNumeric(forumId) || forumId.length()>10) {
 			return forumMessageQueryService.getThreads(start, count, threadListSpec);
 		} else
 			return forumMessageQueryService.getThreads(new Long(forumId), start, count,
@@ -109,7 +109,7 @@ public class ThreadListAction extends ModelListAction {
 				.servlet
 				.getServletContext());
 		Forum forum = null;
-		if ((forumId == null) || !UtilValidate.isInteger(forumId) || forumId.length()>10) {
+		if ((forumId == null) || !StringUtils.isNumeric(forumId) || forumId.length()>10) {
 			forum = new Forum();
 			forum.setName("");
 

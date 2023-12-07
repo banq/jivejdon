@@ -62,7 +62,7 @@ public class MessageListOwnerAction extends ModelListAction {
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
 		Debug.logVerbose("enter getPageIterator", module);
 		String threadId = request.getParameter("thread");
-		if ((threadId == null) || (!UtilValidate.isInteger(threadId)) || threadId.length() > 10) {
+		if ((threadId == null) || (!StringUtils.isNumeric(threadId)) || threadId.length() > 10) {
 			Debug.logError(" getPageIterator error : threadId is null", module);
 			return new PageIterator();
 		}
@@ -96,7 +96,7 @@ public class MessageListOwnerAction extends ModelListAction {
 	public void customizeListForm(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request,
 			ModelListForm modelListForm) throws Exception {
 		String threadId = request.getParameter("thread");
-		if ((threadId == null) || (!UtilValidate.isInteger(threadId)) || threadId.length() > 10) {
+		if ((threadId == null) || (!StringUtils.isNumeric(threadId)) || threadId.length() > 10) {
 			Debug.logError("customizeListForm error : threadId is null", module);
 			return;
 		}

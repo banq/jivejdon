@@ -32,7 +32,7 @@ public class SubForumListAction extends ModelListAction {
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
 		logger.debug("enter getPageIterator");
 		String userId = request.getParameter("userId");
-		if ((userId == null) || (!UtilValidate.isInteger(userId))) {
+		if ((userId == null) || (!StringUtils.isNumeric(userId))) {
 			logger.error(" getPageIterator error : userId is null");
 			return new PageIterator();
 		}

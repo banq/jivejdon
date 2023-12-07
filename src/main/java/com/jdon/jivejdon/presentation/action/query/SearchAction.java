@@ -50,8 +50,8 @@ public class SearchAction extends ModelListAction {
 	}
 
 	public static void main(String[] args) {
-		String testS = "sss！ 测试";
-		System.out.println(testS.replaceAll("[^(a-zA-Z0-9\\s\\u4e00-\\u9fa5)]", ""));
+		String testS = "33333eee";
+		System.out.println(testS.matches("\\d+")?"ok":"no");
 	}
 
 }

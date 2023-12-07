@@ -40,7 +40,7 @@ public class MessageListNav2Action extends Action {
 
 		String pMessageId = request.getParameter("pMessage");
 		String messageId = request.getParameter("message");
-		if ((pMessageId == null) || (!UtilValidate.isInteger(pMessageId)) || messageId == null) {
+		if ((pMessageId == null) || (!StringUtils.isNumeric(pMessageId)) || messageId == null) {
 			logger.error(" MessageListNavAction error : pMessageId or messageId is null");
 			return mapping.findForward("failure");
 		}
