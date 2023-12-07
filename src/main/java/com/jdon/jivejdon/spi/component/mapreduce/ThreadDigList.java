@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
@@ -59,7 +60,7 @@ public class ThreadDigList {
 	}
 
 	public PageIterator getPageIterator(int start, int count) {
-		List<Long> threads = Collections.unmodifiableList(new ArrayList<Long>(sortedAll));
+		List<Long> threads = new CopyOnWriteArrayList<Long>(sortedAll);
 		threads = threads.stream().skip(start).limit(count).collect(Collectors.toList());
 		return new PageIterator(threads.size(), threads.toArray());
 	}
