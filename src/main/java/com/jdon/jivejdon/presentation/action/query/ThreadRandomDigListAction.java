@@ -17,6 +17,10 @@ package com.jdon.jivejdon.presentation.action.query;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.api.ForumService;
@@ -27,10 +31,6 @@ import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadDigList;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
-import com.jdon.util.UtilValidate;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
 
 /**
  * Random list dig collection

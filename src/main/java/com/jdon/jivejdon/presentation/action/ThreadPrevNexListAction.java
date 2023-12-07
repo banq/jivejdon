@@ -21,14 +21,15 @@ import java.util.ListIterator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
+import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.strutsutil.FormBeanUtil;
 import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;

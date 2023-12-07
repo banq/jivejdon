@@ -17,6 +17,7 @@ package com.jdon.jivejdon.presentation.action;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
@@ -28,7 +29,6 @@ import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.strutsutil.ModelListForm;
 import com.jdon.util.Debug;
-import com.jdon.util.UtilValidate;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -43,7 +43,6 @@ public class MessageForumListAction extends MessageListAction {
 					("forumMessageQueryService", this.servlet.getServletContext());
 		return forumMessageQueryService;
 	}
-
 
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
 		Debug.logVerbose("enter getPageIterator", module);

@@ -1,12 +1,9 @@
 package com.jdon.jivejdon.presentation.action;
 
-import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.domain.model.Forum;
-import com.jdon.jivejdon.domain.model.ForumMessage;
-import com.jdon.jivejdon.presentation.form.MessageListForm;
-import com.jdon.jivejdon.api.ForumService;
-import com.jdon.strutsutil.FormBeanUtil;
-import com.jdon.util.UtilValidate;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
@@ -15,8 +12,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionRedirect;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.api.ForumService;
+import com.jdon.jivejdon.domain.model.Forum;
+import com.jdon.jivejdon.domain.model.ForumMessage;
+import com.jdon.jivejdon.presentation.form.MessageListForm;
+import com.jdon.strutsutil.FormBeanUtil;
 
 /**
  * <%-- /message/messageNavList.shtml == > MessageListNavAction ==> navf.jsp ==>

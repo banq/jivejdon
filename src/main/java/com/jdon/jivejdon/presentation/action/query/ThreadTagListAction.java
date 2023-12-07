@@ -15,10 +15,11 @@
  */
 package com.jdon.jivejdon.presentation.action.query;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
@@ -28,7 +29,6 @@ import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadContext;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.util.Debug;
-import com.jdon.util.UtilValidate;
 
 public class ThreadTagListAction extends ModelListAction {
 	private final static String module = ThreadTagListAction.class.getName();

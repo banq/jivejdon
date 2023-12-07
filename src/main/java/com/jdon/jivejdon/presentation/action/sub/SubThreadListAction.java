@@ -2,13 +2,14 @@ package com.jdon.jivejdon.presentation.action.sub;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.logging.log4j.*;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.api.subscription.SubscriptionService;
 import com.jdon.strutsutil.ModelListAction;
-import com.jdon.util.UtilValidate;
 
 public class SubThreadListAction extends ModelListAction {
 	private final static Logger logger = LogManager.getLogger(SubThreadListAction.class);

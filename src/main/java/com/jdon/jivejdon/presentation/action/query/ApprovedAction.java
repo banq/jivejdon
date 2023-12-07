@@ -1,22 +1,22 @@
 package com.jdon.jivejdon.presentation.action.query;
 
-import com.jdon.controller.WebAppUtil;
-import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.api.property.TagService;
-import com.jdon.jivejdon.domain.model.property.ThreadTag;
-import com.jdon.jivejdon.domain.model.query.specification.TaggedThreadListSpec;
-import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
-import com.jdon.jivejdon.domain.model.Forum;
-import com.jdon.jivejdon.domain.model.query.ResultSort;
-import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
-import com.jdon.jivejdon.api.query.ForumMessageQueryService;
-import com.jdon.strutsutil.ModelListAction;
-import com.jdon.strutsutil.ModelListForm;
-import com.jdon.util.UtilValidate;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
-import javax.servlet.http.HttpServletRequest;
+import com.jdon.controller.WebAppUtil;
+import com.jdon.controller.model.PageIterator;
+import com.jdon.jivejdon.api.property.TagService;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
+import com.jdon.jivejdon.domain.model.Forum;
+import com.jdon.jivejdon.domain.model.property.ThreadTag;
+import com.jdon.jivejdon.domain.model.query.ResultSort;
+import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
+import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
+import com.jdon.strutsutil.ModelListAction;
+import com.jdon.strutsutil.ModelListForm;
 
 public class ApprovedAction extends ModelListAction {
 

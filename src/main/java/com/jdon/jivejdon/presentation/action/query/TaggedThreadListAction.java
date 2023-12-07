@@ -21,6 +21,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.api.property.TagService;
@@ -29,7 +31,6 @@ import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.util.Debug;
-import com.jdon.util.UtilValidate;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>

@@ -15,11 +15,14 @@
  */
 package com.jdon.jivejdon.presentation.action.query;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
@@ -33,10 +36,6 @@ import com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
 import com.jdon.util.Debug;
-import com.jdon.util.UtilValidate;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>

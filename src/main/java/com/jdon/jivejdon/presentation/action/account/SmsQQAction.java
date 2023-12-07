@@ -1,10 +1,12 @@
 package com.jdon.jivejdon.presentation.action.account;
 
-import com.github.qcloudsms.SmsSingleSender;
-import com.github.qcloudsms.SmsSingleSenderResult;
-import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.spi.component.block.ErrorBlockerIF;
-import com.jdon.util.UtilValidate;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
@@ -12,10 +14,10 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
+import com.github.qcloudsms.SmsSingleSender;
+import com.github.qcloudsms.SmsSingleSenderResult;
+import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.spi.component.block.ErrorBlockerIF;
 
 public class SmsQQAction extends Action {
 	private final static Logger logger = LogManager.getLogger(SmsQQAction.class);

@@ -2,11 +2,11 @@ package com.jdon.jivejdon.presentation.action.query;
 
 
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
@@ -14,13 +14,11 @@ import com.jdon.jivejdon.api.property.TagService;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
-import com.jdon.jivejdon.domain.model.query.specification.TaggedThreadListSpec;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadDigComparator;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadTagList;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.util.Debug;
-import com.jdon.util.UtilValidate;
 
 public class ThreadTagHotList2Action extends ModelListAction {
 	private final static String module = ThreadTagHotList2Action.class.getName();
