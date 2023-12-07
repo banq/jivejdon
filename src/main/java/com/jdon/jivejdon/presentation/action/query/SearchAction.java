@@ -19,13 +19,11 @@ import com.jdon.util.UtilValidate;
 
 public class SearchAction extends ModelListAction {
 
-	private final static Logger logger = LogManager.getLogger(ThreadQueryAction.class);
 
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
 
 		String query = request.getParameter("query");
 		if ((query == null) || (UtilValidate.isEmpty(query))) {
-			logger.error(" getPageIterator error : query is null " + request.getRemoteAddr());
 			return new PageIterator();
 		}
 		String useGBK = request.getParameter("useGBK");
@@ -38,7 +36,7 @@ public class SearchAction extends ModelListAction {
 				e.printStackTrace();
 			}
 		}
-		query = query.replaceAll("[^(a-zA-Z0-9\\u4e00-\\u9fa5)]", "");
+		query = query.replaceAll("[^(a-zA-Z0-9\\s\\u4e00-\\u9fa5)]", "");
 		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil
 				.getService("forumMessageQueryService", this.servlet.getServletContext());
 		return forumMessageQueryService.searchMessages(query, start, count);
@@ -48,8 +46,12 @@ public class SearchAction extends ModelListAction {
 	public Object findModelIFByKey(HttpServletRequest request, Object key) {
 		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService",
 				this.servlet.getServletContext());
-		logger.debug(" key calss type = " + key.getClass().getName());
 		return forumMessageService.getMessage((Long) key);
+	}
+
+	public static void main(String[] args) {
+		String testS = "sss！ 测试";
+		System.out.println(testS.replaceAll("[^(a-zA-Z0-9\\s\\u4e00-\\u9fa5)]", ""));
 	}
 
 }
