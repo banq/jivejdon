@@ -1,11 +1,11 @@
 package com.jdon.jivejdon.spi.component.mapreduce;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.stream.Collectors;
 
 import com.jdon.jivejdon.api.property.TagService;
@@ -40,7 +40,7 @@ public class ThreadTagList {
 		this.tags_messageImageUrls = new ConcurrentHashMap<>();
 		this.tagThreadIds = new ConcurrentHashMap<>();
 		this.threadId_tagIDs = new ConcurrentHashMap<>();
-		this.tagIds = Collections.synchronizedSet(new TreeSet<Long>(new ThreadTagComparator(this)));
+		this.tagIds = new ConcurrentSkipListSet<Long>(new ThreadTagComparator(this));
 	}
 
 	public void addForumThread(ForumThread forumThread) {

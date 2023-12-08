@@ -20,11 +20,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 import com.jdon.controller.model.PageIterator;
@@ -44,8 +42,8 @@ public class ThreadDigList {
 
 	public ThreadDigList(ForumMessageQueryService forumMessageQueryService) {
 		this.forumMessageQueryService = forumMessageQueryService;
-		this.sortedAll = new TreeSet<>(new ThreadDigComparator(forumMessageQueryService));
-		this.sortedWindows = new TreeSet<>(new ThreadDigComparator(forumMessageQueryService));
+		this.sortedAll = new ConcurrentSkipListSet<>(new ThreadDigComparator(forumMessageQueryService));
+		this.sortedWindows = new ConcurrentSkipListSet<>(new ThreadDigComparator(forumMessageQueryService));
 	}
 
 	public void addForumThread(ForumThread forumThread) {
