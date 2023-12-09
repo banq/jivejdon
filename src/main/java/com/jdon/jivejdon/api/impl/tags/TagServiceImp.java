@@ -62,8 +62,10 @@ public class TagServiceImp implements TagService, Poolable {
 		Collection tags = new ArrayList();
 		if (UtilValidate.isEmpty(s))
 			return tags;
-		if (s.length() > 10)
+		if (s.length() > 20)
 			return tags;
+		if (!s.matches("^[\\_a-zA-Z0-9\\u4e00-\\u9fa5]+$"))
+		   return tags; 	
 		if (!illEscape.matcher(s).matches())
 			return tags;
 

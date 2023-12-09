@@ -1,18 +1,13 @@
 package com.jdon.jivejdon.presentation.action.query;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.api.ForumMessageService;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.util.ToolsUtil;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.util.UtilValidate;
@@ -50,8 +45,8 @@ public class SearchAction extends ModelListAction {
 	}
 
 	public static void main(String[] args) {
-		String testS = "33333eee";
-		System.out.println(testS.matches("\\d+")?"ok":"no");
+		String testS = "33333eee阿斯顿撒%大苏打";
+		System.out.println(testS.matches("^[\\_a-zA-Z0-9\\u4e00-\\u9fa5]+$")?"ok":"no");
 	}
 
 }
