@@ -47,7 +47,7 @@ function Juge(theForm)
     </script>
     
 <logic:messagesNotPresent>
-<bean:parameter name="step" id="step" value="0"/>
+<%-- <bean:parameter name="step" id="step" value="0"/>
 <logic:equal name="step" value="0">
     <form action="<%=request.getContextPath() %>/account/forgetPasswd.shtml" method="POST" >
     <input type="hidden" name="step" value="1"/>
@@ -106,7 +106,7 @@ function Juge(theForm)
 <br><br><br>
     新密码已经发往您的信箱<bean:write name="email"/>。请稍候收取。。  
 <br><br><br>
-</logic:equal>    
+</logic:equal>     --%>
 </logic:messagesNotPresent>
    
     

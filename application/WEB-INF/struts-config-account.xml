@@ -93,11 +93,11 @@
     </action>
 
    <!-- forget passwd -->    	  	  
-	<action  path="/account/forgetPasswd" type="com.jdon.jivejdon.presentation.action.account.PasswordassitAction"
+	<!-- <action  path="/account/forgetPasswd" type="com.jdon.jivejdon.presentation.action.account.PasswordassitAction"
 	  scope="request" validate="false" >
       <forward name="success" path="/account/forgetPasswd.jsp"/>
       <forward name="failure" path="/account/forgetPasswd.jsp?step=0" />		
-    </action>
+    </action> -->
     <!-- forget passwd end-->
     
 
