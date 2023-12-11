@@ -13,9 +13,11 @@
   <bean:define id="title" name="forumThread" property="name"/>
   <bean:define id="pagestart" name="messageListForm" property="start"/>
   <bean:define id="pagecount" name="messageListForm" property="count"/>
+  <bean:define id="pageallCount" name="messageListForm" property="allCount" />
   <%
     int pagestartInt = ((Integer) pageContext.getAttribute("pagestart")).intValue();
     int pagecountInt = ((Integer) pageContext.getAttribute("pagecount")).intValue();
+    int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
     int currentPageNo = 1;
     if (pagecountInt > 0)
       currentPageNo = (pagestartInt / pagecountInt) + 1;
@@ -52,12 +54,24 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <script defer src="/common/messageList12.js"></script> 
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" >
     <link rel="alternate" type="application/rss+xml" title="极道订阅" href="/rss" >
+
+     <%if(pagestartInt != 0 ) {%> 
+        <%if(pagestartInt-pagecountInt>0 ) {%>  
+            <link rel="prev" href="/post/<bean:write name="forumThread" property="threadId" />/<%=(pagestartInt-pagecountInt)%>"/>
+        <%}else{%>
+            <link rel="prev" href="/<bean:write name="forumThread" property="threadId" />.html"/>
+         <%}%>
+        <%}%>
+
       <%if (currentPageNo > 1) {%>
          <link rel="canonical" href="/post/<bean:write name="forumThread" property="threadId" />/<%=pagestartInt%>"> 
        <% }else{%>
-          <link rel="canonical" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html">  
+          <link rel="canonical" href="/<bean:write name="forumThread" property="threadId" />.html">  
        <% }%>   
     
+        <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
+            <link rel="next" href="/post/<bean:write name="forumThread" property="threadId" />/<%=pagestartInt+pagecountInt%>"/>
+         <%}%>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTT1M21HE8"></script>
     <script>
