@@ -21,26 +21,26 @@
 
         <action path="/message/threadViewQuery" type="com.jdon.jivejdon.presentation.action.query.QueryViewAction" name="queryForm" scope="request" validate="false">
             <forward name="view" path="/query/queryView.jsp" />
-            <forward name="threadQueryAction" path="/query/threadQueryAction.shtml" />
-            <forward name="messageQueryAction" path="/query/messageQueryAction.shtml" />
-            <forward name="userMessageQueryAction" path="/query/userMessageQueryAction.shtml" />
+            <!-- <forward name="threadQueryAction" path="/query/threadQueryAction.shtml" /> -->
+            <!-- <forward name="messageQueryAction" path="/query/messageQueryAction.shtml" /> -->
+            <!-- <forward name="userMessageQueryAction" path="/query/userMessageQueryAction.shtml" /> -->
         </action>
 
 
         <!--  hot thread query multi-page so ThreadQueryAction cannot be called directly from client -->
-        <action path="/query/threadQueryAction" type="com.jdon.jivejdon.presentation.action.query.ThreadQueryAction" name="threadListForm" scope="request" validate="false">
+        <!-- <action path="/query/threadQueryAction" type="com.jdon.jivejdon.presentation.action.query.ThreadQueryAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/hotThreadView.jsp" />
-        </action>
+        </action> -->
 
         <!--  message query , cannot be called directly from client -->
-        <action path="/query/messageQueryAction" type="com.jdon.jivejdon.presentation.action.query.MessageQueryAction" name="messageListForm" scope="request" validate="false">
+        <!-- <action path="/query/messageQueryAction" type="com.jdon.jivejdon.presentation.action.query.MessageQueryAction" name="messageListForm" scope="request" validate="false">
             <forward name="success" path="/query/messageView.jsp" />
-        </action>
+        </action> -->
 
         <!--  user messages query  -->
-        <action path="/query/userMessageQueryAction" type="com.jdon.jivejdon.presentation.action.query.MessageQueryUserAction" name="messageListForm" scope="request" validate="false">
+        <!-- <action path="/query/userMessageQueryAction" type="com.jdon.jivejdon.presentation.action.query.MessageQueryUserAction" name="messageListForm" scope="request" validate="false">
             <forward name="success" path="/query/userMessageView.jsp" />
-        </action>
+        </action> -->
 
         <!-- search message  -->
         <action path="/query/searchAction" type="com.jdon.jivejdon.presentation.action.query.SearchAction" name="messageListForm" scope="request" validate="false">
