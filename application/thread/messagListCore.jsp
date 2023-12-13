@@ -86,7 +86,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <%@ include file="../common/body_header.jsp" %>
 <%@ include file="../common/header_errors.jsp" %>
 
-<main>
+
 <div id="page-content" class="single-page container">
   <div class="row">
     <!-- /////////////////左边 -->
@@ -94,10 +94,11 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
       <div class="box">
 
         <!--  内容-->
+       
         <div id="messageListBody">
- 
-          <%@include file="messageListBody.jsp" %>
-                  
+          <main>
+            <%@include file="messageListBody.jsp" %>
+          </main>        
         </div>
 
         <div id="pageEnd"></div>
@@ -220,7 +221,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <input type="hidden" id="replySubject" name="replySubject" value="<bean:write name="forumThread" property="rootMessage.messageVO.subject"/>">
   </div>
 
-</main>
+
 
 <%@include file="../common/IncludeBottomBody.jsp"%>
 

@@ -34,7 +34,7 @@
       <logic:equal name="forumMessage" property="root" value="false">
       <div class="frame-yy">
       </logic:equal>
-        <header>
+      <article>
         <div class="post_header">
           <div class="post_title">
             <logic:equal name="forumMessage" property="root" value="true">
@@ -98,7 +98,6 @@
             </div>
           </div>
         </div>
-        </header>   
 
 <logic:equal name="i" value="0"><div>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
@@ -115,10 +114,11 @@
          </div></logic:equal>          
        
               <div class="article">
-                <article><bean:write name="forumMessage" property="messageVO.body" filter="false"/></article>
+                <bean:write name="forumMessage" property="messageVO.body" filter="false"/>
               </div>    
              
-
+</article>
+             
 <logic:equal name="forumMessage" property="root" value="true">
 <aside>
         
