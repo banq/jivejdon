@@ -15,6 +15,7 @@
  */
 package com.jdon.jivejdon.presentation.action.query;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -41,7 +42,7 @@ public class TaggedThreadListAction extends ModelListAction {
 	private final static String module = TaggedThreadListAction.class.getName();
 	private ForumMessageQueryService forumMessageQueryService;
 
-	private ConcurrentMap<Long, Integer> cache = new ConcurrentHashMap<>();
+	private ConcurrentMap<String, List> cache = new ConcurrentHashMap<>();
 
 	public ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
@@ -70,7 +71,9 @@ public class TaggedThreadListAction extends ModelListAction {
 			request.setAttribute("TITLE", tag.getTitle());
 			request.setAttribute("threadTag", tag);
 			if (request.getParameter("r") == null) {
-				return othersService.getTaggedThread(tagIDL, start, count);
+				List threadIdsP  = cache.computeIfAbsent(tagIDL.toString() + start + count,
+						k -> Arrays.asList(othersService.getTaggedThread(tagIDL, start, count).getKeys()));
+				return new PageIterator(threadIdsP.size(), threadIdsP.toArray());
 			} else {
 				List<Long> threadIds = othersService.getTaggedThreads(tagIDL);
 				Collections.shuffle(threadIds);
