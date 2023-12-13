@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jdom.Document;
 import org.jdom.ProcessingInstruction;
 import org.jdom.output.Format;
@@ -47,7 +48,6 @@ import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
-import com.jdon.jivejdon.domain.model.query.MultiCriteria;
 import com.jdon.jivejdon.domain.model.query.ResultSort;
 import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
 import com.jdon.jivejdon.spi.component.sitemap.SitemapRepository;
@@ -141,10 +141,13 @@ public class RSSGenServlet extends HttpServlet {
 			feed.setDescription(channel_des);
 			feed.setEncoding("UTF-8");
 
-			String needMessages = request.getParameter("messages");
 			String tagId = request.getParameter("tagId");
+		
 
 			if (tagId != null) {
+				if (!StringUtils.isNumeric(tagId) || tagId.length() > 10) {
+					return;
+				}
 				List<SyndEntrySorted> entries = addTags(request, url, tagId);
 				feed.setEntries(entries);
 
@@ -157,15 +160,7 @@ public class RSSGenServlet extends HttpServlet {
 			} else {
 				// it is threads
 				List<SyndEntrySorted> entries = addThreads(request, url);
-				// String username = request.getParameter("username");
-				// if (!UtilValidate.isEmpty(username)) {
-				// Account account = getAccount(request, username);
-				// if (account != null) {
-				// feed.setTitle(account.getUsername());
-				// feed.setLink(url + "/blog/" + account.getUsername());
-				// feed.setDescription(account.getUsername());
-				// }
-				// }else{
+			
 				entries.addAll(this.addsitemap(request, url));
 				Collections.sort(entries);
 				Collections.reverse(entries);
@@ -230,45 +225,19 @@ public class RSSGenServlet extends HttpServlet {
 	}
 
 	private List<SyndEntrySorted> addThreads(HttpServletRequest request, String url) {
-		String startS = request.getParameter("start");
-		if (UtilValidate.isEmpty(startS)) {
-			startS = "0";
-		}
-		int start = Integer.parseInt(startS);
-
-		String countS = request.getParameter("count");
-		int count = LENGTH;
-		if (!UtilValidate.isEmpty(countS)) {
-			count = Integer.parseInt(countS);
-		}
-	
 
 		List<SyndEntrySorted> entries = new ArrayList<SyndEntrySorted>();
 
 		PageIterator pi = null;
-		String username = request.getParameter("username");
-		if (!UtilValidate.isEmpty(username)) {
-			Account account = this.getAccount(request, username);
-			if (account != null) {
-				MultiCriteria queryCriteria = new MultiCriteria();
-				queryCriteria.setUserID(account.getUserId());
 
-				queryCriteria.setFromDate("2000-01-01");// from begin
+		ThreadListSpec threadListSpec = new ThreadListSpec();
+		ResultSort resultSort = new ResultSort();
+		resultSort.setOrder_DESCENDING();
+		threadListSpec.setResultSort(resultSort);
 
-				ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil
-						.getService("forumMessageQueryService", this.getServletContext());
-				pi = forumMessageQueryService.getThreads(queryCriteria, start, count);
-			}
-		} else {
-			ThreadListSpec threadListSpec = new ThreadListSpec();
-			ResultSort resultSort = new ResultSort();
-			resultSort.setOrder_DESCENDING();
-			threadListSpec.setResultSort(resultSort);
-
-			ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil
-					.getService("forumMessageQueryService", this.getServletContext());
-			pi = forumMessageQueryService.getThreads(start, count, threadListSpec);
-		}
+		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil
+				.getService("forumMessageQueryService", this.getServletContext());
+		pi = forumMessageQueryService.getThreads(0, LENGTH, threadListSpec);
 
 		while (pi.hasNext()) {
 			Long threadId = (Long) pi.next();
