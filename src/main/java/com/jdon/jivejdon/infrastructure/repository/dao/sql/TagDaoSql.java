@@ -26,11 +26,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
-import com.jdon.jivejdon.domain.model.query.specification.TaggedThreadListSpec;
 import com.jdon.jivejdon.infrastructure.repository.dao.SequenceDao;
 import com.jdon.jivejdon.infrastructure.repository.dao.TagDao;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.model.query.PageIteratorSolver;
 import com.jdon.model.query.block.Block;
@@ -276,7 +275,7 @@ public class TagDaoSql implements TagDao {
 	}
 
 	public List<Long> getTaggedThread(Long tagID) {
-		String LOAD_SQL = "SELECT threadID FROM threadTag where tagID=?";
+		String LOAD_SQL = "SELECT threadID FROM threadTag where tagID=? order by threadID DESC";
 		List queryParams = new ArrayList();
 		queryParams.add(tagID);
 		List<Long> ret = new ArrayList<>();
@@ -291,6 +290,20 @@ public class TagDaoSql implements TagDao {
 			logger.error(se);
 		}
 		return ret;
+	}
+
+	public int getThreadTagCount(Long tagID) {
+		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from threadTag where tagID =? ";
+		List queryParams = new ArrayList();
+		queryParams.add(tagID);
+		ThreadTag ret = null;
+		try {
+			Object result = jdbcTempSource.getJdbcTemp().querySingleObject(queryParams, GET_ALL_ITEMS_ALLCOUNT);
+			return (Integer)result;
+		} catch (Exception se) {
+			logger.error(se);
+		}
+		return 0;
 	}
 
 		/*

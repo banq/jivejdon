@@ -157,10 +157,6 @@
             <forward name="success" path="/query/approvedThreadListOthers.jsp" />
         </action>
 
-        <action path="/query/threadApprovedTagsList" type="com.jdon.jivejdon.presentation.action.query.ApprovedAction" name="threadListForm" scope="request" validate="false">
-            <forward name="success" path="/query/approvedThreadListTags.jsp" />
-        </action>
-
 
         <action path="/query/stickyList" type="com.jdon.jivejdon.presentation.action.query.StickyThreadList" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/stickyList.jsp" />

@@ -203,30 +203,21 @@ public class RSSGenServlet extends HttpServlet {
 	}
 
 	private List<SyndEntrySorted> addTags(HttpServletRequest request, String url, String tagId) {
-		String startS = request.getParameter("start");
-		if (UtilValidate.isEmpty(startS)) {
-			startS = "0";
-		}
-		int start = Integer.parseInt(startS);
-
-		String countS = request.getParameter("count");
-		int count = LENGTH;
-		if (!UtilValidate.isEmpty(countS)) {
-			count = Integer.parseInt(countS);
-		}
-	
 
 		List<SyndEntrySorted> entries = new ArrayList<SyndEntrySorted>();
 		ThreadTag tag = getTag(request, tagId);
 		if (tag == null)
 			return entries;
 		TagService othersService = (TagService) WebAppUtil.getService("othersService", this.getServletContext());
-		PageIterator pi = othersService.getTaggedThread(Long.parseLong(tagId), start, count);
-		while (pi.hasNext()) {
-			Long threadId = (Long) pi.next();
+		List<Long> threadIds = othersService.getTaggedThreads(Long.parseLong(tagId));
+		int i = 0;
+		for (Long threadId : threadIds) {
 			ForumThread thread = getForumThread(request, threadId);
 			if (thread != null)
 				addMessage(url, entries, thread.getRootMessage(), request);
+			i++;
+			if (i > LENGTH)
+				break;
 		}
 
 		return entries;

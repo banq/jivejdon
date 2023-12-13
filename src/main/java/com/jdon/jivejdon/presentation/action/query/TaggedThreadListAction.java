@@ -15,9 +15,10 @@
  */
 package com.jdon.jivejdon.presentation.action.query;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ThreadLocalRandom;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -71,12 +72,10 @@ public class TaggedThreadListAction extends ModelListAction {
 			if (request.getParameter("r") == null) {
 				return othersService.getTaggedThread(tagIDL, start, count);
 			} else {
-				int allCount = cache.computeIfAbsent(tagIDL,
-						k -> othersService.getTaggedThreads(tagIDL).size());
-				if (allCount == 0 || count == 0)
-					return new PageIterator();
-				start = ThreadLocalRandom.current().nextInt(allCount);
-				return othersService.getTaggedThread(tagIDL, start, count);
+				List<Long> threadIds = othersService.getTaggedThreads(tagIDL);
+				Collections.shuffle(threadIds);
+			    List<Long> cutList = threadIds.subList(0, threadIds.size() > count ? count : threadIds.size());
+				return new PageIterator(cutList.size(), cutList.toArray());
 			}
 	}
 

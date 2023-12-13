@@ -90,16 +90,6 @@
         <to>/query/threadDigList2.shtml?length=8&amp;tablewidth=300&amp;count=30</to>
     </rule>
 
-    <rule>
-        <from>^/query/approved$</from>
-        <to>/query/threadApprovedTagsList.shtml?count=30</to>
-    </rule>
-
-    <rule>
-        <from>^/query/approved/([0-9]+)$</from>
-        <to>/query/threadApprovedTagsList.shtml?count=30&amp;tagID=$1</to>
-    </rule>
-
     <!-- <rule>
         <from>^/approvedNewList3$</from>
         <to>/query/threadApprovedNewList3.shtml?count=15</to>
