@@ -41,6 +41,21 @@ import com.jdon.util.Debug;
 public class ThreadListAction extends ModelListAction {
 	private final static String module = ThreadListAction.class.getName();
 
+	private ForumMessageQueryService forumMessageQueryService;
+    private ForumService forumService;
+
+	private ForumMessageQueryService getForumMessageQueryService() {
+		if (forumMessageQueryService == null)
+			forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getComponentInstance(
+					"forumMessageQueryService",this.servlet.getServletContext());
+		return forumMessageQueryService;
+	}
+
+	private ForumService getForumService() {
+		if (forumService == null)
+			forumService = (ForumService) WebAppUtil.getService("forumService", this.servlet.getServletContext());
+		return forumService;
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -68,14 +83,12 @@ public class ThreadListAction extends ModelListAction {
 			threadListSpec.setResultSort(resultSort);
 		}
 
-		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil
-				.getService("forumMessageQueryService", this.servlet.getServletContext());
 		if (forumId == null)
 			forumId = request.getParameter("forumId");
 		if ((forumId == null) || !StringUtils.isNumeric(forumId) || forumId.length()>10) {
-			return forumMessageQueryService.getThreads(start, count, threadListSpec);
+			return getForumMessageQueryService().getThreads(start, count, threadListSpec);
 		} else
-			return forumMessageQueryService.getThreads(Long.parseLong(forumId), start, count,
+			return getForumMessageQueryService().getThreads(Long.parseLong(forumId), start, count,
 					resultSort);
 	}
 
@@ -89,11 +102,7 @@ public class ThreadListAction extends ModelListAction {
 	public Object findModelIFByKey(HttpServletRequest request, Object key) {
 		ForumThread thread = null;
 		try {
-			ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService)
-					WebAppUtil
-							.getService("forumMessageQueryService", this.servlet.getServletContext
-									());
-			thread = forumMessageQueryService.getThread((Long) key);
+			thread = getForumMessageQueryService().getThread((Long) key);
 		} catch (Exception e) {
 			Debug.logError("getThread error:" + e, module);
 		}
@@ -106,9 +115,6 @@ public class ThreadListAction extends ModelListAction {
 		if (forumId == null)
 			forumId = request.getParameter("forumId");
 
-		ForumService forumService = (ForumService) WebAppUtil.getService("forumService", this
-				.servlet
-				.getServletContext());
 		Forum forum = null;
 		if ((forumId == null) || !StringUtils.isNumeric(forumId) || forumId.length()>10) {
 			forum = new Forum();
@@ -119,7 +125,7 @@ public class ThreadListAction extends ModelListAction {
 			forum = new Forum();
 			forum.setName("");
 		} else {
-			forum = forumService.getForum(Long.parseLong(forumId));
+			forum = getForumService().getForum(Long.parseLong(forumId));
 		}
 		if (forum == null)
 			throw new Exception("forum is null forumid=" + forumId);
