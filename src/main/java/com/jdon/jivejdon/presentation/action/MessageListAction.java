@@ -15,6 +15,9 @@
  */
 package com.jdon.jivejdon.presentation.action;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
@@ -36,13 +39,12 @@ import com.jdon.util.Debug;
  */
 public class MessageListAction extends ModelListAction {
 	private final static String module = MessageListAction.class.getName();
-	private ForumMessageQueryService forumMessageQueryService;	
+	private ConcurrentMap<String, Object> serviceCache = new ConcurrentHashMap<>();
 
 	public ForumMessageQueryService getForumMessageQueryService() {
-		if (forumMessageQueryService == null)
-			forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService",
-					this.servlet.getServletContext());
-		return forumMessageQueryService;
+		return (ForumMessageQueryService) serviceCache.computeIfAbsent("forumMessageQueryService",
+				k -> WebAppUtil.getService("forumMessageQueryService",
+						this.servlet.getServletContext()));
 	}
 
 	/*
