@@ -37,14 +37,17 @@ import com.jdon.model.query.block.Block;
 public class TagDaoSql implements TagDao {
 	private final static Logger logger = LogManager.getLogger(TagDaoSql.class);
 
-	private final PageIteratorSolver pageIteratorSolver;
+	private final PageIteratorSolver pageIteratorSolverTag;
+
+	private final PageIteratorSolver pageIteratorSolverThreadTag;
 
 	private final JdbcTempSource jdbcTempSource;
 
 	private final SequenceDao sequenceDao;
 
 	public TagDaoSql(JdbcTempSource jdbcTempSource, ContainerUtil containerUtil, SequenceDao sequenceDao) {
-		this.pageIteratorSolver = new PageIteratorSolver(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
+		this.pageIteratorSolverTag = new PageIteratorSolver(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
+		this.pageIteratorSolverThreadTag = new PageIteratorSolver(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
 		this.jdbcTempSource = jdbcTempSource;
 		this.sequenceDao = sequenceDao;
 	}
@@ -245,7 +248,7 @@ public class TagDaoSql implements TagDao {
 		logger.debug("enter getThreadTags ..");
 		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from tag order by assonum DESC";
 		String GET_ALL_ITEMS = "select tagID from tag order by assonum DESC";
-		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "", start, count);
+		return pageIteratorSolverTag.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "", start, count);
 	}
 
 	/*
@@ -259,7 +262,22 @@ public class TagDaoSql implements TagDao {
 		String GET_ALL_ITEMS = "select threadID  from threadTag where tagID=? order by threadID DESC" ;
 		Collection params = new ArrayList(1);
 		params.add(tagID);
-		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, params, start, count);
+		return pageIteratorSolverThreadTag.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, params, start, count);
+	}
+
+		/*
+	 * get the threads collection include prev/cuurent/next threads in tag.
+	 */
+	public List getThreadsPrevNextInTag(Long tagId, Long currentThreadId) {
+		String GET_ALL_ITEMS = "select threadID  from threadTag where tagID=? order by threadID DESC";
+		Collection params = new ArrayList(1);
+		params.add(tagId);
+		Block block = pageIteratorSolverThreadTag.locate(GET_ALL_ITEMS, params, currentThreadId);
+		if (block == null) {
+			return new ArrayList();
+		} else {
+			return block.getList();
+		}
 	}
 
 	public List<Long> getTaggedThread(Long tagID) {
@@ -294,20 +312,7 @@ public class TagDaoSql implements TagDao {
 		return 0;
 	}
 
-		/*
-	 * get the threads collection include prev/cuurent/next threads in tag.
-	 */
-	public List getThreadsPrevNextInTag(Long tagId, Long currentThreadId) {
-		String GET_ALL_ITEMS = "select threadID  from threadTag where tagID=? order by threadID DESC";
-		Collection params = new ArrayList(1);
-		params.add(tagId);
-		Block block = pageIteratorSolver.locate(GET_ALL_ITEMS, params, currentThreadId);
-		if (block == null) {
-			return new ArrayList();
-		} else {
-			return block.getList();
-		}
-	}
+	
 
 
 	/*
