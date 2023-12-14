@@ -37,11 +37,11 @@ import com.jdon.model.query.block.Block;
 public class TagDaoSql implements TagDao {
 	private final static Logger logger = LogManager.getLogger(TagDaoSql.class);
 
-	private PageIteratorSolver pageIteratorSolver;
+	private final PageIteratorSolver pageIteratorSolver;
 
-	private JdbcTempSource jdbcTempSource;
+	private final JdbcTempSource jdbcTempSource;
 
-	private SequenceDao sequenceDao;
+	private final SequenceDao sequenceDao;
 
 	public TagDaoSql(JdbcTempSource jdbcTempSource, ContainerUtil containerUtil, SequenceDao sequenceDao) {
 		this.pageIteratorSolver = new PageIteratorSolver(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
@@ -65,7 +65,6 @@ public class TagDaoSql implements TagDao {
 			queryParams.add(threadTag.getAssonum());
 
 			jdbcTempSource.getJdbcTemp().operate(queryParams, ADD_SQL);
-			clearCache();
 		} catch (Exception e) {
 			logger.error(e);
 		}
@@ -83,7 +82,6 @@ public class TagDaoSql implements TagDao {
 		List queryParams = new ArrayList();
 		queryParams.add(threadID);
 		jdbcTempSource.getJdbcTemp().operate(queryParams, SQL);
-		clearCache();
 	}
 
 	/*
@@ -101,7 +99,6 @@ public class TagDaoSql implements TagDao {
 		queryParams.add(threadID);
 		queryParams.add(tagID);
 		jdbcTempSource.getJdbcTemp().operate(queryParams, SQL);
-		clearCache();
 	}
 
 	/*
@@ -117,7 +114,6 @@ public class TagDaoSql implements TagDao {
 		queryParams.add(threadID);
 		queryParams.add(tagID);
 		jdbcTempSource.getJdbcTemp().operate(queryParams, SQL);
-		clearCache();
 	}
 
 	public void deleteThreadTag(Long tagID) throws Exception {
@@ -131,7 +127,6 @@ public class TagDaoSql implements TagDao {
 		queryParams2.add(tagID);
 		jdbcTempSource.getJdbcTemp().operate(queryParams2, SQL2);
 
-		clearCache();
 	}
 
 	public boolean checkThreadTagRelation(Long tagID, Long threadID) {
@@ -152,14 +147,7 @@ public class TagDaoSql implements TagDao {
 		return ret;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.jdon.jivejdon.dao.sql.TagDao#clearCache()
-	 */
-	public void clearCache() {
-		pageIteratorSolver.clearCache();
-	}
+
 
 	public Collection getThreadTagIDs(Long threadID) {
 		String SQL = "select tagID FROM threadTag WHERE threadID=? ";
@@ -338,7 +326,6 @@ public class TagDaoSql implements TagDao {
 		queryParams.add(threadTag.getTagID());
 
 		jdbcTempSource.getJdbcTemp().operate(queryParams, SQL);
-		clearCache();
 	}
 
 }

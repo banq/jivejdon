@@ -71,6 +71,8 @@ public class TaggedThreadListAction extends ModelListAction {
 			request.setAttribute("TITLE", tag.getTitle());
 			request.setAttribute("threadTag", tag);
 			if (request.getParameter("r") == null) {
+				if (start != 0) 
+				    return othersService.getTaggedThread(tagIDL, start, count);
 				List threadIdsP  = cache.computeIfAbsent(tagIDL.toString() + start + count,
 						k -> Arrays.asList(othersService.getTaggedThread(tagIDL, start, count).getKeys()));
 				return new PageIterator(threadIdsP.size(), threadIdsP.toArray());
