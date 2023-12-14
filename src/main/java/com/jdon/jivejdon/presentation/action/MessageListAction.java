@@ -61,7 +61,7 @@ public class MessageListAction extends ModelListAction {
 		try {
 			Long threadIdL = Long.parseLong(threadId);
 			return getForumMessageQueryService().getMessages(threadIdL, start, count);
-		} catch (NumberFormatException nfe) {
+		} catch (Exception nfe) {
 			return new PageIterator();
 		}
 	}
