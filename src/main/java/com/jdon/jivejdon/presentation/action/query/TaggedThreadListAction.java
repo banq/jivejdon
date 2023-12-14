@@ -15,11 +15,8 @@
  */
 package com.jdon.jivejdon.presentation.action.query;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,8 +38,6 @@ import com.jdon.util.Debug;
 public class TaggedThreadListAction extends ModelListAction {
 	private final static String module = TaggedThreadListAction.class.getName();
 	private ForumMessageQueryService forumMessageQueryService;
-
-	private ConcurrentMap<Long, List> cache = new ConcurrentHashMap<>();
 
 	public ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
@@ -71,15 +66,16 @@ public class TaggedThreadListAction extends ModelListAction {
 			request.setAttribute("TITLE", tag.getTitle());
 			request.setAttribute("threadTag", tag);
 			if (request.getParameter("r") == null) {
-				if (start != 0) 
-				    return othersService.getTaggedThread(tagIDL, start, count);
-				List threadIdsP  = cache.computeIfAbsent(tagIDL,
-						k -> Arrays.asList(othersService.getTaggedThread(tagIDL, start, count).getKeys()));
-				return new PageIterator(threadIdsP.size(), threadIdsP.toArray());
+				// if (start != 0)
+				return othersService.getTaggedThread(tagIDL, start, count);
+				// List threadIdsP = cache.computeIfAbsent(tagIDL,
+				// k -> Arrays.asList(othersService.getTaggedThread(tagIDL, start,
+				// count).getKeys()));
+				// return new PageIterator(threadIdsP.size(), threadIdsP.toArray());
 			} else {
 				List<Long> threadIds = othersService.getTaggedThreads(tagIDL);
 				Collections.shuffle(threadIds);
-			    List<Long> cutList = threadIds.subList(0, threadIds.size() > count ? count : threadIds.size());
+				List<Long> cutList = threadIds.subList(0, threadIds.size() > count ? count : threadIds.size());
 				return new PageIterator(cutList.size(), cutList.toArray());
 			}
 	}
