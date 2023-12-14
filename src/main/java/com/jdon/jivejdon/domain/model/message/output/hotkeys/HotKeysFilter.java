@@ -16,25 +16,26 @@
  */
 package com.jdon.jivejdon.domain.model.message.output.hotkeys;
 
-import com.jdon.jivejdon.domain.model.property.HotKeys;
-import com.jdon.jivejdon.domain.model.property.Property;
-import com.jdon.jivejdon.domain.model.message.MessageVO;
-import com.jdon.util.Debug;
-
 import java.util.Iterator;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
+import com.jdon.jivejdon.domain.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.property.HotKeys;
+import com.jdon.jivejdon.domain.model.property.Property;
+import com.jdon.util.Debug;
+
 /**
  * removing replace hot keywords with HotKeys added by administrator
- * 
+ * all char:
+ * ([!\"#$%&'()*+,-./:;<=>?@[\\\\]^_`{|}~]|[a-zA-Z0-9\\s\\u4e00-\\uFFFF]|[\\s])(?i)
  * @author banq
  * 
  */
 public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 	private final static String module = HotKeysFilter.class.getName();
 
-	private String prefix_regEx = "([\\u4e00-\\u9fa5]|[\\s])(?i)"; // chinese or
+	private String prefix_regEx = "(.*)"; // chinese or
 	// whitespace
 	private String suffix_regEx = "";
 
@@ -96,6 +97,10 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 	public void setSuffix_regEx(String suffix_regEx) {
 		if (suffix_regEx != null)
 			this.suffix_regEx = suffix_regEx;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(Pattern.compile("(.*)" + "上下文" + "").matcher("sss(上下文").replaceFirst("$1" + "hello"));
 	}
 
 }
