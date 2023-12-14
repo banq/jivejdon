@@ -15,20 +15,20 @@
  */
 package com.jdon.jivejdon.domain.model.message.output.weibo;
 
-import com.jdon.jivejdon.domain.model.message.MessageVO;
-import com.jdon.jivejdon.domain.model.message.infilter.InFilterAuthor;
-import com.jdon.util.StringUtil;
-
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.jdon.jivejdon.domain.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.message.infilter.InFilterAuthor;
+import com.jdon.util.StringUtil;
 
 /**
  * 1.进入管理界面 /jivejdon/admin/
  * 
  * 2.全局过滤 --> 添加过虑器（底部）
  * 
- * 3.输入com.jdon.jivejdon.model.message.output.weibo.AuthorNameFormat
+ * 3.输入com.jdon.jivejdon.domain.model.message.output.weibo.AuthorNameFormat
  * 
  * 4在”可用过滤器“中出现'AuthorNameFormat' 选择'AuthorNameFormat'，点按”安装“即可
  * 
