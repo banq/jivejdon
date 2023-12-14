@@ -42,7 +42,7 @@ public class TaggedThreadListAction extends ModelListAction {
 	private final static String module = TaggedThreadListAction.class.getName();
 	private ForumMessageQueryService forumMessageQueryService;
 
-	private ConcurrentMap<String, List> cache = new ConcurrentHashMap<>();
+	private ConcurrentMap<Long, List> cache = new ConcurrentHashMap<>();
 
 	public ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
@@ -73,7 +73,7 @@ public class TaggedThreadListAction extends ModelListAction {
 			if (request.getParameter("r") == null) {
 				if (start != 0) 
 				    return othersService.getTaggedThread(tagIDL, start, count);
-				List threadIdsP  = cache.computeIfAbsent(tagIDL.toString() + start + count,
+				List threadIdsP  = cache.computeIfAbsent(tagIDL,
 						k -> Arrays.asList(othersService.getTaggedThread(tagIDL, start, count).getKeys()));
 				return new PageIterator(threadIdsP.size(), threadIdsP.toArray());
 			} else {
