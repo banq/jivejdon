@@ -204,15 +204,12 @@ public class RSSGenServlet extends HttpServlet {
 		if (tag == null)
 			return entries;
 		TagService othersService = (TagService) WebAppUtil.getService("othersService", this.getServletContext());
-		List<Long> threadIds = othersService.getTaggedThreads(Long.parseLong(tagId));
-		int i = 0;
-		for (Long threadId : threadIds) {
+		PageIterator pi = othersService.getTaggedThread(Long.parseLong(tagId), 0, LENGTH);
+		while (pi.hasNext()) {
+			Long threadId = (Long) pi.next();
 			ForumThread thread = getForumThread(request, threadId);
 			if (thread != null)
 				addMessage(url, entries, thread.getRootMessage(), request);
-			i++;
-			if (i > LENGTH)
-				break;
 		}
 
 		return entries;

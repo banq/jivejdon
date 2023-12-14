@@ -15,8 +15,7 @@
  */
 package com.jdon.jivejdon.presentation.action.query;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -73,10 +72,11 @@ public class TaggedThreadListAction extends ModelListAction {
 				// count).getKeys()));
 				// return new PageIterator(threadIdsP.size(), threadIdsP.toArray());
 			} else {
-				List<Long> threadIds = othersService.getTaggedThreads(tagIDL);
-				Collections.shuffle(threadIds);
-				List<Long> cutList = threadIds.subList(0, threadIds.size() > count ? count : threadIds.size());
-				return new PageIterator(cutList.size(), cutList.toArray());
+				int allCount = othersService.getTaggedThread(tagIDL, start, count).getAllCount();
+				if (allCount == 0 || count == 0)
+					return new PageIterator();
+				start = ThreadLocalRandom.current().nextInt(allCount);
+				return othersService.getTaggedThread(new Long(tagID), start, count);
 			}
 	}
 
