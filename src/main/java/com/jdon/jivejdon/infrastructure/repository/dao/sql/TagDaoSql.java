@@ -56,10 +56,10 @@ public class TagDaoSql implements TagDao {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.dao.sql.TagDao#createThreadTag(com.jdon.jivejdon.domain.model
+	 * com.jdon.jivejdon.dao.sql.TagDao#createTag(com.jdon.jivejdon.domain.model
 	 * .ThreadTag)
 	 */
-	public void createThreadTag(ThreadTag threadTag) throws Exception {
+	public void createTag(ThreadTag threadTag) throws Exception {
 		try {
 			String ADD_SQL = "INSERT INTO tag(tagID, title, assonum)" + " VALUES (?,?,?)";
 			List queryParams = new ArrayList();
@@ -102,6 +102,7 @@ public class TagDaoSql implements TagDao {
 		queryParams.add(threadID);
 		queryParams.add(tagID);
 		jdbcTempSource.getJdbcTemp().operate(queryParams, SQL);
+		pageIteratorSolverThreadTag.clearCache();
 	}
 
 	/*
@@ -119,7 +120,7 @@ public class TagDaoSql implements TagDao {
 		jdbcTempSource.getJdbcTemp().operate(queryParams, SQL);
 	}
 
-	public void deleteThreadTag(Long tagID) throws Exception {
+	public void deleteTag(Long tagID) throws Exception {
 		String SQL = "DELETE FROM tag WHERE  tagID =?";
 		List queryParams = new ArrayList();
 		queryParams.add(tagID);
@@ -319,10 +320,10 @@ public class TagDaoSql implements TagDao {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.dao.sql.TagDao#updateThreadTag(com.jdon.jivejdon.domain.model
+	 * com.jdon.jivejdon.dao.sql.TagDao#updateTag(com.jdon.jivejdon.domain.model
 	 * .ThreadTag)
 	 */
-	public void updateThreadTag(ThreadTag threadTag) throws Exception {
+	public void updateTag(ThreadTag threadTag) throws Exception {
 		String SQL = "UPDATE tag SET title=?, assonum=? WHERE tagID=?";
 
 		List queryParams = new ArrayList();

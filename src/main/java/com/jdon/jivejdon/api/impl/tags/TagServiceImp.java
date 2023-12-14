@@ -94,7 +94,7 @@ public class TagServiceImp implements TagService, Poolable {
 		ThreadTag threadTagOld = tagRepository.getThreadTag(threadTag.getTagID());
 		try {
 			threadTagOld.setTitle(threadTag.getTitle());
-			tagRepository.updateThreadTag(threadTagOld);
+			tagRepository.updateTag(threadTagOld);
 		} catch (Exception e) {
 			logger.error(e);
 			em.setErrors(Constants.ERRORS);
@@ -108,7 +108,7 @@ public class TagServiceImp implements TagService, Poolable {
 		if (threadTag == null)
 			return;
 		try {
-			tagRepository.deleteThreadTag(threadTag);
+			tagRepository.deleteTag(threadTag);
 		} catch (Exception e) {
 			logger.error(e);
 			em.setErrors(Constants.ERRORS);

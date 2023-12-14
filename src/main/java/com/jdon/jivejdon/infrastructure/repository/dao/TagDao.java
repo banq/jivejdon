@@ -30,9 +30,9 @@ public interface TagDao {
 
 	ThreadTag getThreadTag(Long tagID);
 
-	void createThreadTag(ThreadTag threadTag) throws Exception;
+	void createTag(ThreadTag threadTag) throws Exception;
 
-	void updateThreadTag(ThreadTag threadTag) throws Exception;
+	void updateTag(ThreadTag threadTag) throws Exception;
 
 	Collection getThreadTagIDs(Long threadID);
 
@@ -52,6 +52,6 @@ public interface TagDao {
 
 	void delThreadTag(Long tagID, Long threadID) throws Exception;
 
-	void deleteThreadTag(Long tagID) throws Exception;
+	void deleteTag(Long tagID) throws Exception;
 
 }

@@ -42,8 +42,8 @@ public interface TagRepository {
 
 	public abstract Collection getThreadTags(Long forumThreadId);
 
-	public abstract void updateThreadTag(ThreadTag threadTag) throws Exception;
+	public abstract void updateTag(ThreadTag threadTag) throws Exception;
 
-	public abstract void deleteThreadTag(ThreadTag threadTag) throws Exception;
+	public abstract void deleteTag(ThreadTag threadTag) throws Exception;
 
 }

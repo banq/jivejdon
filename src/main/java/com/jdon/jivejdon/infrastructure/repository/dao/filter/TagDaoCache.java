@@ -39,8 +39,8 @@ public class TagDaoCache extends TagDaoSql {
 		return threadTag;
 	}
 
-	public void updateThreadTag(ThreadTag threadTag) throws Exception {
-		super.updateThreadTag(threadTag);
+	public void updateTag(ThreadTag threadTag) throws Exception {
+		super.updateTag(threadTag);
 		containerUtil.clearCache(threadTag.getTagID());
 	}
 

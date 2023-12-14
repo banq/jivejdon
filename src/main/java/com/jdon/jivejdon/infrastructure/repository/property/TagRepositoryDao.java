@@ -16,18 +16,17 @@
  */
 package com.jdon.jivejdon.infrastructure.repository.property;
 
-import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.property.ThreadTag;
-import com.jdon.jivejdon.domain.model.query.specification.TaggedThreadListSpec;
-import com.jdon.jivejdon.infrastructure.repository.dao.SequenceDao;
-import com.jdon.jivejdon.infrastructure.repository.dao.TagDao;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+
+import com.jdon.controller.model.PageIterator;
+import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.property.ThreadTag;
+import com.jdon.jivejdon.infrastructure.repository.dao.SequenceDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.TagDao;
+import com.jdon.jivejdon.util.Constants;
 
 public class TagRepositoryDao implements TagRepository {
 
@@ -110,7 +109,7 @@ public class TagRepositoryDao implements TagRepository {
 			// if threadTag is not belong to the thread, add one to it.
 			if (!tagDao.checkThreadTagRelation(threadTag.getTagID(), fourmThreadId)) {
 				threadTag.setAssonum(threadTag.getAssonum() + 1);
-				updateThreadTag(threadTag);
+				updateTag(threadTag);
 				tagDao.addThreadTag(threadTag.getTagID(), fourmThreadId);
 			}
 		} else {
@@ -119,7 +118,7 @@ public class TagRepositoryDao implements TagRepository {
 			threadTag.setTagID(tagID);
 			threadTag.setTitle(tagTitle);
 			threadTag.setAssonum(1);
-			tagDao.createThreadTag(threadTag);
+			tagDao.createTag(threadTag);
 			tagDao.addThreadTag(threadTag.getTagID(), fourmThreadId);
 		}
 
@@ -150,10 +149,10 @@ public class TagRepositoryDao implements TagRepository {
 		for (Object o : tags) {
 			ThreadTag tag = (ThreadTag) o;
 			if (tag.getAssonum() <= 1) {
-				deleteThreadTag(tag);
+				deleteTag(tag);
 			} else {
 				tag.setAssonum(tag.getAssonum() - 1);
-				updateThreadTag(tag);
+				updateTag(tag);
 				tagDao.delThreadTag(threadId);
 			}
 		}
@@ -200,23 +199,25 @@ public class TagRepositoryDao implements TagRepository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.infrastructure.repository.property.TagRepository#updateThreadTag(com.jdon.jivejdon
+	 * com.jdon.jivejdon.infrastructure.repository.property.TagRepository#updateTag(
+	 * com.jdon.jivejdon
 	 * .model.ThreadTag)
 	 */
-	public void updateThreadTag(ThreadTag threadTag) throws Exception {
-		tagDao.updateThreadTag(threadTag);
+	public void updateTag(ThreadTag threadTag) throws Exception {
+		tagDao.updateTag(threadTag);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.jdon.jivejdon.infrastructure.repository.property.TagRepository#deleteThreadTag(com.jdon.jivejdon
+	 * com.jdon.jivejdon.infrastructure.repository.property.TagRepository#deleteTag(
+	 * com.jdon.jivejdon
 	 * .model.ThreadTag)
 	 */
-	public void deleteThreadTag(ThreadTag threadTag) throws Exception {
+	public void deleteTag(ThreadTag threadTag) throws Exception {
 		threadTag = this.getThreadTag(threadTag.getTagID());
-		tagDao.deleteThreadTag(threadTag.getTagID());
+		tagDao.deleteTag(threadTag.getTagID());
 	}
 
 }
