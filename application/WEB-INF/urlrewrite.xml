@@ -141,26 +141,26 @@
     </rule>
     <rule>
         <from>^/tags/$</from>
-        <to>/query/tagsList.shtml?count=90&amp;start=0</to>
+        <to>/query/tagsList.shtml?count=25&amp;start=0</to>
     </rule>
     <rule>
         <from>^/tags$</from>
-        <to>/query/tagsList.shtml?count=90&amp;start=0</to>
+        <to>/query/tagsList.shtml?count=25&amp;start=0</to>
     </rule>
     <rule>
         <from>^/tags/([0-9]+)$</from>
-        <to>/query/tagsList.shtml?count=30&amp;start=$1</to>
+        <to>/query/tagsList.shtml?count=25&amp;start=$1</to>
     </rule>
     <rule>
         <from>^/tag-([0-9]+)/$</from>
-        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=30</to>
+        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=25</to>
     </rule>
    <rule>
         <from>^/tag-([0-9]+)/([0-9]+)$</from>
-        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=30&amp;start=$2</to>
+        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=25&amp;start=$2</to>
     </rule>
     <rule>
-        <from>^/tag-([a-zA-Z0-9]+)/rss$</from>
+        <from>^/tag-([0-9]+)/rss$</from>
         <to>/RSServlet?tagId=$1</to>
     </rule>      
     <rule>
