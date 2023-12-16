@@ -29,18 +29,21 @@ public class HomepageListSolver {
 	}
 
 	public Collection<Long> getList(int start, int count) {
-		if (start == 0 || list  == null){
-		 synchronized(this) {
-		    list = Collections.synchronizedList(new ArrayList<>());;
-		    for (int i = 0; i < 75; i = i + 15) {
-			   list.addAll(threadApprovedNewList.getApprovedThreads(i));
-		    }
-			list = list.stream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
-				.getThread(threadId), threadId -> threadId, (e1, e2) -> e1,
-				() -> new ConcurrentSkipListMap<ForumThread, Long>(new HomePageComparator(approvedListSpec)))).values();
-		 }		
-	    }   
+		if (start == 0 || list == null) {
+			init();
+		}
 		return list.stream().skip(start).limit(count).collect(Collectors.toList());
+	}
+
+	private void init() {
+		list = Collections.synchronizedList(new ArrayList<>());
+		for (int i = 0; i < 75; i = i + 15) {
+			list.addAll(threadApprovedNewList.getApprovedThreads(i));
+		}
+		list = list.stream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
+				.getThread(threadId), threadId -> threadId, (e1, e2) -> e1,
+				() -> new ConcurrentSkipListMap<ForumThread, Long>(new HomePageComparator(approvedListSpec))))
+				.values();
 	}
 
 	

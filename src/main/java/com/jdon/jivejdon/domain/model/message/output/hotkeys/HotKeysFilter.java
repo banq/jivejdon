@@ -16,7 +16,7 @@
  */
 package com.jdon.jivejdon.domain.model.message.output.hotkeys;
 
-import java.util.Iterator;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
@@ -35,10 +35,11 @@ import com.jdon.util.Debug;
 public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 	private final static String module = HotKeysFilter.class.getName();
 
-	private String prefix_regEx = "(.*)"; // chinese or
+	private String prefix_regEx = "([\\u4e00-\\uFFFF]|[\\s])(?i)"; // chinese or
 	// whitespace
 	private String suffix_regEx = "";
 
+	private final static ConcurrentHashMap<String, Pattern> patterns = new ConcurrentHashMap<>();
 	//
 	public MessageVO apply(MessageVO messageVO) {
 		return messageVO.builder().subject(messageVO.getSubject()).body(applyFilteredBody(messageVO)).build();
@@ -54,12 +55,10 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 			if (hotKeys == null)
 				return body;
 
-			Iterator iter = hotKeys.getProps().iterator();
-			while (iter.hasNext()) {
-				Property prop = (Property) iter.next();
+			for (Property prop:hotKeys.getProps()) {
 				String regEx = prefix_regEx + prop.getName() + suffix_regEx;
 				String replcaement = getKeyUrlStr(prop.getName(), prop.getValue());
-				body = Pattern.compile(regEx).matcher(body).replaceFirst("$1" + replcaement);
+				body = patterns.computeIfAbsent(replcaement, k->Pattern.compile(regEx)).matcher(body).replaceFirst("$1" + replcaement);
 			}
 		} catch (Exception e) {
 			Debug.logError("" + e, module);

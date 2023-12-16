@@ -15,27 +15,27 @@
  */
 package com.jdon.jivejdon.spi.component.mapreduce;
 
-import com.jdon.annotation.Component;
-import com.jdon.container.pico.Startable;
-import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.domain.model.account.Account;
-import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.query.ResultSort;
-import com.jdon.jivejdon.domain.model.query.specification.ApprovedListSpec;
-import com.jdon.jivejdon.api.account.AccountService;
-import com.jdon.jivejdon.api.query.ForumMessageQueryService;
-import com.jdon.jivejdon.api.property.TagService;
-import com.jdon.jivejdon.util.ScheduledExecutorUtil;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.jdon.annotation.Component;
+import com.jdon.container.pico.Startable;
+import com.jdon.controller.model.PageIterator;
+import com.jdon.jivejdon.api.account.AccountService;
+import com.jdon.jivejdon.api.property.TagService;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
+import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.domain.model.query.ResultSort;
+import com.jdon.jivejdon.domain.model.query.specification.ApprovedListSpec;
+import com.jdon.jivejdon.util.ScheduledExecutorUtil;
 
 /**
  * Home Mixer
@@ -51,7 +51,7 @@ public class ThreadApprovedNewList implements Startable {
 	private final static Logger logger = LogManager
 			.getLogger(ThreadApprovedNewList.class);
 	//key is start of one page,
-	public final Map<Integer, Collection<Long>> approvedThreadList;
+	public final ConcurrentHashMap<Integer, Collection<Long>> approvedThreadList;
 	// author sort map
 	private final AuthorList authorList;
 	// dig sort map, start is more greater, the dig collection is more greater.
@@ -61,7 +61,6 @@ public class ThreadApprovedNewList implements Startable {
 	private final AccountService accountService;
 	// private Cache approvedThreadList = new LRUCache("approvedCache.xml");
 	private final ApprovedListSpec approvedListSpec = new ApprovedListSpec();
-	private boolean refresh;
 	private int maxStart = -1;
 	private	long currentIndicator = 0;
 	private	int currentStartBlock = 0;
@@ -70,7 +69,7 @@ public class ThreadApprovedNewList implements Startable {
 	public ThreadApprovedNewList(
 			ForumMessageQueryService forumMessageQueryService,
 			AccountService accountService, TagService tagService) {
-		approvedThreadList = new HashMap();
+		approvedThreadList = new ConcurrentHashMap<>();
 		this.accountService = accountService;
 		this.authorList = new AuthorList(accountService);
 		this.threadDigList = new ThreadDigList(forumMessageQueryService);
@@ -103,7 +102,6 @@ public class ThreadApprovedNewList implements Startable {
 		ResultSort resultSort = new ResultSort();
 		resultSort.setOrder_DESCENDING();
 		approvedListSpec.setResultSort(resultSort);
-		refresh = true;
 		maxStart = -1;
 		currentIndicator = 0;
 	    currentStartBlock = 0;
@@ -149,20 +147,23 @@ public class ThreadApprovedNewList implements Startable {
 
 	}
 
-	protected synchronized Collection<Long> appendList(int start,
-													   ApprovedListSpec approvedListSpec) {
+	protected Collection<Long> appendList(int start,
+			ApprovedListSpec approvedListSpec) {
 		if (approvedThreadList.containsKey(start)) {
 			return approvedThreadList.get(start);
+		}else{
+			return initApprovedList( start, approvedListSpec);
 		}
+	}
 
-		this.refresh = false;
-		Collection<Long> resultSorteds = null;
+	protected Collection<Long> initApprovedList(int start,
+			ApprovedListSpec approvedListSpec) {
+		Collection<Long> resultSorteds = new ArrayList<>();
 		logger.debug("not found it in cache, create it");
 		int count = approvedListSpec.getNeedCount();
 		int i = currentStartPage;
 		while (i < start + count) {
-			resultSorteds = loadApprovedThreads(approvedListSpec);
-			approvedThreadList.put(i, resultSorteds);
+			resultSorteds = approvedThreadList.computeIfAbsent(i, k->loadApprovedThreads(approvedListSpec));
 			if (resultSorteds.size() < approvedListSpec.getNeedCount()) {
 				if (maxStart == -1) {
 					maxStart = i;
@@ -174,10 +175,9 @@ public class ThreadApprovedNewList implements Startable {
 		if (i > currentStartPage)
 			currentStartPage = i;
 		return resultSorteds;
-
 	}
 
-	public synchronized List<Long> loadApprovedThreads(
+	public List<Long> loadApprovedThreads(
 			ApprovedListSpec approvedListSpec) {
 		List<Long> resultSorteds = new ArrayList(
 				approvedListSpec.getNeedCount());
@@ -232,9 +232,7 @@ public class ThreadApprovedNewList implements Startable {
 		return resultSorteds;
 	}
 
-	public boolean isRefresh() {
-		return refresh;
-	}
+
 
 	public int getMaxSize() {
 		if (maxStart != -1)

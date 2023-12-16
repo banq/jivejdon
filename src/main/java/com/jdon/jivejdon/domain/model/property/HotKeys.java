@@ -22,7 +22,7 @@ public class HotKeys {
 	
 	private long id = 44444444;
 	
-	private Collection props;
+	private Collection<Property> props;
 	
 	public Long getId() {
 		return id;
@@ -32,10 +32,10 @@ public class HotKeys {
 		this.id = id;
 	}
 	 */
-	public Collection getProps() {
+	public Collection<Property> getProps() {
 		return props;
 	}
-	public void setProps(Collection props) {
+	public void setProps(Collection<Property> props) {
 		this.props = props;
 	}
 	
