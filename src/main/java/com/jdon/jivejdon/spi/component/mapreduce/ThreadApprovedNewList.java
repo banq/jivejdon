@@ -127,33 +127,23 @@ public class ThreadApprovedNewList implements Startable {
 			logger.error("start=" + start
 					+ " < approvedListSpec.getCurrentStartPage()"
 					+ currentStartPage);
-			return null;
+			return new ArrayList<>();
 		}
-		return appendList(start, approvedListSpec);
-
+		return initApprovedList( start, approvedListSpec);
 	}
 
 	public ThreadDigList getThreadDigList() {
 		if (!approvedThreadList.containsKey(0))
-			appendList(0, approvedListSpec);
+			initApprovedList(0, approvedListSpec);
 		return this.threadDigList;
 
 	}
 
 	public AuthorList getAuthorList() {
 		if (!approvedThreadList.containsKey(0))
-			appendList(0, approvedListSpec);
+			initApprovedList(0, approvedListSpec);
 		return this.authorList;
 
-	}
-
-	protected Collection<Long> appendList(int start,
-			ApprovedListSpec approvedListSpec) {
-		if (approvedThreadList.containsKey(start)) {
-			return approvedThreadList.get(start);
-		}else{
-			return initApprovedList( start, approvedListSpec);
-		}
 	}
 
 	protected Collection<Long> initApprovedList(int start,
