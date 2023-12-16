@@ -153,11 +153,11 @@ public class TagDaoSql implements TagDao {
 
 
 
-	public Collection getThreadTagIDs(Long threadID) {
+	public Collection<Long> getThreadTagIDs(Long threadID) {
 		String SQL = "select tagID FROM threadTag WHERE threadID=? ";
-		List queryParams = new ArrayList();
+		List<Long> queryParams = new ArrayList<>();
 		queryParams.add(threadID);
-		Collection ret = new ArrayList();
+		Collection<Long> ret = new ArrayList<>();
 		try {
 			List list = jdbcTempSource.getJdbcTemp().queryMultiObject(queryParams, SQL);
 			Iterator iter = list.iterator();

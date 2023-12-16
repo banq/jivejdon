@@ -19,7 +19,6 @@ import java.util.Collection;
 import java.util.List;
 
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
 
 public interface TagRepository {
@@ -38,9 +37,7 @@ public interface TagRepository {
 
 	public abstract void deleteTagTitle(Long threadId) throws Exception;
 
-	public abstract Collection getThreadTags(ForumThread forumThread);
-
-	public abstract Collection getThreadTags(Long forumThreadId);
+	public abstract Collection<ThreadTag> getThreadTags(Long forumThreadId);
 
 	public abstract void updateTag(ThreadTag threadTag) throws Exception;
 

@@ -16,27 +16,19 @@
  */
 package com.jdon.jivejdon.infrastructure.repository.builder;
 
-import com.jdon.annotation.Introduce;
-import com.jdon.annotation.pointcut.Around;
-import com.jdon.jivejdon.domain.model.Forum;
-import com.jdon.jivejdon.domain.model.ForumMessage;
-import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.RootMessage;
-import com.jdon.jivejdon.domain.model.property.HotKeys;
-import com.jdon.jivejdon.domain.model.thread.ThreadTagsVO;
-import com.jdon.jivejdon.infrastructure.repository.property.HotKeysRepository;
-import com.jdon.jivejdon.infrastructure.repository.property.TagRepository;
-import com.jdon.jivejdon.infrastructure.repository.dao.MessageDao;
-import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
-import org.apache.log4j.chainsaw.Main;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Collection;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.function.Function;
+import com.jdon.annotation.Introduce;
+import com.jdon.annotation.pointcut.Around;
+import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.RootMessage;
+import com.jdon.jivejdon.domain.model.thread.ThreadTagsVO;
+import com.jdon.jivejdon.infrastructure.repository.dao.MessageDao;
+import com.jdon.jivejdon.infrastructure.repository.property.TagRepository;
 
 @Introduce("modelCache")
 public class ThreadDirector implements ThreadDirectorIF{
@@ -87,13 +79,8 @@ public class ThreadDirector implements ThreadDirectorIF{
 				logger.error("no threadId=" + threadId);
 				return null;
 			}
-
-			Forum forum = forumDirector.getForum(forumThread.getForum().getForumId());
-			// init viewcount
+			forumThread.build(forumDirector.getForum(forumThread.getForum().getForumId()), new ThreadTagsVO(forumThread, tagRepository.getThreadTags(threadId)));
 			forumThread.getViewCounter().loadinitCount();
-			Collection tags = tagRepository.getThreadTags(forumThread);
-			ThreadTagsVO threadTagsVO = new ThreadTagsVO(forumThread, tags);
-			forumThread.build(forum, threadTagsVO);
 			return forumThread;
 		}
 	}

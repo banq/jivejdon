@@ -34,7 +34,7 @@ public interface TagDao {
 
 	void updateTag(ThreadTag threadTag) throws Exception;
 
-	Collection getThreadTagIDs(Long threadID);
+	Collection<Long> getThreadTagIDs(Long threadID);
 
 	PageIterator getThreadTags(int start, int count);
 

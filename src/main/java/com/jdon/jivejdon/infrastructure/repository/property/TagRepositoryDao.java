@@ -18,11 +18,9 @@ package com.jdon.jivejdon.infrastructure.repository.property;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.infrastructure.repository.dao.SequenceDao;
 import com.jdon.jivejdon.infrastructure.repository.dao.TagDao;
@@ -158,25 +156,7 @@ public class TagRepositoryDao implements TagRepository {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.jdon.jivejdon.infrastructure.repository.property.TagRepository#getThreadTags(com.jdon.jivejdon
-	 * .model.ForumThread)
-	 */
-	public Collection getThreadTags(ForumThread forumThread) {
-		Collection tags = new ArrayList();
-		Collection ids = tagDao.getThreadTagIDs(forumThread.getThreadId());
-		Iterator iter = ids.iterator();
-		while (iter.hasNext()) {
-			Long tagID = (Long) iter.next();
-			ThreadTag tag = tagDao.getThreadTag(tagID);
-			if (tag != null)
-				tags.add(tag);
-		}
-		return tags;
-	}
+	
 
 	/*
 	 * (non-Javadoc)
@@ -184,12 +164,10 @@ public class TagRepositoryDao implements TagRepository {
 	 * @see
 	 * com.jdon.jivejdon.infrastructure.repository.property.TagRepository#getThreadTags(java.lang.Long)
 	 */
-	public Collection getThreadTags(Long forumThreadId) {
-		Collection tags = new ArrayList();
-		Collection ids = tagDao.getThreadTagIDs(forumThreadId);
-		Iterator iter = ids.iterator();
-		while (iter.hasNext()) {
-			Long tagID = (Long) iter.next();
+	public Collection<ThreadTag> getThreadTags(Long forumThreadId) {
+		Collection<ThreadTag> tags = new ArrayList<>();
+		Collection<Long> ids = tagDao.getThreadTagIDs(forumThreadId);
+		for (Long tagID: ids) {
 			tags.add(tagDao.getThreadTag(tagID));
 		}
 		return tags;
