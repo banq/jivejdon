@@ -15,11 +15,11 @@
  */
 package com.jdon.jivejdon.domain.model.thread;
 
+import java.util.Collection;
+
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.domain.model.subscription.event.TagSubscribedNotifyEvent;
-
-import java.util.Collection;
 
 public class ThreadTagsVO {
 
@@ -27,7 +27,7 @@ public class ThreadTagsVO {
 	private final Collection<ThreadTag> tags;
 	private ForumThread forumThread;
 
-	public ThreadTagsVO(ForumThread forumThread, Collection tags) {
+	public ThreadTagsVO(ForumThread forumThread, Collection<ThreadTag> tags) {
 		super();
 		this.forumThread = forumThread;
 		this.tags = tags;

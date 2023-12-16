@@ -95,7 +95,7 @@ public class ForumThread {
 
 	private ReBlogVO reBlogVO;
 
-	private boolean solid;
+	private volatile boolean built = false;
 
 	/**
 	 * normal can be cached reused
@@ -276,7 +276,7 @@ public class ForumThread {
 	}
 
 	public boolean isLeaf(ForumMessage forumMessage) {
-		if (!this.isSolid()) {
+		if (!built) {
 			logger.error("this thread is not embedded, threadId = " + threadId + " " + this.hashCode());
 			return false;
 		}
@@ -333,7 +333,7 @@ public class ForumThread {
 	}
 
 	public Collection<ThreadTag> getTags() {
-		return this.threadTagsVO.getTags();
+		return  (built)? this.threadTagsVO.getTags():new ArrayList<>();
 	}
 
 	public void changeTags(ThreadTagsVO threadTagsVO) {
@@ -398,20 +398,13 @@ public class ForumThread {
 	}
 
 	public synchronized void build(Forum forum,ThreadTagsVO threadTagsVO) {
-		if (isSolid())
+		if (built)
 			return;
 		this.forum = forum;
 		this.threadTagsVO = threadTagsVO;
-		this.setSolid(true);
+		this.built = true;
 	}
 
-	public boolean isSolid() {
-		return solid;
-	}
-
-	private void setSolid(boolean solid) {
-		this.solid = solid;
-	}
 
 	public ReBlogVO getReBlogVO() {
 	    if (reBlogVO == null &&  lazyLoaderRole != null)
