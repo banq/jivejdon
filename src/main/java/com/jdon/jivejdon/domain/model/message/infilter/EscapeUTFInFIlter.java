@@ -30,7 +30,7 @@ public class EscapeUTFInFIlter implements Function<MessageVO, MessageVO> {
 		// return unicodeOutlierMatcher.replaceAll(" ");
 	}
 
-	//from chatGPT
+	//from chatGPT 
 	private boolean isNested(String text) {
 		Stack<Character> stack = new Stack<>();
 
@@ -44,7 +44,7 @@ public class EscapeUTFInFIlter implements Function<MessageVO, MessageVO> {
 				stack.pop();
 			}
 		}
-
+        //chatgpt NOT know here have "!", he say: stack.isEmpty()
 		return !stack.isEmpty(); // If the stack is empty, brackets are properly nested
 	}
 
