@@ -36,7 +36,7 @@ public final class FilterPipleSpec implements Function<MessageVO, MessageVO> {
         }
         
             try {
-                messageVO = outFilters.stream()
+                messageVO = outFilters.parallelStream()
                         .reduce(Function.identity(), Function::andThen)
                         .apply(messageVO);
             } catch (Exception e) {
