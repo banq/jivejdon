@@ -1,11 +1,10 @@
 package com.jdon.jivejdon.domain.model.message;
 
+import java.util.Collection;
+import java.util.function.Function;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.function.Function;
 
 /**
  * piple pattern
@@ -35,18 +34,16 @@ public final class FilterPipleSpec implements Function<MessageVO, MessageVO> {
             logger.error("when build but outFilters is null");
             return messageVO;
         }
-        Iterator iter = outFilters.iterator();
-        while (iter.hasNext()) {
-            Function<MessageVO, MessageVO> mrs = ((Function<MessageVO, MessageVO>) iter
-                    .next());
+        
             try {
-                messageVO = mrs.apply(messageVO);
+                messageVO = outFilters.stream()
+                        .reduce(Function.identity(), Function::andThen)
+                        .apply(messageVO);
             } catch (Exception e) {
                 logger.error(" applyFilters error1:" + e + messageVO.getForumMessage().getMessageId());
                 logger.error(" applyFilters error2:" + e + messageVO.getShortBody(5));
-                logger.error(" applyFilters error3:" + e + iter.getClass());
+               
             }
-        }
 		return messageVO;
 	}
 }
