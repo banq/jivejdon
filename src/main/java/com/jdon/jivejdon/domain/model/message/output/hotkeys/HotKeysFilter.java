@@ -17,6 +17,7 @@
 package com.jdon.jivejdon.domain.model.message.output.hotkeys;
 
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ForkJoinPool;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
@@ -39,7 +40,7 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 	// whitespace
 	private String suffix_regEx = "";
 
-	private final static ConcurrentHashMap<String, Pattern> patterns = new ConcurrentHashMap<>();
+	private final static ConcurrentHashMap<String, Pattern> Patterns = new ConcurrentHashMap<>();
 	//
 	public MessageVO apply(MessageVO messageVO) {
 		return messageVO.builder().subject(messageVO.getSubject()).body(applyFilteredBody(messageVO)).build();
@@ -55,15 +56,55 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 			if (hotKeys == null)
 				return body;
 
-			for (Property prop:hotKeys.getProps()) {
-				String regEx = prefix_regEx + prop.getName() + suffix_regEx;
-				String replcaement = getKeyUrlStr(prop.getName(), prop.getValue());
-				body = patterns.computeIfAbsent(replcaement, k->Pattern.compile(regEx)).matcher(body).replaceFirst("$1" + replcaement);
+			for (Property prop : hotKeys.getProps()) {
+				body = convertBody(prop.getName(),prop.getValue(), body);
 			}
 		} catch (Exception e) {
 			Debug.logError("" + e, module);
 		}
 		return body;
+	}
+
+	//from chatGPT
+	public  String parallelReplace(String input, Pattern pattern, String replace) {
+        int parallelism = ForkJoinPool.commonPool().getParallelism();
+
+        // Split the input string into chunks based on the number of available processors
+        int chunkSize = input.length() / parallelism;
+        String[] chunks = new String[parallelism];
+        for (int i = 0; i < parallelism - 1; i++) {
+            chunks[i] = input.substring(i * chunkSize, (i + 1) * chunkSize);
+        }
+        chunks[parallelism - 1] = input.substring((parallelism - 1) * chunkSize);
+
+        // Use parallel stream for concurrent processing
+        String result = String.join("", java.util.Arrays.stream(chunks)
+                .parallel()
+                .map(chunk -> pattern.matcher(chunk).replaceFirst(replace))
+                .toArray(String[]::new));
+
+        return result;
+    }
+
+	public static void main(String[] args) {
+		HotKeysFilter hotKeysFilter = new HotKeysFilter();
+		// Example usage
+		String largeText = "This is a large text with multiple occurrences of the word Java. Replace Java with another word.";
+		String search = "Java|word";
+		String replace = "GPT-3";
+
+		String result = hotKeysFilter.parallelReplace(largeText,Pattern.compile(search) , replace);
+
+		System.out.println("Original: " + largeText);
+		System.out.println("Modified: " + result);
+	}
+
+	private String convertBody(String regExName , String replacementName, String body) {
+		String regEx = prefix_regEx + regExName + suffix_regEx;
+		String  replacement = getKeyUrlStr(regExName, replacementName);
+		Pattern pattern = Patterns.computeIfAbsent(replacement, k -> Pattern.compile(regEx));
+		return parallelReplace(body,pattern,replacement);
+
 	}
 
 	private String getKeyUrlStr(String name, String url) {
@@ -98,8 +139,8 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 			this.suffix_regEx = suffix_regEx;
 	}
 
-	public static void main(String[] args) {
-		System.out.println(Pattern.compile("(.*)" + "上下文" + "").matcher("sss(上下文").replaceFirst("$1" + "hello"));
-	}
+	// public static void main(String[] args) {
+	// 	System.out.println(Pattern.compile("(.*)" + "上下文" + "").matcher("sss(上下文").replaceFirst("$1" + "hello"));
+	// }
 
 }
