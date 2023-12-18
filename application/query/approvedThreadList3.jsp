@@ -57,7 +57,7 @@ int i=0;
   <div class="lazyload" >
 	    <!-- 
         <script>
-         $('#ajax_<bean:write name="threadTag" property="tagID"/>').load("/query/tt2/${threadTag.tagID}");                         
+         $('#ajax_<bean:write name="threadTag" property="tagID"/>').load("/query/tt/${threadTag.tagID}");                         
         </script>
         -->
 	  
