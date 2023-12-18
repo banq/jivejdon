@@ -16,14 +16,16 @@
  */
 package com.jdon.jivejdon.domain.model.message.output.hotkeys;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ForkJoinPool;
 import java.util.function.Function;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.jivejdon.domain.model.property.HotKeys;
-import com.jdon.jivejdon.domain.model.property.Property;
 import com.jdon.util.Debug;
 
 /**
@@ -56,9 +58,8 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 			if (hotKeys == null)
 				return body;
 
-			for (Property prop : hotKeys.getProps()) {
-				body = convertBody(prop.getName(),prop.getValue(), body);
-			}
+			Map<String, String> searchMap = hotKeys.getProps().stream().collect(Collectors.toMap(prop->prop.getName(), prop->prop.getValue()));
+			body =  parallelReplace(body,searchMap);	
 		} catch (Exception e) {
 			Debug.logError("" + e, module);
 		}
@@ -66,7 +67,7 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 	}
 
 	//from chatGPT
-	public  String parallelReplace(String input, Pattern pattern, String replace) {
+	public  String parallelReplace(String input,Map<String, String> searchMap) {
         int parallelism = ForkJoinPool.commonPool().getParallelism();
 
         // Split the input string into chunks based on the number of available processors
@@ -80,7 +81,7 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
         // Use parallel stream for concurrent processing
         String result = String.join("", java.util.Arrays.stream(chunks)
                 .parallel()
-                .map(chunk -> pattern.matcher(chunk).replaceFirst(replace))
+                .map(chunk -> convertSearch(searchMap,chunk))
                 .toArray(String[]::new));
 
         return result;
@@ -90,22 +91,27 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 		HotKeysFilter hotKeysFilter = new HotKeysFilter();
 		// Example usage
 		String largeText = "This is a large text with multiple occurrences of the word Java. Replace Java with another word.";
-		String search = "Java|word";
-		String replace = "GPT-3";
+		Map<String, String> searchMap = new HashMap<>();
+		searchMap.put("Java", "GPT-3");
+		searchMap.put("word", "GPT-4");
 
-		String result = hotKeysFilter.parallelReplace(largeText,Pattern.compile(search) , replace);
+		String result = hotKeysFilter.parallelReplace(largeText,searchMap);
 
 		System.out.println("Original: " + largeText);
 		System.out.println("Modified: " + result);
 	}
 
-	private String convertBody(String regExName , String replacementName, String body) {
-		String regEx = prefix_regEx + regExName + suffix_regEx;
-		String  replacement = getKeyUrlStr(regExName, replacementName);
-		Pattern pattern = Patterns.computeIfAbsent(replacement, k -> Pattern.compile(regEx));
-		return parallelReplace(body,pattern,replacement);
-
+	private String convertSearch(Map<String, String> searchMap, String chunk) {
+		for (String key : searchMap.keySet()) {
+			String regEx = prefix_regEx + key + suffix_regEx;
+			String replacement = getKeyUrlStr(key, searchMap.get(key));
+			Pattern pattern = Patterns.computeIfAbsent(replacement, k -> Pattern.compile(regEx));
+			chunk = pattern.matcher(chunk).replaceFirst(replacement);
+		}
+		return chunk;
 	}
+
+	
 
 	private String getKeyUrlStr(String name, String url) {
 		StringBuilder bf = new StringBuilder();
