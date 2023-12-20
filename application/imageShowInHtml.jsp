@@ -9,7 +9,7 @@ if (errorBlocker.checkCount(request.getRemoteAddr(), 10)){
 	response.sendError(404);
     return;
 }
-  if (request.getParameter("oid") == null && request.getParameter("id") == null) {
+  if (request.getParameter("oid") == null || request.getParameter("id") == null) {
     response.sendError(404);
     return;
   }

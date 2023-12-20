@@ -64,7 +64,7 @@
  
 </div>
 
-    <jsp:include page="/query/threadApprovedNewList3.shtml?count=30" flush="true"></jsp:include>        
+    <jsp:include page="/query/threadApprovedNewList3.shtml?count=15" flush="true"></jsp:include>        
 	
     <div class="box"> 
 	    <div class="tres center">        
@@ -108,7 +108,7 @@
                 <div>
 					    <div>
 					
-                              <div id="newList"><jsp:include page="/query/threadNewList.shtml?count=15" flush="true"></jsp:include></div>   
+                              <div id="newList"><jsp:include page="/query/threadNewList.shtml?count=10" flush="true"></jsp:include></div>   
 							   
 							</div>
 				</div>
