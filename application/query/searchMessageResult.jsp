@@ -42,8 +42,8 @@
 
     <logic:greaterThan name="messageListForm" property="allCount" value="0">
 
-<div id="page-content" class="single-page container">
-	<div>
+<div id="main-content" class="col-lg-12">
+	<div class="box">
 
 
         <div class="tres">
