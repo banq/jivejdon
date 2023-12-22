@@ -1,14 +1,15 @@
 package com.jdon.jivejdon.domain.model.message.output.thumbnailUrl;
 
-import com.jdon.jivejdon.domain.model.message.MessageUrlVO;
-import com.jdon.jivejdon.domain.model.message.MessageVO;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.jdon.jivejdon.domain.model.message.MessageUrlVO;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 
 /**
  * add a thumbnail to a thread for list;
@@ -18,7 +19,7 @@ public class ThumbnailExtractor implements Function<MessageVO, MessageVO> {
 	private final static Logger logger = LogManager.getLogger(ThumbnailExtractor.class);
 	private final static Pattern imgPattern = Pattern.compile("(<img\\b|(?!^)\\G)[^>]*?\\b" +
 			"(src|width|height)=([\"']?)([^\"]*)\\3");
-	private String thumbpics = "/simgs/thumb/1.jpg,/simgs/thumb/2.jpg";
+	private String thumbpics = "//cdn.jdon.com/simgs/thumb/1.jpg,//cdn.jdon.com/simgs/thumb/2.jpg";
 
 	@Override
 	public MessageVO apply(MessageVO messageVO) {

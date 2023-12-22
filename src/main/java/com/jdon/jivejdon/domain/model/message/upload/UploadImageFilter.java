@@ -15,12 +15,12 @@
  */
 package com.jdon.jivejdon.domain.model.message.upload;
 
-import com.jdon.jivejdon.domain.model.attachment.UploadFile;
-import com.jdon.jivejdon.domain.model.message.MessageVO;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.function.Function;
+
+import com.jdon.jivejdon.domain.model.attachment.UploadFile;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 
 /**
  * @author banq(http://www.jdon.com)
@@ -31,7 +31,7 @@ public class UploadImageFilter implements Function<MessageVO, MessageVO> {
 	// this imageShowUrl must modified if jivejdon is not default web name
 	private String imageShowUrl = "/img";
 	private String imageShowInHtmlUrl = "/imageShowInHtml.jsp";
-	private String thumbpics = "/simgs/thumb/1.jpg,/simgs/thumb/2.jpg";
+	private String thumbpics = "//cdn.jdon.com/simgs/thumb/1.jpg,//cdn.jdon.com/simgs/thumb/2.jpg";
 
 	private UploadHelper uploadHelper = new UploadHelper();
 
