@@ -2,7 +2,6 @@ package com.jdon.jivejdon.spi.component.mapreduce;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.stream.Collectors;
 
@@ -29,18 +28,18 @@ public class HomepageListSolver {
 	}
 
 	public Collection<Long> getList(int start, int count) {
-		if (start == 0 || list == null) {
+		if (list == null) {
 			init();
 		}
 		return list.stream().skip(start).limit(count).collect(Collectors.toList());
 	}
 
-	private void init() {
-		list = Collections.synchronizedList(new ArrayList<>());
+	private synchronized void init() {
+		Collection<Long> listInit = new ArrayList<>();
 		for (int i = 0; i < 75; i = i + 15) {
-			list.addAll(threadApprovedNewList.getApprovedThreads(i));
+			listInit.addAll(threadApprovedNewList.getApprovedThreads(i));
 		}
-		list = list.stream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
+		list = listInit.stream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
 				.getThread(threadId), threadId -> threadId, (e1, e2) -> e1,
 				() -> new ConcurrentSkipListMap<ForumThread, Long>(new HomePageComparator(approvedListSpec))))
 				.values();
