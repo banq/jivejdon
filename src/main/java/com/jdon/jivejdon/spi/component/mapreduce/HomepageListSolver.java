@@ -26,12 +26,13 @@ public class HomepageListSolver {
 							  ForumMessageQueryService forumMessageQueryService) {
 		this.threadApprovedNewList = threadApprovedNewList;
 		this.forumMessageQueryService = forumMessageQueryService;
+		this.list = new AtomicReference<>();
 	}
 
 	public Collection<Long> getList(int start, int count) {
-		if (list == null)
-			synchronized (this) {
-				if (list == null)
+		if (list.get() == null)
+			synchronized (list) {
+				if (list.get() == null)
 					init();
 			}
 		return list.get().stream().skip(start).limit(count).collect(Collectors.toList());
@@ -47,7 +48,7 @@ public class HomepageListSolver {
 				() -> new ConcurrentSkipListMap<ForumThread, Long>(new HomePageComparator(approvedListSpec))))
 				.values();
 
-		this.list = new AtomicReference<>(listInit);		
+		this.list.set(listInit);		
 	}
 
 	

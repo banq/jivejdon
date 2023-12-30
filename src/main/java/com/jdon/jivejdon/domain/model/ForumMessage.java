@@ -17,7 +17,6 @@ package com.jdon.jivejdon.domain.model;
 
 import java.util.Collection;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -394,7 +393,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
                         messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO.getBody())
                                 .build();
                         setMessageVO(messageVO);
-                        isCreated = new AtomicReference<Boolean>(true);// construt end
+                        isCreated.set(true); // construt end
                     }
                 }
         } catch (Exception e) {

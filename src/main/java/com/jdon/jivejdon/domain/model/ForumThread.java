@@ -85,7 +85,7 @@ public class ForumThread {
 	 * in the thread are children of the root message.
 	 */
 	
-	private volatile AtomicReference<ForumThreadState> state;
+	private final ForumThreadState state;
 	// update mutable
 	private volatile ViewCounter viewCounter;
 	// update mutable
@@ -107,7 +107,7 @@ public class ForumThread {
 		this.rootMessage = rootMessage;
 		this.threadId = tIDInt;
 	
-		this.state = new AtomicReference<>(new ForumThreadState(this));
+		this.state = new ForumThreadState(this);
 		// this.threadTagsVO = new ThreadTagsVO(this, new ArrayList());
 		this.propertys = new ArrayList<Property>();
 		this.viewCounter = new ViewCounter(this);
@@ -118,17 +118,7 @@ public class ForumThread {
 	private ForumThread() {
 		this(null, Long.MAX_VALUE);
 	}
-	// /**
-	// * DTO object, limited usage
-	// */
-	// private ForumThread() {
-	// this.threadId = null;
-	// this.threadTagsVO = new ThreadTagsVO(this, new ArrayList());
-	// this.propertys = new ArrayList();
-	// this.state = new AtomicReference(new ForumThreadState(this));
-	// this.viewCounter = new ViewCounter(this);
-	//// this.rootMessage = new ForumMessage();
-	// }
+
 
 	public String getCreationDate() {
 		return creationDate;
@@ -209,7 +199,7 @@ public class ForumThread {
 	 * @return Returns the forumThreadState.
 	 */
 	public ForumThreadState getState() {
-		return state.get();
+		return state;
 	}
 
 	public boolean isRoot(ForumMessage message) {
@@ -227,9 +217,9 @@ public class ForumThread {
 	 *
 	 * @param forumMessageReply
 	 */
-	private void changeState(ForumMessageReply forumMessageReply) {
-		this.state.get().setLatestPost(forumMessageReply);
-		this.state.get().addMessageCount();
+	private synchronized void changeState(ForumMessageReply forumMessageReply) {
+		this.state.setLatestPost(forumMessageReply);
+		this.state.addMessageCount();
 		this.forum.addNewMessage(forumMessageReply);
 	}
 
@@ -272,7 +262,7 @@ public class ForumThread {
 	}
 
 	public void updateMessage(ForumMessage forumMessage) {		
-		this.state.get().setLatestPost(forumMessage);
+		this.state.setLatestPost(forumMessage);
 		this.forum.updateNewMessage(forumMessage);
 	}
 
@@ -404,7 +394,7 @@ public class ForumThread {
 				if (!built.get()) {
 					this.forum = forum;
 					this.threadTagsVO = threadTagsVO;
-					this.built = new AtomicReference<>(true);
+					built.set(true);;
 				}
 			}
 	}

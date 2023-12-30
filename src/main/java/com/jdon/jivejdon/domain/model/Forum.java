@@ -18,7 +18,6 @@ package com.jdon.jivejdon.domain.model;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,7 +30,6 @@ import com.jdon.jivejdon.domain.command.PostTopicMessageCommand;
 import com.jdon.jivejdon.domain.event.TopicMessagePostedEvent;
 import com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF;
 import com.jdon.jivejdon.domain.model.subscription.event.ForumSubscribedNotifyEvent;
-import com.jdon.jivejdon.infrastructure.repository.builder.MessageInitFactory;
 import com.jdon.jivejdon.spi.pubsub.publish.ThreadEventSourcingRole;
 import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 import com.jdon.jivejdon.util.Constants;
@@ -64,7 +62,7 @@ public class Forum {
 	 * @link aggregation
 	 */
 
-	private volatile AtomicReference<ForumState> forumState;
+	private final ForumState forumState;
 
 	@Inject
 	public LazyLoaderRole lazyLoaderRole;
@@ -94,22 +92,22 @@ public class Forum {
 	}
 
 	private boolean isRepeatedMessage(PostTopicMessageCommand postTopicMessageCommand) {
-		if (this.forumState.get().getLatestPost() == null)
+		if (this.forumState.getLatestPost() == null)
 			return false;
-		return this.forumState.get().getLatestPost()
+		return this.forumState.getLatestPost()
 				.isSubjectRepeated(postTopicMessageCommand.getMessageVO().getSubject()) ? true : false;
 
 	}
 
 	public void threadPosted(ForumMessage rootForumMessage) {
-		forumState.get().addThreadCount();
-		forumState.get().setLatestPost(rootForumMessage);
+		forumState.addThreadCount();
+		forumState.setLatestPost(rootForumMessage);
 		this.publisherRole.subscriptionNotify(new ForumSubscribedNotifyEvent(this.forumId, rootForumMessage));
 	}
 
 	public Forum() {
 		// init state
-		forumState = new AtomicReference(new ForumState(this));
+		forumState = new ForumState(this);
 	}
 
 	/**
@@ -192,10 +190,7 @@ public class Forum {
 	}
 
 	public ForumState getForumState() {
-		try {
-			return forumState.get();
-		} finally {
-		}
+			return forumState;
 	}
 	//
 	// public void setForumState(ForumState forumState) {
@@ -204,8 +199,8 @@ public class Forum {
 	// }
 
 	public void addNewMessage(ForumMessageReply forumMessageReply) {
-		forumState.get().addMessageCount();
-		forumState.get().setLatestPost(forumMessageReply);
+		forumState.addMessageCount();
+		forumState.setLatestPost(forumMessageReply);
 
 		// Date olddate = Constants.parseDateTime(oldmessage.getCreationDate());
 		// if (Constants.timeAfter(1, olddate)) {// a pubsub per one hour
@@ -215,7 +210,7 @@ public class Forum {
 	}
 
 	public void updateNewMessage(ForumMessage forumMessage) {
-		forumState.get().setLatestPost(forumMessage);
+		forumState.setLatestPost(forumMessage);
 	}
 
 	@Override
