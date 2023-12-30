@@ -28,9 +28,11 @@ public class HomepageListSolver {
 	}
 
 	public Collection<Long> getList(int start, int count) {
-		if (list == null) {
-			init();
-		}
+		if (list == null)
+			synchronized (this) {
+				if (list == null)
+					init();
+			}
 		return list.stream().skip(start).limit(count).collect(Collectors.toList());
 	}
 
