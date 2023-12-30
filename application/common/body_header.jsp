@@ -9,7 +9,7 @@
 		<div class="container">
 			<div class="row">
                 <div class="col-lg-12 ">
-                    <a href="/"><img src="/simgs/jdon100.png" width="100" height="40" fetchpriority="high" alt="极道"/></a>
+                    <a href="/"><img src="/simgs/jdon100.png" width="100" height="40" loading="lazy" alt="极道"/></a>
                     <span class="list-inline top-link link pull-right">
 				        <a href="/forum"><i class="fa fa-home"></i>Dojo</a>
                         <a href="/tags/"><i class="fa fa-arrow-circle-o-down"></i>话题</a>
