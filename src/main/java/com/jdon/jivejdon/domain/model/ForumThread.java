@@ -95,7 +95,7 @@ public class ForumThread {
 
 	private ReBlogVO reBlogVO;
 
-	private volatile boolean built = false;
+	private AtomicReference<Boolean>  built ;
 
 	/**
 	 * normal can be cached reused
@@ -107,10 +107,11 @@ public class ForumThread {
 		this.rootMessage = rootMessage;
 		this.threadId = tIDInt;
 	
-		this.state = new AtomicReference(new ForumThreadState(this));
+		this.state = new AtomicReference<>(new ForumThreadState(this));
 		// this.threadTagsVO = new ThreadTagsVO(this, new ArrayList());
 		this.propertys = new ArrayList<Property>();
 		this.viewCounter = new ViewCounter(this);
+		this.built = new AtomicReference<>(false);
 	}
 
 	// new ForumThread() is Banned
@@ -276,7 +277,7 @@ public class ForumThread {
 	}
 
 	public boolean isLeaf(ForumMessage forumMessage) {
-		if (!built) {
+		if (!built.get()) {
 			logger.error("this thread is not embedded, threadId = " + threadId + " " + this.hashCode());
 			return false;
 		}
@@ -333,7 +334,7 @@ public class ForumThread {
 	}
 
 	public Collection<ThreadTag> getTags() {
-		return  (built)? this.threadTagsVO.getTags():new ArrayList<>();
+		return  (built.get())? this.threadTagsVO.getTags():new ArrayList<>();
 	}
 
 	public void changeTags(ThreadTagsVO threadTagsVO) {
@@ -398,12 +399,12 @@ public class ForumThread {
 	}
 
 	public void build(Forum forum, ThreadTagsVO threadTagsVO) {
-		if (!built)
-			synchronized (this) {
-				if (!built) {
+		if (!built.get())
+			synchronized (built) {
+				if (!built.get()) {
 					this.forum = forum;
 					this.threadTagsVO = threadTagsVO;
-					this.built = true;
+					this.built = new AtomicReference<>(true);
 				}
 			}
 	}

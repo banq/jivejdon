@@ -15,6 +15,13 @@
  */
 package com.jdon.jivejdon.domain.model;
 
+import java.util.Collection;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
 import com.jdon.annotation.model.OnCommand;
@@ -34,17 +41,10 @@ import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.jivejdon.domain.model.property.HotKeys;
 import com.jdon.jivejdon.domain.model.property.MessagePropertysVO;
 import com.jdon.jivejdon.domain.model.property.Property;
-import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
 import com.jdon.jivejdon.spi.pubsub.publish.MessageEventSourcingRole;
 import com.jdon.jivejdon.spi.pubsub.publish.ShortMPublisherRole;
 import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 import com.jdon.jivejdon.util.Constants;
-
-import java.util.Collection;
-import java.util.Objects;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
  * Aggregate Root
@@ -377,9 +377,9 @@ public class ForumMessage extends RootMessage implements Cloneable {
             String creationDate, long modifiedDate, FilterPipleSpec filterPipleSpec, Collection<UploadFile> uploads,
             Collection<Property> props, HotKeys hotKeys) {
         try {
-            if (!isCreated)
+            if (!isCreated.get())
                 synchronized (this) {
-                    if (!isCreated) {
+                    if (!isCreated.get()) {
                         setMessageId(messageId);
                         setAccount(account);
                         setCreationDate(creationDate);
@@ -394,7 +394,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
                         messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO.getBody())
                                 .build();
                         setMessageVO(messageVO);
-                        isCreated = true;// construt end
+                        isCreated = new AtomicReference<Boolean>(true);// construt end
                     }
                 }
         } catch (Exception e) {

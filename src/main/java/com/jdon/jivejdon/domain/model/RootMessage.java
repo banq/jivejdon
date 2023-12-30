@@ -1,6 +1,7 @@
 package com.jdon.jivejdon.domain.model;
 
 import java.util.Collection;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,22 +20,23 @@ import com.jdon.jivejdon.domain.model.property.Property;
  */
 public class RootMessage {
     private final static Logger logger = LogManager.getLogger(RootMessage.class);
-    protected volatile boolean isCreated;
+    protected AtomicReference<Boolean> isCreated;
     public final ForumThread forumThread;
 
     public boolean isCreated() {
-        return isCreated;
+        return isCreated.get();
     }
 
     protected RootMessage(Long threadId) {
         this.forumThread = new ForumThread(this, threadId);
+        this.isCreated = new AtomicReference<>(false);
     }
 
     private RootMessage(){this(Long.MAX_VALUE);}
 
 
     public ForumThread getForumThread() {
-        if (!this.isCreated) {
+        if (!this.isCreated.get()) {
             logger.error("forumMessage is be constructing. thread is half");
             return null;
         }

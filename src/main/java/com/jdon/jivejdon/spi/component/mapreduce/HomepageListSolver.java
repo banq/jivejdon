@@ -3,6 +3,7 @@ package com.jdon.jivejdon.spi.component.mapreduce;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 import com.jdon.annotation.Component;
@@ -19,7 +20,7 @@ public class HomepageListSolver {
 	private final ThreadApprovedNewList threadApprovedNewList;
 	private final ForumMessageQueryService forumMessageQueryService;
 	private final ApprovedListSpec approvedListSpec = new ApprovedListSpec();
-	private Collection<Long> list;
+	private AtomicReference<Collection<Long>>  list;
 
 	public HomepageListSolver(ThreadApprovedNewList threadApprovedNewList,
 							  ForumMessageQueryService forumMessageQueryService) {
@@ -33,7 +34,7 @@ public class HomepageListSolver {
 				if (list == null)
 					init();
 			}
-		return list.stream().skip(start).limit(count).collect(Collectors.toList());
+		return list.get().stream().skip(start).limit(count).collect(Collectors.toList());
 	}
 
 	private synchronized void init() {
@@ -41,10 +42,12 @@ public class HomepageListSolver {
 		for (int i = 0; i < 75; i = i + 15) {
 			listInit.addAll(threadApprovedNewList.getApprovedThreads(i));
 		}
-		list = listInit.stream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
+		listInit = listInit.stream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
 				.getThread(threadId), threadId -> threadId, (e1, e2) -> e1,
 				() -> new ConcurrentSkipListMap<ForumThread, Long>(new HomePageComparator(approvedListSpec))))
 				.values();
+
+		this.list = new AtomicReference<>(listInit);		
 	}
 
 	
