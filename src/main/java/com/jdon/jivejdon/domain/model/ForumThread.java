@@ -397,12 +397,15 @@ public class ForumThread {
 		this.forum = forum;
 	}
 
-	public synchronized void build(Forum forum,ThreadTagsVO threadTagsVO) {
-		if (built)
-			return;
-		this.forum = forum;
-		this.threadTagsVO = threadTagsVO;
-		this.built = true;
+	public void build(Forum forum, ThreadTagsVO threadTagsVO) {
+		if (!built)
+			synchronized (this) {
+				if (!built) {
+					this.forum = forum;
+					this.threadTagsVO = threadTagsVO;
+					this.built = true;
+				}
+			}
 	}
 
 
