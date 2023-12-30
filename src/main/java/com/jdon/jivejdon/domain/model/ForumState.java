@@ -15,12 +15,13 @@
  */
 package com.jdon.jivejdon.domain.model;
 
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
+
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.domain.model.subscription.SubscribedState;
 import com.jdon.jivejdon.domain.model.subscription.subscribed.ForumSubscribed;
 import com.jdon.jivejdon.domain.model.util.OneOneDTO;
-
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Forum State ValueObject this is a embeded class in Forum.
@@ -31,16 +32,16 @@ import java.util.concurrent.atomic.AtomicLong;
  * 
  */
 public class ForumState  {
-	private  AtomicLong threadCount = new AtomicLong(0);
+	private  AtomicLong threadCount ;
 
 	/**
 	 * the number of messages in the thread. This includes the root message. So,
 	 * to find the number of replies to the root message, subtract one from the
 	 * answer of this method.
 	 */
-	private  AtomicLong messageCount = new AtomicLong(0);
+	private  AtomicLong messageCount;
 
-	private  ForumMessage latestPost;
+	private AtomicReference<ForumMessage> latestPost;
 
 	private final Forum forum;
 
@@ -49,21 +50,26 @@ public class ForumState  {
 	public ForumState(Forum forum) {
 		super();
 		this.forum = forum;
+		this.messageCount = new AtomicLong(Integer.MIN_VALUE);
+		this.threadCount = new AtomicLong(Integer.MIN_VALUE);
+		this.latestPost = new AtomicReference<>();
+		
 	}
 
 	/**
 	 * @return Returns the messageCount.
 	 */
 	public int getMessageCount() {
-		if (this.messageCount.longValue() == 0)
-			loadinitState();
-		return messageCount.intValue();
+		if (messageCount.get() == Integer.MIN_VALUE)
+			synchronized (messageCount) {
+				if (messageCount.get() == Integer.MIN_VALUE)
+					loadinitState();
+			}
+		return (int) messageCount.get();
 	}
 
 	public long addMessageCount() {
-		if (this.messageCount.longValue() == 0) {
-			loadinitState();
-		}
+        getMessageCount();
 		return this.messageCount.incrementAndGet();
 	}
 
@@ -71,31 +77,31 @@ public class ForumState  {
 	 * @return Returns the threadCount.
 	 */
 	public int getThreadCount() {
-		if (threadCount.longValue() == 0) {
-			loadinitState();
-		}
+		if (threadCount.longValue() == Integer.MIN_VALUE)
+			synchronized (threadCount) {
+				if (threadCount.longValue() == Integer.MIN_VALUE)
+					loadinitState();
+			}
 		return threadCount.intValue();
 	}
 
 	public long addThreadCount() {
-		if (threadCount.longValue() == 0) {
-			loadinitState();
-		}
+		getThreadCount();
 		return this.threadCount.incrementAndGet();
 	}
 
 	public ForumMessage getLatestPost() {
-		if (latestPost == null){
-			loadinitState();
-		}
-		return latestPost;
+		if (this.latestPost.get() == null)
+			synchronized (latestPost) {
+				if (this.latestPost.get() == null)
+					loadinitState();
+			}
+		return latestPost.get();
 	}
 
 	public void setLatestPost(ForumMessage forumMessage) {
-		if (latestPost == null) {
-			loadinitState();
-		}
-		this.latestPost = forumMessage;
+		getLatestPost();
+		this.latestPost.set(forumMessage);
 	}
 
 	public Forum getForum() {
@@ -107,13 +113,9 @@ public class ForumState  {
 	}
 
 	public SubscribedState getSubscribedState() {
-		if (subscribedState == null)
+		if (subscribedState == null && forum.getForumId() != null )
 			subscribedState = new SubscribedState(new ForumSubscribed(forum.getForumId()));
 		return subscribedState;
-	}
-
-	public int getSubscriptionCount() {
-		return getSubscribedState().getSubscribedCount(this.forum.lazyLoaderRole);
 	}
 
 	public String getModifiedDate() {
@@ -134,9 +136,9 @@ public class ForumState  {
 			if (oneOneDTO != null) {
 				OneOneDTO oneOneDTO2 = (OneOneDTO) oneOneDTO.getParent();
 				if(oneOneDTO2 != null){
-				   this.threadCount = new AtomicLong((Long)oneOneDTO.getChild());
-				   latestPost = (ForumMessage) oneOneDTO2.getParent();
-				   messageCount = new AtomicLong((Long) oneOneDTO2.getChild());
+				   threadCount.set((Long)oneOneDTO.getChild());
+				   latestPost.set((ForumMessage) oneOneDTO2.getParent());
+				   messageCount.set((Long) oneOneDTO2.getChild());
 				}
 				dm.clear();
 			}

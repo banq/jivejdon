@@ -15,12 +15,13 @@
  */
 package com.jdon.jivejdon.domain.model;
 
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
+
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.domain.model.subscription.SubscribedState;
 import com.jdon.jivejdon.domain.model.subscription.subscribed.ThreadSubscribed;
 import com.jdon.jivejdon.domain.model.util.OneOneDTO;
-
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * State is a Value Object, it is immutable. need a pattern to keep immutable.
@@ -36,38 +37,36 @@ public class ForumThreadState {
 	 * answer of this method.
 	 */
 	private AtomicLong messageCount;
-	private ForumMessage latestPost;
+	private AtomicReference<ForumMessage> latestPost;
 	private SubscribedState subscribedState;
 
 	public ForumThreadState(ForumThread forumThread, ForumMessage latestPost, long messageCount) {
-		super();
-		this.forumThread = forumThread;
-		this.latestPost = latestPost;
-		this.messageCount = new AtomicLong(messageCount);
-
+		this(forumThread);
 	}
 
 	public ForumThreadState(ForumThread forumThread) {
 		super();
 		this.forumThread = forumThread;
-		this.latestPost = null;
-		this.messageCount = null;
+		this.latestPost = new AtomicReference<>();
+		this.messageCount = new AtomicLong(Integer.MIN_VALUE);
 	}
 
 	/**
 	 * @return Returns the messageCount.
 	 */
 	public int getMessageCount() {
-		if (this.messageCount == null)
-			projectStateFromEventSource();
-		if (messageCount != null)
+		if (this.messageCount.get() == Integer.MIN_VALUE)
+		  synchronized(messageCount){
+			if (this.messageCount.get() == Integer.MIN_VALUE)
+			   projectStateFromEventSource();
+		  }
+			
+		if (messageCount.get() != Integer.MIN_VALUE)
 			return messageCount.intValue();
 		return -1;
 	}
 
 	public long addMessageCount() {
-		if (this.messageCount == null)
-			projectStateFromEventSource();
 		if (getMessageCount() != -1)
 			return messageCount.incrementAndGet();
 		else
@@ -75,17 +74,19 @@ public class ForumThreadState {
 	}
 
 	public ForumMessage getLatestPost() {
-		if (this.latestPost == null) {
-			projectStateFromEventSource();
-		}
-		return latestPost;
+		if (this.latestPost.get() == null)
+			synchronized (latestPost) {
+				if (this.latestPost.get() == null)
+					projectStateFromEventSource();
+			}
+		return latestPost.get();
 	}
 
+
+
 	public void setLatestPost(ForumMessage latestPost) {
-		if (this.latestPost == null) {
-			projectStateFromEventSource();
-		}
-		this.latestPost = latestPost;
+	    getLatestPost();
+		this.latestPost.set(latestPost);
 	}
 
 	public void projectStateFromEventSource() {
@@ -94,8 +95,8 @@ public class ForumThreadState {
 		try {
 			oneOneDTO = (OneOneDTO) dm.getEventResult();
 			if (oneOneDTO != null) {
-				latestPost = (ForumMessage) oneOneDTO.getParent();
-				messageCount = new AtomicLong((Long) oneOneDTO.getChild());
+				latestPost.set((ForumMessage) oneOneDTO.getParent());
+				messageCount.set((Long) oneOneDTO.getChild());
 				dm.clear();
 			}
 		} catch (Exception e) {
@@ -103,7 +104,7 @@ public class ForumThreadState {
 		}
 	}
 	public boolean latestPostIsNull() {
-		return latestPost == null ? true : false;
+		return latestPost.get() == null ? true : false;
 	}
 
 	public ForumThread getForumThread() {
@@ -125,7 +126,7 @@ public class ForumThreadState {
 	}
 
 	public SubscribedState getSubscribedState() {
-		if (this.subscribedState == null)
+		if (this.subscribedState == null && forumThread.getThreadId() != null)
 			this.subscribedState = new SubscribedState(new ThreadSubscribed(forumThread.getThreadId()));
 		return this.subscribedState;
 	}
