@@ -42,7 +42,7 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 	// whitespace
 	private String suffix_regEx = "";
 
-	private final static ConcurrentHashMap<String, Pattern> Patterns = new ConcurrentHashMap<>();
+	private final static ConcurrentHashMap<String, Matcher> Matchers = new ConcurrentHashMap<>();
 	//
 	public MessageVO apply(MessageVO messageVO) {
 		return messageVO.builder().subject(messageVO.getSubject()).body(applyFilteredBody(messageVO)).build();
@@ -107,15 +107,12 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 
 	private String convertSearch(ConcurrentMap<String, String> searchMap, String chunk) {
 		for (String key : searchMap.keySet()) {
+			if (!chunk.contains(key)) continue;
 			String replacementVale = searchMap.get(key);
-			if (replacementVale == null)
-				break;
+			if (replacementVale == null) continue;
 			String regEx = prefix_regEx + key + suffix_regEx;
-			Pattern pattern = Patterns.computeIfAbsent(regEx, k -> Pattern.compile(regEx));
-			Matcher matcher = pattern.matcher(chunk);
-			if (matcher.find()) {
-				chunk = searchMap.remove(key, replacementVale)?matcher.replaceFirst(getKeyUrlStr(key, replacementVale)):chunk;
-			}
+			Matcher matcher = Matchers.computeIfAbsent(regEx, k -> Pattern.compile(regEx).matcher("ignored input"));
+			chunk = searchMap.remove(key, replacementVale)?matcher.reset(chunk).replaceFirst(getKeyUrlStr(key, replacementVale)):chunk;
 		}
 		return chunk;
 	}
