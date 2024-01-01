@@ -16,11 +16,11 @@
  */
 package com.jdon.jivejdon.domain.model.message.output.hotkeys;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ForkJoinPool;
 import java.util.function.Function;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -38,7 +38,7 @@ import com.jdon.util.Debug;
 public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 	private final static String module = HotKeysFilter.class.getName();
 
-	private String prefix_regEx = "([\\u4e00-\\uFFFF]|[\\s])(?i)"; // chinese or
+	private String prefix_regEx = ""; // chinese or
 	// whitespace
 	private String suffix_regEx = "";
 
@@ -58,8 +58,12 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 			if (hotKeys == null)
 				return body;
 
-			Map<String, String> searchMap = hotKeys.getProps().stream().collect(Collectors.toMap(prop->prop.getName(), prop->prop.getValue()));
-			body =  parallelReplace(body,searchMap);	
+			ConcurrentMap<String, String> searchMap = hotKeys.getProps().stream().collect(Collectors.toConcurrentMap(prop->prop.getName(), prop->prop.getValue()));
+
+			if(body.length()>1024){
+			  body =  parallelReplace(body,searchMap);	
+			}else
+			  body =  convertSearch(searchMap,  body);
 		} catch (Exception e) {
 			Debug.logError("" + e, module);
 		}
@@ -67,7 +71,7 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 	}
 
 	//from chatGPT
-	public  String parallelReplace(String input,Map<String, String> searchMap) {
+	public  String parallelReplace(String input,ConcurrentMap<String, String> searchMap) {
         int parallelism = ForkJoinPool.commonPool().getParallelism();
 
         // Split the input string into chunks based on the number of available processors
@@ -90,9 +94,9 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 	public static void main(String[] args) {
 		HotKeysFilter hotKeysFilter = new HotKeysFilter();
 		// Example usage
-		String largeText = "This is a large text with multiple occurrences of the word Java. Replace Java with another word.";
-		Map<String, String> searchMap = new HashMap<>();
-		searchMap.put("Java", "GPT-3");
+		String largeText = "This is a large text with multiple banq注 occurrences of the word Java. Replace Java with another 水水水水 （banq注）.";
+		ConcurrentMap<String, String> searchMap = new ConcurrentHashMap<>();
+		searchMap.put("banq注", "瞎写");
 		searchMap.put("word", "GPT-4");
 
 		String result = hotKeysFilter.parallelReplace(largeText,searchMap);
@@ -101,12 +105,17 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 		System.out.println("Modified: " + result);
 	}
 
-	private String convertSearch(Map<String, String> searchMap, String chunk) {
+	private String convertSearch(ConcurrentMap<String, String> searchMap, String chunk) {
 		for (String key : searchMap.keySet()) {
+			String replacementVale = searchMap.get(key);
+			if (replacementVale == null)
+				break;
 			String regEx = prefix_regEx + key + suffix_regEx;
-			String replacement = getKeyUrlStr(key, searchMap.get(key));
-			Pattern pattern = Patterns.computeIfAbsent(replacement, k -> Pattern.compile(regEx));
-			chunk = pattern.matcher(chunk).replaceFirst(replacement);
+			Pattern pattern = Patterns.computeIfAbsent(regEx, k -> Pattern.compile(regEx));
+			Matcher matcher = pattern.matcher(chunk);
+			if (matcher.find()) {
+				chunk = searchMap.remove(key, replacementVale)?matcher.replaceFirst(getKeyUrlStr(key, replacementVale)):chunk;
+			}
 		}
 		return chunk;
 	}
@@ -114,14 +123,11 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 	
 
 	private String getKeyUrlStr(String name, String url) {
+		if (url == null || url.isEmpty()) return null;
 		StringBuilder bf = new StringBuilder();
 		bf.append("<a href='");
 		bf.append(url);
-
 		bf.append("' target=_blank><b>");
-		// // class="hotkeys ajax_query=cache"
-		// bf.append(" class='hotkeys ajax_query=").append(name).append("' ");
-		// bf.append(" id='id_").append(url).append("' ><b>");
 		bf.append(name);
 		bf.append("</b></a>");
 		return bf.toString();
