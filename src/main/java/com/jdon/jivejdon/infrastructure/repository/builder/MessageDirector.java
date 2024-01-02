@@ -16,28 +16,31 @@
  */
 package com.jdon.jivejdon.infrastructure.repository.builder;
 
+import java.util.Collection;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.pointcut.Around;
-import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.spi.component.filter.OutFilterManager;
-import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.RootMessage;
-import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
+import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.message.FilterPipleSpec;
 import com.jdon.jivejdon.domain.model.property.HotKeys;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactory;
-import com.jdon.jivejdon.infrastructure.repository.property.HotKeysRepository;
-import com.jdon.jivejdon.infrastructure.repository.property.UploadRepository;
 import com.jdon.jivejdon.infrastructure.repository.dao.MessageDao;
 import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.Collection;
-import java.util.Optional;
+import com.jdon.jivejdon.infrastructure.repository.property.HotKeysRepository;
+import com.jdon.jivejdon.infrastructure.repository.property.UploadRepository;
+import com.jdon.jivejdon.spi.component.filter.OutFilterManager;
+import com.jdon.jivejdon.util.Constants;
 
 /**
  * Builder pattern for ForumMessage
@@ -63,6 +66,10 @@ public class MessageDirector implements MessageDirectorIF {
 
 	private ThreadDirectorIF threadDirectorIF;
 
+	private final ConcurrentMap<Long, RootMessage> atomicFactorys = new ConcurrentHashMap<>();
+
+	private final ConcurrentMap<Long, ForumMessage> atomicFactorys2 = new ConcurrentHashMap<>();
+
 	public MessageDirector(ForumDirector forumDirector, MessageDao messageDao, AccountFactory accountFactory,
 			OutFilterManager outFilterManager, PropertyDao propertyDao, UploadRepository uploadRepository,
 			HotKeysRepository hotKeysFactory) {
@@ -86,7 +93,10 @@ public class MessageDirector implements MessageDirectorIF {
 		if (messageId == null || messageId == 0)
 			return null;
 		try {
-			return buildMessage(messageId);
+			ForumMessage forumMessage = (ForumMessage)atomicFactorys2.computeIfAbsent(messageId, k->buildMessage(messageId));
+			if (forumMessage != null)
+			   atomicFactorys2.remove(messageId);
+			return forumMessage;
 		} catch (Exception e) {
 			return null;
 		}
@@ -97,7 +107,10 @@ public class MessageDirector implements MessageDirectorIF {
 		if (messageId == null || messageId == 0)
 			return null;
 		try {
-			return buildRootMessage(messageId, threadId);
+			RootMessage rootMessage = atomicFactorys.computeIfAbsent(messageId, k->buildRootMessage(messageId, threadId));
+			if (rootMessage != null)
+			    atomicFactorys.remove(messageId);
+			return rootMessage;
 		} catch (Exception e) {
 			return null;
 		}
@@ -107,7 +120,7 @@ public class MessageDirector implements MessageDirectorIF {
 	 * builder pattern with lambdas return a full ForumMessage need solve the
 	 * relations with Forum ForumThread parentMessage
 	 */
-	private RootMessage buildRootMessage(Long messageId, Long threadId) throws Exception {
+	private RootMessage buildRootMessage(Long messageId, Long threadId)  {
 		logger.debug(" enter createMessage for id=" + messageId);
 		try {
 			final AnemicMessageDTO anemicMessageDTO = (AnemicMessageDTO) messageDao.getAnemicMessage(messageId);
@@ -148,7 +161,7 @@ public class MessageDirector implements MessageDirectorIF {
 	 * relations with Forum
 	 *
 	 */
-	private ForumMessage buildMessage(Long messageId) throws Exception {
+	private ForumMessage buildMessage(Long messageId)  {
 		logger.debug(" enter createMessage for id=" + messageId);
 		try {
 			final AnemicMessageDTO anemicMessageDTO = (AnemicMessageDTO) messageDao.getAnemicMessage(messageId);

@@ -40,6 +40,7 @@ public class ImageFilter implements Function<MessageVO, MessageVO> {
 		if (str == null || str.length() == 0) {
 			return str;
 		}
+		if(!str.contains("img")) return str;
 		
 		Matcher m = p.matcher(str);
 		StringBuffer sb = new StringBuffer();

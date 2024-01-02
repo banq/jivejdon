@@ -1,13 +1,14 @@
 package com.jdon.jivejdon.domain.model.message.output.linkurl;
 
-import com.jdon.jivejdon.domain.model.message.MessageUrlVO;
-import com.jdon.jivejdon.domain.model.message.MessageVO;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.jdon.jivejdon.domain.model.message.MessageUrlVO;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 
 /**
  * Quote link
@@ -21,13 +22,13 @@ public class LinkUrlExtractor implements Function<MessageVO, MessageVO> {
 	@Override
 	public MessageVO apply(MessageVO messageVO) {
 		String linkUrl = "";
-		String newbody;
-		Matcher matcher = httpURLEscape.matcher(messageVO.getBody());
+		String newbody = messageVO.getBody();
+		if (!newbody.contains("http")) return messageVO;
+		Matcher matcher = httpURLEscape.matcher(newbody);
 		if (matcher.find()) {
 			linkUrl = matcher.group();
 			newbody = matcher.replaceAll("");
-		} else
-			newbody = messageVO.getBody();
+		} 
 
 		messageVO.getForumMessage().setMessageUrlVO(new MessageUrlVO(linkUrl, messageVO
 				.getForumMessage().getMessageUrlVO().getThumbnailUrl(), messageVO

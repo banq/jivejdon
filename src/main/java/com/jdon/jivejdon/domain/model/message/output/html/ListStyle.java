@@ -1,8 +1,8 @@
 package com.jdon.jivejdon.domain.model.message.output.html;
 
-import com.jdon.jivejdon.domain.model.message.MessageVO;
-
 import java.util.function.Function;
+
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 
 /**
  * [list] [/list]  ===> [ul][/ul]
@@ -17,6 +17,7 @@ public class ListStyle implements Function<MessageVO, MessageVO> {
 	}
 
 	private String convertTags(String input) {
+		if (!input.contains("list")) return input;
 		input = convertOLTag(input);
 		input = convertULTag(input);
 		return input;

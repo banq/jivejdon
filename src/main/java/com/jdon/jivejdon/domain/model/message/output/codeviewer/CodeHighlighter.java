@@ -15,15 +15,16 @@
  */
 package com.jdon.jivejdon.domain.model.message.output.codeviewer;
 
-import com.jdon.jivejdon.domain.model.message.MessageVO;
-import com.jdon.util.StringUtil;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.function.Function;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.jdon.jivejdon.domain.model.message.MessageVO;
+import com.jdon.util.StringUtil;
 
 /**
  * A ForumMessageFilter that syntax highlights Java code appearing between
@@ -183,6 +184,7 @@ public class CodeHighlighter implements Function<MessageVO, MessageVO> {
 		if (input == null || input.length() == 0) {
 			return input;
 		} else {
+			if(!input.contains("[code]")) return input;
 			StringBuilder buf = new StringBuilder(input.length() + 50);
 			int i = 0, j = 0, oldend = 0;
 
