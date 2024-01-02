@@ -16,15 +16,16 @@
  */
 package com.jdon.jivejdon.spi.component.block;
 
-import com.jdon.jivejdon.infrastructure.repository.dao.SetupDao;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.io.BufferedReader;
 import java.io.StringReader;
 import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.jdon.jivejdon.infrastructure.repository.dao.SetupDao;
 
 /**
  * From Apache Roller
@@ -43,6 +44,11 @@ public class IPBanListManager implements Runnable, IPBanListManagerIF {
 	private final static Logger log = LogManager.getLogger(IPBanListManager.class);
 
 	private final String PERSISTENCE_NAME = "IPBANLIST";
+	
+	private final Pattern pattern = Pattern.compile("\\b((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.(" +
+				"(?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)" +
+				"\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])" +
+				"\\b");
 
 	private final IPHolder ipHolder;
 	// file listing the ips that are banned
@@ -60,10 +66,6 @@ public class IPBanListManager implements Runnable, IPBanListManagerIF {
 
 	public boolean isIPAddress(String ipaddr) {
 		boolean flag = false;
-		Pattern pattern = Pattern.compile("\\b((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.(" +
-				"(?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)" +
-				"\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])" +
-				"\\b");
 		Matcher m = pattern.matcher(ipaddr);
 		flag = m.matches();
 		return flag;

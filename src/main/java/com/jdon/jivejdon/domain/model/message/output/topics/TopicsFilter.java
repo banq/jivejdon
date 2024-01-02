@@ -16,12 +16,13 @@
  */
 package com.jdon.jivejdon.domain.model.message.output.topics;
 
-import com.jdon.jivejdon.domain.model.message.MessageVO;
-import com.jdon.util.Debug;
-
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.jdon.jivejdon.domain.model.message.MessageVO;
+import com.jdon.util.Debug;
 
 /**
  * removing replace #topic with search key
@@ -34,6 +35,7 @@ public class TopicsFilter implements Function<MessageVO, MessageVO> {
 
 	private final String regEx = "[a-zA-Z\u4e00-\u9fa5]+";
 	private String topicUrl = "/query/searchAction.shtml?query=";
+	private final static ConcurrentHashMap<String, Pattern> patterns = new ConcurrentHashMap<>();
 
 	//
 	public MessageVO apply(MessageVO messageVO) {
@@ -45,13 +47,13 @@ public class TopicsFilter implements Function<MessageVO, MessageVO> {
 	 */
 	public String applyFilteredBody(String body) {
 		try {
-			Pattern topicRegEx = Pattern.compile("#" + regEx);
+			if (!body.contains("#")) return body;
+			Pattern topicRegEx = patterns.computeIfAbsent(regEx, k-> Pattern.compile("#" + regEx));
 			Matcher matcher = topicRegEx.matcher(body);
 			while (matcher.find()) {
 				String topocStr = matcher.group();
 				if (topocStr.length() < 20)
-					body = Pattern.compile(topocStr).matcher(body)
-							.replaceAll(getKeyUrlStr(topocStr.replaceAll("#", "")));
+					body = matcher.replaceAll(getKeyUrlStr(topocStr.replaceAll("#", "")));
 			}
 		} catch (Exception e) {
 			Debug.logError("" + e, module);

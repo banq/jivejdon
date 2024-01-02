@@ -15,11 +15,10 @@
  */
 package com.jdon.jivejdon.domain.model.message.output.html;
 
-import com.jdon.jivejdon.domain.model.message.MessageVO;
-
 import java.util.function.Function;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 
 /**
  * A ForumMessageFilter that converts newline characters into HTML &lt;br&gt;
@@ -28,6 +27,7 @@ import java.util.regex.Pattern;
  * to work around the TextStyle filter.
  */
 public class Newline implements Function<MessageVO, MessageVO> {
+	private final Pattern pattern = Pattern.compile("\r\n\r\n", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 	// private final static String module = Newline.class.getName();
 	// private static final char[] P_TAG = "</section><section
 	// class=\"indent\">".toCharArray();
@@ -110,11 +110,7 @@ public class Newline implements Function<MessageVO, MessageVO> {
 	 */
 	public MessageVO apply(MessageVO messageVO) {
 		String s = "<p class=\"indent\">" + messageVO.getBody();
-		Pattern pattern = Pattern.compile("\r\n\r\n", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 		s = pattern.matcher(s).replaceAll("</p><p class=\"indent\">");
-		if (pattern.matcher(s).find()) {
-			s = s.concat("</p>");
-		}
 		return messageVO.builder().subject(messageVO.getSubject()).body(convertNewlinesAroundCode(s)).build();
 	}
 

@@ -42,7 +42,7 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 	// whitespace
 	private String suffix_regEx = "";
 
-	private final static ConcurrentHashMap<String, Matcher> Matchers = new ConcurrentHashMap<>();
+	private final static ConcurrentHashMap<String, Pattern> patterns = new ConcurrentHashMap<>();
 	//
 	public MessageVO apply(MessageVO messageVO) {
 		return messageVO.builder().subject(messageVO.getSubject()).body(applyFilteredBody(messageVO)).build();
@@ -94,13 +94,19 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 	public static void main(String[] args) {
 		HotKeysFilter hotKeysFilter = new HotKeysFilter();
 		// Example usage
-		String largeText = "This is a large text with multiple banq注 occurrences of the word Java. Replace Java with another 水水水水 （banq注）.";
+		String largeText = "This is a large text with multiple banq注 #occurrences of the word Java. Replace Java with another 水水水水 （banq注）.";
 		ConcurrentMap<String, String> searchMap = new ConcurrentHashMap<>();
 		searchMap.put("banq注", "瞎写");
 		searchMap.put("word", "GPT-4");
 
 		String result = hotKeysFilter.parallelReplace(largeText,searchMap);
 
+		Pattern pattern = Pattern.compile("#occurrences", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+		Matcher matcher  = pattern.matcher(result);
+		if (matcher.find()) {
+				String topocStr = matcher.group();
+					result = matcher.replaceAll("============");
+			}
 		System.out.println("Original: " + largeText);
 		System.out.println("Modified: " + result);
 	}
@@ -111,8 +117,8 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 			String replacementVale = searchMap.get(key);
 			if (replacementVale == null) continue;
 			String regEx = prefix_regEx + key + suffix_regEx;
-			Matcher matcher = Matchers.computeIfAbsent(regEx, k -> Pattern.compile(regEx).matcher("ignored input"));
-			chunk = searchMap.remove(key, replacementVale)?matcher.reset(chunk).replaceFirst(getKeyUrlStr(key, replacementVale)):chunk;
+			Pattern p = patterns.computeIfAbsent(regEx, k -> Pattern.compile(regEx));
+			chunk = searchMap.remove(key, replacementVale)?p.matcher(chunk).replaceFirst(getKeyUrlStr(key, replacementVale)):chunk;
 		}
 		return chunk;
 	}

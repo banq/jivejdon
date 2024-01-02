@@ -15,18 +15,19 @@
  */
 package com.jdon.jivejdon.domain.model.message.output.html;
 
-import com.jdon.jivejdon.domain.model.message.MessageVO;
-
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 
 /**
  * A ForumMessageFilter that replaces to <img src=url></img>
  */
 
 public class ImageFilter implements Function<MessageVO, MessageVO> {
-	private final static String module = ImageFilter.class.getName();
+
+	private final Pattern p = Pattern.compile("(\\[img\\])([^\\[]+)(\\[/img\\])");
 
 	public MessageVO apply(MessageVO messageVO) {
 		return messageVO.builder().subject(messageVO.getSubject()).body(convertTags
@@ -39,8 +40,7 @@ public class ImageFilter implements Function<MessageVO, MessageVO> {
 		if (str == null || str.length() == 0) {
 			return str;
 		}
-		String patt = "(\\[img\\])([^\\[]+)(\\[/img\\])";
-		Pattern p = Pattern.compile(patt);
+		
 		Matcher m = p.matcher(str);
 		StringBuffer sb = new StringBuffer();
 		boolean result = m.find();

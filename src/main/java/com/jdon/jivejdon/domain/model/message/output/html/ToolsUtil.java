@@ -1,9 +1,13 @@
 package com.jdon.jivejdon.domain.model.message.output.html;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ToolsUtil {
+
+	private final static ConcurrentMap<String, Pattern> cacheP = new ConcurrentHashMap<>();
 
 	/**
 	 * replace String [list] [/ist] or [XX] [/XX] or XXX YYY
@@ -22,9 +26,10 @@ public class ToolsUtil {
 		if (input == null || input.length() == 0)
 			return input;
 
-		Matcher matcher = Pattern.compile(parentTagRegx, Pattern.CASE_INSENSITIVE | Pattern.DOTALL)
-				.matcher(input);
-		StringBuilder sb = new StringBuilder();
+		Pattern pattern = cacheP.computeIfAbsent(parentTagRegx,
+				k -> Pattern.compile(parentTagRegx, Pattern.CASE_INSENSITIVE | Pattern.DOTALL));
+
+		Matcher matcher = pattern.matcher(input);
 		while (matcher.find()) {
 			input = convertTagsFirst(input, parentTagRegx, parentHtml, childTagRex, childHtml);
 		}
@@ -39,8 +44,9 @@ public class ToolsUtil {
 		if (input == null || input.length() == 0)
 			return input;
 
-		Matcher matcher = Pattern.compile(parentTagRegx, Pattern.CASE_INSENSITIVE | Pattern.DOTALL)
-				.matcher(input);
+		Pattern pattern = cacheP.computeIfAbsent(parentTagRegx,
+				k -> Pattern.compile(parentTagRegx, Pattern.CASE_INSENSITIVE | Pattern.DOTALL));	
+		Matcher matcher = pattern.matcher(input);
 		StringBuilder sb = new StringBuilder();
 		if (matcher.find()) {
 			// remove \n ...
@@ -82,8 +88,9 @@ public class ToolsUtil {
 		if (input == null || input.length() == 0)
 			return input;
 
-		Matcher matcher = Pattern.compile(parentTagRegx, Pattern.CASE_INSENSITIVE | Pattern.DOTALL)
-				.matcher(input);
+		Pattern pattern = cacheP.computeIfAbsent(parentTagRegx,
+				k -> Pattern.compile(parentTagRegx, Pattern.CASE_INSENSITIVE | Pattern.DOTALL));
+		Matcher matcher = pattern.matcher(input);
 		input = matcher.replaceAll(phtml);
 
 		return input;

@@ -1,11 +1,11 @@
 package com.jdon.jivejdon.domain.model.message;
 
-import com.jdon.jivejdon.domain.model.ForumMessage;
-import com.jdon.util.StringUtil;
-
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.regex.Pattern;
+
+import org.jsoup.Jsoup;
+
+import com.jdon.jivejdon.domain.model.ForumMessage;
 
 /**
  * ForumMessage's value object created by MessageVOCreatedBuilder
@@ -17,10 +17,6 @@ import java.util.regex.Pattern;
 public final class MessageVO implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = 1L;
-
-	private final static Pattern quoteEscape = Pattern.compile("\\[.*?\\](.*)\\[\\/.*?\\]");
-	private final static Pattern htmlEscape = Pattern.compile("\\<.*?\\>|<[^>]+");
-	private final static Pattern newlineEscape = Pattern.compile("\\<br\\>|\\<p\\>", Pattern.CASE_INSENSITIVE);
 
 	private final ForumMessage forumMessage;
 
@@ -69,18 +65,15 @@ public final class MessageVO implements Serializable, Cloneable {
 
 	public String getBodyText(int length) {
 		String text = getBody().substring(0, Math.min(getBody().length(), length));
-		return quoteEscape.matcher(text).replaceAll(" ");
+		return Jsoup.parse(text).text();
 	}
 
 	public String shortenNoHTML(String in) {
-		String nohtml = htmlEscape.matcher(in).replaceAll(" ");
-		return quoteEscape.matcher(nohtml).replaceAll(" ");
+		return Jsoup.parse(in).text();
 	}
 
 	public String shortenNoHTMLText(String in) {
-		String puretext = newlineEscape.matcher(in).replaceAll("\r\n");
-		String nohtml = htmlEscape.matcher(puretext).replaceAll(" ");
-		return quoteEscape.matcher(nohtml).replaceAll(" ");
+		return Jsoup.parse(in).text();
 	}
 
 	public int getBodyLengthK(){

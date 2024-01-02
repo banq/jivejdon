@@ -18,6 +18,7 @@ package com.jdon.jivejdon.util;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
 import com.jdon.annotation.Component;
@@ -33,6 +34,8 @@ import com.jdon.domain.model.cache.ModelManager;
  */
 @Component("containerUtil")
 public class ContainerUtil {
+	
+	private final static ConcurrentHashMap<String, Pattern> patterns = new ConcurrentHashMap<>();
 
 	private SessionContextSetup sessionContextSetup;
 	private ModelManager modelManager;
@@ -112,7 +115,7 @@ public class ContainerUtil {
 		if (keys == null || keys.size() == 0)
 			return new PageIterator();
 
-		Pattern domainPattern = Pattern.compile(".*(" + skey + ").*");
+		Pattern domainPattern = patterns.computeIfAbsent(skey, k->Pattern.compile(".*(" + skey + ").*"));
 		List searchKeys = new ArrayList(keys.size());
 		for (Object o : keys) {
 			if (domainPattern.matcher(o.toString()).matches()) {
