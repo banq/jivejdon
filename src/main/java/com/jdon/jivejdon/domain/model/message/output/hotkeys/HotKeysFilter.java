@@ -95,7 +95,7 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 		
 		HotKeysFilter hotKeysFilter = new HotKeysFilter();
 		// Example usage
-		String largeText = "啊实打实banq注 s注 word   模块化设计是指产品设计的方法/程序，涉及集成或组合较小的独立元素以创建成品。大型产品（如汽车）可以分为更小、更简单的组件，并使用模块化设计方法单独开发和生产。最终产品是通过集成（或组装）这些组件中的每一个来创建的。";
+		String largeText = "啊实打实#banq注 s注 word   模块化设计是指产品设计的方法/程序，涉及集成或组合较小的独立元素以WORD创建成品。大型产品（如汽车）可以分为更小、更简单的组件，并使用模块化设计方法单独开发和生产。最终产品是通过集成（或组装）这些组件中的banq注每一个来创建的。";
 		ConcurrentMap<String, String> searchMap = new ConcurrentHashMap<>();
 		searchMap.put("banq注", "瞎写");
 		searchMap.put("word", "GPT-4");
@@ -107,29 +107,25 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 	}
 
 	private String convertSearch(ConcurrentMap<String, String> searchMap, String chunk) {
-		try{
+		try {
 			for (String key : searchMap.keySet()) {
 				if (!chunk.contains(key))
 					continue;
-				String replacementVale = searchMap.get(key);
-				if (replacementVale == null)
-					continue;
-				String regEx = prefix_regEx + key + suffix_regEx;
-				Pattern p = patterns.computeIfAbsent(regEx, k -> Pattern.compile(regEx));
-				Matcher m = p.matcher(chunk);
-				if (m.find())
-					chunk = searchMap.remove(key, replacementVale)
-							? m.replaceFirst(m.group().replace(key, "") + getKeyUrlStr(key, replacementVale))
-							: chunk;
+
+				Matcher m = patterns.computeIfAbsent(prefix_regEx + key + suffix_regEx,
+						k -> Pattern.compile(prefix_regEx + key + suffix_regEx)).matcher(chunk);
+				chunk = m.find()
+						? m.replaceFirst(m.group().replace(key, "") + getKeyUrlStr(key, searchMap.remove(key)))
+						: chunk;
 			}
-		}finally{}
+		} finally {
+		}
 		return chunk;
 	}
-
 	
 
 	private String getKeyUrlStr(String name, String url) {
-		if (url == null || url.isEmpty()) return null;
+		if (url == null || url.isEmpty()) return name;
 		StringBuilder bf = new StringBuilder();
 		bf.append("<a href='");
 		bf.append(url);
