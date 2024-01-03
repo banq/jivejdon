@@ -74,7 +74,7 @@ pageContext.setAttribute("title", titleStr);
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
  
 
-<main>
+
 <div id="page-content" class="single-page container">
     <div class="row">
       <!-- /////////////////左边 -->
@@ -122,11 +122,11 @@ pageContext.setAttribute("title", titleStr);
 		  
       </center>
 
-
+<main>
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
   <%@ include file="threadListCore.jsp" %>
 </logic:iterate>
-
+</main>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
      crossorigin="anonymous"></script>
@@ -178,7 +178,7 @@ pageContext.setAttribute("title", titleStr);
 
   </div>
 </div>  
-</main>
+
 
 
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
