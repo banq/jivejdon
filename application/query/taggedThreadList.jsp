@@ -73,6 +73,15 @@ pageContext.setAttribute("title", titleStr);
 
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
  
+
+<main>
+<div id="page-content" class="single-page container">
+    <div class="row">
+      <!-- /////////////////左边 -->
+      <div id="main-content" class="col-lg-12">
+
+        <div class="box"> 
+        
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
      crossorigin="anonymous"></script>
 <ins class="adsbygoogle"
@@ -85,12 +94,6 @@ pageContext.setAttribute("title", titleStr);
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 
-<main>
-<div id="page-content" class="single-page container">
-    <div class="row">
-      <!-- /////////////////左边 -->
-      <div id="main-content" class="col-lg-12">
-        <div class="box"> 
        <center>
         
         <h2 class="tagcloud"><a href="/tag-<bean:write name="tagID"/>/" class="tag-cloud-link"><bean:write  name='TITLE'/></a></h2>
