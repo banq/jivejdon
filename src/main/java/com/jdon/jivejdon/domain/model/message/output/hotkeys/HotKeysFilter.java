@@ -30,15 +30,17 @@ import com.jdon.util.Debug;
 
 /**
  * removing replace hot keywords with HotKeys added by administrator
+ * behind @TopicsFilter
  * all char:
- * ([!\"#$%&'()*+,-./:;<=>?@[\\\\]^_`{|}~]|[a-zA-Z0-9\\s\\u4e00-\\uFFFF]|[\\s])(?i)
+ * ([!\"#$%&'()*+,-./:;<=>?@\\[\\]`{|}\\\\~^]|[a-zA-Z0-9\\s\\u4e00-\\uFFFF]|[\\s])(?i)
+ * 
  * @author banq
  * 
  */
 public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 	private final static String module = HotKeysFilter.class.getName();
 
-	private String prefix_regEx = ""; // chinese or
+	private String prefix_regEx = "[^!\"#$%&'()*+,-./:;<=>?@\\[\\]`{|}\\\\~^]"; // chinese or
 	// whitespace
 	private String suffix_regEx = "";
 
@@ -59,11 +61,7 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 				return body;
 
 			ConcurrentMap<String, String> searchMap = hotKeys.getProps().stream().collect(Collectors.toConcurrentMap(prop->prop.getName(), prop->prop.getValue()));
-
-			if(body.length()>1024){
 			  body =  parallelReplace(body,searchMap);	
-			}else
-			  body =  convertSearch(searchMap,  body);
 		} catch (Exception e) {
 			Debug.logError("" + e, module);
 		}
@@ -76,6 +74,8 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 
         // Split the input string into chunks based on the number of available processors
         int chunkSize = input.length() / parallelism;
+		if(chunkSize<10) return convertSearch(searchMap,input);
+
         String[] chunks = new String[parallelism];
         for (int i = 0; i < parallelism - 1; i++) {
             chunks[i] = input.substring(i * chunkSize, (i + 1) * chunkSize);
@@ -92,21 +92,16 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
     }
 
 	public static void main(String[] args) {
+		
 		HotKeysFilter hotKeysFilter = new HotKeysFilter();
 		// Example usage
-		String largeText = "This is a large text with multiple banq注 #occurrences of the word Java. Replace Java with another 水水水水 （banq注）.";
+		String largeText = "啊实打实'banq注 s注 word   模块化设计是指产品设计的方法/程序，涉及集成或组合较小的独立元素以创建成品。大型产品（如汽车）可以分为更小、更简单的组件，并使用模块化设计方法单独开发和生产。最终产品是通过集成（或组装）这些组件中的每一个来创建的。";
 		ConcurrentMap<String, String> searchMap = new ConcurrentHashMap<>();
 		searchMap.put("banq注", "瞎写");
 		searchMap.put("word", "GPT-4");
 
 		String result = hotKeysFilter.parallelReplace(largeText,searchMap);
 
-		Pattern pattern = Pattern.compile("#occurrences", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
-		Matcher matcher  = pattern.matcher(result);
-		if (matcher.find()) {
-				String topocStr = matcher.group();
-					result = matcher.replaceAll("============");
-			}
 		System.out.println("Original: " + largeText);
 		System.out.println("Modified: " + result);
 	}
@@ -118,7 +113,9 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 			if (replacementVale == null) continue;
 			String regEx = prefix_regEx + key + suffix_regEx;
 			Pattern p = patterns.computeIfAbsent(regEx, k -> Pattern.compile(regEx));
-			chunk = searchMap.remove(key, replacementVale)?p.matcher(chunk).replaceFirst(getKeyUrlStr(key, replacementVale)):chunk;
+			Matcher m = p.matcher(chunk);
+			if (m.find())
+			  chunk = searchMap.remove(key, replacementVale)?m.replaceFirst(m.group().replace(key, "")+getKeyUrlStr(key, replacementVale)):chunk;
 		}
 		return chunk;
 	}

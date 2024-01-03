@@ -26,6 +26,7 @@ import com.jdon.util.Debug;
 
 /**
  * removing replace #topic with search key
+ * before @HotKeysFilter
  * 
  * @author banq
  * 
