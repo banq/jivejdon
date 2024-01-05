@@ -122,7 +122,8 @@ pageContext.setAttribute("title", titleStr);
 </ul>           
 
 
-
+ 
+<logic:empty name="forum" property="forumId">	
 <div class="box">
 <div class="row">
 
@@ -149,7 +150,35 @@ pageContext.setAttribute("title", titleStr);
 
 </div>
 </div>
+ </logic:empty>
+<logic:notEmpty name="forum" property="forumId">		
+<div class="box">
+<div class="row">
 
+<div class="col-lg-4">
+ <%if(pagestartInt != 0 ) {%> 
+ <span class="pull-left">
+    <%if(pagestartInt-pagecountInt>0 ) {%>  
+        <a href="/forum/<bean:write name="forum" property="forumId"/>/<%=(pagestartInt-pagecountInt)%>" >上页</a>
+    <%}else{%>
+        <a href="/forum/<bean:write name="forum" property="forumId"/>/" >上页</a>
+     <%}%>
+ </span>
+ <%}%>
+</div>
+<div class="col-lg-4"></div>
+
+<div class="col-lg-4">
+<span class="pull-right"> 
+    <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
+    <a href="/forum/<bean:write name="forum" property="forumId"/>/<%=pagestartInt+pagecountInt%>" >下页</a>
+    <%}%>
+</span>
+</div>
+
+</div>
+</div>
+</logic:notEmpty>  
 
 
 
@@ -190,7 +219,7 @@ pageContext.setAttribute("title", titleStr);
   </ul>   
  
  
-
+<logic:empty name="forum" property="forumId">	
 <div class="box">
 <div class="row">
 
@@ -217,7 +246,35 @@ pageContext.setAttribute("title", titleStr);
 
 </div>
 </div>
+ </logic:empty>
+<logic:notEmpty name="forum" property="forumId">		
+<div class="box">
+<div class="row">
 
+<div class="col-lg-4">
+ <%if(pagestartInt != 0 ) {%> 
+ <span class="pull-left">
+    <%if(pagestartInt-pagecountInt>0 ) {%>  
+        <a href="/forum/<bean:write name="forum" property="forumId"/>/<%=(pagestartInt-pagecountInt)%>" >上页</a>
+    <%}else{%>
+        <a href="/forum/<bean:write name="forum" property="forumId"/>/" >上页</a>
+     <%}%>
+ </span>
+ <%}%>
+</div>
+<div class="col-lg-4"></div>
+
+<div class="col-lg-4">
+<span class="pull-right"> 
+    <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
+    <a href="/forum/<bean:write name="forum" property="forumId"/>/<%=pagestartInt+pagecountInt%>" >下页</a>
+    <%}%>
+</span>
+</div>
+
+</div>
+</div>
+</logic:notEmpty>  
 
   
 
