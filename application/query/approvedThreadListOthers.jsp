@@ -89,16 +89,34 @@ pageContext.setAttribute("title", titleStr);
 
 </ul>   
 
-<div class="box">  
-<MultiPagesREST:pager actionFormName="threadListForm" page="/approval" >
-        <span class="pull-left">
-         <MultiPagesREST:prev name=" 上页 " />
-                 </span>
-         <span class="pull-right">
-         <MultiPagesREST:next  name=" 下页 " />
-         </span>
-</MultiPagesREST:pager>
+
+<div class="box">
+<div class="row">
+
+<div class="col-lg-4">
+ <%if(pagestartInt != 0 ) {%> 
+ <span class="pull-left">
+    <%if(pagestartInt-pagecountInt>0 ) {%>  
+        <a href="/approval/<%=(pagestartInt-pagecountInt)%>" >上页</a>
+    <%}else{%>
+        <a href="/approval/" >上页</a>
+     <%}%>
+ </span>
+ <%}%>
 </div>
+<div class="col-lg-4"></div>
+
+<div class="col-lg-4">
+<span class="pull-right"> 
+    <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
+    <a href="/approval/<%=pagestartInt+pagecountInt%>" >下页</a>
+    <%}%>
+</span>
+</div>
+
+</div>
+</div>
+
 
 <div class="list-group">
 
@@ -108,16 +126,35 @@ pageContext.setAttribute("title", titleStr);
 
 </div>
 
-<div class="box">  
-<MultiPagesREST:pager actionFormName="threadListForm" page="/approval" >
-        <span class="pull-left">
-         <MultiPagesREST:prev name=" 上页 " />
-                 </span>
-         <span class="pull-right">
-         <MultiPagesREST:next  name=" 下页 " />
-         </span>
-</MultiPagesREST:pager>
+
+
+<div class="box">
+<div class="row">
+
+<div class="col-lg-4">
+ <%if(pagestartInt != 0 ) {%> 
+ <span class="pull-left">
+    <%if(pagestartInt-pagecountInt>0 ) {%>  
+        <a href="/approval/<%=(pagestartInt-pagecountInt)%>" >上页</a>
+    <%}else{%>
+        <a href="/approval/" >上页</a>
+     <%}%>
+ </span>
+ <%}%>
 </div>
+<div class="col-lg-4"></div>
+
+<div class="col-lg-4">
+<span class="pull-right"> 
+    <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
+    <a href="/approval/<%=pagestartInt+pagecountInt%>" >下页</a>
+    <%}%>
+</span>
+</div>
+
+</div>
+</div>
+
 
         </div>
       </div>  

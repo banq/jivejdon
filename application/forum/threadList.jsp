@@ -120,24 +120,37 @@ pageContext.setAttribute("title", titleStr);
   </a></li>
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" ><i class="fa fa-search"></i></a></li>
 </ul>           
- <ul class="pagination pull-right">
-  		 <logic:empty name="forum" property="forumId">						        
-          <MultiPagesREST:pager actionFormName="threadListForm" page="/threads" >
-            <MultiPagesREST:prev name=" 上页 " />
-            <MultiPagesREST:index displayCount="8" />
-            <MultiPagesREST:next  name=" 下页 " />
-          </MultiPagesREST:pager>          
-        </logic:empty>
-        <logic:notEmpty name="forum" property="forumId">			    
-          <MultiPagesREST:pager actionFormName="threadListForm" page="/forum" paramId="forum" paramName="forum" paramProperty="forumId">
-            <MultiPagesREST:prev name=" 上页 " />
-            <MultiPagesREST:index displayCount="8" />
-            <MultiPagesREST:next  name=" 下页 " />
-          </MultiPagesREST:pager>
-           有<b><bean:write name="threadListForm" property="allCount"/></b>贴          
-        </logic:notEmpty>           
-  </ul> 
-                  
+
+
+
+<div class="box">
+<div class="row">
+
+<div class="col-lg-4">
+ <%if(pagestartInt != 0 ) {%> 
+ <span class="pull-left">
+    <%if(pagestartInt-pagecountInt>0 ) {%>  
+        <a href="/threads/<%=(pagestartInt-pagecountInt)%>" >上页</a>
+    <%}else{%>
+        <a href="/threads/" >上页</a>
+     <%}%>
+ </span>
+ <%}%>
+</div>
+<div class="col-lg-4"></div>
+
+<div class="col-lg-4">
+<span class="pull-right"> 
+    <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
+    <a href="/threads/<%=pagestartInt+pagecountInt%>" >下页</a>
+    <%}%>
+</span>
+</div>
+
+</div>
+</div>
+
+
 
 
 <div class="list-group">
@@ -175,23 +188,37 @@ pageContext.setAttribute("title", titleStr);
   </a></li>
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" ><i class="fa fa-search"></i></a></li>                
   </ul>   
-  <ul class="pagination pull-right">
-  		 <logic:empty name="forum" property="forumId">						        
-          <MultiPagesREST:pager actionFormName="threadListForm" page="/threads" >
-            <MultiPagesREST:prev name=" 上页 " />
-            <MultiPagesREST:index displayCount="8" />
-            <MultiPagesREST:next  name=" 下页 " />
-          </MultiPagesREST:pager>          
-        </logic:empty>
-        <logic:notEmpty name="forum" property="forumId">			    
-          <MultiPagesREST:pager actionFormName="threadListForm" page="/forum" paramId="forum" paramName="forum" paramProperty="forumId">
-            <MultiPagesREST:prev name=" 上页 " />
-            <MultiPagesREST:index displayCount="8" />
-            <MultiPagesREST:next  name=" 下页 " />
-          </MultiPagesREST:pager>
-           有<b><bean:write name="threadListForm" property="allCount"/></b>贴          
-        </logic:notEmpty>           
-  </ul> 
+ 
+ 
+
+<div class="box">
+<div class="row">
+
+<div class="col-lg-4">
+ <%if(pagestartInt != 0 ) {%> 
+ <span class="pull-left">
+    <%if(pagestartInt-pagecountInt>0 ) {%>  
+        <a href="/threads/<%=(pagestartInt-pagecountInt)%>" >上页</a>
+    <%}else{%>
+        <a href="/threads/" >上页</a>
+     <%}%>
+ </span>
+ <%}%>
+</div>
+<div class="col-lg-4"></div>
+
+<div class="col-lg-4">
+<span class="pull-right"> 
+    <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
+    <a href="/threads/<%=pagestartInt+pagecountInt%>" >下页</a>
+    <%}%>
+</span>
+</div>
+
+</div>
+</div>
+
+
   
 
 				</div>

@@ -98,20 +98,35 @@ pageContext.setAttribute("title", titleStr);
   </a></li>
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" ><i class="fa fa-search"></i></a></li>
 </ul>          
-<ul class="pagination pull-right">
-        <logic:empty name="forum" property="forumId">
-          <MultiPagesREST:pager actionFormName="threadListForm" page="/maxPopThreads" >
-            <MultiPagesREST:prev name=" 上页 " />
-            <MultiPagesREST:index displayCount="8" />
-            <MultiPagesREST:next  name=" 下页 " />
-          </MultiPagesREST:pager>
-        </logic:empty>
-      
-         有<b>
-        <bean:write name="threadListForm" property="allCount"/>
-        </b>贴      
-</ul>
 
+
+
+<div class="box">
+<div class="row">
+
+<div class="col-lg-4">
+ <%if(pagestartInt != 0 ) {%> 
+ <span class="pull-left">
+    <%if(pagestartInt-pagecountInt>0 ) {%>  
+        <a href="/maxPopThreads/<%=(pagestartInt-pagecountInt)%>" >上页</a>
+    <%}else{%>
+        <a href="/maxPopThreads/" >上页</a>
+     <%}%>
+ </span>
+ <%}%>
+</div>
+<div class="col-lg-4"></div>
+
+<div class="col-lg-4">
+<span class="pull-right"> 
+    <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
+    <a href="/maxPopThreads/<%=pagestartInt+pagecountInt%>" >下页</a>
+    <%}%>
+</span>
+</div>
+
+</div>
+</div>
 
 <div class="list-group">
 
@@ -136,20 +151,33 @@ pageContext.setAttribute("title", titleStr);
 
 </div>
  
-<ul class="pagination pull-right">
-        <logic:empty name="forum" property="forumId">
-          <MultiPagesREST:pager actionFormName="threadListForm" page="/maxPopThreads" >
-            <MultiPagesREST:prev name=" 上页 " />
-            <MultiPagesREST:index displayCount="8" />
-            <MultiPagesREST:next  name=" 下页 " />
-          </MultiPagesREST:pager>
-        </logic:empty>
-      
-         有<b>
-        <bean:write name="threadListForm" property="allCount"/>
-        </b>贴      
-</ul>
+ 
+<div class="box">
+<div class="row">
 
+<div class="col-lg-4">
+ <%if(pagestartInt != 0 ) {%> 
+ <span class="pull-left">
+    <%if(pagestartInt-pagecountInt>0 ) {%>  
+        <a href="/maxPopThreads/<%=(pagestartInt-pagecountInt)%>" >上页</a>
+    <%}else{%>
+        <a href="/maxPopThreads/" >上页</a>
+     <%}%>
+ </span>
+ <%}%>
+</div>
+<div class="col-lg-4"></div>
+
+<div class="col-lg-4">
+<span class="pull-right"> 
+    <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
+    <a href="/maxPopThreads/<%=pagestartInt+pagecountInt%>" >下页</a>
+    <%}%>
+</span>
+</div>
+
+</div>
+</div>
       
 	    	         
 				</div>

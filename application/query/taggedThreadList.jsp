@@ -150,6 +150,7 @@ pageContext.setAttribute("title", titleStr);
 
 <div class="box">
 <div class="row">
+
 <div class="col-lg-4">
  <%if(pagestartInt != 0 ) {%> 
  <span class="pull-left">
@@ -162,14 +163,15 @@ pageContext.setAttribute("title", titleStr);
  <%}%>
 </div>
 <div class="col-lg-4"></div>
+
 <div class="col-lg-4">
 <span class="pull-right"> 
     <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
     <a href="/tag-<bean:write name="tagID"/>/<%=pagestartInt+pagecountInt%>" >下页</a>
     <%}%>
 </span>
-
 </div>
+
 </div>
 </div>
 <% } %>  
