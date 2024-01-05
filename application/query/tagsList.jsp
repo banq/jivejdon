@@ -38,19 +38,19 @@ pageContext.setAttribute("title", titleStr);
  
 <%if(pagestartInt != 0 ) {%> 
     <%if(pagestartInt-pagecountInt>0 ) {%>  
-        <link rel="prev" href="/tags/<%=(pagestartInt-pagecountInt)%>"/>
+        <link rel="prev" href="/tagAll/<%=(pagestartInt-pagecountInt)%>"/>
     <%}else{%>
-        <link rel="prev" href="/tags/"/>
+        <link rel="prev" href="/tagAll/"/>
      <%}%>
  <%}%>
 <%if (currentPageNo > 1) {%>
-       <link rel="canonical" href="/tags/<%=pagestartInt%>"/>      
+       <link rel="canonical" href="/tagAll/<%=pagestartInt%>"/>      
    <% }else{%>
-         <link rel="canonical" href="/tags/"/>  
+         <link rel="canonical" href="/tagAll/"/>  
    <% }%>
           
  <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
-    <link rel="next" href="/tags/<%=pagestartInt+pagecountInt%>"/>
+    <link rel="next" href="/tagAll/<%=pagestartInt+pagecountInt%>"/>
  <%}%>
 
 <meta http-equiv="refresh" content="3600">
@@ -158,9 +158,9 @@ int h = 0 ;
  <%if(pagestartInt != 0 ) {%> 
  <span class="pull-left">
     <%if(pagestartInt-pagecountInt>0 ) {%>  
-        <a href="/tags/<%=(pagestartInt-pagecountInt)%>" rel="prev">上页</a>
+        <a href="/tagAll/<%=(pagestartInt-pagecountInt)%>" rel="prev">上页</a>
     <%}else{%>
-        <a href="/tags/" rel="prev">上页</a>
+        <a href="/tagAll/" rel="prev">上页</a>
      <%}%>
  </span>
  <%}%>
@@ -169,7 +169,7 @@ int h = 0 ;
 <div class="col-lg-4">
 <span class="pull-right"> 
     <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
-    <a href="/tags/<%=pagestartInt+pagecountInt%>" rel="next">下页</a>
+    <a href="/tagAll/<%=pagestartInt+pagecountInt%>" rel="next">下页</a>
     <%}%>
 </span>
 

@@ -140,11 +140,11 @@
         <to>/query/tagsList2.shtml</to>
     </rule>
     <rule>
-        <from>^/tags/$</from>
+        <from>^/tagAll/$</from>
         <to>/query/tagsList.shtml?count=25&amp;start=0</to>
     </rule>
     <rule>
-        <from>^/tags$</from>
+        <from>^/tagAll$</from>
         <to>/query/tagsList.shtml?count=25&amp;start=0</to>
     </rule>
     <rule>

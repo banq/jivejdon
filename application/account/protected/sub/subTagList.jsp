@@ -122,7 +122,7 @@
 	 <input type="submit" name="edit" value="编辑选择的关注" onclick="return editAction('listForm2','subscriptionId');" >
       <input type="submit" name="delete" value="删除选择的关注" onclick="return delAction('listForm2', 'subscriptionId');" >
       <br></br>
-      <html:link page="/tags">进入标签列表，选择 关注订阅 即可加入新关注</html:link>
+      <html:link page="/tagAll/">进入标签列表，选择 关注订阅 即可加入新关注</html:link>
      </logic:present>
    </center>
 </form>   
