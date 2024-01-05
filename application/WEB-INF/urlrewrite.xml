@@ -148,7 +148,7 @@
         <to>/query/tagsList.shtml?count=25&amp;start=0</to>
     </rule>
     <rule>
-        <from>^/tags/([0-9]+)$</from>
+        <from>^/tagAll/([0-9]+)$</from>
         <to>/query/tagsList.shtml?count=25&amp;start=$1</to>
     </rule>
     <rule>
