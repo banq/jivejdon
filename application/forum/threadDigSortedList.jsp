@@ -99,7 +99,7 @@ pageContext.setAttribute("title", titleStr);
   <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" ><i class="fa fa-search"></i></a></li>
 </ul>        
 <div class="box">  
-<MultiPagesREST:pager actionFormName="threadListForm" page="/threadDigSortedList/" >
+<MultiPagesREST:pager actionFormName="threadListForm" page="/threadDigSortedList" >
         <span class="pull-left">
          <MultiPagesREST:prev name=" 上页 " />
                  </span>
@@ -134,7 +134,7 @@ pageContext.setAttribute("title", titleStr);
 </div>
 
 <div class="box">  
-<MultiPagesREST:pager actionFormName="threadListForm" page="/threadDigSortedList/" >
+<MultiPagesREST:pager actionFormName="threadListForm" page="/threadDigSortedList" >
         <span class="pull-left">
          <MultiPagesREST:prev name=" 上页 " />
                  </span>

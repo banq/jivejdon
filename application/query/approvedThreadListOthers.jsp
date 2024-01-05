@@ -42,14 +42,14 @@ pageContext.setAttribute("title", titleStr);
         <%if(pagestartInt-pagecountInt>0 ) {%>  
             <link rel="prev" href="/approval/<%=(pagestartInt-pagecountInt)%>"/>
         <%}else{%>
-            <link rel="prev" href="/approval"/>
+            <link rel="prev" href="/approval/"/>
          <%}%>
         <%}%>
 
    <%if (currentPageNo > 1) {%>
          <link rel="canonical" href="/approval/<%=pagestartInt%>"> 
    <% }else{%>
-          <link rel="canonical" href="/approval">  
+          <link rel="canonical" href="/approval/">  
    <% }%>      
 
          <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
