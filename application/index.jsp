@@ -68,7 +68,7 @@
 	
     <div class="box"> 
 	    <div class="tres center">        
-           追踪前沿最新技术 <a href="/approval"><b>更多</b></a>	   
+           追踪前沿最新技术 <a href="/approval/"><b>更多</b></a>	   
 		</div>
     </div>
 		  
