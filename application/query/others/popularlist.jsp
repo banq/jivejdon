@@ -5,7 +5,7 @@
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <b></b>
-<a href="<%=request.getContextPath()%>/forum/maxPopThreads"><b>热文</b></a>
+<a href="<%=request.getContextPath()%>/maxPopThreads/"><b>热文</b></a>
 <div class="important" >
 <bean:parameter id="count" name="count" value="8"/>
 <%
