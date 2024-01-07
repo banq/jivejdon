@@ -183,10 +183,7 @@
         <from>^/tag-([0-9]+)/rss$</from>
         <to>/RSServlet?tagId=$1</to>
     </rule>      
-    <rule>
-        <from>^/query/hotkeys$</from>
-        <to>/query/hotKeys.shtml?method=hotkeys</to>
-    </rule>
+
     <rule>
         <from>^/img/([0-9]+)/([0-9]+)$</from>
         <to>/img/uploadShowAction.shtml?id=$1&amp;oid=$2</to>

@@ -1,15 +1,16 @@
 package com.jdon.jivejdon.presentation.action.query;
 
+import java.util.Collection;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
+
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadDigComparator;
 import com.jdon.strutsutil.ModelListAction;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Collection;
-import java.util.stream.Collectors;
 
 public class ThreadApprovedNewListAction extends ModelListAction {
 	private ForumMessageQueryService forumMessageQueryService;
@@ -38,7 +39,7 @@ public class ThreadApprovedNewListAction extends ModelListAction {
 //	}
 
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
-		if (start >= ThreadApprovedNewList.maxSize || start % count != 0)
+		if (start >= ThreadApprovedNewList.maxSize || start % 30 != 0)
 			return new PageIterator();
 
 		Collection<Long> list = getThreadApprovedNewList().getApprovedThreads(start).stream()

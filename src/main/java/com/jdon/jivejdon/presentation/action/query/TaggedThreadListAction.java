@@ -37,6 +37,7 @@ import com.jdon.util.Debug;
 public class TaggedThreadListAction extends ModelListAction {
 	private final static String module = TaggedThreadListAction.class.getName();
 	private ForumMessageQueryService forumMessageQueryService;
+	private final static int COUNT = 30;
 
 	public ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
@@ -58,10 +59,15 @@ public class TaggedThreadListAction extends ModelListAction {
 			if (tagID == null || !StringUtils.isNumeric(tagID) || tagID.length() > 10) {
 				return new PageIterator();
 			}
+			if (start % COUNT != 0) {
+				return new PageIterator();
+			}
+
 			Long tagIDL = Long.parseLong(tagID);
 			ThreadTag tag = othersService.getThreadTag(tagIDL);
 			if (tag == null)
 				return new PageIterator();
+
 			request.setAttribute("TITLE", tag.getTitle());
 			request.setAttribute("threadTag", tag);
 			if (request.getParameter("r") == null) {
@@ -78,7 +84,7 @@ public class TaggedThreadListAction extends ModelListAction {
 				start = ThreadLocalRandom.current().nextInt(allCount);
 				return othersService.getTaggedThread(new Long(tagID), start, count);
 			}
-	}
+		}
 
 	/*
 	 * (non-Javadoc)

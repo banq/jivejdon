@@ -41,7 +41,7 @@ public class ThreadDigSortedListAction extends ModelListAction {
 	public PageIterator getPageIterator(HttpServletRequest httpServletRequest, int start, int
 			count) {
 
-		if (start >= ThreadApprovedNewList.maxSize || start % count != 0)
+		if (start >= ThreadApprovedNewList.maxSize || start % 30 != 0)
 			return new PageIterator();
 
 		ThreadDigList messageDigList = getThreadApprovedNewList().getThreadDigList();

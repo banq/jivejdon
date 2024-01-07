@@ -1,20 +1,21 @@
 package com.jdon.jivejdon.presentation.action;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
+import com.jdon.jivejdon.api.ForumService;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.query.HoThreadCriteria;
-import com.jdon.jivejdon.api.query.ForumMessageQueryService;
-import com.jdon.jivejdon.api.ForumService;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
 import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
-
-import javax.servlet.http.HttpServletRequest;
 
 public class MaxThreadListAction extends ModelListAction {
     private final static String module = ThreadListAction.class.getName();
@@ -28,7 +29,9 @@ public class MaxThreadListAction extends ModelListAction {
     }
 
     public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
-
+        if (start % 30 != 0) {
+            return new PageIterator();
+        }
         HoThreadCriteria queryCriteria = new HoThreadCriteria();
 
         String dateRange = "1";
