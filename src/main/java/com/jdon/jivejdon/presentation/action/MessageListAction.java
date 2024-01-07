@@ -54,6 +54,9 @@ public class MessageListAction extends ModelListAction {
 	 * .HttpServletRequest, int, int)
 	 */
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
+		if (start % 15 != 0) {
+			return new PageIterator();
+		}
 		Debug.logVerbose("enter getPageIterator", module);
 		String threadId = request.getParameter("thread");
 		if ((threadId == null) || threadId.length() > 12 || !StringUtils.isNumeric(threadId)) {

@@ -29,9 +29,8 @@ public class MaxThreadListAction extends ModelListAction {
     }
 
     public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
-        if (start % 30 != 0) {
+        if (start % 30 != 0) 
             return new PageIterator();
-        }
         HoThreadCriteria queryCriteria = new HoThreadCriteria();
 
         String dateRange = "1";

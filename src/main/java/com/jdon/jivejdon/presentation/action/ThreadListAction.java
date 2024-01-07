@@ -67,9 +67,8 @@ public class ThreadListAction extends ModelListAction {
 	 * .HttpServletRequest, int, int)
 	 */
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
-		if (start % 30 != 0) {
+		if (start % 30 != 0) 
 			return new PageIterator();
-		}
 		String forumId = request.getParameter("forum");
 
 		ThreadListSpec threadListSpec = null;
