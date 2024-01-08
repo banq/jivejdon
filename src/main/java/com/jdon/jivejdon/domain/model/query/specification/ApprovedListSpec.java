@@ -40,19 +40,14 @@ public class ApprovedListSpec extends ThreadListSpec {
 		try {
 			final ReBlogVO reBlogVO = thread.getReBlogVO();
 			final double linkCount = reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size() + 1;
-			final double tagsCOunt = thread.getTags().stream().map(threadTag -> threadTag.getAssonum()).reduce(0, (subtotal, element) -> subtotal + element);
-			p =  (thread.getRootMessage().getDigCount() + 1) * (thread.getViewCount() + linkCount + tagsCOunt
-					+ (thread.getRootMessage().hasImage() ? 5 : 0) );
+			final double tagsCOunt = thread.getTags().stream().map(threadTag -> threadTag.getAssonum()).reduce(0,
+					(subtotal, element) -> subtotal + element);
+			p = (thread.getRootMessage().getDigCount() + 1) * (thread.getViewCount() + linkCount + tagsCOunt
+					+ (thread.getRootMessage().hasImage() ? 5 : 0));
 			final long diff2 = thread.getViewCount() - thread.getViewCounter().getLastSavedCount() + 1;
 			final long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
 			final long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
-			if (diffDays >= 5)
-				p = diff2 * p / (diffDays * 100);
-			else if (diffDays >= 3)
-				p = diff2 * p / (diffDays * 10);
-			else {
-				p = Math.pow(p, diff2);
-			}
+			p = (p * diff2) / (diffDays + 1);
 		} finally {
 		}
 		return p;
