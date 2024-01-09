@@ -1,7 +1,10 @@
 package com.jdon.jivejdon.domain.model.message;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import org.jsoup.Jsoup;
 
@@ -23,6 +26,8 @@ public final class MessageVO implements Serializable, Cloneable {
 	private final String subject;
 
 	private final String body;
+
+	private final Map<Integer,String> caches = new HashMap<>();
 
 	/**
 	 * only using builder pattern to create MessageVO!
@@ -59,9 +64,10 @@ public final class MessageVO implements Serializable, Cloneable {
 	}
 
 	public String getShortBody(int length) {
-		String text = getBody().substring(0, Math.min(getBody().length(), length));
-		return shortenNoHTML(text);
+		return caches.computeIfAbsent(length,k-> Stream.of(shortenNoHTML(getBody())).map(s -> s.substring(0, Math.min(s.length(), length))).findFirst().orElse(""));
 	}
+
+	
 
 	public String getBodyText(int length) {
 		String text = getBody().substring(0, Math.min(getBody().length(), length));
