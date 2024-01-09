@@ -108,16 +108,33 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   
   <!-- 导航区  -->
               <logic:greaterThan name="messageListForm" property="numPages" value="1">
-              <div class="box">
-                <ul class="pagination pull-right">
-                  有<b><bean:write name="messageListForm" property="numPages"/></b>页 
-                  <MultiPagesREST:pager actionFormName="messageListForm" page="/post" paramId="thread" paramName="forumThread" paramProperty="threadId">
-                    <MultiPagesREST:prev name=" 上页 "/>
-                    <MultiPagesREST:index displayCount="6"/>
-                    <MultiPagesREST:next name=" 下页 "/>
-                  </MultiPagesREST:pager>
-                </ul>
-                </div>
+<div class="box">
+<div class="row">
+
+<div class="col-lg-4">
+ <%if(pagestartInt != 0 ) {%> 
+ <span class="pull-left">
+    <%if(pagestartInt-pagecountInt>0 ) {%>  
+        <a href="/post/<bean:write name="forumThread" property="threadId" />/<%=(pagestartInt-pagecountInt)%>" >上页</a>
+    <%}else{%>
+        <a href="/<bean:write name="forumThread" property="threadId" />.html" >上页</a>
+     <%}%>
+ </span>
+ <%}%>
+</div>
+<div class="col-lg-4"></div>
+
+<div class="col-lg-4">
+<span class="pull-right"> 
+    <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
+    <a href="/post/<bean:write name="forumThread" property="threadId" />/<%=pagestartInt+pagecountInt%>" >下页</a>
+    <%}%>
+</span>
+</div>
+
+</div>
+</div>              
+              
               </logic:greaterThan>
       </div>
       <logic:present name="principal"> 
