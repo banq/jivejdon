@@ -65,15 +65,15 @@ public final class MessageVO implements Serializable, Cloneable {
 
 	public String getBodyText(int length) {
 		String text = getBody().substring(0, Math.min(getBody().length(), length));
-		return Jsoup.parse(text).text();
+		return Jsoup.parse(text).wholeText();
 	}
 
 	public String shortenNoHTML(String in) {
-		return Jsoup.parse(in).text();
+		return Jsoup.parse(in).wholeText();
 	}
 
 	public String shortenNoHTMLText(String in) {
-		return Jsoup.parse(in).text();
+		return Jsoup.parse(in).wholeText();
 	}
 
 	public int getBodyLengthK(){
