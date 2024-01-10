@@ -49,12 +49,14 @@ public class TopicsFilter implements Function<MessageVO, MessageVO> {
 	public String applyFilteredBody(String body) {
 		try {
 			if (!body.contains("#")) return body;
-			Pattern topicRegEx = patterns.computeIfAbsent(regEx, k-> Pattern.compile("#" + regEx));
-			Matcher matcher = topicRegEx.matcher(body);
-			while (matcher.find()) {
-				String topocStr = matcher.group();
-				if (topocStr.length() < 20)
-					body = matcher.replaceAll(getKeyUrlStr(topocStr.replaceAll("#", "")));
+			Pattern regExPAll = patterns.computeIfAbsent(regEx, k-> Pattern.compile("#" + regEx));
+			Matcher matcherAll = regExPAll.matcher(body);
+			while (matcherAll.find()) {
+				String topocStr = matcherAll.group();
+				if (topocStr.length() < 20){
+                    Pattern topicRegEx = patterns.computeIfAbsent(topocStr, k-> Pattern.compile(topocStr));
+					body = topicRegEx.matcher(body).replaceAll(getKeyUrlStr(topocStr.replaceAll("#", "")));
+				}
 			}
 		} catch (Exception e) {
 			Debug.logError("" + e, module);
@@ -64,7 +66,7 @@ public class TopicsFilter implements Function<MessageVO, MessageVO> {
 
 	public static void main(String[] args) throws Exception {
 		TopicsFilter topicsFilter = new TopicsFilter();
-		String body = topicsFilter.applyFilteredBody("asdasd#dddddd www");
+		String body = topicsFilter.applyFilteredBody("asdasd#dddddd www#CCC");
 		System.out.println(body);
 	}
 
