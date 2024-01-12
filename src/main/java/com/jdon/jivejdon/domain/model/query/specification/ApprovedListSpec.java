@@ -44,7 +44,8 @@ public class ApprovedListSpec extends ThreadListSpec {
 					(subtotal, element) -> subtotal + element);
 			p = (thread.getRootMessage().getDigCount() + 1) * (thread.getViewCount() + linkCount + tagsCOunt
 					+ (thread.getRootMessage().hasImage() ? 5 : 0));
-			final long diff2 = thread.getViewCount() - thread.getViewCounter().getLastSavedCount() + 1;
+			int onlineCount = thread.getViewCounter().getLastSavedCount();		
+			final long diff2 = onlineCount!=-1?(thread.getViewCount() - onlineCount + 1):1;
 			final long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
 			final long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 			p = (p * diff2) / (diffDays + 1);
