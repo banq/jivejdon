@@ -95,9 +95,9 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 		
 		HotKeysFilter hotKeysFilter = new HotKeysFilter();
 		// Example usage
-		String largeText = "啊实打实banq注 s注 word.jpg   模块化设计是指产品设计的方法/程序，涉及集成或组合较小的独立元素以WORD创建成品。大型产品（如汽车）可以分为更小、更简单的组件，并使用模块化设计方法单独开发和生产。最终产品是通过集成（或组装）这些组件中的banq注每一个来创建的。";
+		String largeText = "啊实打实banq注 s注 wordjpg   模在软件工程领域的成就方面品设计的方法/程序，涉及集成或组合较小的独立元素以WORD创建成品。大型产品（如汽车）可以分为更小、更简单的组件，并使用模块化设计方法单独开发和生产。最终产品是通过集成（或组装）这些组件中的banq注每一个来创建的。";
 		ConcurrentMap<String, String> searchMap = new ConcurrentHashMap<>();
-		searchMap.put("banq注", "瞎写");
+		searchMap.put("软件工程", "瞎写");
 		searchMap.put("word", "GPT-4");
 
 		String result = hotKeysFilter.parallelReplace(largeText,searchMap);
@@ -112,11 +112,13 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 				if (!chunk.contains(key))
 					continue;
 
+				StringBuffer result = new StringBuffer();
 				Matcher m = patterns.computeIfAbsent(key,
 						k -> Pattern.compile(prefix_regEx + key + suffix_regEx)).matcher(chunk);
-				chunk = m.find()
-						? m.replaceFirst(m.group().replace(key, "") + getKeyUrlStr(key, searchMap.remove(key)))
-						: chunk;
+				if (m.find())
+					m.appendReplacement(result, getKeyUrlStr(key, searchMap.remove(key)));
+				m.appendTail(result);
+				chunk = result.toString();
 			}
 		} finally {
 		}
