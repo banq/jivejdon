@@ -42,7 +42,7 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 
 	private String prefix_regEx = "[^!\"#$%&'()*+,-./:;<=>?@\\[\\]`{|}\\\\~^]"; // chinese or
 	// whitespace
-	private String suffix_regEx = "";
+	private String suffix_regEx = "[^!\"#$%&'()*+,-./:;<=>?@\\[\\]`{|}\\\\~^]";
 
 	private final static ConcurrentHashMap<String, Pattern> patterns = new ConcurrentHashMap<>();
 	//
@@ -95,7 +95,7 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 		
 		HotKeysFilter hotKeysFilter = new HotKeysFilter();
 		// Example usage
-		String largeText = "啊实打实banq注 s注 word   模块化设计是指产品设计的方法/程序，涉及集成或组合较小的独立元素以WORD创建成品。大型产品（如汽车）可以分为更小、更简单的组件，并使用模块化设计方法单独开发和生产。最终产品是通过集成（或组装）这些组件中的banq注每一个来创建的。";
+		String largeText = "啊实打实banq注 s注 word.jpg   模块化设计是指产品设计的方法/程序，涉及集成或组合较小的独立元素以WORD创建成品。大型产品（如汽车）可以分为更小、更简单的组件，并使用模块化设计方法单独开发和生产。最终产品是通过集成（或组装）这些组件中的banq注每一个来创建的。";
 		ConcurrentMap<String, String> searchMap = new ConcurrentHashMap<>();
 		searchMap.put("banq注", "瞎写");
 		searchMap.put("word", "GPT-4");
