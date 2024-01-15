@@ -27,7 +27,7 @@
          <h4 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"><bean:write name="forumThread" property="name"/></a></h4>
       
          <div class="info">			 
-             <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[80]" />.             
+             <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />.             
           </div>
 
           </section>
