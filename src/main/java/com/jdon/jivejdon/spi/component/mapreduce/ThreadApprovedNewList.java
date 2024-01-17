@@ -184,7 +184,7 @@ public class ThreadApprovedNewList implements Startable {
 					break;
 
 				ForumThread threadPrev = null;	
-
+				ForumThread threadPrev2 = null;
 				while (pi.hasNext()) {
 					Long threadId = (Long) pi.next();					
 					if (currentIndicator > threadId
@@ -197,7 +197,7 @@ public class ThreadApprovedNewList implements Startable {
 						final Account account = accountService
 								.getAccount(userId);
 
-						if (approvedListSpec.isApprovedToBest(thread, account, i, threadPrev)){
+						if (approvedListSpec.isApprovedToBest(thread, account, i, threadPrev, threadPrev2)){
 							resultSorteds.add(thread.getThreadId());
 							// map to sort account
 							authorList.addAuthor(account);
@@ -205,6 +205,7 @@ public class ThreadApprovedNewList implements Startable {
 							i++;
 						}
 						threadTagList.addForumThread(thread);
+						threadPrev2 = threadPrev;
 						threadPrev = thread;
 
 						if (i >= approvedListSpec.getNeedCount()) {

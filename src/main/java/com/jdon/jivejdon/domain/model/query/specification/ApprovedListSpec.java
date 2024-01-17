@@ -19,12 +19,12 @@ public class ApprovedListSpec extends ThreadListSpec {
 		sorttableName = "creationDate";
 	}
 
-	public boolean isApproved(ForumThread thread, Account account, ForumThread threadPrev) {
+	public boolean isApproved(ForumThread thread, Account account, ForumThread threadPrev, ForumThread threadPrev2) {
 			try {
 				if (thread.getViewCount() > initViewCount ||
 						isDigged(thread, 1) ||
 						isExcelledDiscuss(thread) ||
-						isGreaterThanPrev(thread, threadPrev,0.6) ||
+						isGreaterThanPrev(thread, threadPrev, threadPrev2,0.6) ||
 						isLongText(thread, 15) ||
 						thread.getRootMessage().hasImage()||
 						(isTagged(thread,3) && isLinked(thread,3))){
@@ -65,16 +65,16 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 		
 
-	public boolean isApprovedToBest(ForumThread thread, Account account, int count, ForumThread threadPrev){		
-		return isApproved(thread, account, threadPrev) && count < getNeedCount();
+	public boolean isApprovedToBest(ForumThread thread, Account account, int count, ForumThread threadPrev,ForumThread threadPrev2){		
+		return isApproved(thread, account, threadPrev, threadPrev2) && count < getNeedCount();
 	}
 
-	public boolean isGreaterThanPrev(ForumThread thread, ForumThread threadPrev, double rate){
-		if (threadPrev == null || threadPrev.getViewCount() == 0)
+	public boolean isGreaterThanPrev(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2, double rate){
+		if (threadPrev == null || threadPrev.getViewCount() == 0 || threadPrev2 == null || threadPrev2.getViewCount() == 0)
 			return false;
 		if (thread.getViewCount() > threadPrev.getViewCount()){
 			if (thread.getCreationDate().substring(2, 11).equals(threadPrev.getCreationDate().substring(2, 11)))
-				return (thread.getViewCount() * rate > threadPrev.getViewCount()) ? true : false;
+				return (thread.getViewCount() * rate > Math.min(threadPrev.getViewCount(), threadPrev2.getViewCount())) ? true : false;
 		}
 		return false;
 	}
