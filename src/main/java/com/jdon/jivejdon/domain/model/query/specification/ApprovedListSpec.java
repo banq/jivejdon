@@ -72,9 +72,10 @@ public class ApprovedListSpec extends ThreadListSpec {
 	public boolean isGreaterThanPrev(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2, double rate){
 		if (threadPrev == null || threadPrev.getViewCount() == 0 || threadPrev2 == null || threadPrev2.getViewCount() == 0)
 			return false;
-		if (thread.getViewCount() > threadPrev.getViewCount()){
-			if (thread.getCreationDate().substring(2, 11).equals(threadPrev.getCreationDate().substring(2, 11)))
-				return (thread.getViewCount() * rate > Math.min(threadPrev.getViewCount(), threadPrev2.getViewCount())) ? true : false;
+		long initViewCount = Math.min(threadPrev.getViewCount(), threadPrev2.getViewCount());	
+		if (thread.getViewCount() > initViewCount){
+			//if (thread.getCreationDate().substring(2, 11).equals(threadPrev.getCreationDate().substring(2, 11)))
+				return (thread.getViewCount() * rate > initViewCount) ? true : false;
 		}
 		return false;
 	}
