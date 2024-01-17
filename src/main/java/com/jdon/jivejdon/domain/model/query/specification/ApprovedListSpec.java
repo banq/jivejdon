@@ -69,15 +69,16 @@ public class ApprovedListSpec extends ThreadListSpec {
 		return isApproved(thread, account, threadPrev, threadPrev2) && count < getNeedCount();
 	}
 
-	public boolean isGreaterThanPrev(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2, double rate){
-		if (threadPrev == null || threadPrev.getViewCount() == 0 || threadPrev2 == null || threadPrev2.getViewCount() == 0)
+	public boolean isGreaterThanPrev(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2, double rate) {
+		if (threadPrev == null || threadPrev.getViewCount() == 0 || threadPrev2 == null
+				|| threadPrev2.getViewCount() == 0)
 			return false;
-		long initViewCount = Math.min(threadPrev.getViewCount(), threadPrev2.getViewCount());	
-		if (thread.getViewCount() > initViewCount){
-			//if (thread.getCreationDate().substring(2, 11).equals(threadPrev.getCreationDate().substring(2, 11)))
-				return (thread.getViewCount() * rate > initViewCount) ? true : false;
-		}
-		return false;
+
+		// if (thread.getCreationDate().substring(2,
+		// 11).equals(threadPrev.getCreationDate().substring(2, 11)))
+		return (thread.getViewCount() * rate > Math.min(threadPrev.getViewCount(), threadPrev2.getViewCount())) ? true
+				: false;
+
 	}
 
 	protected boolean isGoodBlog(ForumThread thread, Account account) {
