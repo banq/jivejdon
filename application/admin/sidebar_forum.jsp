@@ -31,7 +31,7 @@ onload="parent.frames['header'].location.href='tabs.jsp?method=forum';">
     </tr>
         <tr><td>&nbsp;</td>
         <td>&#149;</td>
-        <td><font size="-1"><html:link  page="/admin/tag/tagsList.shtml?count=150"  target="main">标签管理</html:link></font></td>
+        <td><font size="-1"><html:link  page="/admin/tag/tagsList.shtml?count=180"  target="main">标签管理</html:link></font></td>
     </tr>
      <tr><td>&nbsp;</td>
         <td>&#149;</td>
