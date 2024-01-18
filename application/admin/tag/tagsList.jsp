@@ -21,25 +21,12 @@
 <div class="tres">        
     <%-- request.setAttribute("paramMaps", qForm.getParamMaps());  in ThreadQueryAction --%>    
     共有<b><bean:write name="tagsListForm" property="allCount"/></b>标签 
-<MultiPages:pager actionFormName="tagsListForm" page="/admin/tag/tagsList.shtml?count=100"  >
+<MultiPages:pager actionFormName="tagsListForm" page="/admin/tag/tagsList.shtml"  >
 <MultiPages:prev name=" 上页 " />
 <MultiPages:index displayCount="3" />
 <MultiPages:next  name=" 下页 " />
 </MultiPages:pager>
-<a href="JavaScript:void(0);" class="tooltip html_tooltip_content_go">Go</a>
 
-<div id="tooltip_content_go"  style="display:none">
-<div class="tooltip_content">
-			<div class="title">前往下页:</div>
-			<div class="form">
-				<input type="text" style="width: 50px;" id="pageToGo">
-				<input type="button" value=" Go " onClick="goToAnotherPage('<html:rewrite page="/query/tagsList.shtml?count=100"  />',
-				<bean:write name="tagsListForm" property="count" />);" />
-				
-			</div>
- </div>
-</div> 
-</div>      
     </td>
 </tr>
 </table>
@@ -78,8 +65,8 @@ int i = 0;
     <td class="smallgray">
 <div class="tres">        
     共有<b><bean:write name="tagsListForm" property="allCount"/></b>标签  
-<MultiPages:pager actionFormName="tagsListForm" page="/admin/tag/tagsList.shtml?count=100"  >
-<a href="JavaScript:void(0);" class="tooltip html_tooltip_content_go">Go</a>
+<MultiPages:pager actionFormName="tagsListForm" page="/admin/tag/tagsList.shtml"  >
+
 <MultiPages:prev name=" 上页 " />
 <MultiPages:index displayCount="3" />
 <MultiPages:next  name=" 下页 " />
