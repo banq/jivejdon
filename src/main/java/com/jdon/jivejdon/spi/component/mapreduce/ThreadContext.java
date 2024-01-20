@@ -60,12 +60,12 @@ public class ThreadContext {
     public Set<Long> getThreadListInContext(ForumThread thread) {
         Set<Long> threadIds = createSortedSet();
         for (ThreadTag tag : thread.getTags()) {
-            PageIterator pi = tagDao.getTaggedThread(tag.getTagID(), 0, 5);
+            PageIterator pi = tagDao.getTaggedThread(tag.getTagID(), 0, 2);
             List list = Arrays.asList(pi.getKeys());
             threadIds.addAll(new HashSet<>(list));
         }
         if (threadIds.isEmpty()) {
-            PageIterator pi = messageQueryDao.getThreads(thread.getForum().getForumId(),  0, 20, new ResultSort());
+            PageIterator pi = messageQueryDao.getThreads(thread.getForum().getForumId(),  0, 6, new ResultSort());
             List list = Arrays.asList(pi.getKeys());
              threadIds.addAll(new HashSet<>(list));
         }

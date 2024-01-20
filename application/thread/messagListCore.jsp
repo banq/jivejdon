@@ -184,7 +184,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         <div class="wid-vid">
         
                  <logic:notEmpty name="forumThread" property="tags">          
-                  <div id="threadTagList" class="linkblock"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
+                  <div id="threadTagList" class="linkblock" style="height:600px"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
 							    <script defer>
 					               document.addEventListener("DOMContentLoaded", function(event) { 
                               $(document).ready(function() {      
