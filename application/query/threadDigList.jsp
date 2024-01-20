@@ -6,7 +6,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 
-<bean:parameter id="count" name="count" value="8"/>
+<bean:parameter id="count" name="count" value="5"/>
 <%
 String coutlength = (String)pageContext.getAttribute("count");
 %>        
