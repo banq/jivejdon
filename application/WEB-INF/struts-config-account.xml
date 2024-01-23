@@ -15,16 +15,16 @@
   <action-mappings>
     
 	  <!--  create new user -->
-    <action name="accountForm" path="/account/newAccountForm" type="com.jdon.strutsutil.ModelViewAction" scope="request"
+    <!-- <action name="accountForm" path="/account/newAccountForm" type="com.jdon.strutsutil.ModelViewAction" scope="request"
 		validate="false">
-        <forward name="create" path="/account/register.jsp"/>
+        <forward name="create" path="/account/newReg.jsp"/>
     </action>
     
       <action  path="/account/newPasswordassitView" type="com.jdon.jivejdon.presentation.action.account.PasswordassitAction" scope="request"
     	validate="false" >
-         <forward name="create" path="/account/NewAccountForm.jsp" />
+         <forward name="create" path="/account/newAccount.jsp" />
      </action>
-   
+    -->
 	  
     <action name="accountForm" path="/account/newAccount" type="com.jdon.strutsutil.ModelSaveAction" scope="request"
     	validate="true" input="/account/result.jsp">
