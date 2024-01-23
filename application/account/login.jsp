@@ -82,7 +82,7 @@ try{
         <%--<a href="<%=request.getContextPath()%>/account/newAccountForm.shtml" target="_blank" >--%>
           <%--新用户注册--%>
         <%--</a>--%>
-        <%--<a href="<%=request.getContextPath()%>/account/forgetPasswd.jsp" target="_blank">--%>
+        <%--<a href="<%=request.getContextPath()%>/account/fwd.jsp" target="_blank">--%>
           <%--忘记密码?--%>
         <%--</a>--%>
       </td>
