@@ -139,7 +139,7 @@
               <span class="smallgray"><i class="fa fa-eye"></i><bean:write name="forumThread" property="viewCount" />
                       </span>
 			   <logic:notEqual name="forumMessage" property="digCount" value="0">
-                       <span><i class="fa fa-heart"></i>
+                       <span class="smallgray"><i class="fa fa-heart"></i>
                       <bean:write name="forumMessage" property="digCount"/>
 					   </span>
                       </logic:notEqual>     
