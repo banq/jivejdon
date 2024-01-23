@@ -26,7 +26,7 @@ public class ThreadListForm extends ModelListForm {
 	private static final long serialVersionUID = -8134126745171582441L;
 
 	public ThreadListForm() {
-		this.setCount(50);
+		// this.setCount(30);
 	}
 
 }
