@@ -24,7 +24,7 @@ String coutlength = (String)pageContext.getAttribute("count");
 <li>
 	<h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"><bean:write name="forumThread" property="name"/></a></h3>
       
-         <div class="info">			 
+         <div class="smallgray">			 
               <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />.             
             </div>
 </li>
