@@ -68,8 +68,8 @@
             <button class="btn btn-danger" data-dismiss="modal">取消</button>
           </div>
           <input type="checkbox" name="rememberMe" id="rememberMe" checked="checked">自动登陆
-          <a href="<%=request.getContextPath()%>/account/oauth/sinaCallAction.shtml" target="_blank">新浪微博登录 </a>
-          <a href="<%=request.getContextPath()%>/account/newAccountForm.shtml" target="_blank"> 新用户注册 </a> <a href="<%=request.getContextPath()%>/account/forgetPasswd.jsp" target="_blank"> 忘记密码? </a>
+          <%-- <a href="<%=request.getContextPath()%>/account/oauth/sinaCallAction.shtml" target="_blank">新浪微博登录 </a>
+          <a href="<%=request.getContextPath()%>/account/newAccountForm.shtml" target="_blank"> 新用户注册 </a> <a href="<%=request.getContextPath()%>/account/forgetPasswd.jsp" target="_blank"> 忘记密码? </a> --%>
 
         </form>
       </div>
