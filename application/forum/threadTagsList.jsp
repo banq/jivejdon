@@ -5,13 +5,17 @@
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-
+<logic:notEmpty name="threadListForm" property="list">   
  <logic:iterate id="forumThread" name="threadListForm"  property="list" length="5">
      <%@ include file="../query/others/threadListCore.jsp" %>   
  </logic:iterate>
+</logic:notEmpty>   
 
-
-
+<logic:empty name="threadListForm" property="list">
+<% 
+  response.sendError(204);  
+  %>
+</logic:empty>
 
 
 

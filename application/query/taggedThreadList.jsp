@@ -12,6 +12,11 @@
 </logic:empty>   
 <logic:notEmpty  name="TITLE">
 <bean:define id="title" name="TITLE" />
+<logic:empty name="threadListForm" property="list">
+<% 
+  response.sendError(204);  
+  %>
+</logic:empty>
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
 <bean:define id="pageallCount" name="threadListForm" property="allCount" />

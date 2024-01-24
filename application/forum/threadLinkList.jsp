@@ -13,3 +13,8 @@
    </logic:notEmpty>   
  </logic:iterate>
 </logic:notEmpty>   
+<logic:empty name="threadListForm" property="list">
+<% 
+  response.sendError(204);  
+  %>
+</logic:empty>
