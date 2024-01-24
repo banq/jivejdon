@@ -116,6 +116,11 @@ public class ThreadListAction extends ModelListAction {
 
 	public void customizeListForm(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, ModelListForm modelListForm)
 			throws Exception {
+
+
+		if (modelListForm.getStart() % 30 != 0)
+			return ;
+
 		String forumId = request.getParameter("forum");
 		if (forumId == null)
 			forumId = request.getParameter("forumId");

@@ -8,16 +8,7 @@
 
 
 <bean:define id="threadList" name="threadListForm" property="list" />
-<logic:empty name="threadListForm" property="oneModel">
-  <% 
-  response.sendError(404);  
-  %>
-</logic:empty>
-<bean:define id="forum" name="threadListForm" property="oneModel"/>
-<bean:define id="title" name="forum" property="name" />
-<bean:define id="pagestart" name="threadListForm" property="start" />
-<bean:define id="pagecount" name="threadListForm" property="count" />
-<bean:define id="lastModifiedDate" name="forum" property="modifiedDate2"/>
+
 
 <bean:define id="title"  value=" 最佳教程 " />
 <bean:define id="pagestart" name="threadListForm" property="start" />
@@ -29,6 +20,9 @@ int pagestartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
 int pagecountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
 int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
 int currentPageNo = 1;
+if (pagestartInt % 30 != 0) {
+   response.sendError(404);  
+}
 if (pagecountInt > 0) {
 	currentPageNo = (pagestartInt / pagecountInt) + 1;
 }

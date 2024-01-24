@@ -13,6 +13,8 @@
   response.sendError(404);  
   %>
 </logic:empty>
+<logic:notEmpty name="threadListForm" property="oneModel">
+
 <bean:define id="forum" name="threadListForm" property="oneModel"/>
 <logic:empty name="forum" property="name">
 <bean:define id="title" value="最新教程"/>
@@ -30,6 +32,9 @@ int pagestartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();
 int pagecountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
 int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
 int currentPageNo = 1;
+if (pagestartInt % 30 != 0) {
+   response.sendError(404);  
+}
 if (pagecountInt > 0) {
 	currentPageNo = (pagestartInt / pagecountInt) + 1;
 }
@@ -368,3 +373,4 @@ pageContext.setAttribute("title", titleStr);
 </body>
 </html>
 
+</logic:notEmpty>
