@@ -7,13 +7,19 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <bean:parameter id="noheader" name="noheader"  value=""/>
 
-<bean:define id="threadList" name="threadListForm" property="list" />
 <logic:empty name="threadListForm" property="oneModel">
   <% 
   response.sendError(404);  
   %>
 </logic:empty>
 <logic:notEmpty name="threadListForm" property="oneModel">
+
+<logic:empty name="threadListForm" property="list">
+<% 
+  response.sendError(204);  
+  %>
+</logic:empty>
+
 
 <bean:define id="forum" name="threadListForm" property="oneModel"/>
 <logic:empty name="forum" property="name">

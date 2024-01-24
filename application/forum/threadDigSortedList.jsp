@@ -6,8 +6,11 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-
-<bean:define id="threadList" name="threadListForm" property="list" />
+<logic:empty name="threadListForm" property="list">
+<% 
+  response.sendError(204);  
+  %>
+</logic:empty>
 
 
 <bean:define id="title"  value=" 最佳教程 " />

@@ -8,7 +8,11 @@
 <bean:parameter id="noheader" name="noheader"  value=""/>
 
 
-<bean:define id="threadList" name="threadListForm" property="list" />
+<logic:empty name="threadListForm" property="list">
+<% 
+  response.sendError(204);  
+  %>
+</logic:empty>
 
 
 <bean:define id="title"  value=" 精华教程 " />
