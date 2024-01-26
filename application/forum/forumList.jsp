@@ -39,7 +39,7 @@
             <td>
               
                  <h2 class="bige20">
-                 <a href="<%=request.getContextPath()%>/forum/<bean:write name="forum" property="forumId" />">                
+                 <a href="<%=request.getContextPath()%>/forum/<bean:write name="forum" property="forumId" />/">                
                        <b><span class="threadTitle"><bean:write name="forum" property="name" /></span></b>
                  </a>
                  </h2>
