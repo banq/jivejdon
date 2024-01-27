@@ -11,7 +11,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	private final int initViewCount = 500;
 
 	//this value is display count on one page
-	private final int needCount = 15;
+	private final int needCount = 30;
 	private final int needViewcount = 300;
 	
 
