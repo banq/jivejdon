@@ -23,9 +23,7 @@ int pagecountInt = ((Integer)pageContext.getAttribute("pagecount")).intValue();
 int pageAllcountInt = ((Integer)pageContext.getAttribute("pageallCount")).intValue();
 int currentPageNo = 1;
 
-if (pagestartInt % 30 != 0) {
-   response.sendError(404);  
-}
+
 
 if (pagecountInt > 0) {
 	currentPageNo = (pagestartInt / pagecountInt) + 1;
