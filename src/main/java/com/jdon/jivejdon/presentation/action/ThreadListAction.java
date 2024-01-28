@@ -137,8 +137,10 @@ public class ThreadListAction extends ModelListAction {
 		} else {
 			forum = getForumService().getForum(Long.parseLong(forumId));
 		}
-		if (forum == null)
-			throw new Exception("forum is null forumid=" + forumId);
+		if (forum == null){
+			Debug.logError("forum is null forumid=" + forumId);
+			return;
+		}
 		modelListForm.setOneModel(forum);
 	}
 
