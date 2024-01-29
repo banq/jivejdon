@@ -19,7 +19,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 		sorttableName = "creationDate";
 	}
 
-	public boolean isApproved(ForumThread thread, Account account, ForumThread threadPrev, ForumThread threadPrev2) {
+	public boolean isApproved(ForumThread thread,  ForumThread threadPrev, ForumThread threadPrev2) {
 			try {
 				if (thread.getViewCount() > initViewCount ||
 						isDigged(thread, 1) ||
@@ -65,8 +65,8 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 		
 
-	public boolean isApprovedToBest(ForumThread thread, Account account, int count, ForumThread threadPrev,ForumThread threadPrev2){		
-		return isApproved(thread, account, threadPrev, threadPrev2) && count < getNeedCount();
+	public boolean isApprovedToBest(ForumThread thread, int count, ForumThread threadPrev,ForumThread threadPrev2){		
+		return isApproved(thread, threadPrev, threadPrev2) && count < getNeedCount();
 	}
 
 	public boolean isGreaterThanPrev(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2, double rate) {

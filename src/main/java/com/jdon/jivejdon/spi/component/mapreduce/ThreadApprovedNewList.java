@@ -192,12 +192,9 @@ public class ThreadApprovedNewList implements Startable {
 						final ForumThread thread = forumMessageQueryService
 								.getThread(threadId);																						
 						if (thread == null || thread.getRootMessage() == null) continue;
-						Long userId = thread.getRootMessage().getAccount()
-								.getUserIdLong();
-						final Account account = accountService
-								.getAccount(userId);
+						Account account = thread.getRootMessage().getAccount();
 
-						if (approvedListSpec.isApprovedToBest(thread, account, i, threadPrev, threadPrev2)){
+						if (approvedListSpec.isApprovedToBest(thread, i, threadPrev, threadPrev2)){
 							resultSorteds.add(thread.getThreadId());
 							// map to sort account
 							authorList.addAuthor(account);
