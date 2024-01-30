@@ -17,6 +17,8 @@ package com.jdon.jivejdon.presentation.action.query;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,6 +34,7 @@ import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadContext;
+import com.jdon.strutsutil.ModelListForm;
 
 
 public class ThreadLinkListAction extends Action {
@@ -67,14 +70,14 @@ public class ThreadLinkListAction extends Action {
 			if (threadLinks.isEmpty()) {
 				ThreadContext threadContext = (ThreadContext) WebAppUtil.getComponentInstance("threadContext", 
 						this.servlet.getServletContext());
-				// List<ForumThread> threadList = threadContext.getPrevNextInTag(thread).stream()
-				// 		.map(e -> getForumMessageQueryService().getThread(e))
-				// 		.filter(Objects::nonNull).collect(Collectors.toList());
-				// threadLinks.addAll(threadList);
+				List<ForumThread> threadList = threadContext.getPrevNextInTag(thread).stream()
+						.map(e -> getForumMessageQueryService().getThread(e))
+						.filter(Objects::nonNull).collect(Collectors.toList());
+				threadLinks.addAll(threadList);
 			}
-			// ModelListForm threadListForm = (ModelListForm) form;
-			// threadListForm.setList(threadLinks);
-			// threadListForm.setAllCount(threadLinks.size());
+			ModelListForm threadListForm = (ModelListForm) form;
+			threadListForm.setList(threadLinks);
+			threadListForm.setAllCount(threadLinks.size());
 			return mapping.findForward("success");
 		} catch (Exception e) {
 			return null;
