@@ -73,15 +73,13 @@ public class UploadFileListAction extends Action {
 			logger.debug("uploadFileForm don't existed,please config acion filter for upload view in struts-config-upload");
 			return;
 		}
-		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", 
-				this.servlet.getServletContext());
+		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
 		Account account = accountService.getloginAccount();
 		if (account == null) {
 			upLoadFileForm.setAuthenticated(false);
 			return;
 		}
-		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", 
-				this.servlet.getServletContext());
+		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
 		ForumMessage forumMessage = forumMessageService.getMessage(messageId);
 		boolean isallowEdit = forumMessageService.checkIsAuthenticated(forumMessage);
 		upLoadFileForm.setAuthenticated(isallowEdit);

@@ -38,8 +38,7 @@ public class AccountPropsAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		logger.debug("enter save proprs");
 
-		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", 
-				this.servlet.getServletContext());
+		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
 		Account account = accountService.getloginAccount();
 		if (account == null) {
 			return mapping.findForward("failure");

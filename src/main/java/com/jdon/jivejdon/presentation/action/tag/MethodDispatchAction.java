@@ -19,12 +19,10 @@ import com.jdon.jivejdon.api.account.AccountService;
 import com.jdon.jivejdon.api.property.TagService;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.account.Account;
-import com.jdon.jivejdon.spi.component.throttle.hitkey.CustomizedThrottle;
 import com.jdon.util.UtilValidate;
 
 public class MethodDispatchAction extends DispatchAction {
 	private final static Logger logger = LogManager.getLogger(MethodDispatchAction.class);
-	private CustomizedThrottle customizedThrottle;
 
 	public ActionForward tags(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 							  HttpServletResponse response) throws Exception {
@@ -60,16 +58,14 @@ public class MethodDispatchAction extends DispatchAction {
 			logger.error("savetags error : no auth" + request.getRemoteAddr());
 			mapping.findForward("savetags");
 		}
-		TagService othersService = (TagService) WebAppUtil.getService("othersService", 
-				this.servlet.getServletContext());
+		TagService othersService = (TagService) WebAppUtil.getService("othersService", request);
 		othersService.saveTag(Long.parseLong(threadId), tagTitle);
 		return mapping.findForward("savetags");
 	}
 
 	public boolean checkAuth(String threadId, HttpServletRequest request) {
 		boolean isOK = false;
-		AccountService accountService = (AccountService) WebAppUtil.getService("accountService",
-				request);
+		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
 		Account account = accountService.getloginAccount();
 		if (account == null) return isOK;
 		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService

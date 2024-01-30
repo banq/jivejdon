@@ -23,7 +23,7 @@ public class NewMsgCheckerAction extends Action {
 		logger.debug("enter checkReceiveShortMessages");
 		AccountService accountService = null;
 		if (request.getSession(false) != null)
-			accountService = (AccountService) WebAppUtil.getService("accountService", this.servlet.getServletContext());
+			accountService = (AccountService) WebAppUtil.getService("accountService", request);
 		else
 			accountService = (AccountService) WebAppUtil.getService("accountService", this.servlet.getServletContext());
 		Account account = accountService.getloginAccount();

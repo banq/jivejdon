@@ -23,8 +23,9 @@ public class UpdateThreadNameAction extends Action {
             actionMapping.findForward(FormBeanUtil.FORWARD_FAILURE_NAME);
         }
         String threadId  = request.getParameter("threadId");
+        //need request
         ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil
-                .getService("forumMessageService", this.servlet.getServletContext());
+                .getService("forumMessageService", request);
         try {
             forumMessageService.updateThreadName(Long.parseLong(threadId), name);
             return actionMapping.findForward(FormBeanUtil.FORWARD_SUCCESS_NAME);

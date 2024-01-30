@@ -32,16 +32,15 @@ public class MessageEditAuthFilter extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Debug.logVerbose("enter MessageEditAuthFilter");
 		MessageForm messageForm = (MessageForm) form;
-		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", 
-				this.servlet.getServletContext());
+		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
 		Account account = accountService.getloginAccount();
 		if (account == null) {
 			messageForm.setAuthenticated(false);// only logined user can post
 			return mapping.findForward("failure");
 		}
 		if ((messageForm.getAction() != null) && (!messageForm.getAction().equals(MessageForm.CREATE_STR))) {
-			ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", 
-					this.servlet.getServletContext());
+			//here need httpsession , so param is request
+			ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
 			ForumMessage forumMessage = null;
 			if (messageForm.getMessageId() != null)
 			 forumMessage = forumMessageService.getMessage(messageForm.getMessageId());

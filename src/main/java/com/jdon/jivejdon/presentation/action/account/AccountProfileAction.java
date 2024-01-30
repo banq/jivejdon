@@ -68,8 +68,7 @@ public class AccountProfileAction extends Action {
 		String userId = request.getParameter("userId");
 		String username = request.getParameter("username");
 
-		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", 
-				this.servlet.getServletContext());
+		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
 		Account account = null;
 		if (userId != null) {
 			account = accountService.getAccount(Long.parseLong(userId));

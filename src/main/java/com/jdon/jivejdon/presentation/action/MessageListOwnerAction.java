@@ -40,14 +40,7 @@ import com.jdon.util.Debug;
  */
 public class MessageListOwnerAction extends ModelListAction {
 	private final static String module = MessageListAction.class.getName();
-	private ForumMessageQueryService forumMessageQueryService;	
-
-	public ForumMessageQueryService getForumMessageQueryService() {
-		if (forumMessageQueryService == null)
-			forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService",
-					this.servlet.getServletContext());
-		return forumMessageQueryService;
-	}
+	
 
 	/*
 	 * (non-Javadoc)
@@ -62,8 +55,9 @@ public class MessageListOwnerAction extends ModelListAction {
 			Debug.logError(" getPageIterator error : threadId is null", module);
 			return new PageIterator();
 		}
-
-		return getForumMessageQueryService().getMessages(Long.parseLong(threadId), start, count);
+		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService(
+				"forumMessageQueryService", request);
+		return forumMessageQueryService.getMessages(Long.parseLong(threadId), start, count);
 	}
 
 	/*
@@ -77,7 +71,9 @@ public class MessageListOwnerAction extends ModelListAction {
 
 		// getXXX can be intercepted by cacheinterceptor before accessing
 		// ForumMessageServiceShell
-		ForumMessage forumMessage = getForumMessageQueryService().getMessage((Long) key);
+		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService(
+				"forumMessageQueryService", request);
+		ForumMessage forumMessage = forumMessageQueryService.getMessage((Long) key);
 
 		return forumMessage;
 	}
@@ -98,13 +94,15 @@ public class MessageListOwnerAction extends ModelListAction {
 		}
 
 		try {
-			ForumThread forumThread = getForumMessageQueryService().getThread(Long.parseLong(threadId));
+			ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService(
+					"forumMessageQueryService", request);
+			ForumThread forumThread = forumMessageQueryService.getThread(Long.parseLong(threadId));
 			if (forumThread == null)
 				throw new Exception("thread is null " + threadId);
 
 			modelListForm.setOneModel(forumThread);
 
-			if (request.getSession(false) != null) {
+			if (request.getSession() != null) {
 				boolean[] authenticateds = getAuthedListForm(actionForm, request);
 				MessageListForm messageListForm = (MessageListForm) actionForm;
 				messageListForm.setAuthenticateds(authenticateds);
@@ -127,8 +125,7 @@ public class MessageListOwnerAction extends ModelListAction {
 		if (request.getSession(false) == null)
 			return authenticateds;
 
-		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", 
-				this.servlet.getServletContext());
+		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
 		Account account = accountService.getloginAccount();
 		if (account == null)
 			return authenticateds;// if login need auth check

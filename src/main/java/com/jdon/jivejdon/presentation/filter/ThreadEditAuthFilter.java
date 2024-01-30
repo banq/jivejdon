@@ -26,18 +26,16 @@ public class ThreadEditAuthFilter  extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Debug.logVerbose("enter ThreadEditAuthFilter");
 		ThreadForm threadForm = (ThreadForm) form;
-		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", 
-				this.servlet.getServletContext());
+		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
 		Account account = accountService.getloginAccount();
 		if (account == null) {
 			threadForm.setAuthenticated(false);// only logined user can post
 			return mapping.findForward("success");
 		}
 		if ((threadForm.getAction() != null) && (!threadForm.getAction().equals(MessageForm.CREATE_STR))) {
-			ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", 
-					this.servlet.getServletContext());
-			ForumThread forumThread = forumMessageService.getThread(new
-						Long(threadForm.getThreadId()));
+			// here need httpsession , so param is request
+			ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
+			ForumThread forumThread = forumMessageService.getThread(new Long(threadForm.getThreadId()));
 			if (forumThread != null) {
 				boolean result = forumMessageService.checkIsAuthenticated
 						(forumThread.getRootMessage());
