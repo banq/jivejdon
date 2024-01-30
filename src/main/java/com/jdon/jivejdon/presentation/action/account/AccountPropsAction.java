@@ -28,9 +28,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.api.account.AccountService;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.presentation.form.AccountProfileForm;
-import com.jdon.jivejdon.api.account.AccountService;
 
 public class AccountPropsAction extends Action {
 	private final static Logger logger = LogManager.getLogger(AccountPropsAction.class);
@@ -38,7 +38,8 @@ public class AccountPropsAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		logger.debug("enter save proprs");
 
-		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
+		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", 
+				this.servlet.getServletContext());
 		Account account = accountService.getloginAccount();
 		if (account == null) {
 			return mapping.findForward("failure");

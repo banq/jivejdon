@@ -26,8 +26,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.presentation.form.ShortMessageForm;
 import com.jdon.jivejdon.api.shortmessage.ShortMessageService;
+import com.jdon.jivejdon.presentation.form.ShortMessageForm;
 import com.jdon.strutsutil.FormBeanUtil;
 
 /**
@@ -52,7 +52,8 @@ public class SaveShortmessageAction extends Action {
 	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		ShortMessageService shortMessageService = (ShortMessageService) WebAppUtil.getService("shortMessageService", request);
+		ShortMessageService shortMessageService = (ShortMessageService) WebAppUtil.getService("shortMessageService", 
+				this.servlet.getServletContext());
 		logger.debug(" " + shortMessageService);
 		ShortMessageForm form = (ShortMessageForm) actionForm;
 		String operation = request.getAttribute("operation").toString();

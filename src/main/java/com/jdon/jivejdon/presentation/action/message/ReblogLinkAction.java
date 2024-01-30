@@ -9,6 +9,11 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.api.ForumMessageService;
 import com.jdon.jivejdon.api.property.TagService;
@@ -18,11 +23,6 @@ import com.jdon.jivejdon.domain.model.util.OneOneDTO;
 import com.jdon.jivejdon.presentation.form.PropertysForm;
 import com.jdon.util.Debug;
 
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 public class ReblogLinkAction extends Action {
     public final static String module = ReblogLinkAction.class.getName();
 
@@ -30,7 +30,8 @@ public class ReblogLinkAction extends Action {
             HttpServletResponse response) throws Exception {
         PropertysForm df = (PropertysForm) actionForm;
         String threadFromId = request.getParameter("threadId");
-        TagService othersService = (TagService) WebAppUtil.getService("othersService", request);
+        TagService othersService = (TagService) WebAppUtil.getService("othersService", 
+                this.servlet.getServletContext());
         Collection<String> urls = df.getPropertys().stream().map(e -> e.getValue()).collect(Collectors.toList());
         if (urls.stream().anyMatch(url -> url != null)) {
             othersService.deleteReBlogLink(Long.parseLong(threadFromId));
@@ -54,7 +55,8 @@ public class ReblogLinkAction extends Action {
         if (url != null && !url.equals("")) {
             Long threadId = extractFromUrl(url, request);
             if (threadId != null) {
-                TagService othersService = (TagService) WebAppUtil.getService("othersService", request);
+                TagService othersService = (TagService) WebAppUtil.getService("othersService", 
+                        this.servlet.getServletContext());
                 othersService.saveReBlogLink(new OneOneDTO(threadFromId, threadId));
             }
 

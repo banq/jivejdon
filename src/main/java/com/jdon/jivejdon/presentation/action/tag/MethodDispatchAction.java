@@ -60,7 +60,8 @@ public class MethodDispatchAction extends DispatchAction {
 			logger.error("savetags error : no auth" + request.getRemoteAddr());
 			mapping.findForward("savetags");
 		}
-		TagService othersService = (TagService) WebAppUtil.getService("othersService", request);
+		TagService othersService = (TagService) WebAppUtil.getService("othersService", 
+				this.servlet.getServletContext());
 		othersService.saveTag(Long.parseLong(threadId), tagTitle);
 		return mapping.findForward("savetags");
 	}

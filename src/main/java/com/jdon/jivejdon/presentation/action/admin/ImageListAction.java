@@ -20,7 +20,8 @@ public class ImageListAction extends ModelListAction {
 	public PageIterator getPageIterator(HttpServletRequest request, int start,
 			int count) {
 		
-		UploadInfoVOService uploadInfoVOService = (UploadInfoVOService) WebAppUtil.getService("uploadInfoVOService", request);
+		UploadInfoVOService uploadInfoVOService = (UploadInfoVOService) WebAppUtil.getService("uploadInfoVOService", 
+				this.servlet.getServletContext());
 		return uploadInfoVOService.getUploads(start, count);
 	}
 
@@ -30,7 +31,8 @@ public class ImageListAction extends ModelListAction {
 	 */
 	public Object findModelIFByKey(HttpServletRequest request, Object key) {
 		
-		UploadInfoVOService uploadInfoVOService = (UploadInfoVOService) WebAppUtil.getService("uploadInfoVOService", request);
+		UploadInfoVOService uploadInfoVOService = (UploadInfoVOService) WebAppUtil.getService("uploadInfoVOService", 
+				this.servlet.getServletContext());
 		return uploadInfoVOService.getUploadInfoVO((String)key);
 	}
 

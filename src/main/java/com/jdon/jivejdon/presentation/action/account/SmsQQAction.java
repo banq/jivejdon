@@ -26,7 +26,7 @@ public class SmsQQAction extends Action {
 			request, HttpServletResponse response) throws Exception {
 
 		ErrorBlockerIF errorBlocker = (ErrorBlockerIF)
-				WebAppUtil.getComponentInstance("errorBlocker", request);
+				WebAppUtil.getComponentInstance("errorBlocker", this.servlet.getServletContext());
 		if (errorBlocker.checkRate(request.getRemoteAddr(), 10)) {
 			logger.error("SmsQQAction errorBlocker:" + request.getRemoteAddr());
 			return null;

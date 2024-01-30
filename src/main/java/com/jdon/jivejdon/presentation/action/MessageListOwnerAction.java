@@ -127,7 +127,8 @@ public class MessageListOwnerAction extends ModelListAction {
 		if (request.getSession(false) == null)
 			return authenticateds;
 
-		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
+		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", 
+				this.servlet.getServletContext());
 		Account account = accountService.getloginAccount();
 		if (account == null)
 			return authenticateds;// if login need auth check

@@ -21,7 +21,8 @@ public class MethodDispatchAction extends DispatchAction {
 			throws Exception {
 		logger.debug("enter userMessageListDelete");
 		String username = request.getParameter("username");
-		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
+		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", 
+				this.servlet.getServletContext());
 		forumMessageService.deleteUserMessages(username);
 
 		String deluserprofile = request.getParameter("deluserprofile");
@@ -32,7 +33,8 @@ public class MethodDispatchAction extends DispatchAction {
 
 	public ActionForward deleteCacheKey(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		ContainerUtil containerUtil = (ContainerUtil) WebAppUtil.getComponentInstance("containerUtil", request);
+		ContainerUtil containerUtil = (ContainerUtil) WebAppUtil.getComponentInstance("containerUtil", 
+				this.servlet.getServletContext());
 		containerUtil.getCacheManager().getCache().remove(request.getParameter("cacheKey"));
 		return mapping.findForward("deleteCacheKey");
 	}

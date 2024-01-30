@@ -40,7 +40,8 @@ public class CacheKeysAction extends Action {
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelListForm mlform = (ModelListForm) form;
-		ContainerUtil containerUtil = (ContainerUtil) WebAppUtil.getComponentInstance("containerUtil", request);
+		ContainerUtil containerUtil = (ContainerUtil) WebAppUtil.getComponentInstance("containerUtil", 
+				this.servlet.getServletContext());
 
 		PageIterator pageIterator = null;
 		String skey = request.getParameter("key");

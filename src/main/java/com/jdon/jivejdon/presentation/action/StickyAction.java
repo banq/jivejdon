@@ -26,7 +26,8 @@ public class StickyAction extends Action {
 			ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		PropertyService propertyService = (PropertyService) WebAppUtil.getService("propertyService", request);
+		PropertyService propertyService = (PropertyService) WebAppUtil.getService("propertyService", 
+				this.servlet.getServletContext());
 		String threadId = request.getParameter("threadId");
 		String ui_state = request.getParameter("ui_state");
 		String action = request.getParameter("action");

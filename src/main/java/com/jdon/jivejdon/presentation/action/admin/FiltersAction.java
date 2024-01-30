@@ -15,22 +15,6 @@
  */
 package com.jdon.jivejdon.presentation.action.admin;
 
-import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.domain.model.message.MessageVO;
-import com.jdon.jivejdon.domain.model.message.output.RenderingFilterManager;
-import com.jdon.jivejdon.presentation.form.FiltersForm;
-import com.jdon.jivejdon.api.ForumMessageService;
-import com.jdon.jivejdon.api.ForumService;
-import com.jdon.jivejdon.util.BeanUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.actions.DispatchAction;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.beans.BeanDescriptor;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -40,6 +24,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.actions.DispatchAction;
+
+import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.api.ForumMessageService;
+import com.jdon.jivejdon.api.ForumService;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
+import com.jdon.jivejdon.domain.model.message.output.RenderingFilterManager;
+import com.jdon.jivejdon.presentation.form.FiltersForm;
+import com.jdon.jivejdon.util.BeanUtils;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -200,7 +202,8 @@ public class FiltersAction extends DispatchAction {
   			  // Save the filters
   			  filterManager.saveFilters();
   			  //clear all cache
-  			  ForumService forumService = (ForumService) WebAppUtil.getService("forumService", request);
+  			  ForumService forumService = (ForumService) WebAppUtil.getService("forumService", 
+                      this.servlet.getServletContext());
   			  forumService.clearCache();
   		} catch (Exception e) {
   			e.printStackTrace();
@@ -264,7 +267,8 @@ public class FiltersAction extends DispatchAction {
     }
     
     private RenderingFilterManager getFilterManager( HttpServletRequest request){
-        ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
+        ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", 
+                this.servlet.getServletContext());
         return forumMessageService.getFilterManager();        
     }
     

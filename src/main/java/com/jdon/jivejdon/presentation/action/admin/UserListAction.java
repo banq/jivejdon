@@ -13,7 +13,8 @@ public class UserListAction extends ModelListAction {
 	@Override
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
 		String username = request.getParameter("username");
-		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
+		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", 
+				this.servlet.getServletContext());
 		if (UtilValidate.isEmpty(username)) {
 			return accountService.getAccounts(start, count);
 		} else {
@@ -23,7 +24,8 @@ public class UserListAction extends ModelListAction {
 	}
 
 	public Object findModelIFByKey(HttpServletRequest request, Object key) {
-		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
+		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", 
+				this.servlet.getServletContext());
 		return accountService.getAccount((Long) key);
 
 	}

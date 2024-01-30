@@ -39,7 +39,8 @@ public class InputSwitcherAction extends Action {
 	}
 
 	public void load(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response) {
-		InputSwitcherIF inputSwitcher = (InputSwitcherIF) WebAppUtil.getComponentInstance("inputSwitcher", request);
+		InputSwitcherIF inputSwitcher = (InputSwitcherIF) WebAppUtil.getComponentInstance("inputSwitcher", 
+				this.servlet.getServletContext());
 		if (inputSwitcher.isInputPermit())
 			request.setAttribute("des", inputSwitcher.getDes());
 
@@ -48,7 +49,8 @@ public class InputSwitcherAction extends Action {
 	public void save(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response) {
 		String inputSwitcherS = request.getParameter("inputSwitcher");
 		String des = request.getParameter("des");
-		InputSwitcherIF inputSwitcher = (InputSwitcherIF) WebAppUtil.getComponentInstance("inputSwitcher", request);
+		InputSwitcherIF inputSwitcher = (InputSwitcherIF) WebAppUtil.getComponentInstance("inputSwitcher", 
+				this.servlet.getServletContext());
 		if ((inputSwitcherS != null) && (inputSwitcherS.equals("on")))
 			inputSwitcher.setInputPermit(true, des);
 		else

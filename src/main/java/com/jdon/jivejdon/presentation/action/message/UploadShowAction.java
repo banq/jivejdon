@@ -11,9 +11,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.api.property.UploadService;
 import com.jdon.jivejdon.domain.model.attachment.UploadFile;
 import com.jdon.jivejdon.domain.model.message.upload.UploadFileFilter;
-import com.jdon.jivejdon.api.property.UploadService;
 import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
 
@@ -38,7 +38,8 @@ public class UploadShowAction extends Action {
 		String dlname = request.getParameter(UploadFileFilter.DOWNLOAD_NAME);
 		UploadFile uploadFile = null;
 		try {
-			UploadService uploadService = (UploadService) WebAppUtil.getService("uploadService", request);
+			UploadService uploadService = (UploadService) WebAppUtil.getService("uploadService", 
+					this.servlet.getServletContext());
 			uploadFile = uploadService.getUploadFile(id);
 			if (uploadFile == null)
 				throw new Exception("uploadFile == null");

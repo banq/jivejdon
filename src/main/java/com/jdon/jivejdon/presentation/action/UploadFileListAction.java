@@ -58,7 +58,8 @@ public class UploadFileListAction extends Action {
 		} else {
 			logger.debug("no paramter parentId, it is create!");
 		}
-		UploadService uploadService = (UploadService) WebAppUtil.getService("uploadService", request);
+		UploadService uploadService = (UploadService) WebAppUtil.getService("uploadService", 
+				this.servlet.getServletContext());
 		List<UploadFile> list = uploadService.getAllUploadFiles(messageIdL);
 		listForm.setList(list);
 
@@ -72,13 +73,15 @@ public class UploadFileListAction extends Action {
 			logger.debug("uploadFileForm don't existed,please config acion filter for upload view in struts-config-upload");
 			return;
 		}
-		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
+		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", 
+				this.servlet.getServletContext());
 		Account account = accountService.getloginAccount();
 		if (account == null) {
 			upLoadFileForm.setAuthenticated(false);
 			return;
 		}
-		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
+		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", 
+				this.servlet.getServletContext());
 		ForumMessage forumMessage = forumMessageService.getMessage(messageId);
 		boolean isallowEdit = forumMessageService.checkIsAuthenticated(forumMessage);
 		upLoadFileForm.setAuthenticated(isallowEdit);

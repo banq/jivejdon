@@ -28,9 +28,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.api.account.AccountService;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.presentation.form.AccountProfileForm;
-import com.jdon.jivejdon.api.account.AccountService;
 
 /**
  * 
@@ -68,7 +68,8 @@ public class AccountProfileAction extends Action {
 		String userId = request.getParameter("userId");
 		String username = request.getParameter("username");
 
-		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
+		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", 
+				this.servlet.getServletContext());
 		Account account = null;
 		if (userId != null) {
 			account = accountService.getAccount(Long.parseLong(userId));

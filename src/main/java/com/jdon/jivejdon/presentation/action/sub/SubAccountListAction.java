@@ -21,7 +21,8 @@ public class SubAccountListAction extends ModelListAction {
 			logger.error(" getPageIterator error : userId is null");
 			return new PageIterator();
 		}
-		SubscriptionService subscriptionService = (SubscriptionService) WebAppUtil.getService("subscriptionService", request);
+		SubscriptionService subscriptionService = (SubscriptionService) WebAppUtil.getService("subscriptionService", 
+				this.servlet.getServletContext());
 		return subscriptionService.getSubscriptionsForAccount(userId, start, count);
 	}
 
@@ -33,7 +34,8 @@ public class SubAccountListAction extends ModelListAction {
 	 */
 	public Object findModelIFByKey(HttpServletRequest request, Object key) {
 		logger.debug("enter findModelByKey");
-		SubscriptionService subscriptionService = (SubscriptionService) WebAppUtil.getService("subscriptionService", request);
+		SubscriptionService subscriptionService = (SubscriptionService) WebAppUtil.getService("subscriptionService", 
+				this.servlet.getServletContext());
 		return subscriptionService.getSubscription((Long) key);
 	}
 

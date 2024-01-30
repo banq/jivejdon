@@ -21,18 +21,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.oauth.OAuthAccessor;
-
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.spi.component.account.GoogleOAuthSubmitter;
-import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.api.account.OAuthAccountService;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.spi.component.account.GoogleOAuthSubmitter;
+
+import net.oauth.OAuthAccessor;
 
 public class GoogleCallBackAction extends Action {
 	private final static Logger logger = LogManager.getLogger(GoogleCallBackAction.class);
@@ -44,13 +45,15 @@ public class GoogleCallBackAction extends Action {
 		if (verifier != null) {
 			OAuthAccessor resToken = (OAuthAccessor) session.getAttribute("resToken");
 			if (resToken != null) {
-				GoogleOAuthSubmitter googleOAuthSubmitter = (GoogleOAuthSubmitter) WebAppUtil.getComponentInstance("googleOAuthSubmitter", request);
+				GoogleOAuthSubmitter googleOAuthSubmitter = (GoogleOAuthSubmitter) WebAppUtil.getComponentInstance("googleOAuthSubmitter", 
+						this.servlet.getServletContext());
 				OAuthAccessor accessToken = googleOAuthSubmitter.requstAccessToken(resToken, verifier);
 
 				if (accessToken.accessToken == null)
 					return mapping.findForward("failure");
 
-				OAuthAccountService oAuthAccountService = (OAuthAccountService) WebAppUtil.getService("oAuthAccountService", request);
+				OAuthAccountService oAuthAccountService = (OAuthAccountService) WebAppUtil.getService("oAuthAccountService", 
+						this.servlet.getServletContext());
 				Account account = oAuthAccountService.saveGoogle(accessToken);
 
 				Map<String, String> subParams = (Map<String, String>) session.getAttribute("subscriptionParameters");

@@ -17,7 +17,8 @@ package com.jdon.jivejdon.presentation.action.shortmessage;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
@@ -45,7 +46,8 @@ public class ReceiveBoxListAction extends ModelListAction {
 	@Override
 	public Object findModelIFByKey(HttpServletRequest request, Object key) {
 		logger.debug("getPageIterator()");
-		ShortMessageService service = (ShortMessageService) WebAppUtil.getService("shortMessageService", request);
+		ShortMessageService service = (ShortMessageService) WebAppUtil.getService("shortMessageService", 
+				this.servlet.getServletContext());
 
 		return service.getToShortMessage((Long) key);
 	}
@@ -53,7 +55,8 @@ public class ReceiveBoxListAction extends ModelListAction {
 	@Override
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
 		logger.debug("findModelIFByKey()");
-		ShortMessageService service = (ShortMessageService) WebAppUtil.getService("shortMessageService", request);
+		ShortMessageService service = (ShortMessageService) WebAppUtil.getService("shortMessageService", 
+				this.servlet.getServletContext());
 
 		return service.getReceiveShortMessages(start, count);
 	}

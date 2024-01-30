@@ -25,16 +25,17 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.api.property.TagService;
 import com.jdon.jivejdon.domain.model.property.HotKeys;
 import com.jdon.jivejdon.presentation.form.PropertysForm;
-import com.jdon.jivejdon.api.property.TagService;
 
 public class HotKeysAction extends Action {
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		PropertysForm df = (PropertysForm) form;
 		String action = df.getAction();
-		TagService othersService = (TagService) WebAppUtil.getService("othersService", request);
+		TagService othersService = (TagService) WebAppUtil.getService("othersService", 
+				this.servlet.getServletContext());
 		if ((action != null) && (action.equals("save"))) {
 			HotKeys hotKeys = new HotKeys();
 			hotKeys.setProps(df.getPropertys());

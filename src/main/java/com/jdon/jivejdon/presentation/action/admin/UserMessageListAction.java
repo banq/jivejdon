@@ -1,16 +1,17 @@
 package com.jdon.jivejdon.presentation.action.admin;
 
-import com.jdon.controller.WebAppUtil;
-import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.domain.model.query.MultiCriteria;
-import com.jdon.jivejdon.api.query.ForumMessageQueryService;
-import com.jdon.jivejdon.api.ForumMessageService;
-import com.jdon.strutsutil.ModelListAction;
-import com.jdon.util.UtilValidate;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.http.HttpServletRequest;
+import com.jdon.controller.WebAppUtil;
+import com.jdon.controller.model.PageIterator;
+import com.jdon.jivejdon.api.ForumMessageService;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
+import com.jdon.jivejdon.domain.model.query.MultiCriteria;
+import com.jdon.strutsutil.ModelListAction;
+import com.jdon.util.UtilValidate;
 
 public class UserMessageListAction extends ModelListAction {
 	private final static Logger logger = LogManager.getLogger(UserMessageListAction.class);
@@ -29,7 +30,8 @@ public class UserMessageListAction extends ModelListAction {
 		logger.debug("fromDate=" + queryCriteria.getFromDateString());
 		logger.debug("toDate=" + queryCriteria.getToDateString());
 
-		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService", request);
+		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService", 
+				this.servlet.getServletContext());
 		return forumMessageQueryService.getMessages(queryCriteria, start, count);
 	}
 
@@ -41,7 +43,8 @@ public class UserMessageListAction extends ModelListAction {
 	}
 
 	public Object findModelIFByKey(HttpServletRequest request, Object key) {
-		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
+		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", 
+				this.servlet.getServletContext());
 		logger.debug(" key calss type = " + key.getClass().getName());
 		return forumMessageService.getMessage((Long) key);
 	}

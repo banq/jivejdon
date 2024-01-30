@@ -18,7 +18,8 @@ package com.jdon.jivejdon.presentation.action.account;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
@@ -28,9 +29,9 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.spi.component.email.ValidateCodeEmail;
-import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.api.account.AccountService;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.spi.component.email.ValidateCodeEmail;
 
 public class EmailValidateAction extends Action {
 	private final static Logger logger = LogManager.getLogger(EmailValidateAction.class);
@@ -46,13 +47,15 @@ public class EmailValidateAction extends Action {
 		if (validateCode == null)
 			return null;
 
-		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
+		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", 
+				this.servlet.getServletContext());
 		Account account = accountService.getAccount(Long.parseLong(userId));
 		if (account == null)
 			return null;
 
 		try {
-			ValidateCodeEmail validateCodeEmail = (ValidateCodeEmail) WebAppUtil.getComponentInstance("validateCodeEmail", request);
+			ValidateCodeEmail validateCodeEmail = (ValidateCodeEmail) WebAppUtil.getComponentInstance("validateCodeEmail", 
+					this.servlet.getServletContext());
 
 			if (validateCodeEmail.emailValidate(account.getUserId(), Integer.parseInt(validateCode))) {
 				logger.debug("emailValidate passed =" + account.getUserId());

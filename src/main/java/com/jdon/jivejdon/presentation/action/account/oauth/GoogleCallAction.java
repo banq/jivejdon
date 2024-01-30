@@ -21,10 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.oauth.OAuth;
-import net.oauth.OAuthAccessor;
-
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -33,6 +31,9 @@ import org.apache.struts.action.ActionMapping;
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.spi.component.account.GoogleOAuthSubmitter;
 
+import net.oauth.OAuth;
+import net.oauth.OAuthAccessor;
+
 public class GoogleCallAction extends Action {
 	private final static Logger logger = LogManager.getLogger(GoogleCallAction.class);
 
@@ -40,7 +41,8 @@ public class GoogleCallAction extends Action {
 		String forwdUrl = mapping.findForward("success").getPath();
 		String domainUrl = CallUtil.getCleanDomainUrl(request, forwdUrl);
 
-		GoogleOAuthSubmitter googleOAuthSubmitter = (GoogleOAuthSubmitter) WebAppUtil.getComponentInstance("googleOAuthSubmitter", request);
+		GoogleOAuthSubmitter googleOAuthSubmitter = (GoogleOAuthSubmitter) WebAppUtil.getComponentInstance("googleOAuthSubmitter", 
+				this.servlet.getServletContext());
 		OAuthAccessor accessor = googleOAuthSubmitter.request(domainUrl);
 		if (accessor.requestToken != null) {
 			HttpSession session = request.getSession();

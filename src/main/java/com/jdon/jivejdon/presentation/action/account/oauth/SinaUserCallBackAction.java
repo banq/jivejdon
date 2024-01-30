@@ -29,12 +29,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.api.account.OAuthAccountService;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.infrastructure.repository.subscription.SubscriptionInitFactory;
 import com.jdon.jivejdon.spi.component.account.SinaOAuthSubmitter;
 import com.jdon.jivejdon.spi.component.account.sina.AccessToken;
 import com.jdon.jivejdon.spi.component.weibo.UserConnectorAuth;
-import com.jdon.jivejdon.domain.model.account.Account;
-import com.jdon.jivejdon.infrastructure.repository.subscription.SubscriptionInitFactory;
-import com.jdon.jivejdon.api.account.OAuthAccountService;
 import com.jdon.util.UtilValidate;
 
 public class SinaUserCallBackAction extends Action {
@@ -58,7 +58,8 @@ public class SinaUserCallBackAction extends Action {
 		try {
 			String forwdUrl = mapping.findForward("success").getPath();
 			String domainUrl = CallUtil.getDomainUrl(request, forwdUrl, subParams);
-			SinaOAuthSubmitter sinaOAuthSubmitter = (SinaOAuthSubmitter) WebAppUtil.getComponentInstance("sinaOAuthSubmitter", request);
+			SinaOAuthSubmitter sinaOAuthSubmitter = (SinaOAuthSubmitter) WebAppUtil.getComponentInstance("sinaOAuthSubmitter", 
+					this.servlet.getServletContext());
 			AccessToken accessToken = sinaOAuthSubmitter.getAccessTokenByCode(verifier, domainUrl);
 			if (UtilValidate.isEmpty(accessToken.getAccessToken())) {
 				logger.error("SINA accessToken RETURN null ");
@@ -67,7 +68,8 @@ public class SinaUserCallBackAction extends Action {
 
 			String userId = (String) subParams.get("userId");
 			if (userId == null) {
-				OAuthAccountService oAuthAccountService = (OAuthAccountService) WebAppUtil.getService("oAuthAccountService", request);
+				OAuthAccountService oAuthAccountService = (OAuthAccountService) WebAppUtil.getService("oAuthAccountService", 
+						this.servlet.getServletContext());
 				Account account = oAuthAccountService.saveSina(accessToken);
 				if (account.isAnonymous()) {
 					logger.error("save account error: " + accessToken.getAccessToken());

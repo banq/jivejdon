@@ -1,16 +1,17 @@
 package com.jdon.jivejdon.presentation.action.message;
 
-import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.api.ForumMessageService;
-import com.jdon.strutsutil.FormBeanUtil;
-import com.jdon.util.Debug;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.api.ForumMessageService;
+import com.jdon.strutsutil.FormBeanUtil;
+import com.jdon.util.Debug;
 
 public class UpdateThreadNameAction extends Action {
     public final static String module = UpdateThreadNameAction.class.getName();
@@ -23,7 +24,7 @@ public class UpdateThreadNameAction extends Action {
         }
         String threadId  = request.getParameter("threadId");
         ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil
-                .getService("forumMessageService", request);
+                .getService("forumMessageService", this.servlet.getServletContext());
         try {
             forumMessageService.updateThreadName(Long.parseLong(threadId), name);
             return actionMapping.findForward(FormBeanUtil.FORWARD_SUCCESS_NAME);

@@ -21,7 +21,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
@@ -31,11 +32,11 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.api.account.AccountService;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.account.PasswordassitVO;
 import com.jdon.jivejdon.presentation.action.account.oauth.CallUtil;
 import com.jdon.jivejdon.presentation.form.SkinUtils;
-import com.jdon.jivejdon.api.account.AccountService;
 
 public class PasswordassitAction extends Action {
 	private final static Logger logger = LogManager.getLogger(PasswordassitAction.class);
@@ -46,7 +47,8 @@ public class PasswordassitAction extends Action {
 		String passwdtype = request.getParameter("passwdtype");
 		String passwdanswer = request.getParameter("passwdanswer");
 		PasswordassitVO passwordassitVO = new PasswordassitVO(userId, passwdtype, passwdanswer);
-		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
+		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", 
+				this.servlet.getServletContext());
 
 		String action = request.getParameter("action");
 		try {

@@ -60,7 +60,8 @@ public class ThreadTagListAction extends ModelListAction {
 			return null;
 
 		try {
-			ThreadContext threadContext = (ThreadContext)WebAppUtil.getComponentInstance("threadContext", request);
+			ThreadContext threadContext = (ThreadContext)WebAppUtil.getComponentInstance("threadContext", 
+					this.servlet.getServletContext());
 		    Set<Long> threadIdsPN = threadContext.getThreadListInContext(thread);
 	        return new PageIterator(threadIdsPN.size(), threadIdsPN.toArray());
 		} catch (Exception e) {

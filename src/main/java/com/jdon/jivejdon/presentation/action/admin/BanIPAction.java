@@ -6,7 +6,8 @@ import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -39,7 +40,8 @@ public class BanIPAction extends Action {
 		logger.debug("enter getBanIpList");
 		Collection ipsres =  new ArrayList();
 		try {
-			IPBanListManagerIF iPBanListManager = (IPBanListManagerIF) WebAppUtil.getComponentInstance("iPBanListManager", request);
+			IPBanListManagerIF iPBanListManager = (IPBanListManagerIF) WebAppUtil.getComponentInstance("iPBanListManager", 
+					this.servlet.getServletContext());
 			ipsres = iPBanListManager.getAllBanIpList();
 		} catch (Exception e) {
 			logger.error(e.toString());
@@ -57,7 +59,8 @@ public class BanIPAction extends Action {
 	
 	private void delIP(HttpServletRequest request, String ip){
 		try {
-			IPBanListManagerIF iPBanListManager = (IPBanListManagerIF) WebAppUtil.getComponentInstance("iPBanListManager", request);
+			IPBanListManagerIF iPBanListManager = (IPBanListManagerIF) WebAppUtil.getComponentInstance("iPBanListManager", 
+					this.servlet.getServletContext());
 			iPBanListManager.deleteBannedIp(ip);
 		} catch (Exception e) {
 			logger.error(e.toString());
@@ -66,7 +69,8 @@ public class BanIPAction extends Action {
 	
 	private void addBanIp(HttpServletRequest request, String ip){
 		try {
-			IPBanListManagerIF iPBanListManager = (IPBanListManagerIF) WebAppUtil.getComponentInstance("iPBanListManager", request);
+			IPBanListManagerIF iPBanListManager = (IPBanListManagerIF) WebAppUtil.getComponentInstance("iPBanListManager", 
+					this.servlet.getServletContext());
 			iPBanListManager.addBannedIp(ip);
 			
 			logger.warn(ip + " was blocked");

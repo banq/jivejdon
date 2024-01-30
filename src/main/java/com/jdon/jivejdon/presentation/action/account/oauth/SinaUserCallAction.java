@@ -21,7 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -37,7 +38,8 @@ public class SinaUserCallAction extends Action {
 		String forwdUrl = mapping.findForward("success").getPath();
 		String domainUrl = CallUtil.getCleanDomainUrl(request, forwdUrl);
 
-		SinaOAuthSubmitter sinaOAuthSubmitter = (SinaOAuthSubmitter) WebAppUtil.getComponentInstance("sinaOAuthSubmitter", request);
+		SinaOAuthSubmitter sinaOAuthSubmitter = (SinaOAuthSubmitter) WebAppUtil.getComponentInstance("sinaOAuthSubmitter", 
+				this.servlet.getServletContext());
 		String authUrl = sinaOAuthSubmitter.authorizeURL(domainUrl, "code");
 
 		if (authUrl != null) {

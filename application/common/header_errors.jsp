@@ -3,7 +3,7 @@
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-
+<%@ page session="false" %>
 
 <logic:present name="message"> <b><font color="BLUE">
   <bean:write name="message" />
