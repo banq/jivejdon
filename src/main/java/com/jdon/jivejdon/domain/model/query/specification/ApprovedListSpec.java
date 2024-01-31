@@ -21,8 +21,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 	public boolean isApproved(ForumThread thread,  ForumThread threadPrev, ForumThread threadPrev2) {
 			try {
-				if (thread.getViewCount() > initViewCount ||
-						isDigged(thread, 1) ||
+				if (isDigged(thread, 1) ||
 						isExcelledDiscuss(thread) ||
 						isGreaterThanPrev(thread, threadPrev, threadPrev2,0.6) ||
 						isLongText(thread, 15) ||
@@ -81,8 +80,8 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 	}
 
-	protected boolean isGoodBlog(ForumThread thread, Account account) {
-		return (isTagged(thread,1) && isGoodAuthor(account, 2) && isDigged(
+	public boolean isGoodBlog(ForumThread thread) {
+		return (isTagged(thread,1) && isGoodAuthor(thread.getRootMessage().getAccount(), 2) && isDigged(
 				thread, 1));
 	}
 
