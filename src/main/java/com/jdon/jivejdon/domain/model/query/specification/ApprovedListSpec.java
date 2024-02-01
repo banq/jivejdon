@@ -8,7 +8,6 @@ import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
 
 public class ApprovedListSpec extends ThreadListSpec {
-	private final int initViewCount = 500;
 
 	//this value is display count on one page
 	private final int needCount = 30;
