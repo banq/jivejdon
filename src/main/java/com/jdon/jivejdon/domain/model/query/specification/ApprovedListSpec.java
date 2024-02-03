@@ -40,14 +40,22 @@ public class ApprovedListSpec extends ThreadListSpec {
 			final double linkCount = reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size() + 1;
 			final double tagsCOunt = thread.getTags().stream().map(threadTag -> threadTag.getAssonum()).reduce(0,
 					(subtotal, element) -> subtotal + element);
-			p = (thread.getRootMessage().getDigCount() + 1) * (thread.getViewCount() + linkCount + tagsCOunt
-					+ (thread.getRootMessage().hasImage() ? 5 : 0));
-			int onlineCount = thread.getViewCounter().getLastSavedCount();		
-			final long diff2 = onlineCount!=-1?(thread.getViewCount() - onlineCount + 1):1;
+			
+			
 			final long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
 			final long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
-			int betterThanOthers = Math.round(thread.getViewCount() /threadPrev.getViewCount());
-			p = (p * diff2 * betterThanOthers) / (diffDays + 1);
+
+			int onlineCount = thread.getViewCounter().getLastSavedCount();		
+			final long diff2 = onlineCount>1?(thread.getViewCount() - onlineCount + 1):1;
+
+			int betterThanOthers = 0;
+			if(threadPrev.getViewCount()>10 && thread.getViewCount()>10){
+				betterThanOthers = Math.round(thread.getViewCount() / threadPrev.getViewCount());
+			}
+
+			p = (thread.getRootMessage().getDigCount() + 1) * (thread.getViewCount() + linkCount + tagsCOunt
+					+ (thread.getRootMessage().hasImage() ? 5 : 1));
+			p = (p * diff2 * (betterThanOthers>1?betterThanOthers:1)) / (diffDays>1?diffDays:1);
 		} finally {
 		}
 		return p;

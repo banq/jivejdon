@@ -31,7 +31,7 @@ public class HomepageListSolver {
 
 	public Collection<Long> getList(int start, int count) {
 		if (list.get() == null)
-			synchronized (list) {
+			synchronized (this) {
 				if (list.get() == null)
 					init();
 			}
