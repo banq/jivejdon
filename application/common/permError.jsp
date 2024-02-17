@@ -55,12 +55,16 @@ if (errorBlocker.checkRate(request.getRemoteAddr(), 5)){
 <%@ include file="../common/IncludeTop.jsp"%>
 <bean:parameter id="error" name="error" value="" />
 <center>
-<H3>服务器内部错误......</H3>
-发生系统错误<bean:write name="error" />
+<H3>错误......</H3>
+发生错误<bean:write name="error" />
 <br>
+ <p>
+ <form  method="post" action="/query/threadViewQuery.shtml">
+		查找：<input type="text"  value="" name="query" size="40">
+</form>
+
 <br>
-<br>
-<p>返回<html:link page="/"> 首页</html:link>
+<p> <a href="<%=request.getContextPath() %>/" class="btn">Jdon.com首页</a>
 </center>
 <%-- <script>
     try{
