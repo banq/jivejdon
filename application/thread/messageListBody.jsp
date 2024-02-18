@@ -34,6 +34,22 @@
       <logic:equal name="forumMessage" property="root" value="false">
       <div class="frame-yy">
       </logic:equal>
+      <logic:equal name="forumMessage" property="root" value="true">
+        <div>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
+             crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-7573657117119544"
+             data-ad-slot="3121124104"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>        
+       </div>
+      </logic:equal>          
+
       <div class="article">
       <article>
         <div class="post_header">
@@ -99,21 +115,6 @@
             </div>
           </div>
         </div>
-
-<logic:equal name="i" value="0"><div>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
-     crossorigin="anonymous"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="3121124104"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>        
-         </div></logic:equal>          
-       
              
                 <bean:write name="forumMessage" property="messageVO.body" filter="false"/>
            

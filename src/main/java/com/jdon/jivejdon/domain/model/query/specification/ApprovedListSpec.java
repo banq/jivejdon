@@ -55,7 +55,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 			p = (thread.getRootMessage().getDigCount() + 1) * (thread.getViewCount() + linkCount + tagsCOunt
 					+ (thread.getRootMessage().hasImage() ? 5 : 1));
-			p = (p * diff2 * (betterThanOthers>1?betterThanOthers:1)) / (diffDays>1?diffDays:1);
+			p = (p * diff2 * (betterThanOthers>1?betterThanOthers:1)) / (diffDays>7?Math.pow(diffDays, diffDays/7):(diffDays>1?diffDays:1));
 		} finally {
 		}
 		return p;
