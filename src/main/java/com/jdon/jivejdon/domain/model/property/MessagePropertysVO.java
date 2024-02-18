@@ -91,9 +91,8 @@ public class MessagePropertysVO {
 	}
 
 	public int getDigCount() {
-		if (this.getPropertyValue(DIG_NUMBER) == null)
-			return 0;
-		return Integer.parseInt(this.getPropertyValue(DIG_NUMBER));
+		Object digCount = this.getPropertyValue(DIG_NUMBER);
+		return digCount != null? Integer.parseInt(digCount):0;
 	}
 
 	public void replacePropertys(Collection<Property> newprops) {
