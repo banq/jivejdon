@@ -116,9 +116,9 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 			List<UploadFile> uploads = uploadService.loadAllUploadFilesOfMessage(mIDInt, sessionContext);
 			AttachmentsVO attachmentsVO = new AttachmentsVO(mIDInt, uploads);
 			Account operator = sessionContextUtil.getLoginAccount(sessionContext);
-			Collection properties = new ArrayList();
+			Collection<Property> properties = new ArrayList<>();
 			properties.add(new Property(MessagePropertysVO.PROPERTY_IP, operator.getPostIP()));
-			MessagePropertysVO messagePropertysVO = new MessagePropertysVO(mIDInt, properties);
+			MessagePropertysVO messagePropertysVO = new MessagePropertysVO(properties);
 
 			if (!UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getBody())
 					|| !UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getSubject())) {
@@ -167,9 +167,9 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 			forumMessageReplyPostDTO.setOperator(operator);
 			forumMessageReplyPostDTO.setAccount(operator);
 
-			Collection properties = new ArrayList();
+			Collection<Property> properties = new ArrayList<>();
 			properties.add(new Property(MessagePropertysVO.PROPERTY_IP, operator.getPostIP()));
-			MessagePropertysVO messagePropertysVO = new MessagePropertysVO(mIDInt, properties);
+			MessagePropertysVO messagePropertysVO = new MessagePropertysVO(properties);
 			PostRepliesMessageCommand postRepliesMessageCommand = new PostRepliesMessageCommand(parentMessage, mIDInt,
 					operator, inFilterManager.applyFilters(forumMessageReplyPostDTO.getMessageVO()), attachmentsVO,
 					messagePropertysVO, forumMessageReplyPostDTO.getTagTitle());
@@ -228,10 +228,9 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 			List<UploadFile> uploads = uploadService.loadAllUploadFilesOfMessage(oldforumMessage.getMessageId(),
 					this.sessionContext);
 			AttachmentsVO attachmentsVO = new AttachmentsVO(newForumMessageInputparamter.getMessageId(), uploads);
-			Collection properties = new ArrayList();
+			Collection<Property> properties = new ArrayList<>();
 			properties.add(new Property(MessagePropertysVO.PROPERTY_IP, operator.getPostIP()));
-			MessagePropertysVO messagePropertysVO = new MessagePropertysVO(newForumMessageInputparamter.getMessageId(),
-					properties);
+			MessagePropertysVO messagePropertysVO = new MessagePropertysVO(properties);
 			ReviseForumMessageCommand reviseForumMessageCommand = new ReviseForumMessageCommand(oldforumMessage,
 					inFilterManager.applyFilters(newForumMessageInputparamter.getMessageVO()), attachmentsVO,
 					messagePropertysVO);

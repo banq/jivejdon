@@ -387,7 +387,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
                      
                         setFilterPipleSpec(filterPipleSpec);
                         setAttachment(new AttachmentsVO(messageId, uploads));
-                        setMessagePropertysVO(new MessagePropertysVO(messageId, props));
+                        setMessagePropertysVO(new MessagePropertysVO(props));
                         this.hotKeys = hotKeys;
                         // apply all filter specification , business rule!
                         messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO.getBody())
