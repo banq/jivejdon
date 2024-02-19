@@ -18,6 +18,13 @@ public class ApprovedListSpec extends ThreadListSpec {
 		sorttableName = "creationDate";
 	}
 
+	/**
+	 * recommend
+	 * @param thread
+	 * @param threadPrev
+	 * @param threadPrev2
+	 * @return
+	 */
 	public boolean isApproved(ForumThread thread,  ForumThread threadPrev, ForumThread threadPrev2) {
 			try {
 				if (isDigged(thread, 1) ||
@@ -33,17 +40,16 @@ public class ApprovedListSpec extends ThreadListSpec {
 			return false;
 	}
 
+	/**
+	 * recommend：HomePageComparator 
+	 * @param thread
+	 * @param threadPrev
+	 * @return
+	 */
 	public double sortedLeaderboard(final ForumThread thread, final ForumThread threadPrev) {
 		double p = 0;
 		try {
-			final ReBlogVO reBlogVO = thread.getReBlogVO();
-			final double linkCount = reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size() + 1;
-			final double tagsCOunt = thread.getTags().stream().map(threadTag -> threadTag.getAssonum()).reduce(0,
-					(subtotal, element) -> subtotal + element);
-			
-			
-			final long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
-			final long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+			p = approvedCompare(thread);
 
 			int onlineCount = thread.getViewCounter().getLastSavedCount();		
 			final long diff2 = onlineCount>1?(thread.getViewCount() - onlineCount + 1):1;
@@ -52,13 +58,21 @@ public class ApprovedListSpec extends ThreadListSpec {
 			if(threadPrev.getViewCount()>10 && thread.getViewCount()>10){
 				betterThanOthers = Math.round(thread.getViewCount() / threadPrev.getViewCount());
 			}
-
-			p = (thread.getRootMessage().getDigCount() + 1) * (thread.getViewCount() + linkCount + tagsCOunt
-					+ (thread.getRootMessage().hasImage() ? 5 : 1));
-			p = (p * diff2 * (betterThanOthers>1?betterThanOthers:1)) / (diffDays>7?Math.pow(diffDays, diffDays/7):(diffDays>1?diffDays:1));
+			p = (p * diff2 * (betterThanOthers>1?betterThanOthers:1));
 		} finally {
 		}
 		return p;
+	}
+
+	/**
+	 * recommend：ThreadDigComparator
+	 * @param thread
+	 * @return
+	 */
+	public double approvedCompare(ForumThread thread){
+		double threadCount = thread.getRootMessage().getDigCount()>0?thread.getViewCount() *  (thread.getRootMessage().getDigCount() + 1):thread.getViewCount();
+		long diff = TimeUnit.DAYS.convert(Math.abs(System.currentTimeMillis() - thread.getCreationDate2()), TimeUnit.MILLISECONDS);
+		return threadCount / (diff + 1);
 	}
 
 	protected boolean isTagged(ForumThread thread, int count) {
