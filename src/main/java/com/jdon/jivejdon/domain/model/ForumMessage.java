@@ -312,7 +312,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
 
     public void messaegDigAction() {
         this.getMessagePropertysVO().addMessageDigCount();
-        this.forumThread.addDig(this);
+        // this.forumThread.addDig(this);
         eventSourcing.saveMessageProperties(
                 new MessagePropertiesRevisedEvent(this.messageId, getMessagePropertysVO().getPropertys()));
     }

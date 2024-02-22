@@ -336,17 +336,17 @@ public class ForumThread {
 		return threadTagsVO.getTags().stream().map(ThreadTag::getTitle).toArray(String[]::new);
 	}
 
-	/**
-	 * all dig for reply messages add to root Message
-	 * 
-	 * @param message
-	 */
-	public void addDig(ForumMessage message) {
-		if (message.getMessageId().longValue() != ((ForumMessage)rootMessage).getMessageId().longValue()) {
-			((ForumMessage)rootMessage).messaegDigAction();
-		}
+	// /**
+	//  * all dig for reply messages add to root Message
+	//  * 
+	//  * @param message
+	//  */
+	// public void addDig(ForumMessage message) {
+	// 	if (message.getMessageId().longValue() != ((ForumMessage)rootMessage).getMessageId().longValue()) {
+	// 		((ForumMessage)rootMessage).messaegDigAction();
+	// 	}
 
-	}
+	// }
 
 	// not use the field modifiedDate in DB.
 	public String getModifiedDate() {

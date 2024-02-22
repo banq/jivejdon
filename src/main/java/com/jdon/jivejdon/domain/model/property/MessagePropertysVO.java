@@ -17,6 +17,7 @@ package com.jdon.jivejdon.domain.model.property;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Optional;
 
 /**
  *
@@ -90,63 +91,30 @@ public class MessagePropertysVO {
   }
 
   public void replacePropertys(Collection<Property> newprops) {
-    Iterator iter = newprops.iterator();
-    while (iter.hasNext()) {
-      Property newproperty = (Property) iter.next();
-      Property oldproperty = getProperty(newproperty.getName());
-      if (oldproperty == null) {
-        getPropertys().add(newproperty);
-      } else {
-        oldproperty.setValue(newproperty.getValue());
-      }
+    for (Property newproperty:newprops) {
+       replaceProperty(newproperty) ;
     }
   }
 
   public void removeProperty(String propName) {
-    Iterator iter = getPropertys().iterator();
-    while (iter.hasNext()) {
-      Property property = (Property) iter.next();
-      if (property.getName().equalsIgnoreCase(propName)) {
-        getPropertys().remove(property);
-        break;
-      }
-    }
+    propertys.removeIf(item -> item.getName().equalsIgnoreCase(propName));
   }
 
   private Property getProperty(String propName) {
-    Iterator iter = getPropertys().iterator();
-    while (iter.hasNext()) {
-      Property property = (Property) iter.next();
-      if (property.getName().equalsIgnoreCase(propName)) {
-        return property;
-      }
-    }
-    return null;
+    Optional<Property> propertyO =  propertys.stream().filter(p -> p.getName().equalsIgnoreCase(propName)).findFirst();
+    return propertyO.isPresent()?propertyO.get():null;
   }
 
   private void replaceProperty(Property newproperty) {
-    boolean found = false;
-    Iterator iter = getPropertys().iterator();
-    while (iter.hasNext()) {
-      Property property = (Property) iter.next();
-      if (property.getName().equalsIgnoreCase(newproperty.getName())) {
-        property.setValue(newproperty.getValue());
-        found = true;
-      }
-    }
-    if (!found) {
-      getPropertys().add(newproperty);
-    }
+    Optional<Property> propertyO =  propertys.stream().filter(p -> p.getName().equalsIgnoreCase(newproperty.getName())).findFirst();
+    if(propertyO.isPresent())
+      propertyO.get().setValue(newproperty.getValue());
+    else
+      propertys.add(newproperty);
   }
 
   private String getPropertyValue(String propName) {
-    Iterator iter = getPropertys().iterator();
-    while (iter.hasNext()) {
-      Property property = (Property) iter.next();
-      if (property.getName().equalsIgnoreCase(propName)) {
-        return property.getValue();
-      }
-    }
-    return null;
+    Optional<Property> propertyO =  propertys.stream().filter(p -> p.getName().equalsIgnoreCase(propName)).findFirst();
+    return propertyO.isPresent()?propertyO.get().getValue():null;
   }
 }
