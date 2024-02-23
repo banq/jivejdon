@@ -74,7 +74,9 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 
         // Split the input string into chunks based on the number of available processors
         int chunkSize = input.length() / parallelism;
-		if(chunkSize<1024) return convertSearch(searchMap,input);
+
+		if(chunkSize < 1024) return convertSearch(searchMap,input);
+		else if(chunkSize > 2048)  return input;
 
         String[] chunks = new String[parallelism];
         for (int i = 0; i < parallelism - 1; i++) {
