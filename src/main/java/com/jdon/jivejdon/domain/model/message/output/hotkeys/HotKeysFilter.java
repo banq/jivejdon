@@ -55,7 +55,7 @@ public class HotKeysFilter implements Function<MessageVO, MessageVO> {
 	 */
 	public String applyFilteredBody(MessageVO messageVO) {
 		String body = messageVO.getBody();
-		if (body.length() < 1024) return body;
+		if (body.length() < 2048) return body;
 		try {
 			HotKeys hotKeys = messageVO.getForumMessage().getHotKeys();
 			if (hotKeys == null)
