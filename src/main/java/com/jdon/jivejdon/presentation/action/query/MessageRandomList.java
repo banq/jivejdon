@@ -55,7 +55,10 @@ public class MessageRandomList extends Action {
         while(pi.hasNext()){
             Long threadId = (Long)pi.next();
             ForumThread thread = getForumMessageQueryService().getThread(threadId);
-            if (approvedListSpec.isApproved(thread, thread, thread)){
+            if (approvedListSpec.isApproved(thread, thread, thread) 
+               || approvedListSpec.isLongText(thread, 5)
+               || approvedListSpec.isTagged(thread, 4)
+               || approvedListSpec.isLinked(thread, 1)){
                 request.setAttribute("threadId", threadId);
                 return actionMapping.findForward("success");
             }

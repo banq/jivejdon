@@ -75,14 +75,14 @@ public class ApprovedListSpec extends ThreadListSpec {
 		return threadCount / (diff + 1);
 	}
 
-	protected boolean isTagged(ForumThread thread, int count) {
+	public boolean isTagged(ForumThread thread, int count) {
 		final double tagsCOunt = thread.getTags().stream().map(threadTag -> threadTag.getAssonum()).reduce(0, (subtotal, element) -> subtotal + element);
-        return tagsCOunt>count?true:false;
+        return tagsCOunt>=count?true:false;
 	}
 
-	protected boolean isLinked(ForumThread thread, int count) {
+	public boolean isLinked(ForumThread thread, int count) {
 		final ReBlogVO reBlogVO = thread.getReBlogVO();
-        return (reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size())>count?true:false;
+        return (reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size())>=count?true:false;
 	}
 		
 
@@ -107,7 +107,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 				thread, 1));
 	}
 
-	protected boolean isLongText(ForumThread thread, int count){
+	public boolean isLongText(ForumThread thread, int count){
 		int bodylength = thread.getRootMessage().getMessageVO().getBody().length();
 		if (bodylength<=0) return false;
 
