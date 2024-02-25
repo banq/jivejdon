@@ -35,7 +35,7 @@ pageContext.setAttribute("title", titleStr);
    <meta name="Description" content="教程，免费在线教程，编码教程和面试问题">
    <meta name="Keywords" content="Java教程,SpringBoot教程,程序,算法,模式,数据库,计算机科学,面试技巧,程序员职场,幽默,meme,Python,Java,JavaScript,安卓,SQL,数据科学,机器学习,Web开发,系统设计,技术博客,面试,HTML,CSS,golang,Rust">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
-  <link rel="alternate" type="application/rss+xml" title="极道订阅" href="https://www.jdon.com/rss">
+  <link rel="alternate" type="application/rss+xml" title="汲道订阅" href="https://www.jdon.com/rss">
  
 <%if(pagestartInt != 0 ) {%> 
     <%if(pagestartInt-pagecountInt>0 ) {%>  

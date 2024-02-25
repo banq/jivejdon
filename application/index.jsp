@@ -20,11 +20,11 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>极道 - 技术前沿极客</title>
+  <title>汲道 - 技术前沿极客</title>
   <meta name="Description" content="教程，免费在线教程，为初学者和专业人士提供所有编码与架构设计的教程和面试问题">
   <meta name="Keywords" content="认知,逻辑,编程,Java教程,SpringBoot教程,软件架构,企业架构,大语言模型,规则引擎,流程,领域驱动,微服务,数据工程,平台,人工智能,程序,算法,模式,数据库,计算机科学,Python,Java,JavaScript,安卓,SQL,数据科学,机器学习,Web开发,系统设计,技术博客,面试,HTML,CSS,golang,Rust">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
-  <link rel="alternate" type="application/rss+xml" title="极道订阅" href="https://www.jdon.com/rss">
+  <link rel="alternate" type="application/rss+xml" title="汲道订阅" href="https://www.jdon.com/rss">
   <link rel="canonical" href="https://www.jdon.com/">
   <meta http-equiv="refresh" content="3600">
    <!-- Google tag (gtag.js) -->

@@ -62,7 +62,7 @@ public class SmsQQAction extends Action {
 		int templateId = 150191;
 		// NOTE: 这里的模板ID`7839`只是一个示例，真实的模板ID需要在短信控制台中申请
 // 签名
-		String smsSign = "极道软件";
+		String smsSign = "汲道软件";
 		HttpSession session1 = request.getSession();
 		String SMSCODE = (String) session1.getAttribute("SMSCODE");
 		if (SMSCODE == null) {
