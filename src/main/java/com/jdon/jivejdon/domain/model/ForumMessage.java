@@ -295,7 +295,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
     }
 
     public int getDigCount() {
-        return this.getMessagePropertysVO().getDigCount();
+        return this.getForumThread().getRootMessage().getMessagePropertysVO().getDigCount();
     }
 
     public MessagePropertysVO getMessagePropertysVO() {
