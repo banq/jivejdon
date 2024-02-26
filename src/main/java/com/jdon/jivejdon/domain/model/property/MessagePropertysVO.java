@@ -89,7 +89,6 @@ public class MessagePropertysVO {
   }
 
   public int getDigCount() {
-  
     return digCount;
   }
 
