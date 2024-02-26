@@ -37,9 +37,13 @@ public class MessagePropertysVO {
 
   private final Collection<Property> propertys;
 
+  private int digCount = -1;
+
   // for read or load
   public MessagePropertysVO(Collection<Property> propertys) {
     this.propertys = propertys;
+    String digCountS = this.getPropertyValue(DIG_NUMBER);
+    digCount = digCountS != null ? Integer.parseInt(digCountS) : 0;
   }
 
   public Collection<Property> getPropertys() {
@@ -79,15 +83,14 @@ public class MessagePropertysVO {
   }
 
   public void addMessageDigCount() {
-    int number = getDigCount();
-    number++;
-    Property Numberproperty = new Property(DIG_NUMBER, String.valueOf(number));
+    digCount++;
+    Property Numberproperty = new Property(DIG_NUMBER, String.valueOf(digCount));
     this.replaceProperty(Numberproperty);
   }
 
   public int getDigCount() {
-    String digCount = this.getPropertyValue(DIG_NUMBER);
-    return digCount != null ? Integer.parseInt(digCount) : 0;
+  
+    return digCount;
   }
 
   public void replacePropertys(Collection<Property> newprops) {
