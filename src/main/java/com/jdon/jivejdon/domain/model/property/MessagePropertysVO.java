@@ -16,7 +16,6 @@
 package com.jdon.jivejdon.domain.model.property;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.Optional;
 
 /**
@@ -30,40 +29,35 @@ import java.util.Optional;
 public class MessagePropertysVO {
 
   public static final String PROPERTY_MASKED = "MASKED";
+  private boolean masked = false;
 
   public static final String PROPERTY_IP = "IP";
+  private String postIP;
 
   public static final String DIG_NUMBER = "digNumber";
+  private int digCount = -1;
 
   private final Collection<Property> propertys;
 
-  private int digCount = -1;
-
   // for read or load
   public MessagePropertysVO(Collection<Property> propertys) {
+
     this.propertys = propertys;
+
     String digCountS = this.getPropertyValue(DIG_NUMBER);
     digCount = digCountS != null ? Integer.parseInt(digCountS) : 0;
-  }
 
-  public Collection<Property> getPropertys() {
-    return propertys;
+    masked = getPropertyValue(PROPERTY_MASKED) != null ? true : false;
+
+    postIP = getPropertyValue(PROPERTY_IP);
   }
 
   public boolean isMasked() {
-    return  getPropertyValue(MessagePropertysVO.PROPERTY_MASKED) != null? true: false;
-  }
-
-  // this method is called in messageForm, it is a inputDTO
-  public void setMasked(boolean masked) {
-    if (masked) {
-      replaceProperty(new Property(MessagePropertysVO.PROPERTY_MASKED, "true"));
-    } else {
-      removeProperty(MessagePropertysVO.PROPERTY_MASKED);
-    }
+    return masked;
   }
 
   public void updateMasked(boolean masked) {
+    this.masked = masked;
     if (masked) {
       Property newproperty = new Property();
       newproperty.setName(MessagePropertysVO.PROPERTY_MASKED);
@@ -74,12 +68,12 @@ public class MessagePropertysVO {
     }
   }
 
-  public String getPostip() {
-    String ipaddress = "";
+  public void removeProperty(String propName) {
+    propertys.removeIf(item -> item.getName().equalsIgnoreCase(propName));
+  }
 
-    String saveipaddress = getPropertyValue(MessagePropertysVO.PROPERTY_IP);
-    if (saveipaddress != null) ipaddress = saveipaddress;
-    return ipaddress;
+  public String getPostip() {
+    return postIP;
   }
 
   public void addMessageDigCount() {
@@ -92,31 +86,30 @@ public class MessagePropertysVO {
     return digCount;
   }
 
-  public void replacePropertys(Collection<Property> newprops) {
-    for (Property newproperty:newprops) {
-       replaceProperty(newproperty) ;
-    }
-  }
-
-  public void removeProperty(String propName) {
-    propertys.removeIf(item -> item.getName().equalsIgnoreCase(propName));
-  }
-
-  private Property getProperty(String propName) {
-    Optional<Property> propertyO =  propertys.stream().filter(p -> p.getName().equalsIgnoreCase(propName)).findFirst();
-    return propertyO.isPresent()?propertyO.get():null;
-  }
-
-  private void replaceProperty(Property newproperty) {
-    Optional<Property> propertyO =  propertys.stream().filter(p -> p.getName().equalsIgnoreCase(newproperty.getName())).findFirst();
-    if(propertyO.isPresent())
-      propertyO.get().setValue(newproperty.getValue());
-    else
-      propertys.add(newproperty);
+  public Collection<Property> getPropertys() {
+    return propertys;
   }
 
   private String getPropertyValue(String propName) {
-    Optional<Property> propertyO =  propertys.stream().filter(p -> p.getName().equalsIgnoreCase(propName)).findFirst();
-    return propertyO.isPresent()?propertyO.get().getValue():null;
+    Optional<Property> propertyO = propertys.stream().filter(p -> p.getName().equalsIgnoreCase(propName)).findFirst();
+    return propertyO.isPresent() ? propertyO.get().getValue() : null;
   }
+
+  public Collection<Property> replacePropertys(Collection<Property> newprops) {
+    for (Property newproperty : newprops) {
+      replaceProperty(newproperty);
+    }
+    return propertys;
+  }
+
+  private Collection<Property> replaceProperty(Property newproperty) {
+    Optional<Property> propertyO = propertys.stream().filter(p -> p.getName().equalsIgnoreCase(newproperty.getName()))
+        .findFirst();
+    if (propertyO.isPresent())
+      propertyO.get().setValue(newproperty.getValue());
+    else
+      propertys.add(newproperty);
+    return propertys;
+  }
+
 }

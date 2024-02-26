@@ -202,14 +202,14 @@ public class ForumMessage extends RootMessage implements Cloneable {
             // 3. association message property
             Collection<Property> props = reviseForumMessageCommand.getMessagePropertysVO().getPropertys();
             if (props != null)
-                this.getMessagePropertysVO().replacePropertys(props);
-
+                props = this.getMessagePropertysVO().replacePropertys(props);
+       
             // save this updated message to db
             eventSourcing.saveMessage(new MessageRevisedEvent(reviseForumMessageCommand));
 
             // merge with old properties;
             eventSourcing.saveMessageProperties(
-                    new MessagePropertiesRevisedEvent(this.messageId, getMessagePropertysVO().getPropertys()));
+                    new MessagePropertiesRevisedEvent(this.messageId, props));
         } catch (Exception e) {
             logger.error(" updateMessage error:" + e + this.messageId);
         }
