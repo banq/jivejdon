@@ -9,10 +9,9 @@ import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
 
 public class ApprovedListSpec extends ThreadListSpec {
 
-	//this value is display count on one page
+	// this value is display count on one page
 	private final int needCount = 30;
 	private final int needViewcount = 300;
-	
 
 	public ApprovedListSpec() {
 		sorttableName = "creationDate";
@@ -20,28 +19,30 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 	/**
 	 * recommend
+	 * 
 	 * @param thread
 	 * @param threadPrev
 	 * @param threadPrev2
 	 * @return
 	 */
-	public boolean isApproved(ForumThread thread,  ForumThread threadPrev, ForumThread threadPrev2) {
-			try {
-				if (isDigged(thread, 1) ||
-						isExcelledDiscuss(thread) ||
-						isGreaterThanPrev(thread, threadPrev, threadPrev2,0.6) ||
-						isLongText(thread, 15) ||
-						thread.getRootMessage().hasImage()||
-						(isTagged(thread,3) && isLinked(thread,3))){
-					return true;
-				}
-			} finally {
+	public boolean isApproved(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2) {
+		try {
+			if (isDigged(thread, 1) ||
+					isExcelledDiscuss(thread) ||
+					isGreaterThanPrev(thread, threadPrev, threadPrev2, 0.6) ||
+					isLongText(thread, 15) ||
+					thread.getRootMessage().hasImage() ||
+					(isTagged(thread, 3) && isLinked(thread, 3))) {
+				return true;
 			}
-			return false;
+		} finally {
+		}
+		return false;
 	}
 
 	/**
-	 * recommend：HomePageComparator 
+	 * recommend：HomePageComparator
+	 * 
 	 * @param thread
 	 * @param threadPrev
 	 * @return
@@ -51,14 +52,25 @@ public class ApprovedListSpec extends ThreadListSpec {
 		try {
 			p = approvedCompare(thread);
 
-			int onlineCount = thread.getViewCounter().getLastSavedCount();		
-			final long diff2 = onlineCount>1?(thread.getViewCount() - onlineCount + 1):1;
+			int onlineCount = thread.getViewCounter().getLastSavedCount()
+			long diff2 = onlineCount > 1 ? (thread.getViewCount() - onlineCount + 1) : 1;
+
+			long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
+			long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+			if (diffDays >= 5)
+				p = diff2 * p / (diffDays * 100);
+			else if (diffDays >= 3)
+				p = diff2 * p / (diffDays * 10);
+			else {
+				p = Math.pow(p, diff2);
+			}
 
 			int betterThanOthers = 0;
-			if(threadPrev.getViewCount()>10 && thread.getViewCount()>10){
+			if (threadPrev.getViewCount() > 10 && thread.getViewCount() > 10) {
 				betterThanOthers = Math.round(thread.getViewCount() / threadPrev.getViewCount());
 			}
-			p = (p * diff2 * (betterThanOthers>1?betterThanOthers:1));
+			p = p * (betterThanOthers > 1 ? betterThanOthers : 1);
+
 		} finally {
 		}
 		return p;
@@ -66,27 +78,31 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 	/**
 	 * recommend：ThreadDigComparator
+	 * 
 	 * @param thread
 	 * @return
 	 */
-	public double approvedCompare(ForumThread thread){
-		double threadCount = thread.getRootMessage().getDigCount()>0?thread.getViewCount() *  (thread.getRootMessage().getDigCount() + 1):thread.getViewCount();
-		long diff = TimeUnit.DAYS.convert(Math.abs(System.currentTimeMillis() - thread.getCreationDate2()), TimeUnit.MILLISECONDS);
+	public double approvedCompare(ForumThread thread) {
+		double threadCount = thread.getRootMessage().getDigCount() > 0
+				? thread.getViewCount() * (thread.getRootMessage().getDigCount() + 1)
+				: thread.getViewCount();
+		long diff = TimeUnit.DAYS.convert(Math.abs(System.currentTimeMillis() - thread.getCreationDate2()),
+				TimeUnit.MILLISECONDS);
 		return threadCount / (diff + 1);
 	}
 
 	public boolean isTagged(ForumThread thread, int count) {
-		final double tagsCOunt = thread.getTags().stream().map(threadTag -> threadTag.getAssonum()).reduce(0, (subtotal, element) -> subtotal + element);
-        return tagsCOunt>=count?true:false;
+		final double tagsCOunt = thread.getTags().stream().map(threadTag -> threadTag.getAssonum()).reduce(0,
+				(subtotal, element) -> subtotal + element);
+		return tagsCOunt >= count ? true : false;
 	}
 
 	public boolean isLinked(ForumThread thread, int count) {
 		final ReBlogVO reBlogVO = thread.getReBlogVO();
-        return (reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size())>=count?true:false;
+		return (reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size()) >= count ? true : false;
 	}
-		
 
-	public boolean isApprovedToBest(ForumThread thread, int count, ForumThread threadPrev,ForumThread threadPrev2){		
+	public boolean isApprovedToBest(ForumThread thread, int count, ForumThread threadPrev, ForumThread threadPrev2) {
 		return isApproved(thread, threadPrev, threadPrev2) && count < getNeedCount();
 	}
 
@@ -103,13 +119,14 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	public boolean isGoodBlog(ForumThread thread) {
-		return (isTagged(thread,1) && isGoodAuthor(thread.getRootMessage().getAccount(), 2) && isDigged(
+		return (isTagged(thread, 1) && isGoodAuthor(thread.getRootMessage().getAccount(), 2) && isDigged(
 				thread, 1));
 	}
 
-	public boolean isLongText(ForumThread thread, int count){
+	public boolean isLongText(ForumThread thread, int count) {
 		int bodylength = thread.getRootMessage().getMessageVO().getBody().length();
-		if (bodylength<=0) return false;
+		if (bodylength <= 0)
+			return false;
 
 		if (bodylength / 1024 > count)
 			return true;
@@ -118,14 +135,13 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	protected boolean isExcelledDiscuss(ForumThread thread) {
-		return (isTagged(thread,2) && hasReply(thread, 2));
+		return (isTagged(thread, 2) && hasReply(thread, 2));
 
 	}
 
 	protected boolean isLargeViewCount(ForumThread thread) {
-		return thread.getViewCount()>needViewcount;
+		return thread.getViewCount() > needViewcount;
 	}
-
 
 	private boolean isGoodAuthor(Account account, int throttle) {
 		if (account.getMessageCountNow() >= throttle)
@@ -152,6 +168,5 @@ public class ApprovedListSpec extends ThreadListSpec {
 	public int getNeedCount() {
 		return needCount;
 	}
-
 
 }
