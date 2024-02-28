@@ -22,6 +22,7 @@ import javax.mail.Message;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
@@ -59,8 +60,8 @@ public class EmailSender implements Startable {
 	public void send(EmailVO emailVO) {
 		try {
 			Message message = createMessage(emailVO);
-			// if (message != null)
-			// 	Transport.send(message);
+			if (message != null)
+				Transport.send(message);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

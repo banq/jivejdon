@@ -50,7 +50,7 @@ public class SubscriptionEmail implements Startable {
 		String fromName = sm.getMessageFrom();
 		String fromEmail = subscriptionEmailParam.getFromEmail();
 		EmailVO emailVO = new EmailVO(toName, toEmail, fromName, fromEmail, subject, body, EmailTask.HTML_FORMAT);
-		emailHelper.send(emailVO);
+		// emailHelper.send(emailVO);
 		Debug.logVerbose("email is over", module);
 
 	}
