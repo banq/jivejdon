@@ -51,7 +51,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 		double p = 0;
 		try {
 			p = approvedCompare(thread);
-			
+
 			int betterThanOthers = 0;
 			if (threadPrev.getViewCount() > 10 && thread.getViewCount() > 10) {
 				betterThanOthers = Math.round(thread.getViewCount() / threadPrev.getViewCount());
@@ -64,7 +64,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 			long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
 			long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 			if (diffDays >= 5)
-				p = diff2 * p / (diffDays * 100);
+				p = diff2 * p / (diffDays * 1000);
 			else if (diffDays >= 3)
 				p = diff2 * p / (diffDays * 10);
 			else {
