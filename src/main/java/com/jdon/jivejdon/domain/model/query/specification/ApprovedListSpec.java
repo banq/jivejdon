@@ -54,7 +54,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 			int onlineCount = thread.getViewCounter().getLastSavedCount();
 			long diff2 = onlineCount > 1 ? (thread.getViewCount() - onlineCount + 1) : 1;
-			p = diff2 * p;
+			p = diff2 + p;
 
 		} finally {
 		}
