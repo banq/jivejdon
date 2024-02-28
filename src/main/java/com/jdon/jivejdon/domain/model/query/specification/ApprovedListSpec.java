@@ -60,16 +60,12 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 			int onlineCount = thread.getViewCounter().getLastSavedCount();
 			long diff2 = onlineCount > 1 ? (thread.getViewCount() - onlineCount + 1) : 1;
+			p = diff2 * p;
 
 			long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
 			long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
-			if (diffDays >= 5)
-				p = diff2 * p / (diffDays * 100);
-			else if (diffDays >= 3)
-				p = diff2 * p / (diffDays * 10);
-			else {
-				p = Math.pow(p, diff2);
-			}
+			if (diffDays >= 3)
+				p =  p / diffDays ;		
 
 		} finally {
 		}
