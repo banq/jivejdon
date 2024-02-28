@@ -66,11 +66,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 			long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 			if (diffDays >= 5)
 				p =  p / (diffDays * 1000);
-			else if (diffDays >= 3)
-				p =  p / (diffDays * 10);
-			else {
-				p = Math.pow(p, 2);
-			}
+		
 
 		} finally {
 		}
