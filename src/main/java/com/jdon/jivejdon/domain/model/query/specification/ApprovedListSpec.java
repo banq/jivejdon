@@ -52,12 +52,6 @@ public class ApprovedListSpec extends ThreadListSpec {
 		try {
 			p = approvedCompare(thread);
 
-			int betterThanOthers = 0;
-			if (threadPrev.getViewCount() > 10 && thread.getViewCount() > 10) {
-				betterThanOthers = Math.round(thread.getViewCount() / threadPrev.getViewCount());
-			}
-			p = p * (betterThanOthers > 1 ? betterThanOthers : 1);
-
 			int onlineCount = thread.getViewCounter().getLastSavedCount();
 			long diff2 = onlineCount > 1 ? (thread.getViewCount() - onlineCount + 1) : 1;
 			p = diff2 * p;
