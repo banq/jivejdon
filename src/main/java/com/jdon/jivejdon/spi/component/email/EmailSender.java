@@ -15,12 +15,22 @@
  */
 package com.jdon.jivejdon.spi.component.email;
 
+import javax.mail.Address;
+import javax.mail.Authenticator;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.MimeUtility;
+import javax.naming.InitialContext;
+
 import com.google.common.eventbus.Subscribe;
 import com.jdon.container.pico.Startable;
-
-import javax.mail.*;
-import javax.mail.internet.*;
-import javax.naming.InitialContext;
 
 public class EmailSender implements Startable {
 	public final static String NOHTML_FORMAT = "text/plain";
@@ -49,8 +59,8 @@ public class EmailSender implements Startable {
 	public void send(EmailVO emailVO) {
 		try {
 			Message message = createMessage(emailVO);
-			if (message != null)
-				Transport.send(message);
+			// if (message != null)
+			// 	Transport.send(message);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
