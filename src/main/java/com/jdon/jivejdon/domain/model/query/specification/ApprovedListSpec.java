@@ -52,9 +52,9 @@ public class ApprovedListSpec extends ThreadListSpec {
 		try {
 			p = approvedCompare(thread);
 
-			int onlineCount = thread.getViewCounter().getLastSavedCount();
-			long diff2 = onlineCount > 1 ? (thread.getViewCount() - onlineCount + 1) : 1;
-			p = diff2 + p;
+			// int onlineCount = thread.getViewCounter().getLastSavedCount();
+			// long diff2 = onlineCount > 1 ? (thread.getViewCount() - onlineCount + 1) : 1;
+			// p = diff2 + p;
 
 		} finally {
 		}
