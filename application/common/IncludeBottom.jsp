@@ -10,5 +10,6 @@
 	</div>
 <%@include file="./IncludeBottomBody.jsp"%>
 <%@include file="../account/loginAJAX.jsp"%>
+
 </body>
 </html>
