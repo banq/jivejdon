@@ -13,7 +13,7 @@
 <html:errors/>
 <div style="text-align: center">
   <p>非常感谢，我们会和您取得联系的。</p>
-  <p>你的信箱在5分钟内回收到回执，否则通过其他方式直接联系<a href="https://www.jdon.com/aboutme.htm"
+  <p>你的信箱在5分钟内回收到回执，否则通过其他方式直接联系<a href="/aboutme.htm"
                                    target="_blank">@板桥banq</a></p>
 </div>
 </body>
