@@ -76,7 +76,7 @@ public class CacheKeysAction extends Action {
 			field.setAccessible(true);
 			try {
 				Object fo = field.get(obj);
-				sb.append(field.getName()).append("=").append(fo).append(" \n <br>");
+				sb.append(field.getName()).append("=").append(fo).append(fo!=null? System.identityHashCode(fo):"").append(" \n <br>");
 			} catch (IllegalArgumentException e) {
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {

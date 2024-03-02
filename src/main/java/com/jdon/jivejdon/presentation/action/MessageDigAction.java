@@ -47,6 +47,7 @@ public class MessageDigAction extends Action {
 		}
 
 		ForumThread thread = forumMessageService.getThread(message.getForumThread().getThreadId());
+		// ForumThread thread = message.getForumThread();
 		thread.oncePerIP(request.getRemoteAddr());
 
 		try {

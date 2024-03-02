@@ -15,6 +15,7 @@
  */
 package com.jdon.jivejdon.domain.model.property;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -39,10 +40,15 @@ public class MessagePropertysVO {
 
   private final Collection<Property> propertys;
 
-  // for read or load
-  public MessagePropertysVO(Collection<Property> propertys) {
+  private boolean loaded;
 
-    this.propertys = propertys;
+    // for read or load
+    public MessagePropertysVO() {
+      this.propertys = new ArrayList<>();
+    }
+
+  // for read or load
+  public void init() {
 
     String digCountS = this.getPropertyValue(DIG_NUMBER);
     digCount = digCountS != null ? Integer.parseInt(digCountS) : 0;
@@ -50,9 +56,12 @@ public class MessagePropertysVO {
     masked = getPropertyValue(PROPERTY_MASKED) != null ? true : false;
 
     postIP = getPropertyValue(PROPERTY_IP);
+
+    loaded = true;
   }
 
   public boolean isMasked() {
+    if (!loaded) init();
     return masked;
   }
 
@@ -66,13 +75,16 @@ public class MessagePropertysVO {
     } else {
       removeProperty(MessagePropertysVO.PROPERTY_MASKED);
     }
+    loaded = false;
   }
 
   public void removeProperty(String propName) {
     propertys.removeIf(item -> item.getName().equalsIgnoreCase(propName));
+    loaded = false;
   }
 
   public String getPostip() {
+    if (!loaded) init();
     return postIP;
   }
 
@@ -83,6 +95,7 @@ public class MessagePropertysVO {
   }
 
   public int getDigCount() {
+    if (!loaded) init();
     return digCount;
   }
 
@@ -99,6 +112,7 @@ public class MessagePropertysVO {
     for (Property newproperty : newprops) {
       replaceProperty(newproperty);
     }
+    loaded = false;
     return propertys;
   }
 

@@ -15,6 +15,14 @@
  */
 package com.jdon.jivejdon.api.impl.message;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.jdon.annotation.Service;
 import com.jdon.annotation.intercept.Poolable;
 import com.jdon.annotation.intercept.SessionContextAcceptable;
@@ -43,13 +51,6 @@ import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import com.jdon.jivejdon.spi.component.filter.InFilterManager;
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.util.UtilValidate;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * ForumMessageServiceImpl is the shell of ForumMessage core implementions.
@@ -118,7 +119,9 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 			Account operator = sessionContextUtil.getLoginAccount(sessionContext);
 			Collection<Property> properties = new ArrayList<>();
 			properties.add(new Property(MessagePropertysVO.PROPERTY_IP, operator.getPostIP()));
-			MessagePropertysVO messagePropertysVO = new MessagePropertysVO(properties);
+			MessagePropertysVO messagePropertysVO = new MessagePropertysVO();
+			messagePropertysVO.replacePropertys(properties);
+			
 
 			if (!UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getBody())
 					|| !UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getSubject())) {
@@ -169,7 +172,8 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 
 			Collection<Property> properties = new ArrayList<>();
 			properties.add(new Property(MessagePropertysVO.PROPERTY_IP, operator.getPostIP()));
-			MessagePropertysVO messagePropertysVO = new MessagePropertysVO(properties);
+			MessagePropertysVO messagePropertysVO = new MessagePropertysVO();
+			messagePropertysVO.replacePropertys(properties);
 			PostRepliesMessageCommand postRepliesMessageCommand = new PostRepliesMessageCommand(parentMessage, mIDInt,
 					operator, inFilterManager.applyFilters(forumMessageReplyPostDTO.getMessageVO()), attachmentsVO,
 					messagePropertysVO, forumMessageReplyPostDTO.getTagTitle());
@@ -230,7 +234,8 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 			AttachmentsVO attachmentsVO = new AttachmentsVO(newForumMessageInputparamter.getMessageId(), uploads);
 			Collection<Property> properties = new ArrayList<>();
 			properties.add(new Property(MessagePropertysVO.PROPERTY_IP, operator.getPostIP()));
-			MessagePropertysVO messagePropertysVO = new MessagePropertysVO(properties);
+			MessagePropertysVO messagePropertysVO = new MessagePropertysVO();
+			messagePropertysVO.replacePropertys(properties);
 			ReviseForumMessageCommand reviseForumMessageCommand = new ReviseForumMessageCommand(oldforumMessage,
 					inFilterManager.applyFilters(newForumMessageInputparamter.getMessageVO()), attachmentsVO,
 					messagePropertysVO);

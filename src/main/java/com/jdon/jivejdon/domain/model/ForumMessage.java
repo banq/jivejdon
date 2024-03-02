@@ -84,7 +84,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
     private Forum forum;
 
     private AttachmentsVO attachmentsVO;
-    private MessagePropertysVO messagePropertysVO;
+    private final MessagePropertysVO messagePropertysVO;
 
     private HotKeys hotKeys;
 
@@ -93,6 +93,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
         super(threadId);
         this.messageVO = this.messageVOBuilder().subject("").body("").build();
         this.messageUrlVO = new MessageUrlVO("", "", "");
+        this.messagePropertysVO = new MessagePropertysVO();
     }
 
     private ForumMessage(){
@@ -306,10 +307,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
         this.attachmentsVO = attachmentsVO;
     }
 
-    private void setMessagePropertysVO(MessagePropertysVO messagePropertysVO) {
-        this.messagePropertysVO = messagePropertysVO;
-    }
-
+   
     public void messaegDigAction() {
         this.getMessagePropertysVO().addMessageDigCount();
         // this.forumThread.addDig(this);
@@ -387,7 +385,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
                      
                         setFilterPipleSpec(filterPipleSpec);
                         setAttachment(new AttachmentsVO(messageId, uploads));
-                        setMessagePropertysVO(new MessagePropertysVO(props));
+                        this.messagePropertysVO.replacePropertys(props);
                         this.hotKeys = hotKeys;
                         // apply all filter specification , business rule!
                         messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO.getBody())
