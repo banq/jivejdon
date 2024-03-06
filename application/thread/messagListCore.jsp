@@ -38,10 +38,17 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <head>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	
     <link rel="preconnect" href="https://cdn.jdon.com/">
-    <link rel="preconnect" href="https://adservice.google.com/">
     <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
+    <link rel="preconnect" href="https://tpc.googlesyndication.com/">
     <link rel="preconnect" href="https://www.googletagservices.com/">
-    <link rel="preconnect" href="https://tpc.googlesyndication.com/"> 
+    <link rel="preconnect" href="https://static.googleadsserving.cn/">
+    <link rel="preconnect" href="https://www.gstatic.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link rel="preconnect" href="https://www.gstatic.cn/">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://cm.g.doubleclick.net/">
+    <link rel="preconnect" href="https://ad.doubleclick.net/">
+    <link rel="preconnect" href="https://fundingchoicesmessages.google.com/">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
