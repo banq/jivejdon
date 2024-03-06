@@ -38,6 +38,8 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <head>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	
     <link rel="preconnect" href="https://cdn.jdon.com/">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
+    <link rel="preconnect" href="https://www.googletagmanager.com/">    
     <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
     <link rel="preconnect" href="https://tpc.googlesyndication.com/">
     <link rel="preconnect" href="https://www.googletagservices.com/">
