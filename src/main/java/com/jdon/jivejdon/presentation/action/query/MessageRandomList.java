@@ -47,24 +47,27 @@ public class MessageRandomList extends Action {
         threadListSpec = new ThreadListSpec();
         threadListSpec.setResultSort(resultSort);
         int allCount = getForumService().getThreadAllCount();
-        if (allCount == 0 )
+        if (allCount == 0)
             return actionMapping.findForward("failure");
 
-        int start = ThreadLocalRandom.current().nextInt(allCount);
-        PageIterator pi = getForumMessageQueryService().getThreads(start, 100, threadListSpec);
-        while (pi.hasNext()) {
-            Long threadId = (Long) pi.next();
-            ForumThread thread = getForumMessageQueryService().getThread(threadId);
-            if (approvedListSpec.isLinked(thread, 1)) {
-                if (approvedListSpec.isApproved(thread, thread, thread) || approvedListSpec.isLongText(thread, 5)
+        while (request.getAttribute("threadId") == null) {
+            int start = ThreadLocalRandom.current().nextInt(allCount);
+            PageIterator pi = getForumMessageQueryService().getThreads(start, 200, threadListSpec);
+            while (pi.hasNext()) {
+                Long threadId = (Long) pi.next();
+                ForumThread thread = getForumMessageQueryService().getThread(threadId);
+                if (approvedListSpec.isApproved(thread, thread, thread)
+                        || approvedListSpec.isLongText(thread, 5)
                         || approvedListSpec.isTagged(thread, 4)) {
-                    request.setAttribute("threadId", threadId);
-                    return actionMapping.findForward("success");
+
+                    if (approvedListSpec.isLinked(thread, 1)) {
+                        request.setAttribute("threadId", threadId);
+
+                    }
                 }
             }
         }
-        return actionMapping.findForward("failure");
+        return actionMapping.findForward("success");
     }
-
 
 }
