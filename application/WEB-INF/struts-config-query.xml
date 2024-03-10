@@ -208,6 +208,10 @@
             <forward name="success" path="/forum/randomThreadList.jsp" />
         </action>
 
+         <action path="/message/threadRandomList" type="com.jdon.jivejdon.presentation.action.query.ThreadRandomList" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/message/randomThreadList.jsp" />
+        </action>
+
         <action path="/random/MessageRandomList" type="com.jdon.jivejdon.presentation.action.query.MessageRandomList" name="messageListForm" scope="request" validate="false">
             <forward name="success" path="/thread/randomMessageList.jsp" />
             <forward name="failure" path="/404.jsp" />
