@@ -27,6 +27,7 @@ import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.api.ForumMessageService;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumMessage;
+import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
 
@@ -48,8 +49,14 @@ public class MessageRecursiveListAction extends ModelListAction {
 		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService", this.servlet.getServletContext());
 		String messageId = request.getParameter("messageId");
 		if (messageId == null) {
-			logger.error(" getPageIterator error : messageId is null");
-			return new PageIterator();
+			String threadIds = request.getParameter("threadId");
+			if (threadIds != null) {
+				ForumThread thread = forumMessageQueryService.getThread(Long.parseLong(threadIds));
+				messageId = thread.getRootMessage().getMessageId().toString();
+			}else {
+				logger.error(" getPageIterator error : messageId is null");
+				return new PageIterator();
+			}
 		}
 		return forumMessageQueryService.getRecursiveMessages(Long.parseLong(messageId), start, count);
 	}
@@ -68,12 +75,19 @@ public class MessageRecursiveListAction extends ModelListAction {
 
 	public void customizeListForm(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, ModelListForm modelListForm)
 			throws Exception {
-		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", this.servlet.getServletContext());
+		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService", this.servlet.getServletContext());
+		
 		String messageId = request.getParameter("messageId");
 		if (messageId == null) {
-			logger.error("customizeListForm error : messageId is null");
+			String threadIds = request.getParameter("threadId");
+			if (threadIds != null) {
+				ForumThread thread = forumMessageQueryService.getThread(Long.parseLong(threadIds));
+				messageId = thread.getRootMessage().getMessageId().toString();
+			}else{
+				logger.error("customizeListForm error : messageId is null");
+			}
 		}
-		ForumMessage forumParentMessage = forumMessageService.getMessage(Long.parseLong(messageId));
+		ForumMessage forumParentMessage = forumMessageQueryService.getMessage(Long.parseLong(messageId));
 		modelListForm.setOneModel(forumParentMessage);
 	}
 
