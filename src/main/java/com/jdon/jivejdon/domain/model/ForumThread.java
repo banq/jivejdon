@@ -358,8 +358,7 @@ public class ForumThread {
 	}
 
 	public void delete(ForumMessage delforumMessage) {
-		DomainMessage domainMessage = eventSourcing
-				.deleteMessage(new MessageRemoveCommand(delforumMessage.getMessageId()));
+		eventSourcing.deleteMessage(new MessageRemoveCommand(delforumMessage.getMessageId()));
 		eventSourcing.delThread(new MessageRemovedEvent(delforumMessage));
 
 	}
