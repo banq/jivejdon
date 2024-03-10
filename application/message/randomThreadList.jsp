@@ -57,13 +57,16 @@ pageContext.setAttribute("title", titleStr);
 
  <logic:iterate indexId="i" id="forumThread" name="threadListForm"  property="list">
  
-
+ <logic:equal name="forumThread" property="state.messageCount" value="0">
  
 <logic:notEmpty name="forumThread">
      <logic:notEmpty name="forumThread" property="rootMessage">
      <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
      <bean:define id="body" name="forumMessage" property="messageVO.body" />
      
+
+     <logic:equal name="forumMessage" property="digCount" value="0">
+
      <div class="box">
               <section> 
               <div class="wrap-vid">              
@@ -99,10 +102,11 @@ pageContext.setAttribute("title", titleStr);
                </section>
      </div>
      
+    </logic:equal>    
       </logic:notEmpty>
      </logic:notEmpty>    
      
-
+    </logic:equal>     
  </logic:iterate>
 
 </div>
