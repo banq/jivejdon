@@ -52,18 +52,15 @@ public class MessageRandomList extends Action {
 
         while (request.getAttribute("threadId") == null) {
             int start = ThreadLocalRandom.current().nextInt(allCount);
-            PageIterator pi = getForumMessageQueryService().getThreads(start, 200, threadListSpec);
+            PageIterator pi = getForumMessageQueryService().getThreads(start, 100, threadListSpec);
             while (pi.hasNext()) {
                 Long threadId = (Long) pi.next();
                 ForumThread thread = getForumMessageQueryService().getThread(threadId);
-                if (approvedListSpec.isApproved(thread, thread, thread)
-                        || approvedListSpec.isLongText(thread, 5)
-                        || approvedListSpec.isTagged(thread, 4)) {
-
-                    if (approvedListSpec.isLinked(thread, 1)) {
+                if (approvedListSpec.isExcelledDiscuss(thread, 5) 
+                        || approvedListSpec.isDigged(thread, 2)                      
+                        || approvedListSpec.isTagged(thread, 2)
+                        || approvedListSpec.isLinked(thread, 1)) {
                         request.setAttribute("threadId", threadId);
-
-                    }
                 }
             }
         }

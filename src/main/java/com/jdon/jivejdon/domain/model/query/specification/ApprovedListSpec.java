@@ -28,11 +28,11 @@ public class ApprovedListSpec extends ThreadListSpec {
 	public boolean isApproved(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2) {
 		try {
 			if (isDigged(thread, 1) ||
-					isExcelledDiscuss(thread) ||
+					isExcelledDiscuss(thread, 2) ||
 					isGreaterThanPrev(thread, threadPrev, threadPrev2, 0.6) ||
 					isLongText(thread, 15) ||
 					thread.getRootMessage().hasImage() ||
-					(isTagged(thread, 3) && isLinked(thread, 3))) {
+					(isTagged(thread, 2) && isLinked(thread, 1))) {
 				return true;
 			}
 		} finally {
@@ -131,8 +131,8 @@ public class ApprovedListSpec extends ThreadListSpec {
 			return false;
 	}
 
-	protected boolean isExcelledDiscuss(ForumThread thread) {
-		return (isTagged(thread, 2) && hasReply(thread, 2));
+	public boolean isExcelledDiscuss(ForumThread thread, int count) {
+		return (isTagged(thread, 2) && hasReply(thread, count));
 
 	}
 
@@ -147,7 +147,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 			return false;
 	}
 
-	private boolean isDigged(ForumThread thread, int digcount) {
+	public boolean isDigged(ForumThread thread, int digcount) {
 		ForumMessage message = thread.getRootMessage();
 		if (message.getDigCount() >= digcount)
 			return true;
