@@ -18,10 +18,10 @@ package com.jdon.jivejdon.spi.pubsub.subscriber.delmessage;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.infrastructure.cqrs.CacheQueryRefresher;
+import com.jdon.jivejdon.domain.event.MessageRemovedEvent;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.event.MessageRemovedEvent;
+import com.jdon.jivejdon.infrastructure.cqrs.CacheQueryRefresher;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
 
@@ -41,7 +41,7 @@ public class RefreshThreadAction implements DomainEventHandler {
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 		MessageRemovedEvent messageRemovedEvent = (MessageRemovedEvent) event.getDomainMessage().getEventSource();
-		reload(messageRemovedEvent.getForumMessage());
+		// reload(messageRemovedEvent.getForumMessage());
 		// send to pubsub bus to notify refresh view model
 		eventHandler.refresh(messageRemovedEvent.getForumMessage());
 

@@ -1,5 +1,8 @@
 package com.jdon.jivejdon.infrastructure;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.jdon.annotation.Component;
 import com.jdon.annotation.model.OnEvent;
 import com.jdon.jivejdon.api.util.JtaTransactionUtil;
@@ -13,8 +16,6 @@ import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import com.jdon.jivejdon.infrastructure.repository.builder.MessageRepositoryDao;
 import com.jdon.jivejdon.infrastructure.repository.property.TagRepository;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 @Component
 public class MessageCRUDService {
@@ -99,14 +100,14 @@ public class MessageCRUDService {
 		messageRepository.getMessageDaoFacade().getMessageDao().updateMovingForum(messageId, threadId, forumId);
 	}
 
-	@OnEvent("deleteMessage")
+
 	public Long deleteMessage(MessageRemoveCommand event) throws Exception {
 		logger.debug("enter deleteMessage");
 		Long messageId = event.getMessageId();
 		ForumMessage delforumMessage = forumAbstractFactory.getMessage(messageId);
 		try {
 
-			jtaTransactionUtil.beginTransaction();
+			// jtaTransactionUtil.beginTransaction();
 			this.messageRepository.deleteMessageComposite(delforumMessage);
 
 			// if the root message was deleted, the thread that it be in
@@ -117,11 +118,11 @@ public class MessageCRUDService {
 				tagRepository.deleteTagTitle(delforumMessage.getForumThread().getThreadId());
 				messageRepository.deleteThread(delforumMessage.getForumThread());
 			}
-			forumAbstractFactory.reloadThreadState(delforumMessage.getForumThread());
-			jtaTransactionUtil.commitTransaction();
+			// forumAbstractFactory.reloadThreadState(delforumMessage.getForumThread());
+			// jtaTransactionUtil.commitTransaction();
 
 		} catch (Exception e) {
-			jtaTransactionUtil.rollback();
+			// jtaTransactionUtil.rollback();
 			String error = e + " deleteMessage forumMessageId=" + delforumMessage.getMessageId();
 			logger.error(error);
 			throw new Exception(error);
