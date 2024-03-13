@@ -208,7 +208,7 @@
             <forward name="success" path="/forum/randomThreadList.jsp" />
         </action>
 
-         <action path="/message/threadRandomList" type="com.jdon.jivejdon.presentation.action.ThreadListAction" name="threadListForm" scope="request" validate="false">
+         <action path="/message/threadRandomList" type="com.jdon.jivejdon.presentation.action.query.ThreadRandomList" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/message/randomThreadList.jsp" />
         </action>
 

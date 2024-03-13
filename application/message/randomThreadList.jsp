@@ -66,6 +66,8 @@ pageContext.setAttribute("title", titleStr);
      
 
      <logic:equal name="forumMessage" property="digCount" value="0">
+      <logic:notEqual name="forumMessage" property="account.username" value="banq">
+     
 
      <div class="box">
               <section> 
@@ -102,6 +104,7 @@ pageContext.setAttribute("title", titleStr);
                </section>
      </div>
      
+     </logic:notEqual>
     </logic:equal>    
       </logic:notEmpty>
      </logic:notEmpty>    
