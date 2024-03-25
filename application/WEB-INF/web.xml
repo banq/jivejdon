@@ -188,8 +188,13 @@
     </servlet-mapping>
 
     <session-config>
-        <session-timeout>30</session-timeout>
+        <session-timeout>5</session-timeout>
         <tracking-mode>COOKIE</tracking-mode>
+        <cookie-config>
+           <http-only>true</http-only>
+           <secure>true</secure>
+           <cookie-processor sameSiteCookies="Strict"/>
+         </cookie-config>
     </session-config>
     <error-page>
         <error-code>404</error-code>
