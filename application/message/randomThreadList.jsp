@@ -57,7 +57,7 @@ pageContext.setAttribute("title", titleStr);
 
  <logic:iterate indexId="i" id="forumThread" name="threadListForm"  property="list">
  
- <logic:equal name="forumThread" property="state.messageCount" value="0">
+ <logic:equal name="forumThread" property="state.messageCount" value="1">
  
 <logic:notEmpty name="forumThread">
      <logic:notEmpty name="forumThread" property="rootMessage">
