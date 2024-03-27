@@ -60,10 +60,10 @@
     </action>
     
    
-    <action path="/forum/forumListJSON" type="com.jdon.jivejdon.presentation.action.ForumListAction"
+    <action path="/message/forumListJSON" type="com.jdon.jivejdon.presentation.action.ForumListAction"
       name="forumListForm" scope="request" 
       validate="false">
-      <forward name="success" path="/forum/forumListJSON.jsp"/>
+      <forward name="success" path="/message/forumListJSON.jsp"/>
     </action>	
     
     <!-- <action name="feedForm" path="/forum/feed/feedbackAction" type="com.jdon.strutsutil.ServiceMethodAction"

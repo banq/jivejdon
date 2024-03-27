@@ -90,7 +90,7 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function(event) { 
-     load(getContextPath() +'/forum/forumListJSON.shtml', function(xhr) {
+     load(getContextPath() +'/message/forumListJSON.shtml', function(xhr) {
      var dataArray = JSON.parse(xhr.responseText);  
          for (var i in dataArray){  
             var optn = document.createElement('option');
@@ -101,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }  
     });
 
+
 function forwardNewPage(fmainurl, fmainPars, anchor){  
      // infoDiagClose();       
       var url = fmainurl + fmainPars + "#" + anchor;   
@@ -108,5 +109,13 @@ function forwardNewPage(fmainurl, fmainPars, anchor){
       window.location.href =  url;
       
 }
+
+setInterval(function() {
+  load(getContextPath() +'/message/forumListJSON.shtml');
+}, 60000);
+
 });
+
+
+
 </script>    
