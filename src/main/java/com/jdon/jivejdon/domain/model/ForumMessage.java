@@ -291,10 +291,6 @@ public class ForumMessage extends RootMessage implements Cloneable {
         return messagePropertysVO;
     }
 
-    private void setAttachmentsVO(AttachmentsVO attachmentsVO) {
-        this.attachmentsVO = attachmentsVO;
-    }
-
     public void messaegDigAction(String ip) {
         this.getForumThread().getRootMessage().addMessageDigCount(ip);
     }
