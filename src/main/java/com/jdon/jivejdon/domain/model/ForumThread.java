@@ -295,12 +295,7 @@ public class ForumThread {
 
 	}
 
-	public void oncePerIP(String ip) {
-		if (viewCounter.isIdempotent(ip)) {
-			getRootMessage().messaegDigAction();
-		}
-	}
-
+	
 	// return count
 	public long getViewCount() {
 		return viewCounter.getViewCount();

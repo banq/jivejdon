@@ -16,18 +16,20 @@
  */
 package com.jdon.jivejdon.infrastructure.repository.builder;
 
-import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.domain.model.*;
-import com.jdon.jivejdon.domain.model.account.Account;
-import com.jdon.jivejdon.domain.model.auth.Role;
-import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
-import com.jdon.jivejdon.infrastructure.repository.dao.sql.MessageDaoSql;
-import com.jdon.jivejdon.domain.model.message.MessageVO;
-
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.jdon.jivejdon.domain.model.Forum;
+import com.jdon.jivejdon.domain.model.ForumMessage;
+import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.RootMessage;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.domain.model.auth.Role;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
+import com.jdon.jivejdon.util.Constants;
 
 public class MessageInitFactory {
 	private final static Logger logger = LogManager.getLogger(MessageInitFactory.class);
@@ -100,26 +102,22 @@ public class MessageInitFactory {
 		return forumMessage.messageVOBuilder().subject(subject).body(body).build();
 	}
 
+	/**
+	 * make jdon framework inject ForumThread
+	 * @param threadId
+	 * @param map
+	 * @param rootMessage
+	 * @return
+	 */
 	public ForumThread createThreadCore(Long threadId, Map map, RootMessage rootMessage) {
 
-			Forum forum = new Forum();
-			forum.setForumId((Long) map.get("forumID"));
 			ForumThread forumThread = rootMessage.getForumThread();
-			forumThread.setForum(forum);
-
-//			forumThread.setForum(forum);
-
-			// String saveDateTime = ((String) map.get("modifiedDate")).trim();
-			// String displayDateTime = constants.getDateTimeDisp(saveDateTime);
-			// forumThread.setModifiedDate(displayDateTime);
+			forumThread.setForum(rootMessage.getForum());
 
 			String saveDateTime = ((String) map.get("creationDate")).trim();
 			String displayDateTime = constants.getDateTimeDisp(saveDateTime);
 			forumThread.setCreationDate(displayDateTime);
 			forumThread.setCreationDate2(Long.parseLong(saveDateTime));
-
-			// forumThread.setPropertys(propertyDaoSql.getAllPropertys(Constants.THREAD,
-			// threadId));
 
 		return forumThread;
 	}

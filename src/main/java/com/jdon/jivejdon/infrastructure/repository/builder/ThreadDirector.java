@@ -24,6 +24,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.pointcut.Around;
+import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.RootMessage;
 import com.jdon.jivejdon.domain.model.thread.ThreadTagsVO;
@@ -69,17 +70,18 @@ public class ThreadDirector implements ThreadDirectorIF{
 
 	
 
-	public ForumThread build(Long threadId) {
+	private ForumThread build(Long threadId) {
 		Long rootmessageId = this.messageDao.getThreadRootMessageId(threadId);
-		RootMessage rootMessage = messageDirectorIF.getRootMessage(rootmessageId, threadId);
+		RootMessage rootMessage = messageDirectorIF.getRootMessage(rootmessageId);
 
+	
 		ForumThread forumThread = messageDao.getThreadCore(threadId, rootMessage);
-		if (forumThread == null) {
-			logger.error("no threadId=" + threadId);
-			return null;
-		}
-		forumThread.build(forumDirector.getForum(forumThread.getForum().getForumId()),
-				new ThreadTagsVO(forumThread, tagRepository.getThreadTags(threadId)));
+
+		Forum forum = forumDirector.getForum(forumThread.getForum().getForumId());
+		ThreadTagsVO threadTagsVO= new ThreadTagsVO(forumThread, tagRepository.getThreadTags(threadId));
+
+		forumThread.build(forum, threadTagsVO);
+
 		forumThread.getViewCounter().loadinitCount();
 		return forumThread;
 	}

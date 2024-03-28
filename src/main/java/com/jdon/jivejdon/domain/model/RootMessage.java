@@ -22,6 +22,7 @@ public class RootMessage {
     private final static Logger logger = LogManager.getLogger(RootMessage.class);
     protected AtomicReference<Boolean> isCreated;
     public final ForumThread forumThread;
+    private Forum forum;
 
     public boolean isCreated() {
         return isCreated.get();
@@ -34,6 +35,14 @@ public class RootMessage {
 
     private RootMessage(){this(Long.MAX_VALUE);}
 
+    
+    public Forum getForum() {
+        return forum;
+    }
+
+    public void setForum(Forum forum) {
+        this.forum = forum;
+    }
 
     public ForumThread getForumThread() {
         if (!this.isCreated.get()) {

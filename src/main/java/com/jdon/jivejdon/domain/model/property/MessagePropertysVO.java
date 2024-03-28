@@ -38,14 +38,16 @@ public class MessagePropertysVO {
   public static final String DIG_NUMBER = "digNumber";
   private int digCount = -1;
 
+  private volatile String lastDigIP;
+
   private final Collection<Property> propertys;
 
   private boolean loaded;
 
-    // for read or load
-    public MessagePropertysVO() {
-      this.propertys = new ArrayList<>();
-    }
+  // for read or load
+  public MessagePropertysVO() {
+    this.propertys = new ArrayList<>();
+  }
 
   // for read or load
   public void init() {
@@ -61,7 +63,8 @@ public class MessagePropertysVO {
   }
 
   public boolean isMasked() {
-    if (!loaded) init();
+    if (!loaded)
+      init();
     return masked;
   }
 
@@ -84,18 +87,29 @@ public class MessagePropertysVO {
   }
 
   public String getPostip() {
-    if (!loaded) init();
+    if (!loaded)
+      init();
     return postIP;
   }
 
-  public void addMessageDigCount() {
+  private void setLastDigIP(String ip) {
+    this.lastDigIP = ip;
+  }
+
+  public synchronized void addMessageDigCount(String ip) {
+    if (lastDigIP != null && lastDigIP.equals(ip)) {   
+      return;
+    }
+
     digCount++;
     Property Numberproperty = new Property(DIG_NUMBER, String.valueOf(digCount));
     this.replaceProperty(Numberproperty);
+    setLastDigIP(ip);
   }
 
   public int getDigCount() {
-    if (!loaded) init();
+    if (!loaded)
+      init();
     return digCount;
   }
 

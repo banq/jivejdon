@@ -26,13 +26,13 @@ public class ViewCounter implements Comparable<ViewCounter> {
 	private int viewCount = -1;
 	private int lastSavedCount;
 	private volatile String lastIP ;
-	private volatile String lastIP2 ;
+	
 
 	public ViewCounter(ForumThread thread) {
 		this.thread = thread;
 		this.lastSavedCount = -1;
 		this.lastIP = "";
-		this.lastIP2 = "";
+	
 	}
 
 	public void loadinitCount() {
@@ -70,14 +70,6 @@ public class ViewCounter implements Comparable<ViewCounter> {
 		
 	}
 
-
-	public boolean isIdempotent(String ip) {
-		if (!lastIP2.equals(ip)) {
-			lastIP2 = ip;
-			return true;
-		} else
-			return false;
-	}
 
 	public int getLastSavedCount() {
 		return lastSavedCount;

@@ -13,7 +13,6 @@ import org.apache.struts.action.ActionMapping;
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.api.ForumMessageService;
 import com.jdon.jivejdon.domain.model.ForumMessage;
-import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.util.UtilValidate;
 
 /**
@@ -46,9 +45,7 @@ public class MessageDigAction extends Action {
 			return null;
 		}
 
-		ForumThread thread = forumMessageService.getThread(message.getForumThread().getThreadId());
-		// ForumThread thread = message.getForumThread();
-		thread.oncePerIP(request.getRemoteAddr());
+		message.messaegDigAction(request.getRemoteAddr());
 
 		try {
 			response.setContentType("text/html");

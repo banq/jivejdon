@@ -81,8 +81,6 @@ public class ForumMessage extends RootMessage implements Cloneable {
     private long modifiedDate;
     private Account account; // owner
 
-    private Forum forum;
-
     private AttachmentsVO attachmentsVO;
     private final MessagePropertysVO messagePropertysVO;
 
@@ -173,7 +171,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
             String creationDate = Constants.getDefaultDateTimeDisp(modifiedDate);
             ForumMessageReply forumMessageReply = (ForumMessageReply) RootMessage.messageBuilder()
                     .messageId(postRepliesMessageCommand.getMessageId())
-                    .messageVO(postRepliesMessageCommand.getMessageVO()).forum(this.forum)
+                    .messageVO(postRepliesMessageCommand.getMessageVO()).forum(getForum())
                     .acount(postRepliesMessageCommand.getAccount()).creationDate(creationDate)
                     .modifiedDate(modifiedDate).filterPipleSpec(this.filterPipleSpec)
                     .uploads(postRepliesMessageCommand.getAttachment().getUploadFiles())
@@ -280,16 +278,6 @@ public class ForumMessage extends RootMessage implements Cloneable {
     }
 
 
-    public Forum getForum() {
-        return forum;
-    }
-
-    public void setForum(Forum forum) {
-        if (forum.lazyLoaderRole == null || forum.getName() == null) {
-            logger.error("forum not solid for messageId=" + messageId + " forumId=" + forum.getForumId());
-        }
-        this.forum = forum;
-    }
 
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
@@ -307,13 +295,17 @@ public class ForumMessage extends RootMessage implements Cloneable {
         this.attachmentsVO = attachmentsVO;
     }
 
-   
-    public void messaegDigAction() {
-        this.getMessagePropertysVO().addMessageDigCount();
+    public void messaegDigAction(String ip) {
+        this.getForumThread().getRootMessage().addMessageDigCount(ip);
+    }
+
+    public synchronized void addMessageDigCount(String ip) {
+        this.getMessagePropertysVO().addMessageDigCount(ip);
         // this.forumThread.addDig(this);
         eventSourcing.saveMessageProperties(
                 new MessagePropertiesRevisedEvent(this.messageId, getMessagePropertysVO().getPropertys()));
     }
+  
 
     public String getPostip() {
         return this.getMessagePropertysVO().getPostip();

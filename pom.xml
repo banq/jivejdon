@@ -4,7 +4,7 @@
 
     <groupId>com.jdon</groupId>
     <artifactId>jivejdon</artifactId>
-    <version>1.0</version>
+    <version>5.0</version>
     <packaging>war</packaging>
 
     <properties>

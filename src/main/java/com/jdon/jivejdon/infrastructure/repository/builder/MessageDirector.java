@@ -103,11 +103,11 @@ public class MessageDirector implements MessageDirectorIF {
 	}
 
 	@Around()
-	public RootMessage getRootMessage(Long messageId, Long threadId) {
+	public RootMessage getRootMessage(Long messageId) {
 		if (messageId == null || messageId == 0)
 			return null;
 		try {
-			RootMessage rootMessage = atomicFactorys.computeIfAbsent(messageId, k->buildRootMessage(messageId, threadId));
+			RootMessage rootMessage = atomicFactorys.computeIfAbsent(messageId, k->buildRootMessage(messageId));
 			if (rootMessage != null)
 			    atomicFactorys.remove(messageId);
 			return rootMessage;
@@ -120,7 +120,7 @@ public class MessageDirector implements MessageDirectorIF {
 	 * builder pattern with lambdas return a full ForumMessage need solve the
 	 * relations with Forum ForumThread parentMessage
 	 */
-	private RootMessage buildRootMessage(Long messageId, Long threadId)  {
+	private RootMessage buildRootMessage(Long messageId)  {
 		logger.debug(" enter createMessage for id=" + messageId);
 		try {
 			final AnemicMessageDTO anemicMessageDTO = (AnemicMessageDTO) messageDao.getAnemicMessage(messageId);
@@ -133,7 +133,7 @@ public class MessageDirector implements MessageDirectorIF {
 				logger.error("this message is not root message  id=" + messageId);
 				return null;
 			}
-			return createRootMessage(anemicMessageDTO, threadId);
+			return createRootMessage(anemicMessageDTO);
 
 		} catch (Exception e) {
 			logger.error("getMessage exception " + e.getMessage() + " messageId=" + messageId);
@@ -141,7 +141,7 @@ public class MessageDirector implements MessageDirectorIF {
 		}
 	}
 
-	private RootMessage createRootMessage(AnemicMessageDTO anemicMessageDTO, Long threadId) {
+	private RootMessage createRootMessage(AnemicMessageDTO anemicMessageDTO) {
 		Optional<Account> accountOptional = createAccount(anemicMessageDTO.getAccount());
 		FilterPipleSpec filterPipleSpec = new FilterPipleSpec(outFilterManager.getOutFilters());
 		Forum forum = forumDirector.getForum(anemicMessageDTO.getForum().getForumId());
@@ -152,7 +152,7 @@ public class MessageDirector implements MessageDirectorIF {
 		        .messageVO(anemicMessageDTO.getMessageVO()).forum(forum)
 				.acount(accountOptional.orElse(new Account())).creationDate(anemicMessageDTO.getCreationDate())
 				.modifiedDate(anemicMessageDTO.getModifiedDate()).filterPipleSpec(filterPipleSpec).uploads(uploads)
-				.props(props).hotKeys(hotKeys).build(threadId);
+				.props(props).hotKeys(hotKeys).build(anemicMessageDTO.getForumThread().getThreadId());
 		return forumMessage;
 	}
 
