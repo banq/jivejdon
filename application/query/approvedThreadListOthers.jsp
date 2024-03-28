@@ -12,7 +12,7 @@
   %>
 </logic:empty>
 
-<bean:define id="title"  value=" 新佳教程 " />
+<bean:define id="title"  value=" 最新最热的趋势与教程 " />
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
 <bean:define id="pageallCount" name="threadListForm" property="allCount" />
@@ -41,7 +41,7 @@ pageContext.setAttribute("title", titleStr);
 <head>
    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	
    <%@include file="../common/IncludeTopHead.jsp"%>
- <meta name="Description" content="最新最佳的编程教程">
+ <meta name="Description" content="近期最新又最佳的热点趋势与编程教程">
 <meta name="Keywords" content="编码经典,又新又好教程,技术热点,IT新闻,产品经理,产品新闻,科技新闻,前沿大技术,未来大技术,架构动态,SpringBoot,微服务,软件架构,企业架构,系统设计,架构设计,企业IT,IT设计,IT平台,平台工程,Devops,运维,维护工程,敏捷,软件工程,程序工艺,编码手艺,码农">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 <link rel="alternate" type="application/rss+xml" title="汲道订阅" href="/rss">     

@@ -23,7 +23,7 @@
 
 <bean:define id="forum" name="threadListForm" property="oneModel"/>
 <logic:empty name="forum" property="name">
-<bean:define id="title" value="最新教程"/>
+<bean:define id="title" value="最新趋势与教程"/>
 </logic:empty>
 <logic:notEmpty name="forum" property="name">
 <bean:define id="title" name="forum" property="name"/>
