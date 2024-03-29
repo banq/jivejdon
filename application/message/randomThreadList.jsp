@@ -57,8 +57,9 @@ pageContext.setAttribute("title", titleStr);
 
  <logic:iterate indexId="i" id="forumThread" name="threadListForm"  property="list">
  
- <logic:equal name="forumThread" property="state.messageCount" value="1">
- 
+
+  <logic:empty name="forumThread" property="tags">      
+
 <logic:notEmpty name="forumThread">
      <logic:notEmpty name="forumThread" property="rootMessage">
      <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
@@ -109,7 +110,7 @@ pageContext.setAttribute("title", titleStr);
       </logic:notEmpty>
      </logic:notEmpty>    
      
-    </logic:equal>     
+  </logic:empty>     
  </logic:iterate>
 
 </div>
