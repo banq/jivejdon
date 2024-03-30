@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * from ChatGPT
  */
 public class IPRequestLimitFilter implements Filter {
-    private static final int MAX_REQUESTS_PER_IP = 1; // 最大请求次数
+    private static final int MAX_REQUESTS_PER_IP = 5; // 最大请求次数
     private static final long TIME_WINDOW_MILLIS = 1000; // 时间窗口，单位：毫秒
     private final Map<String, AtomicInteger> ipRequestCounts = new ConcurrentHashMap<>();
 
