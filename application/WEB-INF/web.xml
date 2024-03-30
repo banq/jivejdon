@@ -189,7 +189,7 @@
     </servlet-mapping>
 
     <session-config>
-        <session-timeout>5</session-timeout>
+        <session-timeout>2</session-timeout>
         <tracking-mode>COOKIE</tracking-mode>
         <cookie-config>
            <http-only>true</http-only>
