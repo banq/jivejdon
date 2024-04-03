@@ -6,6 +6,17 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <div class="box">
+
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="form-group">
+      <html:textarea styleClass="form-control" property="body" cols="100" rows="40" styleId="formBody" tabindex="6"></html:textarea>
+
+    </div>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-lg-12">
     <div class="form-group">
@@ -16,14 +27,6 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-lg-12">
-    <div class="form-group">
-      <html:textarea styleClass="form-control" property="body" cols="100" rows="40" styleId="formBody" tabindex="6"></html:textarea>
-
-    </div>
-  </div>
-</div>
 <script src="/common/form.js"></script>
 <script src="/common/ckeditor/ckeditor.js"></script>
 <script src="/common/ckeditor/sample.js"></script>
