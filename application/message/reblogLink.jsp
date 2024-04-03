@@ -11,6 +11,21 @@
 <%@ include file="messageHeader.jsp" %>
 
 
+<div class="box">	
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <input class="form-control" type="text"  size="10" maxlength="25" id="inputBox"  value=''/>
+        <div id="resultDiv"></div>
+         
+      </div>
+    </div>
+    <div class="col-sm-3"></div>
+  </div>
+  </div>
+
+
     <bean:define id="ForumMessage" name="threadForm" property="rootMessage"  />
 
 <div class="col-lg-offset-4 col-lg-4">
@@ -25,6 +40,10 @@
 <logic:equal name="threadForm" property="authenticated"
              value="true">
 <p>
+
+  
+
+  
 
 <html:form action="/message/reblogLink.shtml">
 <br>
@@ -102,15 +121,39 @@ function setValuesss(){
 </logic:notEmpty>
 </logic:notEmpty>
 
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) { 
+   
+  
+  $(document).ready(function() {
+      // 当输入框内容发生变化时触发
+      $('#inputBox').on('input', function() {
+          var userInput = $(this).val(); // 获取用户输入的内容
+  
+          // 发起 AJAX 请求
+          $.ajax({
+              url: '/message/searchAction.shtml', // 请求的URL
+              type: 'GET', // 请求类型
+              data: { query:  userInput }, // 发送给服务器的数据，可以根据需要传递其他参数
+              success: function(response) { // 请求成功时执行的回调函数
+                  // 处理服务器返回的数据
+                  $('#resultDiv').html(response);
+              },
+              error: function(xhr, status, error) { // 请求失败时执行的回调函数
+                  // 处理请求失败的情况
+                  console.error('AJAX请求失败:', status, error);
+              }
+          });
+      });
+  });
+  
+  
+  });
+  
+  
+  </script>    
+  
 
 <%@include file="../common/IncludeBottom.jsp"%>
 
