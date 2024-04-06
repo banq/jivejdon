@@ -64,40 +64,43 @@ pageContext.setAttribute("title", titleStr);
      <div class="box">
               <section> 
               <div class="wrap-vid">              
-                     <a href="/message/postSaveAction.shtml?method=delete&messageId=<bean:write name="forumMessage" property="messageId"/>"  target="_blank" class="delajax">删除</a>
-                     <a href="/message/tag/thread.shtml?action=edit&threadId=<bean:write name="forumThread" property="threadId"/>"  target="_blank" >编辑</a>
-
+                <h3 class="vid-name">
+                  <a href="/message/tag/thread.shtml?action=edit&threadId=<bean:write name="forumThread" property="threadId"/>"  target="_blank" >编辑</a>
+                  
+                  <span class="pull-right"> 
+                  <a href="/message/postSaveAction.shtml?method=delete&messageId=<bean:write name="forumMessage" property="messageId"/>"  target="_blank" class="delajax">删除</a></h3>
+                  </span>
               </div>
 
              
               <div class="info">			 
-                   <span class="smallgray"><i class="fa fa-calendar"></i>
-                     <bean:define id="cdate" name="forumThread" property="creationDate" ></bean:define>
-                     <%String cdateS = (String)pageContext.getAttribute("cdate"); %>
-                     <time datetime="<%=cdateS.substring(2, 11) %>"><%=cdateS.substring(2, 11) %></time>
-                   </span>
-                     <logic:notEqual name="forumThread" property="state.messageCount" value="0">
-                   <span class="smallgray"><i class="fa fa-comment"></i> <bean:write name="forumThread" property="state.messageCount" />
+        
+                     <logic:greaterThan name="forumThread" property="state.messageCount" value="5">
+                   <span  class="pull-right"><i class="fa fa-comment"></i> <b><bean:write name="forumThread" property="state.messageCount" /></b>
                            </span>
-                      </logic:notEqual>  
-                   <span class="smallgray"><i class="fa fa-eye"></i><bean:write name="forumThread" property="viewCount" />
+                      </logic:greaterThan>  
+                   <span >
+                    <logic:greaterThan name="forumThread" property="viewCount" value="1000">
+                      
+                       <i class="fa fa-eye"></i><b  class="pull-right"><bean:write name="forumThread" property="viewCount" /></b>
+                      </logic:greaterThan>     
                            </span>
-                       <logic:notEqual name="forumMessage" property="digCount" value="0">
-                            <span class="smallgray"><i class="fa fa-heart"></i>
-                           <bean:write name="forumMessage" property="digCount"/>
+                       <logic:greaterThan name="forumMessage" property="digCount" value="0">
+                            <span  class="pull-right"><i class="fa fa-heart"></i>
+                              <b><bean:write name="forumMessage" property="digCount"/></b>
                                  </span>
-                           </logic:notEqual>     
+                           </logic:greaterThan>     
      
                  <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
-                     <span class="smallgray"><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
+                     <span ><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
                  </logic:greaterThan>     
-                   
-                   <br><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[500]" />.             
-                 </div>
-
                  <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank"><bean:write name="forumThread" property="name"/></a></h3>
            
      
+                      
+                 </div>
+
+         
                </section>
      </div>
      
