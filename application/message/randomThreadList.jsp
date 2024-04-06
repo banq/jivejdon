@@ -73,9 +73,9 @@ pageContext.setAttribute("title", titleStr);
      <div class="box">
               <section> 
               <div class="wrap-vid">              
-                     <a href="/message/messageDeleAction.shtml?messageId=<bean:write name="forumMessage" property="messageId"/>"  target="_blank">删除</a>
+                     <a href="/message/postSaveAction.shtml?method=delete&messageId=<bean:write name="forumMessage" property="messageId"/>"  target="_blank">删除</a>
               </div>
-              <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"><bean:write name="forumThread" property="name"/></a></h3>
+              <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank"><bean:write name="forumThread" property="name"/></a></h3>
            
               <div class="info">			 
                    <span class="smallgray"><i class="fa fa-calendar"></i>
