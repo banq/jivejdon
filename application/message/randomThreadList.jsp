@@ -33,7 +33,7 @@ pageContext.setAttribute("title", titleStr);
 %>
 <%@ include file="../common/IncludeTop.jsp" %>
 <link rel="alternate" type="application/rss+xml" title="<bean:write name="title" /> " href="/rss" /> 
-<div id="responseDiv"></div>
+
 <main>
 <div id="page-content" class="single-page container">
 		<div class="row">
@@ -170,7 +170,7 @@ pageContext.setAttribute("title", titleStr);
 	</div>
 </div>
 </main>
- 
+<div id="responseDiv"></div>
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
 
 
