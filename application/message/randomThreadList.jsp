@@ -70,13 +70,6 @@ pageContext.setAttribute("title", titleStr);
               </div>
 
              
-        
-                     
-
-              
-              
-              <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank"><bean:write name="forumThread" property="name"/></a></h3>
-           
               <div class="info">			 
                    <span class="smallgray"><i class="fa fa-calendar"></i>
                      <bean:define id="cdate" name="forumThread" property="creationDate" ></bean:define>
@@ -101,6 +94,9 @@ pageContext.setAttribute("title", titleStr);
                    
                    <br><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[500]" />.             
                  </div>
+
+                 <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank"><bean:write name="forumThread" property="name"/></a></h3>
+           
      
                </section>
      </div>
