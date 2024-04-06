@@ -45,6 +45,10 @@ pageContext.setAttribute("title", titleStr);
 
 <div class="list-group">
 
+  <bean:size id="beansize" name="threadListForm"  property="list"/>
+  <logic:equal name="beansize"  value="0">
+      <script>location.reload();</script>
+  </logic:equal>    
 
  <logic:iterate indexId="i" id="forumThread" name="threadListForm"  property="list">
  
