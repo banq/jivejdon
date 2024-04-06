@@ -65,7 +65,7 @@ pageContext.setAttribute("title", titleStr);
               <section> 
               <div class="wrap-vid">              
                      <a href="/message/postSaveAction.shtml?method=delete&messageId=<bean:write name="forumMessage" property="messageId"/>"  target="_blank" class="delajax">删除</a>
-                     <a href="/message/tag/thread.shtml?action=edit&threadId=<bean:write name="forumThread" property="threadId"/>"  target="_blank" class="editajax">编辑</a>
+                     <a href="/message/tag/thread.shtml?action=edit&threadId=<bean:write name="forumThread" property="threadId"/>"  target="_blank" >编辑</a>
 
               </div>
 
@@ -196,27 +196,6 @@ pageContext.setAttribute("title", titleStr);
     });
   });
 });
-
-$(document).ready(function(){
-  // 监听链接的点击事件
-  $('a.editajax').click(function(event){
-    // 阻止链接的默认行为
-    event.preventDefault();
-
-    // 获取链接的href属性值，即API端点
-    var apiUrl = $(this).attr('href');
-
-    // 发起GET请求
-    $.get(apiUrl, function(response) {
-      // 将响应写入到div层
-      $('#responseDiv').html(response);
-    }).fail(function(xhr, status, error) {
-      // 处理错误情况
-      console.error(error);
-    });
-  });
-});
-
 
 
 
