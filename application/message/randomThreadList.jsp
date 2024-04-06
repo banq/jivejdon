@@ -45,14 +45,11 @@ pageContext.setAttribute("title", titleStr);
 
 <div class="list-group">
 
-  <bean:size id="beansize" name="threadListForm"  property="list"/>
-  <logic:equal name="beansize"  value="0">
-      <script>location.reload();</script>
-  </logic:equal>    
-
+  <% int size=0;%>
+  
  <logic:iterate indexId="i" id="forumThread" name="threadListForm"  property="list">
  
-
+    
   <logic:empty name="forumThread" property="tags">      
 
 <logic:notEmpty name="forumThread">
@@ -64,7 +61,7 @@ pageContext.setAttribute("title", titleStr);
      <logic:equal name="forumMessage" property="digCount" value="0">
       <logic:notEqual name="forumMessage" property="account.username" value="banq">
      
-
+      <% size++;%>
      <div class="box">
               <section> 
               <div class="wrap-vid">              
@@ -173,6 +170,14 @@ pageContext.setAttribute("title", titleStr);
 	</div>
 </div>
 </main>
+
+<%
+if (size ==0)  {
+%>
+      <script>location.reload();</script>
+
+<%}%>
+
 <div id="responseDiv"></div>
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
 
