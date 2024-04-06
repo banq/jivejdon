@@ -33,24 +33,15 @@ pageContext.setAttribute("title", titleStr);
 %>
 <%@ include file="../common/IncludeTop.jsp" %>
 <link rel="alternate" type="application/rss+xml" title="<bean:write name="title" /> " href="/rss" /> 
-
+<div id="responseDiv"></div>
 <main>
 <div id="page-content" class="single-page container">
 		<div class="row">
 			<!-- /////////////////左边 -->
 			<div id="main-content" class="col-lg-8">
 				<div class="box">	
-<ul class="nav nav-tabs">
-  <li ><a href="<%=request.getContextPath()%>/threads/">最新</a></li>
-  <li><a href="<%=request.getContextPath()%>/approval/">新佳</a></li>
-  <li><a href="<%=request.getContextPath()%>/threadDigSortedList/">最佳</a></li>	
-  <li><a href="<%=request.getContextPath()%>/maxPopThreads/">精华</a></li>
-  <li class="active"><a href="javascript:location.reload()" >
-  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M504.971 359.029c9.373 9.373 9.373 24.569 0 33.941l-80 79.984c-15.01 15.01-40.971 4.49-40.971-16.971V416h-58.785a12.004 12.004 0 0 1-8.773-3.812l-70.556-75.596 53.333-57.143L352 336h32v-39.981c0-21.438 25.943-31.998 40.971-16.971l80 79.981zM12 176h84l52.781 56.551 53.333-57.143-70.556-75.596A11.999 11.999 0 0 0 122.785 96H12c-6.627 0-12 5.373-12 12v56c0 6.627 5.373 12 12 12zm372 0v39.984c0 21.46 25.961 31.98 40.971 16.971l80-79.984c9.373-9.373 9.373-24.569 0-33.941l-80-79.981C409.943 24.021 384 34.582 384 56.019V96h-58.785a12.004 12.004 0 0 0-8.773 3.812L96 336H12c-6.627 0-12 5.373-12 12v56c0 6.627 5.373 12 12 12h110.785c3.326 0 6.503-1.381 8.773-3.812L352 176h32z"></path></svg>
-  </a></li>
-  <li><a href="<%=request.getContextPath()%>/query/threadViewQuery.shtml" ><i class="fa fa-search"></i></a></li>
-</ul>          
-
+        
+        
 
 <div class="list-group">
 
@@ -73,8 +64,17 @@ pageContext.setAttribute("title", titleStr);
      <div class="box">
               <section> 
               <div class="wrap-vid">              
-                     <a href="/message/postSaveAction.shtml?method=delete&messageId=<bean:write name="forumMessage" property="messageId"/>"  target="_blank">删除</a>
+                     <a href="/message/postSaveAction.shtml?method=delete&messageId=<bean:write name="forumMessage" property="messageId"/>"  target="_blank" class="delajax">删除</a>
+                     <a href="/message/tag/thread.shtml?action=edit&threadId=<bean:write name="forumThread" property="threadId"/>"  target="_blank" class="editajax">编辑</a>
+
               </div>
+
+             
+        
+                     
+
+              
+              
               <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank"><bean:write name="forumThread" property="name"/></a></h3>
            
               <div class="info">			 
@@ -99,7 +99,7 @@ pageContext.setAttribute("title", titleStr);
                      <span class="smallgray"><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
                  </logic:greaterThan>     
                    
-                   <br><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />.             
+                   <br><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[500]" />.             
                  </div>
      
                </section>
@@ -172,7 +172,58 @@ pageContext.setAttribute("title", titleStr);
 </main>
  
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) { 
   
+    $(document).ready(function(){
+  // 监听链接的点击事件
+  $('a.delajax').click(function(event){
+    // 阻止链接的默认行为
+    event.preventDefault();
+
+    // 获取链接的href属性值，即API端点
+    var apiUrl = $(this).attr('href');
+
+    // 发起GET请求
+    $.get(apiUrl, function(response) {
+      // 将响应写入到div层
+      $('#responseDiv').html(response);
+    }).fail(function(xhr, status, error) {
+      // 处理错误情况
+      console.error(error);
+    });
+  });
+});
+
+$(document).ready(function(){
+  // 监听链接的点击事件
+  $('a.editajax').click(function(event){
+    // 阻止链接的默认行为
+    event.preventDefault();
+
+    // 获取链接的href属性值，即API端点
+    var apiUrl = $(this).attr('href');
+
+    // 发起GET请求
+    $.get(apiUrl, function(response) {
+      // 将响应写入到div层
+      $('#responseDiv').html(response);
+    }).fail(function(xhr, status, error) {
+      // 处理错误情况
+      console.error(error);
+    });
+  });
+});
+
+
+
+
+  });
+  
+  
+  </script>    
 
 </body>
 </html>
