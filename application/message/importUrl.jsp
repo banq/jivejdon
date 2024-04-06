@@ -42,10 +42,10 @@ if (request.getParameter("url") != null)
 
 %>
 
-<center>
+
 <a name="post"></a>
 <jsp:include page="threadPost.jsp" flush="true"/>   
-</center>
+
 
 <!-- ensure jquery was loaded, cannot load jquery twice -->
   <link rel="stylesheet" href="/common/autocomplete/jquery-ui.css" type="text/css">
