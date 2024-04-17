@@ -114,7 +114,7 @@ public class MessageListAction extends ModelListAction {
 			//   request.setAttribute("principal", request.getUserPrincipal());
 			
 		} catch (Exception e) {
-			Debug.logError(" customizeListForm err:", module);
+			Debug.logError(" customizeListForm err:" + threadId, module);
 			return;
 		}
 
