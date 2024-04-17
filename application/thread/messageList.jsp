@@ -15,6 +15,8 @@
       response.sendError(404);
      %>
     </logic:empty>
-   <%@include file="./messagListCore.jsp"%>
+    <logic:notEmpty name="messageListForm" property="oneModel" >
+     <%@include file="./messagListCore.jsp"%>
+    </logic:notEmpty>
   </logic:greaterThan>
 </logic:notEmpty>
