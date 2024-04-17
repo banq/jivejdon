@@ -12,7 +12,7 @@ public class PostRepliesMessageCommand extends PostTopicMessageCommand {
 
     public PostRepliesMessageCommand(ForumMessage parentMessage, Long messageId, Account account, MessageVO messageVO, AttachmentsVO attachment,
                                      MessagePropertysVO messagePropertysVO, String[] tagTitle) {
-        super(messageId, parentMessage.getForum(), account, messageVO, attachment, messagePropertysVO, tagTitle);
+        super(messageId, parentMessage.getForum(), account, messageVO, attachment, messagePropertysVO, tagTitle, null);
         this.parentMessage = parentMessage;
     }
 

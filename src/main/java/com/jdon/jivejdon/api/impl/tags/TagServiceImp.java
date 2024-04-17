@@ -125,15 +125,20 @@ public class TagServiceImp implements TagService, Poolable {
 		return tagRepository.getThreadTag(tagID);
 	}
 
-	public void saveTag(Long threadId, String[] tagTitles) {
+	public void saveTag(Long threadId, String[] tagTitles, String token) {
 		if ((tagTitles == null) || (tagTitles.length == 0)) {
 			return;
 		}
 		try {
 			tagRepository.saveTagTitle(threadId, tagTitles);
+			if (token != null && token.length() !=0)
+			   tagRepository.saveThreadToken(threadId, token);
+
+
 			Optional<ForumThread> forumThreadOptional = messageRepository.getForumBuilder().getThread(threadId);
 			Collection<ThreadTag> newtags = tagRepository.getThreadTags(threadId);
-			ThreadTagsVO threadTagsVO = new ThreadTagsVO(forumThreadOptional.get(), newtags);
+			token = tagRepository.getThreadToken(threadId);
+			ThreadTagsVO threadTagsVO = new ThreadTagsVO(forumThreadOptional.get(), newtags, token);
 			// this is update thread in memory cache
 			forumThreadOptional.get().changeTags(threadTagsVO);
 		} catch (Exception e) {

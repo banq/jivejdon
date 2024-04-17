@@ -32,6 +32,7 @@ public class AnemicMessageDTO {
     private boolean replyNotify;
     // for messageForm inject
     private String[] tagTitle;
+    private String token;
 
     public AnemicMessageDTO() {
         messageVO = new MessageVO();
@@ -174,6 +175,7 @@ public class AnemicMessageDTO {
         forumMessageDTO.setForum(postTopicMessageCommand.getForum());
         forumMessageDTO.setMessagePropertysVO(postTopicMessageCommand.getMessagePropertysVO());
         forumMessageDTO.setTagTitle(postTopicMessageCommand.getTagTitle());
+        forumMessageDTO.setToken(postTopicMessageCommand.getToken());
         return forumMessageDTO;
     }
 
@@ -187,7 +189,16 @@ public class AnemicMessageDTO {
         forumMessageDTO.setForumThread(reviseForumMessageCommand.getOldforumMessage().getForumThread());
         forumMessageDTO.setMessagePropertysVO(reviseForumMessageCommand.getMessagePropertysVO());
         forumMessageDTO.setTagTitle(reviseForumMessageCommand.getOldforumMessage().getTagTitle());
+        
         return forumMessageDTO;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
 }

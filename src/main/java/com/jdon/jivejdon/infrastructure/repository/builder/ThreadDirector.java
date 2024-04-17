@@ -55,7 +55,7 @@ public class ThreadDirector implements ThreadDirectorIF{
 
 	@Override
 	@Around
-	public ForumThread getThread(Long threadId) throws Exception {
+	public ForumThread getThread(Long threadId)  {
 		if (threadId == null || threadId == 0)
 			return null;
 		try {
@@ -64,26 +64,32 @@ public class ThreadDirector implements ThreadDirectorIF{
 				atomicFactorys.remove(threadId);
 			return forumThread;
 		} catch (Exception e) {
-			throw new Exception(e);
+			return null;
 		}
 	}
 
 	
 
 	private ForumThread build(Long threadId) {
-		Long rootmessageId = this.messageDao.getThreadRootMessageId(threadId);
-		RootMessage rootMessage = messageDirectorIF.getRootMessage(rootmessageId);
-
+		try{
+			Long rootmessageId = this.messageDao.getThreadRootMessageId(threadId);
+			RootMessage rootMessage = messageDirectorIF.getRootMessage(rootmessageId);
 	
-		ForumThread forumThread = messageDao.getThreadCore(threadId, rootMessage);
-
-		Forum forum = forumDirector.getForum(forumThread.getForum().getForumId());
-		ThreadTagsVO threadTagsVO= new ThreadTagsVO(forumThread, tagRepository.getThreadTags(threadId));
-
-		forumThread.build(forum, threadTagsVO);
-
-		forumThread.getViewCounter().loadinitCount();
-		return forumThread;
+		
+			ForumThread forumThread = messageDao.getThreadCore(threadId, rootMessage);
+	
+			Forum forum = forumDirector.getForum(forumThread.getForum().getForumId());
+			ThreadTagsVO threadTagsVO = new ThreadTagsVO(forumThread, 
+												tagRepository.getThreadTags(threadId),
+												tagRepository.getThreadToken(threadId));
+			forumThread.build(forum, threadTagsVO);
+	
+			forumThread.getViewCounter().loadinitCount();
+			return forumThread;
+		}catch(Exception e) {
+			return null;
+		}
+		
 	}
 
 }

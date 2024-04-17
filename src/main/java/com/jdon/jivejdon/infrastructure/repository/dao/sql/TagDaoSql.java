@@ -73,13 +73,7 @@ public class TagDaoSql implements TagDao {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.jdon.jivejdon.dao.sql.TagDao#delThreadTag(com.jdon.jivejdon.domain.model
-	 * .ForumThread)
-	 */
+	
 	public void delThreadTag(Long threadID) throws Exception {
 		String SQL = "DELETE FROM threadTag WHERE threadID=?";
 		List queryParams = new ArrayList();
@@ -87,13 +81,7 @@ public class TagDaoSql implements TagDao {
 		jdbcTempSource.getJdbcTemp().operate(queryParams, SQL);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.jdon.jivejdon.dao.sql.TagDao#addThreadTag(com.jdon.jivejdon.domain.model
-	 * .ThreadTag, com.jdon.jivejdon.domain.model.ForumThread)
-	 */
+
 	public void addThreadTag(Long tagID, Long threadID) throws Exception {
 		String SQL = "INSERT INTO threadTag(threadTagID, threadID, tagID)" + " VALUES (?,?,?)";
 		List queryParams = new ArrayList();
@@ -105,13 +93,7 @@ public class TagDaoSql implements TagDao {
 		pageIteratorSolverThreadTag.clearCache();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.jdon.jivejdon.dao.sql.TagDao#delThreadTag(com.jdon.jivejdon.domain.model
-	 * .ThreadTag, com.jdon.jivejdon.domain.model.ForumThread)
-	 */
+	
 	public void delThreadTag(Long tagID, Long threadID) throws Exception {
 		String SQL = "DELETE FROM threadTag WHERE threadID=? and tagID =?";
 		List queryParams = new ArrayList();
@@ -164,6 +146,43 @@ public class TagDaoSql implements TagDao {
 			while (iter.hasNext()) {
 				Map map = (Map) iter.next();
 				ret.add((Long) map.get("tagID"));
+			}
+		} catch (Exception se) {
+			logger.error(se);
+		}
+		return ret;
+	}
+
+	public void createThreadToken(Long threadID, String token) throws Exception {
+		try {
+			String ADD_SQL = "INSERT INTO token(threadID, token)" + " VALUES (?,?)";
+			List queryParams = new ArrayList();
+			queryParams.add(threadID);
+			queryParams.add(token);
+			jdbcTempSource.getJdbcTemp().operate(queryParams, ADD_SQL);
+		} catch (Exception e) {
+			logger.error(e);
+		}
+	}
+
+	public void delThreadToken(Long threadID) throws Exception {
+		String SQL = "DELETE FROM token WHERE threadID=?";
+		List queryParams = new ArrayList();
+		queryParams.add(threadID);
+		jdbcTempSource.getJdbcTemp().operate(queryParams, SQL);
+	}
+
+	public String getThreadToken(Long threadID){
+		String LOAD_SQL = "SELECT token FROM token WHERE threadID=?";
+		List queryParams = new ArrayList();
+		queryParams.add(threadID);
+		String ret = null;
+		try {
+			List list = jdbcTempSource.getJdbcTemp().queryMultiObject(queryParams, LOAD_SQL);
+			Iterator iter = list.iterator();
+			if (iter.hasNext()) {
+				Map map = (Map) iter.next();
+				ret = (String) map.get("token");
 			}
 		} catch (Exception se) {
 			logger.error(se);

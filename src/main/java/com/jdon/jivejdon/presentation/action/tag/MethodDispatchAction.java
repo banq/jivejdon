@@ -53,13 +53,14 @@ public class MethodDispatchAction extends DispatchAction {
 			request, HttpServletResponse response) throws Exception {
 		logger.debug("enter savetags");
 		String[] tagTitle = request.getParameterValues("tagTitle");
+		String token = request.getParameter("token");
 		String threadId = request.getParameter("threadId");
 		if (!checkAuth(threadId, request)) {
 			logger.error("savetags error : no auth" + request.getRemoteAddr());
 			mapping.findForward("savetags");
 		}
 		TagService othersService = (TagService) WebAppUtil.getService("othersService", request);
-		othersService.saveTag(Long.parseLong(threadId), tagTitle);
+		othersService.saveTag(Long.parseLong(threadId), tagTitle, token);
 		return mapping.findForward("savetags");
 	}
 

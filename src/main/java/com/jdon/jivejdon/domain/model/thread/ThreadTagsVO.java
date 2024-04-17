@@ -25,17 +25,33 @@ public class ThreadTagsVO {
 
 	// same as rooMessage 's tags, but this is Collection
 	private final Collection<ThreadTag> tags;
+	//token is used for search from lucene
+	private final String token;
 	private ForumThread forumThread;
 
-	public ThreadTagsVO(ForumThread forumThread, Collection<ThreadTag> tags) {
+	public ThreadTagsVO(ForumThread forumThread, Collection<ThreadTag> tags, String token) {
 		super();
 		this.forumThread = forumThread;
 		this.tags = tags;
+		if( token != null)
+		   this.token = token;
+		else{ 
+		  if(tags.size() !=0 )
+		    this.token = tags.stream().map(ThreadTag::getTitle).toArray(String[]::new).toString();
+		  else 
+		    this.token = "";
+		}	
 	}
 
 	public Collection<ThreadTag> getTags() {
 		return tags;
 	}
+
+
+	public String getToken() {
+		return token;
+	}
+
 
 	public void subscriptionNotify(Collection lasttags) {
 		for (Object o : this.tags) {

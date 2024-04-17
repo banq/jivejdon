@@ -173,6 +173,24 @@ public class TagRepositoryDao implements TagRepository {
 		return tags;
 	}
 
+	public void saveThreadToken(Long threadId, String token) {
+		try {
+			if (getThreadToken(threadId) == null) {
+				tagDao.createThreadToken(threadId, token);
+			} else {
+				tagDao.delThreadToken(threadId);
+				tagDao.createThreadToken(threadId, token);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	public String getThreadToken(Long threadId) {
+		return tagDao.getThreadToken(threadId);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

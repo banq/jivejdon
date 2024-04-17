@@ -45,7 +45,7 @@ public interface TagService {
 
 	public void deleteThreadTag(EventModel em);
 
-	public void saveTag(Long threadId, String[] tagTitle);
+	public void saveTag(Long threadId, String[] tagTitle, String token);
 
 	public void deleteReBlogLink(Long fromId);
 

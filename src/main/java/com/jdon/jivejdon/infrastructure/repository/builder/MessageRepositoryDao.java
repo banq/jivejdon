@@ -15,27 +15,27 @@
  */
 package com.jdon.jivejdon.infrastructure.repository.builder;
 
-import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.domain.model.Forum;
-import com.jdon.jivejdon.domain.model.ForumMessage;
-import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
-import com.jdon.jivejdon.domain.model.util.OneOneDTO;
-import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
-import com.jdon.jivejdon.infrastructure.repository.MessageRepository;
-import com.jdon.jivejdon.infrastructure.repository.property.TagRepository;
-import com.jdon.jivejdon.infrastructure.repository.property.UploadRepository;
-import com.jdon.jivejdon.infrastructure.repository.dao.MessageDaoFacade;
-import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
-import com.jdon.jivejdon.util.ContainerUtil;
-import com.jdon.treepatterns.TreeVisitor;
+import java.sql.SQLException;
+import java.util.Collection;
+import java.util.Optional;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Optional;
+import com.jdon.jivejdon.domain.model.Forum;
+import com.jdon.jivejdon.domain.model.ForumMessage;
+import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.util.OneOneDTO;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
+import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
+import com.jdon.jivejdon.infrastructure.repository.MessageRepository;
+import com.jdon.jivejdon.infrastructure.repository.dao.MessageDaoFacade;
+import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
+import com.jdon.jivejdon.infrastructure.repository.property.TagRepository;
+import com.jdon.jivejdon.infrastructure.repository.property.UploadRepository;
+import com.jdon.jivejdon.util.Constants;
+import com.jdon.jivejdon.util.ContainerUtil;
+import com.jdon.treepatterns.TreeVisitor;
 
 /**
  * Kernel of Message business operations
@@ -94,6 +94,7 @@ public class MessageRepositoryDao extends ThreadRepositoryDao implements Message
 			// so it can be used in model ForumThread's changetags method
 			tagRepository.saveTagTitle(forumMessagePostDTO.getForumThread().getThreadId(),
 					forumMessagePostDTO.getTagTitle());
+					tagRepository.saveThreadToken(forumMessagePostDTO.getForumThread().getThreadId(), forumMessagePostDTO.getToken());		
 
 			messageDaoFacade.getMessageDao().createMessage(forumMessagePostDTO);
 			super.createThread(forumMessagePostDTO);		

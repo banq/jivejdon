@@ -10,20 +10,8 @@
 <bean:define id="title" name="forum" property="name" />
 <%@ include file="messageHeader.jsp" %>
 
+<bean:define id="forumThread" name="threadForm"/>
 
-<div class="box">	
-  <div class="row">
-    <div class="col-sm-3"></div>
-    <div class="col-sm-6">
-      <div class="form-group">
-        <input class="form-control" type="text"  size="10" maxlength="25" id="inputBox"  value=''/>
-        <div id="resultDiv"></div>
-         
-      </div>
-    </div>
-    <div class="col-sm-3"></div>
-  </div>
-  </div>
 
 
     <bean:define id="ForumMessage" name="threadForm" property="rootMessage"  />
@@ -43,7 +31,11 @@
 
   
 
-  
+  <div style="text-align: center">
+
+    <h3><bean:write name="forumThread" property="name" /></h3>         
+<br>    
+
 
 <html:form action="/message/reblogLink.shtml">
 <br>
@@ -110,16 +102,32 @@ function setValuesss(){
 <a href="<%=request.getContextPath()%>/message/messageListOwner.shtml?thread=<bean:write name="threadForm" property="threadId"/>">返回</a>
 </html:form>
 
+</div>
 <p><p><p>
 
 </logic:equal>   
 
-
+<div class="box">	
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <input class="form-control" type="text" name="token" value="<bean:write name="forumThread" property="token" />" size="10" maxlength="25" id="inputBox"  value=''/>
+    
+         
+      </div>
+    </div>
+    <div class="col-sm-3"></div>
+  </div>
+  </div>
+  
 </div>
 
 
 </logic:notEmpty>
 </logic:notEmpty>
+
+<div id="resultDiv"></div>
 
 
 <script>

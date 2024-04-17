@@ -127,7 +127,7 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 					|| !UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getSubject())) {
 				PostTopicMessageCommand postTopicMessageCommand = new PostTopicMessageCommand(mIDInt, forum, operator,
 						inFilterManager.applyFilters(forumMessagePostDTO.getMessageVO()), attachmentsVO,
-						messagePropertysVO, forumMessagePostDTO.getTagTitle());
+						messagePropertysVO, forumMessagePostDTO.getTagTitle(),forumMessagePostDTO.getToken());
 				messageKernel.post(forum.getForumId(), forum, postTopicMessageCommand);
 			}
 

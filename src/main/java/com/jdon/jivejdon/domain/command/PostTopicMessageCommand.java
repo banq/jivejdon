@@ -15,9 +15,10 @@ public class PostTopicMessageCommand {
     private final AttachmentsVO attachment;;
     private final MessagePropertysVO messagePropertysVO;
     private final String[] tagTitle;
+    private final String token;
 
     public PostTopicMessageCommand(Long messageId, Forum forum, Account account, MessageVO messageVO, AttachmentsVO attachment, MessagePropertysVO
-            messagePropertysVO, String[] tagTitle) {
+            messagePropertysVO, String[] tagTitle, String token) {
         this.messageId = messageId;
         this.forum = forum;
         this.account = account;
@@ -25,6 +26,7 @@ public class PostTopicMessageCommand {
         this.attachment = attachment;
         this.messagePropertysVO = messagePropertysVO;
         this.tagTitle = tagTitle;
+        this.token = token;
     }
 
     public Long getMessageId() {
@@ -54,4 +56,10 @@ public class PostTopicMessageCommand {
     public String[] getTagTitle() {
         return tagTitle;
     }
+
+    public String getToken() {
+        return token;
+    }
+
+    
 }

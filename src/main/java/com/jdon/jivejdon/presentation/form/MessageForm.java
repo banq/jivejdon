@@ -15,22 +15,24 @@
  */
 package com.jdon.jivejdon.presentation.form;
 
-import com.jdon.jivejdon.domain.model.Forum;
-import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.account.Account;
-import com.jdon.jivejdon.domain.model.attachment.AttachmentsVO;
-import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
-import com.jdon.jivejdon.domain.model.message.MessageVO;
-import com.jdon.util.UtilValidate;
-import org.apache.struts.action.ActionMapping;
-
-import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionMapping;
+
+import com.jdon.jivejdon.domain.model.Forum;
+import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.domain.model.attachment.AttachmentsVO;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
+import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
+import com.jdon.util.UtilValidate;
 
 /**
  * UI model
@@ -71,7 +73,17 @@ public class MessageForm extends BaseForm {
 
 	private String[] tagTitle;
 
+	private String token;
+
 	// modify
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
 
 	/**
 	 * for initMessage of the ForumMessageService

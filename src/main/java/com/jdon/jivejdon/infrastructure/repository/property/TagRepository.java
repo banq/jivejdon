@@ -39,6 +39,10 @@ public interface TagRepository {
 
 	public abstract Collection<ThreadTag> getThreadTags(Long forumThreadId);
 
+	void saveThreadToken(Long threadId, String token);
+
+	String getThreadToken(Long forumThreadId);
+
 	public abstract void updateTag(ThreadTag threadTag) throws Exception;
 
 	public abstract void deleteTag(ThreadTag threadTag) throws Exception;

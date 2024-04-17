@@ -130,6 +130,11 @@ CREATE TABLE threadTag (
   INDEX jiveThread_tagID_idx (tagID),
   INDEX tagID_jiveThread_idx (threadID)
 );
+CREATE TABLE token (
+  threadID BIGINT NOT NULL,
+  token varchar(50) default '', 
+  PRIMARY KEY (threadID)
+);
 CREATE TABLE jiveUser (
   userID BIGINT NOT NULL,
   username VARCHAR(30) UNIQUE NOT NULL,

@@ -26,6 +26,8 @@
 <logic:equal name="threadForm" property="authenticated"
              value="true">
 
+    <h3><bean:write name="forumThread" property="name" /></h3>         
+   <br>          
 <form action="<%=request.getContextPath()%>/message/tag/savetags.shtml?method=savetags" method="post">
 
 
@@ -47,14 +49,20 @@
     <input type="text" name="tagTitle" size="13" maxlength="25"
            id="searchV_3"
            onfocus="javascript:loadAcJS(this.id)" value=''/>
-    <br> <html:submit>提交</html:submit>
+    <br>搜索token: <input type="text" name="token" size="13" maxlength="25" id="token"/>
+           <br> <html:submit>提交</html:submit>
 </form>
+<script>
 <logic:iterate id="threadTag" name="forumThread" property="tags" indexId="i">
-    <script>
+    
         document.getElementById('searchV_<bean:write name="i"/>').value = '<bean:write name="threadTag" property="title" />';
-    </script>
+    
 </logic:iterate>
-	</logic:equal>
+document.getElementById('token').value = '<bean:write name="forumThread" property="token" />';
+    
+</script>    	
+    	
+</logic:equal>
 <br><br><br><br>
 
 <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"

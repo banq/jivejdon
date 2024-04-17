@@ -36,6 +36,12 @@ public interface TagDao {
 
 	Collection<Long> getThreadTagIDs(Long threadID);
 
+	void createThreadToken(Long threadID, String token) throws Exception;
+
+	void delThreadToken(Long threadID) throws Exception;
+	
+	String getThreadToken(Long threadID);
+
 	PageIterator getThreadTags(int start, int count);
 
 	PageIterator getTaggedThread(Long tagID, int start, int count);

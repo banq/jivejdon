@@ -93,7 +93,7 @@ public class ForumThread {
 
 	private long creationDate2;
 
-	private ReBlogVO reBlogVO;
+	private ReBlogVO reBlogVO;	
 
 	private AtomicReference<Boolean>  built ;
 
@@ -320,6 +320,10 @@ public class ForumThread {
 
 	public Collection<ThreadTag> getTags() {
 		return  (built.get())? this.threadTagsVO.getTags():new ArrayList<>();
+	}
+
+	public String getToken(){
+		return (built.get())? this.threadTagsVO.getToken():"";
 	}
 
 	public void changeTags(ThreadTagsVO threadTagsVO) {
