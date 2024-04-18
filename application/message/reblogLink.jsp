@@ -47,25 +47,28 @@
 int i = 0;
 %>
 
-<table cellspacing="0" cellpadding="0" border="0" width="500" >
-<tr><td>
-<table  border="0" width="100%">
+<div class="box">	
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+      <div class="form-group">
   
 <logic:iterate id="prop" name="propertysForm" property="propertys" >
  <logic:notEmpty name="prop" property="value">
- <tr>
-    <td>链接</td>
- </tr>
-  <tr>
-    <td><input type="text" name='<%= "property[" + i + "].value" %>' value='<bean:write name="prop" property="value" filter="false" />'    size="40"/></td>
-  </tr>
-  <% i++; %>
+ 链接:<input type="text" name='<%= "property[" + i + "].value" %>' value='<bean:write name="prop" property="value" filter="false" />'    size="40"/></td>
+  
+ <% i++; %>
   </logic:notEmpty>
 </logic:iterate>
  
+</div>
+</div>
+<div class="col-sm-3"></div>
+</div>
+</div>
+
+</div>
   
-</table>
-  </td></tr></table>
 <div id="div1">
 
 
