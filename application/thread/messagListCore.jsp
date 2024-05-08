@@ -54,7 +54,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty></title> 
+    <title><logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty> - 汲道</title> 
     <meta property="og:type" content="article">
     <meta property="og:url" content="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html">
     <meta property="og:release_date" content="<bean:write name="forumThread" property="creationDate" />">
