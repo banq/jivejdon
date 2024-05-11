@@ -52,7 +52,21 @@ pageContext.setAttribute("title", titleStr);
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
+   <link rel="preconnect" href="https://cdn.jdon.com/">
+   <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
+   <link rel="preconnect" href="https://www.googletagmanager.com/">  
+   <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
+   <link rel="preconnect" href="https://tpc.googlesyndication.com/">
+   <link rel="preconnect" href="https://www.googletagservices.com/">
+   <link rel="preconnect" href="https://static.googleadsserving.cn/">
+   <link rel="preconnect" href="https://www.gstatic.com/">
+   <link rel="preconnect" href="https://fonts.gstatic.com/">
+   <link rel="preconnect" href="https://www.gstatic.cn/">
+   <link rel="preconnect" href="https://fonts.googleapis.com/">
+   <link rel="preconnect" href="https://cm.g.doubleclick.net/">
+   <link rel="preconnect" href="https://ad.doubleclick.net/">
+   <link rel="preconnect" href="https://fundingchoicesmessages.google.com/">	
    <%@include file="../common/IncludeTopHead.jsp"%>
    <meta name="Description" content="最新免费在线编程教程">
 <meta name="Keywords" content="最新技术,前沿技术,编码前沿,编程动态,Java21,Java22,JVM,最新Java,Java动态,Java版本发布,DDD最新,DDD源码,DDD实战,定义,数据分析,科技新闻,Java新闻,SpringBoot新闻,Java发布,SpringBoot发布,Java版本,SpringBoot版本,微服务,认知负担">
