@@ -21,13 +21,9 @@
 <table class="table table-striped">
     <tbody>
     <tr><td align="middle">
-        <form action="https://www.baidu.com/baidu">
-            <input type=text name=word  value="<bean:write name="query"/>" size="40">
-            <input type="submit" value="百度本道场">
-            <input name=tn type=hidden value="bds">
-            <input name=cl type=hidden value="3">
-            <input name=ct type=hidden value="2097152">
-            <input name=si type=hidden value="www.jdon.com">
+        <form action="https://www.baidu.com/s" class="search" method="get">
+            <input type=text name=wd  value="<bean:write name="query"/>  site:jdon.com" size="40">
+            <input type="submit" value="百度本道场"> 
             </form>
     </td></tr>
     </tbody>
