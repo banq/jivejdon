@@ -90,6 +90,10 @@ function setValuesss(){
 	<script type='text/javascript'  >
 	  setValuesss();
 	  setValuesss();
+    setValuesss();
+    setValuesss();
+    setValuesss();
+    setValuesss();
 	</script>
 <%}%>
 
