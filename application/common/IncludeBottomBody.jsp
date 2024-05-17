@@ -9,7 +9,7 @@
 					<div class="col-lg-4 col-footer footer-1">
 						<div class="footer-heading"><h3><span style="color: #fff;">Jdon.com</span></h3></div>
 						<div class="content">
-							<p>汲道：汲聚智慧之道</p>
+							<p>极道：极客之道</p>
 						</div>
 					</div>
 					<div class="col-lg-4 col-footer footer-2">
@@ -18,8 +18,8 @@
 					<div class="col-lg-4 col-footer footer-3">
 						<div class="content">
 							<ul>
-								<li><a href="/followus.html">关注汲道 </a></li>
-								<li><a href="/aboutsite.htm">关于汲道</a></li>		
+								<li><a href="/followus.html">关注极道 </a></li>
+								<li><a href="/aboutsite.htm">关于极道</a></li>		
 							</ul>
 						</div>
 					</div>

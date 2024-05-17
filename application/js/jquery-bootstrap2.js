@@ -178,7 +178,7 @@ function shareto(id){
         return;
     } else if (id == "sina") {
         _gaq.push(['_trackEvent', 'SocialShare', 'Share', 'SinaT', 1]);
-        window.open(" http://service.weibo.com/share/share.php?url=" + url + "&appkey=2879276008&title=" + title + " @汲道Jdon", "_blank", "width=615,height=505");
+        window.open(" http://service.weibo.com/share/share.php?url=" + url + "&appkey=2879276008&title=" + title + " @极道Jdon", "_blank", "width=615,height=505");
         return;
     } else if (id == "googlebuzz") {
         _gaq.push(['_trackEvent', 'SocialShare', 'Share', 'GoogleBuzz', 1]);

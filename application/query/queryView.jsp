@@ -13,7 +13,7 @@
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name" : "汲道",
+    "name" : "极道",
     "url": "https://www.jdon.com/",
     "potentialAction": {
       "@type": "SearchAction",
