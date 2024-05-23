@@ -158,14 +158,13 @@
               </div>
 
 
-                  <div id='threadLink' class="linkblock"></div>    
-                  <script defer>
-                  document.addEventListener("DOMContentLoaded", function(event) { 
-                    $(document).ready(function() {              
-                        $('#threadLink').load("/forum/threadLinkList.shtml?threadId=<bean:write name="forumThread" property="threadId"/>");
-                    });            
-                  });  
-                  </script>                  
+                  <div id='threadLink' class="linkblock">
+                    <jsp:include page="/forum/threadLinkList.shtml" flush="true">
+                      <jsp:param name="threadId" value="${forumThread.threadId}"/>
+                    </jsp:include>
+                 
+                  </div>    
+              
 
               
 </aside>
