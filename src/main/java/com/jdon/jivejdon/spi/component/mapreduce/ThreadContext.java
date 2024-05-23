@@ -9,6 +9,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 import com.jdon.annotation.Component;
@@ -28,6 +30,7 @@ public class ThreadContext {
     private final TagDao tagDao;
     private final ForumMessageQueryService forumMessageQueryService;
     private final ThreadViewCounterJob threadViewCounterJob ;
+    private final ExecutorService executorService = Executors.newFixedThreadPool(5);
 
     public ThreadContext(MessageQueryDao messageQueryDao, TagDao tagDao, ForumMessageQueryService forumMessageQueryService,  ThreadViewCounterJob threadViewCounterJob) {
         this.messageQueryDao = messageQueryDao;
@@ -129,20 +132,23 @@ public class ThreadContext {
 		return threadLinks;
 	}
     
-    public void prepareThreadOthers(ForumThread forumThread,String ipAddress) {
+    public List<ForumThread> prepareThreadOthers(Long threadId, String ipAddress) {
         // 这里是异步任务的逻辑
-        try {
-            // 1.prepare reBlog
-            forumThread.getReBlogVO().loadAscResult();
+        ForumThread forumThread = forumMessageQueryService.getThread(threadId);
+        // 1.prepare reBlog
+        forumThread.getReBlogVO().loadAscResult();
 
-            // 2. page view counting
-            threadViewCounterJob.saveViewCounter(forumThread.addViewCount(ipAddress));
+        // // 2. page view counting
+        executorService.execute(() -> {
+            try {
+                threadViewCounterJob.saveViewCounter(forumThread.addViewCount(ipAddress));
+            } catch (Exception e) { }         
+        });
+        
 
-            // 3.prepare relation posts
-            createsThreadLinks(forumThread.getThreadId().toString());
-        } catch (Exception e) {
+        // 3.prepare relation posts
+        return createsThreadLinks(threadId.toString());
 
-        }
     }
 
 }

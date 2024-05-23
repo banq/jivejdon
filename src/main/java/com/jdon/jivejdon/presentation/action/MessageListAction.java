@@ -15,10 +15,11 @@
  */
 package com.jdon.jivejdon.presentation.action;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -43,9 +44,7 @@ import com.jdon.util.Debug;
 public class MessageListAction extends ModelListAction {
 	private final static String module = MessageListAction.class.getName();
 	private ConcurrentMap<String, Object> serviceCache = new ConcurrentHashMap<>();
-	private ExecutorService executor = Executors.newFixedThreadPool(10);
-
-
+	
 	public ForumMessageQueryService getForumMessageQueryService() {
 		return (ForumMessageQueryService) serviceCache.computeIfAbsent("forumMessageQueryService",
 				k -> WebAppUtil.getService("forumMessageQueryService",
@@ -62,6 +61,7 @@ public class MessageListAction extends ModelListAction {
 		if (start % 15 != 0) {
 			return new PageIterator();
 		}
+	
 		Debug.logVerbose("enter getPageIterator", module);
 		String threadId = request.getParameter("thread");
 		if ((threadId == null) || threadId.length() > 12 || !StringUtils.isNumeric(threadId)) {
@@ -70,10 +70,24 @@ public class MessageListAction extends ModelListAction {
 		}
 		try {
 			Long threadIdL = Long.parseLong(threadId);
+			
+			CompletableFuture<List<ForumThread>> future = CompletableFuture.supplyAsync(() -> {
+				// 这里是异步任务的逻辑
+				try {
+					ThreadContext threadContext = (ThreadContext) WebAppUtil.getComponentInstance("threadContext",
+							this.servlet.getServletContext());
+					return threadContext.prepareThreadOthers(threadIdL, request.getRemoteAddr());
+				} catch (Exception e) {
+	                return new ArrayList<>();
+				}
+			});		
+			serviceCache.putIfAbsent(threadId, future);
+
 			return getForumMessageQueryService().getMessages(threadIdL, start, count);
 		} catch (Exception nfe) {
 			return new PageIterator();
 		}
+		
 	}
 
 	/*
@@ -114,18 +128,12 @@ public class MessageListAction extends ModelListAction {
 
 			modelListForm.setOneModel(forumThread);
 
-			Runnable asyncTask = () -> {
-				// 这里是异步任务的逻辑
-				try {
-					ThreadContext threadContext = (ThreadContext) WebAppUtil.getComponentInstance("threadContext",
-							this.servlet.getServletContext());
-					threadContext.prepareThreadOthers(forumThread, request.getRemoteAddr());
-				} catch (Exception e) {
-
-				}
-			};
-			// 提交任务给线程池执行
-			executor.submit(asyncTask);
+			@SuppressWarnings("unchecked")
+			CompletableFuture<List<ForumThread>> future = (CompletableFuture<List<ForumThread>>) serviceCache.get(threadId);
+			future.thenAccept(result -> {
+				// 将结果放入请求属性中
+				request.setAttribute("threadLinkList", result);
+			});
 
 		} catch (Exception e) {
 			Debug.logError(" customizeListForm err:" + threadId, module);
@@ -133,7 +141,6 @@ public class MessageListAction extends ModelListAction {
 		}
 
 	}
-
 	
 
 }

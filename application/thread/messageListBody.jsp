@@ -158,17 +158,38 @@
               </div>
 
 
-              <div id='threadLink' class="linkblock"></div>    
-              <script defer>
-              document.addEventListener("DOMContentLoaded", function(event) { 
-                $(document).ready(function() {              
-                    $('#threadLink').load("/forum/threadLinkList.shtml?threadId=<bean:write name="forumThread" property="threadId"/>");
-                });            
-              });  
-              </script>                  
-              
+              <div id='threadLink' class="linkblock">
 
-              
+              <logic:notEmpty name="threadLinkList" >   
+                <logic:iterate id="forumThreadLink" name="threadLinkList" >
+                  <div class="box">
+                    <section> 
+                    <div class="wrap-vid">              
+                           <logic:notEmpty name="forumThreadLink" property="rootMessage.messageUrlVO.imageUrl">                  
+                             <div class="thumbn">
+                                  <img src="<bean:write name="forumThreadLink" property="rootMessage.messageUrlVO.imageUrl"/>" border='0' class="thumbnail" loading="lazy" width="80" height="70" onerror="this.src='//cdn.jdon.com/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(9)%>.jpg'"/>    
+                             </div>
+                           </logic:notEmpty>
+                            
+                           <logic:notEmpty name="forumThreadLink" property="rootMessage.messageUrlVO.thumbnailUrl">                  
+                             <div class="thumbn">
+                               <img src="<bean:write name="forumThreadLink" property="rootMessage.messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail" loading="lazy" width="80" height="70"/>                  
+                             </div>  
+                           </logic:notEmpty>              
+                     </div>
+                    <h4 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThreadLink" property="threadId"/>.html"><bean:write name="forumThreadLink" property="name"/></a></h4>
+                 
+                    <div class="smallgray">			 
+                        <bean:write name="forumThreadLink" property="rootMessage.messageVO.shortBody[50]" />.             
+                     </div>
+           
+                     </section>
+           </div>
+                </logic:iterate>  
+              </logic:notEmpty>
+
+              </div>    
+        
 </aside>
 
 
