@@ -15,10 +15,7 @@
  */
 package com.jdon.jivejdon.presentation.action.query;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +29,6 @@ import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.api.property.TagService;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadContext;
 import com.jdon.strutsutil.ModelListForm;
 
@@ -66,15 +62,11 @@ public class ThreadLinkListAction extends Action {
 			return null;
 
 		try {
-			final List<ForumThread> threadLinks = loadReblog(thread);
-			if (threadLinks.isEmpty()) {
-				ThreadContext threadContext = (ThreadContext) WebAppUtil.getComponentInstance("threadContext", 
-						this.servlet.getServletContext());
-				List<ForumThread> threadList = threadContext.getPrevNextInTag(thread).stream()
-						.map(e -> getForumMessageQueryService().getThread(e))
-						.filter(Objects::nonNull).collect(Collectors.toList());
-				threadLinks.addAll(threadList);
-			}
+
+			ThreadContext threadContext = (ThreadContext) WebAppUtil.getComponentInstance("threadContext",
+					this.servlet.getServletContext());
+			final List<ForumThread> threadLinks = threadContext.createsThreadLinks(threadId);
+
 			ModelListForm threadListForm = (ModelListForm) form;
 			threadListForm.setList(threadLinks);
 			threadListForm.setAllCount(threadLinks.size());
@@ -85,26 +77,6 @@ public class ThreadLinkListAction extends Action {
 
 	}
 
-	private List<ForumThread> loadReblog(ForumThread thread) {
-		final List<ForumThread> threadLinks = new ArrayList<>();
-		ReBlogVO reBlogVO = thread.getReBlogVO();
-		if (reBlogVO == null)
-			return threadLinks;
-
-		if (reBlogVO.getThreadFroms() == null && reBlogVO.getThreadTos() == null)
-			return threadLinks;
-
-		for (ForumThread threadLink : reBlogVO.getThreadFroms()) {
-			threadLinks.add(threadLink);
-		}
-		for (ForumThread threadLink : reBlogVO.getThreadTos()) {
-			threadLinks.add(threadLink);
-		}
-		if (threadLinks.size() == 0) {
-
-		}
-		return threadLinks;
-	}
 
 	
 	

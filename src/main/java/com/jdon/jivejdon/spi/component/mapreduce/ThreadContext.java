@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -12,20 +13,27 @@ import java.util.stream.Collectors;
 
 import com.jdon.annotation.Component;
 import com.jdon.controller.model.PageIterator;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.domain.model.query.ResultSort;
+import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
 import com.jdon.jivejdon.infrastructure.repository.dao.MessageQueryDao;
 import com.jdon.jivejdon.infrastructure.repository.dao.TagDao;
+import com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob;
 
 @Component("threadContext")
 public class ThreadContext {
     private final MessageQueryDao messageQueryDao;
     private final TagDao tagDao;
+    private final ForumMessageQueryService forumMessageQueryService;
+    private final ThreadViewCounterJob threadViewCounterJob ;
 
-    public ThreadContext(MessageQueryDao messageQueryDao, TagDao tagDao) {
+    public ThreadContext(MessageQueryDao messageQueryDao, TagDao tagDao, ForumMessageQueryService forumMessageQueryService,  ThreadViewCounterJob threadViewCounterJob) {
         this.messageQueryDao = messageQueryDao;
         this.tagDao = tagDao;
+        this.forumMessageQueryService = forumMessageQueryService;
+        this.threadViewCounterJob = threadViewCounterJob;
     }
 
     public List<Long> getPrevNextInTag(ForumThread thread) {
@@ -83,6 +91,58 @@ public class ThreadContext {
                     return 1;
             }
         });
+    }
+
+    public List<ForumThread> createsThreadLinks(String threadId) {
+        ForumThread thread = forumMessageQueryService.getThread(Long.parseLong(threadId));
+        final List<ForumThread> threadLinks = loadReblog(thread);
+        if (threadLinks.isEmpty()) {
+            threadLinks.addAll(transform(thread));
+        }
+        return threadLinks;
+    }
+
+    private List<ForumThread> transform(ForumThread thread) {
+        return getPrevNextInTag(thread).stream()
+                .map(e -> forumMessageQueryService.getThread(e))
+                .filter(Objects::nonNull).collect(Collectors.toList());
+    }
+
+    private List<ForumThread> loadReblog(ForumThread thread) {
+		final List<ForumThread> threadLinks = new ArrayList<>();
+		ReBlogVO reBlogVO = thread.getReBlogVO();
+		if (reBlogVO == null)
+			return threadLinks;
+
+		if (reBlogVO.getThreadFroms() == null && reBlogVO.getThreadTos() == null)
+			return threadLinks;
+
+		for (ForumThread threadLink : reBlogVO.getThreadFroms()) {
+			threadLinks.add(threadLink);
+		}
+		for (ForumThread threadLink : reBlogVO.getThreadTos()) {
+			threadLinks.add(threadLink);
+		}
+		if (threadLinks.size() == 0) {
+
+		}
+		return threadLinks;
+	}
+    
+    public void prepareThreadOthers(ForumThread forumThread,String ipAddress) {
+        // 这里是异步任务的逻辑
+        try {
+            // 1.prepare reBlog
+            forumThread.getReBlogVO().loadAscResult();
+
+            // 2. page view counting
+            threadViewCounterJob.saveViewCounter(forumThread.addViewCount(ipAddress));
+
+            // 3.prepare relation posts
+            createsThreadLinks(forumThread.getThreadId().toString());
+        } catch (Exception e) {
+
+        }
     }
 
 }

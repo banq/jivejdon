@@ -17,6 +17,8 @@ package com.jdon.jivejdon.presentation.action;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,6 +31,7 @@ import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.spi.component.mapreduce.ThreadContext;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
 import com.jdon.util.Debug;
@@ -40,6 +43,8 @@ import com.jdon.util.Debug;
 public class MessageListAction extends ModelListAction {
 	private final static String module = MessageListAction.class.getName();
 	private ConcurrentMap<String, Object> serviceCache = new ConcurrentHashMap<>();
+	private ExecutorService executor = Executors.newFixedThreadPool(10);
+
 
 	public ForumMessageQueryService getForumMessageQueryService() {
 		return (ForumMessageQueryService) serviceCache.computeIfAbsent("forumMessageQueryService",
@@ -109,10 +114,19 @@ public class MessageListAction extends ModelListAction {
 
 			modelListForm.setOneModel(forumThread);
 
-			//enbale message reply function
-			// if (request.getSession(false) != null)
-			//   request.setAttribute("principal", request.getUserPrincipal());
-			
+			Runnable asyncTask = () -> {
+				// 这里是异步任务的逻辑
+				try {
+					ThreadContext threadContext = (ThreadContext) WebAppUtil.getComponentInstance("threadContext",
+							this.servlet.getServletContext());
+					threadContext.prepareThreadOthers(forumThread, request.getRemoteAddr());
+				} catch (Exception e) {
+
+				}
+			};
+			// 提交任务给线程池执行
+			executor.submit(asyncTask);
+
 		} catch (Exception e) {
 			Debug.logError(" customizeListForm err:" + threadId, module);
 			return;
