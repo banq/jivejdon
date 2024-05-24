@@ -130,10 +130,8 @@ public class MessageListAction extends ModelListAction {
 
 			@SuppressWarnings("unchecked")
 			CompletableFuture<List<ForumThread>> future = (CompletableFuture<List<ForumThread>>) serviceCache.get(threadId);
-			future.thenAccept(result -> {
-				// 将结果放入请求属性中
-				request.setAttribute("threadLinkList", result);
-			});
+			request.setAttribute("threadLinkList", future.get());
+			serviceCache.remove(threadId);
 
 		} catch (Exception e) {
 			Debug.logError(" customizeListForm err:" + threadId, module);
