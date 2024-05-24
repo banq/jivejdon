@@ -65,7 +65,7 @@ public class ThreadLinkListAction extends Action {
 
 			ThreadContext threadContext = (ThreadContext) WebAppUtil.getComponentInstance("threadContext",
 					this.servlet.getServletContext());
-			final List<ForumThread> threadLinks = threadContext.createsThreadLinks(threadId);
+			final List<ForumThread> threadLinks = threadContext.createsThreadLinks(thread);
 
 			ModelListForm threadListForm = (ModelListForm) form;
 			threadListForm.setList(threadLinks);

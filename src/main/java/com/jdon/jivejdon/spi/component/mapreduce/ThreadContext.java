@@ -9,34 +9,29 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 import com.jdon.annotation.Component;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.domain.model.query.ResultSort;
 import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
+import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import com.jdon.jivejdon.infrastructure.repository.dao.MessageQueryDao;
 import com.jdon.jivejdon.infrastructure.repository.dao.TagDao;
-import com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob;
 
 @Component("threadContext")
 public class ThreadContext {
     private final MessageQueryDao messageQueryDao;
     private final TagDao tagDao;
-    private final ForumMessageQueryService forumMessageQueryService;
-    private final ThreadViewCounterJob threadViewCounterJob ;
-    private final ExecutorService executorService = Executors.newFixedThreadPool(5);
+    private final ForumFactory forumFactory;
+  
 
-    public ThreadContext(MessageQueryDao messageQueryDao, TagDao tagDao, ForumMessageQueryService forumMessageQueryService,  ThreadViewCounterJob threadViewCounterJob) {
+    public ThreadContext(MessageQueryDao messageQueryDao, TagDao tagDao, ForumFactory forumFactory) {
         this.messageQueryDao = messageQueryDao;
         this.tagDao = tagDao;
-        this.forumMessageQueryService = forumMessageQueryService;
-        this.threadViewCounterJob = threadViewCounterJob;
+        this.forumFactory = forumFactory;
     }
 
     public List<Long> getPrevNextInTag(ForumThread thread) {
@@ -96,8 +91,7 @@ public class ThreadContext {
         });
     }
 
-    public List<ForumThread> createsThreadLinks(String threadId) {
-        ForumThread thread = forumMessageQueryService.getThread(Long.parseLong(threadId));
+    public List<ForumThread> createsThreadLinks(ForumThread thread) {
         final List<ForumThread> threadLinks = loadReblog(thread);
         if (threadLinks.isEmpty()) {
             threadLinks.addAll(transform(thread));
@@ -107,7 +101,7 @@ public class ThreadContext {
 
     private List<ForumThread> transform(ForumThread thread) {
         return getPrevNextInTag(thread).stream()
-                .map(e -> forumMessageQueryService.getThread(e))
+                .map(e -> forumFactory.getThread(e).get())
                 .filter(Objects::nonNull).collect(Collectors.toList());
     }
 
@@ -132,23 +126,5 @@ public class ThreadContext {
 		return threadLinks;
 	}
     
-    public List<ForumThread> prepareThreadOthers(Long threadId, String ipAddress) {
-        // 这里是异步任务的逻辑
-        ForumThread forumThread = forumMessageQueryService.getThread(threadId);
-        // 1.prepare reBlog
-        forumThread.getReBlogVO().loadAscResult();
-
-        // // 2. page view counting
-        executorService.execute(() -> {
-            try {
-                threadViewCounterJob.saveViewCounter(forumThread.addViewCount(ipAddress));
-            } catch (Exception e) { }         
-        });
-        
-
-        // 3.prepare relation posts
-        return createsThreadLinks(threadId.toString());
-
-    }
-
+  
 }

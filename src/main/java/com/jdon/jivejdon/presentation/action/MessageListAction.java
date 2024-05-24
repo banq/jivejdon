@@ -15,11 +15,12 @@
  */
 package com.jdon.jivejdon.presentation.action;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,6 +34,7 @@ import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadContext;
+import com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
 import com.jdon.util.Debug;
@@ -44,11 +46,22 @@ import com.jdon.util.Debug;
 public class MessageListAction extends ModelListAction {
 	private final static String module = MessageListAction.class.getName();
 	private ConcurrentMap<String, Object> serviceCache = new ConcurrentHashMap<>();
+	private final ExecutorService executorService = Executors.newFixedThreadPool(5);
 	
-	public ForumMessageQueryService getForumMessageQueryService() {
+	private ForumMessageQueryService getForumMessageQueryService() {
 		return (ForumMessageQueryService) serviceCache.computeIfAbsent("forumMessageQueryService",
 				k -> WebAppUtil.getService("forumMessageQueryService",
 						this.servlet.getServletContext()));
+	}
+
+	private ThreadViewCounterJob getThreadViewCounterJob() {
+		return (ThreadViewCounterJob) serviceCache.computeIfAbsent("threadViewCounterJob" ,k ->WebAppUtil.getComponentInstance("threadViewCounterJob",
+					this.servlet.getServletContext()));
+	}
+
+	private ThreadContext getThreadContext() {
+		return (ThreadContext) serviceCache.computeIfAbsent("threadContext" ,k ->WebAppUtil.getComponentInstance("threadContext",
+		this.servlet.getServletContext()));
 	}
 
 	/*
@@ -69,21 +82,23 @@ public class MessageListAction extends ModelListAction {
 			return new PageIterator();
 		}
 		try {
-			Long threadIdL = Long.parseLong(threadId);
-			
+			ForumThread forumThread = getForumMessageQueryService().getThread(Long.parseLong(threadId));
+			if (forumThread == null) {
+				return new PageIterator();
+			}
+
+			forumThread.getReBlogVO().loadAscResult();
+
+			executorService.execute(() -> {
+				getThreadViewCounterJob().saveViewCounter(forumThread.addViewCount(request.getRemoteAddr()));
+			});
+
 			CompletableFuture<List<ForumThread>> future = CompletableFuture.supplyAsync(() -> {
-				// 这里是异步任务的逻辑
-				try {
-					ThreadContext threadContext = (ThreadContext) WebAppUtil.getComponentInstance("threadContext",
-							this.servlet.getServletContext());
-					return threadContext.prepareThreadOthers(threadIdL, request.getRemoteAddr());
-				} catch (Exception e) {
-	                return new ArrayList<>();
-				}
-			});		
+				return getThreadContext().createsThreadLinks(forumThread);
+			});
 			serviceCache.putIfAbsent(threadId, future);
 
-			return getForumMessageQueryService().getMessages(threadIdL, start, count);
+			return getForumMessageQueryService().getMessages(Long.parseLong(threadId), start, count);
 		} catch (Exception nfe) {
 			return new PageIterator();
 		}
