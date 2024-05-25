@@ -101,7 +101,7 @@ public class ThreadContext {
 
     private List<ForumThread> transform(ForumThread thread) {
         return getPrevNextInTag(thread).stream()
-                .map(e -> forumFactory.getThread(e).get())
+                .map(e -> forumFactory.getThread(e).orElse(null))
                 .filter(Objects::nonNull).collect(Collectors.toList());
     }
 
