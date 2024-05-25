@@ -89,10 +89,6 @@ public class MessageListAction extends ModelListAction {
 
 			forumThread.getReBlogVO().loadAscResult();
 
-			executorService.execute(() -> {
-				getThreadViewCounterJob().saveViewCounter(forumThread.addViewCount(request.getRemoteAddr()));
-			});
-
 			CompletableFuture<List<ForumThread>> future = CompletableFuture.supplyAsync(() -> {
 				return getThreadContext().createsThreadLinks(forumThread);
 			});
@@ -147,6 +143,10 @@ public class MessageListAction extends ModelListAction {
 			CompletableFuture<List<ForumThread>> future = (CompletableFuture<List<ForumThread>>) serviceCache.get(threadId);
 			request.setAttribute("threadLinkList", future.get());
 			serviceCache.remove(threadId);
+
+			executorService.execute(() -> {
+				getThreadViewCounterJob().saveViewCounter(forumThread.addViewCount(request.getRemoteAddr()));
+			});
 
 		} catch (Exception e) {
 			Debug.logError(" customizeListForm err:" + threadId, module);
