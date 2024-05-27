@@ -17,7 +17,7 @@
  <%}%>
 
  <div class="col-lg-4">
- <div class="box">	
+ <li class="box">	
   <div class="linkblock">
      <div class="box">	             
         <section> 
@@ -67,7 +67,7 @@
           </section> 
 	 </div>	
   </div>	
-</div>  
+</li>  
 </div>
 
  

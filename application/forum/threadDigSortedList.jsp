@@ -138,7 +138,7 @@ pageContext.setAttribute("title", titleStr);
 
 
 
-<div class="list-group">
+<ul class="list-group" style="list-style-type:none;padding:0">
 
 
  <logic:iterate indexId="i" id="forumThread" name="threadListForm"  property="list">
@@ -159,7 +159,7 @@ pageContext.setAttribute("title", titleStr);
 
  </logic:iterate>
 
-</div>
+</ul>
 
 
 <div class="box">

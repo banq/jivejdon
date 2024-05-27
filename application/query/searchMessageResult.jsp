@@ -58,7 +58,7 @@
         </div>
 
         <main>
-     
+            <ul style="list-style-type:none;padding:0">
             <logic:iterate indexId="i" id="messageSearchSpec"
                            name="messageListForm"
                            property="list">
@@ -70,7 +70,7 @@
                              property="forum"/>
                 <bean:define id="account" name="forumMessage"
                              property="account"/>
-                   <div class="row">
+                   <li class="row">
                         <div class="col-lg-12">
                             <section> 
                             <header>
@@ -104,11 +104,11 @@
 
                         </div>
                   
-                </div>
+                    </li>
 
 
             </logic:iterate>
-       
+            </ul>
         </main>    
         
         <div class="tres">

@@ -63,7 +63,7 @@
           </MultiPages:pager>
           
         </div>
-        <div class="box">
+        <ul class="box" style="list-style-type:none;padding:0">
             <logic:iterate indexId="i" id="messageSearchSpec"
                            name="messageListForm" property="list">
 
@@ -76,7 +76,7 @@
                <%@ include file="./others/threadListCore.jsp" %> 
             </logic:iterate>
 
-        </div>   
+        </ul>   
 
         <div class="tres">
 

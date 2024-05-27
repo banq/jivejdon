@@ -6,9 +6,11 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <logic:notEmpty name="threadListForm" property="list">   
+<ul style="list-style-type:none;padding:0">
  <logic:iterate id="forumThread" name="threadListForm"  property="list" length="5">
      <%@ include file="../query/others/threadListCore.jsp" %>   
  </logic:iterate>
+</ul>
 </logic:notEmpty>   
 
 <logic:empty name="threadListForm" property="list">

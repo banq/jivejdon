@@ -5,13 +5,17 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ page session="false" %>
 
- <logic:notEmpty name="threadListForm" property="list">          
+<logic:notEmpty name="threadListForm" property="list">       
+<ul style="list-style-type:none;padding:0">   
  <logic:iterate id="forumThread" name="threadListForm"  property="list">
    <logic:notEmpty name="forumThread" property="rootMessage">
     <bean:define id="forumMessage" name="forumThread" property="rootMessage"  />
-    <%@ include file="../query/others/threadListCore.jsp" %>  
+
+      <%@ include file="../query/others/threadListCore.jsp" %>  
+
    </logic:notEmpty>   
  </logic:iterate>
+</ul> 
 </logic:notEmpty>   
 <logic:empty name="threadListForm" property="list">
 <% 

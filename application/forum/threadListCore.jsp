@@ -11,7 +11,7 @@
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
 <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
-<div class="box">
+<li class="box">
          <section> 
          <div class="wrap-vid">              
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">                  
@@ -54,7 +54,7 @@
             </div>
 
           </section>
-</div>
+</li>
 
  </logic:notEmpty>
 </logic:notEmpty>    

@@ -161,8 +161,9 @@
               <div id='threadLink' class="linkblock">
 
               <logic:notEmpty name="threadLinkList" >   
+                <ul style="list-style-type:none;padding:0">
                 <logic:iterate id="forumThreadLink" name="threadLinkList" >
-                  <div class="box">
+                  <li class="box">
                     <section> 
                     <div class="wrap-vid">              
                            <logic:notEmpty name="forumThreadLink" property="rootMessage.messageUrlVO.imageUrl">                  
@@ -184,8 +185,9 @@
                      </div>
            
                      </section>
-           </div>
+                    </li>
                 </logic:iterate>  
+              </ul>
               </logic:notEmpty>
 
               </div>    

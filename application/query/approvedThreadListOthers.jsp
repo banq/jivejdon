@@ -141,13 +141,13 @@ pageContext.setAttribute("title", titleStr);
 </div>
 
 
-<div class="list-group">
+<ul class="list-group" style="list-style-type:none;padding:0">
 
  <logic:iterate indexId="i" id="forumThread" name="threadListForm"  property="list">
   <%@ include file="../forum/threadListCore.jsp" %>
  </logic:iterate>
 
-</div>
+</ul>
 
 
 
