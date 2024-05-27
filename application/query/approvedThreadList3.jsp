@@ -41,7 +41,7 @@ int i=0;
           imgeUrl = "//cdn.jdon.com/simgs/thumb2/"+java.util.concurrent.ThreadLocalRandom.current().nextInt(49)+".jpg";
 
        %>     
-        <img id="home-thumbnai" src='<%=imgeUrl%>' border="0" class="thumbnail"  loading="lazy" style="max-width:400px;  width:100%;" onerror="this.src='//cdn.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg'"/>
+        <img id="home-thumbnai" src='<%=imgeUrl%>' border="0" class="img-thumbnail"  loading="lazy" style="max-width:400px;  width:100%;" onerror="this.src='//cdn.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg'"/>
        </a>
       <div style="position: absolute;top:0px;right:0px">
        <div class="tagcloud">

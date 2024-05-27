@@ -18,7 +18,7 @@
             <div class="wrap-vid">
               <div class="thumbn">
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">
-                  <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail" loading="lazy"/>
+                  <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy"/>
                 </logic:notEmpty>
               </div>  
               <div class="widget">			 
