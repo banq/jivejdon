@@ -14,13 +14,13 @@
          <div class="wrap-vid">              
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">                  
                   <div class="thumbn">
-                       <img src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="thumbnail" loading="lazy" width="80" height="70" onerror="this.src='//cdn.jdon.com/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(9)%>.jpg'"/>    
+                       <img src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="thumbnail" loading="lazy" width="70" height="70" onerror="this.src='//cdn.jdon.com/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(9)%>.jpg'"/>    
                   </div>
                 </logic:notEmpty>
                  
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">                  
                   <div class="thumbn">
-                    <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail" loading="lazy" width="80" height="70"/>                  
+                    <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="thumbnail" loading="lazy" width="70" height="70"/>                  
                   </div>  
                 </logic:notEmpty>              
           </div>
