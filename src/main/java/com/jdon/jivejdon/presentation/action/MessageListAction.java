@@ -15,6 +15,7 @@
  */
 package com.jdon.jivejdon.presentation.action;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
@@ -65,7 +66,7 @@ public class MessageListAction extends ModelListAction {
 	}
 
 	/*
-	 * (non-Javadoc)
+	 * get a PageIterator Collection for the thread
 	 * 
 	 * @see com.jdon.strutsutil.ModelListAction#getPageIterator(javax.servlet.http
 	 * .HttpServletRequest, int, int)
@@ -74,7 +75,7 @@ public class MessageListAction extends ModelListAction {
 		if (start % 15 != 0) {
 			return new PageIterator();
 		}
-	
+
 		Debug.logVerbose("enter getPageIterator", module);
 		String threadId = request.getParameter("thread");
 		if ((threadId == null) || threadId.length() > 12 || !StringUtils.isNumeric(threadId)) {
@@ -82,14 +83,12 @@ public class MessageListAction extends ModelListAction {
 			return new PageIterator();
 		}
 		try {
-			ForumThread forumThread = getForumMessageQueryService().getThread(Long.parseLong(threadId));
-			if (forumThread == null) {
-				return new PageIterator();
-			}
-
-			forumThread.getReBlogVO().loadAscResult();
-
 			CompletableFuture<List<ForumThread>> future = CompletableFuture.supplyAsync(() -> {
+				ForumThread forumThread = getForumMessageQueryService().getThread(Long.parseLong(threadId));
+				if (forumThread == null) {
+					return new ArrayList<>();
+				}
+				forumThread.getReBlogVO().loadAscResult();
 				return getThreadContext().createsThreadLinks(forumThread);
 			});
 			serviceCache.putIfAbsent(threadId, future);
@@ -98,11 +97,11 @@ public class MessageListAction extends ModelListAction {
 		} catch (Exception nfe) {
 			return new PageIterator();
 		}
-		
+
 	}
 
 	/*
-	 * (non-Javadoc)
+	 * get every message in a thread
 	 * 
 	 * @see com.jdon.strutsutil.ModelListAction#findModelByKey(javax.servlet.http
 	 * .HttpServletRequest, java.lang.Object)
@@ -133,16 +132,16 @@ public class MessageListAction extends ModelListAction {
 		}
 
 		try {
-			ForumThread forumThread = getForumMessageQueryService().getThread(Long.parseLong(threadId));
-			if (forumThread == null)
-				throw new Exception("thread is null " + threadId);
-
-			modelListForm.setOneModel(forumThread);
-
 			@SuppressWarnings("unchecked")
 			CompletableFuture<List<ForumThread>> future = (CompletableFuture<List<ForumThread>>) serviceCache.get(threadId);
 			request.setAttribute("threadLinkList", future.get());
 			serviceCache.remove(threadId);
+
+			ForumThread forumThread = getForumMessageQueryService().getThread(Long.parseLong(threadId));
+			if (forumThread == null)
+		    	return;
+
+			modelListForm.setOneModel(forumThread);
 
 			executorService.execute(() -> {
 				getThreadViewCounterJob().saveViewCounter(forumThread.addViewCount(request.getRemoteAddr()));
