@@ -84,7 +84,8 @@ public class MessageListAction extends ModelListAction {
 		}
 		try {
 			CompletableFuture<List<ForumThread>> future = CompletableFuture.supplyAsync(() -> {
-				ForumThread forumThread = getForumMessageQueryService().getThread(Long.parseLong(threadId));
+				return getForumMessageQueryService().getThread(Long.parseLong(threadId));
+			}).thenApplyAsync(forumThread -> {
 				if (forumThread == null) {
 					return new ArrayList<>();
 				}
@@ -134,7 +135,7 @@ public class MessageListAction extends ModelListAction {
 		try {
 			@SuppressWarnings("unchecked")
 			CompletableFuture<List<ForumThread>> future = (CompletableFuture<List<ForumThread>>) serviceCache.get(threadId);
-			request.setAttribute("threadLinkList", future.get());
+			request.setAttribute("threadLinkList", future.join());
 			serviceCache.remove(threadId);
 
 			ForumThread forumThread = getForumMessageQueryService().getThread(Long.parseLong(threadId));
