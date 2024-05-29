@@ -15,7 +15,6 @@
  */
 package com.jdon.jivejdon.presentation.action;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
@@ -78,26 +77,27 @@ public class MessageListAction extends ModelListAction {
 
 		Debug.logVerbose("enter getPageIterator", module);
 		String threadId = request.getParameter("thread");
-		if ((threadId == null) || threadId.length() > 12 || !StringUtils.isNumeric(threadId)) {
-			Debug.logError(" getPageIterator error : threadId is null", module);
+		if (threadId == null || threadId.length() > 12 || !StringUtils.isNumeric(threadId)) {
+			Debug.logError(" getPageIterator error : threadId is null" + threadId, module);
+			return new PageIterator();
+		}
+		PageIterator pageIterator = getForumMessageQueryService().getMessages(Long.parseLong(threadId), start, count);
+		if(pageIterator == null || pageIterator.getAllCount() == 0)  {
+			Debug.logError(" getPageIterator error : thread is null"  + threadId, module);
 			return new PageIterator();
 		}
 		try {
 			CompletableFuture<List<ForumThread>> future = CompletableFuture.supplyAsync(() -> {
 				return getForumMessageQueryService().getThread(Long.parseLong(threadId));
 			}).thenApplyAsync(forumThread -> {
-				if (forumThread == null) {
-					return new ArrayList<>();
-				}
 				forumThread.getReBlogVO().loadAscResult();
 				return getThreadContext().createsThreadLinks(forumThread);
 			});
 			serviceCache.putIfAbsent(threadId, future);
-
-			return getForumMessageQueryService().getMessages(Long.parseLong(threadId), start, count);
 		} catch (Exception nfe) {
 			return new PageIterator();
 		}
+		return pageIterator;
 
 	}
 
