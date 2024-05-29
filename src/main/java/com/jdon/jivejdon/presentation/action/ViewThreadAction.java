@@ -1,7 +1,6 @@
 package com.jdon.jivejdon.presentation.action;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.CompletableFuture;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +22,6 @@ public class ViewThreadAction extends ModelDispAction {
 
 	private ForumMessageQueryService forumMessageQueryService;
 	private ThreadViewCounterJob threadViewCounterJob;
-	private final ExecutorService executorService = Executors.newFixedThreadPool(5);
 
 	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -40,10 +38,10 @@ public class ViewThreadAction extends ModelDispAction {
 				return actionMapping.findForward(FormBeanUtil.FORWARD_FAILURE_NAME);
 			}
 
-			executorService.execute(() -> {
+			CompletableFuture.runAsync(() -> {
 				getThreadViewCounterJob().saveViewCounter(forumThread.addViewCount(request.getRemoteAddr()));
 			});
-  
+
 			return actionMapping.findForward(FormBeanUtil.FORWARD_SUCCESS_NAME);
 		} catch (Exception e) {
 			Debug.logError(" viewThread error");
