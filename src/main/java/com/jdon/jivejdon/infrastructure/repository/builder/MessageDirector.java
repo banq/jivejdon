@@ -18,6 +18,7 @@ package com.jdon.jivejdon.infrastructure.repository.builder;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -142,14 +143,31 @@ public class MessageDirector implements MessageDirectorIF {
 	}
 
 	private RootMessage createRootMessage(AnemicMessageDTO anemicMessageDTO) {
-		Optional<Account> accountOptional = createAccount(anemicMessageDTO.getAccount());
-		FilterPipleSpec filterPipleSpec = new FilterPipleSpec(outFilterManager.getOutFilters());
-		Forum forum = forumDirector.getForum(anemicMessageDTO.getForum().getForumId());
-		Collection props = propertyDao.getProperties(Constants.MESSAGE, anemicMessageDTO.getMessageId());
-		Collection uploads = uploadRepository.getUploadFiles(anemicMessageDTO.getMessageId().toString());
-		HotKeys hotKeys = hotKeysFactory.getHotKeys();
+		CompletableFuture<Optional<Account>> accountFuture = CompletableFuture
+				.supplyAsync(() -> createAccount(anemicMessageDTO.getAccount()));
+		CompletableFuture<FilterPipleSpec> filterPipleSpecFuture = CompletableFuture
+				.supplyAsync(() -> new FilterPipleSpec(outFilterManager.getOutFilters()));
+		CompletableFuture<Forum> forumFuture = CompletableFuture
+				.supplyAsync(() -> forumDirector.getForum(anemicMessageDTO.getForum().getForumId()));
+		CompletableFuture<Collection> propsFuture = CompletableFuture
+				.supplyAsync(() -> propertyDao.getProperties(Constants.MESSAGE, anemicMessageDTO.getMessageId()));
+		CompletableFuture<Collection> uploadsFuture = CompletableFuture
+				.supplyAsync(() -> uploadRepository.getUploadFiles(anemicMessageDTO.getMessageId().toString()));
+		CompletableFuture<HotKeys> hotKeysFuture = CompletableFuture.supplyAsync(() -> hotKeysFactory.getHotKeys());
+
+		// 等待所有任务完成
+		CompletableFuture
+				.allOf(accountFuture, filterPipleSpecFuture, forumFuture, propsFuture, uploadsFuture, hotKeysFuture)
+				.join();
+
+		Optional<Account> accountOptional = accountFuture.join();
+		FilterPipleSpec filterPipleSpec = filterPipleSpecFuture.join();
+		Forum forum = forumFuture.join();
+		Collection props = propsFuture.join();
+		Collection uploads = uploadsFuture.join();
+		HotKeys hotKeys = hotKeysFuture.join();
 		ForumMessage forumMessage = RootMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId())
-		        .messageVO(anemicMessageDTO.getMessageVO()).forum(forum)
+				.messageVO(anemicMessageDTO.getMessageVO()).forum(forum)
 				.acount(accountOptional.orElse(new Account())).creationDate(anemicMessageDTO.getCreationDate())
 				.modifiedDate(anemicMessageDTO.getModifiedDate()).filterPipleSpec(filterPipleSpec).uploads(uploads)
 				.props(props).hotKeys(hotKeys).build(anemicMessageDTO.getForumThread().getThreadId());
