@@ -17,10 +17,12 @@ package com.jdon.jivejdon.spi.component.mapreduce;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -167,45 +169,50 @@ public class ThreadApprovedNewList implements Startable {
 		return resultSorteds;
 	}
 
-	public List<Long> loadApprovedThreads(
-			ApprovedListSpec approvedListSpec) {
-		List<Long> resultSorteds = new ArrayList(
-				approvedListSpec.getNeedCount());
-		final Date nowD = new Date();
+	public List<Long> loadApprovedThreads(ApprovedListSpec approvedListSpec) {
+		List<Long> resultSorteds = new CopyOnWriteArrayList<>();
 		try {
-			int i = 0;
+			AtomicInteger i = new AtomicInteger(0);
 			int start = currentStartBlock;
 			int count = 100;
-		
-			while (i < approvedListSpec.getNeedCount()) {
+
+			while (i.get() < approvedListSpec.getNeedCount()) {
 				PageIterator pi = forumMessageQueryService.getThreads(start,
 						count, approvedListSpec);
 				if (!pi.hasNext())
 					break;
 
-				ForumThread threadPrev = null;	
+				ForumThread threadPrev = null;
 				ForumThread threadPrev2 = null;
 				while (pi.hasNext()) {
-					Long threadId = (Long) pi.next();					
+					Long threadId = (Long) pi.next();
 					if (currentIndicator > threadId
 							|| currentIndicator == 0) {
 						final ForumThread thread = forumMessageQueryService
-								.getThread(threadId);																						
-						if (thread == null || thread.getRootMessage() == null) continue;
+								.getThread(threadId);
+						if (thread == null || thread.getRootMessage() == null)
+							continue;
 						Account account = thread.getRootMessage().getAccount();
 
-						if (approvedListSpec.isApprovedToBest(thread, i, threadPrev, threadPrev2)){
-							resultSorteds.add(thread.getThreadId());
-							// map to sort account
-							authorList.addAuthor(account);
-							threadDigList.addForumThread(thread);
-							i++;
-						}
+						final ForumThread threadPrevP = threadPrev;
+						final ForumThread threadPrev2P = threadPrev2;
+						CompletableFuture.supplyAsync(
+								() -> approvedListSpec.isApprovedToBest(thread, i.get(), threadPrevP, threadPrev2P))
+								.thenAccept(isApproved -> {
+									if (isApproved) {
+										resultSorteds.add(thread.getThreadId());
+										// map to sort account
+										authorList.addAuthor(account);
+										threadDigList.addForumThread(thread);
+										i.incrementAndGet();
+									}
+								});
+
 						threadTagList.addForumThread(thread);
 						threadPrev2 = threadPrev;
 						threadPrev = thread;
 
-						if (i >= approvedListSpec.getNeedCount()) {
+						if (i.get() >= approvedListSpec.getNeedCount()) {
 							currentIndicator = threadId;
 							currentStartBlock = start;
 							break;
