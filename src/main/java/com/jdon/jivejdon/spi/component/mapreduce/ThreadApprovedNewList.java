@@ -169,6 +169,11 @@ public class ThreadApprovedNewList implements Startable {
 		return resultSorteds;
 	}
 
+	/**
+	 * CompletableFuture.supplyAsync
+	 * @param approvedListSpec
+	 * @return
+	 */
 	public List<Long> loadApprovedThreads(ApprovedListSpec approvedListSpec) {
 		List<Long> resultSorteds = new CopyOnWriteArrayList<>();
 		try {
