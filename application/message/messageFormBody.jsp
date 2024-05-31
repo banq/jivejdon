@@ -20,7 +20,7 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="form-group">
-      <html:textarea styleClass="form-control" property="subject" styleId="replySubject" cols="100" rows="2" tabindex="5"
+      <html:textarea styleClass="form-control" property="subject" styleId="replySubject" cols="100" rows="1" tabindex="5"
                      onfocus="if(value=='网络用语：标题'){value=''}"
                      onblur="if (value ==''){value='网络用语：标题'}" ></html:textarea>
     </div>
