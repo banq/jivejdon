@@ -49,8 +49,8 @@ public abstract class LazyLoader {
 		Object loadedResult = null;
 		try {
 			loadedResult = domainMessage.getEventResult();
-			if (loadedResult != null)
-				domainMessage.clear();
+			// if (loadedResult != null)
+			// 	domainMessage.clear();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
