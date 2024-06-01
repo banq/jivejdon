@@ -18,7 +18,6 @@ package com.jdon.jivejdon.domain.model.reblog;
 import java.util.Collection;
 
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.util.LazyLoader;
 import com.jdon.jivejdon.domain.model.util.Many2ManyDTO;
@@ -54,12 +53,13 @@ public class ReBlogVO extends LazyLoader {
 	public void loadAscResult() {
 		if (!load) {
 			super.setDomainMessage(null);
-			Many2ManyDTO many2ManyDTO = (Many2ManyDTO) super.loadResult();
+			Many2ManyDTO many2ManyDTO = super.loadResult().map(value -> (Many2ManyDTO) value).orElse(null);
 			if (many2ManyDTO != null) {
 				threadTos = many2ManyDTO.getChildern();
 				threadFroms = many2ManyDTO.getParent();
-				load = true;
+				
 			}
+			load = true;
 		}
 
 	}

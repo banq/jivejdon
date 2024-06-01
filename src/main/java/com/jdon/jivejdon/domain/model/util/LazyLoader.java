@@ -15,6 +15,8 @@
  */
 package com.jdon.jivejdon.domain.model.util;
 
+import java.util.Optional;
+
 import com.jdon.domain.message.DomainMessage;
 
 public abstract class LazyLoader {
@@ -41,7 +43,7 @@ public abstract class LazyLoader {
 	 * 
 	 * @return
 	 */
-	public Object loadResult() {
+	public Optional<Object> loadResult() {
 		if (domainMessage == null)
 			preload();
 		Object loadedResult = null;
@@ -52,7 +54,7 @@ public abstract class LazyLoader {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return loadedResult;
+		return Optional.ofNullable(loadedResult) ;
 
 	}
 

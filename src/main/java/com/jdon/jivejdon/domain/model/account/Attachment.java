@@ -52,7 +52,7 @@ public class Attachment extends LazyLoader {
 			if (this.domainMessage == null && uploadLazyLoader != null) {
 				super.preload();
 			} else if (this.domainMessage != null) {
-				uploadFile = (UploadFile) super.loadResult();
+				uploadFile = super.loadResult().map(value -> (UploadFile) value).orElse(null);
 			}
 		}
 		return uploadFile;

@@ -16,10 +16,10 @@
 package com.jdon.jivejdon.domain.model.subscription;
 
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 import com.jdon.jivejdon.domain.model.subscription.subscribed.Subscribed;
 import com.jdon.jivejdon.domain.model.util.LazyLoader;
 import com.jdon.jivejdon.domain.model.util.OneOneDTO;
+import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 
 /**
  * // the field is not the core field of ThreadTag, it's value is fetched by //
@@ -55,10 +55,12 @@ public class SubscribedState extends LazyLoader {
 		if (subscriptionCount == -1 && this.lazyLoaderRole == null) {
 			this.lazyLoaderRole = lazyLoaderRole;
 			super.preload();
-		} else if (subscriptionCount == -1 && this.lazyLoaderRole != null) {
-			OneOneDTO oneOneDTO = (OneOneDTO) super.loadResult();
-			subscriptionCount = (Integer) oneOneDTO.getParent();
-			subscribedCount = (Integer) oneOneDTO.getChild();
+		} else if (subscriptionCount == -1 && this.lazyLoaderRole != null ) {
+			OneOneDTO oneOneDTO = super.loadResult().map(value -> (OneOneDTO) value).orElse(null);
+			if (oneOneDTO != null) {
+				subscriptionCount = (Integer) oneOneDTO.getParent();
+				subscribedCount = (Integer) oneOneDTO.getChild();
+			}
 		}
 		return subscriptionCount;
 	}
@@ -68,9 +70,11 @@ public class SubscribedState extends LazyLoader {
 			this.lazyLoaderRole = lazyLoaderRole;
 			super.preload();
 		} else if (subscribedCount == -1 && this.lazyLoaderRole != null) {
-			OneOneDTO oneOneDTO = (OneOneDTO) super.loadResult();
-			subscriptionCount = (Integer) oneOneDTO.getParent();
-			subscribedCount = (Integer) oneOneDTO.getChild();
+			OneOneDTO oneOneDTO = super.loadResult().map(value -> (OneOneDTO) value).orElse(null);
+			if (oneOneDTO != null) {
+				subscriptionCount = (Integer) oneOneDTO.getParent();
+				subscribedCount = (Integer) oneOneDTO.getChild();
+			}
 		}
 		return subscribedCount;
 	}

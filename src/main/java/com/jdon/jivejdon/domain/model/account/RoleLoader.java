@@ -16,8 +16,8 @@
 package com.jdon.jivejdon.domain.model.account;
 
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 import com.jdon.jivejdon.domain.model.util.LazyLoader;
+import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 
 public class RoleLoader extends LazyLoader {
 
@@ -38,7 +38,7 @@ public class RoleLoader extends LazyLoader {
 			if (this.domainMessage == null && lazyLoaderRole != null) {
 				super.preload();
 			} else if (this.domainMessage != null) {
-				rolename = (String) super.loadResult();
+				rolename = super.loadResult().map(value -> (String) value).orElse("");
 			}
 		}
 

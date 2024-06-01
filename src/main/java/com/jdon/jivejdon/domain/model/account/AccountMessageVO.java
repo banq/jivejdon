@@ -16,8 +16,8 @@
 package com.jdon.jivejdon.domain.model.account;
 
 import com.jdon.domain.message.DomainMessage;
-import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 import com.jdon.jivejdon.domain.model.util.LazyLoader;
+import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 
 public class AccountMessageVO extends LazyLoader {
 
@@ -44,7 +44,7 @@ public class AccountMessageVO extends LazyLoader {
 	public int getMessageCount() {
 		if (messageCount == -1) {
 			if (super.domainMessage != null) {
-				messageCount = (Integer) super.loadResult();
+				messageCount = super.loadResult().map(value -> (Integer) value).orElse(0);
 			} else {
 				super.preload();
 			}
@@ -58,7 +58,7 @@ public class AccountMessageVO extends LazyLoader {
 
 	public int getMessageCountNow() {
 		if (messageCount == -1) {
-			messageCount = (Integer) super.loadResult();
+			messageCount = super.loadResult().map(value -> (Integer) value).orElse(0);
 		}
 		return messageCount;
 	}
