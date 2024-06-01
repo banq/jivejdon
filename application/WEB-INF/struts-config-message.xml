@@ -151,15 +151,13 @@
             <forward name="success" path="/forum/thread2.shtml" />
         </action> -->
 
+        <action path="/forum/viewThread" type="com.jdon.jivejdon.presentation.action.ViewThreadAction" scope="request" validate="false" >
+        </action>
+
         <action path="/forum/threadTagList" type="com.jdon.jivejdon.presentation.action.ViewThreadAction" scope="request" validate="false" >
             <forward name="success" path="/forum/threadTagList2.shtml" />
             <forward name="failure" path="/forum/threadTagList2.shtml" />
         </action> 
-
-        <action name="threadListForm" path="/forum/threadLinkList" type="com.jdon.jivejdon.presentation.action.query.ThreadLinkListAction" scope="request" validate="false">
-            <forward name="success" path="/forum/threadLinkList.jsp" />
-        </action>
-
     
         <action path="/forum/threadTagList2" type="com.jdon.jivejdon.presentation.action.query.ThreadTagListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/forum/threadTagsList.jsp" />
