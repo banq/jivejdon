@@ -180,8 +180,9 @@ public class ThreadApprovedNewList implements Startable {
 			AtomicInteger i = new AtomicInteger(0);
 			int start = currentStartBlock;
 			int count = 100;
+			int allCount =  forumMessageQueryService.getThreads(0, 1, approvedListSpec).getAllCount();
 
-			while (i.get() < approvedListSpec.getNeedCount()) {
+			while (i.get() < approvedListSpec.getNeedCount() && start < allCount) {
 				PageIterator pi = forumMessageQueryService.getThreads(start,
 						count, approvedListSpec);
 				if (!pi.hasNext())
