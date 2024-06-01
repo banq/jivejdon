@@ -38,7 +38,7 @@ public class RoleLoader extends LazyLoader {
 			if (this.domainMessage == null && lazyLoaderRole != null) {
 				super.preload();
 			} else if (this.domainMessage != null) {
-				rolename = super.loadResult().map(value -> (String) value).orElse("");
+				rolename = super.loadResult().map(value -> (String) value).orElse(null);
 			}
 		}
 
