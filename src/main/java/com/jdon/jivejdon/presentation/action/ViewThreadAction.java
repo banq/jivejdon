@@ -1,7 +1,5 @@
 package com.jdon.jivejdon.presentation.action;
 
-import java.util.concurrent.CompletableFuture;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +10,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
+import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob;
 import com.jdon.strutsutil.FormBeanUtil;
 import com.jdon.strutsutil.ModelDispAction;
@@ -30,12 +29,9 @@ public class ViewThreadAction extends ModelDispAction {
 			return actionMapping.findForward(FormBeanUtil.FORWARD_FAILURE_NAME);
 
 		try {
-			CompletableFuture.supplyAsync(() -> {
-				return getForumMessageQueryService().getThread(Long.parseLong(threadId));
-			}).thenAccept(forumThread -> {
-				if (forumThread != null)
+			ForumThread forumThread =  getForumMessageQueryService().getThread(Long.parseLong(threadId));
+			if (forumThread != null)
 					getThreadViewCounterJob().saveViewCounter(forumThread.addViewCount(request.getRemoteAddr()));
-			});
 
 			return actionMapping.findForward(FormBeanUtil.FORWARD_SUCCESS_NAME);
 		} catch (Exception e) {
