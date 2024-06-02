@@ -12,7 +12,6 @@ import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
-import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob;
 import com.jdon.strutsutil.FormBeanUtil;
 import com.jdon.strutsutil.ModelDispAction;
@@ -25,21 +24,17 @@ public class ViewThreadAction extends ModelDispAction {
 
 	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-	
 
 		String threadId = request.getParameter("threadId");
-		if (threadId == null || threadId.length() == 0 || !StringUtils.isNumeric(threadId) || threadId.length()>20)
+		if (threadId == null || threadId.length() == 0 || !StringUtils.isNumeric(threadId) || threadId.length() > 20)
 			return actionMapping.findForward(FormBeanUtil.FORWARD_FAILURE_NAME);
 
-	
 		try {
-			ForumThread forumThread = getForumMessageQueryService().getThread(Long.parseLong(threadId));
-			if (forumThread == null) {
-				return actionMapping.findForward(FormBeanUtil.FORWARD_FAILURE_NAME);
-			}
-
-			CompletableFuture.runAsync(() -> {
-				getThreadViewCounterJob().saveViewCounter(forumThread.addViewCount(request.getRemoteAddr()));
+			CompletableFuture.supplyAsync(() -> {
+				return getForumMessageQueryService().getThread(Long.parseLong(threadId));
+			}).thenAccept(forumThread -> {
+				if (forumThread != null)
+					getThreadViewCounterJob().saveViewCounter(forumThread.addViewCount(request.getRemoteAddr()));
 			});
 
 			return actionMapping.findForward(FormBeanUtil.FORWARD_SUCCESS_NAME);

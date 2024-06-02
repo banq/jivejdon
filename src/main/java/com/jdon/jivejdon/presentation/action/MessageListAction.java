@@ -88,6 +88,7 @@ public class MessageListAction extends ModelListAction {
 				Debug.logError(" getPageIterator error : thread is null"  + threadId, module);
 				return new PageIterator();
 			}
+			
 
 			CompletableFuture<List<ForumThread>> future = CompletableFuture.supplyAsync(() -> {
 				return getForumMessageQueryService().getThread(Long.parseLong(threadId));
