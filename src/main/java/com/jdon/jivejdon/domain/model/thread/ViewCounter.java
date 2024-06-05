@@ -20,13 +20,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.util.LazyLoader;
 
-public class ViewCounter implements Comparable<ViewCounter> {
+public class ViewCounter extends LazyLoader implements Comparable<ViewCounter> {
 
 	private final ForumThread thread;
-	private AtomicInteger viewCount = new AtomicInteger(-1);
+	private AtomicInteger viewCount = new AtomicInteger(0);
 	private int lastSavedCount;
 	private String lastIP = "";
+	private boolean load = false;
 	
 
 	public ViewCounter(ForumThread thread) {
@@ -37,38 +39,28 @@ public class ViewCounter implements Comparable<ViewCounter> {
 	}
 
 	public void loadinitCount() {
-		if (this.viewCount.get() != -1)
-			return;
-		DomainMessage dm = this.thread.lazyLoaderRole.loadViewCount(thread.getThreadId());
-		try {
-			// this.viewCount = 0;//flag it
-			Integer count = (Integer) dm.getEventResult();
+		if (!load) {
+			Integer count = super.loadResult().map(value -> (Integer) value).orElse(null);
 			if (count != null) {
 				viewCount.addAndGet(count);
 				this.lastSavedCount = count;
-				dm.clear();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+			load = true;
 		}
-
 	}
 
 	public int getViewCount() {
-		if (this.viewCount.get() == -1) {
-			loadinitCount();
-		}
+		loadinitCount();
 		return this.viewCount.get();
 	}
 
 	public void addViewCount(String ip) {
-		if (getViewCount() != -1 ) 
-			if (!lastIP.equals(ip)){
-                viewCount.incrementAndGet();
-				lastIP = ip;
-			}
-				
-		
+		loadinitCount();
+		if (!lastIP.equals(ip)) {
+			viewCount.incrementAndGet();
+			lastIP = ip;
+		}
+
 	}
 
 
@@ -121,6 +113,11 @@ public class ViewCounter implements Comparable<ViewCounter> {
 		else
 			return 1;
 		return 0;
+	}
+
+	@Override
+	public DomainMessage getDomainMessage() {
+		return this.thread.lazyLoaderRole.loadViewCount(thread.getThreadId());
 	}
 
 }
