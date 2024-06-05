@@ -164,7 +164,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         <div class="content">
           <ul class="list-inline">
             <form role="form" class="form-horizontal" method="post" action="/query/threadViewQuery.shtml">
-              <input type="text" placeholder="Search" value="" name="query" id="v_search" class="form-control">
+              <input type="text" value="<bean:write name="forumThread" property="token" />" name="query" id="v_search" class="form-control">
             </form>
           </ul>
         </div>
@@ -190,7 +190,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
      <div class="widget">
         <div class="wid-vid">
-        
+               <div id="searchResult">
                  <logic:notEmpty name="forumThread" property="tags">          
                   <div id="threadTagList" class="linkblock"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
 							    <script defer>
@@ -211,7 +211,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                           });  
                   </script>           
                 </logic:empty>   				   
-          
+              </div> 
         </div>
       </div>     
 

@@ -49,66 +49,32 @@ function loadCkeditJS() {
     });
 }
 
-function scrollLoadByElementId(url, nextPageContent) {
-  var loading = false;
-  document.getElementById(nextPageContent).innerHTML = " ";
-  $(window).on("scroll", function () {
-    var hT = $("#" + nextPageContent).offset().top,
-      hH = $("#" + nextPageContent).outerHeight(),
-      wH = $(window).height(),
-      wS = $(window).scrollTop();
-    if (
-      wS > hT + hH - wH &&
-      !loading &&
-      document.getElementById(nextPageContent).innerHTML == " "
-    ) {
-      loading = true;
-      var surl = url.indexOf("?") == -1 ? url + "?" : url + "&";
-      load(surl, function (xhr) {
-        document.getElementById(nextPageContent).innerHTML = xhr.responseText;
-        loading = false;
-      });
-    }
-  });
-}
-function sumStart() {
-  start = start + count;
-}
-function returnStart() {
-  return "start=" + start + "&count=" + count;
-}
-function returnAllCount() {
-  return start < allCount ? true : false;
-}
+document.addEventListener("DOMContentLoaded", function(event) { 
+  
+$(document).ready(function() {
+ // 当输入框内容发生变化时触发
+ $('#v_search').on('input', function() {
+     var userInput = $(this).val(); // 获取用户输入的内容
 
-function scrollAppendByElementId(
-  url,
-  nextPageContent,
-  endPage,
-  returnAllCount,
-  sumStart,
-  returnStart
-) {
-  var loading = false;
-  $(window).on("scroll", function () {
-    var hT = $("#" + nextPageContent).offset().top,
-      hH = $("#" + nextPageContent).outerHeight(),
-      wH = $(window).height(),
-      wS = $(window).scrollTop();
-    var hT2 = $("#" + endPage).offset().top,
-      hH2 = $("#" + endPage).outerHeight();
-    if (wS > hT + hH - wH && !loading && wS < hT2 + hH2 - wH) {
-      if (returnAllCount()) {
-        loading = true;
-        var surl = url.indexOf("?") == -1 ? url + "?" : url + "&";
-        load(surl + returnStart(), function (xhr) {
-          document.getElementById(nextPageContent).innerHTML =
-            document.getElementById(nextPageContent).innerHTML +
-            xhr.responseText;
-          loading = false;
-          sumStart();
-        });
-      }
-    }
-  });
-}
+     // 发起 AJAX 请求
+     $.ajax({
+         url: '/thread/searchAction.shtml', // 请求的URL
+         type: 'GET', // 请求类型
+         data: { query:  userInput }, // 发送给服务器的数据，可以根据需要传递其他参数
+         success: function(response) { // 请求成功时执行的回调函数
+             // 处理服务器返回的数据
+             $('#searchResult').html(response);
+         },
+         error: function(xhr, status, error) { // 请求失败时执行的回调函数
+             // 处理请求失败的情况
+             console.error('AJAX请求失败:', status, error);
+         }
+     });
+ });
+});
+
+
+});
+
+
+

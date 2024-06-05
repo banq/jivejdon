@@ -33,14 +33,10 @@ public class ThreadTagsVO {
 		super();
 		this.forumThread = forumThread;
 		this.tags = tags;
-		if( token != null)
-		   this.token = token;
-		else{ 
-		  if(tags.size() !=0 )
-		    this.token = tags.stream().map(ThreadTag::getTitle).toArray(String[]::new).toString();
-		  else 
-		    this.token = "";
-		}	
+		if (token != null)
+			this.token = token;
+		else
+			this.token = "";
 	}
 
 	public Collection<ThreadTag> getTags() {

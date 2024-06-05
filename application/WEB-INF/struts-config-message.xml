@@ -167,6 +167,10 @@
             <forward name="success" path="/message/searchMessageResult.jsp" />
         </action>
 
+        <action path="/thread/searchAction" type="com.jdon.jivejdon.presentation.action.query.SearchAction" name="messageListForm" scope="request" validate="false">
+            <forward name="success" path="/message/searchMessageResult.jsp" />
+        </action>
+
     </action-mappings>
 
 </struts-config>
