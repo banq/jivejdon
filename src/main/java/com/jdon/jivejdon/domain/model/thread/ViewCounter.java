@@ -16,6 +16,7 @@
 package com.jdon.jivejdon.domain.model.thread;
 
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
@@ -23,9 +24,9 @@ import com.jdon.jivejdon.domain.model.ForumThread;
 public class ViewCounter implements Comparable<ViewCounter> {
 
 	private final ForumThread thread;
-	private int viewCount = -1;
+	private AtomicInteger viewCount = new AtomicInteger(-1);
 	private int lastSavedCount;
-	private volatile String lastIP ;
+	private String lastIP = "";
 	
 
 	public ViewCounter(ForumThread thread) {
@@ -36,14 +37,14 @@ public class ViewCounter implements Comparable<ViewCounter> {
 	}
 
 	public void loadinitCount() {
-		if (this.viewCount != -1)
+		if (this.viewCount.get() != -1)
 			return;
 		DomainMessage dm = this.thread.lazyLoaderRole.loadViewCount(thread.getThreadId());
 		try {
 			// this.viewCount = 0;//flag it
 			Integer count = (Integer) dm.getEventResult();
 			if (count != null) {
-				this.viewCount = count;
+				viewCount.addAndGet(count);
 				this.lastSavedCount = count;
 				dm.clear();
 			}
@@ -54,16 +55,16 @@ public class ViewCounter implements Comparable<ViewCounter> {
 	}
 
 	public int getViewCount() {
-		if (this.viewCount == -1) {
+		if (this.viewCount.get() == -1) {
 			loadinitCount();
 		}
-		return this.viewCount;
+		return this.viewCount.get();
 	}
 
 	public void addViewCount(String ip) {
-		if (getViewCount() != -1) 
+		if (getViewCount() != -1 ) 
 			if (!lastIP.equals(ip)){
-                viewCount++;
+                viewCount.incrementAndGet();
 				lastIP = ip;
 			}
 				

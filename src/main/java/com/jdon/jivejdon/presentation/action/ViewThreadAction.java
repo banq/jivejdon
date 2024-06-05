@@ -14,6 +14,7 @@ import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob;
 import com.jdon.strutsutil.FormBeanUtil;
 import com.jdon.strutsutil.ModelDispAction;
+import com.jdon.util.UtilValidate;
 
 public class ViewThreadAction extends ModelDispAction {
 
@@ -28,7 +29,7 @@ public class ViewThreadAction extends ModelDispAction {
 			return actionMapping.findForward(FormBeanUtil.FORWARD_FAILURE_NAME);
 
 		ForumThread forumThread = getForumMessageQueryService().getThread(Long.parseLong(threadId));
-		if (forumThread != null)
+		if (forumThread != null && !UtilValidate.isEmpty(request.getRemoteAddr()))
 			getThreadViewCounterJob().saveViewCounter(forumThread.addViewCount(request.getRemoteAddr()));
 
 		return actionMapping.findForward(FormBeanUtil.FORWARD_SUCCESS_NAME);
