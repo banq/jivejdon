@@ -55,10 +55,14 @@ public class ViewCounter extends LazyLoader implements Comparable<ViewCounter> {
 	}
 
 	public void addViewCount(String ip) {
-		loadinitCount();
-		if (!lastIP.equals(ip)) {
-			viewCount.incrementAndGet();
-			lastIP = ip;
+		try {
+			loadinitCount();
+			if (!Objects.equals(lastIP, ip)) {
+				viewCount.incrementAndGet();
+				lastIP = ip;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 	}
