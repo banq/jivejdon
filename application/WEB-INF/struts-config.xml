@@ -5,6 +5,14 @@
           "struts-config_1_2.dtd">
 
 <struts-config>
+
+ <global-exceptions>
+        <exception
+            key="error.invalidPath"
+            type="org.apache.struts.chain.commands.InvalidPathException"
+            path="/404.jsp"/>
+  </global-exceptions>
+
   <global-forwards>   	 
     <forward name="index" path="/forum/forumList.shtml"/>	  
     <forward name="thread" path="/thread.shtml"/>	  
@@ -45,4 +53,5 @@
   </plug-in>
 
  
+
 </struts-config>
