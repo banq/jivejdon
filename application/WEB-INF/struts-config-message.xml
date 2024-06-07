@@ -75,11 +75,6 @@
             <forward name="success" path="/thread/messageList.jsp" />
         </action>
 
-
-        <action path="/forum/messageListBodyNoheader" type="com.jdon.jivejdon.presentation.action.MessageListAction" name="messageListForm" scope="request" validate="false">   
-            <forward name="success" path="/thread/messageListBody.jsp" />
-        </action>
-
        
         <!-- All message List start  -->
 
