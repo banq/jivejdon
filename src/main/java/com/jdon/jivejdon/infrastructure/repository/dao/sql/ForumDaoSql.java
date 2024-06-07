@@ -20,16 +20,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.infrastructure.repository.builder.MessageInitFactory;
 import com.jdon.jivejdon.infrastructure.repository.dao.ForumDao;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.util.ContainerUtil;
+import com.jdon.jivejdon.util.PageIteratorSolverFixed;
 import com.jdon.jivejdon.util.ToolsUtil;
-import com.jdon.model.query.PageIteratorSolver;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -38,7 +39,7 @@ import com.jdon.model.query.PageIteratorSolver;
 public abstract class ForumDaoSql implements ForumDao {
 	private final static Logger logger = LogManager.getLogger(ForumDaoSql.class);
 
-	protected PageIteratorSolver pageIteratorSolver;
+	protected PageIteratorSolverFixed pageIteratorSolver;
 
 	private JdbcTempSource jdbcTempSource;
 
@@ -50,7 +51,7 @@ public abstract class ForumDaoSql implements ForumDao {
 
 	public ForumDaoSql(JdbcTempSource jdbcTempSource, ContainerUtil containerUtil, MessageInitFactory messageFactory,
 			Constants constants) {
-		this.pageIteratorSolver = new PageIteratorSolver(jdbcTempSource.getDataSource(),
+		this.pageIteratorSolver = new PageIteratorSolverFixed(jdbcTempSource.getDataSource(),
 				containerUtil.getCacheManager());
 		this.jdbcTempSource = jdbcTempSource;
 		this.propertyDaoSql = new PropertyDaoSql(jdbcTempSource, containerUtil);

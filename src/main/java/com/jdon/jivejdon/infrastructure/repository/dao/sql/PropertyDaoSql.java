@@ -27,11 +27,11 @@ import org.apache.logging.log4j.Logger;
 
 import com.jdon.container.pico.Startable;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.property.Property;
 import com.jdon.jivejdon.infrastructure.repository.dao.PropertyDao;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.util.ContainerUtil;
-import com.jdon.model.query.PageIteratorSolver;
+import com.jdon.jivejdon.util.PageIteratorSolverFixed;
 import com.jdon.util.UtilValidate;
 
 /**
@@ -45,7 +45,7 @@ public class PropertyDaoSql implements PropertyDao, Startable {
 
 	private Map tables = new HashMap();
 
-	protected PageIteratorSolver pageIteratorSolver;
+	protected PageIteratorSolverFixed pageIteratorSolver;
 
 	/**
 	 * @param jdbcTempSource
@@ -53,7 +53,7 @@ public class PropertyDaoSql implements PropertyDao, Startable {
 	public PropertyDaoSql(JdbcTempSource jdbcTempSource, ContainerUtil containerUtil) {
 
 		this.jdbcTempSource = jdbcTempSource;
-		this.pageIteratorSolver = new PageIteratorSolver(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
+		this.pageIteratorSolver = new PageIteratorSolverFixed(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
 
 		Property property = new Property();
 		property.setName("jiveForumProp");

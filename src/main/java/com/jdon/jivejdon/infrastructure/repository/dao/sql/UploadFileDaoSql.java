@@ -27,8 +27,8 @@ import org.apache.logging.log4j.Logger;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.domain.model.attachment.UploadFile;
 import com.jdon.jivejdon.util.ContainerUtil;
+import com.jdon.jivejdon.util.PageIteratorSolverFixed;
 import com.jdon.jivejdon.util.ToolsUtil;
-import com.jdon.model.query.PageIteratorSolver;
 import com.jdon.util.UtilValidate;
 
 /**
@@ -38,12 +38,12 @@ import com.jdon.util.UtilValidate;
 public abstract class UploadFileDaoSql implements com.jdon.jivejdon.infrastructure.repository.dao.UploadFileDao {
 	private final static Logger logger = LogManager.getLogger(UploadFileDaoSql.class);
 
-	protected PageIteratorSolver pageIteratorSolver;
+	protected PageIteratorSolverFixed pageIteratorSolver;
 
 	protected JdbcTempSource jdbcTempSource;
 
 	public UploadFileDaoSql(JdbcTempSource jdbcTempSource, ContainerUtil containerUtil) {
-		this.pageIteratorSolver = new PageIteratorSolver(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
+		this.pageIteratorSolver = new PageIteratorSolverFixed(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
 		this.jdbcTempSource = jdbcTempSource;
 	}
 

@@ -20,18 +20,19 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.pointcut.Around;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.shortmessage.ShortMessage;
 import com.jdon.jivejdon.domain.model.shortmessage.ShortMessageState;
 import com.jdon.jivejdon.infrastructure.repository.dao.ShortMessageDao;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.util.ContainerUtil;
-import com.jdon.model.query.PageIteratorSolver;
+import com.jdon.jivejdon.util.PageIteratorSolverFixed;
 
 /**
  * ShortMessageDaoImp.java
@@ -57,12 +58,12 @@ public class ShortMessageDaoSql implements ShortMessageDao {
 
 	private Constants constants;
 
-	private PageIteratorSolver pageIteratorSolver;
+	private PageIteratorSolverFixed pageIteratorSolver;
 
 	public ShortMessageDaoSql(JdbcTempSource jdbcTempSource, ContainerUtil containerUtil, Constants constants) {
 		this.jdbcTempSource = jdbcTempSource;
 		this.constants = constants;
-		this.pageIteratorSolver = new PageIteratorSolver(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
+		this.pageIteratorSolver = new PageIteratorSolverFixed(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
 		;
 	}
 

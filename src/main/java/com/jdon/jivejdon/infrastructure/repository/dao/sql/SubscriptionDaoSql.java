@@ -10,16 +10,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.spi.component.subscription.action.EmailAction;
-import com.jdon.jivejdon.spi.component.subscription.action.ShortMsgAction;
 import com.jdon.jivejdon.domain.model.subscription.Subscription;
 import com.jdon.jivejdon.domain.model.subscription.subscribed.Subscribed;
-import com.jdon.jivejdon.infrastructure.repository.subscription.SubscriptionInitFactory;
 import com.jdon.jivejdon.infrastructure.repository.dao.SubscriptionDao;
+import com.jdon.jivejdon.infrastructure.repository.subscription.SubscriptionInitFactory;
+import com.jdon.jivejdon.spi.component.subscription.action.EmailAction;
+import com.jdon.jivejdon.spi.component.subscription.action.ShortMsgAction;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.util.ContainerUtil;
+import com.jdon.jivejdon.util.PageIteratorSolverFixed;
 import com.jdon.jivejdon.util.ToolsUtil;
-import com.jdon.model.query.PageIteratorSolver;
 
 public class SubscriptionDaoSql implements SubscriptionDao {
 	private final static Logger logger = LogManager.getLogger(SubscriptionDaoSql.class);
@@ -28,7 +28,7 @@ public class SubscriptionDaoSql implements SubscriptionDao {
 
 	protected Constants constants;
 
-	protected PageIteratorSolver pageIteratorSolver;
+	protected PageIteratorSolverFixed pageIteratorSolver;
 
 	protected SubscriptionInitFactory subscriptionInitFactory;
 
@@ -37,7 +37,7 @@ public class SubscriptionDaoSql implements SubscriptionDao {
 		this.jdbcTempSource = jdbcTempSource;
 		this.constants = constants;
 		this.subscriptionInitFactory = subscriptionInitFactory;
-		this.pageIteratorSolver = new PageIteratorSolver(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
+		this.pageIteratorSolver = new PageIteratorSolverFixed(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
 
 	}
 

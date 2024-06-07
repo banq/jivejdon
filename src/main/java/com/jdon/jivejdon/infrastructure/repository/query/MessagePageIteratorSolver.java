@@ -17,21 +17,20 @@ package com.jdon.jivejdon.infrastructure.repository.query;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.TimeUnit;
 
 import com.jdon.annotation.Component;
 import com.jdon.container.pico.Startable;
 import com.jdon.jivejdon.infrastructure.repository.dao.sql.JdbcTempSource;
 import com.jdon.jivejdon.util.ContainerUtil;
+import com.jdon.jivejdon.util.PageIteratorSolverFixed;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;
-import com.jdon.model.query.PageIteratorSolver;
 
 /**
  * CQRS query Manager.
  * 
  * MessageQueryDao share this class, so share one PageIteratorSolver. when
  * create/update happened in MessageDaoSql, it can clear the cache in
- * PageIteratorSolver that shared with MessageQueryDaoSql, there are many batch
+ * PageIteratorSolverFixed that shared with MessageQueryDaoSql, there are many batch
  * inquiry operations in MessageQueryDaoSql. so, that will refresh the result of
  * batch inquiry
  * 
@@ -45,7 +44,7 @@ public class MessagePageIteratorSolver implements Startable {
 
 	private ContainerUtil containerUtil;
 
-	private final ConcurrentMap<String, PageIteratorSolver> permanentsolvers;
+	private final ConcurrentMap<String, PageIteratorSolverFixed> permanentsolvers;
 
 	/**
 	 * @param pageIteratorSolver
@@ -54,7 +53,7 @@ public class MessagePageIteratorSolver implements Startable {
 	public MessagePageIteratorSolver(JdbcTempSource jdbcTempSource, ContainerUtil containerUtil) {
 		this.jdbcTempSource = jdbcTempSource;
 		this.containerUtil = containerUtil;
-		this.permanentsolvers = new ConcurrentHashMap<String, PageIteratorSolver>();
+		this.permanentsolvers = new ConcurrentHashMap<>();
 
 	}
 
@@ -67,7 +66,7 @@ public class MessagePageIteratorSolver implements Startable {
 
 
 	public void clearPerm() {
-		for (PageIteratorSolver pageIteratorSolver : permanentsolvers.values()) {
+		for (PageIteratorSolverFixed pageIteratorSolver : permanentsolvers.values()) {
 			pageIteratorSolver.clearCache();
 		}
 		permanentsolvers.clear();
@@ -91,12 +90,12 @@ public class MessagePageIteratorSolver implements Startable {
 	/**
 	 * @return Returns the pageIteratorSolver.
 	 */
-	public PageIteratorSolver getPageIteratorSolver(String key) {
-		return permanentsolvers.computeIfAbsent(key, k->new PageIteratorSolver(jdbcTempSource.getDataSource(), containerUtil.getCacheManager()));
+	public PageIteratorSolverFixed getPageIteratorSolver(String key) {
+		return permanentsolvers.computeIfAbsent(key, k->new PageIteratorSolverFixed(jdbcTempSource.getDataSource(), containerUtil.getCacheManager()));
 	}
 
 	public void clearPageIteratorSolver(String key) {
-		PageIteratorSolver pageIteratorSolver = (PageIteratorSolver) permanentsolvers.get(key);
+		PageIteratorSolverFixed pageIteratorSolver = (PageIteratorSolverFixed) permanentsolvers.get(key);
 		if (pageIteratorSolver != null)
 			pageIteratorSolver.clearCache();
 		permanentsolvers.remove(key);

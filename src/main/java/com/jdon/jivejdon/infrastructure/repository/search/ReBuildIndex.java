@@ -1,17 +1,18 @@
 package com.jdon.jivejdon.infrastructure.repository.search;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
-import com.jdon.model.query.PageIteratorSolver;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.Collection;
+import com.jdon.jivejdon.util.PageIteratorSolverFixed;
 
 public class ReBuildIndex implements Runnable {
 	private final static Logger logger = LogManager.getLogger(ReBuildIndex.class);
@@ -24,7 +25,7 @@ public class ReBuildIndex implements Runnable {
 
 	private ForumFactory forumAbstractFactory;
 
-	protected PageIteratorSolver pageIteratorSolver;
+	protected PageIteratorSolverFixed pageIteratorSolver;
 
 	public ReBuildIndex(ForumFactory forumAbstractFactory, MessagePageIteratorSolver messagePageIteratorSolver) {
 		messageSearchProxy = new MessageSearchProxy(true);

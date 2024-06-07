@@ -27,11 +27,11 @@ import com.jdon.annotation.Component;
 import com.jdon.annotation.Introduce;
 import com.jdon.annotation.pointcut.Around;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.infrastructure.repository.dao.sql.JdbcTempSource;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.util.ContainerUtil;
+import com.jdon.jivejdon.util.PageIteratorSolverFixed;
 import com.jdon.jivejdon.util.ToolsUtil;
-import com.jdon.model.query.PageIteratorSolver;
 
 @Component("sitemapRepository")
 @Introduce("modelCache")
@@ -40,12 +40,12 @@ public class SitemapRepositoryImpl implements SitemapRepository {
 
 	private JdbcTempSource jdbcTempSource;
 
-	private PageIteratorSolver pageIteratorSolver;
+	private PageIteratorSolverFixed pageIteratorSolver;
 
 	private Constants constants;
 
 	public SitemapRepositoryImpl(JdbcTempSource jdbcTempSource, ContainerUtil containerUtil, Constants constants) {
-		this.pageIteratorSolver = new PageIteratorSolver(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
+		this.pageIteratorSolver = new PageIteratorSolverFixed(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
 		this.jdbcTempSource = jdbcTempSource;
 		this.constants = constants;
 	}

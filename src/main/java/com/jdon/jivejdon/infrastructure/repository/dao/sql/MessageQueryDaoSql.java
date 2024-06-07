@@ -15,25 +15,26 @@
  */
 package com.jdon.jivejdon.infrastructure.repository.dao.sql;
 
-import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.domain.model.query.QueryCriteria;
-import com.jdon.jivejdon.domain.model.query.QuerySpecification;
-import com.jdon.jivejdon.domain.model.query.ResultSort;
-import com.jdon.jivejdon.domain.model.query.specification.QuerySpecDBModifiedDate;
-import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
-import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
-import com.jdon.jivejdon.infrastructure.repository.dao.MessageQueryDao;
-import com.jdon.model.query.block.Block;
-import com.jdon.treepatterns.model.TreeModel;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.jdon.controller.model.PageIterator;
+import com.jdon.jivejdon.domain.model.query.QueryCriteria;
+import com.jdon.jivejdon.domain.model.query.QuerySpecification;
+import com.jdon.jivejdon.domain.model.query.ResultSort;
+import com.jdon.jivejdon.domain.model.query.specification.QuerySpecDBModifiedDate;
+import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
+import com.jdon.jivejdon.infrastructure.repository.dao.MessageQueryDao;
+import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
+import com.jdon.model.query.block.Block;
+import com.jdon.treepatterns.model.TreeModel;
 
 /**
  * 
@@ -46,7 +47,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 	protected JdbcTempSource jdbcTempSource;
 	protected MessagePageIteratorSolver messagePageIteratorSolver;
 
-	// protected PageIteratorSolver pageIteratorSolver;
+	// protected PageIteratorSolverFixed pageIteratorSolver;
 
 	/**
 	 * @param jdbcTempSource

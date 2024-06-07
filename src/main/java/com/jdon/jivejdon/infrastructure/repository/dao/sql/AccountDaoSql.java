@@ -33,8 +33,8 @@ import com.jdon.jivejdon.infrastructure.repository.acccount.AccountRepository;
 import com.jdon.jivejdon.infrastructure.repository.dao.AccountDao;
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.util.ContainerUtil;
+import com.jdon.jivejdon.util.PageIteratorSolverFixed;
 import com.jdon.jivejdon.util.ToolsUtil;
-import com.jdon.model.query.PageIteratorSolver;
 
 /**
  * @author <a href="mailto:banqJdon<AT>jdon.com">banq</a>
@@ -46,7 +46,7 @@ public class AccountDaoSql implements AccountDao, AccountRepository {
 
 	private JdbcTempSource jdbcTempSource;
 
-	private PageIteratorSolver pageIteratorSolver;
+	private PageIteratorSolverFixed pageIteratorSolver;
 
 	private AccountSSOSql accountSSOSql;
 
@@ -56,7 +56,7 @@ public class AccountDaoSql implements AccountDao, AccountRepository {
 
 	public AccountDaoSql(JdbcTempSource jdbcTempSource, AccountSSOSql accountSSOSql, ContainerUtil containerUtil,
 			AccountInitFactory accountInitFactory, Constants constants) {
-		this.pageIteratorSolver = new PageIteratorSolver(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
+		this.pageIteratorSolver = new PageIteratorSolverFixed(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
 		this.jdbcTempSource = jdbcTempSource;
 		this.accountSSOSql = accountSSOSql;
 		this.accountInitFactory = accountInitFactory;
