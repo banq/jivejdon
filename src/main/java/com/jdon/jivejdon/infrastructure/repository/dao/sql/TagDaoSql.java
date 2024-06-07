@@ -31,23 +31,23 @@ import com.jdon.jivejdon.infrastructure.repository.dao.SequenceDao;
 import com.jdon.jivejdon.infrastructure.repository.dao.TagDao;
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.util.ContainerUtil;
-import com.jdon.model.query.PageIteratorSolver;
+import com.jdon.jivejdon.util.PageIteratorSolverFixed;
 import com.jdon.model.query.block.Block;
 
 public class TagDaoSql implements TagDao {
 	private final static Logger logger = LogManager.getLogger(TagDaoSql.class);
 
-	private final PageIteratorSolver pageIteratorSolverTag;
+	private final PageIteratorSolverFixed pageIteratorSolverTag;
 
-	private final PageIteratorSolver pageIteratorSolverThreadTag;
+	private final PageIteratorSolverFixed pageIteratorSolverThreadTag;
 
 	private final JdbcTempSource jdbcTempSource;
 
 	private final SequenceDao sequenceDao;
 
 	public TagDaoSql(JdbcTempSource jdbcTempSource, ContainerUtil containerUtil, SequenceDao sequenceDao) {
-		this.pageIteratorSolverTag = new PageIteratorSolver(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
-		this.pageIteratorSolverThreadTag = new PageIteratorSolver(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
+		this.pageIteratorSolverTag = new PageIteratorSolverFixed(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
+		this.pageIteratorSolverThreadTag = new PageIteratorSolverFixed(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
 		this.jdbcTempSource = jdbcTempSource;
 		this.sequenceDao = sequenceDao;
 	}
