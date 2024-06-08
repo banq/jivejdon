@@ -196,7 +196,22 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 							    <script defer>
 					               document.addEventListener("DOMContentLoaded", function(event) { 
                               $(document).ready(function() {      
-                                   $('#threadTagList').load("/forum/threadTagList.shtml?othread=<bean:write name="forumThread" property="threadId"/>&threadId=<bean:write name="forumThread" property="threadId"/>");                                
+                                var url = '/forum/threadTagList.shtml';
+                                var params = {
+                                  threadId: '<bean:write name="forumThread" property="threadId"/>',
+                                };
+
+                                $.ajax({
+                                  url: url,
+                                  method: 'GET',
+                                  headers: {
+                                    'X-Robot-Tag': 'noindex'
+                                  },
+                                  data: params,
+                                  success: function(data) {
+                                    $('#threadTagList').html(data);
+                                  }
+                                });                                 
                               });            
                           });  
                   </script>                                 
