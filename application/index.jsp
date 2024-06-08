@@ -38,14 +38,6 @@
   <link rel="alternate" type="application/rss+xml" title="极道Jdon订阅" href="/rss">
   <link rel="canonical" href="https://www.jdon.com/">
   <script defer src="https://cdn.jdon.com/js/jquery-bootstrap2.js"></script>  
-   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTT1M21HE8"></script>
-  <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-FTT1M21HE8');
-  </script>
 </head>
 <body style="background-color:#FFF">
 <%@ include file="./common/body_header.jsp" %>

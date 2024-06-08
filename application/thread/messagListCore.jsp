@@ -84,14 +84,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <%}%>
     <script defer src="https://cdn.jdon.com/js/jquery-bootstrap2.js"></script>   
     <script defer src="/common/messageList12.js"></script>  
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTT1M21HE8"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-FTT1M21HE8');
-    </script>  
 </head>
 <body>
 <%@ include file="../common/body_header.jsp" %>
