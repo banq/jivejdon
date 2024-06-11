@@ -52,7 +52,7 @@ pageContext.setAttribute("title", titleStr);
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
+   
    <link rel="preconnect" href="https://cdn.jdon.com/">
    <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
    <link rel="preconnect" href="https://www.googletagmanager.com/">  
@@ -209,8 +209,7 @@ pageContext.setAttribute("title", titleStr);
 
  <logic:iterate indexId="i" id="forumThread" name="threadListForm"  property="list">
  <logic:equal name="i" value="2">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
-     crossorigin="anonymous"></script>
+
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-format="fluid"
@@ -320,8 +319,7 @@ pageContext.setAttribute("title", titleStr);
         <div class="widget">
 					    <div class="wid-vid">
 						
-							   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
-     crossorigin="anonymous"></script>
+							   
 <!-- 内容右侧悬浮广告 -->
 <ins class="adsbygoogle"
      style="display:block"
@@ -356,8 +354,7 @@ pageContext.setAttribute("title", titleStr);
            <div class="wid-vid">
 							    <div class="scrolldiv">
 							     <div style="width: 300px"> 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
-     crossorigin="anonymous"></script>
+
 <!-- 内容右侧悬浮广告 -->
 <ins class="adsbygoogle"
      style="display:block"
@@ -387,6 +384,7 @@ pageContext.setAttribute("title", titleStr);
 </div>
 </div>
 </div>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
 
 </body>
 </html>

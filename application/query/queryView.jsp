@@ -5,7 +5,7 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script> 
+ 
 <bean:define id="title"  value=" 道场查询" />
 <%@ include file="../common/IncludeTop.jsp" %>
 

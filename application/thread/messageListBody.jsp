@@ -36,8 +36,7 @@
       </logic:equal>
       <logic:equal name="forumMessage" property="root" value="true">
         <div>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
-             crossorigin="anonymous"></script>
+        
         <ins class="adsbygoogle"
              style="display:block; text-align:center;"
              data-ad-layout="in-article"
@@ -145,8 +144,7 @@
               </div>
              
               <div class="box">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
-     crossorigin="anonymous"></script>
+
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-format="autorelaxed"

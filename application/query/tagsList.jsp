@@ -30,7 +30,7 @@ pageContext.setAttribute("title", titleStr);
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	
+   	
    <link rel="preconnect" href="https://cdn.jdon.com/">
    <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
    <link rel="preconnect" href="https://www.googletagmanager.com/">  
@@ -88,8 +88,7 @@ pageContext.setAttribute("title", titleStr);
 <logic:present name="tagsListForm">
 <logic:greaterThan name="tagsListForm" property="allCount" value="0">
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
-     crossorigin="anonymous"></script>
+
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-format="fluid"
@@ -198,8 +197,7 @@ int h = 0 ;
 
 </main>
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
-     crossorigin="anonymous"></script>
+
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-format="fluid"
@@ -218,6 +216,7 @@ int h = 0 ;
 </div>
 
 <%@include file="../common/IncludeBottomBody.jsp"%>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
 
 </body>
 </html>

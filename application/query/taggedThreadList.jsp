@@ -40,7 +40,7 @@ pageContext.setAttribute("title", titleStr);
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
+   
    <link rel="preconnect" href="https://cdn.jdon.com/">
    <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
    <link rel="preconnect" href="https://www.googletagmanager.com/">  
@@ -102,8 +102,7 @@ pageContext.setAttribute("title", titleStr);
 
         <div class="box"> 
         
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
-     crossorigin="anonymous"></script>
+
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-format="fluid"
@@ -150,8 +149,7 @@ pageContext.setAttribute("title", titleStr);
 </ul>
 </main>
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
-     crossorigin="anonymous"></script>
+
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-format="fluid"
@@ -207,6 +205,7 @@ pageContext.setAttribute("title", titleStr);
 
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
 
 </body>
 </html>
