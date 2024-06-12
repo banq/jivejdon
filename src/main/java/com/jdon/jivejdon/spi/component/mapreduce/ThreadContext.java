@@ -63,7 +63,7 @@ public class ThreadContext {
         return threadIds;
     }
 
-    public Set<Long> getThreadListInContext(ForumThread thread) {
+    public List<ForumThread> getThreadListInContext(ForumThread thread) {
         Set<Long> threadIds = createSortedSet();
         for (ThreadTag tag : thread.getTags()) {
             PageIterator pi = tagDao.getTaggedThread(tag.getTagID(), 0, 2);
@@ -75,7 +75,7 @@ public class ThreadContext {
             List list = Arrays.asList(pi.getKeys());
              threadIds.addAll(new HashSet<>(list));
         }
-        return threadIds;
+        return threadIds.stream().map(e -> forumFactory.getThread(e).orElse(null)).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
     private SortedSet<Long> createSortedSet() {

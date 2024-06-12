@@ -15,7 +15,6 @@
  */
 package com.jdon.jivejdon.presentation.action;
 
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -90,13 +89,21 @@ public class MessageListAction extends ModelListAction {
 			}
 			
 
-			CompletableFuture<List<ForumThread>> future = CompletableFuture.supplyAsync(() -> {
+			CompletableFuture<Void> future1 = CompletableFuture.supplyAsync(() -> {
 				return getForumMessageQueryService().getThread(Long.parseLong(threadId));
-			}).thenApplyAsync(forumThread -> {
+			}).thenAccept(forumThread -> {
 				forumThread.getReBlogVO().loadAscResult();
-				return getThreadContext().createsThreadLinks(forumThread);
+				request.setAttribute("threadLinkList",  getThreadContext().createsThreadLinks(forumThread));
 			});
-			serviceCache.putIfAbsent(threadId, future);
+	
+
+			CompletableFuture<Void> future2 = CompletableFuture.supplyAsync(() -> {
+					return getForumMessageQueryService().getThread(Long.parseLong(threadId));
+			}).thenAccept(forumThread -> {
+				request.setAttribute("threadTagList",  getThreadContext().getThreadListInContext(forumThread));
+			});
+
+			serviceCache.putIfAbsent(threadId, CompletableFuture.allOf(future1, future2));
 
 			return pageIterator;
 		} catch (Exception nfe) {
@@ -137,8 +144,8 @@ public class MessageListAction extends ModelListAction {
 
 		try {
 			@SuppressWarnings("unchecked")
-			CompletableFuture<List<ForumThread>> future = (CompletableFuture<List<ForumThread>>) serviceCache.get(threadId);
-			request.setAttribute("threadLinkList", future.join());
+			CompletableFuture<Void> allOf = (CompletableFuture<Void>) serviceCache.get(threadId);
+			allOf.join(); 
 			serviceCache.remove(threadId);
 
 			ForumThread forumThread = getForumMessageQueryService().getThread(Long.parseLong(threadId));

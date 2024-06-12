@@ -183,11 +183,42 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         <div class="wid-vid">
                <div id="searchResult">
                  <logic:notEmpty name="forumThread" property="tags">          
-                  <div id="threadTagList" class="linkblock"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
+                  <div id="threadTagList" class="linkblock">
+                    <logic:notEmpty name="threadTagList" >   
+                      <ul style="list-style-type:none;padding:0">
+                      <logic:iterate id="forumThreadTag" name="threadTagList" length="5">
+                        <li class="box">
+                          <section> 
+                          <div class="wrap-vid">              
+                                 <logic:notEmpty name="forumThreadTag" property="rootMessage.messageUrlVO.imageUrl">                  
+                                   <div class="thumbn">
+                                        <img src="<bean:write name="forumThreadTag" property="rootMessage.messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="70" height="70" onerror="this.src='//cdn.jdon.com/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(9)%>.jpg'"/>    
+                                   </div>
+                                 </logic:notEmpty>
+                                  
+                                 <logic:notEmpty name="forumThreadTag" property="rootMessage.messageUrlVO.thumbnailUrl">                  
+                                   <div class="thumbn">
+                                     <img src="<bean:write name="forumThreadTag" property="rootMessage.messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="70" height="70"/>                  
+                                   </div>  
+                                 </logic:notEmpty>              
+                           </div>
+                          <h4 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThreadTag" property="threadId"/>.html"><bean:write name="forumThreadTag" property="name"/></a></h4>
+                       
+                          <div class="smallgray">			 
+                              <bean:write name="forumThreadTag" property="rootMessage.messageVO.shortBody[50]" />.             
+                           </div>
+                 
+                           </section>
+                          </li>
+                      </logic:iterate>  
+                    </ul>
+                    </logic:notEmpty>
+
+                  </div>   
 							    <script defer>
 					               document.addEventListener("DOMContentLoaded", function(event) { 
                               $(document).ready(function() {      
-                                   $('#threadTagList').load("/forum/threadTagList.shtml?othread=<bean:write name="forumThread" property="threadId"/>&threadId=<bean:write name="forumThread" property="threadId"/>");                                
+                                  $.get('/forum/viewThread.shtml', { threadId: 'value<bean:write name="forumThread" property="threadId"/>1'});
                               });            
                           });  
                   </script>                                 
