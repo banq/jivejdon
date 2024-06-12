@@ -218,7 +218,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 							    <script defer>
 					               document.addEventListener("DOMContentLoaded", function(event) { 
                               $(document).ready(function() {      
-                                  $.get('/forum/viewThread.shtml', { threadId: 'value<bean:write name="forumThread" property="threadId"/>1'});
+                                  $.get('/forum/viewThread.shtml', { threadId: '<bean:write name="forumThread" property="threadId"/>'});
                               });            
                           });  
                   </script>                                 
