@@ -152,11 +152,7 @@ public class MessageListAction extends ModelListAction {
 			if (forumThread == null)
 		    	return;
 
-			modelListForm.setOneModel(forumThread);
-
-			executorService.execute(() -> {
-				getThreadViewCounterJob().saveViewCounter(forumThread.addViewCount(request.getRemoteAddr()));
-			});
+			modelListForm.setOneModel(forumThread);		
 
 		} catch (Exception e) {
 			Debug.logError(" customizeListForm err:" + threadId, module);

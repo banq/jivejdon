@@ -215,13 +215,21 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                     </logic:notEmpty>
 
                   </div>   
-							    <script defer>
-					               document.addEventListener("DOMContentLoaded", function(event) { 
-                              $(document).ready(function() {      
-                                  $.post('/forum/viewThread.shtml?threadId=<bean:write name="forumThread" property="threadId"/>');
-                              });            
-                          });  
-                  </script>                                 
+                  <div id="viewThread"></div>
+                  <script defer>
+                    document.addEventListener("DOMContentLoaded", function(event) { 
+                      var threadId = '<bean:write name="forumThread" property="threadId"/>'; 
+                      var scriptContent = 
+                      '$(document).ready(function() {' +
+                               '$.post("/forum/viewThread.shtml?threadId=' + threadId + '");' +
+                      '});';
+                      var script = document.createElement('script');
+                      script.type = 'text/javascript';
+                      script.text = scriptContent;
+                      document.getElementById('viewThread').appendChild(script);
+                     });  
+             </script>              
+							                           
                  </logic:notEmpty>		
                  <logic:empty name="forumThread" property="tags">    
                   <div id="digList" class="linkblock"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
