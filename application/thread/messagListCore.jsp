@@ -228,7 +228,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                       script.text = scriptContent;
                       document.getElementById('viewThread').appendChild(script);
                      });  
-             </script>              
+                 </script>              
 							                           
                  </logic:notEmpty>		
                  <logic:empty name="forumThread" property="tags">    
