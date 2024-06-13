@@ -31,11 +31,12 @@ public class ViewThreadAction extends ModelDispAction {
 
 
 		try {
+			String ip = request.getRemoteAddr();
 			CompletableFuture.supplyAsync(() -> {
 				return getForumMessageQueryService().getThread(Long.parseLong(threadId));
 			}).thenAccept(forumThread -> {
-				if (forumThread != null && !UtilValidate.isEmpty(request.getRemoteAddr()))
-					getThreadViewCounterJob().saveViewCounter(forumThread.addViewCount(request.getRemoteAddr()));
+				if (forumThread != null && !UtilValidate.isEmpty(ip))
+					getThreadViewCounterJob().saveViewCounter(forumThread.addViewCount(ip));
 			});
 		} catch (Exception e) {
 
