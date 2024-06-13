@@ -215,20 +215,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                     </logic:notEmpty>
 
                   </div>   
-                  <div id="viewThread"></div>
-                  <script defer>
-                    document.addEventListener("DOMContentLoaded", function(event) { 
-                      var threadId = '<bean:write name="forumThread" property="threadId"/>'; 
-                      var scriptContent = 
-                      '$(document).ready(function() {' +
-                               '$.post("/forum/viewThread.shtml?threadId=' + threadId + '");' +
-                      '});';
-                      var script = document.createElement('script');
-                      script.type = 'text/javascript';
-                      script.text = scriptContent;
-                      document.getElementById('viewThread').appendChild(script);
-                     });  
-                 </script>              
+                 
 							                           
                  </logic:notEmpty>		
                  <logic:empty name="forumThread" property="tags">    
@@ -283,7 +270,15 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
 <%@include file="../common/IncludeBottomBody.jsp"%>
 
+<script defer>  
+document.addEventListener("DOMContentLoaded", function(event) { 
+$(document).ready(function() {
+  $.post("/forum/viewThread.shtml?threadId=<bean:write name="forumThread" property="threadId"/>");
+ });
+});
+</script>
+ 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
 
-  </body>
-  </html>
+</body>
+</html>
