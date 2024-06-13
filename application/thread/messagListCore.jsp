@@ -273,7 +273,9 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <script defer>  
 document.addEventListener("DOMContentLoaded", function(event) { 
 $(document).ready(function() {
-  $.post("/forum/viewThread.shtml?threadId=<bean:write name="forumThread" property="threadId"/>");
+  $(document).one('mousemove', function() {
+    $.post("/forum/viewThread.shtml?threadId=<bean:write name="forumThread" property="threadId"/>");
+  });
  });
 });
 </script>
