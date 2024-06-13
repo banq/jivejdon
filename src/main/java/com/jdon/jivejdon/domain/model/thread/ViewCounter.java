@@ -30,7 +30,7 @@ public class ViewCounter extends LazyLoader implements Comparable<ViewCounter> {
 	private final AtomicInteger viewCount = new AtomicInteger(0);
 	private int lastSavedCount;
 	private final AtomicReference<String> lastIP = new AtomicReference<>("");
-	private AtomicBoolean load = new AtomicBoolean(false);
+	private final AtomicBoolean load = new AtomicBoolean(false);
 	
 
 	public ViewCounter(ForumThread thread) {
