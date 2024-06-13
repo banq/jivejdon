@@ -16,7 +16,9 @@
 package com.jdon.jivejdon.domain.model.thread;
 
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
@@ -25,27 +27,25 @@ import com.jdon.jivejdon.domain.model.util.LazyLoader;
 public class ViewCounter extends LazyLoader implements Comparable<ViewCounter> {
 
 	private final ForumThread thread;
-	private AtomicInteger viewCount = new AtomicInteger(0);
+	private final AtomicInteger viewCount = new AtomicInteger(0);
 	private int lastSavedCount;
-	private String lastIP = "";
-	private boolean load = false;
+	private final AtomicReference<String> lastIP = new AtomicReference<>("");
+	private AtomicBoolean load = new AtomicBoolean(false);
 	
 
 	public ViewCounter(ForumThread thread) {
 		this.thread = thread;
-		this.lastSavedCount = -1;
-		this.lastIP = "";
-	
+		this.lastSavedCount = -1;	
 	}
 
 	public void loadinitCount() {
-		if (!load) {
+		if (!load.get()) {
 			Integer count = super.loadResult().map(value -> (Integer) value).orElse(null);
 			if (count != null) {
 				viewCount.addAndGet(count);
 				this.lastSavedCount = count;
 			}
-			load = true;
+			load.set(true);
 		}
 	}
 
@@ -57,9 +57,9 @@ public class ViewCounter extends LazyLoader implements Comparable<ViewCounter> {
 	public void addViewCount(String ip) {
 		try {
 			loadinitCount();
-			if (!Objects.equals(this.lastIP, ip)) {
+			if (!Objects.equals(this.lastIP.get(), ip)) {
 				viewCount.incrementAndGet();
-				this.lastIP = ip;
+				this.lastIP.set(ip);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
