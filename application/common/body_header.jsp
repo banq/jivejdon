@@ -30,35 +30,35 @@
         </div>
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav navbar-inverse">
-			    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">认知哲学 <i class="fa fa-arrow-circle-o-down"></i></a>
+			    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">元认知 <i class="fa fa-arrow-circle-o-down"></i></a>
 					<div class="dropdown-menu">
 						  <div class="dropdown-inner" id="renzhi">
                        
                           </div>
 					</div>
 				</li>    
-               <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">领域驱动 <i class="fa fa-arrow-circle-o-down"></i></a>
+               <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">元逻辑 <i class="fa fa-arrow-circle-o-down"></i></a>
 					<div class="dropdown-menu">
 						  <div class="dropdown-inner"  id="ddd">
  
                            </div>
 					</div>
 				</li>
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">微服务 <i class="fa fa-arrow-circle-o-down"></i></a>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">元设计 <i class="fa fa-arrow-circle-o-down"></i></a>
 					<div class="dropdown-menu">
 	                      <div class="dropdown-inner" id="micros">
                           
                           </div>
 					</div>
 				</li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">编程设计 <i class="fa fa-arrow-circle-o-down"></i></a>
+				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">元编程 <i class="fa fa-arrow-circle-o-down"></i></a>
 					<div class="dropdown-menu">
 	                   <div class="dropdown-inner" id="prog">
                         
                        </div>
 					</div>
 				</li>
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">模因梗 <i class="fa fa-arrow-circle-o-down"></i></a>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">元语言 <i class="fa fa-arrow-circle-o-down"></i></a>
 					<div class="dropdown-menu">
 	                   <div class="dropdown-inner" id="meme">
                        
