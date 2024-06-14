@@ -115,7 +115,7 @@
                     <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="img-responsive" style="height:280px;width:100%" loading="lazy"  onerror="this.src='//cdn.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg'"/>
                 </logic:notEmpty>
                 <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">        
-                    <img id="home-thumbnai" src="//cdn.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="img-responsive" loading="lazy" style="height:280px;width:100%" /> 
+                    <img id="home-thumbnai" src="//cdn.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="img-responsive" style="height:280px;width:100%"  loading="lazy"/> 
                 </logic:empty>      
                </a>                   
               </div>
