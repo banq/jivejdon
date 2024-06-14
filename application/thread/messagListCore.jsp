@@ -58,7 +58,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <meta property="og:type" content="article">
     <meta property="og:url" content="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html">
     <meta property="og:release_date" content="<bean:write name="forumThread" property="creationDate" />">
-    <meta name="keywords" content="<logic:iterate id="threadTag" name="forumThread" property="tags" ><bean:write name="threadTag" property="title" />,</logic:iterate>">
+    <meta name="keywords" content="<bean:write name="forumThread" property="token" />,<logic:iterate id="threadTag" name="forumThread" property="tags" ><bean:write name="threadTag" property="title" />,</logic:iterate>">
     <meta name="description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[140]" /> ">
     <meta name="og:title" content="<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>">
     <meta name="og:description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[140]" /> ">       
