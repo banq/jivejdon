@@ -140,7 +140,9 @@ int h = 0 ;
   <div class="lazyload" >
 	    <!-- 
         <script>
-         $('#ajax_<bean:write name="threadTag" property="tagID"/>').load("/query/tt/${threadTag.tagID}");        
+            $(document).ready(function() {
+                $('#ajax_<bean:write name="threadTag" property="tagID"/>').load("/query/tt/${threadTag.tagID}");     
+           	  });   
         </script>
         -->
 	  

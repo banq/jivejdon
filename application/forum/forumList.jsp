@@ -74,9 +74,11 @@
                 </jsp:include> --%>
                   <div class="lazyload" >
 	    	    	    <!-- 
-        	    	    	    <script>
+        	    	    	<script>
+                      $(document).ready(function() {
          	    	    	    $('#threadNewList_<bean:write name="forum" property="forumId"/>').load("/query/threadNewList.shtml?count=5&forumId=${forum.forumId}");                         
-        	    	    	    </script>
+        	    	    	  });
+                    </script>
         	    	    	    -->
   	    	    	    </div>  
 

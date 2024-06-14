@@ -21,7 +21,7 @@ if (request.getParameter("count")!=null){
 String[] imageUrls = (String[])request.getAttribute("Tags_ImageUrls");
 int i=0;
 %>
-<main>
+<aside>
 <logic:iterate  id="threadTag" name="tagsListForm"  property="list" offset="<%=offset%>" length="<%=count%>">
 
 
@@ -59,10 +59,11 @@ int i=0;
   <div class="lazyload" >
 	    <!-- 
         <script>
-         $('#ajax_<bean:write name="threadTag" property="tagID"/>').load("/query/tt/${threadTag.tagID}");                         
+            $(document).ready(function() {
+               $('#ajax_<bean:write name="threadTag" property="tagID"/>').load("/query/tt/${threadTag.tagID}");    
+          });
         </script>
         -->
-	  
   </div>  
 	</div>	
   </div>  
@@ -75,4 +76,4 @@ int i=0;
 
 <%i++;%>
 </logic:iterate>
-</main>
+</aside>
