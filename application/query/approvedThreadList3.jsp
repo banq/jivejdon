@@ -34,7 +34,7 @@ int i=0;
    <div class="box">
      <div class="row">
      <div class="col-lg-4">
-    <div style="position: relative;"  class="thumbn ">           
+    <div style="position: relative;"  class="zoom-container">           
        <a href='<%=request.getContextPath() %>/tag-<bean:write name="threadTag" property="tagID"/>/' target="_blank" title="<bean:write name="threadTag" property="title" />">    
        <%
        String imgeUrl = imageUrls[i];
@@ -42,7 +42,7 @@ int i=0;
           imgeUrl = "//cdn.jdon.com/simgs/thumb2/"+java.util.concurrent.ThreadLocalRandom.current().nextInt(49)+".jpg";
 
        %>     
-        <img id="home-thumbnai" src='<%=imgeUrl%>' border="0" class="img-thumbnail"  loading="lazy" style="max-width:400px;  width: 100%;" onerror="this.src='//cdn.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg'"/>
+        <img id="home-thumbnai" src='<%=imgeUrl%>' border="0" class="img-thumbnail"  loading="lazy" style="width:280px;height:200px" onerror="this.src='//cdn.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg'"/>
        </a>
       <div style="position: absolute;top:0px;right:0px">
        <div class="tagcloud">
@@ -53,7 +53,7 @@ int i=0;
        </div> 
       </div>
     </div>
-<section class="widget col" id='ajax_<bean:write name="threadTag" property="tagID"/>'>  
+<section class="widget" id='ajax_<bean:write name="threadTag" property="tagID"/>'>  
   <br><br><br><br><br><br>     
   </section>  
   <div class="lazyload" >
