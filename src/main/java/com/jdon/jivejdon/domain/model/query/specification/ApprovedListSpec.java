@@ -26,14 +26,14 @@ public class ApprovedListSpec extends ThreadListSpec {
 	 * @return
 	 */
 	public boolean isApproved(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2) {
-		if (isDigged(thread, 1) || isTutorial(thread))
+		if (isDigged(thread, 1) || isGreaterThanPrev(thread, threadPrev, threadPrev2, 0.8)  || thread.getRootMessage().hasImage()  || isTutorial(thread))
 			return true;
 		else
 			return false;
 	}
 
 	public boolean isTutorial(ForumThread thread) {
-		return isLongText(thread, 2) && thread.getRootMessage().hasImage() && isTagged(thread, 3)
+		return isLongText(thread, 4)  && isTagged(thread, 3)
 				&& isLinked(thread, 4);
 	}
 
