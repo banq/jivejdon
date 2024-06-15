@@ -34,7 +34,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 	public boolean isTutorial(ForumThread thread) {
 		return isLongText(thread, 4)  && isTagged(thread, 3)
-				&& isLinked(thread, 4);
+				&& isLinked(thread, 4) &&  thread.getViewCount()>50;
 	}
 
 	/**
