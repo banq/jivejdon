@@ -27,12 +27,10 @@ public class ApprovedListSpec extends ThreadListSpec {
 	 */
 	public boolean isApproved(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2) {
 		try {
-			if (isDigged(thread, 1) ||
-					isExcelledDiscuss(thread, 2) ||
-					isGreaterThanPrev(thread, threadPrev, threadPrev2, 0.6) ||
-					isLongText(thread, 15) ||
-					thread.getRootMessage().hasImage() ||
-					(isTagged(thread, 2) && isLinked(thread, 1))) {
+			if (isDigged(thread, 1)  ||
+					(isLongText(thread, 10) &&
+					thread.getRootMessage().hasImage() &&
+					(isTagged(thread, 3) && isLinked(thread, 4)))) {
 				return true;
 			}
 		} finally {
