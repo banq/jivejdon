@@ -102,7 +102,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 	public boolean isGreaterThanPrev(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2, double rate) {
 		if (threadPrev == null || threadPrev.getViewCount() < 50 || threadPrev2 == null
-				|| threadPrev2.getViewCount() < 50)
+				|| threadPrev2.getViewCount() < 50 || thread.getViewCount() < 100)
 			return false;
 
 		// if (thread.getCreationDate().substring(2,
