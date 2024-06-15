@@ -26,7 +26,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	 * @return
 	 */
 	public boolean isApproved(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2) {
-		if (isDigged(thread, 1) || isGreaterThanPrev(thread, threadPrev, threadPrev2, 0.8)  || thread.getRootMessage().hasImage()  || isTutorial(thread))
+		if (isDigged(thread, 1) ||  isGreaterThanPrev(thread, threadPrev, threadPrev2, 0.5)  || thread.getRootMessage().hasImage()  || isTutorial(thread))
 			return true;
 		else
 			return false;
@@ -101,8 +101,8 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	public boolean isGreaterThanPrev(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2, double rate) {
-		if (threadPrev == null || threadPrev.getViewCount() == 0 || threadPrev2 == null
-				|| threadPrev2.getViewCount() == 0)
+		if (threadPrev == null || threadPrev.getViewCount() < 50 || threadPrev2 == null
+				|| threadPrev2.getViewCount() < 50)
 			return false;
 
 		// if (thread.getCreationDate().substring(2,
