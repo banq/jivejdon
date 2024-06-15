@@ -33,7 +33,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	public boolean isTutorial(ForumThread thread) {
-		return isLongText(thread, 5) && thread.getRootMessage().hasImage() && isTagged(thread, 3)
+		return isLongText(thread, 2) && thread.getRootMessage().hasImage() && isTagged(thread, 3)
 				&& isLinked(thread, 4);
 	}
 
