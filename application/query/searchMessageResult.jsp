@@ -134,4 +134,7 @@
 </div>
 
 <%@include file="../common/IncludeBottom.jsp" %>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
 
+</body>
+</html>
