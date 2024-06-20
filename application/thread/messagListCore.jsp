@@ -232,6 +232,23 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         </div>
       </div>     
 
+      <div class="widget">
+        <div class="content">
+      <h4>订阅本文话题：</h4>
+          <ul class="list-inline">
+        
+            <logic:iterate id="threadTag" name="forumThread" property="tags" >
+              <li class="tagcloud">
+                <a href="/tag-<bean:write name="threadTag" property="tagID"/>/" target="_blank" class="tag-cloud-link">
+                  <bean:write name="threadTag" property="title" /></a>
+                <a href="/tag-<bean:write name="threadTag" property="tagID"/>/rss" title="订阅"><i class="fa fa-feed"></i></a>
+              </li>
+           
+            </logic:iterate>
+
+          </ul>
+        </div>
+      </div>
 
       <!-- Start Widget -->
      <div class="widget">
