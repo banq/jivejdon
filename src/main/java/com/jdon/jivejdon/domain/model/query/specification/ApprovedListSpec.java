@@ -55,8 +55,10 @@ public class ApprovedListSpec extends ThreadListSpec {
 			}
 			p = p + (betterThanOthers > 1 ? betterThanOthers : 1);
 
+			p = p + (isLongText(thread, 1)? 100: 1);
+
 			int onlineCount = thread.getViewCounter().getLastSavedCount();
-			long diff2 = onlineCount > 1 ? (thread.getViewCount() - onlineCount + 1) : 1;
+			long diff2 = onlineCount > 1 ? ( onlineCount + 1) : 1;
 			p = diff2 + p ;
 
 			long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
