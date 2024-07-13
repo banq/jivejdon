@@ -416,7 +416,7 @@ function shareto(id){
 
      
 var renzhi = `<ul class="list-unstyled">
-            <li> <a href="/design.htm">原创思考</a></li >
+            <li><a href="/design.htm">逻辑之道</a></li>
             <li><a href="/tag-16355/">形式逻辑</a></li>	
             <li><a href="/tag-58254/">认知偏差</a></li>
             <li><a href="/tag-38982/">语言游戏</a></li>
@@ -494,7 +494,11 @@ var meme =` <ul class="list-unstyled">
 
 
 document.addEventListener("DOMContentLoaded", function(event) { 
- addMenuItems();
+
+  $(document).ready(function () {
+     addMenuItems();
+  });
+
  $('.lazyload').lazyload();
     
  if ($('div.scrolldiv').length)
