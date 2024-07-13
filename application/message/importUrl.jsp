@@ -12,9 +12,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
    <!-- Bootstrap Core CSS -->
-  <link rel="stylesheet" href="//cdn.jdon.com/js/jdon.css"  type="text/css">  
+  <link rel="stylesheet" href="/js/jdon.css"  type="text/css">  
   <!-- jQuery and Modernizr-->
-  <script src="//cdn.jdon.com/js/jquery-bootstrap2.js"></script>
+  <script src="/js/jquery-bootstrap2.js"></script>
 
 <title>享道</title>
 <%-- 
