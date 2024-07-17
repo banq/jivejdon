@@ -38,6 +38,16 @@
   <link rel="alternate" type="application/rss+xml" title="极道Jdon订阅" href="/rss">
   <link rel="canonical" href="https://www.jdon.com/">
   <script defer src="/js/jquery-bootstrap2.js"></script>  
+  <script>
+     var _hmt = _hmt || [];
+     (function() {
+       var hm = document.createElement("script");
+       hm.src = "https://hm.baidu.com/hm.js?beb8727358ee1695cf3da14e61adb422";
+       var s = document.getElementsByTagName("script")[0]; 
+       s.parentNode.insertBefore(hm, s);
+     })();
+     </script>
+     
 </head>
 <body style="background-color:#FFF">
 <%@ include file="./common/body_header.jsp" %>

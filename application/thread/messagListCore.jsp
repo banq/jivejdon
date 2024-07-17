@@ -84,6 +84,16 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <%}%>
     <script defer src="/js/jquery-bootstrap2.js"></script>   
     <script defer src="/common/messageList12.js"></script>  
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?beb8727358ee1695cf3da14e61adb422";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+      </script>
+      
 </head>
 <body>
 <%@ include file="../common/body_header.jsp" %>
