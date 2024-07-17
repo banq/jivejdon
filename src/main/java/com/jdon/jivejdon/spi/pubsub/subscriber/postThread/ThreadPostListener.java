@@ -34,7 +34,6 @@ import com.jdon.jivejdon.domain.model.subscription.event.ThreadSubscribedCreateE
 import com.jdon.jivejdon.infrastructure.cqrs.CacheQueryRefresher;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
-import com.jdon.jivejdon.spi.component.pingrpc.BaiduSearchClient;
 import com.jdon.jivejdon.spi.pubsub.publish.LobbyPublisherRole;
 
 @Consumer("topicMessagePostedEvent")
@@ -42,14 +41,12 @@ public class ThreadPostListener implements DomainEventHandler {
 
 	private final RoleAssigner roleAssigner;
 	private final CacheQueryRefresher eventHandler;
-	private final BaiduSearchClient baiduSearchClient;
 
 	public ThreadPostListener(RoleAssigner roleAssigner, ForumFactory forumFactory,
-			MessagePageIteratorSolver messagePageIteratorSolver, BaiduSearchClient baiduSearchClient) {
+			MessagePageIteratorSolver messagePageIteratorSolver) {
 		super();
 		this.roleAssigner = roleAssigner;
 		eventHandler = new CacheQueryRefresher(forumFactory, messagePageIteratorSolver);
-		this.baiduSearchClient = baiduSearchClient;
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
@@ -62,12 +59,6 @@ public class ThreadPostListener implements DomainEventHandler {
 		// if there is a pubsub bus server, rewrite this code:
 		eventHandler.refresh(forumMessage);
 
-	}
-
-	private void baiduSearchClient(ForumMessage forumMessage) {
-		Notification notification = new Notification();
-		notification.setSource(new ForumMessageDTO(forumMessage));
-		baiduSearchClient.send(notification);
 	}
 
 	/**
