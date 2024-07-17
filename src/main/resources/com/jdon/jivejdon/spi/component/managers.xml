@@ -284,7 +284,7 @@
 	</component>    
     
 		
-		<component name="baiduSearchTempParams"
+		<!-- <component name="baiduSearchTempParams"
 			class="com.jdon.jivejdon.spi.component.pingrpc.BaiduSearchTempParams">
 			<constructor value="http://data.zz.baidu.com/urls" />
 			<constructor value="data.zz.baidu.com" />
@@ -293,7 +293,7 @@
 			<constructor
                     value="https://www.jdon.com/#threadId#.html"/>
 			
-		</component>
+		</component> -->
 		
 		
 

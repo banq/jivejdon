@@ -56,7 +56,7 @@ public class ThreadPostListener implements DomainEventHandler {
 		TopicMessagePostedEvent topicMessagePostedEvent = (TopicMessagePostedEvent) event.getDomainMessage()
 				.getEventSource();
 		ForumMessage forumMessage = topicMessagePostedEvent.getForumMessage();
-		baiduSearchClient(forumMessage);
+		// baiduSearchClient(forumMessage);
 		// messageLobbyNotifyAction(forumMessage);
 		// messageNotifyAction(false,forumMessage);
 		// if there is a pubsub bus server, rewrite this code:
