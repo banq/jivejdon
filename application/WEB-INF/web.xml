@@ -291,6 +291,31 @@
             <web-resource-name>Blog</web-resource-name>
             <url-pattern>/blog/*</url-pattern>
         </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Blogresource</web-resource-name>
+            <url-pattern>/common/blog/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Blogckeditor</web-resource-name>
+            <url-pattern>/common/ckeditor/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>adminresource</web-resource-name>
+            <url-pattern>/common/admin/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>autocomplete</web-resource-name>
+            <url-pattern>/common/autocomplete/*</url-pattern>
+        </web-resource-collection>
+         <web-resource-collection>
+            <web-resource-name>style</web-resource-name>
+            <url-pattern>/common/style/*</url-pattern>
+        </web-resource-collection>
+         <web-resource-collection>
+            <web-resource-name>js</web-resource-name>
+            <url-pattern>/common/js/*</url-pattern>
+        </web-resource-collection>
+
 
 
         <auth-constraint>
