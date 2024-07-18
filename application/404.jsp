@@ -20,7 +20,7 @@ if (errorBlocker.checkRate(request.getRemoteAddr(), 10)){
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta http-equiv="refresh" content="15;url=https://www.jdon.com" />
     
-    <title>该页无法找到404 ERROR</title>
+    <title>404</title>
    
 </head>
 <body class="body-bg">
