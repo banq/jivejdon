@@ -169,9 +169,9 @@
            <forward name="computeSubscriptionNumbers" path="/query/others/computeSubscriptionNumbers.jsp"/>
         </action>
         -->
-        <action path="/query/authorList" type="com.jdon.jivejdon.presentation.action.query.AuthorListAction" name="accountListForm" scope="request" validate="false">
+        <!-- <action path="/query/authorList" type="com.jdon.jivejdon.presentation.action.query.AuthorListAction" name="accountListForm" scope="request" validate="false">
             <forward name="success" path="/query/authorList.jsp" />
-        </action>
+        </action> -->
 
         <action path="/query/threadDigList" type="com.jdon.jivejdon.presentation.action.query.ThreadDigListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/threadDigList.jsp" />

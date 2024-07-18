@@ -85,15 +85,6 @@
         <to>/query/approvedListOther.shtml?start=$1&amp;count=30</to>
     </rule>
 
-    <rule>
-        <from>^/authors$</from>
-        <to>/query/authorList.shtml</to>
-    </rule>
-
-    <rule>
-        <from>^/query/stickyList$</from>
-        <to>/query/stickyList.shtml?length=8&amp;tablewidth=300&amp;count=30</to>
-    </rule>
 
     <rule>
         <from>^/query/digList$</from>
@@ -115,12 +106,7 @@
         <to>/query/tt2.shtml?start=0&amp;length=10&amp;tablewidth=160&amp;count=6&amp;tagID=$1</to>
     </rule>
 
-    <rule>
-        <from>^/query/tagHotList$</from>
-        <to>/query/tagHotList.shtml</to>
-    </rule>    
 
-    
 
     <rule>
         <from>^/maxPopThreads$</from>
