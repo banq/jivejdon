@@ -10,6 +10,6 @@
         <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border="0" class="thumbnail center" loading="lazy"/>
     </logic:notEmpty>
 	<logic:empty name="forumMessage" property="messageUrlVO.thumbnailUrl">
-        <img src="<%=request.getContextPath() %>//cdn.jsdelivr.net/simgs/thumb/<%=1 + i%>.jpg" border="0" class="thumbnail center" loading="lazy">  
+        <img src="<%=request.getContextPath() %>https://cdn.jsdelivr.net/gh/banq/jivejdon/application/simgs/thumb/<%=1 + i%>.jpg" border="0" class="thumbnail center" loading="lazy">  
 	</logic:empty>	
 </logic:iterate>

@@ -166,7 +166,7 @@
                     <div class="wrap-vid">              
                            <logic:notEmpty name="forumThreadLink" property="rootMessage.messageUrlVO.imageUrl">                  
                              <div class="thumbn">
-                                  <img src="<bean:write name="forumThreadLink" property="rootMessage.messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="70" height="70" onerror="this.src='//cdn.jsdelivr.net/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(9)%>.jpg'"/>    
+                                  <img src="<bean:write name="forumThreadLink" property="rootMessage.messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="70" height="70" onerror="this.src='https://cdn.jsdelivr.net/gh/banq/jivejdon/application/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(9)%>.jpg'"/>    
                              </div>
                            </logic:notEmpty>
                             
