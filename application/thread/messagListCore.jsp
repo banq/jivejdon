@@ -37,7 +37,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <html lang="zh-CN">
 <head>
     	
-    <link rel="preconnect" href="https://cdn.jdon.com/">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net/">
     <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
     <link rel="preconnect" href="https://www.googletagmanager.com/">    
     <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
@@ -82,7 +82,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
             <link rel="next" href="/post/<bean:write name="forumThread" property="threadId" />/<%=pagestartInt+pagecountInt%>"/>
     <%}%>
-    <script defer src="/js/jquery-bootstrap2.js"></script>   
+    <script defer src="https://cdn.jsdelivr.net/gh/banq/jivejdon/application/js/jquery-bootstrap2.js"></script>   
     <script defer src="/common/messageList12.js"></script>  
     <script>
       var _hmt = _hmt || [];
@@ -202,7 +202,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                           <div class="wrap-vid">              
                                  <logic:notEmpty name="forumThreadTag" property="rootMessage.messageUrlVO.imageUrl">                  
                                    <div class="thumbn">
-                                        <img src="<bean:write name="forumThreadTag" property="rootMessage.messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="70" height="70" onerror="this.src='//cdn.jdon.com/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(9)%>.jpg'"/>    
+                                        <img src="<bean:write name="forumThreadTag" property="rootMessage.messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="70" height="70" onerror="this.src='https://cdn.jsdelivr.net/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(9)%>.jpg'"/>    
                                    </div>
                                  </logic:notEmpty>
                                   

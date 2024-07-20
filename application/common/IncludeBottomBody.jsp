@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
-<link rel="stylesheet" type="text/css" href="/js/jdon.css">  
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/banq/jivejdon/application/js/jdon.css">  
 
 <footer>
 		<div class="wrap-footer">

@@ -10,7 +10,7 @@
 <html lang="zh-CN">
 <head>
    
-  <link rel="preconnect" href="https://cdn.jdon.com/">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net/">
   <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
   <link rel="preconnect" href="https://www.googletagmanager.com/">  
   <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
@@ -37,7 +37,7 @@
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
   <link rel="alternate" type="application/rss+xml" title="极道Jdon订阅" href="/rss">
   <link rel="canonical" href="https://www.jdon.com/">
-  <script defer src="/js/jquery-bootstrap2.js"></script>  
+  <script defer src="https://cdn.jsdelivr.net/gh/banq/jivejdon/application/js/jquery-bootstrap2.js"></script>  
   <script>
      var _hmt = _hmt || [];
      (function() {

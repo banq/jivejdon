@@ -10,7 +10,7 @@
 <bean:define id="title"  value=" 添加标签" />
 <%@ include file="../header.jsp" %>
 <!-- jQuery and Modernizr-->
-<script src="/js/jquery-bootstrap2.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/banq/jivejdon/application/js/jquery-bootstrap2.js"></script>
 
 
  <form action="<%=request.getContextPath()%>/admin/tag/thread.shtml" method="post" >

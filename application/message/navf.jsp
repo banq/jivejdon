@@ -20,9 +20,9 @@ response.setDateHeader("Expires", 0);
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <!-- Bootstrap Core CSS -->
-  <link rel="stylesheet" href="/js/jdon.css"  type="text/css">  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/banq/jivejdon/application/js/jdon.css"  type="text/css">  
   <!-- jQuery and Modernizr-->
-  <script src="/js/jquery-bootstrap2.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/banq/jivejdon/application/js/jquery-bootstrap2.js"></script>
   <script src="/common/js/waitingfor.js"></script>
 </head>
 <body>

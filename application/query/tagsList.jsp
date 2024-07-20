@@ -31,7 +31,7 @@ pageContext.setAttribute("title", titleStr);
 <html lang="zh-CN">
 <head>
    	
-   <link rel="preconnect" href="https://cdn.jdon.com/">
+   <link rel="preconnect" href="https://cdn.jsdelivr.net/">
    <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
    <link rel="preconnect" href="https://www.googletagmanager.com/">  
    <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
@@ -124,7 +124,7 @@ int h = 0 ;
                 
      <div style="position: relative;">           
        <a href='<%=request.getContextPath() %>/tag-<bean:write name="threadTag" property="tagID"/>/' target="_blank" title="<bean:write name="threadTag" property="title" />">         
-        <img id="home-thumbnai" src="//cdn.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="img-thumbnail" style="width: 100%" loading="lazy"/>                  
+        <img id="home-thumbnai" src="https://cdn.jsdelivr.net/gh/banq/jivejdon/application/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="img-thumbnail" style="width: 100%" loading="lazy"/>                  
        </a>
       <div style="position: absolute;bottom: 0px;">
        <div class="tagcloud">
