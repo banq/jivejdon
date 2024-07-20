@@ -39,10 +39,10 @@ int i=0;
        <%
        String imgeUrl = imageUrls[i];
        if (imgeUrl==null)
-          imgeUrl = "https://cdn.jsdelivr.net/gh/banq/jivejdon/application/simgs/thumb2/"+java.util.concurrent.ThreadLocalRandom.current().nextInt(49)+".jpg";
+          imgeUrl = "/simgs/thumb2/"+java.util.concurrent.ThreadLocalRandom.current().nextInt(5)+".jpg";
 
        %>     
-        <img id="home-thumbnai" src='<%=imgeUrl%>' border="0" class="img-thumbnail img-responsive" style="height:230px;width:100%"  loading="lazy" onerror="this.src='https://cdn.jsdelivr.net/gh/banq/jivejdon/application/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg'"/>
+        <img id="home-thumbnai" src='<%=imgeUrl%>' border="0" class="img-thumbnail img-responsive" style="height:230px;width:100%"  loading="lazy" onerror="this.src='/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg'"/>
        </a>
       <div style="position: absolute;top:0px;right:0px">
        <div class="tagcloud">

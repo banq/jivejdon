@@ -26,10 +26,10 @@
               <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank" title="<bean:write name="forumThread" property="name"/>">
                <% String thumbthreadIdS = ((Long)pageContext.getAttribute("thumbthreadId")).toString(); %>               
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">        
-                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="img-thumbnail img-responsive" style="height:230px;width:100%"  loading="lazy" onerror="this.src='https://cdn.jsdelivr.net/gh/banq/jivejdon/application/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg'"/>
+                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="img-thumbnail img-responsive" style="height:230px;width:100%"  loading="lazy" onerror="this.src='/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg'"/>
                 </logic:notEmpty>
                 <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">        
-                    <img id="home-thumbnai" src="https://cdn.jsdelivr.net/gh/banq/jivejdon/application/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="img-thumbnail img-responsive" style="height:230px;width:100%"  loading="lazy" /> 
+                    <img id="home-thumbnai" src="/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg" border="0" class="img-thumbnail img-responsive" style="height:230px;width:100%"  loading="lazy" /> 
                 </logic:empty>      
                </a>                   
               </div>
@@ -107,19 +107,7 @@
  <div class="box">	
   <div class="linkblock">
     <div class="box">	           
-      <div class="zoom-container">
-			      	<div>
-              <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank" title="<bean:write name="forumThread" property="name"/>">
-               <% String thumbthreadIdS = ((Long)pageContext.getAttribute("thumbthreadId")).toString(); %>               
-                <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">        
-                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="img-thumbnail img-responsive" style="height:280px;width:100%" loading="lazy"  onerror="this.src='https://cdn.jsdelivr.net/gh/banq/jivejdon/application/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg'"/>
-                </logic:notEmpty>
-                <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">        
-                    <img id="home-thumbnai" src="https://cdn.jsdelivr.net/gh/banq/jivejdon/application/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(49)%>.jpg" border="0" class="img-thumbnail img-responsive" style="height:280px;width:100%"  loading="lazy"/> 
-                </logic:empty>      
-               </a>                   
-              </div>
-			      </div>
+      
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
          <section class="widget">
