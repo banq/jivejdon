@@ -68,10 +68,16 @@
                 <br>
                 <span class="home_content" ><bean:write name="forum" property="description" filter="false"/></span>
                 <div id="threadNewList_<bean:write name="forum" property="forumId"/>" class="linkblock">
-                <jsp:include page="/query/threadNewList.shtml" flush="true">
-                 <jsp:param name="count" value="5"/>
-                 <jsp:param name="forumId" value="${forum.forumId}"/>
-                </jsp:include> 
+                </div>  
+                <script defer>
+                  document.addEventListener("DOMContentLoaded", function(event) { 
+                    $(document).ready(function() {
+         	    	    	    $('#threadNewList_<bean:write name="forum" property="forumId"/>').load("/query/threadNewList.shtml?count=5&forumId=${forum.forumId}");                         
+        	    	    	});
+                  });  
+        	    	   
+                </script>
+        	    	   
 
                 </div>
                 <div class="box">
