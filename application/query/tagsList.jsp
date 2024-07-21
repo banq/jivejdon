@@ -135,18 +135,15 @@ int h = 0 ;
        </div> 
       </div>
 	<div id='ajax_<bean:write name="threadTag" property="tagID"/>' >
-  <br><br><br><br><br><br>     
+    <jsp:include page="/query/tt.shtml" flush="true">
+      <jsp:param name="start" value="0"/>
+      <jsp:param name="length" value="10"/>
+      <jsp:param name="tablewidth" value="160"/>
+      <jsp:param name="count" value="6"/>
+      <jsp:param name="tagID" value="${threadTag.tagID}"/>
+     </jsp:include>  
   </div>  
-  <div class="lazyload" >
-	    <!-- 
-        <script>
-            $(document).ready(function() {
-                $('#ajax_<bean:write name="threadTag" property="tagID"/>').load("/query/tt/${threadTag.tagID}");     
-           	  });   
-        </script>
-        -->
-	  
-  </div>  
+ 
 	</div>	
 </div>  
 </div>
