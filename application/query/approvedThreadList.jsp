@@ -24,7 +24,6 @@
       <div class="col-lg-4">
 			      	<div class="zoom-container">
               <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank" title="<bean:write name="forumThread" property="name"/>">
-               <% String thumbthreadIdS = ((Long)pageContext.getAttribute("thumbthreadId")).toString(); %>               
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">        
                     <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="img-thumbnail img-responsive" style="height:230px;width:100%"  loading="lazy" onerror="this.src='/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg'"/>
                 </logic:notEmpty>
@@ -107,7 +106,14 @@
  <div class="box">	
   <div class="linkblock">
     <div class="box">	           
-      
+      <div class="zoom-container">
+          <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">      
+            <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank" title="<bean:write name="forumThread" property="name"/>">
+              <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="img-thumbnail img-responsive" style="height:230px;width:100%"  loading="lazy" onerror="this.src='/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg'"/>
+            </a>       
+          </logic:notEmpty>
+                     
+        </div>
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
          <section class="widget">
@@ -129,18 +135,18 @@
                        <span class="smallgray"><i class="fa fa-heart"></i>
                       <bean:write name="forumMessage" property="digCount"/>
 					   </span>
-                      </logic:notEqual>     
+         </logic:notEqual>     
 		       
-
-            <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
-                <span class="smallgray"><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
-            </logic:greaterThan>   
+              <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
+                            <span class="smallgray"><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
+              </logic:greaterThan>   
                      
             </div>
-        
-          <div class="wrap-vid">
+            <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">      
+            <div class="wrap-vid">
               <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. </p>
-          </div>
+             </div>
+            </logic:empty>           
       </section>
    	</div>	
 	</div>	
