@@ -19,7 +19,7 @@
       "@type": "SearchAction",
       "target": {
         "@type": "EntryPoint",
-        "urlTemplate": "https://www.jdon.com/query/searchAction.shtml?query={search_term_string}"
+        "urlTemplate": "https://www.jdon.com/query/search.shtml?query={search_term_string}"
       },
       "query-input": "required name=search_term_string"
     }

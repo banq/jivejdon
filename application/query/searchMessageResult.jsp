@@ -48,7 +48,7 @@
 
         <div class="tres">
           <MultiPages:pager actionFormName="messageListForm"
-                            page="/query/searchAction.shtml"
+                            page="/query/search.shtml"
                             paramId="query" paramName="query">
             <MultiPages:prev name=" 上页 "/>
 
@@ -113,7 +113,7 @@
         
         <div class="tres">
           <MultiPages:pager actionFormName="messageListForm"
-                            page="/query/searchAction.shtml"
+                            page="/query/search.shtml"
                             paramId="query" paramName="query">
             <MultiPages:prev name=" 上页 "/>
 

@@ -16,7 +16,7 @@
     <action-mappings>
         <action path="/query/threadViewQuery" type="com.jdon.jivejdon.presentation.action.query.QueryViewAction" name="queryForm" scope="request" validate="false">
             <forward name="view" path="/query/queryView.jsp" />
-            <forward name="search" path="/query/searchAction.shtml" />
+            <forward name="search" path="/query/search.shtml" />
         </action>
 
         <action path="/message/threadViewQuery" type="com.jdon.jivejdon.presentation.action.query.QueryViewAction" name="queryForm" scope="request" validate="false">
@@ -43,7 +43,7 @@
         </action> -->
 
         <!-- search message  -->
-        <action path="/query/searchAction" type="com.jdon.jivejdon.presentation.action.query.SearchAction" name="messageListForm" scope="request" validate="false">
+        <action path="/query/search" type="com.jdon.jivejdon.presentation.action.query.SearchAction" name="messageListForm" scope="request" validate="false">
             <forward name="success" path="/query/searchMessageResult.jsp" />
         </action>
 
