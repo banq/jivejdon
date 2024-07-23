@@ -58,7 +58,7 @@ $(document).ready(function() {
 
      // 发起 AJAX 请求
      $.ajax({
-         url: '/thread/searchAction.shtml', // 请求的URL
+         url: '/message/searchAction.shtml', // 请求的URL
          type: 'GET', // 请求类型
          data: { query:  userInput }, // 发送给服务器的数据，可以根据需要传递其他参数
          success: function(response) { // 请求成功时执行的回调函数

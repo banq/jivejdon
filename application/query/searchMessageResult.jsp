@@ -48,7 +48,7 @@
 
         <div class="tres">
           <MultiPages:pager actionFormName="messageListForm"
-                            page="/query/search.shtml"
+                            page="/message/search.shtml"
                             paramId="query" paramName="query">
             <MultiPages:prev name=" 上页 "/>
 
@@ -113,7 +113,7 @@
         
         <div class="tres">
           <MultiPages:pager actionFormName="messageListForm"
-                            page="/query/search.shtml"
+                            page="/message/search.shtml"
                             paramId="query" paramName="query">
             <MultiPages:prev name=" 上页 "/>
 
@@ -132,8 +132,6 @@
 </div>
 </div>
 </div>
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
 
 
 <%@include file="../common/IncludeBottom.jsp" %>

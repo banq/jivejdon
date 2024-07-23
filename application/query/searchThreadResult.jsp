@@ -27,7 +27,7 @@
     <tbody>
     <tr>
         <td align="middle">
-          <html:form action="/query/search.shtml" method="post"
+          <html:form action="/message/search.shtml" method="post"
                      styleClass="search" >
                 <input type="text" name="query"
                        value="<bean:write name="query"/>" id="queryId" size="40"/>
