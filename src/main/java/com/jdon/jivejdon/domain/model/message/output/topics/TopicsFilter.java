@@ -35,7 +35,7 @@ public class TopicsFilter implements Function<MessageVO, MessageVO> {
 	private final static String module = TopicsFilter.class.getName();
 
 	private final String regEx = "[a-zA-Z\u4e00-\u9fa5]+";
-	private String topicUrl = "/message/search.shtml?query=";
+	private String topicUrl = "/query/threadViewQuery.shtml?query=";
 	private final static ConcurrentHashMap<String, Pattern> patterns = new ConcurrentHashMap<>();
 
 	//
