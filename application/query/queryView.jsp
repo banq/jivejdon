@@ -8,23 +8,7 @@
  
 <bean:define id="title"  value=" 道场查询" />
 <%@ include file="../common/IncludeTop.jsp" %>
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name" : "极道",
-    "url": "https://www.jdon.com/",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://www.jdon.com/message/search.shtml?query={search_term_string}"
-      },
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
+<meta name="robots" content="noindex">
 
 
 <div id="page-content" class="single-page container">
