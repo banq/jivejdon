@@ -15,7 +15,7 @@
     pageContext.setAttribute("title", title);
 %>
 <%@ include file="../common/IncludeTop.jsp" %>
-
+<meta name="robots" content="noindex">
 
 <div id="page-content" class="single-page container">
 		<div class="row">
