@@ -5,6 +5,8 @@
 
 <bean:define id="title" value=" 登录成功 " />
 <%@ include file="../../common/IncludeTop.jsp"%>
+
+<%@ page import="java.util.Map" %>
 <center>
      <br><br>
 <ul>     
