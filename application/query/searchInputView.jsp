@@ -28,11 +28,10 @@
     <tbody>
     <tr>
         <td align="middle">
-          <html:form action="/query/search.shtml" method="post"   styleId="myForm" styleClass="search">
-                <input type="text" name="query"
-                       value="<bean:write name="query"/>" id="queryId" size="40"/>
-                       <input type="hidden" id="registerCode" name="registerCode"  >
-                       <input type="hidden" id="randstr" name="randstr">    
+          <form method="post"  id="myForm" class="search">
+            <input type="text" name="query"  value="<bean:write name="query"/>" id="queryId" size="40"/>
+            <input type="hidden" id="registerCode" name="registerCode"  >
+            <input type="hidden" id="randstr" name="randstr">    
         
        
               <%
@@ -52,7 +51,7 @@
                <input type="submit"  value="道场搜索">
               <% } 
                %>
-            </html:form>            
+            </form>            
         </td>
     </tr>
     </tbody>
@@ -70,3 +69,12 @@
 </table>
 
 
+<script defer>  
+    document.addEventListener("DOMContentLoaded", function(event) { 
+    $(document).ready(function() {
+      $(document).one('mousemove touchstart', function() {
+        $("#myForm").attr("action", "/query/search.shtml");
+      });
+     });
+    });
+    </script>
