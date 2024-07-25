@@ -31,7 +31,7 @@ public class SearchAction extends ModelListAction {
 			registerCode = request.getParameter("registerCode");
 			if (UtilValidate.isEmpty(registerCode) || UtilValidate.isEmpty(randstr))
 				return new PageIterator();
-			if (SkinUtils.verifyQQRegisterCode(registerCode, randstr, "183.194.157.28")) {
+			if (SkinUtils.verifyQQRegisterCode(registerCode, randstr, request.getRemoteAddr())) {
 				session.setAttribute("registerCode", registerCode);
 				session.setAttribute("randstr", randstr);
 			} else
