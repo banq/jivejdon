@@ -73,7 +73,7 @@
     document.addEventListener("DOMContentLoaded", function(event) { 
     $(document).ready(function() {
       $(document).one('mousemove touchstart', function() {
-        $("#myForm").attr("action", "/query/search.shtml");
+        $("#myForm").attr("action", "/thread/search.shtml");
       });
      });
     });

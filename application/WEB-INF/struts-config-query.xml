@@ -43,7 +43,7 @@
         </action> -->
 
         <!-- search message  -->
-        <action path="/query/search" type="com.jdon.jivejdon.presentation.action.query.SearchAction" name="messageListForm" scope="request" validate="false">
+        <action path="/thread/search" type="com.jdon.jivejdon.presentation.action.query.SearchAction" name="messageListForm" scope="request" validate="false">
             <forward name="success" path="/query/searchMessageResult.jsp" />
         </action>
 
