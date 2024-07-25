@@ -21,7 +21,11 @@
    String username = "";
    String password = "";
 
-   java.util.Map<String, String> subParams = (java.util.Map<String, String>) session.getAttribute("subscriptionParameters");
+   java.util.Map<String, String> subParams = null;
+   HttpSession session = request.getSession(false);
+   if (session != null) 
+       subParams = (java.util.Map<String, String>) request.getSession().getAttribute("subscriptionParameters");
+                  
    if(subParams != null){
           username = subParams.get("j_username");
           password = subParams.get("j_password");

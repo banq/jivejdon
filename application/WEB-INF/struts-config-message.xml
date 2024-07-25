@@ -158,9 +158,7 @@
             <forward name="success" path="/forum/threadTagsList.jsp" />
         </action> -->
 
-        <action path="/message/searchAction" type="com.jdon.jivejdon.presentation.action.query.SearchAction" name="messageListForm" scope="request" validate="false">
-            <forward name="success" path="/message/searchMessageResult.jsp" />
-        </action>
+ 
 
         <action path="/message/searchAction" type="com.jdon.jivejdon.presentation.action.query.SearchAction" name="messageListForm" scope="request" validate="false">
             <forward name="success" path="/message/searchMessageResult.jsp" />

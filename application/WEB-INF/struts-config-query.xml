@@ -43,14 +43,14 @@
         </action> -->
 
         <!-- search message  -->
-        <action path="/message/search" type="com.jdon.jivejdon.presentation.action.query.SearchAction" name="messageListForm" scope="request" validate="false">
+        <action path="/query/search" type="com.jdon.jivejdon.presentation.action.query.SearchAction" name="messageListForm" scope="request" validate="false">
             <forward name="success" path="/query/searchMessageResult.jsp" />
         </action>
 
         <!-- search threads not used -->
-        <action path="/query/searchThreadAction" type="com.jdon.jivejdon.presentation.action.query.SearchThreadAction" name="messageListForm" scope="request" validate="false">
+        <!-- <action path="/query/searchThreadAction" type="com.jdon.jivejdon.presentation.action.query.SearchThreadAction" name="messageListForm" scope="request" validate="false">
             <forward name="success" path="/query/searchThreadResult.jsp" />
-        </action>
+        </action> -->
 
 
         <!--  /query/popularlist.shtml?count=8&length=8 call from fourmList.jsp

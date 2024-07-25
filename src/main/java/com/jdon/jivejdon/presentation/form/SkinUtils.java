@@ -14,18 +14,21 @@
  */
 package com.jdon.jivejdon.presentation.form;
 
-import com.jdon.util.Debug;
-import com.jdon.util.StringUtil;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.alibaba.fastjson2.JSONObject;
+import com.jdon.util.StringUtil;
+
+
 
 public class SkinUtils {
     private final static String module = SkinUtils.class.getName();
@@ -57,7 +60,27 @@ public class SkinUtils {
         return false;
     }
 
+    public static boolean verifyQQRegisterCode(String registerCodeIn,
+            String randstr, String userip) {
+        boolean isTrue = false;
+        try {
+            String url = "https://ssl.captcha.qq" +
+                    ".com/ticket/verify?aid=2050847547&AppSecretKey" +
+                    "=0gRRG_bSpnphbFfz7q125mQ**&Randstr=" + randstr + "&UserIP" +
+                    "=" + userip + "&Ticket=" + registerCodeIn;
+            String json = loadJSON(url);
+            JSONObject jsonObj = JSONObject.parseObject(json);
+            String result = jsonObj.getString("response");
+            if (result.equals("1"))
+                isTrue = true;
+            else
+                System.err.println("QQRegisterCode=" + result + " ip=" + userip);
+        } catch (Exception ex) {
+            System.err.println(" QQverifyRegisterCode : " + ex);
+        }
 
+        return isTrue;
+    }
 
     public static boolean verifyRegisterCode(String registerCodeIn,
                                              HttpServletRequest request) {
