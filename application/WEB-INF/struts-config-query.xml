@@ -43,9 +43,13 @@
         </action> -->
 
         <!-- search message  -->
-        <action path="/captcha/search" type="com.jdon.jivejdon.presentation.action.query.SearchAction" name="messageListForm" scope="request" validate="false">
+        <action path="/captcha/search" type="com.jdon.jivejdon.presentation.action.query.CaptchaAction" name="messageListForm" scope="request" validate="false">
             <forward name="failure" path="/404.jsp" />
-            <forward name="success" path="/message/searchAction.shtml" />
+            <forward name="success" path="/message/search.shtml" />
+        </action>
+
+        <action path="/message/search" type="com.jdon.jivejdon.presentation.action.query.SearchAction" name="messageListForm" scope="request" validate="false">
+            <forward name="success" path="/query/searchMessageResult.jsp" />
         </action>
 
         <!-- search threads not used -->
