@@ -3,13 +3,11 @@ package com.jdon.jivejdon.presentation.action.query;
 import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.api.ForumMessageService;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
-import com.jdon.jivejdon.presentation.form.SkinUtils;
 import com.jdon.jivejdon.util.ToolsUtil;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.util.UtilValidate;
@@ -18,28 +16,6 @@ public class SearchAction extends ModelListAction {
 
 
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
-
-		HttpSession session = request.getSession();
-
-		// 尝试从会话中获取 randstr 和 registerCode
-		String randstr = (String) session.getAttribute("randstr");
-		String registerCode = (String) session.getAttribute("registerCode");
-
-		// 如果会话中没有 randstr，则从请求中获取并存储到会话中
-		if (randstr == null || registerCode == null) {
-			randstr = request.getParameter("randstr");
-			registerCode = request.getParameter("registerCode");
-			if (UtilValidate.isEmpty(registerCode) || UtilValidate.isEmpty(randstr))
-				return new PageIterator();
-			if (SkinUtils.verifyQQRegisterCode(registerCode, randstr, request.getRemoteAddr())) {
-				session.setAttribute("registerCode", registerCode);
-				session.setAttribute("randstr", randstr);
-			} else
-				return new PageIterator();
-
-		}
-		
-		
 		String query = request.getParameter("query");
 		if ((query == null) || (UtilValidate.isEmpty(query))) {
 			return new PageIterator();

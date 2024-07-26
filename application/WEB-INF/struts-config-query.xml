@@ -44,7 +44,8 @@
 
         <!-- search message  -->
         <action path="/captcha/search" type="com.jdon.jivejdon.presentation.action.query.SearchAction" name="messageListForm" scope="request" validate="false">
-            <forward name="success" path="/query/searchMessageResult.jsp" />
+            <forward name="failure" path="/404.jsp" />
+            <forward name="success" path="/message/searchAction.shtml" />
         </action>
 
         <!-- search threads not used -->
