@@ -15,6 +15,9 @@
  */
 package com.jdon.jivejdon.presentation.action.util;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,6 +30,7 @@ import org.apache.struts.action.ActionMapping;
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.util.ToolsUtil;
 import com.jdon.strutsutil.FormBeanUtil;
 
 public class ThreadEtagFilter extends Action {
@@ -74,20 +78,20 @@ public class ThreadEtagFilter extends Action {
 		long modelLastModifiedDate = forumThread.getState().getModifiedDate2();
 
 		// in 15 days the message expire will be shorter;
-		// Calendar c = Calendar.getInstance();
-		// c.setTime(new Date(modelLastModifiedDate));
-		// c.add(Calendar.DATE, 15);
-		//
-		// Calendar tc = Calendar.getInstance();
-		// tc.setTime(new Date());
-		// if (c.after(tc)) {
-		// expire = 24 * 60 * 60;
-		// }
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date(modelLastModifiedDate));
+		c.add(Calendar.DATE, 15);
 
-		// if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request,
-		// response)) {
-		// return null;// response is 304
-		// }
+		Calendar tc = Calendar.getInstance();
+		tc.setTime(new Date());
+		if (c.after(tc)) {
+			expire = 24 * 60 * 60;
+		}
+
+		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request,
+				response)) {
+			return null;// response is 304
+		}
 
 		return actionMapping.findForward(FormBeanUtil.FORWARD_SUCCESS_NAME);
 	}

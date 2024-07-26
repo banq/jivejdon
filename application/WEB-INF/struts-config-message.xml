@@ -46,7 +46,8 @@
             <forward name="failure" path="/message/result.jsp" />
         </action>
 
-        <action path="/message/uploadShowAction" type="com.jdon.jivejdon.presentation.action.message.UploadShowAction" validate="false" />
+        <action path="/message/uploadShowAction"
+            type="com.jdon.jivejdon.presentation.action.message.UploadShowAction" validate="false" />
 
         <action name="messageReplyForm" path="/message/replySaveAction" type="com.jdon.strutsutil.ModelSaveAction" scope="request" validate="true" input="/message/resultSave2.jsp">
             <forward name="success" path="/message/resultSave2.jsp" />
@@ -71,17 +72,22 @@
             <forward name="success" path="/thread/messageList.jsp" />
         </action>
 
-        <action path="/thread" type="com.jdon.jivejdon.presentation.action.MessageListAction" name="messageListForm" scope="request" validate="false">
+        <action path="/thread"
+            type="com.jdon.jivejdon.presentation.action.util.ThreadEtagFilter"
+            scope="request" validate="false">
+            <forward name="success" path="/thread2.shtml" />
+        </action>
+
+        <action path="/thread2" type="com.jdon.jivejdon.presentation.action.MessageListAction" name="messageListForm" scope="request" validate="false">
             <forward name="success" path="/thread/messageList.jsp" />
         </action>
 
-       
+
         <!-- All message List start  -->
 
         <action path="/forum/messageListAll" type="com.jdon.jivejdon.presentation.action.MessageListAllAction" name="messageListForm" scope="request" validate="false">
             <forward name="success" path="/forum/messageListAll.jsp" />
         </action>
-
 
 
         <!--  for after modfied messageList display end -->
@@ -153,7 +159,7 @@
             <forward name="success" path="/forum/threadTagList2.shtml" />
             <forward name="failure" path="/forum/threadTagList2.shtml" />
         </action>  -->
-    
+
         <!-- <action path="/forum/threadTagList" type="com.jdon.jivejdon.presentation.action.query.ThreadTagListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/forum/threadTagsList.jsp" />
         </action> -->

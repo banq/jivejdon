@@ -15,11 +15,6 @@
  */
 package com.jdon.jivejdon.util;
 
-import com.jdon.util.UtilDateTime;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -31,6 +26,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.jdon.util.UtilDateTime;
 
 /**
  * tools for this project.
@@ -378,90 +379,90 @@ public class ToolsUtil {
 
 	// com.jdon.jivejdon.presentation.filter.ExpiresFilter
 	// but urlrewiter not work for ExpiresFilter.
-	// public static boolean setHeaderCache(long adddays, HttpServletRequest request, HttpServletResponse response) {
-	// 	if (request.getAttribute("myExpire") != null) {
-	// 		System.err.print(" checkHeaderCache called above twice times :" + request.getRequestURI());
-	// 		return true;
-	// 	}
-	// 	// com.jdon.jivejdon.presentation.filter.ExpiresFilter
-	// 	request.setAttribute("myExpire", adddays);
+	public static boolean setHeaderCache(long adddays, HttpServletRequest request, HttpServletResponse response) {
+		if (request.getAttribute("myExpire") != null) {
+			System.err.print(" checkHeaderCache called above twice times :" + request.getRequestURI());
+			return true;
+		}
+		// com.jdon.jivejdon.presentation.filter.ExpiresFilter
+		request.setAttribute("myExpire", adddays);
 
-	// 	// convert seconds to ms.
-	// 	try {
-	// 		long adddaysM = new Long(adddays) * 1000;
-	// 		long header = request.getDateHeader("If-Modified-Since");
-	// 		if (header > 0 && adddaysM > 0) {
-	// 			if (header + adddaysM > System.currentTimeMillis()) {
-	// 				response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-	// 				return false;
-	// 			}
-	// 		}
+		// convert seconds to ms.
+		try {
+			long adddaysM = new Long(adddays) * 1000;
+			long header = request.getDateHeader("If-Modified-Since");
+			if (header > 0 && adddaysM > 0) {
+				if (header + adddaysM > System.currentTimeMillis()) {
+					response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+					return false;
+				}
+			}
 
-	// 		setRespHeaderCache(adddays, request, response);
-	// 	} catch (Exception e) {
-	// 		e.printStackTrace();
-	// 	}
-	// 	return true;
-	// }
+			setRespHeaderCache(adddays, request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
 
-	// public static boolean checkHeaderCache(long adddays, long modelLastModifiedDate, HttpServletRequest request, HttpServletResponse response) {
-	// 	if (request.getAttribute("myExpire") != null) {
-	// 		System.err.print(" checkHeaderCache called above twice times :" + request.getRequestURI());
-	// 		return true;
-	// 	}
-	// 	// com.jdon.jivejdon.presentation.filter.ExpiresFilter
-	// 	request.setAttribute("myExpire", adddays);
+	public static boolean checkHeaderCache(long adddays, long modelLastModifiedDate, HttpServletRequest request, HttpServletResponse response) {
+		if (request.getAttribute("myExpire") != null) {
+			System.err.print(" checkHeaderCache called above twice times :" + request.getRequestURI());
+			return true;
+		}
+		// com.jdon.jivejdon.presentation.filter.ExpiresFilter
+		request.setAttribute("myExpire", adddays);
 
-	// 	// convert seconds to ms.
-	// 	try {
-	// 		long adddaysM = new Long(adddays) * 1000;
-	// 		long header = request.getDateHeader("If-Modified-Since");
-	// 		long now = System.currentTimeMillis();
-	// 		if (header > 0 && adddaysM > 0) {
-	// 			if (modelLastModifiedDate > header) {
-	// 				// adddays = 0; // reset
-	// 				response.setStatus(HttpServletResponse.SC_OK);
-	// 				return true;
-	// 			}
-	// 			if (header + adddaysM > now) {
-	// 				// during the period not happend modified
-	// 				response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-	// 				return false;
-	// 			}
-	// 		}
+		// convert seconds to ms.
+		try {
+			long adddaysM = new Long(adddays) * 1000;
+			long header = request.getDateHeader("If-Modified-Since");
+			long now = System.currentTimeMillis();
+			if (header > 0 && adddaysM > 0) {
+				if (modelLastModifiedDate > header) {
+					// adddays = 0; // reset
+					response.setStatus(HttpServletResponse.SC_OK);
+					return true;
+				}
+				if (header + adddaysM > now) {
+					// during the period not happend modified
+					response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+					return false;
+				}
+			}
 
-	// 		// if over expire data, see the Etags;
-	// 		// ETags if ETags no any modified
-	// 		String previousToken = request.getHeader("If-None-Match");
-	// 		if (previousToken != null && previousToken.equals(Long.toString(modelLastModifiedDate))) {
-	// 			// not modified
-	// 			response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-	// 			return false;
-	// 		}
-	// 		// if th model has modified , setup the new modified date
-	// 		setEtagHaeder(response, modelLastModifiedDate);
-	// 		setRespHeaderCache(adddays, request, response);
-	// 	} catch (Exception e) {
-	// 		e.printStackTrace();
-	// 	}
-	// 	return true;
-	// }
+			// if over expire data, see the Etags;
+			// ETags if ETags no any modified
+			String previousToken = request.getHeader("If-None-Match");
+			if (previousToken != null && previousToken.equals(Long.toString(modelLastModifiedDate))) {
+				// not modified
+				response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+				return false;
+			}
+			// if th model has modified , setup the new modified date
+			setEtagHaeder(response, modelLastModifiedDate);
+			setRespHeaderCache(adddays, request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
 
-	// public static void setEtagHaeder(HttpServletResponse response, long modelLastModifiedDate) {
-	// 	response.setHeader("ETag", Long.toString(modelLastModifiedDate));
-	// }
+	public static void setEtagHaeder(HttpServletResponse response, long modelLastModifiedDate) {
+		response.setHeader("ETag", Long.toString(modelLastModifiedDate));
+	}
 
-	// public static boolean setRespHeaderCache(long adddays, HttpServletRequest request, HttpServletResponse response) {
-	// 	request.setAttribute("myExpire", adddays);
+	public static boolean setRespHeaderCache(long adddays, HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("myExpire", adddays);
 
-	// 	long adddaysM = new Long(adddays) * 1000;
-	// 	String maxAgeDirective = "max-age=" + adddays;
-	// 	response.setHeader("Cache-Control", maxAgeDirective);
-	// 	response.setStatus(HttpServletResponse.SC_OK);
-	// 	response.addDateHeader("Last-Modified", System.currentTimeMillis());
-	// 	response.addDateHeader("Expires", System.currentTimeMillis() + adddaysM);
-	// 	return true;
-	// }
+		long adddaysM = new Long(adddays) * 1000;
+		String maxAgeDirective = "max-age=" + adddays;
+		response.setHeader("Cache-Control", maxAgeDirective);
+		response.setStatus(HttpServletResponse.SC_OK);
+		response.addDateHeader("Last-Modified", System.currentTimeMillis());
+		response.addDateHeader("Expires", System.currentTimeMillis() + adddaysM);
+		return true;
+	}
 
 	public static String convertURL(String s) {
 		Pattern patt = Pattern
