@@ -8,7 +8,7 @@
 <bean:define id="title" value=" 添加标签"/>
 <%@ include file="../header.jsp" %>
 <!-- jQuery and Modernizr-->
-<script src="https://cdn.jsdelivr.net/gh/banq/jivejdon/application/js/jquery-bootstrap2.js"></script>
+<script src="/js/jquery-bootstrap2.js"></script>
 
 <!-- at first load jquery , cannot load jquery twice -->
 <link rel="stylesheet" href="/common/autocomplete/jquery-ui.css" type="text/css">

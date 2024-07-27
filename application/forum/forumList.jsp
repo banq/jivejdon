@@ -11,7 +11,7 @@
 <html lang="zh-CN">
 <head>
    
-   <link rel="preconnect" href="https://cdn.jsdelivr.net/">
+   
    <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
    <link rel="preconnect" href="https://www.googletagmanager.com/">  
    <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
