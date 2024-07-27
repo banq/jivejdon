@@ -50,11 +50,13 @@ import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.domain.model.query.ResultSort;
 import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
+import com.jdon.jivejdon.presentation.action.util.ForumUtil;
 import com.jdon.jivejdon.spi.component.sitemap.SitemapRepository;
 import com.jdon.jivejdon.spi.component.sitemap.SitemapService;
 import com.jdon.jivejdon.spi.component.sitemap.Url;
 import com.jdon.jivejdon.spi.component.throttle.hitkey.CustomizedThrottle;
 import com.jdon.jivejdon.util.Constants;
+import com.jdon.jivejdon.util.ToolsUtil;
 import com.jdon.util.RequestUtil;
 import com.jdon.util.UtilValidate;
 import com.sun.syndication.feed.synd.SyndCategory;
@@ -92,11 +94,11 @@ public class RSSGenServlet extends HttpServlet {
 	}
 
 	protected boolean checkModifiedEtagFilter(HttpServletRequest request, HttpServletResponse response) {
-		// int expire = 24 * 60 * 60;
-		// long modelLastModifiedDate = ForumUtil.getForumsLastModifiedDate(this.getServletContext());
-		// if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
-		// 	return false;
-		// }
+		int expire = 5 * 60 * 60;
+		long modelLastModifiedDate = ForumUtil.getForumsLastModifiedDate(this.getServletContext());
+		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
+			return false;
+		}
 		return true;
 	}
 

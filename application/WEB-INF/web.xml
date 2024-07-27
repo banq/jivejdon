@@ -165,7 +165,7 @@
         </servlet-class>
         <init-param>
             <param-name>sitemapUrl</param-name>
-            <param-value>https://www.jdon.com/sitemap</param-value>
+            <param-value>https://www.jdon.com/sitemap.xml</param-value>
         </init-param>
         <init-param>
             <param-name>threadUrl</param-name>

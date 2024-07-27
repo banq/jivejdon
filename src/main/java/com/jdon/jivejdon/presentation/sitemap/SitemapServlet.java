@@ -45,8 +45,7 @@ import com.jdon.jivejdon.spi.component.sitemap.SitemapService;
 import com.jdon.jivejdon.spi.component.sitemap.Url;
 import com.jdon.jivejdon.spi.component.sitemap.UrlSet;
 import com.jdon.jivejdon.spi.component.throttle.hitkey.CustomizedThrottle;
-import com.jdon.jivejdon.spi.component.throttle.hitkey.HitKeyIF;
-import com.jdon.jivejdon.spi.component.throttle.hitkey.HitKeySame;
+import com.jdon.jivejdon.util.ToolsUtil;
 import com.jdon.util.UtilValidate;
 
 public class SitemapServlet extends HttpServlet {
@@ -178,10 +177,10 @@ public class SitemapServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		long modelLastModifiedDate = ForumUtil.getForumsLastModifiedDate(
 				this.getServletContext());
-		// if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request,
-		// response)) {
-		// return;
-		// }
+		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request,
+				response)) {
+			return;
+		}
 
 		// if (!checkSpamHit(request)) {
 		// 	((HttpServletResponse) response).sendError(404);
