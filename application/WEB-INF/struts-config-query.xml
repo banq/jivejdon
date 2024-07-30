@@ -27,21 +27,6 @@
         </action>
 
 
-        <!--  hot thread query multi-page so ThreadQueryAction cannot be called directly from client -->
-        <!-- <action path="/query/threadQueryAction" type="com.jdon.jivejdon.presentation.action.query.ThreadQueryAction" name="threadListForm" scope="request" validate="false">
-            <forward name="success" path="/query/hotThreadView.jsp" />
-        </action> -->
-
-        <!--  message query , cannot be called directly from client -->
-        <!-- <action path="/query/messageQueryAction" type="com.jdon.jivejdon.presentation.action.query.MessageQueryAction" name="messageListForm" scope="request" validate="false">
-            <forward name="success" path="/query/messageView.jsp" />
-        </action> -->
-
-        <!--  user messages query  -->
-        <!-- <action path="/query/userMessageQueryAction" type="com.jdon.jivejdon.presentation.action.query.MessageQueryUserAction" name="messageListForm" scope="request" validate="false">
-            <forward name="success" path="/query/userMessageView.jsp" />
-        </action> -->
-
         <!-- search message  -->
         <action path="/captcha/search" type="com.jdon.jivejdon.presentation.action.query.CaptchaAction" name="messageListForm" scope="request" validate="false">
             <forward name="failure" path="/404.jsp" />
@@ -52,30 +37,14 @@
             <forward name="success" path="/query/searchMessageResult.jsp" />
         </action>
 
-        <!-- search threads not used -->
-        <!-- <action path="/query/searchThreadAction" type="com.jdon.jivejdon.presentation.action.query.SearchThreadAction" name="messageListForm" scope="request" validate="false">
-            <forward name="success" path="/query/searchThreadResult.jsp" />
-        </action> -->
-
-
-        <!--  /query/popularlist.shtml?count=8&length=8 call from fourmList.jsp
-         popularlist is same as  /query/hotlist, but another way in SQL -->
-        <!-- <action path="/query/popularlist" type="com.jdon.jivejdon.presentation.action.query.ThreadPopularAction" name="threadListForm" scope="request" validate="false">
-            <forward name="success" path="/query/others/popularlist.jsp" />
-        </action> -->
-
-        <action path="/forum/maxPopThreadlist" type="com.jdon.jivejdon.presentation.action.MaxThreadListAction" name="threadListForm" scope="request" validate="false">
+     
+       <action path="/forum/maxPopThreadlist" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/forum/maxPopThreadlist2.shtml" />
+        </action>
+        <action path="/forum/maxPopThreadlist2" type="com.jdon.jivejdon.presentation.action.MaxThreadListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/forum/maxPopThreadlist.jsp" />
         </action>
 
-<!-- 
-        <action path="/query/hotKeys" type="com.jdon.jivejdon.presentation.action.tag.HotKeyListAction" parameter="method">
-            <forward name="hotkeys" path="/query/hotkeys.jsp" />
-        </action> -->
-
-        <!-- <action name="threadForm" path="/query/threadLatestPostViewAction" type="com.jdon.strutsutil.ModelDispAction" scope="request" validate="false">
-            <forward name="success" path="/query/others/threadLatestPostView.jsp" />
-        </action> -->
 
         <action path="/message/tags" type="com.jdon.jivejdon.presentation.action.tag.MethodDispatchAction" parameter="method">
             <forward name="tags" path="/query/others/tags.jsp" />
@@ -84,7 +53,6 @@
         <action path="/query/taggedThreadList" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/taggedThreadList2.shtml" />
         </action>
-
         <action path="/query/taggedThreadList2" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/taggedThreadList.jsp" />
         </action>
@@ -97,7 +65,10 @@
             <forward name="success" path="/query/threadList.jsp" />
         </action> -->
 
-        <action path="/query/tagsList" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" name="tagsListForm" scope="request" validate="false">
+        <action path="/query/tagsList" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/query/tagsList2.shtml" />
+        </action>
+        <action path="/query/tagsList2" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" name="tagsListForm" scope="request" validate="false">
             <forward name="success" path="/query/tagsList.jsp" />
         </action>
 
@@ -105,111 +76,44 @@
             <forward name="success" path="/query/others/tagHotList.jsp" />
         </action> -->
 
-        <action path="/query/tt" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
+        <action path="/query/tt" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/query/tt2.shtml" />
+        </action> 
+        <action path="/query/tt2" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/tt.jsp" />
         </action>
 
-        <!-- <action path="/query/tt2" type="com.jdon.jivejdon.presentation.action.query.ThreadTagHotList2Action" name="threadListForm" scope="request" validate="false">
-            <forward name="success" path="/query/others/tt.jsp" />
-        </action> -->
-       
-
-        <!-- <action path="/query/tagThreads" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
-            <forward name="success" path="/query/tagThreads.jsp" />
-        </action> -->
-
-        <!-- <action path="/query/tl" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" name="tagsListForm" scope="request" validate="false">
-            <forward name="success" path="/query/others/tl.jsp" />
-        </action> -->
 
         <action name="tagForm" path="/query/tagSubcountAction" type="com.jdon.strutsutil.ModelDispAction" scope="request" validate="false">
             <forward name="success" path="/query/others/tagSubcount.jsp" />
         </action>
-
-
-        <!-- <action path="/query/s" type="com.jdon.jivejdon.presentation.action.query.SearchAction" name="messageListForm" scope="request" validate="false">
-            <forward name="success" path="/query/others/st.jsp" />
-        </action> -->
-
-        <!--  hotlist hot thread query one-page call from messageList.jsp or threadList.jsp
-        /query/hotlist.shtml?dateRange=180&tablewidth=160&count=13
-            /query/hotlist.shtml?dateRange=180&tablewidth=160&count=13&messageReplyCountWindow=50&noRandom=1
-         -->
-        <action path="/query/hotlist" type="com.jdon.jivejdon.presentation.action.query.ThreadHotAction" name="threadListForm" scope="request" validate="false">
-            <forward name="success" path="/query/others/hotlist.jsp" />
-        </action>
-
-        <!-- reference in homepage -->
-        <!-- <action path="/query/threadApprovedNewList" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
-            <forward name="success" path="/query/threadApprovedNewList2.shtml" />
-        </action>
-
-        <action path="/query/threadApprovedNewList2" type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedHomeListAction" name="threadListForm" scope="request" validate="false">
-            <forward name="success" path="/query/approvedThreadList.jsp" />
-        </action>
-
-        <action path="/query/threadApprovedNewList3" type="com.jdon.jivejdon.presentation.action.query.ThreadTagHotListAction" name="tagsListForm" scope="request" validate="false">
-            <forward name="success" path="/query/approvedThreadList3.jsp" />            
-        </action> -->
-
 
         <!-- from next page  reference in homepage   -->
         <action path="/query/approvedListOther" type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedNewListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/approvedThreadListOthers.jsp" />
         </action>
 
-        <!-- <action path="/query/approvedListOtherNoheader" type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedNewListAction" name="threadListForm" scope="request" validate="false">   
-            <forward name="success" path="/query/threadList.jsp" />
-        </action> -->
-
-        <action path="/query/approvedMyTags" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" name="tagsListForm" scope="request" validate="false">
-            <forward name="success" path="/query/approvedThreadListOthers.jsp" />
-        </action>
-
-
-        <action path="/query/stickyList" type="com.jdon.jivejdon.presentation.action.query.StickyThreadList" name="threadListForm" scope="request" validate="false">
-            <forward name="success" path="/query/others/stickyList.jsp" />
-        </action>
-
-
-        <!--  /query/tagSubsCount.shtml?method=computeSubscriptionNumbers  computeSubscriptionNumbers is OtherService's method
-        <action path="/query/tagSubsCount" type="com.jdon.strutsutil.ServiceMethodAction"
-         name="tagForm" scope="request"  validate="false">
-           <forward name="computeSubscriptionNumbers" path="/query/others/computeSubscriptionNumbers.jsp"/>
-        </action>
-        -->
-        <!-- <action path="/query/authorList" type="com.jdon.jivejdon.presentation.action.query.AuthorListAction" name="accountListForm" scope="request" validate="false">
-            <forward name="success" path="/query/authorList.jsp" />
-        </action> -->
-
-        <action path="/query/threadDigList" type="com.jdon.jivejdon.presentation.action.query.ThreadDigListAction" name="threadListForm" scope="request" validate="false">
+        
+        <action path="/query/threadDigList" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/query/threadDigList2.shtml" />
+        </action> 
+        <action path="/query/threadDigList2" type="com.jdon.jivejdon.presentation.action.query.ThreadDigListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/threadDigList.jsp" />
         </action>
 
-        <action path="/query/threadDigList2" type="com.jdon.jivejdon.presentation.action.query.ThreadRandomDigListAction" name="threadListForm" scope="request" validate="false">
-            <forward name="success" path="/query/others/digList.jsp" />
-        </action>
-
-        <action path="/query/tagHotList" type="com.jdon.jivejdon.presentation.action.query.ThreadTagHotListAction" name="tagsHotListForm" scope="request" validate="false">
-            <forward name="success" path="/query/others/tagHotList.jsp" />
-        </action>
-
-        <action path="/query/tagHotList2" type="com.jdon.jivejdon.presentation.action.query.ThreadTagHotListAction" name="tagsHotListForm" scope="request" validate="false">
-            <forward name="success" path="/query/others/tagHotList2.jsp" />
-        </action>
-
-        <action path="/query/tagHotList_menu" type="com.jdon.jivejdon.presentation.action.query.ThreadTagHotListAction" name="tagsHotListForm" scope="request" validate="false">
-            <forward name="success" path="/query/others/tagHotList_menu.jsp" />
-        </action>
-
         
-
-        <action path="/forum/threadDigSortedList" type="com.jdon.jivejdon.presentation.action.query.ThreadDigSortedListAction" name="threadListForm" scope="request" validate="false">
+        <action path="/forum/threadDigSortedList" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/forum/threadDigSortedList2.shtml" />
+        </action> 
+        <action path="/forum/threadDigSortedList2" type="com.jdon.jivejdon.presentation.action.query.ThreadDigSortedListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/forum/threadDigSortedList.jsp" />
         </action>
 
 
-        <action path="/query/threadNewList" type="com.jdon.jivejdon.presentation.action.ThreadListAction" name="threadListForm" scope="request" validate="false">
+       <action path="/query/threadNewList" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/query/threadNewList2.shtml" />
+        </action> 
+        <action path="/query/threadNewList2" type="com.jdon.jivejdon.presentation.action.ThreadListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/newlist.jsp" />
         </action>
 
@@ -233,20 +137,15 @@
         <action path="/query/threadNewDigList" type="com.jdon.jivejdon.presentation.action.query.ThreadNewDigListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/newdiglist.jsp" />
         </action>
-
-        
         <action path="/query/threadNewDigList2" type="com.jdon.jivejdon.presentation.action.query.ThreadNewDigListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/newdiglist2.jsp" />
         </action>
 
 
-        <action path="/query/threadNewList2" type="com.jdon.jivejdon.presentation.action.ThreadListAction" name="threadListForm" scope="request" validate="false">
-            <forward name="success" path="/query/others/newlist.jsp" />
-        </action>
 
-        <action path="/query/urlListAction" type="com.jdon.jivejdon.presentation.sitemap.UrlListAction" name="listForm" scope="request" validate="false">
+        <!-- <action path="/query/urlListAction" type="com.jdon.jivejdon.presentation.sitemap.UrlListAction" name="listForm" scope="request" validate="false">
             <forward name="success" path="/query/smurlList.jsp" />
-        </action>
+        </action> -->
 
 
     </action-mappings>

@@ -231,10 +231,10 @@
         <from>^/query/threadDigList$</from>
         <to>/query/threadDigList.shtml?count=5</to>
     </rule>    
-	<rule>
+	<!-- <rule>
         <from>^/query/urlListAction$</from>
         <to>/query/urlListAction.shtml?count=20</to>
-    </rule>    
+    </rule>     -->
     
     <!-- rss -->
     <rule>
