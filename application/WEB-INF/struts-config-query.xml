@@ -22,6 +22,15 @@
             <forward name="failure" path="/404.jsp" /> <!-- after 2011-1-8 JF version -->
         </action>
 
+      <!-- reference in homepage -->
+     <action path="/query/threadApprovedNewList2" type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedHomeListAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/query/approvedThreadList.jsp" />
+        </action>
+
+     <action path="/query/threadApprovedNewList3" type="com.jdon.jivejdon.presentation.action.query.ThreadTagHotListAction" name="tagsListForm" scope="request" validate="false">
+            <forward name="success" path="/query/approvedThreadList3.jsp" />            
+        </action>     
+
         <action path="/query/threadViewQuery" type="com.jdon.jivejdon.presentation.action.query.QueryViewAction" name="queryForm" scope="request" validate="false">
             <forward name="view" path="/query/queryView.jsp" />
             <forward name="search" path="/query/queryView.jsp" />
