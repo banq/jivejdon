@@ -14,6 +14,14 @@
 
     <!-- jivejdon/message/threadViewQuery.shtml?dateRange=3650&messageReplyCountWindow=1&queryType=HOT1  -->
     <action-mappings>
+       <action path="/forum/threadList" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/forum/threadList2.shtml" />
+        </action>
+        <action path="/forum/threadList2" type="com.jdon.jivejdon.presentation.action.ThreadListAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/forum/threadList.jsp" />
+            <forward name="failure" path="/404.jsp" /> <!-- after 2011-1-8 JF version -->
+        </action>
+
         <action path="/query/threadViewQuery" type="com.jdon.jivejdon.presentation.action.query.QueryViewAction" name="queryForm" scope="request" validate="false">
             <forward name="view" path="/query/queryView.jsp" />
             <forward name="search" path="/query/queryView.jsp" />
@@ -89,7 +97,10 @@
         </action>
 
         <!-- from next page  reference in homepage   -->
-        <action path="/query/approvedListOther" type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedNewListAction" name="threadListForm" scope="request" validate="false">
+           <action path="/query/approvedListOther" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/query/approvedListOther2.shtml" />
+        </action> 
+        <action path="/query/approvedListOther2" type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedNewListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/approvedThreadListOthers.jsp" />
         </action>
 
