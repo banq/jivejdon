@@ -15,16 +15,15 @@
  */
 package com.jdon.jivejdon.presentation.action.util;
 
-import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.api.ForumService;
-import com.jdon.jivejdon.util.ToolsUtil;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.jdon.jivejdon.util.ToolsUtil;
 
 /**
  * for struts-config.xml
@@ -40,21 +39,15 @@ import javax.servlet.http.HttpServletResponse;
  * 
  */
 public class ForumEtagFilterAction extends Action {
-	public final static String NEWLASMESSAGE = "NEWLASMESSAGE";
-	private final static int expire = 1 * 60 * 60;
+	private final static int expire = 5 * 60 * 60;
 
 	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		ForumService forumService = (ForumService) WebAppUtil.getService("forumService", this.servlet.getServletContext());
-		String forumId = request.getParameter("forum");
-		if (forumId == null)
-			forumId = request.getParameter("forumId");
-
 		long modelLastModifiedDate = ForumUtil.getForumsLastModifiedDate(this.servlet
 				.getServletContext());
-		// if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
-		// 	return null;
-		// }
+		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
+			return null;
+		}
 		return actionMapping.findForward("success");
 
 	}

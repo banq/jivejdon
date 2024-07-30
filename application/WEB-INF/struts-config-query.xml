@@ -68,20 +68,24 @@
             <forward name="success" path="/forum/maxPopThreadlist.jsp" />
         </action>
 
-
+<!-- 
         <action path="/query/hotKeys" type="com.jdon.jivejdon.presentation.action.tag.HotKeyListAction" parameter="method">
             <forward name="hotkeys" path="/query/hotkeys.jsp" />
-        </action>
+        </action> -->
 
-        <action name="threadForm" path="/query/threadLatestPostViewAction" type="com.jdon.strutsutil.ModelDispAction" scope="request" validate="false">
+        <!-- <action name="threadForm" path="/query/threadLatestPostViewAction" type="com.jdon.strutsutil.ModelDispAction" scope="request" validate="false">
             <forward name="success" path="/query/others/threadLatestPostView.jsp" />
-        </action>
+        </action> -->
 
         <action path="/message/tags" type="com.jdon.jivejdon.presentation.action.tag.MethodDispatchAction" parameter="method">
             <forward name="tags" path="/query/others/tags.jsp" />
         </action>
 
-        <action path="/query/taggedThreadList" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
+        <action path="/query/taggedThreadList" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/query/taggedThreadList2.shtml" />
+        </action>
+
+        <action path="/query/taggedThreadList2" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/taggedThreadList.jsp" />
         </action>
 
@@ -89,43 +93,43 @@
             <forward name="success" path="/query/taggedThreadList.jsp" />
         </action>
 
-        <action path="/query/taggedThreadListNoheader" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">   
+        <!-- <action path="/query/taggedThreadListNoheader" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">   
             <forward name="success" path="/query/threadList.jsp" />
-        </action>
+        </action> -->
 
         <action path="/query/tagsList" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" name="tagsListForm" scope="request" validate="false">
             <forward name="success" path="/query/tagsList.jsp" />
         </action>
 
-        <action path="/query/tagsList2" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" name="tagsHotListForm" scope="request" validate="false">
+        <!-- <action path="/query/tagsList2" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" name="tagsHotListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/tagHotList.jsp" />
-        </action>
+        </action> -->
 
         <action path="/query/tt" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/tt.jsp" />
         </action>
 
-        <action path="/query/tt2" type="com.jdon.jivejdon.presentation.action.query.ThreadTagHotList2Action" name="threadListForm" scope="request" validate="false">
+        <!-- <action path="/query/tt2" type="com.jdon.jivejdon.presentation.action.query.ThreadTagHotList2Action" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/tt.jsp" />
-        </action>
+        </action> -->
        
 
         <!-- <action path="/query/tagThreads" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/tagThreads.jsp" />
         </action> -->
 
-        <action path="/query/tl" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" name="tagsListForm" scope="request" validate="false">
+        <!-- <action path="/query/tl" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" name="tagsListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/tl.jsp" />
-        </action>
+        </action> -->
 
         <action name="tagForm" path="/query/tagSubcountAction" type="com.jdon.strutsutil.ModelDispAction" scope="request" validate="false">
             <forward name="success" path="/query/others/tagSubcount.jsp" />
         </action>
 
 
-        <action path="/query/s" type="com.jdon.jivejdon.presentation.action.query.SearchAction" name="messageListForm" scope="request" validate="false">
+        <!-- <action path="/query/s" type="com.jdon.jivejdon.presentation.action.query.SearchAction" name="messageListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/st.jsp" />
-        </action>
+        </action> -->
 
         <!--  hotlist hot thread query one-page call from messageList.jsp or threadList.jsp
         /query/hotlist.shtml?dateRange=180&tablewidth=160&count=13
@@ -136,7 +140,7 @@
         </action>
 
         <!-- reference in homepage -->
-        <action path="/query/threadApprovedNewList" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
+        <!-- <action path="/query/threadApprovedNewList" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/threadApprovedNewList2.shtml" />
         </action>
 
@@ -146,7 +150,7 @@
 
         <action path="/query/threadApprovedNewList3" type="com.jdon.jivejdon.presentation.action.query.ThreadTagHotListAction" name="tagsListForm" scope="request" validate="false">
             <forward name="success" path="/query/approvedThreadList3.jsp" />            
-        </action>
+        </action> -->
 
 
         <!-- from next page  reference in homepage   -->
