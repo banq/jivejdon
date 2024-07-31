@@ -398,7 +398,7 @@ public class ToolsUtil {
 				}
 			}
 
-			setRespHeaderCache(adddays, request, response);
+			setRespHeaderCache(adddays, System.currentTimeMillis(), request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -447,7 +447,7 @@ public class ToolsUtil {
 			}
 			// if th model has modified , setup the new modified date
 			setEtagHaeder(response, modelLastModifiedDate);
-			setRespHeaderCache(adddays, request, response);
+			setRespHeaderCache(adddays, modelLastModifiedDate, request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -458,15 +458,15 @@ public class ToolsUtil {
 		response.setHeader("ETag", Long.toString(modelLastModifiedDate));
 	}
 
-	public static boolean setRespHeaderCache(long adddays, HttpServletRequest request, HttpServletResponse response) {
+	public static boolean setRespHeaderCache(long adddays, long modelLastModifiedDate,HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("myExpire", adddays);
 
 		long adddaysM = new Long(adddays) * 1000;
 		String maxAgeDirective = "max-age=" + adddays;
 		response.setHeader("Cache-Control", maxAgeDirective);
 		response.setStatus(HttpServletResponse.SC_OK);
-		response.addDateHeader("Last-Modified", System.currentTimeMillis());
-		response.addDateHeader("Expires", System.currentTimeMillis() + adddaysM);
+		response.addDateHeader("Last-Modified", modelLastModifiedDate);
+		response.addDateHeader("Expires", modelLastModifiedDate + adddaysM);
 		return true;
 	}
 
