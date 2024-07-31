@@ -405,7 +405,8 @@ public class ToolsUtil {
 		return true;
 	}
 
-	public static boolean checkHeaderCache(long adddays, long modelLastModifiedDate, HttpServletRequest request, HttpServletResponse response) {
+	public static boolean checkHeaderCache(long adddays, long modelLastModifiedDate, HttpServletRequest request,
+			HttpServletResponse response) {
 		if (request.getAttribute("myExpire") != null) {
 			System.err.print(" checkHeaderCache called above twice times :" + request.getRequestURI());
 			return true;
@@ -415,29 +416,34 @@ public class ToolsUtil {
 
 		// convert seconds to ms.
 		try {
-			long adddaysM = new Long(adddays) * 1000;
-			long header = request.getDateHeader("If-Modified-Since");
-			long now = System.currentTimeMillis();
-			if (header > 0 && adddaysM > 0) {
-				if (modelLastModifiedDate > header) {
-					// adddays = 0; // reset
-					response.setStatus(HttpServletResponse.SC_OK);
-					return true;
-				}
-				if (header + adddaysM > now) {
-					// during the period not happend modified
-					response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-					return false;
-				}
-			}
 
 			// if over expire data, see the Etags;
 			// ETags if ETags no any modified
-			String previousToken = request.getHeader("If-None-Match");
-			if (previousToken != null && previousToken.equals(Long.toString(modelLastModifiedDate))) {
-				// not modified
-				response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-				return false;
+			String etag = request.getHeader("If-None-Match");
+
+			if (etag != null) {
+				if (etag.equals(Long.toString(modelLastModifiedDate))) {
+					// not modified
+					response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+					return false;
+				}
+			} else {
+
+				long adddaysM = new Long(adddays) * 1000;
+				long header = request.getDateHeader("If-Modified-Since");
+				long now = System.currentTimeMillis();
+				if (header > 0 && adddaysM > 0) {
+					if (modelLastModifiedDate > header) {
+						// adddays = 0; // reset
+						response.setStatus(HttpServletResponse.SC_OK);
+						return true;
+					}
+					if (header + adddaysM > now) {
+						// during the period not happend modified
+						response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+						return false;
+					}
+				}
 			}
 			// if th model has modified , setup the new modified date
 			setEtagHaeder(response, modelLastModifiedDate);
