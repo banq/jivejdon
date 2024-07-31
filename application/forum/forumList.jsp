@@ -6,6 +6,10 @@
 <%@ taglib uri="/WEB-INF/MultiPages.tld" prefix="MultiPages" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
+<%          
+    com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(5 * 60 * 60, request, response);
+	
+%>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
