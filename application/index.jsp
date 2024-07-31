@@ -7,8 +7,10 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <%          
-    com.jdon.jivejdon.util.ToolsUtil.setHeaderCache(5 * 60 * 60, request, response);
-	
+long modelLastModifiedDate = com.jdon.jivejdon.presentation.action.util.ForumUtil.getForumsLastModifiedDate(this.getServletContext());
+if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCache(5 * 60 * 60, modelLastModifiedDate, request, response)) {
+    return ;
+}	
 %>
 
 <!DOCTYPE html>
