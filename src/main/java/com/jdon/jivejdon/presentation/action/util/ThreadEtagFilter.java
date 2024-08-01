@@ -85,7 +85,7 @@ public class ThreadEtagFilter extends Action {
 		tc.setTime(new Date());
 		// browser cache expire time; default is one hour
 		int expire = 1 * 60 * 60;
-		if (c.after(tc)) {
+		if (c.before(tc)) {
 			expire = 24 * 60 * 60;
 		}
 
