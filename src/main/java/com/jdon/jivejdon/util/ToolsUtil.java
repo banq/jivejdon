@@ -401,17 +401,9 @@ public class ToolsUtil {
 					return false;
 				}
 			} else {
-
-				long adddaysM = new Long(adddays) * 1000;
 				long header = request.getDateHeader("If-Modified-Since");
-				long now = System.currentTimeMillis();
-				if (header > 0 && adddaysM > 0) {
-					if (modelLastModifiedDate > header) {
-						// adddays = 0; // reset
-						response.setStatus(HttpServletResponse.SC_OK);
-						return true;
-					}
-					if (header + adddaysM > now) {
+				if (header > 0) {
+					if (modelLastModifiedDate <= header || (modelLastModifiedDate - header)<1000) {
 						// during the period not happend modified
 						response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
 						return false;
