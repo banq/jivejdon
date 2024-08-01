@@ -54,8 +54,7 @@ public class ThreadEtagFilter extends Action {
 			return actionMapping.findForward(FormBeanUtil.FORWARD_SUCCESS_NAME);
 		}
 
-		// browser cache expire time; default is one hour
-		int expire = 1 * 60 * 60;
+		
 		String threadId = request.getParameter("thread");
 		if ((threadId == null) || (!StringUtils.isNumeric(threadId)) || threadId.length() > 10) {
 			response.sendError(404);
@@ -84,6 +83,8 @@ public class ThreadEtagFilter extends Action {
 
 		Calendar tc = Calendar.getInstance();
 		tc.setTime(new Date());
+		// browser cache expire time; default is one hour
+		int expire = 1 * 60 * 60;
 		if (c.after(tc)) {
 			expire = 24 * 60 * 60;
 		}

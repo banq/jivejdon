@@ -439,7 +439,7 @@ public class ToolsUtil {
 		response.setHeader("Cache-Control", maxAgeDirective);
 		response.setStatus(HttpServletResponse.SC_OK);
 		response.addDateHeader("Last-Modified", modelLastModifiedDate);
-		response.addDateHeader("Expires", modelLastModifiedDate + adddaysM);
+		response.addDateHeader("Expires", System.currentTimeMillis() + adddaysM);
 		return true;
 	}
 
