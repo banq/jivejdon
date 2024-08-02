@@ -36,7 +36,6 @@
 
 <%@ include file="searchInputView.jsp" %>
 
-<%-- <%@ include file="queryInputView.jsp" %> --%>
 
 <%@include file="../common/IncludeBottom.jsp"%>
 

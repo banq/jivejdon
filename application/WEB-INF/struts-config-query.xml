@@ -37,7 +37,7 @@
         </action>
 
         <action path="/message/threadViewQuery" type="com.jdon.jivejdon.presentation.action.query.QueryViewAction" name="queryForm" scope="request" validate="false">
-            <forward name="view" path="/query/queryView.jsp" />
+            <forward name="search" path="/query/queryView.jsp" />
             <!-- <forward name="threadQueryAction" path="/query/threadQueryAction.shtml" /> -->
             <!-- <forward name="messageQueryAction" path="/query/messageQueryAction.shtml" /> -->
             <!-- <forward name="userMessageQueryAction" path="/query/userMessageQueryAction.shtml" /> -->
