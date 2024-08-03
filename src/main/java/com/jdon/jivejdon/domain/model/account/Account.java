@@ -1,10 +1,10 @@
 package com.jdon.jivejdon.domain.model.account;
 
+import java.util.Date;
+import java.util.Observable;
+
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
-import com.jdon.jivejdon.spi.component.throttle.post.Throttler;
-import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 import com.jdon.jivejdon.domain.model.attachment.UploadFile;
 import com.jdon.jivejdon.domain.model.auth.Role;
 import com.jdon.jivejdon.domain.model.message.upload.UploadLazyLoader;
@@ -12,9 +12,9 @@ import com.jdon.jivejdon.domain.model.property.Reward;
 import com.jdon.jivejdon.domain.model.shortmessage.AccountSMState;
 import com.jdon.jivejdon.domain.model.subscription.SubscribedState;
 import com.jdon.jivejdon.domain.model.subscription.subscribed.AccountSubscribed;
-
-import java.util.Date;
-import java.util.Observable;
+import com.jdon.jivejdon.spi.component.throttle.post.Throttler;
+import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
+import com.jdon.jivejdon.util.Constants;
 
 /**
  * we have a SSO server, all auth information will be save to the sso server,
@@ -189,17 +189,17 @@ public class Account {
 
 	}
 
-	/**
-	 * @return Returns the messageCount.
-	 */
-	public int getMessageCount() {
-		if (isAnonymous())
-			return 0;
-		if (lazyLoaderRole != null)
-			return getAccountMessageVO().getMessageCount();
-		else
-			return 0;
-	}
+	// /**
+	//  * @return Returns the messageCount.
+	//  */
+	// public int getMessageCount() {
+	// 	if (isAnonymous())
+	// 		return 0;
+	// 	if (lazyLoaderRole != null)
+	// 		return getAccountMessageVO().getMessageCount();
+	// 	else
+	// 		return 0;
+	// }
 
 	public int getMessageCountNow() {
 		if (isAnonymous())
@@ -370,9 +370,9 @@ public class Account {
 		}
 		// if (methodNameNow.contains("create")) {
 		if (methodNameNow.contains("createTopic") || methodNameNow.contains("createReply")) {
-			if (getMessageCount() > throttler.getVipUserThrottleConf().getVipmessagecount())
+			if (getMessageCountNow() > throttler.getVipUserThrottleConf().getVipmessagecount())
 				isAllowed = throttler.checkVIPValidate(this);
-			else if (getMessageCount() <= throttler.getVipUserThrottleConf().getVipmessagecount()
+			else if (getMessageCountNow() <= throttler.getVipUserThrottleConf().getVipmessagecount()
 					&& methodNameNow.contains("createTopic"))
 				isAllowed = false;
 			else {
