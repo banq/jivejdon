@@ -56,12 +56,6 @@ public class AccountMessageVO extends LazyLoader {
 		return lazyLoaderRole.loadAccountMessageCount(accountId);
 	}
 
-	public int getMessageCountNow() {
-		if (messageCount == -1) {
-			messageCount = super.loadResult().map(value -> (Integer) value).orElse(0);
-		}
-		return messageCount;
-	}
 
 	public void update(int count) {
 		if (messageCount != -1) {

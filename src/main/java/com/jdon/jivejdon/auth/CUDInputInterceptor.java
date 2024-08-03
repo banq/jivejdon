@@ -16,22 +16,24 @@
  */
 package com.jdon.jivejdon.auth;
 
-import com.jdon.container.access.TargetMetaRequest;
-import com.jdon.container.access.TargetMetaRequestsHolder;
-import com.jdon.container.visitor.data.SessionContext;
-import com.jdon.controller.events.EventModel;
-import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.spi.component.block.ErrorBlockerIF;
-import com.jdon.jivejdon.spi.component.filter.InputSwitcherIF;
-import com.jdon.jivejdon.spi.component.throttle.post.Throttler;
-import com.jdon.jivejdon.domain.model.account.Account;
-import com.jdon.jivejdon.api.util.SessionContextUtil;
+import java.lang.reflect.Method;
+
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.lang.reflect.Method;
+import com.jdon.container.access.TargetMetaRequest;
+import com.jdon.container.access.TargetMetaRequestsHolder;
+import com.jdon.container.visitor.data.SessionContext;
+import com.jdon.controller.events.EventModel;
+import com.jdon.jivejdon.api.util.SessionContextUtil;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.infrastructure.repository.dao.MessageQueryDao;
+import com.jdon.jivejdon.spi.component.block.ErrorBlockerIF;
+import com.jdon.jivejdon.spi.component.filter.InputSwitcherIF;
+import com.jdon.jivejdon.spi.component.throttle.post.Throttler;
+import com.jdon.jivejdon.util.Constants;
 
 /**
  * web-inf/myaspect.xml
@@ -53,13 +55,16 @@ public class CUDInputInterceptor implements MethodInterceptor {
 
 	private final ErrorBlockerIF errorBlockerIF;
 
+	private final MessageQueryDao messageQueryDao;
+
 	public CUDInputInterceptor(Throttler throttler, TargetMetaRequestsHolder targetMetaRequestsHolder, SessionContextUtil sessionContextUtil,
-			InputSwitcherIF inputSwitcherIF, ErrorBlockerIF errorBlockerIF) {
+			InputSwitcherIF inputSwitcherIF, ErrorBlockerIF errorBlockerIF, MessageQueryDao messageQueryDao) {
 		this.throttler = throttler;
 		this.sessionContextUtil = sessionContextUtil;
 		this.inputSwitcherIF = inputSwitcherIF;
 		this.targetMetaRequestsHolder = targetMetaRequestsHolder;
 		this.errorBlockerIF = errorBlockerIF;
+		this.messageQueryDao = messageQueryDao;
 
 	}
 
@@ -97,7 +102,7 @@ public class CUDInputInterceptor implements MethodInterceptor {
 		Account account = sessionContextUtil.getLoginAccount(sessionContext);
 		if (account == null)
 			return false;
-		if (account.postIsAllowed(methodNameNow, throttler))
+		if (account.postIsAllowed(methodNameNow, throttler,  messageQueryDao))
 			return invocation.proceed();
 		else {
 			errorBlockerIF.checkCount(account.getPostIP(), 5);

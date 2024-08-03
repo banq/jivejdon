@@ -12,6 +12,7 @@ import com.jdon.jivejdon.domain.model.property.Reward;
 import com.jdon.jivejdon.domain.model.shortmessage.AccountSMState;
 import com.jdon.jivejdon.domain.model.subscription.SubscribedState;
 import com.jdon.jivejdon.domain.model.subscription.subscribed.AccountSubscribed;
+import com.jdon.jivejdon.infrastructure.repository.dao.MessageQueryDao;
 import com.jdon.jivejdon.spi.component.throttle.post.Throttler;
 import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 import com.jdon.jivejdon.util.Constants;
@@ -201,13 +202,10 @@ public class Account {
 	// 		return 0;
 	// }
 
-	public int getMessageCountNow() {
+	public int getMessageCountNow(MessageQueryDao messageQueryDao) {
 		if (isAnonymous())
 			return 0;
-		if (lazyLoaderRole != null)
-			return getAccountMessageVO().getMessageCountNow();
-		else
-			return 0;
+		return messageQueryDao.getMessageCountOfUser(Long.parseLong(userId));
 	}
 
 	public String getEmail() {
@@ -362,7 +360,7 @@ public class Account {
 	 * @param throttler
 	 * @return
 	 */
-	public boolean postIsAllowed(String methodNameNow, Throttler throttler) {
+	public boolean postIsAllowed(String methodNameNow, Throttler throttler, MessageQueryDao messageQueryDao) {
 		boolean isAllowed = false;
 		if (isMasked()) {
 			throttler.blockIP(getPostIP());
@@ -370,9 +368,9 @@ public class Account {
 		}
 		// if (methodNameNow.contains("create")) {
 		if (methodNameNow.contains("createTopic") || methodNameNow.contains("createReply")) {
-			if (getMessageCountNow() > throttler.getVipUserThrottleConf().getVipmessagecount())
+			if (getMessageCountNow(messageQueryDao) > throttler.getVipUserThrottleConf().getVipmessagecount())
 				isAllowed = throttler.checkVIPValidate(this);
-			else if (getMessageCountNow() <= throttler.getVipUserThrottleConf().getVipmessagecount()
+			else if (getMessageCountNow(messageQueryDao) <= throttler.getVipUserThrottleConf().getVipmessagecount()
 					&& methodNameNow.contains("createTopic"))
 				isAllowed = false;
 			else {
