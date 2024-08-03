@@ -190,17 +190,17 @@ public class Account {
 
 	}
 
-	// /**
-	//  * @return Returns the messageCount.
-	//  */
-	// public int getMessageCount() {
-	// 	if (isAnonymous())
-	// 		return 0;
-	// 	if (lazyLoaderRole != null)
-	// 		return getAccountMessageVO().getMessageCount();
-	// 	else
-	// 		return 0;
-	// }
+	/**
+	 * @return Returns the messageCount.
+	 */
+	public int getMessageCount() {
+		if (isAnonymous())
+			return 0;
+		if (lazyLoaderRole != null)
+			return getAccountMessageVO().getMessageCount();
+		else
+			return 0;
+	}
 
 	public int getMessageCountNow(MessageQueryDao messageQueryDao) {
 		if (isAnonymous())

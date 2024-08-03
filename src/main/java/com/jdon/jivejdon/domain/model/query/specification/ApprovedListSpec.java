@@ -140,7 +140,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	private boolean isGoodAuthor(Account account, int throttle) {
-		if (account.getMessageCountNow() >= throttle)
+		if (account.getMessageCount() >= throttle)
 			return true;
 		else
 			return false;
