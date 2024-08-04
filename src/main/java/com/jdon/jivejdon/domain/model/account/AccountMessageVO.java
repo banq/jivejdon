@@ -15,13 +15,15 @@
  */
 package com.jdon.jivejdon.domain.model.account;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.domain.model.util.LazyLoader;
 import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 
 public class AccountMessageVO extends LazyLoader {
 
-	private int messageCount = -1;
+	private final AtomicInteger messageCount = new AtomicInteger(-1);
 
 	private long accountId;
 
@@ -42,14 +44,24 @@ public class AccountMessageVO extends LazyLoader {
 	 * @return
 	 */
 	public int getMessageCount() {
-		if (messageCount == -1) {
-			if (super.domainMessage != null) {
-				messageCount = super.loadResult().map(value -> (Integer) value).orElse(0);
-			} else {
-				super.preload();
+		int count = messageCount.get();
+		if (count == -1) {
+			// 使用循环以确保在并发情况下正确设置
+			while (!messageCount.compareAndSet(-1, loadMessageCount())) {
+				// 如果更新失败，说明其他线程已经修改了值，重新读取当前值
+				count = messageCount.get();
+				if (count != -1) {
+					return count;
+				}
 			}
+			// 更新成功后读取最新的值
+			count = messageCount.get();
 		}
-		return messageCount;
+		return count;
+	}
+
+	public int loadMessageCount(){
+		return super.loadResult().map(value -> (Integer) value).orElse(0);
 	}
 
 	public DomainMessage getDomainMessage() {
@@ -58,8 +70,8 @@ public class AccountMessageVO extends LazyLoader {
 
 
 	public void update(int count) {
-		if (messageCount != -1) {
-			messageCount = messageCount + count;
+		if (messageCount.get() != -1) {
+			messageCount.addAndGet(count);
 		}
 
 	}

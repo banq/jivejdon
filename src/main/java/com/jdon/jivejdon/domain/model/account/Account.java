@@ -226,9 +226,8 @@ public class Account {
 
 	public String getRoleName() {
 		if (lazyLoaderRole != null && this.roleName == null)
-			return getRoleLoader().getRoleName();
-		else
-			return "User";
+			this.roleName = getRoleLoader().getRoleName();
+		return this.roleName;
 	}
 
 	public void setRoleName(String roleName) {

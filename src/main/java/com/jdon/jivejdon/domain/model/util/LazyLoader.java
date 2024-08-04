@@ -16,21 +16,32 @@
 package com.jdon.jivejdon.domain.model.util;
 
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 import com.jdon.domain.message.DomainMessage;
 
 public abstract class LazyLoader {
 
-	protected volatile DomainMessage domainMessage;
+	protected final AtomicReference<DomainMessage> domainMessageRef = new AtomicReference<>(null);
 
 	public Object loadBlockedResult() {
-		if (domainMessage == null)
-			preload();
+
+		// 尝试获取 domainMessage
+		DomainMessage domainMessage = domainMessageRef.get();
+
+		// 如果 domainMessage 为 null，调用 preload 方法进行预加载
+		if (domainMessage == null) {
+			preload(); // 可能会设置 domainMessageRef
+			domainMessage = domainMessageRef.get(); // 再次获取更新后的 domainMessage
+		}
+
 		Object loadedResult = null;
 		try {
-			loadedResult = domainMessage.getBlockEventResult();
-			if (loadedResult != null)
-				domainMessage.clear();
+			if (domainMessage != null) {
+				loadedResult = domainMessage.getBlockEventResult();
+				// 如果需要的话，清除 domainMessage
+				// ((YourDomainMessageType) domainMessage).clear();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -44,37 +55,47 @@ public abstract class LazyLoader {
 	 * @return
 	 */
 	public Optional<Object> loadResult() {
-		if (domainMessage == null)
-			preload();
+		// 尝试获取 domainMessage
+		DomainMessage domainMessage = domainMessageRef.get();
+
+		// 如果 domainMessage 为 null，调用 preload 方法进行预加载
+		if (domainMessage == null) {
+			preload(); // 可能会设置 domainMessageRef
+			domainMessage = domainMessageRef.get(); // 再次获取更新后的 domainMessage
+		}
+
 		Object loadedResult = null;
 		try {
-			loadedResult = domainMessage.getEventResult();
-			// if (loadedResult != null)
-			// 	domainMessage.clear();
+			if (domainMessage != null) {
+				loadedResult = domainMessage.getEventResult();
+				// 如果需要的话，清除 domainMessage
+				// ((YourDomainMessageType) domainMessage).clear();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return Optional.ofNullable(loadedResult) ;
+
+		return Optional.ofNullable(loadedResult);
 
 	}
 
 	public void preload() {
 		try {
-			if (domainMessage == null)
-				domainMessage = getDomainMessage();
+			// 尝试将 domainMessageRef 设置为从 getDomainMessage() 获取的值
+			domainMessageRef.compareAndSet(null, getDomainMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void clear() {
-		if (this.domainMessage != null) {
-			domainMessage.clear();
+		if (domainMessageRef.get() != null) {
+			domainMessageRef.get().clear();
 		}
 	}
 
 	public void setDomainMessage(DomainMessage domainMessage) {
-		this.domainMessage = domainMessage;
+		domainMessageRef.set(domainMessage);
 	}
 
 	public abstract DomainMessage getDomainMessage();

@@ -49,9 +49,9 @@ public class Attachment extends LazyLoader {
 	 */
 	public UploadFile getUploadFile() {
 		if (uploadFile == null) {
-			if (this.domainMessage == null && uploadLazyLoader != null) {
+			if (this.domainMessageRef.get() == null && uploadLazyLoader != null) {
 				super.preload();
-			} else if (this.domainMessage != null) {
+			} else if (this.domainMessageRef.get() != null) {
 				uploadFile = super.loadResult().map(value -> (UploadFile) value).orElse(null);
 			}
 		}
@@ -59,7 +59,7 @@ public class Attachment extends LazyLoader {
 	}
 
 	public void updateUploadFile() {
-		this.domainMessage = uploadLazyLoader.loadUploadFile(Long.toString(this.accountId));
+		this.domainMessageRef.set(uploadLazyLoader.loadUploadFile(Long.toString(this.accountId)));
 	}
 
 	@Override

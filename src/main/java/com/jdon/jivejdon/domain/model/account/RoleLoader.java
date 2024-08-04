@@ -15,6 +15,8 @@
  */
 package com.jdon.jivejdon.domain.model.account;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.domain.model.util.LazyLoader;
 import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
@@ -25,7 +27,7 @@ public class RoleLoader extends LazyLoader {
 
 	private final LazyLoaderRole lazyLoaderRole;
 
-	private volatile String rolename;
+	private final AtomicReference<String> rolenameRef = new AtomicReference<>(null);
 
 	public RoleLoader(long accountId, LazyLoaderRole lazyLoaderRole) {
 		super();
@@ -33,16 +35,23 @@ public class RoleLoader extends LazyLoader {
 		this.lazyLoaderRole = lazyLoaderRole;
 	}
 
+	
+    //from chatGPT thread safe
 	public String getRoleName() {
+		// Use the rolenameRef to ensure thread-safe access to rolename
+		String rolename = rolenameRef.get();
 		if (rolename == null) {
-			if (this.domainMessage == null && lazyLoaderRole != null) {
-				super.preload();
-			} else if (this.domainMessage != null) {
+            
+			if (domainMessageRef.get() == null && lazyLoaderRole != null) {
+				super.preload(); // Assuming preload is thread-safe
+			}
+			if (domainMessageRef.get() != null) {
 				rolename = super.loadResult().map(value -> (String) value).orElse(null);
+				// Use AtomicReference's compareAndSet to ensure atomic updates
+				rolenameRef.compareAndSet(null, rolename);
 			}
 		}
-
-		return rolename;
+		return rolenameRef.get();
 	}
 
 	@Override
