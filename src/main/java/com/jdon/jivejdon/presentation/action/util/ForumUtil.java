@@ -15,37 +15,29 @@
  */
 package com.jdon.jivejdon.presentation.action.util;
 
-import com.jdon.controller.WebAppUtil;
-import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.query.ResultSort;
-import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
-import com.jdon.jivejdon.api.query.ForumMessageQueryService;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import javax.servlet.ServletContext;
 
-public class ForumUtil {
+import com.jdon.controller.WebAppUtil;
+import com.jdon.controller.model.PageIterator;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
+import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
 
+public class ForumUtil {
+    private final static ConcurrentMap<String, Object> serviceCache = new ConcurrentHashMap<>();
+
+	private static ForumMessageQueryService getForumMessageQueryService(ServletContext sc) {
+		return (ForumMessageQueryService) serviceCache.computeIfAbsent("forumMessageQueryService",
+				k -> WebAppUtil.getService("forumMessageQueryService", sc));
+	}
 
 	public static long getForumsLastModifiedDate(ServletContext sc) {
-		long restult = System.currentTimeMillis();
-		try {
-			ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService)
-					WebAppUtil.getService("forumMessageQueryService", sc);
-			ResultSort resultSort = new ResultSort();
-			resultSort.setOrder_DESCENDING();
-			ThreadListSpec threadListSpec = new ThreadListSpec();
-			threadListSpec.setResultSort(resultSort);
-			PageIterator pageIterator = forumMessageQueryService.getThreads(0, 1,
-					threadListSpec);
-			if (pageIterator.hasNext()) {
-				ForumThread thread = forumMessageQueryService.getThread((Long) pageIterator.next
-						());
-				restult = thread.getCreationDate2();
-			}
-		} catch (Exception ex) {
-		}
-		return restult;
+		PageIterator pi = getForumMessageQueryService(sc).getThreads(0, 1, new ThreadListSpec());
+		return pi.hasNext() ? getForumMessageQueryService(sc).getThread((Long) pi.next()).getCreationDate2()
+				: System.currentTimeMillis();
+
 	}
 
 }
