@@ -43,9 +43,8 @@ public class ForumEtagFilterAction extends Action {
 
 	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		long modelLastModifiedDate = ForumUtil.getForumsLastModifiedDate(this.servlet
-				.getServletContext());
-		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
+
+		if (!ToolsUtil.checkHeaderCacheForum(expire, this.servlet.getServletContext(), request, response)) {
 			return null;
 		}
 		return actionMapping.findForward("success");

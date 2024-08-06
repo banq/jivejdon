@@ -50,7 +50,6 @@ import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.domain.model.query.ResultSort;
 import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
-import com.jdon.jivejdon.presentation.action.util.ForumUtil;
 import com.jdon.jivejdon.spi.component.sitemap.SitemapRepository;
 import com.jdon.jivejdon.spi.component.sitemap.SitemapService;
 import com.jdon.jivejdon.spi.component.sitemap.Url;
@@ -95,8 +94,7 @@ public class RSSGenServlet extends HttpServlet {
 
 	protected boolean checkModifiedEtagFilter(HttpServletRequest request, HttpServletResponse response) {
 		int expire = 5 * 60 * 60;
-		long modelLastModifiedDate = ForumUtil.getForumsLastModifiedDate(this.getServletContext());
-		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request, response)) {
+		if (!ToolsUtil.checkHeaderCacheForum(expire, this.getServletContext(), request, response)) {
 			return false;
 		}
 		return true;

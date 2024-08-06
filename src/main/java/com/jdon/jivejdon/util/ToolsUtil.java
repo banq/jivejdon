@@ -27,10 +27,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jdon.jivejdon.presentation.action.util.ForumUtil;
 import com.jdon.util.UtilDateTime;
 
 /**
@@ -377,14 +379,24 @@ public class ToolsUtil {
 		return hostName;
 	}
 
+	public static boolean checkHeaderCacheForum(long adddays, ServletContext sc, HttpServletRequest request,
+			HttpServletResponse response) {
+		if (request.getHeader("If-None-Match") == null && request.getDateHeader("If-Modified-Since") <= 0) {
+			return true;
+		}
+		return checkHeaderCache(adddays, ForumUtil.getForumsLastModifiedDate(sc), request, response);
+
+	}
 
 	public static boolean checkHeaderCache(long adddays, long modelLastModifiedDate, HttpServletRequest request,
 			HttpServletResponse response) {
+		if (request.getHeader("If-None-Match") == null && request.getDateHeader("If-Modified-Since") <= 0) {
+			return true;
+		}
 		if (request.getAttribute("myExpire") != null) {
 			System.err.print(" checkHeaderCache called above twice times :" + request.getRequestURI());
 			return true;
 		}
-		// com.jdon.jivejdon.presentation.filter.ExpiresFilter
 		request.setAttribute("myExpire", adddays);
 
 		// convert seconds to ms.
@@ -403,7 +415,7 @@ public class ToolsUtil {
 			} else {
 				long header = request.getDateHeader("If-Modified-Since");
 				if (header > 0) {
-					if (modelLastModifiedDate <= header || (modelLastModifiedDate - header)<1000) {
+					if (modelLastModifiedDate <= header || (modelLastModifiedDate - header) < 1000) {
 						// during the period not happend modified
 						response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
 						return false;

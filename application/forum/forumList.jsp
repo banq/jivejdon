@@ -7,10 +7,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <%          
-long modelLastModifiedDate = com.jdon.jivejdon.presentation.action.util.ForumUtil.getForumsLastModifiedDate(this.getServletContext());
-if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCache(5 * 60 * 60, modelLastModifiedDate, request, response)) {
-    return ;
-}	
+if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.getServletContext(), request, response)) {
+     return ;
+ }	
 %>
 <!DOCTYPE html>
 <html lang="zh-CN">
