@@ -23,7 +23,7 @@ public class QueryViewAction extends Action {
 		if (UtilValidate.isEmpty(query))
 			return mapping.findForward("view");
 		
-		query = query.replaceAll("[^(a-zA-Z0-9\\s\\u4e00-\\u9fa5)]", "");
+		
 		ActionRedirect redirect = new ActionRedirect(mapping.findForward("search"));
 		redirect.addParameter("query", query);
 		return redirect;
