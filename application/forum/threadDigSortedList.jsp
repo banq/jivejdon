@@ -57,7 +57,7 @@ pageContext.setAttribute("title", titleStr);
 <meta name="Description" content="近几年来最佳热点趋势与教程">
 <meta name="Keywords" content="认知,逻辑,编程,技巧,模式,编程心得,有趣项目,Java教程,SpringBoot教程,软件架构,系统设计,大科技、自然科学,科普,AI,自然语言,大模型">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
-<link rel="alternate" type="application/rss+xml" title="极道订阅" href="/rss">
+
   
    <%if(pagestartInt != 0 ) {%> 
         <%if(pagestartInt-pagecountInt>0 ) {%>  

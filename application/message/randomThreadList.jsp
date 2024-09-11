@@ -32,7 +32,7 @@ if (currentPageNo > 1){
 pageContext.setAttribute("title", titleStr);
 %>
 <%@ include file="../common/IncludeTop.jsp" %>
-<link rel="alternate" type="application/rss+xml" title="<bean:write name="title" /> " href="/rss" /> 
+ 
 
 <main>
 <div id="page-content" class="single-page container">

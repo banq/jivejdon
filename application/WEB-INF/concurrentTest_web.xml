@@ -122,10 +122,10 @@
         </init-param>
     </servlet>
 
-    <servlet-mapping>
+    <!-- <servlet-mapping>
         <servlet-name>RSSGenServlet</servlet-name>
         <url-pattern>/rss</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping> -->
     <servlet-mapping>
         <servlet-name>action</servlet-name>
         <url-pattern>*.shtml</url-pattern>

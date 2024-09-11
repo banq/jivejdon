@@ -48,7 +48,7 @@ int i=0;
        <div class="tagcloud">
         <a href='<%=request.getContextPath() %>/tag-<bean:write name="threadTag" property="tagID"/>/' target="_blank" class="tag-cloud-link">
 		    <bean:write name="threadTag" property="title" /></a>
-	      <a href="/tag-<bean:write name="threadTag" property="tagID"/>/rss" title="订阅"><i class="fa fa-feed"></i></a>
+	      
        </div>
        </div> 
       </div>

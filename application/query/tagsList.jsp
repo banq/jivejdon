@@ -49,7 +49,7 @@ pageContext.setAttribute("title", titleStr);
    <meta name="Description" content="编程 软件架构 教程">
    <meta name="Keywords" content="Java教程,SpringBoot教程,程序,算法,模式,数据库,计算机科学,面试技巧,程序员职场,幽默,meme,Python,Java,JavaScript,安卓,SQL,数据科学,机器学习,Web开发,系统设计,技术博客,面试,HTML,CSS,golang,Rust">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
-  <link rel="alternate" type="application/rss+xml" title="极道订阅" href="/rss">
+  
  
 <%if(pagestartInt != 0 ) {%> 
     <%if(pagestartInt-pagecountInt>0 ) {%>  
@@ -130,7 +130,6 @@ int h = 0 ;
        <div class="tagcloud">
         <a href='<%=request.getContextPath() %>/tag-<bean:write name="threadTag" property="tagID"/>/' target="_blank" class="tag-cloud-link">
 		    <bean:write name="threadTag" property="title" /></a>
-	      <a href="/tag-<bean:write name="threadTag" property="tagID"/>/rss" title="订阅"><i class="fa fa-feed"></i></a>
        </div>
        </div> 
       </div>

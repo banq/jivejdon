@@ -173,10 +173,10 @@
         </init-param>
     </servlet>
 
-    <servlet-mapping>
+    <!-- <servlet-mapping>
         <servlet-name>RSSGenServlet</servlet-name>
         <url-pattern>/RSServlet</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping> -->
     <servlet-mapping>
         <servlet-name>SitemapServlet</servlet-name>
         <url-pattern>/sitemap</url-pattern>
