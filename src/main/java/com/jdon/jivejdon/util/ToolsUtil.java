@@ -381,18 +381,14 @@ public class ToolsUtil {
 
 	public static boolean checkHeaderCacheForum(long adddays, ServletContext sc, HttpServletRequest request,
 			HttpServletResponse response) {
-		if (request.getHeader("If-None-Match") == null && request.getDateHeader("If-Modified-Since") <= 0) {
-			return true;
-		}
+
 		return checkHeaderCache(adddays, ForumUtil.getForumsLastModifiedDate(sc), request, response);
 
 	}
 
 	public static boolean checkHeaderCache(long adddays, long modelLastModifiedDate, HttpServletRequest request,
 			HttpServletResponse response) {
-		if (request.getHeader("If-None-Match") == null && request.getDateHeader("If-Modified-Since") <= 0) {
-			return true;
-		}
+
 		if (request.getAttribute("myExpire") != null) {
 			System.err.print(" checkHeaderCache called above twice times :" + request.getRequestURI());
 			return true;
