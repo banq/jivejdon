@@ -111,6 +111,30 @@ function setValuesss(){
 
 </logic:equal>   
 
+
+<div class="box">	
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+      
+          <ul class="list-inline">
+        
+            <logic:iterate id="threadTag" name="forumThread" property="tags" >
+              <li class="tagcloud">
+                <a href="/tag-<bean:write name="threadTag" property="tagID"/>/" target="_blank" class="tag-cloud-link">
+                  <bean:write name="threadTag" property="title" /></a>
+              </li>
+           
+            </logic:iterate>
+            
+    </div>
+    <div class="col-sm-3"></div>
+  </div>
+  </div>
+  
+</div>
+
+
 <div class="box">	
   <div class="row">
     <div class="col-sm-3"></div>
