@@ -15,8 +15,6 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-   
-  
   <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
   <link rel="preconnect" href="https://www.googletagmanager.com/">  
   <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
@@ -52,7 +50,11 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
        s.parentNode.insertBefore(hm, s);
      })();
      </script>
-     
+  <link rel="preload" href="/simgs/thumb/1.jpg" as="image">   
+  <link rel="preload" href="/simgs/thumb/2.jpg" as="image">   
+  <link rel="preload" href="/simgs/thumb/3.jpg" as="image">   
+  <link rel="preload" href="/simgs/thumb/4.jpg" as="image">   
+  <link rel="preload" href="/simgs/thumb/5.jpg" as="image">   
 </head>
 <body style="background-color:#FFF">
 <%@ include file="./common/body_header.jsp" %>
