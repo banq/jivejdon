@@ -202,7 +202,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                           <div class="wrap-vid">              
                                  <logic:notEmpty name="forumThreadTag" property="rootMessage.messageUrlVO.imageUrl">                  
                                    <div class="thumbn">
-                                        <img src="<bean:write name="forumThreadTag" property="rootMessage.messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="70" height="70" onerror="this.src='/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg'"/>    
+                                        <img src="<bean:write name="forumThreadTag" property="rootMessage.messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="70" height="70" onerror="this.src='/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg'"/>    
                                    </div>
                                  </logic:notEmpty>
                                   

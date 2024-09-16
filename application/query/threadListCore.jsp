@@ -49,7 +49,7 @@
           <div class="wrap-vid">              
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">                  
                   <div>
-                    <img src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" onerror="this.src='/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg'"/>    
+                    <img src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" onerror="this.src='/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg'"/>    
                   </div>
                   <div>
                      <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. 
