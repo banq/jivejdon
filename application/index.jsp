@@ -81,7 +81,7 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
  
 </div>
 
-    <jsp:include page="/query/threadApprovedNewList3.shtml?count=15" flush="true"></jsp:include>        
+    <jsp:include page="/query/threadApprovedNewList3.shtml?count=5" flush="true"></jsp:include>        
 	
     <div class="box"> 
 	    <div class="tres center">        
@@ -124,7 +124,7 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
                 <div>
 					    <div>
 					
-                              <div id="newList"><jsp:include page="/query/threadNewList.shtml?count=10" flush="true"></jsp:include></div>   
+                              <div id="newList"><jsp:include page="/query/threadNewList.shtml?count=5" flush="true"></jsp:include></div>   
 							   
 							</div>
 				</div>
