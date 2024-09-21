@@ -82,7 +82,7 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
 	
     <div class="box"> 
 	    <div class="tres center">        
-           追踪前沿最新技术 <a href="/approval/"><b>更多</b></a>	   
+           追踪前沿最黑科技 <a href="/approval/"><b>更多</b></a>	   
 		</div>
     </div>
 		  
