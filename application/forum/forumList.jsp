@@ -124,7 +124,7 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
         <div class="widget">
 					    <div class="wid-vid">
 						
-							   
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
 <!-- 内容右侧悬浮广告 -->
 <ins class="adsbygoogle"
      style="display:block"
@@ -188,7 +188,6 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
 
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
 
 </body>
 </html>

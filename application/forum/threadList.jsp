@@ -319,7 +319,7 @@ pageContext.setAttribute("title", titleStr);
         <div class="widget">
 					    <div class="wid-vid">
 						
-							   
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>				   
 <!-- 内容右侧悬浮广告 -->
 <ins class="adsbygoogle"
      style="display:block"
@@ -384,7 +384,6 @@ pageContext.setAttribute("title", titleStr);
 </div>
 </div>
 </div>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
 
 </body>
 </html>

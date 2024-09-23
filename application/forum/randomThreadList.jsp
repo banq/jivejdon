@@ -85,18 +85,7 @@ pageContext.setAttribute("title", titleStr);
         <!---- Start tags ---->
         <div class="widget">
 					    <div class="wid-vid">
-						
-							   
-<!-- 内容右侧悬浮广告 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="5184711902"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+				
 
 							</div>
 				</div>
@@ -121,17 +110,7 @@ pageContext.setAttribute("title", titleStr);
            <div class="wid-vid">
 							    <div class="scrolldiv">
 							     <div style="width: 300px"> 
-
-<!-- 内容右侧悬浮广告 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="5184711902"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>                   
+            
 		                  
                    </div> 
 							    </div>    
@@ -147,7 +126,6 @@ pageContext.setAttribute("title", titleStr);
  
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
   
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
 
 </body>
 </html>
