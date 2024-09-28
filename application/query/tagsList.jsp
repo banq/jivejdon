@@ -7,7 +7,7 @@
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
 
-<bean:define id="title"  value="编程教程全系列" />
+<bean:define id="title"  value="话题系列" />
 <bean:define id="pagestart" name="tagsListForm" property="start" />
 <bean:define id="pagecount" name="tagsListForm" property="count" />
 <bean:define id="pageallCount" name="tagsListForm" property="allCount" />
@@ -32,6 +32,7 @@ pageContext.setAttribute("title", titleStr);
 <head>
    	
    <%@include file="../common/IncludeTopHead.jsp"%>
+   <meta name="robots" content="noindex">
    <meta name="Description" content="编程 软件架构 教程">
    <meta name="Keywords" content="Java教程,SpringBoot教程,程序,算法,模式,数据库,计算机科学,面试技巧,程序员职场,幽默,meme,Python,Java,JavaScript,安卓,SQL,数据科学,机器学习,Web开发,系统设计,技术博客,面试,HTML,CSS,golang,Rust">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">

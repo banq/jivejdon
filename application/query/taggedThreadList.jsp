@@ -41,10 +41,9 @@ pageContext.setAttribute("title", titleStr);
 <html lang="zh-CN">
 <head>
    <%@include file="../common/IncludeTopHead.jsp"%>
-   <meta name="Description" content="有关<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>系列文章">
-<meta name="Keywords" content="<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>,最佳实践,教材,论文,文章,技巧,模式,编程心得,面试,设计">
-<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
-  
+   <meta name="robots" content="noindex">
+   <meta name="Description" content="有关<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>系列">
+<meta name="Keywords" content="<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>">
 <% if (request.getParameter("r") == null){ %>  
 <%if(pagestartInt != 0 ) {%> 
     <%if(pagestartInt-pagecountInt>0 ) {%>  
