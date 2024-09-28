@@ -68,18 +68,18 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <link rel="apple-touch-icon" href="https://www.jdon.com/simgs/jdon100.png" />
     <%if(pagestartInt != 0 ) {%> 
         <%if(pagestartInt-pagecountInt>0 ) {%>  
-            <link rel="prev" href="<%=domainUrl %>/post/<bean:write name="forumThread" property="threadId" />/<%=(pagestartInt-pagecountInt)%>"/>
+            <link rel="prev" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />/page/<%=(pagestartInt-pagecountInt)%>"/>
         <%}else{%>
             <link rel="prev" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html"/>
          <%}%>
     <%}%>
     <%if (currentPageNo > 1) {%>
-         <link rel="canonical" href="<%=domainUrl %>/post/<bean:write name="forumThread" property="threadId" />/<%=pagestartInt%>"> 
+         <link rel="canonical" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />/page/<%=pagestartInt%>"> 
     <%}else{%>
           <link rel="canonical" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html">  
     <%}%>   
     <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
-            <link rel="next" href="<%=domainUrl %>/post/<bean:write name="forumThread" property="threadId" />/<%=pagestartInt+pagecountInt%>"/>
+            <link rel="next" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />/page/<%=pagestartInt+pagecountInt%>"/>
     <%}%>
     <script defer src="/js/jquery-bootstrap2.js"></script>   
     <script defer src="/common/messageList12.js"></script>  
@@ -124,7 +124,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
  <%if(pagestartInt != 0 ) {%> 
  <span class="pull-left">
     <%if(pagestartInt-pagecountInt>0 ) {%>  
-        <a href="/post/<bean:write name="forumThread" property="threadId" />/<%=(pagestartInt-pagecountInt)%>" >上页</a>
+        <a href="/<bean:write name="forumThread" property="threadId" />/page/<%=(pagestartInt-pagecountInt)%>" >上页</a>
     <%}else{%>
         <a href="/<bean:write name="forumThread" property="threadId" />.html" >上页</a>
      <%}%>
@@ -136,7 +136,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <div class="col-lg-4">
 <span class="pull-right"> 
     <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
-    <a href="/post/<bean:write name="forumThread" property="threadId" />/<%=pagestartInt+pagecountInt%>" >下页</a>
+    <a href="/<bean:write name="forumThread" property="threadId" />page/<%=pagestartInt+pagecountInt%>" >下页</a>
     <%}%>
 </span>
 </div>
