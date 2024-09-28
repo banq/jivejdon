@@ -74,7 +74,7 @@
 				</td>
 				
 				<td class="contact"  >
-					<a href="<%=request.getContextPath()%>/tag-<bean:write name="subscribed" property="subscribeId"/>/" 
+					<a href="<%=request.getContextPath()%>/tag/<bean:write name="subscribed" property="subscribeId"/>/" 
               target="_blank">
 						<bean:write name="subscribed" property="name" />
 					</a>

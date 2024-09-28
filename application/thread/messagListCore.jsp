@@ -248,7 +248,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         
             <logic:iterate id="threadTag" name="forumThread" property="tags" >
               <li class="tagcloud">
-                <a href="/tag-<bean:write name="threadTag" property="tagID"/>/" target="_blank" class="tag-cloud-link">
+                <a href="/tag/<bean:write name="threadTag" property="tagID"/>/" target="_blank" class="tag-cloud-link">
                   <bean:write name="threadTag" property="title" /></a>
               </li>
            
