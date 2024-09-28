@@ -44,6 +44,7 @@ pageContext.setAttribute("title", titleStr);
    <meta name="robots" content="noindex">
    <meta name="Description" content="有关<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>系列">
 <meta name="Keywords" content="<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>">
+<link rel="canonical" href="/tag/<bean:write name="tagID"/>/"/>  
 <% if (request.getParameter("r") == null){ %>  
 <%if(pagestartInt != 0 ) {%> 
     <%if(pagestartInt-pagecountInt>0 ) {%>  
@@ -52,13 +53,6 @@ pageContext.setAttribute("title", titleStr);
         <link rel="prev" href="/tag/<bean:write name="tagID"/>/"/>
      <%}%>
  <%}%>
- 
-   <%if (currentPageNo > 1) {%>
-         <link rel="canonical" href="/tag/<bean:write name="tagID"/>/<%=pagestartInt%>"/> 
-   <% }else{%>
-          <link rel="canonical" href="/tag/<bean:write name="tagID"/>/"/>  
-   <% }%>    
-
  <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
     <link rel="next" href="/tag/<bean:write name="tagID"/>/<%=pagestartInt+pagecountInt%>"/>
  <%}%>
