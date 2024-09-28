@@ -59,9 +59,6 @@ public class TaggedThreadListAction extends ModelListAction {
 			if (tagID == null || !StringUtils.isNumeric(tagID) || tagID.length() > 10) {
 				return new PageIterator();
 			}
-			if (start % COUNT != 0) {
-				return new PageIterator();
-			}
 
 			Long tagIDL = Long.parseLong(tagID);
 			ThreadTag tag = othersService.getThreadTag(tagIDL);
