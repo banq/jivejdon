@@ -13,7 +13,7 @@
                     <a href="/random/MessageRandomList.shtml"><img src="/simgs/jdon100.png" width="100" height="40" loading="lazy" alt="极道Jdon"/></a>
                     <span class="list-inline top-link link pull-right">
 				        <a href="/forum/"><i class="fa fa-home"></i>Dojo</a>
-                        <a href="/tag"><i class="fa fa-arrow-circle-o-down"></i>话题</a>
+                        <a href="/tag/"><i class="fa fa-arrow-circle-o-down"></i>话题</a>
 						<a href="/approval/"><i class="fa fa-star-half-full"></i>新佳</a>
                         <a href="/followus.html"><i class="fa fa-feed"></i>订阅</a>
                     </span>

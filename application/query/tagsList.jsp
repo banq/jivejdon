@@ -42,13 +42,13 @@ pageContext.setAttribute("title", titleStr);
     <%if(pagestartInt-pagecountInt>0 ) {%>  
         <link rel="prev" href="/tag/page/<%=(pagestartInt-pagecountInt)%>"/>
     <%}else{%>
-        <link rel="prev" href="/tag"/>
+        <link rel="prev" href="/tag/"/>
      <%}%>
  <%}%>
 <%if (currentPageNo > 1) {%>
        <link rel="canonical" href="/tag/page/<%=pagestartInt%>"/>      
    <% }else{%>
-         <link rel="canonical" href="/tag"/>  
+         <link rel="canonical" href="/tag/"/>  
    <% }%>
           
  <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
@@ -152,7 +152,7 @@ int h = 0 ;
     <%if(pagestartInt-pagecountInt>0 ) {%>  
         <a href="/tag/page/<%=(pagestartInt-pagecountInt)%>" rel="prev">上页</a>
     <%}else{%>
-        <a href="/tag" rel="prev">上页</a>
+        <a href="/tag/" rel="prev">上页</a>
      <%}%>
  </span>
  <%}%>

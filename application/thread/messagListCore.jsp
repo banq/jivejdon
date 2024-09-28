@@ -66,21 +66,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     </style> 
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
     <link rel="apple-touch-icon" href="https://www.jdon.com/simgs/jdon100.png" />
-    <%if(pagestartInt != 0 ) {%> 
-        <%if(pagestartInt-pagecountInt>0 ) {%>  
-            <link rel="prev" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />/page/<%=(pagestartInt-pagecountInt)%>"/>
-        <%}else{%>
-            <link rel="prev" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html"/>
-         <%}%>
-    <%}%>
-    <%if (currentPageNo > 1) {%>
-         <link rel="canonical" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />/page/<%=pagestartInt%>"> 
-    <%}else{%>
-          <link rel="canonical" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html">  
-    <%}%>   
-    <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
-            <link rel="next" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />/page/<%=pagestartInt+pagecountInt%>"/>
-    <%}%>
+    <link rel="canonical" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html">  
     <script defer src="/js/jquery-bootstrap2.js"></script>   
     <script defer src="/common/messageList12.js"></script>  
     <script>
@@ -136,7 +122,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <div class="col-lg-4">
 <span class="pull-right"> 
     <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
-    <a href="/<bean:write name="forumThread" property="threadId" />page/<%=pagestartInt+pagecountInt%>" >下页</a>
+    <a href="/<bean:write name="forumThread" property="threadId" />/page/<%=pagestartInt+pagecountInt%>" >下页</a>
     <%}%>
 </span>
 </div>

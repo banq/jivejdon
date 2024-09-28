@@ -146,7 +146,7 @@
         <to>/query/tagsList2.shtml</to>
     </rule>
     <rule>
-        <from>^/tag$</from>
+        <from>^/tag/$</from>
         <to>/query/tagsList.shtml?count=6&amp;start=0</to>
     </rule>
    
