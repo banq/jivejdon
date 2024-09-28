@@ -172,7 +172,7 @@
 		<component name="tagNotifyMessage"
 			class="com.jdon.jivejdon.domain.model.subscription.messsage.TagNotifyMessage">
 			<constructor value="您关注的标签有新主题 " />
-            <constructor value="https://jdon.com/tag-tagId/"/>
+            <constructor value="https://jdon.com/tag/tagId/"/>
 			<constructor value="admin" />
 		</component>
 

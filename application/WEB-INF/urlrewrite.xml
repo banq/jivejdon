@@ -146,15 +146,12 @@
         <to>/query/tagsList2.shtml</to>
     </rule>
     <rule>
-        <from>^/tagAll/$</from>
+        <from>^/tag$</from>
         <to>/query/tagsList.shtml?count=6&amp;start=0</to>
     </rule>
+   
     <rule>
-        <from>^/tagAll$</from>
-        <to>/query/tagsList.shtml?count=6&amp;start=0</to>
-    </rule>
-    <rule>
-        <from>^/tagAll/([0-9]+)$</from>
+        <from>^/tag/page/([0-9]+)$</from>
         <to>/query/tagsList.shtml?count=6&amp;start=$1</to>
     </rule>
     <rule>
