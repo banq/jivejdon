@@ -36,8 +36,6 @@ public class TagsListAction extends ModelListAction {
 	 * .HttpServletRequest, int, int)
 	 */
 	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
-		if (start % 30 != 0) 
-			return new PageIterator();
 		TagService othersService = (TagService) WebAppUtil.getService("othersService", this.servlet.getServletContext());
 		return othersService.getThreadTags(start, count);
 	}

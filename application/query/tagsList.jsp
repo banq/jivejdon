@@ -31,20 +31,6 @@ pageContext.setAttribute("title", titleStr);
 <html lang="zh-CN">
 <head>
    	
-   
-   <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
-   <link rel="preconnect" href="https://www.googletagmanager.com/">  
-   <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
-   <link rel="preconnect" href="https://tpc.googlesyndication.com/">
-   <link rel="preconnect" href="https://www.googletagservices.com/">
-   <link rel="preconnect" href="https://static.googleadsserving.cn/">
-   <link rel="preconnect" href="https://www.gstatic.com/">
-   <link rel="preconnect" href="https://fonts.gstatic.com/">
-   <link rel="preconnect" href="https://www.gstatic.cn/">
-   <link rel="preconnect" href="https://fonts.googleapis.com/">
-   <link rel="preconnect" href="https://cm.g.doubleclick.net/">
-   <link rel="preconnect" href="https://ad.doubleclick.net/">
-   <link rel="preconnect" href="https://fundingchoicesmessages.google.com/">
    <%@include file="../common/IncludeTopHead.jsp"%>
    <meta name="Description" content="编程 软件架构 教程">
    <meta name="Keywords" content="Java教程,SpringBoot教程,程序,算法,模式,数据库,计算机科学,面试技巧,程序员职场,幽默,meme,Python,Java,JavaScript,安卓,SQL,数据科学,机器学习,Web开发,系统设计,技术博客,面试,HTML,CSS,golang,Rust">
@@ -88,16 +74,6 @@ pageContext.setAttribute("title", titleStr);
 <logic:present name="tagsListForm">
 <logic:greaterThan name="tagsListForm" property="allCount" value="0">
 
-
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="fluid"
-     data-ad-layout-key="-ev-1p-5j-ot+26n"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="3378777426"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <main>
 <div class="row">
@@ -199,16 +175,6 @@ int h = 0 ;
 </main>
 
 
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="fluid"
-     data-ad-layout-key="-ev-1p-5j-ot+26n"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="3378777426"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 </logic:greaterThan>
 </logic:present>
 
@@ -217,7 +183,6 @@ int h = 0 ;
 </div>
 
 <%@include file="../common/IncludeBottomBody.jsp"%>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
 
 </body>
 </html>

@@ -40,21 +40,6 @@ pageContext.setAttribute("title", titleStr);
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-   
-   
-   <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
-   <link rel="preconnect" href="https://www.googletagmanager.com/">  
-   <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
-   <link rel="preconnect" href="https://tpc.googlesyndication.com/">
-   <link rel="preconnect" href="https://www.googletagservices.com/">
-   <link rel="preconnect" href="https://static.googleadsserving.cn/">
-   <link rel="preconnect" href="https://www.gstatic.com/">
-   <link rel="preconnect" href="https://fonts.gstatic.com/">
-   <link rel="preconnect" href="https://www.gstatic.cn/">
-   <link rel="preconnect" href="https://fonts.googleapis.com/">
-   <link rel="preconnect" href="https://cm.g.doubleclick.net/">
-   <link rel="preconnect" href="https://ad.doubleclick.net/">
-   <link rel="preconnect" href="https://fundingchoicesmessages.google.com/">	
    <%@include file="../common/IncludeTopHead.jsp"%>
    <meta name="Description" content="有关<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>系列文章">
 <meta name="Keywords" content="<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>,最佳实践,教材,论文,文章,技巧,模式,编程心得,面试,设计">
@@ -102,15 +87,6 @@ pageContext.setAttribute("title", titleStr);
         <div class="box"> 
         
 
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="fluid"
-     data-ad-layout-key="-ev-1p-5j-ot+26n"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="3378777426"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
        <center>
         
@@ -146,16 +122,6 @@ pageContext.setAttribute("title", titleStr);
 </ul>
 </main>
 
-
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="fluid"
-     data-ad-layout-key="-ev-1p-5j-ot+26n"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="3378777426"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 
         </div>
@@ -201,8 +167,6 @@ pageContext.setAttribute("title", titleStr);
 
 
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
 
 </body>
 </html>
