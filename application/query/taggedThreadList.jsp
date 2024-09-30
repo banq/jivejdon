@@ -89,7 +89,7 @@ pageContext.setAttribute("title", titleStr);
        
              <%if (request.getSession(false) != null && request.getUserPrincipal() != null){%>
            
-                 <a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=2&subscribeId=<bean:write name="tagID" /> " target="_blank"  ><i class="fa fa-heart"></i></a>    
+                 <a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=2&subscribeId=<bean:write name="tagID" /> "><i class="fa fa-heart"></i></a>    
                  <img src="/images/user_add.gif" width="18" height="18" alt="关注本标签" border="0" /></a>                                                         
             <%
             }

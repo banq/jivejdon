@@ -35,7 +35,7 @@ int i=0;
      <div class="row">
      <div class="col-lg-4">
     <div style="position: relative;"  class="zoom-container">           
-       <a href='<%=request.getContextPath() %>/tag/<bean:write name="threadTag" property="tagID"/>/' target="_blank" title="<bean:write name="threadTag" property="title" />">    
+       <a href='<%=request.getContextPath() %>/tag/<bean:write name="threadTag" property="tagID"/>/'  title="<bean:write name="threadTag" property="title" />">    
        <%
        String imgeUrl = imageUrls[i];
        if (imgeUrl==null)
@@ -46,7 +46,7 @@ int i=0;
        </a>
       <div style="position: absolute;top:0px;right:0px">
        <div class="tagcloud">
-        <a href='<%=request.getContextPath() %>/tag/<bean:write name="threadTag" property="tagID"/>/' target="_blank" class="tag-cloud-link">
+        <a href='<%=request.getContextPath() %>/tag/<bean:write name="threadTag" property="tagID"/>/'  class="tag-cloud-link">
 		    <bean:write name="threadTag" property="title" /></a>
 	      
        </div>
