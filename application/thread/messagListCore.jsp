@@ -66,7 +66,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     </style> 
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
     <link rel="apple-touch-icon" href="https://www.jdon.com/simgs/jdon100.png" />
-    <link rel="canonical" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html">  
+    <link rel="canonical" href="https://www.jdon.com/<bean:write name="forumThread" property="threadId" />.html">  
     <%if(pagestartInt != 0 ) {%> 
       <%if(pagestartInt-pagecountInt>0 ) {%>  
           <link rel="prev" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />/page/<%=(pagestartInt-pagecountInt)%>"/>
