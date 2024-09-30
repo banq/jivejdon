@@ -22,7 +22,7 @@ String coutlength = (String)pageContext.getAttribute("count");
  <bean:define id="body" name="forumMessage" property="messageVO.body" />
 <logic:equal name="i" value="0">
 <li>
-	<h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"><bean:write name="forumThread" property="name"/></a></h3>
+	<h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThread" property="name"/></a></h3>
       
          <div class="smallgray">			 
               <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />.             
@@ -31,7 +31,7 @@ String coutlength = (String)pageContext.getAttribute("count");
 </logic:equal>
 <logic:greaterThan name="i" value="0">
 <li class="info">
-	  <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" title="<bean:write name="forumThread" property="rootMessage.messageVO.shortBody[80]" />" ><bean:write name="forumThread" property="name"/></a></h3>
+	  <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" title="<bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />"  class="hover-preload"><bean:write name="forumThread" property="name"/></a></h3>
 </li>
 </logic:greaterThan>
 </logic:iterate>

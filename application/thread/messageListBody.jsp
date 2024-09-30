@@ -180,7 +180,7 @@
                              </div>  
                            </logic:notEmpty>              
                      </div>
-                    <h4 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThreadLink" property="threadId"/>.html"><bean:write name="forumThreadLink" property="name"/></a></h4>
+                    <h4 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThreadLink" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThreadLink" property="name"/></a></h4>
                  
                     <div class="smallgray">			 
                         <bean:write name="forumThreadLink" property="rootMessage.messageVO.shortBody[50]" />.             

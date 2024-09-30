@@ -207,7 +207,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                                    </div>  
                                  </logic:notEmpty>              
                            </div>
-                          <h4 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThreadTag" property="threadId"/>.html"><bean:write name="forumThreadTag" property="name"/></a></h4>
+                          <h4 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThreadTag" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThreadTag" property="name"/></a></h4>
                        
                           <div class="smallgray">			 
                               <bean:write name="forumThreadTag" property="rootMessage.messageVO.shortBody[50]" />.             
@@ -244,7 +244,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         
             <logic:iterate id="threadTag" name="forumThread" property="tags" >
               <li class="tagcloud">
-                <a href="/tag/<bean:write name="threadTag" property="tagID"/>/" target="_blank" class="tag-cloud-link">
+                <a href="/tag/<bean:write name="threadTag" property="tagID"/>/" target="_blank" class="tag-cloud-link" class="hover-preload">
                   <bean:write name="threadTag" property="title" /></a>
               </li>
            
@@ -303,5 +303,19 @@ $(document).ready(function() {
  
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
 
+<script type="speculationrules">
+  {
+    "prerender": [{
+      "source": "document",
+      "where": {
+        "and": [
+          { "selector_matches": ".hover-preload" },
+          { "not": { "selector_matches": ".do-not-prerender" } }
+        ]
+      },
+      "eagerness": "moderate"
+    }]
+  }
+  </script>
 </body>
 </html>

@@ -57,7 +57,7 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
             <td>
               
                  <h2 class="bige20">
-                 <a href="<%=request.getContextPath()%>/forum/<bean:write name="forum" property="forumId" />/">                
+                 <a href="<%=request.getContextPath()%>/forum/<bean:write name="forum" property="forumId" />/" class="hover-preload">                
                        <b><span class="threadTitle"><bean:write name="forum" property="name" /></span></b>
                  </a>
                  </h2>
@@ -189,6 +189,20 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
 
 
+<script type="speculationrules">
+     {
+       "prerender": [{
+         "source": "document",
+         "where": {
+           "and": [
+             { "selector_matches": ".hover-preload" },
+             { "not": { "selector_matches": ".do-not-prerender" } }
+           ]
+         },
+         "eagerness": "moderate"
+       }]
+     }
+     </script>
 </body>
 </html>
 

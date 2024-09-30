@@ -36,7 +36,7 @@
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
          <section class="widget">
-         <h2><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank"><bean:write name="forumThread" property="name"/></a></h2>
+         <h2><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank" class="hover-preload"><bean:write name="forumThread" property="name"/></a></h2>
       
          <div class="info">			 
               <span class="smallgray"><i class="fa fa-calendar"></i>
@@ -119,7 +119,7 @@
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
          <section class="widget">
-         <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank"><bean:write name="forumThread" property="name"/></a></h3>
+         <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"  target="_blank" class="hover-preload"><bean:write name="forumThread" property="name"/></a></h3>
       
          <div class="info">			 
               <span class="smallgray"><i class="fa fa-calendar"></i>
