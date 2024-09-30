@@ -53,7 +53,7 @@ String coutlength = (String)pageContext.getAttribute("count");
                 <img src="/images/dot.gif" width="18" height="18" border="0" align="absmiddle" /> 
                              
                   <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" 
-             title="<bean:write name="forumThread" property="name" />" target="_blank">
+             title="<bean:write name="forumThread" property="name" />" >
              <bean:write name="forumThread" property="name" /></a>
                          
                 </td>
@@ -79,7 +79,7 @@ String coutlength = (String)pageContext.getAttribute("count");
 <tr>
     <td class="smallgray">
       <div class="tres">
-        更多<html:link page="/message/searchAction.shtml" paramId="query" paramName="query" target="_blank">按这里</html:link>
+        更多<html:link page="/message/searchAction.shtml" paramId="query" paramName="query" >按这里</html:link>
      符合主题贴共有<b><bean:write name="messageListForm" property="allCount"/></b>贴 
    
     </td>

@@ -35,7 +35,7 @@
 <table width="<%=tablewidth%>"  bgcolor="<%=bgcolor%>"><tr><td>
 
 <logic:iterate id="threadTag" name="tagsListForm" property="list"  indexId="i">
-    <a href='<%=request.getContextPath() %>/tag/<bean:write name="threadTag" property="tagID"/>/' target="_blank" >
+    <a href='<%=request.getContextPath() %>/tag/<bean:write name="threadTag" property="tagID"/>/'  >
              <span class="tag<%=i%>" ><bean:write name="threadTag" property="title" /></span>
              (<bean:write name="threadTag" property="assonum" />)&nbsp;&nbsp;&nbsp;&nbsp;
     </a>
