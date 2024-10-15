@@ -162,11 +162,7 @@
         <from>^/tag/([0-9]+)/([0-9]+)$</from>
         <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=6&amp;start=$2</to>
     </rule>
-    <!-- <rule>
-        <from>^/tag/([0-9]+)/rss$</from>
-        <to>/RSServlet?tagId=$1</to>
-    </rule>       -->
-
+  
     <rule>
         <from>^/img/([0-9]+)/([0-9]+)$</from>
         <to>/img/uploadShowAction.shtml?id=$1&amp;oid=$2</to>
@@ -234,10 +230,7 @@
     </rule>     -->
     
     <!-- rss -->
-    <rule>
-        <from>^/rss$</from>
-        <to>/RSServlet</to>
-    </rule>
+ 
 
     <rule>
         <from>^/sitemap.xml$</from>

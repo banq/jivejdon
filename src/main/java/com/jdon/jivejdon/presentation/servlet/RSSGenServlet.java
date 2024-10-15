@@ -74,7 +74,7 @@ public class RSSGenServlet extends HttpServlet {
 	private String channel_title = "";
 	private String channel_des = "";
 	private ServletContext servletContext;
-	private final int LENGTH = 30;
+	private final int LENGTH = 10;
 
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
