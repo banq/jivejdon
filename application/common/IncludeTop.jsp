@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-   <link rel="preconnect" href="https://static.jdon.com/"> 	
    <%@include file="./IncludeTopHead.jsp"%>
 </head>
 <body>
