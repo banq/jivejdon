@@ -48,7 +48,7 @@ public class ImageFilter implements Function<MessageVO, MessageVO> {
 		String url = "";
 		while (result) {
 			url = m.group(2);
-			m.appendReplacement(sb, "<img src=\"" + url + "\" border='0' loading='lazy' >");
+			m.appendReplacement(sb, "<img src=\"" + url + "\" border='0' loading='lazy' onerror=\"this.outerHTML = this.src\">");
 			result = m.find();
 		}
 //		messageVO.setThumbnailUrl(url);
