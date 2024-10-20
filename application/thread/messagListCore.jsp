@@ -36,8 +36,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <link rel="prefetch" href="https://www.jdon.com/js/jdon.css"> 
-    <link rel="prefetch" href="https://www.jdon.com/js/jquery-bootstrap2.js"> 
+    <link rel="preconnect" href="https://static.jdon.com/" crossorigin> 
     <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
     <link rel="preconnect" href="https://www.googletagmanager.com/">    
     <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
