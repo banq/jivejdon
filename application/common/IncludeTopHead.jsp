@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-<link rel="preload" href="https://static.jdon.com/js/jdon.css" as="style"> 
-<link rel="preload" href="https://static.jdon.com/js/jquery-bootstrap2.js" as="script"> 
+<link rel="preload" href="https://www.jdon.com/js/jdon.css" as="style"> 
+<link rel="preload" href="https://www.jdon.com/js/jquery-bootstrap2.js" as="script"> 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
