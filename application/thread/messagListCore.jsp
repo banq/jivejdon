@@ -77,6 +77,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
           <link rel="next" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />/page/<%=pagestartInt+pagecountInt%>"/>
   <%}%>
+    <link rel="stylesheet" type="text/css" href="/js/jdon.css" media="print" onload="this.media='all'">
     <script defer src="/js/jquery-bootstrap2.js"></script>   
     <script defer src="/common/messageList12.js"></script>  
     <script>

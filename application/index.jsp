@@ -41,6 +41,7 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
   </style>  
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
   <link rel="canonical" href="https://www.jdon.com/">
+  <link rel="stylesheet" type="text/css" href="/js/jdon.css" media="print" onload="this.media='all'">
   <script defer src="/js/jquery-bootstrap2.js"></script>  
   <script>
      var _hmt = _hmt || [];
