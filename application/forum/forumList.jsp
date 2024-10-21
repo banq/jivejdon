@@ -75,10 +75,8 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
                 </div>  
                   <div class="lazyload" >
                       <!-- 
-                        <script defer>
-                            $(document).ready(function() {
-                                $('#threadNewList_<bean:write name="forum" property="forumId"/>').load("/query/threadNewList.shtml?count=5&forumId=${forum.forumId}");     
-                               });   
+                        <script>
+                          $('#threadNewList_<bean:write name="forum" property="forumId"/>').load("/query/threadNewList.shtml?count=5&forumId=${forum.forumId}");     
                         </script>
                         -->
                     
