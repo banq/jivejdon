@@ -142,13 +142,13 @@ int h = 0 ;
 <div class="row">
 <div class="col-lg-4">
  <%if(pagestartInt != 0 ) {%> 
- <span class="pull-left">
+ <h3 class="pull-left">
     <%if(pagestartInt-pagecountInt>0 ) {%>  
         <a href="/tag/page/<%=(pagestartInt-pagecountInt)%>" rel="prev">上页</a>
     <%}else{%>
         <a href="/tag/" rel="prev">上页</a>
      <%}%>
- </span>
+    </h3>
  <%}%>
 </div>
 <div class="col-lg-4"></div>

@@ -114,13 +114,13 @@ pageContext.setAttribute("title", titleStr);
 
 <div class="col-lg-4">
  <%if(pagestartInt != 0 ) {%> 
- <span class="pull-left">
+ <h3 class="pull-left">
     <%if(pagestartInt-pagecountInt>0 ) {%>  
         <a href="/maxPopThreads/<%=(pagestartInt-pagecountInt)%>" >上页</a>
     <%}else{%>
         <a href="/maxPopThreads/" >上页</a>
      <%}%>
- </span>
+    </h3>
  <%}%>
 </div>
 <div class="col-lg-4"></div>
@@ -164,13 +164,13 @@ pageContext.setAttribute("title", titleStr);
 
 <div class="col-lg-4">
  <%if(pagestartInt != 0 ) {%> 
- <span class="pull-left">
+ <h3 class="pull-left">
     <%if(pagestartInt-pagecountInt>0 ) {%>  
         <a href="/maxPopThreads/<%=(pagestartInt-pagecountInt)%>" >上页</a>
     <%}else{%>
         <a href="/maxPopThreads/" >上页</a>
      <%}%>
- </span>
+    </h3>
  <%}%>
 </div>
 <div class="col-lg-4"></div>

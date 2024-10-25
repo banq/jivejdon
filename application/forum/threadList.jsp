@@ -141,13 +141,13 @@ pageContext.setAttribute("title", titleStr);
 
 <div class="col-lg-4">
  <%if(pagestartInt != 0 ) {%> 
- <span class="pull-left">
+ <h3 class="pull-left">
     <%if(pagestartInt-pagecountInt>0 ) {%>  
         <a href="/threads/<%=(pagestartInt-pagecountInt)%>" >上页</a>
     <%}else{%>
         <a href="/threads/" >上页</a>
      <%}%>
- </span>
+    </h3>
  <%}%>
 </div>
 <div class="col-lg-4"></div>
@@ -169,13 +169,13 @@ pageContext.setAttribute("title", titleStr);
 
 <div class="col-lg-4">
  <%if(pagestartInt != 0 ) {%> 
- <span class="pull-left">
+ <h3 class="pull-left">
     <%if(pagestartInt-pagecountInt>0 ) {%>  
         <a href="/forum/<bean:write name="forum" property="forumId"/>/<%=(pagestartInt-pagecountInt)%>" >上页</a>
     <%}else{%>
         <a href="/forum/<bean:write name="forum" property="forumId"/>/" >上页</a>
      <%}%>
- </span>
+    </h3>
  <%}%>
 </div>
 <div class="col-lg-4"></div>
@@ -236,13 +236,13 @@ pageContext.setAttribute("title", titleStr);
 
 <div class="col-lg-4">
  <%if(pagestartInt != 0 ) {%> 
- <span class="pull-left">
+ <h3 class="pull-left">
     <%if(pagestartInt-pagecountInt>0 ) {%>  
         <a href="/threads/<%=(pagestartInt-pagecountInt)%>" >上页</a>
     <%}else{%>
         <a href="/threads/" >上页</a>
      <%}%>
- </span>
+    </h3>
  <%}%>
 </div>
 <div class="col-lg-4"></div>
@@ -264,13 +264,13 @@ pageContext.setAttribute("title", titleStr);
 
 <div class="col-lg-4">
  <%if(pagestartInt != 0 ) {%> 
- <span class="pull-left">
+ <h3 class="pull-left">
     <%if(pagestartInt-pagecountInt>0 ) {%>  
         <a href="/forum/<bean:write name="forum" property="forumId"/>/<%=(pagestartInt-pagecountInt)%>" >上页</a>
     <%}else{%>
         <a href="/forum/<bean:write name="forum" property="forumId"/>/" >上页</a>
      <%}%>
- </span>
+    </h3>
  <%}%>
 </div>
 <div class="col-lg-4"></div>
