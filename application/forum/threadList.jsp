@@ -134,63 +134,6 @@ pageContext.setAttribute("title", titleStr);
 </ul>           
 
 
- 
-<logic:empty name="forum" property="forumId">	
-<div class="box">
-<div class="row">
-
-<div class="col-lg-4">
- <%if(pagestartInt != 0 ) {%> 
- <h3 class="pull-left">
-    <%if(pagestartInt-pagecountInt>0 ) {%>  
-        <a href="/threads/<%=(pagestartInt-pagecountInt)%>" >上页</a>
-    <%}else{%>
-        <a href="/threads/" >上页</a>
-     <%}%>
-    </h3>
- <%}%>
-</div>
-<div class="col-lg-4"></div>
-
-<div class="col-lg-4">
-<span class="pull-right"> 
-    <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
-    <a href="/threads/<%=pagestartInt+pagecountInt%>" >下页</a>
-    <%}%>
-</span>
-</div>
-
-</div>
-</div>
- </logic:empty>
-<logic:notEmpty name="forum" property="forumId">		
-<div class="box">
-<div class="row">
-
-<div class="col-lg-4">
- <%if(pagestartInt != 0 ) {%> 
- <h3 class="pull-left">
-    <%if(pagestartInt-pagecountInt>0 ) {%>  
-        <a href="/forum/<bean:write name="forum" property="forumId"/>/<%=(pagestartInt-pagecountInt)%>" >上页</a>
-    <%}else{%>
-        <a href="/forum/<bean:write name="forum" property="forumId"/>/" >上页</a>
-     <%}%>
-    </h3>
- <%}%>
-</div>
-<div class="col-lg-4"></div>
-
-<div class="col-lg-4">
-<span class="pull-right"> 
-    <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
-    <a href="/forum/<bean:write name="forum" property="forumId"/>/<%=pagestartInt+pagecountInt%>" >下页</a>
-    <%}%>
-</span>
-</div>
-
-</div>
-</div>
-</logic:notEmpty>  
 
 
 
@@ -236,23 +179,27 @@ pageContext.setAttribute("title", titleStr);
 
 <div class="col-lg-4">
  <%if(pagestartInt != 0 ) {%> 
- <h3 class="pull-left">
+  <ul class="pagination pull-left">
+    <li>
     <%if(pagestartInt-pagecountInt>0 ) {%>  
-        <a href="/threads/<%=(pagestartInt-pagecountInt)%>" >上页</a>
+        <a href="/threads/<%=(pagestartInt-pagecountInt)%>" rel="prev" class="btn-page">上页</a>
     <%}else{%>
-        <a href="/threads/" >上页</a>
+        <a href="/threads/" rel="prev" class="btn-page">上页</a>
      <%}%>
-    </h3>
+    </li>
+  </ul>
  <%}%>
 </div>
 <div class="col-lg-4"></div>
 
 <div class="col-lg-4">
-<span class="pull-right"> 
+  <ul class="pagination pull-right"> 
+    <li>
     <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
-    <a href="/threads/<%=pagestartInt+pagecountInt%>" >下页</a>
+    <a href="/threads/<%=pagestartInt+pagecountInt%>" rel="next" class="btn-page">下页</a>
     <%}%>
-</span>
+  </li>  
+</ul>
 </div>
 
 </div>
@@ -264,23 +211,27 @@ pageContext.setAttribute("title", titleStr);
 
 <div class="col-lg-4">
  <%if(pagestartInt != 0 ) {%> 
- <h3 class="pull-left">
+  <ul class="pagination pull-left">
+    <li>
     <%if(pagestartInt-pagecountInt>0 ) {%>  
-        <a href="/forum/<bean:write name="forum" property="forumId"/>/<%=(pagestartInt-pagecountInt)%>" >上页</a>
+        <a href="/forum/<bean:write name="forum" property="forumId"/>/<%=(pagestartInt-pagecountInt)%>" rel="prev" class="btn-page">上页</a>
     <%}else{%>
-        <a href="/forum/<bean:write name="forum" property="forumId"/>/" >上页</a>
+        <a href="/forum/<bean:write name="forum" property="forumId"/>/" rel="prev" class="btn-page">上页</a>
      <%}%>
-    </h3>
+    </li>  
+  </ul>
  <%}%>
 </div>
 <div class="col-lg-4"></div>
 
 <div class="col-lg-4">
-<span class="pull-right"> 
+  <ul class="pagination pull-right"> 
+    <li>
     <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
-    <a href="/forum/<bean:write name="forum" property="forumId"/>/<%=pagestartInt+pagecountInt%>" >下页</a>
+    <a href="/forum/<bean:write name="forum" property="forumId"/>/<%=pagestartInt+pagecountInt%>" rel="next" class="btn-page">下页</a>
     <%}%>
-</span>
+  </li>  
+</ul>
 </div>
 
 </div>

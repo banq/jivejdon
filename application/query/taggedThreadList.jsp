@@ -129,23 +129,27 @@ pageContext.setAttribute("title", titleStr);
 
 <div class="col-lg-4">
  <%if(pagestartInt != 0 ) {%> 
- <h3 class="pull-left">
+  <ul class="pagination pull-left">
+    <li>
     <%if(pagestartInt-pagecountInt>0 ) {%>  
-        <a href="/tag/<bean:write name="tagID"/>/<%=(pagestartInt-pagecountInt)%>" >上页</a>
+        <a href="/tag/<bean:write name="tagID"/>/<%=(pagestartInt-pagecountInt)%>" rel="prev" class="btn-page">上页</a>
     <%}else{%>
-        <a href="/tag/<bean:write name="tagID"/>/" >上页</a>
+        <a href="/tag/<bean:write name="tagID"/>/" rel="prev" class="btn-page">上页</a>
      <%}%>
-    </h3>
+    </li>  
+  </ul>
  <%}%>
 </div>
 <div class="col-lg-4"></div>
 
 <div class="col-lg-4">
-<span class="pull-right"> 
+  <ul class="pagination pull-right"> 
+    <li>
     <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
-    <a href="/tag/<bean:write name="tagID"/>/<%=pagestartInt+pagecountInt%>" >下页</a>
+    <a href="/tag/<bean:write name="tagID"/>/<%=pagestartInt+pagecountInt%>" rel="next" class="btn-page">下页</a>
     <%}%>
-</span>
+  </li>  
+</ul>
 </div>
 
 </div>
