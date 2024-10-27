@@ -52,6 +52,8 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
                      <table class="table table-striped">
 	<tbody>
 
+   
+
 <logic:iterate indexId="i"   id="forum" name="forumListForm" property="list" >
         <tr>
             <td>
@@ -75,9 +77,24 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
                 </div>  
                   <div class="lazyload" >
                       <!-- 
-                        <script>
-                          $('#threadNewList_<bean:write name="forum" property="forumId"/>').load("/query/threadNewList.shtml?count=5&forumId=${forum.forumId}");     
-                        </script>
+                    <script>
+                       $(document).ready(function() {
+                          const request = $.ajax({
+                            url: '/query/threadNewList.shtml',
+                            data: {
+                                forumId: ${forum.forumId},        
+                                count: 5  
+                            },
+                            success: function(data) {
+                                $('#threadNewList_<bean:write name="forum" property="forumId"/>').html(data); 
+                            },
+                        });
+
+                 
+                        });
+    
+                      </script>
+
                         -->
                     
                   </div>  
@@ -201,6 +218,8 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
        }]
      }
      </script>
+
+
 </body>
 </html>
 
