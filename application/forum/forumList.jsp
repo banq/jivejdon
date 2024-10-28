@@ -64,7 +64,7 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
                       <!-- 
                     <script>
                        $(document).ready(function() {
-                          const request = $.ajax({
+                        $.ajax({
                             url: '/query/threadNewList.shtml',
                             data: {
                                 forumId: ${forum.forumId},        
