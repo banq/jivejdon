@@ -56,15 +56,15 @@ int i=0;
 <section class="widget" id='ajax_<bean:write name="threadTag" property="tagID"/>'>  
   <br><br><br><br><br><br>     
   </section>  
-  <div class="lazyload" >
-	    <!-- 
+  
         <script defer>
+          document.addEventListener("DOMContentLoaded", function(event) { 
             $(document).ready(function() {
                $('#ajax_<bean:write name="threadTag" property="tagID"/>').load("/query/tt/${threadTag.tagID}");    
-          });
+            });
+          });     
         </script>
-        -->
-  </div>  
+    
 	</div>	
   </div>  
 </div>	
