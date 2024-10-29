@@ -61,9 +61,9 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
                 <div id="threadNewList_<bean:write name="forum" property="forumId"/>" class="linkblock">
                   <br><br><br><br><br><br>     
                 </div>  
-                  <div class="lazyload" >
-                      <!-- 
+               
                     <script>
+                      document.addEventListener("DOMContentLoaded", function(event) {  
                        $(document).ready(function() {
                         $.ajax({
                             url: '/query/threadNewList.shtml',
@@ -75,15 +75,11 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
                                 $('#threadNewList_<bean:write name="forum" property="forumId"/>').html(data); 
                             },
                         });
-
                  
                         });
-    
+                      });    
                       </script>
 
-                        -->
-                    
-                  </div>  
          
                 <div class="box">
 
