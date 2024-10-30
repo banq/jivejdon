@@ -112,7 +112,22 @@ int h = 0 ;
         <script defer>
           document.addEventListener("DOMContentLoaded", function(event) { 
             $(document).ready(function() {
-                $('#ajax_<bean:write name="threadTag" property="tagID"/>').load("/query/tt/${threadTag.tagID}");     
+              fetch('/query/tt/${threadTag.tagID}')
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('Network response was not ok');
+                }
+                return  response.text();
+              })
+              .then(data => {
+                $('#ajax_<bean:write name="threadTag" property="tagID"/>').html(data); 
+   
+              })
+              .catch(error => {
+                console.error('Fetch error:', error);
+              });
+          
+              
            	  });   
           });    
         </script>
