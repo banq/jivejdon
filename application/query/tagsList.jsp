@@ -111,7 +111,6 @@ int h = 0 ;
 
         <script defer>
           document.addEventListener("DOMContentLoaded", function(event) { 
-            $(document).ready(function() {
               fetch('/query/tt/${threadTag.tagID}')
               .then(response => {
                 if (!response.ok) {
@@ -119,16 +118,12 @@ int h = 0 ;
                 }
                 return  response.text();
               })
-              .then(data => {
-                $('#ajax_<bean:write name="threadTag" property="tagID"/>').html(data); 
-   
+              .then(html => {
+                 document.getElementById('ajax_<bean:write name="threadTag" property="tagID"/>').innerHTML = html;
               })
               .catch(error => {
                 console.error('Fetch error:', error);
               });
-          
-              
-           	  });   
           });    
         </script>
 
