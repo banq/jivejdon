@@ -82,6 +82,9 @@ int i = 3;
 int h = 0 ;
 %>
 
+<script>
+  const ids = []; // 初始化一个空数组
+</script>
 <logic:iterate id="threadTag" name="tagsListForm" property="list" >
  <%
   if(i % 3==0){ 
@@ -108,25 +111,10 @@ int h = 0 ;
   <br><br><br><br><br><br>     
   </div>  
   
-
-        <script defer>
-          document.addEventListener("DOMContentLoaded", function(event) { 
-              fetch('/query/tt/${threadTag.tagID}')
-              .then(response => {
-                if (!response.ok) {
-                  throw new Error('Network response was not ok');
-                }
-                return  response.text();
-              })
-              .then(html => {
-                 document.getElementById('ajax_<bean:write name="threadTag" property="tagID"/>').innerHTML = html;
-              })
-              .catch(error => {
-                console.error('Fetch error:', error);
-              });
-          });    
-        </script>
-
+  <script>
+    ids.push(<bean:write name="threadTag" property="tagID"/>);
+  </script>
+       
 	  
 
 	</div>	
@@ -149,6 +137,22 @@ int h = 0 ;
   </div>
  <%}%>
 
+ <script>
+    for (const id of ids) {
+            try {
+                const response = await fetch(`/query/tt/${id}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const html = await response.text();
+                document.getElementById(`ajax_${id}`).innerHTML = html;
+            } catch (error) {
+                console.error('Fetch error:', error);
+            }
+    }
+     
+
+</script>
 
 <div class="box">
 <div class="row">
