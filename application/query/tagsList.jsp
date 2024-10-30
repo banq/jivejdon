@@ -138,19 +138,22 @@ int h = 0 ;
  <%}%>
 
  <script>
+  async function fetchData() {
     for (const id of ids) {
             try {
-                const response = await fetch(`/query/tt/${id}`);
+                const response = await fetch(`/query/tt/\${id}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const html = await response.text();
-                document.getElementById(`ajax_${id}`).innerHTML = html;
+                document.getElementById(`ajax_\${id}`).innerHTML = html;
             } catch (error) {
                 console.error('Fetch error:', error);
             }
     }
-     
+  }
+
+  fetchData();    
 
 </script>
 
