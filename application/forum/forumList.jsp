@@ -38,7 +38,9 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
 	<tbody>
 
    
-
+    <script>
+      const ids = []; // 初始化一个空数组
+    </script>
 <logic:iterate indexId="i"   id="forum" name="forumListForm" property="list" >
         <tr>
             <td>
@@ -62,24 +64,10 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
                   <br><br><br><br><br><br>     
                 </div>  
                
-                    <script>
-                      document.addEventListener("DOMContentLoaded", function(event) {  
-                       $(document).ready(function() {
-                        $.ajax({
-                            url: '/query/threadNewList.shtml',
-                            data: {
-                                forumId: ${forum.forumId},        
-                                count: 5  
-                            },
-                            success: function(data) {
-                                $('#threadNewList_<bean:write name="forum" property="forumId"/>').html(data); 
-                            },
-                        });
-                 
-                        });
-                      });    
-                      </script>
-
+  <script>
+    ids.push(<bean:write name="forum" property="forumId"/>);
+  </script>
+       
          
                 <div class="box">
 
@@ -104,6 +92,32 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
     </div>	
     </div>
         
+ 
+	  
+<script>
+ async function fetchData() {
+    for (const id of ids) {
+            try {
+              const params = new URLSearchParams({
+                forumId: id,        
+                count: 5 
+               });
+               const response = await fetch(`/query/threadNewList.shtml?\${params.toString()}`);
+               if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const html = await response.text();
+                document.getElementById(`threadNewList_\${id}`).innerHTML = html;
+            } catch (error) {
+                console.error('Fetch error:', error);
+            }
+    }
+  }
+
+  fetchData();    
+      </script>
+
+
 	 <!-- /////////////////右边 -->
 <aside>      
        <div id="sidebar" class="col-lg-4">
