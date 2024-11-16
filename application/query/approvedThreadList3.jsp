@@ -40,14 +40,8 @@ int i=0;
      <div class="col-lg-4">
     <div style="position: relative;"  class="zoom-container">           
        <a href='<%=request.getContextPath() %>/tag/<bean:write name="threadTag" property="tagID"/>/'  title="<bean:write name="threadTag" property="title" />">    
-       <%
-       String imgeUrl = imageUrls[i];
-       if (imgeUrl==null)
-          imgeUrl = "/simgs/thumb2/"+java.util.concurrent.ThreadLocalRandom.current().nextInt(5)+".jpg";
-
-       %>     
-        <img id="home-thumbnai" src='<%=imgeUrl%>' border="0" class="img-thumbnail img-responsive" style="height:230px;width:100%"  loading="lazy" onerror="this.src='/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg'"/>
-       </a>
+        <img id="home-thumbnai" src='https://static.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg' border="0" class="img-thumbnail img-responsive" style="height:230px;width:100%"  loading="lazy" onerror="this.src='/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg'"/>
+      </a>
       <div style="position: absolute;top:0px;right:0px">
        <div class="tagcloud">
         <a href='<%=request.getContextPath() %>/tag/<bean:write name="threadTag" property="tagID"/>/'  class="tag-cloud-link">
