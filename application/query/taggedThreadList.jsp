@@ -41,7 +41,7 @@ pageContext.setAttribute("title", titleStr);
 <html lang="zh-CN">
 <head>
    <%@include file="../common/IncludeTopHead.jsp"%>
-   <meta name="robots" content="noindex">
+
    <meta name="Description" content="有关<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>系列">
 <meta name="Keywords" content="<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>">
 <link rel="canonical" href="https://www.jdon.com/tag/<bean:write name="tagID"/>/"/>  
