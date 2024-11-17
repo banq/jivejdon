@@ -102,10 +102,6 @@ public class SitemapServlet extends HttpServlet {
 
 		try {
 			int startInt = 0;
-			String start = request.getParameter("start");
-			if (start != null) {
-				startInt = Integer.parseInt(start);
-			}
 			Collection<UrlSet> urlsets = new ArrayList();
 			PageIterator pi = null;
 			SitemapRepository sitemapRepository = (SitemapRepository) WebAppUtil
