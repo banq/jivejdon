@@ -32,7 +32,7 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>极道Jdon - 前沿黑科技</title>
+  <title>极道Jdon - 深入前沿黑科技</title>
   <meta name="Description" content="收集领域建模、逻辑算法、AI大模型、编程架构和生物黑客等黑科技，布道上下文、关系、模式和结构等极客之道。">
   <meta name="Keywords" content="极道,极客,黑客,J道,解道,汲道,及道,context,上下文,jdon,jdao,jd,模式,形式,逻辑,长寿,Java,Go,Rust,Spring,DDD,规则引擎,工作流,建模,ER建模,API设计,分布式事务,docker,jive,函数式编程,面向对象,REST,J2EE,Struts,分析哲学,需求,商业分析,权限,领域事件,事件风暴,并发编程,异步编程,事务,软件架构,系统架构,分布式架构,ChatGPT,弹性,缓存,高可用,扩展性,EDA,EventSourcing,CQRS,复杂性,涌现,系统思维,算法,树形结构,SpringBoot,Jdon框架,企业架构,大语言模型,上下文,领域语言,BPM,微服务,大数据,人工智能,基础设施,性能优化,Devops,软件工程,敏捷,CAP定理,kafka,最佳实践,IT战略,云原生,多线程,Hadoop,Stream,关系数据库,表库设计,整洁架构,SOA,hibernate,ORM,JPA,Kubernetes,体系结构,计算机科学,SQL,Go,Python,Web,道德经,数据科学,系统设计,技术博客,面试,科普,产品,幽默,模因,梗">
   <meta http-equiv="refresh" content="3600">    
@@ -86,7 +86,7 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(5 * 60 * 60, this.ge
 	
     <div class="box"> 
 	    <div class="tres center">        
-           追踪前沿最黑科技 <a href="/approval/"><b>更多</b></a>	   
+           深入前沿最黑科技 <a href="/approval/"><b>更多</b></a>	   
 		</div>
     </div>
 		  
