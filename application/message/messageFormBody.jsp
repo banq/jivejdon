@@ -21,8 +21,8 @@
   <div class="col-lg-12">
     <div class="form-group">
       <html:textarea styleClass="form-control" property="subject" styleId="replySubject" cols="100" rows="1" tabindex="5"
-                     onfocus="if(value=='网络用语：标题'){value=''}"
-                     onblur="if (value ==''){value='网络用语：标题'}" ></html:textarea>
+                     onfocus="if(value=='文中加入本站链接、热门标题'){value=''}"
+                     onblur="if (value ==''){value='文中加入本站链接、热门标题'}" ></html:textarea>
     </div>
   </div>
 </div>
