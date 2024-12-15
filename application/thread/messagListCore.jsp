@@ -191,44 +191,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
      <div class="widget">
         <div class="wid-vid">
-               <div id="searchResult">
-                 <logic:notEmpty name="forumThread" property="tags">          
-                  <div id="threadTagList" class="linkblock">
-                    <logic:notEmpty name="threadTagList" >   
-                      <ul style="list-style-type:none;padding:0">
-                      <logic:iterate id="forumThreadTag" name="threadTagList" length="5">
-                        <li class="box">
-                          <section> 
-                          <div class="wrap-vid">              
-                                 <logic:notEmpty name="forumThreadTag" property="rootMessage.messageUrlVO.imageUrl">                  
-                                   <div class="thumbn">
-                                        <img src="<bean:write name="forumThreadTag" property="rootMessage.messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="70" height="70" onerror="this.src='/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg'"/>    
-                                   </div>
-                                 </logic:notEmpty>
-                                  
-                                 <logic:notEmpty name="forumThreadTag" property="rootMessage.messageUrlVO.thumbnailUrl">                  
-                                   <div class="thumbn">
-                                     <img src="<bean:write name="forumThreadTag" property="rootMessage.messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="70" height="70"/>                  
-                                   </div>  
-                                 </logic:notEmpty>              
-                           </div>
-                          <h4 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThreadTag" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThreadTag" property="name"/></a></h4>
-                       
-                          <div class="smallgray">			 
-                              <bean:write name="forumThreadTag" property="rootMessage.messageVO.shortBody[50]" />.             
-                           </div>
-                 
-                           </section>
-                          </li>
-                      </logic:iterate>  
-                    </ul>
-                    </logic:notEmpty>
-
-                  </div>   
-                 
-							                           
-                 </logic:notEmpty>		
-                 <logic:empty name="forumThread" property="tags">    
+               <div id="searchResult">                		
                   <div id="digList" class="linkblock"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
 							    <script defer>
 					               document.addEventListener("DOMContentLoaded", function(event) { 
@@ -237,7 +200,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                               });            
                           });  
                   </script>           
-                </logic:empty>   				   
               </div> 
         </div>
       </div>     
