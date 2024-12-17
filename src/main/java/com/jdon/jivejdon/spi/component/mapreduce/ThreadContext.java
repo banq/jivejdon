@@ -111,12 +111,12 @@ public class ThreadContext {
 		if (reBlogVO == null)
 			return threadLinks;
 
-		if (reBlogVO.getThreadFroms() == null && reBlogVO.getThreadTos() == null)
+		if ( reBlogVO.getThreadTos() == null)
 			return threadLinks;
 
-		for (ForumThread threadLink : reBlogVO.getThreadFroms()) {
-			threadLinks.add(threadLink);
-		}
+		// for (ForumThread threadLink : reBlogVO.getThreadFroms()) {
+		// 	threadLinks.add(threadLink);
+		// }
 		for (ForumThread threadLink : reBlogVO.getThreadTos()) {
 			threadLinks.add(threadLink);
 		}
