@@ -120,9 +120,9 @@ public class ThreadContext {
 		for (ForumThread threadLink : reBlogVO.getThreadTos()) {
 			threadLinks.add(threadLink);
 		}
-		if (threadLinks.size() == 0) {
+		// if (threadLinks.size() == 0) {
 
-		}
+		// }
 		return threadLinks;
 	}
     
