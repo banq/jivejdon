@@ -26,7 +26,7 @@ Domain-centric architecture is a new way to design modern world enterprise appli
 
 There are two aggregate roots in jivejdon: FormThread and ForumMessage(Root Message).
 
-[com.jdon.jivejdon.domain.model.ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/model/ForumMessage.java) is a rich model, no "public" setter method, all setter methods are "private":
+[com.jdon.jivejdon.domain.model.ForumMessage](https://github.com/banq/jivejdon/blob/master/src/main/java/com/jdon/jivejdon/domain/model/ForumMessage.java) is a rich model, no "public" setter method, all setter methods are "private":
 
 ![avatar](./doc/private-setter.png)
 
