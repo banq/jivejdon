@@ -93,17 +93,19 @@ public class MessageListAction extends ModelListAction {
 				return getForumMessageQueryService().getThread(Long.parseLong(threadId));
 			}).thenAccept(forumThread -> {
 				forumThread.getReBlogVO().loadAscResult();
+				request.setAttribute("threadPreNextList",  getThreadContext().getThreadListInContext(forumThread));
 				request.setAttribute("threadLinkList",  getThreadContext().createsThreadLinks(forumThread));
+				
 			});
 	
 
-			CompletableFuture<Void> future2 = CompletableFuture.supplyAsync(() -> {
-					return getForumMessageQueryService().getThread(Long.parseLong(threadId));
-			}).thenAccept(forumThread -> {
-				request.setAttribute("threadTagList",  getThreadContext().getThreadListInContext(forumThread));
-			});
+			// CompletableFuture<Void> future2 = CompletableFuture.supplyAsync(() -> {
+			// 		return getForumMessageQueryService().getThread(Long.parseLong(threadId));
+			// }).thenAccept(forumThread -> {
+			// 	request.setAttribute("threadTagList",  getThreadContext().getThreadListInContext(forumThread));
+			// });
 
-			serviceCache.putIfAbsent(threadId, CompletableFuture.allOf(future1, future2));
+			serviceCache.putIfAbsent(threadId, CompletableFuture.allOf(future1));
 
 			return pageIterator;
 		} catch (Exception nfe) {

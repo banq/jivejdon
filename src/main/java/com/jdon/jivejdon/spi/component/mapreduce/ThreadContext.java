@@ -65,16 +65,17 @@ public class ThreadContext {
 
     public List<ForumThread> getThreadListInContext(ForumThread thread) {
         Set<Long> threadIds = createSortedSet();
-        for (ThreadTag tag : thread.getTags()) {
-            PageIterator pi = tagDao.getTaggedThread(tag.getTagID(), 0, 2);
-            List list = Arrays.asList(pi.getKeys());
-            threadIds.addAll(new HashSet<>(list));
-        }
-        if (threadIds.isEmpty()) {
-            PageIterator pi = messageQueryDao.getThreads(thread.getForum().getForumId(),  0, 6, new ResultSort());
-            List list = Arrays.asList(pi.getKeys());
-             threadIds.addAll(new HashSet<>(list));
-        }
+        // for (ThreadTag tag : thread.getTags()) {
+        //     PageIterator pi = tagDao.getTaggedThread(tag.getTagID(), 0, 2);
+        //     List list = Arrays.asList(pi.getKeys());
+        //     threadIds.addAll(new HashSet<>(list));
+        // }
+        // if (threadIds.isEmpty()) {
+        //     PageIterator pi = messageQueryDao.getThreads(thread.getForum().getForumId(),  0, 6, new ResultSort());
+        //     List list = Arrays.asList(pi.getKeys());
+        //      threadIds.addAll(new HashSet<>(list));
+        // }
+        threadIds.addAll(getThreadListInContext2(thread));
         return threadIds.stream().map(e -> forumFactory.getThread(e).orElse(null)).filter(Objects::nonNull).collect(Collectors.toList());
     }
 

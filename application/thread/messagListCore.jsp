@@ -192,14 +192,42 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
      <div class="widget">
         <div class="wid-vid">
                <div id="searchResult">                		
-                  <div id="digList" class="linkblock"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
-							    <script defer>
-					               document.addEventListener("DOMContentLoaded", function(event) { 
-                              $(document).ready(function() {      
-                                   $('#digList').load("/query/threadDigList");                                
-                              });            
-                          });  
-                  </script>           
+                
+                  <div id="threadPreNextList" class="linkblock">
+                    <logic:notEmpty name="threadPreNextList" >   
+                      <ul style="list-style-type:none;padding:0">
+                      <logic:iterate id="forumThreadPreNext" name="threadPreNextList" length="5">
+                        <li class="box">
+                          <section> 
+                          <div class="wrap-vid">              
+                                 <logic:notEmpty name="forumThreadPreNext" property="rootMessage.messageUrlVO.imageUrl">                  
+                                   <div class="thumbn">
+                                        <img src="<bean:write name="forumThreadPreNext" property="rootMessage.messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="70" height="70" onerror="this.src='/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg'"/>    
+                                   </div>
+                                 </logic:notEmpty>
+                                  
+                                 <logic:notEmpty name="forumThreadPreNext" property="rootMessage.messageUrlVO.thumbnailUrl">                  
+                                   <div class="thumbn">
+                                     <img src="<bean:write name="forumThreadPreNext" property="rootMessage.messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="70" height="70"/>                  
+                                   </div>  
+                                 </logic:notEmpty>              
+                           </div>
+                          <h4 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThreadPreNext" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThreadPreNext" property="name"/></a></h4>
+                       
+                          <div class="smallgray">			 
+                              <bean:write name="forumThreadPreNext" property="rootMessage.messageVO.shortBody[50]" />.             
+                           </div>
+                 
+                           </section>
+                          </li>
+                      </logic:iterate>  
+                    </ul>
+                    </logic:notEmpty>
+
+                  </div>   
+                 
+							                           
+                
               </div> 
         </div>
       </div>     
