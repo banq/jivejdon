@@ -49,17 +49,49 @@ public class ThreadContext {
         return resultIds;
     }
 
-    public Set<Long> getThreadListInContext2(ForumThread thread) {
+    public Set<Long> getThreadListInContext2(ForumThread currentThread) {
         Set<Long> threadIds = createSortedSet();
         // for (ThreadTag tag : thread.getTags()) {
-        //     threadIds.addAll(tagDao.getThreadsPrevNextInTag(tag.getTagID(), thread.getThreadId()));
-        //     break;
+        // threadIds.addAll(tagDao.getThreadsPrevNextInTag(tag.getTagID(),
+        // thread.getThreadId()));
+        // break;
         // }
-        if (threadIds.isEmpty()) {
-            threadIds.addAll(messageQueryDao.getThreadsPrevNext(thread.getForum().getForumId(), thread.getThreadId()));
+        List resultIds = messageQueryDao.getThreadsPrevNext(currentThread.getForum().getForumId(),
+        currentThread.getThreadId());
+        int index = resultIds.indexOf(currentThread.getThreadId());
+        if (index == -1)
+            return threadIds;
+
+        int prevIndex = index - 1;
+        int nextIndex = index + 1;
+
+        // Add the previous 2 threads if available
+        if (prevIndex >= 1 && prevIndex - 1 >= 0 && prevIndex < resultIds.size()) {
+            Long prevThreadId1 = (Long) resultIds.get(prevIndex - 1);
+            Long prevThreadId2 = (Long) resultIds.get(prevIndex);
+            if (prevThreadId1 != null) {
+                threadIds.add(prevThreadId1); // Only add if not null
+            }
+            if (prevThreadId2 != null) {
+                threadIds.add(prevThreadId2); // Only add if not null
+            }
         }
-        if (!threadIds.contains(thread.getThreadId()))
-            threadIds.add(thread.getThreadId());// new item not be inconsistency with DB
+
+        threadIds.add(currentThread.getThreadId());
+
+        // Add the next 2 threads if available
+        if (nextIndex < resultIds.size() - 1 && nextIndex + 1 < resultIds.size() - 1) {
+
+            Long nextThreadId1 = (Long) resultIds.get(nextIndex);
+            Long nextThreadId2 = (Long) resultIds.get(nextIndex + 1);
+            if (nextThreadId1 != null) {
+                threadIds.add(nextThreadId1); // Only add if not null
+            }
+            if (nextThreadId2 != null) {
+                threadIds.add(nextThreadId2); // Only add if not null
+            }
+        }
+
         return threadIds;
     }
 
