@@ -51,10 +51,10 @@ public class ThreadContext {
 
     public Set<Long> getThreadListInContext2(ForumThread thread) {
         Set<Long> threadIds = createSortedSet();
-        for (ThreadTag tag : thread.getTags()) {
-            threadIds.addAll(tagDao.getThreadsPrevNextInTag(tag.getTagID(), thread.getThreadId()));
-            break;
-        }
+        // for (ThreadTag tag : thread.getTags()) {
+        //     threadIds.addAll(tagDao.getThreadsPrevNextInTag(tag.getTagID(), thread.getThreadId()));
+        //     break;
+        // }
         if (threadIds.isEmpty()) {
             threadIds.addAll(messageQueryDao.getThreadsPrevNext(thread.getForum().getForumId(), thread.getThreadId()));
         }
