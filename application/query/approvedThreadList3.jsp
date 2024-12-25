@@ -18,7 +18,7 @@ if (request.getParameter("count")!=null){
    count = request.getParameter("count");
 }
 
-String[] imageUrls = (String[])request.getAttribute("Tags_ImageUrls");
+<%-- String[] imageUrls = (String[])request.getAttribute("Tags_ImageUrls"); --%>
 int i=0;
 %>
 <script>

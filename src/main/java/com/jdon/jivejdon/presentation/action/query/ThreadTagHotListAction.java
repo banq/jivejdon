@@ -32,7 +32,7 @@ public class ThreadTagHotListAction extends Action {
 		ThreadTagList threadTagList = getThreadApprovedNewList().getThreadTagList();
 		tagsHotListForm.setList(threadTagList.getThreadTags());
 		tagsHotListForm.setAllCount(threadTagList.getThreadTags().size());
-		request.setAttribute("Tags_ImageUrls", threadTagList.getImageUrls());
+		// request.setAttribute("Tags_ImageUrls", threadTagList.getImageUrls());
 		return mapping.findForward("success");
 	}
 }
