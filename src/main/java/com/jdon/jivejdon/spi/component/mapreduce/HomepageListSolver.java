@@ -36,12 +36,16 @@ public class HomepageListSolver  implements Startable {
 
 		Runnable task = new Runnable() {
 			public void run() {
-				list.set(new ArrayList<>()); 
+				clear();
 			}
 		};
-		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(task, 60 * 60 * 5,
-				60 * 60 * 5, TimeUnit.SECONDS);
+		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(task, 60 * 60 * 6,
+				60 * 60 * 6, TimeUnit.SECONDS);
 
+	}
+
+	private void clear() {
+		this.list = new AtomicReference<>();
 	}
 
 	public void stop() {
