@@ -3,19 +3,22 @@ package com.jdon.jivejdon.spi.component.mapreduce;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 import com.jdon.annotation.Component;
+import com.jdon.container.pico.Startable;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.query.specification.ApprovedListSpec;
+import com.jdon.jivejdon.util.ScheduledExecutorUtil;
 
 /**
  * Home page approve threads
  */
 @Component("homepageListSolver")
-public class HomepageListSolver {
+public class HomepageListSolver  implements Startable {
 
 	private final ThreadApprovedNewList threadApprovedNewList;
 	private final ForumMessageQueryService forumMessageQueryService;
@@ -28,6 +31,26 @@ public class HomepageListSolver {
 		this.forumMessageQueryService = forumMessageQueryService;
 		this.list = new AtomicReference<>();
 	}
+
+	public void start() {
+
+		Runnable task = new Runnable() {
+			public void run() {
+				list.set(new ArrayList<>()); 
+			}
+		};
+		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(task, 60 * 60 * 5,
+				60 * 60 * 5, TimeUnit.SECONDS);
+
+	}
+
+	public void stop() {
+		try {
+			ScheduledExecutorUtil.scheduExecStatic.shutdownNow();
+		} catch (Exception e) {
+		}
+	}
+
 
 	public Collection<Long> getList(int start, int count) {
 		if (list.get() == null)
