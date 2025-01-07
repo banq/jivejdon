@@ -4,17 +4,7 @@
 <%@ page language="java" %>
 <%
     response.setHeader("X-Robots-Tag", "noindex"); 
-    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+    response.sendRedirect("https://www.jdon.com/");
 %>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Page Not Found</title>
-    <meta http-equiv="refresh" content="5;url=https://www.jdon.com" />
-</head>
-<body>
-    <h1>404 - 页面无法发现</h1>
-    <p>在Jdon.com无法找到. </p>
-</body>
-</html>
+
 
