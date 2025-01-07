@@ -3,6 +3,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ page language="java" %>
 <%
+    response.setHeader("X-Robots-Tag", "noindex"); 
     response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 %>
 <!DOCTYPE html>
