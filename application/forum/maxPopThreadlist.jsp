@@ -10,7 +10,8 @@
 
 <logic:empty name="threadListForm" property="list">
 <% 
-  response.sendError(204);  
+  response.setHeader("X-Robots-Tag", "noindex");  // 防止被搜索引擎索引
+  response.setStatus(HttpServletResponse.SC_GONE);  // 使用 410 表示该页面已被永久删除
   %>
 </logic:empty>
 
