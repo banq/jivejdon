@@ -4,7 +4,8 @@
 <%@ page language="java" %>
 <%
     response.setHeader("X-Robots-Tag", "noindex"); 
-    response.sendRedirect("https://www.jdon.com/");
+    response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY); // 301
+    response.setHeader("Location", "https://www.jdon.com/");
 %>
 
 
