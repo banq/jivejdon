@@ -3,9 +3,9 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ page language="java" %>
 <%
-    response.setHeader("X-Robots-Tag", "noindex"); 
-    response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY); // 301
-    response.setHeader("Location", "https://www.jdon.com/");
+     response.setHeader("X-Robots-Tag", "noindex");  // 防止被搜索引擎索引
+     response.setStatus(HttpServletResponse.SC_GONE);  // 使用 410 表示该页面已被永久删除
+
 %>
 
 
