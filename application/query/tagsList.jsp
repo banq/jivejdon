@@ -164,7 +164,7 @@ int h = 0 ;
   <ul class="pagination pull-left">
     <li>
     <%if(pagestartInt-pagecountInt>0 ) {%>  
-        <a href="/tag/page/<%=(pagestartInt-pagecountInt)%>" rel="prev" class="btn-page">上页</a>
+        <a href="/tag/page/<%=(pagestartInt-pagecountInt)%>" rel="prev nofollow" class="btn-page">上页</a>
     <%}else{%>
         <a href="/tag/" rel="prev" class="btn-page">上页</a>
      <%}%>
@@ -177,7 +177,7 @@ int h = 0 ;
   <ul class="pagination pull-right"> 
     <li>
     <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
-    <a href="/tag/page/<%=pagestartInt+pagecountInt%>" rel="next" rel="next" class="btn-page">下页</a>
+    <a href="/tag/page/<%=pagestartInt+pagecountInt%>" rel="next" rel="next nofollow" class="btn-page">下页</a>
     <%}%>
   </li>  
 </ul>

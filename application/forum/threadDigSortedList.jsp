@@ -137,7 +137,7 @@ pageContext.setAttribute("title", titleStr);
   <ul class="pagination pull-left">
     <li>
     <%if(pagestartInt-pagecountInt>0 ) {%>  
-        <a href="/threadDigSortedList/<%=(pagestartInt-pagecountInt)%>" rel="prev" class="btn-page">上页</a>
+        <a href="/threadDigSortedList/<%=(pagestartInt-pagecountInt)%>" rel="prev nofollow" class="btn-page">上页</a>
     <%}else{%>
         <a href="/threadDigSortedList/" rel="prev" class="btn-page">上页</a>
      <%}%>
@@ -151,7 +151,7 @@ pageContext.setAttribute("title", titleStr);
   <ul class="pagination pull-right"> 
     <li>
     <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
-    <a href="/threadDigSortedList/<%=pagestartInt+pagecountInt%>" rel="next" class="btn-page">下页</a>
+    <a href="/threadDigSortedList/<%=pagestartInt+pagecountInt%>" rel="next nofollow" class="btn-page">下页</a>
     <%}%>
   </li>  
 </ul>
