@@ -50,7 +50,7 @@
                 <span class="smallgray"><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
             </logic:greaterThan>     
 		    
-              <br><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />.             
+             
             </div>
 
           </section>

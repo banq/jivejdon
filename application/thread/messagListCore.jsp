@@ -214,9 +214,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                            </div>
                           <h4 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThreadPreNext" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThreadPreNext" property="name"/></a></h4>
                        
-                          <div class="smallgray">			 
-                              <bean:write name="forumThreadPreNext" property="rootMessage.messageVO.shortBody[50]" />.             
-                           </div>
+    
                  
                            </section>
                           </li>
