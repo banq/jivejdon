@@ -61,7 +61,7 @@
      
   
 <span class="artilce">
-            <bean:write name="forumMessage" property="messageVO.shortBody[100]" />
+            <bean:write name="forumMessage" property="messageVO.shortBody[50]" />
 </span>
 
         

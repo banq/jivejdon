@@ -52,7 +52,7 @@
                     <img src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" onerror="this.src='/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg'"/>    
                   </div>
                   <div>
-                     <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. 
+                     <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />. 
                   </div>
                 </logic:notEmpty>
                  
@@ -60,7 +60,7 @@
                   <div class="thumbn">
                     <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="70" height="70"/>                  
                   </div>  
-                   <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. </p>
+                   <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />. </p>
                           
                 </logic:notEmpty>              
           </div>
