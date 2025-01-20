@@ -202,17 +202,17 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                           <div class="wrap-vid">              
                                  <logic:notEmpty name="forumThreadPreNext" property="rootMessage.messageUrlVO.imageUrl">                  
                                    <div class="thumbn">
-                                        <img src="<bean:write name="forumThreadPreNext" property="rootMessage.messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="70" height="70" onerror="this.src='/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg'"/>    
+                                        <img src="<bean:write name="forumThreadPreNext" property="rootMessage.messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="50" height="50" onerror="this.src='/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg'"/>    
                                    </div>
                                  </logic:notEmpty>
                                   
                                  <logic:notEmpty name="forumThreadPreNext" property="rootMessage.messageUrlVO.thumbnailUrl">                  
                                    <div class="thumbn">
-                                     <img src="<bean:write name="forumThreadPreNext" property="rootMessage.messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="70" height="70"/>                  
+                                     <img src="<bean:write name="forumThreadPreNext" property="rootMessage.messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="50" height="50"/>                  
                                    </div>  
                                  </logic:notEmpty>              
                            </div>
-                          <h4 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThreadPreNext" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThreadPreNext" property="name"/></a></h4>
+                          <div class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThreadPreNext" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThreadPreNext" property="name"/></a></div>
                        
     
                  
