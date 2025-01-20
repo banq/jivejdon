@@ -107,7 +107,7 @@
  <div class="col-md-6">
  <div class="box">	
   <div class="linkblock">
-    <div class="box">	           
+    <div>	           
     
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
