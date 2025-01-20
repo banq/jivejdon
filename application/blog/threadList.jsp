@@ -64,7 +64,7 @@
 
         </div>
       </div>
-      <div class="b_content_line"> </div>
+      
 
 </td>
 			</tr>
@@ -93,7 +93,7 @@
                 </div>
              </div>
 
-            <div class="b_content_line"></div>			 
+          	 
 		 </div> 
 	  </div> 
 	 

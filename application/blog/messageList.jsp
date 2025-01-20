@@ -50,11 +50,7 @@
       <bean:write name="forumMessage" property="messageVO.shortBody[50]" filter="false"/>
      </div>
 
-      <div class="b_content_other">
-        <div class="b_content_other_left">                  
-        </div>
-      </div>
-      <div class="b_content_line"> </div>
+    
       	
 </logic:notEmpty>
 </logic:iterate>
@@ -80,8 +76,7 @@
                 
                 </div>
              </div>
-
-            <div class="b_content_line"></div>			 
+			 
 		 </div> 
 	  </div> 
 
