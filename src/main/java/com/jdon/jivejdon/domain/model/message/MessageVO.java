@@ -64,7 +64,7 @@ public final class MessageVO implements Serializable, Cloneable {
 	}
 
 	public String getShortBody(int length) {
-		return caches.computeIfAbsent(length,k-> Stream.of(shortenNoHTML(getBody())).map(s -> s.substring(0, Math.min(s.length(), length))).findFirst().orElse(""));
+		return caches.computeIfAbsent(length,k-> Stream.of(shortenNoHTML(getBodyText(length))).map(s -> s.substring(0, Math.min(s.length(), length))).findFirst().orElse(""));
 	}
 
 	

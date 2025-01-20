@@ -27,7 +27,7 @@
          <h4 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThread" property="name"/></a></h4>
       
          <div class="smallgray">			 
-             <bean:write name="forumThread" property="rootMessage.messageVO.bodyText[50]" />.             
+             <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />.             
           </div>
 
           </section>

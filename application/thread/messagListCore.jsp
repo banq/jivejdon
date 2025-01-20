@@ -55,9 +55,9 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty> - 极道</title> 
     <meta name="keywords" content="<logic:iterate id="threadTag" name="forumThread" property="tags" ><bean:write name="threadTag" property="title" />,</logic:iterate><bean:write name="forumThread" property="token" />">
-    <meta name="description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.bodyText[100]" /> ">  
+    <meta name="description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" /> ">  
     <meta name="og:title" content="<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>">
-    <meta name="og:description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.bodyText[100]" /> ">       
+    <meta name="og:description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" /> ">       
     <meta property="og:url" content="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html"/>
     <meta property="og:release_date" content="<bean:write name="forumThread" property="creationDate" />"/>
     <meta property="og:image" content="https://www.jdon.com/simgs/jdon100.png"/> 

@@ -52,7 +52,7 @@
      
   
 <span class="article">
-      <bean:write name="forumMessage" property="messageVO.bodyText[100]" />
+      <bean:write name="forumMessage" property="messageVO.shortBody[100]" />
 </span>
 
         
