@@ -184,7 +184,7 @@
                  
                     <div class="smallgray" id="des_<bean:write name="forumThreadLink" property="threadId"/>" aria-hidden="true"></div>
                     <script>
-                      document.getElementById('des_<bean:write name="forumThreadLink" property="threadId"/>').innerHTML = '<bean:write name="forumThreadLink" property="rootMessage.messageVO.shortBody[50]" />. ';
+                      document.getElementById('des_<bean:write name="forumThreadLink" property="threadId"/>').innerHTML = '<bean:write name="forumThreadLink" property="rootMessage.messageVO.bodyText[50]" />. ';
                     </script>
                      </section>
                     </li>

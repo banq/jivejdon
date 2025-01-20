@@ -50,7 +50,7 @@
        
 
       <div class="b_content_body">
-      <bean:write name="forumMessage" property="messageVO.shortBody[100]" filter="false"/>
+      <bean:write name="forumMessage" property="messageVO.bodyText[100]" filter="false"/>
      </div>
 
        <div class="b_content_other">

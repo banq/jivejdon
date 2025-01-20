@@ -25,13 +25,13 @@ String coutlength = (String)pageContext.getAttribute("count");
 	<h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThread" property="name"/></a></h3>
       
          <div class="smallgray">			 
-              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />.             
+              <bean:write name="forumThread" property="rootMessage.messageVO.bodyText[100]" />.             
             </div>
 </li>
 </logic:equal>
 <logic:greaterThan name="i" value="0">
 <li class="info">
-	  <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" title="<bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />"  class="hover-preload"><bean:write name="forumThread" property="name"/></a></h3>
+	  <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" title="<bean:write name="forumThread" property="rootMessage.messageVO.bodyText[50]" />"  class="hover-preload"><bean:write name="forumThread" property="name"/></a></h3>
 </li>
 </logic:greaterThan>
 </logic:iterate>

@@ -14,7 +14,7 @@
     <bean:define id="body" name="forumMessage" property="messageVO.body" />    
     <h3> <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" ><bean:write name="forumThread" property="name" /></a> </h3>  
       <br>          
-      <p class="smallgray"> <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />..
+      <p class="smallgray"> <bean:write name="forumThread" property="rootMessage.messageVO.bodyText[50]" />..
 	</div>
 </div>        
 </logic:iterate>
@@ -28,7 +28,7 @@
     <bean:define id="body" name="forumMessage" property="messageVO.body" />    
     <h3> <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" ><bean:write name="forumThread" property="name" /></a> </h3>  
       <br>          
-      <p class="smallgray"> <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />..
+      <p class="smallgray"> <bean:write name="forumThread" property="rootMessage.messageVO.bodyText[50]" />..
 	</div>			  
 </div>        
 </logic:iterate>
@@ -42,7 +42,7 @@
     <bean:define id="body" name="forumMessage" property="messageVO.body" />    
     <h3> <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" ><bean:write name="forumThread" property="name" /></a> </h3>  
       <br>          
-      <p class="smallgray"> <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />..
+      <p class="smallgray"> <bean:write name="forumThread" property="rootMessage.messageVO.bodyText[50]" />..
 	</div>			  
 </div>        
 </logic:iterate>
