@@ -182,9 +182,9 @@
                      </div>
                     <div class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThreadLink" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThreadLink" property="name"/></a></div>
                  
-                    <div class="smallgray" id="less-important-content" aria-hidden="true"></div>
+                    <div class="smallgray" id="des_<bean:write name="forumThreadLink" property="threadId"/>" aria-hidden="true"></div>
                     <script>
-                      document.getElementById('less-important-content').innerHTML = '<bean:write name="forumThreadLink" property="rootMessage.messageVO.shortBody[50]" />. ';
+                      document.getElementById('des_<bean:write name="forumThreadLink" property="threadId"/>').innerHTML = '<bean:write name="forumThreadLink" property="rootMessage.messageVO.shortBody[50]" />. ';
                     </script>
                      </section>
                     </li>
