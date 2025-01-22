@@ -139,7 +139,7 @@
             </div>
           
             <div class="wrap-vid">
-              <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />. </p>
+              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />
              </div>
            
       </section>
