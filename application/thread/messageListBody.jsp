@@ -160,39 +160,57 @@
               </div>
 
 
-              <div id='threadLink' class="linkblock">
-
               <logic:notEmpty name="threadLinkList" >   
                 <ul style="list-style-type:none;padding:0">
-                <logic:iterate id="forumThreadLink" name="threadLinkList" >
-                  <li class="box">
-                    <section> 
-                    <div class="wrap-vid">              
-                           <logic:notEmpty name="forumThreadLink" property="rootMessage.messageUrlVO.imageUrl">                  
-                             <div class="thumbn">
-                                  <img src="<bean:write name="forumThreadLink" property="rootMessage.messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="50" height="50" onerror="this.src='/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg'"/>    
-                             </div>
-                           </logic:notEmpty>
-                            
-                           <logic:notEmpty name="forumThreadLink" property="rootMessage.messageUrlVO.thumbnailUrl">                  
-                             <div class="thumbn">
-                               <img src="<bean:write name="forumThreadLink" property="rootMessage.messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="50" height="50"/>                  
-                             </div>  
-                           </logic:notEmpty>              
-                     </div>
-                    <div class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThreadLink" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThreadLink" property="name"/></a></div>
-                 
-                    <div class="smallgray" id="des_<bean:write name="forumThreadLink" property="threadId"/>" aria-hidden="true"></div>
-                    <script>
-                      document.getElementById('des_<bean:write name="forumThreadLink" property="threadId"/>').innerHTML = '<bean:write name="forumThreadLink" property="rootMessage.messageVO.shortBody[50]" />. ';
-                    </script>
-                     </section>
-                    </li>
-                </logic:iterate>  
-              </ul>
-              </logic:notEmpty>
 
-              </div>    
+                  <%int j = 0;%>
+                  <logic:iterate id="forumThreadLink" name="threadLinkList" >
+                     
+                  <%
+                    j = j % 2;
+                    if(j ==0){ 
+                   %>
+                   <div class="row">	
+                   <%}%>
+                  
+                   <div class="col-md-6">
+                     <li class="box">	
+                       <div class="linkblock">
+                          <section class="widget">
+                            <div class="wrap-vid">       
+                                     
+                              <logic:notEmpty name="forumThreadLink" property="rootMessage.messageUrlVO.imageUrl">                  
+                                <div class="thumbn">
+                                     <img src="<bean:write name="forumThreadLink" property="rootMessage.messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="50" height="50" onerror="this.src='/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg'"/>    
+                                </div>
+                              </logic:notEmpty>
+                               
+                              <logic:notEmpty name="forumThreadLink" property="rootMessage.messageUrlVO.thumbnailUrl">                  
+                                <div class="thumbn">
+                                  <img src="<bean:write name="forumThreadLink" property="rootMessage.messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="50" height="50"/>                  
+                                </div>  
+                              </logic:notEmpty>              
+                            </div>
+                            <div class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThreadLink" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThreadLink" property="name"/></a></div>
+                 
+                            <div class="smallgray" id="des_<bean:write name="forumThreadLink" property="threadId"/>" aria-hidden="true"></div>
+                               <script>
+                                 document.getElementById('des_<bean:write name="forumThreadLink" property="threadId"/>').innerHTML = '<bean:write name="forumThreadLink" property="rootMessage.messageVO.shortBody[50]" />. ';
+                            </script>
+                          </section>
+                        </div>	
+                      </li>	
+                  </div>  
+              
+                  <%
+                    j = j+1;
+                    if(j % 2==0){ 
+                   %>
+                    </div>
+                   <%}%>
+                  </logic:iterate>
+               </ul>
+              </logic:notEmpty>
         
 </aside>
 
