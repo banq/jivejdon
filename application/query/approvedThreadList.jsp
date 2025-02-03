@@ -137,10 +137,6 @@
               </logic:greaterThan>   
                      
             </div>
-          
-            <div class="wrap-vid">
-              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />
-             </div>
            
       </section>
    	</div>	

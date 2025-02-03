@@ -63,7 +63,7 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(1 * 60 * 60, this.ge
        <main>	  
 	  <div id="main-content" class="col-lg-8">
 
-       <jsp:include page="/query/threadApprovedNewList2.shtml?count=7" flush="true"></jsp:include>
+       <jsp:include page="/query/threadApprovedNewList2.shtml?count=9" flush="true"></jsp:include>
 
 	
 <div class="box"> 
