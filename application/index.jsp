@@ -125,7 +125,7 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(1 * 60 * 60, this.ge
                 <div>
 					    <div>
 					
-                              <div id="newList"><jsp:include page="/query/threadNewList.shtml?count=5" flush="true"></jsp:include></div>   
+                              <div id="newList"><jsp:include page="/query/threadNewList.shtml?count=10" flush="true"></jsp:include></div>   
 							   
 							</div>
 				</div>
