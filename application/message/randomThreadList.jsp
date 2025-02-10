@@ -67,10 +67,10 @@ pageContext.setAttribute("title", titleStr);
               <section> 
               <div class="wrap-vid">              
                 <h3 class="vid-name">
-                  <a href="/message/tag/thread.shtml?action=edit&threadId=<bean:write name="forumThread" property="threadId"/>"  target="_blank" >编辑</a>
+                  <a href="https://www.jdon.com/message/tag/thread.shtml?action=edit&threadId=<bean:write name="forumThread" property="threadId"/>"  target="_blank" >编辑</a>
                   
                   <span class="pull-right"> 
-                  <a href="/message/postSaveAction.shtml?method=delete&messageId=<bean:write name="forumMessage" property="messageId"/>"  target="_blank" class="delajax">删除</a></h3>
+                  <a href="https://www.jdon.com/message/postSaveAction.shtml?method=delete&messageId=<bean:write name="forumMessage" property="messageId"/>"  target="_blank" class="delajax">删除</a></h3>
                   </span>
               </div>
 

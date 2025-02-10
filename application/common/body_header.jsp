@@ -10,12 +10,12 @@
 		<div class="container">
 			<div class="row">
                 <div class="col-lg-12 ">
-                    <a href="/threads/"><img src="/simgs/jdon100.png" width="100" height="40" alt="极道Jdon"/></a>
+                    <a href="<%=domainUrl%>/threads/"><img src="<%=domainUrl%>/simgs/jdon100.png" width="100" height="40" alt="极道Jdon"/></a>
                     <span class="list-inline top-link link pull-right">
-				        <a href="/forum/"><i class="fa fa-home"></i>Dojo</a>
-                        <a href="/tag/"><i class="fa fa-arrow-circle-o-down"></i>话题</a>
-						<a href="/approval/"><i class="fa fa-star-half-full"></i>新佳</a>
-                        <a href="/followus.html"><i class="fa fa-feed"></i>订阅</a>
+				        <a href="<%=domainUrl%>/forum/"><i class="fa fa-home"></i>Dojo</a>
+                        <a href="<%=domainUrl%>/tag/"><i class="fa fa-arrow-circle-o-down"></i>话题</a>
+						<a href="<%=domainUrl%>/approval/"><i class="fa fa-star-half-full"></i>新佳</a>
+                        <a href="<%=domainUrl%>/followus.html"><i class="fa fa-feed"></i>订阅</a>
                     </span>
 				</div>
 			</div>
@@ -26,7 +26,7 @@
     <nav id="menu" class="navbar container">
         <div class="navbar-header">
 		    <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
-            <a class="navbar-brand" href="/">极道</a>
+            <a class="navbar-brand" href="<%=domainUrl%>/">极道</a>
         </div>
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav navbar-inverse">

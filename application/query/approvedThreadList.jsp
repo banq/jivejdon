@@ -23,7 +23,7 @@
       <div class="row">	          
       <div class="col-lg-4">
 			      	<div class="zoom-container">
-              <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"   title="<bean:write name="forumThread" property="name"/>">
+              <a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/>.html"   title="<bean:write name="forumThread" property="name"/>">
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">        
                     <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="img-thumbnail img-responsive" style="height:230px;width:100%"  loading="lazy" onerror="this.src='https://static.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg'"/>
                 </logic:notEmpty>
@@ -36,7 +36,7 @@
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
          <section class="widget">
-         <h2><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h2>
+         <h2><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/>.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h2>
       
          <div class="info">			 
               <span class="smallgray"><i class="fa fa-calendar"></i>
@@ -112,7 +112,7 @@
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
          <section class="widget">
-         <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h3>
+         <h3 class="vid-name"><a href="<%=com.jdon.jivejdon.util.ToolsUtil.getAppURL(request)%>/<bean:write name="forumThread" property="threadId"/>.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h3>
       
          <div class="info">			 
               <span class="smallgray"><i class="fa fa-calendar"></i>

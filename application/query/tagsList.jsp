@@ -27,6 +27,9 @@ if (currentPageNo > 1){
 }
 pageContext.setAttribute("title", titleStr);
 %>
+<%
+String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
+%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -35,18 +38,18 @@ pageContext.setAttribute("title", titleStr);
  
    <meta name="Description" content="编程 软件架构 教程">
    <meta name="Keywords" content="Java教程,SpringBoot教程,程序,算法,模式,数据库,计算机科学,面试技巧,程序员职场,幽默,meme,Python,Java,JavaScript,安卓,SQL,数据科学,机器学习,Web开发,系统设计,技术博客,面试,HTML,CSS,golang,Rust">
-  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
-  <link rel="canonical" href="https://www.jdon.com/tag/"/>  
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="<%=domainUrl%>/sitemap.xml">
+  <link rel="canonical" href="<%=domainUrl%>/tag/"/>  
  
 <%if(pagestartInt != 0 ) {%> 
     <%if(pagestartInt-pagecountInt>0 ) {%>  
-        <link rel="prev" href="/tag/page/<%=(pagestartInt-pagecountInt)%>"/>
+        <link rel="prev" href="<%=domainUrl%>/tag/page/<%=(pagestartInt-pagecountInt)%>"/>
     <%}else{%>
-        <link rel="prev" href="/tag/"/>
+        <link rel="prev" href="<%=domainUrl%>/tag/"/>
      <%}%>
  <%}%>          
  <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
-    <link rel="next" href="/tag/page/<%=pagestartInt+pagecountInt%>"/>
+    <link rel="next" href="<%=domainUrl%>/tag/page/<%=pagestartInt+pagecountInt%>"/>
  <%}%>
 
 <meta http-equiv="refresh" content="3600">
@@ -164,9 +167,9 @@ int h = 0 ;
   <ul class="pagination pull-left">
     <li>
     <%if(pagestartInt-pagecountInt>0 ) {%>  
-        <a href="/tag/page/<%=(pagestartInt-pagecountInt)%>" rel="prev nofollow" class="btn-page">上页</a>
+        <a href="<%=domainUrl%>/tag/page/<%=(pagestartInt-pagecountInt)%>" rel="prev nofollow" class="btn-page">上页</a>
     <%}else{%>
-        <a href="/tag/" rel="prev" class="btn-page">上页</a>
+        <a href="<%=domainUrl%>/tag/" rel="prev" class="btn-page">上页</a>
      <%}%>
     </li>  
   </ul>
@@ -177,7 +180,7 @@ int h = 0 ;
   <ul class="pagination pull-right"> 
     <li>
     <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
-    <a href="/tag/page/<%=pagestartInt+pagecountInt%>" rel="next" rel="next nofollow" class="btn-page">下页</a>
+    <a href="<%=domainUrl%>/tag/page/<%=pagestartInt+pagecountInt%>" rel="next" rel="next nofollow" class="btn-page">下页</a>
     <%}%>
   </li>  
 </ul>

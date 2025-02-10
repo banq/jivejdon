@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-
+<%
+String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
+%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>

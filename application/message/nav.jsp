@@ -8,7 +8,7 @@
 <table cellpadding="0" cellspacing="0" border="0" width="971" style="text-align: center">
 <tr><td>
     <b>
-    <a href="/"
+    <a href="https://www.jdon.com/"
     >首页</a>
     &raquo;
     <html:link page="/forum/" title="返回道场"

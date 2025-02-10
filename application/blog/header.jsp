@@ -194,7 +194,7 @@ var openUploadWindow = function(url){
     <div class="box_mode_1"> 
 	     <div class="title"> 
 	        <div class="title_left"><a href="<%=request.getContextPath()%>/blog/<bean:write name="accountProfileForm" property="account.username"/>">博主首页</a></div> 
-	        <div class="title_right"><a href="/">首页</a></div> 
+	        <div class="title_right"><a href="https://www.jdon.com/">首页</a></div> 
 	     </div> 
 	     
 		 <div class="content"> 
@@ -332,7 +332,7 @@ var openUploadWindow = function(url){
 		 <div class="content">
  	 <div class="list_div">
 		 	  <ul><li>
-		 <a href="/social/interest.shtml?userId=<bean:write name="accountProfileForm" property="account.userId"/>" >
+		 <a href="https://www.jdon.com/social/interest.shtml?userId=<bean:write name="accountProfileForm" property="account.userId"/>" >
 	               近期关注情况
 	      </a>
 		 </li></ul>

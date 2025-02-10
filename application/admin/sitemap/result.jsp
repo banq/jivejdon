@@ -10,7 +10,7 @@
 <logic:messagesNotPresent>
   Operate Successfully!
   <br>
-  <a href="/admin/sitemap/urlListAction.shtml">返回</a>
+  <a href="https://www.jdon.com/admin/sitemap/urlListAction.shtml">返回</a>
 
 </logic:messagesNotPresent>
 

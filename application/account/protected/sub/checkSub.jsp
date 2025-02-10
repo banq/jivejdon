@@ -16,7 +16,7 @@
  </logic:equal>  
  <logic:equal name="Integer" value="2">
     已关注&nbsp;
-      <a href="/account/protected/sub/delSub.shtml?service=subscriptionService&method=deleteSubscription&id=<bean:write name="id"/>"
+      <a href="https://www.jdon.com/account/protected/sub/delSub.shtml?service=subscriptionService&method=deleteSubscription&id=<bean:write name="id"/>"
                   target="_blank"  >            
                  <span class="blackgray">取消关注</span>
        </a>    
@@ -24,7 +24,7 @@
  </logic:equal>  
  <logic:equal name="Integer" value="3">
     相互关注&nbsp;
-      <a href="/account/protected/sub/delSub.shtml?service=subscriptionService&method=deleteSubscription&id=<bean:write name="id"/>"
+      <a href="https://www.jdon.com/account/protected/sub/delSub.shtml?service=subscriptionService&method=deleteSubscription&id=<bean:write name="id"/>"
                   target="_blank"  >            
                  <span class="blackgray">取消关注</span>
        </a>    

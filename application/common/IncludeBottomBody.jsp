@@ -17,8 +17,8 @@
 					<div class="col-lg-4 col-footer footer-3">
 						<div class="content">
 							<ul>
-								<li><a href="/followus.html">关注极道 </a></li>
-								<li><a href="/aboutsite.htm">关于极道</a></li>		
+								<li><a href="https://www.jdon.com/followus.html">关注极道 </a></li>
+								<li><a href="https://www.jdon.com/aboutsite.htm">关于极道</a></li>		
 							</ul>
 						</div>
 					</div>
