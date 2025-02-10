@@ -4,7 +4,9 @@
 <%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
-
+<%
+String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
+%>
 <div class="box">
 <div class="col-lg-4">
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length="2" >

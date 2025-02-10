@@ -5,6 +5,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%
+String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
+%>
 
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
