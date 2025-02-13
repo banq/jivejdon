@@ -20,9 +20,35 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="form-group">
-      <html:text styleClass="form-control" property="subject" styleId="replySubject" size="18" maxlength="18" tabindex="5"
+      <html:text styleClass="form-control" property="subject" styleId="replySubject" size="40" maxlength="40" tabindex="5"
                      onfocus="if(value=='文中加入本站链接、热门标题'){value=''}"
-                     onblur="if (value ==''){value='文中加入本站链接、热门标题'}" ></html:text>
+                     onblur="if (value ==''){value='文中加入本站链接、热门标题'}" onkeydown="limitInputLength(this, 18)"></html:text>
+
+<script>
+function limitInputLength(input, maxChineseLength) {
+    let value = input.value; // 获取输入框的值
+    let length = 0; // 初始化长度计数器
+
+    // 遍历每个字符，计算总长度
+    for (let i = 0; i < value.length; i++) {
+        // 如果是中文字符（Unicode 范围：\u4e00-\u9fa5），长度 +1
+        if (/[\u4e00-\u9fa5]/.test(value[i])) {
+            length += 1;
+        }
+        // 如果是英文字符（包括字母、数字、标点等），长度 +0.5
+        else {
+            length += 0.5;
+        }
+
+        // 如果长度超过最大限制，截断字符串并退出循环
+        if (length > maxChineseLength) {
+            input.value = value.substring(0, i);
+            break;
+        }
+    }
+                 
+}
+</script>
     </div>
   </div>
 </div>
