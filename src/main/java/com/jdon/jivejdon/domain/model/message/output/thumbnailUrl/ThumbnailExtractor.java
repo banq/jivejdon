@@ -19,7 +19,7 @@ public class ThumbnailExtractor implements Function<MessageVO, MessageVO> {
 	private final static Logger logger = LogManager.getLogger(ThumbnailExtractor.class);
 	private final static Pattern imgPattern = Pattern.compile("(<img\\b|(?!^)\\G)[^>]*?\\b" +
 			"(src|width|height)=([\"']?)([^\"]*)\\3");
-	private String thumbpics = "//cdn.jdon.com/simgs/thumb/1.jpg,//cdn.jdon.com/simgs/thumb/2.jpg";
+	private String thumbpics = "/simgs/thumb/1.jpg,/simgs/thumb/2.jpg";
 
 	@Override
 	public MessageVO apply(MessageVO messageVO) {

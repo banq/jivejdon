@@ -12,12 +12,12 @@
 <li class="box">
          <section> 
          <div class="wrap-vid">              
-                <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">                  
-                  <div class="thumbn">
-                       <img src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="50" height="50" onerror="this.src='/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg'"/>    
-                  </div>
-                </logic:notEmpty>
-                 
+          <logic:empty name="forumMessage" property="messageUrlVO.thumbnailUrl">                  
+            <div class="thumbn">
+              <img src="https://static.jdon.com/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg" border='0' class="img-thumbnail" loading="lazy" width="50" height="50"/>
+            </div>
+          </logic:empty>
+                            
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">                  
                   <div class="thumbn">
                     <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="50" height="50"/>                  
