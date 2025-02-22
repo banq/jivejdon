@@ -140,7 +140,10 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
               </logic:greaterThan>   
                      
             </div>
-           
+
+            <div class="wrap-vid">
+              <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />. </p>
+          </div>
       </section>
    	</div>	
 	</div>	
