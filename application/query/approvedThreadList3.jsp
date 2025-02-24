@@ -39,10 +39,10 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   <div class="linkblock">
    <div class="box">
      <div class="row">
-     <div class="col-lg-4">
+     <div class="col-lg-5">
     <div style="position: relative;"  class="zoom-container">           
        <a href='<%=domainUrl%>/tag/<bean:write name="threadTag" property="tagID"/>/'  title="<bean:write name="threadTag" property="title" />">    
-        <img id="home-thumbnai" src='https://static.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg' border="0" class="img-thumbnail img-responsive" style="height:230px;width:100%"  loading="lazy" />
+        <img id="home-thumbnai" src='https://static.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg' border="0" class="img-thumbnail img-responsive" style="height:200px;width:100%"  loading="lazy" />
       </a>
       <div style="position: absolute;top:0px;right:0px">
        <div class="tagcloud">
