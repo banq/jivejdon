@@ -212,7 +212,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                                    </div>  
                                  </logic:notEmpty>              
                            </div>
-                          <div class="vid-name"><a href="<%=domainUrl %>/<bean:write name="forumThreadPreNext" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThreadPreNext" property="name"/></a></div>
+                          <div class="vid-name" style="margin-left: 10px; flex: 1;"><a href="<%=domainUrl %>/<bean:write name="forumThreadPreNext" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThreadPreNext" property="name"/></a></div>
                        
     
                  
