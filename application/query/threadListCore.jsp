@@ -46,7 +46,7 @@
             </logic:greaterThan>   
                       
             </div>
-          <div class="wrap-vid">              
+          <div class="wrap-vid" style="display: flex; align-items: center;">              
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">                  
                   <div>
                     <img src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" onerror="this.src='/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg'"/>    
@@ -58,9 +58,9 @@
                  
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">                  
                   <div class="thumbn">
-                    <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="50" height="50"/>                  
+                    <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="45" height="45"/>                  
                   </div>  
-                   <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />. </p>
+                   <span style="margin-left: 5px; flex: 1;"><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />. </span>
                           
                 </logic:notEmpty>              
           </div>
