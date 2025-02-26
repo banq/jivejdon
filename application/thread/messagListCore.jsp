@@ -208,11 +208,11 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                                   
                                  <logic:notEmpty name="forumThreadPreNext" property="rootMessage.messageUrlVO.thumbnailUrl">                  
                                    <div class="thumbn">
-                                     <img src="<bean:write name="forumThreadPreNext" property="rootMessage.messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="50" height="50"/>                  
+                                     <img src="<bean:write name="forumThreadPreNext" property="rootMessage.messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="45" height="45"/>                  
                                    </div>  
                                  </logic:notEmpty>              
                            </div>
-                          <div class="vid-name" style="margin-left: 10px; flex: 1;"><a href="<%=domainUrl %>/<bean:write name="forumThreadPreNext" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThreadPreNext" property="name"/></a></div>
+                          <div class="vid-name" style="margin-left: 5px; flex: 1;"><a href="<%=domainUrl %>/<bean:write name="forumThreadPreNext" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThreadPreNext" property="name"/></a></div>
                        
     
                  
