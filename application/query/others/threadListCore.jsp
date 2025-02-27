@@ -24,7 +24,7 @@
                   </div>  
                 </logic:notEmpty>              
           </div>
-         <h4 class="vid-name" style="margin-left: 5px; flex: 1;"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThread" property="name"/></a></h4>
+         <h4 class="vid-name" style="margin-left: 2px; flex: 1;"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThread" property="name"/></a></h4>
 
           </section>
 </li>
