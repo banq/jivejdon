@@ -26,10 +26,27 @@ public class ApprovedListSpec extends ThreadListSpec {
 	 * @return
 	 */
 	public boolean isApproved(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2) {
-		if (isDigged(thread, 1) ||  isGreaterThanPrev(thread, threadPrev, threadPrev2, 0.5)  || thread.getRootMessage().hasImage()  || isTutorial(thread))
+		if (isDigged(thread, 1) || isDailyViewCountAboveThreshold(thread,15) ||  isGreaterThanPrev(thread, threadPrev, threadPrev2, 0.5)  || thread.getRootMessage().hasImage()  || isTutorial(thread))
 			return true;
 		else
 			return false;
+	}
+
+	/**
+	 * 检查帖子每日浏览量是否超过指定阈值
+	 * 
+	 * @param thread    论坛帖子
+	 * @param threshold 每日浏览量阈值
+	 * @return 如果每日浏览量超过阈值返回true，否则返回false
+	 */
+	private boolean isDailyViewCountAboveThreshold(ForumThread thread, double threshold) {
+		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
+		long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+
+		// 计算平均每天浏览量
+		double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
+
+		return dailyViewCount > threshold;
 	}
 
 	public boolean isTutorial(ForumThread thread) {
