@@ -39,7 +39,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 	/**
 	 * recommend：HomePageComparator
-	 * 
+	 * grok3 编写的代码
 	 * @param thread
 	 * @param threadPrev
 	 * @return
@@ -48,34 +48,68 @@ public class ApprovedListSpec extends ThreadListSpec {
 		double p = 0;
 		try {
 			p = approvedCompare(thread);
-
+	
+			// 比较浏览量
 			int betterThanOthers = 0;
 			if (threadPrev.getViewCount() > 10 && thread.getViewCount() > 10) {
 				betterThanOthers = Math.round(thread.getViewCount() / threadPrev.getViewCount());
 			}
-			p = p + (betterThanOthers > 1 ? betterThanOthers : 1) * 2;
-
+			p = p + (betterThanOthers > 1 ? betterThanOthers : 1);
+	
+			// 长文加分
 			p = p + (isLongText(thread, 1)? 100: 1);
-
+	
+			// 在线人数影响
 			int onlineCount = thread.getViewCounter().getLastSavedCount();
-			long diff2 = onlineCount > 1 ? ( onlineCount + 1) : 1;
-			p = diff2 + p ;
-
+			long diff2 = onlineCount > 1 ? (onlineCount + 1) : 1;
+			p = diff2 + p;
+	
+			// 时间差计算
 			long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
 			long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
-
+			
 			// 计算平均每天浏览量
 			double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
-			// 如果每天浏览量超过15次，加权分数
 			if (dailyViewCount > 15) {
 				p = p + (dailyViewCount * 2); // 每天浏览量高的帖子获得额外加分
 			}
+	
+			// 互动率分析
+			double engagementRate = calculateEngagementRate(thread);
+			if (engagementRate > 0) {
+				p = p + (engagementRate * 100); // 互动率越高加分越多
+			}
+	
+			// 时间衰减
 			if (diffDays >= 3)
 				p = p / (diffDays * 1000);
-
+	
 		} finally {
 		}
 		return p;
+	}
+	
+	/**
+	 * 计算帖子互动率 作者：grok3
+	 * @param thread 论坛帖子
+	 * @return 互动率（0到1之间的值）
+	 */
+	private double calculateEngagementRate(ForumThread thread) {
+		// 获取互动数据
+		long viewCount = thread.getViewCount();         // 浏览量
+		long replyCount = thread.getState().getMessageCount();       // 回复数
+		int digCount = thread.getRootMessage().getDigCount(); // 点赞数
+		
+		// 避免除以0
+		if (viewCount == 0) {
+			return 0.0;
+		}
+	
+		// 计算互动率 = (回复数 + 点赞数) / 浏览量
+		double rawEngagement = (double)(replyCount + digCount) / viewCount;
+		
+		// 将互动率限制在0-1之间
+		return Math.min(1.0, Math.max(0.0, rawEngagement));
 	}
 
 	/**
