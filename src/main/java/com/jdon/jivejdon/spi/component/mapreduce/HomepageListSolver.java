@@ -43,8 +43,8 @@ public class HomepageListSolver  implements Startable {
 				clear();
 			}
 		};
-		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(task,  60 * 60 *1,
-		60 * 60 * 1, TimeUnit.SECONDS);
+		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(task,   30 * 60 *1,
+		   30 * 60 * 1, TimeUnit.SECONDS);
 
 	}
 
