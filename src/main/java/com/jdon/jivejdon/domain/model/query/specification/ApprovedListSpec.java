@@ -53,7 +53,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 			if (threadPrev.getViewCount() > 10 && thread.getViewCount() > 10) {
 				betterThanOthers = Math.round(thread.getViewCount() / threadPrev.getViewCount());
 			}
-			p = p + (betterThanOthers > 1 ? betterThanOthers : 1);
+			p = p + (betterThanOthers > 1 ? betterThanOthers : 1) * 2;
 
 			p = p + (isLongText(thread, 1)? 100: 1);
 
