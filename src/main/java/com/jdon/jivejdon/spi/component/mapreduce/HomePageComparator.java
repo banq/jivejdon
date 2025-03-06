@@ -4,6 +4,8 @@ import java.util.Comparator;
 
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.query.specification.ApprovedListSpec;
+import com.jdon.jivejdon.domain.model.thread.ViewCounter;
+import com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob;
 
 /**
  * Home page Mixer: approve/rank threads Comparator
@@ -13,9 +15,11 @@ import com.jdon.jivejdon.domain.model.query.specification.ApprovedListSpec;
  */
 public class HomePageComparator implements Comparator<ForumThread> {
     private final ApprovedListSpec approvedListSpec;
+	private final ThreadViewCounterJob threadViewCounterJob;
 
-	public HomePageComparator(ApprovedListSpec approvedListSpec){
+	public HomePageComparator(ApprovedListSpec approvedListSpec, ThreadViewCounterJob threadViewCounterJob){
         this.approvedListSpec = approvedListSpec;
+		this.threadViewCounterJob = threadViewCounterJob;
 	}
 
 	@Override
@@ -45,6 +49,16 @@ public class HomePageComparator implements Comparator<ForumThread> {
 	}
 
 	private double algorithm(final ForumThread thread, final ForumThread threadPrev) {
-		return approvedListSpec.sortedLeaderboard(thread, threadPrev);
+		double p = approvedListSpec.sortedLeaderboard(thread, threadPrev);
+
+		// 检查 viewcounters 中是否存在该 thread，并加权
+		ViewCounter viewCounter = threadViewCounterJob.getViewCounter(thread.getThreadId());
+		if (viewCounter != null) {
+			long viewCountFromMap = viewCounter.getViewCount();
+			if (viewCountFromMap > 0) {
+				p = p + (viewCountFromMap * 0.5); // 加权系数0.5，可调整
+			}
+		}
+		return p;
 	}
 }

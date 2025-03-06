@@ -12,6 +12,7 @@ import com.jdon.container.pico.Startable;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.query.specification.ApprovedListSpec;
+import com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;
 
 /**
@@ -24,12 +25,15 @@ public class HomepageListSolver  implements Startable {
 	private final ForumMessageQueryService forumMessageQueryService;
 	private final ApprovedListSpec approvedListSpec = new ApprovedListSpec();
 	private AtomicReference<Collection<Long>>  list;
+	private final ThreadViewCounterJob threadViewCounterJob;
 
 	public HomepageListSolver(ThreadApprovedNewList threadApprovedNewList,
-							  ForumMessageQueryService forumMessageQueryService) {
+							  ForumMessageQueryService forumMessageQueryService,
+							  ThreadViewCounterJob threadViewCounterJob) {
 		this.threadApprovedNewList = threadApprovedNewList;
 		this.forumMessageQueryService = forumMessageQueryService;
 		this.list = new AtomicReference<>();
+		this.threadViewCounterJob = threadViewCounterJob;
 	}
 
 	public void start() {
@@ -70,14 +74,33 @@ public class HomepageListSolver  implements Startable {
 		for (int i = 0; i < 75; i = i + 15) {
 			listInit.addAll(threadApprovedNewList.getApprovedThreads(i));
 		}
-		listInit = listInit.stream().collect(Collectors.toMap((threadId) -> forumMessageQueryService
-				.getThread(threadId), threadId -> threadId, (e1, e2) -> e1,
-				() -> new ConcurrentSkipListMap<ForumThread, Long>(new HomePageComparator(approvedListSpec))))
-				.values();
+		// 第一步：将原始 listInit 放入 ConcurrentSkipListMap 进行排序
+		ConcurrentSkipListMap<ForumThread, Long> sortedMap = listInit.stream()
+				.collect(Collectors.toMap(
+						(threadId) -> forumMessageQueryService.getThread(threadId),
+						threadId -> threadId,
+						(e1, e2) -> e1,
+						() -> new ConcurrentSkipListMap<>(
+								new HomePageComparator(approvedListSpec, threadViewCounterJob))));
 
-		this.list.set(listInit);		
+		// 第二步：从 threadViewCounterJob 获取所有 ViewCounter，并筛选 5 天内的帖子
+		threadViewCounterJob.getThreadIdsList().stream()
+				.map(threadId -> forumMessageQueryService.getThread(threadId))
+				.filter(thread -> {
+					long diffDays = calculateDiffDays(thread);
+					return diffDays <= 5; // 只保留 5 天内的帖子
+				})
+				.forEach(thread -> sortedMap.putIfAbsent(thread, thread.getThreadId())); // 添加到 sortedMap
+
+		// 第三步：将排序结果赋值给 listInit
+		listInit = new ArrayList<>(sortedMap.values());
+		this.list.set(listInit);
 	}
 
+	private long calculateDiffDays(ForumThread thread) {
+        long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
+        return TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+    }
 	
 
 //		for (Long threadId : list) {
