@@ -87,7 +87,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 			
 			// 计算平均每天浏览量
 			double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
-			if (dailyViewCount > 15) {
+			if (dailyViewCount > 5) {
 				p = p + (dailyViewCount * 2); // 每天浏览量高的帖子获得额外加分
 			}
 	
@@ -98,7 +98,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 			}
 	
 			// 时间衰减
-			if (diffDays >= 3)
+			if (diffDays >= 7)
 				p = p / (diffDays * 1000);
 	
 		} finally {
