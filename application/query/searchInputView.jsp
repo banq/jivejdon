@@ -60,9 +60,9 @@
 <table class="table table-striped">
     <tbody>
     <tr><td align="middle">
-        <form action="https://www.baidu.com/s" class="search" method="get">
-            <input type=text name=wd  value="<bean:write name="query"/>  site:jdon.com" size="40">
-            <input type="submit" value="百度本道场"> 
+        <form action="https://www.so.com/s" class="search" method="get">
+            <input type=text name=q  value="<bean:write name="query"/>  site:jdon.com" size="40">
+            <input type="submit" value="360搜"> 
             </form>
     </td></tr>
     </tbody>
