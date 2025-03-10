@@ -98,8 +98,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 			}
 	
 			// 时间衰减
-			if (diffDays >= 15)
-				p = p / (diffDays * 0.5);
+			p = p + p / diffDays ;
 	
 		} finally {
 		}
