@@ -56,7 +56,7 @@ public class HomePageComparator implements Comparator<ForumThread> {
 		if (viewCounter != null) {
 			long viewCountFromMap = viewCounter.getViewCount();
 			if (viewCountFromMap > 0) {
-				p = p + (viewCountFromMap * 0.5); // 加权系数0.5，可调整
+				p = p + (viewCountFromMap * 5.5); // 加权系数0.5，可调整
 			}
 		}
 		return p;

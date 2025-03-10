@@ -55,7 +55,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	/**
-	 * recommend：HomePageComparator
+	 * approval：HomePageComparator
 	 * grok3 编写的代码
 	 * @param thread
 	 * @param threadPrev
@@ -71,7 +71,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 			if (threadPrev.getViewCount() > 10 && thread.getViewCount() > 10) {
 				betterThanOthers = Math.round(thread.getViewCount() / threadPrev.getViewCount());
 			}
-			p = p + (betterThanOthers > 1 ? betterThanOthers : 1);
+			p = p + (betterThanOthers > 1 ? betterThanOthers : 1) * 10;
 	
 			// 长文加分
 			p = p + (isLongText(thread, 1)? 100: 1);
@@ -79,7 +79,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 			// 在线人数影响
 			int onlineCount = thread.getViewCounter().getLastSavedCount();
 			long diff2 = onlineCount > 1 ? (onlineCount + 1) : 1;
-			p = diff2 + p;
+			p =  p + (diff2 * 10) ;
 	
 			// 时间差计算
 			long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
@@ -88,7 +88,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 			// 计算平均每天浏览量
 			double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
 			if (dailyViewCount > 5) {
-				p = p + (dailyViewCount * 2); // 每天浏览量高的帖子获得额外加分
+				p = p + (dailyViewCount * 10); // 每天浏览量高的帖子获得额外加分
 			}
 	
 			// 互动率分析
@@ -98,8 +98,8 @@ public class ApprovedListSpec extends ThreadListSpec {
 			}
 	
 			// 时间衰减
-			if (diffDays >= 7)
-				p = p / (diffDays * 1000);
+			if (diffDays >= 15)
+				p = p / (diffDays * 0.5);
 	
 		} finally {
 		}
