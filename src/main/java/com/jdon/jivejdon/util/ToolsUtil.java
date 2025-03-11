@@ -424,6 +424,7 @@ public class ToolsUtil {
 	}
 	
 	public static void setEtagHaeder(HttpServletResponse response, long modelLastModifiedDate) {
+		modelLastModifiedDate = modelLastModifiedDate / 1000 * 1000;
 		response.setHeader("ETag", "\"" + Long.toString(modelLastModifiedDate) + "\"");
 	}
 	
@@ -438,6 +439,7 @@ public class ToolsUtil {
 		response.setStatus(HttpServletResponse.SC_OK);
 	
 		// 设置 Last-Modified
+		modelLastModifiedDate = modelLastModifiedDate / 1000 * 1000;
 		response.addDateHeader("Last-Modified", modelLastModifiedDate);
 	
 		// 设置 Age（资源已经存在的秒数）
