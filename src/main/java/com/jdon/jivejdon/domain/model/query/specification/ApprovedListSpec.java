@@ -74,7 +74,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 			p = p + (betterThanOthers > 1 ? betterThanOthers : 1) * 10;
 	
 			// 长文加分
-			p = p + (isLongText(thread, 1)? 100: 1);
+			p = p + (isLongText(thread, 1)? 10: 1);
 	
 			// 在线人数影响
 			int onlineCount = thread.getViewCounter().getLastSavedCount();
@@ -97,13 +97,31 @@ public class ApprovedListSpec extends ThreadListSpec {
 				p = p + (engagementRate * 100); // 互动率越高加分越多
 			}
 	
+			 // 新增逻辑：一天内发布的帖子，基于浏览量和点赞数加权
+			 if (diffDays <= 1) {
+                double weightedScore = calculateWeightedScore(thread);
+                p = p + weightedScore; // 将加权分数加到 p 上，影响排序
+            }
 			// 时间衰减
-			p = p + p / (diffDays * 5) ;
+			p = p + (diffDays == 0 ? 0 : p / (diffDays * 5));
 	
 		} finally {
 		}
 		return p;
 	}
+
+	 // 新增方法：计算一天内帖子的加权分数
+	 private double calculateWeightedScore(ForumThread thread) {
+        long viewCount = thread.getViewCount();
+        int digCount = thread.getRootMessage().getDigCount();
+
+        // 浏览量和点赞的权重
+        double viewWeight = 0.7; // 浏览量权重更高
+        double digWeight = 0.3;  // 点赞权重
+
+        // 加权分数
+        return (viewCount * viewWeight) + (digCount * digWeight);
+    }
 	
 	/**
 	 * 计算帖子互动率 作者：grok3
