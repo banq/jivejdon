@@ -83,14 +83,14 @@ public class HomepageListSolver  implements Startable {
 						() -> new ConcurrentSkipListMap<>(
 								new HomePageComparator(approvedListSpec, threadViewCounterJob))));
 
-		// 第二步：从 threadViewCounterJob 获取所有 ViewCounter，并筛选 5 天内的帖子
-		threadViewCounterJob.getThreadIdsList().stream()
-				.map(threadId -> forumMessageQueryService.getThread(threadId))
-				.filter(thread -> {
-					long diffDays = calculateDiffDays(thread);
-					return diffDays <= 15; // 只保留 15 天内的帖子
-				})
-				.forEach(thread -> sortedMap.putIfAbsent(thread, thread.getThreadId())); // 添加到 sortedMap
+		// // 第二步：从 threadViewCounterJob 获取所有 ViewCounter，并筛选 5 天内的帖子
+		// threadViewCounterJob.getThreadIdsList().stream()
+		// 		.map(threadId -> forumMessageQueryService.getThread(threadId))
+		// 		.filter(thread -> {
+		// 			long diffDays = calculateDiffDays(thread);
+		// 			return diffDays <= 15; // 只保留 15 天内的帖子
+		// 		})
+		// 		.forEach(thread -> sortedMap.putIfAbsent(thread, thread.getThreadId())); // 添加到 sortedMap
 
 		// 第三步：将排序结果赋值给 listInit
 		listInit = new ArrayList<>(sortedMap.values());

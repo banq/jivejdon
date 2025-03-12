@@ -66,10 +66,10 @@ public class ApprovedListSpec extends ThreadListSpec {
 		try {
 			p = approvedCompare(thread);
 	
-			// 在线人数影响
-			int onlineCount = thread.getViewCounter().getLastSavedCount();
-			long diff2 = onlineCount > 1 ? (onlineCount + 1) : 1;
-			p =  p + (diff2 * 10) ;
+			// // 在线人数影响
+			// int onlineCount = thread.getViewCounter().getLastSavedCount();
+			// long diff2 = onlineCount > 1 ? (onlineCount + 1) : 1;
+			// p =  p + (diff2 * 10) ;
 	
 			// 时间差计算
 			long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
@@ -87,7 +87,7 @@ public class ApprovedListSpec extends ThreadListSpec {
                 p = p + weightedScore; // 将加权分数加到 p 上，影响排序
             }
 			// 时间衰减
-			p = p + (diffDays == 0 ? 0 : p / (diffDays * 5));
+			p = p + (diffDays == 0 ? 0 : p / (diffDays * 100));
 	
 		} finally {
 		}
