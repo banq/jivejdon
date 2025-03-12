@@ -88,7 +88,7 @@ public class HomepageListSolver  implements Startable {
 				.map(threadId -> forumMessageQueryService.getThread(threadId))
 				.filter(thread -> {
 					long diffDays = calculateDiffDays(thread);
-					return diffDays <= 35; // 只保留 35 天内的帖子
+					return diffDays <= 15; // 只保留 15 天内的帖子
 				})
 				.forEach(thread -> sortedMap.putIfAbsent(thread, thread.getThreadId())); // 添加到 sortedMap
 
