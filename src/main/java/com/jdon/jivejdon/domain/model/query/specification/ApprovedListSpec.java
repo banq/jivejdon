@@ -69,7 +69,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 			// 在线人数影响
 			int onlineCount = thread.getViewCounter().getLastSavedCount();
 			long diff2 = onlineCount > 1 ? (onlineCount + 1) : 1;
-			p =  p + (diff2 * 100) ;
+			p =  p + (diff2 * 10) ;
 	
 			// 时间差计算
 			long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
