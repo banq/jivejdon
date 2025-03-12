@@ -66,16 +66,6 @@ public class ApprovedListSpec extends ThreadListSpec {
 		try {
 			p = approvedCompare(thread);
 	
-			// 比较浏览量
-			int betterThanOthers = 0;
-			if (threadPrev.getViewCount() > 10 && thread.getViewCount() > 10) {
-				betterThanOthers = Math.round(thread.getViewCount() / threadPrev.getViewCount());
-			}
-			p = p + (betterThanOthers > 1 ? betterThanOthers : 1) * 10;
-	
-			// 长文加分
-			p = p + (isLongText(thread, 1)? 10: 1);
-	
 			// 在线人数影响
 			int onlineCount = thread.getViewCounter().getLastSavedCount();
 			long diff2 = onlineCount > 1 ? (onlineCount + 1) : 1;
@@ -89,12 +79,6 @@ public class ApprovedListSpec extends ThreadListSpec {
 			double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
 			if (dailyViewCount > 5) {
 				p = p + (dailyViewCount * 10); // 每天浏览量高的帖子获得额外加分
-			}
-	
-			// 互动率分析
-			double engagementRate = calculateEngagementRate(thread);
-			if (engagementRate > 0) {
-				p = p + (engagementRate * 100); // 互动率越高加分越多
 			}
 	
 			 // 新增逻辑：一天内发布的帖子，基于浏览量和点赞数加权
@@ -123,28 +107,7 @@ public class ApprovedListSpec extends ThreadListSpec {
         return (viewCount * viewWeight) + (digCount * digWeight);
     }
 	
-	/**
-	 * 计算帖子互动率 作者：grok3
-	 * @param thread 论坛帖子
-	 * @return 互动率（0到1之间的值）
-	 */
-	private double calculateEngagementRate(ForumThread thread) {
-		// 获取互动数据
-		long viewCount = thread.getViewCount();         // 浏览量
-		long replyCount = thread.getState().getMessageCount();       // 回复数
-		int digCount = thread.getRootMessage().getDigCount(); // 点赞数
-		
-		// 避免除以0
-		if (viewCount == 0) {
-			return 0.0;
-		}
 	
-		// 计算互动率 = (回复数 + 点赞数) / 浏览量
-		double rawEngagement = (double)(replyCount + digCount) / viewCount;
-		
-		// 将互动率限制在0-1之间
-		return Math.min(1.0, Math.max(0.0, rawEngagement));
-	}
 
 	/**
 	 * recommend：ThreadDigComparator
