@@ -40,7 +40,7 @@ pageContext.setAttribute("title", titleStr);
 		<div class="row">
 			<!-- /////////////////左边 -->
 			<div id="main-content" class="col-lg-8">
-				<div class="box">	
+				<div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1)">	
         
         
 
