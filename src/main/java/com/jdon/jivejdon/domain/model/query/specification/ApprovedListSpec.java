@@ -100,8 +100,8 @@ public class ApprovedListSpec extends ThreadListSpec {
         int digCount = thread.getRootMessage().getDigCount();
 
         // 浏览量和点赞的权重
-        double viewWeight = 0.7; // 浏览量权重更高
-        double digWeight = 0.3;  // 点赞权重
+        double viewWeight = 8; // 浏览量权重更高
+        double digWeight = 2;  // 点赞权重
 
         // 加权分数
         return (viewCount * viewWeight) + (digCount * digWeight);
