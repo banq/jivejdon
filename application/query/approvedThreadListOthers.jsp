@@ -93,8 +93,9 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <div id="page-content" class="single-page container">
     <div class="row">
       <!-- /////////////////左边 -->
-      <div id="main-content" class="col-lg-8">
-        <div class="box"> 
+          <div id="main-content" class="col-lg-8">
+            <div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1)">	
+
 <ul class="nav nav-tabs">        
   <li><a href="<%=domainUrl%>/threads/">最新</a></li>
   <li class="active"><a href="#">新佳</a></li>
