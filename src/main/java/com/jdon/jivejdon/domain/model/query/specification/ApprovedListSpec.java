@@ -86,8 +86,8 @@ public class ApprovedListSpec extends ThreadListSpec {
                 double weightedScore = calculateWeightedScore(thread);
                 p = p + weightedScore; // 将加权分数加到 p 上，影响排序
             }
-			// 时间衰减
-			p = p + (diffDays == 0 ? 0 : p / (diffDays * 100));
+			// // 时间衰减
+			// p = p + (diffDays == 0 ? 0 : p / (diffDays * 100));
 	
 		} finally {
 		}
