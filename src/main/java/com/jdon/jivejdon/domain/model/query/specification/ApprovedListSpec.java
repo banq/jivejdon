@@ -75,14 +75,14 @@ public class ApprovedListSpec extends ThreadListSpec {
 			long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
 			long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 			
-			// 计算平均每天浏览量
-			double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
-			if (dailyViewCount > 5) {
-				p = p + (dailyViewCount * 10); // 每天浏览量高的帖子获得额外加分
-			}
+			// // 计算平均每天浏览量
+			// double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
+			// if (dailyViewCount > 5) {
+			// 	p = p + (dailyViewCount * 10); // 每天浏览量高的帖子获得额外加分
+			// }
 	
 			 // 新增逻辑：一天内发布的帖子，基于浏览量和点赞数加权
-			 if (diffDays <= 1) {
+			 if (diffDays <= 3) {
                 double weightedScore = calculateWeightedScore(thread);
                 p = p + weightedScore; // 将加权分数加到 p 上，影响排序
             }
