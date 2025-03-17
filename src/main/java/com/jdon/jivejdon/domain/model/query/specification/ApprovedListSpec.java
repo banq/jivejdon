@@ -105,26 +105,42 @@ public class ApprovedListSpec extends ThreadListSpec {
 		return p;
 	}
 
-	 private double calculateWeightedScore(ForumThread thread) {
-        long viewCount = thread.getViewCount();
-        int digCount = thread.getRootMessage().getDigCount();
+	/**
+	 * recommend：ThreadDigComparator
+	 */
+	public double approvedCompare(ForumThread thread) {
+		return calculateApprovedScore(thread);
+	}
 
-        // 浏览量和点赞的权重
-        double viewWeight = 0.8; // 浏览量权重更高
-        double digWeight = 0.2;  // 点赞权重
-
-		// 时间差计算
-		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
-		long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
-
-		if (diffDays <= 5) {
-			viewWeight = 10;			
-		}
-
-        // 加权分数
-        return (viewCount * viewWeight) + (digCount * digWeight);
-    }
+	public double calculateApprovedScore(ForumThread thread) {
+		double weightedScore = calculateWeightedScore(thread);
+		long daysSinceCreation = getDaysSinceCreation(thread.getCreationDate2());
+		return weightedScore / (daysSinceCreation + 1);
+	}
 	
+	private double calculateWeightedScore(ForumThread thread) {
+		// Extract metrics
+		long viewCount = thread.getViewCount();
+		int digCount = thread.getRootMessage().getDigCount();
+		
+		// Define weights
+		double viewWeight = getViewWeight(thread.getCreationDate2());
+		double digWeight = 0.2;
+		
+		// Calculate weighted score
+		return (viewCount * viewWeight) + (digCount * digWeight);
+	}
+	
+	private double getViewWeight(long creationDate) {
+		long daysSinceCreation = getDaysSinceCreation(creationDate);
+		return (daysSinceCreation <= 5) ? 10.0 : 0.8;
+	}
+	
+	private long getDaysSinceCreation(long creationDate) {
+		long currentTime = System.currentTimeMillis();
+		long timeDifferenceMillis = Math.abs(currentTime - creationDate);
+		return TimeUnit.DAYS.convert(timeDifferenceMillis, TimeUnit.MILLISECONDS);
+	}
 
 
 	public boolean isTagged(ForumThread thread, int count) {
