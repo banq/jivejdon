@@ -71,7 +71,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 			if (threadPrev.getViewCount() > 10 && thread.getViewCount() > 10) {
 				betterThanOthers = Math.round(thread.getViewCount() / threadPrev.getViewCount());
 			}
-			p = p + (betterThanOthers > 1 ? betterThanOthers : 1) * 10;
+			p = p + (betterThanOthers > 1 ? betterThanOthers : 1) * 100;
 	
 			// 长文加分
 			p = p + (isLongText(thread, 1)? 100: 1);
@@ -80,20 +80,18 @@ public class ApprovedListSpec extends ThreadListSpec {
 			// 时间差计算
 			long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
 			long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
-			
-			// 计算平均每天浏览量
-			double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
-			if (dailyViewCount > 5) {
-				p = p + (dailyViewCount * 10); // 每天浏览量高的帖子获得额外加分
+
+			if (diffDays <= 5) {
+				// 计算平均每天浏览量
+				double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
+				if (dailyViewCount > 5) {
+					p = p + (dailyViewCount * 100); // 每天浏览量高的帖子获得额外加分
+				}
+			} else {
+				// // 时间衰减
+				p = p/(diffDays * 100);
 			}
-	
-			 // 新增逻辑：一天内发布的帖子，基于浏览量和点赞数加权
-			 if (diffDays <= 3) {
-                double weightedScore = calculateWeightedScore(thread);
-                p = p + weightedScore; // 将加权分数加到 p 上，影响排序
-            }
-			// // 时间衰减
-			p = p + (diffDays == 0 ? 0 : p / (diffDays * 100));
+
 	
 		} finally {
 		}
@@ -122,12 +120,12 @@ public class ApprovedListSpec extends ThreadListSpec {
 	 * @return
 	 */
 	public double approvedCompare(ForumThread thread) {
-		double threadCount = thread.getRootMessage().getDigCount() > 0
-				? thread.getViewCount() * (thread.getRootMessage().getDigCount() + 1)
-				: thread.getViewCount();
+		// double threadCount = thread.getRootMessage().getDigCount() > 0
+		// 		? thread.getViewCount() * (thread.getRootMessage().getDigCount() + 1)
+		// 		: thread.getViewCount();
 		long diff = TimeUnit.DAYS.convert(Math.abs(System.currentTimeMillis() - thread.getCreationDate2()),
 				TimeUnit.MILLISECONDS);
-		return threadCount / (diff + 1);
+		return calculateWeightedScore(thread) / (diff + 1);
 	}
 
 	public boolean isTagged(ForumThread thread, int count) {
