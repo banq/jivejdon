@@ -65,21 +65,27 @@ public class ApprovedListSpec extends ThreadListSpec {
 		double p = 0;
 		try {
 			p = approvedCompare(thread);
+
+			// 比较浏览量
+			int betterThanOthers = 0;
+			if (threadPrev.getViewCount() > 10 && thread.getViewCount() > 10) {
+				betterThanOthers = Math.round(thread.getViewCount() / threadPrev.getViewCount());
+			}
+			p = p + (betterThanOthers > 1 ? betterThanOthers : 1) * 10;
 	
-			// // 在线人数影响
-			// int onlineCount = thread.getViewCounter().getLastSavedCount();
-			// long diff2 = onlineCount > 1 ? (onlineCount + 1) : 1;
-			// p =  p + (diff2 * 10) ;
+			// 长文加分
+			p = p + (isLongText(thread, 1)? 100: 1);
 	
+
 			// 时间差计算
 			long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
 			long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 			
-			// // 计算平均每天浏览量
-			// double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
-			// if (dailyViewCount > 5) {
-			// 	p = p + (dailyViewCount * 10); // 每天浏览量高的帖子获得额外加分
-			// }
+			// 计算平均每天浏览量
+			double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
+			if (dailyViewCount > 5) {
+				p = p + (dailyViewCount * 10); // 每天浏览量高的帖子获得额外加分
+			}
 	
 			 // 新增逻辑：一天内发布的帖子，基于浏览量和点赞数加权
 			 if (diffDays <= 3) {
@@ -87,7 +93,7 @@ public class ApprovedListSpec extends ThreadListSpec {
                 p = p + weightedScore; // 将加权分数加到 p 上，影响排序
             }
 			// // 时间衰减
-			// p = p + (diffDays == 0 ? 0 : p / (diffDays * 100));
+			p = p + (diffDays == 0 ? 0 : p / (diffDays * 100));
 	
 		} finally {
 		}
@@ -100,8 +106,8 @@ public class ApprovedListSpec extends ThreadListSpec {
         int digCount = thread.getRootMessage().getDigCount();
 
         // 浏览量和点赞的权重
-        double viewWeight = 8; // 浏览量权重更高
-        double digWeight = 2;  // 点赞权重
+        double viewWeight = 80; // 浏览量权重更高
+        double digWeight = 20;  // 点赞权重
 
         // 加权分数
         return (viewCount * viewWeight) + (digCount * digWeight);
