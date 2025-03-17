@@ -26,7 +26,12 @@ public class ApprovedListSpec extends ThreadListSpec {
 	 * @return
 	 */
 	public boolean isApproved(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2) {
-		if (isDigged(thread, 1) || isDailyViewCountAboveThreshold(thread,15) ||  isGreaterThanPrev(thread, threadPrev, threadPrev2, 0.5)  || thread.getRootMessage().hasImage()  || isTutorial(thread))
+		if (calculateWeightedScore(thread)>10
+		    || isDigged(thread, 1) 
+			|| isDailyViewCountAboveThreshold(thread, 5)
+			|| isGreaterThanPrev(thread, threadPrev, threadPrev2, 0.5) 
+			|| thread.getRootMessage().hasImage()
+			|| isTutorial(thread))
 			return true;
 		else
 			return false;
@@ -64,8 +69,6 @@ public class ApprovedListSpec extends ThreadListSpec {
 	public double sortedLeaderboard(final ForumThread thread, final ForumThread threadPrev) {
 		double p = 0;
 		try {
-			p = approvedCompare(thread);
-
 			// 比较浏览量
 			int betterThanOthers = 0;
 			if (threadPrev.getViewCount() > 10 && thread.getViewCount() > 10) {
@@ -98,35 +101,27 @@ public class ApprovedListSpec extends ThreadListSpec {
 		return p;
 	}
 
-	 // 新增方法：计算一天内帖子的加权分数
 	 private double calculateWeightedScore(ForumThread thread) {
         long viewCount = thread.getViewCount();
         int digCount = thread.getRootMessage().getDigCount();
 
         // 浏览量和点赞的权重
-        double viewWeight = 80; // 浏览量权重更高
-        double digWeight = 20;  // 点赞权重
+        double viewWeight = 0.8; // 浏览量权重更高
+        double digWeight = 0.2;  // 点赞权重
+
+		// 时间差计算
+		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
+		long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+
+		if (diffDays <= 5) {
+			viewWeight = 10;			
+		}
 
         // 加权分数
         return (viewCount * viewWeight) + (digCount * digWeight);
     }
 	
-	
 
-	/**
-	 * recommend：ThreadDigComparator
-	 * 
-	 * @param thread
-	 * @return
-	 */
-	public double approvedCompare(ForumThread thread) {
-		// double threadCount = thread.getRootMessage().getDigCount() > 0
-		// 		? thread.getViewCount() * (thread.getRootMessage().getDigCount() + 1)
-		// 		: thread.getViewCount();
-		long diff = TimeUnit.DAYS.convert(Math.abs(System.currentTimeMillis() - thread.getCreationDate2()),
-				TimeUnit.MILLISECONDS);
-		return calculateWeightedScore(thread) / (diff + 1);
-	}
 
 	public boolean isTagged(ForumThread thread, int count) {
 		final double tagsCOunt = thread.getTags().stream().map(threadTag -> threadTag.getAssonum()).reduce(0,
@@ -144,15 +139,10 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	public boolean isGreaterThanPrev(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2, double rate) {
-		if (threadPrev == null || threadPrev.getViewCount() < 50 || threadPrev2 == null
-				|| threadPrev2.getViewCount() < 50 || thread.getViewCount() < 100)
+		if (threadPrev == null || threadPrev2 == null || thread.getViewCount() < 10)
 			return false;
-
-		// if (thread.getCreationDate().substring(2,
-		// 11).equals(threadPrev.getCreationDate().substring(2, 11)))
 		return (thread.getViewCount() * rate > Math.min(threadPrev.getViewCount(), threadPrev2.getViewCount())) ? true
 				: false;
-
 	}
 
 	public boolean isGoodBlog(ForumThread thread) {
