@@ -62,43 +62,62 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <% } %>  
 
 <style>
-  dialog {
-      max-width: 800px;
-      width: 90%;
-      padding: 20px;
-      border: none;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      background-color: white; /* 添加白色背景 */
-      overflow: hidden; /* 隐藏所有滚动条 */
-            max-height: 90vh; /* 限制最大高度 */
-            box-sizing: border-box; /* 确保padding包含在宽度计算中 */
-  }
-  dialog::backdrop {
-      background: rgba(0,0,0,0.4);
-  }
-  .dialog-content {
-      margin-top: 15px;
-      width: 100%;
-      min-height: 400px;
-  }
-  .close-btn {
-      float: right;
-      cursor: pointer;
-      background: #41872d;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 3px;
-  }
-  .vid-name a {
-      cursor: pointer;
-  }
-  iframe {
-      width: 100%;
-      height: 500px;
-      border: none;
-  }
+    dialog {
+            max-width: 810px;
+            width: 90%;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            background-color: white;
+            overflow: hidden;
+            max-height: 90vh;
+            box-sizing: border-box;
+        }
+        dialog::backdrop {
+            background: rgba(0,0,0,0.4);
+        }
+        .dialog-content {
+            margin-top: 15px;
+            width: 100%;
+            min-height: 400px;
+            max-width: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+        .close-btn {
+            float: right;
+            cursor: pointer;
+            background: #41872d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+        .vid-name a {
+            cursor: pointer;
+        }
+        iframe {
+            width: 100%;
+            max-width: 100%;
+            height: 500px;
+            border: none;
+            overflow-x: hidden;
+            box-sizing: border-box;
+            display: block;
+        }
+        /* 浏览器特定滚动条隐藏 */
+        dialog, .dialog-content, iframe {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        dialog::-webkit-scrollbar, 
+        .dialog-content::-webkit-scrollbar, 
+        iframe::-webkit-scrollbar {
+            display: none;
+        }
+   
 </style>
 <meta http-equiv="refresh" content="3600">
 <script>
