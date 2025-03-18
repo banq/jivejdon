@@ -61,7 +61,45 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
  <%}%>
 <% } %>  
 
-
+<style>
+  dialog {
+      max-width: 810px;
+      width: 90%;
+      padding: 20px;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      background-color: white; /* 添加白色背景 */
+      overflow: hidden; /* 隐藏所有滚动条 */
+            max-height: 90vh; /* 限制最大高度 */
+            box-sizing: border-box; /* 确保padding包含在宽度计算中 */
+  }
+  dialog::backdrop {
+      background: rgba(0,0,0,0.4);
+  }
+  .dialog-content {
+      margin-top: 15px;
+      width: 100%;
+      min-height: 400px;
+  }
+  .close-btn {
+      float: right;
+      cursor: pointer;
+      background: #41872d;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+  }
+  .vid-name a {
+      cursor: pointer;
+  }
+  iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+  }
+</style>
 <meta http-equiv="refresh" content="3600">
 <script>
  if(top !== self) top.location = self.location;
@@ -184,6 +222,32 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   }
   </script>
   
+   <!-- 添加全局dialog -->
+   <dialog id="contentDialog">
+    <button class="close-btn" onclick="closeDialog()">关闭</button>
+    <div class="dialog-content">
+        <iframe id="contentFrame"></iframe>
+    </div>
+</dialog>
+
+<!-- 页脚部分保持不变 -->
+
+<script>
+    function showDialog(dialogId, url) {
+        const dialog = document.getElementById('contentDialog');
+        const iframe = document.getElementById('contentFrame');
+        iframe.src = url;
+        dialog.showModal();
+    }
+
+    function closeDialog() {
+        const dialog = document.getElementById('contentDialog');
+        const iframe = document.getElementById('contentFrame');
+        iframe.src = ''; // 清空iframe内容
+        dialog.close();
+    }
+</script>
+
 </body>
 </html>
 
