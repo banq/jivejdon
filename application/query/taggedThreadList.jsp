@@ -63,7 +63,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
 <style>
   dialog {
-      max-width: 810px;
+      max-width: 800px;
       width: 90%;
       padding: 20px;
       border: none;
