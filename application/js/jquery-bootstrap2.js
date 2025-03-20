@@ -416,78 +416,79 @@ function shareto(id){
 
      
 var renzhi = `<ul class="list-unstyled">
-            <li><a href="/design.htm">逻辑之道</a></li>
-            <li><a href="/tag/16355/">形式逻辑</a></li>	
-            <li><a href="/tag/58254/">认知偏差</a></li>
-            <li><a href="/tag/38982/">语言游戏</a></li>
-            <li><a href="/tag/5676/">道德经</a></li>
-            <li><a href="/tag/49140/">大语言模型</a></li>
-            <li><a href="/tag/1159/">算法</a></li>                               
-            <li><a href="/tag/77518/">大科技</a></li>
-            <li><a href="/tag/49555/">数字化转型</a></li>
-            <li><a href="/tag/49075/">数据科学</a></li>
-            <li><a href="/tag/38726/">系统思维</a></li>	
+            <li><a href="https://www.jdon.com/design.htm">逻辑之道</a></li>
+            <li><a href="https://www.jdon.com/tag/16355/">形式逻辑</a></li>	
+            <li><a href="https://www.jdon.com/tag/58254/">认知偏差</a></li>
+            <li><a href="https://www.jdon.com/tag/38982/">语言游戏</a></li>
+            <li><a href="https://www.jdon.com/tag/5676/">道德经</a></li>
+            <li><a href="https://www.jdon.com/tag/49140/">大语言模型</a></li>
+            <li><a href="https://www.jdon.com/tag/1159/">算法</a></li>                               
+            <li><a href="https://www.jdon.com/tag/77518/">大科技</a></li>
+            <li><a href="https://www.jdon.com/tag/49555/">数字化转型</a></li>
+            <li><a href="https://www.jdon.com/tag/49075/">数据科学</a></li>
+            <li><a href="https://www.jdon.com/tag/38726/">系统思维</a></li>	
 			</ul > `;
             $('#renzhi').html(renzhi);
 
   var ddd = `<ul class="list-unstyled">
-            <li><a href="/ddd.html">DDD介绍</a></li>
-            <li><a href="/tag/272/">DDD专辑</a></li>
-            <li><a href="/tag/10740/">战略建模</a></li>
-            <li><a href="/tag/20044/">领域语言UL</a></li>
-            <li><a href="/tag/15977/">限界上下文</a></li>
-            <li><a href="/event.html">领域事件</a></li>
-            <li><a href="/tag/19145/">DDD案例</a></li>
-            <li><a href="/colorUML.html">商业分析</a></li>
-            <li><a href="/workflow-bpm.html">工作流BPM</a></li>
-            <li><a href="/tag/26738/">规则引擎</a></li>
-            <li><a href="/tag/240/">权限设计</a></li>
+            <li><a href="https://www.jdon.com/ddd.html">DDD介绍</a></li>
+            <li><a href="https://www.jdon.com/tag/272/">DDD专辑</a></li>
+            <li><a href="https://www.jdon.com/tag/10740/">战略建模</a></li>
+            <li><a href="https://www.jdon.com/tag/20044/">领域语言UL</a></li>
+            <li><a href="https://www.jdon.com/tag/15977/">限界上下文</a></li>
+            <li><a href="https://www.jdon.com/event.html">领域事件</a></li>
+            <li><a href="https://www.jdon.com/tag/19145/">DDD案例</a></li>
+            <li><a href="https://www.jdon.com/colorUML.html">商业分析</a></li>
+            <li><a href="https://www.jdon.com/workflow-bpm.html">工作流BPM</a></li>
+            <li><a href="https://www.jdon.com/tag/26738/">规则引擎</a></li>
+            <li><a href="https://www.jdon.com/tag/240/">权限设计</a></li>
         </ul>   `;  
     $('#ddd').html(ddd);
 
 var micros = `<ul class="list-unstyled" >
-                            <li><a href="/microservice.html">微服务介绍</a></li>
-                            <li><a href="/tag/25407/">微服务专辑</a></li>
-                            <li><a href="/tag/9899/">模块化设计</a></li>
-                            <li><a href="/tag/40250/">Clean架构</a></li>
-                            <li><a href="/springboot.html">SpringBoot</a></li>
-                            <li><a href="/transaction.html">分布式事务</a></li>
-                            <li><a href="/scalable.html">扩展性</a></li>
-                            <li><a href="/tag/35487/">弹性工程</a></li>
-                            <li><a href="/tag/17268/">事件溯源</a></li>
-                            <li><a href="/cache.html">缓存</a></li>
-                            <li><a href="/tag/34196/">Kubernetes</a></li>
-                            <li><a href="/tag/29134/">DevOps</a></li>
+                            <li><a href="https://www.jdon.com/microservice.html">微服务介绍</a></li>
+                            <li><a href="https://www.jdon.com/tag/25407/">微服务专辑</a></li>
+                            <li><a href="https://www.jdon.com/tag/9899/">模块化设计</a></li>
+                            <li><a href="https://www.jdon.com/tag/40250/">Clean架构</a></li>
+                            <li><a href="https://www.jdon.com/springboot.html">SpringBoot</a></li>
+                            <li><a href="https://www.jdon.com/transaction.html">分布式事务</a></li>
+                            <li><a href="https://www.jdon.com/scalable.html">扩展性</a></li>
+                            <li><a href="https://www.jdon.com/tag/35487/">弹性工程</a></li>
+                            <li><a href="https://www.jdon.com/tag/17268/">事件溯源</a></li>
+                            <li><a href="https://www.jdon.com/cache.html">缓存</a></li>
+                            <li><a href="https://www.jdon.com/tag/34196/">Kubernetes</a></li>
+                            <li><a href="https://www.jdon.com/tag/29134/">DevOps</a></li>
                         </ul>`; 
              $('#micros').html(micros);           
                         
 var prog= `<ul class="list-unstyled" >
-            <li><a href="/designpatterns/">GoF设计模式</a></li>
-            <li><a href="/tag/324/">模式专辑</a></li>
-            <li><a href="/functional.html">函数语言</a></li>
-            <li><a href="/tag/222/">编程语言比较</a></li>
-            <li><a href="/tag/31545/">前端编程</a></li>
-            <li><a href="/tag/210/">关系数据库</a></li>
-            <li><a href="/bigdata.html">大数据</a></li>
-            <li><a href="/concurrency.html">并发编程</a></li>
-            <li><a href="/tag/354/">事务架构</a></li>
-            <li><a href="/tag/395/">Java教程</a></li>
-            <li><a href="/tag/26320/">Python教程</a></li>
-            <li><a href="/idea/rust.html">Rust教程</a></li>
-            <li><a href="/tag/48335/">ChatGPT</a></li>
+            <li><a href="https://www.jdon.com/tag/98071/">vibe编程</a></li>
+            <li><a href="https://www.jdon.com/designpatterns/">GoF设计模式</a></li>
+            <li><a href="https://www.jdon.com/tag/324/">模式专辑</a></li>
+            <li><a href="https://www.jdon.com/functional.html">函数语言</a></li>
+            <li><a href="https://www.jdon.com/tag/222/">编程语言比较</a></li>
+            <li><a href="https://www.jdon.com/tag/31545/">前端编程</a></li>
+            <li><a href="https://www.jdon.com/tag/210/">关系数据库</a></li>
+            <li><a href="https://www.jdon.com/bigdata.html">大数据</a></li>
+            <li><a href="https://www.jdon.com/concurrency.html">并发编程</a></li>
+            <li><a href="https://www.jdon.com/tag/354/">事务架构</a></li>
+            <li><a href="https://www.jdon.com/tag/395/">Java教程</a></li>
+            <li><a href="https://www.jdon.com/tag/26320/">Python教程</a></li>
+            <li><a href="https://www.jdon.com/idea/rust.html">Rust教程</a></li>
+           
         </ul>`; 
         $('#prog').html(prog);         
 
 var meme =` <ul class="list-unstyled">
-            <li><a href="/tag/37546/">幽默梗</a></li>
-            <li><a href="/tag/297/">程序员吐槽</a></li>
-            <li><a href="/tag/20618/">面试技巧</a></li>
-            <li><a href="/tag/445/">GitHub工具</a></li>
-            <li><a href="/tag/30661/">人工智能</a></li>
-            <li><a href="/tag/249/">软件架构</a></li>
-            <li><a href="/idea.html">JEE教程</a></li>
-            <li><a href="/course.html">架构教程</a></li>
-            <li><a href="/tags/">更多话题</a></li>
+            <li><a href="https://www.jdon.com/tag/37546/">幽默梗</a></li>
+            <li><a href="https://www.jdon.com/tag/297/">程序员吐槽</a></li>
+            <li><a href="https://www.jdon.com/tag/20618/">面试技巧</a></li>
+            <li><a href="https://www.jdon.com/tag/445/">GitHub工具</a></li>
+            <li><a href="https://www.jdon.com/tag/30661/">人工智能</a></li>
+            <li><a href="https://www.jdon.com/tag/249/">软件架构</a></li>
+            <li><a href="https://www.jdon.com/idea.html">JEE教程</a></li>
+            <li><a href="https://www.jdon.com/course.html">架构教程</a></li>
+            <li><a href="https://www.jdon.com/tags/">更多话题</a></li>
         </ul>`; 
         $('#meme').html(meme);
 }
