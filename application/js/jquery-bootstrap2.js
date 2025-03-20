@@ -423,10 +423,10 @@ var renzhi = `<ul class="list-unstyled">
             <li><a href="https://www.jdon.com/tag/5676/">道德经</a></li>
             <li><a href="https://www.jdon.com/tag/49140/">大语言模型</a></li>
             <li><a href="https://www.jdon.com/tag/1159/">算法</a></li>                               
+            <li><a href="https://www.jdon.com/tag/44675/">企业架构</a></li>
+            <li><a href="https://www.jdon.com/tag/619/">架构师</a></li>	
+            <li><a href="https://www.jdon.com/tag/78279/">生物黑客</a></li>
             <li><a href="https://www.jdon.com/tag/77518/">大科技</a></li>
-            <li><a href="https://www.jdon.com/tag/49555/">数字化转型</a></li>
-            <li><a href="https://www.jdon.com/tag/49075/">数据科学</a></li>
-            <li><a href="https://www.jdon.com/tag/38726/">系统思维</a></li>	
 			</ul > `;
             $('#renzhi').html(renzhi);
 
@@ -446,18 +446,15 @@ var renzhi = `<ul class="list-unstyled">
     $('#ddd').html(ddd);
 
 var micros = `<ul class="list-unstyled" >
-                            <li><a href="https://www.jdon.com/microservice.html">微服务介绍</a></li>
-                            <li><a href="https://www.jdon.com/tag/25407/">微服务专辑</a></li>
+                            <li><a href="https://www.jdon.com/tag/42486/">系统设计</a></li>
                             <li><a href="https://www.jdon.com/tag/9899/">模块化设计</a></li>
-                            <li><a href="https://www.jdon.com/tag/40250/">Clean架构</a></li>
-                            <li><a href="https://www.jdon.com/springboot.html">SpringBoot</a></li>
+                            <li><a href="https://www.jdon.com/tag/11205/">CAP定理</a></li>
                             <li><a href="https://www.jdon.com/transaction.html">分布式事务</a></li>
                             <li><a href="https://www.jdon.com/scalable.html">扩展性</a></li>
                             <li><a href="https://www.jdon.com/tag/35487/">弹性工程</a></li>
                             <li><a href="https://www.jdon.com/tag/17268/">事件溯源</a></li>
-                            <li><a href="https://www.jdon.com/cache.html">缓存</a></li>
-                            <li><a href="https://www.jdon.com/tag/34196/">Kubernetes</a></li>
                             <li><a href="https://www.jdon.com/tag/29134/">DevOps</a></li>
+                        
                         </ul>`; 
              $('#micros').html(micros);           
                         
@@ -465,10 +462,7 @@ var prog= `<ul class="list-unstyled" >
             <li><a href="https://www.jdon.com/tag/98071/">vibe编程</a></li>
             <li><a href="https://www.jdon.com/designpatterns/">GoF设计模式</a></li>
             <li><a href="https://www.jdon.com/tag/324/">模式专辑</a></li>
-            <li><a href="https://www.jdon.com/functional.html">函数语言</a></li>
             <li><a href="https://www.jdon.com/tag/222/">编程语言比较</a></li>
-            <li><a href="https://www.jdon.com/tag/31545/">前端编程</a></li>
-            <li><a href="https://www.jdon.com/tag/210/">关系数据库</a></li>
             <li><a href="https://www.jdon.com/bigdata.html">大数据</a></li>
             <li><a href="https://www.jdon.com/concurrency.html">并发编程</a></li>
             <li><a href="https://www.jdon.com/tag/354/">事务架构</a></li>
@@ -488,6 +482,7 @@ var meme =` <ul class="list-unstyled">
             <li><a href="https://www.jdon.com/tag/249/">软件架构</a></li>
             <li><a href="https://www.jdon.com/idea.html">JEE教程</a></li>
             <li><a href="https://www.jdon.com/course.html">架构教程</a></li>
+            <li><a href="https://www.jdon.com/springboot.html">SpringBoot</a></li>
             <li><a href="https://www.jdon.com/tags/">更多话题</a></li>
         </ul>`; 
         $('#meme').html(meme);
