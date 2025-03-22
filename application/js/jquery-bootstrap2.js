@@ -455,10 +455,12 @@ var micros = `<ul class="list-unstyled" >
 var prog= `<ul class="list-unstyled" >
             <li><a href="https://www.jdon.com/tag/98071/">vibe编程</a></li>
             <li><a href="https://www.jdon.com/tag/222/">编程语言比较</a></li>
-             <li><a href="https://www.jdon.com/tag/49140/">大语言模型</a></li>
-             <li><a href="https://www.jdon.com/tag/29134/">DevOps</a></li>
+            <li><a href="https://www.jdon.com/tag/49140/">大语言模型</a></li>
+            <li><a href="https://www.jdon.com/tag/29134/">DevOps</a></li>
+            <li><a href="https://www.jdon.com/tag/78923/">芯片</a></li>
             <li><a href="https://www.jdon.com/bigdata.html">大数据</a></li>
             <li><a href="https://www.jdon.com/concurrency.html">并发编程</a></li>
+
            
         </ul>`; 
         $('#prog').html(prog);         
