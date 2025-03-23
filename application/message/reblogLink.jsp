@@ -37,7 +37,7 @@
 <br>    
 
 
-<html:form action="/message/reblogLink.shtml">
+<html:form action="/message/reblogLink.shtml" onsubmit="return checkDuplicates()">
 <br>
 <html:hidden property="threadId" /> 
 
@@ -82,6 +82,30 @@ function setValuesss(){
         document.getElementById("div1").innerHTML=content;     
 		w++;
 }
+
+function validateForm() {
+    // 获取所有输入框
+    const inputs = document.querySelectorAll('input[name^="property["][name$=".value"]');
+    const values = [];
+    
+    // 收集所有输入值
+    inputs.forEach(input => {
+        if (input.value.trim() !== '') { // 忽略空值
+            values.push(input.value);
+        }
+    });
+    
+    // 检查是否有重复值
+    const uniqueValues = new Set(values);
+    if (uniqueValues.size !== values.length) {
+        alert('存在重复的链接，请确保所有链接都不相同！');
+        return false;
+    }
+    return true;
+}
+
+// 修改表单添加 onsubmit 事件
+document.querySelector('form[name="threadForm"]').onsubmit = validateForm;
 </script>
 
 
