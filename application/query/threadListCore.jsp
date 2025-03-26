@@ -25,9 +25,7 @@
       
          <div class="info">			 
               <span class="smallgray"><i class="fa fa-calendar"></i>
-                <bean:define id="cdate" name="forumThread" property="creationDate" ></bean:define>
-                <%String cdateS = (String)pageContext.getAttribute("cdate"); %>
-                <time datetime="<%=cdateS.substring(2, 11) %>"><%=cdateS.substring(2, 11) %></time>
+                <bean:write name="forumMessage" property="modifiedDate3"/>
               </span>
 			 <logic:notEqual name="forumThread" property="state.messageCount" value="0">
               <span class="smallgray"><i class="fa fa-comment"></i> <bean:write name="forumThread" property="state.messageCount" />
