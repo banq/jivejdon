@@ -65,7 +65,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
             </div>
         
           <div class="wrap-vid">
-              <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[150]" />. </p>
+              <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. </p>
           </div>
       </section>
    	</div>	
