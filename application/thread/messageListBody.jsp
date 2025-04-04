@@ -137,7 +137,7 @@
                     href="javascript:digMessage('<bean:write name="forumMessage" property="messageId"/>')"><i class="fa fa-thumbs-o-up"></i></a>
                 </DIV> 
               </div>
-              <div style="margin: 0 auto;width: 85px">
+              <div style="margin: 0 auto;width: 90px">
 	             <ul class="list-inline  top-social">
 		            <li><a href="javascript:shareto('sina')"><i class="fa fa-weibo"></i></a></li>
 		            <li><a href="javascript:shareto('weixin')"><i class="fa fa-weixin"></i></a></li>
