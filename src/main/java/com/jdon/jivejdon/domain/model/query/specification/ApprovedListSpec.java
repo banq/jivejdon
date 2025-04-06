@@ -92,7 +92,11 @@ public class ApprovedListSpec extends ThreadListSpec {
 				// 计算平均每天浏览量
 				double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
 				if (dailyViewCount > 5) {
-					p = p + (dailyViewCount * 100); // 每天浏览量高的帖子获得额外加分
+					p = p + (dailyViewCount * 100); // 浏览量高的帖子获得额外加分
+				}
+				int digCount = thread.getRootMessage().getDigCount();
+				if (digCount > 0) {
+					p = p + (digCount * 100); // 赞的帖子获得额外加分
 				}
 			} else {
 				// // 时间衰减
