@@ -88,7 +88,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 			long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
 			long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 
-			if (diffDays <= 5) {
+			if (diffDays <= 3) {
 				// 计算平均每天浏览量
 				double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
 				if (dailyViewCount > 5) {
