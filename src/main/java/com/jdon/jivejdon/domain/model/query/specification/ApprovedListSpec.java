@@ -69,20 +69,6 @@ public class ApprovedListSpec extends ThreadListSpec {
 	public double sortedLeaderboard(final ForumThread thread, final ForumThread threadPrev) {
 		double p = 0;
 		try {
-			// 比较浏览量
-			int betterThanOthers = 0;
-			if (threadPrev.getViewCount() > 10 && thread.getViewCount() > 10) {
-				betterThanOthers = Math.round(thread.getViewCount() / threadPrev.getViewCount());
-			}
-			p = p + (betterThanOthers > 1 ? betterThanOthers : 1) * 100;
-	
-			// 长文加分
-			p = p + (isLongText(thread, 1)? 100: 1);
-	
-			// 在线人数影响
-			int onlineCount = thread.getViewCounter().getLastSavedCount();
-			long diff2 = onlineCount > 1 ? (onlineCount + 1) : 1;
-			p =  p + (diff2 * 100) ;
 
 			// 时间差计算
 			long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
