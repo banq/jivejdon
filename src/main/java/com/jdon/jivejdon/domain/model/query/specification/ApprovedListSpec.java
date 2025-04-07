@@ -26,15 +26,12 @@ public class ApprovedListSpec extends ThreadListSpec {
 	 * @return
 	 */
 	public boolean isApproved(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2) {
-		if (calculateWeightedScore(thread)>10
-		    || isDigged(thread, 1) 
-			|| isDailyViewCountAboveThreshold(thread, 5)
-			|| isGreaterThanPrev(thread, threadPrev, threadPrev2, 0.5) 
-			|| thread.getRootMessage().hasImage()
-			|| isTutorial(thread))
-			return true;
-		else
-			return false;
+		return calculateWeightedScore(thread) > 10
+				|| isDigged(thread, 1)
+				|| isDailyViewCountAboveThreshold(thread, 5)
+				|| isGreaterThanPrev(thread, threadPrev, threadPrev2, 0.5)
+				|| thread.getRootMessage().hasImage()
+				|| isTutorial(thread);
 	}
 
 	/**
@@ -55,13 +52,14 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	public boolean isTutorial(ForumThread thread) {
-		return isLongText(thread, 4)  && isTagged(thread, 3)
-				&& isLinked(thread, 4) &&  thread.getViewCount()>50;
+		return isLongText(thread, 4) && isTagged(thread, 3)
+				&& isLinked(thread, 4) && thread.getViewCount() > 50;
 	}
 
 	/**
 	 * approval：HomePageComparator
 	 * grok3 编写的代码
+	 * 
 	 * @param thread
 	 * @param threadPrev
 	 * @return
@@ -81,13 +79,12 @@ public class ApprovedListSpec extends ThreadListSpec {
 				if (dailyViewCount > 5 || digCount > 0) {
 					p = p + (dailyViewCount * 100); // 点赞和浏览量高的帖子获得额外加分
 				}
-			
+
 			} else {
 				// // 时间衰减
-				p = p/(diffDays * 100);
+				p = p / (diffDays * 100);
 			}
 
-	
 		} finally {
 		}
 		return p;
@@ -105,31 +102,30 @@ public class ApprovedListSpec extends ThreadListSpec {
 		long daysSinceCreation = getDaysSinceCreation(thread.getCreationDate2());
 		return weightedScore / (daysSinceCreation + 1);
 	}
-	
+
 	private double calculateWeightedScore(ForumThread thread) {
 		// Extract metrics
 		long viewCount = thread.getViewCount();
 		int digCount = thread.getRootMessage().getDigCount();
-		
+
 		// Define weights
 		double viewWeight = getViewWeight(thread.getCreationDate2());
 		double digWeight = 0.2;
-		
+
 		// Calculate weighted score
 		return (viewCount * viewWeight) + (digCount * digWeight);
 	}
-	
+
 	private double getViewWeight(long creationDate) {
 		long daysSinceCreation = getDaysSinceCreation(creationDate);
 		return (daysSinceCreation <= 5) ? 10.0 : 0.8;
 	}
-	
+
 	private long getDaysSinceCreation(long creationDate) {
 		long currentTime = System.currentTimeMillis();
 		long timeDifferenceMillis = Math.abs(currentTime - creationDate);
 		return TimeUnit.DAYS.convert(timeDifferenceMillis, TimeUnit.MILLISECONDS);
 	}
-
 
 	public boolean isTagged(ForumThread thread, int count) {
 		final double tagsCOunt = thread.getTags().stream().map(threadTag -> threadTag.getAssonum()).reduce(0,
