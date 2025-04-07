@@ -89,7 +89,7 @@ public class ThreadApprovedNewListConcurrent implements Startable {
 			}
 		};
 		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(task, 60 * 60 * 5,
-				60 * 60 * 1, TimeUnit.SECONDS);
+				15 * 60 * 1, TimeUnit.SECONDS);
 
 	}
 
