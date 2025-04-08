@@ -70,19 +70,19 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 			// 时间差计算
 			long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
-			long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+			long diffHours = TimeUnit.HOURS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 
-			if (diffDays <= 3) {
-				// 计算平均每天浏览量
-				double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
+			if (diffHours <= 72) { // 72小时等于3天
+				// 计算平均每小时浏览量
+				double hourlyViewCount = (double) thread.getViewCount() / (diffHours == 0 ? 1 : diffHours);
 				int digCount = thread.getRootMessage().getDigCount();
-				if (dailyViewCount > 5 || digCount > 0) {
-					p = p + (dailyViewCount * 100); // 点赞和浏览量高的帖子获得额外加分
+				if (hourlyViewCount > 5 || digCount > 0) {
+					p = p + (hourlyViewCount * 100); // 点赞和浏览量高的帖子获得额外加分
 				}
 
 			} else {
-				// // 时间衰减
-				p = p / (diffDays * 100);
+				// 时间衰减
+				p = p / (diffHours * 100);
 			}
 
 		} finally {
