@@ -91,13 +91,13 @@ ul.menuitem li .cfont {float:left;overflow: hidden;color: #2D4754;font-size:13px
 .b_content_title {float:left;clear:left;display:block;overflow:hidden;width:658px;text-align:left;border-bottom:dashed 1px #E7E8EA;padding:5px 0px 5px 0px;font-size:16px;font-weight:bold;color:#13688D;margin-bottom:10px;}
 .b_content_title span{color:#868686;font-size:10px;margin-left:10px;}
 
-.b_content_title2 {float:left;clear:left;display:block;overflow:hidden;width:658px;text-align:left;padding:5px 0px 5px 0px;font-size:14px;font-weight:bold;color:#13688D;margin-bottom:10px;}
-.b_content_title2 span{color:#868686;font-size:10px;margin-left:10px;}
+.b_content_title2 {float:left;clear:left;display:block;overflow:hidden;width:658px;text-align:left;padding:5px 0px 5px 0px;font-size:16px;font-weight:bold;color:#13688D;margin-bottom:10px;}
+.b_content_title2 span{color:#868686;font-size:12px;margin-left:10px;}
 .b_content_title2 a {color: #13688D;TEXT-DECORATION: underline}
 .b_content_title2 a:hover{	color: #D20000;TEXT-DECORATION: none;	}
 
 
-.b_content_body {float:left;clear:left;display:block;overflow:hidden;width:658px;text-align:left;padding:0px 0px 5px 0px;color:#656D77;font:normal normal 14px/2.2em '����';}
+.b_content_body {float:left;clear:left;display:block;overflow:hidden;width:658px;text-align:left;padding:0px 0px 5px 0px;color:#656D77;font:normal normal 15px/2.2em 'Microsoft YaHei';}
 
 .b_content_other {float:left;clear:left;display:block;overflow:hidden;width:658px;padding:10px 0px 5px 0px;}
 .b_content_other_left {float:left;clear:left;display:block;overflow:hidden;text-align:left;font-size:12px;font-weight:bold;color:#656D77;}

@@ -1,6 +1,6 @@
 body, div, form, input, select, table, td {
     color: #444;
-    font: 400 15px/1.8 "Microsoft YaHei", Rajdhani, Play, Helvetica Neue, Helvetica, Helvetica, Arial, sans-serif;
+    font: 400 16px/1.8 "Microsoft YaHei", Rajdhani, Play, Helvetica Neue, Helvetica, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     line-height: 1.8em
@@ -161,7 +161,7 @@ A.a03 {
 .tpc_content {
     margin: 10px;
     color: #444;
-    font: 400 15px/1.8 "Microsoft YaHei", Rajdhani, Play, Helvetica Neue, Helvetica, Helvetica, Arial, sans-serif;
+    font: 400 16px/1.8 "Microsoft YaHei", Rajdhani, Play, Helvetica Neue, Helvetica, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     line-height: 1.8em
