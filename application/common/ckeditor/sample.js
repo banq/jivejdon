@@ -37,6 +37,7 @@ var initSample = ( function() {
 			CKEDITOR.replace( 'formBody', {
                language: 'zh-cn',
                 stylesSet:'my_styles',
+				fontSize: '16px',
                 pasteFilter: 'b i ul ol li; img[!src, alt]; a[!href]',
             extraPlugins: 'bbcode,base64image,autosave,autogrow',  
  	// Remove unused plugins.
