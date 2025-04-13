@@ -23,7 +23,7 @@
         </action>
 
       <!-- reference in homepage -->
-     <action path="/query/threadApprovedNewList2" type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedHomeListAction" name="threadListForm" scope="request" validate="false">
+     <action path="/query/threadApprovedNewList2" type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedNewListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/approvedThreadList.jsp" />
         </action>
 
