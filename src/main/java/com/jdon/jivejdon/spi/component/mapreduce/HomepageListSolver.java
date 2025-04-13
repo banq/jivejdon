@@ -75,13 +75,13 @@ public class HomepageListSolver  implements Startable {
 			listInit.addAll(threadApprovedNewList.getApprovedThreads(i));
 		}
 		// 第一步：将原始 listInit 放入 ConcurrentSkipListMap 进行排序
-		ConcurrentSkipListMap<ForumThread, Long> sortedMap = listInit.stream()
-				.collect(Collectors.toMap(
-						(threadId) -> forumMessageQueryService.getThread(threadId),
-						threadId -> threadId,
-						(e1, e2) -> e1,
-						() -> new ConcurrentSkipListMap<>(
-								new HomePageComparator(approvedListSpec, threadViewCounterJob))));
+		// ConcurrentSkipListMap<ForumThread, Long> sortedMap = listInit.stream()
+		// 		.collect(Collectors.toMap(
+		// 				(threadId) -> forumMessageQueryService.getThread(threadId),
+		// 				threadId -> threadId,
+		// 				(e1, e2) -> e1,
+		// 				() -> new ConcurrentSkipListMap<>(
+		// 						new HomePageComparator(approvedListSpec, threadViewCounterJob))));
 
 		// // 第二步：从 threadViewCounterJob 获取所有 ViewCounter，并筛选 5 天内的帖子
 		// threadViewCounterJob.getThreadIdsList().stream()
@@ -93,7 +93,7 @@ public class HomepageListSolver  implements Startable {
 		// 		.forEach(thread -> sortedMap.putIfAbsent(thread, thread.getThreadId())); // 添加到 sortedMap
 
 		// 第三步：将排序结果赋值给 listInit
-		listInit = new ArrayList<>(sortedMap.values());
+		// listInit = new ArrayList<>(sortedMap.values());
 		this.list.set(listInit);
 	}
 
