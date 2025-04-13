@@ -80,9 +80,21 @@ public class ApprovedListSpec extends ThreadListSpec {
 					p = p + (hourlyViewCount * 100); // 点赞和浏览量高的帖子获得额外加分
 				}
 
+			} else if (diffHours > 72 && diffHours <= 168) { // 72小时到168小时之间
+				// 计算平均每天浏览量
+				double dailyViewCount = (double) thread.getViewCount() / (diffHours / 24 == 0 ? 1 : diffHours / 24);
+				int digCount = thread.getRootMessage().getDigCount();
+				if (dailyViewCount > 5 || digCount > 0) {
+					p = p + (dailyViewCount * 50); // 点赞和浏览量高的帖子获得额外加分
+				}
 			} else {
-				// 时间衰减
-				p = p / (diffHours * 100);
+				// 超过168小时，按天计算
+				long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+				double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
+				int digCount = thread.getRootMessage().getDigCount();
+				if (dailyViewCount > 5 || digCount > 0) {
+					p = p + (dailyViewCount * 10); // 点赞和浏览量高的帖子获得额外加分
+				}
 			}
 
 		} finally {
