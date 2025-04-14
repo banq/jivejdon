@@ -70,15 +70,17 @@
             <div class="post_title2">
               <div class="post_titleauthor info">
                <logic:equal name="forumMessage" property="root" value="true">
-                    <i class="fa fa-calendar"></i>
+                    <i class="fa fa-calendar">
                     <bean:define id="cdate" name="forumThread" property="creationDate"></bean:define>
                     <%String cdateS = (String) pageContext.getAttribute("cdate"); %>
                     <time datetime="<%=cdateS.substring(2, 11) %>"><%=cdateS.substring(2, 11) %></time>
+                    </i>
                 </logic:equal>
 				         
                <logic:notEmpty name="forumMessage" property="account">
-				           	<i class="fa fa-user"></i>
-                    <bean:write name="forumMessage" property="account.username"/>
+				           	<i class="fa fa-user">
+                    <cite><bean:write name="forumMessage" property="account.username"/></cite>
+                     </i>
                </logic:notEmpty>    
               </div>
 
