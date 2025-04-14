@@ -94,7 +94,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
 
 <%int j = 0;%>
-<logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" offset="1" >
+<logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" offset="1" length="20">
    <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
    <bean:define id="thumbthreadId" name="forumThread" property="threadId"/>
    
