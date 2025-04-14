@@ -58,6 +58,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <meta name="description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" /> ">  
     <meta name="author" content="<bean:write name="forumThread" property="rootMessage.account.username" />">
     <meta name="og:title" content="<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>">
+    <meta name="og:description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" /> ">       
     <meta property="og:url" content="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html"/>
     <meta property="og:release_date" content="<bean:write name="forumThread" property="creationDate" />"/>
     <meta property="og:image" content="<%=domainUrl %>/simgs/jdon100.png"/> 
