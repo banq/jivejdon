@@ -13,7 +13,6 @@ import com.jdon.container.pico.Startable;
 import com.jdon.jivejdon.domain.model.query.MessageSearchSpec;
 import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.infrastructure.repository.dao.sql.MessageUtilSQL;
-import com.jdon.jivejdon.util.ThreadTimer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
