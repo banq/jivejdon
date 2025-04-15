@@ -14,7 +14,6 @@ import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import com.jdon.jivejdon.infrastructure.repository.dao.sql.MessageUtilSQL;
 import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
 import com.jdon.jivejdon.util.PageIteratorSolverFixed;
-import com.jdon.jivejdon.util.ThreadTimer;
 
 public class ReBuildIndex implements Runnable {
 	private final static Logger logger = LogManager.getLogger(ReBuildIndex.class);
