@@ -54,9 +54,12 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 	private final static Pattern urlEscape = Pattern
 			.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
 
-	public MessageSearchProxy(MessageUtilSQL messageUtilSQL) {
+			private ThreadTimer threadTimer;
+
+	public MessageSearchProxy(MessageUtilSQL messageUtilSQL, ThreadTimer threadTimer) {
 		this.caches = new ConcurrentHashMap<Long, MessageSearchSpec>();
 		this.messageUtilSQL = messageUtilSQL;
+		this.threadTimer = threadTimer;
 	}
 
 	// for directly invoked.
@@ -77,8 +80,9 @@ public class MessageSearchProxy implements Startable, MessageSearchRepository {
 	}
 
 	public void createMessageTimer(AnemicMessageDTO forumMessage) {
-		AppendMessageThread thread = new AppendMessageThread(forumMessage);
-		thread.setMessageSearchProxy(this);
+		AppendMessageThread appendMessageThread = new AppendMessageThread(forumMessage);
+		appendMessageThread.setMessageSearchProxy(this);
+		threadTimer.offer(appendMessageThread);
 	}
 
 	public void createMessage(AnemicMessageDTO forumMessage) {
