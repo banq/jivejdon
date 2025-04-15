@@ -13,6 +13,7 @@ import com.jdon.jivejdon.spi.component.shortmessage.ShortMessageFactory;
 import com.jdon.jivejdon.spi.component.subscription.action.QueueListerner;
 import com.jdon.jivejdon.spi.component.subscription.action.ShortMsgAction;
 import com.jdon.jivejdon.spi.component.subscription.action.ShortMsgActionList;
+import com.jdon.jivejdon.util.ScheduledExecutorUtil;
 import com.jdon.jivejdon.domain.model.subscription.Subscription;
 import com.jdon.jivejdon.domain.model.subscription.event.SubscribedNotifyEvent;
 import com.jdon.jivejdon.domain.model.subscription.notifysubscribed.NotifySubscribed;
@@ -32,19 +33,16 @@ public class SubscriptionNotify {
 
 	public final ShortMessageFactory shortMessageFactory;
 
-	private final QueueListerner queueListerner;
-
 	private final NotifySubscribedFactory notifySubscribedFactory;
 
 	public SubscriptionNotify(SubscriptionDao subscriptionDao, ShortMessageFactory shortMessageFactory, AccountFactory accountFactory,
 			SubscriptionEmail subscriptionEmail, SinaOAuthSubmitter sinaWeboSubmitter, 
-			QueueListerner queueListerner, NotifySubscribedFactory notifySubscribedFactory) {
+			NotifySubscribedFactory notifySubscribedFactory) {
 		this.subscriptionDao = subscriptionDao;
 		this.shortMessageFactory = shortMessageFactory;
 		this.accountFactory = accountFactory;
 		this.subscriptionEmail = subscriptionEmail;
 		this.sinaWeboSubmitter = sinaWeboSubmitter;
-		this.queueListerner = queueListerner;
 		this.notifySubscribedFactory = notifySubscribedFactory;
 
 	}
@@ -66,10 +64,9 @@ public class SubscriptionNotify {
 					subaction.setNotifySubscribed(notifySubscribed);
 					if (subaction instanceof ShortMsgAction) {
 						shortMsgActionList.addShortMsgAction((ShortMsgAction) subaction);
-						if (!queueListerner.contains(shortMsgActionList))
-							queueListerner.offer(shortMsgActionList);
+						shortMsgActionList.exec();	
 					} else
-						queueListerner.offer(subaction);
+						subaction.exec();
 				}
 				sub.getSubscriptionActionHolder().clear();
 

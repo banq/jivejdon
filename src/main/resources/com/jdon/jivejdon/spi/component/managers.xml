@@ -271,56 +271,7 @@
     	    
 		</component>
 
-	<component name="queueListerner"
-			class="com.jdon.jivejdon.spi.component.subscription.action.QueueListerner">
-			<constructor value="100" /><!-- seconds -->
-		    <constructor value="20" /><!--  -->
-	</component>
-
-    <component name="threadTimer"
-			class="com.jdon.jivejdon.util.ThreadTimer">
-        <constructor value="1"/><!-- seconds -->
-        <constructor value="500"/><!--  -->
-	</component>    
-    
 		
-		<!-- <component name="baiduSearchTempParams"
-			class="com.jdon.jivejdon.spi.component.pingrpc.BaiduSearchTempParams">
-			<constructor value="http://data.zz.baidu.com/urls" />
-			<constructor value="data.zz.baidu.com" />
-			<constructor value="https://www.jdon.com" />
-			<constructor value="L1DkbfaAzyEnmcbM" />
-			<constructor
-                    value="https://www.jdon.com/#threadId#.html"/>
-			
-		</component> -->
-		
-		
-
-		<!-- <component name="blogPingTempParams"
-			class="com.jdon.jivejdon.spi.component.pingrpc.BlogPingTempParams">
-			<constructor value="Jdon" />
-			<constructor value="https://www.jdon.com/" /> 
-    	    <constructor value="https://www.jdon.com/#threadId#.html" /> <
-    	    <constructor value="https://www.jdon.com/rss" /> 
-		</component>
-
-		<component name="blogPingServerUrl"
-			class="com.jdon.jivejdon.spi.component.pingrpc.BlogPingServerUrl">
-			<constructor value="http://ping.baidu.com/ping/RPC2" />
-
-		</component> -->
-
-        <!-- <component name="cdnRefreshUrls"
-                   class="com.jdon.jivejdon.spi.pubsub.subscriber.postThread.CDNRefreshUrls">
-            <constructor value="query/approved"/>
-            <constructor value="rss"/>
-            <constructor value="query/threadDigList"/>
-            <constructor value="query/threadNewList"/>
-            <constructor value="query/popularList"/>
-            <constructor value="query/urlListAction"/>
-            <constructor value=""/>
-        </component> -->
 			
 		</services>
 </app>
