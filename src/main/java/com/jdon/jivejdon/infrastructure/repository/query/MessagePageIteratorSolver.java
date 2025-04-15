@@ -110,11 +110,7 @@ public class MessagePageIteratorSolver implements Startable {
 	@Override
 	public void stop() {
 		
-			try {
-				clearPerm();
-				ScheduledExecutorUtil.scheduExecStatic.shutdownNow();
-			} catch (Exception e) {
-			}
+		
 		jdbcTempSource = null;
 	}
 

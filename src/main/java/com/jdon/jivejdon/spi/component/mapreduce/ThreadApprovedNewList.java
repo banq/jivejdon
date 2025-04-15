@@ -16,6 +16,7 @@
 package com.jdon.jivejdon.spi.component.mapreduce;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -68,15 +69,19 @@ public class ThreadApprovedNewList implements Startable {
 	private	int currentStartBlock = 0;
 	private int currentStartPage = 0;
 
+	private final ScheduledExecutorUtil scheduledExecutorUtil;
+
 	public ThreadApprovedNewList(
 			ForumMessageQueryService forumMessageQueryService,
-			AccountService accountService, TagService tagService) {
+			AccountService accountService, TagService tagService,
+			ScheduledExecutorUtil scheduledExecutorUtil) {
 		approvedThreadList = new ConcurrentHashMap<>();
 		this.accountService = accountService;
 		this.authorList = new AuthorList(accountService);
 		this.threadDigList = new ThreadDigList(forumMessageQueryService);
 		this.threadTagList = new ThreadTagList(tagService, forumMessageQueryService);
 		this.forumMessageQueryService = forumMessageQueryService;
+		this.scheduledExecutorUtil = scheduledExecutorUtil;
 	}
 
 	public void start() {
@@ -87,16 +92,10 @@ public class ThreadApprovedNewList implements Startable {
 				getApprovedThreads(maxSize);
 			}
 		};
-		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(task, 30 * 60, 30 * 60, TimeUnit.SECONDS);
-
+		scheduledExecutorUtil.getScheduExec().scheduleAtFixedRate(task, 30 * 60, 30 * 60, TimeUnit.SECONDS); 
 	}
 
-	public void stop() {
-		try {
-			ScheduledExecutorUtil.scheduExecStatic.shutdownNow();
-		} catch (Exception e) {
-		}
-	}
+	
 
 	public void init() {
 		approvedThreadList.clear();
@@ -238,5 +237,10 @@ public class ThreadApprovedNewList implements Startable {
 			return maxStart + approvedListSpec.getNeedCount();
 		else
 			return maxStart;
+	}
+
+	@Override
+	public void stop() {
+		init();
 	}
 }

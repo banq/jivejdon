@@ -29,12 +29,10 @@ public class ThreadTimer implements Startable {
 
 	private int fixedSize = 10;
 
-	public ThreadTimer(String delay, String size) {
-		if (!UtilValidate.isEmpty(delay))
-			this.delay = Integer.parseInt(delay);
+	private final ScheduledExecutorUtil scheduledExecutorUtil;
 
-		if (!UtilValidate.isEmpty(size))
-			this.fixedSize = Integer.parseInt(size);
+	public ThreadTimer(ScheduledExecutorUtil scheduledExecutorUtil) {
+		this.scheduledExecutorUtil = scheduledExecutorUtil;
 
 	}
 
@@ -61,14 +59,13 @@ public class ThreadTimer implements Startable {
 
 			}
 		};
-		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(sender, 30, delay, TimeUnit.SECONDS);
+		scheduledExecutorUtil.getScheduExec().scheduleAtFixedRate(sender, 30, delay, TimeUnit.SECONDS);
 
 	}
 
 	@Override
 	public void stop() {
 
-		ScheduledExecutorUtil.scheduExecStatic.shutdownNow();
 		queue.clear();
 
 	}

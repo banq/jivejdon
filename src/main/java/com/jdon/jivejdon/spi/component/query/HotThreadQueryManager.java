@@ -26,8 +26,11 @@ public class HotThreadQueryManager implements Startable {
 
 	private final Map<String, List> hotThreadKeys;
 
-	public HotThreadQueryManager(MessageQueryDao messageQueryDao, AccountFactory accountFactory, ForumFactory forumBuilder) {
+	private final ScheduledExecutorUtil scheduledExecutorUtil;
+
+	public HotThreadQueryManager(ScheduledExecutorUtil scheduledExecutorUtil,MessageQueryDao messageQueryDao, AccountFactory accountFactory, ForumFactory forumBuilder) {
 		super();
+		this.scheduledExecutorUtil = scheduledExecutorUtil;
 		this.messageQueryDao = messageQueryDao;
 		this.accountFactory = accountFactory;
 		this.forumBuilder = forumBuilder;
@@ -41,7 +44,7 @@ public class HotThreadQueryManager implements Startable {
 				hotThreadKeys.clear();
 			}
 		};
-		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(task, 0, 60 * 60 * 6, TimeUnit.SECONDS);
+		scheduledExecutorUtil.getScheduExec().scheduleAtFixedRate(task, 0, 60 * 60 * 6, TimeUnit.SECONDS);
 
 	}
 
@@ -126,7 +129,6 @@ public class HotThreadQueryManager implements Startable {
 	public void stop() {
 		try {
 			hotThreadKeys.clear();
-			ScheduledExecutorUtil.scheduExecStatic.shutdownNow();
 		} catch (Exception e) {
 		}
 

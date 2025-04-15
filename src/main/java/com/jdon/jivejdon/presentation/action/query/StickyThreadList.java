@@ -54,7 +54,6 @@ public class StickyThreadList extends Action {
 				stickyThreadList.clear();
 			}
 		};
-		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(task, 30, 60 * 60 * 48, TimeUnit.SECONDS);
 	}
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

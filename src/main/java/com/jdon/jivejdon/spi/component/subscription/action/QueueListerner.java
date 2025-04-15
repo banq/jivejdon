@@ -28,16 +28,14 @@ public class QueueListerner implements Startable {
 
 	private final Queue<SubscriptionAction> queue = new ConcurrentLinkedQueue();
 
+	private final ScheduledExecutorUtil scheduledExecutorUtil;
+
 	private int delay = 100; // 60s
 
 	private int fixedSize = 10;
 
-	public QueueListerner(String delay, String size) {
-		if (!UtilValidate.isEmpty(delay))
-			this.delay = Integer.parseInt(delay);
-
-		if (!UtilValidate.isEmpty(size))
-			this.fixedSize = Integer.parseInt(size);
+	public QueueListerner( ScheduledExecutorUtil scheduledExecutorUtil) {
+		this.scheduledExecutorUtil = scheduledExecutorUtil;
 
 	}
 
@@ -69,14 +67,14 @@ public class QueueListerner implements Startable {
 
 			}
 		};
-		ScheduledExecutorUtil.scheduExecStatic.scheduleAtFixedRate(sender, 30, delay, TimeUnit.SECONDS);
+		scheduledExecutorUtil.getScheduExec().scheduleAtFixedRate(sender, 30, delay, TimeUnit.SECONDS);
 
 	}
 
 	@Override
 	public void stop() {
 
-		ScheduledExecutorUtil.scheduExecStatic.shutdownNow();
+		
 		queue.clear();
 
 	}
