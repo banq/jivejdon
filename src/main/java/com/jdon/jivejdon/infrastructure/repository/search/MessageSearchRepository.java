@@ -24,7 +24,6 @@ public interface MessageSearchRepository {
 
 	public abstract void createMessage(AnemicMessageDTO forumMessage);
 
-	public void createMessageTimer(AnemicMessageDTO forumMessage);
 
 	public abstract void updateMessage(AnemicMessageDTO forumMessage);
 

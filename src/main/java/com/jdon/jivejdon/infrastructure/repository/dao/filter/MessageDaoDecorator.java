@@ -59,7 +59,7 @@ public class MessageDaoDecorator extends MessageDaoSql {
 
 	public void createMessage(AnemicMessageDTO forumMessagePostDTO) throws Exception {
 		super.createMessage(forumMessagePostDTO);// db
-		messageSearchProxy.createMessageTimer(forumMessagePostDTO);//
+		messageSearchProxy.createMessage(forumMessagePostDTO);//
 	}
 
 	/**
