@@ -96,7 +96,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 </div>
 </main> 
 <aside>  			
-    <div id="sidebar" class="col-lg-4">
+    <div id="sidebar" class="col-lg-4"><div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); background-color: white; overflow: hidden; padding-left: 0; padding-right: 0">
 				<!---- Start Widget ---->
 				<div>
 					<div class="content">
@@ -166,7 +166,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 		
 			
 			</div>
-    </aside>
+    </div></aside>
     
   </div>
 </div>
