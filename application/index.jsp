@@ -96,9 +96,9 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 </div>
 </main> 
 <aside>  			
-    <div id="sidebar" class="col-lg-4"><div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); background-color: white; overflow: hidden; padding-left: 0; padding-right: 0">
+    <div id="sidebar" class="col-lg-4"><div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); background-color: white; overflow: hidden; padding-left: 5px; padding-right: 2px">
 				<!---- Start Widget ---->
-				<div>
+				<div class="widget">
 					<div class="content">
 						<ul class="list-inline">
               <form role="form" class="form-horizontal" method="post" action="/query/threadViewQuery.shtml">
