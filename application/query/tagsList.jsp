@@ -64,7 +64,8 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 	<div class="row">
 		<!-- /////////////////左边 -->
 		<div id="main-content" class="col-md-12">
-
+      <div style="border-radius:12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1)" class="box">
+      
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
 <bean:parameter name="queryType" id="queryType" value=""/>
@@ -202,7 +203,7 @@ int h = 0 ;
 </div>
 </div>
 </div>
-
+</div>
 <%@include file="../common/IncludeBottomBody.jsp"%>
 
 <script type="speculationrules">
