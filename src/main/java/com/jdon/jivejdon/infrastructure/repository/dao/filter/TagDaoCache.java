@@ -33,7 +33,7 @@ public class TagDaoCache extends TagDaoSql {
 		this.containerUtil = containerUtil;
 	}
 
-	@Around()
+	// @Around()
 	public ThreadTag getThreadTag(Long tagID) {
 		ThreadTag threadTag = super.getThreadTag(tagID);
 		return threadTag;

@@ -42,8 +42,8 @@
 			class="com.jdon.jivejdon.infrastructure.repository.dao.sql.ShortMessageDaoSql">
 		</component>
 		
-		<component name="tagDaoCache" 
-			class="com.jdon.jivejdon.infrastructure.repository.dao.filter.TagDaoCache">
+		<component name="tagDao" 
+			class="com.jdon.jivejdon.infrastructure.repository.dao.sql.TagDaoSql">
 		</component>
 		<!--  dao  end-->				
 			
