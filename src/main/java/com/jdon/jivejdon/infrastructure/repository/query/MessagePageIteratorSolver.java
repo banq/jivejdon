@@ -92,7 +92,7 @@ public class MessagePageIteratorSolver implements Startable {
 	 */
 	public PageIteratorSolverFixed getPageIteratorSolver(String key) {
 		// return permanentsolvers.computeIfAbsent(key, k->new PageIteratorSolverFixed(jdbcTempSource.getDataSource(), containerUtil.getCacheManager()));
-		return new PageIteratorSolverFixed(jdbcTempSource.getDataSource(), containerUtil.getCacheManager(), false);
+		return new PageIteratorSolverFixed(jdbcTempSource.getDataSource(), containerUtil.getCacheManager());
 
 	}
 
