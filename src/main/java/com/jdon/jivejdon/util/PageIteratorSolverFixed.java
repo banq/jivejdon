@@ -38,6 +38,12 @@ public class PageIteratorSolverFixed {
       this.blockStrategy = blockStrategy;
    }
 
+   public PageIteratorSolverFixed(DataSource dataSource, CacheManager cacheManager, boolean cacheEnable) {
+      this(dataSource, cacheManager);
+      this.cacheEnable = cacheEnable;
+  
+   }
+
    public PageIteratorSolverFixed(DataSource dataSource) {
       this.cacheEnable = true;
       this.dataSource = dataSource;
