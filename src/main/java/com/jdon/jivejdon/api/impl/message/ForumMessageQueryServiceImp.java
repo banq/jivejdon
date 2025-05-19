@@ -112,10 +112,6 @@ public class ForumMessageQueryServiceImp implements ForumMessageQueryService {
 		return messageQueryDao.getMessages(threadId, start, count);
 	}
 
-	public PageIterator getMessages(int start, int count) {
-		return messageQueryDao.getMessages(start, count);
-	}
-
 	public PageIterator searchMessages(String query, int start, int count) {
 		logger.debug("enter searchMessages");
 		PageIterator pi = new PageIterator();
@@ -196,27 +192,7 @@ public class ForumMessageQueryServiceImp implements ForumMessageQueryService {
 		}
 	}
 
-	public PageIterator getMessageReplys(QueryCriteria qc, int start, int count) {
-		logger.debug("enter getMessages for QueryCriteria");
-		if (qc instanceof MultiCriteria) {
-			// transfer msc username to userId;
-			MultiCriteria mc = (MultiCriteria) qc;
-			String username = mc.getUsername();
-			if (username != null) {
-				Account accountIn = new Account();
-				accountIn.setUsername(username);
-				Account account = accountFactory.getFullAccount(accountIn);
-				if (account != null)
-					mc.setUserID(account.getUserId());
-				else
-					mc.setUserID(username);
-			}
-			return messageQueryDao.getMessageReplys(qc, start, count);
-		} else {
-			logger.error("it is not MultiCriteria");
-			return new PageIterator();
-		}
-	}
+	
 
 	public PageIterator getThreads(QueryCriteria qc, int start, int count) {
 		logger.debug("enter getMessages for QueryCriteria");

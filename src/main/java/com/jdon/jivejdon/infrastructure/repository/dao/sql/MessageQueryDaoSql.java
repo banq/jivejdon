@@ -261,15 +261,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 		return new PageIterator(allCount.intValue(), messageIDs.toArray());
 	}
 
-	public PageIterator getMessages(int start, int count) {
-		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from jiveMessage  ";
-
-		String GET_ALL_ITEMS = "select messageID  from jiveMessage ORDER BY creationDate DESC";
-
-		Collection params = new ArrayList(1);
-		return messagePageIteratorSolver.getPageIteratorSolver("getMessages").getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, params, start,
-				count);
-	}
+	
 
 	/*
 	 * (non-Javadoc)
@@ -377,28 +369,6 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 		}
 	}
 
-	public PageIterator getMessageReplys(QueryCriteria qc, int start, int count) {
-		logger.debug("enter getMessagesSQL for QueryCriteria");
-		try {
-			QuerySpecification qs = new QuerySpecDBModifiedDate(qc);
-			qs.parse();
-
-			StringBuilder allCountSQL = new StringBuilder("SELECT count(1)  FROM jiveMessage ");
-			allCountSQL.append(qs.getWhereSQL());
-
-			StringBuilder itemIDsSQL = new StringBuilder("SELECT messageID FROM jiveMessage ");
-			itemIDsSQL.append(qs.getWhereSQL());
-			itemIDsSQL.append(" and parentMessageID IS NOT NULL ");
-			itemIDsSQL.append(qs.getResultSortSQL());
-			logger.debug("GET_ALL_ITEMS=" + itemIDsSQL);
-			return messagePageIteratorSolver.getPageIteratorSolver("getMessageReplys").getPageIterator(allCountSQL.toString(),
-					itemIDsSQL.toString(), qs.getParams(), start, count);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new PageIterator();
-		}
-	}
 
 	public PageIterator getThreads(QueryCriteria qc, int start, int count) {
 		try {

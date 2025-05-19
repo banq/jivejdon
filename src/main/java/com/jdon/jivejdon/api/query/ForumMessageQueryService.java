@@ -16,7 +16,6 @@ public interface ForumMessageQueryService {
 	 */
 	PageIterator getMessages(Long threadId, int start, int count);
 
-	PageIterator getMessages(int start, int count);
 
 	/**
 	 * a Messages Collection of their parenMessage for deleteMessage display
@@ -46,8 +45,6 @@ public interface ForumMessageQueryService {
 	PageIterator getHotThreads(QueryCriteria messageQueryCriteria, int start, int count);
 
 	PageIterator getMessages(QueryCriteria messageQueryCriteria, int start, int count);
-
-	PageIterator getMessageReplys(QueryCriteria messageQueryCriteria, int start, int count);
 
 	PageIterator getThreads(QueryCriteria qc, int start, int count);
 

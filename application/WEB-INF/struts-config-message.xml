@@ -78,13 +78,8 @@
             <forward name="success" path="/thread/messageList.jsp" />
         </action>
 
-
-        <!-- All message List start  -->
-
-        <action path="/forum/messageListAll" type="com.jdon.jivejdon.presentation.action.MessageListAllAction" name="messageListForm" scope="request" validate="false">
-            <forward name="success" path="/forum/messageListAll.jsp" />
-        </action>
-
+、
+       
 
         <!--  for after modfied messageList display end -->
 

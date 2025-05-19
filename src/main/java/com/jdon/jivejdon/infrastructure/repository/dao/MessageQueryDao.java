@@ -37,7 +37,6 @@ public interface MessageQueryDao {
 
 	PageIterator getMessages(Long threadId, int start, int count);
 
-	PageIterator getMessages(int start, int count);
 
 	PageIterator getThreads(Long forumId, int start, int count, ResultSort resultSort);
 
@@ -52,8 +51,6 @@ public interface MessageQueryDao {
 	int getMessageCountOfUser(Long userId);
 
 	PageIterator getMessages(QueryCriteria qc, int start, int count);
-
-	PageIterator getMessageReplys(QueryCriteria qc, int start, int count);
 
 	PageIterator getThreads(QueryCriteria qc, int start, int count);
 
