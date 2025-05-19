@@ -228,12 +228,33 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 	public PageIterator getMessages(Long threadId, int start, int count) {
 		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from jiveMessage where threadID=? ";
 
-		String GET_ALL_ITEMS = "select messageID  from jiveMessage WHERE threadID=? ORDER BY creationDate ASC";
+		String GET_ALL_ITEMS = "select messageID  from jiveMessage WHERE threadID=? ORDER BY creationDate ASC LIMIT ?, ?";
 
-		Collection params = new ArrayList(1);
+		Collection<Long> params = new ArrayList<>(1);
 		params.add(threadId);
-		return messagePageIteratorSolver.getPageIteratorSolver(threadId.toString()).getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, params,
-				start, count);
+		params.add(new Long(start));
+		params.add(new Long(count));
+		Collection<Long> messageIDs = new ArrayList<>();
+		Integer allCount = null;;
+		try {
+			Object allCounto = jdbcTempSource.getJdbcTemp().querySingleObject(params, GET_ALL_ITEMS_ALLCOUNT);
+			if (allCounto instanceof Long)// for mysql 5
+				allCount = ((Long) allCounto).intValue();
+			else
+				allCount = ((Integer) allCounto).intValue(); // for mysql 4
+
+			List list = jdbcTempSource.getJdbcTemp().queryMultiObject(params, GET_ALL_ITEMS);
+			Iterator iter = list.iterator();
+			while (iter.hasNext()) {
+				Map map = (Map) iter.next();
+				messageIDs.add((Long) map.get("messageID"));
+			}
+		} catch (Exception e) {
+			logger.error("getMessages threadId=" + threadId + " happend " + e);
+			return new PageIterator();		
+		}
+
+		return new PageIterator(allCount.intValue(), messageIDs.toArray());
 	}
 
 	public PageIterator getMessages(int start, int count) {
