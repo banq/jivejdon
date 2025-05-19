@@ -230,14 +230,18 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 
 		String GET_ALL_ITEMS = "select messageID  from jiveMessage WHERE threadID=? ORDER BY creationDate ASC LIMIT ?, ?";
 
-		Collection<Long> params = new ArrayList<>(1);
+		// 查询总数
+        Collection<Long> countParams = new ArrayList<>();
+        countParams.add(threadId);
+
+		Collection<Long> params = new ArrayList<>();
 		params.add(threadId);
 		params.add(new Long(start));
 		params.add(new Long(count));
 		Collection<Long> messageIDs = new ArrayList<>();
 		Integer allCount = null;;
 		try {
-			Object allCounto = jdbcTempSource.getJdbcTemp().querySingleObject(params, GET_ALL_ITEMS_ALLCOUNT);
+			Object allCounto = jdbcTempSource.getJdbcTemp().querySingleObject(countParams, GET_ALL_ITEMS_ALLCOUNT);
 			if (allCounto instanceof Long)// for mysql 5
 				allCount = ((Long) allCounto).intValue();
 			else
