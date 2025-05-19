@@ -181,24 +181,30 @@ public class MessageDirector implements MessageDirectorIF {
 	 */
 	private ForumMessage buildMessage(Long messageId)  {
 		logger.debug(" enter createMessage for id=" + messageId);
+		final AnemicMessageDTO anemicMessageDTO = (AnemicMessageDTO) messageDao.getAnemicMessage(messageId);
+		if (anemicMessageDTO == null) {
+			return null;
+		}
+
+		ForumThread forumThread = threadDirectorIF.getThread(anemicMessageDTO.getForumThread().getThreadId());
+        if (forumThread == null) {
+            return null;
+		}
+
+		ForumMessage parentforumMessage = null;
 		try {
-			final AnemicMessageDTO anemicMessageDTO = (AnemicMessageDTO) messageDao.getAnemicMessage(messageId);
-			if (anemicMessageDTO == null) {
-				logger.error("no this message in database id=" + messageId);
-				return null;
-			}
-			ForumThread forumThread = threadDirectorIF.getThread(anemicMessageDTO.getForumThread().getThreadId());
-			ForumMessage parentforumMessage = null;
-			if (anemicMessageDTO.getParentMessage() != null
-					&& anemicMessageDTO.getParentMessage().getMessageId() != null) {
+			if (anemicMessageDTO.getParentMessage() == null
+					|| anemicMessageDTO.getParentMessage().getMessageId() == null) {
+				return forumThread.getRootMessage();
+
+			} else {
 				if (anemicMessageDTO.getParentMessage().getMessageId().longValue() == forumThread.getRootMessage()
 						.getMessageId().longValue())
 					parentforumMessage = forumThread.getRootMessage();
 				else
 					parentforumMessage = buildMessage(anemicMessageDTO.getParentMessage().getMessageId());
 				return createRepliesMessage(anemicMessageDTO, parentforumMessage);
-			} else {
-				return forumThread.getRootMessage();
+
 			}
 
 		} catch (Exception e) {
