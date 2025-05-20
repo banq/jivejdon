@@ -52,7 +52,6 @@ public interface ForumMessageQueryService {
 
 	PageIterator searchThreads(String query, int start, int count);
 
-	PageIterator popularThreads(int popularThreadsWindow, int count);
 
 	ForumThread getThread(Long threadId);
 

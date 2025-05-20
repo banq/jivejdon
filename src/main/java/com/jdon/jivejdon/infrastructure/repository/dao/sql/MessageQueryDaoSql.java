@@ -102,26 +102,68 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 
 	public PageIterator getThreadListByUser(String userId, int start, int count) {
 		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from jiveMessage where parentMessageID IS NULL AND userID=? ";
+		String GET_ALL_ITEMS = "select threadID from jiveMessage WHERE userID=? AND parentMessageID IS NULL ORDER BY modifiedDate DESC LIMIT ?, ?";
 
-		String GET_ALL_ITEMS = "select threadID  from jiveMessage WHERE userID=? AND parentMessageID IS NULL ORDER BY modifiedDate DESC";
-
-		Collection params = new ArrayList(1);
+		// 查询总数参数
+		List<String> countParams = new ArrayList<>();
+		countParams.add(userId);
+		// 分页参数
+		List<Object> params = new ArrayList<>();
 		params.add(userId);
-		return messagePageIteratorSolver.getPageIteratorSolver(userId).getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, params, start,
-				count);
+		params.add(start);
+		params.add(count);
+		List<Long> threadIDs = new ArrayList<>();
+		Integer allCount = null;
+		try {
+			Object allCounto = jdbcTempSource.getJdbcTemp().querySingleObject(countParams, GET_ALL_ITEMS_ALLCOUNT);
+			if (allCounto instanceof Long)
+				allCount = ((Long) allCounto).intValue();
+			else
+				allCount = ((Integer) allCounto).intValue();
 
+			@SuppressWarnings("unchecked")
+			List<Map<String, Object>> list = (List<Map<String, Object>>) jdbcTempSource.getJdbcTemp().queryMultiObject(params, GET_ALL_ITEMS);
+			for (Map<String, Object> map : list) {
+				threadIDs.add((Long) map.get("threadID"));
+			}
+		} catch (Exception e) {
+			logger.error("getThreadListByUser userId=" + userId + " error: " + e);
+			return new PageIterator();
+		}
+		return new PageIterator(allCount.intValue(), threadIDs.toArray());
 	}
 
 	public PageIterator getMesageListByUser(String userId, int start, int count) {
 		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from jiveMessage where parentMessageID IS NOT NULL AND userID=? ";
+		String GET_ALL_ITEMS = "select messageID from jiveMessage WHERE userID=? AND parentMessageID IS NOT NULL ORDER BY modifiedDate DESC LIMIT ?, ?";
 
-		String GET_ALL_ITEMS = "select messageID  from jiveMessage WHERE userID=? AND parentMessageID IS NOT NULL ORDER BY modifiedDate DESC";
-
-		Collection params = new ArrayList(1);
+		// 查询总数参数
+		List<String> countParams = new ArrayList<>();
+		countParams.add(userId);
+		// 分页参数
+		List<Object> params = new ArrayList<>();
 		params.add(userId);
-		return messagePageIteratorSolver.getPageIteratorSolver(userId).getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, params, start,
-				count);
+		params.add(start);
+		params.add(count);
+		List<Long> messageIDs = new ArrayList<>();
+		Integer allCount = null;
+		try {
+			Object allCounto = jdbcTempSource.getJdbcTemp().querySingleObject(countParams, GET_ALL_ITEMS_ALLCOUNT);
+			if (allCounto instanceof Long)
+				allCount = ((Long) allCounto).intValue();
+			else
+				allCount = ((Integer) allCounto).intValue();
 
+			@SuppressWarnings("unchecked")
+			List<Map<String, Object>> list = (List<Map<String, Object>>) jdbcTempSource.getJdbcTemp().queryMultiObject(params, GET_ALL_ITEMS);
+			for (Map<String, Object> map : list) {
+				messageIDs.add((Long) map.get("messageID"));
+			}
+		} catch (Exception e) {
+			logger.error("getMesageListByUser userId=" + userId + " error: " + e);
+			return new PageIterator();
+		}
+		return new PageIterator(allCount.intValue(), messageIDs.toArray());
 	}
 
 	public int getMessageCount(Long threadId) {
@@ -239,7 +281,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 		params.add(new Long(start));
 		params.add(new Long(count));
 		Collection<Long> messageIDs = new ArrayList<>();
-		Integer allCount = null;;
+		Integer allCount = null;
 		try {
 			Object allCounto = jdbcTempSource.getJdbcTemp().querySingleObject(countParams, GET_ALL_ITEMS_ALLCOUNT);
 			if (allCounto instanceof Long)// for mysql 5
@@ -272,20 +314,70 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 	public PageIterator getThreads(Long forumId, int start, int count, ResultSort resultSort) {
 		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from jiveThread where forumId=? ";
 
-		String GET_ALL_ITEMS = "select threadID  from jiveThread WHERE forumId=? " + " ORDER BY creationDate  " + resultSort.toString();
+		String GET_ALL_ITEMS = "select threadID from jiveThread WHERE forumId=? ORDER BY creationDate " + resultSort.toString() + " LIMIT ?, ?";
 
-		Collection params = new ArrayList(1);
-		params.add(forumId);
-		return messagePageIteratorSolver.getPageIteratorSolver(forumId.toString()).getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS,
-				params, start, count);
+		// 查询总数参数
+        Collection<Long> countParams = new ArrayList<>();
+        countParams.add(forumId);
+
+        // 分页参数
+        Collection<Object> params = new ArrayList<>();
+        params.add(forumId);
+        params.add(start);
+        params.add(count);
+        Collection<Long> threadIDs = new ArrayList<>();
+        Integer allCount = null;
+        try {
+            Object allCounto = jdbcTempSource.getJdbcTemp().querySingleObject(countParams, GET_ALL_ITEMS_ALLCOUNT);
+            if (allCounto instanceof Long)
+                allCount = ((Long) allCounto).intValue();
+            else
+                allCount = ((Integer) allCounto).intValue();
+
+            List list = jdbcTempSource.getJdbcTemp().queryMultiObject(params, GET_ALL_ITEMS);
+            Iterator iter = list.iterator();
+            while (iter.hasNext()) {
+                Map map = (Map) iter.next();
+                threadIDs.add((Long) map.get("threadID"));
+            }
+        } catch (Exception e) {
+            logger.error("getThreads forumId=" + forumId + " happend " + e);
+            return new PageIterator();
+        }
+
+        return new PageIterator(allCount.intValue(), threadIDs.toArray());
 	}
 
 	public PageIterator getThreads(int start, int count, ThreadListSpec threadListSpec) {
 		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from jiveThread " + threadListSpec.getResultSortSQL();
+		String GET_ALL_ITEMS = "select threadID from jiveThread " + threadListSpec.getResultSortSQL() + " LIMIT ?, ?";
 
-		String GET_ALL_ITEMS = "select threadID  from jiveThread  " + threadListSpec.getResultSortSQL();
+		// 查询总数参数
+		Collection<Object> countParams = new ArrayList<>(); // 没有额外参数
+		// 分页参数
+		Collection<Object> params = new ArrayList<>();
+		params.add(start);
+		params.add(count);
+		Collection<Long> threadIDs = new ArrayList<>();
+		Integer allCount = null;
+		try {
+			Object allCounto = jdbcTempSource.getJdbcTemp().querySingleObject(countParams, GET_ALL_ITEMS_ALLCOUNT);
+			if (allCounto instanceof Long)
+				allCount = ((Long) allCounto).intValue();
+			else
+				allCount = ((Integer) allCounto).intValue();
 
-		return messagePageIteratorSolver.getPageIteratorSolver("getThreads").getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "", start, count);
+			List list = jdbcTempSource.getJdbcTemp().queryMultiObject(params, GET_ALL_ITEMS);
+			Iterator iter = list.iterator();
+			while (iter.hasNext()) {
+				Map map = (Map) iter.next();
+				threadIDs.add((Long) map.get("threadID"));
+			}
+		} catch (Exception e) {
+			logger.error("getThreads (ThreadListSpec) happend " + e);
+			return new PageIterator();
+		}
+		return new PageIterator(allCount.intValue(), threadIDs.toArray());
 	}
 
 	/*
@@ -335,36 +427,43 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 
 	}
 
-	public PageIterator getMessages(QueryCriteria mqc, int start, int count) {
-		logger.debug("enter getMessagesSQL for QueryCriteria");
-		return getQueryCriteriaResult("messageID", mqc, start, count);
-	}
-
-	/**
-	 * Template that return QueryCriteria
-	 * 
-	 * @param keyName
-	 *            the key name that included in PageIterator key collection,
-	 *            such as threadId or messageId
-	 */
-	public PageIterator getQueryCriteriaResult(String keyName, QueryCriteria qc, int start, int count) {
-		logger.debug("enter getQueryCriteriaResult");
+	public PageIterator getMessages(QueryCriteria qc, int start, int count) {
 		try {
 			QuerySpecification qs = new QuerySpecDBModifiedDate(qc);
 			qs.parse();
 
-			StringBuilder allCountSQL = new StringBuilder("SELECT count(1)  FROM jiveMessage ");
+			StringBuilder allCountSQL = new StringBuilder("SELECT count(1) FROM jiveMessage ");
 			allCountSQL.append(qs.getWhereSQL());
 
-			StringBuilder itemIDsSQL = new StringBuilder("SELECT " + keyName + " FROM jiveMessage ");
+			StringBuilder itemIDsSQL = new StringBuilder("SELECT messageID FROM jiveMessage ");
 			itemIDsSQL.append(qs.getWhereSQL());
 			itemIDsSQL.append(qs.getResultSortSQL());
+			itemIDsSQL.append(" LIMIT ?, ?");
 			logger.debug("GET_ALL_ITEMS=" + itemIDsSQL);
-			return messagePageIteratorSolver.getPageIteratorSolver("getQueryCriteriaResult").getPageIterator(allCountSQL.toString(),
-					itemIDsSQL.toString(), qs.getParams(), start, count);
 
+			// 查询总数参数
+			List<Object> countParams = new ArrayList<>();
+			if (qs.getParams() != null) countParams.addAll(qs.getParams());
+			// 分页参数（复制原有参数并加上start和count）
+			List<Object> params = new ArrayList<>(countParams);
+			params.add(start);
+			params.add(count);
+			List<Long> messageIDs = new ArrayList<>();
+			Integer allCount = null;
+			Object allCounto = jdbcTempSource.getJdbcTemp().querySingleObject(countParams, allCountSQL.toString());
+			if (allCounto instanceof Long)
+				allCount = ((Long) allCounto).intValue();
+			else
+				allCount = ((Integer) allCounto).intValue();
+
+			@SuppressWarnings("unchecked")
+			List<Map<String, Object>> list = (List<Map<String, Object>>) jdbcTempSource.getJdbcTemp().queryMultiObject(params, itemIDsSQL.toString());
+			for (Map<String, Object> map : list) {
+				messageIDs.add((Long) map.get("messageID"));
+			}
+			return new PageIterator(allCount.intValue(), messageIDs.toArray());
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("getMessages(QueryCriteria) error: " + e);
 			return new PageIterator();
 		}
 	}
@@ -382,23 +481,35 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 			itemIDsSQL.append(qs.getWhereSQL());
 			itemIDsSQL.append(" and jiveMessage.parentMessageID IS NULL ");
 			itemIDsSQL.append(qs.getResultSortSQL("creationDate"));
+			itemIDsSQL.append(" LIMIT ?, ?");
 			logger.debug("GET_ALL_ITEMS=" + itemIDsSQL);
-			return messagePageIteratorSolver.getPageIteratorSolver("getThreads").getPageIterator(allCountSQL.toString(), itemIDsSQL.toString(),
-					qs.getParams(), start, count);
 
+			// 查询总数参数
+			Collection<Object> countParams = qs.getParams();
+			// 分页参数（复制原有参数并加上start和count）
+			Collection<Object> params = new ArrayList<>(qs.getParams());
+			params.add(start);
+			params.add(count);
+			Collection<Long> threadIDs = new ArrayList<>();
+			Integer allCount = null;
+			Object allCounto = jdbcTempSource.getJdbcTemp().querySingleObject(countParams, allCountSQL.toString());
+			if (allCounto instanceof Long)
+				allCount = ((Long) allCounto).intValue();
+			else
+				allCount = ((Integer) allCounto).intValue();
+
+			List list = jdbcTempSource.getJdbcTemp().queryMultiObject(params, itemIDsSQL.toString());
+			Iterator iter = list.iterator();
+			while (iter.hasNext()) {
+				Map map = (Map) iter.next();
+				threadIDs.add((Long) map.get("threadID"));
+			}
+			return new PageIterator(allCount.intValue(), threadIDs.toArray());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new PageIterator();
 		}
 	}
 
-	public PageIterator popularThreads(QueryCriteria queryCriteria, int count) {
-		String POPULAR_THREADS_AllCOUNT = "SELECT  count(1)  FROM jiveMessage WHERE " + "modifiedDate > ?  ";
-		String POPULAR_THREADS = "SELECT threadID, count(1) AS msgCount FROM jiveMessage "
-				+ "WHERE modifiedDate > ? GROUP BY threadID ORDER BY msgCount DESC";
-		List queryParams = new ArrayList();
-		queryParams.add(queryCriteria.getFromDateNoMillisString());
-		return messagePageIteratorSolver.getPageIteratorSolver("popularThreads").getPageIterator(POPULAR_THREADS_AllCOUNT, POPULAR_THREADS,
-				queryParams, 0, count);
-	}
+	
 }

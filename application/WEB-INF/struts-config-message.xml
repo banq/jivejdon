@@ -14,9 +14,6 @@
     </form-beans>
 
     <action-mappings>
-
-    
-        <!-- message edit view  -->
         <action name="messageForm" path="/message/messageAction" type="com.jdon.jivejdon.presentation.filter.MessageEditAuthFilter" scope="request" validate="false">
             <forward name="create" path="/message/messageActionCreate.shtml" />
             <forward name="edit" path="/message/messageActionEdit.shtml" />
@@ -56,13 +53,9 @@
             <forward name="failure" path="/message/result.jsp" />
         </action>
 
-
-        <!--  message mask directly call messageService's maskMessage method by "/message/messageMaskAction.shtml?method=maskMessage" -->
         <action name="messageForm" path="/message/messageMaskAction" type="com.jdon.strutsutil.ServiceMethodAction" scope="request" validate="false">
             <forward name="maskMessage" path="/message/result.jsp" />
         </action>
-
-        <!-- message List start  -->
 
         <action path="/message/messageListOwner" type="com.jdon.jivejdon.presentation.action.MessageListOwnerAction" name="messageListForm" scope="request" validate="false">
             <forward name="success" path="/thread/messageList.jsp" />
@@ -78,11 +71,6 @@
             <forward name="success" path="/thread/messageList.jsp" />
         </action>
 
-、
-       
-
-        <!--  for after modfied messageList display end -->
-
         <action path="/message/messageNavList" type="com.jdon.jivejdon.presentation.action.MessageListNavAction" name="messageListForm" scope="request" validate="false">
             <forward name="success" path="/" />
             <forward name="navf" path="/message/navf.jsp" />
@@ -95,9 +83,6 @@
             <forward name="failure" path="/forum/" />
         </action>
 
-        <!-- message List end  -->
-
-     
         <action path="/forum/updateDigCount" type="com.jdon.jivejdon.presentation.action.MessageDigAction" scope="request" validate="false" />
 
 
@@ -108,7 +93,7 @@
         <action name="threadForm" path="/message/updateViewAction2" type="com.jdon.strutsutil.ModelViewAction" scope="request" validate="false">
             <forward name="edit" path="/message/threadName.jsp" />
         </action>
-        <!-- /message/updateAction.shtml?method=updateThreadName&name=XXXX -->
+
         <action name="threadForm" path="/message/updateAction" type="com.jdon.jivejdon.presentation.action.message.UpdateThreadNameAction" scope="request" validate="false">
             <forward name="success" path="/message/resultThreadName.jsp" />
             <forward name="failure" path="/message/threadName.jsp" />
@@ -139,23 +124,8 @@
             <forward name="forward" path="/message/reblogLink.jsp" />
         </action>
 
-        <!-- <action name="threadForm" path="/forum/thread" type="com.jdon.jivejdon.presentation.action.MessageListIPFilterAction" scope="request" validate="false">
-            <forward name="success" path="/forum/thread2.shtml" />
-        </action> -->
-
         <action path="/forum/viewThread" type="com.jdon.jivejdon.presentation.action.ViewThreadAction" scope="request" validate="false" >
         </action>
-
-        <!-- <action path="/forum/threadTagList" type="com.jdon.jivejdon.presentation.action.ViewThreadAction" scope="request" validate="false" >
-            <forward name="success" path="/forum/threadTagList2.shtml" />
-            <forward name="failure" path="/forum/threadTagList2.shtml" />
-        </action>  -->
-
-        <!-- <action path="/forum/threadTagList" type="com.jdon.jivejdon.presentation.action.query.ThreadTagListAction" name="threadListForm" scope="request" validate="false">
-            <forward name="success" path="/forum/threadTagsList.jsp" />
-        </action> -->
-
- 
 
         <action path="/message/searchAction" type="com.jdon.jivejdon.presentation.action.query.SearchAction" name="messageListForm" scope="request" validate="false">
             <forward name="success" path="/message/searchMessageResult.jsp" />

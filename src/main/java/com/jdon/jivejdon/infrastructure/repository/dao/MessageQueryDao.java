@@ -72,7 +72,6 @@ public interface MessageQueryDao {
 
 	int findThreadsAllCount(String query);
 
-	PageIterator popularThreads(QueryCriteria queryCriteria, int count);
 
 	public PageIterator getThreadListByUser(String userId, int start, int count);
 

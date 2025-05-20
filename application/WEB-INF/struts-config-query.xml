@@ -161,12 +161,5 @@
             <forward name="success" path="/query/others/newdiglist2.jsp" />
         </action>
 
-
-
-        <!-- <action path="/query/urlListAction" type="com.jdon.jivejdon.presentation.sitemap.UrlListAction" name="listForm" scope="request" validate="false">
-            <forward name="success" path="/query/smurlList.jsp" />
-        </action> -->
-
-
     </action-mappings>
 </struts-config>

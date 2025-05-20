@@ -265,11 +265,38 @@ public class TagDaoSql implements TagDao {
 	 * @see com.jdon.jivejdon.dao.sql.TagDao#getThreadTags(int, int)
 	 */
 	public PageIterator getThreadTags(int start, int count) {
-		logger.debug("enter getThreadTags ..");
-		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from tag order by assonum DESC";
-		String GET_ALL_ITEMS = "select tagID from tag order by assonum DESC";
-		return pageIteratorSolverTag.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, "", start, count);
-	}
+        logger.debug("enter getThreadTags ..");
+        String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from tag";
+        String GET_ALL_ITEMS = "select tagID from tag order by assonum DESC LIMIT ?, ?";
+
+        List<Object> countParams = new ArrayList<>(); // no params for count
+        Integer allCount = 0;
+        try {
+            Object allCounto = jdbcTempSource.getJdbcTemp().querySingleObject(countParams, GET_ALL_ITEMS_ALLCOUNT);
+            if (allCounto instanceof Long)
+                allCount = ((Long) allCounto).intValue();
+            else
+                allCount = ((Integer) allCounto).intValue();
+        } catch (Exception e) {
+            logger.error("getThreadTags count error: " + e);
+            return new PageIterator();
+        }
+
+        List<Object> params = new ArrayList<>();
+        params.add(start);
+        params.add(count);
+        List<Long> tagIDs = new ArrayList<>();
+        try {
+            List<Map<String, Object>> list = jdbcTempSource.getJdbcTemp().queryMultiObject(params, GET_ALL_ITEMS);
+            for (Map<String, Object> map : list) {
+                tagIDs.add((Long) map.get("tagID"));
+            }
+        } catch (Exception e) {
+            logger.error("getThreadTags list error: " + e);
+            return new PageIterator();
+        }
+        return new PageIterator(allCount, tagIDs.toArray());
+    }
 
 	/*
 	 * (non-Javadoc)
@@ -278,27 +305,40 @@ public class TagDaoSql implements TagDao {
 	 * int, int)
 	 */
 	public PageIterator getTaggedThread(Long tagID, int start, int count) {
-		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from threadTag where tagID =? ";
-		String GET_ALL_ITEMS = "select threadID  from threadTag where tagID=? order by threadID DESC" ;
-		Collection params = new ArrayList(1);
-		params.add(tagID);
-		return pageIteratorSolverThreadTag.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, params, start, count);
-	}
+        String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from threadTag where tagID =?";
+        String GET_ALL_ITEMS = "select threadID from threadTag where tagID=? order by threadID DESC LIMIT ?, ?";
 
-		/*
-	 * get the threads collection include prev/cuurent/next threads in tag.
-	 */
-	public List getThreadsPrevNextInTag(Long tagId, Long currentThreadId) {
-		String GET_ALL_ITEMS = "select threadID  from threadTag where tagID=? order by threadID DESC";
-		Collection params = new ArrayList(1);
-		params.add(tagId);
-		Block block = pageIteratorSolverThreadTag.locate(GET_ALL_ITEMS, params, currentThreadId);
-		if (block == null) {
-			return new ArrayList();
-		} else {
-			return block.getList();
-		}
-	}
+        List<Object> countParams = new ArrayList<>();
+        countParams.add(tagID);
+        Integer allCount = 0;
+        try {
+            Object allCounto = jdbcTempSource.getJdbcTemp().querySingleObject(countParams, GET_ALL_ITEMS_ALLCOUNT);
+            if (allCounto instanceof Long)
+                allCount = ((Long) allCounto).intValue();
+            else
+                allCount = ((Integer) allCounto).intValue();
+        } catch (Exception e) {
+            logger.error("getTaggedThread count error: " + e);
+            return new PageIterator();
+        }
+
+        List<Object> params = new ArrayList<>();
+        params.add(tagID);
+        params.add(start);
+        params.add(count);
+        List<Long> threadIDs = new ArrayList<>();
+        try {
+            List<Map<String, Object>> list = jdbcTempSource.getJdbcTemp().queryMultiObject(params, GET_ALL_ITEMS);
+            for (Map<String, Object> map : list) {
+                threadIDs.add((Long) map.get("threadID"));
+            }
+        } catch (Exception e) {
+            logger.error("getTaggedThread list error: " + e);
+            return new PageIterator();
+        }
+        return new PageIterator(allCount, threadIDs.toArray());
+    }
+
 
 	public List<Long> getTaggedThread(Long tagID) {
 		String LOAD_SQL = "SELECT threadID FROM threadTag where tagID=? order by threadID DESC";

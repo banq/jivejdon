@@ -285,32 +285,7 @@ public class ForumMessageQueryServiceImp implements ForumMessageQueryService {
 		return queryManager.getHotThreadPageKeys(qc, start, count);
 	}
 
-	/**
-	 * call from ThreadPopularAction this method is simple than getHotThreads,
-	 * only for one page , no multi pages. no messageReplyCountWindow, donot
-	 * need sorted by message replies popularThreads will get result from SQL.
-	 * 
-	 */
-	public PageIterator popularThreads(int popularThreadsWindow, int count) {
-		PageIterator pi = messageQueryDao.popularThreads(getQueryCriteria(popularThreadsWindow), count);
-		try {
-			if (pi.getAllCount() < count) {// reload before 30 days
-				int lastcount = count - pi.getAllCount();
-				PageIterator pi2 = messageQueryDao.popularThreads(getQueryCriteria(popularThreadsWindow), lastcount);//
-				Object[] keys = pi.getKeys();
-				Object[] keys2 = pi2.getKeys();
-				Object[] newkeys = new Object[keys.length + keys2.length];
-				System.arraycopy(keys, 0, newkeys, 0, keys.length);
-				System.arraycopy(keys2, 0, newkeys, keys.length, keys2.length);
-				pi = new PageIterator(newkeys.length, newkeys);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return pi;
-	}
-
+	
 	private QueryCriteria getQueryCriteria(int popularThreadsWindow) {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_YEAR, -popularThreadsWindow);

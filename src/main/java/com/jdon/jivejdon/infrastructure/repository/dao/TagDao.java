@@ -48,8 +48,6 @@ public interface TagDao {
 
 	List<Long> getTaggedThread(Long tagID);
 
-	List getThreadsPrevNextInTag(Long tagId, Long currentThreadId);
-
 	void addThreadTag(Long tagID, Long threadID) throws Exception;
 
 	void delThreadTag(Long threadID) throws Exception;

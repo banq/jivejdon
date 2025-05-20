@@ -20,6 +20,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.jdon.container.pico.Startable;
+import com.jdon.controller.model.PageIterator;
+import com.jdon.jivejdon.domain.model.query.QueryCriteria;
 import com.jdon.jivejdon.domain.model.util.CachedCollection;
 import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
 import com.jdon.jivejdon.infrastructure.repository.dao.AccountDao;
@@ -98,5 +100,7 @@ public class MessageQueryDaoProxy extends MessageQueryDaoSql implements Startabl
 		caches.clear();
 
 	}
+
+
 
 }

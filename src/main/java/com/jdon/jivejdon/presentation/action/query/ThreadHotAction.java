@@ -26,15 +26,7 @@ import com.jdon.strutsutil.ModelListAction;
 import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
 
-/**
- * difference with ThreadPopularAction ThreadPopularAction is simple, only for
- * one page , no multi pages. ThreadPopularAction is no messageReplyCountWindow,
- * donot need sorted by message replies ThreadHotAction is simple than
- * ThreadQueryAction.
- * 
- * @author banq(http://www.jdon.com)
- * 
- */
+
 public class ThreadHotAction extends ModelListAction {
 
 	private final static String module = ThreadHotAction.class.getName();
