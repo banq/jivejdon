@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class HotThreadQueryManager implements Startable {
 	private final static Logger logger = LogManager.getLogger(HotThreadQueryManager.class);
@@ -90,40 +91,34 @@ public class HotThreadQueryManager implements Startable {
 		return resultSortedIDs;
 	}
 
-	private List<ThreadCompareVO> createSortedIDs(QueryCriteria qc) {
-		List resultSortedIDs = new ArrayList();
-		try {
-			Collection resultIDs = messageQueryDao.getThreads(qc);
-			List<ThreadCompareVO> threads = new LinkedList();
-			Iterator iter = resultIDs.iterator();
-			while (iter.hasNext()) {
-				Long threadId = (Long) iter.next();
-				int messageCount = messageQueryDao.getMessageCount(threadId);
-				if (messageCount > qc.getMessageReplyCountWindow()) {// messageCount
-																		// inluce
-																		// root
-																		// message
-					// construte a empty forumthread only include messageCount;
-					// we donot get a full forumThread, that will cost memory.
-					ThreadCompareVO threadCompareVO = new ThreadCompareVO(threadId, messageCount);
-					threads.add(threadCompareVO);
-				}
-			}
-			logger.debug(" found messageCount > " + qc.getMessageReplyCountWindow() + " size=" + threads.size());
-			HotThreadSpecification hotspec = new HotThreadSpecification();
-			// Collection only sort several threads ,not many threads
-			hotspec.sortByMessageCount(threads);
-			iter = threads.iterator();
-			while (iter.hasNext()) {
-				ThreadCompareVO threadCompareVO = (ThreadCompareVO) iter.next();
-				resultSortedIDs.add(threadCompareVO.getThreadId());
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return resultSortedIDs;
-	}
+	private List<Long> createSortedIDs(QueryCriteria qc) {
+        try {
+            Collection resultIDs = messageQueryDao.getThreads(qc);
+            SortedSet<ThreadCompareVO> threads = new TreeSet<>(new ThreadReplyComparator());
+            Iterator iter = resultIDs.iterator();
+            while (iter.hasNext()) {
+                if (threads.size() > 100) break;
+                Long threadId = (Long) iter.next();
+                int messageCount = messageQueryDao.getMessageCount(threadId);
+                if (messageCount > qc.getMessageReplyCountWindow()) {
+                    threads.add(new ThreadCompareVO(threadId, messageCount));
+                }
+            }
+            logger.debug(" found messageCount > " + qc.getMessageReplyCountWindow() + " size=" + threads.size());
+            return threads.stream()
+                    .map(ThreadCompareVO::getThreadId)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    static class ThreadReplyComparator implements Comparator<ThreadCompareVO> {
+        public int compare(ThreadCompareVO a, ThreadCompareVO b) {
+            return Integer.compare(a.getMessageCount(), b.getMessageCount());
+        }
+    }
 
 	@Override
 	public void stop() {
