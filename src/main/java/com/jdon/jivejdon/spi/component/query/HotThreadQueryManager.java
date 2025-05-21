@@ -40,13 +40,6 @@ public class HotThreadQueryManager implements Startable {
 
 	@Override
 	public void start() {
-		Runnable task = new Runnable() {
-			public void run() {
-				hotThreadKeys.clear();
-			}
-		};
-		scheduledExecutorUtil.getScheduExec().scheduleAtFixedRate(task, 0, 60 * 60 * 6, TimeUnit.SECONDS);
-
 	}
 
 	/**
