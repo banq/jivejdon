@@ -40,7 +40,7 @@ public class MaxThreadListAction extends ModelListAction {
         Debug.logVerbose("ThreadHotAction dateRange=" + dateRange + " count=" + count, module);
 
         String messageReplyCountWindowS = request.getParameter("messageReplyCountWindow");
-        int messageReplyCountWindow = 10; // if reply num is greate than 10,
+        int messageReplyCountWindow = 50; // if reply num is greate than 10,
         // it
         // is hot thread
         if (!UtilValidate.isEmpty(messageReplyCountWindowS)) {
