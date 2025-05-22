@@ -11,8 +11,8 @@ import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
+import com.jdon.jivejdon.infrastructure.repository.dao.sql.JdbcTempSource;
 import com.jdon.jivejdon.infrastructure.repository.dao.sql.MessageUtilSQL;
-import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
 import com.jdon.jivejdon.util.PageIteratorSolverFixed;
 
 public class ReBuildIndex implements Runnable {
@@ -26,13 +26,13 @@ public class ReBuildIndex implements Runnable {
 
 	private ForumFactory forumAbstractFactory;
 
-	protected PageIteratorSolverFixed pageIteratorSolver;
+	protected JdbcTempSource jdbcTempSource;
 
-	public ReBuildIndex(ForumFactory forumAbstractFactory, MessagePageIteratorSolver messagePageIteratorSolver) {
+
+	public ReBuildIndex(ForumFactory forumAbstractFactory, JdbcTempSource jdbcTempSource) {
 		messageSearchProxy = new MessageSearchProxy(true);
 		this.forumAbstractFactory = forumAbstractFactory;
-		this.pageIteratorSolver = messagePageIteratorSolver.getPageIteratorSolver("ReBuildIndex");
-
+		this.jdbcTempSource = jdbcTempSource;
 	}
 
 	public void run() {
@@ -95,11 +95,33 @@ public class ReBuildIndex implements Runnable {
 	}
 
 	public PageIterator getAllThreads(int start, int count) {
-		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from jiveThread ";
+    String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from jiveThread";
+    String GET_ALL_ITEMS = "select threadID from jiveThread ORDER BY threadID ASC LIMIT ?, ?";
+    Collection<Object> countParams = new ArrayList<>(1);
+    Collection<Object> params = new ArrayList<>(2);
+    params.add(start);
+    params.add(count);
 
-		String GET_ALL_ITEMS = "select threadID  from jiveThread ";
-		Collection params = new ArrayList(1);
-		return pageIteratorSolver.getPageIterator(GET_ALL_ITEMS_ALLCOUNT, GET_ALL_ITEMS, params, start, count);
-	}
+    int allCount = 0;
+    Collection<Long> threadIDs = new ArrayList<>();
+    try {
+        Object allCountObj = jdbcTempSource.getJdbcTemp().querySingleObject(countParams, GET_ALL_ITEMS_ALLCOUNT);
+        if (allCountObj instanceof Long)
+            allCount = ((Long) allCountObj).intValue();
+        else if (allCountObj instanceof Integer)
+            allCount = (Integer) allCountObj;
+
+        @SuppressWarnings("unchecked")
+        java.util.List<java.util.Map<String, Object>> list =
+            jdbcTempSource.getJdbcTemp().queryMultiObject(params, GET_ALL_ITEMS);
+        for (java.util.Map<String, Object> map : list) {
+            threadIDs.add((Long) map.get("threadID"));
+        }
+    } catch (Exception e) {
+        logger.error("getAllThreads SQL error: " + e);
+        return new PageIterator();
+    }
+    return new PageIterator(allCount, threadIDs.toArray());
+}
 
 }

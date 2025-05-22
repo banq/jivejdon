@@ -31,22 +31,17 @@ import com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF;
 import com.jdon.jivejdon.domain.model.subscription.event.AccountSubscribedNotifyEvent;
 import com.jdon.jivejdon.domain.model.subscription.event.TagSubscribedNotifyEvent;
 import com.jdon.jivejdon.domain.model.subscription.event.ThreadSubscribedCreateEvent;
-import com.jdon.jivejdon.infrastructure.cqrs.CacheQueryRefresher;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
-import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
 import com.jdon.jivejdon.spi.pubsub.publish.LobbyPublisherRole;
 
 @Consumer("topicMessagePostedEvent")
 public class ThreadPostListener implements DomainEventHandler {
 
 	private final RoleAssigner roleAssigner;
-	private final CacheQueryRefresher eventHandler;
 
-	public ThreadPostListener(RoleAssigner roleAssigner, ForumFactory forumFactory,
-			MessagePageIteratorSolver messagePageIteratorSolver) {
+	public ThreadPostListener(RoleAssigner roleAssigner, ForumFactory forumFactory) {
 		super();
 		this.roleAssigner = roleAssigner;
-		eventHandler = new CacheQueryRefresher(forumFactory, messagePageIteratorSolver);
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
@@ -57,7 +52,6 @@ public class ThreadPostListener implements DomainEventHandler {
 		// messageLobbyNotifyAction(forumMessage);
 		// messageNotifyAction(false,forumMessage);
 		// if there is a pubsub bus server, rewrite this code:
-		eventHandler.refresh(forumMessage);
 
 	}
 

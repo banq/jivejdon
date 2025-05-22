@@ -32,8 +32,6 @@ import com.jdon.jivejdon.domain.model.query.ResultSort;
 import com.jdon.jivejdon.domain.model.query.specification.QuerySpecDBModifiedDate;
 import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
 import com.jdon.jivejdon.infrastructure.repository.dao.MessageQueryDao;
-import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
-import com.jdon.model.query.block.Block;
 import com.jdon.treepatterns.model.TreeModel;
 
 /**
@@ -45,15 +43,13 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 	private final static Logger logger = LogManager.getLogger(MessageQueryDaoSql.class);
 
 	protected JdbcTempSource jdbcTempSource;
-	protected MessagePageIteratorSolver messagePageIteratorSolver;
 
 	// protected PageIteratorSolverFixed pageIteratorSolver;
 
 	/**
 	 * @param jdbcTempSource
 	 */
-	public MessageQueryDaoSql(JdbcTempSource jdbcTempSource, MessagePageIteratorSolver messagePageIteratorSolver) {
-		this.messagePageIteratorSolver = messagePageIteratorSolver;
+	public MessageQueryDaoSql(JdbcTempSource jdbcTempSource) {
 		this.jdbcTempSource = jdbcTempSource;
 	}
 

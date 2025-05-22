@@ -21,21 +21,17 @@ import com.jdon.domain.message.DomainEventHandler;
 import com.jdon.jivejdon.domain.event.MessageRemovedEvent;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.infrastructure.cqrs.CacheQueryRefresher;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
-import com.jdon.jivejdon.infrastructure.repository.query.MessagePageIteratorSolver;
 
 @Consumer("delThread")
 public class RefreshThreadAction implements DomainEventHandler {
 
 	protected final ForumFactory forumAbstractFactory;
 
-	private CacheQueryRefresher eventHandler;
 
-	public RefreshThreadAction(ForumFactory forumAbstractFactory, MessagePageIteratorSolver messagePageIteratorSolver) {
+	public RefreshThreadAction(ForumFactory forumAbstractFactory) {
 		super();
 		this.forumAbstractFactory = forumAbstractFactory;
-		eventHandler = new CacheQueryRefresher(forumAbstractFactory, messagePageIteratorSolver);
 
 	}
 
@@ -43,7 +39,6 @@ public class RefreshThreadAction implements DomainEventHandler {
 		MessageRemovedEvent messageRemovedEvent = (MessageRemovedEvent) event.getDomainMessage().getEventSource();
 		// reload(messageRemovedEvent.getForumMessage());
 		// send to pubsub bus to notify refresh view model
-		eventHandler.refresh(messageRemovedEvent.getForumMessage());
 
 	}
 
