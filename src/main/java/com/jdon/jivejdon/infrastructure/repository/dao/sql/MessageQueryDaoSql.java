@@ -383,20 +383,36 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 	/*
 	 * get the threads collection include prev/cuurent/next threads.
 	 */
-	public List getThreadsPrevNext(Long forumId, Long currentThreadId) {
-		String GET_ALL_ITEMS = "select threadID  from jiveThread WHERE forumId=? ORDER BY modifiedDate DESC ";
-		Collection params = new ArrayList(1);
-		params.add(forumId);
-		Block block = messagePageIteratorSolver.getPageIteratorSolver(forumId.toString()).locate(GET_ALL_ITEMS, params, currentThreadId);
-		if (block == null) {
-			return new ArrayList();
-		} else {
-			return block.getList();
-		}
-
-	}
-
-	
+	public List<Long> getThreadsPrevNext(Long forumId, Long currentThreadId) {
+        List<Long> result = new ArrayList<>();
+        try {
+            // 前两个（不含当前），查出比当前ID小的最大2个，正序排列
+            String prevSql = "SELECT threadID FROM jiveThread WHERE forumId=? AND threadID < ? ORDER BY threadID DESC LIMIT 2";
+            List<Object> prevParams = new ArrayList<>();
+            prevParams.add(forumId);
+            prevParams.add(currentThreadId);
+            List<Map<String, Object>> prevList = jdbcTempSource.getJdbcTemp().queryMultiObject(prevParams, prevSql);
+            List<Long> prevIds = new ArrayList<>();
+            for (Map<String, Object> map : prevList) {
+                prevIds.add((Long) map.get("threadID"));
+            }
+            java.util.Collections.reverse(prevIds); // 反转为正序
+            result.addAll(prevIds);
+            result.add(currentThreadId);
+            // 后两个（不含当前），正序
+            String nextSql = "SELECT threadID FROM jiveThread WHERE forumId=? AND threadID > ? ORDER BY threadID ASC LIMIT 2";
+            List<Object> nextParams = new ArrayList<>();
+            nextParams.add(forumId);
+            nextParams.add(currentThreadId);
+            List<Map<String, Object>> nextList = jdbcTempSource.getJdbcTemp().queryMultiObject(nextParams, nextSql);
+            for (Map<String, Object> map : nextList) {
+                result.add((Long) map.get("threadID"));
+            }
+        } catch (Exception e) {
+            logger.error("getThreadsPrevNext SQL error: " + e);
+        }
+        return result;
+    }
 
 	/**
 	 * return all threadId satify by QueryCriteria

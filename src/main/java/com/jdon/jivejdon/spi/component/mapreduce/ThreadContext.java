@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -35,64 +36,26 @@ public class ThreadContext {
     }
 
     public List<Long> getPrevNextInTag(ForumThread thread) {
-        List<Long> resultIds = new ArrayList<>();
-        List<Long> threadListInContext = getThreadListInContext2(thread).stream().collect(Collectors.toList());
+        List<Long> threadListInContext = new ArrayList<>(getThreadListInContext2(thread));
         int index = threadListInContext.indexOf(thread.getThreadId());
-        if (index >= 1) {
-            Long prevThreadId = (Long) threadListInContext.get(index - 1);
-            resultIds.add(prevThreadId);
+        List<Long> resultIds = new ArrayList<>();
+        // 先放后一个，再放前一个
+        if (index < threadListInContext.size() - 1) {
+            resultIds.add(threadListInContext.get(index + 1)); // 后一个
         }
-        if (index < (threadListInContext.size() - 1)) {
-            Long nextThreadId = (Long) threadListInContext.get(index + 1);
-            resultIds.add(nextThreadId);
+        if (index > 0) {
+            resultIds.add(threadListInContext.get(index - 1)); // 前一个
         }
         return resultIds;
     }
 
     public Set<Long> getThreadListInContext2(ForumThread currentThread) {
-        Set<Long> threadIds = createSortedSet();
-        // for (ThreadTag tag : thread.getTags()) {
-        // threadIds.addAll(tagDao.getThreadsPrevNextInTag(tag.getTagID(),
-        // thread.getThreadId()));
-        // break;
-        // }
-        List resultIds = messageQueryDao.getThreadsPrevNext(currentThread.getForum().getForumId(),
-        currentThread.getThreadId());
-        int index = resultIds.indexOf(currentThread.getThreadId());
-        if (index == -1)
-            return threadIds;
-
-        int prevIndex = index - 1;
-        int nextIndex = index + 1;
-
-        // Add the previous 2 threads if available
-        if (prevIndex >= 1 && prevIndex - 1 >= 0 && prevIndex < resultIds.size()) {
-            Long prevThreadId1 = (Long) resultIds.get(prevIndex - 1);
-            Long prevThreadId2 = (Long) resultIds.get(prevIndex);
-            if (prevThreadId1 != null) {
-                threadIds.add(prevThreadId1); // Only add if not null
-            }
-            if (prevThreadId2 != null) {
-                threadIds.add(prevThreadId2); // Only add if not null
-            }
-        }
-
-        threadIds.add(currentThread.getThreadId());
-
-        // Add the next 2 threads if available
-        if (nextIndex < resultIds.size() - 1 && nextIndex + 1 < resultIds.size() - 1) {
-
-            Long nextThreadId1 = (Long) resultIds.get(nextIndex);
-            Long nextThreadId2 = (Long) resultIds.get(nextIndex + 1);
-            if (nextThreadId1 != null) {
-                threadIds.add(nextThreadId1); // Only add if not null
-            }
-            if (nextThreadId2 != null) {
-                threadIds.add(nextThreadId2); // Only add if not null
-            }
-        }
-
-        return threadIds;
+        List<Long> resultIds = messageQueryDao.getThreadsPrevNext(
+            currentThread.getForum().getForumId(),
+            currentThread.getThreadId()
+        );
+        // 直接返回有序且去重的 threadId 集合，顺序与 getThreadsPrevNext 保持一致
+        return new LinkedHashSet<>(resultIds);
     }
 
     public List<ForumThread> getThreadListInContext(ForumThread thread) {
