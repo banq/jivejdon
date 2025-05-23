@@ -66,12 +66,6 @@
        <select class="form-control" name="forum.forumId" id="forumId_select" ></select>   
 </logic:empty>
         
-<script>
-   const select = document.getElementById("forumId_select");
-if (select.options.length > 5) {
-    select.selectedIndex = 5; // 选中第6个选项（索引5）
-}
-</script>
 
 <html:hidden property="messageId" />
 <html:hidden property="action" value="create"/>
@@ -117,6 +111,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
            document.getElementById('forumId_select').options.add(optn);
          
         }  
+const select = document.getElementById("forumId_select");
+if (select.options.length > 5) {
+    select.selectedIndex = 5; // 选中第6个选项（索引5）
+}
     });
 
 
@@ -127,10 +125,6 @@ function forwardNewPage(fmainurl, fmainPars, anchor){
       window.location.href =  url;
       
 }
-
-setInterval(function() {
-  load(getContextPath() +'/message/forumListJSON.shtml');
-}, 60000);
 
 
 $(document).ready(function() {
