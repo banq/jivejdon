@@ -66,6 +66,13 @@
        <select class="form-control" name="forum.forumId" id="forumId_select" ></select>   
 </logic:empty>
         
+<script>
+   const select = document.getElementById("forumId_select");
+if (select.options.length > 5) {
+    select.selectedIndex = 5; // 选中第6个选项（索引5）
+}
+</script>
+
 <html:hidden property="messageId" />
 <html:hidden property="action" value="create"/>
         </div>
