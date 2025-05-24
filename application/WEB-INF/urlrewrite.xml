@@ -110,17 +110,17 @@
 
     <rule>
         <from>^/maxPopThreads$</from>
-        <to>/forum/maxPopThreadlist.shtml?dateRange=100000&amp;count=30&amp;start=0</to>
+        <to>/forum/maxPopThreadlist.shtml?dateRange=1000&amp;count=30&amp;start=0</to>
     </rule>
 
      <rule>
         <from>^/maxPopThreads/$</from>
-        <to>/forum/maxPopThreadlist.shtml?dateRange=100000&amp;count=30&amp;start=0</to>
+        <to>/forum/maxPopThreadlist.shtml?dateRange=1000&amp;count=30&amp;start=0</to>
     </rule>   
 
     <rule>
         <from>^/maxPopThreads/([0-9]+)$</from>
-        <to>/forum/maxPopThreadlist.shtml?dateRange=100000&amp;count=30&amp;start=$1</to>
+        <to>/forum/maxPopThreadlist.shtml?dateRange=1000&amp;count=30&amp;start=$1</to>
     </rule>
          
     <rule>

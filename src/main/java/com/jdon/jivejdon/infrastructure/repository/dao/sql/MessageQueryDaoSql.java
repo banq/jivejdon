@@ -439,6 +439,34 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 
 	}
 
+	public List<Long> getHotThreadIDs(QueryCriteria qc) {
+		List<Long> threadIds = new ArrayList<>();
+		try {
+			// 1. 生成where条件和参数
+			QuerySpecification qs = new QuerySpecDBModifiedDate(qc);
+			qs.parse();
+			StringBuilder sql = new StringBuilder("SELECT threadID, COUNT(*) AS message_count FROM jiveMessage ");
+			sql.append(qs.getWhereSQL());
+			sql.append(" GROUP BY threadID ");
+			sql.append(" HAVING message_count > ? "); // 可选
+			sql.append(" ORDER BY message_count DESC LIMIT 100");
+
+			List<Object> params = new ArrayList<>();
+			if (qs.getParams() != null)
+				params.addAll(qs.getParams());
+			params.add(qc.getMessageReplyCountWindow()); // 你的阈值
+
+			@SuppressWarnings("unchecked")
+			List<Map<String, Object>> list = jdbcTempSource.getJdbcTemp().queryMultiObject(params, sql.toString());
+			for (Map<String, Object> map : list) {
+				threadIds.add((Long) map.get("threadID"));
+			}
+		} catch (Exception e) {
+			logger.error("createSortedIDs error: ", e);
+		}
+		return threadIds;
+	}
+
 	public PageIterator getMessages(QueryCriteria qc, int start, int count) {
 		try {
 			QuerySpecification qs = new QuerySpecDBModifiedDate(qc);

@@ -71,7 +71,7 @@ public class HotThreadQueryManager implements Startable {
 		List resultSortedIDs = (List) hotThreadKeys.get(cacheKey);
 		if (resultSortedIDs == null) {
 			logger.debug("not found it in cache, create it");
-			resultSortedIDs = createSortedIDs(qc);
+			resultSortedIDs = messageQueryDao.getHotThreadIDs(qc);
 			if (resultSortedIDs.size() > 0) {
 				if (hotThreadKeys.size() > 100)
 					hotThreadKeys.clear();
