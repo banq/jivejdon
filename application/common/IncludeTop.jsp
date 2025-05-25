@@ -7,6 +7,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <html lang="zh-CN">
 <head>
    <%@include file="./IncludeTopHead.jsp"%>
+   <meta name="robots" content="noindex, nofollow">
 </head>
 <body>
 <%@ include file="./body_header.jsp" %>
