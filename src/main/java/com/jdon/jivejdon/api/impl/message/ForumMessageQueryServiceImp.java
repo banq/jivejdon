@@ -285,6 +285,13 @@ public class ForumMessageQueryServiceImp implements ForumMessageQueryService {
 		return queryManager.getHotThreadPageKeys(qc, start, count);
 	}
 
+	public PageIterator getDigThreads(QueryCriteria qc, int start, int count) {
+		logger.debug("enter getThreads for QueryCriteria, messageReplyCountWindow =" + qc.getMessageReplyCountWindow());
+		return queryManager.getDigThreadPageKeys(qc, start, count);
+	}
+
+	
+
 	
 	private QueryCriteria getQueryCriteria(int popularThreadsWindow) {
 		Calendar cal = Calendar.getInstance();

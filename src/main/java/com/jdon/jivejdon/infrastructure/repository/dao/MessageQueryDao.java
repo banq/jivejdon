@@ -58,6 +58,8 @@ public interface MessageQueryDao {
 
 	List<Long> getHotThreadIDs(QueryCriteria qc);
 
+	List<Long> getDigThreadIDs(QueryCriteria qc);
+
 	Long getLatestPostMessageId(Long threadId);
 
 	Long getForumLatestPostMessageId(Long forumId);

@@ -27,15 +27,16 @@ public class HotThreadQueryManager implements Startable {
 
 	private final Map<String, List> hotThreadKeys;
 
-	private final ScheduledExecutorUtil scheduledExecutorUtil;
+	private final Map<String, List> digThreadKeys;
 
-	public HotThreadQueryManager(ScheduledExecutorUtil scheduledExecutorUtil,MessageQueryDao messageQueryDao, AccountFactory accountFactory, ForumFactory forumBuilder) {
+
+	public HotThreadQueryManager(MessageQueryDao messageQueryDao, AccountFactory accountFactory, ForumFactory forumBuilder) {
 		super();
-		this.scheduledExecutorUtil = scheduledExecutorUtil;
 		this.messageQueryDao = messageQueryDao;
 		this.accountFactory = accountFactory;
 		this.forumBuilder = forumBuilder;
 		this.hotThreadKeys = new ConcurrentHashMap();
+		this.digThreadKeys = new ConcurrentHashMap();
 	}
 
 	@Override
@@ -65,6 +66,29 @@ public class HotThreadQueryManager implements Startable {
 		return new PageIterator();
 	}
 
+	/**
+	 * get hot thread before several days, not too long
+	 */
+	public PageIterator getDigThreadPageKeys(QueryCriteria qc, int start, int count) {
+		try {
+			List resultSortedIDs = getDigThreadKeys(qc);
+			if (resultSortedIDs.size() > 0) {
+				List pageIds = new ArrayList(resultSortedIDs.size());
+				for (int i = start; i < start + count; i++) {
+					if (i < resultSortedIDs.size()) {
+						pageIds.add(resultSortedIDs.get(i));
+					} else
+						break;
+				}
+				logger.debug("return PageIterator size=" + pageIds.size());
+				return new PageIterator(resultSortedIDs.size(), pageIds.toArray());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new PageIterator();
+	}
+
 	public List getHotThreadKeys(QueryCriteria qc) {
 		String cacheKey = qc.toString() + qc.getMessageReplyCountWindow();
 		logger.debug("enter getHotThreadKeys, key=" + cacheKey);
@@ -76,6 +100,25 @@ public class HotThreadQueryManager implements Startable {
 				if (hotThreadKeys.size() > 100)
 					hotThreadKeys.clear();
 				hotThreadKeys.put(cacheKey, resultSortedIDs);
+				logger.debug("resultSortedIDs.size() == " + resultSortedIDs.size());
+			} else {
+				logger.debug("resultSortedIDs.size() == 0");
+			}
+		}
+		return resultSortedIDs;
+	}
+
+	public List getDigThreadKeys(QueryCriteria qc) {
+		String cacheKey = qc.toString() + qc.getDigCountWindow();
+		logger.debug("enter getDigThreadKeys, key=" + cacheKey);
+		List resultSortedIDs = (List) digThreadKeys.get(cacheKey);
+		if (resultSortedIDs == null) {
+			logger.debug("not found it in cache, create it");
+			resultSortedIDs = messageQueryDao.getDigThreadIDs(qc);
+			if (resultSortedIDs.size() > 0) {
+				if (digThreadKeys.size() > 100)
+					hotThreadKeys.clear();
+				digThreadKeys.put(cacheKey, resultSortedIDs);
 				logger.debug("resultSortedIDs.size() == " + resultSortedIDs.size());
 			} else {
 				logger.debug("resultSortedIDs.size() == 0");
@@ -117,6 +160,7 @@ public class HotThreadQueryManager implements Startable {
 	public void stop() {
 		try {
 			hotThreadKeys.clear();
+			digThreadKeys.clear();
 		} catch (Exception e) {
 		}
 

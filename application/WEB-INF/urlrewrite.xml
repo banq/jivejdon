@@ -108,10 +108,6 @@
 
 
 
-    <rule>
-        <from>^/maxPopThreads$</from>
-        <to>/forum/maxPopThreadlist.shtml?dateRange=10000&amp;count=30&amp;start=0</to>
-    </rule>
 
      <rule>
         <from>^/maxPopThreads/$</from>
@@ -123,19 +119,15 @@
         <to>/forum/maxPopThreadlist.shtml?dateRange=10000&amp;count=30&amp;start=$1</to>
     </rule>
          
-    <rule>
-        <from>^/threadDigSortedList$</from>
-        <to>/forum/threadDigSortedList.shtml?count=30&amp;start=0</to>
-    </rule>
     
     <rule>
         <from>^/threadDigSortedList/$</from>
-        <to>/forum/threadDigSortedList.shtml?count=30&amp;start=0</to>
+        <to>/forum/threadDigSortedList.shtml?dateRange=10000&amp;count=30&amp;start=0</to>
     </rule>
 
      <rule>
         <from>^/threadDigSortedList/([0-9]+)$</from>
-        <to>/forum/threadDigSortedList.shtml?count=30&amp;start=$1</to>
+        <to>/forum/threadDigSortedList.shtml?dateRange=10000&amp;count=30&amp;start=$1</to>
     </rule>
 
     

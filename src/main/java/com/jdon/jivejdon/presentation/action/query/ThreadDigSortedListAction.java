@@ -12,14 +12,15 @@ import com.jdon.jivejdon.api.ForumService;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
-import com.jdon.jivejdon.spi.component.mapreduce.ThreadDigList;
+import com.jdon.jivejdon.domain.model.query.HoThreadCriteria;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
+import com.jdon.util.Debug;
+import com.jdon.util.UtilValidate;
 
 public class ThreadDigSortedListAction extends ModelListAction {
+	  private final static String module = ThreadDigSortedListAction.class.getName();
 	private ForumMessageQueryService forumMessageQueryService;
-	private ThreadApprovedNewList threadApprovedNewList;
 
 	public ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
@@ -28,31 +29,27 @@ public class ThreadDigSortedListAction extends ModelListAction {
 		return forumMessageQueryService;
 	}
 
-	public ThreadApprovedNewList getThreadApprovedNewList() {
-		if (threadApprovedNewList == null)
-			threadApprovedNewList = (ThreadApprovedNewList) WebAppUtil
-					.getComponentInstance("threadApprovedNewList", this.servlet.getServletContext
-							());
 
-		return threadApprovedNewList;
-	}
 
 	@Override
-	public PageIterator getPageIterator(HttpServletRequest httpServletRequest, int start, int
-			count) {
+	public PageIterator getPageIterator(HttpServletRequest request, int start, int count) {
 
-		if (start >= ThreadApprovedNewList.maxSize || start % 30 != 0)
+		if ( start % 30 != 0)
 			return new PageIterator();
 
-		ThreadDigList messageDigList = getThreadApprovedNewList().getThreadDigList();
-		int maxSize = ThreadApprovedNewList.maxSize;
-		if (getThreadApprovedNewList().getMaxSize() != -1) {
-			maxSize = getThreadApprovedNewList().getMaxSize();
-		}
-		
-		PageIterator pageIterator =  messageDigList.getPageIterator(start, count);
-		pageIterator.setAllCount(maxSize);
-		return pageIterator;
+		HoThreadCriteria queryCriteria = new HoThreadCriteria();
+
+		String dateRange = "1";
+		if (request.getParameter("dateRange") != null)
+			dateRange = request.getParameter("dateRange");
+		queryCriteria.setDateRange(dateRange);
+		Debug.logVerbose("ThreadDigSortedListAction dateRange=" + dateRange + " count=" + count, module);
+
+		String digCountWindowS = request.getParameter("digCountWindow");
+		queryCriteria.setDigCountWindow(UtilValidate.isEmpty(digCountWindowS) ? 5 : Integer.parseInt(digCountWindowS));
+
+		// Use the new getDigThreads method in ForumMessageQueryService
+		return getForumMessageQueryService().getDigThreads(queryCriteria, start, count);
 	}
 
 	public Object findModelIFByKey(HttpServletRequest request, Object key) {

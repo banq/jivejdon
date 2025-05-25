@@ -18,7 +18,7 @@ import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
 
 public class MaxThreadListAction extends ModelListAction {
-    private final static String module = ThreadListAction.class.getName();
+    private final static String module = MaxThreadListAction.class.getName();
     private ForumMessageQueryService forumMessageQueryService;
 
 

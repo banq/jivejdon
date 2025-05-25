@@ -38,7 +38,7 @@ public class QueryCriteria implements StringKey {
 	private String forumId;
 
 	private int messageReplyCountWindow;
-
+	private int digCountWindow ; 
 	protected ResultSort resultSort;
 
 	public QueryCriteria() {
@@ -193,6 +193,14 @@ public class QueryCriteria implements StringKey {
 
 	public void setMessageReplyCountWindow(int messageReplyCountWindow) {
 		this.messageReplyCountWindow = messageReplyCountWindow;
+	}
+
+	public int getDigCountWindow() {
+		return digCountWindow;
+	}
+
+	public void setDigCountWindow(int digCountWindow) {
+		this.digCountWindow = digCountWindow;
 	}
 
 	/**

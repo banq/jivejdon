@@ -467,6 +467,38 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 		return threadIds;
 	}
 
+	public List<Long> getDigThreadIDs(QueryCriteria qc) {
+		List<Long> threadIds = new ArrayList<>();
+		try {
+			// 生成 where 条件和参数
+			QuerySpecification qs = new QuerySpecDBModifiedDate(qc);
+			qs.parse();
+			StringBuilder sql = new StringBuilder(
+					"SELECT jm.threadID, SUM(CAST(jmp.propValue AS UNSIGNED)) AS dig_sum " +
+							"FROM jiveMessage jm " +
+							"JOIN jiveMessageProp jmp ON jm.messageID = jmp.messageID ");
+			sql.append(qs.getWhereSQL());
+			sql.append(" AND jmp.name = 'digNumber' ");
+			sql.append("GROUP BY jm.threadID ");
+			sql.append("HAVING dig_sum > ? "); // 这里用上阈值
+			sql.append("ORDER BY dig_sum DESC LIMIT 100");
+
+			List<Object> params = new ArrayList<>();
+			if (qs.getParams() != null)
+				params.addAll(qs.getParams());
+            params.add(qc.getDigCountWindow()); // 你的阈值
+
+			@SuppressWarnings("unchecked")
+			List<Map<String, Object>> list = jdbcTempSource.getJdbcTemp().queryMultiObject(params, sql.toString());
+			for (Map<String, Object> map : list) {
+				threadIds.add((Long) map.get("threadID"));
+			}
+		} catch (Exception e) {
+			logger.error("getDigThreadIDs error: ", e);
+		}
+		return threadIds;
+	}
+
 	public PageIterator getMessages(QueryCriteria qc, int start, int count) {
 		try {
 			QuerySpecification qs = new QuerySpecDBModifiedDate(qc);

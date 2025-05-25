@@ -44,6 +44,8 @@ public interface ForumMessageQueryService {
 
 	PageIterator getHotThreads(QueryCriteria messageQueryCriteria, int start, int count);
 
+	PageIterator getDigThreads(QueryCriteria messageQueryCriteria, int start, int count);
+
 	PageIterator getMessages(QueryCriteria messageQueryCriteria, int start, int count);
 
 	PageIterator getThreads(QueryCriteria qc, int start, int count);
