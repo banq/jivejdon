@@ -44,19 +44,10 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-   <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
-   <link rel="preconnect" href="https://www.googletagmanager.com/">  
-   <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
-   <link rel="preconnect" href="https://tpc.googlesyndication.com/">
-   <link rel="preconnect" href="https://www.googletagservices.com/">
-   <link rel="preconnect" href="https://static.googleadsserving.cn/">
-   <link rel="preconnect" href="https://www.gstatic.com/">
-   <link rel="preconnect" href="https://fonts.gstatic.com/">
-   <link rel="preconnect" href="https://www.gstatic.cn/">
-   <link rel="preconnect" href="https://fonts.googleapis.com/">
-   <link rel="preconnect" href="https://cm.g.doubleclick.net/">
-   <link rel="preconnect" href="https://ad.doubleclick.net/">
-   <link rel="preconnect" href="https://fundingchoicesmessages.google.com/">	
+  <link rel="preconnect" href="https://static.jdon.com/" crossorigin>  
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
    <%@include file="../common/IncludeTopHead.jsp"%>
    <meta name="Description" content="编程精华历史与网友编程实践精彩观点">
 <meta name="Keywords" content="Java心得,实战经验,Java最佳实践,Java模式,Java实战,数据库,ORM,struts,j2se,JDK,java6,hibernate,EJB,j2ee,Javaee,it,设计模式,weblogic,spring,工作流,权限,ioc,依赖注射">
