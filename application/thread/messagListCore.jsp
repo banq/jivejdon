@@ -73,7 +73,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <link rel="preload" href="https://static.jdon.com/js/fonts/icomoon.woff" as="font" crossorigin>
     <link rel="preload" href="https://static.jdon.com/js/fonts/icomoon.svg" as="font" crossorigin>
     <script defer src="https://static.jdon.com/js/jquery-bootstrap2.js"></script> 
-    <script defer src="https://static.jdon.com/common/messageList12.js"></script>  
 </head>
 <body>
 <%@ include file="../common/body_header.jsp" %>
