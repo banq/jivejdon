@@ -478,6 +478,13 @@ var meme =` <ul class="list-unstyled">
 }
 
 
+function digMessage(id) {
+  $.get(`/forum/updateDigCount.shtml?messageId=${id}`, data => {
+    $(`#digNumber_${id}`).html(data);
+    $(`#textArea_${id}`).html('  ');
+  });
+}
+
 document.addEventListener("DOMContentLoaded", function(event) { 
 
   $(document).ready(function () {
