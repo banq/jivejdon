@@ -86,11 +86,6 @@
     </rule>
 
 
-    <rule>
-        <from>^/query/digList$</from>
-        <to>/query/threadDigList2.shtml?length=8&amp;tablewidth=300&amp;count=30</to>
-    </rule>
-
     <!-- <rule>
         <from>^/approvedNewList3$</from>
         <to>/query/threadApprovedNewList3.shtml?count=15</to>
