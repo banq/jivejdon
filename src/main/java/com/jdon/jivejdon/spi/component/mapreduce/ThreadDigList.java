@@ -25,61 +25,32 @@ import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
-import com.jdon.controller.model.PageIterator;
+import com.jdon.container.pico.Startable;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
 
 /**
  * Like or Give the thumbs-up
  */
-public class ThreadDigList {
+public class ThreadDigList implements Startable{
 
-	public final static int TIME_WINDOWS = 10000;
+	public final static int TIME_WINDOWS = 100;
 
-	private final SortedSet<Long> sortedAll;
 	private final SortedSet<Long> sortedWindows;
-	private final ForumMessageQueryService forumMessageQueryService;
 
 	public ThreadDigList(ForumMessageQueryService forumMessageQueryService) {
-		this.forumMessageQueryService = forumMessageQueryService;
-		this.sortedAll = new ConcurrentSkipListSet<>(new ThreadDigComparator(forumMessageQueryService));
 		this.sortedWindows = new ConcurrentSkipListSet<>(new ThreadDigComparator(forumMessageQueryService));
 	}
 
 	public void addForumThread(ForumThread forumThread) {
-		Date mDate = new Date(forumThread.getCreationDate2());
+		Date mDate = new Date(forumThread.getRootMessage().getModifiedDate2());
 		Date nowDate = new Date();
 		long daysBetween = (nowDate.getTime() - mDate.getTime() + 1000000) / (60 * 60 * 24 * 1000);
 		if (daysBetween < TIME_WINDOWS) {
 			sortedWindows.add(forumThread.getThreadId());
 		}
-		sortedAll.add(forumThread.getThreadId());
-
 	}
 
-	public PageIterator getPageIterator(int start, int count) {
-		List<Long> threads = new CopyOnWriteArrayList<Long>(sortedAll);
-		threads = threads.stream().skip(start).limit(count).collect(Collectors.toList());
-		return new PageIterator(threads.size(), threads.toArray());
-	}
-
-	public PageIterator getRandomPageIterator(int count) {
-		List<Long> threads = new ArrayList<Long>(sortedAll);
-		if (threads.size() == 0 )
-		  return new PageIterator();
-		Collections.shuffle(threads);
-		List<Long> cutList = threads.subList(0, threads.size() > count ? count : threads.size());
-		return new PageIterator(cutList.size(), cutList.toArray());
-	}
-
-	public Collection<ForumThread> getDigs(int DigsListMAXSize) {
-		if (sortedWindows.size() < DigsListMAXSize)
-			DigsListMAXSize = sortedWindows.size();
-		List<Long> threads = new CopyOnWriteArrayList<Long>(sortedWindows);
-		return threads.stream().limit(DigsListMAXSize).map(forumMessageQueryService::getThread)
-				.collect(Collectors.toList());
-
-	}
 
 	public Collection<Long> getDigThreadIds(int DigsListMAXSize) {
 		List<Long> threads = new CopyOnWriteArrayList<Long>(sortedWindows);
@@ -87,8 +58,17 @@ public class ThreadDigList {
 	}
 
 	public void clear() {
-		sortedAll.clear();
 		sortedWindows.clear();
+	}
+
+	@Override
+	public void start() {
+	 
+	}
+
+	@Override
+	public void stop() {
+		 clear();
 	}
 
 }

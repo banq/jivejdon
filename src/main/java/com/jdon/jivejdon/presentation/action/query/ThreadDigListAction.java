@@ -16,9 +16,7 @@
 package com.jdon.jivejdon.presentation.action.query;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.spi.component.mapreduce.HomepageListSolver;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
-import com.jdon.jivejdon.spi.component.mapreduce.ThreadDigList;
 import com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
@@ -76,7 +74,7 @@ public class ThreadDigListAction extends Action {
 		Collection<ForumThread> digThreads = new ArrayList<>();
 		Collection<Long> digList = getThreadApprovedNewList().getThreadDigList().getDigThreadIds(DigsListMAXSize);
 		if(getThreadViewCounterJob().getThreadIdsList() != null && getThreadViewCounterJob().getThreadIdsList().size() !=0)
-			digList = getThreadViewCounterJob().getThreadIdsList();
+			digList.addAll(getThreadViewCounterJob().getThreadIdsList());
 		digThreads = digList.stream().map(e -> getForumMessageQueryService().getThread(e)).collect(Collectors.toList());
 		threadListForm.setList(digThreads);
 		threadListForm.setAllCount(digThreads.size());
