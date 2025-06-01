@@ -99,7 +99,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 	public double calculateApprovedScore(ForumThread thread) {
 		double weightedScore = calculateWeightedScore(thread);
-		long daysSinceCreation = getDaysSinceCreation(thread.getCreationDate2());
+		long daysSinceCreation = getDaysSinceCreation(thread.getRootMessage().getModifiedDate2());
 		return weightedScore / (daysSinceCreation + 1);
 	}
 
@@ -109,7 +109,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 		int digCount = thread.getRootMessage().getDigCount();
 
 		// Define weights
-		double viewWeight = getViewWeight(thread.getCreationDate2());
+		double viewWeight = getViewWeight(thread.getRootMessage().getModifiedDate2());
 		double digWeight = 0.2;
 
 		// Calculate weighted score
