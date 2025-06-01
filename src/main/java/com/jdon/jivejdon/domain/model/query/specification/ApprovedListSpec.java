@@ -94,19 +94,20 @@ public class ApprovedListSpec extends ThreadListSpec {
 	 * recommend：ThreadDigComparator
 	 */
 	public double approvedCompare(ForumThread thread) {
-		// 只按 dig、标签、链接数加权，不考虑浏览量和时间
 		int digCount = thread.getRootMessage().getDigCount();
-		double digWeight = 100.0; // dig权重
-
-		// 标签权重
 		double tagsCount = thread.getTags().stream()
 				.map(threadTag -> threadTag.getAssonum())
 				.reduce(0, Integer::sum);
-		double tagWeight = 10.0;
-
-		// 链接权重
 		ReBlogVO reBlogVO = thread.getReBlogVO();
 		int linkCount = reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size();
+
+		// 三个都必须 > 0，否则返回 0
+		if (digCount <= 0 || tagsCount <= 0 || linkCount <= 0) {
+			return 0;
+		}
+
+		double digWeight = 100.0;
+		double tagWeight = 10.0;
 		double linkWeight = 5.0;
 
 		return (digCount * digWeight) + (tagsCount * tagWeight) + (linkCount * linkWeight);
