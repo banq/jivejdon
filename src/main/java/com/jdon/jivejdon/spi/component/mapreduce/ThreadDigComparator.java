@@ -25,9 +25,8 @@ public class ThreadDigComparator implements Comparator<Long> {
 		ForumThread thread1 = forumMessageQueryService.getThread(threadId1);
 		ForumThread thread2 = forumMessageQueryService.getThread(threadId2);
 	
-		final double thread1Count = approvedListSpec.sortedLeaderboard(thread1, thread2);
-		final double thread2Count = approvedListSpec.sortedLeaderboard(thread2, thread1);
-
+double thread1Count = approvedListSpec.approvedCompare(thread1);
+		double thread2Count = approvedListSpec.approvedCompare(thread2);
 		if (thread1Count > thread2Count)
 			return -1; // returning the first object
 		else if (thread1Count < thread2Count)

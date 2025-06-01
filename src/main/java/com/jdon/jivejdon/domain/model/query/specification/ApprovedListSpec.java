@@ -94,7 +94,15 @@ public class ApprovedListSpec extends ThreadListSpec {
 	 * recommend：ThreadDigComparator
 	 */
 	public double approvedCompare(ForumThread thread) {
-		return calculateApprovedScore(thread);
+		double weightedScore = calculateWeightedScore(thread);
+
+		// 在基础分上进一步提高dig权重
+		int digCount = thread.getRootMessage().getDigCount();
+		double extraDigWeight = 100.0; // 你可以根据需要调整权重
+		weightedScore += digCount * extraDigWeight;
+
+		// 不做时间递减
+		return weightedScore;
 	}
 
 	public double calculateApprovedScore(ForumThread thread) {
