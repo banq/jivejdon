@@ -68,7 +68,7 @@ public class ThreadDigListAction extends Action {
 		resultSort.setOrder_DESCENDING();
 		ThreadListSpec threadListSpec = new ThreadListSpecForMod();
 		threadListSpec.setResultSort(resultSort);
-		PageIterator pageIterator = getForumMessageQueryService().getThreads(0, 100, threadListSpec);
+		PageIterator pageIterator = getForumMessageQueryService().getThreads(0, 200, threadListSpec);
 		SortedSet<Long> sortedWindows = new ConcurrentSkipListSet<>(new ThreadDigComparator(forumMessageQueryService));
 
 		// 将 pageIterator 中的 threadId 加入 sortedWindows
