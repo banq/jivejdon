@@ -55,10 +55,7 @@ public class ThreadApprovedNewList implements Startable {
 			.getLogger(ThreadApprovedNewList.class);
 	//key is start of one page,
 	public final ConcurrentHashMap<Integer, Collection<Long>> approvedThreadList;
-	// author sort map
-	private final AuthorList authorList;
 	// dig sort map, start is more greater, the dig collection is more greater.
-	private final ThreadDigList threadDigList;
 	private final ThreadTagList threadTagList;
 	private final ForumMessageQueryService forumMessageQueryService;
 	private final AccountService accountService;
@@ -77,8 +74,6 @@ public class ThreadApprovedNewList implements Startable {
 			ScheduledExecutorUtil scheduledExecutorUtil) {
 		approvedThreadList = new ConcurrentHashMap<>();
 		this.accountService = accountService;
-		this.authorList = new AuthorList(accountService);
-		this.threadDigList = new ThreadDigList(forumMessageQueryService);
 		this.threadTagList = new ThreadTagList(tagService, forumMessageQueryService);
 		this.forumMessageQueryService = forumMessageQueryService;
 		this.scheduledExecutorUtil = scheduledExecutorUtil;
@@ -106,8 +101,6 @@ public class ThreadApprovedNewList implements Startable {
 		currentIndicator = 0;
 	    currentStartBlock = 0;
 	    currentStartPage = 0;
-		threadDigList.clear();
-		authorList.clear();
 	}
 
 	public ThreadTagList getThreadTagList() {
@@ -132,19 +125,8 @@ public class ThreadApprovedNewList implements Startable {
 		return initApprovedList( start, approvedListSpec);
 	}
 
-	public ThreadDigList getThreadDigList() {
-		if (!approvedThreadList.containsKey(0))
-			initApprovedList(0, approvedListSpec);
-		return this.threadDigList;
 
-	}
 
-	public AuthorList getAuthorList() {
-		if (!approvedThreadList.containsKey(0))
-			initApprovedList(0, approvedListSpec);
-		return this.authorList;
-
-	}
 
 	protected Collection<Long> initApprovedList(int start,
 			ApprovedListSpec approvedListSpec) {
@@ -204,9 +186,6 @@ public class ThreadApprovedNewList implements Startable {
 								.thenAccept(isApproved -> {
 									if (isApproved) {
 										resultSorteds.add(thread.getThreadId());
-										// map to sort account
-										authorList.addAuthor(account);
-										threadDigList.addForumThread(thread);
 										i.incrementAndGet();
 									}
 								});

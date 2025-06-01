@@ -16,10 +16,15 @@
 package com.jdon.jivejdon.presentation.action.query;
 
 import com.jdon.controller.WebAppUtil;
+import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
+import com.jdon.jivejdon.spi.component.mapreduce.ThreadDigComparator;
 import com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.query.ResultSort;
+import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
+import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpecForMod;
 import com.jdon.strutsutil.ModelListForm;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -31,19 +36,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.SortedSet;
+import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.stream.Collectors;
 
 public class ThreadDigListAction extends Action {
-	private ThreadViewCounterJob threadViewCounterJob;
 	private ForumMessageQueryService forumMessageQueryService;
-	private ThreadApprovedNewList threadApprovedNewList;
 	
-	private ThreadViewCounterJob getThreadViewCounterJob() {
-		if (threadViewCounterJob == null)
-			threadViewCounterJob = (ThreadViewCounterJob) WebAppUtil.getComponentInstance("threadViewCounterJob",
-					this.servlet.getServletContext());
-		return threadViewCounterJob;
-	}
 
 	private ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
@@ -52,30 +51,37 @@ public class ThreadDigListAction extends Action {
 		return forumMessageQueryService;
 	}
 
-	private ThreadApprovedNewList getThreadApprovedNewList(){
-		if (threadApprovedNewList == null)
-		   threadApprovedNewList = (ThreadApprovedNewList) WebAppUtil.getComponentInstance("threadApprovedNewList",
-				this.servlet.getServletContext());
-	    return threadApprovedNewList;
-	}
 
 
 
 
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
 		int DigsListMAXSize = 30;
-		String wSize = request.getParameter("wSize") ;
-		if(wSize != null && wSize.length() > 0){
+		String wSize = request.getParameter("wSize");
+		if (wSize != null && wSize.length() > 0) {
 			DigsListMAXSize = Integer.parseInt(wSize);
 		}
 		ModelListForm threadListForm = (ModelListForm) form;
+		ResultSort resultSort = new ResultSort();
+		resultSort.setOrder_DESCENDING();
+		ThreadListSpec threadListSpec = new ThreadListSpecForMod();
+		threadListSpec.setResultSort(resultSort);
+		PageIterator pageIterator = getForumMessageQueryService().getThreads(0, 100, threadListSpec);
+		SortedSet<Long> sortedWindows = new ConcurrentSkipListSet<>(new ThreadDigComparator(forumMessageQueryService));
 
-		Collection<ForumThread> digThreads = new ArrayList<>();
-		Collection<Long> digList = getThreadApprovedNewList().getThreadDigList().getDigThreadIds(DigsListMAXSize);
-		// if(getThreadViewCounterJob().getThreadIdsList() != null && getThreadViewCounterJob().getThreadIdsList().size() !=0)
-		// 	digList.addAll(getThreadViewCounterJob().getThreadIdsList());
-		digThreads = digList.stream().map(e -> getForumMessageQueryService().getThread(e)).collect(Collectors.toList());
+		// 将 pageIterator 中的 threadId 加入 sortedWindows
+		for (Object threadIdObj : pageIterator.getKeys()) {
+			Long threadId = (Long) threadIdObj;
+			sortedWindows.add(threadId);
+		}
+
+		// 根据排序后的 threadId 获取 ForumThread
+		Collection<ForumThread> digThreads = sortedWindows.stream()
+				.map(e -> getForumMessageQueryService().getThread(e))
+				.collect(Collectors.toList());
+
 		threadListForm.setList(digThreads);
 		threadListForm.setAllCount(digThreads.size());
 		return mapping.findForward("success");
