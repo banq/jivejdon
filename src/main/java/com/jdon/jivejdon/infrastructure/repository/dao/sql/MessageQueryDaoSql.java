@@ -346,7 +346,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 
 	public PageIterator getThreads(int start, int count, ThreadListSpec threadListSpec) {
 		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from jiveThread " + threadListSpec.getResultSortSQL();
-		String GET_ALL_ITEMS = "select threadID from jiveThread " + threadListSpec.getResultSortSQL() + " ORDER BY modifiedDate DESC LIMIT ?, ?";
+		String GET_ALL_ITEMS = "select threadID from jiveThread " + threadListSpec.getResultSortSQL() + " LIMIT ?, ?";
 
 		// 查询总数参数
 		Collection<Object> countParams = new ArrayList<>(); // 没有额外参数
