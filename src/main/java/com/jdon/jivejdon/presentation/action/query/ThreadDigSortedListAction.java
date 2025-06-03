@@ -46,7 +46,7 @@ public class ThreadDigSortedListAction extends ModelListAction {
 		Debug.logVerbose("ThreadDigSortedListAction dateRange=" + dateRange + " count=" + count, module);
 
 		String digCountWindowS = request.getParameter("digCountWindow");
-		queryCriteria.setDigCountWindow(UtilValidate.isEmpty(digCountWindowS) ? 5 : Integer.parseInt(digCountWindowS));
+		queryCriteria.setDigCountWindow(UtilValidate.isEmpty(digCountWindowS) ? 1 : Integer.parseInt(digCountWindowS));
 
 		// Use the new getDigThreads method in ForumMessageQueryService
 		return getForumMessageQueryService().getDigThreads(queryCriteria, start, count);
