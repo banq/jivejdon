@@ -1,5 +1,6 @@
-# Jivejdon
+Jivejdon has been coded using the AI vibe-code tool, with the development environment being VSCode + Copilot.
 
+# Jivejdon
 Jivejdon is a WordPress-like Blog/Forum and production-ready application with DDD + DomainEvents/Event Soucing/CQRS + clean architecture/Hexagonalarchitecture, powered by [jdonframework](https://github.com/banq/jdonframework). 
 
 You can check out the canonical deployment of Jivejdon at [https://www.jdon.com/](https://www.jdon.com/forum/)(NginX+Tomcat+JDK8+MySQL)
