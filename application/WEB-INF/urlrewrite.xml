@@ -199,20 +199,13 @@
         <!--&lt;!&ndash; note: here must be userId, actually userId'value is username'value, need a model key  &ndash;&gt;-->
         <!--<to>/blog/userMessages.shtml?username=$1&amp;count=10&amp;start=$2</to>-->
     <!--</rule>-->
-	<rule>
-        <from>^/query/threadNewList$</from>
-        <to>/query/threadNewList.shtml?count=8</to>
-    </rule>
+
 
 	<rule>
         <from>^/query/threadDigList$</from>
         <to>/query/threadDigList.shtml?count=5</to>
     </rule>    
-	<!-- <rule>
-        <from>^/query/urlListAction$</from>
-        <to>/query/urlListAction.shtml?count=20</to>
-    </rule>     -->
-    
+	
     <!-- rss -->
  
 
