@@ -142,7 +142,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
        <center>
         
-        <h2 class="tagcloud"><a href="<%=domainUrl%>/tag/<bean:write name="tagID"/>/" class="tag-cloud-link"><bean:write  name='TITLE'/></a></h2>
+        <h1 class="tagcloud bige20"><a href="<%=domainUrl%>/tag/<bean:write name="tagID"/>/" class="tag-cloud-link"><bean:write  name='TITLE'/></a></h1>
   
       <div>
        
