@@ -67,10 +67,10 @@
             <forward name="tags" path="/query/others/tags.jsp" />
         </action>
 
-        <action path="/query/taggedThreadList" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
-            <forward name="success" path="/query/taggedThreadList2.shtml" />
+        <action path="/tag/taggedThreadList" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/tag/taggedThreadList2.shtml" />
         </action>
-        <action path="/query/taggedThreadList2" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
+        <action path="/tag/taggedThreadList2" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/taggedThreadList.jsp" />
         </action>
 

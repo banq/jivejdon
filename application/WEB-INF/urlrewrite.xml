@@ -143,11 +143,11 @@
     </rule>
     <rule>
         <from>^/tag/([0-9]+)/$</from>
-        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=6</to>
+        <to>/tag/taggedThreadList.shtml?tagID=$1&amp;count=6</to>
     </rule>
    <rule>
         <from>^/tag/([0-9]+)/([0-9]+)$</from>
-        <to>/query/taggedThreadList.shtml?tagID=$1&amp;count=6&amp;start=$2</to>
+        <to>/tag/taggedThreadList.shtml?tagID=$1&amp;count=6&amp;start=$2</to>
     </rule>
   
     <rule>
