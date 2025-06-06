@@ -23,7 +23,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <meta name="Keywords" content="前后端,语言平台,领域驱动设计,领域建模,逻辑方法,SpringBoot和SpringCloud,平台架构,DevOps,Github工具,企业软件,架构设计,大科技、自然科学,产品领域,科普,大语言模型,数据科学,认知偏见">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="<%=domainUrl%>/sitemap.xml">
 
-<meta http-equiv="refresh" content="3600">
 <script>
  if(top !== self) top.location = self.location;
   contextpath = "<%=request.getContextPath()%>";

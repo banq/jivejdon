@@ -52,7 +52,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <link rel="next" href="<%=domainUrl%>/tag/page/<%=pagestartInt+pagecountInt%>"/>
  <%}%>
 
-<meta http-equiv="refresh" content="3600">
 <script>
  if(top !== self) top.location = self.location;
   contextpath = "<%=request.getContextPath()%>";

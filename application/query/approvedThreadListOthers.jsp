@@ -65,7 +65,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
             <link rel="next" href="<%=domainUrl%>/approval/<%=pagestartInt+pagecountInt%>"/>
          <%}%>
 
-<meta http-equiv="refresh" content="3600">
 <script>
  if(top !== self) top.location = self.location;
   contextpath = "<%=request.getContextPath()%>";

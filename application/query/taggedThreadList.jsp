@@ -119,7 +119,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         }
    
 </style>
-<meta http-equiv="refresh" content="3600">
 <script>
  if(top !== self) top.location = self.location;
   contextpath = "<%=request.getContextPath()%>";

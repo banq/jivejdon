@@ -63,7 +63,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
          <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
             <link rel="next" href="<%=domainUrl%>/threadDigSortedList/<%=pagestartInt+pagecountInt%>"/>
          <%}%>
-<meta http-equiv="refresh" content="3600">
 <script>
  if(top !== self) top.location = self.location;
   contextpath = "<%=request.getContextPath()%>";
