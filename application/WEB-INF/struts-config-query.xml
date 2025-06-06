@@ -82,16 +82,14 @@
             <forward name="success" path="/query/threadList.jsp" />
         </action> -->
 
-        <action path="/query/tagsList" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
-            <forward name="success" path="/query/tagsList2.shtml" />
+        <action path="/tags/tagsList" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/tags/tagsList2.shtml" />
         </action>
-        <action path="/query/tagsList2" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" name="tagsListForm" scope="request" validate="false">
-            <forward name="success" path="/query/tagsList.jsp" />
+        <action path="/tags/tagsList2" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" name="tagsListForm" scope="request" validate="false">
+            <forward name="success" path="/tags/tagsList.jsp" />
         </action>
 
-        <!-- <action path="/query/tagsList2" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" name="tagsHotListForm" scope="request" validate="false">
-            <forward name="success" path="/query/others/tagHotList.jsp" />
-        </action> -->
+      
 
         <action path="/query/tt" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/tt2.shtml" />

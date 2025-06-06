@@ -130,16 +130,16 @@
     <!-- tags -->
         <rule>
         <from>^/tags/tagcloud$</from>
-        <to>/query/tagsList2.shtml</to>
+        <to>/tags/tagsList2.shtml</to>
     </rule>
     <rule>
         <from>^/tag/$</from>
-        <to>/query/tagsList.shtml?count=6&amp;start=0</to>
+        <to>/tags/tagsList.shtml?count=6&amp;start=0</to>
     </rule>
    
     <rule>
         <from>^/tag/page/([0-9]+)$</from>
-        <to>/query/tagsList.shtml?count=6&amp;start=$1</to>
+        <to>/tags/tagsList.shtml?count=6&amp;start=$1</to>
     </rule>
     <rule>
         <from>^/tag/([0-9]+)/$</from>
