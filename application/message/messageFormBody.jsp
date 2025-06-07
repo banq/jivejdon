@@ -20,38 +20,48 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="form-group">
-      <html:text styleClass="form-control" property="subject" styleId="replySubject" size="50" maxlength="50" tabindex="5"
+      <html:text styleClass="form-control" property="subject" styleId="replySubject"  size="60" maxlength="60" tabindex="5"
                      onfocus="if(value=='文中加入本站链接、热门标题'){value=''}"
-                     onblur="if (value ==''){value='文中加入本站链接、热门标题'}" onkeydown="limitInputLength(this, 50)"></html:text>
+                     onblur="if (value ==''){value='文中加入本站链接、热门标题'}" onkeydown="limitInputLength(this, 50, 60)">
+      </html:text>
+ <div>
+    <span id="subjectLengthTip">已输入 0 个字符</span>
+  </div>
+
+    </div>
+  </div>
+</div>
 
 <script>
-function limitInputLength(input, maxChineseLength) {
-    let value = input.value; // 获取输入框的值
-    let length = 0; // 初始化长度计数器
-
-    // 遍历每个字符，计算总长度
+function limitInputLength(input, minChineseLength, maxChineseLength) {
+    let value = input.value;
+    let length = 0;
     for (let i = 0; i < value.length; i++) {
-        // 如果是中文字符（Unicode 范围：\u4e00-\u9fa5），长度 +1
         if (/[\u4e00-\u9fa5]/.test(value[i])) {
             length += 1;
-        }
-        // 如果是英文字符（包括字母、数字、标点等），长度 +0.5
-        else {
+        } else {
             length += 0.5;
         }
-
-        // 如果长度超过最大限制，截断字符串并退出循环
         if (length > maxChineseLength) {
             input.value = value.substring(0, i);
             break;
         }
     }
-                 
+    // 实时显示字数
+    document.getElementById('subjectLengthTip').innerText = '已输入 ' + Math.floor(length) + ' 个字符';
+
+    if (length < minChineseLength) {
+        input.setCustomValidity("内容不能少于 " + minChineseLength + " 个字符（中文算1，英文算0.5）");
+    } else {
+        input.setCustomValidity("");
+    }
 }
+// 页面加载后初始化一次
+document.addEventListener('DOMContentLoaded', function() {
+    var input = document.getElementById('replySubject');
+    limitInputLength(input, 50, 60);
+});
 </script>
-    </div>
-  </div>
-</div>
 
 <script src="/common/form.js"></script>
 <script src="/common/ckeditor/ckeditor.js"></script>
