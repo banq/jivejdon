@@ -20,7 +20,7 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="form-group">
-      <html:text styleClass="form-control" property="subject" styleId="replySubject"  size="60" maxlength="60" tabindex="5"
+      <html:text styleClass="form-control" property="subject" styleId="replySubject"  size="30" maxlength="50" tabindex="5"
                      onfocus="if(value=='文中加入本站链接、热门标题'){value=''}"
                      onblur="if (value ==''){value='文中加入本站链接、热门标题'}" onkeydown="limitInputLength(this, 18, 30)">
       </html:text>
