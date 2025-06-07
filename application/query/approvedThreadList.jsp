@@ -39,7 +39,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
          <section class="widget">
-         <h2><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/>.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h2>
+         <h1 style="font-size: 2.2rem;margin-top: 0px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/>.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h1>
       
          <div class="info">			 
               <span class="smallgray"><i class="fa fa-calendar"></i>
