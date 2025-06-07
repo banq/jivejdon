@@ -22,7 +22,9 @@
     <div class="form-group">
       <html:text styleClass="form-control" property="subject" styleId="replySubject"  size="30" maxlength="50" tabindex="5"
                      onfocus="if(value=='文中加入本站链接、热门标题'){value=''}"
-                     onblur="if (value ==''){value='文中加入本站链接、热门标题'}" onkeydown="limitInputLength(this, 18, 30)">
+                     onblur="if (value ==''){value='文中加入本站链接、热门标题'}" 
+                     onkeyup="limitInputLength(this, 18, 30)"
+                     onchange="limitInputLength(this, 18, 30)">
       </html:text>
  <div>
     <span id="subjectLengthTip">已输入 0 个字符</span>
