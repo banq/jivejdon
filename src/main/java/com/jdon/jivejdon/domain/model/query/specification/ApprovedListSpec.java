@@ -11,12 +11,21 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 	// this value is display count on one page
 	private final int needCount = 30;
-	private final int needViewcount = 300;
+	private final int needViewcount = 10;
+
+	public int getNeedViewcount() {
+		return needViewcount;
+	}
 
 	public ApprovedListSpec() {
 		sorttableName = "creationDate";
 	}
 
+	
+	public boolean isApprovedToBest(ForumThread thread, int count, ForumThread threadPrev, ForumThread threadPrev2) {
+		return isApproved(thread, threadPrev, threadPrev2) && count < getNeedCount() && isLargeViewCount(thread, getNeedViewcount());
+	}
+	
 	/**
 	 * recommend
 	 * 
@@ -155,9 +164,6 @@ public class ApprovedListSpec extends ThreadListSpec {
 		return (reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size()) >= count ? true : false;
 	}
 
-	public boolean isApprovedToBest(ForumThread thread, int count, ForumThread threadPrev, ForumThread threadPrev2) {
-		return isApproved(thread, threadPrev, threadPrev2) && count < getNeedCount();
-	}
 
 	public boolean isGreaterThanPrev(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2, double rate) {
 		if (threadPrev == null || threadPrev2 == null || thread.getViewCount() < 10)
@@ -187,7 +193,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 	}
 
-	protected boolean isLargeViewCount(ForumThread thread) {
+	protected boolean isLargeViewCount(ForumThread thread, int needViewcount) {
 		return thread.getViewCount() > needViewcount;
 	}
 
