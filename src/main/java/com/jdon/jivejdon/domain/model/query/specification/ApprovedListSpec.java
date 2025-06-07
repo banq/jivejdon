@@ -26,7 +26,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	 * @return
 	 */
 	public boolean isApproved(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2) {
-		return calculateWeightedScore(thread) > 10
+		return calculateWeightedScore(thread) > 100
 				|| isDigged(thread, 1)
 				|| isDailyViewCountAboveThreshold(thread, 5)
 				|| isGreaterThanPrev(thread, threadPrev, threadPrev2, 0.5)
