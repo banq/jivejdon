@@ -48,11 +48,11 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         <tr>
             <td>
               
-                 <h2 class="bige20">
+                 <h1 style="font-size: 2.2rem">
                  <a href="<%=request.getContextPath()%>/forum/<bean:write name="forum" property="forumId" />/" class="hover-preload">                
                        <b><span class="threadTitle"><bean:write name="forum" property="name" /></span></b>
                  </a>
-                 </h2>
+                 </h1>
                
                  <%if (request.getSession(false) != null && request.getUserPrincipal() != null){%>
                       <a title="关注本道场" href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=0&subscribeId=<bean:write name="forum" property="forumId" />"  >

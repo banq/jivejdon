@@ -24,7 +24,7 @@
 
 <bean:define id="forum" name="threadListForm" property="oneModel"/>
 <logic:empty name="forum" property="name">
-<bean:define id="title" value="最新趋势与教程"/>
+<bean:define id="title" value="极道Jdon最新文章列表"/>
 </logic:empty>
 <logic:notEmpty name="forum" property="name">
 <bean:define id="title" name="forum" property="name"/>
@@ -60,8 +60,8 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
    <%@include file="../common/IncludeTopHead.jsp"%>
-   <meta name="Description" content="最新免费在线编程教程">
-<meta name="Keywords" content="最新技术,前沿技术,编码前沿,编程动态,Java21,Java22,JVM,最新Java,Java动态,Java版本发布,DDD最新,DDD源码,DDD实战,定义,数据分析,科技新闻,Java新闻,SpringBoot新闻,Java发布,SpringBoot发布,Java版本,SpringBoot版本,微服务,认知负担">
+   <meta name="Description" content="极道Jdon最新所有文章列表">
+<meta name="Keywords" content="最新技术,生物黑客,AI,语言模型,前沿技术,编码前沿,编程动态,Java版本发布,DDD最新,DDD源码,DDD实战,定义,数据分析,科技新闻,微服务,认知负担">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="<%=domainUrl%>/sitemap.xml">
 
    <logic:empty name="forum" property="forumId">	
@@ -112,6 +112,9 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 		<div class="row">
 			<!-- /////////////////左边 -->
 			<div id="main-content" class="col-lg-8">
+        <div class="box">
+          <h1 style="font-size: 2.2rem"><bean:write name="title"/></h1>
+        </div>
 				<div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1)">	
 <ul class="nav nav-tabs">        
   <li class="active"><a href="#">最新</a></li>  
