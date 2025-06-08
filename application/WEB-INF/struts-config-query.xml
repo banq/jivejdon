@@ -86,7 +86,7 @@
             <forward name="success" path="/tags/tagsList2.shtml" />
         </action>
         <action path="/tags/tagsList2" type="com.jdon.jivejdon.presentation.action.query.TagsListAction" name="tagsListForm" scope="request" validate="false">
-            <forward name="success" path="/tags/tagsList.jsp" />
+            <forward name="success" path="/query/tagsList.jsp" />
         </action>
 
       
