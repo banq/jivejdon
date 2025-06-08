@@ -103,9 +103,12 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   if(j ==0){ 
  %>
  <div class="row">	
+   <div class="col-md-6" style="padding-right:0px">
+ <%}else{%>
+  <div class="col-md-6" style="padding-left:0px">
  <%}%>
 
- <div class="col-md-6">
+
  <div class="box">	
   <div class="linkblock">
     <div>	           
@@ -144,7 +147,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
    	</div>	
 	</div>	
 </div>  
-</div>
+
 
  
 <%
@@ -152,8 +155,9 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   if(j % 2==0){ 
  %>
   </div>
+  </div>
+ <%}else{%>
+</div>
  <%}%>
-
-
 
 </logic:iterate>
