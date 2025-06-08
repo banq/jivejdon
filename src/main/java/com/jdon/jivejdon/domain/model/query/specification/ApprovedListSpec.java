@@ -74,30 +74,24 @@ public class ApprovedListSpec extends ThreadListSpec {
 	 */
 	public double sortedLeaderboard(final ForumThread thread, final ForumThread threadPrev) {
 		double p = 0;
-		try {
+		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
+		long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 
-			// 时间差计算
-			long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
-			long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+		double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
+		int digCount = thread.getRootMessage().getDigCount();
 
-			if (diffDays <= 3) {
-				// 计算平均每天浏览量
-				double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
-				int digCount = thread.getRootMessage().getDigCount();
-				if (dailyViewCount > 5 || digCount > 0) {
-					p = p + (dailyViewCount * 100); // 点赞和浏览量高的帖子获得额外加分
-				}
-
-			} else {
-				// // 时间衰减
-				p = p / (diffDays * 100);
+		if (diffDays <= 3) {
+			// 新帖直接加高权重
+			p = (dailyViewCount * 100) + 1000; // 新帖基础分高
+			if (digCount > 0) {
+				p += digCount * 200; // 新帖点赞加更高分
 			}
-
-		} finally {
+		} else {
+			// 老帖分数大幅衰减
+			p = (dailyViewCount * 100 + digCount * 100) / (diffDays * 10);
 		}
 		return p;
 	}
-
 	/**
 	 * recommend：ThreadDigComparator
 	 */
