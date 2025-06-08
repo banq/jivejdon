@@ -112,9 +112,11 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 		<div class="row">
 			<!-- /////////////////左边 -->
 			<div id="main-content" class="col-lg-8">
+        <logic:notEmpty name="forum" property="name">
         <div class="box">
           <h1 style="font-size: 2.2rem"><bean:write name="title"/></h1>
         </div>
+        </logic:notEmpty>
 				<div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1)">	
 <ul class="nav nav-tabs">        
   <li class="active"><a href="#">最新</a></li>  

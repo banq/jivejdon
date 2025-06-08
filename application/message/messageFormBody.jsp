@@ -61,7 +61,7 @@ function limitInputLength(input, minChineseLength, maxChineseLength) {
 // 页面加载后初始化一次
 document.addEventListener('DOMContentLoaded', function() {
     var input = document.getElementById('replySubject');
-    limitInputLength(input, 50, 60);
+    limitInputLength(input, 18, 30);
 });
 </script>
 
