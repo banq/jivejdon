@@ -13,7 +13,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	private final int needCount = 30;
 	private final int needViewcount = 10;
 
-	public int getNeedViewcount() {
+	private int getNeedViewcount() {
 		return needViewcount;
 	}
 
@@ -25,7 +25,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	public boolean isApprovedToBest(ForumThread thread, int count, ForumThread threadPrev, ForumThread threadPrev2) {
 		return isApproved(thread, threadPrev, threadPrev2) && count < getNeedCount() && isLargeViewCount(thread, getNeedViewcount());
 	}
-	
+
 	/**
 	 * recommend
 	 * 
@@ -39,7 +39,6 @@ public class ApprovedListSpec extends ThreadListSpec {
 				|| isDigged(thread, 1)
 				|| isDailyViewCountAboveThreshold(thread, 5)
 				|| isGreaterThanPrev(thread, threadPrev, threadPrev2, 0.5)
-				|| thread.getRootMessage().hasImage()
 				|| isTutorial(thread);
 	}
 
@@ -123,7 +122,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 	}
 
-	public double calculateApprovedScore(ForumThread thread) {
+	private double calculateApprovedScore(ForumThread thread) {
 		double weightedScore = calculateWeightedScore(thread);
 		long daysSinceCreation = getDaysSinceCreation(thread.getRootMessage().getModifiedDate2());
 		return weightedScore / (daysSinceCreation + 1);
@@ -165,19 +164,19 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 
-	public boolean isGreaterThanPrev(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2, double rate) {
+	private boolean isGreaterThanPrev(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2, double rate) {
 		if (threadPrev == null || threadPrev2 == null || thread.getViewCount() < 10)
 			return false;
 		return (thread.getViewCount() * rate > Math.min(threadPrev.getViewCount(), threadPrev2.getViewCount())) ? true
 				: false;
 	}
 
-	public boolean isGoodBlog(ForumThread thread) {
+	private boolean isGoodBlog(ForumThread thread) {
 		return (isTagged(thread, 1) && isGoodAuthor(thread.getRootMessage().getAccount(), 2) && isDigged(
 				thread, 1));
 	}
 
-	public boolean isLongText(ForumThread thread, int count) {
+	private boolean isLongText(ForumThread thread, int count) {
 		int bodylength = thread.getRootMessage().getMessageVO().getBody().length();
 		if (bodylength <= 0)
 			return false;
@@ -193,7 +192,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 	}
 
-	protected boolean isLargeViewCount(ForumThread thread, int needViewcount) {
+	private boolean isLargeViewCount(ForumThread thread, int needViewcount) {
 		return thread.getViewCount() > needViewcount;
 	}
 
