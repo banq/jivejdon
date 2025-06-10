@@ -188,8 +188,7 @@ public class ThreadApprovedNewList implements Startable {
 								.getThread(threadId);
 						if (thread == null || thread.getRootMessage() == null)
 							continue;
-						Account account = thread.getRootMessage().getAccount();
-
+					
 						final ForumThread threadPrevP = threadPrev;
 						final ForumThread threadPrev2P = threadPrev2;
 						CompletableFuture.supplyAsync(
