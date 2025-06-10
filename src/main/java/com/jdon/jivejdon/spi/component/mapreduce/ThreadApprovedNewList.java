@@ -19,11 +19,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -155,7 +157,16 @@ public class ThreadApprovedNewList implements Startable {
 	 * @return
 	 */
 	public List<Long> loadApprovedThreads(ApprovedListSpec approvedListSpec) {
-		List<Long> resultSorteds = new CopyOnWriteArrayList<>();
+		TreeSet<ForumThread> resultSorteds = new TreeSet<>((t1, t2) -> {
+			int cmp = Double.compare(
+					approvedListSpec.approvedCompare(t2),
+					approvedListSpec.approvedCompare(t1));
+			if (cmp == 0) {
+				// 分数相同，按 threadId 排序，避免丢失
+				return Long.compare(t2.getThreadId(), t1.getThreadId());
+			}
+			return cmp;
+		});
 		try {
 			AtomicInteger i = new AtomicInteger(0);
 			int start = currentStartBlock;
@@ -185,7 +196,7 @@ public class ThreadApprovedNewList implements Startable {
 								() -> approvedListSpec.isApprovedToBest(thread, i.get(), threadPrevP, threadPrev2P))
 								.thenAccept(isApproved -> {
 									if (isApproved) {
-										resultSorteds.add(thread.getThreadId());
+										resultSorteds.add(thread);
 										i.incrementAndGet();
 									}
 								});
@@ -206,9 +217,11 @@ public class ThreadApprovedNewList implements Startable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return resultSorteds;
+		return resultSorteds.stream()
+				.map(ForumThread::getThreadId)
+				.collect(Collectors.toList());
+		
 	}
-
 
 
 	public int getMaxSize() {
