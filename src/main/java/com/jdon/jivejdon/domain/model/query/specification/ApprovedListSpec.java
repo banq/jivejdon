@@ -37,7 +37,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	public boolean isApproved(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2) {
 		return calculateWeightedScore(thread) > 100
 				|| isDigged(thread, 1)
-				|| isDailyViewCountAboveThreshold(thread, 5)
+				|| isDailyViewCountAboveThreshold(thread, 10)
 				|| isGreaterThanPrev(thread, threadPrev, threadPrev2, 0.5)
 				|| isTutorial(thread);
 	}
@@ -50,7 +50,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	 * @return 如果每日浏览量超过阈值返回true，否则返回false
 	 */
 	private boolean isDailyViewCountAboveThreshold(ForumThread thread, double threshold) {
-		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
+		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getRootMessage().getModifiedDate2());
 		long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 
 		// 计算平均每天浏览量
@@ -74,7 +74,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	 */
 	public double sortedLeaderboard(final ForumThread thread, final ForumThread threadPrev) {
 		double p = 0;
-		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getCreationDate2());
+		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getRootMessage().getModifiedDate2());
 		long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 
 		double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
@@ -96,6 +96,27 @@ public class ApprovedListSpec extends ThreadListSpec {
 	 * recommend：ThreadDigComparator
 	 */
 	public double approvedCompare(ForumThread thread) {
+		// 基础热度分
+		double baseScore = popularityScore(thread);
+
+		// 内容质量分
+		double qualityScore = contentQualityScore(thread);
+
+		// 质量分大于0时加权加分（如加20%）
+		if (qualityScore > 0) {
+			baseScore += qualityScore * 0.2;
+		}
+
+		return baseScore;
+	}
+
+	/**
+	 * 计算帖子质量分
+	 * 
+	 * @param thread 论坛帖子
+	 * @return 质量分
+	 */
+	public double contentQualityScore(ForumThread thread) {
 		int digCount = thread.getRootMessage().getDigCount();
 		double tagsCount = thread.getTags().stream()
 				.map(threadTag -> threadTag.getAssonum())
@@ -116,7 +137,13 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 	}
 
-	private double calculateApprovedScore(ForumThread thread) {
+	/**
+	 * 计算帖子热度分
+	 * 
+	 * @param thread 论坛帖子
+	 * @return 热度分
+	 */
+	private double popularityScore(ForumThread thread) {
 		double weightedScore = calculateWeightedScore(thread);
 		long daysSinceCreation = getDaysSinceCreation(thread.getRootMessage().getModifiedDate2());
 		return weightedScore / (daysSinceCreation + 1);
