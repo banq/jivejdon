@@ -34,7 +34,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
  <div class="row">	
 
  
- <div class="col-lg-12">
+ <div class="col-lg-12" style="padding:0px">
  <div class="box">	
   <div class="linkblock">
    <div class="box">
