@@ -16,7 +16,7 @@
  <div class="row">	
  <%}%>
 
- <div class="col-lg-4">
+ <div class="col-lg-4" style="padding:0px">
  <li class="box">	
   <div class="linkblock">
      <div class="box">	             

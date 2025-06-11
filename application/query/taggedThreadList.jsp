@@ -167,7 +167,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
       </center>
 
 <main>
-<ul style="list-style-type:none;padding:0">
+<ul style="list-style-type:none;padding:0px">
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
   <%@ include file="threadListCore.jsp" %>
 </logic:iterate>

@@ -103,9 +103,9 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   if(j ==0){ 
  %>
  <div class="row">	
-   <div class="col-md-6" style="padding-right:0px">
+   <div class="col-md-6" style="padding:0px">
  <%}else{%>
-  <div class="col-md-6" style="padding-left:0px">
+  <div class="col-md-6" style="padding:0px">
  <%}%>
 
 
