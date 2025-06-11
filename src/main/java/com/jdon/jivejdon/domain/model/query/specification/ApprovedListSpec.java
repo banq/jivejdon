@@ -75,20 +75,18 @@ public class ApprovedListSpec extends ThreadListSpec {
 	public double sortedLeaderboard(final ForumThread thread, final ForumThread threadPrev) {
 		double p = 0;
 		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getRootMessage().getModifiedDate2());
-		long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+		long diffHours = TimeUnit.HOURS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 
-		double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
+		double hourViewCount = (double) thread.getViewCount() / (diffHours == 0 ? 1 : diffHours);
 		int digCount = thread.getRootMessage().getDigCount();
 
-		if (diffDays <= 3) {
-			// 新帖直接加高权重
-			p = (dailyViewCount * 100) + 1000; // 新帖基础分高
+		if (diffHours <= 3 * 24) {
+			p = (Math.log(hourViewCount + 1) * 100) + 200;
 			if (digCount > 0) {
-				p += digCount * 200; // 新帖点赞加更高分
+				p += Math.log(digCount + 1) * 200;
 			}
 		} else {
-			// 老帖分数大幅衰减
-			p = (dailyViewCount * 100 + digCount * 100) / (diffDays * 10);
+			p = (Math.log(hourViewCount + 1) * 100 + Math.log(digCount + 1) * 100) / (diffHours * 2);
 		}
 		return p;
 	}
