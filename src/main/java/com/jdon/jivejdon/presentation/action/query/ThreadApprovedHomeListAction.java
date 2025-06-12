@@ -2,27 +2,39 @@ package com.jdon.jivejdon.presentation.action.query;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
+import com.jdon.jivejdon.spi.component.mapreduce.HomePageComparator;
 import com.jdon.jivejdon.spi.component.mapreduce.HomepageListSolver;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
+import com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
+import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.query.specification.ApprovedListSpec;
 import com.jdon.strutsutil.ModelListAction;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.stream.Collectors;
 
 public class ThreadApprovedHomeListAction extends ModelListAction {
-	private HomepageListSolver homepageListSolver;
 	private ForumMessageQueryService forumMessageQueryService;
 	private ThreadApprovedNewList threadApprovedNewList;
+	private final static ApprovedListSpec approvedListSpec  = new ApprovedListSpec();
 
-	public HomepageListSolver getHomepageListSolver() {
-		if (homepageListSolver == null)
-			homepageListSolver = (HomepageListSolver) WebAppUtil
-					.getComponentInstance("homepageListSolver", this.servlet.getServletContext());
-		return homepageListSolver;
+	private ThreadViewCounterJob threadViewCounterJob;
+
+	public ThreadViewCounterJob getThreadViewCounterJob() {
+		if (threadViewCounterJob == null)
+			threadViewCounterJob = (ThreadViewCounterJob) WebAppUtil
+					.getComponentInstance("threadViewCounterJob", this.servlet.getServletContext());
+		return threadViewCounterJob;
 	}
+
+	
+	
 
 	public ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
@@ -45,11 +57,28 @@ public class ThreadApprovedHomeListAction extends ModelListAction {
 			return new PageIterator();
 
 //		Collection<Long> list = getThreadApprovedNewList().getApprovedThreads(start);
-		Collection<Long> list = getHomepageListSolver().getList( start,  count);
+		Collection<Long> list = getList( start,  count);
 		if (list != null)
 			return new PageIterator(list.size(), list.toArray(new Long[0]));
 		else
 			return new PageIterator();
+	}
+
+	public Collection<Long> getList(int start, int count) {
+		return initList().stream().skip(start).limit(count).collect(Collectors.toList());
+	}
+
+	private Collection<Long>  initList() {
+		Collection<Long> listInit = new ArrayList<>();
+		for (int i = 0; i < 75; i = i + 15) {
+			listInit.addAll(getThreadApprovedNewList().getApprovedThreads(i));
+		}
+		listInit = listInit.stream().collect(Collectors.toMap((threadId) -> getForumMessageQueryService()
+				.getThread(threadId), threadId -> threadId, (e1, e2) -> e1,
+				() -> new ConcurrentSkipListMap<ForumThread, Long>(new HomePageComparator(approvedListSpec, getThreadViewCounterJob()))))
+				.values();
+
+		return listInit;		
 	}
 
 	public Object findModelIFByKey(HttpServletRequest request, Object key) {
