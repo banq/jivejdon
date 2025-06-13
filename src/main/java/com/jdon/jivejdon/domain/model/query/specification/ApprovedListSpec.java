@@ -22,8 +22,8 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	
-	public boolean isApprovedToBest(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2) {
-		return isApproved(thread, threadPrev, threadPrev2) && isLargeViewCount(thread, getNeedViewcount());
+	public boolean isApprovedToBest(ForumThread thread) {
+		return isApproved(thread) && isLargeViewCount(thread, getNeedViewcount());
 	}
 
 	/**
@@ -34,11 +34,10 @@ public class ApprovedListSpec extends ThreadListSpec {
 	 * @param threadPrev2
 	 * @return
 	 */
-	public boolean isApproved(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2) {
+	public boolean isApproved(ForumThread thread) {
 		return calculateWeightedScore(thread) > 100
 				|| isDigged(thread, 1)
 				|| isDailyViewCountAboveThreshold(thread, 10)
-				|| isGreaterThanPrev(thread, threadPrev, threadPrev2, 0.5)
 				|| isTutorial(thread);
 	}
 

@@ -114,7 +114,7 @@ public class ThreadApprovedNewList implements Startable {
 	 */
 	public List<Long> loadApprovedThreads(ApprovedListSpec approvedListSpec) {
 		List<ForumThread> resultSorteds = new ArrayList<>();
-		
+
 		try {
 			int start = 0;
 			int count = 100;
@@ -123,21 +123,16 @@ public class ThreadApprovedNewList implements Startable {
 				if (!pi.hasNext())
 					break;
 
-				ForumThread threadPrev = null;
-				ForumThread threadPrev2 = null;
 				while (pi.hasNext()) {
-					final ForumThread threadPrevP = threadPrev;
-					final ForumThread threadPrev2P = threadPrev2;
 
 					Long threadId = (Long) pi.next();
 					ForumThread thread = forumMessageQueryService.getThread(threadId);
 					if (thread == null || thread.getRootMessage() == null)
 						continue;
-					if (approvedListSpec.isApprovedToBest(thread, threadPrevP, threadPrev2P)) {
+
+					if (approvedListSpec.isApprovedToBest(thread)) {
 						resultSorteds.add(thread);
 						threadTagList.addForumThread(thread);
-						threadPrev2 = threadPrev;
-						threadPrev = thread;
 						if (resultSorteds.size() >= maxSize)
 							break;
 					}
