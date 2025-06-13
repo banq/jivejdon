@@ -47,7 +47,7 @@ import com.jdon.jivejdon.util.ScheduledExecutorUtil;
 @Component("threadApprovedNewList")
 public class ThreadApprovedNewList implements Startable {
 
-	public final static int maxSize = 1500;
+	public final static int maxSize = 500;
 	public final static String NAME = "threadApprovedNewList";
 	private final static Logger logger = LogManager
 			.getLogger(ThreadApprovedNewList.class);
