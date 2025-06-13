@@ -42,7 +42,7 @@ public class ThreadApprovedNewListAction extends ModelListAction {
 		if (start >= ThreadApprovedNewList.maxSize || start % 30 != 0)
 			return new PageIterator();
 
-		Collection<Long> list = getThreadApprovedNewList().getApprovedThreads(start).stream()
+		Collection<Long> list = getThreadApprovedNewList().getApprovedThreads(start, count).stream()
 				.sorted(new ThreadDigComparator(getForumMessageQueryService())).collect(Collectors.toList());
 		int maxSize = ThreadApprovedNewList.maxSize;
 		if (getThreadApprovedNewList().getMaxSize() != -1) {

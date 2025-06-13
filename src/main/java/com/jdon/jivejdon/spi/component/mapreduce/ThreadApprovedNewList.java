@@ -16,12 +16,9 @@
 package com.jdon.jivejdon.spi.component.mapreduce;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
 import java.util.TreeSet;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -37,7 +34,6 @@ import com.jdon.jivejdon.api.account.AccountService;
 import com.jdon.jivejdon.api.property.TagService;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.query.ResultSort;
 import com.jdon.jivejdon.domain.model.query.specification.ApprovedListSpec;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;
@@ -55,26 +51,18 @@ public class ThreadApprovedNewList implements Startable {
 	public final static String NAME = "threadApprovedNewList";
 	private final static Logger logger = LogManager
 			.getLogger(ThreadApprovedNewList.class);
-	//key is start of one page,
-	public final ConcurrentHashMap<Integer, Collection<Long>> approvedThreadList;
-	// dig sort map, start is more greater, the dig collection is more greater.
+	// 只缓存完整的 threadId 列表
+	private volatile List<Long> approvedThreadIdList = new CopyOnWriteArrayList<>();
 	private final ThreadTagList threadTagList;
 	private final ForumMessageQueryService forumMessageQueryService;
 	private final AccountService accountService;
-	// private Cache approvedThreadList = new LRUCache("approvedCache.xml");
 	private final ApprovedListSpec approvedListSpec = new ApprovedListSpec();
-	private int maxStart = -1;
-	private	long currentIndicator = 0;
-	private	int currentStartBlock = 0;
-	private int currentStartPage = 0;
-
 	private final ScheduledExecutorUtil scheduledExecutorUtil;
 
 	public ThreadApprovedNewList(
 			ForumMessageQueryService forumMessageQueryService,
 			AccountService accountService, TagService tagService,
 			ScheduledExecutorUtil scheduledExecutorUtil) {
-		approvedThreadList = new ConcurrentHashMap<>();
 		this.accountService = accountService;
 		this.threadTagList = new ThreadTagList(tagService, forumMessageQueryService);
 		this.forumMessageQueryService = forumMessageQueryService;
@@ -82,79 +70,47 @@ public class ThreadApprovedNewList implements Startable {
 	}
 
 	public void start() {
-
 		Runnable task = new Runnable() {
 			public void run() {
 				init();
-				getApprovedThreads(maxSize);
+				refreshApprovedThreadIdList();
 			}
 		};
-		scheduledExecutorUtil.getScheduExec().scheduleAtFixedRate(task, 30 * 60, 30 * 60, TimeUnit.SECONDS); 
+		scheduledExecutorUtil.getScheduExec().scheduleAtFixedRate(task, 0, 30 * 60, TimeUnit.SECONDS); 
 	}
 
-	
-
 	public void init() {
-		approvedThreadList.clear();
+		approvedThreadIdList.clear();
 		ResultSort resultSort = new ResultSort();
 		resultSort.setOrder_DESCENDING();
 		approvedListSpec.setResultSort(resultSort);
-		maxStart = -1;
-		currentIndicator = 0;
-	    currentStartBlock = 0;
-	    currentStartPage = 0;
 	}
 
 	public ThreadTagList getThreadTagList() {
 		return threadTagList;
 	}
 
-	public Collection<Long> getApprovedThreads(int start) {
-		if (maxStart != -1 && start > maxStart) {
+	/**
+	 * 获取分页后的 threadId 列表
+	 */
+	public List<Long> getApprovedThreads(int start, int count) {
+		if (start < 0 || start >= approvedThreadIdList.size()) {
 			return new ArrayList<>();
 		}
-		if (start % approvedListSpec.getNeedCount() != 0)
-			return new ArrayList<>();
-		if (approvedThreadList.containsKey(start)) {
-			return approvedThreadList.get(start);
-		}
-		if (start < currentStartPage) {
-			logger.error("start=" + start
-					+ " < approvedListSpec.getCurrentStartPage()"
-					+ currentStartPage);
-			return new ArrayList<>();
-		}
-		return initApprovedList( start, approvedListSpec);
-	}
-
-
-
-
-	protected Collection<Long> initApprovedList(int start,
-			ApprovedListSpec approvedListSpec) {
-		Collection<Long> resultSorteds = new ArrayList<>();
-		logger.debug("not found it in cache, create it");
-		int count = approvedListSpec.getNeedCount();
-		int i = currentStartPage;
-		while (i < start + count) {
-			resultSorteds = approvedThreadList.computeIfAbsent(i, k->loadApprovedThreads(approvedListSpec));
-			if (resultSorteds.size() < approvedListSpec.getNeedCount()) {
-				if (maxStart == -1) {
-					maxStart = i;
-					break;
-				}
-			}
-			i = i + count;
-		}
-		if (i > currentStartPage)
-			currentStartPage = i;
-		return resultSorteds;
+		int end = Math.min(start + count, approvedThreadIdList.size());
+		return approvedThreadIdList.subList(start, end);
 	}
 
 	/**
-	 * CompletableFuture.supplyAsync
-	 * @param approvedListSpec
-	 * @return
+	 * 刷新完整的 threadId 列表缓存
+	 */
+	public void refreshApprovedThreadIdList() {
+		List<Long> newList = loadApprovedThreads(approvedListSpec);
+		approvedThreadIdList = new CopyOnWriteArrayList<>(newList);
+	}
+
+	/**
+	 * 加载所有 approved threadId
 	 */
 	public List<Long> loadApprovedThreads(ApprovedListSpec approvedListSpec) {
 		TreeSet<ForumThread> resultSorteds = new TreeSet<>((t1, t2) -> {
@@ -162,72 +118,47 @@ public class ThreadApprovedNewList implements Startable {
 					approvedListSpec.approvedCompare(t2),
 					approvedListSpec.approvedCompare(t1));
 			if (cmp == 0) {
-				// 分数相同，按 threadId 排序，避免丢失
 				return Long.compare(t2.getThreadId(), t1.getThreadId());
 			}
 			return cmp;
 		});
 		try {
-			AtomicInteger i = new AtomicInteger(0);
-			int start = currentStartBlock;
+			int start = 0;
 			int count = 100;
-
-			while (i.get() < approvedListSpec.getNeedCount()) {
-				PageIterator pi = forumMessageQueryService.getThreads(start,
-						count, approvedListSpec);
+			while (resultSorteds.size() < maxSize) {
+				PageIterator pi = forumMessageQueryService.getThreads(start, count, approvedListSpec);
 				if (!pi.hasNext())
 					break;
 
 				ForumThread threadPrev = null;
 				ForumThread threadPrev2 = null;
 				while (pi.hasNext()) {
-					Long threadId = (Long) pi.next();
-					if (currentIndicator > threadId
-							|| currentIndicator == 0) {
-						final ForumThread thread = forumMessageQueryService
-								.getThread(threadId);
-						if (thread == null || thread.getRootMessage() == null)
-							continue;
-					
-						final ForumThread threadPrevP = threadPrev;
-						final ForumThread threadPrev2P = threadPrev2;
-						CompletableFuture.supplyAsync(
-								() -> approvedListSpec.isApprovedToBest(thread, i.get(), threadPrevP, threadPrev2P))
-								.thenAccept(isApproved -> {
-									if (isApproved) {
-										resultSorteds.add(thread);
-										i.incrementAndGet();
-									}
-								});
+					final ForumThread threadPrevP = threadPrev;
+					final ForumThread threadPrev2P = threadPrev2;
 
+					Long threadId = (Long) pi.next();
+					ForumThread thread = forumMessageQueryService.getThread(threadId);
+					if (thread == null || thread.getRootMessage() == null)
+						continue;
+					if (approvedListSpec.isApprovedToBest(thread, threadPrevP, threadPrev2P)) {
+						resultSorteds.add(thread);
 						threadTagList.addForumThread(thread);
 						threadPrev2 = threadPrev;
 						threadPrev = thread;
-
-						if (i.get() >= approvedListSpec.getNeedCount()) {
-							currentIndicator = threadId;
-							currentStartBlock = start;
+						if (resultSorteds.size() >= maxSize)
 							break;
-						}
 					}
 				}
-				start = start + count;
+				start += count;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return resultSorteds.stream()
-				.map(ForumThread::getThreadId)
-				.collect(Collectors.toList());
-		
+		return resultSorteds.stream().map(ForumThread::getThreadId).collect(Collectors.toList());
 	}
 
-
 	public int getMaxSize() {
-		if (maxStart != -1)
-			return maxStart + approvedListSpec.getNeedCount();
-		else
-			return maxStart;
+		return approvedThreadIdList.size();
 	}
 
 	@Override

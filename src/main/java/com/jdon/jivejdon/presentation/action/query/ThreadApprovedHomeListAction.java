@@ -72,7 +72,7 @@ public class ThreadApprovedHomeListAction extends ModelListAction {
 
 	private List<Long> initList() {
 		// 直接并发获取第一页的 ForumThread
-		List<ForumThread> threads = getThreadApprovedNewList().getApprovedThreads(0).parallelStream()
+		List<ForumThread> threads = getThreadApprovedNewList().getApprovedThreads(0,100).stream()
 				.map(id -> getForumMessageQueryService().getThread(id))
 				.filter(thread -> thread != null)
 				.collect(Collectors.toList());

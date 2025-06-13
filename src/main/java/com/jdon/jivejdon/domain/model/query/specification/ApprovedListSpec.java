@@ -22,8 +22,8 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	
-	public boolean isApprovedToBest(ForumThread thread, int count, ForumThread threadPrev, ForumThread threadPrev2) {
-		return isApproved(thread, threadPrev, threadPrev2) && count < getNeedCount() && isLargeViewCount(thread, getNeedViewcount());
+	public boolean isApprovedToBest(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2) {
+		return isApproved(thread, threadPrev, threadPrev2) && isLargeViewCount(thread, getNeedViewcount());
 	}
 
 	/**
