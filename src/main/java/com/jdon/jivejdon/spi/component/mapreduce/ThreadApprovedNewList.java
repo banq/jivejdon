@@ -76,7 +76,7 @@ public class ThreadApprovedNewList implements Startable {
 				refreshApprovedThreadIdList();
 			}
 		};
-		scheduledExecutorUtil.getScheduExec().scheduleAtFixedRate(task, 0, 30 * 60, TimeUnit.SECONDS); 
+		scheduledExecutorUtil.getScheduExec().scheduleAtFixedRate(task, 0, 60 * 60, TimeUnit.SECONDS); 
 	}
 
 	public void init() {
