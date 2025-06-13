@@ -113,15 +113,8 @@ public class ThreadApprovedNewList implements Startable {
 	 * 加载所有 approved threadId
 	 */
 	public List<Long> loadApprovedThreads(ApprovedListSpec approvedListSpec) {
-		TreeSet<ForumThread> resultSorteds = new TreeSet<>((t1, t2) -> {
-			int cmp = Double.compare(
-					approvedListSpec.approvedCompare(t2),
-					approvedListSpec.approvedCompare(t1));
-			if (cmp == 0) {
-				return Long.compare(t2.getThreadId(), t1.getThreadId());
-			}
-			return cmp;
-		});
+		List<ForumThread> resultSorteds = new ArrayList<>();
+		
 		try {
 			int start = 0;
 			int count = 100;
