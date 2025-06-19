@@ -82,10 +82,10 @@ public class ApprovedListSpec extends ThreadListSpec {
 		if (diffHours <= 3 * 24) {
 			p = (Math.log(hourViewCount + 1) * 100) + 200;
 			if (digCount > 0) {
-				p += Math.log(digCount + 1) * 200;
+				p += digCount  * 200;
 			}
 		} else {
-			p = (Math.log(hourViewCount + 1) * 100 + Math.log(digCount + 1) * 100) / (diffHours * 2);
+			p = (Math.log(hourViewCount + 1) * 100) / (diffHours * 2);
 		}
 		return p;
 	}
