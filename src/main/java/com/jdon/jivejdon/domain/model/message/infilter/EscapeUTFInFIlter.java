@@ -12,46 +12,57 @@ public class EscapeUTFInFIlter implements Function<MessageVO, MessageVO> {
 	private final static String module = EscapeUTFInFIlter.class.getName();
 
 
-	public MessageVO apply(MessageVO messageVO) {
-		return messageVO.builder().subject(esacpeUtf(messageVO
-				.getSubject())).body(esacpeUtf(messageVO.getBody()))
-				.build();
+    public MessageVO apply(MessageVO messageVO) {
+        return messageVO.builder()
+                .subject(escapeUtf(messageVO.getSubject()))
+                .body(escapeUtf(messageVO.getBody()))
+                .build();
+    }
+     /**
+     * 去除不支持的 emoji 字符或不规范的嵌套标签
+     */
+    public String escapeUtf(String input) {
+        if (input == null) return null;
+        if (isNested(input)) {
+            // 用 StringBuilder 替换 replaceAll，效率更高
+            StringBuilder sb = new StringBuilder(input.length());
+            for (char c : input.toCharArray()) {
+                if (c != '[' && c != ']') {
+                    sb.append(c);
+                }
+            }
+            return sb.toString();
+        }
+        // 用 codePoints 过滤超出 BMP 的字符，效率高于正则
+        StringBuilder sb = new StringBuilder(input.length());
+        input.codePoints().forEach(cp -> {
+            if (cp <= 0xFFFF) {
+                sb.append((char) cp);
+            }
+        });
+        return sb.toString();
+    }
 
-	}
+    // 检查是否存在未闭合的 [ 标签
+    private boolean isNested(String text) {
+        if (text == null) return false;
+        int count = 0;
+        for (char c : text.toCharArray()) {
+            if (c == '[') count++;
+            else if (c == ']') {
+                if (count == 0) return false;
+                count--;
+            }
+        }
+        return count > 0;
+    }
 
-	public String esacpeUtf(String input) {
-		if (isNested(input))
-		     return  input.replaceAll("\\[|\\]", "");
-		return input.replaceAll("[^\\u0000-\\uFFFF]", "");
-		// Pattern unicodeOutliers = Pattern.compile(EmojiRegexUtil.getFullEmojiRegex(),
-		// 		Pattern.UNICODE_CASE | Pattern.CANON_EQ
-		// 				| Pattern.CASE_INSENSITIVE);
-		// Matcher unicodeOutlierMatcher = unicodeOutliers.matcher(input);
-		// return unicodeOutlierMatcher.replaceAll(" ");
-	}
-
-	//from chatGPT 
-	private boolean isNested(String text) {
-		Stack<Character> stack = new Stack<>();
-
-		for (char c : text.toCharArray()) {
-			if (c == '[') {
-				stack.push(c);
-			} else if (c == ']') {
-				if (stack.isEmpty()) {
-					return false; // Closing bracket without a matching opening bracket
-				}
-				stack.pop();
-			}
-		}
-        //chatgpt NOT know here have "!", he say: stack.isEmpty()
-		return !stack.isEmpty(); // If the stack is empty, brackets are properly nested
-	}
-
-	public static void main(String[] args) {
-		EscapeUTFInFIlter escapeUTFInFIlter = new EscapeUTFInFIlter();
-		String in = "dasdfsdf[sfsa[b]df[/b]sad";
-		if (escapeUTFInFIlter.isNested("dasdfsdf[sfsa[b]df[/b]sad"))
-		     System.out.println("===" + in.replaceAll("\\[|\\]", "ss"));
-	}
+    public static void main(String[] args) {
+        EscapeUTFInFIlter escapeUTFInFIlter = new EscapeUTFInFIlter();
+        String in = "dasdfsdf[sfsa[b]df[/b]sad";
+        if (escapeUTFInFIlter.isNested(in))
+            System.out.println("===" + escapeUTFInFIlter.escapeUtf(in));
+        String emoji = "abc😃def";
+        System.out.println("no emoji: " + escapeUTFInFIlter.escapeUtf(emoji));
+    }
 }

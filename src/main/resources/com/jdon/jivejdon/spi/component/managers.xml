@@ -66,8 +66,8 @@
 		<component name="inFilterManager"
 			class="com.jdon.jivejdon.spi.component.filter.InFilterManager">
             <constructor value="com.jdon.jivejdon.domain.model.message.infilter.EscapeUTFInFIlter"/>
-			<constructor value="com.jdon.jivejdon.domain.model.message.infilter.InFilterPosterIP" />
-			<!-- <constructor value="com.jdon.jivejdon.domain.model.message.infilter.InFilterAuthor" />
+			<!-- <constructor value="com.jdon.jivejdon.domain.model.message.infilter.InFilterPosterIP" />
+			<constructor value="com.jdon.jivejdon.domain.model.message.infilter.InFilterAuthor" />
 			com.jdon.jivejdon.domain.model.message.output.weibo.AuthorNameFormat
 			-->
 		</component>
