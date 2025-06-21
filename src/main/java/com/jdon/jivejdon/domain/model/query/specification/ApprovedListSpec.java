@@ -79,7 +79,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 		double hourViewCount = (double) thread.getViewCount() / (diffHours == 0 ? 1 : diffHours);
 		int digCount = thread.getRootMessage().getDigCount();
 
-		if (diffHours <= 3 * 24) {
+		if (diffHours <= 5 * 24) {
 			p = (Math.log(hourViewCount + 1) * 100) + 200;
 			if (digCount > 0) {
 				p += digCount  * 200;
