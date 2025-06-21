@@ -28,24 +28,27 @@ public class ViewCounter extends LazyLoader implements Comparable<ViewCounter> {
 
 	private final ForumThread thread;
 	private final AtomicInteger viewCount = new AtomicInteger(0);
-	private int lastSavedCount;
+	private final AtomicBoolean dirty = new AtomicBoolean(false);
 	private final AtomicReference<String> lastIP = new AtomicReference<>("");
-	private final AtomicBoolean load = new AtomicBoolean(false);
+	// 懒加载优化：用 volatile boolean loaded 替代 AtomicBoolean load
+	private volatile boolean loaded = false;
 	
 
 	public ViewCounter(ForumThread thread) {
 		this.thread = thread;
-		this.lastSavedCount = -1;	
 	}
 
 	public void loadinitCount() {
-		if (!load.get()) {
-			Integer count = super.loadResult().map(value -> (Integer) value).orElse(null);
-			if (count != null) {
-				viewCount.addAndGet(count);
-				this.lastSavedCount = count;
+		if (!loaded) {
+			synchronized (this) {
+				if (!loaded) {
+					Integer count = super.loadResult().map(value -> (Integer) value).orElse(null);
+					if (count != null) {
+						viewCount.addAndGet(count);
+					}
+					loaded = true;
+				}
 			}
-			load.set(true);
 		}
 	}
 
@@ -60,6 +63,7 @@ public class ViewCounter extends LazyLoader implements Comparable<ViewCounter> {
 			if (!Objects.equals(this.lastIP.get(), ip)) {
 				viewCount.incrementAndGet();
 				this.lastIP.set(ip);
+				dirty.set(true);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -67,15 +71,13 @@ public class ViewCounter extends LazyLoader implements Comparable<ViewCounter> {
 
 	}
 
-
-	public int getLastSavedCount() {
-		return lastSavedCount;
+	public boolean isDirty() {
+		return dirty.get();
 	}
 
-	public void setLastSavedCount(int lastSavedCount) {
-		this.lastSavedCount = lastSavedCount;
+	public void clearDirty() {
+		dirty.set(false);
 	}
-
 	// public ForumThread getThread() {
 	// return thread;
 	// }
@@ -86,16 +88,10 @@ public class ViewCounter extends LazyLoader implements Comparable<ViewCounter> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
 		ViewCounter viewCounter = (ViewCounter) o;
-		if (this.thread.getThreadId() == null || viewCounter.getThreadId() == null)
-			return false;
-		return this.thread.getThreadId().longValue() == viewCounter.getThreadId().longValue();
+		return Objects.equals(this.thread.getThreadId(), viewCounter.getThreadId());
 	}
 
 	@Override
@@ -105,18 +101,11 @@ public class ViewCounter extends LazyLoader implements Comparable<ViewCounter> {
 
 	@Override
 	public int compareTo(ViewCounter o) {
-		int diff1 = getViewCount() - getLastSavedCount();
-		int diff2 = o.getViewCount() - o.getLastSavedCount();
-		if (diff1 == diff2) {
-			if (thread.getThreadId() > o.getThreadId())
-				return -1;
-			else if (thread.getThreadId() < o.getThreadId())
-				return 1;
-		} else if (diff1 > diff2)
-			return -1;
-		else
-			return 1;
-		return 0;
+		int diff = Integer.compare(o.getViewCount(), this.getViewCount());
+		if (diff != 0)
+			return diff;
+		// 浏览量相同，按 threadId 降序
+		return Long.compare(o.getThreadId(), this.getThreadId());
 	}
 
 	@Override

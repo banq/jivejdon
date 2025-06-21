@@ -25,7 +25,7 @@ public interface ThreadViewCounterJob {
 	 * 
 	 * @param thread
 	 */
-	ViewCounter saveViewCounter(ViewCounter viewCounter);
+	boolean saveViewCounter(ViewCounter viewCounter);
 
     List<Long> getThreadIdsList();
 

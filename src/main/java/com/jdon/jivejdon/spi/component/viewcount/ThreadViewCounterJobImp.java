@@ -66,15 +66,14 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 	public void writeDB() {
 		// construct a immutable set
 		List<ViewCounter> viewCounters2 = new ArrayList<>(this.viewcounters.values());
-		this.viewcounters.clear();
 		for (ViewCounter viewCounter : viewCounters2) {
-			if (viewCounter.getViewCount() != viewCounter.getLastSavedCount() && viewCounter.getViewCount() != -1
-					&& viewCounter.getViewCount() != 0) {
+			if (viewCounter.isDirty() && viewCounter.getViewCount() != -1 && viewCounter.getViewCount() != 0) {
 				saveItem(viewCounter);
-				viewCounter.setLastSavedCount(viewCounter.getViewCount());
+				viewCounter.clearDirty();
+				// 只移除已写入的 key，避免并发丢失
+				this.viewcounters.remove(viewCounter.getThreadId(), viewCounter);
 			}
 		}
-	
 	}
 
 	private void saveItem(ViewCounter viewCounter) {
@@ -85,7 +84,6 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 			propertyDao.updateProperty(Constants.THREAD, viewCounter.getThreadId(), property);
 		} catch (Exception e) {
 			logger.error(e);
-		} finally {
 		}
 	}
 
@@ -96,8 +94,8 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 	 * saveViewCounter (com.jdon.jivejdon.domain.model.ForumThread)
 	 */
 	@Override
-	public ViewCounter saveViewCounter(ViewCounter viewCounter) {
-		return viewcounters.putIfAbsent(viewCounter.getThreadId(), viewCounter);
+	public boolean saveViewCounter(ViewCounter viewCounter) {
+		return viewcounters.putIfAbsent(viewCounter.getThreadId(), viewCounter) == null;
 	}
 
 	public ViewCounter getViewCounter(Long threadId){
