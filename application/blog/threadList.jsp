@@ -60,7 +60,11 @@
            <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
                 <span><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
             </logic:greaterThan>     
-
+  <logic:notEqual name="forumMessage" property="digCount" value="0">
+                       <span class="smallgray">
+                      <bean:write name="forumMessage" property="digCount"/>赞
+					   </span>
+                      </logic:notEqual>     
 
         </div>
       </div>
