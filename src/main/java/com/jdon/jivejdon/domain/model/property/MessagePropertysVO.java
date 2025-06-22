@@ -17,6 +17,7 @@ package com.jdon.jivejdon.domain.model.property;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
 
 /**
@@ -46,7 +47,7 @@ public class MessagePropertysVO {
 
   // for read or load
   public MessagePropertysVO() {
-    this.propertys = new ArrayList<>();
+    this.propertys = Collections.synchronizedList(new ArrayList<>());
   }
 
   // for read or load
@@ -63,8 +64,7 @@ public class MessagePropertysVO {
   }
 
   public boolean isMasked() {
-    if (!loaded)
-      init();
+    ensureLoaded();
     return masked;
   }
 
@@ -87,8 +87,7 @@ public class MessagePropertysVO {
   }
 
   public String getPostip() {
-    if (!loaded)
-      init();
+    ensureLoaded();
     return postIP;
   }
 
@@ -97,10 +96,10 @@ public class MessagePropertysVO {
   }
 
   public synchronized void addMessageDigCount(String ip) {
+    ensureLoaded();
     if (lastDigIP != null && lastDigIP.equals(ip)) {   
       return;
     }
-
     digCount++;
     Property Numberproperty = new Property(DIG_NUMBER, String.valueOf(digCount));
     this.replaceProperty(Numberproperty);
@@ -108,13 +107,18 @@ public class MessagePropertysVO {
   }
 
   public int getDigCount() {
-    if (!loaded)
-      init();
+    ensureLoaded();
     return digCount;
   }
 
   public Collection<Property> getPropertys() {
+    ensureLoaded();
     return propertys;
+  }
+
+  private void ensureLoaded() {
+    if (!loaded)
+      init();
   }
 
   private String getPropertyValue(String propName) {

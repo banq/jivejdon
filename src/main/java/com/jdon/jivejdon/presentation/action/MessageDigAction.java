@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.api.ForumMessageService;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.util.UtilValidate;
 
@@ -34,12 +35,12 @@ public class MessageDigAction extends Action {
 			return null;
 		}
 
+		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService",
+					this.servlet.getServletContext());
 
-		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil
-				.getService("forumMessageService", this.servlet.getServletContext());
 
 		Long key = Long.valueOf(messageId);
-		ForumMessage message = forumMessageService.getMessage(key);
+		ForumMessage message = forumMessageQueryService.getMessage(key);
 		if (message == null) {
 			response.sendError(404);
 			return null;
