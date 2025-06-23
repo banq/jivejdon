@@ -66,28 +66,22 @@ public class ApprovedListSpec extends ThreadListSpec {
 	/**
 	 * approval：HomePageComparator
 	 * grok3 编写的代码
-	 * 
+	 * GPT4.1 vscode
 	 * @param thread
 	 * @param threadPrev
 	 * @return
 	 */
 	public double sortedLeaderboard(final ForumThread thread, final ForumThread threadPrev) {
-		double p = 0;
 		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getRootMessage().getModifiedDate2());
 		long diffHours = TimeUnit.HOURS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 
 		double hourViewCount = (double) thread.getViewCount() / (diffHours == 0 ? 1 : diffHours);
 		int digCount = thread.getRootMessage().getDigCount();
 
-		if (diffHours <= 5 * 24) {
-			p = (Math.log(hourViewCount + 1) * 100) + 200;
-			if (digCount > 0) {
-				p += digCount  * 200;
-			}
-		} else {
-			p = (Math.log(hourViewCount + 1) * 100) / (diffHours * 2);
-		}
-		return p;
+		double newThreadBonus = (diffHours <= 5 * 24) ? 1.1 : 1.0;
+		double digBonus = 1.0 + digCount * 0.1;
+
+		return hourViewCount * newThreadBonus * digBonus;
 	}
 	/**
 	 * recommend：ThreadDigComparator
