@@ -15,9 +15,9 @@
  */
 package com.jdon.jivejdon.domain.model.message.output.html;
 
-import com.jdon.jivejdon.domain.model.message.MessageVO;
-
 import java.util.function.Function;
+
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 
 /**
  * A ForumMessageFilter that replaces [b][/b] and [i][/i] tags with their HTML
@@ -217,6 +217,9 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
         if (input == null || input.length() == 0) {
             return input;
         }
+		// Markdown 分隔线 ---，前面有 >，后面有 < 或空格，转为 <hr>
+		input = input.replaceAll("(>\\s*)---(?=\\s|<)", "$1<hr>");
+
         // Markdown 标题 #、##、### 转为 <h1>、<h2>、<h3>
 		// 匹配1~3个#，后跟一个空格，标题内容（不允许空格），内容后面必须是一个空格或"<"（即HTML标签起始）
 		input = input.replaceAll("(#{1,3}) ([^\\s<]+)(?= |<)", "<strong>$2</strong>");// Markdown 粗体 **XXX** 或 __XXX__
@@ -302,14 +305,19 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
         String test6 = "- 列表项1\n* 列表项2\n1. 有序项";
         String test7 = "> 引用\n~~删除线~~\n`代码`";
         String test8 = "[链接](https://example.com)";
-        System.out.println("Test1: " + textStyle.convertTags(test1));
-        System.out.println("Test2: " + textStyle.convertTags(test2));
-        System.out.println("Test3: " + textStyle.convertTags(test3));
-        System.out.println("Test4: " + textStyle.convertTags(test4));
-        System.out.println("Test5: " + textStyle.convertTags(test5));
-        System.out.println("Test6: " + textStyle.convertTags(test6));
-        System.out.println("Test7: " + textStyle.convertTags(test7));
-        System.out.println("Test8: " + textStyle.convertTags(test8));
+		String test9 = "<p class=\"indent\">---</p>";
+ 		String test10 = "<br>---</br>";
+		System.out.println("Test1: " + textStyle.convertTags(test1));
+		System.out.println("Test2: " + textStyle.convertTags(test2));
+		System.out.println("Test3: " + textStyle.convertTags(test3));
+		System.out.println("Test4: " + textStyle.convertTags(test4));
+		System.out.println("Test5: " + textStyle.convertTags(test5));
+		System.out.println("Test6: " + textStyle.convertTags(test6));
+		System.out.println("Test7: " + textStyle.convertTags(test7));
+		System.out.println("Test8: " + textStyle.convertTags(test8));
+		System.out.println("Test9: " + textStyle.convertTags(test9));
+		System.out.println("Test10: " + textStyle.convertTags(test10));
+
     }
 
 }
