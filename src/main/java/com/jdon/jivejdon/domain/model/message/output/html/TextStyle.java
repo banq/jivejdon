@@ -214,13 +214,11 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 	 *         their HTML equivalents.
 	 */
 	private String convertTags(String input) {
-		// Check if the string is null or zero length -- if so, return what was
-		// sent in.
 		if (input == null || input.length() == 0) {
 			return input;
 		} else {
-			// To figure out how many times we've made text replacements, we
-			// need to pass around Integer count objects.
+			// 新增：将 markdown **XXX** 转为 <strong>XXX</strong>
+			input = input.replaceAll("\\*\\*(.+?)\\*\\*", "<strong>$1</strong>");
 			int[] boldStartCount = new int[1];
 			int[] italicsStartCount = new int[1];
 			int[] boldEndCount = new int[1];
@@ -271,6 +269,19 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 			}
 		}
 		return input;
+	}
+
+	// 测试主函数
+	public static void main(String[] args) {
+		TextStyle textStyle = new TextStyle();
+		String test1 = "[b]Hello[/b] World!";
+		String test2 = "**Bold** and [i]Italic[/i] and [u]Underline[/u]";
+		String test3 = "[b]Mix **Markdown** and BBCode[/b]";
+		String test4 = "[pre]Preformatted[/pre] and normal";
+		System.out.println("Test1: " + textStyle.convertTags(test1));
+		System.out.println("Test2: " + textStyle.convertTags(test2));
+		System.out.println("Test3: " + textStyle.convertTags(test3));
+		System.out.println("Test4: " + textStyle.convertTags(test4));
 	}
 
 }
