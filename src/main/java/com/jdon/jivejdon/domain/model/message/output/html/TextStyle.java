@@ -214,74 +214,103 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 	 *         their HTML equivalents.
 	 */
 	private String convertTags(String input) {
-		if (input == null || input.length() == 0) {
-			return input;
-		} else {
-			// 新增：将 markdown **XXX** 转为 <strong>XXX</strong>
-			input = input.replaceAll("\\*\\*(.+?)\\*\\*", "<strong>$1</strong>");
-			int[] boldStartCount = new int[1];
-			int[] italicsStartCount = new int[1];
-			int[] boldEndCount = new int[1];
-			int[] italicsEndCount = new int[1];
-			int[] underlineStartCount = new int[1];
-			int[] underlineEndCount = new int[1];
-			int[] preformatStartCount = new int[1];
-			int[] preformatEndCount = new int[1];
-			if (boldEnabled) {
-				input = replaceIgnoreCase(input, "[b]", "<strong>", boldStartCount);
-				input = replaceIgnoreCase(input, "[/b]", "</strong>", boldEndCount);
-				int bStartCount = boldStartCount[0];
-				int bEndCount = boldEndCount[0];
-				while (bStartCount > bEndCount) {
-					input = input.concat("</strong>");
-					bEndCount++;
-				}
-			}
-			if (italicEnabled) {
-				input = replaceIgnoreCase(input, "[i]", "<i>", italicsStartCount);
-				input = replaceIgnoreCase(input, "[/i]", "</i>", italicsEndCount);
-				int iStartCount = italicsStartCount[0];
-				int iEndCount = italicsEndCount[0];
-				while (iStartCount > iEndCount) {
-					input = input.concat("</i>");
-					iEndCount++;
-				}
-			}
-			if (underlineEnabled) {
-				input = replaceIgnoreCase(input, "[u]", "<u>", underlineStartCount);
-				input = replaceIgnoreCase(input, "[/u]", "</u>", underlineEndCount);
-				int uStartCount = underlineStartCount[0];
-				int uEndCount = underlineEndCount[0];
-				while (uStartCount > uEndCount) {
-					input = input.concat("</u>");
-					uEndCount++;
-				}
-			}
-			if (preformatEnabled) {
-				input = replaceIgnoreCase(input, "[pre]", "<pre>", preformatStartCount);
-				input = replaceIgnoreCase(input, "[/pre]", "</pre>", preformatEndCount);
-				int preStartCount = preformatStartCount[0];
-				int preEndCount = preformatEndCount[0];
-				while (preStartCount > preEndCount) {
-					input = input.concat("</pre>");
-					preEndCount++;
-				}
-			}
-		}
-		return input;
-	}
+        if (input == null || input.length() == 0) {
+            return input;
+        }
+        // Markdown 标题 #、##、### 转为 <h1>、<h2>、<h3>
+        input = input.replaceAll("(?m)^### (.+)$", "<h3>$1</h3>");
+        input = input.replaceAll("(?m)^## (.+)$", "<h2>$1</h2>");
+        //input = input.replaceAll("(?m)^# (.+)$", "<h1>$1</h1>");
+        // Markdown 粗体 **XXX** 或 __XXX__ 转为 <strong>XXX</strong>
+        input = input.replaceAll("\\*\\*(.+?)\\*\\*", "<strong>$1</strong>");
+        input = input.replaceAll("__(.+?)__", "<strong>$1</strong>");
+        // Markdown 斜体 *XXX* 或 _XXX_ 转为 <em>XXX</em>
+        input = input.replaceAll("(?<!\\*)\\*(?!\\*)(.+?)(?<!\\*)\\*(?!\\*)", "<em>$1</em>");
+        input = input.replaceAll("_(.+?)_", "<em>$1</em>");
+        // Markdown 删除线 ~~XXX~~ 转为 <del>XXX</del>
+        input = input.replaceAll("~~(.+?)~~", "<del>$1</del>");
+        // Markdown 行内代码 `XXX` 转为 <code>XXX</code>
+        input = input.replaceAll("`([^`]+?)`", "<code>$1</code>");
+        // Markdown 链接 [text](url)
+        input = input.replaceAll("\\[(.+?)\\]\\((.+?)\\)", "<a href=\"$2\">$1</a>");
+        // Markdown 无序列表 - xxx 或 * xxx
+        input = input.replaceAll("(?m)^[\\*-] (.+)$", "<li>$1</li>");
+        // Markdown 有序列表 1. xxx
+        input = input.replaceAll("(?m)^\\d+\\. (.+)$", "<li>$1</li>");
+        // Markdown 块引用 > xxx
+        input = input.replaceAll("(?m)^> (.+)$", "<blockquote>$1</blockquote>");
 
-	// 测试主函数
-	public static void main(String[] args) {
-		TextStyle textStyle = new TextStyle();
-		String test1 = "[b]Hello[/b] World!";
-		String test2 = "**Bold** and [i]Italic[/i] and [u]Underline[/u]";
-		String test3 = "[b]Mix **Markdown** and BBCode[/b]";
-		String test4 = "[pre]Preformatted[/pre] and normal";
-		System.out.println("Test1: " + textStyle.convertTags(test1));
-		System.out.println("Test2: " + textStyle.convertTags(test2));
-		System.out.println("Test3: " + textStyle.convertTags(test3));
-		System.out.println("Test4: " + textStyle.convertTags(test4));
-	}
+        // BBCode 处理
+        int[] boldStartCount = new int[1];
+        int[] italicsStartCount = new int[1];
+        int[] boldEndCount = new int[1];
+        int[] italicsEndCount = new int[1];
+        int[] underlineStartCount = new int[1];
+        int[] underlineEndCount = new int[1];
+        int[] preformatStartCount = new int[1];
+        int[] preformatEndCount = new int[1];
+        if (boldEnabled) {
+            input = replaceIgnoreCase(input, "[b]", "<strong>", boldStartCount);
+            input = replaceIgnoreCase(input, "[/b]", "</strong>", boldEndCount);
+            int bStartCount = boldStartCount[0];
+            int bEndCount = boldEndCount[0];
+            while (bStartCount > bEndCount) {
+                input = input.concat("</strong>");
+                bEndCount++;
+            }
+        }
+        if (italicEnabled) {
+            input = replaceIgnoreCase(input, "[i]", "<i>", italicsStartCount);
+            input = replaceIgnoreCase(input, "[/i]", "</i>", italicsEndCount);
+            int iStartCount = italicsStartCount[0];
+            int iEndCount = italicsEndCount[0];
+            while (iStartCount > iEndCount) {
+                input = input.concat("</i>");
+                iEndCount++;
+            }
+        }
+        if (underlineEnabled) {
+            input = replaceIgnoreCase(input, "[u]", "<u>", underlineStartCount);
+            input = replaceIgnoreCase(input, "[/u]", "</u>", underlineEndCount);
+            int uStartCount = underlineStartCount[0];
+            int uEndCount = underlineEndCount[0];
+            while (uStartCount > uEndCount) {
+                input = input.concat("</u>");
+                uEndCount++;
+            }
+        }
+        if (preformatEnabled) {
+            input = replaceIgnoreCase(input, "[pre]", "<pre>", preformatStartCount);
+            input = replaceIgnoreCase(input, "[/pre]", "</pre>", preformatEndCount);
+            int preStartCount = preformatStartCount[0];
+            int preEndCount = preformatEndCount[0];
+            while (preStartCount > preEndCount) {
+                input = input.concat("</pre>");
+                preEndCount++;
+            }
+        }
+        return input;
+    }
+
+    // 测试主函数
+    public static void main(String[] args) {
+        TextStyle textStyle = new TextStyle();
+        String test1 = "[b]Hello[/b] World!";
+        String test2 = "**Bold** and [i]Italic[/i] and [u]Underline[/u]";
+        String test3 = "[b]Mix **Markdown** and BBCode[/b]";
+        String test4 = "[pre]Preformatted[/pre] and normal";
+        String test5 = "## 二级标题\n### 三级标题";
+        String test6 = "- 列表项1\n* 列表项2\n1. 有序项";
+        String test7 = "> 引用\n~~删除线~~\n`代码`";
+        String test8 = "[链接](https://example.com)";
+        System.out.println("Test1: " + textStyle.convertTags(test1));
+        System.out.println("Test2: " + textStyle.convertTags(test2));
+        System.out.println("Test3: " + textStyle.convertTags(test3));
+        System.out.println("Test4: " + textStyle.convertTags(test4));
+        System.out.println("Test5: " + textStyle.convertTags(test5));
+        System.out.println("Test6: " + textStyle.convertTags(test6));
+        System.out.println("Test7: " + textStyle.convertTags(test7));
+        System.out.println("Test8: " + textStyle.convertTags(test8));
+    }
 
 }

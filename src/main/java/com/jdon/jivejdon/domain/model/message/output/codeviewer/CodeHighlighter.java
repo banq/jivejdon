@@ -183,60 +183,62 @@ public class CodeHighlighter implements Function<MessageVO, MessageVO> {
 		// sent in.
 		if (input == null || input.length() == 0) {
 			return input;
-		} else {
-			if(!input.contains("[code]")) return input;
-			StringBuilder buf = new StringBuilder(input.length() + 50);
-			int i = 0, j = 0, oldend = 0;
-
-			while ((i = input.indexOf("[code]", oldend)) >= 0) {
-				// Check to see where the ending code tag is and store than in j
-				if ((j = input.indexOf("[/code]", i + 6)) < 0) {
-					// End at end of input if no closing tag is given
-					j = input.length() - 7;
-				}
-				// Take the string up to the code, append the string returned by
-				// CodeViewer
-				buf.append(input.substring(oldend, i));
-				buf.append("<TABLE width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><TBODY><TR><TD class=\"code-outline\"><PRE class=\"displaycode\">");
-				// Read line by line and filter accordingly.
-
-				StringBuilder codeBuf = new StringBuilder(input.length() / 2);
-
-				// Advance i past one initial carriage return until the code,
-				// if a carriage return exists
-				if (i + 6 + 1 < input.length() && (input.charAt(i + 6 + 1) == '\n')) {
-					i++;
-					if (i + 6 + 1 < input.length() && (input.charAt(i + 6 + 1) == '\r')) {
-						i++;
-					}
-				}
-
-				BufferedReader reader = new BufferedReader(new StringReader(input.substring(i + 6, j)));
-				String line;
-				try {
-					while ((line = reader.readLine()) != null) {
-						// unescape html > and < to workaround the HTMLFilter
-						line = StringUtil.replace(line, "&lt;", "<");
-						line = StringUtil.replace(line, "&gt;", ">");
-						codeBuf.append(viewer.syntaxHighlight(line));
-						codeBuf.append(NEW_LINE);
-					}
-				} catch (IOException ioe) {
-					ioe.printStackTrace();
-				}
-				String code = codeBuf.toString().intern();
-				// escape braces to workaround TextStyle filter
-				code = StringUtil.replace(code, "[", "&#91;");
-				code = StringUtil.replace(code, "]", "&#93;");
-
-				buf.append(code);
-				buf.append("</PRE></TD></TR></TBODY></TABLE>");
-				// Next time, start looking after the ending [/code] tag
-				oldend = j + 7;
-			}
-			buf.append(input.substring(oldend, input.length()));
-			return buf.toString().intern();
 		}
+		if (!input.contains("[code]"))
+			return input;
+		StringBuilder buf = new StringBuilder(input.length() + 50);
+		int i = 0, j = 0, oldend = 0;
+
+		while ((i = input.indexOf("[code]", oldend)) >= 0) {
+			// Check to see where the ending code tag is and store than in j
+			if ((j = input.indexOf("[/code]", i + 6)) < 0) {
+				// End at end of input if no closing tag is given
+				j = input.length() - 7;
+			}
+			// Take the string up to the code, append the string returned by
+			// CodeViewer
+			buf.append(input.substring(oldend, i));
+			buf.append(
+					"<TABLE width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><TBODY><TR><TD class=\"code-outline\"><PRE class=\"displaycode\">");
+			// Read line by line and filter accordingly.
+
+			StringBuilder codeBuf = new StringBuilder(input.length() / 2);
+
+			// Advance i past one initial carriage return until the code,
+			// if a carriage return exists
+			if (i + 6 + 1 < input.length() && (input.charAt(i + 6 + 1) == '\n')) {
+				i++;
+				if (i + 6 + 1 < input.length() && (input.charAt(i + 6 + 1) == '\r')) {
+					i++;
+				}
+			}
+
+			BufferedReader reader = new BufferedReader(new StringReader(input.substring(i + 6, j)));
+			String line;
+			try {
+				while ((line = reader.readLine()) != null) {
+					// unescape html > and < to workaround the HTMLFilter
+					line = StringUtil.replace(line, "&lt;", "<");
+					line = StringUtil.replace(line, "&gt;", ">");
+					codeBuf.append(viewer.syntaxHighlight(line));
+					codeBuf.append(NEW_LINE);
+				}
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
+			}
+			String code = codeBuf.toString().intern();
+			// escape braces to workaround TextStyle filter
+			code = StringUtil.replace(code, "[", "&#91;");
+			code = StringUtil.replace(code, "]", "&#93;");
+
+			buf.append(code);
+			buf.append("</PRE></TD></TR></TBODY></TABLE>");
+			// Next time, start looking after the ending [/code] tag
+			oldend = j + 7;
+		}
+		buf.append(input.substring(oldend, input.length()));
+		return buf.toString().intern();
+
 	}
 
 
