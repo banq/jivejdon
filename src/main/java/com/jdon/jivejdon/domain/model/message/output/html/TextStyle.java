@@ -218,10 +218,9 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
             return input;
         }
         // Markdown 标题 #、##、### 转为 <h1>、<h2>、<h3>
-        input = input.replaceAll("(?m)^### (.+)$", "<h3>$1</h3>");
-        input = input.replaceAll("(?m)^## (.+)$", "<h2>$1</h2>");
-        //input = input.replaceAll("(?m)^# (.+)$", "<h1>$1</h1>");
-        // Markdown 粗体 **XXX** 或 __XXX__ 转为 <strong>XXX</strong>
+		// 匹配1~3个#，后跟一个空格，标题内容（不允许空格），内容后面必须是一个空格或"<"（即HTML标签起始）
+		input = input.replaceAll("(#{1,3}) ([^\\s<]+)(?= |<)", "<strong>$2</strong>");// Markdown 粗体 **XXX** 或 __XXX__
+																						// 转为 <strong>XXX</strong>
         input = input.replaceAll("\\*\\*(.+?)\\*\\*", "<strong>$1</strong>");
         input = input.replaceAll("__(.+?)__", "<strong>$1</strong>");
         // Markdown 斜体 *XXX* 或 _XXX_ 转为 <em>XXX</em>
@@ -238,7 +237,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
         // Markdown 有序列表 1. xxx
         input = input.replaceAll("(?m)^\\d+\\. (.+)$", "<li>$1</li>");
         // Markdown 块引用 > xxx
-        input = input.replaceAll("(?m)^> (.+)$", "<blockquote>$1</blockquote>");
+        //input = input.replaceAll("(?m)^> (.+)$", "<blockquote>$1</blockquote>");
 
         // BBCode 处理
         int[] boldStartCount = new int[1];
@@ -299,7 +298,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
         String test2 = "**Bold** and [i]Italic[/i] and [u]Underline[/u]";
         String test3 = "[b]Mix **Markdown** and BBCode[/b]";
         String test4 = "[pre]Preformatted[/pre] and normal";
-        String test5 = "## 二级标题\n### 三级标题";
+        String test5 = "<p class=\"indent\">## 二级标题<br>";
         String test6 = "- 列表项1\n* 列表项2\n1. 有序项";
         String test7 = "> 引用\n~~删除线~~\n`代码`";
         String test8 = "[链接](https://example.com)";
