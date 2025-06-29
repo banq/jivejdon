@@ -217,7 +217,14 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
         if (input == null || input.length() == 0) {
             return input;
         }
-		// Markdown 分隔线 ---，前面有 >，后面有 < 或空格，转为 <hr>
+        // 先处理 HTML 包裹的 Markdown 列表块
+        input = processHtmlWrappedMarkdownList(input);
+        // 其余内容不再全局替换 <p class="indent"> 和 <br>
+        input = input.replaceAll("^\\s*\\n+", "");
+        input = input.replaceAll("\\n+$", "");
+        input = wrapMarkdownListWithUl(input);
+
+        // Markdown 分隔线 ---，前面有 >，后面有 < 或空格，转为 <hr>
 		input = input.replaceAll("(>\\s*)---(?=\\s|<)", "$1<hr>");
 
         // Markdown 标题 #、##、### 转为 <h1>、<h2>、<h3>
@@ -294,6 +301,82 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
         return input;
     }
 
+    /**
+     * 只处理 <p class="indent">* ...</p> 这种块，将其转为 <ul><li>...</li></ul>
+     */
+    private String processHtmlWrappedMarkdownList(String input) {
+        if (input == null || input.length() == 0) return input;
+        StringBuffer sb = new StringBuffer();
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(
+            "<p class=\\\"indent\\\">([\\s\\S]*?)</p>", java.util.regex.Pattern.CASE_INSENSITIVE);
+        java.util.regex.Matcher m = p.matcher(input);
+        int lastEnd = 0;
+        while (m.find()) {
+            sb.append(input.substring(lastEnd, m.start()));
+            String inner = m.group(1);
+            // 将 <br> 替换为换行，便于分行
+            String block = inner.replaceAll("<br ?/?>", "\n");
+            String[] lines = block.split("\n");
+            boolean allList = true;
+            int listCount = 0;
+            for (String line : lines) {
+                String t = line.trim();
+                if (t.startsWith("* ") || t.startsWith("- ")) {
+                    listCount++;
+                } else if (!t.isEmpty()) {
+                    allList = false;
+                    break;
+                }
+            }
+            // 至少一项且全部为列表才包ul，否则原样输出
+            if (allList && listCount >= 1) {
+                StringBuilder ul = new StringBuilder("<ul>");
+                for (String line : lines) {
+                    String t = line.trim();
+                    if (t.startsWith("* ") || t.startsWith("- ")) {
+                        ul.append("<li>").append(t.substring(2).trim()).append("</li>");
+                    }
+                }
+                ul.append("</ul>");
+                sb.append(ul.toString());
+            } else {
+                // 非列表块，原样输出
+                sb.append("<p class=\"indent\">").append(inner).append("</p>");
+            }
+            lastEnd = m.end();
+        }
+        sb.append(input.substring(lastEnd));
+        return sb.toString();
+    }
+
+    /**
+     * 检查并将连续的 Markdown 列表行（* 或 - 开头）包裹为 <ul>...</ul>
+     */
+    private String wrapMarkdownListWithUl(String input) {
+        String[] lines = input.split("\\r?\\n");
+        StringBuilder sb = new StringBuilder();
+        boolean inUl = false;
+        for (String line : lines) {
+            if (line.trim().matches("^[\\*-] .+")) {
+                if (!inUl) {
+                    sb.append("<ul>\n");
+                    inUl = true;
+                }
+                sb.append(line).append("\n");
+            } else {
+                if (inUl) {
+                    sb.append("</ul>\n");
+                    inUl = false;
+                }
+                sb.append(line).append("\n");
+            }
+        }
+        if (inUl) {
+            sb.append("</ul>\n");
+        }
+        return sb.toString().trim();
+    }
+
     // 测试主函数
     public static void main(String[] args) {
         TextStyle textStyle = new TextStyle();
@@ -317,7 +400,16 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 		System.out.println("Test8: " + textStyle.convertTags(test8));
 		System.out.println("Test9: " + textStyle.convertTags(test9));
 		System.out.println("Test10: " + textStyle.convertTags(test10));
-
+        // Markdown 列表标准化测试
+        String mdList = "<p class=\"indent\">当然，任何新的研究都会有它的两面性。CD38疫苗虽然潜力巨大，但目前也存在一些小问题，需要科学家们继续努力解决：</p><p class=\"indent\">* 短期炎症反应： 打疫苗可能会在短期内引起一些炎症反应。因为疫苗会刺激免疫系统去攻击CD38，这个过程中可能会释放一些炎症因子。不过，实验表明，这种炎症反应是暂时的，长期来看反而会降低身体的炎症水平。<br>* 对感染的影响： CD38在免疫系统中也发挥着作用，参与身体对感染的反应。所以，未来还需要研究CD38疫苗是否会影响身体对抗感染的能力。<br>* 疫苗设计的优化： 现在的CD38疫苗主要针对T细胞反应，未来还可以继续研究，看能否找到更多能诱导B细胞免疫反应的CD38靶点，让疫苗效果更全面。</p>";
+        String htmlList = textStyle.convertTags(mdList);
+        System.out.println("\n[Markdown 列表测试]\n原文:\n" + mdList + "\nHTML:\n" + htmlList);
+        // 断言输出是否为标准<ul><li>...</li></ul>结构
+        if (htmlList.trim().contains("<ul>") && htmlList.trim().contains("</ul>") && htmlList.trim().contains("<li>短期炎症反应：") && htmlList.trim().contains("<li>对感染的影响：") && htmlList.trim().contains("<li>疫苗设计的优化：")) {
+            System.out.println("[PASS] 输出包含<ul><li>...</li></ul>结构");
+        } else {
+            System.out.println("[FAIL] 输出不包含<ul><li>...</li></ul>结构");
+        }
     }
 
 }
