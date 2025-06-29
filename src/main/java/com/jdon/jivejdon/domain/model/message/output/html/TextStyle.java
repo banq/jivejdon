@@ -410,6 +410,24 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
         } else {
             System.out.println("[FAIL] 输出不包含<ul><li>...</li></ul>结构");
         }
+        // 斜体测试
+        String italicTest1 = "*斜体内容*";
+        String italicTest2 = "_斜体内容_";
+        String italicTest3 = "普通*斜体*普通";
+        String italicTest4 = "普通_斜体_普通";
+        System.out.println("ItalicTest1: " + textStyle.convertTags(italicTest1));
+        System.out.println("ItalicTest2: " + textStyle.convertTags(italicTest2));
+        System.out.println("ItalicTest3: " + textStyle.convertTags(italicTest3));
+        System.out.println("ItalicTest4: " + textStyle.convertTags(italicTest4));
+        // 断言
+        if (textStyle.convertTags(italicTest1).contains("<em>斜体内容</em>") &&
+            textStyle.convertTags(italicTest2).contains("<em>斜体内容</em>") &&
+            textStyle.convertTags(italicTest3).contains("<em>斜体</em>") &&
+            textStyle.convertTags(italicTest4).contains("<em>斜体</em>")) {
+            System.out.println("[PASS] 斜体语法测试通过");
+        } else {
+            System.out.println("[FAIL] 斜体语法测试未通过");
+        }
     }
 
 }
