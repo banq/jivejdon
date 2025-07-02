@@ -481,7 +481,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 			sql.append(" AND jmp.name = 'digNumber' ");
 			sql.append("GROUP BY jm.threadID ");
 			sql.append("HAVING dig_sum > ? "); // 这里用上阈值
-			sql.append("ORDER BY creationDate DESC LIMIT 100");
+			sql.append("ORDER BY dig_sum  DESC LIMIT 100");
 
 			List<Object> params = new ArrayList<>();
 			if (qs.getParams() != null)
