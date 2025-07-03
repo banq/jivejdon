@@ -236,8 +236,12 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
       
         // Markdown 删除线 ~~XXX~~ 转为 <del>XXX</del>
         input = input.replaceAll("~~(.+?)~~", "<del>$1</del>");
-        // Markdown 行内代码 `XXX` 转为 <code>XXX</code>
-        input = input.replaceAll("`([^`]+?)`", "<code>$1</code>");
+        
+		// Markdown 行内代码块 ```XXX``` 转为 <code>XXX</code>
+		input = input.replaceAll("```([^`]+?)```", "<code>$1</code>");
+		// Markdown 行内代码 `XXX` 转为 <code>XXX</code>
+		input = input.replaceAll("`([^`]+?)`", "<code>$1</code>");
+
         // Markdown 链接 [text](url)
         input = input.replaceAll("\\[(.+?)\\]\\((.+?)\\)", "<a href=\"$2\">$1</a>");
         // Markdown 无序列表 - xxx 或 * xxx
@@ -408,6 +412,27 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
         } else {
             System.out.println("[FAIL] 输出不包含<ul><li>...</li></ul>结构");
         }
+
+		// ...existing code...
+        // Markdown 行内代码测试
+        String inlineCode1 = "这是`code`测试";
+        String inlineCode2 = "`abc`";
+        String inlineCode3 = "前缀```123```后缀";
+        String htmlInline1 = textStyle.convertTags(inlineCode1);
+        String htmlInline2 = textStyle.convertTags(inlineCode2);
+        String htmlInline3 = textStyle.convertTags(inlineCode3);
+        System.out.println("\n[Markdown 行内代码测试]");
+        System.out.println("InlineCode1: " + htmlInline1);
+        System.out.println("InlineCode2: " + htmlInline2);
+        System.out.println("InlineCode3: " + htmlInline3);
+        if (htmlInline1.contains("<code>code</code>")
+            && htmlInline2.contains("<code>abc</code>")
+            && htmlInline3.contains("<code>123</code>")) {
+            System.out.println("[PASS] Markdown 行内代码语法测试通过");
+        } else {
+            System.out.println("[FAIL] Markdown 行内代码语法测试未通过");
+        }
+// ...existing code...
       
     }
 
