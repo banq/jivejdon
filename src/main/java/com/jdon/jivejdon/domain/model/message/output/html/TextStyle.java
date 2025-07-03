@@ -238,9 +238,9 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
         input = input.replaceAll("~~(.+?)~~", "<del>$1</del>");
         
 		// Markdown 行内代码块 ```XXX``` 转为 <code>XXX</code>
-		input = input.replaceAll("```([^`]+?)```", "<code>$1</code>");
+		input = input.replaceAll("```([^`]+?)```", "<pre class=\"displaycode\"><code>$1</code></pre>");
 		// Markdown 行内代码 `XXX` 转为 <code>XXX</code>
-		input = input.replaceAll("`([^`]+?)`", "<code>$1</code>");
+		input = input.replaceAll("`([^`]+?)`", "<pre class=\"displaycode\"><code>$1</code></pre>");
 
         // Markdown 链接 [text](url)
         input = input.replaceAll("\\[(.+?)\\]\\((.+?)\\)", "<a href=\"$2\">$1</a>");
