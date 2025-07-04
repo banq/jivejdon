@@ -269,8 +269,8 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 		String GET_ALL_ITEMS = "select messageID  from jiveMessage WHERE threadID=? ORDER BY creationDate ASC LIMIT ?, ?";
 
 		// 查询总数
-        Collection<Long> countParams = new ArrayList<>();
-        countParams.add(threadId);
+		Collection<Long> countParams = new ArrayList<>();
+		countParams.add(threadId);
 
 		Collection<Long> params = new ArrayList<>();
 		params.add(threadId);
@@ -313,35 +313,35 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 		String GET_ALL_ITEMS = "select threadID from jiveThread WHERE forumId=? ORDER BY creationDate " + resultSort.toString() + " LIMIT ?, ?";
 
 		// 查询总数参数
-        Collection<Long> countParams = new ArrayList<>();
-        countParams.add(forumId);
+		Collection<Long> countParams = new ArrayList<>();
+		countParams.add(forumId);
 
-        // 分页参数
-        Collection<Object> params = new ArrayList<>();
-        params.add(forumId);
-        params.add(start);
-        params.add(count);
-        Collection<Long> threadIDs = new ArrayList<>();
-        Integer allCount = null;
-        try {
-            Object allCounto = jdbcTempSource.getJdbcTemp().querySingleObject(countParams, GET_ALL_ITEMS_ALLCOUNT);
-            if (allCounto instanceof Long)
-                allCount = ((Long) allCounto).intValue();
-            else
-                allCount = ((Integer) allCounto).intValue();
+		// 分页参数
+		Collection<Object> params = new ArrayList<>();
+		params.add(forumId);
+		params.add(start);
+		params.add(count);
+		Collection<Long> threadIDs = new ArrayList<>();
+		Integer allCount = null;
+		try {
+			Object allCounto = jdbcTempSource.getJdbcTemp().querySingleObject(countParams, GET_ALL_ITEMS_ALLCOUNT);
+			if (allCounto instanceof Long)
+				allCount = ((Long) allCounto).intValue();
+			else
+				allCount = ((Integer) allCounto).intValue();
 
-            List list = jdbcTempSource.getJdbcTemp().queryMultiObject(params, GET_ALL_ITEMS);
-            Iterator iter = list.iterator();
-            while (iter.hasNext()) {
-                Map map = (Map) iter.next();
-                threadIDs.add((Long) map.get("threadID"));
-            }
-        } catch (Exception e) {
-            logger.error("getThreads forumId=" + forumId + " happend " + e);
-            return new PageIterator();
-        }
+			List list = jdbcTempSource.getJdbcTemp().queryMultiObject(params, GET_ALL_ITEMS);
+			Iterator iter = list.iterator();
+			while (iter.hasNext()) {
+				Map map = (Map) iter.next();
+				threadIDs.add((Long) map.get("threadID"));
+			}
+		} catch (Exception e) {
+			logger.error("getThreads forumId=" + forumId + " happend " + e);
+			return new PageIterator();
+		}
 
-        return new PageIterator(allCount.intValue(), threadIDs.toArray());
+		return new PageIterator(allCount.intValue(), threadIDs.toArray());
 	}
 
 	public PageIterator getThreads(int start, int count, ThreadListSpec threadListSpec) {
@@ -380,35 +380,35 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 	 * get the threads collection include prev/cuurent/next threads.
 	 */
 	public List<Long> getThreadsPrevNext(Long forumId, Long currentThreadId) {
-        List<Long> result = new ArrayList<>();
-        try {
-            // 前两个（不含当前），查出比当前ID小的最大2个，正序排列
-            String prevSql = "SELECT threadID FROM jiveThread WHERE forumId=? AND threadID < ? ORDER BY threadID DESC LIMIT 2";
-            List<Object> prevParams = new ArrayList<>();
-            prevParams.add(forumId);
-            prevParams.add(currentThreadId);
-            List<Map<String, Object>> prevList = jdbcTempSource.getJdbcTemp().queryMultiObject(prevParams, prevSql);
-            List<Long> prevIds = new ArrayList<>();
-            for (Map<String, Object> map : prevList) {
-                prevIds.add((Long) map.get("threadID"));
-            }
-            java.util.Collections.reverse(prevIds); // 反转为正序
-            result.addAll(prevIds);
-            result.add(currentThreadId);
-            // 后两个（不含当前），正序
-            String nextSql = "SELECT threadID FROM jiveThread WHERE forumId=? AND threadID > ? ORDER BY threadID ASC LIMIT 2";
-            List<Object> nextParams = new ArrayList<>();
-            nextParams.add(forumId);
-            nextParams.add(currentThreadId);
-            List<Map<String, Object>> nextList = jdbcTempSource.getJdbcTemp().queryMultiObject(nextParams, nextSql);
-            for (Map<String, Object> map : nextList) {
-                result.add((Long) map.get("threadID"));
-            }
-        } catch (Exception e) {
-            logger.error("getThreadsPrevNext SQL error: " + e);
-        }
-        return result;
-    }
+		List<Long> result = new ArrayList<>();
+		try {
+			// 前两个（不含当前），查出比当前ID小的最大2个，正序排列
+			String prevSql = "SELECT threadID FROM jiveThread WHERE forumId=? AND threadID < ? ORDER BY threadID DESC LIMIT 2";
+			List<Object> prevParams = new ArrayList<>();
+			prevParams.add(forumId);
+			prevParams.add(currentThreadId);
+			List<Map<String, Object>> prevList = jdbcTempSource.getJdbcTemp().queryMultiObject(prevParams, prevSql);
+			List<Long> prevIds = new ArrayList<>();
+			for (Map<String, Object> map : prevList) {
+				prevIds.add((Long) map.get("threadID"));
+			}
+			java.util.Collections.reverse(prevIds); // 反转为正序
+			result.addAll(prevIds);
+			result.add(currentThreadId);
+			// 后两个（不含当前），正序
+			String nextSql = "SELECT threadID FROM jiveThread WHERE forumId=? AND threadID > ? ORDER BY threadID ASC LIMIT 2";
+			List<Object> nextParams = new ArrayList<>();
+			nextParams.add(forumId);
+			nextParams.add(currentThreadId);
+			List<Map<String, Object>> nextList = jdbcTempSource.getJdbcTemp().queryMultiObject(nextParams, nextSql);
+			for (Map<String, Object> map : nextList) {
+				result.add((Long) map.get("threadID"));
+			}
+		} catch (Exception e) {
+			logger.error("getThreadsPrevNext SQL error: " + e);
+		}
+		return result;
+	}
 
 	/**
 	 * return all threadId satify by QueryCriteria
@@ -473,12 +473,20 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 			// 生成 where 条件和参数
 			QuerySpecification qs = new QuerySpecDBModifiedDate(qc);
 			qs.parse();
+
+			// 计算1000天前的时间戳（毫秒），并补齐15位字符串
+			long now = System.currentTimeMillis();
+			long days1000Millis = 1000L * 24 * 60 * 60 * 1000;
+			long minCreationDate = now - days1000Millis;
+			String minCreationDateStr = com.jdon.jivejdon.util.ToolsUtil.zeroPadString(String.valueOf(minCreationDate), 15);
+
 			StringBuilder sql = new StringBuilder(
 					"SELECT jm.threadID, SUM(CAST(jmp.propValue AS UNSIGNED)) AS dig_sum " +
 							"FROM jiveMessage jm " +
 							"JOIN jiveMessageProp jmp ON jm.messageID = jmp.messageID ");
 			sql.append(qs.getWhereSQL());
 			sql.append(" AND jmp.name = 'digNumber' ");
+			sql.append(" AND jm.creationDate >= ? "); // 新增1000天内过滤
 			sql.append("GROUP BY jm.threadID ");
 			sql.append("HAVING dig_sum > ? "); // 这里用上阈值
 			sql.append("ORDER BY dig_sum  DESC LIMIT 100");
@@ -486,7 +494,8 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 			List<Object> params = new ArrayList<>();
 			if (qs.getParams() != null)
 				params.addAll(qs.getParams());
-            params.add(qc.getDigCountWindow()); // 你的阈值
+			params.add(minCreationDateStr); // creationDate >= ?
+			params.add(qc.getDigCountWindow()); // 你的阈值
 
 			@SuppressWarnings("unchecked")
 			List<Map<String, Object>> list = jdbcTempSource.getJdbcTemp().queryMultiObject(params, sql.toString());
