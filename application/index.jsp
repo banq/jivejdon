@@ -48,7 +48,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
        <main>	  
 	  <div id="main-content" class="col-lg-8">
 
-       <jsp:include page="/query/threadApprovedNewList2.shtml?count=9" flush="true"></jsp:include>
+       <jsp:include page="/query/threadApprovedNewList2.shtml?count=19" flush="true"></jsp:include>
 
 	
 <div class="box"> 
