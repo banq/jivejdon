@@ -424,7 +424,7 @@ var renzhi = `<ul class="list-unstyled">
             <li><a href="https://www.jdon.com/tag/1159/">算法</a></li>                               
             <li><a href="https://www.jdon.com/tag/78279/">生物黑客</a></li>
         
-			</ul > `;
+      </ul > `;
             $('#renzhi').html(renzhi);
 
   var ddd = `<ul class="list-unstyled">
@@ -487,8 +487,24 @@ function digMessage(id) {
 
 document.addEventListener("DOMContentLoaded", function(event) { 
 
-  $(document).ready(function () {
-     addMenuItems();
+  // 鼠标悬停到菜单时再动态加载内容
+  var menuMap = {
+    'renzhi': '#renzhi',
+    'ddd': '#ddd',
+    'micros': '#micros',
+    'prog': '#prog',
+    'meme': '#meme'
+  };
+  Object.keys(menuMap).forEach(function(id) {
+    var loaded = false;
+    var selector = menuMap[id];
+    var $dropdown = $(selector).closest('.dropdown');
+    $dropdown.on('mouseenter', function () {
+      if (!loaded) {
+        addMenuItems();
+        loaded = true;
+      }
+    });
   });
 
  $('.lazyload').lazyload();
