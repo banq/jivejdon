@@ -37,7 +37,8 @@ public class ApprovedListSpec extends ThreadListSpec {
 	public boolean isApproved(ForumThread thread) {
 		return calculateWeightedScore(thread) > 100
 				|| isDigged(thread, 1)
-				|| isDailyViewCountAboveThreshold(thread, 10)
+				|| isDailyViewCountAboveThreshold(thread, 5)
+				|| thread.getViewCount() > 10
 				|| isTutorial(thread);
 	}
 
