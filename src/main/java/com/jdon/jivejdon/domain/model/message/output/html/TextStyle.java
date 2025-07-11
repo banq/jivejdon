@@ -225,7 +225,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
         input = wrapMarkdownListWithUl(input);
 
         // Markdown 分隔线 ---，前面有 >，后面有 < 或空格，转为 <hr>
-		input = input.replaceAll("(>\\s*)---(?=\\s|<)", "$1<hr>");
+		input = input.replaceAll("(>\\s*)-{3,}(?=\\s|<)", "$1<hr>");
 
         // Markdown 标题 #、##、### 转为 <h1>、<h2>、<h3>
 		// 匹配1~3个#，后跟一个空格，标题内容（不允许空格），内容后面必须是一个空格或"<"（即HTML标签起始）
