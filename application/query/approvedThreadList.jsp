@@ -111,11 +111,11 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
  <div class="box">	
   <div class="linkblock">
-    <div>	           
+    <div class="box">	           
     
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
-         <section class="widget">
+         <section>
          <h3 class="vid-name"><a href="<%=com.jdon.jivejdon.util.ToolsUtil.getAppURL(request)%>/<bean:write name="forumThread" property="threadId"/>.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h3>
       
          <div class="info">			 
