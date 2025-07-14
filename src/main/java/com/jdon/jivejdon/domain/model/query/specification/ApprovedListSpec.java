@@ -99,7 +99,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 		if (diffHours < 2 * 24) {
 			digBonus = 1.0 + digCount * 5.0; // 48小时内放大
 		} else if (diffHours < 5 * 24) {	
-			digBonus = 1.0 + digCount * 3.0; // 48小时到5天不变
+			digBonus = 1.0 + digCount * 3.0;
 		} else if (diffHours < 7 * 24) {
 			digBonus = 1.0 + digCount * 1.0; // 48小时到5天不变
 		} else {
