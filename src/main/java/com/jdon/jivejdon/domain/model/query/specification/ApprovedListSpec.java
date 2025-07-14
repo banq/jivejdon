@@ -81,7 +81,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 		// 48小时内放大，48小时到5天不放大不缩小，5天后缩小
 		double newThreadBonus;
-		if (diffHours < 48) {
+		if (diffHours < 2 * 24) {
 			newThreadBonus = 5.0; // 48小时内放大
 		}else if (diffHours < 5 * 24) {
 			newThreadBonus = 3.0; // 
@@ -96,7 +96,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 		}
 
 		double digBonus;
-		if (diffHours < 48) {
+		if (diffHours < 2 * 24) {
 			digBonus = 1.0 + digCount * 5.0; // 48小时内放大
 		} else if (diffHours < 5 * 24) {	
 			digBonus = 1.0 + digCount * 3.0; // 48小时到5天不变
