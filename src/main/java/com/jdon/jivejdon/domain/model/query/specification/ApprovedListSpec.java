@@ -79,7 +79,15 @@ public class ApprovedListSpec extends ThreadListSpec {
 		double hourViewCount = (double) thread.getViewCount() / (diffHours == 0 ? 1 : diffHours);
 		int digCount = thread.getRootMessage().getDigCount();
 
-		double newThreadBonus = (diffHours <= 5 * 24) ? 2 : 1.0;
+		// 24小时内为2，每过24小时递减0.25，到5天为1，5天后恒为1
+		double newThreadBonus;
+		if (diffHours < 5 * 24) {
+			newThreadBonus = 2.0 - (diffHours / 24.0) * 0.25;
+			if (newThreadBonus < 1.0)
+				newThreadBonus = 1.0;
+		} else {
+			newThreadBonus = 1.0;
+		}
 		double digBonus = 1.0 + digCount * 10;
 
 		return hourViewCount * newThreadBonus * digBonus;
