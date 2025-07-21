@@ -14,6 +14,7 @@ import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.api.ForumMessageService;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumMessage;
+import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.util.UtilValidate;
 
 /**
@@ -46,7 +47,8 @@ public class MessageDigAction extends Action {
 			return null;
 		}
 
-		message.messaegDigAction(request.getRemoteAddr());
+		ForumThread thread = forumMessageQueryService.getThread(message.getForumThread().getThreadId());
+		thread.messaegDigAction(request.getRemoteAddr());
 
 		try {
 			response.setContentType("text/html");

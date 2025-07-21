@@ -403,4 +403,8 @@ public class ForumThread {
 	        reBlogVO = new ReBlogVO(this);
 	    return reBlogVO;
 	}
+
+	public void messaegDigAction(String ip) {
+        getRootMessage().addMessageDigCount(ip);
+    }
 }
