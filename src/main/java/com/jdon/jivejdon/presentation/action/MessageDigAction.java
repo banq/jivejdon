@@ -31,7 +31,7 @@ public class MessageDigAction extends Action {
 
 
 		String messageId = request.getParameter("messageId");
-		if (UtilValidate.isEmpty(messageId)) {
+		if (UtilValidate.isEmpty(messageId) || !messageId.matches("\\d+")) {
 			response.sendError(404);
 			return null;
 		}
@@ -52,12 +52,9 @@ public class MessageDigAction extends Action {
 
 		try {
 			response.setContentType("text/html");
-			response.getWriter().print(message.getDigCount());
-			response.getWriter().close();
+			response.getWriter().print(thread.getRootMessage().getDigCount());
 		} catch (Exception e) {
-			if (response != null && response.getWriter() != null) {
-				response.getWriter().close();
-			}
+			response.sendError(404);
 		}
 		// }
 		return null;
