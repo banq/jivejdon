@@ -293,13 +293,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
 
     
 
-    public void addMessageDigCount(String ip) {
-        this.getMessagePropertysVO().addMessageDigCount(ip);
-        // this.forumThread.addDig(this);
-        eventSourcing.saveMessageProperties(
-                new MessagePropertiesRevisedEvent(this.messageId, getMessagePropertysVO().getPropertys()));
-    }
-  
+    
 
     public String getPostip() {
         return this.getMessagePropertysVO().getPostip();

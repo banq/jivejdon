@@ -29,6 +29,7 @@ import com.jdon.annotation.model.Inject;
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.domain.command.MessageRemoveCommand;
 import com.jdon.jivejdon.domain.event.MessageOwnershipChangedEvent;
+import com.jdon.jivejdon.domain.event.MessagePropertiesRevisedEvent;
 import com.jdon.jivejdon.domain.event.MessageRemovedEvent;
 import com.jdon.jivejdon.domain.event.ThreadNameRevisedEvent;
 import com.jdon.jivejdon.domain.model.property.Property;
@@ -405,6 +406,11 @@ public class ForumThread {
 	}
 
 	public void messaegDigAction(String ip) {
-        getRootMessage().addMessageDigCount(ip);
+        this.getRootMessage().getMessagePropertysVO().addMessageDigCount(ip);
+        // this.forumThread.addDig(this);
+        eventSourcing.saveMessageProperties(
+                new MessagePropertiesRevisedEvent(getRootMessage().getMessageId(), getRootMessage().getMessagePropertysVO().getPropertys()));
+
+  
     }
 }
