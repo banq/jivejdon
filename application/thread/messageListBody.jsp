@@ -36,7 +36,7 @@
       </logic:equal>
       <logic:equal name="forumMessage" property="root" value="true">
         <div>
-        
+         <logic:empty name="principal"> 
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
      <ins class="adsbygoogle"
           style="display:block; text-align:center;"
@@ -47,7 +47,7 @@
      <script>
           (adsbygoogle = window.adsbygoogle || []).push({});
      </script>
-
+        </logic:empty>
        </div>
       </logic:equal>          
 
@@ -58,7 +58,8 @@
             <logic:equal name="forumMessage" property="root" value="true">
               <div class="post_titlename">
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.linkUrl">
-                  <a href="<bean:write name="forumMessage" property="messageUrlVO.linkUrl" filter="false"/>" target="_blank" title="原始链接"><h1 class="bige20"><bean:write name="forumMessage" property="messageVO.subject"/>
+                  <a href="<bean:write name="forumMessage" property="messageUrlVO.linkUrl" filter="false"/>" target="_blank" title="原始链接">
+                    <h1 class="bige20"><bean:write name="forumMessage" property="messageVO.subject"/></h1>
                     </a>
                   </logic:notEmpty>
                 <logic:empty name="forumMessage" property="messageUrlVO.linkUrl">
@@ -148,7 +149,7 @@
               </div>
              
               <div class="box">
-
+ <logic:empty name="principal"> 
            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
            <ins class="adsbygoogle"
                 style="display:block"
@@ -158,7 +159,7 @@
            <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
            </script>
-
+ </logic:empty>
               </div>
 
 

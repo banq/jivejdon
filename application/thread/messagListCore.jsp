@@ -36,10 +36,10 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <logic:empty name="principal"> 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
+    </logic:empty>
     <link rel="preconnect" href="https://static.jdon.com/" crossorigin> 
-    <link rel="preconnect" href="https://pagead2.googlesyndication.com">
-    <link rel="preconnect" href="https://www.googletagmanager.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -155,7 +155,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 			<div class="widget">
         <div class="wid-vid">
               
-                
+ <logic:empty name="principal">                 
 <!-- 内容右侧悬浮广告 -->
 <ins class="adsbygoogle"
      style="display:block"
@@ -166,6 +166,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
+ </logic:empty>
 
         </div>				
 			</div>
@@ -234,6 +235,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
           
                 <div class="scrolldiv">
 							   <div style="width: 300px"> 
+<logic:empty name="principal">                   
 <!-- 自适应主广告 -->
 <ins class="adsbygoogle"
      style="display:block"
@@ -244,6 +246,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>		                
+</logic:empty>
                  </div> 
 							 </div>   
          
@@ -274,8 +277,6 @@ $(document).ready(function() {
  });
 });
 </script>
- 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
 
 <script type="speculationrules">
   {
