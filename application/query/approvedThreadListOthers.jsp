@@ -42,10 +42,8 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://static.jdon.com/" crossorigin>  
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com">
-  <link rel="preconnect" href="https://www.googletagmanager.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
    <%@include file="../common/IncludeTopHead.jsp"%>
  <meta name="Description" content="近期最新又最佳的热点趋势与编程教程">
 <meta name="Keywords" content="编码经典,又新又好教程,技术热点,IT新闻,产品经理,产品新闻,科技新闻,前沿大技术,未来大技术,架构动态,SpringBoot,微服务,软件架构,企业架构,系统设计,架构设计,企业IT,IT设计,IT平台,平台工程,Devops,运维,维护工程,敏捷,软件工程,程序工艺,编码手艺,码农">
@@ -161,7 +159,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         <div class="widget">
 					    <div class="wid-vid">
 						
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
 <!-- 内容右侧悬浮广告 -->
 <ins class="adsbygoogle"
      style="display:block"
