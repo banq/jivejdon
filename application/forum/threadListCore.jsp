@@ -17,7 +17,11 @@
          <h3 class="vid-name"><a href="<%=com.jdon.jivejdon.util.ToolsUtil.getAppURL(request)%>/<bean:write name="forumThread" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThread" property="name"/></a></h3>
       
           <div class="info" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px;">
-    	 
+            
+             <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
+                <span class="smallgray"><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
+             </logic:greaterThan>     
+
               <span class="smallgray"><i class="fa fa-calendar"></i>
                   <bean:write name="forumMessage" property="modifiedDate3"/>
               </span>
@@ -33,9 +37,6 @@
 					   </span>
                       </logic:notEqual>     
 
-            <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
-                <span class="smallgray"><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
-            </logic:greaterThan>     
 		    
              
             </div>
