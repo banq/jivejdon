@@ -229,7 +229,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 
         // Markdown 标题 #、##、### 转为 <h1>、<h2>、<h3>
 		// 匹配1~3个#，后跟一个空格，标题内容（不允许空格），内容后面必须是一个空格或"<"（即HTML标签起始）
-		input = input.replaceAll("(#{1,3}) ([^\\s<]+)(?= |<)", "<strong>$2</strong>");// Markdown 粗体 **XXX** 或 __XXX__
+		input = input.replaceAll("(#{1,3}) +([^\\s<]+)(?= |<)", "<strong>$2</strong>");// Markdown 粗体 **XXX** 或 __XXX__
 																						// 转为 <strong>XXX</strong>
         input = input.replaceAll("\\*\\*(.+?)\\*\\*", "<strong>$1</strong>");
         input = input.replaceAll("__(.+?)__", "<strong>$1</strong>");
@@ -386,7 +386,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
         String test2 = "**Bold** and [i]Italic[/i] and [u]Underline[/u]";
         String test3 = "[b]Mix **Markdown** and BBCode[/b]";
         String test4 = "[pre]Preformatted[/pre] and normal";
-        String test5 = "<p class=\"indent\">## 二级标题<br>";
+        String test5 = "<p class=\"indent\">##  二级标题<br>";
         String test6 = "- 列表项1\n* 列表项2\n1. 有序项";
         String test7 = "> 引用\n~~删除线~~\n`代码`";
         String test8 = "[链接](https://example.com)";
