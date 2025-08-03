@@ -138,17 +138,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         <div class="widget">
 					    <div class="wid-vid">
 						
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
-<!-- 内容右侧悬浮广告 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="5184711902"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 							</div>
 				</div>
@@ -173,20 +162,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
        <div class="widget">
            <div class="wid-vid">
 							    <div class="scrolldiv">
-							     <div style="width: 300px"> 
-
-<!-- 内容右侧悬浮广告 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="5184711902"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>                   
-		                  
-                   </div> 
+							     
 							    </div>    
           </div>
         </div>
