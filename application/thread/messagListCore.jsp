@@ -154,19 +154,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
       </div>
 			<div class="widget">
         <div class="wid-vid">
-              
- <logic:empty name="principal">                 
-<!-- 内容右侧悬浮广告 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="5184711902"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
- </logic:empty>
+     
 
         </div>				
 			</div>
