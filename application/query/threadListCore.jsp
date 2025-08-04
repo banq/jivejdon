@@ -20,7 +20,6 @@
  <li class="box">	
   <div class="linkblock">
      <div class="box">	             
-        <section> 
          <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" onclick="showDialog('dialog2', '<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html#messageListBody');return false;" class="hover-preload"><bean:write name="forumThread" property="name"/></a></h3>
       
          <div class="info">			 
@@ -62,7 +61,6 @@
                           
                 </logic:notEmpty>              
           </div>
-          </section> 
 	 </div>	
   </div>	
 </li>  

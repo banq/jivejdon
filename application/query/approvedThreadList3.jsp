@@ -53,9 +53,9 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
        </div> 
       </div>
     </div>
-<section class="widget" id='ajax_<bean:write name="threadTag" property="tagID"/>'>  
+<div class="widget" id='ajax_<bean:write name="threadTag" property="tagID"/>'>  
   <br><br><br><br><br><br>     
-  </section>  
+  </div>  
                  
   <script>
     ids.push(<bean:write name="threadTag" property="tagID"/>);

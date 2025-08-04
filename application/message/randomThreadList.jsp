@@ -64,7 +64,6 @@ pageContext.setAttribute("title", titleStr);
      
       <% size++;%>
      <div class="box">
-              <section> 
               <div class="wrap-vid">              
                 <h3 class="vid-name">
                   <a href="https://www.jdon.com/message/tag/thread.shtml?action=edit&threadId=<bean:write name="forumThread" property="threadId"/>"  target="_blank" >编辑</a>
@@ -103,7 +102,6 @@ pageContext.setAttribute("title", titleStr);
                  </div>
 
          
-               </section>
      </div>
      
      </logic:notEqual>

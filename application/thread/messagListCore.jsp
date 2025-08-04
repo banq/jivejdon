@@ -168,7 +168,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                       <ul style="list-style-type:none;padding:0">
                       <logic:iterate id="forumThreadPreNext" name="threadPreNextList" length="5">
                         <li class="box">
-                          <section style="display: flex; align-items: center;"> 
+                          <div style="display: flex; align-items: center;"> 
                           <div class="wrap-vid">              
                                  <logic:notEmpty name="forumThreadPreNext" property="rootMessage.messageUrlVO.imageUrl">                  
                                    <div class="thumbn">
@@ -186,7 +186,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                        
     
                  
-                           </section>
+                          </div>
                           </li>
                       </logic:iterate>  
                     </ul>

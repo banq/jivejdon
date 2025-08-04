@@ -30,7 +30,6 @@
                              property="account"/>
                    <div class="row">
                         <div class="col-lg-12">
-                            <section> 
                             <header>
                             <h3 class="vid-name">
                             <a href='<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId" />.html'
@@ -58,7 +57,6 @@
                                     name="forumMessage"
                                     property="modifiedDate3"/></span>
 
-                            </section> 
 
                         </div>
                   

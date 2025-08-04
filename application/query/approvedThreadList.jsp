@@ -38,7 +38,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 			      </div>
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
-         <section class="widget">
          <h1 style="font-size: 2.2rem;margin-top: 0px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/>.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h1>
       
          <div class="info">			 
@@ -67,7 +66,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
           <div class="wrap-vid">
               <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. </p>
           </div>
-      </section>
    	</div>	
    	</div>	 
 	</div>	
@@ -115,7 +113,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
-         <section>
          <h3 class="vid-name"><a href="<%=com.jdon.jivejdon.util.ToolsUtil.getAppURL(request)%>/<bean:write name="forumThread" property="threadId"/>.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h3>
       
          <div class="info">			 
@@ -143,7 +140,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
             <div class="wrap-vid">
               <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />. </p>
           </div>
-      </section>
    	</div>	
 	</div>	
 </div>  

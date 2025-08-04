@@ -159,7 +159,7 @@
                    <div class="col-md-6">
                      <li class="box">	
                        <div class="linkblock">
-                          <section class="widget">
+                          <div class="widget">
                             <div class="wrap-vid">       
                                      
                               <logic:notEmpty name="forumThreadLink" property="rootMessage.messageUrlVO.imageUrl">                  
@@ -180,7 +180,7 @@
                                <script>
                                  document.getElementById('des_<bean:write name="forumThreadLink" property="threadId"/>').innerHTML = '<bean:write name="forumThreadLink" property="rootMessage.messageVO.shortBody[50]" />. ';
                             </script>
-                          </section>
+                          </div>
                         </div>	
                       </li>	
                   </div>  
