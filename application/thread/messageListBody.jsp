@@ -38,10 +38,9 @@
 
       <div class="article">
       <article>
-        <div class="post_header">
-          <div class="post_title">
+        <header class="post_header">
             <logic:equal name="forumMessage" property="root" value="true">
-              <div class="post_titlename">
+    
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.linkUrl">
                   <a href="<bean:write name="forumMessage" property="messageUrlVO.linkUrl" filter="false"/>" target="_blank" title="原始链接">
                     <h1 class="bige20"><bean:write name="forumMessage" property="messageVO.subject"/></h1>
@@ -50,11 +49,10 @@
                 <logic:empty name="forumMessage" property="messageUrlVO.linkUrl">
                       <h1 class="bige20"><bean:write name="forumMessage" property="messageVO.subject"/></h1>
                   </logic:empty>
-              </div>
+
             </logic:equal>
 
-            <div class="post_title2">
-              <div class="post_titleauthor info">
+             <div class="post_meta info">
                <logic:equal name="forumMessage" property="root" value="true">
                     <i class="fa fa-calendar">
                     <bean:define id="cdate" name="forumThread" property="creationDate"></bean:define>
@@ -68,17 +66,14 @@
                     <cite><bean:write name="forumMessage" property="account.username"/></cite>
                      </i>
                </logic:notEmpty>    
-              </div>
 
                <logic:equal name="forumMessage" property="root" value="false">
-                <div class="post_titledate">
-                  <div class="smallgray" id='creationDate_<bean:write name="forumMessage" property="messageId"/>'>
+                  <span class="smallgray" id='creationDate_<bean:write name="forumMessage" property="messageId"/>'>
                     <bean:write name="forumMessage" property="creationDate"/>
-                  </div>
-                </div>
+                  </span >
               </logic:equal> 
 
-              <div class="post_titleother">
+        
                 <logic:equal name="messageListForm" property='<%= "authenticated[" + i + "]" %>' value="true">
                   <a href='<html:rewrite page="/message/messageAction.shtml?action=edit" paramId="messageId" paramName="forumMessage" paramProperty="messageId" />'>
                     编辑
@@ -100,28 +95,14 @@
             paramProperty="forumThread.threadId" />'>编辑互链 </a>
                   </logic:equal>
                 </logic:equal>
-              </div>
-            </div>
-          </div>
-        </div>
-    <logic:equal name="forumMessage" property="root" value="true">
-        <div>
-         <logic:empty name="principal"> 
-     <ins class="adsbygoogle"
-          style="display:block; text-align:center;"
-          data-ad-layout="in-article"
-          data-ad-format="fluid"
-          data-ad-client="ca-pub-7573657117119544"
-          data-ad-slot="3121124104"></ins>
-     <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-     </script>
-        </logic:empty>
-       </div>
-      </logic:equal>         
-                <bean:write name="forumMessage" property="messageVO.body" filter="false"/>
-           
              
+            </div>
+        </header>
+
+        <section class="post_content">
+           <bean:write name="forumMessage" property="messageVO.body" filter="false"/>
+        </section>
+        
 </article>
 </div>    
              

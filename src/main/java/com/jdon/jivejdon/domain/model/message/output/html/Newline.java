@@ -111,7 +111,12 @@ public class Newline implements Function<MessageVO, MessageVO> {
 	public MessageVO apply(MessageVO messageVO) {
 		String s = "<p class=\"indent\">" + messageVO.getBody();
 		s = pattern.matcher(s).replaceAll("</p><p class=\"indent\">");
-		return messageVO.builder().subject(messageVO.getSubject()).body(convertNewlinesAroundCode(s)).build();
+		s = convertNewlinesAroundCode(s);
+		// 如果结尾不是 </p>，则补上
+		if (!s.endsWith("</p>")) {
+			s = s + "</p>";
+		}
+		return messageVO.builder().subject(messageVO.getSubject()).body(s).build();
 	}
 
 	/**
