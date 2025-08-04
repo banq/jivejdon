@@ -30,6 +30,22 @@ pageContext.setAttribute("title", titleStr);
 <%
 String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 %>
+<%
+java.util.List nums = new java.util.ArrayList();
+int[] randomArr = new int[5];
+int idx = 0;
+while (idx < 5) {
+    nums.add(idx);
+    idx++;
+}
+java.util.Collections.shuffle(nums);
+idx = 0;
+while (idx < 5) {
+    randomArr[idx] = ((Integer)nums.get(idx)).intValue();
+    idx++;
+}
+int randomIdx = 0;
+%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -101,7 +117,7 @@ int h = 0 ;
                 
      <div style="position: relative;">           
        <a href='<%=request.getContextPath() %>/tag/<bean:write name="threadTag" property="tagID"/>/' title="<bean:write name="threadTag" property="title" />">         
-        <img id="home-thumbnai" src="/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg" border="0" class="img-thumbnail" style="width: 100%" loading="lazy"/>                  
+        <img id="home-thumbnai" src="/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg" border="0" class="img-thumbnail" style="width: 100%" loading="lazy"/>                  
        </a>
       <div style="position: absolute;bottom: 0px;">
        <div class="tagcloud">

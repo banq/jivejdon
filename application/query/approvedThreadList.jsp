@@ -8,7 +8,22 @@
 <%
 String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 %>
-
+<%
+java.util.List nums = new java.util.ArrayList();
+int[] randomArr = new int[5];
+int idx = 0;
+while (idx < 5) {
+    nums.add(idx);
+    idx++;
+}
+java.util.Collections.shuffle(nums);
+idx = 0;
+while (idx < 5) {
+    randomArr[idx] = ((Integer)nums.get(idx)).intValue();
+    idx++;
+}
+int randomIdx = 0;
+%>
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
 <logic:iterate  id="forumThread" name="threadListForm" property="list" length="1">
@@ -31,7 +46,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                     <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="img-thumbnail img-responsive" style="height:150px;width:100%"  loading="lazy" onerror="this.src='https://static.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg'"/>
                 </logic:notEmpty>
                 <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">        
-                    <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg" border="0" class="img-thumbnail img-responsive" style="height:150px;width:100%"  loading="lazy" /> 
+                    <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg" border="0" class="img-thumbnail img-responsive" style="height:150px;width:100%"  loading="lazy" /> 
                 </logic:empty>      
                </a>                   
               </div>
