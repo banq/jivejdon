@@ -53,7 +53,7 @@ int randomIdx = 0;
 			      </div>
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
         <div class="col-lg-8">
-            <h1 style="font-size: 2.2rem;margin-top: 0px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/>.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h1>
+            <h1 style="font-size: 2.2rem;margin-top: 2px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/>.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h1>
             <div class="info">			 
               <span class="smallgray"><i class="fa fa-calendar"></i>
                 <bean:write name="forumMessage" property="modifiedDate3"/>
