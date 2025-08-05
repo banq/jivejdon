@@ -18,7 +18,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	}
 
 	public ApprovedListSpec() {
-		sorttableName = "creationDate";
+		sorttableName = "modifiedDate";
 	}
 
 	
