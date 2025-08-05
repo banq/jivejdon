@@ -52,24 +52,23 @@ int randomIdx = 0;
               </div>
 			      </div>
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
-
-         <h1 style="font-size: 2.2rem;margin-top: 0px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/>.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h1>
-      
-         <div class="info">			 
+        <div class="col-lg-8">
+            <h1 style="font-size: 2.2rem;margin-top: 0px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/>.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h1>
+            <div class="info">			 
               <span class="smallgray"><i class="fa fa-calendar"></i>
                 <bean:write name="forumMessage" property="modifiedDate3"/>
               </span>
-			 <logic:notEqual name="forumThread" property="state.messageCount" value="0">
+			      <logic:notEqual name="forumThread" property="state.messageCount" value="0">
               <span class="smallgray"><i class="fa fa-comment"></i> <bean:write name="forumThread" property="state.messageCount" />
                       </span>
-		       </logic:notEqual>  
+		        </logic:notEqual>  
               <span class="smallgray"><i class="fa fa-eye"></i><bean:write name="forumThread" property="viewCount" />
                       </span>
-			   <logic:notEqual name="forumMessage" property="digCount" value="0">
+			      <logic:notEqual name="forumMessage" property="digCount" value="0">
                        <span class="smallgray"><i class="fa fa-heart"></i>
                       <bean:write name="forumMessage" property="digCount"/>
 					   </span>
-                      </logic:notEqual>     
+            </logic:notEqual>     
 		       
 
             <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
@@ -81,6 +80,7 @@ int randomIdx = 0;
           <div class="wrap-vid">
               <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. </p>
           </div>
+        </div>  
    	</div>	
    	</div>	 
 	</div>	
