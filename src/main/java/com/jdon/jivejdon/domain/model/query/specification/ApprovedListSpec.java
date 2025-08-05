@@ -117,7 +117,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	 */
 	public double approvedCompare(ForumThread thread) {
 		// 基础热度分
-		double baseScore = popularityScore(thread);
+		double baseScore = calculateWeightedScore(thread);
 
 		// 内容质量分
 		double qualityScore = contentQualityScore(thread);
@@ -157,41 +157,15 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 	}
 
-	/**
-	 * 计算帖子热度分
-	 * 
-	 * @param thread 论坛帖子
-	 * @return 热度分
-	 */
-	private double popularityScore(ForumThread thread) {
-		double weightedScore = calculateWeightedScore(thread);
-		long daysSinceCreation = getDaysSinceCreation(thread.getRootMessage().getModifiedDate2());
-		return weightedScore / (daysSinceCreation + 1);
-	}
+	
 
 	private double calculateWeightedScore(ForumThread thread) {
 		// Extract metrics
 		long viewCount = thread.getViewCount();
 		int digCount = thread.getRootMessage().getDigCount();
-
-		// Define weights
-		double viewWeight = getViewWeight(thread.getRootMessage().getModifiedDate2());
-		double digWeight = 0.2;
-
-		// Calculate weighted score
-		return (viewCount * viewWeight) + (digCount * digWeight);
+		return viewCount * digCount ;
 	}
 
-	private double getViewWeight(long creationDate) {
-		long daysSinceCreation = getDaysSinceCreation(creationDate);
-		return (daysSinceCreation <= 5) ? 10.0 : 0.8;
-	}
-
-	private long getDaysSinceCreation(long creationDate) {
-		long currentTime = System.currentTimeMillis();
-		long timeDifferenceMillis = Math.abs(currentTime - creationDate);
-		return TimeUnit.DAYS.convert(timeDifferenceMillis, TimeUnit.MILLISECONDS);
-	}
 
 	public boolean isTagged(ForumThread thread, int count) {
 		final double tagsCOunt = thread.getTags().stream().map(threadTag -> threadTag.getAssonum()).reduce(0,

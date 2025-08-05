@@ -36,13 +36,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.SortedSet;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.stream.Collectors;
 
 public class ThreadDigListAction extends Action {
 	private ForumMessageQueryService forumMessageQueryService;
-	
+	private ThreadApprovedNewList threadApprovedNewList;
 
 	private ForumMessageQueryService getForumMessageQueryService() {
 		if (forumMessageQueryService == null)
@@ -51,8 +52,13 @@ public class ThreadDigListAction extends Action {
 		return forumMessageQueryService;
 	}
 
+	public ThreadApprovedNewList getThreadApprovedNewList() {
+		if (threadApprovedNewList == null)
+			threadApprovedNewList = (ThreadApprovedNewList) WebAppUtil
+					.getComponentInstance("threadApprovedNewList", this.servlet.getServletContext());
 
-
+		return threadApprovedNewList;
+	}
 
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -64,18 +70,10 @@ public class ThreadDigListAction extends Action {
 			DigsListMAXSize = Integer.parseInt(wSize);
 		}
 		ModelListForm threadListForm = (ModelListForm) form;
-		ResultSort resultSort = new ResultSort();
-		resultSort.setOrder_DESCENDING();
-		ThreadListSpec threadListSpec = new ThreadListSpecForMod();
-		threadListSpec.setResultSort(resultSort);
-		PageIterator pageIterator = getForumMessageQueryService().getThreads(0, 200, threadListSpec);
-		SortedSet<Long> sortedWindows = new ConcurrentSkipListSet<>(new ThreadDigComparator(forumMessageQueryService));
+		List<Long> sortedWindows = getThreadApprovedNewList().getApprovedThreads(0, DigsListMAXSize).stream()
+				.sorted(new ThreadDigComparator(getForumMessageQueryService())).collect(Collectors.toList());
 
-		// 将 pageIterator 中的 threadId 加入 sortedWindows
-		for (Object threadIdObj : pageIterator.getKeys()) {
-			Long threadId = (Long) threadIdObj;
-			sortedWindows.add(threadId);
-		}
+		
 
 		// 根据排序后的 threadId 获取 ForumThread
 		Collection<ForumThread> digThreads = sortedWindows.stream()
