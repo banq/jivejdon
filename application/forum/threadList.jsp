@@ -56,7 +56,8 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <html lang="zh-CN">
 <head>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	   
-  <link rel="preconnect" href="https://static.jdon.com/" crossorigin>  
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
    <%@include file="../common/IncludeTopHead.jsp"%>
    <meta name="Description" content="极道Jdon最新所有文章列表">
 <meta name="Keywords" content="最新技术,生物黑客,AI,语言模型,前沿技术,编码前沿,编程动态,Java版本发布,DDD最新,DDD源码,DDD实战,定义,数据分析,科技新闻,微服务,认知负担">
