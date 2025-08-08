@@ -218,19 +218,25 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
             return input;
         }
         // 先处理 HTML 包裹的 Markdown 列表块
-        input = processHtmlWrappedMarkdownList(input);
+       	// 先将 <br>- 或 <br>* 替换为换行符，方便后续识别为列表
+		input = input.replaceAll("<p", "\n<p");
+		input = input.replaceAll("<br>\\s*([\\*-] )", "\n$1");
+		// 其余 <br> 也替换为换行，保证 HTML 标签单独成行
+		input = input.replaceAll("<br>", "\n");
+		input = wrapMarkdownListWithUl(input);
         // 其余内容不再全局替换 <p class="indent"> 和 <br>
         input = input.replaceAll("^\\s*\\n+", "");
         input = input.replaceAll("\\n+$", "");
-        input = wrapMarkdownListWithUl(input);
 
         // Markdown 分隔线 ---，前面有 >，后面有 < 或空格，转为 <hr>
 		input = input.replaceAll("(>\\s*)-{3,}(?=\\s|<)", "$1<hr>");
 
         // Markdown 标题 #、##、### 转为 <h1>、<h2>、<h3>
 		// 匹配1~3个#，后跟一个空格，标题内容（不允许空格），内容后面必须是一个空格或"<"（即HTML标签起始）
-		input = input.replaceAll("(#{1,3}) +([^\\s<]+)(?= |<)", "<strong>$2</strong>");// Markdown 粗体 **XXX** 或 __XXX__
-																						// 转为 <strong>XXX</strong>
+		// 先处理 <p class="indent"> 开头的标题
+		input = input.replaceAll("(<p class=\"indent\">)(#{1,6}) +([^\\s<]+)(?= |<|$)", "$1<strong>$3</strong>");
+		// 再处理普通行首的标题
+		input = input.replaceAll("^(#{1,6}) +([^\\s<]+)(?= |<|$)", "<strong>$2</strong>");
         input = input.replaceAll("\\*\\*(.+?)\\*\\*", "<strong>$1</strong>");
         input = input.replaceAll("__(.+?)__", "<strong>$1</strong>");
       
@@ -247,7 +253,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
         // Markdown 无序列表 - xxx 或 * xxx
         input = input.replaceAll("(?m)^[\\*-] (.+)$", "<li>$1</li>");
         // Markdown 有序列表 1. xxx
-        input = input.replaceAll("(?m)^\\d+\\. (.+)$", "<li>$1</li>");
+       // input = input.replaceAll("(?m)^\\d+\\. (.+)$", "<li>$1</li>");
         // Markdown 块引用 > xxx
         //input = input.replaceAll("(?m)^> (.+)$", "<blockquote>$1</blockquote>");
 
@@ -355,29 +361,35 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
      * 检查并将连续的 Markdown 列表行（* 或 - 开头）包裹为 <ul>...</ul>
      */
     private String wrapMarkdownListWithUl(String input) {
-        String[] lines = input.split("\\r?\\n");
-        StringBuilder sb = new StringBuilder();
-        boolean inUl = false;
-        for (String line : lines) {
-            if (line.trim().matches("^[\\*-] .+")) {
-                if (!inUl) {
-                    sb.append("<ul>\n");
-                    inUl = true;
-                }
-                sb.append(line).append("\n");
-            } else {
-                if (inUl) {
-                    sb.append("</ul>\n");
-                    inUl = false;
-                }
-                sb.append(line).append("\n");
-            }
-        }
-        if (inUl) {
-            sb.append("</ul>\n");
-        }
-        return sb.toString().trim();
-    }
+		String[] lines = input.split("\\r?\\n");
+		StringBuilder sb = new StringBuilder();
+		boolean inUl = false;
+		for (String line : lines) {
+			// 支持以 * 或 - 开头，或以 <br>- 开头的行
+			String trimmed = line.trim();
+			boolean isList = trimmed.matches("^[\\*-] .+")
+					|| trimmed.matches("^<br>[\\*-] .+");
+			if (isList) {
+				if (!inUl) {
+					sb.append("<ul>\n");
+					inUl = true;
+				}
+				// 去掉前面的 <br>，只保留 - 或 *
+				String item = trimmed.replaceFirst("^<br>", "");
+				sb.append(item).append("\n");
+			} else {
+				if (inUl) {
+					sb.append("</ul>\n");
+					inUl = false;
+				}
+				sb.append(line).append("\n");
+			}
+		}
+		if (inUl) {
+			sb.append("</ul>\n");
+		}
+		return sb.toString().trim();
+	}
 
     // 测试主函数
     public static void main(String[] args) {
@@ -386,8 +398,8 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
         String test2 = "**Bold** and [i]Italic[/i] and [u]Underline[/u]";
         String test3 = "[b]Mix **Markdown** and BBCode[/b]";
         String test4 = "[pre]Preformatted[/pre] and normal";
-        String test5 = "<p class=\"indent\">##  二级标题<br>";
-        String test6 = "- 列表项1\n* 列表项2\n1. 有序项";
+        String test5 = "<p class=\"indent\">### 二级标题";
+        String test6 = "<br>- 列表项1 <br>- 列表项2<p></p>1. 有序项";
         String test7 = "> 引用\n~~删除线~~\n`代码`";
         String test8 = "[链接](https://example.com)";
 		String test9 = "<p class=\"indent\">---</p>";
