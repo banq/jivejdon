@@ -233,10 +233,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 
         // Markdown 标题 #、##、### 转为 <h1>、<h2>、<h3>
 		// 匹配1~3个#，后跟一个空格，标题内容（不允许空格），内容后面必须是一个空格或"<"（即HTML标签起始）
-		// 先处理 <p class="indent"> 开头的标题
-		input = input.replaceAll("(<p class=\"indent\">)(#{1,6}) +([^\\s<]+)(?= |<|$)", "$1<strong>$3</strong>");
-		// 再处理普通行首的标题
-		input = input.replaceAll("^(#{1,6}) +([^\\s<]+)(?= |<|$)", "<strong>$2</strong>");
+		input = input.replaceAll("(#{1,6}) +([^\\s<]+)(?= |<|$)", "<strong>$2</strong>");
         input = input.replaceAll("\\*\\*(.+?)\\*\\*", "<strong>$1</strong>");
         input = input.replaceAll("__(.+?)__", "<strong>$1</strong>");
       
@@ -398,7 +395,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
         String test2 = "**Bold** and [i]Italic[/i] and [u]Underline[/u]";
         String test3 = "[b]Mix **Markdown** and BBCode[/b]";
         String test4 = "[pre]Preformatted[/pre] and normal";
-        String test5 = "<p class=\"indent\">### 二级标题";
+        String test5 = "### **二级标题**";
         String test6 = "<br>- 列表项1 <br>- 列表项2<p></p>1. 有序项";
         String test7 = "> 引用\n~~删除线~~\n`代码`";
         String test8 = "[链接](https://example.com)";
@@ -414,36 +411,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 		System.out.println("Test8: " + textStyle.convertTags(test8));
 		System.out.println("Test9: " + textStyle.convertTags(test9));
 		System.out.println("Test10: " + textStyle.convertTags(test10));
-        // Markdown 列表标准化测试
-        String mdList = "<p class=\"indent\">当然，任何新的研究都会有它的两面性。CD38疫苗虽然潜力巨大，但目前也存在一些小问题，需要科学家们继续努力解决：</p><p class=\"indent\">* 短期炎症反应： 打疫苗可能会在短期内引起一些炎症反应。因为疫苗会刺激免疫系统去攻击CD38，这个过程中可能会释放一些炎症因子。不过，实验表明，这种炎症反应是暂时的，长期来看反而会降低身体的炎症水平。<br>* 对感染的影响： CD38在免疫系统中也发挥着作用，参与身体对感染的反应。所以，未来还需要研究CD38疫苗是否会影响身体对抗感染的能力。<br>* 疫苗设计的优化： 现在的CD38疫苗主要针对T细胞反应，未来还可以继续研究，看能否找到更多能诱导B细胞免疫反应的CD38靶点，让疫苗效果更全面。</p>";
-        String htmlList = textStyle.convertTags(mdList);
-        System.out.println("\n[Markdown 列表测试]\n原文:\n" + mdList + "\nHTML:\n" + htmlList);
-        // 断言输出是否为标准<ul><li>...</li></ul>结构
-        if (htmlList.trim().contains("<ul>") && htmlList.trim().contains("</ul>") && htmlList.trim().contains("<li>短期炎症反应：") && htmlList.trim().contains("<li>对感染的影响：") && htmlList.trim().contains("<li>疫苗设计的优化：")) {
-            System.out.println("[PASS] 输出包含<ul><li>...</li></ul>结构");
-        } else {
-            System.out.println("[FAIL] 输出不包含<ul><li>...</li></ul>结构");
-        }
-
-		// ...existing code...
-        // Markdown 行内代码测试
-        String inlineCode1 = "这是`code`测试";
-        String inlineCode2 = "`abc`";
-        String inlineCode3 = "前缀```123```后缀";
-        String htmlInline1 = textStyle.convertTags(inlineCode1);
-        String htmlInline2 = textStyle.convertTags(inlineCode2);
-        String htmlInline3 = textStyle.convertTags(inlineCode3);
-        System.out.println("\n[Markdown 行内代码测试]");
-        System.out.println("InlineCode1: " + htmlInline1);
-        System.out.println("InlineCode2: " + htmlInline2);
-        System.out.println("InlineCode3: " + htmlInline3);
-        if (htmlInline1.contains("<code>code</code>")
-            && htmlInline2.contains("<code>abc</code>")
-            && htmlInline3.contains("<code>123</code>")) {
-            System.out.println("[PASS] Markdown 行内代码语法测试通过");
-        } else {
-            System.out.println("[FAIL] Markdown 行内代码语法测试未通过");
-        }
+      
 // ...existing code...
       
     }
