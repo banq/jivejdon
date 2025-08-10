@@ -130,16 +130,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 </head>
 <body>
 <%@ include file="../common/body_header.jsp" %>
-<div class="my-manual-ad" style="width:100%; min-height:50px; text-align:center;">
-<!-- 728X90横幅 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:468px;height:60px"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="2308336581"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
+
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
  
 
