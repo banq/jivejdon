@@ -80,7 +80,18 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <body>
 <%@ include file="../common/body_header.jsp" %>
 <%@ include file="../common/header_errors.jsp" %>
-
+<div class="my-manual-ad" style="width:100%; text-align:center;">
+<!-- 728X90横幅 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="2308336581"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
 
 <div id="page-content" class="single-page container">
   <div class="row">

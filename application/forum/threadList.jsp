@@ -56,8 +56,9 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <html lang="zh-CN">
 <head>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>	   
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
+  <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>      
    <%@include file="../common/IncludeTopHead.jsp"%>
    <meta name="Description" content="极道Jdon最新所有文章列表">
 <meta name="Keywords" content="最新技术,生物黑客,AI,语言模型,前沿技术,编码前沿,编程动态,Java版本发布,DDD最新,DDD源码,DDD实战,定义,数据分析,科技新闻,微服务,认知负担">
@@ -99,6 +100,18 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 </head>
 <body>
 <%@ include file="../common/body_header.jsp" %>
+<div class="my-manual-ad" style="width:100%; text-align:center;">
+<!-- 728X90横幅 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7573657117119544"
+     data-ad-slot="2308336581"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
 <div id="page-content" class="single-page container">
 	<div class="row">
 		<!-- /////////////////左边 -->
