@@ -70,7 +70,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 </head>
 <body>
 <%@ include file="../common/body_header.jsp" %>
-<div class="my-manual-ad" style="width:100%; text-align:center;">
+<div class="my-manual-ad" style="width:100%; min-height:50px; text-align:center;">
 <!-- 728X90横幅 -->
 <ins class="adsbygoogle"
      style="display:block"
