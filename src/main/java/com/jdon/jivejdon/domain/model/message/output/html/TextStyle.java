@@ -234,7 +234,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
         // Markdown 标题 #、##、### 转为 <h1>、<h2>、<h3>
 		// 匹配1~3个#，后跟一个空格，标题内容（不允许空格），内容后面必须是一个空格或"<"（即HTML标签起始）
 		input = input.replaceAll("(#{1,6})(?:\\s|\\u00A0|&nbsp;)+([^\\s<]+)(?= |<|$)", "<strong>$2</strong>");
-        input = input.replaceAll("\\*\\*(.+?)\\*\\*", "<strong>$1</strong>");
+        input = input.replaceAll("\\*\\*([\\s\\S]+?)\\*\\*", "<strong>$1</strong>");
         input = input.replaceAll("__(.+?)__", "<strong>$1</strong>");
       
         // Markdown 删除线 ~~XXX~~ 转为 <del>XXX</del>
@@ -392,7 +392,9 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
     public static void main(String[] args) {
         TextStyle textStyle = new TextStyle();
         String test1 = "[b]Hello[/b] World!";
-        String test2 = "**Bold** and [i]Italic[/i] and [u]Underline[/u]";
+        String test2 = "\r\n" + //
+						"> **OWL 想让机器“理解世界”，却把自己困在逻辑迷宫；  \r\n" + //
+						"> 而 SHACL + SPARQL + RDF-Star + 命名图，让机器“管理世界”，在混乱中建立秩序。**  ";
         String test3 = "[b]Mix **Markdown** and BBCode[/b]";
         String test4 = "[pre]Preformatted[/pre] and normal";
         String test5 = "###	OWL是什么：";
