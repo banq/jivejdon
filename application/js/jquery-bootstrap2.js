@@ -524,65 +524,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
     });
 
-// 广告位处理脚本
-// 监听广告状态变化，隐藏未填充的广告位
-(function(){
-  function hideAd(ad) {
+// 监听广告加载状态并隐藏未填充的广告
+function hideUnfilledAds() {
+  document.querySelectorAll('ins.adsbygoogle').forEach(ad => {
     if (ad.getAttribute('data-ad-status') === 'unfilled') {
-      // 找到广告位外层容器（优先找自定义容器div）
-      let container = ad.closest('#ad-container') || ad.parentElement;
-      if (container) {
-        container.style.display = 'none';
-        console.log('隐藏未填充广告:', container);
-      } else {
-        ad.style.display = 'none';
-        console.log('隐藏未填充广告:', ad);
-      }
-    }
-  }
-
-  function checkAds() {
-    document.querySelectorAll('.adsbygoogle').forEach(hideAd);
-  }
-
-  function delayedChecks(ad) {
-    [500, 1000, 2000, 3000].forEach(delay => {
-      setTimeout(() => hideAd(ad), delay);
-    });
-  }
-
-  // 初始检查
-  checkAds();
-
-  // 监听 DOM 变化
-  const observer = new MutationObserver((mutationsList) => {
-    for (let mutation of mutationsList) {
-      // 有新节点插入
-      if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-        mutation.addedNodes.forEach(node => {
-          if (node.nodeType === 1) { // element 节点
-            if (node.classList.contains('adsbygoogle')) {
-              delayedChecks(node);
-            } else {
-              // 如果广告在子元素中
-              node.querySelectorAll && node.querySelectorAll('.adsbygoogle').forEach(delayedChecks);
-            }
-          }
-        });
-      }
-      // 属性变化
-      if (mutation.type === 'attributes' &&
-          mutation.target.classList.contains('adsbygoogle') &&
-          mutation.attributeName === 'data-ad-status') {
-        hideAd(mutation.target);
-      }
+      ad.style.setProperty('display', 'none', 'important');
     }
   });
+}
 
-  observer.observe(document.body, {
-    childList: true,
-    attributes: true,
-    attributeFilter: ['data-ad-status'],
-    subtree: true
-  });
-})();
+// 初始检查
+setTimeout(hideUnfilledAds, 2000);
+
+// 持续观察DOM变化
+const observer = new MutationObserver(hideUnfilledAds);
+observer.observe(document.body, {
+  subtree: true,
+  attributes: true,
+  attributeFilter: ['data-ad-status']
+});
