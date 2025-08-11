@@ -525,21 +525,34 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
 
 // 监听广告加载状态并隐藏未填充的广告
+// 只处理#ad-container内的未填充广告
 function hideUnfilledAds() {
-  document.querySelectorAll('ins.adsbygoogle').forEach(ad => {
+  const container = document.getElementById('ad-container');
+  if (!container) return;
+
+  container.querySelectorAll('ins.adsbygoogle').forEach(ad => {
     if (ad.getAttribute('data-ad-status') === 'unfilled') {
       ad.style.setProperty('display', 'none', 'important');
     }
   });
 }
 
-// 初始检查
-setTimeout(hideUnfilledAds, 2000);
+// 初始化检查（DOM加载后执行）
+document.addEventListener('DOMContentLoaded', () => {
+  // 立即检查
+  hideUnfilledAds();
+  
+  // 延迟二次检查（防止异步加载未捕获）
+  setTimeout(hideUnfilledAds, 2000);
 
-// 持续观察DOM变化
-const observer = new MutationObserver(hideUnfilledAds);
-observer.observe(document.body, {
-  subtree: true,
-  attributes: true,
-  attributeFilter: ['data-ad-status']
+  // 监听#ad-container内部广告的状态变化
+  const observer = new MutationObserver(hideUnfilledAds);
+  const container = document.getElementById('ad-container');
+  if (container) {
+    observer.observe(container, {
+      subtree: true,            // 监控所有子元素
+      attributes: true,         // 监听属性变化
+      attributeFilter: ['data-ad-status']  // 只关注广告状态属性
+    });
+  }
 });
