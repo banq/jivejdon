@@ -108,15 +108,34 @@ public class Newline implements Function<MessageVO, MessageVO> {
 	 * around the specified message.
 	 *
 	 */
-	public MessageVO apply(MessageVO messageVO) {
-		String s = "<p class=\"indent\">" + messageVO.getBody();
+	 public MessageVO apply(MessageVO messageVO) {
+		String s = messageVO.getBody();
+
+		// 先处理段落分隔（双换行）
 		s = pattern.matcher(s).replaceAll("</p><p class=\"indent\">");
+
+		// 处理单换行
 		s = convertNewlinesAroundCode(s);
-		// 如果结尾不是 </p>，则补上
-		if (!s.endsWith("</p>")) {
-			s = s + "</p>";
-		}
+
+		// 处理块级元素周围的换行
+		s = handleBlockElements(s);
+
+		// 清理多余的 <br> 标签
+		s = s.replaceAll("(?:<br>)+$", "");
+
 		return messageVO.builder().subject(messageVO.getSubject()).body(s).build();
+	}
+
+	private String handleBlockElements(String input) {
+		String result = input;
+
+		// 当文本后面紧跟块级元素时，移除文本末尾的 <br>
+		result = result.replaceAll("([^>])<br>(\\s*)<(ul|ol|div|table|pre)", "$1$2<$3");
+
+		// 处理段落分隔后的内容
+		result = result.replaceAll("</p><p class=\"indent\">", "</p>\n<p class=\"indent\">");
+
+		return result;
 	}
 
 	/**
@@ -173,6 +192,12 @@ public class Newline implements Function<MessageVO, MessageVO> {
 		}
 		// Add whatever chars are left to buffer.
 		buf.append(chars, cur, len - cur);
-		return buf.toString().intern();
+		String result = buf.toString();
+
+		// 清理块级元素周围的 <br>
+		result = result.replaceAll("<br>(\\s*)<(ul|ol|div|table|pre)", "$1<$2");
+		result = result.replaceAll("(</ul>|</ol>|</div>|</table>|</pre>)<br>", "$1");
+
+		return result.intern();
 	}
 }
