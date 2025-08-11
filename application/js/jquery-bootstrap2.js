@@ -507,7 +507,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
   });
 
- $('.lazyload').lazyload();
+//  $('.lazyload').lazyload();
     
  if ($('div.scrolldiv').length)
     $(function() { 
@@ -523,3 +523,34 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }); 
     
     });
+
+// 监听广告加载状态并隐藏未填充的广告
+  function hideUnfilledAds() {
+    var ads = document.querySelectorAll('.adsbygoogle');
+    ads.forEach(function(ad) {
+      if (ad.getAttribute('data-ad-status') === 'unfilled') {
+        ad.parentElement.style.display = 'none';
+      }
+    });
+  }
+  // 使用 MutationObserver 监听 DOM 变化，并在广告属性变化时调用 hideUnfilledAds
+const observer = new MutationObserver((mutationsList, observer) => {
+  // 遍历所有 mutations
+  for (let mutation of mutationsList) {
+    if (mutation.type === 'attributes' && mutation.target.classList.contains('adsbygoogle')) {
+      // 如果是广告元素的属性变化（例如 data-ad-status 被添加），调用函数
+      hideUnfilledAds();
+      // 可选：断开观察器以避免重复调用（如果只需检查一次）
+      observer.disconnect();
+      return; // 退出循环
+    }
+  }
+});
+
+// 配置观察器：监听属性变化和子树变化
+observer.observe(document.body, {
+  attributes: true,       // 监听属性变化
+  childList: true,        // 监听子节点添加/移除
+  subtree: true           // 监听整个子树
+});
+   
