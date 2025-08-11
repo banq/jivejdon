@@ -218,11 +218,6 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
             return input;
         }
         // 先处理 HTML 包裹的 Markdown 列表块
-       	// 先将 <br>- 或 <br>* 替换为换行符，方便后续识别为列表
-		input = input.replaceAll("<p", "\n<p");
-		input = input.replaceAll("<br>\\s*([\\*-] )", "\n$1");
-		// 其余 <br> 也替换为换行，保证 HTML 标签单独成行
-		input = input.replaceAll("<br>", "\n");
 		input = wrapMarkdownListWithUl(input);
         // 其余内容不再全局替换 <p class="indent"> 和 <br>
         input = input.replaceAll("^\\s*\\n+", "");
@@ -319,9 +314,8 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
         while (m.find()) {
             sb.append(input.substring(lastEnd, m.start()));
             String inner = m.group(1);
-            // 将 <br> 替换为换行，便于分行
-            String block = inner.replaceAll("<br ?/?>", "\n");
-            String[] lines = block.split("\n");
+          
+            String[] lines = inner.split("\n");
             boolean allList = true;
             int listCount = 0;
             for (String line : lines) {
@@ -371,9 +365,8 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 					sb.append("<ul>\n");
 					inUl = true;
 				}
-				// 去掉前面的 <br>，只保留 - 或 *
-				String item = trimmed.replaceFirst("^<br>", "");
-				sb.append(item).append("\n");
+			
+				sb.append(trimmed).append("\n");
 			} else {
 				if (inUl) {
 					sb.append("</ul>\n");
