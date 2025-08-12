@@ -79,11 +79,9 @@ int randomIdx = 0;
 <div id="ad-container" style="text-align: center; margin: 0 auto;">	
 <!-- 728X90横幅 -->
 <ins class="adsbygoogle"
-     style="display:block"
+     style="display:inline-block;width:728px;height:90px"
      data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="2308336581"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
+     data-ad-slot="2308336581"></ins>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
