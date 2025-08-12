@@ -537,22 +537,22 @@ function hideUnfilledAds() {
   });
 }
 
-// 初始化检查（DOM加载后执行）
-document.addEventListener('DOMContentLoaded', () => {
-  // 立即检查
-  hideUnfilledAds();
-  
-  // 延迟二次检查（防止异步加载未捕获）
-  setTimeout(hideUnfilledAds, 2000);
+// 1. 优先初始化 Observer（放在外部）
+const observer = new MutationObserver(hideUnfilledAds);
+const container = document.getElementById('ad-container');
+if (container) {
+  observer.observe(container, { 
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['data-ad-status'] 
+  });
+}
 
-  // 监听#ad-container内部广告的状态变化
-  const observer = new MutationObserver(hideUnfilledAds);
-  const container = document.getElementById('ad-container');
-  if (container) {
-    observer.observe(container, {
-      subtree: true,            // 监控所有子元素
-      attributes: true,         // 监听属性变化
-      attributeFilter: ['data-ad-status']  // 只关注广告状态属性
-    });
-  }
+// 2. DOM 加载后处理初始状态
+document.addEventListener('DOMContentLoaded', () => {
+  hideUnfilledAds(); // 初始检查
+  setTimeout(hideUnfilledAds, 2000); // 延迟检查
 });
+
+// 3. 备用检查（确保捕获所有情况）
+window.onload = () => setTimeout(hideUnfilledAds, 500);
