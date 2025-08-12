@@ -77,6 +77,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <body>
 <%@ include file="../common/body_header.jsp" %>
 <%@ include file="../common/header_errors.jsp" %>
+<logic:empty name="principal"> 
 <div id="ad-container" style="text-align: center; margin: 0 auto;">	
 <!-- 728X90横幅 -->
 <ins class="adsbygoogle"
@@ -87,7 +88,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 </div>
-
+</logic:empty>
 <div id="page-content" class="single-page container">
   <div class="row">
     <!-- /////////////////左边 -->
