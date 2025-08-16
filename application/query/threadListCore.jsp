@@ -57,7 +57,7 @@
                   <div class="thumbn">
                     <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="45" height="45"/>                  
                   </div>  
-                   <span style="margin-left: 2px; flex: 1;"><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />. </span>
+                   <span style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />. </span>
                           
                 </logic:notEmpty>              
           </div>
