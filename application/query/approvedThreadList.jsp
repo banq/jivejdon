@@ -112,11 +112,11 @@ int randomIdx = 0;
 
  <div class="box">	
   <div class="linkblock">
-    <div class="box">	           
+    <div class="box" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">	           
     
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
-         <h3 class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+         <h3 class="vid-name">
           <a href="<%=com.jdon.jivejdon.util.ToolsUtil.getAppURL(request)%>/<bean:write name="forumThread" property="threadId"/>.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a>
         </h3>
       
