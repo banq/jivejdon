@@ -142,7 +142,7 @@ int randomIdx = 0;
                      
             </div>
 
-            <div class="wrap-vid">
+            <div class="info smallgray">
               <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />. </p>
           </div>
    	</div>	
