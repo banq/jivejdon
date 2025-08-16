@@ -78,7 +78,7 @@ int randomIdx = 0;
             </div>
         
           <div class="wrap-vid">
-              <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. </p>
+              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. 
           </div>
         </div>  
    	</div>	
@@ -143,7 +143,7 @@ int randomIdx = 0;
             </div>
 
             <div class="info smallgray">
-              <p><bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />. </p>
+              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />. 
           </div>
    	</div>	
 	</div>	
