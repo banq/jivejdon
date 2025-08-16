@@ -15,7 +15,7 @@
 <%
 String coutlength = (String)pageContext.getAttribute("count");
 %>
-<div class="widget">
+<div>
 <ul>
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='<%=coutlength%>' >
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
