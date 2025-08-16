@@ -69,7 +69,7 @@ int randomIdx = 0;
        </div> 
       </div>
     </div>
-<div class="widget" id='ajax_<bean:write name="threadTag" property="tagID"/>'>  
+<div class="col-lg-7" id='ajax_<bean:write name="threadTag" property="tagID"/>'>  
   <br><br><br><br><br><br>     
   </div>  
                  

@@ -15,14 +15,14 @@
 <%
 String coutlength = (String)pageContext.getAttribute("count");
 %>
-<div>
+<div class="widget" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
 <ul>
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='<%=coutlength%>' >
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
  <bean:define id="body" name="forumMessage" property="messageVO.body" />
 <logic:equal name="i" value="0">
 <li>
-	<h3 class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+	<h3 class="vid-name">
     <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThread" property="name"/></a>
   </h3>
       
