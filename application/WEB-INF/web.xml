@@ -172,7 +172,16 @@
             <param-value>https://www.jdon.com/</param-value>
         </init-param>
     </servlet>
-
+    <servlet>
+        <servlet-name>CounterServlet</servlet-name>
+        <servlet-class>
+          com.jdon.jivejdon.presentation.servlet.CounterServlet
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CounterServlet</servlet-name>
+        <url-pattern>/viewThread/count.gif</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RSSGenServlet</servlet-name>
         <url-pattern>/rss</url-pattern>

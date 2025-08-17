@@ -234,20 +234,71 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         <div class="wid-vid">
           
                 <div class="scrolldiv">
-							   <div style="width: 300px"> 
-<logic:empty name="principal">                   
-<!-- 自适应主广告 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="5184711902"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>		                
-</logic:empty>
-                 </div> 
+							
+<div id="digList" class="linkblock"><ul style="list-style-type:none;padding:0">
+<li class="box">
+         <div style="display: flex; align-items: center;"> 
+         <div class="wrap-vid">              
+          <div class="thumbn">
+              <img src="https://static.jdon.com/simgs/thumb/2.jpg" border="0" class="img-thumbnail" loading="lazy" width="45" height="45">
+            </div>
+          </div>
+         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/69062.html" class="hover-preload">什么是Context上下文？</a></h4>
+
+        </div>
+</li>
+
+ <li class="box">
+         <div style="display: flex; align-items: center;"> 
+         <div class="wrap-vid">              
+          <div class="thumbn">
+                    <img src="https://static.jdon.com/simgs/thumb/3.jpg" border="0" class="img-thumbnail" loading="lazy" width="45" height="45">                  
+                  </div>  
+                </div>
+         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/69903.html" class="hover-preload">抽象两种方法：上下文与类型</a></h4>
+
+        </div>
+</li>
+
+ <li class="box">
+         <div style="display: flex; align-items: center;"> 
+         <div class="wrap-vid">              
+          <div class="thumbn">
+                    <img src="https://static.jdon.com/simgs/thumb/2.jpg" border="0" class="img-thumbnail" loading="lazy" width="45" height="45">                  
+                  </div>  
+                </div>
+         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/76821.html" class="hover-preload">Content与Context一字之差暗藏逆天极道</a></h4>
+
+        </div>
+</li>
+
+ <li class="box">
+         <div style="display: flex; align-items: center;"> 
+         <div class="wrap-vid">              
+          <div class="thumbn">
+                    <img src="https://static.jdon.com/simgs/thumb/2.jpg" border="0" class="img-thumbnail" loading="lazy" width="45" height="45">                  
+                  </div>  
+                </div>
+         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/79419.html" class="hover-preload">语境崩塌：你的注意力正被劫持</a></h4>
+
+        </div>
+</li>
+
+ <li class="box">
+         <div style="display: flex; align-items: center;"> 
+         <div class="wrap-vid">              
+          <div class="thumbn">
+              <img src="https://static.jdon.com/simgs/thumb/2.jpg" border="0" class="img-thumbnail" loading="lazy" width="45" height="45">
+            </div>
+          </div>
+         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/design.htm" class="hover-preload">Context逻辑之道</a></h4>
+
+        </div>
+</li>
+
+ </ul>
+
+</div>                  
 							 </div>   
          
         </div>
@@ -268,15 +319,15 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
 <%@include file="../common/IncludeBottomBody.jsp"%>
 
-<script defer>  
-document.addEventListener("DOMContentLoaded", function(event) { 
-$(document).ready(function() {
-  $(document).one('mousemove touchstart', function() {
-    $.post("/forum/viewThread.shtml?threadId=<bean:write name="forumThread" property="threadId"/>");
-  });
- });
-});
+<img id="tracker" src="" style="display:none">
+
+<script defer>
+    document.addEventListener("mousemove", function trackOnce() {
+        document.getElementById("tracker").src = "/viewThread/count.gif?threadId=<bean:write name="forumThread" property="threadId"/>";
+        document.removeEventListener("mousemove", trackOnce);
+    });
 </script>
+
 
 <script type="speculationrules">
   {
