@@ -319,33 +319,8 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
 <%@include file="../common/IncludeBottomBody.jsp"%>
 
-<img id="tracker" src="" style="display:none">
-
-<script defer>
-document.addEventListener("DOMContentLoaded", function() {
-    function trackOnce() {
-        document.getElementById("tracker").src =
-          "/viewThread/count.gif?threadId=<bean:write name='forumThread' property='threadId'/>";
-    }
-    document.addEventListener("mousemove", trackOnce, { once: true });
-    document.addEventListener("touchstart", trackOnce, { once: true });
-});
-</script>
+<img src="/viewThread/count.gif?threadId=<bean:write name='forumThread' property='threadId'/>" width="1" height="1" style="display:none">
 
 
-<script type="speculationrules">
-  {
-    "prerender": [{
-      "source": "document",
-      "where": {
-        "and": [
-          { "selector_matches": ".hover-preload" },
-          { "not": { "selector_matches": ".do-not-prerender" } }
-        ]
-      },
-      "eagerness": "moderate"
-    }]
-  }
-  </script>
 </body>
 </html>
