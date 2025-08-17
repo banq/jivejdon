@@ -319,8 +319,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
 <%@include file="../common/IncludeBottomBody.jsp"%>
 
-<img src="" width="1" height="1" style="display:none">
-
 <script defer>
 document.addEventListener("DOMContentLoaded", function() {
     var img = new Image();
