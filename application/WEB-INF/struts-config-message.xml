@@ -124,8 +124,8 @@
             <forward name="forward" path="/message/reblogLink.jsp" />
         </action>
 
-        <action path="/forum/viewThread" type="com.jdon.jivejdon.presentation.action.ViewThreadAction" scope="request" validate="false" >
-        </action>
+        <!-- <action path="/forum/viewThread" type="com.jdon.jivejdon.presentation.action.ViewThreadAction" scope="request" validate="false" >
+        </action> -->
 
         <action path="/message/searchAction" type="com.jdon.jivejdon.presentation.action.query.SearchAction" name="messageListForm" scope="request" validate="false">
             <forward name="success" path="/message/searchMessageResult.jsp" />
