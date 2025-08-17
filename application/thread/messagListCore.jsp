@@ -319,8 +319,14 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
 <%@include file="../common/IncludeBottomBody.jsp"%>
 
-<img src="/viewThread/count.gif?threadId=<bean:write name='forumThread' property='threadId'/>" width="1" height="1" style="display:none">
+<img src="" width="1" height="1" style="display:none">
 
+<script defer>
+document.addEventListener("DOMContentLoaded", function() {
+    var img = new Image();
+    img.src = "/viewThread/count.gif?threadId=<bean:write name='forumThread' property='threadId'/>";
+});
+</script>
 
 </body>
 </html>
