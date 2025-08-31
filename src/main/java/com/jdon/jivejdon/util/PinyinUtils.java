@@ -35,6 +35,11 @@ public class PinyinUtils {
                 lastWasSpace = false;
             }
         }
+         // 如果最后一个字符是"-"，则去除它
+        String result = sb.toString();
+        if (result.endsWith("-")) {
+            result = result.substring(0, result.length() - 1);
+        }
         return sb.toString();
     }
 
