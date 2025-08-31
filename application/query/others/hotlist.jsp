@@ -54,7 +54,7 @@ SRC="<%=request.getContextPath()%>/query/hotlist.shtml?dateRange=180&tablewidth=
             %>
             
             <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='<%= coutlength%>' >
-<a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" ><bean:write name="forumThread" property="name" /></a><br>
+<a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" ><bean:write name="forumThread" property="name" /></a><br>
             </logic:iterate>
 </div>
 <logic:notEqual name="noheader" value="on">

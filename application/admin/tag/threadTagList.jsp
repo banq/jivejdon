@@ -116,7 +116,7 @@
               <img src="../images/button_delete.gif" width="17" height="17" alt="删除该贴..." border="0"
               ></html:link></td>
             <td>
-              <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"
+              <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"
                  target="_blank">
                 <b><span class="tooltip html_tooltip_content_<bean:write name="forumThread" property="threadId"/>">
              <bean:write name="forumThread" property="name"/></span></b></a>

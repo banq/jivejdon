@@ -35,6 +35,7 @@ import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.api.ForumService;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
+import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.query.ResultSort;
 import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
 import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpecForMod;
@@ -80,12 +81,19 @@ public class SitemapServlet extends HttpServlet {
 				numPages = 1;
 			}
 
+			ForumMessageQueryService forumMessageQueryService = 
+                (com.jdon.jivejdon.api.query.ForumMessageQueryService) WebAppUtil
+                    .getService("forumMessageQueryService", servletContext);
+
 			for (int i = 1; i <= numPages; i++) {
 				PageIterator pi = getThreadPI(request, start, count);
 				Long threadId = null;
 				while (pi.hasNext()) {
 					threadId = (Long) pi.next();
-					urlsets.add(new UrlSet(threadUrl + threadId + ".html"));
+					ForumThread thread = forumMessageQueryService.getThread(threadId);
+					if (thread != null) 
+                            urlsets.add(new UrlSet(threadUrl + threadId + thread.getPinyinToken() + ".html"));
+				
 				}
 				if (threadId == null) {
 					continue;

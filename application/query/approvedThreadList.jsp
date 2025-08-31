@@ -41,7 +41,7 @@ int randomIdx = 0;
       <div class="row">	          
       <div class="col-lg-4">
 			      	<div class="zoom-container">
-              <a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/>.html"   title="<bean:write name="forumThread" property="name"/>">
+              <a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"   title="<bean:write name="forumThread" property="name"/>">
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">        
                     <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="img-thumbnail img-responsive" style="height:150px;width:100%"  loading="lazy" onerror="this.src='https://static.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg'"/>
                 </logic:notEmpty>
@@ -53,7 +53,7 @@ int randomIdx = 0;
 			      </div>
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
         <div class="col-lg-8">
-            <h1 style="font-size: 2.2rem;margin-top: 2px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/>.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h1>
+            <h1 style="font-size: 2.2rem;margin-top: 2px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h1>
             <div class="info">			 
               <span class="smallgray"><i class="fa fa-calendar"></i>
                 <bean:write name="forumMessage" property="modifiedDate3"/>
@@ -117,7 +117,7 @@ int randomIdx = 0;
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
          <h3 class="vid-name">
-          <a href="<%=com.jdon.jivejdon.util.ToolsUtil.getAppURL(request)%>/<bean:write name="forumThread" property="threadId"/>.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a>
+          <a href="<%=com.jdon.jivejdon.util.ToolsUtil.getAppURL(request)%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a>
         </h3>
       
          <div class="info">			 

@@ -42,8 +42,10 @@ public class ReblogLinkAction extends Action {
         if (tos != null && tos.size() != 0) {
             Collection<Property> props = new ArrayList<>();
             String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
+            ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
             for (Long threadId : tos) {
-                props.add(new Property("", domainUrl + "/" + Long.toString(threadId) + ".html"));
+                ForumThread thread = forumMessageService.getThread(threadId);
+                props.add(new Property("", domainUrl + "/" + Long.toString(threadId) + (thread != null ? thread.getPinyinToken() : "") + ".html"));
             }
             df.setPropertys(props);
         } else
@@ -68,11 +70,19 @@ public class ReblogLinkAction extends Action {
         String threadId = null;
         try {
             URI uri = new URI(url);
-            threadId = uri.getPath().replaceAll("/", "").replaceAll(".html", "");            
+            String path = uri.getPath().replaceAll("/", "").replaceAll(".html", "");
+            // 处理新格式：数字-字符串.html 或旧格式：数字.html
+            if (path.contains("-")) {
+                // 新格式：提取连字符前的数字部分
+                threadId = path.split("-")[0];
+            } else {
+                // 旧格式：直接使用整个路径
+                threadId = path;
+            }
         } catch (URISyntaxException e) {
             Debug.logError("Url error:" + url, module);
         }
-        if (threadId == null) {
+        if (threadId == null || !threadId.matches("\\d+")) {
             Debug.logError("threadId error:" + threadId, module);
             return null;
         }

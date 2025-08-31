@@ -13,7 +13,7 @@
 
 <li class="box">
       <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px;">   
-         <h3 class="vid-name"><a href="<%=com.jdon.jivejdon.util.ToolsUtil.getAppURL(request)%>/<bean:write name="forumThread" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThread" property="name"/></a></h3>
+         <h3 class="vid-name"><a href="<%=com.jdon.jivejdon.util.ToolsUtil.getAppURL(request)%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload"><bean:write name="forumThread" property="name"/></a></h3>
       
           <div class="info" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px;">
             

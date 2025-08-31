@@ -321,11 +321,6 @@ public class RSSGenServlet extends HttpServlet {
 		return null;
 	}
 
-	public ForumMessage getForumMessage(HttpServletRequest request, Long key) {
-		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService",
-				this.getServletContext());
-		return forumMessageService.getMessage(key);
-	}
 
 	private void addMessage(String url, List<SyndEntrySorted> entries, ForumMessage message,
 			HttpServletRequest request) {
@@ -365,7 +360,7 @@ public class RSSGenServlet extends HttpServlet {
 
 	private String getItemLink(String url, ForumMessage message, HttpServletRequest request) {
 
-		String relativeLink = "/" + message.getForumThread().getThreadId().toString() + ".html";
+		String relativeLink = "/" + message.getForumThread().getThreadId().toString() +  message.getForumThread().getPinyinToken()  + ".html";
 		return url + relativeLink;
 
 	}

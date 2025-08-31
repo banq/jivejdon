@@ -21,7 +21,7 @@
   <div class="linkblock">
      <div class="box">	             
          <h3 class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-          <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" onclick="showDialog('dialog2', '<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html#messageListBody');return false;" class="hover-preload"><bean:write name="forumThread" property="name"/></a>
+          <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" onclick="showDialog('dialog2', '<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html#messageListBody');return false;" class="hover-preload"><bean:write name="forumThread" property="name"/></a>
         </h3>
       
          <div class="info">			 

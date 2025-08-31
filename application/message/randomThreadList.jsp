@@ -95,7 +95,7 @@ pageContext.setAttribute("title", titleStr);
                  <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
                      <span ><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
                  </logic:greaterThan>     
-                 <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html" target="_blank"><bean:write name="forumThread" property="name"/></a></h3>
+                 <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" target="_blank"><bean:write name="forumThread" property="name"/></a></h3>
            
      
                       

@@ -327,6 +327,14 @@ public class ForumThread {
 		return (built.get())? this.threadTagsVO.getToken():"";
 	}
 
+	public String getPinyinToken(){
+        String token = getToken();
+		if (token == null || token.trim().isEmpty()) {
+            return "";
+        }
+        return  "-" + com.jdon.jivejdon.util.PinyinUtils.toPinyin(token);
+    }
+
 	public void changeTags(ThreadTagsVO threadTagsVO) {
 		this.getThreadTagsVO().subscriptionNotify(threadTagsVO.getTags());
 		this.threadTagsVO = threadTagsVO;

@@ -527,14 +527,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
 // 监听广告加载状态并隐藏未填充的广告
 // 只处理#ad-container内的未填充广告
 function hideUnfilledAds() {
-  const container = document.getElementById('ad-container');
-  if (!container) return;
+  try {
+    const container = document.getElementById('ad-container');
+    if (!container) return;
 
-  container.querySelectorAll('ins.adsbygoogle').forEach(ad => {
-    if (ad.getAttribute('data-ad-status') === 'unfilled') {
+    // 使用CSS选择器直接筛选未填充的广告，提高性能
+    const unfilledAds = container.querySelectorAll('ins.adsbygoogle[data-ad-status="unfilled"]');
+    let hiddenCount = 0;
+    
+    unfilledAds.forEach(ad => {
       ad.style.setProperty('display', 'none', 'important');
+      hiddenCount++;
+    });
+    
+    // 调试信息：记录隐藏的广告数量
+    if (hiddenCount > 0) {
+      console.log(`隐藏了 ${hiddenCount} 个未填充的广告`);
     }
-  });
+  } catch (error) {
+    console.warn('hideUnfilledAds error:', error);
+  }
 }
 
 // 1. 优先初始化 Observer（放在外部）

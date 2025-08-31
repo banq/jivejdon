@@ -65,7 +65,7 @@ document.getElementById('token').value = '<bean:write name="forumThread" propert
 </logic:equal>
 <br><br><br><br>
 
-<a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/>.html"
+<a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"
    target="_blank">
     <b><span
             class="tooltip html_tooltip_content_<bean:write name="forumThread" property="threadId"/>">

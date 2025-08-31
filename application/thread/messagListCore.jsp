@@ -52,7 +52,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <meta name="author" content="<bean:write name="forumThread" property="rootMessage.account.username" />">
     <meta name="og:title" content="<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>">
     <meta name="og:description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" /> ">       
-    <meta property="og:url" content="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html"/>
+    <meta property="og:url" content="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" /><bean:write name="forumThread" property="pinyinToken" />.html"/>
     <meta property="og:release_date" content="<bean:write name="forumThread" property="creationDate" />"/>
     <meta property="og:image" content="<%=domainUrl %>/simgs/jdon100.png"/> 
     <style> 
@@ -60,12 +60,12 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     </style> 
     <link rel="sitemap" type="application/xml" title="Sitemap" href="<%=domainUrl %>/sitemap.xml">
     <link rel="apple-touch-icon" href="<%=domainUrl %>/simgs/jdon100.png" />
-    <link rel="canonical" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html">  
+    <link rel="canonical" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" /><bean:write name="forumThread" property="pinyinToken" />.html">  
     <%if(pagestartInt != 0 ) {%> 
       <%if(pagestartInt-pagecountInt>0 ) {%>  
           <link rel="prev" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />/page/<%=(pagestartInt-pagecountInt)%>"/>
       <%}else{%>
-          <link rel="prev" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html"/>
+          <link rel="prev" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" /><bean:write name="forumThread" property="pinyinToken" />.html"/>
        <%}%>
   <%}%> 
   <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
@@ -117,7 +117,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <%if(pagestartInt-pagecountInt>0 ) {%>  
         <a href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />/page/<%=(pagestartInt-pagecountInt)%>" rel="prev" class="btn-page">上页</a>
     <%}else{%>
-        <a href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />.html" rel="prev" class="btn-page">上页</a>
+        <a href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" /><bean:write name="forumThread" property="pinyinToken" />.html" rel="prev" class="btn-page">上页</a>
      <%}%>
     </li>  
   </ul>

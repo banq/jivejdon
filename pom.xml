@@ -383,6 +383,13 @@
     <version>5.1.47</version>
 </dependency>
 
+<!-- https://mvnrepository.com/artifact/com.belerweb/pinyin4j -->
+<dependency>
+    <groupId>com.belerweb</groupId>
+    <artifactId>pinyin4j</artifactId>
+    <version>2.5.1</version>
+</dependency>
+
     </dependencies>
 
     <build>
