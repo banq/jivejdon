@@ -13,26 +13,32 @@ public class PinyinUtils {
         format.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
 
         StringBuilder sb = new StringBuilder();
+        boolean lastWasSpace = false;
         for (char c : chinese.toCharArray()) {
             if (Character.toString(c).matches("[\\u4E00-\\u9FA5]")) {
                 try {
                     String[] pinyinArray = PinyinHelper.toHanyuPinyinStringArray(c, format);
                     if (pinyinArray != null) {
                         sb.append(pinyinArray[0]);
+                        lastWasSpace = false;
                     }
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
                     e.printStackTrace();
                 }
             } else if (c == ' ') {
-                sb.append("-");
+                if (!lastWasSpace) {
+                    sb.append("-");
+                    lastWasSpace = true;
+                }
             } else {
                 sb.append(c);
+                lastWasSpace = false;
             }
         }
         return sb.toString();
     }
 
     public static void main(String[] args) {
-        System.out.println(toPinyin("你好世界 people")); // 输出: nihaoshijie
+        System.out.println(toPinyin("你好 世界  people")); // 输出: nihaoshijie
     }
 }
