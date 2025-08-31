@@ -332,7 +332,12 @@ public class ForumThread {
 		if (token == null || token.trim().isEmpty()) {
             return "";
         }
-        return  "-" + com.jdon.jivejdon.util.PinyinUtils.toPinyin(token);
+        String pinyinResult = com.jdon.jivejdon.util.PinyinUtils.toPinyin(token);
+        if (pinyinResult.startsWith("-")) {
+            return pinyinResult;
+        } else {
+            return "-" + pinyinResult;
+        }
     }
 
 	public void changeTags(ThreadTagsVO threadTagsVO) {
