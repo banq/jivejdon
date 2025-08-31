@@ -40,10 +40,10 @@ public class PinyinUtils {
         if (result.endsWith("-")) {
             result = result.substring(0, result.length() - 1);
         }
-        return sb.toString();
+        return result;
     }
 
     public static void main(String[] args) {
-        System.out.println(toPinyin("你好 世界  people")); // 输出: nihaoshijie
+        System.out.println(toPinyin("你好 世界  people   ")); // 输出: nihaoshijie
     }
 }
