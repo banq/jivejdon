@@ -63,13 +63,7 @@ document.getElementById('token').value = '<bean:write name="forumThread" propert
 </script>    	
     	
 </logic:equal>
-<br><br><br><br>
 
-<a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"
-   target="_blank">
-    <b><span
-            class="tooltip html_tooltip_content_<bean:write name="forumThread" property="threadId"/>">
-             <bean:write name="forumThread" property="name"/></span></b></a>
 </div>
 
  <%@include file="../../common/IncludeBottomBody.jsp"%>
