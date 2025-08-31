@@ -24,7 +24,7 @@
         <to>/thread.shtml?thread=$1</to>
     </rule>
      <rule>
-        <from>^/([0-9]+)-([a-zA-Z-]+)\.html$</from>
+        <from>^/([0-9]+)-([a-zA-Z0-9-]+)\.html$</from>
         <to>/thread.shtml?thread=$1</to>
     </rule>
     <rule>
