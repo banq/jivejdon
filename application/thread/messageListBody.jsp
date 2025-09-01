@@ -174,7 +174,7 @@
                                 </div>  
                               </logic:notEmpty>              
                             </div>
-                            <div class="vid-name"><a href="<%=domainUrl %>/<bean:write name="forumThreadLink" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThreadLink" property="name"/></a></div>
+                            <div class="vid-name"><a href="<%=domainUrl %>/<bean:write name="forumThreadLink" property="threadId"/><bean:write name="forumThreadLink" property="pinyinToken" />.html" class="hover-preload"><bean:write name="forumThreadLink" property="name"/></a></div>
                  
                             <div class="smallgray" id="des_<bean:write name="forumThreadLink" property="threadId"/>" aria-hidden="true"></div>
                                <script>

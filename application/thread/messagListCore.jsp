@@ -194,7 +194,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                                    </div>  
                                  </logic:notEmpty>              
                            </div>
-                          <div class="vid-name" style="margin-left: 2px; flex: 1;"><a href="<%=domainUrl %>/<bean:write name="forumThreadPreNext" property="threadId"/>.html" class="hover-preload"><bean:write name="forumThreadPreNext" property="name"/></a></div>
+                          <div class="vid-name" style="margin-left: 2px; flex: 1;"><a href="<%=domainUrl %>/<bean:write name="forumThreadPreNext" property="threadId"/><bean:write name="forumThreadPreNext" property="pinyinToken" />.html" class="hover-preload"><bean:write name="forumThreadPreNext" property="name"/></a></div>
                        
     
                  
@@ -267,7 +267,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                     <img src="https://static.jdon.com/simgs/thumb/2.jpg" border="0" class="img-thumbnail" loading="lazy" width="45" height="45">                  
                   </div>  
                 </div>
-         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/76821.html" class="hover-preload">Content与Context一字之差暗藏逆天极道</a></h4>
+         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/76821-shangxiawengongcheng.html" class="hover-preload">Content与Context一字之差暗藏逆天极道</a></h4>
 
         </div>
 </li>
@@ -279,7 +279,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                     <img src="https://static.jdon.com/simgs/thumb/2.jpg" border="0" class="img-thumbnail" loading="lazy" width="45" height="45">                  
                   </div>  
                 </div>
-         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/79419.html" class="hover-preload">语境崩塌：你的注意力正被劫持</a></h4>
+         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/79419-yujing-zhuyili.html" class="hover-preload">语境崩塌：你的注意力正被劫持</a></h4>
 
         </div>
 </li>
