@@ -98,6 +98,8 @@ public class ForumThread {
 
 	private AtomicReference<Boolean>  built ;
 
+	private volatile String pinyinResultCache;
+
 	/**
 	 * normal can be cached reused
 	 *
@@ -328,21 +330,27 @@ public class ForumThread {
 	}
 
 	public String getPinyinToken(){
+		if (pinyinResultCache != null) {
+            return pinyinResultCache;
+        }
+
         String token = getToken();
 		if (token == null || token.trim().isEmpty()) {
             return "";
         }
         String pinyinResult = com.jdon.jivejdon.util.PinyinUtils.toPinyin(token);
         if (pinyinResult.startsWith("-")) {
-            return pinyinResult;
+            pinyinResultCache = pinyinResult;
         } else {
-            return "-" + pinyinResult;
+            pinyinResultCache = "-" + pinyinResult;
         }
+		return pinyinResultCache;
     }
 
 	public void changeTags(ThreadTagsVO threadTagsVO) {
 		this.getThreadTagsVO().subscriptionNotify(threadTagsVO.getTags());
 		this.threadTagsVO = threadTagsVO;
+		this.pinyinResultCache = null;
 	}
 
 	public String[] getTagTitles() {
