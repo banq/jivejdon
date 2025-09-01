@@ -32,7 +32,7 @@
                         <div class="col-lg-12">
                             <header>
                             <h3 class="vid-name">
-                            <a href='<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId" />.html'
+                            <a href='<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId" /><bean:write name="forumThread" property="pinyinToken" />.html'
                                target="_blank">
                                 <bean:write name="forumThread" property="name"/></a>
                             </h3>    
