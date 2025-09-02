@@ -25,7 +25,15 @@ public class PinyinUtils {
                 try {
                     String[] pinyinArray = PinyinHelper.toHanyuPinyinStringArray(c, format);
                     if (pinyinArray != null) {
-                        sb.append(pinyinArray[0]);
+                        String pinyin = pinyinArray[0];
+                        // 过滤拼音中的非字母非数字字符，只保留字母和数字
+                        StringBuilder filteredPinyin = new StringBuilder();
+                        for (char pc : pinyin.toCharArray()) {
+                            if (Character.isLetterOrDigit(pc)) {
+                                filteredPinyin.append(pc);
+                            }
+                        }
+                        sb.append(filteredPinyin.toString());
                         lastWasSpace = false;
                     }
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
@@ -57,6 +65,6 @@ public class PinyinUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(toPinyin("你好 世界  people＋  chinese 12389 ")); // 输出: nihaoshijie
+        System.out.println(toPinyin("战略性 ")); // 输出: nihaoshijie
     }
 }
