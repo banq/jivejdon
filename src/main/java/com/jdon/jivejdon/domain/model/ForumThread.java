@@ -336,14 +336,16 @@ public class ForumThread {
 
         String token = getToken();
 		if (token == null || token.trim().isEmpty()) {
+            // 使用getName()的前四个汉字转为拼音
+            String pinyinFromName = com.jdon.jivejdon.util.PinyinUtils.toPinyinFromFirstFourChinese(getName());
+            if (pinyinFromName != null && !pinyinFromName.trim().isEmpty()) {
+                pinyinResultCache = pinyinFromName.startsWith("-") ? pinyinFromName : "-" + pinyinFromName;
+                return pinyinResultCache;
+            }
             return "";
         }
         String pinyinResult = com.jdon.jivejdon.util.PinyinUtils.toPinyin(token);
-        if (pinyinResult.startsWith("-")) {
-            pinyinResultCache = pinyinResult;
-        } else {
-            pinyinResultCache = "-" + pinyinResult;
-        }
+        pinyinResultCache = pinyinResult.startsWith("-") ? pinyinResult : "-" + pinyinResult;
 		return pinyinResultCache;
     }
 

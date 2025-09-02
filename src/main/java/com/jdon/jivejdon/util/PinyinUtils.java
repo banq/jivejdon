@@ -64,7 +64,32 @@ public class PinyinUtils {
         return result;
     }
 
+    public static String toPinyinFromFirstFourChinese(String text) {
+        if (text == null || text.trim().isEmpty()) {
+            return "";
+        }
+
+        StringBuilder firstFourChars = new StringBuilder();
+        int count = 0;
+        for (char c : text.toCharArray()) {
+            // 只取有效字符：汉字、英文字母、数字
+            if (Character.toString(c).matches("[\\u4E00-\\u9FA5]") || Character.isLetterOrDigit(c)) {
+                firstFourChars.append(c);
+                count++;
+                if (count >= 6) {
+                    break;
+                }
+            }
+        }
+
+        if (firstFourChars.length() > 0) {
+            return toPinyin(firstFourChars.toString());
+        }
+
+        return "";
+    }
     public static void main(String[] args) {
-        System.out.println(toPinyin("战略性 ")); // 输出: nihaoshijie
+       System.out.println(toPinyin("j2se基础的重要性 ")); // 输出: nihaoshijie
+       System.out.println(toPinyinFromFirstFourChinese("ab中文c223"));
     }
 }
