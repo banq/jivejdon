@@ -21,8 +21,15 @@
         <!--  thread -->
     <rule>
         <from>^/([0-9]+)\.html$</from>
-        <to>/thread.shtml?thread=$1</to>
+        <to type="permanent-redirect">/redirect/$1</to>
     </rule>
+    
+    <!-- 处理重定向请求 -->
+    <rule>
+        <from>^/redirect/([0-9]+)$</from>
+        <to>/redirect.shtml?threadId=$1</to>
+    </rule>
+    
      <rule>
         <from>^/([0-9]+)-([a-zA-Z0-9-]+)\.html$</from>
         <to>/thread.shtml?thread=$1</to>

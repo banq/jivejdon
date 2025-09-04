@@ -22,6 +22,11 @@
       <forward name="success" path="/forum/forumList.jsp"/>
     </action>
     
+    <!-- 301重定向处理器：将旧格式URL重定向到新格式URL -->
+    <action path="/redirect" type="com.jdon.jivejdon.presentation.action.ThreadRedirectAction"
+      scope="request" validate="false">
+    </action>
+    
 
   <action path="/forum/admin/forumList" type="com.jdon.jivejdon.presentation.action.ForumListAction"
       name="forumListForm" scope="request" 
