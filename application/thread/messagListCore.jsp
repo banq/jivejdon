@@ -243,7 +243,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
               <img src="https://static.jdon.com/simgs/thumb/2.jpg" border="0" class="img-thumbnail" loading="lazy" width="45" height="45">
             </div>
           </div>
-         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/69062.html" class="hover-preload">什么是Context上下文？</a></h4>
+         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/69062-shenmeshiCon.html" class="hover-preload">什么是Context上下文？</a></h4>
 
         </div>
 </li>
@@ -255,7 +255,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                     <img src="https://static.jdon.com/simgs/thumb/3.jpg" border="0" class="img-thumbnail" loading="lazy" width="45" height="45">                  
                   </div>  
                 </div>
-         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/69903.html" class="hover-preload">抽象两种方法：上下文与类型</a></h4>
+         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/69903-chouxiangliangzhongfangfa.html" class="hover-preload">抽象两种方法：上下文与类型</a></h4>
 
         </div>
 </li>
