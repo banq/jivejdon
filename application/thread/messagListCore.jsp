@@ -63,13 +63,13 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <link rel="canonical" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" /><bean:write name="forumThread" property="pinyinToken" />.html">  
     <%if(pagestartInt != 0 ) {%> 
       <%if(pagestartInt-pagecountInt>0 ) {%>  
-          <link rel="prev" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />/page/<%=(pagestartInt-pagecountInt)%>"/>
+          <link rel="prev" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" /><bean:write name="forumThread" property="pinyinToken" />-from-<%=(pagestartInt-pagecountInt)%>.html"/>
       <%}else{%>
           <link rel="prev" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" /><bean:write name="forumThread" property="pinyinToken" />.html"/>
        <%}%>
   <%}%> 
   <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
-          <link rel="next" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />/page/<%=pagestartInt+pagecountInt%>"/>
+          <link rel="next" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" /><bean:write name="forumThread" property="pinyinToken" />-from-<%=pagestartInt+pagecountInt%>.html"/>
   <%}%>
     <link rel="preload" href="https://static.jdon.com/js/jdon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <script defer src="https://static.jdon.com/js/jquery-bootstrap2.js"></script> 
@@ -115,7 +115,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   <ul class="pagination pull-left">
     <li>
     <%if(pagestartInt-pagecountInt>0 ) {%>  
-        <a href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />/page/<%=(pagestartInt-pagecountInt)%>" rel="prev" class="btn-page">上页</a>
+        <a href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" /><bean:write name="forumThread" property="pinyinToken" />-from-<%=(pagestartInt-pagecountInt)%>.html" rel="prev" class="btn-page">上页</a>
     <%}else{%>
         <a href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" /><bean:write name="forumThread" property="pinyinToken" />.html" rel="prev" class="btn-page">上页</a>
      <%}%>
@@ -129,7 +129,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   <ul class="pagination pull-right"> 
     <li>
     <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
-    <a href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" />/page/<%=pagestartInt+pagecountInt%>" rel="next" class="btn-page">下页</a>
+    <a href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" /><bean:write name="forumThread" property="pinyinToken" />-from-<%=pagestartInt+pagecountInt%>.html" rel="next" class="btn-page">下页</a>
     <%}%>
   </li>  
 </ul>

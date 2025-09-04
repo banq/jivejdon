@@ -29,19 +29,15 @@
         <from>^/redirect/([0-9]+)$</from>
         <to>/redirect.shtml?threadId=$1</to>
     </rule>
-    
+    <rule>
+        <from>^/([0-9]+)-([a-zA-Z0-9-]+)-from-([0-9]+)\.html$</from>
+        <to>/thread.shtml?thread=$1&amp;start=$3&amp;count=15</to>
+    </rule>
      <rule>
         <from>^/([0-9]+)-([a-zA-Z0-9-]+)\.html$</from>
         <to>/thread.shtml?thread=$1</to>
     </rule>
-    <rule>
-        <from>^/([0-9]+)/page/([0-9]+)$</from>
-        <to>/thread.shtml?thread=$1&amp;start=$2&amp;count=15</to>
-    </rule> 
-     <rule>
-        <from>^/post/([0-9]+)$</from>
-        <to type="permanent-redirect">../$1.html</to>
-    </rule>
+   
     <rule>
         <from>^/$</from>
         <to>/forum/forumList.shtml</to>
@@ -63,15 +59,6 @@
         <to>/forum/threadList.shtml?forum=$1&amp;start=$2&amp;count=30</to>
     </rule>
     <rule>
-        <from>^/thread$</from>
-        <to>/forum/threadList.shtml</to>
-    </rule>
-    <rule>
-        <from>^/threads$</from>
-        <to>/forum/threadList.shtml?count=30</to>
-    </rule>
-
-    <rule>
         <from>^/threads/$</from>
         <to>/forum/threadList.shtml?count=30</to>
     </rule>
@@ -80,12 +67,6 @@
         <from>^/threads/([0-9]+)$</from>
         <to>/forum/threadList.shtml?start=$1&amp;count=30</to>
     </rule>
-
-    <rule>
-        <from>^/approval$</from>
-        <to>/query/approvedListOther.shtml?start=0&amp;count=30</to>
-    </rule>
-
     <rule>
         <from>^/approval/$</from>
         <to>/query/approvedListOther.shtml?start=0&amp;count=30</to>
@@ -96,12 +77,6 @@
         <to>/query/approvedListOther.shtml?start=$1&amp;count=30</to>
     </rule>
 
-
-    <!-- <rule>
-        <from>^/approvedNewList3$</from>
-        <to>/query/threadApprovedNewList3.shtml?count=15</to>
-    </rule> -->
-
     <rule>
         <from>^/query/tt/([0-9]+)$</from>
         <to>/query/tt.shtml?start=0&amp;length=10&amp;tablewidth=160&amp;count=6&amp;tagID=$1</to>
@@ -111,9 +86,6 @@
         <from>^/query/tt2/([0-9]+)$</from>
         <to>/query/tt2.shtml?start=0&amp;length=10&amp;tablewidth=160&amp;count=6&amp;tagID=$1</to>
     </rule>
-
-
-
 
      <rule>
         <from>^/maxPopThreads/$</from>
@@ -137,12 +109,6 @@
     </rule>
 
     
-
-    <!-- tags -->
-        <rule>
-        <from>^/tags/tagcloud$</from>
-        <to>/tags/tagsList2.shtml</to>
-    </rule>
     <rule>
         <from>^/tag/$</from>
         <to>/tags/tagsList.shtml?count=6&amp;start=0</to>
@@ -192,24 +158,7 @@
         <!-- note: here must be userId, actually userId'value is username'value, need a model key  -->
         <to>/blog/userMessages.shtml?username=$1&amp;count=30&amp;start=$2</to>
     </rule>
-    <!--<rule>-->
-        <!--<from>^/blog/([^\/|^\>|^\&amp;|^\=|^\'|^\"|^\&lt;|^\?|^\\|^\s]*)$</from>-->
-        <!--<to>/blog/home.shtml?username=$1&amp;count=10</to>-->
-    <!--</rule>-->
-    <!--<rule>-->
-        <!--<from>^/blog/([^\/|^\>|^\&amp;|^\=|^\'|^\"|^\&lt;|^\?|^\\|^\s]*)/([0-9]+)$</from>-->
-        <!--<to>/blog/home.shtml?username=$1&amp;count=10&amp;start=$2</to>-->
-    <!--</rule>-->
-    <!--<rule>-->
-        <!--<from>^/blog/messages/(\w+)$</from>-->
-        <!--&lt;!&ndash; note: here must be userId, actually userId'value is username'value, need a model key  &ndash;&gt;-->
-        <!--<to>/blog/userMessages.shtml?username=$1&amp;count=10</to>-->
-    <!--</rule>-->
-    <!--<rule>-->
-        <!--<from>^/blog/messages/(\w+)/([0-9]+)$</from>-->
-        <!--&lt;!&ndash; note: here must be userId, actually userId'value is username'value, need a model key  &ndash;&gt;-->
-        <!--<to>/blog/userMessages.shtml?username=$1&amp;count=10&amp;start=$2</to>-->
-    <!--</rule>-->
+   
 
 
 	<rule>
@@ -224,14 +173,6 @@
         <from>^/sitemap.xml$</from>
         <to>/sitemap</to>
     </rule>
-    <rule>
-        <from>^/sitemap/([0-9]+)/([0-9]+).xml$</from>
-        <to>/sitemap?sub=$1&amp;start=$2</to>
-    </rule>
+   
 
-
-    <!--
-        <rule> <from>^/thread.jsp?(.*)&amp;message=([0-9]+)$</from> <to
-        type="permanent-redirect">thread.jsp$1&amp;message=$2#$2</to> </rule>
-    -->
 </urlrewrite>
