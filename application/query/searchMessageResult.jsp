@@ -4,7 +4,9 @@
 <%@ taglib uri="/WEB-INF/MultiPages.tld" prefix="MultiPages" %>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
-
+<%
+    response.setHeader("X-Robots-Tag", "noindex, nofollow");
+%>
 
  
 <%

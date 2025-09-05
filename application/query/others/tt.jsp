@@ -5,7 +5,9 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-
+<%
+    response.setHeader("X-Robots-Tag", "noindex, nofollow");
+%>
 <logic:empty name="threadTag">
   <%response.setStatus(HttpServletResponse.SC_NOT_FOUND);%>
 </logic:empty>

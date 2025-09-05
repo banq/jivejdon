@@ -4,7 +4,9 @@
 <%@ taglib uri="/WEB-INF/MultiPages.tld" prefix="MultiPages" %>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
-
+<%
+    response.setHeader("X-Robots-Tag", "noindex, nofollow");
+%>
  
 <bean:define id="title"  value=" 道场查询" />
 <%@ include file="../common/IncludeTop.jsp" %>

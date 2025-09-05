@@ -5,7 +5,9 @@
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-
+<%
+    response.setHeader("X-Robots-Tag", "noindex, nofollow");
+%>
 <bean:parameter id="count" name="count" value="5"/>
 <%
 String coutlength = (String)pageContext.getAttribute("count");

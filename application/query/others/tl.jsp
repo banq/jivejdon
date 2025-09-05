@@ -4,7 +4,9 @@
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ taglib uri="/WEB-INF/MultiPages.tld" prefix="MultiPages" %>
 <%@ page session="false" %>
-  
+  <%
+    response.setHeader("X-Robots-Tag", "noindex, nofollow");
+%>
 <!DOCTYPE html>
 <html>
 <head>

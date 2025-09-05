@@ -4,6 +4,9 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%
+    response.setHeader("X-Robots-Tag", "noindex, nofollow");
+%>
 <logic:iterate indexId="i" id="forumThread" name="threadListForm" property="list" length='1' >
     <bean:define id="forumMessage" name="forumThread" property="rootMessage" />	
     <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">
