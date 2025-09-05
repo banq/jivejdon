@@ -37,10 +37,10 @@
        
 
       <div class="article">
-      <article>
+      <article itemscope itemtype="https://schema.org/Article">
         <header class="post_header">
             <logic:equal name="forumMessage" property="root" value="true">
-                <h1 class="bige20">
+                <h1 class="bige20" itemprop="headline">
                   <logic:notEmpty name="forumMessage" property="messageUrlVO.linkUrl">
                    <a href="<bean:write name="forumMessage" property="messageUrlVO.linkUrl" filter="false"/>" target="_blank" title="原始链接">
                     <bean:write name="forumMessage" property="messageVO.subject"/>
@@ -58,13 +58,15 @@
                     <i class="fa fa-calendar">
                     <bean:define id="cdate" name="forumThread" property="creationDate"></bean:define>
                     <%String cdateS = (String) pageContext.getAttribute("cdate"); %>
-                    <time datetime="<%=cdateS.substring(2, 11) %>"><%=cdateS.substring(2, 11) %></time>
+                    <time datetime="<%=cdateS.substring(0, 10) %>" itemprop="datePublished"><%=cdateS.substring(0, 10)%></time>
                     </i>
                 </logic:equal>
 				         
                <logic:notEmpty name="forumMessage" property="account">
 				           	<i class="fa fa-user">
-                    <cite><bean:write name="forumMessage" property="account.username"/></cite>
+                        <span itemprop="editor" itemscope itemtype="https://schema.org/Person">
+                           <cite itemprop="name"><bean:write name="forumMessage" property="account.username"/></cite>
+                        </span>
                      </i>
                </logic:notEmpty>    
 
@@ -100,7 +102,7 @@
             </div>
         </header>
 
-        <section class="post_content">
+        <section class="post_content" itemprop="articleBody">
            <bean:write name="forumMessage" property="messageVO.body" filter="false"/>
         </section>
         
@@ -174,7 +176,13 @@
                                 </div>  
                               </logic:notEmpty>              
                             </div>
-                            <div class="vid-name"><a href="<%=domainUrl %>/<bean:write name="forumThreadLink" property="threadId"/><bean:write name="forumThreadLink" property="pinyinToken" />.html" class="hover-preload"><bean:write name="forumThreadLink" property="name"/></a></div>
+                            <div class="vid-name">
+                              <div itemprop="citation" itemscope itemtype="https://schema.org/Article">
+                                <a href="<%=domainUrl %>/<bean:write name="forumThreadLink" property="threadId"/><bean:write name="forumThreadLink" property="pinyinToken" />.html" class="hover-preload" itemprop="url">
+                                    <span itemprop="headline"><bean:write name="forumThreadLink" property="name"/></span>
+                                  </a>
+                              </div>
+                            </div>
                  
                             <div class="smallgray" id="des_<bean:write name="forumThreadLink" property="threadId"/>" aria-hidden="true"></div>
                                <script>
