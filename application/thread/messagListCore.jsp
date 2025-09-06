@@ -196,7 +196,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                            </div>
                           <div class="vid-name" style="margin-left: 2px; flex: 1;">
                             <div itemprop="citation" itemscope itemtype="https://schema.org/Article">
-                            <a href="<%=domainUrl %>/<bean:write name="forumThreadPreNext" property="threadId"/><bean:write name="forumThreadPreNext" property="pinyinToken" />.html" class="hover-preload" itemprop="url">
+                            <a href="<%=domainUrl %>/<bean:write name="forumThreadPreNext" property="threadId"/><bean:write name="forumThreadPreNext" property="pinyinToken" />.html" itemprop="url">
                                <span itemprop="headline"><bean:write name="forumThreadPreNext" property="name"/></span>
                             </a>
                             </div>
@@ -225,7 +225,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         
             <logic:iterate id="threadTag" name="forumThread" property="tags" >
               <li class="tagcloud">
-                <a href="<%=domainUrl %>/tag/<bean:write name="threadTag" property="tagID"/>/" target="_blank" class="tag-cloud-link" class="hover-preload">
+                <a href="<%=domainUrl %>/tag/<bean:write name="threadTag" property="tagID"/>/" target="_blank" class="tag-cloud-link">
                   <bean:write name="threadTag" property="title" /></a>
               </li>
            
