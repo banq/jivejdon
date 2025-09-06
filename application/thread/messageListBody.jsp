@@ -41,18 +41,6 @@
         <header class="post_header">
             <logic:equal name="forumMessage" property="root" value="true">
                 <h1 class="bige20" itemprop="headline"><logic:notEmpty name="forumMessage" property="messageUrlVO.linkUrl"><a href="<bean:write name="forumMessage" property="messageUrlVO.linkUrl" filter="false"/>" target="_blank" title="原始链接"><bean:write name="forumMessage" property="messageVO.subject"/></a></logic:notEmpty><logic:empty name="forumMessage" property="messageUrlVO.linkUrl"><bean:write name="forumMessage" property="messageVO.subject"/></logic:empty></h1>  
-                <%
-                    String token = "";
-                    try {
-                        token = ((com.jdon.jivejdon.domain.model.ForumThread)pageContext.getAttribute("forumThread")).getToken();
-                        if (token != null) {
-                            token = token.replaceAll("\\s+", ",");
-                        }
-                    } catch (Exception e) {
-                        // 如果获取失败，保持为空字符串
-                    }
-                %>
-                <meta itemprop="keywords" content="<%= token %>" />                 
             </logic:equal>
             
              <div class="post_meta info">
