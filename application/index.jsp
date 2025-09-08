@@ -59,7 +59,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
        <jsp:include page="/query/threadApprovedNewList2.shtml?count=15" flush="true"></jsp:include>
 
-    <jsp:include page="/query/threadApprovedNewList3.shtml?count=9" flush="true"></jsp:include>        
+    <jsp:include page="/query/threadApprovedNewList3.shtml?count=6" flush="true"></jsp:include>        
 	
     <div class="box"> 
 	    <div class="tres center">        
