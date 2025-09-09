@@ -94,14 +94,7 @@ pageContext.setAttribute("title", titleStr);
         <!---- Start Widget ---->
       <div class="widget">
         <div class="wid-vid">
-				<div id="digList" class="linkblock"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
-				 <script defer>
-					document.addEventListener("DOMContentLoaded", function(event) { 
-                                 $(document).ready(function() {      
-                                    $('#digList').load("/query/threadDigList");                                
-                                 });            
-                         });  
-                  </script>           
+		
           </div>
         </div>
 
@@ -110,10 +103,15 @@ pageContext.setAttribute("title", titleStr);
        <div class="widget">
            <div class="wid-vid">
 							    <div class="scrolldiv">
-							     <div style="width: 300px"> 
-            
+                       		<div id="digList" class="linkblock"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
+				 <script defer>
+					document.addEventListener("DOMContentLoaded", function(event) { 
+                                 $(document).ready(function() {      
+                                    $('#digList').load("/query/threadDigList");                                
+                                 });            
+                         });  
+                  </script>                     
 		                  
-                   </div> 
 							    </div>    
           </div>
         </div>

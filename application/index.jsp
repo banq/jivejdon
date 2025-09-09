@@ -97,8 +97,11 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 							</div>
 				</div>
 
-				<div>
-					    <div >
+			
+
+				<div class="widget">
+					    <div class="wid-vid">
+							 <div class="scrolldiv">
 							 <div id="digList"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
 							 <script defer>
 					               document.addEventListener("DOMContentLoaded", function(event) { 
@@ -107,13 +110,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                                           });            
                                         });  
                   			      </script>           
-						</div>
-				</div>		
-
-				<div class="widget">
-					    <div class="wid-vid">
-							 <div class="scrolldiv">
-							  
 							 </div>   
 							</div>
 				</div>
