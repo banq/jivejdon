@@ -102,7 +102,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 				<div class="widget">
 					    <div class="wid-vid">
 							 <div class="scrolldiv">
-							 <div id="digList"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
+							 <div id="digList" class="linkblock"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
 							 <script defer>
 					               document.addEventListener("DOMContentLoaded", function(event) { 
                                           $(document).ready(function() {      
