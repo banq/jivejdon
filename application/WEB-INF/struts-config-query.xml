@@ -23,8 +23,12 @@
         </action>
 
       <!-- reference in homepage -->
-     <action path="/query/threadApprovedNewList2" type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedHomeListAction" name="threadListForm" scope="request" validate="false">
+    <action path="/query/threadApprovedNewList" type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedHomeListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/approvedThreadList.jsp" />
+    </action>
+
+     <action path="/query/threadApprovedNewList2" type="com.jdon.jivejdon.presentation.action.query.ThreadApprovedHomeListAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/query/approvedThreadList2.jsp" />
         </action>
 
      <action path="/query/threadApprovedNewList3" type="com.jdon.jivejdon.presentation.action.query.ThreadTagHotListAction" name="tagsListForm" scope="request" validate="false">
