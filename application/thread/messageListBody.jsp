@@ -121,20 +121,7 @@
 	              </ul>
               </div>
              
-              <div class="box">
- <logic:empty name="principal"> 
-           <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-format="autorelaxed"
-                data-ad-client="ca-pub-7573657117119544"
-                data-ad-slot="3540211914"></ins>
-           <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-           </script>
- </logic:empty>
-              </div>
-
-
+          
               <logic:notEmpty name="threadLinkList" >   
                 <ul style="list-style-type:none;padding:0">
 
@@ -194,7 +181,6 @@
               </logic:notEmpty>
         
 </aside>
-
 
 </logic:equal>
 
