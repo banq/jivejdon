@@ -85,19 +85,10 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
 				<div class="widget">
 					    <div class="wid-vid">
-					
-							</div>
-				</div>
-
-                <div>
-					    <div>
-					
-                              <div id="newList"><jsp:include page="/query/threadNewList.shtml?count=10" flush="true"></jsp:include></div>   
+					         <div id="newList" class="linkblock"><jsp:include page="/query/threadNewList.shtml?count=10" flush="true"></jsp:include></div>   
 							   
 							</div>
 				</div>
-
-			
 
 				<div class="widget">
 					    <div class="wid-vid">
@@ -113,7 +104,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 							 </div>   
 							</div>
 				</div>
-		
 			
 			</div>
     </div></aside>
