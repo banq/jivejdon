@@ -62,12 +62,12 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <jsp:include page="/query/threadApprovedNewList3.shtml?offset=0&count=1" flush="true"></jsp:include>        
 	
     <jsp:include page="/query/threadApprovedNewList2.shtml?offset=5&count=9" flush="true"></jsp:include>
-    <jsp:include page="/query/threadApprovedNewList3.shtml?offset=1&count=2" flush="true"></jsp:include>        
+    <jsp:include page="/query/threadApprovedNewList3.shtml?offset=1&count=1" flush="true"></jsp:include>        
 	
     <jsp:include page="/query/threadApprovedNewList2.shtml?offset=9&count=13" flush="true"></jsp:include>
-    <jsp:include page="/query/threadApprovedNewList3.shtml?offset=2&count=3" flush="true"></jsp:include>        
+    <jsp:include page="/query/threadApprovedNewList3.shtml?offset=2&count=1" flush="true"></jsp:include>        
 	
-    <jsp:include page="/query/threadApprovedNewList3.shtml?offset=3&count=4" flush="true"></jsp:include>        
+    <jsp:include page="/query/threadApprovedNewList3.shtml?offset=3&count=3" flush="true"></jsp:include>        
 	
     <div class="box"> 
 	    <div class="tres center">        

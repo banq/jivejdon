@@ -39,11 +39,8 @@ while (idx < 5) {
 }
 int randomIdx = 0;
 %>
-<script>
-  const ids = []; // 初始化一个空数组
-</script>
 
-<aside>
+
 <logic:iterate  id="threadTag" name="tagsListForm"  property="list" offset="<%=offset%>" length="<%=count%>">
 
 
@@ -72,12 +69,7 @@ int randomIdx = 0;
 <div class="col-lg-7" id='ajax_<bean:write name="threadTag" property="tagID"/>'>  
   <br><br><br><br><br><br>     
   </div>  
-                 
-  <script>
-    ids.push(<bean:write name="threadTag" property="tagID"/>);
-  </script>
-       
-    
+     
 	</div>	
   </div>  
 </div>	
@@ -89,24 +81,10 @@ int randomIdx = 0;
 
 <%i++;%>
 </logic:iterate>
-</aside>
 
-<script>
-  async function fetchData() {
-    for (const id of ids) {
-            try {
-               const response = await fetch(`/query/tt/\${id}`);
-               if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const html = await response.text();
-                document.getElementById(`ajax_\${id}`).innerHTML = html;
-            } catch (error) {
-                console.error('Fetch error:', error);
-            }
-    }
-  }
 
-  fetchData();    
-
+ <script defer>
+            $(document).ready(function() {
+               $('#ajax_<bean:write name="threadTag" property="tagID"/>').load("/query/tt/${threadTag.tagID}");    
+          });
 </script>
