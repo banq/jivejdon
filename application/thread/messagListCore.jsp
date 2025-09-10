@@ -184,13 +184,13 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                           <div class="wrap-vid">              
                                  <logic:notEmpty name="forumThreadPreNext" property="rootMessage.messageUrlVO.imageUrl">                  
                                    <div class="thumbn">
-                                        <img src="<bean:write name="forumThreadPreNext" property="rootMessage.messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="45" height="45" onerror="this.src='/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg'"/>    
+                                        <img src="<bean:write name="forumThreadPreNext" property="rootMessage.messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="35" height="45" onerror="this.src='/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg'"/>    
                                    </div>
                                  </logic:notEmpty>
                                   
                                  <logic:notEmpty name="forumThreadPreNext" property="rootMessage.messageUrlVO.thumbnailUrl">                  
                                    <div class="thumbn">
-                                     <img src="<bean:write name="forumThreadPreNext" property="rootMessage.messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="45" height="45"/>                  
+                                     <img src="<bean:write name="forumThreadPreNext" property="rootMessage.messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="35" height="45"/>                  
                                    </div>  
                                  </logic:notEmpty>              
                            </div>
@@ -246,7 +246,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
          <div style="display: flex; align-items: center;"> 
          <div class="wrap-vid">              
           <div class="thumbn">
-              <img src="https://static.jdon.com/simgs/thumb/2.jpg" border="0" class="img-thumbnail" loading="lazy" width="45" height="45">
+              <img src="https://static.jdon.com/simgs/thumb/2.jpg" border="0" class="img-thumbnail" loading="lazy" width="35" height="45">
             </div>
           </div>
          <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/69062-shenmeshiCon.html" class="hover-preload">什么是Context上下文？</a></h4>
@@ -258,7 +258,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
          <div style="display: flex; align-items: center;"> 
          <div class="wrap-vid">              
           <div class="thumbn">
-                    <img src="https://static.jdon.com/simgs/thumb/3.jpg" border="0" class="img-thumbnail" loading="lazy" width="45" height="45">                  
+                    <img src="https://static.jdon.com/simgs/thumb/3.jpg" border="0" class="img-thumbnail" loading="lazy" width="35" height="45">                  
                   </div>  
                 </div>
          <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/69903-chouxiangliangzhongfangfa.html" class="hover-preload">抽象两种方法：上下文与类型</a></h4>
@@ -270,7 +270,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
          <div style="display: flex; align-items: center;"> 
          <div class="wrap-vid">              
           <div class="thumbn">
-                    <img src="https://static.jdon.com/simgs/thumb/2.jpg" border="0" class="img-thumbnail" loading="lazy" width="45" height="45">                  
+                    <img src="https://static.jdon.com/simgs/thumb/1.jpg" border="0" class="img-thumbnail" loading="lazy" width="35" height="45">                  
                   </div>  
                 </div>
          <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/76821-shangxiawengongcheng.html" class="hover-preload">Content与Context一字之差暗藏逆天极道</a></h4>
@@ -282,7 +282,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
          <div style="display: flex; align-items: center;"> 
          <div class="wrap-vid">              
           <div class="thumbn">
-                    <img src="https://static.jdon.com/simgs/thumb/2.jpg" border="0" class="img-thumbnail" loading="lazy" width="45" height="45">                  
+                    <img src="https://static.jdon.com/simgs/thumb/3.jpg" border="0" class="img-thumbnail" loading="lazy" width="35" height="45">                  
                   </div>  
                 </div>
          <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/79419-yujing-zhuyili.html" class="hover-preload">语境崩塌：你的注意力正被劫持</a></h4>
@@ -294,7 +294,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
          <div style="display: flex; align-items: center;"> 
          <div class="wrap-vid">              
           <div class="thumbn">
-              <img src="https://static.jdon.com/simgs/thumb/2.jpg" border="0" class="img-thumbnail" loading="lazy" width="45" height="45">
+              <img src="https://static.jdon.com/simgs/thumb/2.jpg" border="0" class="img-thumbnail" loading="lazy" width="35" height="45">
             </div>
           </div>
          <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/design.htm" class="hover-preload">Context逻辑之道</a></h4>
