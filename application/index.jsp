@@ -21,7 +21,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
   <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
-  <link rel="preconnect" href="https://static.jdon.com/" crossorigin>   
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,6 +33,8 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   <link rel="sitemap" type="application/xml" title="Sitemap" href="<%=domainUrl%>/sitemap.xml">
   <link rel="canonical" href="<%=domainUrl%>/">
   <link rel="preload" href="https://static.jdon.com/js/jdon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="prefetch" href="https://static.jdon.com/js/fonts/icomoon.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="https://static.jdon.com/js/jquery-bootstrap2.js" as="script">
   <script defer src="https://static.jdon.com/js/jquery-bootstrap2.js"></script> 
 </head>
 <body style="background-color:#FFF">
