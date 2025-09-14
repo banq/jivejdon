@@ -68,7 +68,8 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <jsp:include page="/query/threadApprovedNewList2.shtml?offset=9&count=13" flush="true"></jsp:include>
     <jsp:include page="/query/threadApprovedNewList3.shtml?offset=2&count=1" flush="true"></jsp:include>        
 	
-
+    <jsp:include page="/query/threadApprovedNewList2.shtml?offset=13&count=17" flush="true"></jsp:include>
+  
     <div class="box"> 
 	    <div class="tres center">        
            深入前沿黑科技 <a href="<%=domainUrl%>/approval/"><b>更多</b></a>	   
