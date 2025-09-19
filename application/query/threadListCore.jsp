@@ -25,7 +25,7 @@
         </h3>
          <div class="info" style="display:flex; align-items:flex-start; justify-content:space-between; margin-top: 10px">              
             <span style="flex:1; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical;overflow:hidden">           
-              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />. 
+              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />
              </span>  
               <img src="https://static.jdon.com/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg" alt="icon"  style="width:65px; height:65px; margin-left:12px; flex-shrink:0; object-fit:cover; border-radius:6px;">
             </div>
