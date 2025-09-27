@@ -304,11 +304,7 @@ public class RSSGenServlet extends HttpServlet {
 		}
 	}
 
-	private Account getAccount(HttpServletRequest request, String username) {
-		AccountService accountService = (AccountService) WebAppUtil.getService("accountService",
-				this.getServletContext());
-		return accountService.getAccountByName(username);
-	}
+
 
 	public ForumThread getForumThread(HttpServletRequest request, Long key) {
 		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil

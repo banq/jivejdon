@@ -15,7 +15,10 @@
  */
 package com.jdon.jivejdon.spi.component.sitemap;
 
+import java.util.List;
+
 import com.jdon.controller.model.PageIterator;
+import com.jdon.jivejdon.domain.model.ForumThread;
 
 public interface SitemapRepository {
 
@@ -30,5 +33,19 @@ public interface SitemapRepository {
 	public abstract PageIterator getUrls(int start, int count) throws Exception;
 
 	boolean checkUrl(String ioc);
-
+	
+	/**
+	 * 获取虚拟的ForumThread对象，用于生成URL
+	 * @param threadId
+	 * @return
+	 */
+	public ForumThread getVirtualForumThread(Long threadId);
+	
+	/**
+	 * 批量获取虚拟的ForumThread对象，用于生成URL
+	 * @param start 起始位置
+	 * @param count 数量
+	 * @return
+	 */
+	public List<ForumThread> getVirtualForumThreads(int start, int count);
 }

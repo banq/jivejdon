@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -81,22 +82,15 @@ public class SitemapServlet extends HttpServlet {
 				numPages = 1;
 			}
 
-			ForumMessageQueryService forumMessageQueryService = 
-                (com.jdon.jivejdon.api.query.ForumMessageQueryService) WebAppUtil
-                    .getService("forumMessageQueryService", servletContext);
+			// 获取SitemapRepository实例
+			SitemapRepository sitemapRepository = (SitemapRepository) WebAppUtil
+					.getComponentInstance("sitemapRepository", servletContext);
 
+			// 使用批量查询方式获取ForumThread对象
 			for (int i = 1; i <= numPages; i++) {
-				PageIterator pi = getThreadPI(request, start, count);
-				Long threadId = null;
-				while (pi.hasNext()) {
-					threadId = (Long) pi.next();
-					ForumThread thread = forumMessageQueryService.getThread(threadId);
-					if (thread != null) 
-                            urlsets.add(new UrlSet(threadUrl + threadId + thread.getPinyinToken() + ".html"));
-				
-				}
-				if (threadId == null) {
-					continue;
+				List<ForumThread> threads = sitemapRepository.getVirtualForumThreads(start, count);
+				for (ForumThread thread : threads) {
+					urlsets.add(new UrlSet(threadUrl + thread.getThreadId() + thread.getPinyinToken() + ".html"));
 				}
 				start = start + count;
 			}
@@ -235,5 +229,4 @@ public class SitemapServlet extends HttpServlet {
 		}
 
 	}
-
 }
