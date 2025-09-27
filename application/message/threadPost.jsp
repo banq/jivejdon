@@ -112,8 +112,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
          
         }  
 const select = document.getElementById("forumId_select");
-if (select.options.length > 5) {
-    select.selectedIndex = 5; // 选中第6个选项（索引5）
+if (select.options.length > 0) {
+    select.selectedIndex = select.options.length - 1; // 选中最后一个选项
 }
     });
 
