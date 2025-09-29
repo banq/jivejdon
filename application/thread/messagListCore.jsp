@@ -195,7 +195,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                                    </div>  
                                  </logic:notEmpty>              
                            </div>
-                          <div class="vid-name" style="margin-left: 2px; flex: 1;">
+                          <div class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                             <div itemprop="citation" itemscope itemtype="https://schema.org/Article">
                             <a href="<%=domainUrl %>/<bean:write name="forumThreadPreNext" property="threadId"/><bean:write name="forumThreadPreNext" property="pinyinToken" />.html" itemprop="url">
                                <span itemprop="headline"><bean:write name="forumThreadPreNext" property="name"/></span>
