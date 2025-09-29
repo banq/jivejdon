@@ -10,12 +10,13 @@
     response.setDateHeader("Expires", 0);
 %>
 
-<bean:define id="messageId" name="messageForm" property="messageId" value=""/>
-<bean:define id="action" name="messageForm" property="action" value=""/>
 
 
 <logic:messagesNotPresent>
     <logic:empty name="errors">
+        <bean:define id="messageId" name="messageForm" property="messageId"/>
+        <bean:define id="action" name="messageForm" property="action"/>
+
         <logic:notEqual name="action" value="delete">
 
           帖子保存成功
