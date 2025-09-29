@@ -130,6 +130,22 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 </head>
 <body>
 <%@ include file="../common/body_header.jsp" %>
+<%
+java.util.List nums = new java.util.ArrayList();
+int[] randomArr = new int[5];
+int idx = 0;
+while (idx < 5) {
+    nums.add(idx);
+    idx++;
+}
+java.util.Collections.shuffle(nums);
+idx = 0;
+while (idx < 5) {
+    randomArr[idx] = ((Integer)nums.get(idx)).intValue();
+    idx++;
+}
+int randomIdx = 0;
+%>
 
 <div id="ad-container" style="text-align: center; margin: 0 auto;">	
 <!-- 728X90横幅 -->
@@ -157,48 +173,112 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         
 
 
-       <center>
-        
-        <h1 class="tagcloud bige20"><a href="<%=domainUrl%>/tag/<bean:write name="tagID"/>/" class="tag-cloud-link"><bean:write  name='TITLE'/></a></h1>
   
-      <div>
-       
-             <%if (request.getSession(false) != null && request.getUserPrincipal() != null){%>
-           
-                 <a href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=2&subscribeId=<bean:write name="tagID" /> "><i class="fa fa-heart"></i></a>    
-                 <img src="/images/user_add.gif" width="18" height="18" alt="关注本标签" border="0" /></a>                                                         
-            <%
-            }
-        %>
-      
-  
-       &nbsp;&nbsp;  
-       <a href="<%=domainUrl%>/random/taggedThreadList.shtml?tagID=<bean:write name="tagID"/>&count=15&r=1" rel="nofollow">
-       <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M504.971 359.029c9.373 9.373 9.373 24.569 0 33.941l-80 79.984c-15.01 15.01-40.971 4.49-40.971-16.971V416h-58.785a12.004 12.004 0 0 1-8.773-3.812l-70.556-75.596 53.333-57.143L352 336h32v-39.981c0-21.438 25.943-31.998 40.971-16.971l80 79.981zM12 176h84l52.781 56.551 53.333-57.143-70.556-75.596A11.999 11.999 0 0 0 122.785 96H12c-6.627 0-12 5.373-12 12v56c0 6.627 5.373 12 12 12zm372 0v39.984c0 21.46 25.961 31.98 40.971 16.971l80-79.984c9.373-9.373 9.373-24.569 0-33.941l-80-79.981C409.943 24.021 384 34.582 384 56.019V96h-58.785a12.004 12.004 0 0 0-8.773 3.812L96 336H12c-6.627 0-12 5.373-12 12v56c0 6.627 5.373 12 12 12h110.785c3.326 0 6.503-1.381 8.773-3.812L352 176h32z"></path></svg>
-       </a>
-
-       </div>
-
-    
-		  
-      </center>
 
 <main>
-<ul style="list-style-type:none;padding:0px">
-<logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" >
-  <%@ include file="threadListCore.jsp" %>
+  <div class="row">	
+      <div class="col-md-4">
+       <div style="position: relative;">           
+       <a href='<%=request.getContextPath() %>/tag/<bean:write name="threadTag" property="tagID"/>/' title="<bean:write name="threadTag" property="title" />">         
+        <img id="home-thumbnai" src="/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg" border="0" class="img-thumbnail" style="width: 100%" loading="lazy"/>                  
+       </a>
+      <div style="position: absolute;bottom: 0px;">
+       <div class="tagcloud">
+        <h1 class="tagcloud bige20"><a href="<%=domainUrl%>/tag/<bean:write name="tagID"/>/" class="tag-cloud-link"><bean:write  name='TITLE'/></a></h1>
+  
+       </div>
+       </div> 
+      </div>
+      </div>
+      <div class="col-md-8">
+
+        
+<logic:iterate indexId="j"   id="forumThread" name="threadListForm" property="list" length="4" >
+  
+        <%
+  if(j % 2==0){ 
+ %>
+ <ul style="list-style-type:none;padding:0px">
+ <div class="row">	
+ <%}%>
+
+            <div class="col-sm-6" style="padding:0px">
+<li class="box">	
+     <div class="linkblock">	             
+         <h3 class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+          <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" onclick="showDialog('dialog2', '<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html#messageListBody');return false;" class="hover-preload"><bean:write name="forumThread" property="name"/></a>
+        </h3>
+         <div class="info" style="display:flex; align-items:flex-start; justify-content:space-between; margin-top: 10px">              
+            <span style="flex:1; display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical;overflow:hidden">           
+              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />
+             </span>  
+             
+            </div>
+  </div>	
+</li>  
+            </div>
+
+          
+
+<% j = j+1;%>
+<%
+  if(j % 2==0){ 
+ %>
+  </div>
+  </ul>
+ <%}%>
+
 </logic:iterate>
-</ul>
+
+      </div>
+  </div>
+
+<ul style="list-style-type:none;padding:0px">
+
+<logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" offset="4" >
+      <%
+ if(((Integer)i) % 3==0){ 
+ %>
+ <div class="row">	
+ <%}%>
+ <div class="col-md-4" style="padding:0px">
+ <li class="box">	
+  <div class="linkblock">
+     <div class="box">	             
+         <h3 class="vid-name" >
+          <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" onclick="showDialog('dialog2', '<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html#messageListBody');return false;" class="hover-preload"><bean:write name="forumThread" property="name"/></a>
+        </h3>
+         <div class="info" style="display:flex; align-items:flex-start; justify-content:space-between; margin-top: 10px">              
+            <span style="flex:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;overflow:hidden">           
+              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />
+             </span>  
+              <img src="https://static.jdon.com/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg" alt="icon"  style="width:40px; height:40px; margin-left:12px; flex-shrink:0; object-fit:cover; border-radius:6px;">
+            </div>
+	 </div>	
+  </div>	
+</li>  
+</div>
+
+
+
+
+<%
+  if(((Integer)i) % 3==0){ 
+ %>
+  </div>
+ <%}%>
+
+
+</logic:iterate>
+
+ </ul>
+
 </main>
 
 
 
         </div>
 
-
- 
-
-<% if (request.getParameter("r") == null){ %>  
 
 <div class="box">
 <div class="row">
@@ -230,7 +310,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
 </div>
 </div>
-<% } %>  
 
       </div>  
 
