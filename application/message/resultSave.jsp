@@ -10,8 +10,8 @@
     response.setDateHeader("Expires", 0);
 %>
 
-<bean:define id="messageId" name="messageForm" property="messageId"/>
-<bean:define id="action" name="messageForm" property="action"/>
+<bean:define id="messageId" name="messageForm" property="messageId" value=""/>
+<bean:define id="action" name="messageForm" property="action" value=""/>
 
 
 <logic:messagesNotPresent>
