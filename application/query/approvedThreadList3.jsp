@@ -80,12 +80,13 @@ int randomIdx = 0;
 
 
 <%i++;%>
-</logic:iterate>
+
 
   <script defer>
           document.addEventListener("DOMContentLoaded", function(event) { 
             $(document).ready(function() {
-               $('#ajax_<bean:write name="threadTag" property="tagID"/>').load("/query/tt/${threadTag.tagID}");    
+              $('#ajax_<bean:write name="threadTag" property="tagID"/>').load("/query/tt/<bean:write name="threadTag" property="tagID"/>");   
             });
           });     
         </script>
+</logic:iterate>
