@@ -103,7 +103,7 @@ pageContext.setAttribute("title", titleStr);
        <div class="widget">
            <div class="wid-vid">
 							    <div class="scrolldiv">
-                       		<div id="digList" class="linkblock"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
+                       		<div id="digList" class="linkblock" style="max-width:360px"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
 				 <script defer>
 					document.addEventListener("DOMContentLoaded", function(event) { 
                                  $(document).ready(function() {      

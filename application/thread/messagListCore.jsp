@@ -242,7 +242,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
           
                 <div class="scrolldiv">
 							
-<div id="digList" class="linkblock"><ul style="list-style-type:none;padding:0">
+<div id="digList" class="linkblock" style="max-width:360px"><ul style="list-style-type:none;padding:0">
 <li class="box">
          <div style="display: flex; align-items: center;"> 
          <div class="wrap-vid">              
