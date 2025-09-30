@@ -82,7 +82,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <aside>  			
     <div id="sidebar" class="col-lg-4 custom-col-right" style="padding-left:0px"><div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); background-color: white; overflow: hidden; padding-left: 5px; padding-right: 2px">
 				<!---- Start Widget ---->
-				<div class="widget">
+				<div class="box">
 					<div class="content">
 						<ul class="list-inline">
               <form role="form" class="form-horizontal" method="post" action="/query/threadViewQuery.shtml">
@@ -92,14 +92,14 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 					</div>
 				</div>
 
-				<div class="widget">
+				<div class="box">
 					    <div class="wid-vid">
 					         <div id="newList"><jsp:include page="/query/threadNewList.shtml?count=10" flush="true"></jsp:include></div>   
 							   
 							</div>
 				</div>
 
-				<div class="widget">
+				<div class="box">
 					    <div class="wid-vid">
 							 <div class="scrolldiv">
 							 <div id="digList" class="linkblock" style="max-width:360px"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
