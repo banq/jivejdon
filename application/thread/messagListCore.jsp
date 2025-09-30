@@ -176,7 +176,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         <div class="wid-vid">
                <div id="searchResult">                		
                 
-                  <div id="threadPreNextList" class="linkblock">
+                  <div id="threadPreNextList">
                     <logic:notEmpty name="threadPreNextList" >   
                       <ul style="list-style-type:none;padding:0">
                       <logic:iterate id="forumThreadPreNext" name="threadPreNextList" length="5">
