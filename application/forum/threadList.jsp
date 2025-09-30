@@ -124,7 +124,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <div id="page-content" class="single-page container">
 		<div class="row">
 			<!-- /////////////////左边 -->
-			<div id="main-content" class="col-lg-8">
+			<div id="main-content" class="col-lg-8 custom-col-left">
         <logic:notEmpty name="forum" property="name">
         <div class="box">
           <h1 style="font-size: 2.2rem"><bean:write name="title"/></h1>
@@ -253,7 +253,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
             </div>	
       <!-- /////////////////右边 -->
 <aside>      
-       <div id="sidebar" class="col-lg-4"><div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); background-color: white; overflow: hidden; padding-left: 0; padding-right: 0">
+       <div id="sidebar" class="col-lg-4 custom-col-right"><div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); background-color: white; overflow: hidden; padding-left: 0; padding-right: 0">
         <!---- Start Widget ---->
         <div class="widget wid-follow">
           <div class="content">

@@ -56,7 +56,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <div id="page-content" class="single-page container">
 	<div class="row">
        <main>	  
-	  <div id="main-content" class="col-lg-8">
+	  <div id="main-content" class="col-lg-8 custom-col-left">
     <jsp:include page="/query/threadApprovedNewList.shtml" flush="true"></jsp:include>
 
     <jsp:include page="/query/threadApprovedNewList2.shtml?offset=1&count=5" flush="true"></jsp:include>
