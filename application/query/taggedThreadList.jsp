@@ -178,7 +178,7 @@ int randomIdx = 0;
 <main>
   <div class="row">	
       <div class="col-md-4">
-       <div style="position: relative;">           
+       <div style="position: relative;padding-top:20px">           
        <a href='<%=request.getContextPath() %>/tag/<bean:write name="threadTag" property="tagID"/>/' title="<bean:write name="threadTag" property="title" />">         
         <img id="home-thumbnai" src="/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg" border="0" class="img-thumbnail" style="width: 100%" loading="lazy"/>                  
        </a>
@@ -203,7 +203,7 @@ int randomIdx = 0;
 <li class="box">	
      <div>	             
          <h3 class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-          <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" onclick="showDialog('dialog2', '<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html#messageListBody');return false;" class="hover-preload"><bean:write name="forumThread" property="name"/></a>
+          <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" onclick="showDialog('dialog2', '<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><h3><bean:write name="forumThread" property="pinyinToken" />.html#messageListBody');return false;" class="hover-preload"><bean:write name="forumThread" property="name"/></h3></a>
         </h3>
          <div class="info" style="display:flex; align-items:flex-start; justify-content:space-between; margin-top: 10px">              
             <span style="flex:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;overflow:hidden">           
@@ -239,7 +239,7 @@ int randomIdx = 0;
   <div class="linkblock">
      <div class="box">	             
          <h3 class="vid-name" >
-          <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" onclick="showDialog('dialog2', '<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html#messageListBody');return false;" class="hover-preload"><bean:write name="forumThread" property="name"/></a>
+          <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" onclick="showDialog('dialog2', '<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><h3><bean:write name="forumThread" property="pinyinToken" />.html#messageListBody');return false;" class="hover-preload"><bean:write name="forumThread" property="name"/></h3></a>
         </h3>
          <div class="info" style="display:flex; align-items:flex-start; justify-content:space-between; margin-top: 10px">              
             <span style="flex:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;overflow:hidden">           
