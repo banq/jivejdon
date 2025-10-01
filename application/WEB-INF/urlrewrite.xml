@@ -120,11 +120,11 @@
     </rule>
     <rule>
         <from>^/tag/([0-9]+)/$</from>
-        <to>/tag/taggedThreadList.shtml?tagID=$1&amp;count=17</to>
+        <to>/tag/taggedThreadList.shtml?tagID=$1&amp;count=18</to>
     </rule>
    <rule>
         <from>^/tag/([0-9]+)/([0-9]+)$</from>
-        <to>/tag/taggedThreadList.shtml?tagID=$1&amp;count=17&amp;start=$2</to>
+        <to>/tag/taggedThreadList.shtml?tagID=$1&amp;count=18&amp;start=$2</to>
     </rule>
   
     <rule>
