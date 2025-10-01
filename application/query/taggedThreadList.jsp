@@ -243,7 +243,7 @@ int randomIdx = 0;
         </div>
           <div class="info" style="display:flex; align-items:flex-start; justify-content:space-between; margin-top: 10px">              
             <span style="flex:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;overflow:hidden">           
-              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />
+              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[150]" />
              </span>  
               <img src="https://static.jdon.com/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg" alt="icon" loading="lazy" style="width:40px; height:40px; margin-left:12px; flex-shrink:0; object-fit:cover; border-radius:6px;">
             </div>
