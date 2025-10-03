@@ -93,7 +93,7 @@ public class RSSGenServlet extends HttpServlet {
 	}
 
 	protected boolean checkModifiedEtagFilter(HttpServletRequest request, HttpServletResponse response) {
-		int expire = 5 * 60 * 60;
+		int expire = 1 * 60 * 60;
 		if (!ToolsUtil.checkHeaderCacheForum(expire, this.getServletContext(), request, response)) {
 			return false;
 		}
