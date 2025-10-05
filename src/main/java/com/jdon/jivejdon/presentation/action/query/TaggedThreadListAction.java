@@ -15,6 +15,7 @@
  */
 package com.jdon.jivejdon.presentation.action.query;
 
+import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,7 @@ import com.jdon.jivejdon.api.property.TagService;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
+import com.jdon.jivejdon.spi.component.mapreduce.ThreadDigComparator;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.util.Debug;
 
@@ -67,20 +69,14 @@ public class TaggedThreadListAction extends ModelListAction {
 
 			request.setAttribute("TITLE", tag.getTitle());
 			request.setAttribute("threadTag", tag);
-			if (request.getParameter("r") == null) {
-				// if (start != 0)
-				return othersService.getTaggedThread(tagIDL, start, count);
-				// List threadIdsP = cache.computeIfAbsent(tagIDL,
-				// k -> Arrays.asList(othersService.getTaggedThread(tagIDL, start,
-				// count).getKeys()));
-				// return new PageIterator(threadIdsP.size(), threadIdsP.toArray());
-			} else {
-				int allCount = othersService.getTaggedThread(tagIDL, start, count).getAllCount();
-				if (allCount == 0 || count == 0)
-					return new PageIterator();
-				start = ThreadLocalRandom.current().nextInt(allCount);
-				return othersService.getTaggedThread(new Long(tagID), start, count);
+
+			PageIterator pi = othersService.getTaggedThread(tagIDL, start, count);
+			TreeSet<Long> threadIds = new TreeSet<>(new ThreadDigComparator(getForumMessageQueryService()));
+			while (pi.hasNext()) {
+				threadIds.add((Long) pi.next());
 			}
+            return new PageIterator(pi.getAllCount(), threadIds.toArray());
+			
 		}
 
 	/*
