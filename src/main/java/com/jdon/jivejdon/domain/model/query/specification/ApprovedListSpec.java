@@ -162,7 +162,10 @@ public class ApprovedListSpec extends ThreadListSpec {
 	private double calculateWeightedScore(ForumThread thread) {
 		// Extract metrics
 		long viewCount = thread.getViewCount();
-		int digCount = thread.getRootMessage().getDigCount() ;
+		int digCount = 0;
+        if (thread.getRootMessage() != null) {
+            digCount = thread.getRootMessage().getDigCount();
+        }
 		return viewCount * (1 + digCount) ;
 	}
 
