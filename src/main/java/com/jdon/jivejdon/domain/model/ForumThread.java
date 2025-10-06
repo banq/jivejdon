@@ -428,12 +428,12 @@ public class ForumThread {
 	    return reBlogVO;
 	}
 
-	public void messaegDigAction(String ip) {
-        this.getRootMessage().getMessagePropertysVO().addMessageDigCount(ip);
+	public int messaegDigAction(String ip) {
+        
         // this.forumThread.addDig(this);
         eventSourcing.saveMessageProperties(
                 new MessagePropertiesRevisedEvent(getRootMessage().getMessageId(), getRootMessage().getMessagePropertysVO().getPropertys()));
 
-  
+        return this.getRootMessage().getMessagePropertysVO().addMessageDigCount(ip);
     }
 }

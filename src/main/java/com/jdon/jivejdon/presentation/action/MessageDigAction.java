@@ -48,11 +48,11 @@ public class MessageDigAction extends Action {
 		}
 
 		ForumThread thread = forumMessageQueryService.getThread(message.getForumThread().getThreadId());
-		thread.messaegDigAction(request.getRemoteAddr());
+		int digCount = thread.messaegDigAction(request.getRemoteAddr());
 
 		try {
 			response.setContentType("text/html");
-			response.getWriter().print(thread.getRootMessage().getDigCount());
+			response.getWriter().print(digCount);
 		} catch (Exception e) {
 			response.sendError(404);
 		}

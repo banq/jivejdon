@@ -95,15 +95,16 @@ public class MessagePropertysVO {
     this.lastDigIP = ip;
   }
 
-  public synchronized void addMessageDigCount(String ip) {
+  public synchronized int addMessageDigCount(String ip) {
     ensureLoaded();
     if (lastDigIP != null && lastDigIP.equals(ip)) {   
-      return;
+      return digCount;
     }
     digCount++;
     Property Numberproperty = new Property(DIG_NUMBER, String.valueOf(digCount));
     this.replaceProperty(Numberproperty);
     setLastDigIP(ip);
+    return digCount;
   }
 
   public int getDigCount() {
