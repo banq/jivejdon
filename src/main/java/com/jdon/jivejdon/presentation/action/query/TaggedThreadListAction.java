@@ -15,8 +15,10 @@
  */
 package com.jdon.jivejdon.presentation.action.query;
 
+import java.util.Arrays;
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -71,10 +73,9 @@ public class TaggedThreadListAction extends ModelListAction {
 			request.setAttribute("threadTag", tag);
 
 			PageIterator pi = othersService.getTaggedThread(tagIDL, start, count);
-			TreeSet<Long> threadIds = new TreeSet<>(new ThreadDigComparator(getForumMessageQueryService()));
-			while (pi.hasNext()) {
-				threadIds.add((Long) pi.next());
-			}
+			TreeSet<Long> threadIds = Arrays.stream(pi.getKeys())
+                .map(id -> (Long) id)
+                .collect(Collectors.toCollection(() -> new TreeSet<>(new ThreadDigComparator(getForumMessageQueryService()))));
             return new PageIterator(pi.getAllCount(), threadIds.toArray());
 			
 		}
