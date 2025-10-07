@@ -75,6 +75,7 @@ public class TaggedThreadListAction extends ModelListAction {
 			PageIterator pi = othersService.getTaggedThread(tagIDL, start, count);
 			TreeSet<Long> threadIds = Arrays.stream(pi.getKeys())
                 .map(id -> (Long) id)
+                .filter(id -> getForumMessageQueryService().getThread(id) != null)
                 .collect(Collectors.toCollection(() -> new TreeSet<>(new ThreadDigComparator(getForumMessageQueryService()))));
             return new PageIterator(pi.getAllCount(), threadIds.toArray());
 			

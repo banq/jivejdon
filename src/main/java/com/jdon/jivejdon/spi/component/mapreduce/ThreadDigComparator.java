@@ -24,6 +24,15 @@ public class ThreadDigComparator implements Comparator<Long> {
 			return 0;
 		ForumThread thread1 = forumMessageQueryService.getThread(threadId1);
 		ForumThread thread2 = forumMessageQueryService.getThread(threadId2);
+
+		 // 检查thread1和thread2是否为空
+        if (thread1 == null && thread2 == null) {
+            return 0;
+        } else if (thread1 == null) {
+            return 1;
+        } else if (thread2 == null) {
+            return -1;
+        }
 	
         double thread1Count = approvedListSpec.approvedCompare(thread1);
 		double thread2Count = approvedListSpec.approvedCompare(thread2);
