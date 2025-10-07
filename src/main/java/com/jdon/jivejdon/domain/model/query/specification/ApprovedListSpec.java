@@ -137,12 +137,18 @@ public class ApprovedListSpec extends ThreadListSpec {
 	 * @return 质量分
 	 */
 	public double contentQualityScore(ForumThread thread) {
+		if (thread == null || thread.getRootMessage() == null || thread.getTags() == null) {
+            return 0;
+        }
 		int digCount = thread.getRootMessage().getDigCount();
 		double tagsCount = thread.getTags().stream()
 				.map(threadTag -> threadTag.getAssonum())
 				.reduce(0, Integer::sum);
 		ReBlogVO reBlogVO = thread.getReBlogVO();
-		int linkCount = reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size();
+	    int linkCount = 0;
+        if (reBlogVO != null) {
+            linkCount = reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size();
+        }
 
 		// 三个都必须 > 0，否则返回 0
 		if (digCount <= 0 || tagsCount <= 0 || linkCount <= 0) {
