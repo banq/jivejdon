@@ -226,7 +226,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 
         // Markdown 标题 #、##、### 转为 <h1>、<h2>、<h3>		
 		// 匹配1~3个#，后跟一个空格
-		input = input.replaceAll("(?m)(#{1,6})(?:\\s|\\u00A0|&nbsp;)+([^<\\r\\n]+)", "<strong>$2</strong>");
+		input = input.replaceAll("(?m)(#{2,6})(?:\\s|\\u00A0|&nbsp;)+([^<\\r\\n]+)", "<strong>$2</strong>");
 
         input = input.replaceAll("\\*\\*([\\s\\S]+?)\\*\\*", "<strong>$1</strong>");
         input = input.replaceAll("__(.+?)__", "<strong>$1</strong>");
