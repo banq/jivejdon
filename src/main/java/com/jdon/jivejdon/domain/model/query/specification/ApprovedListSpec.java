@@ -116,6 +116,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 	 * recommend：ThreadDigComparator
 	 */
 	public double approvedCompare(ForumThread thread) {
+		if(thread == null) return 0;
 		// 基础热度分
 		double baseScore = calculateWeightedScore(thread);
 
