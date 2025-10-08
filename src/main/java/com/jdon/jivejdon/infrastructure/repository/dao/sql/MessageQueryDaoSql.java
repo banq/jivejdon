@@ -475,7 +475,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 			qs.parse();
 
             java.util.Calendar cal = java.util.Calendar.getInstance();
-            cal.set(2011, 0, 1, 0, 0, 0); // 2011年1月1日 00:00:00
+            cal.set(2018, 0, 1, 0, 0, 0); // 2011年1月1日 00:00:00
             long minCreationDate = cal.getTimeInMillis();
             String minCreationDateStr = com.jdon.jivejdon.util.ToolsUtil.zeroPadString(String.valueOf(minCreationDate), 15);
 
