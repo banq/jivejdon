@@ -486,7 +486,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 							"JOIN jiveMessageProp jmp ON jm.messageID = jmp.messageID ");
 			sql.append(qs.getWhereSQL());
 			sql.append(" AND jmp.name = 'digNumber' ");
-			sql.append(" AND jm.modifiedDate >= ? "); // 新增1000天内过滤
+			//sql.append(" AND jm.modifiedDate >= ? "); // 新增1000天内过滤
 			sql.append("GROUP BY jm.threadID ");
 			sql.append("HAVING dig_sum > ? "); // 这里用上阈值
 			sql.append("ORDER BY dig_sum  DESC LIMIT 100");
@@ -494,7 +494,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 			List<Object> params = new ArrayList<>();
 			if (qs.getParams() != null)
 				params.addAll(qs.getParams());
-			params.add(minCreationDateStr); // creationDate >= ?
+			//params.add(minCreationDateStr); // creationDate >= ?
 			params.add(qc.getDigCountWindow()); // 你的阈值
 
 			@SuppressWarnings("unchecked")
