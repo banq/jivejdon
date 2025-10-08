@@ -474,11 +474,10 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 			QuerySpecification qs = new QuerySpecDBModifiedDate(qc);
 			qs.parse();
 
-			// 计算1000天前的时间戳（毫秒），并补齐15位字符串
-			long now = System.currentTimeMillis();
-			long days1000Millis = 1000L * 24 * 60 * 60 * 1000;
-			long minCreationDate = now - days1000Millis;
-			String minCreationDateStr = com.jdon.jivejdon.util.ToolsUtil.zeroPadString(String.valueOf(minCreationDate), 15);
+            java.util.Calendar cal = java.util.Calendar.getInstance();
+            cal.set(2011, 0, 1, 0, 0, 0); // 2011年1月1日 00:00:00
+            long minCreationDate = cal.getTimeInMillis();
+            String minCreationDateStr = com.jdon.jivejdon.util.ToolsUtil.zeroPadString(String.valueOf(minCreationDate), 15);
 
 			StringBuilder sql = new StringBuilder(
 					"SELECT jm.threadID, SUM(CAST(jmp.propValue AS UNSIGNED)) AS dig_sum " +
@@ -486,7 +485,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 							"JOIN jiveMessageProp jmp ON jm.messageID = jmp.messageID ");
 			sql.append(qs.getWhereSQL());
 			sql.append(" AND jmp.name = 'digNumber' ");
-			//sql.append(" AND jm.modifiedDate >= ? "); // 新增1000天内过滤
+			sql.append(" AND jm.modifiedDate >= ? "); // 新增1000天内过滤
 			sql.append("GROUP BY jm.threadID ");
 			sql.append("HAVING dig_sum > ? "); // 这里用上阈值
 			sql.append("ORDER BY dig_sum  DESC LIMIT 100");
@@ -494,7 +493,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 			List<Object> params = new ArrayList<>();
 			if (qs.getParams() != null)
 				params.addAll(qs.getParams());
-			//params.add(minCreationDateStr); // creationDate >= ?
+			params.add(minCreationDateStr); // creationDate >= ?
 			params.add(qc.getDigCountWindow()); // 你的阈值
 
 			@SuppressWarnings("unchecked")
