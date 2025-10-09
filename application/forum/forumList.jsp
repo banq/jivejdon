@@ -53,6 +53,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
             <td>
               
                  <h1 style="font-size: 2.2rem">
+                 <a href="/forum/<bean:write name="forum" property="forumId" />/rss"><i class="fa fa-feed"></i></a>  
                  <a href="<%=request.getContextPath()%>/forum/<bean:write name="forum" property="forumId" />/" class="hover-preload">                
                        <b><span class="threadTitle"><bean:write name="forum" property="name" /></span></b>
                  </a>

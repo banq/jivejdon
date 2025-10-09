@@ -59,6 +59,10 @@
         <to>/forum/threadList.shtml?forum=$1&amp;start=$2&amp;count=30</to>
     </rule>
     <rule>
+        <from>^/forum/([0-9]+)/rss$</from>
+        <to>/rss?forumId=$1</to>
+    </rule>
+    <rule>
         <from>^/threads/$</from>
         <to>/forum/threadList.shtml?count=30</to>
     </rule>

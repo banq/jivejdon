@@ -141,22 +141,19 @@ public class RSSGenServlet extends HttpServlet {
 			feed.setDescription(channel_des);
 			feed.setEncoding("UTF-8");
 
-			String tagId = request.getParameter("tagId");
+			String forumId = request.getParameter("forumId");
 		
 
-			if (tagId != null) {
-				if (!StringUtils.isNumeric(tagId) || tagId.length() > 10) {
+			if (forumId != null) {
+				if (!StringUtils.isNumeric(forumId) || forumId.length() > 10) {
 					return;
 				}
-				List<SyndEntrySorted> entries = addTags(request, url, tagId);
-				feed.setEntries(entries);
-
-				ThreadTag tag = getTag(request, tagId);
-				if (tag != null) {
-					feed.setTitle(tag.getTitle());
-					feed.setLink(url + "/tag/" + tag.getTagID() + "/");
-					feed.setDescription(tag.getTitle());
-				}
+				List<SyndEntrySorted> entries = addForums(request, url, forumId);
+				
+				entries.addAll(this.addsitemap(request, url));
+				Collections.sort(entries);
+				Collections.reverse(entries);
+				feed.setEntries(entries.subList(0, LENGTH));
 			} else {
 				// it is threads
 				List<SyndEntrySorted> entries = addThreads(request, url);
@@ -197,14 +194,22 @@ public class RSSGenServlet extends HttpServlet {
 		}
 	}
 
-	private List<SyndEntrySorted> addTags(HttpServletRequest request, String url, String tagId) {
+	private List<SyndEntrySorted> addForums(HttpServletRequest request, String url, String forumId) {
 
 		List<SyndEntrySorted> entries = new ArrayList<SyndEntrySorted>();
-		ThreadTag tag = getTag(request, tagId);
-		if (tag == null)
-			return entries;
-		TagService othersService = (TagService) WebAppUtil.getService("othersService", this.getServletContext());
-		PageIterator pi = othersService.getTaggedThread(Long.parseLong(tagId), 0, LENGTH);
+
+		PageIterator pi = null;
+
+		ThreadListSpec threadListSpec = new ThreadListSpec();
+		ResultSort resultSort = new ResultSort();
+		resultSort.setOrder_DESCENDING();
+		threadListSpec.setResultSort(resultSort);
+
+		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil
+				.getService("forumMessageQueryService", this.getServletContext());
+
+		pi = forumMessageQueryService.getThreads(Long.parseLong(forumId), 0, LENGTH,
+				resultSort);
 		while (pi.hasNext()) {
 			Long threadId = (Long) pi.next();
 			ForumThread thread = getForumThread(request, threadId);
@@ -215,11 +220,7 @@ public class RSSGenServlet extends HttpServlet {
 		return entries;
 	}
 
-	private ThreadTag getTag(HttpServletRequest request, String tagId) {
-		TagService othersService = (TagService) WebAppUtil.getService("othersService", this.getServletContext());
-		return othersService.getThreadTag(Long.parseLong(tagId));
 
-	}
 
 	private List<SyndEntrySorted> addThreads(HttpServletRequest request, String url) {
 
