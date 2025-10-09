@@ -157,8 +157,8 @@ public class ApprovedListSpec extends ThreadListSpec {
 		}
 
 		double digWeight = 100.0;
-		double tagWeight = 10.0;
-		double linkWeight = 5.0;
+		double tagWeight = 80.0;
+		double linkWeight = 50.0;
 
 		return (digCount * digWeight) + (tagsCount * tagWeight) + (linkCount * linkWeight);
 
