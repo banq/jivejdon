@@ -124,6 +124,21 @@
             <forward name="forward" path="/message/reblogLink.jsp" />
         </action>
 
+        
+        <action name="threadForm" path="/message/threadToForum/forumList" type="com.jdon.jivejdon.presentation.filter.ThreadEditAuthFilter" scope="request" validate="false">
+            <forward name="success" path="/message/threadToForum/forumList2.shtml" />
+        </action>
+
+        <action name="threadForm" path="/message/threadToForum/forumList2" type="com.jdon.strutsutil.ModelViewAction" scope="request" validate="false">
+            <forward name="edit" path="/message/threadToForum/forumList.jsp" />
+        </action>
+
+         <action path="/message/threadToForum/save" type="com.jdon.jivejdon.presentation.action.message.UpdateThreadToForumAction" parameter="method" name="threadForm" scope="request" validate="false">
+              <forward name="success" path="/message/threadToForum/saveResult.jsp" />
+            <forward name="failure" path="/message/threadToForum/forumList.jsp" />
+
+        </action>
+
         <!-- <action path="/forum/viewThread" type="com.jdon.jivejdon.presentation.action.ViewThreadAction" scope="request" validate="false" >
         </action> -->
 

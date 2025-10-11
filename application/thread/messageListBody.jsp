@@ -86,6 +86,11 @@
             page="/message/reblogLink.shtml?action=edit"
             paramId="threadId" paramName="forumMessage"
             paramProperty="forumThread.threadId" />'>编辑互链 </a>
+
+                   <a href='<html:rewrite
+            page="/message/threadToForum/forumList.shtml?action=edit"
+            paramId="threadId" paramName="forumMessage"
+            paramProperty="forumThread.threadId" />'>编辑板块 </a>
                   </logic:equal>
                 </logic:equal>
              
