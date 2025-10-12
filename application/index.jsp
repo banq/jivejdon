@@ -33,7 +33,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   <link rel="sitemap" type="application/xml" title="Sitemap" href="<%=domainUrl%>/sitemap.xml">
   <link rel="canonical" href="<%=domainUrl%>/">
   <link rel="preload" href="https://static.jdon.com/js/jdon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="prefetch" href="https://static.jdon.com/js/fonts/icomoon.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="https://static.jdon.com/js/fonts/icomoon.woff" as="font" type="font/woff" crossorigin>
   <link rel="preload" href="https://static.jdon.com/js/jquery-bootstrap2.js" as="script">
   <script defer src="https://static.jdon.com/js/jquery-bootstrap2.js"></script> 
 </head>
