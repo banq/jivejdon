@@ -39,11 +39,33 @@ public class EmailAction implements SubscriptionAction {
 
 	@Override
 	public void exec() {
+		// 添加更完善的空值检查
 		if (subscription == null) {
 			System.err.print("subscription is null in EmailAction");
 			return;
 		}
-		subscriptionNotify.subscriptionEmail.send(subscription.getAccount(), notifySubscribed.createShortMessage(subscription));
+		
+		if (subscriptionNotify == null) {
+			System.err.print("subscriptionNotify is null in EmailAction");
+			return;
+		}
+		
+		if (subscriptionNotify.subscriptionEmail == null) {
+			System.err.print("subscriptionEmail is null in EmailAction");
+			return;
+		}
+		
+		if (notifySubscribed == null) {
+			System.err.print("notifySubscribed is null in EmailAction");
+			return;
+		}
+		
+		try {
+			subscriptionNotify.subscriptionEmail.send(subscription.getAccount(), notifySubscribed.createShortMessage(subscription));
+		} catch (Exception e) {
+			System.err.print("Error in EmailAction.exec(): " + e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 	public void setSubscription(Subscription subscription) {

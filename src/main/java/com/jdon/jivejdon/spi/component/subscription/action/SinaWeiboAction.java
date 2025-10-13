@@ -44,11 +44,27 @@ public class SinaWeiboAction implements SubscriptionAction {
 	}
 
 	public void exec() {
-
+		// 添加空值检查
 		if (subscription == null) {
 			System.err.print("subscription is null in SinaWeiboAction");
 			return;
 		}
+		
+		if (subscriptionNotify == null) {
+			System.err.print("subscriptionNotify is null in SinaWeiboAction");
+			return;
+		}
+		
+		if (subscriptionNotify.shortMessageFactory == null) {
+			System.err.print("shortMessageFactory is null in SinaWeiboAction");
+			return;
+		}
+		
+		if (notifySubscribed == null) {
+			System.err.print("notifySubscribed is null in SinaWeiboAction");
+			return;
+		}
+
 		if (userConnectorAuth.isEmpty()) {
 			return;
 		}
@@ -70,11 +86,10 @@ public class SinaWeiboAction implements SubscriptionAction {
 				String content = notifySubscribed.createShortMessage(subscription).getMessageBody();
 				String rip = notifySubscribed.createShortMessage(subscription).getAccount().getPostIP();
 				// subscriptionNotify.sinaWeboSubmitter.submitWeibo(content, userConnectorAuth, rip);
-					}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void setSubscription(Subscription subscription) {

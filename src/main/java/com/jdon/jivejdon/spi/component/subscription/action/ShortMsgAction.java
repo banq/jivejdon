@@ -36,6 +36,27 @@ public class ShortMsgAction implements SubscriptionAction {
 	@Override
 	public void exec() {
 		try {
+			// 添加空值检查
+			if (subscription == null) {
+				System.err.print("subscription is null in ShortMsgAction");
+				return;
+			}
+			
+			if (subscriptionNotify == null) {
+				System.err.print("subscriptionNotify is null in ShortMsgAction");
+				return;
+			}
+			
+			if (subscriptionNotify.shortMessageFactory == null) {
+				System.err.print("shortMessageFactory is null in ShortMsgAction");
+				return;
+			}
+			
+			if (notifySubscribed == null) {
+				System.err.print("notifySubscribed is null in ShortMsgAction");
+				return;
+			}
+			
 			// one account only send one message
 			ShortMessage shortMessage = notifySubscribed.createShortMessage(subscription);
 			if (subscriptionNotify.shortMessageFactory.getNewShortMessageCount(shortMessage) < 5)

@@ -58,6 +58,12 @@ public class SubscriptionNotify {
 				sub.setAccount(accountFactory.getFullAccount(sub.getAccount()));
 
 				for (SubscriptionAction subaction : sub.getSubscriptionActionHolder().getSubscriptionActions()) {
+					// 添加空值检查
+					if (subaction == null) {
+						logger.warn("SubscriptionAction is null, skipping...");
+						continue;
+					}
+					
 					subaction.setSubscription(sub);
 					subaction.setSubscriptionNotify(this);
 					subaction.setNotifySubscribed(notifySubscribed);
@@ -71,7 +77,7 @@ public class SubscriptionNotify {
 
 			}
 		} catch (Exception e) {
-			logger.error("sendsub erro:" + e);
+			logger.error("sendsub erro:" + e, e);
 		}
 	}
 }
