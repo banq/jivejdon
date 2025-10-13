@@ -10,7 +10,7 @@ import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
 public class ApprovedListSpec extends ThreadListSpec {
 
 	// this value is display count on one page
-	private final int needCount = 30;
+	private final int needCount = 100;
 	private final int needViewcount = 5;
 
 	private int getNeedViewcount() {
@@ -23,47 +23,10 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 	
 	public boolean isApprovedToBest(ForumThread thread) {
-		return isApproved(thread) && isLargeViewCount(thread, getNeedViewcount());
+		return contentQualityScore(thread)>100 && (thread.getViewCount() > getNeedViewcount() || thread.getRootMessage().getDigCount()>=1);
 	}
 
-	/**
-	 * recommend
-	 * 
-	 * @param thread
-	 * @param threadPrev
-	 * @param threadPrev2
-	 * @return
-	 */
-	public boolean isApproved(ForumThread thread) {
-		return calculateWeightedScore(thread) > 100
-				|| isDigged(thread, 1)
-				|| isDailyViewCountAboveThreshold(thread, 5)
-				|| thread.getViewCount() > 10
-				|| isTutorial(thread);
-	}
-
-	/**
-	 * 检查帖子每日浏览量是否超过指定阈值
-	 * 
-	 * @param thread    论坛帖子
-	 * @param threshold 每日浏览量阈值
-	 * @return 如果每日浏览量超过阈值返回true，否则返回false
-	 */
-	private boolean isDailyViewCountAboveThreshold(ForumThread thread, double threshold) {
-		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getRootMessage().getModifiedDate2());
-		long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
-
-		// 计算平均每天浏览量
-		double dailyViewCount = (double) thread.getViewCount() / (diffDays == 0 ? 1 : diffDays);
-
-		return dailyViewCount > threshold;
-	}
-
-	public boolean isTutorial(ForumThread thread) {
-		return isTagged(thread, 3)
-				&& isLinked(thread, 4) && thread.getViewCount() > 50 && isLongText(thread, 20);
-	}
-
+	
 	/**
 	 * approval：HomePageComparator
 	 * grok3 编写的代码
@@ -176,72 +139,6 @@ public class ApprovedListSpec extends ThreadListSpec {
 		return viewCount * (1 + digCount) ;
 	}
 
-
-	public boolean isTagged(ForumThread thread, int count) {
-		final double tagsCOunt = thread.getTags().stream().map(threadTag -> threadTag.getAssonum()).reduce(0,
-				(subtotal, element) -> subtotal + element);
-		return tagsCOunt >= count ? true : false;
-	}
-
-	public boolean isLinked(ForumThread thread, int count) {
-		final ReBlogVO reBlogVO = thread.getReBlogVO();
-		return (reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size()) >= count ? true : false;
-	}
-
-
-	private boolean isGreaterThanPrev(ForumThread thread, ForumThread threadPrev, ForumThread threadPrev2, double rate) {
-		if (threadPrev == null || threadPrev2 == null || thread.getViewCount() < 10)
-			return false;
-		return (thread.getViewCount() * rate > Math.min(threadPrev.getViewCount(), threadPrev2.getViewCount())) ? true
-				: false;
-	}
-
-	private boolean isGoodBlog(ForumThread thread) {
-		return (isTagged(thread, 1) && isGoodAuthor(thread.getRootMessage().getAccount(), 2) && isDigged(
-				thread, 1));
-	}
-
-	private boolean isLongText(ForumThread thread, int count) {
-		int bodylength = thread.getRootMessage().getMessageVO().getBody().length();
-		if (bodylength <= 0)
-			return false;
-
-		if (bodylength / 1024 > count)
-			return true;
-		else
-			return false;
-	}
-
-	public boolean isExcelledDiscuss(ForumThread thread, int count) {
-		return (isTagged(thread, 2) && hasReply(thread, count));
-
-	}
-
-	private boolean isLargeViewCount(ForumThread thread, int needViewcount) {
-		return thread.getViewCount() > needViewcount;
-	}
-
-	private boolean isGoodAuthor(Account account, int throttle) {
-		if (account.getMessageCount() >= throttle)
-			return true;
-		else
-			return false;
-	}
-
-	public boolean isDigged(ForumThread thread, int digcount) {
-		ForumMessage message = thread.getRootMessage();
-		if (message.getDigCount() >= digcount)
-			return true;
-		else
-			return false;
-	}
-
-	private boolean hasReply(ForumThread thread, int throttle) {
-		if (thread.getState().getMessageCount() >= throttle)
-			return true;
-		else
-			return false;
-	}
 
 	public int getNeedCount() {
 		return needCount;
