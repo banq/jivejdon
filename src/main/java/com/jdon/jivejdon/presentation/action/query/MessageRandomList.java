@@ -56,10 +56,8 @@ public class MessageRandomList extends Action {
             while (pi.hasNext()) {
                 Long threadId = (Long) pi.next();
                 ForumThread thread = getForumMessageQueryService().getThread(threadId);
-                if (approvedListSpec.isExcelledDiscuss(thread, 5) 
-                        || approvedListSpec.isDigged(thread, 2)                      
-                        || approvedListSpec.isTagged(thread, 2)
-                        || approvedListSpec.isLinked(thread, 1)) {
+                
+                if (thread.getRootMessage().getDigCount()>1) {
                         request.setAttribute("threadId", threadId);
                 }
             }
