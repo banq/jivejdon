@@ -72,7 +72,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   
     <div class="box"> 
 	    <div class="tres center">        
-          极快深破前沿黑科技:<a href="<%=domainUrl%>/approval/"><b>更多</b></a>	   
+          极快深破前沿黑科技：<a href="<%=domainUrl%>/approval/"><b>更多</b></a>	   
 		</div>
     </div>
 		  
