@@ -25,7 +25,7 @@ String coutlength = (String)pageContext.getAttribute("count");
 <logic:equal name="i" value="0">
 <li>
 	<h3 class="vid-name">
-    <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload"><bean:write name="forumThread" property="name"/></a>
+    <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" title="<bean:write name="forumMessage" property="modifiedDate3"/>" class="hover-preload"><bean:write name="forumThread" property="name"/></a>
   </h3>
       
          <div class="smallgray">			 
@@ -35,7 +35,7 @@ String coutlength = (String)pageContext.getAttribute("count");
 </logic:equal>
 <logic:greaterThan name="i" value="0">
 <li class="info">
-	  <h3 class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" title="<bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />"  class="hover-preload"><bean:write name="forumThread" property="name"/></a></h3>
+	  <h3 class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" title="<bean:write name="forumMessage" property="modifiedDate3"/>" class="hover-preload"><bean:write name="forumThread" property="name"/></a></h3>
 </li>
 </logic:greaterThan>
 </logic:iterate>

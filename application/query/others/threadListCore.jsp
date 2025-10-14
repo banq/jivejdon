@@ -24,7 +24,7 @@
                   </div>  
                 </logic:notEmpty>              
           </div>
-         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload"><bean:write name="forumThread" property="name"/></a></h4>
+         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"  title="<bean:write name="forumMessage" property="modifiedDate3"/>" class="hover-preload"><bean:write name="forumThread" property="name"/></a></h4>
 
         </div>
 </li>
