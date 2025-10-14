@@ -60,11 +60,12 @@
            <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
                 <span><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
             </logic:greaterThan>     
-  <logic:notEqual name="forumMessage" property="digCount" value="0">
-                       <span class="smallgray">
-                      <bean:write name="forumMessage" property="digCount"/>赞
-					   </span>
-                      </logic:notEqual>     
+  
+                       <span class="smallgray"  id="digNumber_<bean:write name="forumMessage" property="messageId"/>">
+                         <bean:write name="forumMessage" property="digCount"/>
+					             </span>
+             <a href="javascript:digMessage(<bean:write name="forumMessage" property="messageId"/>)">赞</a>
+             
 
         </div>
       </div>
@@ -77,6 +78,17 @@
       	
 </logic:iterate>
 
+<script>
+  function digMessage(id) {
+  var pars = "messageId=" + id;
+  load(
+    getContextPath() + "/forum/updateDigCount.shtml?" + pars,
+    function (xhr) {
+      document.getElementById("digNumber_" + id).innerHTML = xhr.responseText;
+    }
+  );
+}
+</script>
 
 <div class="title_right">
 <div class="tres" >    
