@@ -218,10 +218,7 @@ public class RSSGenServlet extends HttpServlet {
 		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil
 				.getService("forumMessageQueryService", this.getServletContext());
 
-		String tagID = request.getParameter("tagID");
-		if (tagID == null || !StringUtils.isNumeric(tagID) || tagID.length() > 10) {
-			return entries;
-		}
+
 		pi = forumMessageQueryService.getThreads(Long.parseLong(forumId), 0, LENGTH,
 				resultSort);
 		while (pi.hasNext()) {
