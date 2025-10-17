@@ -129,7 +129,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 	 <!-- /////////////////右边 -->
 <aside>      
        <div id="sidebar" class="col-lg-4 custom-col-right">
-<div class="scrolldiv"><div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); background-color: white; overflow: hidden; padding-left: 0; padding-right: 0">
+<div class="scrolldiv"><div class="box" style="max-width:360px;border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); background-color: white; overflow: hidden; padding-left: 0; padding-right: 0">
         <!---- Start Widget ---->
         <div class="widget wid-follow">
           <div class="content">
@@ -147,7 +147,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
        <div class="widget">
            <div class="wid-vid">
 							    
-							       <div id="digList" class="linkblock" style="max-width:360px"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
+							       <div id="digList" class="linkblock"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
 							    <script defer>
 					               document.addEventListener("DOMContentLoaded", function(event) { 
                                  $(document).ready(function() {      
