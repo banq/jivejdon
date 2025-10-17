@@ -101,12 +101,13 @@ public class RSSGenServlet extends HttpServlet {
 	}
 
 	// private boolean checkSpamHit(HttpServletRequest request) {
-	// 	if (customizedThrottle == null) {
-	// 		customizedThrottle = (CustomizedThrottle) WebAppUtil.getComponentInstance("customizedThrottle",
-	// 				servletContext);
-	// 	}
-	// 	HitKeyIF hitKey = new HitKeySame(request.getRemoteAddr(), "RSS");
-	// 	return customizedThrottle.processHitFilter(hitKey);
+	// if (customizedThrottle == null) {
+	// customizedThrottle = (CustomizedThrottle)
+	// WebAppUtil.getComponentInstance("customizedThrottle",
+	// servletContext);
+	// }
+	// HitKeyIF hitKey = new HitKeySame(request.getRemoteAddr(), "RSS");
+	// return customizedThrottle.processHitFilter(hitKey);
 	// }
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -120,8 +121,8 @@ public class RSSGenServlet extends HttpServlet {
 		}
 
 		// if (!checkSpamHit(request)) {
-		// 	((HttpServletResponse) response).sendError(404);
-		// 	return;
+		// ((HttpServletResponse) response).sendError(404);
+		// return;
 		// }
 
 		try {
@@ -134,30 +135,40 @@ public class RSSGenServlet extends HttpServlet {
 				rssType = "rss_2.0";
 			}
 			feed.setFeedType(rssType);
-            
+
 			String url = RequestUtil.getAppURL(request);
 			feed.setTitle(channel_title);
 			feed.setLink(url + "/");
 			feed.setDescription(channel_des);
 			feed.setEncoding("UTF-8");
 
-			String forumId = request.getParameter("forumId");
-		
-
-			if (forumId != null) {
-				if (!StringUtils.isNumeric(forumId) || forumId.length() > 10) {
+			if (request.getParameter("forumId") != null) {
+				String forumId = request.getParameter("forumId");
+				if (!StringUtils.isNumeric(forumId) || forumId.length() > 3) {
 					return;
 				}
 				List<SyndEntrySorted> entries = addForums(request, url, forumId);
-				
+
 				entries.addAll(this.addsitemap(request, url));
 				Collections.sort(entries);
 				Collections.reverse(entries);
 				feed.setEntries(entries.subList(0, LENGTH));
+			} else if (request.getParameter("tagID") != null) {
+				String tagID = request.getParameter("tagID");
+				if (!StringUtils.isNumeric(tagID) || tagID.length() > 10) {
+					return;
+				}
+
+				List<SyndEntrySorted> entries = addTagThreads(request, url, tagID);
+				entries.addAll(this.addsitemap(request, url));
+				Collections.sort(entries);
+				Collections.reverse(entries);
+				feed.setEntries(entries.subList(0, LENGTH));
+
 			} else {
 				// it is threads
 				List<SyndEntrySorted> entries = addThreads(request, url);
-			
+
 				entries.addAll(this.addsitemap(request, url));
 				Collections.sort(entries);
 				Collections.reverse(entries);
@@ -169,23 +180,22 @@ public class RSSGenServlet extends HttpServlet {
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("application/xml; charset=utf-8");
 			Writer writer = response.getWriter();
-			
+
 			WireFeedOutput feedOutput = new WireFeedOutput();
-            Document doc = feedOutput.outputJDom(feed.createWireFeed());
-            // create the XSL processing instruction
-            Map<String,String> xsl = new HashMap<>();
+			Document doc = feedOutput.outputJDom(feed.createWireFeed());
+			// create the XSL processing instruction
+			Map<String, String> xsl = new HashMap<>();
 			xsl.put("href", "/js/rss-style.xsl");
 			xsl.put("type", "text/xsl");
-            ProcessingInstruction pXsl = new ProcessingInstruction("xml-stylesheet", xsl);
-            doc.addContent(0, pXsl);
+			ProcessingInstruction pXsl = new ProcessingInstruction("xml-stylesheet", xsl);
+			doc.addContent(0, pXsl);
 
 			// write the document to the servlet response
-            XMLOutputter outputter = new XMLOutputter(Format.getCompactFormat() );
-            outputter.output(doc,writer);
+			XMLOutputter outputter = new XMLOutputter(Format.getCompactFormat());
+			outputter.output(doc, writer);
 
-            // SyndFeedOutput output = new SyndFeedOutput();
+			// SyndFeedOutput output = new SyndFeedOutput();
 			// // output.output(feed, writer);
-			
 
 			writer.close();
 
@@ -208,6 +218,10 @@ public class RSSGenServlet extends HttpServlet {
 		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil
 				.getService("forumMessageQueryService", this.getServletContext());
 
+		String tagID = request.getParameter("tagID");
+		if (tagID == null || !StringUtils.isNumeric(tagID) || tagID.length() > 10) {
+			return entries;
+		}
 		pi = forumMessageQueryService.getThreads(Long.parseLong(forumId), 0, LENGTH,
 				resultSort);
 		while (pi.hasNext()) {
@@ -220,7 +234,35 @@ public class RSSGenServlet extends HttpServlet {
 		return entries;
 	}
 
+	private List<SyndEntrySorted> addTagThreads(HttpServletRequest request, String url, String tagID) {
 
+		List<SyndEntrySorted> entries = new ArrayList<SyndEntrySorted>();
+
+		PageIterator pi = null;
+
+		ThreadListSpec threadListSpec = new ThreadListSpec();
+		ResultSort resultSort = new ResultSort();
+		resultSort.setOrder_DESCENDING();
+		threadListSpec.setResultSort(resultSort);
+
+		TagService othersService = (TagService) WebAppUtil.getService("othersService",
+				this.getServletContext());
+
+		Long tagIDL = Long.parseLong(tagID);
+		ThreadTag tag = othersService.getThreadTag(tagIDL);
+		if (tag == null)
+			return entries;
+
+		pi = othersService.getTaggedThread(tagIDL, 0, LENGTH);
+		while (pi.hasNext()) {
+			Long threadId = (Long) pi.next();
+			ForumThread thread = getForumThread(request, threadId);
+			if (thread != null)
+				addMessage(url, entries, thread.getRootMessage(), request);
+		}
+
+		return entries;
+	}
 
 	private List<SyndEntrySorted> addThreads(HttpServletRequest request, String url) {
 
@@ -260,7 +302,6 @@ public class RSSGenServlet extends HttpServlet {
 		if (!UtilValidate.isEmpty(countS)) {
 			count = Integer.parseInt(countS);
 		}
-	
 
 		List<SyndEntrySorted> entries = new ArrayList<SyndEntrySorted>();
 
@@ -305,8 +346,6 @@ public class RSSGenServlet extends HttpServlet {
 		}
 	}
 
-
-
 	public ForumThread getForumThread(HttpServletRequest request, Long key) {
 		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil
 				.getService("forumMessageQueryService", this.getServletConfig().getServletContext());
@@ -317,7 +356,6 @@ public class RSSGenServlet extends HttpServlet {
 		}
 		return null;
 	}
-
 
 	private void addMessage(String url, List<SyndEntrySorted> entries, ForumMessage message,
 			HttpServletRequest request) {
@@ -357,7 +395,8 @@ public class RSSGenServlet extends HttpServlet {
 
 	private String getItemLink(String url, ForumMessage message, HttpServletRequest request) {
 
-		String relativeLink = "/" + message.getForumThread().getThreadId().toString() +  message.getForumThread().getPinyinToken()  + ".html";
+		String relativeLink = "/" + message.getForumThread().getThreadId().toString()
+				+ message.getForumThread().getPinyinToken() + ".html";
 		return url + relativeLink;
 
 	}
