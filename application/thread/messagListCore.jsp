@@ -154,7 +154,9 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
 <aside>
     <!-- /////////////////右边 -->
-    <div id="sidebar" class="col-lg-4 custom-col-right"><div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); background-color: white; overflow: hidden; padding-left: 0; padding-right: 0">
+    <div id="sidebar" class="col-lg-4 custom-col-right">
+<div class="scrolldiv">
+     <div class="box" style="max-width:360px;border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); background-color: white; overflow: hidden; padding-left: 0; padding-right: 0">
       <!-- Start Widget -->
       <div class="widget wid-follow">
         <div class="content">
@@ -165,15 +167,9 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
           </ul>
         </div>
       </div>
-			<div class="widget">
-        <div class="wid-vid">
-     
-
-        </div>				
-			</div>
-
-     <div class="widget">
-        <div class="wid-vid">
+		
+     <div class="widget wid-post">
+        <div class="content">
                <div id="searchResult">                		
                 
                   <div id="threadPreNextList">
@@ -219,7 +215,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         </div>
       </div>     
 
-      <div class="widget">
+      <div class="widget wid-post">
         <div class="content">
       <h4>本文话题：</h4>
           <ul class="list-inline">
@@ -237,12 +233,13 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
       </div>
 
       <!-- Start Widget -->
-     <div class="widget">
-        <div class="wid-vid">
+     <div class="widget wid-post">
+        <div class="content">
           
-                <div class="scrolldiv">
+                
 							
-<div id="digList" class="linkblock" style="max-width:360px"><ul style="list-style-type:none;padding:0">
+<div id="digList" class="linkblock">
+  <ul style="list-style-type:none;padding:0">
 <li class="box">
          <div style="display: flex; align-items: center;"> 
          <div class="wrap-vid">              
