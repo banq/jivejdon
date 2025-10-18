@@ -508,21 +508,61 @@ document.addEventListener("DOMContentLoaded", function(event) {
   });
 
 //  $('.lazyload').lazyload();
+$(function() {
+  var $elm = $('.scrolldiv');
+  if (!$elm.length) return;
+
+  var startPos = $elm.offset().top;
+
+  function updateScrollBehavior() {
+    var isWideLayout = window.matchMedia('(min-width: 1200px)').matches;
+
+    // 清除旧 scroll 事件，防止重复绑定
+    $(window).off('scroll.scrolldiv');
+
+    if (isWideLayout) {
+      // ✅ 大屏幕：启用悬浮
+      $(window).on('scroll.scrolldiv', function() {
+        var p = $(window).scrollTop();
+        if (p > startPos) {
+          $elm.css({
+            position: 'fixed',
+            top: '20px',
+            width: $elm.width(), // 锁定当前宽度防止跳动
+            'max-width': '360px'
+          });
+        } else {
+          $elm.css({
+            position: 'static',
+            top: '',
+            width: '',
+            'max-width': '360px'
+          });
+        }
+      });
+    } else {
+      // ❌ 小于1200px：竖立布局，不悬浮
+      $elm.css({
+        position: 'static',
+        top: '',
+        width: '',
+        'max-width': '100%'
+      });
+    }
+  }
+
+  // 页面加载时执行一次
+  updateScrollBehavior();
+
+  // 窗口尺寸变化时重新判断
+  $(window).on('resize', function() {
+    updateScrollBehavior();
+  });
+});
+
     
- if ($('div.scrolldiv').length)
-    $(function() { 
-        var elm = $('.scrolldiv'); 
-        var startPos = $(elm).offset().top; 
-        if (window.matchMedia('(min-width: 992px)').matches) { 
-        $.event.add(window, "scroll", function() { 
-            var p = $(window).scrollTop(); 
-            $(elm).css('position',((p) > startPos) ? 'fixed' : 'static'); 
-            $(elm).css('top',((p) > startPos) ? '20px' : ''); 
-        }); 
-        };
-    }); 
-    
-    });
+
+});
 
 // 监听广告加载状态并隐藏未填充的广告
 // 只处理#ad-container内的未填充广告
