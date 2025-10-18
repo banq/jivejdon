@@ -507,12 +507,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
   });
 
-//  $('.lazyload').lazyload();
+// $('.lazyload').lazyload();
 $(function() {
   var $elm = $('.scrolldiv');
   if (!$elm.length) return;
 
+  var $main = $('#main-content'); // 左侧内容
+  if (!$main.length) return;
+
   var startPos = $elm.offset().top;
+  var elmHeight = $elm.outerHeight(true);
 
   function updateScrollBehavior() {
     var isWideLayout = window.matchMedia('(min-width: 1200px)').matches;
@@ -521,17 +525,28 @@ $(function() {
     $(window).off('scroll.scrolldiv');
 
     if (isWideLayout) {
-      // ✅ 大屏幕：启用悬浮
       $(window).on('scroll.scrolldiv', function() {
-        var p = $(window).scrollTop();
-        if (p > startPos) {
+        var scrollTop = $(window).scrollTop();
+        var mainTop = $main.offset().top;
+        var mainHeight = $main.outerHeight(true);
+        var elmBottom = scrollTop + elmHeight + 20; // 20px 顶部间距
+
+        if (scrollTop > startPos) {
+          // 最大偏移量 = 左侧内容高度 - 右侧元素高度
+          var maxTop = mainHeight - elmHeight;
+
+          // 当前 top 值
+          var newTop = scrollTop - mainTop + 20;
+          if (newTop > maxTop) newTop = maxTop;
+
           $elm.css({
-            position: 'fixed',
-            top: '20px',
-            width: $elm.width(), // 锁定当前宽度防止跳动
+            position: 'absolute', // 在父容器中绝对定位
+            top: newTop + 'px',
+            width: $elm.width(),
             'max-width': '360px'
           });
         } else {
+          // 回到顶部状态
           $elm.css({
             position: 'static',
             top: '',
@@ -541,7 +556,7 @@ $(function() {
         }
       });
     } else {
-      // ❌ 小于1200px：竖立布局，不悬浮
+      // 小屏幕取消悬浮
       $elm.css({
         position: 'static',
         top: '',
@@ -559,6 +574,7 @@ $(function() {
     updateScrollBehavior();
   });
 });
+
 
     
 
