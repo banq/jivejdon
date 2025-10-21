@@ -70,6 +70,8 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 	
     <jsp:include page="/query/threadApprovedNewList2.shtml?offset=13&count=17" flush="true"></jsp:include>
   
+    <div id="loadMoreBox"></div>
+
     <div class="box"> 
 	    <div class="tres center">        
           极快深破前沿黑科技：<a href="<%=domainUrl%>/approval/"><b>更多</b></a>	   
@@ -79,6 +81,60 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
    
 </div>
 </main> 
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {   
+$(function() {
+  var loading = false;
+  var done = false;
+
+  var offset = 17; // 初始 offset
+  var count = 19;  // 初始 count
+  var scrollTimer = null;
+
+  function loadMore() {
+    if (loading || done) return;
+    loading = true;
+
+    var url = '/query/threadApprovedNewList2.shtml?offset=' + offset + '&count=' + count;
+
+    $.get(url, function(html) {
+      html = $.trim(html);
+      if (html) {
+        $('#loadMoreBox').before(html);
+
+        // 每次加载后更新 offset 和 count
+        offset += 2;
+        count += 2;
+      } else {
+        done = true; // 没数据了
+      }
+      loading = false;
+    }).fail(function() {
+      loading = false;
+    });
+  }
+
+  // 滚动检测 + 节流
+  $(window).on('scroll', function() {
+    if (scrollTimer) clearTimeout(scrollTimer);
+
+    scrollTimer = setTimeout(function() {
+      if (loading || done) return;
+
+      var box = $('#loadMoreBox');
+      if (!box.length) return;
+
+      var boxTop = box.offset().top;
+      var scrollBottom = $(window).scrollTop() + $(window).height();
+
+      if (scrollBottom + 100 >= boxTop) {
+        loadMore();
+      }
+    }, 200); // 200ms 节流
+  });
+});
+});
+</script>
 <aside>  			
     <div id="sidebar" class="col-lg-4 custom-col-right" style="padding-left:0px"><div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); background-color: white; overflow: hidden; padding-left: 5px; padding-right: 2px">
 				<!---- Start Widget ---->
