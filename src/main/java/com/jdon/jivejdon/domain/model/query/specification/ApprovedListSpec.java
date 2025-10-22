@@ -91,6 +91,10 @@ public class ApprovedListSpec extends ThreadListSpec {
 			baseScore += qualityScore * 0.2;
 		}
 
+		// 添加时间权重，越近权重越高
+		double timeWeight = calculateTimeWeight(thread);
+		baseScore *= timeWeight;
+
 		return baseScore;
 	}
 
@@ -119,15 +123,13 @@ public class ApprovedListSpec extends ThreadListSpec {
 			return 0;
 		}
 
-		double digWeight = 20.0;
-		double tagWeight = 100.0;
+		double digWeight = 100.0;
+		double tagWeight = 50.0;
 		double linkWeight = 50.0;
 
 		return (digCount * digWeight) + (tagsCount * tagWeight) + (linkCount * linkWeight);
 
 	}
-
-	
 
 	private double calculateWeightedScore(ForumThread thread) {
 		if(thread == null) return 0;
@@ -139,6 +141,36 @@ public class ApprovedListSpec extends ThreadListSpec {
 		return viewCount * (1 + digCount) ;
 	}
 
+	/**
+	 * 计算时间权重，越近的时间权重越高
+	 * 
+	 * @param thread 论坛帖子
+	 * @return 时间权重
+	 */
+	private double calculateTimeWeight(ForumThread thread) {
+		if (thread == null || thread.getRootMessage() == null) {
+			return 1.0; // 默认权重
+		}
+		
+		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getRootMessage().getModifiedDate2());
+		long diffHours = TimeUnit.HOURS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+		
+		// 48小时内权重最高，之后随时间递减
+		if (diffHours < 2 * 24) {
+			return 1.5; // 48小时内权重为1.5
+		} else if (diffHours < 5 * 24) {
+			return 1.2; // 2-5天内权重为1.2
+		} else if (diffHours < 7 * 24) {
+			return 1.0; // 5-7天内权重为1.0
+		} else {
+			// 7天后递减，最低0.5
+			long extraDays = (diffHours - 7 * 24) / 24;
+			double weight = 1.0 / (1.0 + extraDays * 0.1);
+			if (weight < 0.5)
+				weight = 0.5;
+			return weight;
+		}
+	}
 
 	public int getNeedCount() {
 		return needCount;
