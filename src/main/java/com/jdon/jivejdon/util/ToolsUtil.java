@@ -432,8 +432,8 @@ public class ToolsUtil {
 		request.setAttribute("myExpire", maxAgeSeconds);
 	
 		// 设置 Cache-Control
-		String maxAgeDirective = "max-age=" + maxAgeSeconds + ", public, s-maxage=7200, stale-while-revalidate=300";
-		response.setHeader("Cache-Control", maxAgeDirective);
+		String maxAgeDirective = "public, max-age=" + maxAgeSeconds + ", s-maxage=7200, stale-while-revalidate=300";
+        response.setHeader("Cache-Control", maxAgeDirective);
 	
 		// 设置状态码
 		response.setStatus(HttpServletResponse.SC_OK);
