@@ -130,6 +130,21 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 </head>
 <body>
 <%@ include file="../common/body_header.jsp" %>
+
+<%
+String start = "0";
+if (request.getParameter("start")!=null){
+   start = request.getParameter("start");
+}
+String offset = "0";
+if (request.getParameter("offset")!=null){
+   offset = request.getParameter("offset");
+}
+String count = "5";
+if (request.getParameter("count")!=null){
+   count = request.getParameter("count");
+}
+%>
 <%
 java.util.List nums = new java.util.ArrayList();
 int[] randomArr = new int[5];
@@ -227,50 +242,70 @@ int randomIdx = 0;
 
 <ul style="list-style-type:none;padding:0px">
 
-<logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" offset="2" >
-  
-      <%
- if(((Integer)i) % 2==0){ 
- %>
- <div class="row">	
- <%}%>
- <div class="col-md-6" style="padding:0px">
- <li class="box">	
-  <div class="linkblock">
-     <div class="box">	        
-        <div class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">     
-          <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" onclick="showDialog('dialog2', '<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html#messageListBody');return false;" class="hover-preload"><h3><bean:write name="forumThread" property="name"/></h3></a>
-        </div>
-          <div class="info" style="display:flex; align-items:flex-start; justify-content:space-between; margin-top: 10px">              
-            <span style="flex:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;overflow:hidden">           
-              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[150]" />
-             </span>  
-              <img src="https://static.jdon.com/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg" alt="icon" loading="lazy" style="width:40px; height:40px; margin-left:12px; flex-shrink:0; object-fit:cover; border-radius:6px;">
-            </div>
-         </div>
- 
+<jsp:include page="/query/taggedThreadList2.shtml" flush="true">
+    <jsp:param name="offset" value="2"/>
+    <jsp:param name="count" value="<%=count%>"/>
+</jsp:include>
 
- </div>	
-</li>  
-</div>
-
-
-
-
-<%
-  if(((Integer)i) % 2==1){ 
- %>
-  </div>
- <%}%>
-
-
-</logic:iterate>
+<div id="loadMoreBox"></div>
 
  </ul>
 
 </main>
 
 
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {   
+$(function() {
+  var loading = false;
+  var done = false;
+
+  var start = <%=start%> +  <%=count%>; 
+  var scrollTimer = null;
+
+  function loadMore() {
+    if (loading || done) return;
+    loading = true;
+
+    var url = '/query/taggedThreadList2.shtml?tagID=<bean:write name="tagID"/>&count=2&start=' + start;
+
+    $.get(url, function(html) {
+      html = $.trim(html);
+      if (html) {
+        $('#loadMoreBox').before(html);
+
+        // 每次加载后更新 offset 和 count
+        start += 2;
+      } else {
+        done = true; // 没数据了
+      }
+      loading = false;
+    }).fail(function() {
+      loading = false;
+    });
+  }
+
+  // 滚动检测 + 节流
+  $(window).on('scroll', function() {
+    if (scrollTimer) clearTimeout(scrollTimer);
+
+    scrollTimer = setTimeout(function() {
+      if (loading || done) return;
+
+      var box = $('#loadMoreBox');
+      if (!box.length) return;
+
+      var boxTop = box.offset().top;
+      var scrollBottom = $(window).scrollTop() + $(window).height();
+
+      if (scrollBottom + 100 >= boxTop) {
+        loadMore();
+      }
+    }, 200); // 200ms 节流
+  });
+});
+});
+</script>
 
         </div>
 

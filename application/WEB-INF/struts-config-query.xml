@@ -78,13 +78,9 @@
             <forward name="success" path="/query/taggedThreadList.jsp" />
         </action>
 
-        <action path="/random/taggedThreadList" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
-            <forward name="success" path="/query/taggedThreadList.jsp" />
+       <action path="/query/taggedThreadList2" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/query/taggedThreadList2.jsp" />
         </action>
-
-        <!-- <action path="/query/taggedThreadListNoheader" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">   
-            <forward name="success" path="/query/threadList.jsp" />
-        </action> -->
 
         <action path="/tags/tagsList" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/tags/tagsList2.shtml" />
