@@ -24,7 +24,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>极道Jdon：极速道破科技玄机</title>
+  <title>极道Jdon:极速道破科技玄机</title>
   <meta name="Description" content="极道Jdon带你探索科技世界，深度解析最新科技动态，助你快速道破科技玄机。">
   <meta name="Keywords" content="极道Jdon,科技,科技动态,科技新闻,科技资讯">
   <style> 
