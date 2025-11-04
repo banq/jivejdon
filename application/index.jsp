@@ -59,16 +59,16 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 	  <div id="main-content" class="col-lg-8 custom-col-left">
     <jsp:include page="/query/threadApprovedNewList.shtml" flush="true"></jsp:include>
 
-    <jsp:include page="/query/threadApprovedNewList2.shtml?offset=1&count=5" flush="true"></jsp:include>
+    <jsp:include page="/query/threadApprovedNewList2.shtml?offset=1&count=9" flush="true"></jsp:include>
     <jsp:include page="/query/threadApprovedNewList3.shtml?offset=0&count=1" flush="true"></jsp:include>        
 	
-    <jsp:include page="/query/threadApprovedNewList2.shtml?offset=5&count=9" flush="true"></jsp:include>
+    <jsp:include page="/query/threadApprovedNewList2.shtml?offset=9&count=13" flush="true"></jsp:include>
     <jsp:include page="/query/threadApprovedNewList3.shtml?offset=1&count=1" flush="true"></jsp:include>        
 	
-    <jsp:include page="/query/threadApprovedNewList2.shtml?offset=9&count=13" flush="true"></jsp:include>
+    <jsp:include page="/query/threadApprovedNewList2.shtml?offset=13&count=17" flush="true"></jsp:include>
     <jsp:include page="/query/threadApprovedNewList3.shtml?offset=2&count=1" flush="true"></jsp:include>        
 	
-    <jsp:include page="/query/threadApprovedNewList2.shtml?offset=13&count=17" flush="true"></jsp:include>
+    <jsp:include page="/query/threadApprovedNewList2.shtml?offset=17&count=21" flush="true"></jsp:include>
   
     <div id="loadMoreBox"></div>
 
@@ -87,8 +87,8 @@ $(function() {
   var loading = false;
   var done = false;
 
-  var offset = 17; // 初始 offset
-  var count = 19;  // 初始 count
+  var offset = 21; // 初始 offset
+  var count = 23;  // 初始 count
   var scrollTimer = null;
 
   function loadMore() {
