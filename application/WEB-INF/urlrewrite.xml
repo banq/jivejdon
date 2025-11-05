@@ -117,6 +117,12 @@
         <from>^/tag/$</from>
         <to>/tags/tagsList.shtml?count=6&amp;start=0</to>
     </rule>
+       
+    <rule>
+        <from>^/tag/page/([0-9]+)$</from>
+        <to>/tags/tagsList.shtml?count=6&amp;start=$1</to>
+    </rule>
+    
     <rule>
         <from>^/tag/([0-9]+)/$</from>
         <to>/tag/taggedThreadList.shtml?tagID=$1&amp;count=18</to>
