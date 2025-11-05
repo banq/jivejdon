@@ -14,7 +14,7 @@
 </logic:empty>
 
 
-<bean:define id="title"  value=" 最佳教程 " />
+<bean:define id="title"  value="最佳热点科技趋势 " />
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
 <bean:define id="pageallCount" name="threadListForm" property="allCount" />

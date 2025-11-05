@@ -16,7 +16,7 @@
 </logic:empty>
 
 
-<bean:define id="title"  value=" 精华教程 " />
+<bean:define id="title"  value=" 历史精华精彩观点 " />
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
 <bean:define id="pageallCount" name="threadListForm" property="allCount" />
