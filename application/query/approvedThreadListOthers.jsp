@@ -47,8 +47,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
   <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>   
    <%@include file="../common/IncludeTopHead.jsp"%>
- <meta name="Description" content="近期最新又最佳的热点趋势与编程教程">
-<meta name="Keywords" content="编码经典,又新又好教程,技术热点,IT新闻,产品经理,产品新闻,科技新闻,前沿大技术,未来大技术,架构动态,SpringBoot,微服务,软件架构,企业架构,系统设计,架构设计,企业IT,IT设计,IT平台,平台工程,Devops,运维,维护工程,敏捷,软件工程,程序工艺,编码手艺,码农">
+ <meta name="Description" content="近期最新又最佳的热点科技趋势">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="<%=domainUrl%>/sitemap.xml">
 <link rel="canonical" href="<%=domainUrl%>/approval/">      
  
