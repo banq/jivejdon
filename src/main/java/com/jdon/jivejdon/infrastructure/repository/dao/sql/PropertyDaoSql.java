@@ -186,23 +186,31 @@ public class PropertyDaoSql implements PropertyDao, Startable {
 			return;
 		Property tproperty = (Property) tables.get(new Integer(type));
 		try {
-			Iterator iter = c.iterator();
-			List queryParams = new ArrayList();
-			while (iter.hasNext()) {
-				Property property = (Property) iter.next();
-				if (!UtilValidate.isEmpty(property.getName()) && UtilValidate.isEmpty(property.getValue())) {
-					// if a property's value is null , delete it from db.
-					deleteProperty(Constants.USER, id, property);
-				} else {
-					queryParams.add(id);
-					queryParams.add(property.getName());
-					queryParams.add(property.getValue());
-					String INSERT_PROPERTY = "REPLACE INTO " + tproperty.getName() + "(" + tproperty.getValue() + ",name,propValue) VALUES(?,?,?)";
-					jdbcTempSource.getJdbcTemp().operate(queryParams, INSERT_PROPERTY);
-					queryParams.clear();
-					pageIteratorSolver.clearCache();
-				}
-			}
+			// 收集需要删除的属性，避免在遍历过程中修改集合
+            List<Property> propertiesToDelete = new ArrayList<>();
+            
+            Iterator iter = c.iterator();
+            List queryParams = new ArrayList();
+            while (iter.hasNext()) {
+                Property property = (Property) iter.next();
+                if (!UtilValidate.isEmpty(property.getName()) && UtilValidate.isEmpty(property.getValue())) {
+                    // 收集需要删除的属性
+                    propertiesToDelete.add(property);
+                } else {
+                    queryParams.add(id);
+                    queryParams.add(property.getName());
+                    queryParams.add(property.getValue());
+                    String INSERT_PROPERTY = "REPLACE INTO " + tproperty.getName() + "(" + tproperty.getValue() + ",name,propValue) VALUES(?,?,?)";
+                    jdbcTempSource.getJdbcTemp().operate(queryParams, INSERT_PROPERTY);
+                    queryParams.clear();
+                    pageIteratorSolver.clearCache();
+                }
+            }
+            
+            // 在遍历结束后处理需要删除的属性
+            for (Property property : propertiesToDelete) {
+                deleteProperty(type, id, property);
+            }
 		} catch (Exception e) {
 			logger.error(e);
 		}
@@ -214,7 +222,7 @@ public class PropertyDaoSql implements PropertyDao, Startable {
 			List queryParams = new ArrayList();
 			if (!UtilValidate.isEmpty(property.getName()) && UtilValidate.isEmpty(property.getValue())) {
 				// if a property's value is null , delete it from db.
-				deleteProperty(Constants.USER, id, property);
+				deleteProperty(type, id, property);
 			} else {
 				queryParams.add(id);
 				queryParams.add(property.getName());
