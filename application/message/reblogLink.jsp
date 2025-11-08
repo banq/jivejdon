@@ -164,7 +164,7 @@ document.querySelector('form[name="threadForm"]').onsubmit = validateForm;
     <div class="col-sm-3"></div>
     <div class="col-sm-6">
       <div class="form-group">
-        <input class="form-control" type="text" name="token" value="<bean:write name="forumThread" property="token" />" size="10" maxlength="25" id="inputBox"  value=''/>
+        <input class="form-control" type="text" name="token" value="<bean:write name="forumThread" property="token" />" size="50" maxlength="50" id="inputBox"  value=''/>
     
          
       </div>
