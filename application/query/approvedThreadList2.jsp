@@ -6,6 +6,12 @@
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%
+response.setHeader("Cache-Control", "public, max-age=86400, must-revalidate");
+response.setDateHeader("Expires", System.currentTimeMillis() + 86400000);
+response.setHeader("X-Robots-Tag", "noindex, nofollow");
+%>
+
+<%
 String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 %>
 
