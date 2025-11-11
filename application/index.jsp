@@ -52,35 +52,80 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 </div>
-	
+
+
 <div id="page-content" class="single-page container">
-	<div class="row">
-       <main>	  
-	  <div id="main-content" class="col-lg-8 custom-col-left">
-    <jsp:include page="/query/threadApprovedNewList.shtml" flush="true"></jsp:include>
-
-    <jsp:include page="/query/threadApprovedNewList2.shtml?offset=1&count=9" flush="true"></jsp:include>
-    <jsp:include page="/query/threadApprovedNewList3.shtml?offset=0&count=1" flush="true"></jsp:include>        
-	
-    <jsp:include page="/query/threadApprovedNewList2.shtml?offset=9&count=13" flush="true"></jsp:include>
-    <jsp:include page="/query/threadApprovedNewList3.shtml?offset=1&count=1" flush="true"></jsp:include>        
-	
-    <jsp:include page="/query/threadApprovedNewList2.shtml?offset=13&count=17" flush="true"></jsp:include>
-    <jsp:include page="/query/threadApprovedNewList3.shtml?offset=2&count=1" flush="true"></jsp:include>        
-	
-    <jsp:include page="/query/threadApprovedNewList2.shtml?offset=17&count=21" flush="true"></jsp:include>
   
-    <div id="loadMoreBox"></div>
+  <jsp:include page="/query/threadApprovedNewList.shtml" flush="true"></jsp:include>
+	<div class="row">
+  <main>	  	 
+	  <div id="main-content" class="col-lg-8 custom-col-left">
 
-    <div class="box"> 
-	    <div class="tres center">        
+      <jsp:include page="/query/threadApprovedNewList2.shtml?offset=1&count=9" flush="true"></jsp:include>
+      <jsp:include page="/query/threadApprovedNewList3.shtml?offset=0&count=1" flush="true"></jsp:include>        
+	
+      <jsp:include page="/query/threadApprovedNewList2.shtml?offset=9&count=13" flush="true"></jsp:include>
+      <jsp:include page="/query/threadApprovedNewList3.shtml?offset=1&count=1" flush="true"></jsp:include>        
+	
+      <jsp:include page="/query/threadApprovedNewList2.shtml?offset=13&count=17" flush="true"></jsp:include>
+      <jsp:include page="/query/threadApprovedNewList3.shtml?offset=2&count=1" flush="true"></jsp:include>        
+	
+      <jsp:include page="/query/threadApprovedNewList2.shtml?offset=17&count=21" flush="true"></jsp:include>
+  
+      <div id="loadMoreBox"></div>
+
+      <div class="box"> 
+	      <div class="tres center">        
           一语道破科技玄机：<a href="<%=domainUrl%>/approval/"><b>更多</b></a>	   
-		</div>
-    </div>
+		    </div>
+      </div>
 		  
-   
+    </div>   
+  </main> 
+
+  <aside>  			
+  <div id="sidebar" class="col-lg-4 custom-col-right" style="padding-left:0px">
+      <div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); background-color: white; overflow: hidden; padding-left: 5px; padding-right: 2px">
+                <!---- Start Widget ---->
+                <div class="widget">
+                    <div class="content">
+                        <ul class="list-inline">
+              <form role="form" class="form-horizontal" method="post" action="/query/threadViewQuery.shtml">
+                                <input type="text" placeholder="Search" value="" name="query" id="v_search" class="form-control">
+                            </form>
+                        </ul>						
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="wid-vid">
+                      <div id="newList"><jsp:include page="/query/threadNewList.shtml?count=10" flush="true"></jsp:include></div>   
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="wid-vid">
+                      <div id="digList"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
+                      <script defer>
+                        document.addEventListener("DOMContentLoaded", function(event) { 
+                          $(document).ready(function() {      
+                            $('#digList').load("/query/threadDigList");                                
+                          });            
+                        });  
+                      </script>           
+                    </div>   
+                </div>
+      </div>
+    </div>
+</aside>
+    
+  </div>
 </div>
-</main> 
+	<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
+
+
+
+<%@ include file="./common/IncludeBottomBody.jsp" %> 
 <script>
 document.addEventListener("DOMContentLoaded", function(event) {   
 $(function() {
@@ -135,52 +180,6 @@ $(function() {
 });
 });
 </script>
-<aside>  			
-    <div id="sidebar" class="col-lg-4 custom-col-right" style="padding-left:0px"><div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); background-color: white; overflow: hidden; padding-left: 5px; padding-right: 2px">
-				<!---- Start Widget ---->
-				<div class="widget">
-					<div class="content">
-						<ul class="list-inline">
-              <form role="form" class="form-horizontal" method="post" action="/query/threadViewQuery.shtml">
-								<input type="text" placeholder="Search" value="" name="query" id="v_search" class="form-control">
-							</form>
-						</ul>						
-					</div>
-				</div>
-
-				<div class="box">
-					    <div class="wid-vid">
-					         <div id="newList"><jsp:include page="/query/threadNewList.shtml?count=10" flush="true"></jsp:include></div>   
-							   
-							</div>
-				</div>
-
-				<div class="box">
-					    <div class="wid-vid">
-							 
-							 <div id="digList" class="linkblock"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
-							 <script defer>
-					               document.addEventListener("DOMContentLoaded", function(event) { 
-                                          $(document).ready(function() {      
-                                             $('#digList').load("/query/threadDigList");                                
-                                          });            
-                                        });  
-                  			      </script>           
-							 </div>   
-							</div>
-				</div>
-			
-			</div>
-    </div></aside>
-    
-  </div>
-</div>
-	<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
-
-
-
-
-<%@ include file="./common/IncludeBottomBody.jsp" %> 
 
 <script type="speculationrules">
      {

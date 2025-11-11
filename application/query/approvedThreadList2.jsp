@@ -45,7 +45,7 @@ if (request.getParameter("count")!=null){
 
 
  <div class="box">	
-  <div class="linkblock">
+  <div>
     <div class="box">	           
     
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
