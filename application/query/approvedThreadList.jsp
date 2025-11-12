@@ -40,15 +40,22 @@ int randomIdx = 0;
     <div class="box">	  
       <div class="row">	          
       <div class="col-lg-3">
-			      	<div class="zoom-container">
-              <a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"   title="<bean:write name="forumThread" property="name"/>">
+			      	<div style="position: relative;" class="zoom-container">
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">        
                     <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="img-thumbnail img-responsive" style="height:130px;width:100%" loading="lazy" onerror="this.src='https://static.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg'"/>
                 </logic:notEmpty>
                 <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">        
-                    <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg" border="0" class="img-thumbnail img-responsive" style="height:130px;width:100%" loading="lazy" /> 
+                  <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg" border="0" class="img-thumbnail img-responsive" style="height:130px;width:100%" loading="lazy" /> 
+
+                  <div style="position: absolute;top:0px;right:0px">
+                  <div class="tagcloud">
+                      <a href='<%=domainUrl%>/forum/<bean:write name="forumThread" property="forum.forumId"/>/'  class="tag-cloud-link">
+		                      <bean:write name="forumThread" property="forum.name"/>
+                      </a>
+                      </div>
+                 </div> 
                 </logic:empty>      
-               </a>                   
+                                  
               </div>
 			      </div>
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
