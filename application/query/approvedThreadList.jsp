@@ -47,7 +47,7 @@ int randomIdx = 0;
                 <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">        
                   <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg" border="0" class="img-thumbnail img-responsive" style="height:130px;width:100%" loading="lazy" /> 
 
-                  <div style="position: absolute;top:0px;right:0px">
+                  <div style="position: absolute;bottom: 0px;">
                   <div class="tagcloud">
                       <a href='<%=domainUrl%>/forum/<bean:write name="forumThread" property="forum.forumId"/>/'  class="tag-cloud-link">
 		                      <bean:write name="forumThread" property="forum.name"/>
