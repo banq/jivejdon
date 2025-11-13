@@ -5,6 +5,13 @@
 <%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+
+<%          
+if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(1 * 30 * 60, this.getServletContext(), request, response)) {
+    return ;
+}	
+%>
+
 <bean:parameter id="noheader" name="noheader"  value=""/>
 
 <logic:empty name="threadListForm" property="oneModel">

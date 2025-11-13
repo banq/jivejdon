@@ -14,10 +14,10 @@
 
     <!-- jivejdon/message/threadViewQuery.shtml?dateRange=3650&messageReplyCountWindow=1&queryType=HOT1  -->
     <action-mappings>
-       <action path="/forum/threadList" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
+       <!-- <action path="/forum/threadList" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/forum/threadList2.shtml" />
-        </action>
-        <action path="/forum/threadList2" type="com.jdon.jivejdon.presentation.action.ThreadListAction" name="threadListForm" scope="request" validate="false">
+        </action> -->
+        <action path="/forum/threadList" type="com.jdon.jivejdon.presentation.action.ThreadListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/forum/threadList.jsp" />
             <forward name="failure" path="/404.jsp" /> <!-- after 2011-1-8 JF version -->
         </action>
