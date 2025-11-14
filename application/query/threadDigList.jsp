@@ -8,7 +8,7 @@
 <%
     response.setHeader("X-Robots-Tag", "noindex, nofollow");
 %>
-<bean:parameter id="count" name="count" value="5"/>
+<bean:parameter id="count" name="count" value="15"/>
 <%
 String coutlength = (String)pageContext.getAttribute("count");
 %>        

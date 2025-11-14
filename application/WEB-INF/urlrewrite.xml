@@ -172,7 +172,7 @@
 
 	<rule>
         <from>^/query/threadDigList$</from>
-        <to>/query/threadDigList.shtml?count=5</to>
+        <to>/query/threadDigList.shtml?count=15</to>
     </rule>    
 	
     <!-- rss -->
