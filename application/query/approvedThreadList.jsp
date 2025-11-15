@@ -60,7 +60,6 @@ int randomIdx = 0;
 			      </div>
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
         <div class="col-lg-9">
-            <h1 style="font-size: 2.6rem;margin-top: 2px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h1>
             <div class="info">			 
               <span class="smallgray"><i class="fa fa-calendar"></i>
                 <bean:write name="forumMessage" property="modifiedDate3"/>
@@ -83,6 +82,9 @@ int randomIdx = 0;
             </logic:greaterThan>   
                      
             </div>
+            
+            <h1 style="font-size: 2.6rem;margin-top: 2px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h1>
+          
         
           <div class="wrap-vid">
               <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. 
