@@ -133,7 +133,7 @@ $(function() {
   var done = false;
 
   var offset = 25; // 初始 offset
-  var count = 29;  // 初始 count
+  var count = 27;  // 初始 count
   var scrollTimer = null;
 
   function loadMore() {
