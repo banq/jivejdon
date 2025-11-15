@@ -10,23 +10,23 @@
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
  <bean:define id="body" name="forumMessage" property="messageVO.body" />
 <li class="info">
-         <div style="display: flex; align-items: center;"> 
+    <div class="box"> 
          <div class="wrap-vid">              
           <logic:empty name="forumMessage" property="messageUrlVO.thumbnailUrl">                  
             <div class="thumbn">
-              <img src="https://static.jdon.com/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg" border='0' class="img-thumbnail" loading="lazy" width="30" height="40"/>
+              <img src="https://static.jdon.com/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg" border='0' class="img-thumbnail" loading="lazy" width="55" height="55"/>
             </div>
           </logic:empty>
                             
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.thumbnailUrl">                  
                   <div class="thumbn">
-                    <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="30" height="40"/>                  
+                    <img src="<bean:write name="forumMessage" property="messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="55" height="55"/>                  
                   </div>  
                 </logic:notEmpty>              
           </div>
-         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"  title="<bean:write name="forumMessage" property="modifiedDate3"/>" class="hover-preload"><bean:write name="forumThread" property="name"/></a></h4>
+         <h4 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"  title="<bean:write name="forumMessage" property="modifiedDate3"/>" class="hover-preload"><bean:write name="forumThread" property="name"/></a></h4>
 
-        </div>
+    </div>
 </li>
 
  </logic:notEmpty>

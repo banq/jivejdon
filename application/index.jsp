@@ -85,7 +85,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
   <aside>  			
   <div id="sidebar" class="col-lg-4 custom-col-right" style="padding-left:0px">
-      <div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); background-color: white; overflow: hidden; padding-left: 5px; padding-right: 2px">
+      <div class="box">
                 <!---- Start Widget ---->
                 <div class="widget">
                     <div class="content">
