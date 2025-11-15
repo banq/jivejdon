@@ -5,10 +5,10 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<%
-response.setHeader("Cache-Control", "public, s-maxage=86400, max-age=86400");
-response.setDateHeader("Expires", System.currentTimeMillis() + 86400000);
-response.setHeader("X-Robots-Tag", "noindex, nofollow");
+<%          
+if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(24 * 60 * 60, this.getServletContext(), request, response)) {
+    return ;
+}	
 %>
 <%
 String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
