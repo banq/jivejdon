@@ -52,6 +52,11 @@ public class MessageDigAction extends Action {
 
 		try {
 			response.setContentType("text/html");
+			response.setHeader("X-Robots-Tag", "noindex, nofollow");
+
+			response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+			response.setHeader("Pragma", "no-cache");
+			response.setDateHeader("Expires", 0);
 			response.getWriter().print(digCount);
 		} catch (Exception e) {
 			response.sendError(404);

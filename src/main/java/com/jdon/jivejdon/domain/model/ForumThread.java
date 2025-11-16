@@ -429,11 +429,19 @@ public class ForumThread {
 	}
 
 	public int messaegDigAction(String ip) {
-        
-        // this.forumThread.addDig(this);
-        eventSourcing.saveMessageProperties(
-                new MessagePropertiesRevisedEvent(getRootMessage().getMessageId(), getRootMessage().getMessagePropertysVO().getPropertys()));
+		// 先获取当前的digCount
+		int oldDigCount = this.getRootMessage().getMessagePropertysVO().getDigCount();
 
-        return this.getRootMessage().getMessagePropertysVO().addMessageDigCount(ip);
-    }
+		// 调用addMessageDigCount方法
+		int newDigCount = this.getRootMessage().getMessagePropertysVO().addMessageDigCount(ip);
+
+		// 只有当digCount确实增加时，才调用eventSourcing.saveMessageProperties
+		if (newDigCount > oldDigCount) {
+			eventSourcing.saveMessageProperties(
+					new MessagePropertiesRevisedEvent(getRootMessage().getMessageId(),
+							getRootMessage().getMessagePropertysVO().getPropertys()));
+		}
+
+		return newDigCount;
+	}
 }
