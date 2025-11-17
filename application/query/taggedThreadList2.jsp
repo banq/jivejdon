@@ -45,7 +45,7 @@ if (request.getParameter("count")!=null){
             <span style="flex:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;overflow:hidden">           
               <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[150]" />
              </span>  
-              <img src="https://static.jdon.com/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg" alt="icon" loading="lazy" style="width:55px; height:55px; margin-left:12px; flex-shrink:0; object-fit:cover; border-radius:6px;">
+              <img src="/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg" alt="icon" loading="lazy" style="width:55px; height:55px; margin-left:12px; flex-shrink:0; object-fit:cover; border-radius:6px;">
             </div>
          </div>
  

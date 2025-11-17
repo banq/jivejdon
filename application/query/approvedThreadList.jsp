@@ -42,10 +42,10 @@ int randomIdx = 0;
       <div class="col-lg-3">
 			      	<div style="position: relative;" class="zoom-container">
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">        
-                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="img-thumbnail img-responsive" style="height:130px;width:100%" loading="lazy" onerror="this.src='https://static.jdon.com/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg'"/>
+                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="img-thumbnail img-responsive" style="height:130px;width:100%" loading="lazy" onerror="this.src='/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg'"/>
                 </logic:notEmpty>
                 <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">        
-                  <img id="home-thumbnai" src="https://static.jdon.com/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg" border="0" class="img-thumbnail img-responsive" style="height:130px;width:100%" loading="lazy" /> 
+                  <img id="home-thumbnai" src="/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg" border="0" class="img-thumbnail img-responsive" style="height:130px;width:100%" loading="lazy" /> 
 
                   <div style="position: absolute;bottom: 0px;">
                   <div class="tagcloud">

@@ -55,7 +55,7 @@ int randomIdx = 0;
      <div class="col-lg-5">
     <div style="position: relative;"  class="zoom-container">           
        <a href='<%=domainUrl%>/tag/<bean:write name="threadTag" property="tagID"/>/'  title="<bean:write name="threadTag" property="title" />">    
-        <img id="home-thumbnai" src='https://static.jdon.com/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg' border="0" class="img-thumbnail img-responsive" style="height:210px;width:100%"  loading="lazy" />
+        <img id="home-thumbnai" src='/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg' border="0" class="img-thumbnail img-responsive" style="height:210px;width:100%"  loading="lazy" />
       </a>
       <div style="position: absolute;top:0px;right:0px">
        <div class="tagcloud">

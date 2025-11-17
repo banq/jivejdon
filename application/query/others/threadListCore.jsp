@@ -14,7 +14,7 @@
          <div class="wrap-vid">              
           <logic:empty name="forumMessage" property="messageUrlVO.thumbnailUrl">                  
             <div class="thumbn">
-              <img src="https://static.jdon.com/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg" border='0' class="img-thumbnail" loading="lazy" width="55" height="55"/>
+              <img src="/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg" border='0' class="img-thumbnail" loading="lazy" width="55" height="55"/>
             </div>
           </logic:empty>
                             
