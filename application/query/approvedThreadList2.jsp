@@ -38,9 +38,9 @@ if (request.getParameter("count")!=null){
    <div class="col-md-12" style="padding:0px">
 
 
- <div class="box" style="padding-top: 0rem;">	
+ <div class="box" style="padding-bottom: 0rem;">	
   <div>
-    <div class="box" style="padding-top: 0rem;">	           
+    <div class="box" style="padding-bottom: 0rem;">	           
     
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
