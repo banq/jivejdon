@@ -66,9 +66,9 @@ if (request.getParameter("count")!=null){
                      
             </div>
                          
-         <h3 class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+         <h2 class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
           <a href="<%=com.jdon.jivejdon.util.ToolsUtil.getAppURL(request)%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a>
-        </h3>
+        </h2>
       
        
 
