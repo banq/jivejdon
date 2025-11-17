@@ -61,7 +61,7 @@
     <tbody>
     <tr><td align="middle">
         <form action="https://cn.bing.com/search" class="search" method="get">
-            <input type=text name=q  value="<bean:write name="query"/>  site:jdon.com" size="40">
+            <input type=text name=q  value="<bean:write name="query"/>  site:www.jdon.com" size="40">
             <input type="submit" value="Bing搜"> 
             </form>
     </td></tr>
