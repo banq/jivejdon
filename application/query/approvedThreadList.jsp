@@ -83,7 +83,7 @@ int randomIdx = 0;
                      
             </div>
             
-            <h1 style="font-size: 2.6rem;margin-top: 2px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h1>
+            <h1 style="font-size: 2.6rem;margin-top: 2px;padding-bottom: 10px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h1>
           
         
           <div class="wrap-vid">
