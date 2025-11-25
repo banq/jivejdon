@@ -60,9 +60,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 	<div class="row">
   <main>	  	 
 	  <div id="main-content" class="col-lg-8 custom-col-left">
-      
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
-     crossorigin="anonymous"></script>
+
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-format="fluid"
