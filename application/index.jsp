@@ -61,16 +61,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   <main>	  	 
 	  <div id="main-content" class="col-lg-8 custom-col-left">
 
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="fluid"
-     data-ad-layout-key="-ev-1p-5j-ot+26n"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="3378777426"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
       <jsp:include page="/query/threadApprovedNewList2.shtml?offset=1&count=7" flush="true"></jsp:include>
       <jsp:include page="/query/threadApprovedNewList3.shtml?offset=0&count=1" flush="true"></jsp:include>        
 	
