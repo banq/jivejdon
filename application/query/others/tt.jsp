@@ -5,6 +5,13 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+
+<%          
+if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(1 * 30 * 60, this.getServletContext(), request, response)) {
+    return ;
+}	
+%>
+
 <%
     response.setHeader("X-Robots-Tag", "noindex, nofollow");
 %>
