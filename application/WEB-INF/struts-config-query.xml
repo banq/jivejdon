@@ -75,7 +75,11 @@
             <forward name="success" path="/query/taggedThreadList.jsp" />
         </action>
 
-       <action path="/query/taggedThreadList2" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
+       <action path="/query/taggedThreadList2" type="com.jdon.jivejdon.presentation.action.util.TagEtagFilterAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/query/taggedThreadList22.shtml" />
+        </action>
+
+        <action path="/query/taggedThreadList22" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/taggedThreadList2.jsp" />
         </action>
 
@@ -87,7 +91,10 @@
         </action>
 
       
-        <action path="/query/tt" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
+        <action path="/query/tt" type="com.jdon.jivejdon.presentation.action.util.TagEtagFilterAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/query/tt2.shtml" />
+        </action>
+        <action path="/query/tt2" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/tt.jsp" />
         </action>
 
