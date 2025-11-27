@@ -50,9 +50,22 @@ public class SubscriptionNotify {
 	public void sendSub(SubscribedNotifyEvent subscribedNotifyEvent) {
 		try {
 			NotifySubscribed notifySubscribed = notifySubscribedFactory.createFullSubscribed(subscribedNotifyEvent);
+			// 添加空值检查
+			if (notifySubscribed == null) {
+				logger.warn("notifySubscribed is null, skipping...");
+				return;
+			}
+
+			// 添加对getSubscribeId()的空值检查
+			Long subscribeId = notifySubscribed.getSubscribeId();
+			if (subscribeId == null) {
+				logger.warn("subscribeId is null, skipping...");
+				return;
+			}
+
 			ShortMsgActionList shortMsgActionList = new ShortMsgActionList();
 
-			Collection<Subscription> subscriptions = subscriptionDao.getSubscriptionsForsubscribed(notifySubscribed.getSubscribeId());
+			Collection<Subscription> subscriptions = subscriptionDao.getSubscriptionsForsubscribed(subscribeId);
 			for (Subscription sub : subscriptions) {
 
 				sub.setAccount(accountFactory.getFullAccount(sub.getAccount()));
