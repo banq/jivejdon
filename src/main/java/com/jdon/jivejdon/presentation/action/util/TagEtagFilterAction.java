@@ -31,14 +31,6 @@ import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.util.ToolsUtil;
 
 /**
- * for struts-config.xml
- * 
- * <action path="/query/threadApprovedNewList"
- * type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction"
- * name="threadListForm" scope="request" validate="false"> <forward
- * name="success" path="/query/threadApprovedNewList2.shtml"/> </action>
- * 
- * /query/threadApprovedNewList2.shtml is true orginal action.
  * 
  * @author banq
  * 

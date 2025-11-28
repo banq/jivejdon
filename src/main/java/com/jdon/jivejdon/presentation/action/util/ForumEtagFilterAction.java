@@ -23,8 +23,11 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.api.ForumService;
+import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.util.ToolsUtil;
-
+import org.apache.commons.lang3.StringUtils;
 /**
  * for struts-config.xml
  * 
@@ -44,8 +47,39 @@ public class ForumEtagFilterAction extends Action {
 	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		if (!ToolsUtil.checkHeaderCacheForum(expire, this.servlet.getServletContext(), request, response)) {
-			return null;
+		String forumId = request.getParameter("forum");
+		if (forumId == null)
+			forumId = request.getParameter("forumId");		
+		if (forumId == null || !StringUtils.isNumeric(forumId) || forumId.length() > 10) {
+			if (!ToolsUtil.checkHeaderCacheExpire(expire, request, response)) {
+				return null;// response is 304
+			}
+			return actionMapping.findForward("success");
+		}
+
+		ForumService forumService = (ForumService) WebAppUtil.getService("forumService", this.servlet.getServletContext());
+		Long forumIDL = Long.parseLong(forumId);
+		Forum forum = forumService.getForum(forumIDL);
+		if (forum == null) {
+			if (!ToolsUtil.checkHeaderCacheExpire(expire, request, response)) {
+				return null;// response is 304
+			}
+			return actionMapping.findForward("success");
+		}
+
+		long latestPostTime = 0;
+		if (forum.getForumState().getLatestPost() != null) {
+			latestPostTime = forum.getForumState().getLatestPost().getModifiedDate2();
+		} 
+		if (latestPostTime == 0) {
+			if (!ToolsUtil.checkHeaderCacheExpire(expire, request, response)) {
+				return null;// response is 304
+			}
+			return actionMapping.findForward("success");
+		}
+
+		if (!ToolsUtil.checkHeaderCache(expire, latestPostTime, request, response)) {
+			return null;// response is 304
 		}
 		return actionMapping.findForward("success");
 

@@ -94,7 +94,55 @@ public class RSSGenServlet extends HttpServlet {
 
 	protected boolean checkModifiedEtagFilter(HttpServletRequest request, HttpServletResponse response) {
 		int expire = 1 * 60 * 60;
-		if (!ToolsUtil.checkHeaderCacheForum(expire, this.getServletContext(), request, response)) {
+		
+		// 检查是否有forumId参数
+		String forumId = request.getParameter("forumId");
+		if (forumId != null && StringUtils.isNumeric(forumId) && forumId.length() <= 10) {
+			// 参考ForumEtagFilterAction的逻辑
+			com.jdon.jivejdon.api.ForumService forumService = (com.jdon.jivejdon.api.ForumService) 
+				WebAppUtil.getService("forumService", this.getServletContext());
+			Long forumIDL = Long.parseLong(forumId);
+			com.jdon.jivejdon.domain.model.Forum forum = forumService.getForum(forumIDL);
+			
+			long latestPostTime = 0;
+			if (forum != null && forum.getForumState().getLatestPost() != null) {
+				latestPostTime = forum.getForumState().getLatestPost().getModifiedDate2();
+			} else {
+				// 如果forum为空或latestPost为空，使用当前时间作为默认值
+				latestPostTime = System.currentTimeMillis();
+			}
+			
+			if (!ToolsUtil.checkHeaderCache(expire, latestPostTime, request, response)) {
+				return false;
+			}
+			return true;
+		}
+		
+		// 检查是否有tagID参数
+		String tagID = request.getParameter("tagID");
+		if (tagID != null && StringUtils.isNumeric(tagID) && tagID.length() <= 10) {
+			// 参考TagEtagFilterAction的逻辑
+			com.jdon.jivejdon.api.property.TagService othersService = (com.jdon.jivejdon.api.property.TagService) 
+				WebAppUtil.getService("othersService", this.getServletContext());
+			Long tagIDL = Long.parseLong(tagID);
+			com.jdon.jivejdon.domain.model.property.ThreadTag tag = othersService.getThreadTag(tagIDL);
+			
+			long tagTime = 0;
+			if (tag != null) {
+				tagTime = 1000000000000L + (long)tag.getAssonum() * 10000;
+			} else {
+				// 如果tag为空，使用当前时间作为默认值
+				tagTime = System.currentTimeMillis();
+			}
+			
+			if (!ToolsUtil.checkHeaderCache(expire, tagTime, request, response)) {
+				return false;
+			}
+			return true;
+		}
+		
+		// 如果都没有参数，使用当前时间
+		if (!ToolsUtil.checkHeaderCacheExpire(expire, request, response)) {
 			return false;
 		}
 		return true;

@@ -32,7 +32,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jdon.jivejdon.presentation.action.util.ForumUtil;
 import com.jdon.util.UtilDateTime;
 
 /**
@@ -379,12 +378,45 @@ public class ToolsUtil {
 		return hostName;
 	}
 
-	public static boolean checkHeaderCacheForum(long adddays, ServletContext sc, HttpServletRequest request,
-			HttpServletResponse response) {
-
-		return checkHeaderCache(adddays, ForumUtil.getForumsLastModifiedDate(sc), request, response);
-
+    public static boolean checkHeaderCacheForum(long adddays, ServletContext sc, HttpServletRequest request,HttpServletResponse response) {
+           return checkHeaderCacheExpire(adddays, request, response);
 	}
+
+    /**
+     * checkHeaderCache 的重载版本：没有 modelLastModifiedDate 参数，使用当前系统时间作为资源最后修改时间。
+     * 如果请求头 If-Modified-Since 与当前时间比较仍在 maxAgeSeconds 有效期内，则返回 304。
+     *
+     * @param maxAgeSeconds 缓存过期时间（秒）
+     * @param request       HttpServletRequest
+     * @param response      HttpServletResponse
+     * @return 当需要继续处理请求（需要返回内容）返回 true；当已命中缓存并已返回 304 时返回 false
+     */
+    public static boolean checkHeaderCacheExpire(long maxAgeSeconds, HttpServletRequest request, HttpServletResponse response) {
+        if (request.getAttribute("myExpire") != null) {
+            System.err.println("checkHeaderCache called above twice times: " + request.getRequestURI());
+            return true;
+        }
+        request.setAttribute("myExpire", maxAgeSeconds);
+
+        try {
+            // 使用 If-Modified-Since 验证: 如果客户端缓存时间距现在仍然在 maxAgeSeconds 内，则返回 304
+            long header = request.getDateHeader("If-Modified-Since");
+            long now = System.currentTimeMillis();
+            if (header > 0) {
+                long ageMillis = now - header;
+                if (ageMillis <= maxAgeSeconds * 1000L) {
+                    response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+                    return false;
+                }
+            }
+
+            // 未命中缓存或缓存已过期，设置新的响应头（基于当前时间）
+            setRespHeaderCache(maxAgeSeconds, now, request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }	
 
 	//grok3
 	public static boolean checkHeaderCache(long maxAgeSeconds, long modelLastModifiedDate, HttpServletRequest request, HttpServletResponse response) {

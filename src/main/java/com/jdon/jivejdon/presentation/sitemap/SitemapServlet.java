@@ -40,7 +40,6 @@ import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.query.ResultSort;
 import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
 import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpecForMod;
-import com.jdon.jivejdon.presentation.action.util.ForumUtil;
 import com.jdon.jivejdon.spi.component.sitemap.SitemapHelper;
 import com.jdon.jivejdon.spi.component.sitemap.SitemapRepository;
 import com.jdon.jivejdon.spi.component.sitemap.SitemapService;
@@ -173,10 +172,7 @@ public class SitemapServlet extends HttpServlet {
 
 	protected void service(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		long modelLastModifiedDate = ForumUtil.getForumsLastModifiedDate(
-				this.getServletContext());
-		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request,
-				response)) {
+		if (!ToolsUtil.checkHeaderCacheExpire(expire,  request, response)) {
 			return;
 		}
 
@@ -185,10 +181,6 @@ public class SitemapServlet extends HttpServlet {
 		// 	return;
 		// }
 
-		if (lastModifiedDate == 0 || lastModifiedDate < modelLastModifiedDate) {
-			lastModifiedDate = modelLastModifiedDate;
-			clearLast();
-		}
 
 		try {
 			if (this.charArrayWriterBuffer == null) {
@@ -209,10 +201,6 @@ public class SitemapServlet extends HttpServlet {
 		}
 	}
 
-	private void clearLast() {
-			this.charArrayWriterBuffer = null;
-
-	}
 
 	
 
