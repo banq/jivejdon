@@ -23,8 +23,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>   
    <bean:define id="title"  value="极道场Dojo" />
    <%@include file="../common/IncludeTopHead.jsp"%>
-   <meta name="Description" content="IT科技、生物极客、软硬件技术道场">
-<meta name="Keywords" content="前端,后端,语言平台,领域驱动设计,语言本体,逻辑方法,SpringBoot,SpringCloud,平台架构,DevOps,Github工具,企业,架构,科技、自然科学,产品领域,生物极客,长寿,科普,大语言模型,数据科学,认知偏见">
+   <meta name="Description" content="极道Jdon：IT科技、生物极客、软硬件技术道场">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="<%=domainUrl%>/sitemap.xml">
 
 <script>

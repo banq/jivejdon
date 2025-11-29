@@ -127,8 +127,11 @@
             <forward name="success" path="/forum/threadDigSortedList.jsp" />
         </action>
 
+        <action path="/query/threadNewList" type="com.jdon.jivejdon.presentation.action.util.ForumEtagFilterAction" name="threadListForm" scope="request" validate="false">
+            <forward name="success" path="/query/threadNewList2.shtml" />
+        </action>
 
-        <action path="/query/threadNewList" type="com.jdon.jivejdon.presentation.action.ThreadListAction" name="threadListForm" scope="request" validate="false">
+        <action path="/query/threadNewList2" type="com.jdon.jivejdon.presentation.action.ThreadListAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/query/others/newlist.jsp" />
         </action>
 
