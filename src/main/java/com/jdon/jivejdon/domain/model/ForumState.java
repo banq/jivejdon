@@ -130,8 +130,8 @@ public class ForumState  {
 		OneOneDTO oneOneDTO = null;
 		try {
 			// synchronized (this) {
-			if (messageCount != null)
-				return;
+			 if (messageCount.get() != Integer.MIN_VALUE)
+                return;
 			oneOneDTO = (OneOneDTO) dm.getEventResult();
 			if (oneOneDTO != null) {
 				OneOneDTO oneOneDTO2 = (OneOneDTO) oneOneDTO.getParent();
