@@ -7,7 +7,7 @@
 <%@ page contentType="application/json; charset=UTF-8" %>
 
 <%          
-if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(10 * 24 * 60 * 60, this.getServletContext(), request, response)) {
+if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(24 * 60 * 60, this.getServletContext(), request, response)) {
      return ;
  }	
 %>
