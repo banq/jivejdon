@@ -42,7 +42,7 @@ import org.apache.commons.lang3.StringUtils;
  * 
  */
 public class ForumEtagFilterAction extends Action {
-	private final static int expire = 12 * 60 * 60;
+	private final static int expire = 6 * 60 * 60;
 
 	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
