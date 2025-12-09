@@ -12,7 +12,7 @@
 <%
 String coutlength = (String)pageContext.getAttribute("count");
 %>        
-<ul style="list-style-type:none;padding:0">
+<ul style="list-style-type:none;padding:0" itemscope itemtype="https://schema.org/ItemList">
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" length='<%=coutlength%>' >
 
  <%@ include file="threadListCore.jsp" %>
