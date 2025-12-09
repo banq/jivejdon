@@ -149,7 +149,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
 
 
-<ul class="list-group" style="list-style-type:none;padding:0">
+<ul class="list-group" style="list-style-type:none;padding:0" itemscope itemtype="https://schema.org/ItemList">
 
  <logic:iterate indexId="i" id="forumThread" name="threadListForm"  property="list">
  <logic:equal name="i" value="2">
