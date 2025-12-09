@@ -26,11 +26,12 @@ int randomIdx = 0;
 %>
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
+<div itemscope itemtype="https://schema.org/ItemList">
 <logic:iterate  id="forumThread" name="threadListForm" property="list" length="1">
    <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
    <bean:define id="thumbthreadId" name="forumThread" property="threadId"/>
    
-
+ <div itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
  <div class="row">	
 
 
@@ -83,9 +84,8 @@ int randomIdx = 0;
                      
             </div>
             
-            <h1 style="font-size: 2.6rem;margin-top: 2px;padding-bottom: 10px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a></h1>
+<h1 style="font-size: 2.6rem;margin-top: 2px;padding-bottom: 10px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><span itemprop="name"><bean:write name="forumThread" property="name"/></span></a></h1>
           
-        
           <div class="wrap-vid">
               <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. 
           </div>
@@ -101,5 +101,5 @@ int randomIdx = 0;
   </div>
 
 </logic:iterate>
-
+</div>
 

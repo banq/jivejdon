@@ -28,12 +28,13 @@ if (request.getParameter("count")!=null){
 %>
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
-
+<div itemscope itemtype="https://schema.org/ItemList">
 <%int j = 0;%>
 <logic:iterate indexId="i"   id="forumThread" name="threadListForm" property="list" offset="<%=offset%>" length="<%=count%>">
    <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
    <bean:define id="thumbthreadId" name="forumThread" property="threadId"/>
    
+ <div itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
  <div class="row">	
    <div class="col-md-12" style="padding:0px">
 
@@ -66,9 +67,9 @@ if (request.getParameter("count")!=null){
                      
             </div>
                          
-         <h2 class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-          <a href="<%=com.jdon.jivejdon.util.ToolsUtil.getAppURL(request)%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"   class="hover-preload"><bean:write name="forumThread" property="name"/></a>
-        </h2>
+<h2 class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+ <a href="<%=com.jdon.jivejdon.util.ToolsUtil.getAppURL(request)%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><span itemprop="name"><bean:write name="forumThread" property="name"/></span></a>
+</h2>
       
        
 
@@ -83,6 +84,6 @@ if (request.getParameter("count")!=null){
 
 
   </div>
-  </div>
-
+</div>
 </logic:iterate>
+</div>

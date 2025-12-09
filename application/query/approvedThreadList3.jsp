@@ -40,12 +40,11 @@ while (idx < 5) {
 int randomIdx = 0;
 %>
 
-
+<div itemscope itemtype="https://schema.org/ItemList">
 <logic:iterate  id="threadTag" name="tagsListForm"  property="list" offset="<%=offset%>" length="<%=count%>">
 
-
+ <div itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
  <div class="row">	
-
  
  <div class="col-lg-12" style="padding:0px">
  <div class="box">	
@@ -59,8 +58,9 @@ int randomIdx = 0;
       </a>
       <div style="position: absolute;top:0px;right:0px">
        <div class="tagcloud">
-        <a href='<%=domainUrl%>/tag/<bean:write name="threadTag" property="tagID"/>/'  class="tag-cloud-link">
-		    <bean:write name="threadTag" property="title" /></a>
+        <a href='<%=domainUrl%>/tag/<bean:write name="threadTag" property="tagID"/>/' class="tag-cloud-link" itemprop="url">
+         <span itemprop="name"><bean:write name="threadTag" property="title" /></span>
+        </a>
 	      
        </div>
        </div> 
@@ -90,3 +90,4 @@ int randomIdx = 0;
           });     
         </script>
 </logic:iterate>
+</div>
