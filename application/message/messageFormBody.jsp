@@ -23,8 +23,8 @@
       <html:text styleClass="form-control" property="subject" styleId="replySubject"  size="50" maxlength="50" tabindex="5"
                      onfocus="if(value=='文中加入本站链接、热门标题'){value=''}"
                      onblur="if (value ==''){value='文中加入本站链接、热门标题'}" 
-                     onkeyup="limitInputLength(this, 18, 50)"
-                     onchange="limitInputLength(this, 18, 50)">
+                     onkeyup="limitInputLength(this, 50, 50)"
+                     onchange="limitInputLength(this, 50, 50)">
       </html:text>
  <div>
     <span id="subjectLengthTip">已输入 0 个字符</span>
