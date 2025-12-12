@@ -187,7 +187,7 @@ public class Profanity implements Function<MessageVO, MessageVO> {
 				j = i;
 			}
 			buf.append(line.substring(j));
-			return buf.toString().intern();
+			return buf.toString();
 		}
 		return line;
 	}

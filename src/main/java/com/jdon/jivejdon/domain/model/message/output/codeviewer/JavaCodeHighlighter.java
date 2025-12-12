@@ -140,7 +140,7 @@ public class JavaCodeHighlighter implements Function<MessageVO, MessageVO> {
 		buffer.append("</pre>\n");
 		buffer.append("</td>").append("</tr>\n");
 		buffer.append("</table>\n");
-		return buffer.toString().intern();
+		return buffer.toString();
 	}
 
 	/**
@@ -155,7 +155,7 @@ public class JavaCodeHighlighter implements Function<MessageVO, MessageVO> {
 			 */
 			buffer.append(" " + i + " \n");
 		}
-		return buffer.toString().intern();
+		return buffer.toString();
 	}
 
 	// OTHER METHODS//
@@ -748,7 +748,7 @@ public class JavaCodeHighlighter implements Function<MessageVO, MessageVO> {
 					}
 
 					// escape braces to workaround TextStyle filter
-					String code = codeBuf.toString().intern();
+					String code = codeBuf.toString();
 					code = StringUtil.replace(code, "[", "&#91;");
 					code = StringUtil.replace(code, "]", "&#93;");
 
@@ -784,7 +784,7 @@ public class JavaCodeHighlighter implements Function<MessageVO, MessageVO> {
 			if (doFilter) {
 				codeBuf.append(input.substring(oldend, input.length()));
 			}
-			return codeBuf.toString().intern();
+			return codeBuf.toString();
 		}
 	}
 
@@ -821,7 +821,7 @@ public class JavaCodeHighlighter implements Function<MessageVO, MessageVO> {
 			}
 			i++;
 		}
-		return buf.toString().intern();
+		return buf.toString();
 	}
 
 	public JavaCodeViewer getViewer() {

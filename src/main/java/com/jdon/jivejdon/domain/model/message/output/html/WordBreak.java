@@ -59,7 +59,7 @@ public class WordBreak implements Function<MessageVO, MessageVO> {
 		}
 		// Add whatever chars are left to buffer.
 		buf.append(chars, cur, len - cur);
-		return buf.toString().intern();
+		return buf.toString();
 	}
 
 	/**

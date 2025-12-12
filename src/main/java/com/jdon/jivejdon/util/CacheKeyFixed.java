@@ -35,7 +35,7 @@ public class CacheKeyFixed extends CacheKey {
             buffer.append("+");//fixed 
 			buffer.append(dataKey.toString());
         }
-		return buffer.toString().intern();
+		return buffer.toString();
 	}
 
 	public String toString() {

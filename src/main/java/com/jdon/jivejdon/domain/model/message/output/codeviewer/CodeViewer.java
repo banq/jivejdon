@@ -180,7 +180,7 @@ public class CodeViewer {
 			if (line.length() > index + 2) {
 				buf.append(inlineCommentFilter(line.substring(index + 2)));
 			}
-			return buf.toString().intern();
+			return buf.toString();
 		}
 		// If there was no end detected and we're currently in a multi-line
 		// comment, we don't want to do anymore work, so return line.
@@ -198,7 +198,7 @@ public class CodeViewer {
 			buf.append(inlineCommentFilter(line.substring(0, index)));
 			buf.append(commentStart).append("/*");
 			buf.append(multiLineCommentFilter(line.substring(index + 2)));
-			return buf.toString().intern();
+			return buf.toString();
 		}
 		// Otherwise, no useful multi-line comment information was found so
 		// pass the line down to the next filter for processesing.
@@ -224,7 +224,7 @@ public class CodeViewer {
 		} else {
 			buf.append(stringFilter(line));
 		}
-		return buf.toString().intern();
+		return buf.toString();
 	}
 
 	/*
@@ -263,7 +263,7 @@ public class CodeViewer {
 
 		buf.append(keywordFilter(line));
 
-		return buf.toString().intern();
+		return buf.toString();
 	}
 
 	/*
@@ -305,7 +305,7 @@ public class CodeViewer {
 			}
 		}
 		buf.append(line);
-		return buf.toString().intern();
+		return buf.toString();
 	}
 
 	/*
@@ -315,7 +315,7 @@ public class CodeViewer {
 	private String replace(String line, String oldString, String newString) {
 		int i = 0;
 		while ((i = line.indexOf(oldString, i)) >= 0) {
-			line = (new StringBuilder().append(line.substring(0, i)).append(newString).append(line.substring(i + oldString.length()))).toString().intern();
+			line = (new StringBuilder().append(line.substring(0, i)).append(newString).append(line.substring(i + oldString.length()))).toString();
 			i += newString.length();
 		}
 		return line;

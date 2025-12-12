@@ -76,7 +76,7 @@ public class QuoteFilter implements Function<MessageVO, MessageVO> {
 			}
 		}
 
-		return sb.toString().intern();
+		return sb.toString();
 	}
 
 	public void setQuoteColors(String prefix) {
@@ -178,7 +178,7 @@ public class QuoteFilter implements Function<MessageVO, MessageVO> {
 			}
 		}
 
-		return sb.toString().intern();
+		return sb.toString();
 	}
 
 	/**
@@ -299,7 +299,7 @@ public class QuoteFilter implements Function<MessageVO, MessageVO> {
 					lines.remove(c + 1);
 				}
 
-				lines.set(c, sb.toString().intern());
+				lines.set(c, sb.toString());
 			}
 		}
 	}
@@ -377,6 +377,6 @@ public class QuoteFilter implements Function<MessageVO, MessageVO> {
 			}
 		}
 
-		return sb.toString().trim().intern();
+		return sb.toString().trim();
 	}
 }

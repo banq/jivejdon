@@ -198,6 +198,6 @@ public class Newline implements Function<MessageVO, MessageVO> {
 		result = result.replaceAll("<br>(\\s*)<(ul|ol|div|table|pre)", "$1<$2");
 		result = result.replaceAll("(</ul>|</ol>|</div>|</table>|</pre>)<br>", "$1");
 
-		return result.intern();
+		return result;
 	}
 }

@@ -266,6 +266,6 @@ public class URLConverter implements Function<MessageVO, MessageVO> {
 		if (oldend < len) {
 			buf.append(chars, oldend, len - oldend);
 		}
-		return buf.toString().intern();
+		return buf.toString();
 	}
 }

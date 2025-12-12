@@ -60,7 +60,7 @@ public class QuerySpecDBModifiedDate implements QuerySpecification {
 				params.add(mmqc.getUserID());
 			}
 		}
-		this.whereSQL = where.toString().intern();
+		this.whereSQL = where.toString();
 	}
 
 	public Collection getParams() {

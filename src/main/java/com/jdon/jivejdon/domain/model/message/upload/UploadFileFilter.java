@@ -73,7 +73,7 @@ public class UploadFileFilter implements Function<MessageVO, MessageVO> {
 		if (attached)
 			sb.append(attachString);
 
-		return sb.toString().intern();
+		return sb.toString();
 	}
 
 	// see com.jdon.jivejdon.presentation.action.UploadShowAction

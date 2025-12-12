@@ -52,7 +52,7 @@ public class InFilterPosterIP implements Function<MessageVO, MessageVO> {
 
 //		buffer.append("[该贴被").append(modifier.getUsername());
 //		buffer.append("于").append(displayDateTime).append("修改过]");
-		return buffer.toString().intern();
+		return buffer.toString();
 	}
 
 	public DateFormat getDateTime_formatter() {

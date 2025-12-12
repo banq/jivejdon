@@ -65,7 +65,7 @@ public class MessageQueryDaoProxy extends MessageQueryDaoSql implements Startabl
 	private String getSearchKey(String name, String query, int start, int count) {
 		StringBuilder sb = new StringBuilder(name);
 		sb.append(query).append(start).append(count);
-		return sb.toString().intern();
+		return sb.toString();
 	}
 
 	public Collection findThread(String query, int start, int count) {

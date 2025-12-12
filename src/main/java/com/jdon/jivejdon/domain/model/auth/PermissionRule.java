@@ -36,22 +36,22 @@ public class PermissionRule {
 	public boolean isOperationAuthenticated(String serviceName, String methodName) {
 		StringBuilder bf = new StringBuilder(serviceName);
 		bf.append(methodName);
-		return operationAuthenticated.contains(bf.toString().intern());
+		return operationAuthenticated.contains(bf.toString());
 	}
 
 	public boolean isOperationAuthenticatedByRole(String serviceName, String methodName, String roleName) {
 		StringBuilder bf = new StringBuilder(serviceName);
 		bf.append(methodName);
 		bf.append(roleName);
-		return operationAuthenticatedByRoles.contains(bf.toString().intern());
+		return operationAuthenticatedByRoles.contains(bf.toString());
 	}
 
 	public void putRule(String serviceName, String methodName, String roleName) {
 		StringBuilder bf = new StringBuilder(serviceName);
 		bf.append(methodName);
-		operationAuthenticated.add(bf.toString().intern());
+		operationAuthenticated.add(bf.toString());
 		bf.append(roleName);
-		operationAuthenticatedByRoles.add(bf.toString().intern());
+		operationAuthenticatedByRoles.add(bf.toString());
 	}
 
 }

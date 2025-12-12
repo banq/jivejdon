@@ -228,7 +228,7 @@ public class QueryCriteria implements StringKey {
 
 		}
 		sb.append(" messageReplyCountWindow=").append(messageReplyCountWindow);
-		return sb.toString().intern();
+		return sb.toString();
 	}
 
 	public String getKey() {

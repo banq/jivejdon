@@ -83,6 +83,6 @@ public class HTMLFilter implements Function<MessageVO, MessageVO> {
 		if (i > last) {
 			out.append(input, last, i - last);
 		}
-		return out.toString().intern();
+		return out.toString();
 	}
 }

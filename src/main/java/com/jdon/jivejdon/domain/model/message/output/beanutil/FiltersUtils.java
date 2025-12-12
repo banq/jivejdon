@@ -77,7 +77,7 @@ public class FiltersUtils {
 		if (html.length() == 0) {
 			html.append("&nbsp;");
 		}
-		return html.toString().intern();
+		return html.toString();
 	}
 
 	private static String escapeHTML(String html) {
@@ -119,6 +119,6 @@ public class FiltersUtils {
 		if (i > last) {
 			out.append(input, last, i - last);
 		}
-		return out.toString().intern();
+		return out.toString();
 	}
 }

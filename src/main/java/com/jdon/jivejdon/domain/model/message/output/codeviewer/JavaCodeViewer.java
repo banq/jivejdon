@@ -880,7 +880,7 @@ public class JavaCodeViewer {
 			}
 			i++;
 		}
-		return buffer.toString().intern();
+		return buffer.toString();
 	}
 
 	public static HashMap getReservedWords() {

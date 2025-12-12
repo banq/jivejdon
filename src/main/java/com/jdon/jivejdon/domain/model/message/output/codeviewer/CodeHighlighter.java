@@ -226,7 +226,7 @@ public class CodeHighlighter implements Function<MessageVO, MessageVO> {
 			} catch (IOException ioe) {
 				ioe.printStackTrace();
 			}
-			String code = codeBuf.toString().intern();
+			String code = codeBuf.toString();
 			// escape braces to workaround TextStyle filter
 			code = StringUtil.replace(code, "[", "&#91;");
 			code = StringUtil.replace(code, "]", "&#93;");
@@ -237,7 +237,7 @@ public class CodeHighlighter implements Function<MessageVO, MessageVO> {
 			oldend = j + 7;
 		}
 		buf.append(input.substring(oldend, input.length()));
-		return buf.toString().intern();
+		return buf.toString();
 
 	}
 

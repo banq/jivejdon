@@ -73,7 +73,7 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 			}
 			buf.append(line2, j, line2.length - j);
 			count[0] = counter;
-			return buf.toString().intern();
+			return buf.toString();
 		}
 		return line;
 	}
@@ -274,8 +274,6 @@ public class TextStyle implements Function<MessageVO, MessageVO> {
 		System.out.println("Test8: " + textStyle.convertTags(test8));
 		System.out.println("Test9: " + textStyle.convertTags(test9));
 		System.out.println("Test10: " + textStyle.convertTags(test10));
-      
-// ...existing code...
       
     }
 
