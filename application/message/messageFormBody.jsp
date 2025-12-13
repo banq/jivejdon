@@ -24,10 +24,7 @@
                      onfocus="if(value=='文中加入本站链接、热门标题'){value=''}"
                      onblur="if (value ==''){value='文中加入本站链接、热门标题'}" >
       </html:text>
- <div>
-    <span id="subjectLengthTip">已输入 0 个字符</span>
-  </div>
-
+ 
     </div>
   </div>
 </div>
