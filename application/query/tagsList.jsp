@@ -117,6 +117,9 @@ int h = 0 ;
 <script>
   const ids = []; // 初始化一个空数组
 </script>
+
+<div itemscope itemtype="https://schema.org/ItemList">
+
 <logic:iterate id="threadTag" name="tagsListForm" property="list" >
  <%
   if(i % 3==0){ 
@@ -124,7 +127,7 @@ int h = 0 ;
  <div class="row">	
  <%}%>
 
- <div class="col-md-4">
+ <div class="col-md-4" itemscope itemtype="https://schema.org/ListItem">
  <div class="box">	
   <div class="linkblock">
                 
@@ -134,8 +137,8 @@ int h = 0 ;
        </a>
       <div style="position: absolute;bottom: 0px;">
        <div class="tagcloud">
-        <a href='<%=request.getContextPath() %>/tag/<bean:write name="threadTag" property="tagID"/>/' class="tag-cloud-link">
-		    <bean:write name="threadTag" property="title" /></a>
+        <a itemprop="url" href='<%=request.getContextPath() %>/tag/<bean:write name="threadTag" property="tagID"/>/' class="tag-cloud-link">
+		     <span itemprop="name"><bean:write name="threadTag" property="title" /></span></a>
        </div>
        </div> 
       </div>
@@ -168,6 +171,8 @@ int h = 0 ;
  %>
   </div>
  <%}%>
+
+</div>
 
  <script>
   async function fetchData() {
