@@ -410,8 +410,9 @@ public class ToolsUtil {
                 }
             }
 
-            // 未命中缓存或缓存已过期，设置新的响应头（基于当前时间）
-            setRespHeaderCache(maxAgeSeconds, now, request, response);
+            // 未命中缓存或缓存已过期，设置新的响应头（基于当前时间，秒对齐）
+            long nowAlignedMs = (now / 1000L) * 1000L;
+            setRespHeaderCache(maxAgeSeconds, nowAlignedMs, request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -432,17 +433,22 @@ public class ToolsUtil {
 
 
 		try {
-			// ETag 验证
-			String etag = request.getHeader("If-None-Match");
-			if (etag != null) {
+			// ETag 验证 (优先级最高，如果存在则仅用 ETag 判断，不再检查 If-Modified-Since)
+			String ifNoneMatch = request.getHeader("If-None-Match");
+			if (ifNoneMatch != null && !ifNoneMatch.isEmpty()) {
 				String expectedEtag = "\"" + Long.toString(modelLastModifiedAlignedMs) + "\"";
-				if (etag.equals(expectedEtag)) {
+				// 支持 "*" 通配符或多个 ETag（逗号分隔）
+				if ("*".equals(ifNoneMatch) || ifNoneMatch.contains(expectedEtag)) {
 					response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
 					return false;
 				}
+				// ETag 不匹配，返回完整内容，不再继续检查 If-Modified-Since
+				setEtagHaeder(response, modelLastModifiedAlignedMs);
+				setRespHeaderCache(maxAgeSeconds, modelLastModifiedAlignedMs, request, response);
+				return true;
 			}
 	
-			// If-Modified-Since 验证
+			// If-Modified-Since 验证 (仅在没有 If-None-Match 时执行)
 			long header = request.getDateHeader("If-Modified-Since");
 			if (header > 0) {
 				if (modelLastModifiedAlignedMs <= header) {
@@ -465,7 +471,7 @@ public class ToolsUtil {
 	}
 	
 	private static boolean setRespHeaderCache(long maxAgeSeconds, long modelLastModifiedAlignedMs, HttpServletRequest request, HttpServletResponse response) {
-		request.setAttribute("myExpire", maxAgeSeconds);
+		// 注意：不在此处重复设置 setAttribute，已在 checkHeaderCache / checkHeaderCacheExpire 中设置
 
 		// 设置 Cache-Control
 		String maxAgeDirective = "public, max-age=" + maxAgeSeconds + ", s-maxage=" + maxAgeSeconds * 2 + ", stale-while-revalidate=3600";
@@ -474,18 +480,17 @@ public class ToolsUtil {
 		// 设置状态码
 		response.setStatus(HttpServletResponse.SC_OK);
 
-
 		// 设置 Last-Modified
 		response.addDateHeader("Last-Modified", modelLastModifiedAlignedMs);
 
-		// 设置 Age（资源已经存在的秒数）
+		// 设置 Age（资源已经存在的秒数，防止负数）
 		long currentTime = System.currentTimeMillis();
 		response.setDateHeader("Date", currentTime);
-		long age = (currentTime - modelLastModifiedAlignedMs) / 1000;
+		long age = Math.max(0L, (currentTime - modelLastModifiedAlignedMs) / 1000L);
 		response.setHeader("Age", String.valueOf(age));
 
 		// 设置 Expires，基于当前时间加上 maxAgeSeconds
-		long expires = System.currentTimeMillis() + (maxAgeSeconds * 1000);
+		long expires = currentTime + (maxAgeSeconds * 1000L);
 		response.addDateHeader("Expires", expires);
 
 		return true;
