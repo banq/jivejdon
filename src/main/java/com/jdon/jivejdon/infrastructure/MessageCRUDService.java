@@ -15,6 +15,7 @@ import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import com.jdon.jivejdon.infrastructure.repository.builder.MessageRepositoryDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.MessageQueryDao;
 import com.jdon.jivejdon.infrastructure.repository.property.TagRepository;
 
 @Component
@@ -23,14 +24,16 @@ public class MessageCRUDService {
 
 	private final JtaTransactionUtil jtaTransactionUtil;
 	private final MessageRepositoryDao messageRepository;
+	private final MessageQueryDao messageQueryDao;
 	private final TagRepository tagRepository;
 	private final ForumFactory forumAbstractFactory;
 
 	public MessageCRUDService(JtaTransactionUtil jtaTransactionUtil, MessageRepositoryDao messageRepository,
-			TagRepository tagRepository, ForumFactory forumAbstractFactory) {
+			MessageQueryDao messageQueryDao, TagRepository tagRepository, ForumFactory forumAbstractFactory) {
 		super();
 		this.jtaTransactionUtil = jtaTransactionUtil;
 		this.messageRepository = messageRepository;
+		this.messageQueryDao = messageQueryDao;
 		this.tagRepository = tagRepository;
 		this.forumAbstractFactory = forumAbstractFactory;
 	}
@@ -39,11 +42,16 @@ public class MessageCRUDService {
 	public ForumMessage insertTopicMessage(PostTopicMessageCommand postTopicMessageCommand) {
 		logger.debug("enter createTopicMessage");
 		try {
-			//synchronized (postTopicMessageCommand) {// no need synchronized, the event is atomic,any time only one thread do inserting for UUID  
-				messageRepository.createTopicMessage(AnemicMessageDTO.commandToDTO(postTopicMessageCommand));
-			//}
+			// synchronized (postTopicMessageCommand) {// no need synchronized, the event is
+			// atomic,any time only one thread do inserting for UUID
+			messageRepository.createTopicMessage(AnemicMessageDTO.commandToDTO(postTopicMessageCommand));
+			// }
 			logger.debug("createTopicMessage ok!");
-			return forumAbstractFactory.getMessage(postTopicMessageCommand.getMessageId());
+
+			ForumMessage forumMessage = forumAbstractFactory.getMessage(postTopicMessageCommand.getMessageId());
+			
+
+			return forumMessage;
 		} catch (Exception e) {
 			String error = e + " createTopicMessage forumMessageId=" + postTopicMessageCommand.getMessageId();
 			logger.error(error);

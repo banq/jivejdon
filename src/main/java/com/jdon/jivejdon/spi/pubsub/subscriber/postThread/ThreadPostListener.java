@@ -15,6 +15,11 @@
  */
 package com.jdon.jivejdon.spi.pubsub.subscriber.postThread;
 
+import java.util.Collection;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.dci.RoleAssigner;
@@ -32,22 +37,51 @@ import com.jdon.jivejdon.domain.model.subscription.event.AccountSubscribedNotify
 import com.jdon.jivejdon.domain.model.subscription.event.TagSubscribedNotifyEvent;
 import com.jdon.jivejdon.domain.model.subscription.event.ThreadSubscribedCreateEvent;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
+import com.jdon.jivejdon.infrastructure.repository.dao.MessageDao;
+import com.jdon.jivejdon.infrastructure.repository.dao.MessageQueryDao;
 import com.jdon.jivejdon.spi.pubsub.publish.LobbyPublisherRole;
 
 @Consumer("topicMessagePostedEvent")
 public class ThreadPostListener implements DomainEventHandler {
 
-	private final RoleAssigner roleAssigner;
+	private final static Logger logger = LogManager.getLogger(ThreadPostListener.class);
 
-	public ThreadPostListener(RoleAssigner roleAssigner, ForumFactory forumFactory) {
+	private final RoleAssigner roleAssigner;
+	private final ForumFactory forumFactory;
+	private final MessageQueryDao messageQueryDao;
+	private final MessageDao messageDao;
+
+	public ThreadPostListener(RoleAssigner roleAssigner, ForumFactory forumFactory, 
+			MessageQueryDao messageQueryDao, MessageDao messageDao) {
 		super();
 		this.roleAssigner = roleAssigner;
+		this.forumFactory = forumFactory;
+		this.messageQueryDao = messageQueryDao;
+		this.messageDao = messageDao;
 	}
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 		TopicMessagePostedEvent topicMessagePostedEvent = (TopicMessagePostedEvent) event.getDomainMessage()
 				.getEventSource();
 		ForumMessage forumMessage = topicMessagePostedEvent.getForumMessage();
+
+		// 获取论坛ID
+		Long forumId = forumMessage.getForum().getForumId();
+
+		// 获取最新的3个线程ID
+		Collection<Long> latestThreadIds = messageQueryDao.getForumLatestThreadIds(forumId);
+
+		// 更新每个线程
+		for (Long threadId : latestThreadIds) {
+			forumFactory.getThread(threadId).ifPresent(forumThread -> {
+				try {
+					messageDao.updateThread(forumThread);
+				} catch (Exception e) {
+					logger.error("Error updating thread: " + threadId, e);
+				}
+			});
+		}
+
 		// baiduSearchClient(forumMessage);
 		// messageLobbyNotifyAction(forumMessage);
 		// messageNotifyAction(false,forumMessage);

@@ -204,7 +204,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 	 */
 	public Long getLatestPostMessageId(Long threadId) {
 		logger.debug("enter getLatestPostMessageId  for threadId:" + threadId);
-		String LAST_MESSAGES = "SELECT messageID from jiveMessage WHERE  threadID = ? ORDER BY modifiedDate DESC";
+		String LAST_MESSAGES = "SELECT messageID from jiveMessage WHERE  threadID = ? ORDER BY modifiedDate DESC LIMIT 1";
 		List queryParams2 = new ArrayList();
 		queryParams2.add(threadId);
 
@@ -223,8 +223,8 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 	}
 
 	public Long getForumLatestPostMessageId(Long forumId) {
-		logger.debug("enter getLatestPostMessageId  for forumId:" + forumId);
-		String LAST_MESSAGES = "SELECT messageID from jiveMessage WHERE  forumID = ? ORDER BY modifiedDate DESC";
+		logger.debug("enter getForumLatestPostMessageId  for forumId:" + forumId);
+		String LAST_MESSAGES = "SELECT messageID from jiveMessage WHERE  forumID = ? ORDER BY modifiedDate DESC LIMIT 1";
 		List queryParams2 = new ArrayList();
 		queryParams2.add(forumId);
 
@@ -240,6 +240,27 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 			logger.error(e);
 		}
 		return messageId;
+	}
+
+	public Collection<Long> getForumLatestThreadIds(Long forumId) {
+		logger.debug("enter getForumLatestThreadIds  for forumId:" + forumId);
+		String LAST_MESSAGES = "SELECT threadID from jiveThread WHERE  forumID = ? ORDER BY creationDate DESC LIMIT 3";
+		List queryParams2 = new ArrayList();
+		queryParams2.add(forumId);
+
+		Collection<Long> threadIds = new ArrayList<>();
+		try {
+			List list = jdbcTempSource.getJdbcTemp().queryMultiObject(queryParams2, LAST_MESSAGES);
+			Iterator iter = list.iterator();
+			while (iter.hasNext()) {
+				Map map = (Map) iter.next();
+				Long threadID = (Long) map.get("threadID");
+				threadIds.add(threadID);
+			}
+		} catch (Exception e) {
+			logger.error(e);
+		}
+		return threadIds;
 	}
 
 	public boolean isRoot(Long messageId) {
