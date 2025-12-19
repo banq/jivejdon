@@ -214,7 +214,7 @@ int h = 0 ;
   <ul class="pagination pull-right"> 
     <li>
     <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
-    <a href="<%=domainUrl%>/tag/page/<%=pagestartInt+pagecountInt%>" rel="next" rel="next nofollow" class="btn-page">下页</a>
+    <a href="<%=domainUrl%>/tag/page/<%=pagestartInt+pagecountInt%>" rel="next nofollow" class="btn-page">下页</a>
     <%}%>
   </li>  
 </ul>
