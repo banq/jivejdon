@@ -109,18 +109,22 @@ public class MessageInitFactory {
 	 * @param rootMessage
 	 * @return
 	 */
-	public ForumThread createThreadCore(Long threadId, Map map, RootMessage rootMessage) {
+    public ForumThread createThreadCore(Long threadId, Map map, RootMessage rootMessage) {
 
-			ForumThread forumThread = rootMessage.getForumThread();
-			forumThread.setForum(rootMessage.getForum());
+        ForumThread forumThread = rootMessage.getForumThread();
+        forumThread.setForum(rootMessage.getForum());
 
-			String saveDateTime = ((String) map.get("creationDate")).trim();
-			String displayDateTime = constants.getDateTimeDisp(saveDateTime);
-			forumThread.setCreationDate(displayDateTime);
-			forumThread.setCreationDate2(Long.parseLong(saveDateTime));
+        String saveDateTime = ((String) map.get("creationDate")).trim();
+        forumThread.setCreationDate2(Long.parseLong(saveDateTime));
 
-		return forumThread;
-	}
+        String displayDateTime = constants.getDateTimeDisp(saveDateTime);
+        forumThread.setCreationDate(displayDateTime);
+
+        saveDateTime = ((String) map.get("modifiedDate")).trim();
+        forumThread.setModifiedDate(Long.parseLong(saveDateTime));
+
+        return forumThread;
+    }
 
 	public Forum createForumCore(Map map) {
 		Forum ret = new Forum();

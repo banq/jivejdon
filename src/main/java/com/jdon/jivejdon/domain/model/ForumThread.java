@@ -76,6 +76,10 @@ public class ForumThread {
 	private Forum forum;
 	// same as rootMessage's creationDate
 	private String creationDate;
+
+	private long creationDate2;
+
+	private long modifiedDate;
 	// contain some abstract properties
 	private Collection<Property> propertys;
 	private ThreadTagsVO threadTagsVO;
@@ -92,7 +96,7 @@ public class ForumThread {
 	// update mutable
 	private volatile ForumThreadTreeModel forumThreadTreeModel;
 
-	private long creationDate2;
+
 
 	private ReBlogVO reBlogVO;	
 
@@ -142,6 +146,14 @@ public class ForumThread {
 		this.creationDate2 = creationDate;
 	}
 
+	public long getModifiedDate() {
+		return modifiedDate;
+	}
+
+	public void setModifiedDate(long modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+
 	public Forum getForum() {
 		return forum;
 	}
@@ -165,6 +177,7 @@ public class ForumThread {
 
 	public void updateName(String name) {
 		this.getRootMessage().updateSubject(name);
+		this.setModifiedDate(System.currentTimeMillis());
 		eventSourcing.saveName(new ThreadNameRevisedEvent(this.getThreadId(), name));
 	}
 
@@ -372,13 +385,13 @@ public class ForumThread {
 	// }
 
 	// not use the field modifiedDate in DB.
-	public String getModifiedDate() {
-		if (getState().getLatestPost() != null)
-			return getState().getModifiedDate();
-		else
-			return this.creationDate;
+	// public String getModifiedDate() {
+	// 	if (getState().getLatestPost() != null)
+	// 		return getState().getModifiedDate();
+	// 	else
+	// 		return this.creationDate;
 
-	}
+	// }
 
 	public void delete(ForumMessage delforumMessage) {
 		eventSourcing.deleteMessage(new MessageRemoveCommand(delforumMessage.getMessageId()));

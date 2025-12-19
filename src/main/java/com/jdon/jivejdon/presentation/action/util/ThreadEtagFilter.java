@@ -74,7 +74,7 @@ public class ThreadEtagFilter extends Action {
 			response.sendError(404);
 			return null;
 		}
-		long modelLastModifiedDate = forumThread.getState().getModifiedDate2();
+		long modelLastModifiedDate = forumThread.getModifiedDate();
 
 		// in 15 days the message expire will be shorter;
 		Calendar c = Calendar.getInstance();

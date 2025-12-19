@@ -282,11 +282,12 @@ public abstract class MessageDaoSql implements MessageDao {
 		long now = System.currentTimeMillis();
 		String saveDateTime = ToolsUtil.dateToMillis(now);
 		queryParams.add(saveDateTime);
-		// forumThread.setModifiedDate(displayDateTime);
+		
 		queryParams.add(forumThread.getThreadId());
 		try {
 			jdbcTempSource.getJdbcTemp().operate(queryParams, SAVE_THREAD);
-
+            // 同时更新forumThread对象的modifiedDate
+            forumThread.setModifiedDate(now);
 		} catch (Exception e) {
 			logger.error("forumThread=" + forumThread.getThreadId() + " happend " + e);
 			throw new Exception(e);
