@@ -30,36 +30,50 @@ public class ReblogLinkAction extends Action {
             HttpServletResponse response) throws Exception {
         PropertysForm df = (PropertysForm) actionForm;
         String threadFromId = request.getParameter("threadId");
-        TagService othersService = (TagService) WebAppUtil.getService("othersService", 
+        if (threadFromId == null || threadFromId.equals("")) {
+            Debug.logError("ReblogLinkAction threadId is null", module);
+            return actionMapping.findForward("forward");
+        }
+        ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
+        ForumThread forumThread = forumMessageService.getThread(Long.parseLong(threadFromId));
+        if (forumThread == null) {
+            Debug.logError("ReblogLinkAction forumThread is null for threadId:" + threadFromId, module);
+            return actionMapping.findForward("forward");
+        }
+
+        TagService othersService = (TagService) WebAppUtil.getService("othersService",
                 this.servlet.getServletContext());
         Collection<String> urls = df.getPropertys().stream().map(e -> e.getValue()).collect(Collectors.toList());
         if (urls.stream().anyMatch(url -> url != null)) {
             othersService.deleteReBlogLink(Long.parseLong(threadFromId));
             for (String url : urls)
-                saveReblogLinkItem(Long.parseLong(threadFromId), url, request);
+                saveReblogLinkItem(forumThread, Long.parseLong(threadFromId), url, request);
         }
         Collection<Long> tos = othersService.getReBlogLink(Long.parseLong(threadFromId));
         if (tos != null && tos.size() != 0) {
             Collection<Property> props = new ArrayList<>();
             String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
-            ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService", request);
+           
             for (Long threadId : tos) {
                 ForumThread thread = forumMessageService.getThread(threadId);
-                props.add(new Property("", domainUrl + "/" + Long.toString(threadId) + (thread != null ? thread.getPinyinToken() : "") + ".html"));
+                props.add(new Property("", domainUrl + "/" + Long.toString(threadId)
+                        + (thread != null ? thread.getPinyinToken() : "") + ".html"));
             }
             df.setPropertys(props);
         } else
             df.getPropertys().add(new Property("", ""));
+
+        
         return actionMapping.findForward("forward");
     }
 
-    private void saveReblogLinkItem(Long threadFromId, String url, HttpServletRequest request) {
+    private void saveReblogLinkItem(ForumThread forumThread,Long threadFromId, String url, HttpServletRequest request) {
         if (url != null && !url.equals("")) {
             Long threadId = extractFromUrl(url, request);
             if (threadId != null) {
                 TagService othersService = (TagService) WebAppUtil.getService("othersService", 
                         this.servlet.getServletContext());
-                othersService.saveReBlogLink(new OneOneDTO(threadFromId, threadId));
+                othersService.saveReBlogLink(forumThread, new OneOneDTO(threadFromId, threadId));
             }
 
         }

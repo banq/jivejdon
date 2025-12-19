@@ -21,6 +21,7 @@ import java.util.List;
 
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;
+import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.property.HotKeys;
 import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.domain.model.util.OneOneDTO;
@@ -49,7 +50,7 @@ public interface TagService {
 
 	public void deleteReBlogLink(Long fromId);
 
-	public void saveReBlogLink(OneOneDTO oneOneDTO);
+	public void saveReBlogLink(ForumThread forumThread,OneOneDTO oneOneDTO);
 
 	public Collection<Long> getReBlogLink(Long messageId);
 

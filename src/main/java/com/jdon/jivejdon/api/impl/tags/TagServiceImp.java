@@ -36,6 +36,7 @@ import com.jdon.jivejdon.domain.model.property.ThreadTag;
 import com.jdon.jivejdon.domain.model.thread.ThreadTagsVO;
 import com.jdon.jivejdon.domain.model.util.OneOneDTO;
 import com.jdon.jivejdon.infrastructure.repository.MessageRepository;
+import com.jdon.jivejdon.infrastructure.repository.builder.ThreadRepositoryDao;
 import com.jdon.jivejdon.infrastructure.repository.property.HotKeysRepository;
 import com.jdon.jivejdon.infrastructure.repository.property.TagRepository;
 import com.jdon.jivejdon.util.Constants;
@@ -49,13 +50,15 @@ public class TagServiceImp implements TagService, Poolable {
 	private final HotKeysRepository hotKeysRepository;
 	private final TagRepository tagRepository;
 	private final MessageRepository messageRepository;
+	private final ThreadRepositoryDao threadRepositoryDao;
 
 	public TagServiceImp(HotKeysRepository hotKeysFactory, TagRepository tagRepository,
-			MessageRepository messageRepository) {
+			MessageRepository messageRepository, ThreadRepositoryDao threadRepositoryDao) {
 		super();
 		this.hotKeysRepository = hotKeysFactory;
 		this.tagRepository = tagRepository;
 		this.messageRepository = messageRepository;
+		this.threadRepositoryDao = threadRepositoryDao;
 	}
 
 	public Collection tags(String s) {
@@ -141,6 +144,7 @@ public class TagServiceImp implements TagService, Poolable {
 			ThreadTagsVO threadTagsVO = new ThreadTagsVO(forumThreadOptional.get(), newtags, token);
 			// this is update thread in memory cache
 			forumThreadOptional.get().changeTags(threadTagsVO);
+			threadRepositoryDao.updateThread(forumThreadOptional.get());
 		} catch (Exception e) {
 			logger.error(e);
 		}
@@ -154,11 +158,12 @@ public class TagServiceImp implements TagService, Poolable {
 		return hotKeysRepository.getHotKeys();
 	}
 
-	public void saveReBlogLink(OneOneDTO oneOneDTO) {
+	public void saveReBlogLink(ForumThread forumThread, OneOneDTO oneOneDTO) {
 		try {
 			messageRepository.saveReBlog(oneOneDTO);
 			refreshReblog((Long) oneOneDTO.getParent());
 			refreshReblog((Long) oneOneDTO.getChild());
+			threadRepositoryDao.updateThread(forumThread);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -68,11 +68,11 @@ public class MethodDispatchAction extends DispatchAction {
 		boolean isOK = false;
 		AccountService accountService = (AccountService) WebAppUtil.getService("accountService", request);
 		Account account = accountService.getloginAccount();
-		if (account == null) return isOK;
-		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService
-				("forumMessageService", request);
-		ForumThread forumThread = forumMessageService.getThread(Long.parseLong
-				(threadId));
+		if (account == null)
+			return isOK;
+		ForumMessageService forumMessageService = (ForumMessageService) WebAppUtil.getService("forumMessageService",
+				request);
+		ForumThread forumThread = forumMessageService.getThread(Long.parseLong(threadId));
 		if (forumThread != null)
 			isOK = forumMessageService.checkIsAuthenticated(forumThread.getRootMessage());
 		return isOK;
