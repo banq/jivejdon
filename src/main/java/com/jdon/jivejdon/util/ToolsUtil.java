@@ -456,7 +456,6 @@ public class ToolsUtil {
 	}
 	
 	public static void setEtagHaeder(HttpServletResponse response, long modelLastModifiedDate) {
-		modelLastModifiedDate = modelLastModifiedDate / 1000 * 1000;
 		response.setHeader("ETag", "\"" + Long.toString(modelLastModifiedDate) + "\"");
 	}
 	
