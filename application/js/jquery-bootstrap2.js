@@ -249,7 +249,7 @@ var meme =` <ul class="list-unstyled">
             <li><a href="https://www.jdon.com/tag/445/">GitHub工具</a></li>
             <li><a href="https://www.jdon.com/tag/30661/">人工智能</a></li>
             <li><a href="https://www.jdon.com/tag/82319/">生产力黑客</a></li>
-            <li><a href="https://www.jdon.com/tags/">更多话题</a></li>
+            <li><a href="https://www.jdon.com/tag/">更多话题</a></li>
         </ul>`; 
         $('#meme').html(meme);
 }
