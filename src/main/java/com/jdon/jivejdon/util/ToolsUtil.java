@@ -426,11 +426,16 @@ public class ToolsUtil {
 		}
 		request.setAttribute("myExpire", maxAgeSeconds);
 	
+		// truncate to seconds (milliseconds precision -> seconds)
+		// name indicates value is aligned to second boundary but still in milliseconds
+		long modelLastModifiedAlignedMs = (modelLastModifiedDate / 1000L) * 1000L;
+
+
 		try {
 			// ETag 验证
 			String etag = request.getHeader("If-None-Match");
 			if (etag != null) {
-				String expectedEtag = "\"" + Long.toString(modelLastModifiedDate) + "\"";
+				String expectedEtag = "\"" + Long.toString(modelLastModifiedAlignedMs) + "\"";
 				if (etag.equals(expectedEtag)) {
 					response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
 					return false;
@@ -440,105 +445,53 @@ public class ToolsUtil {
 			// If-Modified-Since 验证
 			long header = request.getDateHeader("If-Modified-Since");
 			if (header > 0) {
-				if (modelLastModifiedDate <= header) {
+				if (modelLastModifiedAlignedMs <= header) {
 					response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
 					return false;
 				}
 			}
 	
 			// 设置新的响应头
-			setEtagHaeder(response, modelLastModifiedDate);
-			setRespHeaderCache(maxAgeSeconds, modelLastModifiedDate, request, response);
+			setEtagHaeder(response, modelLastModifiedAlignedMs);
+			setRespHeaderCache(maxAgeSeconds, modelLastModifiedAlignedMs, request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return true;
 	}
 	
-	public static void setEtagHaeder(HttpServletResponse response, long modelLastModifiedDate) {
-		response.setHeader("ETag", "\"" + Long.toString(modelLastModifiedDate) + "\"");
+	private static void setEtagHaeder(HttpServletResponse response, long modelLastModifiedAlignedMs) {
+		response.setHeader("ETag", "\"" + Long.toString(modelLastModifiedAlignedMs) + "\"");
 	}
 	
-	public static boolean setRespHeaderCache(long maxAgeSeconds, long modelLastModifiedDate, HttpServletRequest request, HttpServletResponse response) {
+	private static boolean setRespHeaderCache(long maxAgeSeconds, long modelLastModifiedAlignedMs, HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("myExpire", maxAgeSeconds);
-	
+
 		// 设置 Cache-Control
 		String maxAgeDirective = "public, max-age=" + maxAgeSeconds + ", s-maxage=" + maxAgeSeconds * 2 + ", stale-while-revalidate=3600";
-        response.setHeader("Cache-Control", maxAgeDirective);
-	
+		response.setHeader("Cache-Control", maxAgeDirective);
+
 		// 设置状态码
 		response.setStatus(HttpServletResponse.SC_OK);
-	
+
+
 		// 设置 Last-Modified
-		modelLastModifiedDate = modelLastModifiedDate / 1000 * 1000;
-		response.addDateHeader("Last-Modified", modelLastModifiedDate);
-	
+		response.addDateHeader("Last-Modified", modelLastModifiedAlignedMs);
+
 		// 设置 Age（资源已经存在的秒数）
 		long currentTime = System.currentTimeMillis();
 		response.setDateHeader("Date", currentTime);
-		long age = (currentTime - modelLastModifiedDate) / 1000;
+		long age = (currentTime - modelLastModifiedAlignedMs) / 1000;
 		response.setHeader("Age", String.valueOf(age));
-	
+
 		// 设置 Expires，基于当前时间加上 maxAgeSeconds
 		long expires = System.currentTimeMillis() + (maxAgeSeconds * 1000);
 		response.addDateHeader("Expires", expires);
-	
+
 		return true;
 	}
 
-	// public static boolean checkHeaderCache(long adddays, long modelLastModifiedDate, HttpServletRequest request,
-	// 		HttpServletResponse response) {
-
-	// 	if (request.getAttribute("myExpire") != null) {
-	// 		System.err.print(" checkHeaderCache called above twice times :" + request.getRequestURI());
-	// 		return true;
-	// 	}
-	// 	request.setAttribute("myExpire", adddays);
-
-	// 	// convert seconds to ms.
-	// 	try {
-
-	// 		// if over expire data, see the Etags;
-	// 		// ETags if ETags no any modified
-	// 		String etag = request.getHeader("If-None-Match");
-
-	// 		if (etag != null) {
-	// 			if (etag.equals(Long.toString(modelLastModifiedDate))) {
-	// 				// not modified
-	// 				response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-	// 				return false;
-	// 			}
-	// 		} else {
-	// 			long header = request.getDateHeader("If-Modified-Since");
-	// 			if (header > 0) {
-	// 				if (modelLastModifiedDate <= header || (modelLastModifiedDate - header) < 1000) {
-	// 					// during the period not happend modified
-	// 					response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-	// 					return false;
-	// 				}
-	// 			}
-	// 		}
-	// 		// if th model has modified , setup the new modified date
-	// 		setEtagHaeder(response, modelLastModifiedDate);
-	// 		setRespHeaderCache(adddays, modelLastModifiedDate, request, response);
-	// 	} catch (Exception e) {
-	// 		e.printStackTrace();
-	// 	}
-	// 	return true;
-	// }
-
 	
-	// public static boolean setRespHeaderCache(long adddays, long modelLastModifiedDate,HttpServletRequest request, HttpServletResponse response) {
-	// 	request.setAttribute("myExpire", adddays);
-
-	// 	long adddaysM = new Long(adddays) * 1000;
-	// 	String maxAgeDirective = "max-age=" + adddays;
-	// 	response.setHeader("Cache-Control", maxAgeDirective);
-	// 	response.setStatus(HttpServletResponse.SC_OK);
-	// 	response.addDateHeader("Last-Modified", modelLastModifiedDate);
-	// 	response.addDateHeader("Expires", System.currentTimeMillis() + adddaysM);
-	// 	return true;
-	// }
 
 
 
