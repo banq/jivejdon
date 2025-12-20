@@ -1,31 +1,31 @@
 package com.jdon.jivejdon.api.impl.message;
 
-import com.jdon.annotation.Service;
-import com.jdon.annotation.Singleton;
-import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.spi.component.query.HotThreadQueryManager;
-import com.jdon.jivejdon.domain.model.account.Account;
-import com.jdon.jivejdon.domain.model.ForumMessage;
-import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.query.MessageSearchSpec;
-import com.jdon.jivejdon.domain.model.query.MultiCriteria;
-import com.jdon.jivejdon.domain.model.query.QueryCriteria;
-import com.jdon.jivejdon.domain.model.query.ResultSort;
-import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
-import com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactory;
-import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
-import com.jdon.jivejdon.infrastructure.repository.builder.ForumAbstractFactory;
-import com.jdon.jivejdon.infrastructure.repository.dao.MessageQueryDao;
-import com.jdon.jivejdon.api.query.ForumMessageQueryService;
-import com.jdon.treepatterns.TreeVisitor;
-import com.jdon.treepatterns.visitor.TreeNodePicker;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.jdon.annotation.Service;
+import com.jdon.annotation.Singleton;
+import com.jdon.controller.model.PageIterator;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
+import com.jdon.jivejdon.domain.model.ForumMessage;
+import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.domain.model.query.MessageSearchSpec;
+import com.jdon.jivejdon.domain.model.query.MultiCriteria;
+import com.jdon.jivejdon.domain.model.query.QueryCriteria;
+import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
+import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
+import com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactory;
+import com.jdon.jivejdon.infrastructure.repository.builder.ForumAbstractFactory;
+import com.jdon.jivejdon.infrastructure.repository.dao.MessageQueryDao;
+import com.jdon.jivejdon.spi.component.query.HotThreadQueryManager;
+import com.jdon.treepatterns.TreeVisitor;
+import com.jdon.treepatterns.visitor.TreeNodePicker;
 
 @Singleton
 @Service("forumMessageQueryService")
@@ -219,9 +219,9 @@ public class ForumMessageQueryServiceImp implements ForumMessageQueryService {
 	/*
 	 * return query result for FourmThread, it sorted by thread modifidate.
 	 */
-	public PageIterator getThreads(Long forumId, int start, int count, ResultSort resultSort) {
+	public PageIterator getThreads(Long forumId, int start, int count, ThreadListSpec threadListSpec) {
 		logger.debug("enter getThreads");
-		return messageQueryDao.getThreads(forumId, start, count, resultSort);
+		return messageQueryDao.getThreads(forumId, start, count, threadListSpec);
 	}
 
 	public PageIterator getThreads(int start, int count, ThreadListSpec threadListSpec) {

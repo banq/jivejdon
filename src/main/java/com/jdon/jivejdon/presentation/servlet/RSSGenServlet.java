@@ -267,8 +267,7 @@ public class RSSGenServlet extends HttpServlet {
 				.getService("forumMessageQueryService", this.getServletContext());
 
 
-		pi = forumMessageQueryService.getThreads(Long.parseLong(forumId), 0, LENGTH,
-				resultSort);
+		pi = forumMessageQueryService.getThreads(Long.parseLong(forumId), 0, LENGTH, threadListSpec);
 		while (pi.hasNext()) {
 			Long threadId = (Long) pi.next();
 			ForumThread thread = getForumThread(request, threadId);

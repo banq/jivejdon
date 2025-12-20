@@ -328,10 +328,10 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 	 * @see com.jdon.jivejdon.dao.MessageDao#getThreads(java.lang.String, int,
 	 * int)
 	 */
-	public PageIterator getThreads(Long forumId, int start, int count, ResultSort resultSort) {
+	public PageIterator getThreads(Long forumId, int start, int count, ThreadListSpec threadListSpec) {
 		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from jiveThread where forumId=? ";
 
-		String GET_ALL_ITEMS = "select threadID from jiveThread WHERE forumId=? ORDER BY creationDate " + resultSort.toString() + " LIMIT ?, ?";
+		String GET_ALL_ITEMS = "select threadID from jiveThread WHERE forumId=? ORDER BY creationDate " + threadListSpec.toString() + " LIMIT ?, ?";
 
 		// 查询总数参数
 		Collection<Long> countParams = new ArrayList<>();
@@ -366,7 +366,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 	}
 
 	public PageIterator getThreads(int start, int count, ThreadListSpec threadListSpec) {
-		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from jiveThread " + threadListSpec.getResultSortSQL();
+		String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from jiveThread ";
 		String GET_ALL_ITEMS = "select threadID from jiveThread " + threadListSpec.getResultSortSQL() + " LIMIT ?, ?";
 
 		// 查询总数参数

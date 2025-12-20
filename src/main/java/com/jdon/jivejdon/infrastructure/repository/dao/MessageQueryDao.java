@@ -20,7 +20,6 @@ import java.util.List;
 
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.domain.model.query.QueryCriteria;
-import com.jdon.jivejdon.domain.model.query.ResultSort;
 import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
 import com.jdon.treepatterns.model.TreeModel;
 
@@ -38,7 +37,7 @@ public interface MessageQueryDao {
 	PageIterator getMessages(Long threadId, int start, int count);
 
 
-	PageIterator getThreads(Long forumId, int start, int count, ResultSort resultSort);
+	PageIterator getThreads(Long forumId, int start, int count, ThreadListSpec threadListSpec);
 
 	PageIterator getThreads(int start, int count, ThreadListSpec threadListSpec);
 
