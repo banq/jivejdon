@@ -93,8 +93,7 @@ public class ThreadListAction extends ModelListAction {
 		if ((forumId == null) || !StringUtils.isNumeric(forumId) || forumId.length()>10) {
 			return getForumMessageQueryService().getThreads(start, count, threadListSpec);
 		} else
-			return getForumMessageQueryService().getThreads(Long.parseLong(forumId), start, count,
-					resultSort);
+			return getForumMessageQueryService().getThreads(Long.parseLong(forumId), start, count, threadListSpec);
 	}
 
 	/*
