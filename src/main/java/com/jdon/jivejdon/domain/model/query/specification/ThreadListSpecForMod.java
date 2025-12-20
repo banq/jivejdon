@@ -20,7 +20,7 @@ import com.jdon.jivejdon.domain.model.query.ResultSort;
 public class ThreadListSpecForMod extends ThreadListSpec {
 
 	public ThreadListSpecForMod() {
-		sorttableName = "modifiedDate";
+		sorttableName = "threadID";
 		setResultSort( new ResultSort());
 	}
 

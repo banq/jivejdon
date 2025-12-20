@@ -35,11 +35,7 @@ import org.apache.logging.log4j.Logger;
 import com.jdon.controller.WebAppUtil;
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.api.ForumService;
-import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.query.ResultSort;
-import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpec;
-import com.jdon.jivejdon.domain.model.query.specification.ThreadListSpecForMod;
 import com.jdon.jivejdon.spi.component.sitemap.SitemapHelper;
 import com.jdon.jivejdon.spi.component.sitemap.SitemapRepository;
 import com.jdon.jivejdon.spi.component.sitemap.SitemapService;
@@ -123,22 +119,6 @@ public class SitemapServlet extends HttpServlet {
 
 	}
 
-	private PageIterator getThreadPI(HttpServletRequest request, int startInt, int count) {
-		try {
-			ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil
-					.getService("forumMessageQueryService", servletContext);
-			ResultSort resultSort = new ResultSort();
-			resultSort.setOrder_ASCENDING();
-			ThreadListSpec threadListSpec = new ThreadListSpecForMod();
-			threadListSpec.setResultSort(resultSort);
-
-			return forumMessageQueryService.getThreads(startInt, count,
-					threadListSpec);
-		} catch (Exception e) {
-			logger.error(e);
-			return new PageIterator();
-		}
-	}
 
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);

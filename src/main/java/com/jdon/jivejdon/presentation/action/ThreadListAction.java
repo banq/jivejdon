@@ -90,10 +90,12 @@ public class ThreadListAction extends ModelListAction {
 
 		if (forumId == null)
 			forumId = request.getParameter("forumId");
+        PageIterator PageIterator = new PageIterator();	
 		if ((forumId == null) || !StringUtils.isNumeric(forumId) || forumId.length()>10) {
-			return getForumMessageQueryService().getThreads(start, count, threadListSpec);
+			PageIterator =  getForumMessageQueryService().getThreads(start, count, threadListSpec);
 		} else
-			return getForumMessageQueryService().getThreads(Long.parseLong(forumId), start, count, threadListSpec);
+			PageIterator =  getForumMessageQueryService().getThreads(Long.parseLong(forumId), start, count, threadListSpec);
+		return PageIterator;	
 	}
 
 	/*
