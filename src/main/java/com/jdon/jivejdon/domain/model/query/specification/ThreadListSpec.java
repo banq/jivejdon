@@ -10,7 +10,7 @@ public class ThreadListSpec {
 	protected ResultSort resultSort;
 
 	public ThreadListSpec() {
-		sorttableName = "modifiedDate";
+		sorttableName = "threadID";
 		this.resultSort = new ResultSort();
 	}
 
