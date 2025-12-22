@@ -24,6 +24,7 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.RootMessage;
@@ -293,6 +294,26 @@ public abstract class MessageDaoSql implements MessageDao {
 			throw new Exception(e);
 		}
 	}
+
+	public void updateForum(Forum forum) throws Exception{
+		try {
+			String UPDATE_FORUM_MODIFIED_DATE = "UPDATE jiveForum SET modifiedDate=? WHERE forumID=?";
+			List queryParams = new ArrayList();
+
+			long now = System.currentTimeMillis();
+			String saveDateTime = ToolsUtil.dateToMillis(now);
+			queryParams.add(saveDateTime);
+			
+
+			queryParams.add(forum.getForumId());
+			jdbcTempSource.getJdbcTemp().operate(queryParams, UPDATE_FORUM_MODIFIED_DATE);
+			forum.setModifiedDate(now);
+			
+		} catch (Exception e) {
+			logger.error(e);
+				throw new Exception(e);
+		}
+	}	
 
 	public void updateThreadName(String name, ForumThread forumThread) {
 		String SQL = "UPDATE jiveMessage SET  subject=? WHERE messageID=?";

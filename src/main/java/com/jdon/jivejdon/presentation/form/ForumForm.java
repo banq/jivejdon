@@ -39,28 +39,10 @@ public class ForumForm extends BaseForm {
 
 	private String description;
 
-	private String creationDate;
-
-	private String modifiedDate;
 
 	private Collection propertys = new ArrayList();
 
 	public ForumForm() {
-	}
-
-	/**
-	 * @return Returns the creationDate.
-	 */
-	public String getCreationDate() {
-		return creationDate;
-	}
-
-	/**
-	 * @param creationDate
-	 *            The creationDate to set.
-	 */
-	public void setCreationDate(String creationDate) {
-		this.creationDate = creationDate;
 	}
 
 	/**
@@ -93,20 +75,7 @@ public class ForumForm extends BaseForm {
 		this.forumId = forumId;
 	}
 
-	/**
-	 * @return Returns the modifiedDate.
-	 */
-	public String getModifiedDate() {
-		return modifiedDate;
-	}
-
-	/**
-	 * @param modifiedDate
-	 *            The modifiedDate to set.
-	 */
-	public void setModifiedDate(String modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
+	
 
 	/**
 	 * @return Returns the name.

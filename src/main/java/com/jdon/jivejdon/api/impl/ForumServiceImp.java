@@ -15,6 +15,12 @@
  */
 package com.jdon.jivejdon.api.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.jdon.annotation.Singleton;
 import com.jdon.controller.events.EventModel;
 import com.jdon.controller.model.PageIterator;
@@ -26,11 +32,6 @@ import com.jdon.jivejdon.infrastructure.repository.dao.SequenceDao;
 import com.jdon.jivejdon.infrastructure.repository.search.ReBuildIndex;
 import com.jdon.jivejdon.util.Constants;
 import com.jdon.util.task.TaskEngine;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 ;
 
@@ -77,7 +78,7 @@ public class ForumServiceImp implements ForumService {
 			// 创建时间使用long字符串
 			long dateTime = System.currentTimeMillis();
 			forum.setCreationDate(Long.toString(dateTime));
-			forum.setModifiedDate(Long.toString(dateTime));
+			forum.setModifiedDate(dateTime);
 			forumDao.createForum(forum);
 		} catch (Exception e) {
 			logger.error(" createForum error: " + e);

@@ -39,7 +39,6 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(1 * 30 * 60, this.ge
 <bean:define id="pagestart" name="threadListForm" property="start" />
 <bean:define id="pagecount" name="threadListForm" property="count" />
 <bean:define id="pageallCount" name="threadListForm" property="allCount" />
-<bean:define id="lastModifiedDate" name="forum" property="modifiedDate2"/>
 <%
 
 int pagestartInt = ((Integer)pageContext.getAttribute("pagestart")).intValue();

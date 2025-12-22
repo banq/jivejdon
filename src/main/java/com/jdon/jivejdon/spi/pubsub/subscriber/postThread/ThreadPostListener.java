@@ -76,6 +76,7 @@ public class ThreadPostListener implements DomainEventHandler {
 			forumFactory.getThread(threadId).ifPresent(forumThread -> {
 				try {
 					messageDao.updateThread(forumThread);
+					messageDao.updateForum(forumThread.getForum());
 				} catch (Exception e) {
 					logger.error("Error updating thread: " + threadId, e);
 				}

@@ -18,6 +18,7 @@ package com.jdon.jivejdon.presentation.action.util;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -27,7 +28,6 @@ import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.api.ForumService;
 import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.util.ToolsUtil;
-import org.apache.commons.lang3.StringUtils;
 /**
  * for struts-config.xml
  * 
@@ -42,7 +42,7 @@ import org.apache.commons.lang3.StringUtils;
  * 
  */
 public class ForumEtagFilterAction extends Action {
-	private final static int expire = 6 * 60 * 60;
+	private final static int expire = 1 * 60 * 60;
 
 	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -50,32 +50,20 @@ public class ForumEtagFilterAction extends Action {
 		String forumId = request.getParameter("forum");
 		if (forumId == null)
 			forumId = request.getParameter("forumId");		
-		if (forumId == null || !StringUtils.isNumeric(forumId) || forumId.length() > 10) {
-			if (!ToolsUtil.checkHeaderCacheExpire(expire, request, response)) {
-				return null;// response is 304
+		
+		long latestPostTime = System.currentTimeMillis(); // 默认使用当前时间
+		
+		if (forumId != null && StringUtils.isNumeric(forumId) && forumId.length() <= 10) {
+			ForumService forumService = (ForumService) WebAppUtil.getService("forumService", this.servlet.getServletContext());
+			Long forumIDL = Long.parseLong(forumId);
+			Forum forum = forumService.getForum(forumIDL);
+			
+			if (forum != null) {
+				long forumModifiedTime = forum.getModifiedDate();
+				if (forumModifiedTime != 0) {
+					latestPostTime = forumModifiedTime;
+				}
 			}
-			return actionMapping.findForward("success");
-		}
-
-		ForumService forumService = (ForumService) WebAppUtil.getService("forumService", this.servlet.getServletContext());
-		Long forumIDL = Long.parseLong(forumId);
-		Forum forum = forumService.getForum(forumIDL);
-		if (forum == null) {
-			if (!ToolsUtil.checkHeaderCacheExpire(expire, request, response)) {
-				return null;// response is 304
-			}
-			return actionMapping.findForward("success");
-		}
-
-		long latestPostTime = 0;
-		if (forum.getForumState().getLatestPost() != null) {
-			latestPostTime = forum.getForumState().getLatestPost().getModifiedDate2();
-		} 
-		if (latestPostTime == 0) {
-			if (!ToolsUtil.checkHeaderCacheExpire(expire, request, response)) {
-				return null;// response is 304
-			}
-			return actionMapping.findForward("success");
 		}
 
 		if (!ToolsUtil.checkHeaderCache(expire, latestPostTime, request, response)) {

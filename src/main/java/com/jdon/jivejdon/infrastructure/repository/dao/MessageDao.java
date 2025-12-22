@@ -17,6 +17,7 @@ package com.jdon.jivejdon.infrastructure.repository.dao;
 
 import java.util.Collection;
 
+import com.jdon.jivejdon.domain.model.Forum;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.RootMessage;
@@ -48,6 +49,8 @@ public interface MessageDao {
 	void createThread(AnemicMessageDTO forumMessagePostDTO) throws Exception;
 
 	void updateThread(ForumThread forumThread) throws Exception;
+
+	void updateForum(Forum forum) throws Exception;
 
 	void updateThreadName(String name, ForumThread forumThread);
 

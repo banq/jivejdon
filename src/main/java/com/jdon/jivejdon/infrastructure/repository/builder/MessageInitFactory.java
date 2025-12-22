@@ -63,11 +63,10 @@ public class MessageInitFactory {
 			messageCore.setMessageVO(messageVO);
 
 			String saveDateTime = ((String) map.get("modifiedDate")).trim();
-			String displayDateTime = constants.getDateTimeDisp(saveDateTime);
 			messageCore.setModifiedDate(Long.parseLong(saveDateTime));
 
 			saveDateTime = ((String) map.get("creationDate")).trim();
-			displayDateTime = constants.getDateTimeDisp(saveDateTime);
+			String displayDateTime = constants.getDateTimeDisp(saveDateTime);
 			messageCore.setCreationDate(displayDateTime);
 			// get the formatter so later can transfer String to Date
 
@@ -134,11 +133,10 @@ public class MessageInitFactory {
 			ret.setDescription((String) map.get("description"));
 
 			String saveDateTime = ((String) map.get("modifiedDate")).trim();
-			String displayDateTime = constants.getDateTimeDisp(saveDateTime);
-			ret.setModifiedDate(displayDateTime);
+			ret.setModifiedDate(Long.parseLong(saveDateTime));
 
 			saveDateTime = ((String) map.get("creationDate")).trim();
-			displayDateTime = constants.getDateTimeDisp(saveDateTime);
+			String displayDateTime = constants.getDateTimeDisp(saveDateTime);
 			ret.setCreationDate(displayDateTime);
 		} catch (Exception e) {
 			logger.error(e);

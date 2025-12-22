@@ -116,7 +116,7 @@ public abstract class ForumDaoSql implements ForumDao {
 			String saveDateTime = ToolsUtil.dateToMillis(now);
 			String displayDateTime = constants.getDateTimeDisp(saveDateTime);
 			queryParams.add(saveDateTime);
-			forum.setModifiedDate(displayDateTime);
+			forum.setModifiedDate(now);
 			queryParams.add(saveDateTime);
 			forum.setCreationDate(displayDateTime);
 
@@ -153,7 +153,7 @@ public abstract class ForumDaoSql implements ForumDao {
 			String saveDateTime = ToolsUtil.dateToMillis(now);
 			String displayDateTime = constants.getDateTimeDisp(saveDateTime);
 			queryParams.add(saveDateTime);
-			forum.setModifiedDate(displayDateTime);
+			forum.setModifiedDate(now);
 
 			queryParams.add(forum.getForumId());
 			jdbcTempSource.getJdbcTemp().operate(queryParams, SAVE_FORUM);
@@ -165,6 +165,8 @@ public abstract class ForumDaoSql implements ForumDao {
 			logger.error(e);
 		}
 	}
+
+	
 
 	/*
 	 * (non-Javadoc)

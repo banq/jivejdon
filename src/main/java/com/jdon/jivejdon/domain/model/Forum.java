@@ -16,7 +16,6 @@
 package com.jdon.jivejdon.domain.model;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
@@ -32,7 +31,6 @@ import com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF;
 import com.jdon.jivejdon.domain.model.subscription.event.ForumSubscribedNotifyEvent;
 import com.jdon.jivejdon.spi.pubsub.publish.ThreadEventSourcingRole;
 import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
-import com.jdon.jivejdon.util.Constants;
 
 /**
  * @author <a href="mailto:banq@163.com">banq</a>
@@ -55,7 +53,7 @@ public class Forum {
 	/**
 	 * the forum modified date, not the message modified date in the forum,
 	 */
-	private String modifiedDate;
+	private long modifiedDate;
 	private Collection propertys;
 
 	/**
@@ -152,24 +150,12 @@ public class Forum {
 		this.forumId = forumId;
 	}
 
-	/**
-	 * @return Returns the modifiedDate.
-	 */
-	public String getModifiedDate() {
-		if (getForumState().getLatestPost() != null)
-			return getForumState().getModifiedDate();
-		else
-			return this.creationDate;
+	public long getModifiedDate() {
+		return modifiedDate;
 	}
 
-	public long getModifiedDate2() {
-		if (modifiedDate == null)
-			return 0;
-		Date mdate = Constants.parseDateTime(modifiedDate);
-		return mdate.getTime();
-	}
 
-	public void setModifiedDate(String modifiedDate) {
+	public void setModifiedDate(long modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
 
