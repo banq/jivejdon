@@ -7,7 +7,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%
 response.setHeader("X-Robots-Tag", "noindex, nofollow");
-if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(24 * 60 * 60, this.getServletContext(), request, response)) {
+if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(6 * 60 * 60, this.getServletContext(), request, response)) {
     return ;
 }	
 %>
