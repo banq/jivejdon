@@ -21,10 +21,13 @@ public class MessageOwnershipChangedEvent {
 
 	private final Long newForumId;
 
-	public MessageOwnershipChangedEvent(Long oldMessageId, Long newForumId) {
+	private final Long oldForumId;
+
+	public MessageOwnershipChangedEvent(Long oldMessageId, Long newForumId, Long oldForumId) {
 		super();
 		this.oldMessageId = oldMessageId;
 		this.newForumId = newForumId;
+		this.oldForumId = oldForumId;	
 	}
 
 	public Long getOldMessageId() {
@@ -34,5 +37,10 @@ public class MessageOwnershipChangedEvent {
 	public Long getNewForumId() {
 		return newForumId;
 	}
+
+	public Long getOldForumId() {
+		return oldForumId;
+	}
+
 
 }

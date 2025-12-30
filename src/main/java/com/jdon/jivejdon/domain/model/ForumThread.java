@@ -265,13 +265,15 @@ public class ForumThread {
 
 	public Forum moveForum(ForumMessage forumMessage, Forum newForum) {
 		if ((isRoot(forumMessage)) && (forumMessage.isLeaf())) {
+			long oldForumId = forum.getForumId();
+
 			DomainMessage dm = this.lazyLoaderRole.loadForum(newForum.getForumId());
 			newForum = (Forum) dm.getBlockEventResult();
-			forumMessage.setForum(newForum);
+			forumMessage.setForum(newForum);			
 			this.forum = newForum;
 
 			eventSourcing
-					.moveMessage(new MessageOwnershipChangedEvent(forumMessage.getMessageId(), newForum.getForumId()));
+					.moveMessage(new MessageOwnershipChangedEvent(forumMessage.getMessageId(), newForum.getForumId(), oldForumId));
 			dm.clear();
 		}
 		return newForum;
