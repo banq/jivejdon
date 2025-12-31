@@ -436,7 +436,7 @@ public class ToolsUtil {
 			// ETag 验证 (优先级最高，如果存在则仅用 ETag 判断，不再检查 If-Modified-Since)
 			String ifNoneMatch = request.getHeader("If-None-Match");
 			if (ifNoneMatch != null && !ifNoneMatch.isEmpty()) {
-				String expectedEtag = "\"" + Long.toString(modelLastModifiedAlignedMs) + "\"";
+				String expectedEtag = "\"" + generateEtagHash(modelLastModifiedAlignedMs) + "\"";
 				// 支持 "*" 通配符或多个 ETag（逗号分隔）
 				if ("*".equals(ifNoneMatch) || ifNoneMatch.contains(expectedEtag)) {
 					response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
@@ -467,7 +467,13 @@ public class ToolsUtil {
 	}
 	
 	private static void setEtagHaeder(HttpServletResponse response, long modelLastModifiedAlignedMs) {
-		response.setHeader("ETag", "\"" + Long.toString(modelLastModifiedAlignedMs) + "\"");
+		response.setHeader("ETag", "\"" + generateEtagHash(modelLastModifiedAlignedMs) + "\"");
+	}
+	
+	private static String generateEtagHash(long modelLastModifiedAlignedMs) {
+		// 使用时间戳的哈希值作为 ETag，减少字符长度并提高比较效率
+		int hash = Long.hashCode(modelLastModifiedAlignedMs);
+		return Integer.toHexString(hash);
 	}
 	
 	private static boolean setRespHeaderCache(long maxAgeSeconds, long modelLastModifiedAlignedMs, HttpServletRequest request, HttpServletResponse response) {
