@@ -93,7 +93,7 @@ public class RSSGenServlet extends HttpServlet {
 	}
 
 	protected boolean checkModifiedEtagFilter(HttpServletRequest request, HttpServletResponse response) {
-		int expire = 1 * 60 * 60;
+		int expire = 1 * 30 * 60;
 		
 		// 检查是否有forumId参数
 		String forumId = request.getParameter("forumId");
