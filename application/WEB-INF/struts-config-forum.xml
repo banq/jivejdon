@@ -31,13 +31,13 @@
   <action path="/admin/forumList" type="com.jdon.jivejdon.presentation.action.ForumListAction"
       name="forumListForm" scope="request" 
       validate="false">
-      <forward name="success" path="/admin/forumList.jsp"/>
+      <forward name="success" path="/admin/forum/forumList.jsp"/>
     </action>
 	  	  	  
    <action name="forumForm" path="/admin/forumAction" type="com.jdon.strutsutil.ModelViewAction" scope="request"
 		validate="false">
-      <forward name="create" path="/admin/forum.jsp" />
-      <forward name="edit" path="/admin/forum.jsp" />
+      <forward name="create" path="/admin/forum/forum.jsp" />
+      <forward name="edit" path="/admin/forum/forum.jsp" />
     </action>
 	  
     <action name="forumForm" path="/admin/forumSaveAction" type="com.jdon.strutsutil.ModelSaveAction" scope="request"
@@ -49,7 +49,7 @@
 	<action name="imageListForm" path="/admin/imageAction" type="com.jdon.jivejdon.presentation.action.admin.ImageListAction" 
 		scope="request"
 		validate="false">
-      <forward name="success" path="/admin/imageList.jsp" />
+      <forward name="success" path="/admin/forum/imageList.jsp" />
     </action>
     
    <action name="imageListForm" path="/forum/imagesSlide" type="com.jdon.jivejdon.presentation.action.ImageSlideAction" 
@@ -70,12 +70,6 @@
       validate="false">
       <forward name="success" path="/message/forumListJSON.jsp"/>
     </action>	
-    
-    <!-- <action name="feedForm" path="/forum/feed/feedbackAction" type="com.jdon.strutsutil.ServiceMethodAction"
-	  scope="request" validate="true" input="/forum/feed/feedback.jsp" >
-      <forward name="send" path="/forum/feed/result.jsp"/>		
-    </action> -->
-    
     
     
     

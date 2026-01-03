@@ -4,7 +4,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <bean:define id="title"  value=" 编辑论坛" />
-<%@ include file="../../admin/header.jsp" %>
+<%@ include file="../header.jsp" %>
 
 
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -55,6 +55,6 @@ function delConfirm(){
 </script>
 
 
-<%@include file="../../admin/footer.jsp"%> 
+<%@include file="../footer.jsp"%> 
 
 

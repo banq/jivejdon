@@ -5,7 +5,7 @@
 
 
 <bean:define id="title"  value=" 论坛资料保存成功" />
-<%@ include file="../../admin/header.jsp" %>
+<%@ include file="../header.jsp" %>
 
 
 <logic:notPresent name="errors">
@@ -13,4 +13,4 @@
 </logic:notPresent>
 
 
-<%@include file="../../admin/footer.jsp"%> 
+<%@include file="../footer.jsp"%> 

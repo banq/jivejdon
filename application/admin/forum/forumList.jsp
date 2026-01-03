@@ -7,7 +7,7 @@
 
 
 <bean:define id="title"  value=" 论坛概览" />
-<%@ include file="../../admin/header.jsp" %>
+<%@ include file="../header.jsp" %>
 
 
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -70,4 +70,4 @@ function delConfirm(){
 
 
 
-<%@include file="../../admin/footer.jsp"%> 
+<%@include file="../footer.jsp"%> 
