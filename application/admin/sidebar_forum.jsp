@@ -23,11 +23,11 @@ onload="parent.frames['header'].location.href='tabs.jsp?method=forum';">
     </tr>
     <tr><td width="1%">&nbsp;</td>
         <td width="1%">&#149;</td>
-        <td width="97%"><font size="-1"><html:link  page="/forum/admin/forumList.shtml"  target="main">论坛概览</html:link></font></td>
+        <td width="97%"><font size="-1"><html:link  page="/admin/forumList.shtml"  target="main">论坛概览</html:link></font></td>
     </tr>
     <tr><td>&nbsp;</td>
         <td>&#149;</td>
-        <td><font size="-1"><html:link  page="/forum/admin/forumAction.shtml"  target="main">创建新论坛</html:link></font></td>
+        <td><font size="-1"><html:link  page="/admin/forumAction.shtml"  target="main">创建新论坛</html:link></font></td>
     </tr>
         <tr><td>&nbsp;</td>
         <td>&#149;</td>
@@ -44,7 +44,7 @@ onload="parent.frames['header'].location.href='tabs.jsp?method=forum';">
     
     <tr><td>&nbsp;</td>
         <td>&#149;</td>
-        <td><font size="-1"><html:link  page="/forum/admin/imageAction.shtml"  target="main">上传图片管理</html:link></font></td>
+        <td><font size="-1"><html:link  page="/admin/imageAction.shtml"  target="main">上传图片管理</html:link></font></td>
     </tr>
     
        <tr><td>&nbsp;</td>

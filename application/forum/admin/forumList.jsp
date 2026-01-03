@@ -40,11 +40,11 @@
      <br><bean:write name="forum" property="description" /></td>
     <td style="text-align: center"><bean:write name="forum" property="forumState.threadCount" /></td>
     <td style="text-align: center"><bean:write name="forum" property="forumState.messageCount" /></td>
-    <td style="text-align: center"><html:link page="/forum/admin/forumAction.shtml?action=edit" paramId="forumId" paramName="forum" paramProperty="forumId">
+    <td style="text-align: center"><html:link page="/admin/forumAction.shtml?action=edit" paramId="forumId" paramName="forum" paramProperty="forumId">
      <html:img  page="/admin/images/button_edit.gif" width="17" height="17" alt="Click to edit all forum properties" border="0"/>
     </html:link></td>
     <td style="text-align: center">
-    <html:link page="/forum/admin/forumSaveAction.shtml?action=delete" paramId="forumId" paramName="forum" paramProperty="forumId" onclick="return delConfirm()">
+    <html:link page="/admin/forumSaveAction.shtml?action=delete" paramId="forumId" paramName="forum" paramProperty="forumId" onclick="return delConfirm()">
    <html:img  page="/admin/images/button_delete.gif" width="17" height="17" alt="Confirm that you want to delete this forum..." border="0" />
     </html:link></td>
 </tr>

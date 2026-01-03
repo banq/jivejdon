@@ -66,13 +66,13 @@
 						</tr>
 						<tr>
 							<td style="text-align: center">
-								<html:link page="/forum/admin/imageSaveAction.shtml?action=edit"
+								<html:link page="/admin/imageSaveAction.shtml?action=edit"
 									paramId="imageId" paramName="image" paramProperty="imageId">
 									编辑
 								</html:link>
 								|
 								<html:link
-									page="/forum/admin/imageSaveAction.shtml?action=delete"
+									page="/admin/imageSaveAction.shtml?action=delete"
 									paramId="imageId" paramName="image" paramProperty="imageId"
 									onclick="return delConfirm()">
 									删除
@@ -91,7 +91,7 @@
 			</logic:iterate>
 			</tr></table> 
 		<MultiPages:pager actionFormName="imageListForm"
-			page="/forum/admin/imageAction.shtml">
+			page="/admin/imageAction.shtml">
 			<MultiPages:prev>前页</MultiPages:prev>
 			<MultiPages:index></MultiPages:index>
 			<MultiPages:next>后页</MultiPages:next>

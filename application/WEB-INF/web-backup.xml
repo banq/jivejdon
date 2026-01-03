@@ -289,7 +289,7 @@
 			</web-resource-collection>
 			<web-resource-collection>
 				<web-resource-name>forum admin</web-resource-name>
-				<url-pattern>/forum/admin/*</url-pattern>
+				<url-pattern>/admin/*</url-pattern>
 			</web-resource-collection>
 			<auth-constraint>
 				<role-name>Admin</role-name>

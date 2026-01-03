@@ -28,28 +28,28 @@
     </action>
     
 
-  <action path="/forum/admin/forumList" type="com.jdon.jivejdon.presentation.action.ForumListAction"
+  <action path="/admin/forumList" type="com.jdon.jivejdon.presentation.action.ForumListAction"
       name="forumListForm" scope="request" 
       validate="false">
-      <forward name="success" path="/forum/admin/forumList.jsp"/>
+      <forward name="success" path="/admin/forumList.jsp"/>
     </action>
 	  	  	  
-   <action name="forumForm" path="/forum/admin/forumAction" type="com.jdon.strutsutil.ModelViewAction" scope="request"
+   <action name="forumForm" path="/admin/forumAction" type="com.jdon.strutsutil.ModelViewAction" scope="request"
 		validate="false">
-      <forward name="create" path="/forum/admin/forum.jsp" />
-      <forward name="edit" path="/forum/admin/forum.jsp" />
+      <forward name="create" path="/admin/forum.jsp" />
+      <forward name="edit" path="/admin/forum.jsp" />
     </action>
 	  
-    <action name="forumForm" path="/forum/admin/forumSaveAction" type="com.jdon.strutsutil.ModelSaveAction" scope="request"
-    	validate="true" input="/forum/admin/forumAction.shtml">
-      <forward name="success" path="/forum/admin/forumList.shtml" />
-      <forward name="failure" path="/forum/admin/forumAction.shtml" />
+    <action name="forumForm" path="/admin/forumSaveAction" type="com.jdon.strutsutil.ModelSaveAction" scope="request"
+    	validate="true" input="/admin/forumAction.shtml">
+      <forward name="success" path="/admin/forumList.shtml" />
+      <forward name="failure" path="/admin/forumAction.shtml" />
     </action>
     
-	<action name="imageListForm" path="/forum/admin/imageAction" type="com.jdon.jivejdon.presentation.action.admin.ImageListAction" 
+	<action name="imageListForm" path="/admin/imageAction" type="com.jdon.jivejdon.presentation.action.admin.ImageListAction" 
 		scope="request"
 		validate="false">
-      <forward name="success" path="/forum/admin/imageList.jsp" />
+      <forward name="success" path="/admin/imageList.jsp" />
     </action>
     
    <action name="imageListForm" path="/forum/imagesSlide" type="com.jdon.jivejdon.presentation.action.ImageSlideAction" 
@@ -58,10 +58,10 @@
       <forward name="success" path="/imagesSlide.jsp" />
     </action>
     
-    <action name="imageInfoForm" path="/forum/admin/imageSaveAction" type="com.jdon.strutsutil.ModelSaveAction" scope="request"
-    	validate="true" input="/forum/admin/imageAction.shtml">
-      <forward name="success" path="/forum/admin/imageAction.shtml" />
-      <forward name="failure" path="/forum/admin/imageAction.shtml" />
+    <action name="imageInfoForm" path="/admin/imageSaveAction" type="com.jdon.strutsutil.ModelSaveAction" scope="request"
+    	validate="true" input="/admin/imageAction.shtml">
+      <forward name="success" path="/admin/imageAction.shtml" />
+      <forward name="failure" path="/admin/imageAction.shtml" />
     </action>
     
    

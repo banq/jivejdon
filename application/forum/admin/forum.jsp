@@ -17,7 +17,7 @@
 </table>
 <hr size="0">
 
-<html:form action="/forum/admin/forumSaveAction.shtml" method="POST">
+<html:form action="/admin/forumSaveAction.shtml" method="POST">
 <html:hidden property="method"/>
 <html:hidden property="forumId"/>
   <table cellpadding="2" cellspacing="0" border="0">

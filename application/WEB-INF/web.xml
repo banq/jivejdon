@@ -277,11 +277,7 @@
         <web-resource-collection>
             <web-resource-name>Admin input</web-resource-name>
             <url-pattern>/admin/*</url-pattern>
-        </web-resource-collection>
-        <web-resource-collection>
-            <web-resource-name>forum admin</web-resource-name>
-            <url-pattern>/forum/admin/*</url-pattern>
-        </web-resource-collection>
+        </web-resource-collection>       
         <auth-constraint>
             <role-name>Admin</role-name>
         </auth-constraint>
