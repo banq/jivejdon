@@ -43,10 +43,10 @@ int randomIdx = 0;
       <div class="col-lg-3">
 			      	<div style="position: relative;" class="zoom-container">
                 <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">        
-                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="img-thumbnail img-responsive" style="height:130px;width:100%" loading="lazy" onerror="this.src='/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg'"/>
+                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="img-thumbnail img-responsive" style="height:150px;width:100%" loading="lazy" onerror="this.src='/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg'"/>
                 </logic:notEmpty>
                 <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">        
-                  <img id="home-thumbnai" src="/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg" border="0" class="img-thumbnail img-responsive" style="height:130px;width:100%" loading="lazy" /> 
+                  <img id="home-thumbnai" src="/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg" border="0" class="img-thumbnail img-responsive" style="height:150px;width:100%" loading="lazy" /> 
 
                   <div style="position: absolute;bottom: 0px;">
                   <div class="tagcloud">
@@ -86,8 +86,8 @@ int randomIdx = 0;
             
 <h1 style="font-size: 2.6rem;margin-top: 2px;padding-bottom: 10px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><span itemprop="name"><bean:write name="forumThread" property="name"/></span></a></h1>
           
-          <div class="wrap-vid">
-              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[300]" />. 
+          <div class="info" class="wrap-vid">
+              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[150]" />. 
           </div>
         </div>  
    	</div>	
