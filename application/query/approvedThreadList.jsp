@@ -87,7 +87,7 @@ int randomIdx = 0;
 <h1 style="font-size: 2.6rem;margin-top: 2px;padding-bottom: 10px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><span itemprop="name"><bean:write name="forumThread" property="name"/></span></a></h1>
           
           <div class="wrap-vid">
-              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />. 
+              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[500]" />. 
           </div>
         </div>  
    	</div>	
