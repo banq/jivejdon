@@ -74,7 +74,7 @@ if (request.getParameter("count")!=null){
        
 
             <div class="info" style="display:flex; align-items:flex-start; justify-content:space-between; margin-top: 10px">
-              <span style="flex:1; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical;overflow:hidden">      
+              <span style="flex:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;overflow:hidden">      
                  <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[150]" />
               </span>
           </div>
