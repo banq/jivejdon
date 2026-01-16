@@ -19,6 +19,6 @@
 <input type="hidden"  name="method" value="doRebuildIndex" />
 <html:submit value=" 进行截止当日的重新索引 "/>
 </form>
-注：如果数据量大，需要耗费一段时间。
+注：删除原来目录/temp/jivejdonLuceneDB 如果数据量大，需要耗费一段时间。查看jdon.log出现rebuildIndex finished!表示完成。
 </logic:equal>
 <%@include file="../footer.jsp"%>
