@@ -146,6 +146,21 @@ note:
 16 com.jdon.jivejdon.domain.model.message.output.thumbnailUrl.ThumbnailExtractor
 
 
+1 	LinkUrlExtractor 	LinkUrlExtractor 	将此过虑器下移 		删除此过滤器
+2 	TextStyle 	TextStyle 	将此过虑器下移 将此过滤器上移 	编辑过滤器属性 	删除此过滤器
+3 	ListStyle 	ListStyle 	将此过虑器下移 将此过滤器上移 		删除此过滤器
+4 	CodeHighlighter 	CodeHighlighter 	将此过虑器下移 将此过滤器上移 	编辑过滤器属性 	删除此过滤器
+5 	Newline 	Newline 	将此过虑器下移 将此过滤器上移 		删除此过滤器
+6 	URLConverter 	URLConverter 	将此过虑器下移 将此过滤器上移 	编辑过滤器属性 	删除此过滤器
+7 	ImageFilter 	ImageFilter 	将此过虑器下移 将此过滤器上移 		删除此过滤器
+8 	Profanity 	Profanity 	将此过虑器下移 将此过滤器上移 	编辑过滤器属性 	删除此过滤器
+9 	UploadImageFilter 	UploadImageFilter 	将此过虑器下移 将此过滤器上移 	编辑过滤器属性 	删除此过滤器
+10 	UploadFileFilter 	UploadFileFilter 	将此过虑器下移 将此过滤器上移 	编辑过滤器属性 	删除此过滤器
+11 	Bodymasking 	Bodymasking 	将此过虑器下移 将此过滤器上移 	编辑过滤器属性 	删除此过滤器
+12 	AuthorNameFormat 	AuthorNameFormat 	将此过虑器下移 将此过滤器上移 	编辑过滤器属性 	删除此过滤器
+13 	QuoteRegexFilter 	QuoteRegexFilter 	将此过虑器下移 将此过滤器上移 		删除此过滤器
+14 	FontStyle 	FontStyle 	将此过虑器下移 将此过滤器上移 		删除此过滤器
+15 	ThumbnailExtractor 	ThumbnailExtractor 	将此过滤器上移 	编辑过滤器属性 	删除此过滤器
 
 ##############################################################################################
 （四）调试方法
