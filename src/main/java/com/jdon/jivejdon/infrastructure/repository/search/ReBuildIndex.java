@@ -12,8 +12,6 @@ import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import com.jdon.jivejdon.infrastructure.repository.dao.sql.JdbcTempSource;
-import com.jdon.jivejdon.infrastructure.repository.dao.sql.MessageUtilSQL;
-import com.jdon.jivejdon.util.PageIteratorSolverFixed;
 
 public class ReBuildIndex implements Runnable {
 	private final static Logger logger = LogManager.getLogger(ReBuildIndex.class);
@@ -88,7 +86,7 @@ public class ReBuildIndex implements Runnable {
 			anemicMessageDTO.setMessageVO(message.getMessageVO());
 			anemicMessageDTO.setForumThread(message.getForumThread());
 			messageSearchProxy.createMessage(anemicMessageDTO);
-            Thread.sleep(5000);
+            Thread.sleep(1000);
 		} catch (Exception e) {
 			logger.error(e);
 		}
