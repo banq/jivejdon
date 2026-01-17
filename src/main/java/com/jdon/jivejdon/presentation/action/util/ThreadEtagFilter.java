@@ -15,9 +15,6 @@
  */
 package com.jdon.jivejdon.presentation.action.util;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -76,18 +73,7 @@ public class ThreadEtagFilter extends Action {
 		}
 		long modelLastModifiedDate = forumThread.getModifiedDate();
 
-		// in 15 days the message expire will be shorter;
-		Calendar c = Calendar.getInstance();
-		c.setTime(new Date(modelLastModifiedDate));
-		c.add(Calendar.DATE, 15);
-
-		Calendar tc = Calendar.getInstance();
-		tc.setTime(new Date());
-		// browser cache expire time; default is one hour
-		int expire = 1 * 60 * 60;
-		if (c.before(tc)) {
-			expire = 24 * 60 * 60;
-		}
+		int expire = 24 * 60 * 60;
 
 		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request,
 				response)) {
