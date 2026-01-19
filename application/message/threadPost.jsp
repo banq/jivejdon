@@ -111,10 +111,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
            document.getElementById('forumId_select').options.add(optn);
          
         }  
-const select = document.getElementById("forumId_select");
-if (select.options.length > 0) {
-    select.selectedIndex = select.options.length - 1; // 选中最后一个选项
-}
+
     });
 
 
