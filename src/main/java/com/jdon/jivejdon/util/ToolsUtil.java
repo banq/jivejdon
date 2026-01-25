@@ -420,17 +420,20 @@ public class ToolsUtil {
     }	
 
 	//grok3
-	public static boolean checkHeaderCache(long maxAgeSeconds, long modelLastModifiedDate, HttpServletRequest request, HttpServletResponse response) {
+	public static boolean checkHeaderCache(long maxAgeSeconds, long modelLastModifiedDate, HttpServletRequest request,
+			HttpServletResponse response) {
 		if (request.getAttribute("myExpire") != null) {
 			System.err.println("checkHeaderCache called above twice times: " + request.getRequestURI());
 			return true;
 		}
 		request.setAttribute("myExpire", maxAgeSeconds);
-	
+
 		// truncate to seconds (milliseconds precision -> seconds)
 		// name indicates value is aligned to second boundary but still in milliseconds
 		long modelLastModifiedAlignedMs = (modelLastModifiedDate / 1000L) * 1000L;
-
+		// 设置新的响应头
+		setEtagHaeder(response, modelLastModifiedAlignedMs);
+		setRespHeaderCache(maxAgeSeconds, modelLastModifiedAlignedMs, request, response);
 
 		try {
 			// ETag 验证 (优先级最高，如果存在则仅用 ETag 判断，不再检查 If-Modified-Since)
@@ -443,11 +446,9 @@ public class ToolsUtil {
 					return false;
 				}
 				// ETag 不匹配，返回完整内容，不再继续检查 If-Modified-Since
-				setEtagHaeder(response, modelLastModifiedAlignedMs);
-				setRespHeaderCache(maxAgeSeconds, modelLastModifiedAlignedMs, request, response);
 				return true;
 			}
-	
+
 			// If-Modified-Since 验证 (仅在没有 If-None-Match 时执行)
 			long header = request.getDateHeader("If-Modified-Since");
 			if (header > 0) {
@@ -456,10 +457,7 @@ public class ToolsUtil {
 					return false;
 				}
 			}
-	
-			// 设置新的响应头
-			setEtagHaeder(response, modelLastModifiedAlignedMs);
-			setRespHeaderCache(maxAgeSeconds, modelLastModifiedAlignedMs, request, response);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
