@@ -73,7 +73,7 @@ public class ThreadEtagFilter extends Action {
 		}
 		long modelLastModifiedDate = forumThread.getModifiedDate();
 
-		int expire = 24 * 60 * 60;
+		int expire = 3 * 24 * 60 * 60;
 
 		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request,
 				response)) {
