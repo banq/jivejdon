@@ -78,7 +78,7 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="form-group">
-      <input class="form-control" type="text" name="token" size="50" maxlength="50" id="inputBox"  value=''/>
+      <input class="form-control" type="text" name="token" size="80" maxlength="80" id="inputBox"  value=''/>
       <div id="resultDiv"></div>
        
     </div>
