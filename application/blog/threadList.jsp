@@ -18,7 +18,7 @@
 		    </div> 
 		    <div class="title_right"> 
   
-		   <a href="<%=request.getContextPath()%>/message/post.jsp">
+		   <a href="<%=request.getContextPath()%>/message/postThread.jsp">
             <img src="<%=request.getContextPath() %>/images/newtopic.gif" width="110" height="20" border="0" alt="发表新帖子" /></a></div>
 		 </div> 
 		 <div class="content"> 	 

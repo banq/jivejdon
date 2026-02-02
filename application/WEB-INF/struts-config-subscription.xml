@@ -46,11 +46,11 @@
 		</action>
 
 
-		<action name="subscriptionForm" path="/account/protected/sub/subAction"
+		<!-- <action name="subscriptionForm" path="/account/protected/sub/subAction"
 			type="com.jdon.strutsutil.ModelViewAction" scope="request" validate="false">
 			<forward name="create" path="/account/protected/sub/sub.jsp" />
 			<forward name="edit" path="/account/protected/sub/sub.jsp" />
-		</action>
+		</action> -->
 
 		<action name="subscriptionForm" path="/account/protected/sub/subSaveAction"
 			type="com.jdon.strutsutil.ModelSaveAction" scope="request" validate="true"

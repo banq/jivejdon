@@ -12,7 +12,7 @@
       <div class="box_mode_2"> 
 	     <div class="title"> 
 		    <div class="title_left">我关注的道场</div> 
-		    <div class="title_right"> <a href="<%=request.getContextPath()%>/message/post.jsp">
+		    <div class="title_right"> <a href="<%=request.getContextPath()%>/message/postThread.jsp">
             <img src="/images/newtopic.gif" width="110" height="20" border="0" alt="发表新帖子" /></a></div> 
 		 </div> 
 		 <div class="content"> 	 
@@ -28,7 +28,7 @@
       <div class="box_mode_2"> 
 	     <div class="title"> 
 		    <div class="title_left">我关注的主题</div> 
-		    <div class="title_right"> <a href="<%=request.getContextPath()%>/message/post.jsp">
+		    <div class="title_right"> <a href="<%=request.getContextPath()%>/message/postThread.jsp">
             <img src="/images/newtopic.gif" width="110" height="20" border="0" alt="发表新帖子" /></a></div> 
 		 </div> 
 		 <div class="content"> 	 
