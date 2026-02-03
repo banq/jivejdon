@@ -490,8 +490,8 @@ public class ToolsUtil {
 		// 设置 Age（资源已经存在的秒数，防止负数）
 		long currentTime = System.currentTimeMillis();
 		response.setDateHeader("Date", currentTime);
-		long age = Math.max(0L, (currentTime - modelLastModifiedAlignedMs) / 1000L);
-		response.setHeader("Age", String.valueOf(age));
+		// long age = Math.max(0L, (currentTime - modelLastModifiedAlignedMs) / 1000L);
+		// response.setHeader("Age", String.valueOf(age));
 
 		// 设置 Expires，基于当前时间加上 maxAgeSeconds
 		long expires = currentTime + (maxAgeSeconds * 1000L);
