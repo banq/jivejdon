@@ -49,7 +49,7 @@
     <input type="text" name="tagTitle" size="13" maxlength="25"
            id="searchV_3"
            onfocus="javascript:loadAcJS(this.id)" value=''/>
-    <br>UrlSlug: <input type="text" name="token" size="80" maxlength="80" id="token"/>
+    <br>UrlSlug: <input type="text" name="token" size="50" maxlength="50" id="token"/>
            <br> <html:submit>提交</html:submit>
 </form>
 <script>
