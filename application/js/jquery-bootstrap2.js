@@ -262,7 +262,53 @@ function digMessage(id) {
   });
 }
 
+// 朗读全文功能
+function readFullPage() {
+    const articleBody = document.querySelector('[itemprop="articleBody"], .post_content');
+    const mainContent = articleBody || document.querySelector('article') || document.body;
+    const text = mainContent.innerText.substring(0, 10000);
+    
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'zh-CN';
+    utterance.rate = 1.0;
+    window.speechSynthesis.speak(utterance);
+}
+
+// 创建朗读按钮
+function createReadAloudButton() {
+    // 检查是否已存在按钮
+    if (document.getElementById('readAloudButton')) return;
+    
+    // 创建按钮元素
+    const button = document.createElement('button');
+    button.id = 'readAloudButton';
+    button.innerHTML = '🔊 朗读全文';
+    button.onclick = readFullPage;
+    
+    // 设置样式
+    button.style.position = 'fixed';
+    button.style.bottom = '20px';
+    button.style.right = '20px';
+    button.style.background = '#4CAF50';
+    button.style.color = 'white';
+    button.style.border = 'none';
+    button.style.padding = '12px 24px';
+    button.style.borderRadius = '30px';
+    button.style.cursor = 'pointer';
+    button.style.fontSize = '14px';
+    button.style.zIndex = '9999';
+    button.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+    
+    // 添加到页面
+    document.body.appendChild(button);
+    
+}
+
+
 document.addEventListener("DOMContentLoaded", function(event) { 
+// 页面加载完成后创建按钮
+    createReadAloudButton();
 
   // 鼠标悬停到菜单时再动态加载内容
   var menuMap = {
