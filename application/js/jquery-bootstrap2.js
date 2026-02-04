@@ -262,49 +262,72 @@ function digMessage(id) {
   });
 }
 
-// 朗读全文功能
-function readFullPage() {
-    const articleBody = document.querySelector('[itemprop="articleBody"], .post_content');
-    const mainContent = articleBody || document.querySelector('article') || document.body;
-    const text = mainContent.innerText.substring(0, 10000);
+// 简洁版本
+let isSpeaking = false;
+let isPaused = false;
+
+function toggleReadAloud() {
+    const button = document.getElementById('readAloudButton');
+    
+    if (isSpeaking) {
+        if (isPaused) {
+            // 恢复朗读
+            window.speechSynthesis.resume();
+            isPaused = false;
+            button.innerHTML = '⏸️ 暂停朗读';
+        } else {
+            // 暂停朗读
+            window.speechSynthesis.pause();
+            isPaused = true;
+            button.innerHTML = '▶️ 继续朗读';
+        }
+        return;
+    }
+    
+    // 开始新朗读
+    const content = document.querySelector('[itemprop="articleBody"], .post_content, article') || document.body;
+    const text = content.innerText.substring(0, 10000);
     
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'zh-CN';
     utterance.rate = 1.0;
+    
+    utterance.onstart = function() {
+        isSpeaking = true;
+        isPaused = false;
+        button.innerHTML = '⏸️ 暂停朗读';
+    };
+    
+    utterance.onend = utterance.onerror = function() {
+        isSpeaking = false;
+        isPaused = false;
+        button.innerHTML = '🔊 朗读全文';
+    };
+    
     window.speechSynthesis.speak(utterance);
 }
 
-// 创建朗读按钮
 function createReadAloudButton() {
-    // 检查是否已存在按钮
     if (document.getElementById('readAloudButton')) return;
     
-    // 创建按钮元素
     const button = document.createElement('button');
     button.id = 'readAloudButton';
     button.innerHTML = '🔊 朗读全文';
-    button.onclick = readFullPage;
+    button.onclick = toggleReadAloud;
     
     // 设置样式
-    button.style.position = 'fixed';
-    button.style.bottom = '20px';
-    button.style.right = '20px';
-    button.style.background = '#4CAF50';
-    button.style.color = 'white';
-    button.style.border = 'none';
-    button.style.padding = '12px 24px';
-    button.style.borderRadius = '30px';
-    button.style.cursor = 'pointer';
-    button.style.fontSize = '14px';
-    button.style.zIndex = '9999';
-    button.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+    Object.assign(button.style, {
+        position: 'fixed', bottom: '20px', right: '20px',
+        background: '#4CAF50', color: 'white', border: 'none',
+        padding: '12px 24px', borderRadius: '30px', cursor: 'pointer',
+        fontSize: '14px', zIndex: '9999', 
+        boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+        transition: 'background-color 0.3s ease'
+    });
     
-    // 添加到页面
     document.body.appendChild(button);
-    
 }
-
 
 document.addEventListener("DOMContentLoaded", function(event) { 
 // 页面加载完成后创建按钮
