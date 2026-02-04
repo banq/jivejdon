@@ -262,21 +262,24 @@ function digMessage(id) {
   });
 }
 
-// 简洁版本
+// --- 全局状态变量 ---
 let isSpeaking = false;
 let isPaused = false;
+let currentUtterance = null; 
+let textQueue = [];
+let queueIndex = 0;
+let keepAliveTimer = null;
 
 function toggleReadAloud() {
     const button = document.getElementById('readAloudButton');
     
+    // 1. 处理暂停/恢复逻辑
     if (isSpeaking) {
         if (isPaused) {
-            // 恢复朗读
             window.speechSynthesis.resume();
             isPaused = false;
             button.innerHTML = '⏸️ 暂停朗读';
         } else {
-            // 暂停朗读
             window.speechSynthesis.pause();
             isPaused = true;
             button.innerHTML = '▶️ 继续朗读';
@@ -284,48 +287,72 @@ function toggleReadAloud() {
         return;
     }
     
-    // 开始新朗读
+    // 2. 获取文本并分段（解决长文本中断的核心）
     const content = document.querySelector('[itemprop="articleBody"], .post_content, article') || document.body;
-    const text = content.innerText.substring(0, 10000);
+    const fullText = content.innerText.substring(0, 10000);
     
+    // 按标点符号切分，确保每段都不会太长
+    textQueue = fullText.split(/[。！？；…\n]/).filter(t => t.trim().length > 0);
+    
+    if (textQueue.length === 0) return;
+
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'zh-CN';
-    utterance.rate = 1.0;
+    isSpeaking = true;
+    queueIndex = 0;
     
-    utterance.onstart = function() {
-        isSpeaking = true;
-        isPaused = false;
-        button.innerHTML = '⏸️ 暂停朗读';
+    playNextChunk();
+}
+
+function playNextChunk() {
+    if (queueIndex >= textQueue.length) {
+        resetStatus();
+        return;
+    }
+
+    // 3. 创建语音实例并挂载到全局，防止 GC (垃圾回收)
+    currentUtterance = new SpeechSynthesisUtterance(textQueue[queueIndex]);
+    currentUtterance.lang = 'zh-CN';
+    currentUtterance.rate = 1.0;
+
+    currentUtterance.onend = () => {
+        queueIndex++;
+        playNextChunk();
     };
-    
-    utterance.onend = utterance.onerror = function() {
-        isSpeaking = false;
-        isPaused = false;
-        button.innerHTML = '🔊 朗读全文';
-    };
-    
-    window.speechSynthesis.speak(utterance);
+
+    currentUtterance.onerror = () => resetStatus();
+
+    window.speechSynthesis.speak(currentUtterance);
+
+    // 4. Chrome 保活补丁：防止播放超过 15 秒静默回收
+    if (keepAliveTimer) clearInterval(keepAliveTimer);
+    keepAliveTimer = setInterval(() => {
+        if (isSpeaking && !isPaused) {
+            window.speechSynthesis.pause();
+            window.speechSynthesis.resume();
+        }
+    }, 10000);
+}
+
+function resetStatus() {
+    isSpeaking = false;
+    isPaused = false;
+    if (keepAliveTimer) clearInterval(keepAliveTimer);
+    document.getElementById('readAloudButton').innerHTML = '🔊 朗读全文';
 }
 
 function createReadAloudButton() {
     if (document.getElementById('readAloudButton')) return;
-    
     const button = document.createElement('button');
     button.id = 'readAloudButton';
     button.innerHTML = '🔊 朗读全文';
     button.onclick = toggleReadAloud;
     
-    // 设置样式
     Object.assign(button.style, {
         position: 'fixed', bottom: '20px', right: '20px',
         background: '#4CAF50', color: 'white', border: 'none',
         padding: '12px 24px', borderRadius: '30px', cursor: 'pointer',
-        fontSize: '14px', zIndex: '9999', 
-        boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-        transition: 'background-color 0.3s ease'
+        fontSize: '14px', zIndex: '9999', boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
     });
-    
     document.body.appendChild(button);
 }
 
