@@ -1,8 +1,13 @@
 Jivejdon has been coded using the AI vibe-code tool, with the development environment being VSCode + Copilot.
 
 # Jivejdon
-Jivejdon is a WordPress-like Blog/Forum and production-ready application with DDD + DomainEvents/Event Soucing/CQRS + clean architecture/Hexagonalarchitecture, powered by [jdonframework](https://github.com/banq/jdonframework). 
+Jivejdon is a notebook, knowledge graph, and knowledge system with DDD + DomainEvents/Event Soucing/CQRS + clean architecture/Hexagonalarchitecture, powered by [jdonframework](https://github.com/banq/jdonframework). 
 
+# Features: 
+When posting, it provides functions such as keywords, topics, and themes, organizing posts together in the form of links. They are presented to human readers in a [https://www.jdon.com/threads/](chronological sequence) and to AI readers in a [https://www.jdon.com/tag/](semantic structure) like a theme garden. It is suitable for enterprises to manage their internal knowledge systems, and when combined with intelligent agents, it can serve as the enterprise's second brain.
+
+refer:[https://www.jdon.com/90352-markdown-knowledge-graph-curation.html](Markdown files themselves are the graph database for intelligent agents!)
+# Demo
 You can check out the canonical deployment of Jivejdon at [https://www.jdon.com/](https://www.jdon.com/forum/)(NginX+Tomcat+JDK8+MySQL)
 
 [github](https://github.com/banq/jivejdon)
