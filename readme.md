@@ -1,5 +1,3 @@
-Jivejdon has been coded using the AI vibe-code tool, with the development environment being VSCode + Copilot.
-
 # Jivejdon
 Jivejdon is a notebook, knowledge graph, and knowledge system with DDD + DomainEvents/Event Soucing/CQRS + clean architecture/Hexagonalarchitecture, powered by [jdonframework](https://github.com/banq/jdonframework). 
 
