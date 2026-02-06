@@ -1,8 +1,8 @@
 # Jivejdon
-Jivejdon is a notebook, knowledge graph, and knowledge system with DDD + DomainEvents/Event Soucing/CQRS + clean architecture/Hexagonalarchitecture, powered by [jdonframework](https://github.com/banq/jdonframework). 
+Jivejdon is a chain notebook, knowledge graph and knowledge system with DDD + DomainEvents/Event Soucing/CQRS + clean architecture/Hexagonalarchitecture, powered by [jdonframework](https://github.com/banq/jdonframework). 
 
 # Features
-When posting, it provides functions such as keywords, topics, and themes, organizing posts together in the form of links. They are presented to human readers in a [chronological sequence](https://www.jdon.com/threads/) and to AI readers in a [semantic structure](https://www.jdon.com/tag/) like a theme garden. It is suitable for enterprises to manage their internal knowledge systems, and when combined with intelligent agents, it can serve as the enterprise's second brain.
+When posting, it provides the function of interlinking posts around keywords/topics, organizing posts together in the form of links. these posts are presented to human readers in a [time sequence](https://www.jdon.com/threads/) and to AI readers in a [knowledge graph](https://www.jdon.com/tag/) like a theme garden. It is suitable for enterprises to manage their internal knowledge systems, and when combined with intelligent agents, it can serve as the enterprise's second brain.
 
 refer:[Markdown files themselves are the graph database for intelligent agents!](https://www.jdon.com/90352-markdown-knowledge-graph-curation.html)
 # Demo
