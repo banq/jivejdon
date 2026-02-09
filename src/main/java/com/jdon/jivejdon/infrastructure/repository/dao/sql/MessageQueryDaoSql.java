@@ -470,7 +470,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 			sql.append(qs.getWhereSQL());
 			sql.append(" GROUP BY threadID ");
 			sql.append(" HAVING message_count > ? "); // 可选
-			sql.append(" ORDER BY message_count DESC LIMIT 100");
+			sql.append(" ORDER BY threadID DESC LIMIT 100");
 
 			List<Object> params = new ArrayList<>();
 			if (qs.getParams() != null)
@@ -509,7 +509,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 			sql.append(" AND jm.modifiedDate >= ? "); // 新增1000天内过滤
 			sql.append("GROUP BY jm.threadID ");
 			sql.append("HAVING dig_sum > ? "); // 这里用上阈值
-			sql.append("ORDER BY dig_sum  DESC LIMIT 100");
+			sql.append("ORDER BY threadID DESC LIMIT 100");
 
 			List<Object> params = new ArrayList<>();
 			if (qs.getParams() != null)
