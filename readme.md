@@ -4,7 +4,11 @@ Jivejdon is a chain notebook or chain blog, knowledge graph and knowledge system
 # Features
 When posting, it provides the function of interlinking posts around keywords/topics, organizing posts together in the form of links. these posts are presented to human readers in a [time sequence](https://www.jdon.com/threads/) and to AI readers in a [knowledge graph](https://www.jdon.com/tag/) like a theme garden. It is suitable for enterprises to manage their internal knowledge systems, and when combined with intelligent agents, it can serve as the enterprise's second brain.
 
-refer:[Markdown files themselves are the graph database for intelligent agents!](https://www.jdon.com/90352-markdown-knowledge-graph-curation.html)
+refer:
+[Large language models + graph structures are the ultimate path to enterprise intelligence.](https://www.jdon.com/90388-LLM-Graph-Structures-Enterprise-Intelligence.html)
+
+[Markdown files themselves are the graph database for intelligent agents!](https://www.jdon.com/90352-markdown-knowledge-graph-curation.html)
+
 # Demo
 You can check out the canonical deployment of Jivejdon at [https://www.jdon.com/](https://www.jdon.com/forum/)(NginX+Tomcat+JDK8+MySQL)
 
