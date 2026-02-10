@@ -39,10 +39,28 @@
       <div class="article">
       <article itemscope itemtype="https://schema.org/Article">
         <header class="post_header">
-            <logic:equal name="forumMessage" property="root" value="true">
-                <h1 class="bige20" itemprop="headline"><logic:notEmpty name="forumMessage" property="messageUrlVO.linkUrl"><a href="<bean:write name="forumMessage" property="messageUrlVO.linkUrl" filter="false"/>" target="_blank" title="原始链接"><bean:write name="forumMessage" property="messageVO.subject"/></a></logic:notEmpty><logic:empty name="forumMessage" property="messageUrlVO.linkUrl"><bean:write name="forumMessage" property="messageVO.subject"/></logic:empty></h1>  
+            <logic:equal name="forumMessage" property="root" value="true">            
+                <div class="info">
+                  <a href="/forum/<bean:write name="forumMessage" property="forum.forumId"/>/" itemprop="articleSection">
+                    <svg viewBox="0 0 20 20" width="15" height="13">
+    <path d="M17.5 9.1H4.679l5.487-5.462a.898.898 0 00.003-1.272.898.898 0 00-1.272-.003l-7.032 7a.898.898 0 000 1.275l7.03 7a.896.896 0 001.273-.003.898.898 0 00-.002-1.272l-5.487-5.462h12.82a.9.9 0 000-1.8z"></path>
+                    </svg>                  
+                    <bean:write name="forumMessage" property="forum.name"/>
+                  </a>        
+                </div>
+                <h1 class="bige20" itemprop="headline">
+                  <logic:notEmpty name="forumMessage" property="messageUrlVO.linkUrl">
+                    <a href="<bean:write name="forumMessage" property="messageUrlVO.linkUrl" filter="false"/>" target="_blank" title="原始链接">
+                       <bean:write name="forumMessage" property="messageVO.subject"/>
+                    </a>
+                  </logic:notEmpty>
+                  <logic:empty name="forumMessage" property="messageUrlVO.linkUrl">
+                       <bean:write name="forumMessage" property="messageVO.subject"/>
+                  </logic:empty>  
+                </h1>
+
             </logic:equal>
-            
+             
              <div class="post_meta info">
                <logic:equal name="forumMessage" property="root" value="true">
                     <i class="fa fa-calendar">

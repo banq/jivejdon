@@ -132,7 +132,14 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 			<div id="main-content" class="col-lg-8 custom-col-left">
         <logic:notEmpty name="forum" property="name">
         <div class="box">
-          <h1 style="font-size: 2.2rem"><bean:write name="title"/></h1>
+          <h1 style="font-size: 2.2rem">
+              <a href="/forum/" itemprop="articleSection">
+                  <svg viewBox="0 0 20 20" width="15" height="13">
+    <path d="M17.5 9.1H4.679l5.487-5.462a.898.898 0 00.003-1.272.898.898 0 00-1.272-.003l-7.032 7a.898.898 0 000 1.275l7.03 7a.896.896 0 001.273-.003.898.898 0 00-.002-1.272l-5.487-5.462h12.82a.9.9 0 000-1.8z"></path>
+                  </svg>
+                  
+               </a>        
+          <bean:write name="title"/></h1>
         </div>
         </logic:notEmpty>
 				<div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1)">	
