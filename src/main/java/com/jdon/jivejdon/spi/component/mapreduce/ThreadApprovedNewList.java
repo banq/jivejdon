@@ -113,9 +113,9 @@ public class ThreadApprovedNewList implements Startable {
 			if (thread != null && thread.getRootMessage() != null) {
 				if (thread.getViewCount() > 100 && thread.getRootMessage().getDigCount() < 2) {
 					int currentDig = thread.getRootMessage().getDigCount();
-					// 调用足够次数保证digCount达到2
+					// 调用足够次数保证digCount达到2，需要使用不同IP避免重复被过滤
 					for (int i = currentDig; i < 2; i++) {
-						thread.messaegDigAction("127.0.0.1" + i);
+						thread.messageDigAction("127.0.0." + (i + 1));
 					}
 				}
 			}

@@ -11,7 +11,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.api.ForumMessageService;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
@@ -48,7 +47,7 @@ public class MessageDigAction extends Action {
 		}
 
 		ForumThread thread = forumMessageQueryService.getThread(message.getForumThread().getThreadId());
-		int digCount = thread.messaegDigAction(request.getRemoteAddr());
+		int digCount = thread.messageDigAction(request.getRemoteAddr());
 
 		try {
 			response.setContentType("text/html");

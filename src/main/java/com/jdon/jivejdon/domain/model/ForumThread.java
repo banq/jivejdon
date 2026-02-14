@@ -381,7 +381,7 @@ public class ForumThread {
 	//  */
 	// public void addDig(ForumMessage message) {
 	// 	if (message.getMessageId().longValue() != ((ForumMessage)rootMessage).getMessageId().longValue()) {
-	// 		((ForumMessage)rootMessage).messaegDigAction();
+	// 		((ForumMessage)rootMessage).messageDigAction();
 	// 	}
 
 	// }
@@ -443,7 +443,7 @@ public class ForumThread {
 	    return reBlogVO;
 	}
 
-	public int messaegDigAction(String ip) {
+	public int messageDigAction(String ip) {
 		// 先获取当前的digCount
 		int oldDigCount = this.getRootMessage().getMessagePropertysVO().getDigCount();
 
