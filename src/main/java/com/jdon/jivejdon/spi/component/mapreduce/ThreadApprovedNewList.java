@@ -17,11 +17,8 @@ package com.jdon.jivejdon.spi.component.mapreduce;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeSet;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
@@ -74,6 +71,7 @@ public class ThreadApprovedNewList implements Startable {
 			public void run() {
 				init();
 				refreshApprovedThreadIdList();
+				increApprovedThreadIdList() ;
 			}
 		};
 		scheduledExecutorUtil.getScheduExec().scheduleAtFixedRate(task, 0, 60 * 60, TimeUnit.SECONDS); 
@@ -107,6 +105,21 @@ public class ThreadApprovedNewList implements Startable {
 	public void refreshApprovedThreadIdList() {
 		List<Long> newList = loadApprovedThreads(approvedListSpec);
 		approvedThreadIdList = new CopyOnWriteArrayList<>(newList);
+	}
+
+	public void increApprovedThreadIdList() {
+		approvedThreadIdList.forEach(threadId -> {
+			ForumThread thread = forumMessageQueryService.getThread(threadId);
+			if (thread != null && thread.getRootMessage() != null) {
+				if (thread.getViewCount() > 100 && thread.getRootMessage().getDigCount() < 2) {
+					int currentDig = thread.getRootMessage().getDigCount();
+					// 调用足够次数保证digCount达到2
+					for (int i = currentDig; i < 2; i++) {
+						thread.messaegDigAction("127.0.0.1" + i);
+					}
+				}
+			}
+		});
 	}
 
 	/**
