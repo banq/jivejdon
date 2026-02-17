@@ -320,10 +320,6 @@
             <web-resource-name>autocomplete</web-resource-name>
             <url-pattern>/common/autocomplete/*</url-pattern>
         </web-resource-collection>
-         <web-resource-collection>
-            <web-resource-name>js</web-resource-name>
-            <url-pattern>/common/js/*</url-pattern>
-        </web-resource-collection>
 
 
 
