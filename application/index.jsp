@@ -59,7 +59,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   <jsp:include page="/query/threadApprovedNewList.shtml" flush="true"></jsp:include>
 	<div class="row">
   <main>	  	 
-	  <div id="main-content" class="col-lg-8 custom-col-left">
+	  <div id="main-content" class="col-lg-8">
 
       <jsp:include page="/query/threadApprovedNewList2.shtml?offset=1&count=7" flush="true"></jsp:include>
       <jsp:include page="/query/threadApprovedNewList3.shtml?offset=0&count=1" flush="true"></jsp:include>        
@@ -84,7 +84,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   </main> 
 
   <aside>  			
-  <div id="sidebar" class="col-lg-4 custom-col-right" style="padding-left:0px">
+  <div id="sidebar" class="col-lg-4" style="padding-left:0px">
       <div class="box">
                 <!---- Start Widget ---->
                 <div class="widget">
