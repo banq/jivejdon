@@ -9,7 +9,7 @@
 
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
  <bean:define id="body" name="forumMessage" property="messageVO.body" />
-<li class="info" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
     <div class="box"> 
          <div class="wrap-vid">              
           <logic:empty name="forumMessage" property="messageUrlVO.thumbnailUrl">                  
