@@ -82,6 +82,10 @@ int randomIdx = 0;
                 <span class="smallgray"><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
             </logic:greaterThan>   
                      
+            <logic:iterate id="threadTag" name="forumThread" property="tags" >
+                <a href="<%=domainUrl %>/tag/<bean:write name="threadTag" property="tagID"/>/" target="_blank" >
+                  #<bean:write name="threadTag" property="title" /></a>
+            </logic:iterate>                     
             </div>
             
 <h1 class="vid-name" style="font-size: 2.6rem;margin-top: 2px;padding-bottom: 10px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><span itemprop="name"><bean:write name="forumThread" property="name"/></span></a></h1>

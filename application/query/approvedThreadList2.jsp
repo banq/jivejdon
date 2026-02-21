@@ -65,6 +65,11 @@ if (request.getParameter("count")!=null){
                             <span class="smallgray"><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
               </logic:greaterThan>   
                      
+           <logic:iterate id="threadTag" name="forumThread" property="tags" >
+                <a href="<%=domainUrl %>/tag/<bean:write name="threadTag" property="tagID"/>/" target="_blank" >
+                  #<bean:write name="threadTag" property="title" /></a>
+            </logic:iterate>
+
             </div>
                          
 <h2 class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
