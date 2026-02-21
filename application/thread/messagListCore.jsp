@@ -214,8 +214,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         </div>
       </div>     
 
-
-
       <div class="widget wid-post">
         <div class="content">
       <h4>本文话题：</h4>
@@ -231,9 +229,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
           </ul>
         </div>
-
-
-
       </div>
 
       <!-- Start Widget -->
