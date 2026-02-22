@@ -61,7 +61,21 @@ int randomIdx = 0;
 			      </div>
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
         <div class="col-lg-9">
-            <div class="info">			 
+            
+<h1 class="vid-name" style="font-size: 2.6rem;margin-top: 2px;padding-bottom: 10px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><span itemprop="name"><bean:write name="forumThread" property="name"/></span></a></h1>
+          
+           <div class="info">		
+            <logic:iterate id="threadTag" name="forumThread" property="tags" >
+                <a href="<%=domainUrl %>/tag/<bean:write name="threadTag" property="tagID"/>/" target="_blank" >
+                  #<bean:write name="threadTag" property="title" /></a>
+            </logic:iterate>       
+            </div>
+            
+          <div class="info" class="wrap-vid">
+              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[150]" />. 
+          </div>
+
+           <div class="info">			 
               <span class="smallgray"><i class="fa fa-calendar"></i>
                 <bean:write name="forumMessage" property="modifiedDate3"/>
               </span>
@@ -83,19 +97,7 @@ int randomIdx = 0;
             </logic:greaterThan>   
                                  
             </div>
-            
-<h1 class="vid-name" style="font-size: 2.6rem;margin-top: 2px;padding-bottom: 10px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><span itemprop="name"><bean:write name="forumThread" property="name"/></span></a></h1>
-          
-           <div class="info">		
-            <logic:iterate id="threadTag" name="forumThread" property="tags" >
-                <a href="<%=domainUrl %>/tag/<bean:write name="threadTag" property="tagID"/>/" target="_blank" >
-                  #<bean:write name="threadTag" property="title" /></a>
-            </logic:iterate>       
-            </div>
-            
-          <div class="info" class="wrap-vid">
-              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[150]" />. 
-          </div>
+                     
         </div>  
    	</div>	
    	</div>	 
