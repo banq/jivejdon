@@ -65,19 +65,19 @@ if (request.getParameter("count")!=null){
                             <span class="smallgray"><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
               </logic:greaterThan>   
                      
-           <logic:iterate id="threadTag" name="forumThread" property="tags" >
-                <a href="<%=domainUrl %>/tag/<bean:write name="threadTag" property="tagID"/>/" target="_blank" >
-                  #<bean:write name="threadTag" property="title" /></a>
-            </logic:iterate>
+         
 
             </div>
                          
 <h2 class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
  <a href="<%=com.jdon.jivejdon.util.ToolsUtil.getAppURL(request)%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><span itemprop="name"><bean:write name="forumThread" property="name"/></span></a>
 </h2>
-      
-       
-
+          <div class="info">		
+            <logic:iterate id="threadTag" name="forumThread" property="tags" >
+                <a href="<%=domainUrl %>/tag/<bean:write name="threadTag" property="tagID"/>/" target="_blank" >
+                  #<bean:write name="threadTag" property="title" /></a>
+            </logic:iterate>       
+            </div>
             <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-top: 10px">
               <span style="flex:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;overflow:hidden">      
                  <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[150]" />
