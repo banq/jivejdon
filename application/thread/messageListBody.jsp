@@ -42,12 +42,10 @@
             <logic:equal name="forumMessage" property="root" value="true">            
                 <div class="info">
                   <a href="/forum/<bean:write name="forumMessage" property="forum.forumId"/>/" itemprop="articleSection">
-                    <span>
                     <svg viewBox="0 0 20 20" width="15" height="13">
     <path d="M17.5 9.1H4.679l5.487-5.462a.898.898 0 00.003-1.272.898.898 0 00-1.272-.003l-7.032 7a.898.898 0 000 1.275l7.03 7a.896.896 0 001.273-.003.898.898 0 00-.002-1.272l-5.487-5.462h12.82a.9.9 0 000-1.8z"></path>
                     </svg>                  
                     <bean:write name="forumMessage" property="forum.name"/>
-                    </span>
                   </a>                      
                 </div>
                 <h1 class="bige20" itemprop="headline">
