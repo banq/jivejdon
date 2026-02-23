@@ -48,12 +48,7 @@
                     </svg>                  
                     <bean:write name="forumMessage" property="forum.name"/>
                     </span>
-                  </a>      
-                 <logic:iterate id="threadTag" name="forumThread" property="tags" >
-                
-                     <a itemprop="about" itemscope itemtype="https://schema.org/Thing" href="<%=domainUrl %>/tag/<bean:write name="threadTag" property="tagID"/>/" target="_blank" >#<span itemprop="name"><bean:write name="threadTag" property="title" /></span></a>
-             
-                </logic:iterate>        
+                  </a>                      
                 </div>
                 <h1 class="bige20" itemprop="headline">
                   <logic:notEmpty name="forumMessage" property="messageUrlVO.linkUrl">
@@ -65,7 +60,11 @@
                        <bean:write name="forumMessage" property="messageVO.subject"/>
                   </logic:empty>  
                 </h1>
-
+                <div class="info">
+                  <logic:iterate id="threadTag" name="forumThread" property="tags" >
+                     <a itemprop="about" itemscope itemtype="https://schema.org/Thing" href="<%=domainUrl %>/tag/<bean:write name="threadTag" property="tagID"/>/" target="_blank" >#<span itemprop="name"><bean:write name="threadTag" property="title" /></span></a>
+                   </logic:iterate>        
+                 </div>
             </logic:equal>
              
              <div class="post_meta info">
