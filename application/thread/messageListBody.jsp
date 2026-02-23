@@ -70,7 +70,7 @@
                     
                     <bean:define id="cdate" name="forumThread" property="creationDate"></bean:define>
                     <%String cdateS = (String) pageContext.getAttribute("cdate"); %>
-                    <span class="small">
+                    <span class="smallgray">
                        <i class="fa fa-calendar"></i>                    
                        <time datetime="<%=cdateS.substring(0, 10) %>" itemprop="datePublished"><%=cdateS.substring(0, 10)%></time>
                     </span>
