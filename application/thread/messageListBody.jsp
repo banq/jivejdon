@@ -67,19 +67,33 @@
              
              <div class="post_meta info">
                <logic:equal name="forumMessage" property="root" value="true">
-                    <i class="fa fa-calendar">
+                    
                     <bean:define id="cdate" name="forumThread" property="creationDate"></bean:define>
                     <%String cdateS = (String) pageContext.getAttribute("cdate"); %>
-                    <time datetime="<%=cdateS.substring(0, 10) %>" itemprop="datePublished"><%=cdateS.substring(0, 10)%></time>
-                    </i>
+                    <span class="small">
+                       <i class="fa fa-calendar"></i>                    
+                       <time datetime="<%=cdateS.substring(0, 10) %>" itemprop="datePublished"><%=cdateS.substring(0, 10)%></time>
+                    </span>
+      
+                    <logic:notEqual name="forumMessage" property="digCount" value="0">                       
+                       <span itemscope itemtype="https://schema.org/InteractionCounter" class="smallgray">                         
+                         <meta itemprop="interactionType" content="https://schema.org/LikeAction">
+                         <meta itemprop="userInteractionCount" content="<bean:write name="forumMessage" property="digCount"/>">
+                         <i class="fa fa-heart"></i><bean:write name="forumMessage" property="digCount"/>
+                       </span>                                      
+                    </logic:notEqual>                         
+
+                    <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">                       
+                       <span class="smallgray"><i class="fa fa-arrow-circle-o-down"></i><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
+                    </logic:greaterThan>   
+
                 </logic:equal>
 				         
-               <logic:notEmpty name="forumMessage" property="account">
-				           	<i class="fa fa-user">
-                        <span itemprop="editor" itemscope itemtype="https://schema.org/Person">
+               <logic:notEmpty name="forumMessage" property="account">				           	
+                        <span itemprop="author" itemscope itemtype="https://schema.org/Person" class="smallgray">
+                           <i class="fa fa-user"></i>
                            <cite itemprop="name"><bean:write name="forumMessage" property="account.username"/></cite>
-                        </span>
-                     </i>
+                        </span>                     
                </logic:notEmpty>    
 
                <logic:equal name="forumMessage" property="root" value="false">
