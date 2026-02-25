@@ -42,14 +42,13 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 			<!-- /////////////////左边 -->
             <div id="main-content" class="col-lg-8 custom-col-left">
 				<div class="box">		
-                     <table class="table table-striped">
-	<tbody>
+                     <div class="box">
+	                        <div class="box">
 
    
   
 <logic:iterate indexId="i"   id="forum" name="forumListForm" property="list" >
-        <tr>
-            <td>
+        <div>
               
                  <h1 style="font-size: 2.2rem">
                  <a href="/forum/<bean:write name="forum" property="forumId" />/rss"><i class="fa fa-feed"></i></a>  
@@ -65,8 +64,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                  }
                  %>
 
-                <br>
-                <span class="home_content" ><bean:write name="forum" property="description" filter="false"/></span>
+                <p class="home_content" ><bean:write name="forum" property="description" filter="false"/></p>
                 <div id="threadNewList_<bean:write name="forum" property="forumId"/>" class="linkblock">
                   <br><br><br><br><br><br>     
                 </div>  
@@ -76,17 +74,12 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   </script>
        
          
-                <div class="box">
-
-                </div>
-            </td>
-            
-        </tr>
+        </div>
 
 </logic:iterate>
 
-       </tbody>
-        </table>
+       </div>
+        </div>
     </div>	
     </div>
         
