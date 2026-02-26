@@ -49,9 +49,9 @@ if (request.getParameter("count")!=null){
 <h2 class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
  <a href="<%=com.jdon.jivejdon.util.ToolsUtil.getAppURL(request)%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><span itemprop="name"><bean:write name="forumThread" property="name"/></span></a>
 </h2>
-          <div class="info">		
+          <div>		
             <logic:iterate id="threadTag" name="forumThread" property="tags" >
-                <a href="<%=domainUrl %>/tag/<bean:write name="threadTag" property="tagID"/>/" target="_blank" >
+                <a class="smallgray" href="<%=domainUrl %>/tag/<bean:write name="threadTag" property="tagID"/>/" target="_blank" >
                   #<bean:write name="threadTag" property="title" /></a>
             </logic:iterate>       
             </div>
