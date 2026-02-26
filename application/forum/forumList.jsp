@@ -57,12 +57,12 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                  </a>
                  </h1>
                
-                 <%if (request.getSession(false) != null && request.getUserPrincipal() != null){%>
+                 <%-- <%if (request.getSession(false) != null && request.getUserPrincipal() != null){%>
                       <a title="关注本道场" href="<%=request.getContextPath()%>/account/protected/sub/subAction.shtml?subscribeType=0&subscribeId=<bean:write name="forum" property="forumId" />"  >
                       <img src="/images/user_add.gif" width="18" height="18" alt="关注本道场" border="0" /></a>                                                         
                      <%
                  }
-                 %>
+                 %> --%>
 
                 <p class="home_content" ><bean:write name="forum" property="description" filter="false"/></p>
                 <div id="threadNewList_<bean:write name="forum" property="forumId"/>" class="linkblock">
