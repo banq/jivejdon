@@ -24,10 +24,7 @@
 <logic:notPresent name="query">
     <bean:parameter name="query" id="query" value=""/>
 </logic:notPresent>
-<table class="table table-striped">
-    <tbody>
-    <tr>
-        <td align="middle">
+<div class="search-container" style="display: flex; justify-content: center; width: 100%;">
           <form method="post"  id="myForm" class="search">
             <input type="text" name="query"  value="<bean:write name="query"/>" id="queryId" size="40"/>
             <input type="hidden" id="registerCode" name="registerCode"  >
@@ -52,21 +49,14 @@
               <% } 
                %>
             </form>            
-        </td>
-    </tr>
-    </tbody>
-</table>
+</div>
 
-<table class="table table-striped">
-    <tbody>
-    <tr><td align="middle">
+<div class="search-container" style="display: flex; justify-content: center; width: 100%;">
         <form action="https://cn.bing.com/search" class="search" method="get">
             <input type=text name=q  value="<bean:write name="query"/>  site:www.jdon.com" size="40">
             <input type="submit" value="Bing搜"> 
             </form>
-    </td></tr>
-    </tbody>
-</table>
+</div>
 
 
 <script defer>  
