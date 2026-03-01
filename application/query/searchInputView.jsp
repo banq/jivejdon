@@ -24,9 +24,10 @@
 <logic:notPresent name="query">
     <bean:parameter name="query" id="query" value=""/>
 </logic:notPresent>
-<div class="search-container" style="display: flex; justify-content: center; width: 100%;">
-          <form method="post"  id="myForm" class="search">
-            <input type="text" name="query"  value="<bean:write name="query"/>" id="queryId" size="40"/>
+<div class="box">
+<div class="search-container" style="display: flex; justify-content: center; width: 100%; background-color: white;">
+          <form method="post"  id="myForm" class="search" style="display: flex; gap: 10px; align-items: center;">
+            <input type="text" name="query"  value="<bean:write name="query"/>" id="queryId" size="40" class="form-control">
             <input type="hidden" id="registerCode" name="registerCode"  >
             <input type="hidden" id="randstr" name="randstr">    
         
@@ -50,15 +51,15 @@
                %>
             </form>            
 </div>
-
-<div class="search-container" style="display: flex; justify-content: center; width: 100%;">
-        <form action="https://cn.bing.com/search" class="search" method="get">
-            <input type=text name=q  value="<bean:write name="query"/>  site:www.jdon.com" size="40">
+<br>
+<div class="search-container" style="display: flex; justify-content: center; width: 100%; background-color: white;">
+        <form action="https://cn.bing.com/search" class="search" method="get" style="display: flex; gap: 10px; align-items: center;">
+            <input type="text" name="q" value="<bean:write name="query"/>  site:www.jdon.com" size="40" class="form-control">
             <input type="submit" value="Bing搜"> 
             </form>
 </div>
 
-
+</div>
 <script defer>  
     document.addEventListener("DOMContentLoaded", function(event) { 
     $(document).ready(function() {
