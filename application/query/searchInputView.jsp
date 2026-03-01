@@ -54,7 +54,7 @@
 <br> --%>
 <div class="search-container" style="display: flex; justify-content: center; width: 100%; background-color: white;">
         <form action="https://cn.bing.com/search" class="search" method="get" style="display: flex; gap: 10px; align-items: center;">
-            <input type="text" name="q" value="<bean:write name="query"/>  site:www.jdon.com" size="40" class="form-control">
+            <input type="text" name="q" value="<bean:write name="query"/>      site:jdon.com" size="40" class="form-control">
             <input type="submit" value="Bing搜"> 
             </form>
 </div>
