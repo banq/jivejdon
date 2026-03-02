@@ -6,6 +6,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
     response.setHeader("X-Robots-Tag", "noindex, nofollow");
+    response.setHeader("Cache-Control", "no-cache, no-store, max-age=0");
+    response.setHeader("Pragma", "no-cache");
+    response.setHeader("Expires", "0");
 %>
 
  
