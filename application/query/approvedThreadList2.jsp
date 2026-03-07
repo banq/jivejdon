@@ -36,7 +36,7 @@ if (request.getParameter("count")!=null){
    
  <div itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
  <div class="row">	
-   <div class="col-md-12" style="padding:0px">
+   <div class="col-md-12" >
 
 
  <div class="box">	

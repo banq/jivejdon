@@ -37,24 +37,12 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   <link rel="preload" href="/js/jquery-bootstrap2.js" as="script">
   <script defer src="/js/jquery-bootstrap2.js"></script> 
 </head>
-<body style="background-color:#FFF">
+<body>
 <%@ include file="./common/body_header.jsp" %>
 
-<div id="ad-container" style="text-align: center; margin: 0 auto;">	
-<!-- 728X90横幅 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="2308336581"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
-
 <div id="page-content" class="single-page container">
+
+<div style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);background-color: #fff;" class="box">
   
   <jsp:include page="/query/threadApprovedNewList.shtml" flush="true"></jsp:include>
 	<div class="row">
@@ -120,6 +108,8 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 </aside>
     
   </div>
+</div>
+</div>
 </div>
 	<input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
