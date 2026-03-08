@@ -197,7 +197,7 @@ int randomIdx = 0;
        <a href='<%=request.getContextPath() %>/tag/<bean:write name="threadTag" property="tagID"/>/' title="<bean:write name="threadTag" property="title" />">         
         <img id="home-thumbnai" src="/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg" border="0" class="img-thumbnail" style="width: 100%" loading="lazy"/>                  
        </a>
-      <div style="position: absolute;bottom: 0px;">
+      <div style="position: absolute;top: 0px;">
        <div class="tagcloud">
         <h1 class="tagcloud bige20"><a href="<%=domainUrl%>/tag/<bean:write name="tagID"/>/" class="tag-cloud-link"><bean:write  name='TITLE'/></a></h1>
   
