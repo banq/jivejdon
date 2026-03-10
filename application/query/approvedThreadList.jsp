@@ -37,7 +37,7 @@ int randomIdx = 0;
 
  <div class="col-lg-12">
  <div class="box">	
-  <div class="linkblock">
+  <div>
     <div class="box">	  
       <div class="row">	          
       <div class="col-lg-3">
