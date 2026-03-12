@@ -72,7 +72,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     }
     .navbar { min-height: 50px; margin-bottom: 20px; background-color: #000; }
     </style> 
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="<%=domainUrl %>/sitemap.xml">
     <link rel="apple-touch-icon" href="<%=domainUrl %>/simgs/jdon100.png" />
     <link rel="canonical" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" /><bean:write name="forumThread" property="pinyinToken" />.html">  
     <%if(pagestartInt != 0 ) {%> 
