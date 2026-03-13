@@ -40,26 +40,8 @@ int randomIdx = 0;
   <div>
     <div class="box">	  
       <div class="row">	          
-      <div class="col-lg-3">
-			      	<div style="position: relative;" class="zoom-container">
-                <logic:notEmpty name="forumMessage" property="messageUrlVO.imageUrl">        
-                    <img id="home-thumbnai" src="<bean:write name="forumMessage" property="messageUrlVO.imageUrl"/>" border="0" class="img-thumbnail img-responsive" style="height:150px;width:100%" loading="lazy" onerror="this.src='/simgs/thumb2/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(5)%>.jpg'"/>
-                </logic:notEmpty>
-                <logic:empty name="forumMessage" property="messageUrlVO.imageUrl">        
-                  <img id="home-thumbnai" src="/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg" border="0" class="img-thumbnail img-responsive" style="height:150px;width:100%" loading="lazy" /> 
 
-                  <div style="position: absolute;top: 0px;right:0px">
-                  <div class="tagcloud">
-                      <a href='<%=domainUrl%>/forum/<bean:write name="forumThread" property="forum.forumId"/>/'  class="tag-cloud-link">
-		                      <bean:write name="forumThread" property="forum.name"/>
-                      </a>
-                      </div>
-                 </div> 
-                </logic:empty>      
-                                  
-              </div>
-			      </div>
-             <bean:define id="body" name="forumMessage" property="messageVO.body" />
+        <bean:define id="body" name="forumMessage" property="messageVO.body" />
         <div class="col-lg-9">
             
 <h1 class="vid-name" style="font-size: 2.6rem;margin-top: 2px;padding-bottom: 10px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><span itemprop="name"><bean:write name="forumThread" property="name"/></span></a></h1>
@@ -99,6 +81,20 @@ int randomIdx = 0;
             </div>
                      
         </div>  
+        <div class="col-lg-3">
+			      	<div style="position: relative;" class="zoom-container">
+                  <img id="home-thumbnai" src="/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg" border="0" class="img-thumbnail img-responsive" style="height:150px;width:100%" loading="lazy" /> 
+
+                  <div style="position: absolute;top: 0px;right:0px">
+                  <div class="tagcloud">
+                      <a href='<%=domainUrl%>/forum/<bean:write name="forumThread" property="forum.forumId"/>/'  class="tag-cloud-link">
+		                      <bean:write name="forumThread" property="forum.name"/>
+                      </a>
+                      </div>
+                 </div> 
+                                  
+              </div>
+			  </div>        
    	</div>	
    	</div>	 
 	</div>	

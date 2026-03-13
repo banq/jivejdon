@@ -87,25 +87,20 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
   <aside>  			
   <div id="sidebar" class="col-lg-4" style="padding-left:0px">
-      <div class="box">
                 <!---- Start Widget ---->
                 <div class="widget">
-                    <div class="content">
+                    <div class="box">
                         <ul class="list-inline">
               <form role="form" class="form-horizontal" method="post" action="/query/threadViewQuery.shtml">
                                 <input type="text" placeholder="Search" value="" name="query" id="v_search" class="form-control">
                             </form>
                         </ul>						
                     </div>
-                </div>
 
-                <div class="box">
                     <div class="wid-vid">
                       <div id="newList"><jsp:include page="/query/threadNewList.shtml?count=10" flush="true"></jsp:include></div>   
                     </div>
-                </div>
 
-                <div class="box">
                     <div class="wid-vid">
                       <div id="digList"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
                       <script defer>
@@ -116,7 +111,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                         });  
                       </script>           
                     </div>   
-                </div>
       </div>
     </div>
 </aside>
