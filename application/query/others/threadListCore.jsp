@@ -10,6 +10,7 @@
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
  <bean:define id="body" name="forumMessage" property="messageVO.body" />
 <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+    <div class="box"> 
          <div class="wrap-vid">              
           <logic:empty name="forumMessage" property="messageUrlVO.thumbnailUrl">                  
             <div class="thumbn">
@@ -25,6 +26,7 @@
           </div>
          <h4 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"  title="<bean:write name="forumMessage" property="modifiedDate3"/>" class="hover-preload" itemprop="url"><span itemprop="name" style="color: #333;"><bean:write name="forumThread" property="name"/></span></a></h4>
 
+    </div>
 </li>
 <hr style="margin-top: 5px;margin-bottom: 5px; width: 80%;">
  </logic:notEmpty>

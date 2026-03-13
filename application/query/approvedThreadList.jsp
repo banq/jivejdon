@@ -42,7 +42,7 @@ int randomIdx = 0;
       <div class="row">	          
 
         <bean:define id="body" name="forumMessage" property="messageVO.body" />
-        <div class="col-lg-9">
+        <div class="col-lg-8">
             
 <h1 class="vid-name" style="font-size: 2.6rem;margin-top: 2px;padding-bottom: 10px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><span itemprop="name"><bean:write name="forumThread" property="name"/></span></a></h1>
           
@@ -54,7 +54,7 @@ int randomIdx = 0;
             </div>
             
           <div class="wrap-vid">
-              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[150]" />. 
+              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[200]" />. 
           </div>
 
            <div class="info">			 
@@ -81,11 +81,12 @@ int randomIdx = 0;
             </div>
                      
         </div>  
-        <div class="col-lg-3">
+        <div class="col-lg-4">
+            <div class="box">
 			      	<div style="position: relative;" class="zoom-container">
-                  <img id="home-thumbnai" src="/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg" border="0" class="img-thumbnail img-responsive" style="height:150px;width:100%" loading="lazy" /> 
+                  <img id="home-thumbnai" src="/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg" border="0" class="img-thumbnail img-responsive" style="height:auto;width:100%" loading="lazy" /> 
 
-                  <div style="position: absolute;top: 0px;right:0px">
+                  <div style="position: absolute;top: 0px">
                   <div class="tagcloud">
                       <a href='<%=domainUrl%>/forum/<bean:write name="forumThread" property="forum.forumId"/>/'  class="tag-cloud-link">
 		                      <bean:write name="forumThread" property="forum.name"/>
@@ -94,6 +95,7 @@ int randomIdx = 0;
                  </div> 
                                   
               </div>
+            </div>  
 			  </div>        
    	</div>	
    	</div>	 

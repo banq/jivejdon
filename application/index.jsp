@@ -88,7 +88,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   <aside>  			
   <div id="sidebar" class="col-lg-4" style="padding-left:0px">
                 <!---- Start Widget ---->
-                <div class="widget">
+                <div>
                     <div class="box">
                         <ul class="list-inline">
               <form role="form" class="form-horizontal" method="post" action="/query/threadViewQuery.shtml">
