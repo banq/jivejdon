@@ -43,8 +43,8 @@ int randomIdx = 0;
 
         <bean:define id="body" name="forumMessage" property="messageVO.body" />
         <div class="col-lg-8">
-            
-<h1 class="vid-name" style="font-size: 2.6rem;margin-top: 2px;padding-bottom: 10px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><span itemprop="name"><bean:write name="forumThread" property="name"/></span></a></h1>
+          <div class="box">  
+            <h1 class="vid-name" style="font-size: 2.6rem;margin-top: 2px;padding-bottom: 10px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><span itemprop="name"><bean:write name="forumThread" property="name"/></span></a></h1>
           
            <div class="info">		
             <logic:iterate id="threadTag" name="forumThread" property="tags" >
@@ -53,11 +53,14 @@ int randomIdx = 0;
             </logic:iterate>       
             </div>
             
-          <div class="wrap-vid">
-              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[200]" />. 
+          
+          <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-top: 10px">
+              <span style="flex:1; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical;overflow:hidden">      
+                 <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[250]" />
+              </span>
           </div>
 
-           <div class="info">			 
+          <div class="info">			 
               <span class="smallgray"><i class="fa fa-calendar"></i>
                 <bean:write name="forumMessage" property="modifiedDate3"/>
               </span>
@@ -78,8 +81,8 @@ int randomIdx = 0;
                 <span class="smallgray"><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
             </logic:greaterThan>   
                                  
-            </div>
-                     
+          </div>
+         </div>             
         </div>  
         <div class="col-lg-4">
             <div class="box">
