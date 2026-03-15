@@ -87,21 +87,20 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
   <aside>  			
   <div id="sidebar" class="col-lg-4" style="padding-left:0px">
-                <!---- Start Widget ---->
-                <div>
-                    <div class="box">
-                        <ul class="list-inline">
-              <form role="form" class="form-horizontal" method="post" action="/query/threadViewQuery.shtml">
-                                <input type="text" placeholder="Search" value="" name="query" id="v_search" class="form-control">
-                            </form>
-                        </ul>						
-                    </div>
+      <div>
+            <div>
+                    <ul class="nav nav-tabs">
+                      <li class="active"><a href="/threads/">最新</a></li>
+                      <li><a href="/approval/">新佳</a></li>
+                      <li><a href="/threadDigSortedList/">最佳</a></li>	
+                      <li ><a href="/maxPopThreads/">精华</a></li>  
+                      <li><a href="/query/threadViewQuery.shtml" ><i class="fa fa-search"></i></a></li>
+                    </ul>          
 
-                    <div class="wid-vid">
                       <div id="newList"><jsp:include page="/query/threadNewList.shtml?count=10" flush="true"></jsp:include></div>   
-                    </div>
+            </div>
 
-                    <div class="wid-vid">
+            <div>
                       <div id="digList"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
                       <script defer>
                         document.addEventListener("DOMContentLoaded", function(event) { 
@@ -110,7 +109,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                           });            
                         });  
                       </script>           
-                    </div>   
+            </div>   
       </div>
     </div>
 </aside>
