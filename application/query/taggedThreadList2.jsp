@@ -61,3 +61,4 @@ if (request.getParameter("count")!=null){
   </div>
  <%}%>
 <%imgCounter++;%>
+</logic:iterate>
