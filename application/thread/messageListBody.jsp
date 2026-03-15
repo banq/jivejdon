@@ -167,6 +167,7 @@
                 <ul style="list-style-type:none;padding:0">
 
                   <%int j = 0;%>
+                  <%int linkImgCounter = 0;%>
                   <logic:iterate id="forumThreadLink" name="threadLinkList" >
                      
                   <%
@@ -181,18 +182,9 @@
                        <div class="linkblock">
                           <div class="widget">
                             <div class="wrap-vid">       
-                                     
-                              <logic:notEmpty name="forumThreadLink" property="rootMessage.messageUrlVO.imageUrl">                  
                                 <div class="thumbn">
-                                     <img src="<bean:write name="forumThreadLink" property="rootMessage.messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="50" height="50" onerror="this.src='/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg'"/>    
-                                </div>
-                              </logic:notEmpty>
-                               
-                              <logic:notEmpty name="forumThreadLink" property="rootMessage.messageUrlVO.thumbnailUrl">                  
-                                <div class="thumbn">
-                                  <img src="<bean:write name="forumThreadLink" property="rootMessage.messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="50" height="50"/>                  
+                                  <img src="/simgs/thumb/<%=(linkImgCounter % 3)%>.jpg" border='0' class="img-thumbnail" loading="lazy" width="50" height="50"/>                  
                                 </div>  
-                              </logic:notEmpty>              
                             </div>
                             <div class="vid-name">
                               <div itemprop="citation" itemscope itemtype="https://schema.org/Article">
@@ -217,6 +209,7 @@
                    %>
                     </div>
                    <%}%>
+                  <%linkImgCounter++;%>
                   </logic:iterate>
                </ul>
               </logic:notEmpty>

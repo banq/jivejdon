@@ -174,21 +174,14 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                   <div id="threadPreNextList">
                     <logic:notEmpty name="threadPreNextList" >   
                       <ul style="list-style-type:none;padding:0">
+                      <%int previewImgCounter = 0;%>
                       <logic:iterate id="forumThreadPreNext" name="threadPreNextList" length="5">
                         <li class="box">
                           <div style="display: flex; align-items: center;"> 
                           <div class="wrap-vid">              
-                                 <logic:notEmpty name="forumThreadPreNext" property="rootMessage.messageUrlVO.imageUrl">                  
-                                   <div class="thumbn">
-                                        <img src="<bean:write name="forumThreadPreNext" property="rootMessage.messageUrlVO.imageUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="35" height="45" onerror="this.src='/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg'"/>    
-                                   </div>
-                                 </logic:notEmpty>
-                                  
-                                 <logic:notEmpty name="forumThreadPreNext" property="rootMessage.messageUrlVO.thumbnailUrl">                  
-                                   <div class="thumbn">
-                                     <img src="<bean:write name="forumThreadPreNext" property="rootMessage.messageUrlVO.thumbnailUrl"/>" border='0' class="img-thumbnail" loading="lazy" width="35" height="45"/>                  
-                                   </div>  
-                                 </logic:notEmpty>              
+                            <div class="thumbn">
+                                <img src="/simgs/thumb/<%=(previewImgCounter % 3)%>.jpg" border='0' class="img-thumbnail" loading="lazy" width="35" height="45"/>                  
+                            </div>  
                            </div>
                           <div class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                             <div itemprop="citation" itemscope itemtype="https://schema.org/Article">
@@ -202,6 +195,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                  
                           </div>
                           </li>
+                      <%previewImgCounter++;%>
                       </logic:iterate>  
                     </ul>
                     </logic:notEmpty>

@@ -11,6 +11,10 @@
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
 <bean:define id="body" name="forumMessage" property="messageVO.body" />
 <%
+  Integer imgCounter = (Integer) pageContext.getAttribute("imgCounter");
+  if(imgCounter == null) {
+    imgCounter = 0;
+  }
   if(i % 3==0){ 
  %>
  <div class="row">	
@@ -27,7 +31,7 @@
             <span style="flex:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;overflow:hidden">           
               <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />
              </span>  
-              <img src="/simgs/thumb/<%=java.util.concurrent.ThreadLocalRandom.current().nextInt(3)%>.jpg" alt="icon"  style="width:65px; height:65px; margin-left:12px; flex-shrink:0; object-fit:cover; border-radius:6px;">
+              <img src="/simgs/thumb/<%=imgCounter % 3%>.jpg" alt="icon"  style="width:65px; height:65px; margin-left:12px; flex-shrink:0; object-fit:cover; border-radius:6px;">
             </div>
 	 </div>	
   </div>	
@@ -36,6 +40,9 @@
 
  
 <% i = i+1;%>
+<%
+  pageContext.setAttribute("imgCounter", imgCounter + 1);
+%>
 <%
   if(i % 3==0){ 
  %>
