@@ -46,14 +46,34 @@ if (request.getParameter("count")!=null){
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
         
-<h2 class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+<h3 class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
  <a href="<%=com.jdon.jivejdon.util.ToolsUtil.getAppURL(request)%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><span itemprop="name"><bean:write name="forumThread" property="name"/></span></a>
-</h2>
+</h3>
           <div>		
             <logic:iterate id="threadTag" name="forumThread" property="tags" >
                 <a class="smallgray" href="<%=domainUrl %>/tag/<bean:write name="threadTag" property="tagID"/>/" target="_blank" >
                   #<bean:write name="threadTag" property="title" /></a>
             </logic:iterate>       
+            &ensp;&ensp;
+            <span class="info">
+            <span class="smallgray"><i class="fa fa-calendar"></i>
+                <bean:write name="forumMessage" property="modifiedDate3"/>
+            </span>
+			      <logic:notEqual name="forumThread" property="state.messageCount" value="0">
+              <span class="smallgray"><i class="fa fa-comment"></i> <bean:write name="forumThread" property="state.messageCount" />
+                      </span>
+		         </logic:notEqual>  
+             <span class="smallgray"><i class="fa fa-eye"></i><bean:write name="forumThread" property="viewCount" /></span>
+			       <logic:notEqual name="forumMessage" property="digCount" value="0">
+                  <span class="smallgray"><i class="fa fa-heart"></i>
+                      <bean:write name="forumMessage" property="digCount"/>
+					        </span>
+              </logic:notEqual>     
+		       
+              <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
+                  <span class="smallgray"><i class="fa fa-arrow-circle-o-down"></i><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
+              </logic:greaterThan>   
+             </span>        
             </div>
 
             <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-top: 10px">
@@ -62,29 +82,10 @@ if (request.getParameter("count")!=null){
               </span>
           </div>
 
-          <div class="info">			 
-              <span class="smallgray"><i class="fa fa-calendar"></i>
-                <bean:write name="forumMessage" property="modifiedDate3"/>
-              </span>
-			 <logic:notEqual name="forumThread" property="state.messageCount" value="0">
-              <span class="smallgray"><i class="fa fa-comment"></i> <bean:write name="forumThread" property="state.messageCount" />
-                      </span>
-		       </logic:notEqual>  
-              <span class="smallgray"><i class="fa fa-eye"></i><bean:write name="forumThread" property="viewCount" />
-                      </span>
-			   <logic:notEqual name="forumMessage" property="digCount" value="0">
-                       <span class="smallgray"><i class="fa fa-heart"></i>
-                      <bean:write name="forumMessage" property="digCount"/>
-					   </span>
-         </logic:notEqual>     
-		       
-              <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
-                            <span class="smallgray"><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
-              </logic:greaterThan>   
-                     
+         
+        
          
 
-            </div>
                                    
 
    	</div>	
