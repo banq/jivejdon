@@ -21,7 +21,7 @@
     <div class="box"> 
          <div class="wrap-vid">              
             <div class="thumbn">
-              <img src="/simgs/thumb/<%=currentImg%>.jpg" border='0' class="img-thumbnail" loading="lazy" width="55" height="55"/>
+              <img src="/simgs/thumb/<%=currentImg%>.jpg" border='0' class="img-thumbnail" loading="lazy" width="50" height="50"/>
             </div>
       
           </div>
