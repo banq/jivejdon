@@ -78,7 +78,7 @@ int randomIdx = 0;
 		       
 
             <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
-                <span class="smallgray"><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
+                <span class="smallgray"><i class="fa fa-arrow-circle-o-down"></i><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
             </logic:greaterThan>   
                                  
           </div>
