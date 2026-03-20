@@ -34,7 +34,7 @@ import com.jdon.jivejdon.util.ToolsUtil;
  * 
  */
 public class ForumEtagFilterAction extends Action {
-	private final static int expire = 1 * 30 * 60;
+	private final static int expire = 1 * 10 * 60;
 
 	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
