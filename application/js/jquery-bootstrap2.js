@@ -198,8 +198,8 @@ function addMenuItems() {
             <li><a href="https://www.jdon.com/tag/58254/">认知偏差</a></li>
             <li><a href="https://www.jdon.com/tag/38982/">语言游戏</a></li>
             <li><a href="https://www.jdon.com/tag/5676/">道德经</a></li>
-            <li><a href="https://www.jdon.com/tag/1159/">算法</a></li>                               
-            <li><a href="https://www.jdon.com/tag/78279/">生物黑客</a></li>
+            <li><a href="https://www.jdon.com/tag/">更多话题</a></li>                          
+        
         
       </ul > `;
             $('#renzhi').html(renzhi);
@@ -208,11 +208,10 @@ function addMenuItems() {
             <li><a href="https://www.jdon.com/ddd.html">DDD介绍</a></li>
             <li><a href="https://www.jdon.com/tag/272/">DDD专辑</a></li>
             <li><a href="https://www.jdon.com/tag/10740/">战略建模</a></li>
-            <li><a href="https://www.jdon.com/tag/20044/">领域语言UL</a></li>
-            <li><a href="https://www.jdon.com/tag/15977/">限界上下文</a></li>
-            <li><a href="https://www.jdon.com/event.html">领域事件</a></li>
-            <li><a href="https://www.jdon.com/tag/19145/">DDD案例</a></li>
-            <li><a href="https://www.jdon.com/colorUML.html">产品分析</a></li>
+            <li><a href="https://www.jdon.com/tag/20044/">行业用语</a></li>
+            <li><a href="https://www.jdon.com/tag/15977/">限定上下文</a></li>
+            <li><a href="https://www.jdon.com/event.html">领域事件</a></li>            
+            <li><a href="https://www.jdon.com/tag/">更多话题</a></li>
           
         </ul>   `;  
     $('#ddd').html(ddd);
@@ -222,8 +221,8 @@ var micros = `<ul class="list-unstyled" >
                             <li><a href="https://www.jdon.com/tag/619/">架构师</a></li>	
                             <li><a href="https://www.jdon.com/tag/249/">技术架构</a></li>
                             <li><a href="https://www.jdon.com/tag/94214/">智能体</a></li>
-                            <li><a href="https://www.jdon.com/transaction.html">分布式事务</a></li>
-                            <li><a href="https://www.jdon.com/scalable.html">扩展性</a></li>
+                            <li><a href="https://www.jdon.com/tag/78279/">生物黑客</a></li>      
+                            <li><a href="https://www.jdon.com/tag/">更多话题</a></li>                      
                         </ul>`; 
              $('#micros').html(micros);           
                         
@@ -231,9 +230,9 @@ var prog= `<ul class="list-unstyled" >
             <li><a href="https://www.jdon.com/tag/98071/">vibe编程</a></li>
             <li><a href="https://www.jdon.com/tag/222/">编程语言比较</a></li>
             <li><a href="https://www.jdon.com/tag/49140/">大语言模型</a></li>
-            <li><a href="https://www.jdon.com/tag/29134/">DevOps</a></li>
+            <li><a href="https://www.jdon.com/tag/612/">AI基础设施</a></li>
             <li><a href="https://www.jdon.com/tag/78923/">芯片</a></li>
-            <li><a href="https://www.jdon.com/bigdata.html">大数据</a></li>
+            <li><a href="https://www.jdon.com/tag/">更多话题</a></li>
 
 
            
@@ -243,7 +242,6 @@ var prog= `<ul class="list-unstyled" >
 var meme =` <ul class="list-unstyled">
             <li><a href="https://www.jdon.com/tag/37546/">幽默梗</a></li>
             <li><a href="https://www.jdon.com/tag/297/">程序员吐槽</a></li>
-            <li><a href="https://www.jdon.com/tag/20618/">面试技巧</a></li>
             <li><a href="https://www.jdon.com/tag/445/">GitHub工具</a></li>
             <li><a href="https://www.jdon.com/tag/30661/">人工智能</a></li>
             <li><a href="https://www.jdon.com/tag/82319/">生产力黑客</a></li>
