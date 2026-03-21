@@ -218,9 +218,7 @@ function addMenuItems() {
     $('#ddd').html(ddd);
 
 var micros = `<ul class="list-unstyled" >
-                            <li><a href="https://www.jdon.com/tag/42486/">系统设计</a></li>
-                            <li><a href="https://www.jdon.com/tag/38726/">系统涌现</a></li>
-                            <li><a href="https://www.jdon.com/tag/45779/">系统思维</a></li>
+                            <li><a href="https://www.jdon.com/tag/45779/">系统思维</a></li>                                                       
                             <li><a href="https://www.jdon.com/tag/619/">架构师</a></li>	
                             <li><a href="https://www.jdon.com/tag/249/">技术架构</a></li>
                             <li><a href="https://www.jdon.com/tag/94214/">智能体</a></li>
@@ -236,7 +234,7 @@ var prog= `<ul class="list-unstyled" >
             <li><a href="https://www.jdon.com/tag/29134/">DevOps</a></li>
             <li><a href="https://www.jdon.com/tag/78923/">芯片</a></li>
             <li><a href="https://www.jdon.com/bigdata.html">大数据</a></li>
-            <li><a href="https://www.jdon.com/concurrency.html">并发编程</a></li>
+
 
            
         </ul>`; 
