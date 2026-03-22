@@ -65,7 +65,13 @@
                          <bean:write name="forumMessage" property="digCount"/>
 					             </span>
              <a href="javascript:digMessage(<bean:write name="forumMessage" property="messageId"/>)">赞</a>
-             
+         &nbsp;             
+             <logic:iterate id="threadTag" name="forumThread" property="tags" >
+                <a class="smallgray" href="<%=domainUrl %>/tag/<bean:write name="threadTag" property="tagID"/>/" target="_blank" >
+                  #<bean:write name="threadTag" property="title" /></a>   
+         &nbsp;
+            </logic:iterate>       
+            
 
         </div>
       </div>
