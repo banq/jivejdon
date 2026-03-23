@@ -147,18 +147,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <ul class="list-group" style="list-style-type:none;padding:0" itemscope itemtype="https://schema.org/ItemList">
 
  <logic:iterate indexId="i" id="forumThread" name="threadListForm"  property="list">
- <logic:equal name="i" value="2">
 
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="fluid"
-     data-ad-layout-key="-ev-1p-5j-ot+26n"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="3378777426"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
- </logic:equal>
     <%@ include file="threadListCore.jsp" %>
 
  </logic:iterate>
