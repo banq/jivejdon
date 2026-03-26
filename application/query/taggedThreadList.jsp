@@ -65,64 +65,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
  <%}%>
 <% } %>  
 
-<style>
-    dialog {
-            max-width: 810px;
-            width: 90%;
-            padding: 5px;
-            border: none;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
-            background-color: white;
-            overflow: hidden;
-            max-height: 90vh;
-            box-sizing: border-box;
-        }
-        dialog::backdrop {
-            background: rgba(0,0,0,0.4);
-        }
-        .dialog-content {
-            margin-top: 15px;
-            width: 100%;
-            min-height: 400px;
-            max-width: 100%;
-            overflow-x: hidden;
-            overflow-y: auto;
-            box-sizing: border-box;
-        }
-        .close-btn {
-            float: right;
-            cursor: pointer;
-            background: #41872d;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 3px;
-        }
-        .vid-name a {
-            cursor: pointer;
-        }
-        iframe {
-            width: 100%;
-            max-width: 100%;
-            height: 500px;
-            border: none;
-            overflow-x: hidden;
-            box-sizing: border-box;
-            display: block;
-        }
-        /* 浏览器特定滚动条隐藏 */
-        dialog, .dialog-content, iframe {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        dialog::-webkit-scrollbar, 
-        .dialog-content::-webkit-scrollbar, 
-        iframe::-webkit-scrollbar {
-            display: none;
-        }
-   
-</style>
 <script>
  if(top !== self) top.location = self.location;
   contextpath = "<%=request.getContextPath()%>";
@@ -145,22 +87,21 @@ if (request.getParameter("count")!=null){
    count = request.getParameter("count");
 }
 %>
-<%
-java.util.List nums = new java.util.ArrayList();
-int[] randomArr = new int[5];
-int idx = 0;
-while (idx < 5) {
-    nums.add(idx);
-    idx++;
+<script>
+// JavaScript初始化随机数组
+var randomArr = [0, 1, 2, 3, 4];
+for (var i = randomArr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = randomArr[i];
+    randomArr[i] = randomArr[j];
+    randomArr[j] = temp;
 }
-java.util.Collections.shuffle(nums);
-idx = 0;
-while (idx < 5) {
-    randomArr[idx] = ((Integer)nums.get(idx)).intValue();
-    idx++;
+var randomIdx = 0;
+
+function getRandomThumb() {
+    return (randomIdx < 5) ? randomArr[randomIdx++] : Math.floor(Math.random() * 5);
 }
-int randomIdx = 0;
-%>
+</script>
 
 
 
@@ -183,9 +124,12 @@ int randomIdx = 0;
   <div class="row">	
       <div class="col-md-4">
        <div style="position: relative;padding-top:20px">           
-       <a href='<%=request.getContextPath() %>/tag/<bean:write name="threadTag" property="tagID"/>/' title="<bean:write name="threadTag" property="title" />">         
-        <img id="home-thumbnai" src="/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg" border="0" class="img-thumbnail" style="width: 100%" loading="lazy"/>                  
+       <a href='<%=request.getContextPath() %>/tag/<bean:write name="threadTag" property="tagID"/>/'>
+        <img id="home-thumbnai" src="" border="0" class="img-thumbnail" style="width: 100%" loading="lazy"/>
        </a>
+       <script>
+document.getElementById('home-thumbnai').src = '/simgs/thumb2/' + getRandomThumb() + '.jpg';
+</script>
       <div style="position: absolute;top: 0px;">
        <div class="tagcloud">
         <h1 class="tagcloud bige20"><a href="<%=domainUrl%>/tag/<bean:write name="tagID"/>/" class="tag-cloud-link"><bean:write  name='TITLE'/></a></h1>
@@ -355,31 +299,6 @@ $(function() {
   }
   </script>
   
-   <!-- 添加全局dialog -->
-   <dialog id="contentDialog">
-    <button class="close-btn" onclick="closeDialog()">关闭</button>
-    <div class="dialog-content">
-        <iframe id="contentFrame"></iframe>
-    </div>
-</dialog>
-
-<!-- 页脚部分保持不变 -->
-
-<script>
-    function showDialog(dialogId, url) {
-        const dialog = document.getElementById('contentDialog');
-        const iframe = document.getElementById('contentFrame');
-        iframe.src = url;
-        dialog.showModal();
-    }
-
-    function closeDialog() {
-        const dialog = document.getElementById('contentDialog');
-        const iframe = document.getElementById('contentFrame');
-        iframe.src = ''; // 清空iframe内容
-        dialog.close();
-    }
-</script>
 
 </body>
 </html>
