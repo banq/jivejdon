@@ -242,7 +242,7 @@ int randomIdx = 0;
 
 </main>
 
-
+<%-- 
 <script>
 document.addEventListener("DOMContentLoaded", function(event) {   
 $(function() {
@@ -294,7 +294,7 @@ $(function() {
   });
 });
 });
-</script>
+</script> --%>
 
         </div>
 
