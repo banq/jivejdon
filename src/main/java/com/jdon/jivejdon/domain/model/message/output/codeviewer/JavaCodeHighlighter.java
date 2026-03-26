@@ -790,15 +790,16 @@ public class JavaCodeHighlighter implements Function<MessageVO, MessageVO> {
 
 	private final int countLines(String text) {
 		int lineCount = 0;
-		BufferedReader reader = new BufferedReader(new StringReader(text));
-		try {
-			while (reader.readLine() != null) {
-				lineCount++;
+		try (BufferedReader reader = new BufferedReader(new StringReader(text))) {
+			try {
+				while (reader.readLine() != null) {
+					lineCount++;
+				}
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
 			}
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
+			return lineCount;
 		}
-		return lineCount;
 	}
 
 	private final String deleteCarriages(String line) {
