@@ -51,7 +51,7 @@ if (request.getParameter("count")!=null){
 </h3>
 
             <div style="letter-spacing: 0.03em;color: #585050; display:flex;align-items:flex-start; justify-content:space-between; margin-top: 10px">
-              <span style="flex:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;overflow:hidden">      
+              <span style="flex:1; display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical;overflow:hidden">      
                  <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[150]" />
               </span>
            </div>
