@@ -52,7 +52,7 @@ if (request.getParameter("count")!=null){
 
             <div style="letter-spacing: 0.03em;color: #585050; display:flex;align-items:flex-start; justify-content:space-between; margin-top: 10px">
               <span style="flex:1; display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical;overflow:hidden">      
-                 <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[150]" />
+                 <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />
               </span>
            </div>
 
@@ -81,13 +81,8 @@ if (request.getParameter("count")!=null){
                 <a class="smallgray" href="<%=domainUrl %>/tag/<bean:write name="threadTag" property="tagID"/>/" target="_blank" >
                   #<bean:write name="threadTag" property="title" /></a>
             </logic:iterate>       
-            
-          
             </div>        
         
-         
-
-                                   
 
    	</div>	
 	</div>	
