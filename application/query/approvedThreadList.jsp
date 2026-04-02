@@ -36,13 +36,14 @@ int randomIdx = 0;
 
 
  <div class="col-lg-12">
- <div class="box">	
+ <div>	
   <div>
-    <div class="box">	  
+    <div>	  
       <div class="row">	          
 
         <bean:define id="body" name="forumMessage" property="messageVO.body" />
         <div class="col-lg-8">
+        <div class="box">	  
           <div class="box">  
             <h1 class="vid-name" style="font-size: 2.6rem;margin-top: 2px;padding-bottom: 10px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><span itemprop="name"><bean:write name="forumThread" property="name"/></span></a></h1>
           
@@ -82,7 +83,8 @@ int randomIdx = 0;
             </logic:greaterThan>   
                                  
           </div>
-         </div>             
+         </div>  
+         </div>         
         </div>  
         <div class="col-lg-4">
             <div class="box">
