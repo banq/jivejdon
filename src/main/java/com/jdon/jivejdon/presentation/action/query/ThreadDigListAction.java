@@ -112,8 +112,8 @@ public class ThreadDigListAction extends Action {
 			else if (digCount1 < digCount2)
 				return 1;
 			else {
-				// digCount 相同时，按 threadId 排序
-				if (threadId1.longValue() > threadId2.longValue())
+				// digCount 相同时，按 getViewCount 排序
+				if (thread1.getViewCount() > thread2.getViewCount())
 					return -1;
 				else
 					return 1;
