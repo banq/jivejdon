@@ -42,12 +42,12 @@ if (request.getParameter("count")!=null){
  <div class="box">	
   <div class="linkblock">
     <div class="box">	           
-    
+<a href="<%=com.jdon.jivejdon.util.ToolsUtil.getAppURL(request)%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url">    
              <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
         
 <h3 class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
- <a href="<%=com.jdon.jivejdon.util.ToolsUtil.getAppURL(request)%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><span itemprop="name"><bean:write name="forumThread" property="name"/></span></a>
+ <span itemprop="name"><bean:write name="forumThread" property="name"/></span>
 </h3>
 
             <div style="letter-spacing: 0.03em;color: #585050; display:flex;align-items:flex-start; justify-content:space-between; margin-top: 10px">
@@ -83,7 +83,7 @@ if (request.getParameter("count")!=null){
             </logic:iterate>       
             </div>        
         
-
+    </a>
    	</div>	
 	</div>	
 </div>  
