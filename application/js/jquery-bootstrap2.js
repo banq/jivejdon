@@ -208,7 +208,7 @@ function addMenuItems() {
             <li><a href="https://www.jdon.com/ddd.html">DDD介绍</a></li>
             <li><a href="https://www.jdon.com/tag/272/">DDD专辑</a></li>
             <li><a href="https://www.jdon.com/tag/10740/">战略建模</a></li>
-            <li><a href="https://www.jdon.com/tag/20044/">领域术语</a></li>
+            <li><a href="https://www.jdon.com/tag/20044/">本体图谱</a></li>
             <li><a href="https://www.jdon.com/tag/15977/">限定上下文</a></li>
             <li><a href="https://www.jdon.com/event.html">领域事件</a></li>            
             <li><a href="https://www.jdon.com/tag/">更多话题</a></li>
