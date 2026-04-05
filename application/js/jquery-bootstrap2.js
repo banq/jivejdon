@@ -208,7 +208,7 @@ function addMenuItems() {
             <li><a href="https://www.jdon.com/ddd.html">DDD介绍</a></li>
             <li><a href="https://www.jdon.com/tag/272/">DDD专辑</a></li>
             <li><a href="https://www.jdon.com/tag/10740/">战略建模</a></li>
-            <li><a href="https://www.jdon.com/tag/20044/">行业用语</a></li>
+            <li><a href="https://www.jdon.com/tag/20044/">领域术语</a></li>
             <li><a href="https://www.jdon.com/tag/15977/">限定上下文</a></li>
             <li><a href="https://www.jdon.com/event.html">领域事件</a></li>            
             <li><a href="https://www.jdon.com/tag/">更多话题</a></li>
@@ -219,32 +219,30 @@ function addMenuItems() {
 var micros = `<ul class="list-unstyled" >
                             <li><a href="https://www.jdon.com/tag/45779/">系统思维</a></li>                                                       
                             <li><a href="https://www.jdon.com/tag/619/">架构师</a></li>	
-                            <li><a href="https://www.jdon.com/tag/249/">技术架构</a></li>
                             <li><a href="https://www.jdon.com/tag/94214/">智能体</a></li>
                             <li><a href="https://www.jdon.com/tag/78279/">生物黑客</a></li>      
+                            <li><a href="https://www.jdon.com/tag/82319/">生产力黑客</a></li>
                             <li><a href="https://www.jdon.com/tag/">更多话题</a></li>                      
                         </ul>`; 
              $('#micros').html(micros);           
                         
 var prog= `<ul class="list-unstyled" >
-            <li><a href="https://www.jdon.com/tag/98071/">vibe编程</a></li>
+            <li><a href="https://www.jdon.com/tag/98071/">vibecode</a></li>
             <li><a href="https://www.jdon.com/tag/222/">编程语言比较</a></li>
-            <li><a href="https://www.jdon.com/tag/49140/">大语言模型</a></li>
+            <li><a href="https://www.jdon.com/tag/445/">GitHub工具</a></li>
+            <li><a href="https://www.jdon.com/tag/30661/">人工智能</a></li>
             <li><a href="https://www.jdon.com/tag/612/">AI基础设施</a></li>
-            <li><a href="https://www.jdon.com/tag/78923/">芯片</a></li>
             <li><a href="https://www.jdon.com/tag/">更多话题</a></li>
-
-
            
         </ul>`; 
         $('#prog').html(prog);         
 
 var meme =` <ul class="list-unstyled">
+            <li><a href="https://www.jdon.com/tag/99755/">AI提示词</a></li>
+            <li><a href="https://www.jdon.com/tag/49140/">语言模型</a></li>
             <li><a href="https://www.jdon.com/tag/37546/">幽默梗</a></li>
             <li><a href="https://www.jdon.com/tag/297/">程序员吐槽</a></li>
-            <li><a href="https://www.jdon.com/tag/445/">GitHub工具</a></li>
-            <li><a href="https://www.jdon.com/tag/30661/">人工智能</a></li>
-            <li><a href="https://www.jdon.com/tag/82319/">生产力黑客</a></li>
+            <li><a href="https://www.jdon.com/tag/97174/">DeepSeek时刻</a></li>
             <li><a href="https://www.jdon.com/tag/">更多话题</a></li>
         </ul>`; 
         $('#meme').html(meme);
