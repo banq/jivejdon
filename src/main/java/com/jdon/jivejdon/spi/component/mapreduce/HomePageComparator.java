@@ -40,10 +40,12 @@ public class HomePageComparator implements Comparator<ForumThread> {
 		else if (countRs1 < countRs2)
 			return 1;
 		else if (countRs1 == countRs2) {
-			if (thread1.getThreadId() > thread2.getThreadId())
+			if (thread1.getViewCount() > thread2.getViewCount())
 				return -1;
-			else if (thread1.getThreadId() < thread2.getThreadId())
+			else if (thread1.getViewCount() < thread2.getViewCount())
 				return 1;
+			else
+				return Long.compare(thread2.getThreadId(), thread1.getThreadId());
 		}
 		return 0;
 	}
