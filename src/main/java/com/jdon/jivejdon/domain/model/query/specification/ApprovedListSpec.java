@@ -106,7 +106,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 		if (thread == null || thread.getRootMessage() == null || thread.getTags() == null) {
             return 0;
         }
-		int digCount = thread.getRootMessage().getDigCount();
+		long viewCount = thread.getViewCount();
 		double tagsCount = thread.getTags().stream()
 				.map(threadTag -> threadTag.getAssonum())
 				.reduce(0, Integer::sum);
@@ -117,15 +117,15 @@ public class ApprovedListSpec extends ThreadListSpec {
         }
 
 		// 三个都必须 > 0，否则返回 0
-		if (digCount <= 0 || tagsCount <= 0 || linkCount <= 0) {
+		if (viewCount <= 0 || tagsCount <= 0 || linkCount <= 0) {
 			return 0;
 		}
 
-		double digWeight = 100.0;
+		double viewWeight = 100.0;
 		double tagWeight = 50.0;
 		double linkWeight = 50.0;
 
-		return (digCount * digWeight) + (tagsCount * tagWeight) + (linkCount * linkWeight);
+		return (viewCount * viewWeight) + (tagsCount * tagWeight) + (linkCount * linkWeight);
 
 	}
 
