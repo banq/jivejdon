@@ -27,6 +27,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.domain.model.property.MessagePropertysVO;
+import com.jdon.jivejdon.domain.model.property.ThreadPropertys;
 import com.jdon.jivejdon.domain.model.query.QueryCriteria;
 import com.jdon.jivejdon.domain.model.query.QuerySpecification;
 import com.jdon.jivejdon.domain.model.query.ResultSort;
@@ -496,21 +497,22 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 			QuerySpecification qs = new QuerySpecDBModifiedDate(qc);
 			qs.parse();
 
-            java.util.Calendar cal = java.util.Calendar.getInstance();
-            cal.set(2018, 0, 1, 0, 0, 0); 
-            long minCreationDate = cal.getTimeInMillis();
-            String minCreationDateStr = com.jdon.jivejdon.util.ToolsUtil.zeroPadString(String.valueOf(minCreationDate), 15);
+			java.util.Calendar cal = java.util.Calendar.getInstance();
+			cal.set(2018, 0, 1, 0, 0, 0);
+			long minCreationDate = cal.getTimeInMillis();
+			String minCreationDateStr = com.jdon.jivejdon.util.ToolsUtil.zeroPadString(String.valueOf(minCreationDate),
+					15);
 
 			StringBuilder sql = new StringBuilder(
-					"SELECT jm.threadID, SUM(CAST(jmp.propValue AS UNSIGNED)) AS dig_sum " +
-							"FROM jiveMessage jm " +
-							"JOIN jiveMessageProp jmp ON jm.messageID = jmp.messageID ");
+					"SELECT jm.threadID, SUM(CAST(jmp.propValue AS UNSIGNED)) AS view_sum " +
+							"FROM jiveThread jm " +
+							"JOIN jiveThreadProp jmp ON jm.threadID = jmp.threadID ");
 			sql.append(qs.getWhereSQL());
-			sql.append(" AND jmp.name = '").append(MessagePropertysVO.DIG_NUMBER).append("' ");
-			sql.append(" AND jm.modifiedDate >= ? "); // 新增1000天内过滤
+			sql.append(" AND jmp.name = '").append(ThreadPropertys.VIEW_COUNT).append("' ");
+			sql.append(" AND jm.modifiedDate >= ? ");
 			sql.append("GROUP BY jm.threadID ");
-			sql.append("HAVING dig_sum > ? "); // 这里用上阈值
-			sql.append("ORDER BY dig_sum DESC LIMIT 100");
+			sql.append("HAVING view_sum > ? ");
+			sql.append("ORDER BY view_sum DESC LIMIT 100");
 
 			List<Object> params = new ArrayList<>();
 			if (qs.getParams() != null)
