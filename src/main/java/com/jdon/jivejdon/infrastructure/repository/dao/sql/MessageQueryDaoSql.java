@@ -505,7 +505,7 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 							"FROM jiveMessage jm " +
 							"JOIN jiveMessageProp jmp ON jm.messageID = jmp.messageID ");
 			sql.append(qs.getWhereSQL());
-			sql.append(" AND jmp.name = 'digNumber' ");
+			sql.append(" AND jmp.name = '#sym:MessagePropertysVO.#sym:DIG_NUMBER' ");
 			sql.append(" AND jm.modifiedDate >= ? "); // 新增1000天内过滤
 			sql.append("GROUP BY jm.threadID ");
 			sql.append("HAVING dig_sum > ? "); // 这里用上阈值
