@@ -3,7 +3,6 @@ package com.jdon.jivejdon.domain.model.query.specification;
 import java.util.concurrent.TimeUnit;
 
 import com.jdon.jivejdon.domain.model.ForumThread;
-import com.jdon.jivejdon.domain.model.reblog.ReBlogVO;
 
 public class ApprovedListSpec extends ThreadListSpec {
 
@@ -21,7 +20,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 	
 	public boolean isApprovedToBest(ForumThread thread) {
-		return contentQualityScore(thread)>100 && (thread.getViewCount() > getNeedViewcount() || thread.getRootMessage().getDigCount()>=1);
+		return  (thread.getViewCount() > getNeedViewcount() || thread.getRootMessage().getDigCount()>=1);
 	}
 
 	
