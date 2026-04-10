@@ -79,51 +79,10 @@ public class ApprovedListSpec extends ThreadListSpec {
 	public double approvedCompare(ForumThread thread) {
 		if(thread == null) return 0;
 		// 基础热度分
-		double baseScore = calculateWeightedScore(thread);
-
-		// 内容质量分
-		double qualityScore = contentQualityScore(thread);
-
-		// 质量分大于0时加权加分（如加20%）
-		if (qualityScore > 0) {
-			baseScore += qualityScore * 0.2;
-		}
-
-		return baseScore;
-	}
-
-	/**
-	 * 计算帖子质量分
-	 * 
-	 * @param thread 论坛帖子
-	 * @return 质量分
-	 */
-	public double contentQualityScore(ForumThread thread) {
-		if (thread == null || thread.getRootMessage() == null || thread.getTags() == null) {
-            return 0;
-        }
-		long viewCount = thread.getViewCount();
-		double tagsCount = thread.getTags().stream()
-				.map(threadTag -> threadTag.getAssonum())
-				.reduce(0, Integer::sum);
-		ReBlogVO reBlogVO = thread.getReBlogVO();
-	    int linkCount = 0;
-        if (reBlogVO != null) {
-            linkCount = reBlogVO.getThreadFroms().size() + reBlogVO.getThreadTos().size();
-        }
-
-		// 三个都必须 > 0，否则返回 0
-		if (viewCount <= 0 || tagsCount <= 0 || linkCount <= 0) {
-			return 0;
-		}
-
-		double viewWeight = 100.0;
-		double tagWeight = 50.0;
-		double linkWeight = 50.0;
-
-		return (viewCount * viewWeight) + (tagsCount * tagWeight) + (linkCount * linkWeight);
+		return calculateWeightedScore(thread);
 
 	}
+
 
 	private double calculateWeightedScore(ForumThread thread) {
 		if(thread == null) return 0;
