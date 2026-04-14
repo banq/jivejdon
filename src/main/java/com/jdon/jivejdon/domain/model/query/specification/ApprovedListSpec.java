@@ -35,7 +35,8 @@ public class ApprovedListSpec extends ThreadListSpec {
 	public double sortedLeaderboard(final ForumThread thread, final ForumThread threadPrev) {
 		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getRootMessage().getModifiedDate2());
 		long diffHours = TimeUnit.HOURS.convert(diffInMillis, TimeUnit.MILLISECONDS);
-
+        double hourViewCount = (double) thread.getViewCount() / (diffHours == 0 ? 1 : diffHours);
+		
 		double newThreadBonus;
 		if (diffHours < 2 * 24) {
 			newThreadBonus = 5.0; // 48小时内放大
@@ -44,7 +45,7 @@ public class ApprovedListSpec extends ThreadListSpec {
 		} else
 			newThreadBonus = 1.0; 
 
-		return thread.getViewCount()  * newThreadBonus * (1 + thread.getRootMessage().getDigCount());
+		return hourViewCount  * newThreadBonus * (1 + thread.getRootMessage().getDigCount());
 	}
 	/**
 	 * recommend：ThreadDigComparator
