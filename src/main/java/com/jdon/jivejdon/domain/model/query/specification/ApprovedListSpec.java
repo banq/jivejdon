@@ -36,41 +36,15 @@ public class ApprovedListSpec extends ThreadListSpec {
 		long diffInMillis = Math.abs(System.currentTimeMillis() - thread.getRootMessage().getModifiedDate2());
 		long diffHours = TimeUnit.HOURS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 
-		double hourViewCount = (double) thread.getViewCount() / (diffHours == 0 ? 1 : diffHours);
-		int digCount = thread.getRootMessage().getDigCount();
-
-		// 48小时内放大，48小时到5天不放大不缩小，5天后缩小
 		double newThreadBonus;
 		if (diffHours < 2 * 24) {
 			newThreadBonus = 5.0; // 48小时内放大
 		}else if (diffHours < 5 * 24) {
 			newThreadBonus = 3.0; // 
-		} else if (diffHours < 7 * 24) {
-			newThreadBonus = 1.0; // 48小时到5天不变
-		} else {
-			// 5天后递减，最低0.2
-			long extraDays = (diffHours - 5 * 24) / 24;
-			newThreadBonus = 1.0 / (1.0 + extraDays);
-			if (newThreadBonus < 0.2)
-				newThreadBonus = 0.2;
-		}
+		} else
+			newThreadBonus = 1.0; 
 
-		double digBonus;
-		if (diffHours < 2 * 24) {
-			digBonus = 1.0 + digCount * 5.0; // 48小时内放大
-		} else if (diffHours < 5 * 24) {	
-			digBonus = 1.0 + digCount * 3.0;
-		} else if (diffHours < 7 * 24) {
-			digBonus = 1.0 + digCount * 1.0; // 48小时到5天不变
-		} else {
-			long extraDays = (diffHours - 5 * 24) / 24;
-			double digWeight = 1.0 / (1.0 + extraDays);
-			if (digWeight < 0.2)
-				digWeight = 0.2;
-			digBonus = 1.0 + digCount * digWeight;
-		}
-
-		return hourViewCount * newThreadBonus * digBonus;
+		return thread.getViewCount()  * newThreadBonus * (1 + thread.getRootMessage().getDigCount());
 	}
 	/**
 	 * recommend：ThreadDigComparator
