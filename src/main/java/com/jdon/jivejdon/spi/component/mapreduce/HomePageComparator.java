@@ -56,9 +56,8 @@ public class HomePageComparator implements Comparator<ForumThread> {
 		// 检查 viewcounters 中是否存在该 thread，并加权
 		ViewCounter viewCounter = threadViewCounterJob.getViewCounter(thread.getThreadId());
 		if (viewCounter != null) {
-			long viewCountFromMap = viewCounter.getViewCount();
-			if (viewCountFromMap > 0) {
-				p = p + (viewCountFromMap * 100); // 加权系数0.5，可调整
+			if (viewCounter.getViewCount() > 0 && thread.getRootMessage().getDigCount() >= 1) {
+				p = p  * 2; 
 			}
 		}
 		return p;
