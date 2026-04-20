@@ -39,7 +39,7 @@
 			<td>
 				
        <div class="b_content_title2">
-        <a href="<%=request.getContextPath() %>/message/messageListOwner.shtml?thread=<bean:write name="forumThread" property="threadId"/>">编辑</a> 
+        (<a href="<%=request.getContextPath() %>/message/messageListOwner.shtml?thread=<bean:write name="forumThread" property="threadId"/>">编辑</a>) 
          <a href="<%=request.getContextPath() %>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" ><bean:write name="forumMessage" property="messageVO.subject"/></a> 
          
         <span>(<bean:write name="forumMessage" property="creationDate" />)</span>
