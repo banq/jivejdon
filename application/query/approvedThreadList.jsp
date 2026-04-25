@@ -55,7 +55,7 @@ int randomIdx = 0;
             </div>
             
           
-          <div style="letter-spacing: 0.03em;color: #585050; display:flex; align-items:flex-start; justify-content:space-between; margin-top: 10px">
+          <div style="letter-spacing: 0.03em;color: #554646; display:flex; align-items:flex-start; justify-content:space-between; margin-top: 10px">
               <span style="line-height:2.8rem;flex:1; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical;overflow:hidden">      
                  <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[250]" />
               </span>
