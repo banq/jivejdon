@@ -57,7 +57,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <link rel="stylesheet" href="/js/jdon.css">
     <style>
     html { font-size: 62.5%; -webkit-text-size-adjust: 100%; }
-    body { margin: 0; padding: 0; font-family: "Microsoft YaHei", sans-serif; font-size: 1.6rem; color: #333; background-color: #E6E6E6; line-height: 2.2rem; }
+    body { margin: 0; padding: 0; font-family: "Microsoft YaHei", sans-serif; font-size: 1.6rem; color: #373232; background-color: #E6E6E6; line-height: 2.2rem; }
     .container { margin: 0 auto; padding: 0 15px; }
     .row { margin: 0 -15px; }
     .row:after, .container:after { content: " "; display: table; clear: both; }
@@ -70,7 +70,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         .col-lg-4 { float: left; width: 33.33333333%; }
         .col-lg-12 { float: left; width: 100%; }
     }
-    .navbar { min-height: 50px; margin-bottom: 20px; background-color: #000; }
+    .navbar { min-height: 50px; margin-bottom: 20px; background-color: #0b0808; }
     </style> 
     <link rel="apple-touch-icon" href="<%=domainUrl %>/simgs/jdon100.png" />
     <link rel="canonical" href="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" /><bean:write name="forumThread" property="pinyinToken" />.html">  
