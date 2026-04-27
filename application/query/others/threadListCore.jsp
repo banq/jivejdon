@@ -25,7 +25,7 @@
             </div>
       
           </div>
-         <h4 style="margin: 0;"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"  title="<bean:write name="forumThread" property="rootMessage.messageVO.shortBody[20]" />" class="hover-preload" itemprop="url"><span itemprop="name" style="color: #554646;"><bean:write name="forumThread" property="name"/></span></a></h4>
+         <h4 style="margin: 0;"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html"  title="<bean:write name="forumThread" property="rootMessage.messageVO.shortBody[20]" />" class="hover-preload" itemprop="url"><span itemprop="name" style="color: #3c1616;"><bean:write name="forumThread" property="name"/></span></a></h4>
 
     </div>
 </li>
