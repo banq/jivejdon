@@ -43,7 +43,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         .col-lg-4 { float: left; width: 33.33333333%; }
         .col-lg-12 { float: left; width: 100%; }
     }
-    .navbar { min-height: 50px; margin-bottom: 20px; background-color: #0b0808; }
+    .navbar { min-height: 50px; margin-bottom: 20px; background-color: #150303; }
   </style>
   <link rel="sitemap" type="application/xml" title="Sitemap" href="<%=domainUrl%>/sitemap.xml">
   <link rel="canonical" href="<%=domainUrl%>/">
