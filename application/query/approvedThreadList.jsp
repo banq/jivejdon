@@ -45,7 +45,7 @@ int randomIdx = 0;
         <div class="col-lg-8">
         <div class="box">	  
           <div class="box">  
-            <h1 class="vid-name" style="font-size: 2.6rem;margin-top: 2px;padding-bottom: 10px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><span itemprop="name"><bean:write name="forumThread" property="name"/></span></a></h1>
+            <h1 class="vid-name" style="font-size: 2.5rem;margin-top: 2px;padding-bottom: 10px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><span itemprop="name"><bean:write name="forumThread" property="name"/></span></a></h1>
           
            <div class="info">		
             <logic:iterate id="threadTag" name="forumThread" property="tags" >
@@ -55,8 +55,8 @@ int randomIdx = 0;
             </div>
             
           
-          <div style="letter-spacing: 0.03em;color: #3c1616; display:flex; align-items:flex-start; justify-content:space-between; margin-top: 10px">
-              <span style="line-height:2.8rem;flex:1; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical;overflow:hidden">      
+          <div style="letter-spacing: 0.02em;color: #3c1616; display:flex; align-items:flex-start; justify-content:space-between; margin-top: 10px">
+              <span style="line-height:2.5rem;flex:1; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical;overflow:hidden">      
                  <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[250]" />
               </span>
           </div>
