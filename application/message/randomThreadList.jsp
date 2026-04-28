@@ -40,7 +40,7 @@ pageContext.setAttribute("title", titleStr);
 		<div class="row">
 			<!-- /////////////////左边 -->
 			<div id="main-content" class="col-lg-8 custom-col-left">
-				<div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1)">	
+				<div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(150, 1, 1, 0.1)">	
         
         
 
@@ -123,7 +123,7 @@ pageContext.setAttribute("title", titleStr);
  <!-- /////////////////右边 -->
 <aside>      
        <div id="sidebar" class="col-lg-4 custom-col-right">
-<div class="scrolldiv"><div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); background-color: white; overflow: hidden; padding-left: 0; padding-right: 0">
+<div class="scrolldiv"><div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(150, 1, 1, 0.1); background-color: white; overflow: hidden; padding-left: 0; padding-right: 0">
         <!---- Start Widget ---->
         <div class="widget wid-follow">
           <div class="content">

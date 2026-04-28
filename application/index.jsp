@@ -56,7 +56,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
 <div id="page-content" class="single-page container">
 
-<div style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);background-color: #fff;" class="box">
+<div style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(150, 1, 1, 0.1);background-color: #fff;" class="box">
   
   <jsp:include page="/query/threadApprovedNewList.shtml" flush="true"></jsp:include>
 	<div class="row">
