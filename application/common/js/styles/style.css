@@ -156,7 +156,7 @@ p {
   text-indent: 0px;
 }
 a {
-  color: #41872d;
+  color: #904603;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
@@ -302,7 +302,7 @@ body.sub-page .logo {
   font-weight: 700;
 }
 #menu ul.nav .dropdown-menu li a:hover {
-  background-color: #41872d;
+  background-color: #904603;
   color: #fff;
 }
 #menu .dropdown-inner {
@@ -325,7 +325,7 @@ body.sub-page .logo {
 #menu li.dropdown:active > a,
 #menu li.dropdown:focus > a,
 #menu li.dropdown:hover > a {
-  background: #41872d;
+  background: #904603;
   color: #fff;
 }
 #menu ul.nav li a {
@@ -342,7 +342,7 @@ body.sub-page .logo {
 }
 #menu .nav > li > a:focus,
 #menu .nav > li > a:hover {
-  background-color: #41872d;
+  background-color: #904603;
   color: #fff;
 }
 #menu .top-social {
@@ -362,7 +362,7 @@ body.sub-page .logo {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background-color: #41872d;
+  background-color: #904603;
   color: #fff;
   line-height: 1.9;
 }
@@ -373,8 +373,8 @@ body.sub-page .logo {
 #menu .btn-navbar {
   float: right;
   padding: 5px 15px;
-  border: 3px solid #41872d;
-  color: #41872d;
+  border: 3px solid #904603;
+  color: #904603;
   font-size: 20px;
 }
 @media (max-width: 991px) {
@@ -733,7 +733,7 @@ ul.pagination li a {
   border-bottom: 1px solid #fd0005;
 }
 .widget.wid-vid ul li + :hover {
-  border-bottom: 1px solid #41872d;
+  border-bottom: 1px solid #904603;
 }
 .widget.wid-vid ul li + li + :hover {
   border-bottom: 1px solid #966b20;
@@ -811,7 +811,7 @@ ul.pagination li a {
 }
 .widget.wid-tags a:hover {
   border: 1px solid #999;
-  color: #41872d;
+  color: #904603;
 }
 .icon {
   margin-bottom: 10px;
@@ -926,7 +926,7 @@ footer .footer-2 a {
   line-height: 2.2;
 }
 footer .footer-2 a:hover {
-  color: #41872d;
+  color: #904603;
 }
 footer .footer-3 ul {
   padding: 0;
@@ -1177,7 +1177,7 @@ DIV.diggArea {
 	padding: 0;
 }
 .tagcloud .tag-cloud-link {
-    background-color: #41872d;
+    background-color: #904603;
     border: 1px solid #e9e9e9;    
     display: inline-block;
     padding: 0.188rem 1.25rem;
@@ -1186,7 +1186,7 @@ DIV.diggArea {
     text-decoration: none;
 }
 button, html input[type=button], input[type=reset], input[type=submit] {
-  background-color: #41872d;
+  background-color: #904603;
   color: white;
   border: 0;
 }
