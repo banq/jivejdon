@@ -17,6 +17,7 @@ package com.jdon.jivejdon.domain.model;
 
 import java.util.Collection;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -44,7 +45,10 @@ public class Forum {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private static final ConcurrentHashMap<Long, Object> forumLocks = new ConcurrentHashMap<>();
+
 	private Long forumId;
+	private final Object forumStateLock = new Object();
 
 	private String name;
 	private String description;
@@ -97,9 +101,17 @@ public class Forum {
 
 	}
 
+	private Object getForumLock() {
+		if (forumId == null)
+			return forumStateLock;
+		return forumLocks.computeIfAbsent(forumId, k -> new Object());
+	}
+
 	public void threadPosted(ForumMessage rootForumMessage) {
-		forumState.addThreadCount();
-		forumState.setLatestPost(rootForumMessage);
+		 synchronized (getForumLock()) {
+			forumState.addThreadCount();
+			forumState.setLatestPost(rootForumMessage);
+		}
 		this.publisherRole.subscriptionNotify(new ForumSubscribedNotifyEvent(this.forumId, rootForumMessage));
 	}
 
@@ -185,8 +197,10 @@ public class Forum {
 	// }
 
 	public void addNewMessage(ForumMessageReply forumMessageReply) {
-		forumState.addMessageCount();
-		forumState.setLatestPost(forumMessageReply);
+		 synchronized (getForumLock()) {
+			forumState.addMessageCount();
+			forumState.setLatestPost(forumMessageReply);
+		}
 
 		// Date olddate = Constants.parseDateTime(oldmessage.getCreationDate());
 		// if (Constants.timeAfter(1, olddate)) {// a pubsub per one hour
@@ -196,7 +210,9 @@ public class Forum {
 	}
 
 	public void updateNewMessage(ForumMessage forumMessage) {
-		forumState.setLatestPost(forumMessage);
+		 synchronized (getForumLock()) {
+			forumState.setLatestPost(forumMessage);
+		}
 	}
 
 	@Override

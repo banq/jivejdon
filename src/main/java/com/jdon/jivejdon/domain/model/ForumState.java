@@ -44,6 +44,7 @@ public class ForumState  {
 	private AtomicReference<ForumMessage> latestPost;
 
 	private final Forum forum;
+	private final Object loadInitStateLock = new Object();
 
 	private SubscribedState subscribedState;
 
@@ -126,25 +127,25 @@ public class ForumState  {
 	}
 
 	public void loadinitState() {
-		DomainMessage dm = this.forum.lazyLoaderRole.loadForumState(forum.getForumId());
-		OneOneDTO oneOneDTO = null;
-		try {
-			// synchronized (this) {
-			 if (messageCount.get() != Integer.MIN_VALUE)
+		 synchronized (loadInitStateLock) {
+			if (messageCount.get() != Integer.MIN_VALUE)
                 return;
-			oneOneDTO = (OneOneDTO) dm.getEventResult();
-			if (oneOneDTO != null) {
-				OneOneDTO oneOneDTO2 = (OneOneDTO) oneOneDTO.getParent();
-				if(oneOneDTO2 != null){
-				   threadCount.set((Long)oneOneDTO.getChild());
-				   latestPost.set((ForumMessage) oneOneDTO2.getParent());
-				   messageCount.set((Long) oneOneDTO2.getChild());
+			DomainMessage dm = this.forum.lazyLoaderRole.loadForumState(forum.getForumId());
+			OneOneDTO oneOneDTO = null;
+			try {
+				oneOneDTO = (OneOneDTO) dm.getEventResult();
+				if (oneOneDTO != null) {
+					OneOneDTO oneOneDTO2 = (OneOneDTO) oneOneDTO.getParent();
+					if(oneOneDTO2 != null){
+					   threadCount.set((Long)oneOneDTO.getChild());
+					   latestPost.set((ForumMessage) oneOneDTO2.getParent());
+					   messageCount.set((Long) oneOneDTO2.getChild());
+					}
+					dm.clear();
 				}
-				dm.clear();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			// }
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 }
