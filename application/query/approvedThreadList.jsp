@@ -45,7 +45,7 @@ int randomIdx = 0;
         <div class="col-lg-8">
         <div class="box">	  
           <div class="box">  
-            <h1 class="vid-name" style="font-size: 2.5rem;margin-top: 2px;padding-bottom: 10px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><span itemprop="name"><bean:write name="forumThread" property="name"/></span></a></h1>
+            <div class="vid-name" style="font-size: 2.5rem;margin-top: 2px;padding-bottom: 10px;"><a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><h1 itemprop="name"><bean:write name="forumThread" property="name"/></h1></a></div>
           
            <div class="info">		
             <logic:iterate id="threadTag" name="forumThread" property="tags" >
