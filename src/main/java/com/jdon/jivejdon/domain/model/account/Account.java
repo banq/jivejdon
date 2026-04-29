@@ -69,26 +69,43 @@ public class Account {
 	@Inject
 	public UploadLazyLoader uploadLazyLoader;
 
+	private final Object lock = new Object();
+
 	public Account() {
 
 		accountSMState = new AccountSMState(this);
 	}
 
 	public Attachment getAttachment() {
-		if (attachment == null)
-			attachment = new Attachment(this.getUserIdLong(), this.uploadLazyLoader);
+		if (attachment == null) {
+			synchronized (lock) {
+				if (attachment == null) {
+					attachment = new Attachment(this.getUserIdLong(), this.uploadLazyLoader);
+				}
+			}
+		}
 		return attachment;
 	}
 
 	public AccountMessageVO getAccountMessageVO() {
-		if (accountMessageVO == null)
-			accountMessageVO = new AccountMessageVO(this.getUserIdLong(), this.lazyLoaderRole);
+		if (accountMessageVO == null) {
+			synchronized (lock) {
+				if (accountMessageVO == null) {
+					accountMessageVO = new AccountMessageVO(this.getUserIdLong(), this.lazyLoaderRole);
+				}
+			}
+		}
 		return accountMessageVO;
 	}
 
 	public RoleLoader getRoleLoader() {
-		if (roleLoader == null)
-			roleLoader = new RoleLoader(this.getUserIdLong(), this.lazyLoaderRole);
+		if (roleLoader == null) {
+			synchronized (lock) {
+				if (roleLoader == null) {
+					roleLoader = new RoleLoader(this.getUserIdLong(), this.lazyLoaderRole);
+				}
+			}
+		}
 		return roleLoader;
 	}
 
@@ -176,7 +193,7 @@ public class Account {
 	 */
 	public Long getUserIdLong() {
 		if (this.getUserId() != null)
-			return new Long(this.getUserId());
+			return Long.valueOf(this.getUserId());
 		else
 			return null;
 	}
