@@ -41,6 +41,6 @@
             </div>
       </div>  
 </li>
-<hr style="margin-top: 5px;margin-bottom: 5px;width: 90%; ">
+<hr class="custom-hr" />
  </logic:notEmpty>
 </logic:notEmpty>    
