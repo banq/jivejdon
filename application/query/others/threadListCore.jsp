@@ -29,7 +29,7 @@
 
     </div>
 </li>
-<hr style="margin-top: 5px;margin-bottom: 5px; width: 80%;">
+<hr class="custom-hr">
  </logic:notEmpty>
  </logic:notEmpty>    
 
