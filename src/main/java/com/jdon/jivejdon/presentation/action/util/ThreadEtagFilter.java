@@ -73,7 +73,7 @@ public class ThreadEtagFilter extends Action {
 		}
 		long modelLastModifiedDate = forumThread.getModifiedDate();
 
-		int expire = 1 * 24 * 60 * 60;
+		int expire = 2 * 24 * 60 * 60;
 
 		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request,
 				response)) {
@@ -83,15 +83,5 @@ public class ThreadEtagFilter extends Action {
 		return actionMapping.findForward(FormBeanUtil.FORWARD_SUCCESS_NAME);
 	}
 
-
-	private long convertContentInfoToTimestamp(String contentInfo) {
-        // 将内容信息转换为时间戳格式，供ToolsUtil.checkHeaderCache使用
-        // 使用简单的哈希算法转换为时间戳
-        int hash = contentInfo.hashCode();
-        // 确保哈希值为正数
-        hash = Math.abs(hash);
-        // 将哈希值转换为时间戳（避免使用当前时间，确保一致性）
-        return (long)hash * 1000L; // 放大一些避免冲突
-    }
 
 }
