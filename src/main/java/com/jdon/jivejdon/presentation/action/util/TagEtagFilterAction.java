@@ -35,7 +35,7 @@ import com.jdon.jivejdon.util.ToolsUtil;
  * 
  */
 public class TagEtagFilterAction extends Action {
-	private final static int expire = 2 * 24 * 60 * 60;
+	private final static int expire = 4 * 24 * 60 * 60;
 
 	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
