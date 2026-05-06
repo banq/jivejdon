@@ -30,40 +30,41 @@
         </div>
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav navbar-inverse">
-			    <li class="dropdown"><a href="https://www.jdon.com/metacognition.htm" class="dropdown-toggle" data-toggle="dropdown">元认知<i class="fa fa-arrow-circle-o-down"></i></a>
+			    <li class="dropdown"><a href="https://www.jdon.com/metacognition.htm">元认知<i class="fa fa-arrow-circle-o-down dropdown-toggle" data-toggle="dropdown"></i></a>
 					<div class="dropdown-menu">
 						  <div class="dropdown-inner" id="renzhi">
                        
                           </div>
 					</div>
 				</li>    
-               <li class="dropdown"><a href="https://www.jdon.com/metalogic.htm" class="dropdown-toggle" data-toggle="dropdown">元逻辑<i class="fa fa-arrow-circle-o-down"></i></a>
+               <li class="dropdown"><a href="https://www.jdon.com/metalogic.htm">元逻辑<i class="fa fa-arrow-circle-o-down dropdown-toggle" data-toggle="dropdown"></i></a>
 					<div class="dropdown-menu">
 						  <div class="dropdown-inner"  id="ddd">
  
                            </div>
 					</div>
 				</li>
-                <li class="dropdown"><a href="https://www.jdon.com/metadesign.htm" class="dropdown-toggle" data-toggle="dropdown">元设计<i class="fa fa-arrow-circle-o-down"></i></a>
+                <li class="dropdown"><a href="https://www.jdon.com/metadesign.htm">元设计<i class="fa fa-arrow-circle-o-down dropdown-toggle" data-toggle="dropdown"></i></a>
 					<div class="dropdown-menu">
 	                      <div class="dropdown-inner" id="micros">
                           
                           </div>
 					</div>
 				</li>
-				<li class="dropdown"><a href="https://www.jdon.com/metaprogramming.htm" class="dropdown-toggle" data-toggle="dropdown">元编程<i class="fa fa-arrow-circle-o-down"></i></a>
+				<li class="dropdown"><a href="https://www.jdon.com/metaprogramming.htm">元编程<i class="fa fa-arrow-circle-o-down dropdown-toggle" data-toggle="dropdown"></i></a>
 					<div class="dropdown-menu">
 	                   <div class="dropdown-inner" id="prog">
                         
                        </div>
 					</div>
 				</li>
-                <li class="dropdown"><a href="https://www.jdon.com/metalanguage.htm" class="dropdown-toggle" data-toggle="dropdown">元语言<i class="fa fa-arrow-circle-o-down"></i></a>
+                <li class="dropdown"><a href="https://www.jdon.com/metalanguage.htm">元语言<i class="fa fa-arrow-circle-o-down dropdown-toggle" data-toggle="dropdown"></i></a>
 					<div class="dropdown-menu">
 	                   <div class="dropdown-inner" id="meme">
                        
                       </div>
 					</div>
+				</li>
 				</li>			
 			</ul>
 			<ul class="list-inline navbar-right top-social">
