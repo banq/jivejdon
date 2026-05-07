@@ -67,12 +67,11 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 		// construct a immutable set
 		List<ViewCounter> viewCounters2 = new ArrayList<>(this.viewcounters.values());
 		for (ViewCounter viewCounter : viewCounters2) {
-			if (viewCounter.isDirty() && viewCounter.getViewCount() != -1 && viewCounter.getViewCount() != 0) {
+			long count = viewCounter.getViewCount();
+			if (count != -1 && count != 0) {
 				saveItem(viewCounter);
-				viewCounter.clearDirty();
-				// 只移除已写入的 key，避免并发丢失
-				this.viewcounters.remove(viewCounter.getThreadId(), viewCounter);
 			}
+			this.viewcounters.remove(viewCounter.getThreadId(), viewCounter);
 		}
 	}
 

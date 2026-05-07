@@ -16,7 +16,6 @@
 package com.jdon.jivejdon.domain.model.thread;
 
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -28,7 +27,6 @@ public class ViewCounter extends LazyLoader implements Comparable<ViewCounter> {
 
 	private final ForumThread thread;
 	private final AtomicInteger viewCount = new AtomicInteger(0);
-	private final AtomicBoolean dirty = new AtomicBoolean(false);
 	private final AtomicReference<String> lastIP = new AtomicReference<>("");
 	// 懒加载优化：用 volatile boolean loaded 替代 AtomicBoolean load
 	private volatile boolean loaded = false;
@@ -63,7 +61,6 @@ public class ViewCounter extends LazyLoader implements Comparable<ViewCounter> {
 			if (!Objects.equals(this.lastIP.get(), ip)) {
 				viewCount.incrementAndGet();
 				this.lastIP.set(ip);
-				dirty.set(true);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,13 +68,6 @@ public class ViewCounter extends LazyLoader implements Comparable<ViewCounter> {
 
 	}
 
-	public boolean isDirty() {
-		return dirty.get();
-	}
-
-	public void clearDirty() {
-		dirty.set(false);
-	}
 	// public ForumThread getThread() {
 	// return thread;
 	// }
