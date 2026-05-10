@@ -73,7 +73,7 @@ public class ThreadDigSortedListAction extends ModelListAction {
 
 		Forum forum = null;
 		if ((forumId == null) || !StringUtils.isNumeric(forumId) || forumId.length() > 10) {
-			forum = new Forum();
+			forum = new Forum(null);
 			forum.setName("主题总表");
 		} else {
 			forum = forumService.getForum(Long.parseLong(forumId));

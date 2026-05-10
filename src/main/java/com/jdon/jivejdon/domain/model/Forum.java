@@ -15,6 +15,7 @@
  */
 package com.jdon.jivejdon.domain.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -36,11 +37,9 @@ import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
  * 
  */
 @Model
-public class Forum {
+public class Forum implements Serializable {
 	private final static Logger logger = LogManager.getLogger(Forum.class);
-	/**
-	 *
-	 */
+	 
 	private static final long serialVersionUID = 1L;
 
 	private static final ConcurrentHashMap<Long, Object> forumLocks = new ConcurrentHashMap<>();
@@ -83,18 +82,22 @@ public class Forum {
 			logger.error("repeat message error: " + postTopicMessageCommand.getMessageVO().getSubject());
 			return;
 		}
-		DomainMessage domainMessage = null;
-		if (forumState != null) {
-			domainMessage = forumState.saveTopicMessage(postTopicMessageCommand);
-		}
-		if (domainMessage == null)
+		if (forumState == null)
 			return;
-		ForumMessage rootForumMessage = (ForumMessage) domainMessage.getBlockEventResult();
-		if (rootForumMessage != null) {// make sure repostiory finish save new message
-			threadPosted(rootForumMessage);
-			if (forumState != null) {
-				forumState.topicMessagePosted(rootForumMessage);
+
+		DomainMessage domainMessage = null;
+		ForumMessage rootForumMessage = null;
+		synchronized (getForumLock()) {
+			domainMessage = forumState.saveTopicMessage(postTopicMessageCommand);
+			if (domainMessage == null)
+				return;
+			rootForumMessage = (ForumMessage) domainMessage.getBlockEventResult();
+			if (rootForumMessage != null) {
+				threadPosted(rootForumMessage);
 			}
+		}
+		if (rootForumMessage != null) {
+			forumState.topicMessagePosted(rootForumMessage);
 		}
 	}
 
@@ -121,11 +124,22 @@ public class Forum {
 		}
 	}
 
+	/**
+	 * Default constructor reserved for dynamic proxy / framework initialization.
+	 */
 	public Forum() {
 		// no domain state by default, this can be a lightweight DTO-like reference
 		//如果一个对象有可变状态，就是领域对象，否则肯定是数据对象，这是常识
-		forumState = null;
+		forumState = new ForumState(this);
 	}
+
+	/**
+	 * Explicit constructor for code-level creation with initialized state.
+	 */
+	public Forum(ForumState initState) {
+		this.forumState = initState;
+	}
+
 
 	/**
 	 * @return Returns the creationDate.
