@@ -1,31 +1,21 @@
-/*
- * Copyright 2007 the original author or jdon.com
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
 package com.jdon.jivejdon.infrastructure.repository.builder;
 
-import com.jdon.jivejdon.domain.model.Forum;
-import com.jdon.jivejdon.infrastructure.repository.property.HotKeysRepository;
-import com.jdon.jivejdon.infrastructure.repository.dao.ForumDao;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.jdon.jivejdon.domain.model.Forum;
+import com.jdon.jivejdon.infrastructure.repository.dao.ForumDao;
 
 public class ForumDirector {
 	private final static Logger logger = LogManager.getLogger(ForumDirector.class);
 
 	private final ForumDao forumDao;
+	
+	// 缓存 Forum 实例，防止并发创建多个相同 forumId 的实例
+	private final ConcurrentMap<Long, Forum> forumCache = new ConcurrentHashMap<>();
 
 	public ForumDirector(ForumDao forumDao) {
 		this.forumDao = forumDao;
@@ -36,10 +26,16 @@ public class ForumDirector {
 		if (forumId == null)
 			return null;
 		try {
-			return forumDao.getForum(forumId);
+			// 使用 computeIfAbsent 确保每个 forumId 只创建一个实例，避免并发重复创建
+			return forumCache.computeIfAbsent(forumId, this::loadForum);
 		} catch (Exception e) {
+			logger.error("Error getting forum for forumId=" + forumId, e);
 			return null;
 		}
+	}
+	
+	private Forum loadForum(Long forumId) {
+		return forumDao.getForum(forumId);
 	}
 
 }
