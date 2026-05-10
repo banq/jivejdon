@@ -27,9 +27,7 @@ import com.jdon.annotation.model.Inject;
 import com.jdon.annotation.model.OnCommand;
 import com.jdon.domain.message.DomainMessage;
 import com.jdon.jivejdon.domain.command.PostTopicMessageCommand;
-import com.jdon.jivejdon.domain.event.TopicMessagePostedEvent;
 import com.jdon.jivejdon.domain.model.subscription.SubPublisherRoleIF;
-import com.jdon.jivejdon.domain.model.subscription.event.ForumSubscribedNotifyEvent;
 import com.jdon.jivejdon.spi.pubsub.publish.ThreadEventSourcingRole;
 import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 
@@ -64,7 +62,7 @@ public class Forum {
 	 * @link aggregation
 	 */
 
-	private final ForumState forumState;
+	private ForumState forumState;
 
 	@Inject
 	public LazyLoaderRole lazyLoaderRole;
@@ -85,19 +83,25 @@ public class Forum {
 			logger.error("repeat message error: " + postTopicMessageCommand.getMessageVO().getSubject());
 			return;
 		}
-		DomainMessage domainMessage = eventSourcingRole.saveTopicMessage(postTopicMessageCommand);
+		DomainMessage domainMessage = null;
+		if (forumState != null) {
+			domainMessage = forumState.saveTopicMessage(postTopicMessageCommand);
+		}
+		if (domainMessage == null)
+			return;
 		ForumMessage rootForumMessage = (ForumMessage) domainMessage.getBlockEventResult();
 		if (rootForumMessage != null) {// make sure repostiory finish save new message
 			threadPosted(rootForumMessage);
-			eventSourcingRole.topicMessagePosted(new TopicMessagePostedEvent(rootForumMessage));
+			if (forumState != null) {
+				forumState.topicMessagePosted(rootForumMessage);
+			}
 		}
 	}
 
 	private boolean isRepeatedMessage(PostTopicMessageCommand postTopicMessageCommand) {
-		if (this.forumState.getLatestPost() == null)
+		if (forumState == null || this.forumState.getLatestPost() == null)
 			return false;
-		return this.forumState.getLatestPost()
-				.isSubjectRepeated(postTopicMessageCommand.getMessageVO().getSubject()) ? true : false;
+		return this.forumState.getLatestPost().isSubjectRepeated(postTopicMessageCommand.getMessageVO().getSubject());
 
 	}
 
@@ -108,18 +112,19 @@ public class Forum {
 	}
 
 	public void threadPosted(ForumMessage rootForumMessage) {
-		 synchronized (getForumLock()) {
-			forumState.addThreadCount();
-			forumState.setLatestPost(rootForumMessage);
+		if (forumState != null) {
+			 synchronized (getForumLock()) {
+				forumState.addThreadCount();
+				forumState.setLatestPost(rootForumMessage);
+			}
+			forumState.subscriptionNotify(rootForumMessage);
 		}
-		this.publisherRole.subscriptionNotify(new ForumSubscribedNotifyEvent(this.forumId, rootForumMessage));
 	}
 
 	public Forum() {
-		// 如果一个对象有可变状态，就是领域对象，否则肯定是数据对象，这是常识
-		
-		//是不是 在public Forum() { 将#sym:forumState 设置为空，然后调用this.publisherRole.放入#sym:ForumState 中，这样就表明，如果有#sym:ForumState 是领域对象，否则就是普通DTo数据对象？
-		//forumState = new ForumState(this);
+		// no domain state by default, this can be a lightweight DTO-like reference
+		//如果一个对象有可变状态，就是领域对象，否则肯定是数据对象，这是常识
+		forumState = null;
 	}
 
 	/**
@@ -190,18 +195,23 @@ public class Forum {
 	}
 
 	public ForumState getForumState() {
-			return forumState;
+		return forumState;
 	}
-	//
-	// public void setForumState(ForumState forumState) {
-	// if (forumState != null)
-	// this.forumState.lazySet(forumState);
-	// }
+
+	public void setForumState(ForumState forumState) {
+		this.forumState = forumState;
+	}
+
+	public boolean hasForumState() {
+		return forumState != null;
+	}
 
 	public void addNewMessage(ForumMessageReply forumMessageReply) {
-		 synchronized (getForumLock()) {
-			forumState.addMessageCount();
-			forumState.setLatestPost(forumMessageReply);
+		if (forumState != null) {
+			 synchronized (getForumLock()) {
+				forumState.addMessageCount();
+				forumState.setLatestPost(forumMessageReply);
+			}
 		}
 
 		// Date olddate = Constants.parseDateTime(oldmessage.getCreationDate());
@@ -212,8 +222,10 @@ public class Forum {
 	}
 
 	public void updateNewMessage(ForumMessage forumMessage) {
-		 synchronized (getForumLock()) {
-			forumState.setLatestPost(forumMessage);
+		if (forumState != null) {
+			 synchronized (getForumLock()) {
+				forumState.setLatestPost(forumMessage);
+			}
 		}
 	}
 

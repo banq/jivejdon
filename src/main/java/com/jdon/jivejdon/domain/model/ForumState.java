@@ -19,7 +19,10 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
 import com.jdon.domain.message.DomainMessage;
+import com.jdon.jivejdon.domain.command.PostTopicMessageCommand;
+import com.jdon.jivejdon.domain.event.TopicMessagePostedEvent;
 import com.jdon.jivejdon.domain.model.subscription.SubscribedState;
+import com.jdon.jivejdon.domain.model.subscription.event.ForumSubscribedNotifyEvent;
 import com.jdon.jivejdon.domain.model.subscription.subscribed.ForumSubscribed;
 import com.jdon.jivejdon.domain.model.util.OneOneDTO;
 
@@ -107,6 +110,24 @@ public class ForumState  {
 
 	public Forum getForum() {
 		return forum;
+	}
+
+	public DomainMessage saveTopicMessage(PostTopicMessageCommand postTopicMessageCommand) {
+		if (forum == null || forum.eventSourcingRole == null)
+			return null;
+		return forum.eventSourcingRole.saveTopicMessage(postTopicMessageCommand);
+	}
+
+	public void topicMessagePosted(ForumMessage rootForumMessage) {
+		if (forum == null || forum.eventSourcingRole == null)
+			return;
+		forum.eventSourcingRole.topicMessagePosted(new TopicMessagePostedEvent(rootForumMessage));
+	}
+
+	public void subscriptionNotify(ForumMessage forumMessage) {
+		if (forum.publisherRole != null) {
+			forum.publisherRole.subscriptionNotify(new ForumSubscribedNotifyEvent(forum.getForumId(), forumMessage));
+		}
 	}
 
 	public void updateSubscriptionCount(int count) {
