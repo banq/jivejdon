@@ -116,9 +116,10 @@ public class Forum {
 	}
 
 	public Forum() {
-		// init state
+		// 如果一个对象有可变状态，就是领域对象，否则肯定是数据对象，这是常识
+		
 		//是不是 在public Forum() { 将#sym:forumState 设置为空，然后调用this.publisherRole.放入#sym:ForumState 中，这样就表明，如果有#sym:ForumState 是领域对象，否则就是普通DTo数据对象？
-		forumState = new ForumState(this);
+		//forumState = new ForumState(this);
 	}
 
 	/**
