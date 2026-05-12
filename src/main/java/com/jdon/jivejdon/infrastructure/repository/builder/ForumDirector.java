@@ -1,7 +1,7 @@
 package com.jdon.jivejdon.infrastructure.repository.builder;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.FutureTask;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,28 +14,43 @@ public class ForumDirector {
 
 	private final ForumDao forumDao;
 	
-	// 缓存 Forum 实例，防止并发创建多个相同 forumId 的实例
-	private final ConcurrentMap<Long, Forum> forumCache = new ConcurrentHashMap<>();
-
 	public ForumDirector(ForumDao forumDao) {
 		this.forumDao = forumDao;
 	}
 
+	private final ConcurrentHashMap<Long, FutureTask<Forum>> inflightAccounts =
+        new ConcurrentHashMap<>();
+
+	private Forum loadForum(Long forumId) {
+		FutureTask<Forum> task = new FutureTask<>(() -> {
+			return forumDao.getForum(forumId);
+		});
+
+		FutureTask<Forum> existing = inflightAccounts.putIfAbsent(forumId, task);
+
+		if (existing == null) {
+			existing = task;
+			task.run();
+		}
+
+		try {
+			return existing.get();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} finally {
+			inflightAccounts.remove(forumId, existing);
+		}
+	}
+
+	
 	public Forum getForum(Long forumId) {
 		logger.debug(" enter getForum for forumId=" + forumId);
 		if (forumId == null)
 			return null;
-		try {
-			// 使用 computeIfAbsent 确保每个 forumId 只创建一个实例，避免并发重复创建
-			return forumCache.computeIfAbsent(forumId, this::loadForum);
-		} catch (Exception e) {
-			logger.error("Error getting forum for forumId=" + forumId, e);
-			return null;
-		}
+		// 使用 computeIfAbsent 确保每个 forumId 只创建一个实例，避免并发重复创建
+		return loadForum(forumId);
+
 	}
 	
-	private Forum loadForum(Long forumId) {
-		return forumDao.getForum(forumId);
-	}
 
 }
