@@ -47,15 +47,10 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 		}
 
 		try {
-
 			return existing.get();
-
 		} catch (Exception e) {
-
 			throw new RuntimeException(e);
-
 		} finally {
-
 			inflightAccounts.remove(userId, existing);
 		}
 	}
