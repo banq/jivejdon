@@ -71,12 +71,22 @@ public class Account {
 
 	private final Object lock = new Object();
 
+	/**
+	 * Default constructor reserved for dynamic proxy / framework initialization.
+	 */
 	public Account() {
-
 		accountSMState = new AccountSMState(this);
 	}
 
+	/**
+	 * Explicit constructor for code-level creation with initialized state.
+	 */
+	public Account(AccountSMState accountSMState) {
+		this.accountSMState = accountSMState;
+	}
+
 	public Attachment getAttachment() {
+		if (accountSMState == null) return null;
 		if (attachment == null) {
 			synchronized (lock) {
 				if (attachment == null) {
@@ -88,6 +98,7 @@ public class Account {
 	}
 
 	public AccountMessageVO getAccountMessageVO() {
+		if (accountSMState == null) return null;	
 		if (accountMessageVO == null) {
 			synchronized (lock) {
 				if (accountMessageVO == null) {
@@ -98,7 +109,8 @@ public class Account {
 		return accountMessageVO;
 	}
 
-	public RoleLoader getRoleLoader() {
+	public RoleLoader getRoleLoader() {	
+		if (accountSMState == null) return null;
 		if (roleLoader == null) {
 			synchronized (lock) {
 				if (roleLoader == null) {

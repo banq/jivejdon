@@ -50,7 +50,7 @@ public class MessageInitFactory {
 
 			Object o = map.get("userID");
 			if (o != null) {
-				Account account = new Account();
+				Account account = new Account(null);
 				account.setUserIdLong((Long) o);
 				messageCore.setAccount(account);
 			} else {
@@ -146,7 +146,7 @@ public class MessageInitFactory {
 	}
 
 	private Account createAnonymous() {
-		Account account = new Account();
+		Account account = new Account(null);
 		account.setUsername("anonymous");
 		account.setUserIdLong(new Long(0));
 		account.setEmail("anonymous@anonymous.com");

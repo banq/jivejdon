@@ -177,7 +177,7 @@ public class ForumMessageQueryServiceImp implements ForumMessageQueryService {
 			MultiCriteria mc = (MultiCriteria) qc;
 			String username = mc.getUsername();
 			if (username != null) {
-				Account accountIn = new Account();
+				Account accountIn = new Account(null);
 				accountIn.setUsername(username);
 				Account account = accountFactory.getFullAccount(accountIn);
 				if (account != null)
@@ -201,7 +201,7 @@ public class ForumMessageQueryServiceImp implements ForumMessageQueryService {
 			MultiCriteria mc = (MultiCriteria) qc;
 			String username = mc.getUsername();
 			if (username != null) {
-				Account accountIn = new Account();
+				Account accountIn = new Account(null);
 				accountIn.setUsername(username);
 				Account account = accountFactory.getFullAccount(accountIn);
 				if (account != null)

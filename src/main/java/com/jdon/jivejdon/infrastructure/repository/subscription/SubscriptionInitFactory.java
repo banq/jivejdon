@@ -58,7 +58,7 @@ public class SubscriptionInitFactory {
 		subscription.setSubscriptionId((Long) map.get("subscriptionID"));
 
 		String userId = (String) map.get("userId");
-		Account accountin = new Account();
+		Account accountin = new Account(null);
 		accountin.setUserId(userId);
 		subscription.setAccount(accountin);
 

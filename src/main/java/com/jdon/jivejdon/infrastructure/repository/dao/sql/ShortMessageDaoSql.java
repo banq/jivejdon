@@ -94,7 +94,7 @@ public class ShortMessageDaoSql implements ShortMessageDao {
 				shortMessage.setMessageTo((String) map.get("messageTo"));
 
 				Long userId = (Long) map.get("userId");
-				Account account = new Account();
+				Account account = new Account(null);
 				account.setUserId(userId.toString());
 				shortMessage.setAccount(account);
 

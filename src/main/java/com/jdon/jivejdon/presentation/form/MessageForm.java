@@ -93,7 +93,7 @@ public class MessageForm extends BaseForm {
 		forum = new Forum(null); // for parameter forum.forumId=xxx
 		forumThread = new ForumThread(null, null);
 		forumThread.setForum(forum);
-		account = new Account();
+		account = new Account(null);
 		parentMessage = new AnemicMessageDTO();
 
 	}

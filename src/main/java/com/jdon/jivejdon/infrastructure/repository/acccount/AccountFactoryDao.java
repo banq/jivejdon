@@ -9,6 +9,8 @@ import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
 import org.apache.commons.validator.EmailValidator;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.regex.Pattern;
 
 public class AccountFactoryDao implements AccountFactory, Startable {
@@ -20,6 +22,15 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 	private ContainerUtil containerUtil;
 	
 	private final Account anonymous;
+	
+	// 缓存 username -> userId 的映射，防止并发重复查询数据库
+	private final ConcurrentMap<String, Long> usernameCacheMap = new ConcurrentHashMap<>();
+	
+	// 缓存 email -> userId 的映射，防止并发重复查询数据库
+	private final ConcurrentMap<String, Long> emailCacheMap = new ConcurrentHashMap<>();
+	
+	// 缓存 userId -> Account 的映射，防止并发重复创建 Account 实例
+	private final ConcurrentMap<String, Account> accountCacheMap = new ConcurrentHashMap<>();
 
 	public AccountFactoryDao(AccountDao accountDao, ContainerUtil containerUtil) {
 		this.accountDao = accountDao;
@@ -61,12 +72,18 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 			return null;
 		if (email.length() > 50)
 			return null;
-		Long userId = accountDao.fetchAccountByEmail(email);
-		if (userId != null) // ensure one instance in cache for one key;
+		// 使用 computeIfAbsent 确保同一 email 只查询一次数据库，避免并发重复创建
+		Long userId = emailCacheMap.computeIfAbsent(email, this::fetchUserIdByEmail);
+		if (userId != null && userId > 0) // ensure one instance in cache for one key;
 			return accountDao.getAccount(Long.toString(userId));
 		else
 			return null;
 
+	}
+	
+	private Long fetchUserIdByEmail(String email) {
+		Long userId = accountDao.fetchAccountByEmail(email);
+		return userId != null ? userId : -1L; // 用 -1 表示查询过但不存在，避免重复查询
 	}
 
 	public Account getFullAccountForUsername(String username) {
@@ -77,13 +94,15 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 		if (username.length() > 30)
 			return account;
 		try {
-			Long userId = accountDao.fetchAccountByName(username);
-			if (userId != null) {// ensure one instance in cache for one key;
+			// 使用 computeIfAbsent 确保同一 username 只查询一次数据库，避免并发重复创建
+			Long userId = usernameCacheMap.computeIfAbsent(username, this::fetchUserIdByUsername);
+			if (userId != null && userId > 0) {// ensure one instance in cache for one key;
 				account = accountDao.getAccount(Long.toString(userId));
 				if (account != null && !account.getUsername().equalsIgnoreCase(username)) {
 					Debug.logError("the user is wrong, username=" + username + " userId=" + userId + " account username=" + account.getUsername(),
 							module);
 					containerUtil.clearCache(userId);
+					usernameCacheMap.remove(username); // 清除错误的缓存
 					return null;
 				}
 			}
@@ -94,6 +113,11 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 			Debug.logError("the user not found username=" + username, module);
 		}
 		return account;
+	}
+	
+	private Long fetchUserIdByUsername(String username) {
+		Long userId = accountDao.fetchAccountByName(username);
+		return userId != null ? userId : -1L; // 用 -1 表示查询过但不存在，避免重复查询
 	}
 
 	/*
@@ -107,10 +131,12 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 		Debug.logVerbose("enter AccountFactory create", module);
 		if (userId == null)
 			return this.anonymous;
-		Account account = null;
-		if (userId != null) {
-			account = accountDao.getAccount(userId);
-		}
+		// 使用 computeIfAbsent 确保同一 userId 只加载一次，避免并发重复创建 Account 实例
+		return accountCacheMap.computeIfAbsent(userId, this::fetchAccountById);
+	}
+	
+	private Account fetchAccountById(String userId) {
+		Account account = accountDao.getAccount(userId);
 		if (account == null) {
 			Debug.logVerbose("the user has been delete, it is Anonymous, userId=" + userId, module);
 			account = this.anonymous;
@@ -119,7 +145,7 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 	}
 
 	private Account createAnonymous() {
-		Account account = new Account();
+		Account account = new Account(null);
 		account.setUsername("anonymous");
 		account.setUserIdLong(new Long(0));
 		account.setEmail("anonymous@anonymous.com");
@@ -141,6 +167,9 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 		if (this.accountDao != null) {
 			this.accountDao = null;
 		}
+		usernameCacheMap.clear();
+		emailCacheMap.clear();
+		accountCacheMap.clear();
 
 	}
 

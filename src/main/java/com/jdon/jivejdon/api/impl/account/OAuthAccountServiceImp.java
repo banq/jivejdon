@@ -18,32 +18,32 @@ package com.jdon.jivejdon.api.impl.account;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.oauth.OAuthAccessor;
-
 import com.jdon.annotation.Service;
-import com.jdon.jivejdon.util.Constants;
+import com.jdon.jivejdon.api.account.AccountService;
+import com.jdon.jivejdon.api.account.OAuthAccountService;
+import com.jdon.jivejdon.api.util.JtaTransactionUtil;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.domain.model.account.OAuthUserVO;
+import com.jdon.jivejdon.domain.model.attachment.UploadFile;
+import com.jdon.jivejdon.domain.model.auth.Role;
+import com.jdon.jivejdon.domain.model.property.Property;
+import com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactory;
+import com.jdon.jivejdon.infrastructure.repository.acccount.AccountRepository;
+import com.jdon.jivejdon.infrastructure.repository.acccount.Userconnector;
+import com.jdon.jivejdon.infrastructure.repository.dao.SequenceDao;
+import com.jdon.jivejdon.infrastructure.repository.property.UploadRepository;
+import com.jdon.jivejdon.infrastructure.repository.subscription.SubscriptionInitFactory;
 import com.jdon.jivejdon.spi.component.account.GoogleOAuthSubmitter;
 import com.jdon.jivejdon.spi.component.account.GoolgeOAuthParamVO;
 import com.jdon.jivejdon.spi.component.account.SinaOAuthSubmitter;
 import com.jdon.jivejdon.spi.component.account.sina.AccessToken;
 import com.jdon.jivejdon.spi.component.weibo.UserConnectorAuth;
 import com.jdon.jivejdon.spi.component.weibo.WeiboTransferParamVO;
-import com.jdon.jivejdon.domain.model.account.Account;
-import com.jdon.jivejdon.domain.model.property.Property;
-import com.jdon.jivejdon.domain.model.account.OAuthUserVO;
-import com.jdon.jivejdon.domain.model.attachment.UploadFile;
-import com.jdon.jivejdon.domain.model.auth.Role;
-import com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactory;
-import com.jdon.jivejdon.infrastructure.repository.acccount.AccountRepository;
-import com.jdon.jivejdon.infrastructure.repository.property.UploadRepository;
-import com.jdon.jivejdon.infrastructure.repository.acccount.Userconnector;
-import com.jdon.jivejdon.infrastructure.repository.subscription.SubscriptionInitFactory;
-import com.jdon.jivejdon.infrastructure.repository.dao.SequenceDao;
-import com.jdon.jivejdon.api.account.AccountService;
-import com.jdon.jivejdon.api.account.OAuthAccountService;
-import com.jdon.jivejdon.api.util.JtaTransactionUtil;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
+
+import net.oauth.OAuthAccessor;
 
 @Service("oAuthAccountService")
 public class OAuthAccountServiceImp implements OAuthAccountService {
@@ -190,7 +190,7 @@ public class OAuthAccountServiceImp implements OAuthAccountService {
 	}
 
 	public Account transferSina(OAuthUserVO oAuthUser) {
-		Account account = new Account();
+		Account account = new Account(null);
 		account.setUserId(oAuthUser.getUserConnectorAuth().getUserId());
 		String oAuthuserId = oAuthUser.getOAuthUserId();
 		if (oAuthuserId.length() > 5)
@@ -257,7 +257,7 @@ public class OAuthAccountServiceImp implements OAuthAccountService {
 	}
 
 	public Account transferGoogle(OAuthUserVO weiboUser) {
-		Account account = new Account();
+		Account account = new Account(null);
 		account.setUserId(weiboUser.getUserConnectorAuth().getUserId());
 		String weibouesr = weiboUser.getOAuthUserId();
 		if (weibouesr.length() > 5)

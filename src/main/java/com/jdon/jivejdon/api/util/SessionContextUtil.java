@@ -91,7 +91,7 @@ public class SessionContextUtil {
 		Account account = null;
 		String username = getPrinciple(sessionContext);
 		if (username != null) {
-			account = new Account();
+			account = new Account(null);
 			account.setUsername(username);
 			account = accountFactory.getFullAccount(account);
 		}

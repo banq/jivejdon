@@ -21,15 +21,15 @@ import java.util.Observer;
 
 import com.jdon.annotation.Component;
 import com.jdon.controller.model.PageIterator;
-import com.jdon.jivejdon.util.Constants;
+import com.jdon.jivejdon.domain.event.ATUserNotifiedEvent;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.shortmessage.ShortMessage;
 import com.jdon.jivejdon.domain.model.shortmessage.ShortMessageState;
-import com.jdon.jivejdon.domain.event.ATUserNotifiedEvent;
 import com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactory;
-import com.jdon.jivejdon.infrastructure.repository.shortmessage.ShortMessageRepository;
 import com.jdon.jivejdon.infrastructure.repository.dao.SequenceDao;
 import com.jdon.jivejdon.infrastructure.repository.dao.ShortMessageDao;
+import com.jdon.jivejdon.infrastructure.repository.shortmessage.ShortMessageRepository;
+import com.jdon.jivejdon.util.Constants;
 
 /**
  * ShortMessageFactory.java
@@ -84,14 +84,14 @@ public class ShortMessageFactory implements Observer {
 	}
 
 	public void notifyTargetAccount(ShortMessage msg) {
-		Account targetAccount = new Account();
+		Account targetAccount = new Account(null);
 		targetAccount.setUsername(msg.getMessageTo());
 		targetAccount = accountFactory.getFullAccount(targetAccount);
 		targetAccount.addOneNewMessage(1);
 	}
 
 	public int getNewShortMessageCount(ShortMessage msg) {
-		Account targetAccount = new Account();
+		Account targetAccount = new Account(null);
 		targetAccount.setUsername(msg.getMessageTo());
 		targetAccount = accountFactory.getFullAccount(targetAccount);
 		return targetAccount.getNewShortMessageCount();
@@ -137,7 +137,7 @@ public class ShortMessageFactory implements Observer {
 	}
 
 	public Account findTheUser(String userName) {
-		Account account = new Account();
+		Account account = new Account(null);
 		account.setUsername(userName);
 		return accountFactory.getFullAccount(account);
 	}
