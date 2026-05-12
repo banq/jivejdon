@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.FutureTask;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -67,9 +67,6 @@ public class MessageDirector implements MessageDirectorIF {
 
 	private ThreadDirectorIF threadDirectorIF;
 
-	private final ConcurrentMap<Long, RootMessage> atomicFactorys = new ConcurrentHashMap<>();
-
-	private final ConcurrentMap<Long, ForumMessage> atomicFactorys2 = new ConcurrentHashMap<>();
 
 	public MessageDirector(ForumDirector forumDirector, MessageDao messageDao, AccountFactory accountFactory,
 			OutFilterManager outFilterManager, PropertyDao propertyDao, UploadRepository uploadRepository,
@@ -89,17 +86,30 @@ public class MessageDirector implements MessageDirectorIF {
 		this.threadDirectorIF = threadDirectorIF;
 	}
 
+	private final ConcurrentHashMap<Long, FutureTask<ForumMessage>> atomicForumMessage = new ConcurrentHashMap<>();
+
+	private final ConcurrentHashMap<Long, FutureTask<RootMessage>> atomicRootMessage = new ConcurrentHashMap<>();
+
 	@Around()
 	public ForumMessage getMessage(Long messageId) {
 		if (messageId == null || messageId == 0)
 			return null;
+
+		FutureTask<ForumMessage> task = new FutureTask<>(() -> buildMessage(messageId));
+
+		FutureTask<ForumMessage> existing = atomicForumMessage.putIfAbsent(messageId, task);
+
+		if (existing == null) {
+			existing = task;
+			task.run();
+		}
+
 		try {
-			ForumMessage forumMessage = (ForumMessage)atomicFactorys2.computeIfAbsent(messageId, k->buildMessage(messageId));
-			if (forumMessage != null)
-			   atomicFactorys2.remove(messageId);
-			return forumMessage;
+			return existing.get();
 		} catch (Exception e) {
-			return null;
+			throw new RuntimeException(e);
+		} finally {
+			atomicForumMessage.remove(messageId, existing);
 		}
 	}
 
@@ -107,13 +117,22 @@ public class MessageDirector implements MessageDirectorIF {
 	public RootMessage getRootMessage(Long messageId) {
 		if (messageId == null || messageId == 0)
 			return null;
+
+		FutureTask<RootMessage> task = new FutureTask<>(() -> buildRootMessage(messageId));
+
+		FutureTask<RootMessage> existing = atomicRootMessage.putIfAbsent(messageId, task);
+
+		if (existing == null) {
+			existing = task;
+			task.run();
+		}
+
 		try {
-			RootMessage rootMessage = atomicFactorys.computeIfAbsent(messageId, k->buildRootMessage(messageId));
-			if (rootMessage != null)
-			    atomicFactorys.remove(messageId);
-			return rootMessage;
+			return existing.get();
 		} catch (Exception e) {
-			return null;
+			throw new RuntimeException(e);
+		} finally {
+			atomicRootMessage.remove(messageId, existing);
 		}
 	}
 

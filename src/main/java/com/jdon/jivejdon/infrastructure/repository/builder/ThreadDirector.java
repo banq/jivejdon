@@ -17,7 +17,7 @@
 package com.jdon.jivejdon.infrastructure.repository.builder;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.FutureTask;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -43,7 +43,6 @@ public class ThreadDirector implements ThreadDirectorIF{
 
 	private final ForumDirector forumDirector;
 
-	private final ConcurrentMap<Long, ForumThread> atomicFactorys = new ConcurrentHashMap<>();
 
 	public ThreadDirector(ForumDirector forumDirector, MessageDao messageDao, TagRepository tagRepository,
 			MessageDirectorIF messageDirectorIF) {
@@ -53,18 +52,29 @@ public class ThreadDirector implements ThreadDirectorIF{
 		this.messageDirectorIF = messageDirectorIF;
 	}
 
+	private final ConcurrentHashMap<Long, FutureTask<ForumThread>> threadInflight = new ConcurrentHashMap<>();
+
 	@Override
 	@Around
-	public ForumThread getThread(Long threadId)  {
+	public ForumThread getThread(Long threadId) {
 		if (threadId == null || threadId == 0)
 			return null;
+
+		FutureTask<ForumThread> task = new FutureTask<>(() -> build(threadId));
+
+		FutureTask<ForumThread> existing = threadInflight.putIfAbsent(threadId, task);
+
+		if (existing == null) {
+			existing = task;
+			task.run();
+		}
+
 		try {
-			ForumThread  forumThread = atomicFactorys.computeIfAbsent(threadId, this::build);
-			if(forumThread != null)
-				atomicFactorys.remove(threadId);
-			return forumThread;
+			return existing.get();
 		} catch (Exception e) {
 			return null;
+		} finally {
+			threadInflight.remove(threadId, existing);
 		}
 	}
 
