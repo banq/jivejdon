@@ -155,9 +155,6 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 		if (this.accountDao != null) {
 			this.accountDao = null;
 		}
-		usernameCacheMap.clear();
-		emailCacheMap.clear();
-		accountCacheMap.clear();
 
 	}
 
