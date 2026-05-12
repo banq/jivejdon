@@ -1,5 +1,11 @@
 package com.jdon.jivejdon.infrastructure.repository.acccount;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.FutureTask;
+import java.util.regex.Pattern;
+
+import org.apache.commons.validator.EmailValidator;
+
 import com.jdon.container.pico.Startable;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.auth.Role;
@@ -7,11 +13,6 @@ import com.jdon.jivejdon.infrastructure.repository.dao.AccountDao;
 import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.util.Debug;
 import com.jdon.util.UtilValidate;
-import org.apache.commons.validator.EmailValidator;
-
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.regex.Pattern;
 
 public class AccountFactoryDao implements AccountFactory, Startable {
 	private final static String module = AccountFactoryDao.class.getName();
@@ -22,22 +23,42 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 	private ContainerUtil containerUtil;
 	
 	private final Account anonymous;
-	
-	// 缓存 username -> userId 的映射，防止并发重复查询数据库
-	private final ConcurrentMap<String, Long> usernameCacheMap = new ConcurrentHashMap<>();
-	
-	// 缓存 email -> userId 的映射，防止并发重复查询数据库
-	private final ConcurrentMap<String, Long> emailCacheMap = new ConcurrentHashMap<>();
-	
-	// 缓存 userId -> Account 的映射，防止并发重复创建 Account 实例
-	private final ConcurrentMap<String, Account> accountCacheMap = new ConcurrentHashMap<>();
-
+		
 	public AccountFactoryDao(AccountDao accountDao, ContainerUtil containerUtil) {
 		this.accountDao = accountDao;
 		this.containerUtil = containerUtil;
 		this.anonymous = this.createAnonymous();
 	}
 
+	private final ConcurrentHashMap<Long, FutureTask<Account>> inflightAccounts =
+        new ConcurrentHashMap<>();
+
+	private Account loadFullAccount(Long userId) {
+
+		FutureTask<Account> task = new FutureTask<>(() -> {
+			return accountDao.getAccount(Long.toString(userId));
+		});
+
+		FutureTask<Account> existing = inflightAccounts.putIfAbsent(userId, task);
+
+		if (existing == null) {
+			existing = task;
+			task.run();
+		}
+
+		try {
+
+			return existing.get();
+
+		} catch (Exception e) {
+
+			throw new RuntimeException(e);
+
+		} finally {
+
+			inflightAccounts.remove(userId, existing);
+		}
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -72,18 +93,15 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 			return null;
 		if (email.length() > 50)
 			return null;
-		// 使用 computeIfAbsent 确保同一 email 只查询一次数据库，避免并发重复创建
-		Long userId = emailCacheMap.computeIfAbsent(email, this::fetchUserIdByEmail);
-		if (userId != null && userId > 0) // ensure one instance in cache for one key;
-			return accountDao.getAccount(Long.toString(userId));
-		else
-			return null;
 
-	}
-	
-	private Long fetchUserIdByEmail(String email) {
 		Long userId = accountDao.fetchAccountByEmail(email);
-		return userId != null ? userId : -1L; // 用 -1 表示查询过但不存在，避免重复查询
+
+		if (userId == null || userId <= 0) {
+			return null;
+		}
+
+		return loadFullAccount(userId);
+
 	}
 
 	public Account getFullAccountForUsername(String username) {
@@ -93,32 +111,15 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 			return account;
 		if (username.length() > 30)
 			return account;
-		try {
-			// 使用 computeIfAbsent 确保同一 username 只查询一次数据库，避免并发重复创建
-			Long userId = usernameCacheMap.computeIfAbsent(username, this::fetchUserIdByUsername);
-			if (userId != null && userId > 0) {// ensure one instance in cache for one key;
-				account = accountDao.getAccount(Long.toString(userId));
-				if (account != null && !account.getUsername().equalsIgnoreCase(username)) {
-					Debug.logError("the user is wrong, username=" + username + " userId=" + userId + " account username=" + account.getUsername(),
-							module);
-					containerUtil.clearCache(userId);
-					usernameCacheMap.remove(username); // 清除错误的缓存
-					return null;
-				}
-			}
-		} catch (Exception e) {
-			Debug.logError("the user look error=" + e + " username=" + username, module);
+		Long userId = accountDao.fetchAccountByName(username);
+
+		if (userId == null || userId <= 0) {
+			return null;
 		}
-		if (account == null) {
-			Debug.logError("the user not found username=" + username, module);
-		}
-		return account;
+
+		return loadFullAccount(userId);
 	}
 	
-	private Long fetchUserIdByUsername(String username) {
-		Long userId = accountDao.fetchAccountByName(username);
-		return userId != null ? userId : -1L; // 用 -1 表示查询过但不存在，避免重复查询
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -132,17 +133,9 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 		if (userId == null)
 			return this.anonymous;
 		// 使用 computeIfAbsent 确保同一 userId 只加载一次，避免并发重复创建 Account 实例
-		return accountCacheMap.computeIfAbsent(userId, this::fetchAccountById);
+		return loadFullAccount(Long.parseLong(userId));
 	}
 	
-	private Account fetchAccountById(String userId) {
-		Account account = accountDao.getAccount(userId);
-		if (account == null) {
-			Debug.logVerbose("the user has been delete, it is Anonymous, userId=" + userId, module);
-			account = this.anonymous;
-		}
-		return account;
-	}
 
 	private Account createAnonymous() {
 		Account account = new Account(null);
