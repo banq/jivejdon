@@ -207,7 +207,7 @@ public class Account {
 		if (this.getUserId() != null)
 			return Long.valueOf(this.getUserId());
 		else
-			return null;
+			return 0L;
 	}
 
 	/**
@@ -223,6 +223,7 @@ public class Account {
 	 * @return Returns the messageCount.
 	 */
 	public int getMessageCount() {
+		if (accountSMState == null) return 0;
 		if (isAnonymous())
 			return 0;
 		if (lazyLoaderRole != null)
@@ -232,9 +233,10 @@ public class Account {
 	}
 
 	public int getMessageCountNow(MessageQueryDao messageQueryDao) {
+		if (accountSMState == null) return 0;
 		if (isAnonymous())
 			return 0;
-		return messageQueryDao.getMessageCountOfUser(Long.parseLong(userId));
+		return messageQueryDao.getMessageCountOfUser(getUserIdLong());
 	}
 
 	public String getEmail() {
@@ -254,7 +256,7 @@ public class Account {
 	}
 
 	public String getRoleName() {
-		if (lazyLoaderRole != null && this.roleName == null)
+		if (accountSMState != null && this.roleName == null)
 			this.roleName = getRoleLoader().getRoleName();
 		return this.roleName;
 	}
@@ -296,14 +298,14 @@ public class Account {
 	}
 
 	public SubscribedState getSubscribedState() {
-		if (subscribedState == null)
+		if (accountSMState != null && subscribedState == null)
 			subscribedState = new SubscribedState(new AccountSubscribed(this.getUserIdLong()));
 		return subscribedState;
 	}
 
 	public int getSubscriptionCount() {
 		try {
-			if (this.lazyLoaderRole != null)
+			if (accountSMState != null )
 				return getSubscribedState().getSubscriptionCount(this.lazyLoaderRole);
 			else
 				return -1;
@@ -314,7 +316,7 @@ public class Account {
 
 	public int getSubscribedCount() {
 		try {
-			if (this.lazyLoaderRole != null)
+			if (accountSMState != null )
 				return getSubscribedState().getSubscribedCount(this.lazyLoaderRole);
 			else
 				return -1;
@@ -328,7 +330,8 @@ public class Account {
 	}
 
 	public void updateMessageCount(int count) {
-		this.getAccountMessageVO().update(count);
+		if (accountSMState != null)
+			this.getAccountMessageVO().update(count);
 	}
 
 	/**
@@ -341,28 +344,31 @@ public class Account {
 	 * @return
 	 */
 	public UploadFile getUploadFile() {
-		return getAttachment().getUploadFile();
+		return accountSMState != null ? getAttachment().getUploadFile() : null;
 	}
 
 	public void setUploadFile(boolean update) {
-		if (update)
+		if (update && accountSMState != null)
 			getAttachment().updateUploadFile();
 	}
 
 	public void reloadAccountSMState() {
+		if (accountSMState != null)
 		accountSMState.reload();
 	}
 
 	public void addOneNewMessage(int count) {
-		accountSMState.addOneNewMessage(count);
+		if (accountSMState != null)
+			accountSMState.addOneNewMessage(count);
 	}
 
 	public void addMessageObservable(Observable observable) {
-		observable.addObserver(accountSMState);
+		if (accountSMState != null)
+			observable.addObserver(accountSMState);
 	}
 
 	public int getNewShortMessageCount() {
-		return accountSMState.getNewShortMessageCount();
+		return accountSMState != null ? accountSMState.getNewShortMessageCount() : 0;
 	}
 
 	public boolean isAdmin() {
