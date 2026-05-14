@@ -76,6 +76,7 @@ public class Account {
 	 */
 	public Account() {
 		accountSMState = new AccountSMState(this);
+		this.anonymous = false;
 	}
 
 	/**
@@ -83,6 +84,19 @@ public class Account {
 	 */
 	public Account(AccountSMState accountSMState) {
 		this.accountSMState = accountSMState;
+		this.anonymous = false;
+	}
+
+	public static Account createAnonymous() {
+		Account account = new Account(null);
+		account.anonymous = true;
+		account.setUsername("anonymous");
+		account.setUserIdLong(Long.valueOf(0));
+		account.setEmail("anonymous@anonymous.com");
+		account.setRoleName(Role.ANONYMOUS);
+		account.setModifiedDate("");
+		account.setCreationDate("");
+		return account;
 	}
 
 	public Attachment getAttachment() {
@@ -285,9 +299,7 @@ public class Account {
 		return anonymous;
 	}
 
-	public void setAnonymous(boolean anonymous) {
-		this.anonymous = anonymous;
-	}
+
 
 	public boolean isEmailValidate() {
 		return emailValidate;

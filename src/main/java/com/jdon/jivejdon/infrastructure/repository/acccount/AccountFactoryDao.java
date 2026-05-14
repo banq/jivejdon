@@ -8,7 +8,6 @@ import org.apache.commons.validator.EmailValidator;
 
 import com.jdon.container.pico.Startable;
 import com.jdon.jivejdon.domain.model.account.Account;
-import com.jdon.jivejdon.domain.model.auth.Role;
 import com.jdon.jivejdon.infrastructure.repository.dao.AccountDao;
 import com.jdon.jivejdon.util.ContainerUtil;
 import com.jdon.util.Debug;
@@ -22,12 +21,10 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 
 	private ContainerUtil containerUtil;
 	
-	private final Account anonymous;
 		
 	public AccountFactoryDao(AccountDao accountDao, ContainerUtil containerUtil) {
 		this.accountDao = accountDao;
 		this.containerUtil = containerUtil;
-		this.anonymous = this.createAnonymous();
 	}
 
 	private final ConcurrentHashMap<Long, FutureTask<Account>> inflightAccounts =
@@ -64,11 +61,11 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 	public Account getFullAccount(Account accountIn) {
 		Debug.logVerbose("enter AccountFactory create", module);
 		if (accountIn == null)
-			return this.anonymous;
+			return Account.createAnonymous();
 		return !UtilValidate.isEmpty(accountIn.getUserId()) ? getFullAccount(accountIn.getUserId()) :
            !UtilValidate.isEmpty(accountIn.getUsername()) ? getFullAccountForUsername(accountIn.getUsername()) :
            !UtilValidate.isEmpty(accountIn.getEmail()) ? getFullAccountForEmail(accountIn.getEmail()) :
-           this.anonymous;
+           Account.createAnonymous();
 	}
 
 	public Account getFullAccountForEmail(String email) {
@@ -116,23 +113,12 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 	public Account getFullAccount(String userId) {
 		Debug.logVerbose("enter AccountFactory create", module);
 		if (userId == null)
-			return this.anonymous;
-		// 使用 computeIfAbsent 确保同一 userId 只加载一次，避免并发重复创建 Account 实例
-		return loadFullAccount(Long.parseLong(userId));
+			return Account.createAnonymous();		
+		return loadFullAccount(Long.valueOf(userId));
 	}
 	
 
-	private Account createAnonymous() {
-		Account account = new Account(null);
-		account.setUsername("anonymous");
-		account.setUserIdLong(new Long(0));
-		account.setEmail("anonymous@anonymous.com");
-		account.setRoleName(Role.ANONYMOUS);
-		account.setModifiedDate("");
-		account.setCreationDate("");
-		account.setAnonymous(true);
-		return account;
-	}
+
 
 	@Override
 	public void start() {

@@ -26,7 +26,6 @@ import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.RootMessage;
 import com.jdon.jivejdon.domain.model.account.Account;
-import com.jdon.jivejdon.domain.model.auth.Role;
 import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.jivejdon.infrastructure.dto.AnemicMessageDTO;
 import com.jdon.jivejdon.util.Constants;
@@ -55,7 +54,7 @@ public class MessageInitFactory {
 				messageCore.setAccount(account);
 			} else {
 				logger.warn("messageId=" + messageId + " no userID in DB ");
-				messageCore.setAccount(createAnonymous());				
+				messageCore.setAccount(Account.createAnonymous());				
 			}
 
 			MessageVO messageVO = new MessageVO();
@@ -145,15 +144,4 @@ public class MessageInitFactory {
 		return ret;
 	}
 
-	private Account createAnonymous() {
-		Account account = new Account(null);
-		account.setUsername("anonymous");
-		account.setUserIdLong(new Long(0));
-		account.setEmail("anonymous@anonymous.com");
-		account.setRoleName(Role.ANONYMOUS);
-		account.setModifiedDate("");
-		account.setCreationDate("");
-		account.setAnonymous(true);
-		return account;
-	}
 }
