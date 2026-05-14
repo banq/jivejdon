@@ -252,8 +252,8 @@ public class MessageDirector implements MessageDirectorIF {
 		try {
 			logger.debug(" embed getAccount ");
 			account = accountFactory.getFullAccount(accountIn);
-			if (account == null || account.getUserId().isEmpty())
-				throw new Exception("set null account or userId is null ");
+			// if (account == null || account.getUserId().isEmpty())
+			// 	throw new Exception("set null account or userId is null ");
 			// forumMessage.setAccount(account);
 		} catch (Exception e) {
 			String error = e + " embedAccount accountIn=null";
