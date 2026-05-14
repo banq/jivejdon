@@ -65,20 +65,10 @@ public class AccountFactoryDao implements AccountFactory, Startable {
 		Debug.logVerbose("enter AccountFactory create", module);
 		if (accountIn == null)
 			return this.anonymous;
-		Account account = null;
-		if (!UtilValidate.isEmpty(accountIn.getUserId())) {
-			account = getFullAccount(accountIn.getUserId());
-		} else if (!UtilValidate.isEmpty(accountIn.getUsername())) {
-			account = getFullAccountForUsername(accountIn.getUsername());
-		} else if (!UtilValidate.isEmpty(accountIn.getEmail())) {
-			account = getFullAccountForEmail(accountIn.getEmail());
-		}
-		if (account == null) {
-			Debug.logError("the user has been delete, it is Anonymous id=" + accountIn.getUserId() + " username=" + accountIn.getUsername()
-					+ " email=" + accountIn.getEmail(), module);
-			account = this.anonymous;
-		}
-		return account;
+		return !UtilValidate.isEmpty(accountIn.getUserId()) ? getFullAccount(accountIn.getUserId()) :
+           !UtilValidate.isEmpty(accountIn.getUsername()) ? getFullAccountForUsername(accountIn.getUsername()) :
+           !UtilValidate.isEmpty(accountIn.getEmail()) ? getFullAccountForEmail(accountIn.getEmail()) :
+           this.anonymous;
 	}
 
 	public Account getFullAccountForEmail(String email) {
