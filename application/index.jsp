@@ -30,7 +30,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   <link rel="stylesheet" href="/js/jdon.css">
   <style>
     html { font-size: 62.5%; -webkit-text-size-adjust: 100%; }
-    body { margin: 0; padding: 0; font-family: "Microsoft YaHei", sans-serif; font-size: 1.6rem; color: #373232; background-color: #E6E6E6; line-height: 2.2rem; }
+    body { margin: 0; padding: 0; font-family: "Microsoft YaHei", sans-serif; font-size: 1.6rem; color: #373232; background-color: #f7f4ed; line-height: 2.2rem; }
     .container { margin: 0 auto; padding: 0 15px; }
     .row { margin: 0 -15px; }
     .row:after, .container:after { content: " "; display: table; clear: both; }
