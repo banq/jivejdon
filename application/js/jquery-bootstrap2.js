@@ -343,7 +343,7 @@ function createReadAloudButton() {
     
     Object.assign(button.style, {
         position: 'fixed', bottom: '20px', right: '20px',
-        background: '#4CAF50', color: 'white', border: 'none',
+        background: '#81D8D0', color: 'white', border: 'none',
         padding: '12px 24px', borderRadius: '30px', cursor: 'pointer',
         fontSize: '14px', zIndex: '9999', boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
     });
