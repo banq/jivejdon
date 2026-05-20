@@ -94,6 +94,7 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 /**
      * 门面方法：一键完成「原子限流校验」与「受控自增」
      */
+        @Override
     public void saveAndIncrement(ViewCounter viewCounter, String ip) {
         if (viewCounter == null || ip == null) {
             return;
