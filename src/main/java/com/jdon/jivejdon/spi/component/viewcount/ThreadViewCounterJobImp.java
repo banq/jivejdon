@@ -113,7 +113,7 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
      * 核心原子限流器（$O(1)$ 复杂度，纯原子无锁）
      */
     private boolean saveViewCounter(ViewCounter viewCounter, String ipAddress) {
-        
+        ipAddress = getIpSegmentKey(ipAddress);
         // 1. 【原子步骤一】尝试将帖子抢占放入大账本（检查这小时内是不是第一次被点开）
         if (viewcounters.putIfAbsent(viewCounter.getThreadId(), viewCounter) == null) {
             
@@ -147,6 +147,28 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 
         // 如果该一小时内该 IP 访问的不同新帖子总数没超过 5，则允许老帖子继续累加数量
         return currentCount <= 5; 
+    }
+
+	/**
+     * 🌟 高性能纯原生 IP 裁剪工具
+     * 支持 IPv4 的 C段提取；如果是 IPv6 则保留原样或提取前缀。
+     */
+    private String getIpSegmentKey(String ip) {
+        // 处理常见的 IPv4 
+        int lastDotIndex = ip.lastIndexOf('.');
+        if (lastDotIndex > 0) {
+            // 截取到最后一个点（包含点），例如 "123.22.22."
+            return ip.substring(0, lastDotIndex + 1);
+        }
+        
+        // 如果是局域网 IPv6 或者异常格式（如 "0:0:0:0:0:0:0:1" 或 "::1"）
+        // IPv6 爬虫通常变动的是后 64 位，可以考虑截取前 4 个冒号，这里简单做前缀提取
+        int lastColonIndex = ip.lastIndexOf(':');
+        if (lastColonIndex > 0) {
+            return ip.substring(0, lastColonIndex + 1);
+        }
+        
+        return ip; // 保底返回
     }
 
 	public ViewCounter getViewCounter(Long threadId){
