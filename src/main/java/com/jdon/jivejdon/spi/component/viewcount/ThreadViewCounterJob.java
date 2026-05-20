@@ -20,12 +20,8 @@ import java.util.List;
 import com.jdon.jivejdon.domain.model.thread.ViewCounter;
 
 public interface ThreadViewCounterJob {
-	/**
-	 * concurrentHashMap.remove will remove it, everytime check if it is exist.
-	 * 
-	 * @param thread
-	 */
-	boolean saveViewCounter(ViewCounter viewCounter);
+
+	void saveAndIncrement(ViewCounter viewCounter, String ip);
 
     List<Long> getThreadIdsList();
 

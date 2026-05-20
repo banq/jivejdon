@@ -2,6 +2,7 @@ package com.jdon.jivejdon.presentation.servlet;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -23,6 +24,11 @@ public class CounterServlet extends HttpServlet {
 
     private ForumMessageQueryService forumMessageQueryService;
     private ThreadViewCounterJob threadViewCounterJob;
+
+    private static final Pattern BOT_PATTERN = Pattern.compile(
+            "bot|spider|crawl|slurp|crawler|archiver|mediapartners|lighthouse|curl|wget|" +
+                    "gptbot|claudebot|perplexity|bytespider|ccbot|applebot", 
+            Pattern.CASE_INSENSITIVE);
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -46,13 +52,18 @@ public class CounterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String ua = req.getHeader("User-Agent");
-        if (ua != null && ua.matches("(?i).*(bot|crawl|spider|curl|wget).*")) {
+        if (ua != null && BOT_PATTERN.matcher(ua).find()) {
             return; // 忽略爬虫
         }
 
-       String threadId = req.getParameter("threadId");
-		if (threadId == null || threadId.length() == 0 || !StringUtils.isNumeric(threadId) || threadId.length() > 20)
-			 return; 
+        String threadId = req.getParameter("threadId");
+        if (threadId == null || threadId.length() == 0 || !StringUtils.isNumeric(threadId) || threadId.length() > 20)
+            return;
+
+        String referer = req.getHeader("Referer");
+        if (referer == null || !referer.contains(threadId))
+            return;
+
 
 		try {
 			String ip = req.getRemoteAddr();
@@ -60,7 +71,7 @@ public class CounterServlet extends HttpServlet {
 				return getForumMessageQueryService().getThread(Long.parseLong(threadId));
 			}).thenAccept(forumThread -> {
 				if (forumThread != null && !UtilValidate.isEmpty(ip))
-					getThreadViewCounterJob().saveViewCounter(forumThread.addViewCount(ip));
+					getThreadViewCounterJob().saveAndIncrement(forumThread.getViewCounter(), ip);
 			});
 		} catch (Exception e) {
 
