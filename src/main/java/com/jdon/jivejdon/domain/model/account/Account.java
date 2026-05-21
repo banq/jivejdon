@@ -11,11 +11,9 @@ import com.jdon.jivejdon.domain.model.message.upload.UploadLazyLoader;
 import com.jdon.jivejdon.domain.model.property.Reward;
 import com.jdon.jivejdon.domain.model.shortmessage.AccountSMState;
 import com.jdon.jivejdon.domain.model.subscription.SubscribedState;
-import com.jdon.jivejdon.domain.model.subscription.subscribed.AccountSubscribed;
 import com.jdon.jivejdon.infrastructure.repository.dao.MessageQueryDao;
 import com.jdon.jivejdon.spi.component.throttle.post.Throttler;
 import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
-import com.jdon.jivejdon.util.Constants;
 
 /**
  * we have a SSO server, all auth information will be save to the sso server,
@@ -26,62 +24,36 @@ import com.jdon.jivejdon.util.Constants;
  */
 @Model
 public class Account {
-
 	private String userId;
-
-	private String password;
-
 	private String username;
-
-	private String email;
-
+	private String password;
 	private String roleName;
-
-	private boolean emailVisible;
-
-	private boolean emailValidate;
-
-	private String creationDate;
-
-	private String modifiedDate;
-
 	private String postIP;
-
-	private AccountMessageVO accountMessageVO;
-
-	private SubscribedState subscribedState;
-
-	private final AccountSMState accountSMState;
-
-	private Reward reward;
-
 	private boolean anonymous;
-
-	private Attachment attachment;
-
 	private boolean masked;
 
-	private RoleLoader roleLoader;
+	// 上一次重构引入的值对象
+	private EmailInfo emailInfo = new EmailInfo("", false, false);
+	private AuditTimeline auditTimeline = new AuditTimeline("", "");
 
+	// === 保留这两个 DI 注入字段 ===
 	@Inject
 	public LazyLoaderRole lazyLoaderRole;
 
 	@Inject
 	public UploadLazyLoader uploadLazyLoader;
 
-	private final Object lock = new Object();
+	// === 新引入的用于封装 Loader 操作的状态值对象 ===
+	private AccountState accountState;
 
-	/**
-	 * Default constructor reserved for dynamic proxy / framework initialization.
-	 */
+	private final AccountSMState accountSMState;
+	private Reward reward;
+
 	public Account() {
-		accountSMState = new AccountSMState(this);
+		this.accountSMState = new AccountSMState(this);
 		this.anonymous = false;
 	}
 
-	/**
-	 * Explicit constructor for code-level creation with initialized state.
-	 */
 	public Account(AccountSMState accountSMState) {
 		this.accountSMState = accountSMState;
 		this.anonymous = false;
@@ -91,312 +63,125 @@ public class Account {
 		Account account = new Account(null);
 		account.anonymous = true;
 		account.setUsername("anonymous");
-		account.setUserIdLong(Long.valueOf(0));
-		account.setEmail("anonymous@anonymous.com");
+		account.setUserIdLong(0L);
 		account.setRoleName(Role.ANONYMOUS);
-		account.setModifiedDate("");
-		account.setCreationDate("");
+		account.emailInfo = new EmailInfo("anonymous@anonymous.com", false, false);
+		account.auditTimeline = new AuditTimeline("", "");
 		return account;
 	}
 
-	public Attachment getAttachment() {
-		if (accountSMState == null) return null;
-		if (attachment == null) {
-			synchronized (lock) {
-				if (attachment == null) {
-					attachment = new Attachment(this.getUserIdLong(), this.uploadLazyLoader);
-				}
-			}
+	/**
+	 * 初始化或获取当前的 AccountState
+	 * 因为容器注入（@Inject）是在构造函数之后发生的，所以采用延迟初始化的方式获取最新的注入实例
+	 */
+	private AccountState initOrGetState() {
+		if (accountState == null) {
+			accountState = new AccountState(this, this.lazyLoaderRole, this.uploadLazyLoader);
 		}
-		return attachment;
+		return accountState;
+	}
+
+	// ==========================================
+	// 彻底重构：所有与 Loader 相关的逻辑全部委派给 AccountState
+	// ==========================================
+
+	public Attachment getAttachment() {
+		this.accountState = initOrGetState().loadAttachment();
+		return this.accountState.getAttachment();
 	}
 
 	public AccountMessageVO getAccountMessageVO() {
-		if (accountSMState == null) return null;	
-		if (accountMessageVO == null) {
-			synchronized (lock) {
-				if (accountMessageVO == null) {
-					accountMessageVO = new AccountMessageVO(this.getUserIdLong(), this.lazyLoaderRole);
-				}
-			}
-		}
-		return accountMessageVO;
+		this.accountState = initOrGetState().loadAccountMessageVO();
+		return this.accountState.getAccountMessageVO();
 	}
 
-	public RoleLoader getRoleLoader() {	
-		if (accountSMState == null) return null;
-		if (roleLoader == null) {
-			synchronized (lock) {
-				if (roleLoader == null) {
-					roleLoader = new RoleLoader(this.getUserIdLong(), this.lazyLoaderRole);
-				}
-			}
-		}
-		return roleLoader;
-	}
-
-	/**
-	 * @return Returns the creationDate.
-	 */
-	public String getCreationDate() {
-		try {
-			if (creationDate != null && creationDate.length() != 0)
-				return creationDate.substring(0, 11);
-		} catch (Exception e) {
-		}
-		return "";
-	}
-
-	public Date getCreationDate2() {
-		return Constants.parseDateTime(creationDate);
-	}
-
-	/**
-	 * @param creationDate The creationDate to set.
-	 */
-	public void setCreationDate(String creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	/**
-	 * @return Returns the emailVisible.
-	 */
-	public boolean isEmailVisible() {
-		return emailVisible;
-	}
-
-	/**
-	 * @param emailVisible The emailVisible to set.
-	 */
-	public void setEmailVisible(boolean emailVisible) {
-		this.emailVisible = emailVisible;
-	}
-
-	/**
-	 * @return Returns the modifiedDate.
-	 */
-	public String getModifiedDate() {
-		return modifiedDate;
-	}
-
-	/**
-	 * @param modifiedDate The modifiedDate to set.
-	 */
-	public void setModifiedDate(String modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
-
-	/**
-	 * @return Returns the reward.
-	 */
-	public Reward getReward() {
-		return reward;
-	}
-
-	/**
-	 * @param reward The reward to set.
-	 */
-	public void setReward(Reward reward) {
-		this.reward = reward;
-	}
-
-	/**
-	 * @return Returns the postIP.
-	 */
-	public String getPostIP() {
-		return postIP;
-	}
-
-	/**
-	 * @param postIP The postIP to set.
-	 */
-	public void setPostIP(String postIP) {
-		this.postIP = postIP;
-	}
-
-	/**
-	 * @return Returns the userId.
-	 */
-	public Long getUserIdLong() {
-		if (this.getUserId() != null)
-			return Long.valueOf(this.getUserId());
-		else
-			return 0L;
-	}
-
-	/**
-	 * @param userId The userId to set.
-	 */
-	public void setUserIdLong(Long userId) {
-		if (userId != null)
-			this.setUserId(userId.toString().trim());
-
-	}
-
-	/**
-	 * @return Returns the messageCount.
-	 */
-	public int getMessageCount() {
-		if (accountSMState == null) return 0;
-		if (isAnonymous())
-			return 0;
-		if (lazyLoaderRole != null)
-			return getAccountMessageVO().getMessageCount();
-		else
-			return 0;
-	}
-
-	public int getMessageCountNow(MessageQueryDao messageQueryDao) {
-		if (accountSMState == null) return 0;
-		if (isAnonymous())
-			return 0;
-		return messageQueryDao.getMessageCountOfUser(getUserIdLong());
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getRoleName() {
-		if (accountSMState != null && this.roleName == null)
-			this.roleName = getRoleLoader().getRoleName();
-		return this.roleName;
-	}
-
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public boolean isAnonymous() {
-		return anonymous;
-	}
-
-
-
-	public boolean isEmailValidate() {
-		return emailValidate;
-	}
-
-	public void setEmailValidate(boolean emailValidate) {
-		this.emailValidate = emailValidate;
+	public RoleLoader getRoleLoader() {
+		this.accountState = initOrGetState().loadRoleLoader();
+		return this.accountState.getRoleLoader();
 	}
 
 	public SubscribedState getSubscribedState() {
-		if (accountSMState != null && subscribedState == null)
-			subscribedState = new SubscribedState(new AccountSubscribed(this.getUserIdLong()));
-		return subscribedState;
+		this.accountState = initOrGetState().loadSubscribedState();
+		return this.accountState.getSubscribedState();
+	}
+
+	public int getMessageCount() {
+		return initOrGetState().getMessageCount();
+	}
+
+	public String getRoleName() {
+		this.roleName = initOrGetState().getRoleName(this.roleName);
+		return this.roleName;
 	}
 
 	public int getSubscriptionCount() {
-		try {
-			if (accountSMState != null )
-				return getSubscribedState().getSubscriptionCount(this.lazyLoaderRole);
-			else
-				return -1;
-		} catch (Exception e) {
-			return -1;
-		}
+		return initOrGetState().getSubscriptionCount();
 	}
 
 	public int getSubscribedCount() {
-		try {
-			if (accountSMState != null )
-				return getSubscribedState().getSubscribedCount(this.lazyLoaderRole);
-			else
-				return -1;
-		} catch (Exception e) {
-			return -1;
+		return initOrGetState().getSubscribedCount();
+	}
+
+	public UploadFile getUploadFile() {
+		return accountSMState != null && getAttachment() != null ? getAttachment().getUploadFile() : null;
+	}
+
+	public void setUploadFile(boolean update) {
+		if (update && accountSMState != null && getAttachment() != null) {
+			getAttachment().updateUploadFile();
 		}
 	}
 
 	public void updateSubscriptionCount(int count) {
-		getSubscribedState().update(count);
+		if (getSubscribedState() != null) {
+			getSubscribedState().update(count);
+		}
 	}
 
 	public void updateMessageCount(int count) {
-		if (accountSMState != null)
+		if (accountSMState != null && getAccountMessageVO() != null) {
 			this.getAccountMessageVO().update(count);
+		}
 	}
 
-	/**
-	 * <logic:notEmpty name="forumMessage" property="account.uploadFile"> <img src=
-	 * "<%=request.getContextPath() %>/img/uploadShowAction.shtml?oid=<bean:write
-	 * name=" forumMessage " property="account.userId"/>&id=<bean:write name=
-	 * "forumMessage " property="account.uploadFile.id"/>" border='0' />
-	 * </logic:notEmpty>
-	 * 
-	 * @return
-	 */
-	public UploadFile getUploadFile() {
-		return accountSMState != null ? getAttachment().getUploadFile() : null;
-	}
+	// ==========================================
+	// 其他基础属性与状态机逻辑（保持不变）
+	// ==========================================
 
-	public void setUploadFile(boolean update) {
-		if (update && accountSMState != null)
-			getAttachment().updateUploadFile();
-	}
-
-	public void reloadAccountSMState() {
-		if (accountSMState != null)
-		accountSMState.reload();
-	}
-
-	public void addOneNewMessage(int count) {
-		if (accountSMState != null)
-			accountSMState.addOneNewMessage(count);
-	}
-
-	public void addMessageObservable(Observable observable) {
-		if (accountSMState != null)
-			observable.addObserver(accountSMState);
-	}
-
-	public int getNewShortMessageCount() {
-		return accountSMState != null ? accountSMState.getNewShortMessageCount() : 0;
-	}
-
-	public boolean isAdmin() {
-		if (getRoleName() != null && getRoleName().equals(Role.ADMIN))
-			return true;
-		else
-			return false;
-	}
-
-	public boolean isMasked() {
-		return masked;
-	}
-
-	public void setMasked(boolean masked) {
-		this.masked = masked;
-	}
+	public AccountSMState getAccountSMState() { return accountSMState; }
+	public String getEmail() { return emailInfo.getAddress(); }
+	public void setEmail(String email) { this.emailInfo = emailInfo.withAddress(email); }
+	public boolean isEmailVisible() { return emailInfo.isVisible(); }
+	public void setEmailVisible(boolean emailVisible) { this.emailInfo = emailInfo.withVisible(emailVisible); }
+	public boolean isEmailValidate() { return emailInfo.isValidated(); }
+	public void setEmailValidate(boolean emailValidate) { this.emailInfo = emailInfo.withValidated(emailValidate); }
+	public String getCreationDate() { return auditTimeline.getShortCreationDate(); }
+	public Date getCreationDate2() { return auditTimeline.getCreationDateTime(); }
+	public void setCreationDate(String creationDate) { this.auditTimeline = new AuditTimeline(creationDate, this.auditTimeline.getModifiedDate()); }
+	public String getModifiedDate() { return auditTimeline.getModifiedDate(); }
+	public void setModifiedDate(String modifiedDate) { this.auditTimeline = new AuditTimeline(this.auditTimeline.getCreationDate(), modifiedDate); }
+	public Reward getReward() { return reward; }
+	public void setReward(Reward reward) { this.reward = reward; }
+	public String getPostIP() { return postIP; }
+	public void setPostIP(String postIP) { this.postIP = postIP; }
+	public Long getUserIdLong() { return this.getUserId() != null ? Long.valueOf(this.getUserId()) : 0L; }
+	public void setUserIdLong(Long userId) { if (userId != null) this.setUserId(userId.toString().trim()); }
+	public int getMessageCountNow(MessageQueryDao messageQueryDao) { if (accountSMState == null || isAnonymous()) return 0; return messageQueryDao.getMessageCountOfUser(getUserIdLong()); }
+	public String getPassword() { return password; }
+	public void setPassword(String password) { this.password = password; }
+	public void setRoleName(String roleName) { this.roleName = roleName; }
+	public String getUserId() { return userId; }
+	public void setUserId(String userId) { this.userId = userId; }
+	public String getUsername() { return username; }
+	public void setUsername(String username) { this.username = username; }
+	public boolean isAnonymous() { return anonymous; }
+	public void reloadAccountSMState() { if (accountSMState != null) accountSMState.reload(); }
+	public void addOneNewMessage(int count) { if (accountSMState != null) accountSMState.addOneNewMessage(count); }
+	public void addMessageObservable(Observable observable) { if (accountSMState != null) observable.addObserver(accountSMState); }
+	public int getNewShortMessageCount() { return accountSMState != null ? accountSMState.getNewShortMessageCount() : 0; }
+	public boolean isAdmin() { return getRoleName() != null && getRoleName().equals(Role.ADMIN); }
+	public boolean isMasked() { return masked; }
+	public void setMasked(boolean masked) { this.masked = masked; }
 
 	/**
 	 * post rule is business rule, refactoring from CUDInputInterceptor to here.
