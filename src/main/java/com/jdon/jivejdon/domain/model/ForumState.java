@@ -35,138 +35,183 @@ import com.jdon.jivejdon.domain.model.util.OneOneDTO;
  * 
  */
 public class ForumState  {
-	private  AtomicLong threadCount ;
+	private final AtomicLong threadCount;
+    private final AtomicLong messageCount;
+    private final AtomicReference<ForumMessage> latestPost;
 
-	/**
-	 * the number of messages in the thread. This includes the root message. So,
-	 * to find the number of replies to the root message, subtract one from the
-	 * answer of this method.
-	 */
-	private  AtomicLong messageCount;
+    private final Forum forum;
+    private final Object loadInitStateLock = new Object();
+    
+    // 状态对象内部自己的锁，替代原先 Forum 的本地锁逻辑
+    private final Object stateLock = new Object();
 
-	private AtomicReference<ForumMessage> latestPost;
+    private SubscribedState subscribedState;
 
-	private final Forum forum;
-	private final Object loadInitStateLock = new Object();
+    public ForumState(Forum forum) {
+        super();
+        this.forum = forum;
+        this.messageCount = new AtomicLong(Integer.MIN_VALUE);
+        this.threadCount = new AtomicLong(Integer.MIN_VALUE);
+        this.latestPost = new AtomicReference<>();
+    }
 
-	private SubscribedState subscribedState;
+    /**
+     * 暴露内部的锁对象给 Forum 里的同步块使用
+     */
+    public Object getStateLock() {
+        return this.stateLock;
+    }
 
-	public ForumState(Forum forum) {
-		super();
-		this.forum = forum;
-		this.messageCount = new AtomicLong(Integer.MIN_VALUE);
-		this.threadCount = new AtomicLong(Integer.MIN_VALUE);
-		this.latestPost = new AtomicReference<>();
-		
-	}
+    /**
+     * 判断是否为重复提交的消息
+     */
+    public boolean isRepeatedMessage(PostTopicMessageCommand postTopicMessageCommand) {
+        if (this.getLatestPost() == null)
+            return false;
+        return this.getLatestPost().isSubjectRepeated(postTopicMessageCommand.getMessageVO().getSubject());
+    }
 
-	/**
-	 * @return Returns the messageCount.
-	 */
-	public int getMessageCount() {
-		if (messageCount.get() == Integer.MIN_VALUE)
-			synchronized (messageCount) {
-				if (messageCount.get() == Integer.MIN_VALUE)
-					loadinitState();
-			}
-		return (int) messageCount.get();
-	}
+    /**
+     * 处理新主题贴发布成功后的计数与最新消息更新 (内部直接使用自己的锁)
+     */
+    public void threadPosted(ForumMessage rootForumMessage) {
+        synchronized (stateLock) {
+            this.addThreadCount();
+            this.setLatestPost(rootForumMessage);
+        }
+        this.subscriptionNotify(rootForumMessage);
+    }
 
-	public long addMessageCount() {
-        getMessageCount();
-		return this.messageCount.incrementAndGet();
-	}
+    /**
+     * 处理新回复消息时的计数更新 (由原 Forum.addNewMessage 迁移至此)
+     */
+    public void addNewMessageState(ForumMessageReply forumMessageReply) {
+        synchronized (stateLock) {
+            this.addMessageCount();
+            this.setLatestPost(forumMessageReply);
+        }
+    }
 
-	/**
-	 * @return Returns the threadCount.
-	 */
-	public int getThreadCount() {
-		if (threadCount.longValue() == Integer.MIN_VALUE)
-			synchronized (threadCount) {
-				if (threadCount.longValue() == Integer.MIN_VALUE)
-					loadinitState();
-			}
-		return threadCount.intValue();
-	}
+    /**
+     * 更新最新消息 (由原 Forum.updateNewMessage 迁移至此)
+     */
+    public void updateLatestPostState(ForumMessage forumMessage) {
+        synchronized (stateLock) {
+            this.setLatestPost(forumMessage);
+        }
+    }
 
-	public long addThreadCount() {
-		getThreadCount();
-		return this.threadCount.incrementAndGet();
-	}
+    // =========================================================================
+    // 依赖注入角色的调用
+    // =========================================================================
 
-	public ForumMessage getLatestPost() {
-		if (this.latestPost.get() == null)
-			synchronized (latestPost) {
-				if (this.latestPost.get() == null)
-					loadinitState();
-			}
-		return latestPost.get();
-	}
+    public DomainMessage saveTopicMessage(PostTopicMessageCommand postTopicMessageCommand) {
+        if (forum == null || forum.eventSourcingRole == null)
+            return null;
+        return forum.eventSourcingRole.saveTopicMessage(postTopicMessageCommand);
+    }
 
-	public void setLatestPost(ForumMessage forumMessage) {
-		getLatestPost();
-		this.latestPost.set(forumMessage);
-	}
+    public void topicMessagePosted(ForumMessage rootForumMessage) {
+        if (forum == null || forum.eventSourcingRole == null)
+            return;
+        forum.eventSourcingRole.topicMessagePosted(new TopicMessagePostedEvent(rootForumMessage));
+    }
 
-	public Forum getForum() {
-		return forum;
-	}
+    public void subscriptionNotify(ForumMessage forumMessage) {
+        if (forum != null && forum.publisherRole != null) {
+            forum.publisherRole.subscriptionNotify(new ForumSubscribedNotifyEvent(forum.getForumId(), forumMessage));
+        }
+    }
 
-	public DomainMessage saveTopicMessage(PostTopicMessageCommand postTopicMessageCommand) {
-		if (forum == null || forum.eventSourcingRole == null)
-			return null;
-		return forum.eventSourcingRole.saveTopicMessage(postTopicMessageCommand);
-	}
-
-	public void topicMessagePosted(ForumMessage rootForumMessage) {
-		if (forum == null || forum.eventSourcingRole == null)
-			return;
-		forum.eventSourcingRole.topicMessagePosted(new TopicMessagePostedEvent(rootForumMessage));
-	}
-
-	public void subscriptionNotify(ForumMessage forumMessage) {
-		if (forum.publisherRole != null) {
-			forum.publisherRole.subscriptionNotify(new ForumSubscribedNotifyEvent(forum.getForumId(), forumMessage));
-		}
-	}
-
-	public void updateSubscriptionCount(int count) {
-		getSubscribedState().update(count);
-	}
-
-	public SubscribedState getSubscribedState() {
-		if (subscribedState == null && forum.getForumId() != null )
-			subscribedState = new SubscribedState(new ForumSubscribed(forum.getForumId()));
-		return subscribedState;
-	}
-
-	public String getModifiedDate() {
-		if (getLatestPost() != null)
-			return getLatestPost().getModifiedDate();
-		else
-			return "";
-	}
-
-	public void loadinitState() {
-		 synchronized (loadInitStateLock) {
-			if (messageCount.get() != Integer.MIN_VALUE)
+    public void loadinitState() {
+        synchronized (loadInitStateLock) {
+            if (messageCount.get() != Integer.MIN_VALUE)
                 return;
-			DomainMessage dm = this.forum.lazyLoaderRole.loadForumState(forum.getForumId());
-			OneOneDTO oneOneDTO = null;
-			try {
-				oneOneDTO = (OneOneDTO) dm.getEventResult();
-				if (oneOneDTO != null) {
-					OneOneDTO oneOneDTO2 = (OneOneDTO) oneOneDTO.getParent();
-					if(oneOneDTO2 != null){
-					   threadCount.set((Long)oneOneDTO.getChild());
-					   latestPost.set((ForumMessage) oneOneDTO2.getParent());
-					   messageCount.set((Long) oneOneDTO2.getChild());
-					}
-					dm.clear();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
+            
+            if (forum == null || forum.lazyLoaderRole == null) 
+                return;
+
+            DomainMessage dm = forum.lazyLoaderRole.loadForumState(forum.getForumId());
+            OneOneDTO oneOneDTO = null;
+            try {
+                oneOneDTO = (OneOneDTO) dm.getEventResult();
+                if (oneOneDTO != null) {
+                    OneOneDTO oneOneDTO2 = (OneOneDTO) oneOneDTO.getParent();
+                    if (oneOneDTO2 != null) {
+                        threadCount.set((Long) oneOneDTO.getChild());
+                        latestPost.set((ForumMessage) oneOneDTO2.getParent());
+                        messageCount.set((Long) oneOneDTO2.getChild());
+                    }
+                    dm.clear();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // ==========================================
+    // 基础状态访问器
+    // ==========================================
+
+    public int getMessageCount() {
+        if (messageCount.get() == Integer.MIN_VALUE)
+            synchronized (messageCount) {
+                if (messageCount.get() == Integer.MIN_VALUE)
+                    loadinitState();
+            }
+        return (int) messageCount.get();
+    }
+
+    public long addMessageCount() {
+        getMessageCount();
+        return this.messageCount.incrementAndGet();
+    }
+
+    public int getThreadCount() {
+        if (threadCount.longValue() == Integer.MIN_VALUE)
+            synchronized (threadCount) {
+                if (threadCount.longValue() == Integer.MIN_VALUE)
+                    loadinitState();
+            }
+        return threadCount.intValue();
+    }
+
+    public long addThreadCount() {
+        getThreadCount();
+        return this.threadCount.incrementAndGet();
+    }
+
+    public ForumMessage getLatestPost() {
+        if (this.latestPost.get() == null)
+            synchronized (latestPost) {
+                if (this.latestPost.get() == null)
+                    loadinitState();
+            }
+        return latestPost.get();
+    }
+
+    public void setLatestPost(ForumMessage forumMessage) {
+        getLatestPost();
+        this.latestPost.set(forumMessage);
+    }
+
+    public Forum getForum() { return forum; }
+
+    public void updateSubscriptionCount(int count) {
+        getSubscribedState().update(count);
+    }
+
+    public SubscribedState getSubscribedState() {
+        if (subscribedState == null && forum != null && forum.getForumId() != null)
+            subscribedState = new SubscribedState(new ForumSubscribed(forum.getForumId()));
+        return subscribedState;
+    }
+
+    public String getModifiedDate() {
+        if (getLatestPost() != null)
+            return getLatestPost().getModifiedDate();
+        else
+            return "";
+    }
 }

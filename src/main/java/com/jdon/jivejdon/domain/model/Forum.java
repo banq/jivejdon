@@ -39,227 +39,113 @@ import com.jdon.jivejdon.spi.pubsub.reconstruction.LazyLoaderRole;
 @Model
 public class Forum implements Serializable {
 	private final static Logger logger = LogManager.getLogger(Forum.class);
-	 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private static final ConcurrentHashMap<Long, Object> forumLocks = new ConcurrentHashMap<>();
+    private Long forumId;
+    private String name;
+    private String description;
+    private String creationDate;
+    private long modifiedDate;
+    private Collection propertys;
 
-	private Long forumId;
-	private final Object forumStateLock = new Object();
+    private ForumState forumState;
 
-	private String name;
-	private String description;
-	private String creationDate;
+    @Inject
+    public LazyLoaderRole lazyLoaderRole;
 
-	/**
-	 * the forum modified date, not the message modified date in the forum,
-	 */
-	private long modifiedDate;
-	private Collection propertys;
+    @Inject
+    public SubPublisherRoleIF publisherRole;
 
-	/**
-	 * @link aggregation
-	 */
+    @Inject
+    public ThreadEventSourcingRole eventSourcingRole;
 
-	private ForumState forumState;
+    public Forum() {
+        this.forumState = new ForumState(this);
+    }
 
-	@Inject
-	public LazyLoaderRole lazyLoaderRole;
+    public Forum(ForumState initState) {
+        this.forumState = initState;
+    }
 
-	@Inject
-	public SubPublisherRoleIF publisherRole;
-	//
-	// @Inject
-	// private ForumStateFactory forumStateManager;
+    @OnCommand("postTopicMessageCommand")
+    public void postMessage(PostTopicMessageCommand postTopicMessageCommand) {
+        if (forumState == null) return;
 
-	@Inject
-	public ThreadEventSourcingRole eventSourcingRole;
+        if (forumState.isRepeatedMessage(postTopicMessageCommand)) {
+            logger.error("repeat message error: " + postTopicMessageCommand.getMessageVO().getSubject());
+            return;
+        }
 
-	@OnCommand("postTopicMessageCommand")
-	public void postMessage(PostTopicMessageCommand postTopicMessageCommand) {
-		// fill the business rule for post a topic message
-		if (isRepeatedMessage(postTopicMessageCommand)) {
-			logger.error("repeat message error: " + postTopicMessageCommand.getMessageVO().getSubject());
-			return;
-		}
-		if (forumState == null)
-			return;
+        DomainMessage domainMessage = null;
+        ForumMessage rootForumMessage = null;
+        
+        // 直接使用 forumState 内部维护的锁
+        synchronized (forumState.getStateLock()) {
+            domainMessage = forumState.saveTopicMessage(postTopicMessageCommand);
+            if (domainMessage == null) return;
+            
+            rootForumMessage = (ForumMessage) domainMessage.getBlockEventResult();
+            if (rootForumMessage != null) {
+                forumState.threadPosted(rootForumMessage);
+            }
+        }
+        
+        if (rootForumMessage != null) {
+            forumState.topicMessagePosted(rootForumMessage);
+        }
+    }
 
-		DomainMessage domainMessage = null;
-		ForumMessage rootForumMessage = null;
-		synchronized (getForumLock()) {
-			domainMessage = forumState.saveTopicMessage(postTopicMessageCommand);
-			if (domainMessage == null)
-				return;
-			rootForumMessage = (ForumMessage) domainMessage.getBlockEventResult();
-			if (rootForumMessage != null) {
-				threadPosted(rootForumMessage);
-			}
-		}
-		if (rootForumMessage != null) {
-			forumState.topicMessagePosted(rootForumMessage);
-		}
-	}
+    public void addNewMessage(ForumMessageReply forumMessageReply) {
+        if (forumState != null) {
+            forumState.addNewMessageState(forumMessageReply);
+        }
+    }
 
-	private boolean isRepeatedMessage(PostTopicMessageCommand postTopicMessageCommand) {
-		if (forumState == null || this.forumState.getLatestPost() == null)
-			return false;
-		return this.forumState.getLatestPost().isSubjectRepeated(postTopicMessageCommand.getMessageVO().getSubject());
+    public void updateNewMessage(ForumMessage forumMessage) {
+        if (forumState != null) {
+            forumState.updateLatestPostState(forumMessage);
+        }
+    }
 
-	}
+    // ==========================================
+    // GETTERS & SETTERS (保持纯净)
+    // ==========================================
 
-	private Object getForumLock() {
-		if (forumId == null)
-			return forumStateLock;
-		return forumLocks.computeIfAbsent(forumId, k -> new Object());
-	}
+    public String getCreationDate() { return creationDate; }
+    public void setCreationDate(String creationDate) { this.creationDate = creationDate; }
 
-	public void threadPosted(ForumMessage rootForumMessage) {
-		if (forumState != null) {
-			 synchronized (getForumLock()) {
-				forumState.addThreadCount();
-				forumState.setLatestPost(rootForumMessage);
-			}
-			forumState.subscriptionNotify(rootForumMessage);
-		}
-	}
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-	/**
-	 * Default constructor reserved for dynamic proxy / framework initialization.
-	 */
-	public Forum() {
-		// no domain state by default, this can be a lightweight DTO-like reference
-		//如果一个对象有可变状态，就是领域对象，否则肯定是数据对象，这是常识
-		forumState = new ForumState(this);
-	}
+    public Long getForumId() { return forumId; }
+    public void setForumId(Long forumId) { this.forumId = forumId; }
 
-	/**
-	 * Explicit constructor for code-level creation with initialized state.
-	 */
-	public Forum(ForumState initState) {
-		this.forumState = initState;
-	}
+    public long getModifiedDate() { return modifiedDate; }
+    public void setModifiedDate(long modifiedDate) { this.modifiedDate = modifiedDate; }
 
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-	/**
-	 * @return Returns the creationDate.
-	 */
-	public String getCreationDate() {
-		return creationDate;
-	}
+    public Collection getPropertys() { return propertys; }
+    public void setPropertys(Collection propertys) { this.propertys = propertys; }
 
-	/**
-	 * @param creationDate The creationDate to set.
-	 */
-	public void setCreationDate(String creationDate) {
-		this.creationDate = creationDate;
-	}
+    public ForumState getForumState() { return forumState; }
+    public void setForumState(ForumState forumState) { this.forumState = forumState; }
 
-	/**
-	 * @return Returns the description.
-	 */
-	public String getDescription() {
-		return description;
-	}
+    public boolean hasForumState() { return forumState != null; }
 
-	/**
-	 * @param description The description to set.
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Forum forum = (Forum) o;
+        if (forum.getForumId() == null || this.forumId == null) return false;
+        return this.forumId.longValue() == forum.getForumId().longValue();
+    }
 
-	/**
-	 * @return Returns the forumId.
-	 */
-	public Long getForumId() {
-		return forumId;
-	}
-
-	/**
-	 * @param forumId The forumId to set.
-	 */
-	public void setForumId(Long forumId) {
-		this.forumId = forumId;
-	}
-
-	public long getModifiedDate() {
-		return modifiedDate;
-	}
-
-
-	public void setModifiedDate(long modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Collection getPropertys() {
-		return propertys;
-	}
-
-	public void setPropertys(Collection propertys) {
-		this.propertys = propertys;
-	}
-
-	public ForumState getForumState() {
-		return forumState;
-	}
-
-	public void setForumState(ForumState forumState) {
-		this.forumState = forumState;
-	}
-
-	public boolean hasForumState() {
-		return forumState != null;
-	}
-
-	public void addNewMessage(ForumMessageReply forumMessageReply) {
-		if (forumState != null) {
-			 synchronized (getForumLock()) {
-				forumState.addMessageCount();
-				forumState.setLatestPost(forumMessageReply);
-			}
-		}
-
-		// Date olddate = Constants.parseDateTime(oldmessage.getCreationDate());
-		// if (Constants.timeAfter(1, olddate)) {// a pubsub per one hour
-		// this.publisherRole.subscriptionNotify(new
-		// ForumSubscribedNotifyEvent(this.getForumId(), forumMessageReply));
-		// }
-	}
-
-	public void updateNewMessage(ForumMessage forumMessage) {
-		if (forumState != null) {
-			 synchronized (getForumLock()) {
-				forumState.setLatestPost(forumMessage);
-			}
-		}
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		Forum forum = (Forum) o;
-		if (forum.getForumId() == null || this.forumId == null)
-			return false;
-		return this.forumId.longValue() == forum.getForumId().longValue();
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(this.forumId);
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.forumId);
+    }
 
 }
