@@ -168,7 +168,7 @@ public class Account {
 	public void setPostIP(String postIP) { this.postIP = postIP; }
 	public Long getUserIdLong() { return this.getUserId() != null ? Long.valueOf(this.getUserId()) : 0L; }
 	public void setUserIdLong(Long userId) { if (userId != null) this.setUserId(userId.toString().trim()); }
-	public int getMessageCountNow(MessageQueryDao messageQueryDao) { if (accountSMState == null || isAnonymous()) return 0; return messageQueryDao.getMessageCountOfUser(getUserIdLong()); }
+	
 	public String getPassword() { return password; }
 	public void setPassword(String password) { this.password = password; }
 	public String getUserId() { return userId; }
@@ -232,9 +232,9 @@ public class Account {
 		}
 		// if (methodNameNow.contains("create")) {
 		if (methodNameNow.contains("createTopic") || methodNameNow.contains("createReply")) {
-			if (getMessageCountNow(messageQueryDao) > throttler.getVipUserThrottleConf().getVipmessagecount())
+			if (messageQueryDao.getMessageCountOfUser(getUserIdLong()) > throttler.getVipUserThrottleConf().getVipmessagecount())
 				isAllowed = throttler.checkVIPValidate(this);
-			else if (getMessageCountNow(messageQueryDao) <= throttler.getVipUserThrottleConf().getVipmessagecount()
+			else if (messageQueryDao.getMessageCountOfUser(getUserIdLong()) <= throttler.getVipUserThrottleConf().getVipmessagecount()
 					&& methodNameNow.contains("createTopic"))
 				isAllowed = false;
 			else {
@@ -245,5 +245,7 @@ public class Account {
 			isAllowed = !throttler.isAbusive(getPostIP());
 		return isAllowed;
 	}
+
+	
 
 }
