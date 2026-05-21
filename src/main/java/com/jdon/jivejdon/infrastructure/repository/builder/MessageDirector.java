@@ -187,7 +187,7 @@ public class MessageDirector implements MessageDirectorIF {
 		HotKeys hotKeys = hotKeysFuture.join();
 		ForumMessage forumMessage = RootMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId())
 				.messageVO(anemicMessageDTO.getMessageVO()).forum(forum)
-				.acount(accountOptional.orElse(new Account(null))).creationDate(anemicMessageDTO.getCreationDate())
+				.acount(accountOptional.orElse(Account.createAsDTO())).creationDate(anemicMessageDTO.getCreationDate())
 				.modifiedDate(anemicMessageDTO.getModifiedDate()).filterPipleSpec(filterPipleSpec).uploads(uploads)
 				.props(props).hotKeys(hotKeys).build(anemicMessageDTO.getForumThread().getThreadId());
 		return forumMessage;
@@ -241,7 +241,7 @@ public class MessageDirector implements MessageDirectorIF {
 		HotKeys hotKeys = hotKeysFactory.getHotKeys();
 		ForumMessage forumMessage = RootMessage.messageBuilder().messageId(anemicMessageDTO.getMessageId())
 				.messageVO(anemicMessageDTO.getMessageVO()).forum(forum)
-				.acount(accountOptional.orElse(new Account(null)))
+				.acount(accountOptional.orElse(Account.createAsDTO()))
 				.creationDate(anemicMessageDTO.getCreationDate()).modifiedDate(anemicMessageDTO.getModifiedDate())
 				.filterPipleSpec(filterPipleSpec).uploads(uploads).props(props).hotKeys(hotKeys).build(parentforumMessage);
 		return forumMessage;

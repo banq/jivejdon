@@ -190,7 +190,7 @@ public class OAuthAccountServiceImp implements OAuthAccountService {
 	}
 
 	public Account transferSina(OAuthUserVO oAuthUser) {
-		Account account = new Account(null);
+		Account account = Account.createAsDTO();
 		account.setUserId(oAuthUser.getUserConnectorAuth().getUserId());
 		String oAuthuserId = oAuthUser.getOAuthUserId();
 		if (oAuthuserId.length() > 5)
@@ -257,7 +257,7 @@ public class OAuthAccountServiceImp implements OAuthAccountService {
 	}
 
 	public Account transferGoogle(OAuthUserVO weiboUser) {
-		Account account = new Account(null);
+		Account account = Account.createAsDTO();
 		account.setUserId(weiboUser.getUserConnectorAuth().getUserId());
 		String weibouesr = weiboUser.getOAuthUserId();
 		if (weibouesr.length() > 5)

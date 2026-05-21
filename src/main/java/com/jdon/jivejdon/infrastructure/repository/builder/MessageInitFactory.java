@@ -49,7 +49,7 @@ public class MessageInitFactory {
 
 			Object o = map.get("userID");
 			if (o != null) {
-				Account account = new Account(null);
+				Account account = Account.createAsDTO();
 				account.setUserIdLong((Long) o);
 				messageCore.setAccount(account);
 			} else {

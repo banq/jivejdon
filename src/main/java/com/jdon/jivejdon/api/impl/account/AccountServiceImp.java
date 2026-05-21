@@ -89,7 +89,7 @@ public abstract class AccountServiceImp implements AccountService {
 	 * init the account
 	 */
 	public Account initAccount(EventModel em) {
-		return new Account(null);
+		return Account.createAsDTO();
 	}
 
 	/*

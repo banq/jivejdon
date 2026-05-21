@@ -15,12 +15,12 @@
  */
 package com.jdon.jivejdon.api.util;
 
-import com.jdon.jivejdon.domain.model.account.Account;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.jdon.container.visitor.data.SessionContext;
 import com.jdon.container.visitor.data.SessionContextSetup;
+import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactory;
 import com.jdon.jivejdon.util.ContainerUtil;
 
@@ -91,7 +91,7 @@ public class SessionContextUtil {
 		Account account = null;
 		String username = getPrinciple(sessionContext);
 		if (username != null) {
-			account = new Account(null);
+			account = Account.createAsDTO();
 			account.setUsername(username);
 			account = accountFactory.getFullAccount(account);
 		}

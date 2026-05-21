@@ -84,14 +84,14 @@ public class ShortMessageFactory implements Observer {
 	}
 
 	public void notifyTargetAccount(ShortMessage msg) {
-		Account targetAccount = new Account(null);
+		Account targetAccount = Account.createAsDTO();
 		targetAccount.setUsername(msg.getMessageTo());
 		targetAccount = accountFactory.getFullAccount(targetAccount);
 		targetAccount.addOneNewMessage(1);
 	}
 
 	public int getNewShortMessageCount(ShortMessage msg) {
-		Account targetAccount = new Account(null);
+		Account targetAccount = Account.createAsDTO();
 		targetAccount.setUsername(msg.getMessageTo());
 		targetAccount = accountFactory.getFullAccount(targetAccount);
 		return targetAccount.getNewShortMessageCount();
@@ -137,7 +137,7 @@ public class ShortMessageFactory implements Observer {
 	}
 
 	public Account findTheUser(String userName) {
-		Account account = new Account(null);
+		Account account = Account.createAsDTO();
 		account.setUsername(userName);
 		return accountFactory.getFullAccount(account);
 	}

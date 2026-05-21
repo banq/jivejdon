@@ -31,7 +31,7 @@ public class AccountProfileForm extends BaseForm {
 	private int validateCode;
 
 	public AccountProfileForm() {
-		account = new Account(null);
+		account = Account.createAsDTO();
 		propertys = new ArrayList();
 		for (int i = 0; i < maxSize; i++) {
 			propertys.add(new Property());

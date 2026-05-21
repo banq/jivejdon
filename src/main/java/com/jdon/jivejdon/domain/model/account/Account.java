@@ -46,21 +46,22 @@ public class Account {
 	// === 新引入的用于封装 Loader 操作的状态值对象 ===
 	private AccountState accountState;
 
-	private final AccountSMState accountSMState;
+    private AccountSMState accountSMState;
 	private Reward reward;
 
 	public Account() {
-		this.accountSMState = new AccountSMState(this);
 		this.anonymous = false;
 	}
 
-	public Account(AccountSMState accountSMState) {
-		this.accountSMState = accountSMState;
-		this.anonymous = false;
+
+	public static Account createAsDTO() {
+		Account dto = new Account();
+		dto.anonymous = false;
+		return dto;
 	}
 
 	public static Account createAnonymous() {
-		Account account = new Account(null);
+		Account account = Account.createAsDTO();
 		account.anonymous = true;
 		account.setUsername("anonymous");
 		account.setUserIdLong(0L);
@@ -80,6 +81,7 @@ public class Account {
 		}
 		return accountState;
 	}
+
 
 	// ==========================================
 	// 彻底重构：所有与 Loader 相关的逻辑全部委派给 AccountState
@@ -175,13 +177,37 @@ public class Account {
 	public String getUsername() { return username; }
 	public void setUsername(String username) { this.username = username; }
 	public boolean isAnonymous() { return anonymous; }
-	public void reloadAccountSMState() { if (accountSMState != null) accountSMState.reload(); }
-	public void addOneNewMessage(int count) { if (accountSMState != null) accountSMState.addOneNewMessage(count); }
-	public void addMessageObservable(Observable observable) { if (accountSMState != null) observable.addObserver(accountSMState); }
-	public int getNewShortMessageCount() { return accountSMState != null ? accountSMState.getNewShortMessageCount() : 0; }
 	public boolean isAdmin() { return getRoleName() != null && getRoleName().equals(Role.ADMIN); }
 	public boolean isMasked() { return masked; }
 	public void setMasked(boolean masked) { this.masked = masked; }
+
+	private AccountSMState initOrGetSMState() {
+		if (accountSMState == null) {
+			accountSMState = new AccountSMState(this, this.lazyLoaderRole);
+		}
+		return accountSMState;
+	}
+
+	// ==========================================
+	// 状态机行为的委派 (全面引入延迟装载拦截)
+	// ==========================================
+
+	public void reloadAccountSMState() {
+		initOrGetSMState().reload();
+	}
+
+	public void addOneNewMessage(int count) {
+		initOrGetSMState().addOneNewMessage(count);
+	}
+
+	public void addMessageObservable(Observable observable) {
+		// 这一步通常需要注册监听器，触发初始化
+		observable.addObserver(initOrGetSMState());
+	}
+
+	public int getNewShortMessageCount() {
+		return initOrGetSMState().getNewShortMessageCount();
+	}
 
 	/**
 	 * post rule is business rule, refactoring from CUDInputInterceptor to here.
