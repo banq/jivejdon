@@ -125,11 +125,11 @@ public class Account {
 	}
 
 	public UploadFile getUploadFile() {
-		return accountSMState != null && getAttachment() != null ? getAttachment().getUploadFile() : null;
+		return getAttachment() != null ? getAttachment().getUploadFile() : null;
 	}
 
 	public void setUploadFile(boolean update) {
-		if (update && accountSMState != null && getAttachment() != null) {
+		if (update  && getAttachment() != null) {
 			getAttachment().updateUploadFile();
 		}
 	}
@@ -141,7 +141,7 @@ public class Account {
 	}
 
 	public void updateMessageCount(int count) {
-		if (accountSMState != null && getAccountMessageVO() != null) {
+		if (getAccountMessageVO() != null) {
 			this.getAccountMessageVO().update(count);
 		}
 	}
