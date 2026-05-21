@@ -171,7 +171,6 @@ public class Account {
 	public int getMessageCountNow(MessageQueryDao messageQueryDao) { if (accountSMState == null || isAnonymous()) return 0; return messageQueryDao.getMessageCountOfUser(getUserIdLong()); }
 	public String getPassword() { return password; }
 	public void setPassword(String password) { this.password = password; }
-	public void setRoleName(String roleName) { this.roleName = roleName; }
 	public String getUserId() { return userId; }
 	public void setUserId(String userId) { this.userId = userId; }
 	public String getUsername() { return username; }
@@ -180,6 +179,14 @@ public class Account {
 	public boolean isAdmin() { return getRoleName() != null && getRoleName().equals(Role.ADMIN); }
 	public boolean isMasked() { return masked; }
 	public void setMasked(boolean masked) { this.masked = masked; }
+
+	public void setRoleName(String roleName) { 
+		// 只有在 accountState 还没有初始化（即依然是干净的 DTO 或者是刚被实例化的实体）时允许直接设值
+		if (this.accountState != null) {
+			throw new IllegalStateException("当前账户已进入业务激活状态，不允许直接通过 setRoleName 修改角色！");
+		}
+		this.roleName = roleName; 
+	}
 
 	private AccountSMState initOrGetSMState() {
 		if (accountSMState == null) {

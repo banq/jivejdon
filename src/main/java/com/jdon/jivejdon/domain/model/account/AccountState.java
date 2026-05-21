@@ -46,7 +46,7 @@ public class AccountState {
     // ==========================================
 
     public AccountState loadAttachment() {
-        if (account.getAccountSMState() == null || this.attachment != null) return this;
+        if (this.attachment != null) return this;
         synchronized (lock) {
             if (this.attachment == null) {
                 Attachment newAttachment = new Attachment(account.getUserIdLong(), this.uploadLazyLoader);
@@ -57,7 +57,7 @@ public class AccountState {
     }
 
     public AccountState loadAccountMessageVO() {
-        if (account.getAccountSMState() == null || this.accountMessageVO != null) return this;
+        if (this.accountMessageVO != null) return this;
         synchronized (lock) {
             if (this.accountMessageVO == null) {
                 AccountMessageVO newMessageVO = new AccountMessageVO(account.getUserIdLong(), this.lazyLoaderRole);
@@ -68,7 +68,7 @@ public class AccountState {
     }
 
     public AccountState loadRoleLoader() {
-        if (account.getAccountSMState() == null || this.roleLoader != null) return this;
+        if (this.roleLoader != null) return this;
         synchronized (lock) {
             if (this.roleLoader == null) {
                 RoleLoader newRoleLoader = new RoleLoader(account.getUserIdLong(), this.lazyLoaderRole);
@@ -79,7 +79,7 @@ public class AccountState {
     }
 
     public AccountState loadSubscribedState() {
-        if (account.getAccountSMState() == null || this.subscribedState != null) return this;
+        if (this.subscribedState != null) return this;
         synchronized (lock) {
             if (this.subscribedState == null) {
                 SubscribedState newState = new SubscribedState(new AccountSubscribed(account.getUserIdLong()));
@@ -94,7 +94,6 @@ public class AccountState {
     // ==========================================
 
     public int getMessageCount() {
-        if (account.getAccountSMState() == null || account.isAnonymous()) return 0;
         if (lazyLoaderRole != null) {
             // 这里会确保自身已经加载了 accountMessageVO
             return this.loadAccountMessageVO().getAccountMessageVO().getMessageCount();
@@ -103,7 +102,7 @@ public class AccountState {
     }
 
     public String getRoleName(String currentRoleName) {
-        if (account.getAccountSMState() != null && currentRoleName == null) {
+        if (currentRoleName == null) {
             return this.loadRoleLoader().getRoleLoader().getRoleName();
         }
         return currentRoleName;
@@ -111,10 +110,7 @@ public class AccountState {
 
     public int getSubscriptionCount() {
         try {
-            if (account.getAccountSMState() != null) {
                 return this.loadSubscribedState().getSubscribedState().getSubscriptionCount(this.lazyLoaderRole);
-            }
-            return -1;
         } catch (Exception e) {
             return -1;
         }
@@ -122,10 +118,7 @@ public class AccountState {
 
     public int getSubscribedCount() {
         try {
-            if (account.getAccountSMState() != null) {
                 return this.loadSubscribedState().getSubscribedState().getSubscribedCount(this.lazyLoaderRole);
-            }
-            return -1;
         } catch (Exception e) {
             return -1;
         }
