@@ -90,7 +90,7 @@ public class MessageForm extends BaseForm {
 	 */
 	public MessageForm() {
 		messageVO = new MessageVO();
-		forum = new Forum(null); // for parameter forum.forumId=xxx
+		forum = Forum.createDTO(); // for parameter forum.forumId=xxx
 		forumThread = new ForumThread(null, null);
 		forumThread.setForum(forum);
 		account = Account.createAsDTO();

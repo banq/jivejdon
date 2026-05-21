@@ -71,7 +71,7 @@ public class MaxThreadListAction extends ModelListAction {
 
         Forum forum = null;
         if ((forumId == null) || forumId.length()>10) {
-            forum = new Forum(null);
+            forum = Forum.createDTO();
             forum.setName("主题总表");
         } else {
             try {

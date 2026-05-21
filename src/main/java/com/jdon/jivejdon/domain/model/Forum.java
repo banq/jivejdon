@@ -63,8 +63,10 @@ public class Forum implements Serializable {
         this.forumState = new ForumState(this);
     }
 
-    public Forum(ForumState initState) {
-        this.forumState = initState;
+	public static Forum createDTO() {
+        Forum dto = new Forum();
+        dto.setForumState(null); // 明确将其业务状态置空，使其退化为纯数据对象
+        return dto;
     }
 
     @OnCommand("postTopicMessageCommand")

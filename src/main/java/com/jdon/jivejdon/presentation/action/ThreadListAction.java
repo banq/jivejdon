@@ -128,12 +128,12 @@ public class ThreadListAction extends ModelListAction {
 
 		Forum forum = null;
 		if ((forumId == null) || !StringUtils.isNumeric(forumId) || forumId.length()>10) {
-			forum = new Forum(null);
+			forum = Forum.createDTO();
 			forum.setName("");
 
 		} else if(Long.valueOf(forumId).longValue()>200){
 		//for the bot or DDOS attack
-			forum = new Forum(null);
+			forum = Forum.createDTO();
 			forum.setName("");
 		} else {
 			forum = getForumService().getForum(Long.parseLong(forumId));

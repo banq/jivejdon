@@ -69,7 +69,7 @@ public class MessageInitFactory {
 			messageCore.setCreationDate(displayDateTime);
 			// get the formatter so later can transfer String to Date
 
-			Forum forum = new Forum(null);
+			Forum forum = Forum.createDTO();
 			forum.setForumId((Long) map.get("forumID"));
 			messageCore.setForum(forum);
 
