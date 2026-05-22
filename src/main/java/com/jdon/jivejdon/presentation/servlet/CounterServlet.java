@@ -51,6 +51,8 @@ public class CounterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setHeader("X-Robots-Tag", "noindex, nofollow");
+
         String ua = req.getHeader("User-Agent");
         if (ua != null && BOT_PATTERN.matcher(ua).find()) {
             return; // 忽略爬虫
@@ -77,7 +79,7 @@ public class CounterServlet extends HttpServlet {
 
 		}
 
-        resp.setHeader("X-Robots-Tag", "noindex, nofollow");
+       
 
         resp.setContentType("image/gif");
         resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
