@@ -175,6 +175,16 @@ public class TagRepositoryDao implements TagRepository {
 
 	public void saveThreadToken(Long threadId, String token) {
 		try {
+			if (token != null) {
+				// 1. 严格过滤：除了字母和数字，其余所有字符（含中文、符号等）一律变空格
+				token = token.replaceAll("[^a-zA-Z0-9]", " ");
+
+				// 2. 将大写字母一律转换为小写字母（Slug 标准规范）
+				token = token.toLowerCase();
+
+				// 3. 合并连续的多余空格，并去除首尾空格
+				token = token.replaceAll(" +", " ").trim();
+			}
 			if (getThreadToken(threadId) == null) {
 				tagDao.createThreadToken(threadId, token);
 			} else {
