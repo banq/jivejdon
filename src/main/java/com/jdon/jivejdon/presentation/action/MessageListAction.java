@@ -80,6 +80,7 @@ public class MessageListAction extends ModelListAction {
 			forumThread.getReBlogVO().loadAscResult();
 			request.setAttribute("threadPreNextList", getThreadContext().getThreadListInContext(forumThread));
 			request.setAttribute("threadLinkList", getThreadContext().createsThreadLinks(forumThread));
+			request.setAttribute("threadLinkListFrom", getThreadContext().createsThreadLinksFrom(forumThread));
 
 		});
 

@@ -228,74 +228,42 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
       <!-- Start Widget -->
      <div class="widget wid-post">
         <div class="content">
-          
+           <div>                		
+                  <div id="threadLinkListFrom">
+                    <logic:notEmpty name="threadLinkListFrom" >   
+                      <ul style="list-style-type:none;padding:0">
+                      <%int previewImgCounter = 0;%>
+                      <logic:iterate id="forumThreadLinkFrom" name="threadLinkListFrom">
+                        <li class="box">
+                          <div style="display: flex; align-items: center;"> 
+                          <div class="wrap-vid">              
+                            <div class="thumbn">
+                                <img src="/simgs/thumb/<%=(previewImgCounter % 3)%>.jpg" border='0' class="img-thumbnail" loading="lazy" width="35" height="45"/>                  
+                            </div>  
+                           </div>
+                          <div class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            <div itemprop="citation" itemscope itemtype="https://schema.org/Article">
+                            <a href="<%=domainUrl %>/<bean:write name="forumThreadLinkFrom" property="threadId"/><bean:write name="forumThreadLinkFrom" property="pinyinToken" />.html" itemprop="url">
+                               <span itemprop="headline"><bean:write name="forumThreadLinkFrom" property="name"/></span>
+                            </a>
+                            </div>
+                          </div>
+                       
+    
+                 
+                          </div>
+                          </li>
+                      <%previewImgCounter++;%>
+                      </logic:iterate>  
+                    </ul>
+                    </logic:notEmpty>
+
+                  </div>   
+                 
+							                           
                 
-							
-<div id="digList" class="linkblock">
-  <ul style="list-style-type:none;padding:0">
-<li class="box">
-         <div style="display: flex; align-items: center;"> 
-         <div class="wrap-vid">              
-          <div class="thumbn">
-              <img src="/simgs/thumb/2.jpg" border="0" class="img-thumbnail" loading="lazy" width="35" height="45">
-            </div>
-          </div>
-         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/69062-shenmeshiCon.html" class="hover-preload">什么是Context上下文？</a></h4>
+              </div> 
 
-        </div>
-</li>
-
- <li class="box">
-         <div style="display: flex; align-items: center;"> 
-         <div class="wrap-vid">              
-          <div class="thumbn">
-                    <img src="/simgs/thumb/3.jpg" border="0" class="img-thumbnail" loading="lazy" width="35" height="45">                  
-                  </div>  
-                </div>
-         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/69903-chouxiangliangzhongfangfa.html" class="hover-preload">抽象两种方法：上下文与类型</a></h4>
-
-        </div>
-</li>
-
- <li class="box">
-         <div style="display: flex; align-items: center;"> 
-         <div class="wrap-vid">              
-          <div class="thumbn">
-                    <img src="/simgs/thumb/1.jpg" border="0" class="img-thumbnail" loading="lazy" width="35" height="45">                  
-                  </div>  
-                </div>
-         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/76821-shangxiawengongcheng.html" class="hover-preload">Content与Context一字之差暗藏逆天极道</a></h4>
-
-        </div>
-</li>
-
- <li class="box">
-         <div style="display: flex; align-items: center;"> 
-         <div class="wrap-vid">              
-          <div class="thumbn">
-                    <img src="/simgs/thumb/3.jpg" border="0" class="img-thumbnail" loading="lazy" width="35" height="45">                  
-                  </div>  
-                </div>
-         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/79419-yujing-zhuyili.html" class="hover-preload">语境崩塌：你的注意力正被劫持</a></h4>
-
-        </div>
-</li>
-
- <li class="box">
-         <div style="display: flex; align-items: center;"> 
-         <div class="wrap-vid">              
-          <div class="thumbn">
-              <img src="/simgs/thumb/2.jpg" border="0" class="img-thumbnail" loading="lazy" width="35" height="45">
-            </div>
-          </div>
-         <h4 class="vid-name" style="margin-left: 2px; flex: 1;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="https://www.jdon.com/design.htm" class="hover-preload">Context逻辑之道</a></h4>
-
-        </div>
-</li>
-
- </ul>
-
-</div>                  
 							 </div>   
          
         </div>

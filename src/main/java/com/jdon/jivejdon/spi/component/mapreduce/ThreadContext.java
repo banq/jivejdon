@@ -88,11 +88,16 @@ public class ThreadContext {
     }
 
     public List<ForumThread> createsThreadLinks(ForumThread thread) {
-        final List<ForumThread> threadLinks = loadReblog(thread);
+        final List<ForumThread> threadLinks = loadReblogTo(thread);
         if (threadLinks.isEmpty()) {
             threadLinks.addAll(transform(thread));
         }
         return threadLinks;
+    }
+
+    public List<ForumThread> createsThreadLinksFrom(ForumThread thread) {
+        final List<ForumThread> threadLinksFrom = loadReblogFrom(thread);
+        return threadLinksFrom;
     }
 
     private List<ForumThread> transform(ForumThread thread) {
@@ -101,26 +106,41 @@ public class ThreadContext {
                 .filter(Objects::nonNull).collect(Collectors.toList());
     }
 
-    private List<ForumThread> loadReblog(ForumThread thread) {
-		final List<ForumThread> threadLinks = new ArrayList<>();
+    private List<ForumThread> loadReblogTo(ForumThread thread) {
+		final List<ForumThread> threadLinksTo = new ArrayList<>();
 		ReBlogVO reBlogVO = thread.getReBlogVO();
 		if (reBlogVO == null)
-			return threadLinks;
+			return threadLinksTo;
 
 		if ( reBlogVO.getThreadTos() == null)
-			return threadLinks;
+			return threadLinksTo;
 
 		// for (ForumThread threadLink : reBlogVO.getThreadFroms()) {
 		// 	threadLinks.add(threadLink);
 		// }
 		for (ForumThread threadLink : reBlogVO.getThreadTos()) {
-			threadLinks.add(threadLink);
+			threadLinksTo.add(threadLink);
 		}
 		// if (threadLinks.size() == 0) {
 
 		// }
-		return threadLinks;
+		return threadLinksTo;
 	}
     
+private List<ForumThread> loadReblogFrom(ForumThread thread) {
+		final List<ForumThread> threadLinksFrom = new ArrayList<>();
+		ReBlogVO reBlogVO = thread.getReBlogVO();
+		if (reBlogVO == null)
+			return threadLinksFrom;
+
+		if ( reBlogVO.getThreadFroms() == null)
+			return threadLinksFrom;
+
+		for (ForumThread threadLink : reBlogVO.getThreadFroms()) {
+			threadLinksFrom.add(threadLink);
+		}
+	
+		return threadLinksFrom;
+	}    
   
 }
