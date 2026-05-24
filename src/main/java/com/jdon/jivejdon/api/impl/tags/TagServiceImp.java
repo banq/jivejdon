@@ -172,6 +172,11 @@ public class TagServiceImp implements TagService, Poolable {
 	private void refreshReblog(Long Id) {
 		Optional<ForumThread> forumThreadOptional = messageRepository.getForumBuilder().getThread(Id);
 		forumThreadOptional.get().getReBlogVO().refresh();
+		try {
+			threadRepositoryDao.updateThread(forumThreadOptional.get());
+		} catch (Exception e) {
+			logger.error(e);
+		}
 	}
 
 	public void deleteReBlogLink(Long fromId) {
