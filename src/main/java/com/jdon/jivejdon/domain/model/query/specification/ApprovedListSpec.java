@@ -20,7 +20,8 @@ public class ApprovedListSpec extends ThreadListSpec {
 
 	
 	public boolean isApprovedToBest(ForumThread thread) {
-		return  (thread.getViewCount() > getNeedViewcount() || thread.getRootMessage().getDigCount()>=1);
+		int reBlogCount = thread.getReBlogVO() != null ? thread.getReBlogVO().getThreadFroms().size() : 1;
+		return  thread.getViewCount() > getNeedViewcount() || thread.getRootMessage().getDigCount()>=1 || reBlogCount > 1;
 	}
 
 	
@@ -52,8 +53,10 @@ public class ApprovedListSpec extends ThreadListSpec {
 	 */
 	public double approvedCompare(ForumThread thread) {
 		if(thread == null) return 0;
-		// 基础热度分
-		return calculateWeightedScore(thread);
+		
+		int reBlogCount = thread.getReBlogVO() != null ? thread.getReBlogVO().getThreadTos().size() : 1;
+		reBlogCount = reBlogCount + thread.getReBlogVO().getThreadFroms().size();
+		return reBlogCount * calculateWeightedScore(thread);
 
 	}
 
