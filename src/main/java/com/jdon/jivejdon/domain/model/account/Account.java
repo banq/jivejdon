@@ -50,14 +50,20 @@ public class Account {
     private AccountSMState accountSMState;
 	private Reward reward;
 
-	public Account() {
+	private Account() {
 		this.anonymous = false;
 	}
+
+    public static Account createAsEntity() {
+		return new Account();
+	}	
 
 
 	public static Account createAsDTO() {
 		Account dto = new Account();
-		dto.anonymous = false;
+		// DTO 不需要业务逻辑，显式禁用注入的依赖，确保 accountState 为空
+		dto.lazyLoaderRole = null;
+		dto.uploadLazyLoader = null;
 		return dto;
 	}
 

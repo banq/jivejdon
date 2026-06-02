@@ -16,13 +16,14 @@
  */
 package com.jdon.jivejdon.infrastructure.repository.acccount;
 
-import com.jdon.jivejdon.util.Constants;
-import com.jdon.jivejdon.domain.model.account.Account;
-import com.jdon.jivejdon.domain.model.property.Reward;
+import java.util.Map;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Map;
+import com.jdon.jivejdon.domain.model.account.Account;
+import com.jdon.jivejdon.domain.model.property.Reward;
+import com.jdon.jivejdon.util.Constants;
 
 public class AccountInitFactory {
 	private final static Logger logger = LogManager.getLogger(AccountInitFactory.class);
@@ -82,7 +83,7 @@ public class AccountInitFactory {
 	}
 
 	public Account create(Map map) {
-		Account ret = new Account();
+		Account ret = Account.createAsEntity();
 		try {
 			ret.setUserIdLong((Long) map.get("userID"));
 			ret.setUsername((String) map.get("username"));
