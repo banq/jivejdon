@@ -37,6 +37,9 @@ public class Account {
 	private EmailInfo emailInfo = new EmailInfo("", false, false);
 	private AuditTimeline auditTimeline = new AuditTimeline("", "");
 
+	// === 内部标志：区分Entity和DTO ===
+	private boolean isDTO = false;
+
 	// === 保留这两个 DI 注入字段 ===
 	@Inject
 	public LazyLoaderRole lazyLoaderRole;
@@ -61,9 +64,7 @@ public class Account {
 
 	public static Account createAsDTO() {
 		Account dto = new Account();
-		// DTO 不需要业务逻辑，显式禁用注入的依赖，确保 accountState 为空
-		dto.lazyLoaderRole = null;
-		dto.uploadLazyLoader = null;
+		dto.isDTO = true;  // 标记为DTO模式
 		return dto;
 	}
 
@@ -80,12 +81,13 @@ public class Account {
 
 	/**
 	 * 初始化或获取当前的 AccountState
-	 * 只有当 lazyLoaderRole 和 uploadLazyLoader 都已注入时，才创建 AccountState
-	 * 如果任一依赖为 null，返回 Optional.empty()
-	 * 这确保 DTO（如 createAsDTO()）或未完全注入的实例不会有 accountState
+	 * 只有当：
+	 * 1. 不是DTO模式
+	 * 2. lazyLoaderRole 和 uploadLazyLoader 都已注入
+	 * 时，才创建 AccountState
 	 */
 	private Optional<AccountState> initOrGetState() {
-		if (this.lazyLoaderRole == null || this.uploadLazyLoader == null) {
+		if (isDTO || this.lazyLoaderRole == null || this.uploadLazyLoader == null) {
 			return Optional.empty();
 		}
 		if (accountState == null) {
@@ -211,15 +213,15 @@ public class Account {
 	public void setMasked(boolean masked) { this.masked = masked; }
 
 	public void setRoleName(String roleName) { 
-		// 只有在 accountState 还没有初始化（即依然是干净的 DTO 或者是刚被实例化的实体）时允许直接设值
-		if (this.accountState != null) {
+		// 只有在非DTO且 accountState 还没有初始化时允许直接设值
+		if (!isDTO && this.accountState != null) {
 			throw new IllegalStateException("当前账户已进入业务激活状态，不允许直接通过 setRoleName 修改角色！");
 		}
 		this.roleName = roleName; 
 	}
 
 	private Optional<AccountSMState> initOrGetSMState() {
-		if (this.lazyLoaderRole == null) {
+		if (isDTO || this.lazyLoaderRole == null) {
 			return Optional.empty();
 		}
 		if (accountSMState == null) {
