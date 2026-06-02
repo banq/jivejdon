@@ -56,7 +56,6 @@ public class RoleLoader extends LazyLoader {
 
 	@Override
 	public DomainMessage getDomainMessage() {
-		return lazyLoaderRole.loadRolename(Long.toString(this.accountId));
-	}
-
+        return lazyLoaderRole == null ? null : lazyLoaderRole.loadRolename(Long.toString(this.accountId));
+    }
 }

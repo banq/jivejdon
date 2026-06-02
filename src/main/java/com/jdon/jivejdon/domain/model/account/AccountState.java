@@ -19,6 +19,14 @@ public class AccountState {
     // 内部专用的并发锁
     private final Object lock = new Object();
 
+    private LazyLoaderRole effectiveLazyLoaderRole() {
+        return this.lazyLoaderRole != null ? this.lazyLoaderRole : account.lazyLoaderRole;
+    }
+
+    private UploadLazyLoader effectiveUploadLazyLoader() {
+        return this.uploadLazyLoader != null ? this.uploadLazyLoader : account.uploadLazyLoader;
+    }
+
     public AccountState(Account account, LazyLoaderRole lazyLoaderRole, UploadLazyLoader uploadLazyLoader) {
         this.account = account;
         this.lazyLoaderRole = lazyLoaderRole;
@@ -49,7 +57,7 @@ public class AccountState {
         if (this.attachment != null) return this;
         synchronized (lock) {
             if (this.attachment == null) {
-                Attachment newAttachment = new Attachment(account.getUserIdLong(), this.uploadLazyLoader);
+                Attachment newAttachment = new Attachment(account.getUserIdLong(), effectiveUploadLazyLoader());
                 return new AccountState(account, lazyLoaderRole, uploadLazyLoader, newAttachment, accountMessageVO, roleLoader, subscribedState);
             }
         }
@@ -60,7 +68,7 @@ public class AccountState {
         if (this.accountMessageVO != null) return this;
         synchronized (lock) {
             if (this.accountMessageVO == null) {
-                AccountMessageVO newMessageVO = new AccountMessageVO(account.getUserIdLong(), this.lazyLoaderRole);
+                AccountMessageVO newMessageVO = new AccountMessageVO(account.getUserIdLong(), effectiveLazyLoaderRole());
                 return new AccountState(account, lazyLoaderRole, uploadLazyLoader, attachment, newMessageVO, roleLoader, subscribedState);
             }
         }
@@ -71,7 +79,7 @@ public class AccountState {
         if (this.roleLoader != null) return this;
         synchronized (lock) {
             if (this.roleLoader == null) {
-                RoleLoader newRoleLoader = new RoleLoader(account.getUserIdLong(), this.lazyLoaderRole);
+                RoleLoader newRoleLoader = new RoleLoader(account.getUserIdLong(), effectiveLazyLoaderRole());
                 return new AccountState(account, lazyLoaderRole, uploadLazyLoader, attachment, accountMessageVO, newRoleLoader, subscribedState);
             }
         }
@@ -94,7 +102,7 @@ public class AccountState {
     // ==========================================
 
     public int getMessageCount() {
-        if (lazyLoaderRole != null) {
+        if (effectiveLazyLoaderRole() != null) {
             // 这里会确保自身已经加载了 accountMessageVO
             return this.loadAccountMessageVO().getAccountMessageVO().getMessageCount();
         }
@@ -110,7 +118,7 @@ public class AccountState {
 
     public int getSubscriptionCount() {
         try {
-                return this.loadSubscribedState().getSubscribedState().getSubscriptionCount(this.lazyLoaderRole);
+                return this.loadSubscribedState().getSubscribedState().getSubscriptionCount(effectiveLazyLoaderRole());
         } catch (Exception e) {
             return -1;
         }
@@ -118,7 +126,7 @@ public class AccountState {
 
     public int getSubscribedCount() {
         try {
-                return this.loadSubscribedState().getSubscribedState().getSubscribedCount(this.lazyLoaderRole);
+                return this.loadSubscribedState().getSubscribedState().getSubscribedCount(effectiveLazyLoaderRole());
         } catch (Exception e) {
             return -1;
         }

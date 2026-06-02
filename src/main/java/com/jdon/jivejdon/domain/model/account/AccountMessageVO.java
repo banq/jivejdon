@@ -65,9 +65,8 @@ public class AccountMessageVO extends LazyLoader {
 	}
 
 	public DomainMessage getDomainMessage() {
-		return lazyLoaderRole.loadAccountMessageCount(accountId);
-	}
-
+        return lazyLoaderRole == null ? null : lazyLoaderRole.loadAccountMessageCount(accountId);
+    }
 
 	public void update(int count) {
 		if (messageCount.get() != -1) {

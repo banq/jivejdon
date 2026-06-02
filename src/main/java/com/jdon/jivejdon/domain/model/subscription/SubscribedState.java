@@ -53,42 +53,51 @@ public class SubscribedState extends LazyLoader {
 	 */
 	public int getSubscriptionCount(LazyLoaderRole lazyLoaderRole) {
 		if (subscriptionCount == -1 && this.lazyLoaderRole == null) {
-			this.lazyLoaderRole = lazyLoaderRole;
-			super.preload();
-		} else if (subscriptionCount == -1 && this.lazyLoaderRole != null ) {
-			OneOneDTO oneOneDTO = super.loadResult().map(value -> (OneOneDTO) value).orElse(null);
-			if (oneOneDTO != null) {
-				subscriptionCount = (Integer) oneOneDTO.getParent();
-				subscribedCount = (Integer) oneOneDTO.getChild();
-			}
-		}
-		return subscriptionCount;
-	}
+            if (lazyLoaderRole == null) {
+                return -1;
+            }
+            this.lazyLoaderRole = lazyLoaderRole;
+            super.preload();
+        } else if (subscriptionCount == -1 && this.lazyLoaderRole != null ) {
+            OneOneDTO oneOneDTO = super.loadResult().map(value -> (OneOneDTO) value).orElse(null);
+            if (oneOneDTO != null) {
+                subscriptionCount = (Integer) oneOneDTO.getParent();
+                subscribedCount = (Integer) oneOneDTO.getChild();
+            }
+        }
+        return subscriptionCount;
+    }
 
-	public int getSubscribedCount(LazyLoaderRole lazyLoaderRole) {
-		if (subscribedCount == -1 && this.lazyLoaderRole == null) {
-			this.lazyLoaderRole = lazyLoaderRole;
-			super.preload();
-		} else if (subscribedCount == -1 && this.lazyLoaderRole != null) {
-			OneOneDTO oneOneDTO = super.loadResult().map(value -> (OneOneDTO) value).orElse(null);
-			if (oneOneDTO != null) {
-				subscriptionCount = (Integer) oneOneDTO.getParent();
-				subscribedCount = (Integer) oneOneDTO.getChild();
-			}
-		}
-		return subscribedCount;
-	}
+    public int getSubscribedCount(LazyLoaderRole lazyLoaderRole) {
+        if (subscribedCount == -1 && this.lazyLoaderRole == null) {
+            if (lazyLoaderRole == null) {
+                return -1;
+            }
+            this.lazyLoaderRole = lazyLoaderRole;
+            super.preload();
+        } else if (subscribedCount == -1 && this.lazyLoaderRole != null) {
+            OneOneDTO oneOneDTO = super.loadResult().map(value -> (OneOneDTO) value).orElse(null);
+            if (oneOneDTO != null) {
+                subscriptionCount = (Integer) oneOneDTO.getParent();
+                subscribedCount = (Integer) oneOneDTO.getChild();
+            }
+        }
+        return subscribedCount;
+    }
 
-	public void update(int count) {
-		if (subscriptionCount != -1) {
-			subscriptionCount = subscriptionCount + count;
-		}
+    public void update(int count) {
+        if (subscriptionCount != -1) {
+            subscriptionCount = subscriptionCount + count;
+        }
 
-	}
+    }
 
-	public DomainMessage getDomainMessage() {
-		OneOneDTO oneOneDTO = new OneOneDTO(subscribed.getSubscribeId(), subscribed.getSubscribeType());
-		return lazyLoaderRole.loadSubscriptionNumbers(oneOneDTO);
-	}
+    public DomainMessage getDomainMessage() {
+        if (lazyLoaderRole == null) {
+            return null;
+        }
+        OneOneDTO oneOneDTO = new OneOneDTO(subscribed.getSubscribeId(), subscribed.getSubscribeType());
+        return lazyLoaderRole.loadSubscriptionNumbers(oneOneDTO);
+    }
 
 }

@@ -59,13 +59,15 @@ public class Attachment extends LazyLoader {
 	}
 
 	public void updateUploadFile() {
-		this.domainMessageRef.set(uploadLazyLoader.loadUploadFile(Long.toString(this.accountId)));
-	}
+        if (uploadLazyLoader != null) {
+            this.domainMessageRef.set(uploadLazyLoader.loadUploadFile(Long.toString(this.accountId)));
+        }
+    }
 
-	@Override
-	public DomainMessage getDomainMessage() {
-		return uploadLazyLoader.loadUploadFile(Long.toString(this.accountId));
-	}
+    @Override
+    public DomainMessage getDomainMessage() {
+        return uploadLazyLoader == null ? null : uploadLazyLoader.loadUploadFile(Long.toString(this.accountId));
+    }
 
 	public void setUploadFile(UploadFile uploadFile) {
 		this.uploadFile = uploadFile;
