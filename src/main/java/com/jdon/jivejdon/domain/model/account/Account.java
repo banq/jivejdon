@@ -2,6 +2,7 @@ package com.jdon.jivejdon.domain.model.account;
 
 import java.util.Date;
 import java.util.Observable;
+import java.util.Optional;
 
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
@@ -73,13 +74,18 @@ public class Account {
 
 	/**
 	 * 初始化或获取当前的 AccountState
-	 * 因为容器注入（@Inject）是在构造函数之后发生的，所以采用延迟初始化的方式获取最新的注入实例
+	 * 只有当 lazyLoaderRole 和 uploadLazyLoader 都已注入时，才创建 AccountState
+	 * 如果任一依赖为 null，返回 Optional.empty()
+	 * 这确保 DTO（如 createAsDTO()）或未完全注入的实例不会有 accountState
 	 */
-	private AccountState initOrGetState() {
+	private Optional<AccountState> initOrGetState() {
+		if (this.lazyLoaderRole == null || this.uploadLazyLoader == null) {
+			return Optional.empty();
+		}
 		if (accountState == null) {
 			accountState = new AccountState(this, this.lazyLoaderRole, this.uploadLazyLoader);
 		}
-		return accountState;
+		return Optional.of(accountState);
 	}
 
 
@@ -88,40 +94,55 @@ public class Account {
 	// ==========================================
 
 	public Attachment getAttachment() {
-		this.accountState = initOrGetState().loadAttachment();
-		return this.accountState.getAttachment();
+		return initOrGetState()
+			.map(state -> this.accountState = state.loadAttachment())
+			.map(AccountState::getAttachment)
+			.orElse(null);
 	}
 
 	public AccountMessageVO getAccountMessageVO() {
-		this.accountState = initOrGetState().loadAccountMessageVO();
-		return this.accountState.getAccountMessageVO();
+		return initOrGetState()
+			.map(state -> this.accountState = state.loadAccountMessageVO())
+			.map(AccountState::getAccountMessageVO)
+			.orElse(null);
 	}
 
 	public RoleLoader getRoleLoader() {
-		this.accountState = initOrGetState().loadRoleLoader();
-		return this.accountState.getRoleLoader();
+		return initOrGetState()
+			.map(state -> this.accountState = state.loadRoleLoader())
+			.map(AccountState::getRoleLoader)
+			.orElse(null);
 	}
 
 	public SubscribedState getSubscribedState() {
-		this.accountState = initOrGetState().loadSubscribedState();
-		return this.accountState.getSubscribedState();
+		return initOrGetState()
+			.map(state -> this.accountState = state.loadSubscribedState())
+			.map(AccountState::getSubscribedState)
+			.orElse(null);
 	}
 
 	public int getMessageCount() {
-		return initOrGetState().getMessageCount();
+		return initOrGetState()
+			.map(AccountState::getMessageCount)
+			.orElse(0);
 	}
 
 	public String getRoleName() {
-		this.roleName = initOrGetState().getRoleName(this.roleName);
+		initOrGetState()
+			.ifPresent(state -> this.roleName = state.getRoleName(this.roleName));
 		return this.roleName;
 	}
 
 	public int getSubscriptionCount() {
-		return initOrGetState().getSubscriptionCount();
+		return initOrGetState()
+			.map(AccountState::getSubscriptionCount)
+			.orElse(-1);
 	}
 
 	public int getSubscribedCount() {
-		return initOrGetState().getSubscribedCount();
+		return initOrGetState()
+			.map(AccountState::getSubscribedCount)
+			.orElse(-1);
 	}
 
 	public UploadFile getUploadFile() {
@@ -150,7 +171,10 @@ public class Account {
 	// 其他基础属性与状态机逻辑（保持不变）
 	// ==========================================
 
-	public AccountSMState getAccountSMState() { return accountSMState; }
+	public AccountSMState getAccountSMState() {
+		return initOrGetSMState()
+			.orElse(null);
+	}
 	public String getEmail() { return emailInfo.getAddress(); }
 	public void setEmail(String email) { this.emailInfo = emailInfo.withAddress(email); }
 	public boolean isEmailVisible() { return emailInfo.isVisible(); }
@@ -188,11 +212,14 @@ public class Account {
 		this.roleName = roleName; 
 	}
 
-	private AccountSMState initOrGetSMState() {
+	private Optional<AccountSMState> initOrGetSMState() {
+		if (this.lazyLoaderRole == null) {
+			return Optional.empty();
+		}
 		if (accountSMState == null) {
 			accountSMState = new AccountSMState(this, this.lazyLoaderRole);
 		}
-		return accountSMState;
+		return Optional.of(accountSMState);
 	}
 
 	// ==========================================
@@ -200,20 +227,22 @@ public class Account {
 	// ==========================================
 
 	public void reloadAccountSMState() {
-		initOrGetSMState().reload();
+		initOrGetSMState().ifPresent(AccountSMState::reload);
 	}
 
 	public void addOneNewMessage(int count) {
-		initOrGetSMState().addOneNewMessage(count);
+		initOrGetSMState().ifPresent(sm -> sm.addOneNewMessage(count));
 	}
 
 	public void addMessageObservable(Observable observable) {
 		// 这一步通常需要注册监听器，触发初始化
-		observable.addObserver(initOrGetSMState());
+		initOrGetSMState().ifPresent(sm -> observable.addObserver(sm));
 	}
 
 	public int getNewShortMessageCount() {
-		return initOrGetSMState().getNewShortMessageCount();
+		return initOrGetSMState()
+			.map(AccountSMState::getNewShortMessageCount)
+			.orElse(-1);
 	}
 
 	/**
