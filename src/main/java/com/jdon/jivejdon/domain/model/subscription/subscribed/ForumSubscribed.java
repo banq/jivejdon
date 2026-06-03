@@ -50,7 +50,7 @@ public class ForumSubscribed implements Subscribed {
 
 	@Override
 	public void updateSubscriptionCount(int count) {
-		forum.getForumState().updateSubscriptionCount(count);
+		forum.updateSubscriptionCount(count);
 
 	}
 

@@ -54,7 +54,7 @@ public class MessageForumListAction extends MessageListAction {
 		ForumService forumService = (ForumService) WebAppUtil.getService("forumService",
 				this.servlet.getServletContext());
 		Forum forum = forumService.getForum(Long.parseLong(forumId));
-		ForumThread forumThread = forum.getForumState().getLatestPost().getForumThread();
+		ForumThread forumThread = forum.getLatestPost().getForumThread();
 		return getForumMessageQueryService().getMessages(forumThread.getThreadId(), start, count);
 	}
 
@@ -77,7 +77,7 @@ public class MessageForumListAction extends MessageListAction {
 		ForumService forumService = (ForumService) WebAppUtil.getService("forumService",
 				this.servlet.getServletContext());
 		Forum forum = forumService.getForum(Long.parseLong(forumId));
-		ForumThread forumThread = forum.getForumState().getLatestPost().getForumThread();
+		ForumThread forumThread = forum.getLatestPost().getForumThread();
 		if (forumThread == null)
 			throw new Exception("thread is null forumId latestPost=" + forumId);
 

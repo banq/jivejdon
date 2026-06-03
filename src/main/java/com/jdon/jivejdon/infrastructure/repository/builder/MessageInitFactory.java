@@ -125,7 +125,7 @@ public class MessageInitFactory {
     }
 
 	public Forum createForumCore(Map map) {
-		Forum ret = new Forum();
+		Forum ret = Forum.createEntity();
 		try {
 			ret.setForumId((Long) map.get("forumID"));
 			ret.setName((String) map.get("name"));

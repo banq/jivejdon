@@ -52,7 +52,7 @@ public class MessageListNavAction extends Action {
 			return mapping.findForward("failure");
 		}
 
-		ForumMessage lastPost = forum.getForumState().getLatestPost();
+		ForumMessage lastPost = forum.getLatestPost();
 		if (lastPost != null) {
 			Long lastMessageId = lastPost.getMessageId();
 			Long threadId = lastPost.getForumThread().getThreadId();

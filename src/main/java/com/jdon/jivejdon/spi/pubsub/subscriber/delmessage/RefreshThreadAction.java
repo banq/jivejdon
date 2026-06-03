@@ -50,7 +50,7 @@ public class RefreshThreadAction implements DomainEventHandler {
 				ForumThread forumThread = delforumMessage.getForumThread();
 				this.forumAbstractFactory.reloadThreadState(forumThread);// refresh
 //			} else
-			    delforumMessage.getForum().getForumState().loadinitState();
+			    delforumMessage.getForum().loadinitState();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

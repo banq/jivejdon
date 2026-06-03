@@ -105,8 +105,8 @@ public class RSSGenServlet extends HttpServlet {
 			com.jdon.jivejdon.domain.model.Forum forum = forumService.getForum(forumIDL);
 			
 			long latestPostTime = 0;
-			if (forum != null && forum.getForumState().getLatestPost() != null) {
-				latestPostTime = forum.getForumState().getLatestPost().getModifiedDate2();
+			if (forum != null && forum.getLatestPost() != null) {
+				latestPostTime = forum.getLatestPost().getModifiedDate2();
 			} else {
 				// 如果forum为空或latestPost为空，使用当前时间作为默认值
 				latestPostTime = System.currentTimeMillis();

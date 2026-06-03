@@ -18,7 +18,7 @@ package com.jdon.jivejdon.domain.model;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -59,56 +59,90 @@ public class Forum implements Serializable {
     @Inject
     public ThreadEventSourcingRole eventSourcingRole;
 
+    	// === 内部标志：区分Entity和DTO ===
+	private boolean isDTO = false;
+
     public Forum() {
-        this.forumState = new ForumState(this);
+        this.isDTO = true;
     }
 
-	public static Forum createDTO() {
+    public static Forum createEntity() {
+        Forum forum = new Forum();
+        forum.isDTO = false;
+        return forum;
+    }
+
+    public static Forum createDTO() {
         Forum dto = new Forum();
-        dto.setForumState(null); // 明确将其业务状态置空，使其退化为纯数据对象
+        dto.isDTO = true;
         return dto;
     }
 
     @OnCommand("postTopicMessageCommand")
     public void postMessage(PostTopicMessageCommand postTopicMessageCommand) {
-        if (forumState == null) return;
+        initOrGetState()
+                .ifPresent(state -> handlePostMessage(state, postTopicMessageCommand));
+    }
 
-        if (forumState.isRepeatedMessage(postTopicMessageCommand)) {
+    private void handlePostMessage(ForumState state, PostTopicMessageCommand postTopicMessageCommand) {
+        if (state.isRepeatedMessage(postTopicMessageCommand)) {
             logger.error("repeat message error: " + postTopicMessageCommand.getMessageVO().getSubject());
             return;
         }
 
         DomainMessage domainMessage = null;
         ForumMessage rootForumMessage = null;
-        
-        // 直接使用 forumState 内部维护的锁
-        synchronized (forumState.getStateLock()) {
-            domainMessage = forumState.saveTopicMessage(postTopicMessageCommand);
+
+        // 直接使用 ForumState 内部维护的锁
+        synchronized (state.getStateLock()) {
+            domainMessage = state.saveTopicMessage(postTopicMessageCommand);
             if (domainMessage == null) return;
-            
+
             rootForumMessage = (ForumMessage) domainMessage.getBlockEventResult();
             if (rootForumMessage != null) {
-                forumState.threadPosted(rootForumMessage);
+                state.threadPosted(rootForumMessage);
             }
         }
-        
+
         if (rootForumMessage != null) {
-            forumState.topicMessagePosted(rootForumMessage);
+            state.topicMessagePosted(rootForumMessage);
         }
+    }
+
+    private Optional<ForumState> initOrGetState() {
+        if (isDTO || this.lazyLoaderRole == null) {
+            return Optional.empty();
+        }
+        if (forumState == null) {
+            forumState = new ForumState(this);
+        }
+        return Optional.of(forumState);
     }
 
     public void addNewMessage(ForumMessageReply forumMessageReply) {
-        if (forumState != null) {
-            forumState.addNewMessageState(forumMessageReply);
-        }
+        initOrGetState()
+                .ifPresent(state -> state.addNewMessageState(forumMessageReply));
     }
 
     public void updateNewMessage(ForumMessage forumMessage) {
-        if (forumState != null) {
-            forumState.updateLatestPostState(forumMessage);
-        }
+        initOrGetState()
+                .ifPresent(state -> state.updateLatestPostState(forumMessage));
     }
 
+    public ForumMessage getLatestPost() {
+        return initOrGetState()
+                .map(ForumState::getLatestPost)
+                .orElse(null);
+    }
+
+    public void loadinitState(){
+        initOrGetState()
+                .ifPresent(ForumState::loadinitState);
+    }
+
+    public void updateSubscriptionCount(int count) {
+		initOrGetState().ifPresent(state -> state.updateSubscriptionCount(count));
+	}
     // ==========================================
     // GETTERS & SETTERS (保持纯净)
     // ==========================================
@@ -131,11 +165,7 @@ public class Forum implements Serializable {
     public Collection getPropertys() { return propertys; }
     public void setPropertys(Collection propertys) { this.propertys = propertys; }
 
-    public ForumState getForumState() { return forumState; }
-    public void setForumState(ForumState forumState) { this.forumState = forumState; }
-
-    public boolean hasForumState() { return forumState != null; }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
