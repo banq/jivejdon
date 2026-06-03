@@ -53,12 +53,15 @@ public class Account {
     private AccountSMState accountSMState;
 	private Reward reward;
 
-	private Account() {
+	public Account() {
 		this.anonymous = false;
+		this.isDTO = true;
 	}
 
     public static Account createAsEntity() {
-		return new Account();
+		Account a = new Account();
+		a.isDTO = false;
+		return a;
 	}	
 
 
