@@ -485,7 +485,7 @@ public class ToolsUtil {
 		response.setStatus(HttpServletResponse.SC_OK);
 
 		// 设置 Last-Modified
-		response.addDateHeader("Last-Modified", modelLastModifiedAlignedMs);
+		response.setDateHeader("Last-Modified", modelLastModifiedAlignedMs);
 
 		// 设置 Age（资源已经存在的秒数，防止负数）
 		long currentTime = System.currentTimeMillis();
@@ -495,7 +495,7 @@ public class ToolsUtil {
 
 		// 设置 Expires，基于当前时间加上 maxAgeSeconds
 		long expires = currentTime + (maxAgeSeconds * 1000L);
-		response.addDateHeader("Expires", expires);
+		response.setDateHeader("Expires", expires);
 
 		return true;
 	}
