@@ -230,7 +230,7 @@ int h = 0 ;
 
 <script type="speculationrules">
   {
-    "prerender": [{
+    "prefetch": [{
       "source": "document",
       "where": {
         "and": [

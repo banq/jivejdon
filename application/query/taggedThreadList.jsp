@@ -286,7 +286,7 @@ $(function() {
 
 <script type="speculationrules">
   {
-    "prerender": [{
+    "prefetch": [{
       "source": "document",
       "where": {
         "and": [

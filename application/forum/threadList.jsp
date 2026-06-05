@@ -284,7 +284,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
 <script type="speculationrules">
   {
-    "prerender": [{
+    "prefetch": [{
       "source": "document",
       "where": {
         "and": [

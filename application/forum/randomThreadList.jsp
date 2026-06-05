@@ -115,7 +115,7 @@ pageContext.setAttribute("title", titleStr);
 
 <script type="speculationrules">
   {
-    "prerender": [{
+    "prefetch": [{
       "source": "document",
       "where": {
         "and": [
