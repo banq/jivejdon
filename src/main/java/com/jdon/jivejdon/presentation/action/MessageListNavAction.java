@@ -58,7 +58,7 @@ public class MessageListNavAction extends Action {
 			Long threadId = lastPost.getForumThread().getThreadId();
 			if (lastMessageId.longValue() >= (Long.parseLong(messageId))) {
 				ActionRedirect redirect = new ActionRedirect(mapping.findForward("success"));
-				redirect.setPath("/message/messageListOwner.shtml?thread=" + Long.toString(threadId));
+				redirect.setPath("/message/MessageListNavAction.shtml?thread=" + Long.toString(threadId));
 				return redirect;
 			}
 		}

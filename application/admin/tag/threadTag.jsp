@@ -42,7 +42,7 @@
 
        <br><br><br><br>
        
-             <a href="<%=request.getContextPath()%>/message/messageListOwner.shtml?thread=<bean:write name="forumThread" property="threadId"/>" 
+             <a href="<%=request.getContextPath()%>/message/MessageListNavAction.shtml?thread=<bean:write name="forumThread" property="threadId"/>" 
               target="_blank">
              <b><span class="tooltip html_tooltip_content_<bean:write name="forumThread" property="threadId"/>">
              <bean:write name="forumThread" property="name" /></span></b></a>

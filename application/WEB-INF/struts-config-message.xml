@@ -57,7 +57,7 @@
             <forward name="maskMessage" path="/message/result.jsp" />
         </action>
 
-        <action path="/message/messageListOwner" type="com.jdon.jivejdon.presentation.action.MessageListOwnerAction" name="messageListForm" scope="request" validate="false">
+        <action path="/message/MessageListNavAction" type="com.jdon.jivejdon.presentation.action.MessageListOwnerAction" name="messageListForm" scope="request" validate="false">
             <forward name="success" path="/thread/messageList.jsp" />
         </action>
 
