@@ -76,7 +76,7 @@ public class ThreadEtagFilter extends Action {
 		int expire = 3 * 24 * 60 * 60;
 		
 		// 如果帖子修改距现在超过一年以上，设置更长的过期时间
-		long oneYearInMillis = 365L * 24 * 60 * 60 * 1000;
+		long oneYearInMillis = 100L * 24 * 60 * 60 * 1000;
 		long currentTime = System.currentTimeMillis();
 		if (currentTime - modelLastModifiedDate > oneYearInMillis) {
 			expire = 15 * 24 * 60 * 60;
