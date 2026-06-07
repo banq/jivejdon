@@ -81,4 +81,11 @@ public interface MessageQueryDao {
 
 	public PageIterator getMesageListByUser(String userId, int start, int count);
 
+	/**
+	 * Get thread's modifiedDate only, for better performance
+	 * @param threadId the thread ID
+	 * @return modifiedDate value, or -1 if thread not found
+	 */
+	Long getThreadModifiedDate(Long threadId);
+
 }

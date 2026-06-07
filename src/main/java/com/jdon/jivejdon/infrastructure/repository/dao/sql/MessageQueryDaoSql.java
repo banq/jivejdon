@@ -615,5 +615,27 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 		}
 	}
 
+	@Override
+	public Long getThreadModifiedDate(Long threadId) {
+		logger.debug("getThreadModifiedDate for threadId=" + threadId);
+		String SQL = "SELECT modifiedDate FROM jiveThread WHERE threadID=?";
+		List<Object> queryParams = new ArrayList<>();
+		queryParams.add(threadId);
+		
+		try {
+			Object result = jdbcTempSource.getJdbcTemp().querySingleObject(queryParams, SQL);
+			if (result != null) {
+				if (result instanceof String) {
+					return Long.parseLong((String) result);
+				} else if (result instanceof Long) {
+					return (Long) result;
+				}
+			}
+		} catch (Exception e) {
+			logger.error("Error getting thread modifiedDate for threadId=" + threadId, e);
+		}
+		return -1L; // Return -1 if thread not found or error occurs
+	}
+
 	
 }

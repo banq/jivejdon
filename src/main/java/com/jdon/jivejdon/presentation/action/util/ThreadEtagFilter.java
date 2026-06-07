@@ -26,7 +26,6 @@ import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
-import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.util.ToolsUtil;
 import com.jdon.strutsutil.FormBeanUtil;
 
@@ -66,12 +65,11 @@ public class ThreadEtagFilter extends Action {
 			return null;
 		}
 
-		ForumThread forumThread = getForumMessageQueryService().getThread(threadIdl);
-		if (forumThread == null) {
+		Long modelLastModifiedDate = getForumMessageQueryService().getThreadModifiedDate(threadIdl);
+		if (modelLastModifiedDate == null || modelLastModifiedDate == -1) {
 			response.sendError(404);
 			return null;
 		}
-		long modelLastModifiedDate = forumThread.getModifiedDate();
 
 		int expire = 3 * 24 * 60 * 60;
 		

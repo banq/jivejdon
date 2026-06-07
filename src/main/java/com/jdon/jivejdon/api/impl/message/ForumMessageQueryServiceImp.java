@@ -315,4 +315,9 @@ public class ForumMessageQueryServiceImp implements ForumMessageQueryService {
 
 	}
 
+	@Override
+	public Long getThreadModifiedDate(Long threadId) {
+		return messageQueryDao.getThreadModifiedDate(threadId);
+	}
+
 }
