@@ -23,6 +23,8 @@ public interface ThreadViewCounterJob {
 
 	void saveAndIncrement(Long threadId, String ip);
 
+	void saveViewCounter(ViewCounter viewCounter, String ipAddress) ;
+
     List<Long> getThreadIdsList();
 
 	ViewCounter getViewCounter(Long threadId);

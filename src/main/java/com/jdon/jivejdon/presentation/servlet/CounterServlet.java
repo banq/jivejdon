@@ -14,12 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 
 import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.api.query.ForumMessageQueryService;
+import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob;
+import com.jdon.util.UtilValidate;
 
 public class CounterServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private ServletContext servletContext;
 
+    private ForumMessageQueryService forumMessageQueryService;
     private ThreadViewCounterJob threadViewCounterJob;
 
     private static final Pattern BOT_PATTERN = Pattern.compile(
@@ -31,6 +35,14 @@ public class CounterServlet extends HttpServlet {
         super.init(config);
         this.servletContext = config.getServletContext();
     }   
+
+    public ForumMessageQueryService getForumMessageQueryService() {
+        if (forumMessageQueryService == null)
+            forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService("forumMessageQueryService",
+                    servletContext);
+        return forumMessageQueryService;
+    }
+
 
     private ThreadViewCounterJob getThreadViewCounterJob() {
         if (threadViewCounterJob == null)
@@ -60,9 +72,20 @@ public class CounterServlet extends HttpServlet {
 		try {
 			String ip = req.getRemoteAddr();
 			Long threadIdLong = Long.parseLong(threadId);
-			CompletableFuture.runAsync(() -> {
-				getThreadViewCounterJob().saveAndIncrement(threadIdLong, ip);
-			});
+            CompletableFuture.runAsync(() -> {
+                Long modelLastModifiedDate = getForumMessageQueryService().getThreadModifiedDate(threadIdLong);
+                long oneYearInMillis = 100L * 24 * 60 * 60 * 1000;
+                long currentTime = System.currentTimeMillis();
+
+                if (currentTime - modelLastModifiedDate < oneYearInMillis) {
+                    ForumThread forumThread = getForumMessageQueryService().getThread(threadIdLong);
+                    if (forumThread != null && !UtilValidate.isEmpty(ip)) {
+                        getThreadViewCounterJob().saveViewCounter(forumThread.getViewCounter(), ip);
+                    }
+                } else {
+                    getThreadViewCounterJob().saveAndIncrement(threadIdLong, ip);
+                }
+            });
 		} catch (Exception e) {
 
 		}
