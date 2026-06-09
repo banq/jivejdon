@@ -47,7 +47,7 @@ public class ThreadRedirectAction extends ModelDispAction {
             // 发送301永久重定向
             response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
             response.setHeader("Location", newUrl);
-            response.setHeader("Cache-Control", "public, s-maxage=31536000, max-age=31536000, must-revalidate"); // 缓存一年
+            response.setHeader("Cache-Control", "public, s-maxage=31536000, max-age=31536000, immutable"); // 缓存一年
             response.setHeader("X-Robots-Tag", "noindex, nofollow"); // 不要让搜索引擎收录重定向URL
             
             return null; // 不需要转发，直接发送重定向响应
