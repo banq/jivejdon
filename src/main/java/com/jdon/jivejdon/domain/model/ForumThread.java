@@ -324,9 +324,9 @@ public class ForumThread {
 		return viewCounter;
 	}
 
-	public void setViewCounter(ViewCounter viewCounter) {
-		this.viewCounter = viewCounter;
-	}
+	// public void setViewCounter(ViewCounter viewCounter) {
+	// 	this.viewCounter = viewCounter;
+	// }
 
 	public void acceptTreeModelVisitor(long startMessageId, TreeVisitor treeVisitor) {
 		getForumThreadTreeModel().acceptVisitor(startMessageId, treeVisitor);

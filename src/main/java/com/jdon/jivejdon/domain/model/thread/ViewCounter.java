@@ -26,6 +26,7 @@ import com.jdon.jivejdon.domain.model.util.LazyLoader;
 public class ViewCounter extends LazyLoader implements Comparable<ViewCounter> {
 
 	private final ForumThread thread;
+	private final Long threadId;
 	private final AtomicInteger viewCount = new AtomicInteger(0);
 	private final AtomicReference<String> lastIP = new AtomicReference<>("");
 	// 懒加载优化：用 volatile boolean loaded 替代 AtomicBoolean load
@@ -34,6 +35,19 @@ public class ViewCounter extends LazyLoader implements Comparable<ViewCounter> {
 
 	public ViewCounter(ForumThread thread) {
 		this.thread = thread;
+		this.threadId = thread.getThreadId();
+	}
+
+	/**
+	 * 轻量级构造函数，用于从数据库直接获取viewCount时使用，无需加载完整的ForumThread
+	 */
+	public ViewCounter(Long threadId, Integer initialCount) {
+		this.thread = null;
+		this.threadId = threadId;
+		if (initialCount != null && initialCount > 0) {
+			this.viewCount.set(initialCount);
+		}
+		this.loaded = true;
 	}
 
 	public void loadinitCount() {
@@ -55,25 +69,22 @@ public class ViewCounter extends LazyLoader implements Comparable<ViewCounter> {
 		return this.viewCount.get();
 	}
 
-	public void addViewCount(String ip) {
+	public boolean addViewCount(String ip) {
 		try {
 			loadinitCount();
 			if (!Objects.equals(this.lastIP.get(), ip)) {
 				viewCount.incrementAndGet();
 				this.lastIP.set(ip);
+				return true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		return false;
 	}
-
-	// public ForumThread getThread() {
-	// return thread;
-	// }
-
+	
 	public Long getThreadId() {
-		return thread.getThreadId();
+		return threadId != null ? threadId : thread.getThreadId();
 	}
 
 	@Override

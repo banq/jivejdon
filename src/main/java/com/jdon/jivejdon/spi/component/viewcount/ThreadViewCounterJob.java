@@ -21,7 +21,7 @@ import com.jdon.jivejdon.domain.model.thread.ViewCounter;
 
 public interface ThreadViewCounterJob {
 
-	void saveAndIncrement(ViewCounter viewCounter, String ip);
+	void saveAndIncrement(Long threadId, String ip);
 
     List<Long> getThreadIdsList();
 

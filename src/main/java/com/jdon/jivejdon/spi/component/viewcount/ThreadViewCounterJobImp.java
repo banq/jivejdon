@@ -72,12 +72,12 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 		List<ViewCounter> viewCounters2 = new ArrayList<>(this.viewcounters.values());
 		viewcounters.clear();
 		ipCountsMirror.clear();
-		for (ViewCounter viewCounter : viewCounters2) {
-			long count = viewCounter.getViewCount();
-			if (count != -1 && count != 0) {
-				saveItem(viewCounter);
-			}
-		}
+		// for (ViewCounter viewCounter : viewCounters2) {
+		// 	long count = viewCounter.getViewCount();
+		// 	if (count != -1 && count != 0) {
+		// 		saveItem(viewCounter);
+		// 	}
+		// }
 	}
 
 	private void saveItem(ViewCounter viewCounter) {
@@ -93,19 +93,33 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 
 /**
      * 门面方法：一键完成「原子限流校验」与「受控自增」
+     * 通过threadId直接获取viewCount，无需传入完整的ViewCounter对象
      */
-        @Override
-    public void saveAndIncrement(ViewCounter viewCounter, String ip) {
-        if (viewCounter == null || ip == null) {
+    @Override
+    public void saveAndIncrement(Long threadId, String ip) {
+        if (threadId == null || ip == null) {
             return;
         }
 
-        // 1. 直接把 ip 传给核心限流器进行双账本校验
+        // 1. 从数据库获取当前的view_count值
+        Integer number = null;
+        Property p = propertyDao.getThreadProperty(threadId, ThreadPropertys.VIEW_COUNT);
+        if (p != null)
+            number = Integer.valueOf(p.getValue());
+        else
+            number = new Integer(0);
+
+        // 2. 创建临时ViewCounter用于限流检查和计数
+        ViewCounter viewCounter = new ViewCounter(threadId, number);
+
+        // 3. 直接把 ip 传给核心限流器进行双账本校验
         boolean isLegal = this.saveViewCounter(viewCounter, ip);
 
-        // 2. 只有当影子账本判定为“合法”时，才调用自增方法
+        // 4. 只有当影子账本判定为"合法"时，才调用自增方法
         if (isLegal) {
-            viewCounter.addViewCount(ip);
+            if (viewCounter.addViewCount(ip)){
+                saveItem(viewCounter);
+            }
         }
     }
 
@@ -145,7 +159,7 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
             return count;
         }).get();
 
-        // 如果该一小时内该 IP 访问的不同新帖子总数没超过 5，则允许老帖子继续累加数量
+        // 如果一段时间内该 IP 访问的不同新帖子总数没超过 5，则允许老帖子继续累加数量
         return currentCount <= 5; 
     }
 
