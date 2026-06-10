@@ -2,17 +2,11 @@
 <%@ taglib uri="struts-bean" prefix="bean" %>
 <%@ taglib uri="struts-html" prefix="html" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@page import="com.jdon.jivejdon.spi.component.block.ErrorBlockerIF"%>
 <%@page import="java.util.UUID"%>
 <%@page import="java.util.*"%>
 <%@page import="com.jdon.jivejdon.presentation.form.SkinUtils"%>
 <%
-    ErrorBlockerIF errorBlocker = (ErrorBlockerIF)
-            WebAppUtil.getComponentInstance("errorBlocker",
-                    this.getServletConfig().getServletContext());
-    if (errorBlocker.checkRate(request.getRemoteAddr(), 3)){
-        return;
-    }
+    
     Integer limit = (Integer)request.getSession().getServletContext().getAttribute("limit");
     if (limit != null){
         if (limit <= 0){

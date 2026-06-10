@@ -35,18 +35,18 @@ public class ScheduledExecutorUtil implements Startable {
     private static final int DB_THREAD_COUNT = 4; // 数据库线程池大小
     private static final Semaphore DB_SEMAPHORE = new Semaphore(4); // 并发限制
 
-    private ScheduledExecutorService executor;
+    private final ScheduledExecutorService executor ;
     private static final ExecutorService DB_EXECUTOR = 
         Executors.newFixedThreadPool(DB_THREAD_COUNT);
 
     public ScheduledExecutorUtil() {
+        executor  = new ScheduledThreadPoolExecutor(SCHEDULER_THREADS, 
+            new ThreadPoolExecutor.CallerRunsPolicy());
        
     }
 
     @Override
     public void start() {
-         this.executor = new ScheduledThreadPoolExecutor(SCHEDULER_THREADS, 
-            new ThreadPoolExecutor.CallerRunsPolicy());
         System.out.println("ScheduledExecutorUtil started");
     }
 

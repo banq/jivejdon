@@ -4,16 +4,6 @@
 <%@ taglib uri="/WEB-INF/MultiPages.tld" prefix="MultiPages" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<%@page import="com.jdon.controller.WebAppUtil,
-com.jdon.jivejdon.spi.component.block.ErrorBlockerIF"%>
-<%
-ErrorBlockerIF errorBlocker = (ErrorBlockerIF) WebAppUtil.getComponentInstance("errorBlocker", request);
-if (errorBlocker.checkCount(request.getRemoteAddr(), 5)){
-	response.sendError(404);
-    return;
-}
-%>
-
 
 <bean:define id="title"  value=" 用户登录错误" />
 <!DOCTYPE html>

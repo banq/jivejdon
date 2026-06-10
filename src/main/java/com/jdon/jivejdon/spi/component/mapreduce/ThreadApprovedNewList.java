@@ -56,6 +56,12 @@ public class ThreadApprovedNewList implements Startable {
 	private final ApprovedListSpec approvedListSpec = new ApprovedListSpec();
 	private final ScheduledExecutorUtil scheduledExecutorUtil;
 
+	// 添加一个锁对象，防止并发初始化
+	private final Object initLock = new Object();
+	// 标记是否正在初始化
+	private volatile boolean isInitializing = false;
+
+
 	public ThreadApprovedNewList(
 			ForumMessageQueryService forumMessageQueryService,
 			AccountService accountService, TagService tagService,
@@ -75,16 +81,40 @@ public class ThreadApprovedNewList implements Startable {
 			}
 		};
 		scheduledExecutorUtil.getScheduExec().scheduleAtFixedRate(task,  60 * 60, 60 * 60, TimeUnit.SECONDS); 
+		System.out.println("ThreadApprovedNewList started");
 	}
 
-	public void init() {
+	private void init() {
 		approvedThreadIdList.clear();
 		ResultSort resultSort = new ResultSort();
 		resultSort.setOrder_DESCENDING();
 		approvedListSpec.setResultSort(resultSort);
 	}
 
+	/**
+	 * 检查并初始化缓存（如果为空）
+	 */
+	private void checkAndInitialize() {
+		if (approvedThreadIdList.isEmpty() && !isInitializing) {
+			synchronized (initLock) {
+				if (approvedThreadIdList.isEmpty() && !isInitializing) {
+					try {
+						isInitializing = true;
+						logger.info("ApprovedThreadIdList is empty, initializing...");
+						init();
+						refreshApprovedThreadIdList();
+						increApprovedThreadIdList();
+						logger.info("ApprovedThreadIdList initialized, size: {}", approvedThreadIdList.size());
+					} finally {
+						isInitializing = false;
+					}
+				}
+			}
+		}
+	}
+
 	public ThreadTagList getThreadTagList() {
+		checkAndInitialize(); // 添加检查
 		return threadTagList;
 	}
 
@@ -92,6 +122,7 @@ public class ThreadApprovedNewList implements Startable {
 	 * 获取分页后的 threadId 列表
 	 */
 	public List<Long> getApprovedThreads(int start, int count) {
+		checkAndInitialize(); // 添加检查
 		if (start < 0 || start >= approvedThreadIdList.size()) {
 			return new ArrayList<>();
 		}
@@ -102,12 +133,12 @@ public class ThreadApprovedNewList implements Startable {
 	/**
 	 * 刷新完整的 threadId 列表缓存
 	 */
-	public void refreshApprovedThreadIdList() {
+	private void refreshApprovedThreadIdList() {
 		List<Long> newList = loadApprovedThreads(approvedListSpec);
 		approvedThreadIdList = new CopyOnWriteArrayList<>(newList);
 	}
 
-	public void increApprovedThreadIdList() {
+	private void increApprovedThreadIdList() {
 		approvedThreadIdList.forEach(threadId -> {
 			ForumThread thread = forumMessageQueryService.getThread(threadId);
 			if (thread != null && thread.getRootMessage() != null) {
@@ -125,7 +156,7 @@ public class ThreadApprovedNewList implements Startable {
 	/**
 	 * 加载所有 approved threadId
 	 */
-	public List<Long> loadApprovedThreads(ApprovedListSpec approvedListSpec) {
+	private List<Long> loadApprovedThreads(ApprovedListSpec approvedListSpec) {
 		List<ForumThread> resultSorteds = new ArrayList<>();
 
 		try {
@@ -159,6 +190,7 @@ public class ThreadApprovedNewList implements Startable {
 	}
 
 	public int getMaxSize() {
+		checkAndInitialize(); // 添加检查
 		return approvedThreadIdList.size();
 	}
 

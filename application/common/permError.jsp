@@ -5,8 +5,7 @@
 <%@ taglib uri="struts-html" prefix="html"%>
 <%@ page import="java.io.*,java.util.*"%>
 
-<%@page import="com.jdon.controller.WebAppUtil,
-com.jdon.jivejdon.spi.component.block.ErrorBlockerIF,com.jdon.jivejdon.spi.component.email.*"%>
+<%@page import="com.jdon.controller.WebAppUtil,com.jdon.jivejdon.spi.component.email.*"%>
 <%
 
    String isSendMail=(String)this.getServletContext().getAttribute("500"); 
@@ -44,10 +43,6 @@ com.jdon.jivejdon.spi.component.block.ErrorBlockerIF,com.jdon.jivejdon.spi.compo
     	emailHelper.send(emailVO);
 		this.getServletContext().setAttribute("500","true");
 	}
-ErrorBlockerIF errorBlocker = (ErrorBlockerIF) WebAppUtil.getComponentInstance("errorBlocker", this.getServletContext());
-if (errorBlocker.checkRate(request.getRemoteAddr(), 5)){
-    return;
-}
 
 %>
 

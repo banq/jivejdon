@@ -2,14 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@page import="com.jdon.controller.WebAppUtil,
-com.jdon.jivejdon.spi.component.block.ErrorBlockerIF"%>
+
 <%
-ErrorBlockerIF errorBlocker = (ErrorBlockerIF) WebAppUtil.getComponentInstance("errorBlocker", this.getServletContext());
-if (errorBlocker.checkCount(request.getRemoteAddr(), 10)){
-	response.sendError(404);
-    return;
-}
+
   if (request.getParameter("oid") == null || request.getParameter("id") == null) {
     response.sendError(404);
     return;

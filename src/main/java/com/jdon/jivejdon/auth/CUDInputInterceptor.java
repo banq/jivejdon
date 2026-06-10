@@ -30,7 +30,6 @@ import com.jdon.controller.events.EventModel;
 import com.jdon.jivejdon.api.util.SessionContextUtil;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.infrastructure.repository.dao.MessageQueryDao;
-import com.jdon.jivejdon.spi.component.block.ErrorBlockerIF;
 import com.jdon.jivejdon.spi.component.filter.InputSwitcherIF;
 import com.jdon.jivejdon.spi.component.throttle.post.Throttler;
 import com.jdon.jivejdon.util.Constants;
@@ -53,17 +52,14 @@ public class CUDInputInterceptor implements MethodInterceptor {
 
 	private final TargetMetaRequestsHolder targetMetaRequestsHolder;
 
-	private final ErrorBlockerIF errorBlockerIF;
-
 	private final MessageQueryDao messageQueryDao;
 
 	public CUDInputInterceptor(Throttler throttler, TargetMetaRequestsHolder targetMetaRequestsHolder, SessionContextUtil sessionContextUtil,
-			InputSwitcherIF inputSwitcherIF, ErrorBlockerIF errorBlockerIF, MessageQueryDao messageQueryDao) {
+			InputSwitcherIF inputSwitcherIF, MessageQueryDao messageQueryDao) {
 		this.throttler = throttler;
 		this.sessionContextUtil = sessionContextUtil;
 		this.inputSwitcherIF = inputSwitcherIF;
 		this.targetMetaRequestsHolder = targetMetaRequestsHolder;
-		this.errorBlockerIF = errorBlockerIF;
 		this.messageQueryDao = messageQueryDao;
 
 	}
@@ -105,7 +101,6 @@ public class CUDInputInterceptor implements MethodInterceptor {
 		if (account.postIsAllowed(methodNameNow, throttler,  messageQueryDao))
 			return invocation.proceed();
 		else {
-			errorBlockerIF.checkCount(account.getPostIP(), 5);
 			setErrors(invocation, Constants.IP_PERMITTED);
 			logger.error(Constants.IP_PERMITTED + account.getPostIP());
 			return null;

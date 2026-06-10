@@ -16,29 +16,32 @@
 package com.jdon.jivejdon.spi.pubsub.subscriber.sm;
 
 import com.google.common.eventbus.AsyncEventBus;
+import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.jdon.annotation.Component;
 import com.jdon.annotation.model.OnEvent;
+import com.jdon.container.pico.Startable;
 import com.jdon.jivejdon.domain.event.ATUserNotifiedEvent;
 import com.jdon.jivejdon.spi.component.shortmessage.ShortMessageFactory;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;
 
 @Component
-public class ShortMessageHandler {
+public class ShortMessageHandler  implements Startable {
 
 	protected final ShortMessageFactory factory;
-
-	private AsyncEventBus eventBus;
+	private ScheduledExecutorUtil scheduledExecutorUtil;
 
 	public ShortMessageHandler(ShortMessageFactory factory, ScheduledExecutorUtil scheduledExecutorUtil) {
 		super();
 		this.factory = factory;
-		eventBus = new AsyncEventBus(scheduledExecutorUtil.getScheduExec());
-		eventBus.register(this);
+		this.scheduledExecutorUtil = scheduledExecutorUtil;
+		
 	}
 
 	@OnEvent("atUserNotifiedEvent")
 	public void notifyATUser(ATUserNotifiedEvent event) throws Exception {
+		EventBus eventBus = new AsyncEventBus(scheduledExecutorUtil.getScheduExec());
+		eventBus.register(this);
 		eventBus.post(event);
 
 	}
@@ -47,6 +50,13 @@ public class ShortMessageHandler {
 	public void notifyATUserAction(ATUserNotifiedEvent event) throws Exception {
 		factory.createWeiBoShortMessage(event);
 
+	}
+
+	public void start() {
+		        System.out.println("ShortMessageHandler started");
+	}
+	public void stop() {
+		scheduledExecutorUtil = null;
 	}
 
 }

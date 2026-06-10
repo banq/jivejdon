@@ -16,8 +16,6 @@ import org.apache.struts.action.ActionMapping;
 
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
-import com.jdon.controller.WebAppUtil;
-import com.jdon.jivejdon.spi.component.block.ErrorBlockerIF;
 
 public class SmsQQAction extends Action {
 	private final static Logger logger = LogManager.getLogger(SmsQQAction.class);
@@ -25,23 +23,15 @@ public class SmsQQAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest
 			request, HttpServletResponse response) throws Exception {
 
-		ErrorBlockerIF errorBlocker = (ErrorBlockerIF)
-				WebAppUtil.getComponentInstance("errorBlocker", this.servlet.getServletContext());
-		if (errorBlocker.checkRate(request.getRemoteAddr(), 10)) {
-			logger.error("SmsQQAction errorBlocker:" + request.getRemoteAddr());
-			return null;
-		}
-
+		
 		String sessionId = request.getParameter("sessionId");
 		if (sessionId == null || !sessionId.equals(request.getSession().getId())){
-			errorBlocker.checkRate(request.getRemoteAddr(), 0);
 			logger.error("SmsQQAction sessionId:" + request.getRemoteAddr());
 			return null;
 		}
 
 		String randstr = (String)request.getSession().getAttribute("randstr");
 		if(randstr == null){
-			errorBlocker.checkRate(request.getRemoteAddr(), 0);
 			logger.error("SmsQQAction randstr:" + request.getRemoteAddr());
 			return null;
 		}
