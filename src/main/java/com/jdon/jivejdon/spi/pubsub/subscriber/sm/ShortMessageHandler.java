@@ -19,8 +19,8 @@ import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.Subscribe;
 import com.jdon.annotation.Component;
 import com.jdon.annotation.model.OnEvent;
-import com.jdon.jivejdon.spi.component.shortmessage.ShortMessageFactory;
 import com.jdon.jivejdon.domain.event.ATUserNotifiedEvent;
+import com.jdon.jivejdon.spi.component.shortmessage.ShortMessageFactory;
 import com.jdon.jivejdon.util.ScheduledExecutorUtil;
 
 @Component

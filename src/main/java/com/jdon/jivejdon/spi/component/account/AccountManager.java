@@ -15,26 +15,18 @@
  */
 package com.jdon.jivejdon.spi.component.account;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
 import com.jdon.annotation.Component;
-import com.jdon.container.pico.Startable;
-import com.jdon.jivejdon.spi.component.email.ForgotPasswdEmail;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.account.PasswordassitVO;
 import com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactory;
 import com.jdon.jivejdon.infrastructure.repository.acccount.AccountRepository;
-import com.jdon.jivejdon.util.ScheduledExecutorUtil;
+import com.jdon.jivejdon.spi.component.email.ForgotPasswdEmail;
 import com.jdon.util.StringUtil;
 
 @Component
-public class AccountManager implements Startable {
+public class AccountManager  {
 
-	private Set cachedOneTimes = new HashSet();
-
-	private final ScheduledExecutorUtil scheduledExecutorUtil;
+	// private Set cachedOneTimes = new HashSet();
 
 	private ForgotPasswdEmail forgotPasswdEmail;
 
@@ -42,36 +34,34 @@ public class AccountManager implements Startable {
 
 	protected final AccountFactory accountFactory;
 
-	public AccountManager(AccountFactory accountFactory, AccountRepository accountRepository, ForgotPasswdEmail forgotPasswdEmail,
-			ScheduledExecutorUtil scheduledExecutorUtil) {
+	public AccountManager(AccountFactory accountFactory, AccountRepository accountRepository, ForgotPasswdEmail forgotPasswdEmail) {
 		super();
 		this.forgotPasswdEmail = forgotPasswdEmail;
 		this.accountRepository = accountRepository;
 		this.accountFactory = accountFactory;
-		this.scheduledExecutorUtil = scheduledExecutorUtil;
 	}
 
-	public void start() {
-		Runnable task = new Runnable() {
-			public void run() {
-				cachedOneTimes.clear();
-			}
-		};
-		// per ten mintue
-		scheduledExecutorUtil.getScheduExec().scheduleAtFixedRate(task, 60, 60 * 60 * 2, TimeUnit.SECONDS);
-	}
+	// public void start() {
+	// 	Runnable task = new Runnable() {
+	// 		public void run() {
+	// 			cachedOneTimes.clear();
+	// 		}
+	// 	};
+	// 	// per ten mintue
+	// 	scheduledExecutorUtil.getScheduExec().scheduleAtFixedRate(task, 60, 60 * 60 * 2, TimeUnit.SECONDS);
+	// }
 
-	public void stop() {
-		cachedOneTimes.clear();
-	}
+	// public void stop() {
+	// 	cachedOneTimes.clear();
+	// }
 
-	public boolean contains(String chkKey) {
-		return this.cachedOneTimes.contains(chkKey);
-	}
+	// public boolean contains(String chkKey) {
+	// 	return this.cachedOneTimes.contains(chkKey);
+	// }
 
-	public void addChkKey(String chkKey) {
-		this.cachedOneTimes.add(chkKey);
-	}
+	// public void addChkKey(String chkKey) {
+	// 	this.cachedOneTimes.add(chkKey);
+	// }
 
 	public boolean forgetPasswdAction(PasswordassitVO passwordassitVOParam) throws Exception {
 

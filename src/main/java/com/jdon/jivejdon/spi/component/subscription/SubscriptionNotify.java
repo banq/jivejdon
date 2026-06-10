@@ -7,17 +7,16 @@ import org.apache.logging.log4j.Logger;
 
 import com.google.common.eventbus.Subscribe;
 import com.jdon.annotation.Component;
-import com.jdon.jivejdon.spi.component.account.SinaOAuthSubmitter;
-import com.jdon.jivejdon.spi.component.email.SubscriptionEmail;
-import com.jdon.jivejdon.spi.component.shortmessage.ShortMessageFactory;
-import com.jdon.jivejdon.spi.component.subscription.action.ShortMsgAction;
-import com.jdon.jivejdon.spi.component.subscription.action.ShortMsgActionList;
-import com.jdon.jivejdon.util.ScheduledExecutorUtil;
 import com.jdon.jivejdon.domain.model.subscription.Subscription;
 import com.jdon.jivejdon.domain.model.subscription.event.SubscribedNotifyEvent;
 import com.jdon.jivejdon.domain.model.subscription.notifysubscribed.NotifySubscribed;
 import com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactory;
 import com.jdon.jivejdon.infrastructure.repository.dao.SubscriptionDao;
+import com.jdon.jivejdon.spi.component.account.SinaOAuthSubmitter;
+import com.jdon.jivejdon.spi.component.email.SubscriptionEmail;
+import com.jdon.jivejdon.spi.component.shortmessage.ShortMessageFactory;
+import com.jdon.jivejdon.spi.component.subscription.action.ShortMsgAction;
+import com.jdon.jivejdon.spi.component.subscription.action.ShortMsgActionList;
 
 @Component("subscriptionNotify")
 public class SubscriptionNotify {

@@ -17,7 +17,6 @@ package com.jdon.jivejdon.presentation.action.query;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +33,6 @@ import com.jdon.jivejdon.domain.model.property.ThreadPropertys;
 import com.jdon.jivejdon.presentation.form.ThreadListForm;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.api.property.PropertyService;
-import com.jdon.jivejdon.util.ScheduledExecutorUtil;
 
 public class StickyThreadList extends Action {
 

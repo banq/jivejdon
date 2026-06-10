@@ -20,19 +20,19 @@ import com.jdon.annotation.intercept.SessionContextAcceptable;
 import com.jdon.annotation.intercept.Stateful;
 import com.jdon.container.visitor.data.SessionContext;
 import com.jdon.controller.events.EventModel;
-import com.jdon.jivejdon.util.Constants;
+import com.jdon.jivejdon.api.util.JtaTransactionUtil;
+import com.jdon.jivejdon.api.util.SessionContextUtil;
 import com.jdon.jivejdon.auth.ResourceAuthorization;
-import com.jdon.jivejdon.spi.component.account.AccountManager;
-import com.jdon.jivejdon.spi.component.email.ForgotPasswdEmail;
 import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.account.PasswordassitVO;
 import com.jdon.jivejdon.infrastructure.repository.acccount.AccountFactory;
 import com.jdon.jivejdon.infrastructure.repository.acccount.AccountRepository;
-import com.jdon.jivejdon.infrastructure.repository.property.PropertyFactory;
 import com.jdon.jivejdon.infrastructure.repository.acccount.Userconnector;
 import com.jdon.jivejdon.infrastructure.repository.dao.SequenceDao;
-import com.jdon.jivejdon.api.util.JtaTransactionUtil;
-import com.jdon.jivejdon.api.util.SessionContextUtil;
+import com.jdon.jivejdon.infrastructure.repository.property.PropertyFactory;
+import com.jdon.jivejdon.spi.component.account.AccountManager;
+import com.jdon.jivejdon.spi.component.email.ForgotPasswdEmail;
+import com.jdon.jivejdon.util.Constants;
 import com.jdon.util.Debug;
 
 @Stateful
@@ -65,14 +65,9 @@ public class AccountServiceShell extends AccountServiceImp {
 	public void createAccount(EventModel em) {
 		String ip = sessionContextUtil.getClientIP(sessionContext);
 		String chkKey = "REGISTER" + ip.substring(0, 8);
-		if (accountManager.contains(chkKey)) {
-			em.setErrors("only.register.one.times");
-		} else {
-			super.createAccount(em);
-			if (em.getErrors() == null || em.getErrors().isEmpty())
-				accountManager.addChkKey(chkKey);
 
-		}
+		super.createAccount(em);
+
 	}
 
 	public Account getLoginAccountByName(String username) {
@@ -127,13 +122,10 @@ public class AccountServiceShell extends AccountServiceImp {
 	public boolean forgetPasswd(PasswordassitVO passwordassitVO) {
 		boolean ret = false;
 		String chkKey = "REGISTER" + sessionContextUtil.getClientIP(sessionContext).substring(0, 8);
-		if (!accountManager.contains(chkKey)) {
 			try {
 				ret = accountManager.forgetPasswdAction(passwordassitVO);
-				accountManager.addChkKey(chkKey);
 			} catch (Exception e) {
 			}
-		}
 		return ret;
 	}
 

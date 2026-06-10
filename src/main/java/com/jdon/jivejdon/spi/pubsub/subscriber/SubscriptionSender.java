@@ -21,13 +21,12 @@ import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
 import com.jdon.jivejdon.domain.model.subscription.event.SubscribedNotifyEvent;
 import com.jdon.jivejdon.spi.component.subscription.SubscriptionNotify;
-import com.jdon.jivejdon.util.ScheduledExecutorUtil;
 
 @Consumer("subscriptionSender")
 public class SubscriptionSender implements DomainEventHandler {
 	private AsyncEventBus eventBus;
 
-	public SubscriptionSender(SubscriptionNotify subscriptionNotify, ScheduledExecutorUtil scheduledExecutorUtil) {
+	public SubscriptionSender(SubscriptionNotify subscriptionNotify) {
 		// eventBus = new AsyncEventBus(scheduledExecutorUtil.getScheduExec());
 		// eventBus.register(subscriptionNotify);
 	}
