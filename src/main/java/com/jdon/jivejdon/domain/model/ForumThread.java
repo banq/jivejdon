@@ -264,7 +264,7 @@ public class ForumThread {
 	}
 
 	public Forum moveForum(ForumMessage forumMessage, Forum newForum) {
-		if ((isRoot(forumMessage)) && (forumMessage.isLeaf())) {
+		if ((isRoot(forumMessage)) && (this.getState().getMessageCount() == 0)) {
 			long oldForumId = forum.getForumId();
 
 			DomainMessage dm = this.lazyLoaderRole.loadForum(newForum.getForumId());
@@ -292,6 +292,7 @@ public class ForumThread {
 
 		boolean ret = false;
 		try {
+			
 			TreeModel treeModel = getForumThreadTreeModel().getTreeModel();
 			ret = treeModel.isLeaf(forumMessage.getMessageId());
 		} catch (Exception e) {

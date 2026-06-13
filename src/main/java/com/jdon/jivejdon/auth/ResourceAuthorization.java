@@ -15,12 +15,13 @@
  */
 package com.jdon.jivejdon.auth;
 
-import com.jdon.jivejdon.domain.model.account.Account;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import com.jdon.jivejdon.util.Constants;
 import com.jdon.jivejdon.domain.model.ForumMessage;
+import com.jdon.jivejdon.domain.model.account.Account;
 import com.jdon.jivejdon.domain.model.auth.Role;
+import com.jdon.jivejdon.util.Constants;
 
 /**
  * 1. Authorization check: amdin and the owner can modify this nessage.
@@ -49,16 +50,15 @@ public class ResourceAuthorization {
 		if (!isMessageOwner(forumMessage, account)) {
 			throw new NoPermissionException(Constants.NOPERMISSIONS);
 		}
-		if (!isMessageLeaf(forumMessage, account)) {
-			throw new NoPermissionException(Constants.NOPERMISSIONS2);
-		}
+		// if (!isMessageLeaf(forumMessage, account)) {
+		// 	throw new NoPermissionException(Constants.NOPERMISSIONS2);
+		// }
 	}
    
    public boolean isAuthenticated(ForumMessage forumMessage, Account account){
 	   boolean isAuthenticated = false;
 		try {
-			if (isMessageOwner(forumMessage, account)
-					&& isMessageLeaf(forumMessage, account)) {
+			if (isMessageOwner(forumMessage, account)) {
 				isAuthenticated = true;
 			}
 		} catch (Exception e) {
@@ -103,27 +103,7 @@ public class ResourceAuthorization {
 	}
     
     
-    /**
-	 * 2. if the message has childern, only admin can update it.
-	 */
-    public boolean isMessageLeaf(ForumMessage forumMessage, Account account){
-        boolean ret = false;
-        logger.debug(" enter operateMessageAuthCheck2 id =" + forumMessage.getMessageId());        
-        try {
-            if ((account.getRoleName().equals(Role.ADMIN)) || (account.getRoleName().equals(Role.MODERATOR))){
-                ret = true;
-            }else {
-                if (forumMessage.isLeaf()){//only it is leaf, owner can update                    
-                    ret = true;
-                }else{
-                    logger.debug("the Message has childern, no permission to modify it !");
-                }
-            }
-        } catch (Exception e) {
-            logger.error(e);
-        }
-        return ret;
-    }    
+   
     
    
     
