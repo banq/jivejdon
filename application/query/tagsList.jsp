@@ -59,8 +59,10 @@ int randomIdx = 0;
 <%if(pagestartInt != 0 ) {%> 
     <%if(pagestartInt-pagecountInt>0 ) {%>  
         <link rel="prev" href="<%=domainUrl%>/tag/page/<%=(pagestartInt-pagecountInt)%>"/>
+        <meta name="robots" content="noindex, nofollow">
     <%}else{%>
         <link rel="prev" href="<%=domainUrl%>/tag/"/>
+        <meta name="robots" content="noindex, nofollow">
      <%}%>
  <%}%>          
  <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 

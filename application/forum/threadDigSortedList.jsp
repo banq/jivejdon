@@ -54,8 +54,10 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
    <%if(pagestartInt != 0 ) {%> 
         <%if(pagestartInt-pagecountInt>0 ) {%>  
             <link rel="prev" href="<%=domainUrl%>/threadDigSortedList/<%=(pagestartInt-pagecountInt)%>"/>
+            <meta name="robots" content="noindex, nofollow">
         <%}else{%>
             <link rel="prev" href="<%=domainUrl%>/threadDigSortedList/"/>
+            <meta name="robots" content="noindex, nofollow">
          <%}%>
         <%}%>
 
