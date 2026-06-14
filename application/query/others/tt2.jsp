@@ -7,6 +7,7 @@
 <%
     response.setHeader("X-Robots-Tag", "noindex, nofollow");
 %>
+ <meta name="robots" content="noindex, nofollow">
 <%int imgCounter = 0;%>
 <logic:iterate indexId="i" id="forumThread" name="threadListForm" property="list" length='1' >
     <bean:define id="forumMessage" name="forumThread" property="rootMessage" />	

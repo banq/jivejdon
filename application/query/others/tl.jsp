@@ -14,6 +14,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>标签列表</title>
+ <meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" href="/common/jivejdon5.css" type="text/css" />
 <style type="text/css">
 .tag0 { font-size: 12px;}

@@ -15,7 +15,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Jdon.com</title>
 <link rel="stylesheet" href="/common/jivejdon5.css" type="text/css" />
-
+ <meta name="robots" content="noindex, nofollow">
 </head>
 <bean:parameter id="tablewidth" name="tablewidth" value="155"/>
 <bean:parameter id="count" name="count" value="8"/>

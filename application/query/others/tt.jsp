@@ -15,6 +15,7 @@ if (!com.jdon.jivejdon.util.ToolsUtil.checkHeaderCacheForum(1 * 10 * 60, this.ge
 <%
     response.setHeader("X-Robots-Tag", "noindex, nofollow");
 %>
+ <meta name="robots" content="noindex, nofollow">
 <logic:empty name="threadTag">
   <%response.setStatus(HttpServletResponse.SC_NOT_FOUND);%>
 </logic:empty>

@@ -4,7 +4,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-
+ <meta name="robots" content="noindex, nofollow">
 <a href="<%=request.getContextPath()%>/threadDigSortedList/"><b>点赞</b></a>
 <div class="important" >
 <bean:parameter id="count" name="count" value="8"/>

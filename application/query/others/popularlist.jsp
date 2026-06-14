@@ -4,6 +4,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+ <meta name="robots" content="noindex, nofollow">
 <b></b>
 <a href="<%=request.getContextPath()%>/maxPopThreads/"><b>热文</b></a>
 <div class="important" >

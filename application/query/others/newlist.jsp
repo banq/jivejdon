@@ -8,6 +8,7 @@
 <%
     response.setHeader("X-Robots-Tag", "noindex, nofollow");
 %>
+ <meta name="robots" content="noindex, nofollow">
 <bean:parameter id="count" name="count" value="8"/>
 <%
 String coutlength = (String)pageContext.getAttribute("count");

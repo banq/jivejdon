@@ -14,6 +14,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>热点贴列表</title>
+ <meta name="robots" content="noindex, nofollow">
 <style>
 A{font-size: 14px; line-height:23px;text-decoration:none;color:#888;}a:visited{text-decoration:none;color: #666;font-weight:lighter;}A:hover{text-decoration:underline;color:#eab30d;}
 .important {
