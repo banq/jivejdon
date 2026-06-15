@@ -159,36 +159,110 @@ function eraseCookie(name) {
 }
 
 
-function shareto(id){
-
+function shareto(id) {
     var url = encodeURIComponent(window.top.document.location.href);
     var title = encodeURIComponent(window.top.document.title);
-    var _gaq = _gaq || [];
 
     if (id == "fav") {
         addBookmark(document.title);
         return;
     } else if (id == "weixin") {
-        _gaq.push(['_trackEvent', 'SocialShare', 'Share', 'weixin', 1]);
-        window.open('/simgs/weixin.png', 'newwindow', 'height=300,width=300,top=0,left=0,toolbar=no,menubar=no,location=no, status=no');
+        showQRCodeModal();  // 生成二维码浮层
         return;
     } else if (id == "qzone") {
-        _gaq.push(['_trackEvent', 'SocialShare', 'Share', 'QZone', 1]);
-        window.open(' http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + url + "&title=" + title);
+        window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + url + "&title=" + title);
         return;
     } else if (id == "sina") {
-        _gaq.push(['_trackEvent', 'SocialShare', 'Share', 'SinaT', 1]);
-        window.open(" http://service.weibo.com/share/share.php?url=" + url + "&appkey=2879276008&title=" + title + " @极道Jdon", "_blank", "width=615,height=505");
-        return;
-    } else if (id == "googlebuzz") {
-        _gaq.push(['_trackEvent', 'SocialShare', 'Share', 'GoogleBuzz', 1]);
-        window.open(' https://plus.google.com/share?url=' + url, '_blank');
-        return;
-    } else if (id == "mail") {
-        _gaq.push(['_trackEvent', 'SocialShare', 'Share', 'Mail', 1]);
-        window.open('mailto:?subject=' + title + '&body=' + encodeURIComponent('这是我看到了一篇很不错的文章，分享给你看看！\r\n\r\n') + title + encodeURIComponent('\r\n') + url);
-        return;
+        window.open("http://service.weibo.com/share/share.php?url=" + url + "&appkey=2879276008&title=" + title + " @极道Jdon", "_blank", "width=615,height=505");
+        return;   
     }
+}
+
+function showQRCodeModal() {
+    // 获取当前实际URL（不编码）
+    var currentUrl = window.top.document.location.href;
+    
+    // 创建遮罩层
+    var overlay = document.createElement('div');
+    overlay.id = 'qrcode-overlay';
+    overlay.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:99999; display:flex; align-items:center; justify-content:center;';
+    
+    // 创建内容容器
+    var modal = document.createElement('div');
+    modal.style.cssText = 'background:#fff; border-radius:12px; padding:25px 20px 20px; text-align:center; max-width:85%; width:280px; box-shadow:0 5px 20px rgba(0,0,0,0.3);';
+    
+    // 关闭按钮
+    var closeBtn = document.createElement('span');
+    closeBtn.innerHTML = '✕';
+    closeBtn.style.cssText = 'position:absolute; top:10px; right:15px; font-size:24px; cursor:pointer; color:#999; font-family:Arial;';
+    closeBtn.onclick = function() {
+        document.body.removeChild(overlay);
+    };
+    
+    // 提示文字
+    var tip = document.createElement('p');
+    tip.style.cssText = 'margin:0 0 15px 0; font-size:16px; color:#333; font-weight:bold;';
+    tip.innerHTML = '微信分享';
+    
+    var step1 = document.createElement('p');
+    step1.style.cssText = 'margin:5px 0; font-size:13px; color:#666;';
+    step1.innerHTML = '1️⃣ 截图保存二维码';
+    
+    var step2 = document.createElement('p');
+    step2.style.cssText = 'margin:5px 0 15px; font-size:13px; color:#666;';
+    step2.innerHTML = '2️⃣ 打开微信「扫一扫」从相册识别';
+    
+    var step3 = document.createElement('p');
+    step3.style.cssText = 'margin:15px 0 5px; font-size:13px; color:#ff6600; background:#fff3e0; padding:8px; border-radius:6px;';
+    step3.innerHTML = '💡 打开页面后点击右上角「···」分享';
+    
+    // 二维码容器
+    var qrcodeContainer = document.createElement('div');
+    qrcodeContainer.id = 'qrcode-modal-container';
+    qrcodeContainer.style.cssText = 'margin:10px auto; display:flex; justify-content:center;';
+    
+    modal.appendChild(closeBtn);
+    modal.appendChild(tip);
+    modal.appendChild(step1);
+    modal.appendChild(step2);
+    modal.appendChild(qrcodeContainer);
+    modal.appendChild(step3);
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+    
+    // 生成二维码（需要qrcode库）
+    if (typeof QRCode === 'undefined') {
+        // 动态加载QRCode库
+        var script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/qrcodejs2@0.0.2/qrcode.min.js';
+        script.onload = function() {
+            new QRCode(document.getElementById('qrcode-modal-container'), {
+                text: currentUrl,
+                width: 200,
+                height: 200,
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        };
+        document.head.appendChild(script);
+    } else {
+        new QRCode(document.getElementById('qrcode-modal-container'), {
+            text: currentUrl,
+            width: 200,
+            height: 200,
+            colorDark: '#000000',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    }
+    
+    // 点击遮罩层关闭
+    overlay.onclick = function(e) {
+        if (e.target === overlay) {
+            document.body.removeChild(overlay);
+        }
+    };
 }
 
 function addMenuItems() {      
