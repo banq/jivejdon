@@ -215,16 +215,25 @@ int h = 0 ;
 <script>
   async function fetchData() {
     for (const id of ids) {
-            try {
-                const response = await fetch(`/query/tt/\${id}`);
-                if (!response.ok) {
+        try {
+             const params = new URLSearchParams({
+                           start: 0,
+                           length: 10,
+                           tablewidth: 160,
+                           count: 6,
+                           tagID: id
+                         });
+        
+        // 构建完整URL
+             const response = await fetch(`/query/tt.shtml?\${params.toString()}`);
+             if (!response.ok) {
                     throw new Error('Network response was not ok');
-                }
-                const html = await response.text();
-                document.getElementById(`ajax_\${id}`).innerHTML = html;
-            } catch (error) {
-                console.error('Fetch error:', error);
-            }
+              }
+              const html = await response.text();
+              document.getElementById(`ajax_\${id}`).innerHTML = html;
+        } catch (error) {
+              console.error('Fetch error:', error);
+        }
     }
   }
 

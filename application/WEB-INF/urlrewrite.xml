@@ -81,7 +81,7 @@
         <to>/query/approvedListOther.shtml?start=$1&amp;count=30</to>
     </rule>
 
-    <rule>
+    <!-- <rule>
         <from>^/query/tt/([0-9]+)$</from>
         <to>/query/tt.shtml?start=0&amp;length=10&amp;tablewidth=160&amp;count=6&amp;tagID=$1</to>
     </rule>
@@ -89,7 +89,7 @@
     <rule>
         <from>^/query/tt2/([0-9]+)$</from>
         <to>/query/tt2.shtml?start=0&amp;length=10&amp;tablewidth=160&amp;count=6&amp;tagID=$1</to>
-    </rule>
+    </rule> -->
 
      <rule>
         <from>^/maxPopThreads/$</from>
