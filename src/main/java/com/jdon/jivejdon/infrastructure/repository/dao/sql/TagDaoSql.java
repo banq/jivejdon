@@ -259,6 +259,42 @@ public class TagDaoSql implements TagDao {
 		return ret;
 	}
 
+	private volatile Integer cachedTotalCount = null;
+    private final Object lock = new Object();
+
+	private Integer queryTotalCountFromDB() {
+        String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from tag";
+        List<Object> countParams = new ArrayList<>();
+        
+        try {
+            Object allCounto = jdbcTempSource.getJdbcTemp().querySingleObject(countParams, GET_ALL_ITEMS_ALLCOUNT);
+            if (allCounto instanceof Long) {
+                return ((Long) allCounto).intValue();
+            } else {
+                return ((Integer) allCounto).intValue();
+            }
+        } catch (Exception e) {
+            logger.error("queryTotalCountFromDB error: " + e);
+            return 0;
+        }
+    }
+
+	  private Integer getTotalCount() {
+        // 如果缓存有值，直接返回
+        if (cachedTotalCount != null) {
+            return cachedTotalCount;
+        }
+        
+        // 缓存为空，加锁查询并保存
+        synchronized (lock) {
+            if (cachedTotalCount != null) {
+                return cachedTotalCount;
+            }
+            cachedTotalCount = queryTotalCountFromDB();
+            return cachedTotalCount;
+        }
+    }
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -266,22 +302,8 @@ public class TagDaoSql implements TagDao {
 	 */
 	public PageIterator getThreadTags(int start, int count) {
         logger.debug("enter getThreadTags ..");
-        String GET_ALL_ITEMS_ALLCOUNT = "select count(1) from tag";
         String GET_ALL_ITEMS = "select tagID from tag order by assonum DESC LIMIT ?, ?";
-
-        List<Object> countParams = new ArrayList<>(); // no params for count
-        Integer allCount = 0;
-        try {
-            Object allCounto = jdbcTempSource.getJdbcTemp().querySingleObject(countParams, GET_ALL_ITEMS_ALLCOUNT);
-            if (allCounto instanceof Long)
-                allCount = ((Long) allCounto).intValue();
-            else
-                allCount = ((Integer) allCounto).intValue();
-        } catch (Exception e) {
-            logger.error("getThreadTags count error: " + e);
-            return new PageIterator();
-        }
-
+		
         List<Object> params = new ArrayList<>();
         params.add(start);
         params.add(count);
@@ -295,7 +317,7 @@ public class TagDaoSql implements TagDao {
             logger.error("getThreadTags list error: " + e);
             return new PageIterator();
         }
-        return new PageIterator(allCount, tagIDs.toArray());
+        return new PageIterator(getTotalCount(), tagIDs.toArray());
     }
 
 	/*
