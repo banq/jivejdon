@@ -77,7 +77,7 @@ public class ThreadEtagFilter extends Action {
 		long oneYearInMillis = 100L * 24 * 60 * 60 * 1000;
 		long currentTime = System.currentTimeMillis();
 		if (currentTime - modelLastModifiedDate > oneYearInMillis) {
-			expire = 15 * 24 * 60 * 60;
+			expire = 30 * 24 * 60 * 60;
 		}
 
 		if (!ToolsUtil.checkHeaderCache(expire, modelLastModifiedDate, request,
