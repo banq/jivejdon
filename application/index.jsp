@@ -110,6 +110,19 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                         });  
                       </script>           
             </div>   
+            <div>            
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
+     crossorigin="anonymous"></script>
+            <!-- Jdon首页右下侧 -->
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:300px;height:600px"
+                 data-ad-client="ca-pub-7573657117119544"
+                 data-ad-slot="9603128044"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+            </div>
+
       </div>
     </div>
 </aside>
