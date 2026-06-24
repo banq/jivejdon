@@ -19,8 +19,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <head>  
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <link rel="dns-prefetch" href="https://tpc.googlesyndication.com" >
-  <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" >
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
+  <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" >  
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">    
