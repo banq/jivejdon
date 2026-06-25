@@ -25,7 +25,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
   <meta name="viewport" content="width=device-width, initial-scale=1">    
   <title>极道Jdon:一语道破科技玄机</title>
   <meta name="Description" content="极道Jdon带你探索科技世界，深析最新科技动态，道破科技玄机。">
-  <meta name="Keywords" content="IT,科技,AI,AGI,智能,哲学,人文科学,逻辑思维,认知学,信息学,生物极客">
+  <meta name="Keywords" content="IT,科技,AI,AGI,智能,哲学,人文科学,逻辑思维,认知学,信息学,系统学,生物极客">
   <link rel="stylesheet" href="/js/jdon.css">
   <style>
     html { font-size: 62.5%; -webkit-text-size-adjust: 100%; }
