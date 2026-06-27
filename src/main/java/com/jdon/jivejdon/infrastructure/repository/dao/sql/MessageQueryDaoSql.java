@@ -637,5 +637,24 @@ public abstract class MessageQueryDaoSql implements MessageQueryDao {
 		return -1L; // Return -1 if thread not found or error occurs
 	}
 
+	public String getThreadName(Long threadId) {
+		logger.debug("getThreadName for threadId=" + threadId);
+		String SQL = "SELECT m.subject FROM jiveThread t INNER JOIN jiveMessage m ON t.rootMessageID = m.messageID WHERE t.threadID = ?";
+		List<Object> queryParams = new ArrayList<>();
+		queryParams.add(threadId);
+		
+		try {
+			Object result = jdbcTempSource.getJdbcTemp().querySingleObject(queryParams, SQL);
+			if (result != null) {
+				if (result instanceof String) {
+					return (String) result;
+				} 
+			}
+		} catch (Exception e) {
+			logger.error("Error getThreadName for threadId=" + threadId, e);
+		}
+		return null; // Return null if thread not found or error occurs
+	}
+
 	
 }

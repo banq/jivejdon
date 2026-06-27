@@ -320,4 +320,10 @@ public class ForumMessageQueryServiceImp implements ForumMessageQueryService {
 		return messageQueryDao.getThreadModifiedDate(threadId);
 	}
 
+	public String getThreadName(Long threadId){
+        return messageQueryDao.getThreadName(threadId);
+	}
+
+	
+
 }

@@ -198,4 +198,10 @@ public class TagServiceImp implements TagService, Poolable {
 
 	}
 
+	public String getThreadToken(Long forumThreadId){
+          return tagRepository.getThreadToken(forumThreadId);
+	}
+
+	
+
 }

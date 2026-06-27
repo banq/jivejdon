@@ -54,4 +54,6 @@ public interface TagService {
 
 	public Collection<Long> getReBlogLink(Long messageId);
 
+	String getThreadToken(Long forumThreadId);
+
 }

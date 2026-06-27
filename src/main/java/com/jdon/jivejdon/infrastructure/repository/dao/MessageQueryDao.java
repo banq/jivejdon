@@ -88,4 +88,6 @@ public interface MessageQueryDao {
 	 */
 	Long getThreadModifiedDate(Long threadId);
 
+	String getThreadName(Long threadId);
+
 }

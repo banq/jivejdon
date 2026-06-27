@@ -1,5 +1,7 @@
 package com.jdon.jivejdon.presentation.action;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,8 +11,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.jdon.controller.WebAppUtil;
+import com.jdon.jivejdon.api.property.TagService;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
-import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.strutsutil.ModelDispAction;
 
 /**
@@ -20,6 +22,10 @@ import com.jdon.strutsutil.ModelDispAction;
 public class ThreadRedirectAction extends ModelDispAction {
 
     private ForumMessageQueryService forumMessageQueryService;
+
+    private TagService tagService;
+
+    private Map<Long,String> pinyinResultCaches = new java.util.concurrent.ConcurrentHashMap<>();
 
     public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, 
                                HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -32,14 +38,20 @@ public class ThreadRedirectAction extends ModelDispAction {
         }
 
         try {
-            ForumThread forumThread = getForumMessageQueryService().getThread(Long.parseLong(threadId));
-            if (forumThread == null) {
+            // ForumThread forumThread = getForumMessageQueryService().getThread(Long.parseLong(threadId));
+            // if (forumThread == null) {
+            //     response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            //     return null;
+            // }
+
+            // // 获取拼音token
+            // String pinyinToken = forumThread.getPinyinToken();
+
+            String pinyinToken = getPinyinToken(Long.parseLong(threadId));
+            if(pinyinToken == null || pinyinToken.trim().isEmpty()) {
                 response.sendError(HttpServletResponse.SC_NOT_FOUND);
                 return null;
             }
-
-            // 获取拼音token
-            String pinyinToken = forumThread.getPinyinToken();
             
             // 构建新的URL
             String newUrl = request.getContextPath() + "/" + threadId + pinyinToken + ".html";
@@ -62,5 +74,41 @@ public class ThreadRedirectAction extends ModelDispAction {
                     this.servlet.getServletContext());
         }
         return forumMessageQueryService;
+    }
+
+    public TagService getTagService() {
+        if (tagService == null) {
+            tagService = (TagService) WebAppUtil.getService("othersService",
+                    this.servlet.getServletContext());
+        }
+        return tagService;
+    }
+
+    private String getPinyinToken(long threadId){
+        if (pinyinResultCaches.containsKey(threadId)) {
+            return pinyinResultCaches.get(threadId);
+        }
+
+        String pinyinResultCache = null;
+
+        String token = getTagService().getThreadToken(threadId);
+		if (token == null || token.trim().isEmpty()) {
+            // 使用getName()的前四个汉字转为拼音
+            String name =  getForumMessageQueryService().getThreadName(threadId);
+            if (name == null || name.trim().isEmpty()) {
+                return "";
+            }
+            String pinyinFromName = com.jdon.jivejdon.util.PinyinUtils.toPinyinFromFirstFourChinese(name);
+            if (pinyinFromName != null && !pinyinFromName.trim().isEmpty()) {
+                pinyinResultCache = pinyinFromName.startsWith("-") ? pinyinFromName : "-" + pinyinFromName;
+                pinyinResultCaches.put(threadId, pinyinResultCache);
+                return pinyinResultCache;
+            }
+            return "";
+        }
+        String pinyinResult = com.jdon.jivejdon.util.PinyinUtils.toPinyin(token);
+        pinyinResultCache = pinyinResult.startsWith("-") ? pinyinResult : "-" + pinyinResult;
+        pinyinResultCaches.put(threadId, pinyinResultCache);
+		return pinyinResultCache;
     }
 }

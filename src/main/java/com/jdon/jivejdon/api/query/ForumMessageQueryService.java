@@ -69,4 +69,7 @@ public interface ForumMessageQueryService {
 	 */
 	Long getThreadModifiedDate(Long threadId);
 
+
+	String getThreadName(Long threadId);
+
 }
