@@ -142,14 +142,14 @@ document.getElementById('home-thumbnai').src = '/simgs/thumb2/' + getRandomThumb
       </div>
       <div class="col-md-8">
 
-        
+ <ul style="list-style-type:none;padding:0px" itemscope itemtype="https://schema.org/ItemList">       
 <logic:iterate  id="forumThread" name="threadListForm" property="list" length="2" >
   
       
- <ul style="list-style-type:none;padding:0px" itemscope itemtype="https://schema.org/ItemList">
+ 
  <div class="row">	
 
- <div class="col-sm-12" style="padding:0px">
+ <div class="col-sm-12" style="padding:10px">
 <li class="box" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">	
      <div>	             
          <div class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
@@ -168,10 +168,10 @@ document.getElementById('home-thumbnai').src = '/simgs/thumb2/' + getRandomThumb
           
 
   </div>
-  </ul>
+
 
 </logic:iterate>
-
+  </ul>
       </div>
   </div>
 
