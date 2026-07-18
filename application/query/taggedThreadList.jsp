@@ -153,7 +153,7 @@ document.getElementById('home-thumbnai').src = '/simgs/thumb2/' + getRandomThumb
 <li class="box" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">	
      <div>	             
          <div class="vid-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-          <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><h3 itemprop="name"><bean:write name="forumThread" property="name"/></h3></a>
+          <a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" class="hover-preload" itemprop="url"><h2 itemprop="name"><bean:write name="forumThread" property="name"/></h2></a>
          </div>
          <div style="color: #3c1616; display:flex; align-items:flex-start; justify-content:space-between; margin-top: 10px">              
             <span style="flex:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;overflow:hidden">           
