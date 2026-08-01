@@ -44,7 +44,8 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     }
     .navbar { min-height: 50px; margin-bottom: 20px; background-color: #150303; }
   </style>
-  <link rel="sitemap" type="application/xml" title="Sitemap" href="<%=domainUrl%>/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <link rel="alternate" type="application/rss+xml" title="极道订阅" href="/rss">
   <link rel="canonical" href="<%=domainUrl%>/">
   <link rel="preload" href="/js/fonts/icomoon.woff" as="font" type="font/woff" crossorigin>
   <link rel="preload" href="/js/jquery-bootstrap2.js" as="script">
