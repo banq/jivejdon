@@ -251,7 +251,11 @@ public class URLConverter implements Function<MessageVO, MessageVO> {
 				} else {
 					buf.append(chars, oldend, index - oldend);
 					buf.append("<a href =\"");
-					buf.append(input.substring(j, u1).trim());
+					String href = input.substring(j, u1).trim();
+					if (href.startsWith("http://")) {
+						href = "https://" + href.substring(7);
+					}
+					buf.append(href);
 					if (newWindowEnabled) {
 						buf.append("\" target=\"_blank");
 					}
