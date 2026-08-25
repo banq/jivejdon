@@ -148,6 +148,8 @@ public class ThreadApprovedNewList implements Startable {
 					for (int i = currentDig; i < 2; i++) {
 						thread.messageDigAction("127.0.0." + (i + 1));
 					}
+				} else if (thread.getViewCount() > 10 && thread.getRootMessage().getDigCount() < 1) {
+					thread.messageDigAction("127.0.0.1");
 				}
 			}
 		});
