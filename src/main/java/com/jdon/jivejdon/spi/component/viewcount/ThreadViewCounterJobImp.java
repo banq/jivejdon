@@ -124,9 +124,12 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
     public void saveViewCounter(ViewCounter viewCounter, String ipAddress) {
         ipAddress = getIpSegmentKey(ipAddress);
         boolean shouldSave = false;
+        ViewCounter counterToSave;
 
         // 1. 【原子步骤一】尝试将帖子抢占放入大账本（检查这小时内是不是第一次被点开）
-        if (viewcounters.putIfAbsent(viewCounter.getThreadId(), viewCounter) == null) {
+        ViewCounter existingCounter = viewcounters.putIfAbsent(viewCounter.getThreadId(), viewCounter);
+        if (existingCounter == null) {
+            counterToSave = viewCounter;
 
             // 2. 【原子步骤二】新帖子抢占成功，原子的增加影子账本中该 IP 的计数
             int currentCount = ipCountsMirror.compute(ipAddress, (key, count) -> {
@@ -158,12 +161,13 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 
             // 如果一段时间内该 IP 访问的不同新帖子总数没超过 5，则允许老帖子继续累加数量
             shouldSave = currentCount <= 5;
+            counterToSave = existingCounter;
         }
 
         // 执行保存逻辑
         if (shouldSave) {
-            if (viewCounter.addViewCount(ipAddress)) {
-                saveItem(viewCounter);
+            if (counterToSave.addViewCount(ipAddress)) {
+                saveItem(counterToSave);
             }
         }
     }
