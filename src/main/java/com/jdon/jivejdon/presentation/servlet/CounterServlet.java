@@ -68,7 +68,7 @@ public class CounterServlet extends HttpServlet {
 
 
 		try {
-			String ip = req.getRemoteAddr();
+			String ip = req.getHeader("x-forwarded-for");            
 			Long threadIdLong = Long.parseLong(threadId);
             CompletableFuture.runAsync(() -> {
                     getThreadViewCounterJob().saveAndIncrement(threadIdLong, ip);

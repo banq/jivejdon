@@ -122,7 +122,7 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
      * 核心原子限流器（$O(1)$ 复杂度，纯原子无锁）
      */
     public void saveViewCounter(ViewCounter viewCounter, String ipAddress) {
-        ipAddress = getIpSegmentKey(ipAddress);
+//        ipAddress = getIpSegmentKey(ipAddress);
         boolean shouldSave = false;
         ViewCounter counterToSave;
 
