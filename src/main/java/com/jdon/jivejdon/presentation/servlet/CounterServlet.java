@@ -68,7 +68,8 @@ public class CounterServlet extends HttpServlet {
 
 
 		try {
-			String ip = req.getHeader("x-forwarded-for");            
+			String ip = getClientIp(req);
+            
 			Long threadIdLong = Long.parseLong(threadId);
             CompletableFuture.runAsync(() -> {
                     getThreadViewCounterJob().saveAndIncrement(threadIdLong, ip);
@@ -93,5 +94,30 @@ public class CounterServlet extends HttpServlet {
         resp.getOutputStream().write(gif);
     }
 
+    public static String getClientIp(HttpServletRequest request) {
+        if (request == null) {
+            return "unknown";
+        }
+
+        String ip = request.getHeader("x-forwarded-for");
+
+        // 1. 如果 X-Forwarded-For 为空，或者被代理伪装成 unknown，则取 X-Real-IP
+        //nginx配置：proxy_set_header X-Real-IP $remote_addr;
+        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("x-real-ip");
+        }
+
+        // 2. 如果上面都为空（本地直连场景），取最原始的 getRemoteAddr()
+        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+
+        // 3. 如果存在多个代理（有逗号），只取最左边第一个真实用户 IP
+        if (ip != null && ip.contains(",")) {
+            ip = ip.split(",")[0].trim();
+        }
+
+        return ip;
+    }
   
 }
