@@ -142,9 +142,9 @@ public class ForumMessage extends RootMessage implements Cloneable {
                     MessageVO loaded = (MessageVO) em.getBlockEventResult();
                     if (loaded != null) {
                         setMessageVO(messageVO);
+                        em.clear();
+                        this.messageVOLoaded = true;
                     }
-                    em.clear();
-                    this.messageVOLoaded = true;
                 }
             }
         }
