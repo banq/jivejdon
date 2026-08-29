@@ -36,7 +36,7 @@
         
         </td>
         <td >
-        <bean:write name="forumMessage" property="messageVO.subject"/>
+        <bean:write name="forumMessage" property="subject"/>
        <br>
         <span class="smallgray">
           <bean:write name="forumMessage" property="creationDate" />
@@ -52,7 +52,7 @@
      
   
 <span class="article">
-      <bean:write name="forumMessage" property="messageVO.shortBody[50]" />
+      <bean:write name="forumMessage" property="shortBody[50]" />
 </span>
 
         

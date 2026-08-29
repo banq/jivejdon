@@ -56,7 +56,6 @@ pageContext.setAttribute("title", titleStr);
 <logic:notEmpty name="forumThread">
      <logic:notEmpty name="forumThread" property="rootMessage">
      <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
-     <bean:define id="body" name="forumMessage" property="messageVO.body" />
      
 
      <logic:equal name="forumMessage" property="digCount" value="0">
@@ -92,8 +91,8 @@ pageContext.setAttribute("title", titleStr);
                                  </span>
                            </logic:greaterThan>     
      
-                 <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
-                     <span ><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
+                 <logic:greaterThan name="forumMessage" property="bodyLengthK" value="1">
+                     <span ><bean:write name="forumMessage" property="bodyLengthK"/>K</span>
                  </logic:greaterThan>     
                  <h3 class="vid-name"><a href="<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" target="_blank"><bean:write name="forumThread" property="name"/></a></h3>
            

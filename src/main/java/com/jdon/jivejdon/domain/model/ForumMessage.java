@@ -20,6 +20,7 @@ import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jsoup.Jsoup;
 
 import com.jdon.annotation.Model;
 import com.jdon.annotation.model.Inject;
@@ -73,13 +74,19 @@ public class ForumMessage extends RootMessage implements Cloneable {
     @Inject
     public ShortMPublisherRole shortMPublisherRole;
 
+    private static final int PREVIEW_BODY_LENGTH = 200;
+
     private Long messageId;
+    private String subject;
     private MessageVO messageVO;
+    private volatile boolean messageVOLoaded;
     private MessageUrlVO messageUrlVO;
     private FilterPipleSpec filterPipleSpec;
     private String creationDate;
     private long modifiedDate;
     private Account account; // owner
+    private String previewBody;
+    private int bodyLengthK;
 
     private AttachmentsVO attachmentsVO;
     private final MessagePropertysVO messagePropertysVO;
@@ -89,7 +96,6 @@ public class ForumMessage extends RootMessage implements Cloneable {
     // new ForumMessage() is banned, use RootMessage.messageBuilder()
     protected ForumMessage(long threadId) {
         super(threadId);
-        this.messageVO = this.messageVOBuilder().subject("").body("").build();
         this.messageUrlVO = new MessageUrlVO("", "", "");
         this.messagePropertysVO = new MessagePropertysVO();
     }
@@ -118,8 +124,31 @@ public class ForumMessage extends RootMessage implements Cloneable {
         return isRoot() ? null : ((ForumMessageReply) this).getParentMessage();
     }
 
+    public String getSubject() {
+        if (messageVO != null && messageVO.getSubject() != null) {
+            return messageVO.getSubject();
+        }
+        if (subject != null) {
+            return subject;
+        }
+        return "";
+    }
+
     public MessageVO getMessageVO() {
-        return messageVO;
+        if (!messageVOLoaded && this.messageId != null && this.lazyLoaderRole != null) {
+            synchronized (this) {
+                if (!messageVOLoaded && this.messageId != null && this.lazyLoaderRole != null) {
+                    DomainMessage em = lazyLoaderRole.reloadMessageVO(this.messageId);
+                    MessageVO loaded = (MessageVO) em.getBlockEventResult();
+                    if (loaded != null) {
+                        setMessageVO(messageVO);
+                    }
+                    em.clear();
+                    this.messageVOLoaded = true;
+                }
+            }
+        }
+        return this.messageVO;
     }
 
     private void setMessageVO(MessageVO messageVO) {
@@ -134,11 +163,50 @@ public class ForumMessage extends RootMessage implements Cloneable {
 
         // apply complex business filter logic to messageVO;
         this.messageVO = filterPipleSpec.apply(messageVO);
+        this.subject = this.messageVO.getSubject();
+        refreshBodyPreviewAndLength();
+    }
 
+    private void refreshBodyPreviewAndLength() {
+        String body = this.messageVO != null ? this.messageVO.getBody() : null;
+        this.previewBody = buildPreviewBody(body);
+        this.bodyLengthK = body == null || body.isEmpty() ? 0 : body.length() / 1024;
+    }
+
+    private String buildPreviewBody(String body) {
+        if (body == null || body.isEmpty()) {
+            return "";
+        }
+        String text = body.substring(0, Math.min(body.length(), PREVIEW_BODY_LENGTH));
+        return Jsoup.parse(text).wholeText();
+    }
+
+    public String getShortBody(int length) {
+        if (length <= 0 || previewBody == null || previewBody.isEmpty()) {
+            return "";
+        }
+        return previewBody.substring(0, Math.min(previewBody.length(), length));
+    }
+
+    public String getBodyText(int length) {
+        if (previewBody == null || previewBody.isEmpty()) {
+            return "";
+        }
+        return previewBody.substring(0, Math.min(previewBody.length(), length));
+    }
+
+    public int getBodyLengthK() {
+        if (this.messageVO != null && this.messageVO.getBody() != null && !this.messageVO.getBody().isEmpty()) {
+            return this.messageVO.getBody().length() / 1024;
+        }
+        return bodyLengthK;
     }
 
     public void updateSubject(String subject) {
-        this.messageVO = this.messageVOBuilder().subject(subject).body(this.messageVO.getBody()).build();
+        this.subject = subject;
+        if (this.messageVO != null) {
+            this.messageVO = this.messageVOBuilder().subject(subject).body(this.messageVO.getBody()).build();
+        }
     }
 
     public MessageVO getMessageVOClone() throws Exception {
@@ -150,8 +218,16 @@ public class ForumMessage extends RootMessage implements Cloneable {
      * that saved in repository
      */
     public void reloadMessageVOOrignal() {
+        if (this.messageId == null) {
+            return;
+        }
         DomainMessage em = lazyLoaderRole.reloadMessageVO(this.messageId);
-        this.messageVO = (MessageVO) em.getBlockEventResult();
+        MessageVO loaded = (MessageVO) em.getBlockEventResult();
+        if (loaded != null) {
+            this.messageVO = loaded;
+            this.subject = loaded.getSubject();
+        }
+        this.messageVOLoaded = true;
         // not with setMessageVO, no filter
         em.clear();
     }
@@ -367,10 +443,12 @@ public class ForumMessage extends RootMessage implements Cloneable {
                         setAttachment(new AttachmentsVO(messageId, uploads));
                         this.messagePropertysVO.replacePropertys(props);
                         this.hotKeys = hotKeys;
-                        // apply all filter specification , business rule!
-                        messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO.getBody())
-                                .build();
-                        setMessageVO(messageVO);
+                        // initialize the fast metadata first; do not eagerly materialize messageVO here,
+                        // otherwise the lazy-load contract is broken before the body is actually needed.
+                        this.subject = (messageVO != null && messageVO.getSubject() != null)
+                                ? messageVO.getSubject() : this.subject;
+                        this.messageVO = messageVO;
+                        refreshBodyPreviewAndLength();
                         isCreated.set(true); // construt end
                     }
                 }

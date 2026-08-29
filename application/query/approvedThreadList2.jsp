@@ -43,7 +43,6 @@ if (request.getParameter("count")!=null){
   <div class="linkblock">
     <div class="box">	           
     
-             <bean:define id="body" name="forumMessage" property="messageVO.body" />
 
         <div>		
             <span class="info">
@@ -61,8 +60,8 @@ if (request.getParameter("count")!=null){
 					     </span>
               </logic:notEqual>     
 		       
-              <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
-                 <span class="smallgray"><i class="fa fa-arrow-circle-o-down"></i><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
+              <logic:greaterThan name="forumMessage" property="bodyLengthK" value="1">
+                 <span class="smallgray"><i class="fa fa-arrow-circle-o-down"></i><bean:write name="forumMessage" property="bodyLengthK"/>K</span>
               </logic:greaterThan>   
             </span>        
 
@@ -78,7 +77,7 @@ if (request.getParameter("count")!=null){
 
        <div style="letter-spacing: 0.03em;color: #3c1616; display:flex;align-items:flex-start; justify-content:space-between; margin-top: 10px">
               <span style="flex:1; display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical;overflow:hidden">      
-                 <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[100]" />
+                 <bean:write name="forumThread" property="rootMessage.shortBody[100]" />
               </span>
        </div>
 

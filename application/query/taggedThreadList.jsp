@@ -157,7 +157,7 @@ document.getElementById('home-thumbnai').src = '/simgs/thumb2/' + getRandomThumb
          </div>
          <div style="color: #3c1616; display:flex; align-items:flex-start; justify-content:space-between; margin-top: 10px">              
             <span style="flex:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;overflow:hidden">           
-              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[150]" />
+              <bean:write name="forumThread" property="rootMessage.shortBody[150]" />
              </span>  
              
             </div>

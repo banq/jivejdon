@@ -9,7 +9,6 @@
 <logic:notEmpty name="forumThread" property="rootMessage">
 
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
-<bean:define id="body" name="forumMessage" property="messageVO.body" />
 <%
   Integer imgCounter = (Integer) pageContext.getAttribute("imgCounter");
   if(imgCounter == null) {
@@ -29,7 +28,7 @@
         </h3>
          <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-top: 10px">              
             <span style="flex:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;overflow:hidden">           
-              <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />
+              <bean:write name="forumThread" property="rootMessage.shortBody[50]" />
              </span>  
               <img src="/simgs/thumb/<%=imgCounter % 3%>.jpg" alt="icon"  style="width:65px; height:65px; margin-left:12px; flex-shrink:0; object-fit:cover; border-radius:6px;">
             </div>

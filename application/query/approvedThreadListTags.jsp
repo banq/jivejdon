@@ -13,10 +13,9 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <div class="linkblock">	
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />	
 <div style="width:150px;margin:0 auto;height:300px">
-    <bean:define id="body" name="forumMessage" property="messageVO.body" />    
     <h3> <a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" ><bean:write name="forumThread" property="name" /></a> </h3>  
       <br>          
-      <p class="smallgray"> <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />..
+      <p class="smallgray"> <bean:write name="forumThread" property="rootMessage.shortBody[50]" />..
 	</div>
 </div>        
 </logic:iterate>
@@ -27,10 +26,9 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <div class="linkblock">	
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />	
 <div style="width:150px;margin:0 auto;height:300px">
-    <bean:define id="body" name="forumMessage" property="messageVO.body" />    
     <h3> <a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" ><bean:write name="forumThread" property="name" /></a> </h3>  
       <br>          
-      <p class="smallgray"> <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />..
+      <p class="smallgray"> <bean:write name="forumThread" property="rootMessage.shortBody[50]" />..
 	</div>			  
 </div>        
 </logic:iterate>
@@ -41,10 +39,9 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <div class="linkblock">	
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />	
 <div style="width:150px;margin:0 auto;height:300px">
-    <bean:define id="body" name="forumMessage" property="messageVO.body" />    
     <h3> <a href="<%=domainUrl%>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" ><bean:write name="forumThread" property="name" /></a> </h3>  
       <br>          
-      <p class="smallgray"> <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" />..
+      <p class="smallgray"> <bean:write name="forumThread" property="rootMessage.shortBody[50]" />..
 	</div>			  
 </div>        
 </logic:iterate>

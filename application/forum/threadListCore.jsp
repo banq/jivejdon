@@ -9,7 +9,6 @@
 <logic:notEmpty name="forumThread">
 <logic:notEmpty name="forumThread" property="rootMessage">
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
-<bean:define id="body" name="forumMessage" property="messageVO.body" />
 
 <li class="box" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px;">   
@@ -17,8 +16,8 @@
       
           <div class="info" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px;">
             
-             <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
-                <span class="smallgray"><i class="fa fa-arrow-circle-o-down"></i><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
+             <logic:greaterThan name="forumMessage" property="bodyLengthK" value="1">
+                <span class="smallgray"><i class="fa fa-arrow-circle-o-down"></i><bean:write name="forumMessage" property="bodyLengthK"/>K</span>
              </logic:greaterThan>     
 
               <span class="smallgray"><i class="fa fa-calendar"></i>

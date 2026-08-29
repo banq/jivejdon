@@ -72,7 +72,7 @@
       <a href='<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId" />?message=<bean:write name="forumMessage" property="messageId" />#<bean:write name="forumMessage" property="messageId" />'       
         title="<bean:write name="forumMessage" property="messageVO.body"/>"
         target="_blank" >
-        <bean:write name="forumMessage" property="messageVO.subject"/></a>
+        <bean:write name="forumMessage" property="subject"/></a>
     </td>   
      <td style="text-align: center"><bean:write name="forumMessage" property="postip" />
         <form action="<%=request.getContextPath()%>/admin/user/banIPAction.shtml" method="post" target="_blank">

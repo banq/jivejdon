@@ -32,7 +32,7 @@
 <html:hidden name="parentMessage" property="messageId" />
 
 
-        <b><bean:write name="parentMessage" property="messageVO.subject"/></b>
+        <b><bean:write name="parentMessage" property="subject"/></b>
     
          <p><bean:write name="parentMessage" property="account.username"/></p>
             			

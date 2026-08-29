@@ -40,14 +40,14 @@
        <div class="b_content_title2">
          <a href='<%=request.getContextPath()%>/<bean:write name="forumThread" property="threadId" /><bean:write name="forumThread" property="pinyinToken" />.html' target="_blank">
 
-           <bean:write name="forumMessage" property="messageVO.subject"/>
+           <bean:write name="forumMessage" property="subject"/>
         </a>
         <span>(<bean:write name="forumMessage" property="modifiedDate3" />)</span>
         </div>
         
 
       <div class="b_content_body">
-      <bean:write name="forumMessage" property="messageVO.shortBody[50]" filter="false"/>
+      <bean:write name="forumMessage" property="shortBody[50]" filter="false"/>
      </div>
 
     

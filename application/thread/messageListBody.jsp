@@ -51,11 +51,11 @@
                 <h1 class="bige20" itemprop="headline">
                   <logic:notEmpty name="forumMessage" property="messageUrlVO.linkUrl">
                     <a href="<bean:write name="forumMessage" property="messageUrlVO.linkUrl" filter="false"/>" target="_blank" title="原始链接">
-                       <bean:write name="forumMessage" property="messageVO.subject"/>
+                       <bean:write name="forumMessage" property="subject"/>
                     </a>
                   </logic:notEmpty>
                   <logic:empty name="forumMessage" property="messageUrlVO.linkUrl">
-                       <bean:write name="forumMessage" property="messageVO.subject"/>
+                       <bean:write name="forumMessage" property="subject"/>
                   </logic:empty>  
                 </h1>
                 <div class="info">
@@ -83,8 +83,8 @@
                        </span>                                      
                     </logic:notEqual>                         
 
-                    <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">                       
-                       <span class="smallgray"><i class="fa fa-arrow-circle-o-down"></i><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
+                    <logic:greaterThan name="forumMessage" property="bodyLengthK" value="1">                       
+                       <span class="smallgray"><i class="fa fa-arrow-circle-o-down"></i><bean:write name="forumMessage" property="bodyLengthK"/>K</span>
                     </logic:greaterThan>   
 
                 </logic:equal>
@@ -196,7 +196,7 @@
                  
                             <div class="smallgray" id="des_<bean:write name="forumThreadLink" property="threadId"/>" aria-hidden="true"></div>
                                <script>
-                                 document.getElementById('des_<bean:write name="forumThreadLink" property="threadId"/>').innerHTML = `<bean:write name="forumThreadLink" property="rootMessage.messageVO.shortBody[50]" />. `;
+                                 document.getElementById('des_<bean:write name="forumThreadLink" property="threadId"/>').innerHTML = `<bean:write name="forumThreadLink" property="rootMessage.shortBody[50]" />. `;
                             </script>
                           </div>
                         </div>	

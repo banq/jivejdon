@@ -41,7 +41,6 @@ int randomIdx = 0;
     <div>	  
       <div class="row">	          
 
-        <bean:define id="body" name="forumMessage" property="messageVO.body" />
         <div class="col-lg-8">
         <div class="box">	  
           <div class="box">  
@@ -57,7 +56,7 @@ int randomIdx = 0;
           
           <div style="letter-spacing: 0.02em;color: #3c1616; display:flex; align-items:flex-start; justify-content:space-between; margin-top: 10px">
               <span style="line-height:2.5rem;flex:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;overflow:hidden">      
-                 <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[150]" />
+                 <bean:write name="forumThread" property="rootMessage.shortBody[150]" />
               </span>
           </div>
 
@@ -78,8 +77,8 @@ int randomIdx = 0;
             </logic:notEqual>     
 		       
 
-            <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
-                <span class="smallgray"><i class="fa fa-arrow-circle-o-down"></i><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
+            <logic:greaterThan name="forumMessage" property="bodyLengthK" value="1">
+                <span class="smallgray"><i class="fa fa-arrow-circle-o-down"></i><bean:write name="forumMessage" property="bodyLengthK"/>K</span>
             </logic:greaterThan>   
                                  
           </div>

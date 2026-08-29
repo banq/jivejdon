@@ -50,7 +50,7 @@
 
        <div class="b_content_title2">
         (<a href="<%=request.getContextPath() %>/message/MessageListNavAction.shtml?thread=<bean:write name="forumThread" property="threadId"/>">编辑</a>) 
-         <a href="<%=request.getContextPath() %>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" ><bean:write name="forumMessage" property="messageVO.subject"/></a> 
+         <a href="<%=request.getContextPath() %>/<bean:write name="forumThread" property="threadId"/><bean:write name="forumThread" property="pinyinToken" />.html" ><bean:write name="forumMessage" property="subject"/></a> 
          
         <span>(<bean:write name="forumMessage" property="creationDate" />)</span>
            
@@ -59,15 +59,15 @@
        
 
       <div class="b_content_body">
-      <bean:write name="forumMessage" property="messageVO.shortBody[50]" filter="false"/>
+      <bean:write name="forumMessage" property="shortBody[50]" filter="false"/>
      </div>
 
        <div class="b_content_other">
         <div class="b_content_other_left">         
              &nbsp;阅<bean:write name="forumThread" property="viewCount" />
     &nbsp;
-           <logic:greaterThan name="forumMessage" property="messageVO.bodyLengthK" value="1">
-                <span><bean:write name="forumMessage" property="messageVO.bodyLengthK"/>K</span>
+           <logic:greaterThan name="forumMessage" property="bodyLengthK" value="1">
+                <span><bean:write name="forumMessage" property="bodyLengthK"/>K</span>
             </logic:greaterThan>     
   
                        <span class="smallgray"  id="digNumber_<bean:write name="forumMessage" property="messageId"/>">

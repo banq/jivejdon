@@ -38,7 +38,7 @@
   <table width="100%"  cellpadding="1" cellspacing="1">
     <tr>
         <td width="97%">
-        <bean:write name="forumMessage" property="messageVO.subject"/>
+        <bean:write name="forumMessage" property="subject"/>
         </td>
         <td width="1%" nowrap="nowrap">
         <span class="smallgray">
@@ -61,7 +61,7 @@
      
   
 <span class="artilce">
-            <bean:write name="forumMessage" property="messageVO.shortBody[50]" />
+            <bean:write name="forumMessage" property="shortBody[50]" />
 </span>
 
         

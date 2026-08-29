@@ -167,7 +167,7 @@ public class ForumThread {
 			logger.error("getName(): thread rootmessage is null" + threadId);
 			return "null";
 		}
-		return this.getRootMessage().getMessageVO().getSubject();
+		return this.getRootMessage().getSubject();
 	}
 
 	// from threadForm getName calling

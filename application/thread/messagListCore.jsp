@@ -47,10 +47,10 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty> - 极道</title> 
     <meta name="keywords" content="<logic:iterate id="threadTag" name="forumThread" property="tags" ><bean:write name="threadTag" property="title" />,</logic:iterate><bean:write name="forumThread" property="token" />">
-    <meta name="description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" /> ">  
+    <meta name="description" content=" <bean:write name="forumThread" property="rootMessage.shortBody[50]" /> ">  
     <meta name="author" content="<bean:write name="forumThread" property="rootMessage.account.username" />">
     <meta name="og:title" content="<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>">
-    <meta name="og:description" content=" <bean:write name="forumThread" property="rootMessage.messageVO.shortBody[50]" /> ">       
+    <meta name="og:description" content=" <bean:write name="forumThread" property="rootMessage.shortBody[50]" /> ">       
     <meta property="og:url" content="<%=domainUrl %>/<bean:write name="forumThread" property="threadId" /><bean:write name="forumThread" property="pinyinToken" />.html"/>
     <meta property="og:release_date" content="<bean:write name="forumThread" property="creationDate" />"/>
     <meta property="og:image" content="<%=domainUrl %>/simgs/jdon100.png"/> 
@@ -291,7 +291,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
   <div id="reply" style="display:none">
     <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
-    <input type="hidden" id="replySubject" name="replySubject" value="<bean:write name="forumThread" property="rootMessage.messageVO.subject"/>">
+    <input type="hidden" id="replySubject" name="replySubject" value="<bean:write name="forumThread" property="rootMessage.subject"/>">
   </div>
 
 
