@@ -160,11 +160,11 @@ public class ForumMessage extends RootMessage implements Cloneable {
         // apply complex business filter logic to messageVO;
         this.messageVO = filterPipleSpec.apply(messageVO);
         this.subject = this.messageVO.getSubject();
-        refreshBodyPreviewAndLength();
+        refreshBodyPreviewAndLength(this.messageVO);
     }
 
-    private void refreshBodyPreviewAndLength() {
-        String body = this.messageVO != null ? this.messageVO.getBody() : null;
+    private void refreshBodyPreviewAndLength(MessageVO messageVO) {
+        String body = (messageVO != null && messageVO.getBody() != null) ? messageVO.getBody() : null;
         this.previewBody = buildPreviewBody(body);
         this.bodyLengthK = body == null || body.isEmpty() ? 0 : body.length() / 1024;
     }
@@ -442,7 +442,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
                         this.subject = (messageVO != null && messageVO.getSubject() != null)
                                 ? messageVO.getSubject() : this.subject;
                         //setMessageVO(messageVO);
-                        refreshBodyPreviewAndLength();
+                        refreshBodyPreviewAndLength(messageVO);
                         isCreated.set(true); // construt end
                     }
                 }
