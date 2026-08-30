@@ -68,39 +68,36 @@ public class MessageListAction extends ModelListAction {
 		}
 
 		long threadIdL = Long.parseLong(threadId);
-		ForumThread forumThreadExist = getForumMessageQueryService().getThread(threadIdL);
-		if (forumThreadExist == null) {
+		ForumThread forumThread = getForumMessageQueryService().getThread(threadIdL);
+		if (forumThread == null) {
 			Debug.logError(" getThread error : thread is gone" + threadId, module);
 			return actionMapping.findForward("failure");
 		}
 
 		CompletableFuture<Void> future1 = CompletableFuture.supplyAsync(() -> {
-			return getForumMessageQueryService().getThread(threadIdL);
-		}).thenAccept(forumThread -> {
+			forumThread.getRootMessage().getMessageVO(); // active lazy load in async
 			forumThread.getReBlogVO().loadAscResult();
 			request.setAttribute("threadPreNextList", getThreadContext().getThreadListInContext(forumThread));
 			request.setAttribute("threadLinkList", getThreadContext().createsThreadLinks(forumThread));
 			request.setAttribute("threadLinkListFrom", getThreadContext().createsThreadLinksFrom(forumThread));
-
+			return null;
 		});
 
 		try {
-			if (forumThreadExist.getState().getMessageCount() > 0) {
+			if (forumThread.getState().getMessageCount() > 0) {
 				super.execute(actionMapping, listForm, request, response);
 			}else{
-
-				 listForm.setAllCount(1);
-				 List<ForumMessage> list = new ArrayList<>(1);
-				 list.add(forumThreadExist.getRootMessage());
-				 listForm.setList(list);
-
+				listForm.setAllCount(1);
+				List<ForumMessage> list = new ArrayList<>(1);
+				list.add(forumThread.getRootMessage());
+				listForm.setList(list);
 			}
 		} catch (Exception var9) {
 			Debug.logError(" super.execute err: " + threadId, module);
 		}
 
 		CompletableFuture.allOf(future1).join();
-		listForm.setOneModel(forumThreadExist);
+		listForm.setOneModel(forumThread);
 		
 		return actionMapping.findForward("success");
 	}
