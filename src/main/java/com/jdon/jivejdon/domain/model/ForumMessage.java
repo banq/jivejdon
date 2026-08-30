@@ -135,19 +135,15 @@ public class ForumMessage extends RootMessage implements Cloneable {
     }
 
     public MessageVO getMessageVO() {
-        // if (!messageVOLoaded && this.messageId != null && this.lazyLoaderRole != null) {
-        //     synchronized (this) {
-        //         if (!messageVOLoaded && this.messageId != null && this.lazyLoaderRole != null) {
-        //             DomainMessage em = lazyLoaderRole.reloadMessageVO(this.messageId);
-        //             MessageVO loaded = (MessageVO) em.getBlockEventResult();
-        //             if (loaded != null) {
-        //                 setMessageVO(messageVO);
-        //                 em.clear();
-        //                 this.messageVOLoaded = true;
-        //             }
-        //         }
-        //     }
-        // }
+        if (!messageVOLoaded && this.messageId != null && this.lazyLoaderRole != null) {
+            DomainMessage em = lazyLoaderRole.reloadMessageVO(this.messageId);
+            MessageVO loadedmessageVO = (MessageVO) em.getBlockEventResult();
+            if (loadedmessageVO != null) {
+                setMessageVO(loadedmessageVO);
+                em.clear();
+                this.messageVOLoaded = true;
+            }
+        }
         return this.messageVO;
     }
 
@@ -445,7 +441,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
                         // otherwise the lazy-load contract is broken before the body is actually needed.
                         this.subject = (messageVO != null && messageVO.getSubject() != null)
                                 ? messageVO.getSubject() : this.subject;
-                        setMessageVO(messageVO);
+                        //setMessageVO(messageVO);
                         refreshBodyPreviewAndLength();
                         isCreated.set(true); // construt end
                     }
