@@ -164,17 +164,11 @@ public class ForumMessage extends RootMessage implements Cloneable {
     }
 
     private void refreshBodyPreviewAndLength(MessageVO messageVO) {
-        String body = (messageVO != null && messageVO.getBody() != null) ? messageVO.getBody() : null;
-        this.previewBody = buildPreviewBody(body);
-        this.bodyLengthK = body == null || body.isEmpty() ? 0 : body.length() / 1024;
-    }
-
-    private String buildPreviewBody(String body) {
-        if (body == null || body.isEmpty()) {
-            return "";
-        }
+        String body = messageVO != null && messageVO.getBody() != null ? messageVO.getBody() : "";
         String text = body.substring(0, Math.min(body.length(), PREVIEW_BODY_LENGTH));
-        return Jsoup.parse(text).wholeText();
+        String plainText = Jsoup.parse(text).text();
+        this.previewBody = plainText.replaceAll("(?i)https?://\\S+", "").trim();
+        this.bodyLengthK = (body == null || body.isEmpty()) ? 0 : body.length() / 1024;
     }
 
     public String getShortBody(int length) {
@@ -192,9 +186,6 @@ public class ForumMessage extends RootMessage implements Cloneable {
     }
 
     public int getBodyLengthK() {
-        if (this.messageVO != null && this.messageVO.getBody() != null && !this.messageVO.getBody().isEmpty()) {
-            return this.messageVO.getBody().length() / 1024;
-        }
         return bodyLengthK;
     }
 
