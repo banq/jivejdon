@@ -41,7 +41,6 @@ public final class FilterPipleSpec implements Function<MessageVO, MessageVO> {
                         .apply(messageVO);
             } catch (Exception e) {
                 logger.error(" applyFilters error1:" + e + messageVO.getForumMessage().getMessageId());
-                logger.error(" applyFilters error2:" + e + messageVO.getShortBody(5));
                
             }
 		return messageVO;

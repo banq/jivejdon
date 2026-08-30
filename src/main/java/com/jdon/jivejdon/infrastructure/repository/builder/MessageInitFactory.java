@@ -22,7 +22,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.jdon.jivejdon.domain.model.Forum;
-import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.RootMessage;
 import com.jdon.jivejdon.domain.model.account.Account;
@@ -87,7 +86,7 @@ public class MessageInitFactory {
 		return messageCore;
 	}
 
-	public MessageVO createMessageVOCore(Long messageId, Map map, ForumMessage forumMessage) {
+	public MessageVO createMessageVOCore(Long messageId, Map map) {
 		String subject = "";
 		String body = "";
 		try {
@@ -97,7 +96,7 @@ public class MessageInitFactory {
 			logger.error("createMessageVOCore " + subject + " " + body + " error: " + e);
 		} finally {
 		}
-		return forumMessage.messageVOBuilder().subject(subject).body(body).build();
+		return new MessageVO(subject, body);
 	}
 
 	/**

@@ -32,7 +32,7 @@ public class ForumMessageDTO {
 	public ForumMessageDTO(ForumMessage forumMessage) {
 		this.messageId = forumMessage.getMessageId();
 		this.threadId = forumMessage.getForumThread().getThreadId();
-		this.subject = forumMessage.getMessageVO().getSubject();
+		this.subject = forumMessage.getSubject();
 		this.username = forumMessage.getAccount().getUsername();
 		this.creationDate = forumMessage.getCreationDate();
 	}

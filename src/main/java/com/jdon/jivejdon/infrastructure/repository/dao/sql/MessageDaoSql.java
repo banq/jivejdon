@@ -96,12 +96,12 @@ public abstract class MessageDaoSql implements MessageDao {
 		return pmessageId;
 	}
 
-	public MessageVO getMessageVOCore(ForumMessage forumMessage) {
-		logger.debug("enter MessageVO  for id:" + forumMessage.getMessageId());
+	public MessageVO getMessageVOCore(Long messageId) {
+		logger.debug("enter MessageVO  for id:" + messageId);
 		String LOAD_MESSAGE = "SELECT threadID, forumID, userID, subject, body, modValue, " + "rewardPoints, "
 				+ "creationDate, modifiedDate, parentMessageID FROM jiveMessage WHERE messageID=?";
 		List queryParams = new ArrayList();
-		queryParams.add(forumMessage.getMessageId());
+		queryParams.add(messageId);
 
 		MessageVO messageVO = null;
 		try {
@@ -109,10 +109,10 @@ public abstract class MessageDaoSql implements MessageDao {
 			Iterator iter = list.iterator();
 			if (iter.hasNext()) {
 				Map map = (Map) iter.next();
-				messageVO = messageFactory.createMessageVOCore(forumMessage.getMessageId(), map, forumMessage);
+				messageVO = messageFactory.createMessageVOCore(messageId, map);
 			}
 		} catch (Exception e) {
-			logger.error("messageId=" + forumMessage.getMessageId() + " happend messageVO " + e);
+			logger.error("messageId=" + messageId + " happend messageVO " + e);
 		}
 		return messageVO;
 	}

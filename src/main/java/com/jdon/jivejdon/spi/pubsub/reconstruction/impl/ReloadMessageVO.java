@@ -18,7 +18,6 @@ package com.jdon.jivejdon.spi.pubsub.reconstruction.impl;
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
-import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.jivejdon.infrastructure.repository.builder.ForumAbstractFactory;
 import com.jdon.jivejdon.infrastructure.repository.dao.MessageDao;
@@ -37,8 +36,7 @@ public class ReloadMessageVO implements DomainEventHandler {
 
 	public void onEvent(EventDisruptor event, boolean endOfBatch) throws Exception {
 		Long messageId = (Long) event.getDomainMessage().getEventSource();
-		ForumMessage forumMessage = forumAbstractFactory.getMessage(messageId);
-		MessageVO messageVO = messageDao.getMessageVOCore(forumMessage);
+		MessageVO messageVO = messageDao.getMessageVOCore(messageId);
 		event.getDomainMessage().setEventResult(messageVO);
 
 	}

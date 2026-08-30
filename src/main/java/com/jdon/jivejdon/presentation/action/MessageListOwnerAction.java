@@ -74,7 +74,7 @@ public class MessageListOwnerAction extends ModelListAction {
 		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService(
 				"forumMessageQueryService", request);
 		ForumMessage forumMessage = forumMessageQueryService.getMessage((Long) key);
-
+		forumMessage.getMessageVO();//active lazyload
 		return forumMessage;
 	}
 

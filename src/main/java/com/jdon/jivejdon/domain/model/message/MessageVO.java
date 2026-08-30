@@ -45,6 +45,10 @@ public final class MessageVO implements Serializable, Cloneable {
 		this("", "", null);
 	}
 
+	public MessageVO(String subject, String body) {
+		this(subject, body, null);
+	}
+
 	/**
 	 * build a messageVO
 	 */

@@ -1,5 +1,8 @@
 package com.jdon.jivejdon.spi.pubsub.reconstruction.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.jdon.annotation.Consumer;
 import com.jdon.async.disruptor.EventDisruptor;
 import com.jdon.domain.message.DomainEventHandler;
@@ -8,8 +11,6 @@ import com.jdon.jivejdon.domain.model.util.OneOneDTO;
 import com.jdon.jivejdon.infrastructure.repository.ForumFactory;
 import com.jdon.jivejdon.infrastructure.repository.dao.ForumDao;
 import com.jdon.jivejdon.infrastructure.repository.dao.MessageQueryDao;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 @Consumer("loadForumState")
 public class ForumStateLoader implements DomainEventHandler {

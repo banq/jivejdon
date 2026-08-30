@@ -135,19 +135,19 @@ public class ForumMessage extends RootMessage implements Cloneable {
     }
 
     public MessageVO getMessageVO() {
-        if (!messageVOLoaded && this.messageId != null && this.lazyLoaderRole != null) {
-            synchronized (this) {
-                if (!messageVOLoaded && this.messageId != null && this.lazyLoaderRole != null) {
-                    DomainMessage em = lazyLoaderRole.reloadMessageVO(this.messageId);
-                    MessageVO loaded = (MessageVO) em.getBlockEventResult();
-                    if (loaded != null) {
-                        setMessageVO(messageVO);
-                        em.clear();
-                        this.messageVOLoaded = true;
-                    }
-                }
-            }
-        }
+        // if (!messageVOLoaded && this.messageId != null && this.lazyLoaderRole != null) {
+        //     synchronized (this) {
+        //         if (!messageVOLoaded && this.messageId != null && this.lazyLoaderRole != null) {
+        //             DomainMessage em = lazyLoaderRole.reloadMessageVO(this.messageId);
+        //             MessageVO loaded = (MessageVO) em.getBlockEventResult();
+        //             if (loaded != null) {
+        //                 setMessageVO(messageVO);
+        //                 em.clear();
+        //                 this.messageVOLoaded = true;
+        //             }
+        //         }
+        //     }
+        // }
         return this.messageVO;
     }
 
@@ -227,13 +227,11 @@ public class ForumMessage extends RootMessage implements Cloneable {
             this.messageVO = loaded;
             this.subject = loaded.getSubject();
         }
-        this.messageVOLoaded = true;
-        // not with setMessageVO, no filter
         em.clear();
     }
 
     public boolean isSubjectRepeated(String subject) {
-        String lastSubject = getMessageVO().getSubject();
+        String lastSubject = getSubject();
         return lastSubject.equals(subject) ? true : false;
     }
 
@@ -447,7 +445,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
                         // otherwise the lazy-load contract is broken before the body is actually needed.
                         this.subject = (messageVO != null && messageVO.getSubject() != null)
                                 ? messageVO.getSubject() : this.subject;
-                        this.messageVO = messageVO;
+                        setMessageVO(messageVO);
                         refreshBodyPreviewAndLength();
                         isCreated.set(true); // construt end
                     }

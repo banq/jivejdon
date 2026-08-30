@@ -405,7 +405,7 @@ public class RSSGenServlet extends HttpServlet {
 			HttpServletRequest request) {
 		try {
 			SyndEntrySorted entry = new SyndEntrySorted();
-			entry.setTitle(message.getMessageVO().getSubject());
+			entry.setTitle(message.getSubject());
 			entry.setLink(getItemLink(url, message, request));
 
 			Date publishedDate = Constants.parseDateTime(message.getCreationDate());
@@ -416,7 +416,7 @@ public class RSSGenServlet extends HttpServlet {
 
 			SyndContent description = new SyndContentImpl();
 			description.setType("text/html");
-			description.setValue(message.getMessageVO().getShortBody(300));
+			description.setValue(message.getShortBody(200));
 			entry.setDescription(description);
 
 			if (message.isRoot()) {

@@ -29,8 +29,15 @@ import com.jdon.strutsutil.FormBeanUtil;
 public class MessageListNavAction extends Action {
 	private final static Logger logger = LogManager.getLogger(MessageListNavAction.class);
 
+	private void preventClientCache(HttpServletResponse response) {
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+		response.setHeader("Pragma", "no-cache");
+		response.setDateHeader("Expires", 0);
+	}
+
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		preventClientCache(response);
 		MessageListForm messageListForm = (MessageListForm) FormBeanUtil.lookupActionForm(request, "messageListForm"); // same
 		// as struts-config-message.xml
 		if (messageListForm == null) {

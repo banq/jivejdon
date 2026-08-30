@@ -18,7 +18,6 @@ package com.jdon.jivejdon.infrastructure.repository.dao;
 import java.util.Collection;
 
 import com.jdon.jivejdon.domain.model.Forum;
-import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
 import com.jdon.jivejdon.domain.model.RootMessage;
 import com.jdon.jivejdon.domain.model.message.MessageVO;
@@ -32,7 +31,7 @@ public interface MessageDao {
 
 	AnemicMessageDTO getAnemicMessage(Long messageId);
 
-	MessageVO getMessageVOCore(ForumMessage forumMessage);
+	MessageVO getMessageVOCore(Long messageId);
 
 	void createMessage(AnemicMessageDTO forumMessagePostDTO) throws Exception;
 
