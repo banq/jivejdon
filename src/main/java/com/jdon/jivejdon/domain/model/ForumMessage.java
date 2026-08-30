@@ -148,19 +148,29 @@ public class ForumMessage extends RootMessage implements Cloneable {
     }
 
     private void setMessageVO(MessageVO messageVO) {
+        if (messageVO == null) {
+            this.messageVO = null;
+            this.messageVOLoaded = false;
+            return;
+        }
         if (messageVO.getForumMessage() == null || messageVO.getForumMessage() != this) {
-            messageVO = this.messageVOBuilder().subject(messageVO.getSubject()).body(messageVO.getBody()).build();
+            messageVO = this.messageVOBuilder().subject(messageVO.getSubject() == null ? "" : messageVO.getSubject())
+                    .body(messageVO.getBody() == null ? "" : messageVO.getBody()).build();
         }
-        if (messageVO.getSubject().length() == 0 || messageVO.getBody().length() == 0)
-            logger.error("messageVO is null for messageId=" + this.messageId);
-        else if (filterPipleSpec == null) {
-            logger.error("filterPipleSpec is null for messageId=" + this.messageId);
+        if (messageVO.getSubject() == null || messageVO.getBody() == null) {
+            logger.error("messageVO payload is incomplete for messageId=" + this.messageId);
         }
-
-        // apply complex business filter logic to messageVO;
-        this.messageVO = filterPipleSpec.apply(messageVO);
-        this.subject = this.messageVO.getSubject();
-        refreshBodyPreviewAndLength(this.messageVO);
+        if (filterPipleSpec != null) {
+            // apply complex business filter logic to messageVO;
+            this.messageVO = filterPipleSpec.apply(messageVO);
+        } else {
+            this.messageVO = messageVO;
+        }
+        if (this.messageVO != null) {
+            this.subject = this.messageVO.getSubject();
+            refreshBodyPreviewAndLength(this.messageVO);
+        }
+        this.messageVOLoaded = true;
     }
 
     private void refreshBodyPreviewAndLength(MessageVO messageVO) {
@@ -428,12 +438,12 @@ public class ForumMessage extends RootMessage implements Cloneable {
                         setAttachment(new AttachmentsVO(messageId, uploads));
                         this.messagePropertysVO.replacePropertys(props);
                         this.hotKeys = hotKeys;
-                        // initialize the fast metadata first; do not eagerly materialize messageVO here,
-                        // otherwise the lazy-load contract is broken before the body is actually needed.
-                        this.subject = (messageVO != null && messageVO.getSubject() != null)
-                                ? messageVO.getSubject() : this.subject;
-                        //setMessageVO(messageVO);
-                        refreshBodyPreviewAndLength(messageVO);
+                        if (messageVO != null) {
+                            setMessageVO(messageVO);
+                        } else {
+                            this.subject = this.subject != null ? this.subject : "";
+                            refreshBodyPreviewAndLength(new MessageVO(this.subject, ""));
+                        }
                         isCreated.set(true); // construt end
                     }
                 }
