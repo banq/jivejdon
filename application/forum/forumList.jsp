@@ -40,7 +40,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <div id="page-content" class="single-page container">
 		<div class="row">
 			<!-- /////////////////左边 -->
-            <div id="main-content" class="col-lg-8 custom-col-left">
+            <div id="main-content" class="col-lg-8">
 				<div class="box">		
                      <div class="box">
 	                        <div class="box">
@@ -111,8 +111,8 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
 	 <!-- /////////////////右边 -->
 <aside>      
-       <div id="sidebar" class="col-lg-4 custom-col-right">
-<div class="scrolldiv"><div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(150, 1, 1, 0.1); background-color: white; overflow: hidden; padding-left: 0; padding-right: 0">
+       <div id="sidebar" class="col-lg-4">
+<div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(150, 1, 1, 0.1); background-color: white; overflow: hidden; padding-left: 0; padding-right: 0">
         <!---- Start Widget ---->
         <div class="widget wid-follow">
           <div class="content">
@@ -142,7 +142,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
           </div>
         </div>
  
-    </div>
+
 
 </div></aside>  
 
