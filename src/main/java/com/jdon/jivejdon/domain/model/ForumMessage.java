@@ -129,12 +129,16 @@ public class ForumMessage extends RootMessage implements Cloneable {
 
     public MessageVO getMessageVO() {
         if (this.messageId == null || this.lazyLoaderRole == null) {
+            System.err.print(" messageId=" + this.messageId+" lazyLoaderRole=" + this.lazyLoaderRole);
             return null;
         }
 
         DomainMessage em = lazyLoaderRole.reloadMessageVO(this.messageId);
         MessageVO loadedMessageVO = (MessageVO) em.getBlockEventResult();
-
+        if (loadedMessageVO == null || loadedMessageVO.getSubject() == null
+                || loadedMessageVO.getSubject().trim().isEmpty()) {
+            em.clear();
+        }
         return setMessageVO(loadedMessageVO);
     }
 
@@ -202,12 +206,12 @@ public class ForumMessage extends RootMessage implements Cloneable {
      * there are two kinds MessageVO; 1. applied business rule filter 2. original
      * that saved in repository
      */
-    // public void reloadMessageVOOrignal() {
-    // DomainMessage em = lazyLoaderRole.reloadMessageVO(this.messageId);
-    // this.messageVO = (MessageVO) em.getBlockEventResult();
-    // // not with setMessageVO, no filter
-    // em.clear();
-    // }
+    public MessageVO reloadMessageVOOrignal() {
+        DomainMessage em = lazyLoaderRole.reloadMessageVO(this.messageId);
+        MessageVO messageVO = (MessageVO) em.getBlockEventResult();
+        em.clear();
+        return messageVO;
+    }
 
     public boolean isSubjectRepeated(String subject) {
         String lastSubject = getSubject();

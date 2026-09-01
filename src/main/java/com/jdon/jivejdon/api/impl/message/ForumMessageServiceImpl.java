@@ -360,7 +360,7 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 			anemicMessageDTO.setMessageId(newMessage.getMessageId());
 			anemicMessageDTO.setForum(newMessage.getForum());
 			anemicMessageDTO.setAccount(newMessage.getAccount());
-			anemicMessageDTO.setMessageVO(newMessage.getMessageVO());
+			anemicMessageDTO.setMessageVO(newMessage.reloadMessageVOOrignal());
 			anemicMessageDTO.setForumThread(newMessage.getForumThread());
 
 			// after update must enable it see updateMessage;
