@@ -32,6 +32,7 @@ import com.jdon.controller.model.PageIterator;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.domain.model.message.MessageVO;
 import com.jdon.jivejdon.spi.component.mapreduce.ThreadContext;
 import com.jdon.strutsutil.ModelListAction;
 import com.jdon.strutsutil.ModelListForm;
@@ -74,8 +75,26 @@ public class MessageListAction extends ModelListAction {
 			return actionMapping.findForward("failure");
 		}
 
-		CompletableFuture<Void> future1 = CompletableFuture.supplyAsync(() -> {
-			forumThread.getRootMessage().getMessageVO(); // active pre load in async
+		CompletableFuture.runAsync(() -> {
+			MessageVO rootMessageVO = forumThread.getRootMessage().getMessageVO();
+			for (int retry = 0; retry < 3 && rootMessageVO == null; retry++) {
+				Debug.logError(" pre load messageVO is null, retry=" + retry + ", threadId=" + forumThread.getThreadId(),
+						module);
+				try {
+					Thread.sleep(200L);
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+					break;
+				}
+				rootMessageVO = forumThread.getRootMessage().getMessageVO();
+			}
+			if (rootMessageVO == null) {
+				Debug.logError(" pre load messageVO is still null after retries, threadId=" + forumThread.getThreadId(),
+						module);
+			}
+		});
+
+		CompletableFuture<Void> future1 = CompletableFuture.supplyAsync(() -> {			
 			forumThread.getReBlogVO().loadAscResult();
 			request.setAttribute("threadPreNextList", getThreadContext().getThreadListInContext(forumThread));
 			request.setAttribute("threadLinkList", getThreadContext().createsThreadLinks(forumThread));
@@ -140,7 +159,23 @@ public class MessageListAction extends ModelListAction {
 		// getXXX can be intercepted by cacheinterceptor before accessing
 		// ForumMessageServiceShell
 		ForumMessage forumMessage = getForumMessageQueryService().getMessage((Long) key);
-		forumMessage.getMessageVO();
+		MessageVO messageVO = forumMessage.getMessageVO();
+		
+		for (int retry = 0; retry < 3 && messageVO == null; retry++) {
+			Debug.logError(" findModelByKey error : messageVO is null, retry=" + retry + ", key=" + key, module);
+			try {
+				Thread.sleep(200L);
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+				break;
+			}
+			forumMessage = getForumMessageQueryService().getMessage((Long) key);
+			messageVO = forumMessage.getMessageVO();
+		}
+
+		if (messageVO == null) {
+			Debug.logError(" findModelByKey error : messageVO is still null after retries, key=" + key, module);
+		}
 		return forumMessage;
 	}
 
