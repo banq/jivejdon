@@ -135,11 +135,9 @@ public class ForumMessage extends RootMessage implements Cloneable {
 
         DomainMessage em = lazyLoaderRole.reloadMessageVO(this.messageId);
         MessageVO loadedMessageVO = (MessageVO) em.getBlockEventResult();
-        if (loadedMessageVO == null || loadedMessageVO.getSubject() == null
-                || loadedMessageVO.getSubject().trim().isEmpty()) {
-            em.clear();
-        }
-        return setMessageVO(loadedMessageVO);
+        loadedMessageVO = setMessageVO(loadedMessageVO);
+        em.clear();
+        return loadedMessageVO;
     }
 
     private MessageVO setMessageVO(MessageVO messageVO) {
