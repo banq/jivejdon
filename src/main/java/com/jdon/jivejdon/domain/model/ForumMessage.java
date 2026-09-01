@@ -129,7 +129,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
 
     public MessageVO getMessageVO() {
         if (this.messageId == null || this.lazyLoaderRole == null) {
-            System.err.print(" messageId=" + this.messageId+" lazyLoaderRole=" + this.lazyLoaderRole);
+            // System.err.print(" messageId=" + this.messageId+" lazyLoaderRole=" + this.lazyLoaderRole);
             return null;
         }
 
