@@ -40,7 +40,6 @@ import com.jdon.util.Debug;
  */
 public class MessageListOwnerAction extends ModelListAction {
 	private final static String module = MessageListAction.class.getName();
-	
 
 	/*
 	 * (non-Javadoc)
@@ -74,7 +73,6 @@ public class MessageListOwnerAction extends ModelListAction {
 		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService(
 				"forumMessageQueryService", request);
 		ForumMessage forumMessage = forumMessageQueryService.getMessage((Long) key);
-		forumMessage.getMessageVO();//active lazyload
 		return forumMessage;
 	}
 
@@ -106,7 +104,7 @@ public class MessageListOwnerAction extends ModelListAction {
 				boolean[] authenticateds = getAuthedListForm(actionForm, request);
 				MessageListForm messageListForm = (MessageListForm) actionForm;
 				messageListForm.setAuthenticateds(authenticateds);
-				
+
 				request.setAttribute("principal", request.getUserPrincipal());
 			}
 
@@ -141,6 +139,5 @@ public class MessageListOwnerAction extends ModelListAction {
 		}
 		return authenticateds;
 	}
-
 
 }

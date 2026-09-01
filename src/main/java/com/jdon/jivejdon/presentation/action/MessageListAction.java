@@ -75,7 +75,6 @@ public class MessageListAction extends ModelListAction {
 		}
 
 		CompletableFuture<Void> future1 = CompletableFuture.supplyAsync(() -> {
-			forumThread.getRootMessage().getMessageVO(); // active lazy load in async
 			forumThread.getReBlogVO().loadAscResult();
 			request.setAttribute("threadPreNextList", getThreadContext().getThreadListInContext(forumThread));
 			request.setAttribute("threadLinkList", getThreadContext().createsThreadLinks(forumThread));
@@ -86,7 +85,7 @@ public class MessageListAction extends ModelListAction {
 		try {
 			if (forumThread.getState().getMessageCount() > 0) {
 				super.execute(actionMapping, listForm, request, response);
-			}else{
+			} else {
 				listForm.setAllCount(1);
 				List<ForumMessage> list = new ArrayList<>(1);
 				list.add(forumThread.getRootMessage());
@@ -98,7 +97,7 @@ public class MessageListAction extends ModelListAction {
 
 		CompletableFuture.allOf(future1).join();
 		listForm.setOneModel(forumThread);
-		
+
 		return actionMapping.findForward("success");
 	}
 
@@ -114,9 +113,10 @@ public class MessageListAction extends ModelListAction {
 		}
 
 		Debug.logVerbose("enter getPageIterator", module);
-        String threadId = request.getParameter("thread");
+		String threadId = request.getParameter("thread");
 		try {
-			PageIterator pageIterator = getForumMessageQueryService().getMessages(Long.parseLong(threadId), start, count);
+			PageIterator pageIterator = getForumMessageQueryService().getMessages(Long.parseLong(threadId), start,
+					count);
 			if (pageIterator == null || pageIterator.getAllCount() == 0) {
 				Debug.logError(" getPageIterator error : thread is null" + threadId, module);
 			}
@@ -139,7 +139,6 @@ public class MessageListAction extends ModelListAction {
 		// getXXX can be intercepted by cacheinterceptor before accessing
 		// ForumMessageServiceShell
 		ForumMessage forumMessage = getForumMessageQueryService().getMessage((Long) key);
-        forumMessage.getMessageVO(); //active lazy load
 		return forumMessage;
 	}
 
@@ -149,7 +148,5 @@ public class MessageListAction extends ModelListAction {
 	protected boolean isEnableCache() {
 		return false;
 	}
-
-	
 
 }
