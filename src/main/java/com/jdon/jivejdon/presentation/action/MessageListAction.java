@@ -75,6 +75,7 @@ public class MessageListAction extends ModelListAction {
 		}
 
 		CompletableFuture<Void> future1 = CompletableFuture.supplyAsync(() -> {
+			forumThread.getRootMessage().getMessageVO(); // active pre load in async
 			forumThread.getReBlogVO().loadAscResult();
 			request.setAttribute("threadPreNextList", getThreadContext().getThreadListInContext(forumThread));
 			request.setAttribute("threadLinkList", getThreadContext().createsThreadLinks(forumThread));
