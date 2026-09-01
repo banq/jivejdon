@@ -78,8 +78,8 @@ public class MessageListAction extends ModelListAction {
 		CompletableFuture.runAsync(() -> {
 			MessageVO rootMessageVO = forumThread.getRootMessage().getMessageVO();
 			for (int retry = 0; retry < 3 && rootMessageVO == null; retry++) {
-				Debug.logError(" pre load messageVO is null, retry=" + retry + ", threadId=" + forumThread.getThreadId(),
-						module);
+				// Debug.logError(" pre load messageVO is null, retry=" + retry + ", threadId=" + forumThread.getThreadId(),
+				// 		module);
 				try {
 					Thread.sleep(200L);
 				} catch (InterruptedException e) {

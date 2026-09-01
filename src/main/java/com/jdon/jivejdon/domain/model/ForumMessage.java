@@ -68,11 +68,11 @@ public class ForumMessage extends RootMessage implements Cloneable {
 
     private static final long serialVersionUID = 1L;
     @Inject
-    public LazyLoaderRole lazyLoaderRole;
+    public volatile LazyLoaderRole lazyLoaderRole;
     @Inject
-    public MessageEventSourcingRole eventSourcing;
+    public volatile MessageEventSourcingRole eventSourcing;
     @Inject
-    public ShortMPublisherRole shortMPublisherRole;
+    public volatile ShortMPublisherRole shortMPublisherRole;
 
     private static final int PREVIEW_BODY_LENGTH = 200;
 
