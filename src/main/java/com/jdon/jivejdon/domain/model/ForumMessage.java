@@ -78,8 +78,6 @@ public class ForumMessage extends RootMessage implements Cloneable {
 
     private Long messageId;
     private String subject;
-    private MessageVO messageVO;
-    private volatile boolean messageVOLoaded;
     private MessageUrlVO messageUrlVO;
     private FilterPipleSpec filterPipleSpec;
     private String creationDate;
@@ -100,9 +98,9 @@ public class ForumMessage extends RootMessage implements Cloneable {
         this.messagePropertysVO = new MessagePropertysVO();
     }
 
-    private ForumMessage(){
+    private ForumMessage() {
         this(Long.MAX_VALUE);
-    } 
+    }
 
     public Account getAccount() {
         return account;
@@ -125,33 +123,24 @@ public class ForumMessage extends RootMessage implements Cloneable {
     }
 
     public String getSubject() {
-        if (messageVO != null && messageVO.getSubject() != null) {
-            return messageVO.getSubject();
-        }
-        if (subject != null) {
-            return subject;
-        }
-        return "";
+        return subject;
+
     }
 
     public MessageVO getMessageVO() {
-        if (!messageVOLoaded && this.messageId != null && this.lazyLoaderRole != null) {
-            DomainMessage em = lazyLoaderRole.reloadMessageVO(this.messageId);
-            MessageVO loadedmessageVO = (MessageVO) em.getBlockEventResult();
-            if (loadedmessageVO != null) {
-                setMessageVO(loadedmessageVO);
-                em.clear();
-                this.messageVOLoaded = true;
-            }
+        if (this.messageId == null || this.lazyLoaderRole == null) {
+            return null;
         }
-        return this.messageVO;
+
+        DomainMessage em = lazyLoaderRole.reloadMessageVO(this.messageId);
+        MessageVO loadedMessageVO = (MessageVO) em.getBlockEventResult();
+
+        return setMessageVO(loadedMessageVO);
     }
 
-    private void setMessageVO(MessageVO messageVO) {
+    private MessageVO setMessageVO(MessageVO messageVO) {
         if (messageVO == null) {
-            this.messageVO = null;
-            this.messageVOLoaded = false;
-            return;
+            return null;
         }
         if (messageVO.getForumMessage() == null || messageVO.getForumMessage() != this) {
             messageVO = this.messageVOBuilder().subject(messageVO.getSubject() == null ? "" : messageVO.getSubject())
@@ -162,15 +151,13 @@ public class ForumMessage extends RootMessage implements Cloneable {
         }
         if (filterPipleSpec != null) {
             // apply complex business filter logic to messageVO;
-            this.messageVO = filterPipleSpec.apply(messageVO);
-        } else {
-            this.messageVO = messageVO;
+            messageVO = filterPipleSpec.apply(messageVO);
         }
-        if (this.messageVO != null) {
-            this.subject = this.messageVO.getSubject();
-            refreshBodyPreviewAndLength(this.messageVO);
+        if (messageVO != null) {
+            this.subject = messageVO.getSubject();
+            refreshBodyPreviewAndLength(messageVO);
         }
-        this.messageVOLoaded = true;
+        return messageVO;
     }
 
     private void refreshBodyPreviewAndLength(MessageVO messageVO) {
@@ -201,31 +188,26 @@ public class ForumMessage extends RootMessage implements Cloneable {
 
     public void updateSubject(String subject) {
         this.subject = subject;
-        if (this.messageVO != null) {
-            this.messageVO = this.messageVOBuilder().subject(subject).body(this.messageVO.getBody()).build();
-        }
     }
 
     public MessageVO getMessageVOClone() throws Exception {
-        return (MessageVO) this.messageVO.clone();
+        MessageVO current = getMessageVO();
+        if (current == null) {
+            return null;
+        }
+        return (MessageVO) current.clone();
     }
 
     /**
      * there are two kinds MessageVO; 1. applied business rule filter 2. original
      * that saved in repository
      */
-    public void reloadMessageVOOrignal() {
-        if (this.messageId == null) {
-            return;
-        }
-        DomainMessage em = lazyLoaderRole.reloadMessageVO(this.messageId);
-        MessageVO loaded = (MessageVO) em.getBlockEventResult();
-        if (loaded != null) {
-            this.messageVO = loaded;
-            this.subject = loaded.getSubject();
-        }
-        em.clear();
-    }
+    // public void reloadMessageVOOrignal() {
+    // DomainMessage em = lazyLoaderRole.reloadMessageVO(this.messageId);
+    // this.messageVO = (MessageVO) em.getBlockEventResult();
+    // // not with setMessageVO, no filter
+    // em.clear();
+    // }
 
     public boolean isSubjectRepeated(String subject) {
         String lastSubject = getSubject();
@@ -246,7 +228,8 @@ public class ForumMessage extends RootMessage implements Cloneable {
                     .acount(postRepliesMessageCommand.getAccount()).creationDate(creationDate)
                     .modifiedDate(modifiedDate).filterPipleSpec(this.filterPipleSpec)
                     .uploads(postRepliesMessageCommand.getAttachment().getUploadFiles())
-                    .props(postRepliesMessageCommand.getMessagePropertysVO().getPropertys()).hotKeys(hotKeys).build(this);
+                    .props(postRepliesMessageCommand.getMessagePropertysVO().getPropertys()).hotKeys(hotKeys)
+                    .build(this);
 
             forumThread.addNewMessage(this, forumMessageReply);
             forumMessageReply.getAccount().updateMessageCount(1);
@@ -262,7 +245,8 @@ public class ForumMessage extends RootMessage implements Cloneable {
             setModifiedDate(System.currentTimeMillis());
             MessageVO messageVO = this.messageVOBuilder().subject(reviseForumMessageCommand.getMessageVO().getSubject())
                     .body(reviseForumMessageCommand.getMessageVO().getBody()).build();
-            setMessageVO(messageVO);
+            this.subject = messageVO.getSubject();
+            refreshBodyPreviewAndLength(messageVO);
             forumThread.updateMessage(this);
             Collection<UploadFile> uploads = reviseForumMessageCommand.getAttachment().getUploadFiles();
             if (uploads != null) {
@@ -273,7 +257,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
             Collection<Property> props = reviseForumMessageCommand.getMessagePropertysVO().getPropertys();
             if (props != null)
                 props = this.getMessagePropertysVO().replacePropertys(props);
-       
+
             // save this updated message to db
             eventSourcing.saveMessage(new MessageRevisedEvent(reviseForumMessageCommand));
 
@@ -297,7 +281,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
         eventSourcing.saveMessageProperties(
                 new MessagePropertiesRevisedEvent(this.messageId, getMessagePropertysVO().getPropertys()));
         this.getForumThread().updateMessage(this);
-        this.reloadMessageVOOrignal();
+        // this.reloadMessageVOOrignal();
     }
 
     public AttachmentsVO getAttachment() {
@@ -348,8 +332,6 @@ public class ForumMessage extends RootMessage implements Cloneable {
         return modifiedDate;
     }
 
-
-
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
@@ -361,10 +343,6 @@ public class ForumMessage extends RootMessage implements Cloneable {
     public MessagePropertysVO getMessagePropertysVO() {
         return messagePropertysVO;
     }
-
-    
-
-    
 
     public String getPostip() {
         return this.getMessagePropertysVO().getPostip();
@@ -391,9 +369,9 @@ public class ForumMessage extends RootMessage implements Cloneable {
     }
 
     public boolean hasImage() {
-		String imageUrl = getMessageUrlVO().getImageUrl();
-		return (imageUrl == null) || (imageUrl.trim().length() == 0) ? false : true;
-	}
+        String imageUrl = getMessageUrlVO().getImageUrl();
+        return (imageUrl == null) || (imageUrl.trim().length() == 0) ? false : true;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -421,7 +399,7 @@ public class ForumMessage extends RootMessage implements Cloneable {
         return subject -> body -> new MessageVO.MessageVOFinalStage(subject, body, this);
     }
 
-    public void build(long messageId, MessageVO messageVO, Forum forum,  Account account,
+    public void build(long messageId, MessageVO messageVO, Forum forum, Account account,
             String creationDate, long modifiedDate, FilterPipleSpec filterPipleSpec, Collection<UploadFile> uploads,
             Collection<Property> props, HotKeys hotKeys) {
         try {
@@ -433,13 +411,14 @@ public class ForumMessage extends RootMessage implements Cloneable {
                         setCreationDate(creationDate);
                         setModifiedDate(modifiedDate);
                         setForum(forum);
-                     
+
                         setFilterPipleSpec(filterPipleSpec);
                         setAttachment(new AttachmentsVO(messageId, uploads));
                         this.messagePropertysVO.replacePropertys(props);
                         this.hotKeys = hotKeys;
                         if (messageVO != null) {
-                            setMessageVO(messageVO);
+                            this.subject = messageVO.getSubject() == null ? "" : messageVO.getSubject();
+                            refreshBodyPreviewAndLength(messageVO);
                         } else {
                             this.subject = this.subject != null ? this.subject : "";
                             refreshBodyPreviewAndLength(new MessageVO(this.subject, ""));

@@ -121,13 +121,12 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 			properties.add(new Property(MessagePropertysVO.PROPERTY_IP, operator.getPostIP()));
 			MessagePropertysVO messagePropertysVO = new MessagePropertysVO();
 			messagePropertysVO.replacePropertys(properties);
-			
 
 			if (!UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getBody())
 					|| !UtilValidate.isEmpty(forumMessagePostDTO.getMessageVO().getSubject())) {
 				PostTopicMessageCommand postTopicMessageCommand = new PostTopicMessageCommand(mIDInt, forum, operator,
 						inFilterManager.applyFilters(forumMessagePostDTO.getMessageVO()), attachmentsVO,
-						messagePropertysVO, forumMessagePostDTO.getTagTitle(),forumMessagePostDTO.getToken());
+						messagePropertysVO, forumMessagePostDTO.getTagTitle(), forumMessagePostDTO.getToken());
 				messageKernel.post(forum.getForumId(), forum, postTopicMessageCommand);
 			}
 
@@ -356,7 +355,7 @@ public class ForumMessageServiceImpl implements ForumMessageService {
 			return null;
 		try {
 			ForumMessage newMessage = (ForumMessage) message.clone();
-			newMessage.reloadMessageVOOrignal();
+			// newMessage.reloadMessageVOOrignal();
 			AnemicMessageDTO anemicMessageDTO = new AnemicMessageDTO();
 			anemicMessageDTO.setMessageId(newMessage.getMessageId());
 			anemicMessageDTO.setForum(newMessage.getForum());
