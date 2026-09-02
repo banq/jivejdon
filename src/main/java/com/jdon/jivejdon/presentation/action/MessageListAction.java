@@ -67,13 +67,23 @@ public class MessageListAction extends ModelListAction {
 			return actionMapping.findForward("failure");
 		}
 
-		long threadIdL = Long.parseLong(threadId);
-		ForumThread forumThread = getForumMessageQueryService().getThread(threadIdL);
-		if (forumThread == null) {
-			Debug.logError(" getThread error : thread is gone" + threadId, module);
+		ForumMessage rootForumMessage = null;
+        PageIterator pageIterator = getForumMessageQueryService().getMessages(Long.parseLong(threadId), 0, 1);
+		if (pageIterator == null || pageIterator.getAllCount() == 0) {
+			Debug.logError(" getPageIterator error : thread is null" + threadId, module);
 			return actionMapping.findForward("failure");
 		}
-		
+
+		if (pageIterator.hasNext()){
+			rootForumMessage = getForumMessageQueryService().getMessage((Long) pageIterator.next());
+		};
+
+		if (rootForumMessage == null) {
+			Debug.logError(" getPageIterator error : rootForumMessage is null" + threadId, module);
+			return actionMapping.findForward("failure");
+		}
+
+		ForumThread forumThread = rootForumMessage.getForumThread();
 		
 		CompletableFuture<Void> future1 = CompletableFuture.supplyAsync(() -> {			
 			forumThread.getReBlogVO().loadAscResult();
@@ -89,7 +99,7 @@ public class MessageListAction extends ModelListAction {
 			} else {
 				listForm.setAllCount(1);
 				List<ForumMessage> list = new ArrayList<>(1);
-				list.add(forumThread.getRootMessage());
+				list.add(rootForumMessage);
 				listForm.setList(list);
 			}
 		} catch (Exception var9) {
@@ -98,16 +108,6 @@ public class MessageListAction extends ModelListAction {
 
 		CompletableFuture.allOf(future1).join();
 		listForm.setOneModel(forumThread);
-
-		for (int retry = 0; retry < 100 && forumThread.getRootMessage().lazyLoaderRole == null; retry++) {
-			getForumMessageQueryService().getMessage(forumThread.getRootMessage().getMessageId());
-			try {
-				Thread.sleep(400L);
-			} catch (InterruptedException e) {
-				Thread.currentThread().interrupt();
-				break;
-			}
-		}
 
 		return actionMapping.findForward("success");
 	}
