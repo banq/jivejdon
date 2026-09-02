@@ -15,6 +15,8 @@
  */
 package com.jdon.jivejdon.presentation.action;
 
+import java.util.concurrent.CompletableFuture;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
@@ -73,7 +75,12 @@ public class MessageListOwnerAction extends ModelListAction {
 		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService(
 				"forumMessageQueryService", request);
 		ForumMessage forumMessage = forumMessageQueryService.getMessage((Long) key);
-		forumMessage.getMessageVO();
+		CompletableFuture.runAsync(() -> {		
+			// forumMessage.getMessageVO();
+			forumMessageQueryService.getThread(forumMessage.getForumThread().getThreadId());
+		});
+
+		
 		return forumMessage;
 	}
 
