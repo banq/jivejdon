@@ -74,21 +74,7 @@ public class MessageListAction extends ModelListAction {
 			return actionMapping.findForward("failure");
 		}
 		
-		CompletableFuture.runAsync(() -> {
-
-			for (int retry = 0; retry < 3 && forumThread.getRootMessage().lazyLoaderRole == null; retry++) {
-				getForumMessageQueryService().getMessage(forumThread.getRootMessage().getMessageId());				
-				try {
-					Thread.sleep(400L);
-				} catch (InterruptedException e) {
-					Thread.currentThread().interrupt();
-					break;
-				}
-			}
-
-		});
-
-
+		
 		CompletableFuture<Void> future1 = CompletableFuture.supplyAsync(() -> {			
 			forumThread.getReBlogVO().loadAscResult();
 			request.setAttribute("threadPreNextList", getThreadContext().getThreadListInContext(forumThread));
@@ -112,6 +98,16 @@ public class MessageListAction extends ModelListAction {
 
 		CompletableFuture.allOf(future1).join();
 		listForm.setOneModel(forumThread);
+
+		for (int retry = 0; retry < 3 && forumThread.getRootMessage().lazyLoaderRole == null; retry++) {
+			getForumMessageQueryService().getMessage(forumThread.getRootMessage().getMessageId());
+			try {
+				Thread.sleep(400L);
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+				break;
+			}
+		}
 
 		return actionMapping.findForward("success");
 	}
