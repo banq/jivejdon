@@ -99,7 +99,7 @@ public class MessageListAction extends ModelListAction {
 		CompletableFuture.allOf(future1).join();
 		listForm.setOneModel(forumThread);
 
-		for (int retry = 0; retry < 3 && forumThread.getRootMessage().lazyLoaderRole == null; retry++) {
+		for (int retry = 0; retry < 100 && forumThread.getRootMessage().lazyLoaderRole == null; retry++) {
 			getForumMessageQueryService().getMessage(forumThread.getRootMessage().getMessageId());
 			try {
 				Thread.sleep(400L);
