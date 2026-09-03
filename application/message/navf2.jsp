@@ -29,7 +29,7 @@ response.setDateHeader("Expires", 0);
     setTimeout(function () {
         window.top.location.href = '<%=url%>';
         waitingDialog.hide();
-    }, 2000);
+    }, 5000);
 </script>
 </body>
 </html>
