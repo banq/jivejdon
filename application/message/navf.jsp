@@ -31,7 +31,7 @@ response.setDateHeader("Expires", 0);
     setTimeout(function () {
         window.top.location.href = '<%=url%>';
         waitingDialog.hide();
-    }, 5000);
+    }, 2000);
 </script>
 </body>
 </html>
