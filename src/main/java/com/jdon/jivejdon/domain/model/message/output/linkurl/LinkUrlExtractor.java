@@ -1,12 +1,8 @@
 package com.jdon.jivejdon.domain.model.message.output.linkurl;
 
 import java.util.function.Function;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import com.jdon.jivejdon.domain.model.ForumMessage;
 import com.jdon.jivejdon.domain.model.message.MessageUrlVO;
 import com.jdon.jivejdon.domain.model.message.MessageVO;
 
@@ -14,25 +10,25 @@ import com.jdon.jivejdon.domain.model.message.MessageVO;
  * Quote link
  */
 public class LinkUrlExtractor implements Function<MessageVO, MessageVO> {
-	private final static Logger logger = LogManager.getLogger(LinkUrlExtractor.class);
-	private final static Pattern httpURLEscape = Pattern.compile("^(https?|ftp|file)" +
-			"://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
 
+ public MessageVO apply(MessageVO vo) {
+        String body = vo.getBody();
 
-	@Override
-	public MessageVO apply(MessageVO messageVO) {
-		String linkUrl = "";
-		String newbody = messageVO.getBody();
-		if (!newbody.contains("http")) return messageVO;
-		Matcher matcher = httpURLEscape.matcher(newbody);
-		if (matcher.find()) {
-			linkUrl = matcher.group();
-			newbody = matcher.replaceAll("");
-		} 
+        int end = 0;
+        int len = body.length();
+        while (end < len) {
+            char c = body.charAt(end);
+            if (c <= ' ' || c >= 128) break;   // 空白 / 控制字符 / 中文等非 ASCII 视为 URL 结束
+            end++;
+        }
 
-		messageVO.getForumMessage().setMessageUrlVO(new MessageUrlVO(linkUrl, messageVO
-				.getForumMessage().getMessageUrlVO().getThumbnailUrl(), messageVO
-				.getForumMessage().getMessageUrlVO().getImageUrl()));
-		return messageVO.builder().subject(messageVO.getSubject()).body(newbody).build();
-	}
+        String linkUrl = body.substring(0, end);
+        String newBody = body.substring(end);
+
+        ForumMessage fm = vo.getForumMessage();
+        MessageUrlVO old = fm.getMessageUrlVO();
+        fm.setMessageUrlVO(new MessageUrlVO(linkUrl, old.getThumbnailUrl(), old.getImageUrl()));
+
+        return vo.builder().subject(vo.getSubject()).body(newBody).build();
+    }
 }
