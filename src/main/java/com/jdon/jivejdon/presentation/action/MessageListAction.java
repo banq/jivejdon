@@ -84,6 +84,8 @@ public class MessageListAction extends ModelListAction {
 		}
 
 		ForumThread forumThread = rootForumMessage.getForumThread();
+		// 先执行过滤器，确保 JSP 读取 messageUrlVO 时已经完成
+        rootForumMessage.getMessageVO();
 		
 		CompletableFuture<Void> future1 = CompletableFuture.supplyAsync(() -> {			
 			forumThread.getReBlogVO().loadAscResult();
@@ -98,7 +100,7 @@ public class MessageListAction extends ModelListAction {
 				super.execute(actionMapping, listForm, request, response);
 			} else {
 				listForm.setAllCount(1);
-				List<ForumMessage> list = new ArrayList<>(1);
+				List<ForumMessage> list = new ArrayList<>(1);				
 				list.add(rootForumMessage);
 				listForm.setList(list);
 			}
