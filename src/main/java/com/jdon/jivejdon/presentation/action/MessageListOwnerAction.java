@@ -75,12 +75,9 @@ public class MessageListOwnerAction extends ModelListAction {
 		ForumMessageQueryService forumMessageQueryService = (ForumMessageQueryService) WebAppUtil.getService(
 				"forumMessageQueryService", request);
 		ForumMessage forumMessage = forumMessageQueryService.getMessage((Long) key);
-		CompletableFuture.runAsync(() -> {		
-			forumMessage.getMessageVO();
-			forumMessageQueryService.getThread(forumMessage.getForumThread().getThreadId());
-		});
+		forumMessage.getMessageVO();
+		forumMessageQueryService.getThread(forumMessage.getForumThread().getThreadId());
 
-		
 		return forumMessage;
 	}
 
