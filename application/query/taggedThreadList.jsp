@@ -43,10 +43,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com" >
-  <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" >
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>     
+
    <%@include file="../common/IncludeTopHead.jsp"%>
 
    <meta name="Description" content="有关<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>系列">
@@ -56,7 +53,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <%if(pagestartInt != 0 ) {%> 
     <%if(pagestartInt-pagecountInt>0 ) {%>  
         <link rel="prev" href="<%=domainUrl%>/tag/<bean:write name="tagID"/>/<%=(pagestartInt-pagecountInt)%>"/>
-        <meta name="robots" content="noindex, nofollow">
+        <meta name="robots" content="noindex, nofollow">        
     <%}else{%>
         <link rel="prev" href="<%=domainUrl%>/tag/<bean:write name="tagID"/>/"/>
         <meta name="robots" content="noindex, nofollow">
@@ -64,6 +61,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
  <%}%>
  <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
     <link rel="next" href="<%=domainUrl%>/tag/<bean:write name="tagID"/>/<%=pagestartInt+pagecountInt%>"/>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>    
  <%}%>
 <% } %>  
 
