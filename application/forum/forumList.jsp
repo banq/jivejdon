@@ -24,7 +24,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
    <bean:define id="title"  value="极道场Dojo" />
    <%@include file="../common/IncludeTopHead.jsp"%>
    <meta name="Description" content="极道Jdon：IT科技、生物极客、软硬件技术道场">
-<link rel="sitemap" type="application/xml" title="Sitemap" href="<%=domainUrl%>/sitemap.xml">
 
 <script>
  if(top !== self) top.location = self.location;

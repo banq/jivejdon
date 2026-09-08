@@ -53,7 +53,6 @@ int randomIdx = 0;
    <%@include file="../common/IncludeTopHead.jsp"%>
  
    
-  <link rel="sitemap" type="application/xml" title="Sitemap" href="<%=domainUrl%>/sitemap.xml">
   <link rel="canonical" href="<%=domainUrl%>/tag/"/>  
  
 <%if(pagestartInt != 0 ) {%> 

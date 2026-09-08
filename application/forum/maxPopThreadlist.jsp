@@ -49,7 +49,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <%}%>
    <%@include file="../common/IncludeTopHead.jsp"%>
    <meta name="Description" content="历史精华精彩观点">
-<link rel="sitemap" type="application/xml" title="Sitemap" href="<%=domainUrl%>/sitemap.xml">
 <link rel="canonical" href="<%=domainUrl%>/maxPopThreads/">  
 
    <%if(pagestartInt != 0 ) {%> 

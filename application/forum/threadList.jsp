@@ -66,7 +66,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <%}%>
    <%@include file="../common/IncludeTopHead.jsp"%>
    <meta name="Description" content="最新列表">
-   <link rel="sitemap" type="application/xml" title="Sitemap" href="<%=domainUrl%>/sitemap.xml">
 
    <logic:empty name="forum" property="forumId">	
        <link rel="canonical" href="<%=domainUrl%>/threads/"/>    
