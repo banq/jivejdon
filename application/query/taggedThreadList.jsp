@@ -43,7 +43,9 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-
+<%if(pagestartInt == 0 ) {%>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
+<%}%>
    <%@include file="../common/IncludeTopHead.jsp"%>
 
    <meta name="Description" content="有关<logic:notEmpty  name="title"><bean:write name="title" /></logic:notEmpty>系列">
@@ -60,8 +62,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
      <%}%>
  <%}%>
  <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
-    <link rel="next" href="<%=domainUrl%>/tag/<bean:write name="tagID"/>/<%=pagestartInt+pagecountInt%>"/>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>    
+    <link rel="next" href="<%=domainUrl%>/tag/<bean:write name="tagID"/>/<%=pagestartInt+pagecountInt%>"/>    
  <%}%>
 <% } %>  
 

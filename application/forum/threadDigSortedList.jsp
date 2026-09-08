@@ -42,6 +42,9 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>   
+<%if(pagestartInt == 0 ) {%>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
+<%}%>
    <%@include file="../common/IncludeTopHead.jsp"%>
 <meta name="Description" content="近几年来最佳热点科技趋势">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="<%=domainUrl%>/sitemap.xml">
@@ -59,7 +62,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
          <%if((pagestartInt+pagecountInt) < pageAllcountInt ) {%> 
             <link rel="next" href="<%=domainUrl%>/threadDigSortedList/<%=pagestartInt+pagecountInt%>"/>
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>  
          <%}%>
 <script>
  if(top !== self) top.location = self.location;
