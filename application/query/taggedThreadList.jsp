@@ -4,6 +4,94 @@
 <%@ taglib uri="/WEB-INF/MultiPagesREST.tld" prefix="MultiPagesREST" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page session="false" %>
+<%@ page import="javax.servlet.http.HttpSession" %>
+
+<%
+String requestStart = request.getParameter("start");
+int startValue = 0;
+boolean requireTagCaptcha = false;
+if (requestStart != null && requestStart.matches("\\d+")) {
+    startValue = Integer.parseInt(requestStart);
+    requireTagCaptcha = startValue > 0;
+}
+boolean tagVerified = false;
+HttpSession pageSession = request.getSession(false);
+if (pageSession != null) {
+    Object verifiedObj = pageSession.getAttribute("taggedThreadListVerified");
+    if (verifiedObj instanceof Boolean) {
+        tagVerified = (Boolean) verifiedObj;
+    }
+}
+if (requireTagCaptcha && !tagVerified) {
+    response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+    response.setHeader("Pragma", "no-cache");
+    response.setHeader("Expires", "0");
+    String tagIdValue = request.getParameter("tagID");
+%>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+    <script>
+        function postCaptchaResult(res) {
+            if (res && res.ret === 0) {
+                var tagId = '<%=tagIdValue == null ? "" : tagIdValue%>';
+                var start = '<%=requestStart == null ? "0" : requestStart%>';
+                var count = '<%=request.getParameter("count") == null ? "18" : request.getParameter("count")%>';
+                var form = document.createElement('form');
+                form.method = 'post';
+                form.action = '<%=request.getContextPath()%>/captcha/taggedThreadList.shtml';
+
+                var tagIdInput = document.createElement('input');
+                tagIdInput.type = 'hidden';
+                tagIdInput.name = 'tagID';
+                tagIdInput.value = tagId;
+
+                var startInput = document.createElement('input');
+                startInput.type = 'hidden';
+                startInput.name = 'start';
+                startInput.value = start;
+
+                var countInput = document.createElement('input');
+                countInput.type = 'hidden';
+                countInput.name = 'count';
+                countInput.value = count;
+
+                var ticketInput = document.createElement('input');
+                ticketInput.type = 'hidden';
+                ticketInput.name = 'ticket';
+                ticketInput.value = res.ticket;
+
+                var randInput = document.createElement('input');
+                randInput.type = 'hidden';
+                randInput.name = 'randstr';
+                randInput.value = res.randstr;
+
+                form.appendChild(tagIdInput);
+                form.appendChild(startInput);
+                form.appendChild(countInput);
+                form.appendChild(ticketInput);
+                form.appendChild(randInput);
+                document.body.appendChild(form);
+                form.submit();
+            } else {
+                document.body.innerHTML = '';
+            }
+        }
+
+        window.onload = function () {
+            if (window.TencentCaptcha) {
+                new TencentCaptcha('2050847547', postCaptchaResult).show();
+            } else {
+                document.body.innerHTML = '';
+            }
+        };
+    </script>
+</head>
+<body></body>
+</html>
+<% return; }
+%>
 
 <bean:parameter name="queryType" id="queryType" value=""/>
 <bean:parameter name="tagID" id="tagID" value=""/>

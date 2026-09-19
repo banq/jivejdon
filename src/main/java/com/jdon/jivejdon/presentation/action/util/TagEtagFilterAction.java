@@ -41,23 +41,34 @@ public class TagEtagFilterAction extends Action {
 			throws Exception {
 
 		String tagID = request.getParameter("tagID");
+		String start = request.getParameter("start");
+		if (start != null && start.matches("\\d+")) {
+			int startValue = Integer.parseInt(start);
+			if (startValue > 0) {
+				response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+				response.setHeader("Pragma", "no-cache");
+				response.setHeader("Expires", "0");
+				return actionMapping.findForward("success");
+			}
+		}
 		if (tagID == null || !StringUtils.isNumeric(tagID) || tagID.length() > 10) {
 			return actionMapping.findForward("success");
 		}
 		TagService othersService = (TagService) WebAppUtil.getService("othersService",
-				this.servlet.getServletContext());
+					this.servlet.getServletContext());
 
 		Long tagIDL = Long.parseLong(tagID);
 		ThreadTag tag = othersService.getThreadTag(tagIDL);
 		if (tag == null)
 			return actionMapping.findForward("success");
 
-		if (!ToolsUtil.checkHeaderCache(expire, 1000000000000L +  (long)tag.getAssonum() * 10000, request,
-				response)) {
-			return null;// response is 304
+		if (start == null || start.isEmpty() || Integer.parseInt(start) == 0) {
+			if (!ToolsUtil.checkHeaderCache(expire, 1000000000000L +  (long)tag.getAssonum() * 10000, request,
+					response)) {
+				return null;// response is 304
+			}
 		}
 		return actionMapping.findForward("success");
 
 	}
-
 }

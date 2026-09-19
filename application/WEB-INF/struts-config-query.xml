@@ -68,6 +68,11 @@
             <forward name="tags" path="/query/others/tags.jsp" />
         </action>
 
+        <action path="/captcha/taggedThreadList" type="com.jdon.jivejdon.presentation.action.query.TaggedThreadListCaptchaAction" name="threadListForm" scope="request" validate="false">
+            <forward name="failure" path="/404.jsp" />
+            <forward name="success" path="/tag/taggedThreadList2.shtml" />
+        </action>
+
         <action path="/tag/taggedThreadList" type="com.jdon.jivejdon.presentation.action.util.TagEtagFilterAction" name="threadListForm" scope="request" validate="false">
             <forward name="success" path="/tag/taggedThreadList2.shtml" />
         </action>
