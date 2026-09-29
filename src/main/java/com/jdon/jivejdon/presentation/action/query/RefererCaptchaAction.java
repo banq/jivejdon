@@ -77,15 +77,17 @@ public class RefererCaptchaAction extends Action {
         response.getWriter().write("document.getElementById('ticket').value=res.ticket;");
         response.getWriter().write("document.getElementById('randstr').value=res.randstr;");
         response.getWriter().write("document.getElementById('captchaForm').submit();}};");
-        response.getWriter().write("</script><script src=\"https://ssl.captcha.qq.com/TCaptcha.js\"></script></head><body>");
+        response.getWriter().write("</script><script src=\"https://ssl.captcha.qq.com/TCaptcha.js\"></script>");
+        response.getWriter().write("<script>window.onload=function(){if(window.TencentCaptcha){");
+        response.getWriter().write("new TencentCaptcha('2050847547',window.refererCaptchaCallback).show();}};</script>");
+        response.getWriter().write("</head><body>");
         response.getWriter().write("<form id=\"captchaForm\" method=\"post\" action=\"");
         response.getWriter().write(escapeHtml(request.getRequestURI()));
         response.getWriter().write("\"><input type=\"hidden\" name=\"flowId\" value=\"");
         response.getWriter().write(escapeHtml(flowId));
         response.getWriter().write("\"><input type=\"hidden\" id=\"ticket\" name=\"ticket\">");
         response.getWriter().write("<input type=\"hidden\" id=\"randstr\" name=\"randstr\">");
-        response.getWriter().write("<button type=\"button\" id=\"TencentCaptcha\" data-appid=\"2050847547\" ");
-        response.getWriter().write("data-cbfn=\"refererCaptchaCallback\">道场验证</button></form></body></html>");
+        response.getWriter().write("</form></body></html>");
     }
 
     private void verifyAndRedirect(HttpServletRequest request, HttpServletResponse response) throws IOException {
