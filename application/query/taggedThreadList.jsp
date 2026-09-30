@@ -31,6 +31,7 @@ if (requireTagCaptcha && !tagVerified) {
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <meta name="robots" content="noindex, nofollow">
     <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
     <script>
         function postCaptchaResult(res) {
