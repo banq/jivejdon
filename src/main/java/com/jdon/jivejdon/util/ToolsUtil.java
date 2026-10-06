@@ -478,7 +478,7 @@ public class ToolsUtil {
 		// 注意：不在此处重复设置 setAttribute，已在 checkHeaderCache / checkHeaderCacheExpire 中设置
 
 		// 设置 Cache-Control
-		String maxAgeDirective = "public, max-age=" + maxAgeSeconds + ", s-maxage=" + maxAgeSeconds * 2 + ", stale-while-revalidate=3600";
+		String maxAgeDirective = "public, max-age=" + maxAgeSeconds + ", s-maxage=" + maxAgeSeconds * 2 + ", stale-while-revalidate=36000";
 		response.setHeader("Cache-Control", maxAgeDirective);
 
 		// 设置状态码
