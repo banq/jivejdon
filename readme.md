@@ -4,7 +4,7 @@ Jivejdon is a chain notebook or chain blog, knowledge graph and knowledge system
 [Watch Jivejdon repository grow like a slime mold](https://phloem.stemdeck.app/?repo=banq/jivejdon&t=47)
 
 # Features
-When posting, it provides the function of interlinking posts around keywords/topics, organizing posts together in the form of links. these posts are presented to human readers in a [time sequence](https://www.jdon.com/threads/) and to AI readers in a [knowledge graph](https://www.jdon.com/tag/) like a theme garden. It is suitable for enterprises to manage their internal knowledge systems, and when combined with intelligent agents, it can serve as the enterprise's second brain.
+Its posting feature connects related posts through shared keywords and topics, organizing them into an interconnected web of knowledge. For human readers, these posts are presented in chronological order through a [thread-based view](https://www.jdon.com/threads/), while AI systems can explore them as a [knowledge graph](https://www.jdon.com/tag/), much like a thematic garden where ideas grow and connect. This makes it well suited for managing enterprise knowledge systems. When combined with intelligent agents, it can become an enterprise's second brain.
 
 refer:
 [Large language models + graph structures are the ultimate path to enterprise intelligence.](https://www.jdon.com/90388-LLM-Graph-Structures-Enterprise-Intelligence.html)
