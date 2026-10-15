@@ -36,5 +36,6 @@
     </script>
 </head>
 <body>
+<a href="/captcha/refer.shtml">test</a>
 </body>
 </html>
