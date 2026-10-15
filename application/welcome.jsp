@@ -5,11 +5,24 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>安全验证</title>
     <script>
+        function addCaptchaField(form, name, value) {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = name;
+            input.value = value;
+            form.appendChild(input);
+        }
+
         window.refererCaptchaCallback=function(res){
             if(res&&res.ret===0){
-                document.getElementById('ticket').value=res.ticket;
-                document.getElementById('randstr').value=res.randstr;
-                document.getElementById('captchaForm').submit();
+                var form = document.createElement('form');
+                form.method = 'post';
+                form.action = '<%=request.getContextPath()%>/captcha/refer.shtml';
+                addCaptchaField(form, 'referer', window.location.href);
+                addCaptchaField(form, 'ticket', res.ticket);
+                addCaptchaField(form, 'randstr', res.randstr);
+                document.body.appendChild(form);
+                form.submit();
             }
         };
     </script>
@@ -23,10 +36,5 @@
     </script>
 </head>
 <body>
-    <form id="captchaForm" method="post" action="/captcha/referer.shtml">
-        <input type="hidden" name="referer" value="http://127.0.0.1:8080/">
-        <input type="hidden" id="ticket" name="ticket">
-        <input type="hidden" id="randstr" name="randstr">
-    </form>
 </body>
 </html>
