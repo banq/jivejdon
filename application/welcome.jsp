@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -6,31 +7,11 @@
     <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>极道Jdon</title>
+    <title>安全验证</title>
     <script>
         var referer = window.location.href;
-        var approvalKey = 'refererCaptchaApproved';
-        var actionReturnKey = 'refererCaptchaActionReturn';
-        var captchaAlreadyApproved = false;
-        var returnedFromCaptchaAction = false;
-
-        try {
-            returnedFromCaptchaAction = sessionStorage.getItem(actionReturnKey) === '1';
-            if (returnedFromCaptchaAction) {
-                sessionStorage.removeItem(actionReturnKey);
-            }
-
-            var expiresAt = Number(localStorage.getItem(approvalKey));
-            if (expiresAt > Date.now()) {
-                captchaAlreadyApproved = true;
-                if (!returnedFromCaptchaAction) {
-                    sessionStorage.setItem(actionReturnKey, '1');
-                    window.location.replace('/captcha/refer.shtml');
-                }
-            }
-        } catch (error) {
-            console.warn('Unable to read captcha approval.', error);
-        }
+        var approvalStorageKey = 'JDON_CAPTCHA_APPROVAL';
+        var actionReturnStorageKey = 'JDON_CAPTCHA_ACTION_RETURN';
 
         function addCaptchaField(form, name, value) {
             var input = document.createElement('input');
@@ -40,22 +21,63 @@
             form.appendChild(input);
         }
 
-        window.refererCaptchaCallback=function(res){
-            if(res&&res.ret===0){
-                var form = document.createElement('form');
-                form.method = 'post';
-                form.action = '/captcha/refer.shtml';
-                addCaptchaField(form, 'referer', referer);
-                addCaptchaField(form, 'ticket', res.ticket);
-                addCaptchaField(form, 'randstr', res.randstr);
-                document.body.appendChild(form);
-                form.submit();
+        function submitForm(fields) {
+            var form = document.createElement('form');
+            form.method = 'post';
+            form.action = '/captcha/refer.shtml';
+            Object.keys(fields).forEach(function(name) {
+                addCaptchaField(form, name, fields[name]);
+            });
+            try {
+                sessionStorage.setItem(actionReturnStorageKey, '1');
+            } catch (error) {
+                console.warn('Unable to save captcha return marker.', error);
+            }
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        window.refererCaptchaCallback = function(res) {
+            if (res && res.ret === 0) {
+                submitForm({
+                    referer: referer,
+                    ticket: res.ticket,
+                    randstr: res.randstr
+                });
             }
         };
-    </script>
-    <script>
+
         window.onload = function() {
-            if (captchaAlreadyApproved) {
+            var approvalToken = null;
+            var returnedFromCaptchaAction = false;
+            try {
+                approvalToken = localStorage.getItem(approvalStorageKey);
+            } catch (error) {
+                console.warn('Unable to read captcha approval token.', error);
+            }
+
+            try {
+                returnedFromCaptchaAction =
+                    sessionStorage.getItem(actionReturnStorageKey) === '1';
+                sessionStorage.removeItem(actionReturnStorageKey);
+            } catch (error) {
+                console.warn('Unable to read captcha return marker.', error);
+            }
+            try {
+                returnedFromCaptchaAction = returnedFromCaptchaAction ||
+                    new URL(document.referrer).pathname.replace(/\/+$/, '').endsWith('/captcha/refer.shtml');
+            } catch (error) {
+                console.warn('Unable to determine captcha return location.', error);
+            }
+
+            if (approvalToken && !returnedFromCaptchaAction) {
+                submitForm({
+                    referer: referer,
+                    approvalToken: approvalToken
+                });
+                return;
+            }
+            if (approvalToken && returnedFromCaptchaAction) {
                 return;
             }
 
