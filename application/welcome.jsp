@@ -6,7 +6,28 @@
     <title>安全验证</title>
     <script>
         var referer = window.location.href;
-        var approvalKey = 'refererCaptchaApproved:' + referer;
+        var approvalKey = 'refererCaptchaApproved';
+        var actionReturnKey = 'refererCaptchaActionReturn';
+        var captchaAlreadyApproved = false;
+        var returnedFromCaptchaAction = false;
+
+        try {
+            returnedFromCaptchaAction = sessionStorage.getItem(actionReturnKey) === '1';
+            if (returnedFromCaptchaAction) {
+                sessionStorage.removeItem(actionReturnKey);
+            }
+
+            var expiresAt = Number(localStorage.getItem(approvalKey));
+            if (expiresAt > Date.now()) {
+                captchaAlreadyApproved = true;
+                if (!returnedFromCaptchaAction) {
+                    sessionStorage.setItem(actionReturnKey, '1');
+                    window.location.replace('/captcha/refer.shtml');
+                }
+            }
+        } catch (error) {
+            console.warn('Unable to read captcha approval.', error);
+        }
 
         function addCaptchaField(form, name, value) {
             var input = document.createElement('input');
@@ -20,7 +41,7 @@
             if(res&&res.ret===0){
                 var form = document.createElement('form');
                 form.method = 'post';
-                form.action = '<%=request.getContextPath()%>/captcha/refer.shtml';
+                form.action = '/captcha/refer.shtml';
                 addCaptchaField(form, 'referer', referer);
                 addCaptchaField(form, 'ticket', res.ticket);
                 addCaptchaField(form, 'randstr', res.randstr);
@@ -31,16 +52,8 @@
     </script>
     <script>
         window.onload = function() {
-            try {
-                var expiresAt = Number(localStorage.getItem(approvalKey));
-                if (expiresAt > Date.now()) {
-                    return;
-                }
-                if (expiresAt) {
-                    localStorage.removeItem(approvalKey);
-                }
-            } catch (error) {
-                console.warn('Unable to read captcha approval.', error);
+            if (captchaAlreadyApproved) {
+                return;
             }
 
             var captchaScript = document.createElement('script');
@@ -59,7 +72,5 @@
         };
     </script>
 </head>
-<body>
-<a href="/captcha/refer.shtml">test</a>
-</body>
+<body></body>
 </html>

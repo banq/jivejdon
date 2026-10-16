@@ -47,7 +47,7 @@ public class RefererCaptchaAction extends Action {
         response.getWriter().write("<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">");
         response.getWriter().write("<title>安全验证</title><script>");
         response.getWriter().write("var referer=document.referrer;");
-        response.getWriter().write("var approvalKey='refererCaptchaApproved:'+referer;");
+        response.getWriter().write("var approvalKey='refererCaptchaApproved';");
         response.getWriter().write("var captchaAlreadyApproved=false;");
         response.getWriter().write("try{var expiresAt=Number(localStorage.getItem(approvalKey));");
         response.getWriter().write("if(expiresAt>Date.now()){captchaAlreadyApproved=true;window.location.replace(referer);}}");
@@ -87,7 +87,7 @@ public class RefererCaptchaAction extends Action {
         response.getWriter().write("<title>安全验证</title></head><body><a id=\"captchaReturn\" href=\"");
         response.getWriter().write(escapeHtml(referer));
         response.getWriter().write("\"></a><script>var referer=document.getElementById('captchaReturn').href;");
-        response.getWriter().write("try{localStorage.setItem('refererCaptchaApproved:'+referer,String(Date.now()+86400000));}");
+        response.getWriter().write("try{localStorage.setItem('refererCaptchaApproved',String(Date.now()+86400000));}");
         response.getWriter().write("catch(error){console.warn('Unable to save captcha approval.',error);}");
         response.getWriter().write("window.location.replace(referer);</script></body></html>");
     }
