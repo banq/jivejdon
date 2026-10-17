@@ -26,9 +26,9 @@ public class RefererCaptchaAction extends Action {
 
     private static final String APPROVAL_STORAGE_KEY = "JDON_CAPTCHA_APPROVAL";
     private static final String APPROVAL_COOKIE_NAME = "JDON_CAPTCHA_APPROVAL";
-    private static final long APPROVAL_DURATION_MILLIS = 24L * 60 * 60 * 1000;
-    private static final int APPROVAL_DURATION_SECONDS = 24 * 60 * 60;
-    private static final String TOKEN_PREFIX = "jdon-captcha-v1:";
+    private static final long APPROVAL_DURATION_MILLIS = 5L * 60 * 1000;
+    private static final int APPROVAL_DURATION_SECONDS = 5 * 60;
+    private static final String TOKEN_PREFIX = "jdon-captcha-v2:";
     private static final byte[] SIGNING_KEY = createSigningKey();
 
     @Override
