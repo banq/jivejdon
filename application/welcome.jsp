@@ -31,33 +31,7 @@
             form.submit();
         }
 
-        function showCaptcha() {
-            var captchaScript = document.createElement('script');
-            captchaScript.src = 'https://ssl.captcha.qq.com/TCaptcha.js';
-            captchaScript.onload = function() {
-                if (window.TencentCaptcha) {
-                    new TencentCaptcha('2050847547', window.refererCaptchaCallback).show();
-                } else {
-                    console.error('Tencent captcha script loaded without TencentCaptcha.');
-                }
-            };
-            captchaScript.onerror = function() {
-                console.error('Unable to load Tencent captcha script.');
-            };
-            document.head.appendChild(captchaScript);
-        }
-
-        window.refererCaptchaCallback = function(res) {
-            if (res && res.ret === 0) {
-                submitForm({
-                    referer: referer,
-                    ticket: res.ticket,
-                    randstr: res.randstr
-                });
-            }
-        };
-
-        window.onload = function() {
+        document.addEventListener('DOMContentLoaded', function() {
             var approvalToken = null;
             try {
                 approvalToken = localStorage.getItem(approvalStorageKey);
@@ -73,31 +47,17 @@
                 return;
             }
 
-            var cacheCheckUrl = '/captcha/refer.shtml?checkIpCache=1&referer=' +
-                encodeURIComponent(referer);
-            fetch(cacheCheckUrl, { credentials: 'same-origin', cache: 'no-store' })
-                .then(function(response) {
-                    if (!response.ok) {
-                        throw new Error('IP cache check failed with status ' + response.status);
-                    }
-                    return response.json();
-                })
-                .then(function(result) {
-                    if (result.cached) {
-                        submitForm({
-                            referer: referer,
-                            ipCacheApproval: '1'
-                        });
-                        return;
-                    }
-                    showCaptcha();
-                })
-                .catch(function(error) {
-                    console.warn('Unable to check the IP view cache; requiring captcha.', error);
-                    showCaptcha();
-                });
-        };
+            const a = document.createElement('a');
+            a.href = '/captcha/' + 'refer.shtml';
+
+            const h3 = document.createElement('h3');
+            h3.textContent = '请点击验证你是否是真人？或从首页jdon.com访问本文';
+
+            a.appendChild(h3);
+            document.body.appendChild(a);
+        });
     </script>
 </head>
-<body></body>
+<body>
+</body>
 </html>
