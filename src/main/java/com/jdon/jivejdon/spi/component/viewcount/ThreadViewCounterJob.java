@@ -25,6 +25,8 @@ public interface ThreadViewCounterJob {
 
 	void saveViewCounter(ViewCounter viewCounter, String ipAddress) ;
 
+	boolean hasRecentViewFromIp(String ipAddress);
+
     List<Long> getThreadIdsList();
 
 	ViewCounter getViewCounter(Long threadId);

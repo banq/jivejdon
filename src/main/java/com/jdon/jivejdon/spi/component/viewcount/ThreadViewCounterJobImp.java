@@ -198,6 +198,11 @@ public class ThreadViewCounterJobImp implements Startable, ThreadViewCounterJob 
 		return viewcounters.get(threadId);
 	}
 
+	@Override
+	public boolean hasRecentViewFromIp(String ipAddress) {
+		return ipAddress != null && ipCountsMirror.containsKey(ipAddress);
+	}
+
 	public List<Long> getThreadIdsList() {
 		return viewcounters.values().stream().map(e -> e.getThreadId()).collect(Collectors.toList());
 	}

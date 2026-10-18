@@ -19,7 +19,10 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.presentation.form.SkinUtils;
+import com.jdon.jivejdon.presentation.servlet.CounterServlet;
+import com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob;
 import com.jdon.util.UtilValidate;
 
 public class RefererCaptchaAction extends Action {
@@ -30,6 +33,7 @@ public class RefererCaptchaAction extends Action {
     private static final int APPROVAL_DURATION_SECONDS = 5 * 60;
     private static final String TOKEN_PREFIX = "jdon-captcha-v2:";
     private static final byte[] SIGNING_KEY = createSigningKey();
+    private ThreadViewCounterJob threadViewCounterJob;
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -38,6 +42,10 @@ public class RefererCaptchaAction extends Action {
         byte[] signingKey = SIGNING_KEY;
 
         if ("GET".equalsIgnoreCase(request.getMethod())) {
+            if ("1".equals(request.getParameter("checkIpCache"))) {
+                checkIpCache(request, response);
+                return null;
+            }
             showCaptcha(request, response, signingKey);
             return null;
         }
@@ -49,6 +57,19 @@ public class RefererCaptchaAction extends Action {
         response.setHeader("Allow", "GET, POST");
         response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
         return null;
+    }
+
+    private void checkIpCache(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String referer = request.getParameter("referer");
+        if (!isSameOriginReferer(referer, request)) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+
+        boolean cached = getThreadViewCounterJob().hasRecentViewFromIp(CounterServlet.getClientIp(request));
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json; charset=UTF-8");
+        response.getWriter().write(cached ? "{\"cached\":true}" : "{\"cached\":false}");
     }
 
     private void showCaptcha(HttpServletRequest request, HttpServletResponse response, byte[] signingKey)
@@ -64,6 +85,10 @@ public class RefererCaptchaAction extends Action {
             return;
         }
         clearApprovalCookie(response, request);
+        if (getThreadViewCounterJob().hasRecentViewFromIp(CounterServlet.getClientIp(request))) {
+            response.sendRedirect(referer);
+            return;
+        }
 
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
@@ -99,6 +124,14 @@ public class RefererCaptchaAction extends Action {
         response.getWriter().write("</script></head><body></body></html>");
     }
 
+    private ThreadViewCounterJob getThreadViewCounterJob() {
+        if (threadViewCounterJob == null) {
+            threadViewCounterJob = (ThreadViewCounterJob) WebAppUtil.getComponentInstance("threadViewCounterJob",
+                    servlet.getServletContext());
+        }
+        return threadViewCounterJob;
+    }
+
     private void verifyAndRedirect(HttpServletRequest request, HttpServletResponse response, byte[] signingKey)
             throws IOException, GeneralSecurityException {
         String referer = request.getParameter("referer");
@@ -115,7 +148,24 @@ public class RefererCaptchaAction extends Action {
                 response.sendRedirect(referer);
                 return;
             }
-            showCaptcha(request, response, referer, true);
+            if (getThreadViewCounterJob().hasRecentViewFromIp(CounterServlet.getClientIp(request))) {
+                completeApproval(referer, request, response, signingKey);
+            } else {
+                showCaptcha(request, response, referer, true);
+            }
+            return;
+        }
+
+        if ("1".equals(request.getParameter("ipCacheApproval"))) {
+            if (!isSameOriginReferer(referer, request)) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                return;
+            }
+            if (getThreadViewCounterJob().hasRecentViewFromIp(CounterServlet.getClientIp(request))) {
+                completeApproval(referer, request, response, signingKey);
+            } else {
+                showCaptcha(request, response, referer, false);
+            }
             return;
         }
 
@@ -126,6 +176,11 @@ public class RefererCaptchaAction extends Action {
             return;
         }
 
+        completeApproval(referer, request, response, signingKey);
+    }
+
+    private void completeApproval(String referer, HttpServletRequest request, HttpServletResponse response,
+            byte[] signingKey) throws IOException, GeneralSecurityException {
         long expiresAt = System.currentTimeMillis() + APPROVAL_DURATION_MILLIS;
         String token = createApprovalToken(expiresAt, signingKey);
         addApprovalCookie(response, request, token);

@@ -7,11 +7,10 @@
     <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>安全验证</title>
+    <title>Jdon.com安全验证</title>
     <script>
         var referer = window.location.href;
         var approvalStorageKey = 'JDON_CAPTCHA_APPROVAL';
-        var actionReturnStorageKey = 'JDON_CAPTCHA_ACTION_RETURN';
 
         function addCaptchaField(form, name, value) {
             var input = document.createElement('input');
@@ -28,13 +27,24 @@
             Object.keys(fields).forEach(function(name) {
                 addCaptchaField(form, name, fields[name]);
             });
-            try {
-                sessionStorage.setItem(actionReturnStorageKey, '1');
-            } catch (error) {
-                console.warn('Unable to save captcha return marker.', error);
-            }
             document.body.appendChild(form);
             form.submit();
+        }
+
+        function showCaptcha() {
+            var captchaScript = document.createElement('script');
+            captchaScript.src = 'https://ssl.captcha.qq.com/TCaptcha.js';
+            captchaScript.onload = function() {
+                if (window.TencentCaptcha) {
+                    new TencentCaptcha('2050847547', window.refererCaptchaCallback).show();
+                } else {
+                    console.error('Tencent captcha script loaded without TencentCaptcha.');
+                }
+            };
+            captchaScript.onerror = function() {
+                console.error('Unable to load Tencent captcha script.');
+            };
+            document.head.appendChild(captchaScript);
         }
 
         window.refererCaptchaCallback = function(res) {
@@ -49,51 +59,43 @@
 
         window.onload = function() {
             var approvalToken = null;
-            var returnedFromCaptchaAction = false;
             try {
                 approvalToken = localStorage.getItem(approvalStorageKey);
             } catch (error) {
                 console.warn('Unable to read captcha approval token.', error);
             }
 
-            try {
-                returnedFromCaptchaAction =
-                    sessionStorage.getItem(actionReturnStorageKey) === '1';
-                sessionStorage.removeItem(actionReturnStorageKey);
-            } catch (error) {
-                console.warn('Unable to read captcha return marker.', error);
-            }
-            try {
-                returnedFromCaptchaAction = returnedFromCaptchaAction ||
-                    new URL(document.referrer).pathname.replace(/\/+$/, '').endsWith('/captcha/refer.shtml');
-            } catch (error) {
-                console.warn('Unable to determine captcha return location.', error);
-            }
-
-            if (approvalToken && !returnedFromCaptchaAction) {
+            if (approvalToken) {
                 submitForm({
                     referer: referer,
                     approvalToken: approvalToken
                 });
                 return;
             }
-            if (approvalToken && returnedFromCaptchaAction) {
-                return;
-            }
 
-            var captchaScript = document.createElement('script');
-            captchaScript.src = 'https://ssl.captcha.qq.com/TCaptcha.js';
-            captchaScript.onload = function() {
-                if (window.TencentCaptcha) {
-                    new TencentCaptcha('2050847547', window.refererCaptchaCallback).show();
-                } else {
-                    console.error('Tencent captcha script loaded without TencentCaptcha.');
-                }
-            };
-            captchaScript.onerror = function() {
-                console.error('Unable to load Tencent captcha script.');
-            };
-            document.head.appendChild(captchaScript);
+            var cacheCheckUrl = '/captcha/refer.shtml?checkIpCache=1&referer=' +
+                encodeURIComponent(referer);
+            fetch(cacheCheckUrl, { credentials: 'same-origin', cache: 'no-store' })
+                .then(function(response) {
+                    if (!response.ok) {
+                        throw new Error('IP cache check failed with status ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(function(result) {
+                    if (result.cached) {
+                        submitForm({
+                            referer: referer,
+                            ipCacheApproval: '1'
+                        });
+                        return;
+                    }
+                    showCaptcha();
+                })
+                .catch(function(error) {
+                    console.warn('Unable to check the IP view cache; requiring captcha.', error);
+                    showCaptcha();
+                });
         };
     </script>
 </head>
