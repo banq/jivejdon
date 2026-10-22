@@ -81,12 +81,12 @@ public class RefererCaptchaAction extends Action {
         }
 
         if (hasValidApprovalCookie(request, signingKey)) {
-            response.sendRedirect(addVerifiedParameter(referer));
+            writeRedirectPage(response, addVerifiedParameter(referer));
             return;
         }
         clearApprovalCookie(response, request);
         if (getThreadViewCounterJob().hasRecentViewFromIp(CounterServlet.getClientIp(request))) {
-            response.sendRedirect(addVerifiedParameter(referer));
+            writeRedirectPage(response, addVerifiedParameter(referer));
             return;
         }
 
@@ -145,7 +145,7 @@ public class RefererCaptchaAction extends Action {
                 return;
             }
             if (isValidApprovalToken(approvalToken, signingKey)) {
-                response.sendRedirect(addVerifiedParameter(referer));
+                writeRedirectPage(response, addVerifiedParameter(referer));
                 return;
             }
             if (getThreadViewCounterJob().hasRecentViewFromIp(CounterServlet.getClientIp(request))) {
@@ -187,12 +187,32 @@ public class RefererCaptchaAction extends Action {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         response.getWriter().write("<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"UTF-8\">");
-        response.getWriter().write("<title>安全验证</title></head><body><a id=\"captchaReturn\" href=\"");
-        response.getWriter().write(escapeHtml(addVerifiedParameter(referer)));
-        response.getWriter().write("\"></a><script>var referer=document.getElementById('captchaReturn').href;");
+        response.getWriter().write("<title>安全验证</title><script>");
         response.getWriter().write("try{localStorage.setItem('" + APPROVAL_STORAGE_KEY + "','" + token + "');}");
         response.getWriter().write("catch(error){console.warn('Unable to save captcha approval token.',error);}");
-        response.getWriter().write("window.location.replace(referer);</script></body></html>");
+        response.getWriter().write("</script>");
+        writeMetaRefresh(response, addVerifiedParameter(referer));
+        response.getWriter().write("</head><body><p>验证成功，正在返回原页面。<a href=\"");
+        response.getWriter().write(escapeHtml(addVerifiedParameter(referer)));
+        response.getWriter().write("\">如果没有自动跳转，请点击这里</a></p></body></html>");
+    }
+
+    private void writeRedirectPage(HttpServletResponse response, String url) throws IOException {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        response.getWriter().write("<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"UTF-8\">");
+        response.getWriter().write("<title>正在跳转</title>");
+        writeMetaRefresh(response, url);
+        response.getWriter().write("</head><body><p>正在跳转，");
+        response.getWriter().write("<a href=\"");
+        response.getWriter().write(escapeHtml(url));
+        response.getWriter().write("\">如果没有自动跳转，请点击这里</a></p></body></html>");
+    }
+
+    private void writeMetaRefresh(HttpServletResponse response, String url) throws IOException {
+        response.getWriter().write("<meta http-equiv=\"refresh\" content=\"0;url=");
+        response.getWriter().write(escapeHtml(url));
+        response.getWriter().write("\">");
     }
 
     private void showCaptcha(HttpServletRequest request, HttpServletResponse response, String referer,
