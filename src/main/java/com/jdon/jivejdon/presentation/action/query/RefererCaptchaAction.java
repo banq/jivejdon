@@ -81,12 +81,12 @@ public class RefererCaptchaAction extends Action {
         }
 
         if (hasValidApprovalCookie(request, signingKey)) {
-            writeRedirectPage(response, addVerifiedParameter(referer));
+            writeRedirectPage(response, referer);
             return;
         }
         clearApprovalCookie(response, request);
         if (getThreadViewCounterJob().hasRecentViewFromIp(CounterServlet.getClientIp(request))) {
-            writeRedirectPage(response, addVerifiedParameter(referer));
+            writeRedirectPage(response, referer);
             return;
         }
 
@@ -145,7 +145,7 @@ public class RefererCaptchaAction extends Action {
                 return;
             }
             if (isValidApprovalToken(approvalToken, signingKey)) {
-                writeRedirectPage(response, addVerifiedParameter(referer));
+                writeRedirectPage(response, referer);
                 return;
             }
             if (getThreadViewCounterJob().hasRecentViewFromIp(CounterServlet.getClientIp(request))) {
@@ -191,9 +191,9 @@ public class RefererCaptchaAction extends Action {
         response.getWriter().write("try{localStorage.setItem('" + APPROVAL_STORAGE_KEY + "','" + token + "');}");
         response.getWriter().write("catch(error){console.warn('Unable to save captcha approval token.',error);}");
         response.getWriter().write("</script>");
-        writeMetaRefresh(response, addVerifiedParameter(referer));
+        writeMetaRefresh(response, referer);
         response.getWriter().write("</head><body><p>验证成功，正在返回原页面。<a href=\"");
-        response.getWriter().write(escapeHtml(addVerifiedParameter(referer)));
+        response.getWriter().write(escapeHtml(referer));
         response.getWriter().write("\">如果没有自动跳转，请点击这里</a></p></body></html>");
     }
 
@@ -337,17 +337,6 @@ public class RefererCaptchaAction extends Action {
     private String escapeHtml(String value) {
         return value.replace("&", "&amp;").replace("\"", "&quot;")
                 .replace("<", "&lt;").replace(">", "&gt;").replace("'", "&#39;");
-    }
-
-    private String addVerifiedParameter(String url) {
-        int fragmentIndex = url.indexOf('#');
-        String urlWithoutFragment = fragmentIndex < 0 ? url : url.substring(0, fragmentIndex);
-        String fragment = fragmentIndex < 0 ? "" : url.substring(fragmentIndex);
-        String separator = urlWithoutFragment.indexOf('?') < 0 ? "?" : "&";
-        if (urlWithoutFragment.endsWith("?") || urlWithoutFragment.endsWith("&")) {
-            separator = "";
-        }
-        return urlWithoutFragment + separator + "verified=1" + fragment;
     }
 
     private boolean isSameOriginReferer(String referer, HttpServletRequest request) {
