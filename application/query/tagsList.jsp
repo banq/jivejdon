@@ -104,13 +104,10 @@ int i = 3;
 int h = 0 ;
 %>
 
-<script>
-  const ids = []; // 初始化一个空数组
-</script>
-
 <div itemscope itemtype="https://schema.org/ItemList">
 
 <logic:iterate id="threadTag" name="tagsListForm" property="list" >
+ <bean:define id="currentTagId" name="threadTag" property="tagID" type="java.lang.Long" />
  <%
   if(i % 3==0){ 
  %>
@@ -133,14 +130,11 @@ int h = 0 ;
        </div> 
       </div>
 	<div id='ajax_<bean:write name="threadTag" property="tagID"/>' >
-  <br><br><br><br><br><br>     
-  </div>  
-  
-  <script>
-    ids.push(<bean:write name="threadTag" property="tagID"/>);
-  </script>
-       
-	  
+    <jsp:include page="/query/taggedThreadNewList.jsp" flush="false">
+      <jsp:param name="tagID" value="<%= currentTagId.toString() %>" />
+      <jsp:param name="count" value="6" />
+    </jsp:include>
+  </div>
 
 	</div>	
 </div>  
@@ -210,35 +204,6 @@ int h = 0 ;
 </div>
 <%@include file="../common/IncludeBottomBody.jsp"%>
 
-
-<script>
-  async function fetchData() {
-    for (const id of ids) {
-        try {
-             const params = new URLSearchParams({
-                           start: 0,
-                           length: 10,
-                           tablewidth: 160,
-                           count: 6,
-                           tagID: id
-                         });
-        
-        // 构建完整URL
-             const response = await fetch(`/query/tt.shtml?\${params.toString()}`);
-             if (!response.ok) {
-                    throw new Error('Network response was not ok');
-              }
-              const html = await response.text();
-              document.getElementById(`ajax_\${id}`).innerHTML = html;
-        } catch (error) {
-              console.error('Fetch error:', error);
-        }
-    }
-  }
-
-  fetchData();    
-
-</script>
 
 <script type="speculationrules">
   {
