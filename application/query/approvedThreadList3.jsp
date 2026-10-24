@@ -51,9 +51,12 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
        </div> 
       </div>
     </div>
-<div class="col-lg-7" id='ajax_<bean:write name="threadTag" property="tagID"/>'>  
-  <br><br><br><br><br><br>     
-  </div>  
+<div class="col-lg-7">
+  <jsp:include page="/query/others/taggedThreadList.jsp" flush="false">
+    <jsp:param name="count" value="6" />
+    <jsp:param name="tagID" value="${threadTag.tagID}" />
+  </jsp:include>
+</div>
      
 	</div>	
   </div>  
@@ -67,12 +70,5 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <%i++;%>
 
 
-  <script defer>
-          document.addEventListener("DOMContentLoaded", function(event) { 
-            $(document).ready(function() {
-              $('#ajax_<bean:write name="threadTag" property="tagID"/>').load("/query/tt/<bean:write name="threadTag" property="tagID"/>");   
-            });
-          });     
-        </script>
 </logic:iterate>
 </div>
