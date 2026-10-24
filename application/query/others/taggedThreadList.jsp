@@ -14,12 +14,12 @@ if (taggedThreads != null) {
 %>
 <bean:parameter id="count" name="count" value="4"/>
 <%
-String count = (String) pageContext.getAttribute("count");
+String coutlength = (String) pageContext.getAttribute("count");
 %>
 <logic:present name="taggedThreadList">
 <div class="widget" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
 <ul>
-<logic:iterate indexId="i" id="forumThread" name="taggedThreadList" length='<%=count%>'>
+<logic:iterate indexId="i" id="forumThread" name="taggedThreadList" length='<%=coutlength%>'>
 <bean:define id="forumMessage" name="forumThread" property="rootMessage" />
 <logic:equal name="i" value="0">
 <li>
