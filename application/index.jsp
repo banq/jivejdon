@@ -100,14 +100,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
             </div>
 
             <div>
-                      <div id="digList"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
-                      <script defer>
-                        document.addEventListener("DOMContentLoaded", function(event) { 
-                          $(document).ready(function() {      
-                            $('#digList').load("/query/threadDigList");                                
-                          });            
-                        });  
-                      </script>           
+                      <div id="digList"><jsp:include page="/query/threadDigList.shtml?count=10" flush="true" /></div>
             </div>   
             <div>            
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"

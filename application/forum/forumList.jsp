@@ -33,9 +33,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <body>
 <%@ include file="../common/body_header.jsp" %>
  <main>
-  <script>
-    const ids = []; // 初始化一个空数组
-  </script>
 <div id="page-content" class="single-page container">
 		<div class="row">
 			<!-- /////////////////左边 -->
@@ -47,6 +44,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
    
   
 <logic:iterate indexId="i"   id="forum" name="forumListForm" property="list" >
+        <bean:define id="currentForumId" name="forum" property="forumId" type="java.lang.Long" />
         <div>
               
                  <h1 style="font-size: 2.2rem">
@@ -64,17 +62,13 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                  %> --%>
 
                 <p class="home_content" ><bean:write name="forum" property="description" filter="false"/></p>
-                <div id="threadNewList_<bean:write name="forum" property="forumId"/>" class="linkblock">
-                  <br><br><br><br><br><br>     
-                </div>  
-               
-  <script>
-    ids.push(<bean:write name="forum" property="forumId"/>);
-  </script>
-       
-         
+                <div class="linkblock">
+                  <jsp:include page="/query/threadNewList.jsp" flush="false">
+                    <jsp:param name="forumId" value="<%= currentForumId.toString() %>" />
+                    <jsp:param name="count" value="5" />
+                  </jsp:include>
+                </div>
         </div>
-
 </logic:iterate>
 
        </div>
@@ -84,30 +78,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         
  
 	  
-<script>
- async function fetchData() {
-    for (const id of ids) {
-            try {
-              const params = new URLSearchParams({
-                forumId: id,        
-                count: 5 
-               });
-               const response = await fetch(`/query/threadNewList.shtml?\${params.toString()}`);
-               if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const html = await response.text();
-                document.getElementById(`threadNewList_\${id}`).innerHTML = html;
-            } catch (error) {
-                console.error('Fetch error:', error);
-            }
-    }
-  }
-
-  fetchData();    
-      </script>
-
-
 	 <!-- /////////////////右边 -->
 <aside>      
        <div id="sidebar" class="col-lg-4">
@@ -127,19 +97,11 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
         <!---- Start Widget ---->
        <div class="widget">
-           <div class="wid-vid">
-							    
-							       <div id="digList" class="linkblock"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
-							    <script defer>
-					               document.addEventListener("DOMContentLoaded", function(event) { 
-                                 $(document).ready(function() {      
-                                             $('#digList').load("/query/threadDigList");                                
-                                 });            
-                         });  
-                  </script>           
-							    </div>    
+           <div class="wid-vid">                     
+                 <div id="digList"><jsp:include page="/query/threadDigList.shtml?count=10" flush="true" /></div>
+						</div>    
           </div>
-        </div>
+</div>
  
 
 
@@ -171,6 +133,3 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
 </body>
 </html>
-
-
-

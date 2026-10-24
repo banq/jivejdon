@@ -166,18 +166,10 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
         <!---- Start Widget ---->
        <div class="widget">
            <div class="wid-vid">
-							    
-								    <div id="digList" class="linkblock"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
-							    <script defer>
-					               document.addEventListener("DOMContentLoaded", function(event) { 
-                                 $(document).ready(function() {      
-                                             $('#digList').load("/query/threadDigList");                                
-                                 });            
-                         });  
-                  </script>           						    
-							    </div>    
-          </div>
+							    <div id="digList"><jsp:include page="/query/threadDigList.shtml?count=10" flush="true" /></div>
+					 </div>    
         </div>
+</div>
  
 
 </div></aside>  

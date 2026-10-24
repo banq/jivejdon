@@ -122,7 +122,8 @@ pageContext.setAttribute("title", titleStr);
  <!-- /////////////////右边 -->
 <aside>      
        <div id="sidebar" class="col-lg-4 custom-col-right">
-<div class="scrolldiv"><div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(150, 1, 1, 0.1); background-color: white; overflow: hidden; padding-left: 0; padding-right: 0">
+<div class="scrolldiv">
+<div class="box" style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(150, 1, 1, 0.1); background-color: white; overflow: hidden; padding-left: 0; padding-right: 0">
         <!---- Start Widget ---->
         <div class="widget wid-follow">
           <div class="content">
@@ -139,14 +140,7 @@ pageContext.setAttribute("title", titleStr);
         <!---- Start Widget ---->
        <div class="widget">
            <div class="wid-vid">
-							   <div id="digList" class="linkblock"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>   
-				 <script defer>
-					document.addEventListener("DOMContentLoaded", function(event) { 
-                                 $(document).ready(function() {      
-                                    $('#digList').load("/query/threadDigList");                                
-                                 });            
-                         });  
-                  </script>           
+							   <div id="digList"><jsp:include page="/query/threadDigList.shtml?count=10" flush="true" /></div>
           </div>
         </div>
  
