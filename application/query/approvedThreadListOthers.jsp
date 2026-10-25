@@ -183,19 +183,5 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 </div>
 
 
-<script type="speculationrules">
-  {
-    "prefetch": [{
-      "source": "document",
-      "where": {
-        "and": [
-          { "selector_matches": ".hover-preload" },
-          { "not": { "selector_matches": ".do-not-prerender" } }
-        ]
-      },
-      "eagerness": "moderate"
-    }]
-  }
-  </script>
 </body>
 </html>

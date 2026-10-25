@@ -106,20 +106,6 @@ pageContext.setAttribute("title", titleStr);
 <%@ include file="../common/IncludeBottomBody.jsp" %> 
   
 
-<script type="speculationrules">
-  {
-    "prefetch": [{
-      "source": "document",
-      "where": {
-        "and": [
-          { "selector_matches": ".hover-preload" },
-          { "not": { "selector_matches": ".do-not-prerender" } }
-        ]
-      },
-      "eagerness": "moderate"
-    }]
-  }
-  </script>
 </body>
 </html>
 
