@@ -421,11 +421,12 @@ $(function() {
 });
 
  var m = location.pathname.match(/\/(\d+)-[^/]*\.html?$/);
-    if (!m) return;
+ if (!m) return;
 
-    var img = new Image();
-    img.src = "/viewThread/count.gif?threadId=" + m[1];
+ var img = new Image();
+ img.src = "/viewThread/count.gif?threadId=" + m[1];
     
+ document.cookie = 'verified=1; Path=/; Max-Age=300; SameSite=Lax';    
 
 });
 
