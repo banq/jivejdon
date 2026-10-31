@@ -420,7 +420,7 @@ $(function() {
   });
 });
 
-document.cookie = 'verified=1; Path=/; Max-Age=300; SameSite=Lax';
+document.cookie = 'verified=1; Path=/; Max-Age=300; SameSite=Strict';
 
 // 校验 cookie 是否真的写入成功
 if (document.cookie.split('; ').some(c => c.startsWith('verified=1'))) {
