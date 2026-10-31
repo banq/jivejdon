@@ -420,13 +420,16 @@ $(function() {
   });
 });
 
- var m = location.pathname.match(/\/(\d+)-[^/]*\.html?$/);
- if (!m) return;
+document.cookie = 'verified=1; Path=/; Max-Age=300; SameSite=Lax';
 
- var img = new Image();
- img.src = "/viewThread/count.gif?threadId=" + m[1];
-    
- document.cookie = 'verified=1; Path=/; Max-Age=300; SameSite=Lax';    
+// 校验 cookie 是否真的写入成功
+if (document.cookie.split('; ').some(c => c.startsWith('verified=1'))) {
+    var m = location.pathname.match(/\/(\d+)-[^/]*\.html?$/);
+    if (!m) return;
+
+    var img = new Image();
+    img.src = "/viewThread/count.gif?threadId=" + m[1];
+}
 
 });
 
