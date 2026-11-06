@@ -200,6 +200,11 @@ public class SitemapRepositoryImpl implements SitemapRepository {
 			// 创建虚拟的ForumMessage对象
 			ForumMessage forumMessage = new ForumMessage(threadId) {
 				@Override
+				public String getSubject() {
+					return finalSubject != null ? finalSubject : "";
+				}
+
+				@Override
 				public MessageVO getMessageVO() {
 					// 创建一个新的MessageVO对象并设置subject
 					MessageVO messageVO = new MessageVO().builder().subject(finalSubject != null ? finalSubject : "").body("").build();
@@ -264,6 +269,11 @@ public class SitemapRepositoryImpl implements SitemapRepository {
 
 				// 创建虚拟的ForumMessage对象
 				ForumMessage forumMessage = new ForumMessage(threadId) {
+					@Override
+					public String getSubject() {
+						return subject != null ? subject : "";
+					}
+
 					@Override
 					public MessageVO getMessageVO() {
 						// 创建一个新的MessageVO对象并设置subject
