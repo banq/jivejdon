@@ -166,9 +166,9 @@ public class SitemapServlet extends HttpServlet {
 			if (this.charArrayWriterBuffer == null) {
 				charArrayWriterBuffer = new CharArrayWriter();
 				Collection<UrlSet> outUrlSet = new ArrayList<>();
-				Collection<UrlSet> urlSet = genUrlSet(request);
-				if (urlSet != null && !urlSet.isEmpty())
-					outUrlSet.addAll(urlSet);
+				// Collection<UrlSet> urlSet = genUrlSet(request);
+				// if (urlSet != null && !urlSet.isEmpty())
+				// 	outUrlSet.addAll(urlSet);
 				Collection<UrlSet> threadUrlSet = genThreadUrlSet(request);
 				if (threadUrlSet != null && !threadUrlSet.isEmpty())
 					outUrlSet.addAll(threadUrlSet);
