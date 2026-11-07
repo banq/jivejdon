@@ -61,7 +61,7 @@ public class RefererCaptchaAction extends Action {
 
     private void checkIpCache(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String referer = request.getParameter("referer");
-        if (!isSameOriginReferer(referer, request)) {
+        if (!isValidReferer(referer)) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
@@ -75,7 +75,7 @@ public class RefererCaptchaAction extends Action {
     private void showCaptcha(HttpServletRequest request, HttpServletResponse response, byte[] signingKey)
             throws IOException, GeneralSecurityException {
         String referer = request.getHeader("Referer");
-        if (!isSameOriginReferer(referer, request)) {
+        if (!isValidReferer(referer)) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
@@ -140,7 +140,7 @@ public class RefererCaptchaAction extends Action {
         String randstr = request.getParameter("randstr");
 
         if (!UtilValidate.isEmpty(approvalToken)) {
-            if (!isSameOriginReferer(referer, request)) {
+            if (!isValidReferer(referer)) {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST);
                 return;
             }
@@ -157,7 +157,7 @@ public class RefererCaptchaAction extends Action {
         }
 
         if ("1".equals(request.getParameter("ipCacheApproval"))) {
-            if (!isSameOriginReferer(referer, request)) {
+            if (!isValidReferer(referer)) {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST);
                 return;
             }
@@ -170,7 +170,7 @@ public class RefererCaptchaAction extends Action {
         }
 
         if (UtilValidate.isEmpty(ticket) || UtilValidate.isEmpty(randstr)
-                || !isSameOriginReferer(referer, request)
+                || !isValidReferer(referer)
                 || !SkinUtils.verifyQQRegisterCode(ticket, randstr, request.getRemoteAddr())) {
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
             return;
@@ -181,6 +181,7 @@ public class RefererCaptchaAction extends Action {
 
     private void completeApproval(String referer, HttpServletRequest request, HttpServletResponse response,
             byte[] signingKey) throws IOException, GeneralSecurityException {
+        String redirectPath = toLocalRefererPath(referer);
         long expiresAt = System.currentTimeMillis() + APPROVAL_DURATION_MILLIS;
         String token = createApprovalToken(expiresAt, signingKey);
         addApprovalCookie(response, request, token);
@@ -191,21 +192,22 @@ public class RefererCaptchaAction extends Action {
         response.getWriter().write("try{localStorage.setItem('" + APPROVAL_STORAGE_KEY + "','" + token + "');}");
         response.getWriter().write("catch(error){console.warn('Unable to save captcha approval token.',error);}");
         response.getWriter().write("</script>");
-        writeMetaRefresh(response, referer);
+        writeMetaRefresh(response, redirectPath);
         response.getWriter().write("</head><body><p>验证成功，正在返回原页面。<a href=\"");
-        response.getWriter().write(escapeHtml(referer));
+        response.getWriter().write(escapeHtml(redirectPath));
         response.getWriter().write("\">如果没有自动跳转，请点击这里</a></p></body></html>");
     }
 
     private void writeRedirectPage(HttpServletResponse response, String url) throws IOException {
+        String redirectPath = toLocalRefererPath(url);
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         response.getWriter().write("<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"UTF-8\">");
         response.getWriter().write("<title>正在跳转</title>");
-        writeMetaRefresh(response, url);
+        writeMetaRefresh(response, redirectPath);
         response.getWriter().write("</head><body><p>正在跳转，");
         response.getWriter().write("<a href=\"");
-        response.getWriter().write(escapeHtml(url));
+        response.getWriter().write(escapeHtml(redirectPath));
         response.getWriter().write("\">如果没有自动跳转，请点击这里</a></p></body></html>");
     }
 
@@ -217,7 +219,8 @@ public class RefererCaptchaAction extends Action {
 
     private void showCaptcha(HttpServletRequest request, HttpServletResponse response, String referer,
             boolean clearInvalidToken) throws IOException {
-        if (!isSameOriginReferer(referer, request)) {
+        String redirectPath = toLocalRefererPath(referer);
+        if (redirectPath == null) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
@@ -229,7 +232,7 @@ public class RefererCaptchaAction extends Action {
         response.getWriter().write("<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">");
         response.getWriter().write("<title>安全验证</title></head><body>");
         response.getWriter().write("<input type=\"hidden\" id=\"captchaReferer\" value=\"");
-        response.getWriter().write(escapeHtml(referer));
+        response.getWriter().write(escapeHtml(redirectPath));
         response.getWriter().write("\"><script>");
         response.getWriter().write("var referer=document.getElementById('captchaReferer').value;");
         response.getWriter().write("var approvalStorageKey='" + APPROVAL_STORAGE_KEY + "';");
@@ -339,29 +342,37 @@ public class RefererCaptchaAction extends Action {
                 .replace("<", "&lt;").replace(">", "&gt;").replace("'", "&#39;");
     }
 
-    private boolean isSameOriginReferer(String referer, HttpServletRequest request) {
+    private boolean isValidReferer(String referer) {
+        return toLocalRefererPath(referer) != null;
+    }
+
+    private String toLocalRefererPath(String referer) {
         if (UtilValidate.isEmpty(referer)) {
-            return false;
+            return null;
         }
         try {
             URI uri = new URI(referer);
-            String scheme = uri.getScheme();
-            if (!uri.isAbsolute() || uri.getHost() == null || uri.getUserInfo() != null
-                    || !("http".equalsIgnoreCase(scheme) || "https".equalsIgnoreCase(scheme))
-                    || !uri.getHost().equalsIgnoreCase(request.getServerName())
-                    || !scheme.equalsIgnoreCase(request.getScheme())) {
-                return false;
+            String path = uri.getRawPath();
+            if (path == null || path.isEmpty()) {
+                path = "/";
             }
-            int refererPort = uri.getPort() < 0 ? defaultPort(scheme) : uri.getPort();
-            int requestPort = request.getServerPort() < 0 ? defaultPort(request.getScheme()) : request.getServerPort();
-            return refererPort == requestPort;
+            if (!path.startsWith("/")) {
+                return null;
+            }
+            while (path.startsWith("//")) {
+                path = path.substring(1);
+            }
+            StringBuilder localPath = new StringBuilder(path);
+            if (uri.getRawQuery() != null) {
+                localPath.append('?').append(uri.getRawQuery());
+            }
+            if (uri.getRawFragment() != null) {
+                localPath.append('#').append(uri.getRawFragment());
+            }
+            return localPath.toString();
         } catch (Exception e) {
-            return false;
+            return null;
         }
-    }
-
-    private int defaultPort(String scheme) {
-        return "https".equalsIgnoreCase(scheme) ? 443 : 80;
     }
 
     private void setNoCacheHeaders(HttpServletResponse response) {
