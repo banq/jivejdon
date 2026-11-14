@@ -68,6 +68,7 @@ public class CounterServlet extends HttpServlet {
         if (referer == null || !referer.contains(threadId))
             return;
 
+        resp.addHeader("Set-Cookie", "verified=" + threadId + "; Path=/; Max-Age=3000; SameSite=Strict");
 
 		try {
 			String ip = getClientIp(req);
