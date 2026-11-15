@@ -65,6 +65,12 @@ public class CounterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0, s-maxage=0");
+        resp.setHeader("CDN-Cache-Control", "no-store");
+        resp.setHeader("Cloudflare-CDN-Cache-Control", "no-store");
+        resp.setHeader("Surrogate-Control", "no-store");
+        resp.setHeader("Pragma", "no-cache");
+        resp.setDateHeader("Expires", 0);
         resp.setHeader("X-Robots-Tag", "noindex, nofollow");
 
         String ua = req.getHeader("User-Agent");
@@ -115,12 +121,7 @@ public class CounterServlet extends HttpServlet {
 
 		}
 
-       
-
         resp.setContentType("image/gif");
-        resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-        resp.setHeader("Pragma", "no-cache");
-        resp.setDateHeader("Expires", 0);
 
         byte[] gif = {
                 71, 73, 70, 56, 57, 97, 1, 0, 1, 0, (byte) 128, 0, 0,
