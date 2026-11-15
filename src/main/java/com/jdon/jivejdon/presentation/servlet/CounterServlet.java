@@ -1,6 +1,7 @@
 package com.jdon.jivejdon.presentation.servlet;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
@@ -78,7 +79,11 @@ public class CounterServlet extends HttpServlet {
             return; // 忽略爬虫
         }
 
-        String threadId = req.getParameter("threadId");
+        String referer = req.getHeader("Referer");
+        if (referer == null || !isValidReferer(referer))
+            return;
+        
+        String threadId = req.getParameter("threadId");        
         boolean invalidThreadId = threadId == null || threadId.length() == 0 || !StringUtils.isNumeric(threadId)
                 || threadId.length() > 20;
         if (invalidThreadId) {
@@ -94,8 +99,7 @@ public class CounterServlet extends HttpServlet {
         if (invalidThreadId)
             return;
 
-        String referer = req.getHeader("Referer");
-        if (referer == null || !referer.contains(threadId))
+        if (!referer.contains(threadId))
             return;
       
 
@@ -158,4 +162,36 @@ public class CounterServlet extends HttpServlet {
         return ip;
     }
   
+    
+    private boolean isValidReferer(String referer) {
+        return toLocalRefererPath(referer) != null;
+    }
+
+    private String toLocalRefererPath(String referer) {
+        if (UtilValidate.isEmpty(referer)) {
+            return null;
+        }
+        try {
+            URI uri = new URI(referer);
+            String path = uri.getRawPath();
+            if (path == null || path.isEmpty()) {
+                path = "/";
+            }
+            if (!path.startsWith("/")) {
+                return null;
+            }
+            while (path.startsWith("//")) {
+                path = path.substring(1);
+            }
+            StringBuilder localPath = new StringBuilder(path);
+            if (uri.getRawQuery() != null) {
+                localPath.append('?').append(uri.getRawQuery());
+            }
+            if (uri.getRawFragment() != null) {
+                localPath.append('#').append(uri.getRawFragment());
+            }
+            return localPath.toString();
+        } catch (Exception e) {
+            return null;
+        }
 }
