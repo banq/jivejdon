@@ -2,6 +2,7 @@ package com.jdon.jivejdon.presentation.servlet;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
@@ -80,7 +81,7 @@ public class CounterServlet extends HttpServlet {
         }
 
         String referer = req.getHeader("Referer");
-        if (referer == null || !isValidReferer(referer))
+        if (referer == null || !isValidReferer(referer, req))
             return;
         
         String threadId = req.getParameter("threadId");        
@@ -163,16 +164,19 @@ public class CounterServlet extends HttpServlet {
     }
   
     
-    private boolean isValidReferer(String referer) {
-        return toLocalRefererPath(referer) != null;
+    private boolean isValidReferer(String referer, HttpServletRequest request) {
+        return toLocalRefererPath(referer, request) != null;
     }
 
-    private String toLocalRefererPath(String referer) {
+    private String toLocalRefererPath(String referer, HttpServletRequest request) {
         if (UtilValidate.isEmpty(referer)) {
             return null;
         }
         try {
             URI uri = new URI(referer);
+            if (!isSameOrigin(uri, request)) {
+                return null;
+            }
             String path = uri.getRawPath();
             if (path == null || path.isEmpty()) {
                 path = "/";
@@ -191,7 +195,35 @@ public class CounterServlet extends HttpServlet {
                 localPath.append('#').append(uri.getRawFragment());
             }
             return localPath.toString();
-        } catch (Exception e) {
+        } catch (URISyntaxException e) {
             return null;
         }
+    }
+
+    private boolean isSameOrigin(URI refererUri, HttpServletRequest request) {
+        String refererScheme = refererUri.getScheme();
+        String refererHost = refererUri.getHost();
+        String requestScheme = request.getScheme();
+        String requestHost = request.getServerName();
+        if (refererScheme == null || refererHost == null || requestHost == null
+                || !isHttpScheme(refererScheme) || !isHttpScheme(requestScheme)) {
+            return false;
+        }
+
+        return refererScheme.equalsIgnoreCase(requestScheme)
+                && refererHost.equalsIgnoreCase(requestHost)
+                && getEffectivePort(refererUri.getPort(), refererScheme)
+                        == getEffectivePort(request.getServerPort(), requestScheme);
+    }
+
+    private boolean isHttpScheme(String scheme) {
+        return "http".equalsIgnoreCase(scheme) || "https".equalsIgnoreCase(scheme);
+    }
+
+    private int getEffectivePort(int port, String scheme) {
+        if (port != -1) {
+            return port;
+        }
+        return "https".equalsIgnoreCase(scheme) ? 443 : 80;
+    }
 }
