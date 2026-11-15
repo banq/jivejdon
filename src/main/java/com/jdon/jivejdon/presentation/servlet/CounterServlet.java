@@ -1,6 +1,8 @@
 package com.jdon.jivejdon.presentation.servlet;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.regex.Pattern;
 
@@ -16,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.jdon.controller.WebAppUtil;
 import com.jdon.jivejdon.api.query.ForumMessageQueryService;
 import com.jdon.jivejdon.domain.model.ForumThread;
+import com.jdon.jivejdon.spi.component.mapreduce.ThreadApprovedNewList;
 import com.jdon.jivejdon.spi.component.viewcount.ThreadViewCounterJob;
 import com.jdon.util.UtilValidate;
 
@@ -25,6 +28,7 @@ public class CounterServlet extends HttpServlet {
 
     private ForumMessageQueryService forumMessageQueryService;
     private ThreadViewCounterJob threadViewCounterJob;
+    private ThreadApprovedNewList threadApprovedNewList;
 
     private static final Pattern BOT_PATTERN = Pattern.compile(
             "bot|spider|crawl|slurp|crawler|archiver|mediapartners|lighthouse|curl|wget|" +
@@ -42,6 +46,14 @@ public class CounterServlet extends HttpServlet {
                     servletContext);
         return forumMessageQueryService;
     }
+
+    public ThreadApprovedNewList getThreadApprovedNewList() {
+		if (threadApprovedNewList == null)
+			threadApprovedNewList = (ThreadApprovedNewList) WebAppUtil
+					.getComponentInstance("threadApprovedNewList", servletContext);
+
+		return threadApprovedNewList;
+	}
 
 
     private ThreadViewCounterJob getThreadViewCounterJob() {
@@ -61,14 +73,25 @@ public class CounterServlet extends HttpServlet {
         }
 
         String threadId = req.getParameter("threadId");
-        if (threadId == null || threadId.length() == 0 || !StringUtils.isNumeric(threadId) || threadId.length() > 20)
+        boolean invalidThreadId = threadId == null || threadId.length() == 0 || !StringUtils.isNumeric(threadId)
+                || threadId.length() > 20;
+        if (invalidThreadId) {
+            List<Long> threadIds = getThreadApprovedNewList().getApprovedThreads(0, 10);
+            if (threadIds != null && !threadIds.isEmpty()) {
+                Random random = new Random();
+                Long randomThreadId = threadIds.get(random.nextInt(threadIds.size()));
+                threadId = randomThreadId.toString();
+            }
+        }
+
+        resp.addHeader("Set-Cookie", "verified=" + threadId + "; Path=/; Max-Age=3000; SameSite=Strict");
+        if (invalidThreadId)
             return;
 
         String referer = req.getHeader("Referer");
         if (referer == null || !referer.contains(threadId))
             return;
-
-        resp.addHeader("Set-Cookie", "verified=" + threadId + "; Path=/; Max-Age=3000; SameSite=Strict");
+      
 
 		try {
 			String ip = getClientIp(req);

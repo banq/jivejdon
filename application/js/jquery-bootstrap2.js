@@ -422,10 +422,8 @@ $(function() {
 
 
     var m = location.pathname.match(/\/(\d+)-[^/]*\.html?$/);
-    if (!m) return;
-
     var img = new Image();
-    img.src = "/viewThread/count.gif?threadId=" + m[1];
+    img.src = "/viewThread/count.gif" + (m ? "?threadId=" + m[1] : "");
 
     
 });
