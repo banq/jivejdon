@@ -88,7 +88,7 @@ int randomIdx = 0;
         <div class="col-lg-4">
             <div class="box">
 			      	<div style="position: relative;" class="zoom-container">
-                  <img id="home-thumbnai" src="/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg" border="0" class="img-thumbnail img-responsive" style="height:auto;width:100%" loading="lazy" /> 
+                  <img id="home-thumbnai" src="/simgs/thumb2/<%=(randomIdx < 5) ? randomArr[randomIdx++] : (int)(Math.random()*5)%>.jpg" border="0" class="img-thumbnail img-responsive" style="height:260px;width:100%" loading="lazy" /> 
 
                   <div style="position: absolute;top: 0px">
                   <div class="tagcloud">
