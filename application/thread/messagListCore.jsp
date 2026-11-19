@@ -37,9 +37,6 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <html lang="zh-CN">
 <head>
     <logic:empty name="principal"> 
-    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-    <link rel="dns-prefetch" href="https://tpc.googlesyndication.com" >
-    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" >
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
     </logic:empty>
     <meta charset="utf-8">
