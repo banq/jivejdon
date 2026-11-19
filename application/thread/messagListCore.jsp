@@ -37,7 +37,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <html lang="zh-CN">
 <head>
     <logic:empty name="principal"> 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544" crossorigin="anonymous"></script>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" >
     </logic:empty>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -254,21 +254,24 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
                       </logic:iterate>  
                     </ul>
                     </logic:notEmpty>
+                  
                     <logic:empty name="threadLinkListFrom" >   
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
-     crossorigin="anonymous"></script>
-<!-- 右下侧 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7573657117119544"
-     data-ad-slot="9603128044"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-                    </logic:empty>
-
+                      <logic:empty name="principal"> 
+                      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7573657117119544"
+                          crossorigin="anonymous"></script>
+                      <!-- 右下侧 -->
+                      <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-7573657117119544"
+                         data-ad-slot="9603128044"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                      <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                      </script>
+                      </logic:empty>
+                     </logic:empty>   
+                     
                   </div>   
                  
 							                           
