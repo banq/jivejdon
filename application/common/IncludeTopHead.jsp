@@ -11,7 +11,7 @@
     .container { margin: 0 auto; padding: 0 15px; }
     .row { margin: 0 -15px; }
     .row:after, .container:after { content: " "; display: table; clear: both; }
-    .col-lg-12, .col-lg-8, .col-lg-4 { position: relative; min-height: 1px; padding: 0 15px; }
+    .col-lg-12, .col-lg-8, .col-lg-4 { position: relative; min-height: 1px; padding: 0 10px; }
     @media (min-width: 768px) { .container { width: 750px; } }
     @media (min-width: 992px) { .container { width: 970px; } }
     @media (min-width: 1200px) {
