@@ -7,7 +7,7 @@
 <header>
 	<!--Top-->
 	<nav id="top">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
                 <div class="col-lg-12 ">
                     <a href="/threads/"><img src="/simgs/jdon100.png" width="100" height="40" alt="极道Jdon"/></a>
@@ -23,7 +23,7 @@
 	</nav>
 
 	<!--Navigation-->
-    <nav id="menu" class="navbar container">
+    <nav id="menu" class="navbar container-fluid">
         <div class="navbar-header">
 		    <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
             <a class="navbar-brand" href="/">极道</a>

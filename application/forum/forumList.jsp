@@ -30,7 +30,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <body>
 <%@ include file="../common/body_header.jsp" %>
  <main>
-<div id="page-content" class="single-page container">
+<div id="page-content" class="single-page  container-fluid">
 		<div class="row">
 			<!-- /////////////////左边 -->
             <div id="main-content" class="col-lg-8">

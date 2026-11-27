@@ -3,7 +3,7 @@
 
 <footer>
 		<div class="wrap-footer">
-			<div class="container">
+			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-4 col-footer footer-1">
 						<div class="footer-heading"><h3><span style="color: #fff;">Jdon.com</span></h3></div>
