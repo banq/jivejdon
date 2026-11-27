@@ -388,7 +388,7 @@ $(function() {
             position: 'absolute', // 在父容器中绝对定位
             top: newTop + 'px',
             width: $elm.width(),
-            'max-width': '360px'
+            'max-width': '100%'
           });
         } else {
           // 回到顶部状态
@@ -396,7 +396,7 @@ $(function() {
             position: 'static',
             top: '',
             width: '',
-            'max-width': '360px'
+            'max-width': '100%'
           });
         }
       });
