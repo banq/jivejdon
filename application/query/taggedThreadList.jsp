@@ -199,7 +199,7 @@ function getRandomThumb() {
  
 
 
-<div id="page-content" class="single-page  container-fluid">
+<div id="page-content" class="single-page container-fluid">
     <div class="row">
       <!-- /////////////////左边 -->
       <div id="main-content" class="col-lg-12">

@@ -51,7 +51,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <body>
 <%@ include file="./common/body_header.jsp" %>
 
-<div id="page-content" class="single-page  container-fluid">
+<div id="page-content" class="single-page container-fluid">
 
 <div style="border-radius: 12px; box-shadow: 0px 5px 15px rgba(150, 1, 1, 0.1);background-color: #fff;" class="box">
   

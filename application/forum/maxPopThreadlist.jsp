@@ -75,7 +75,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 
 
 
-<div id="page-content" class="single-page  container-fluid">
+<div id="page-content" class="single-page container-fluid">
 	<div class="row">
 		<!-- /////////////////左边 -->
 		<div id="main-content" class="col-lg-12">
@@ -83,7 +83,7 @@ String domainUrl = com.jdon.jivejdon.util.ToolsUtil.getAppURL(request);
 <input type="hidden" id="contextPath"  name="contextPath" value="<%= request.getContextPath()%>" >
 
 <main>
-<div id="page-content" class="single-page  container-fluid">
+<div id="page-content" class="single-page container-fluid">
 		<div class="row">
 			<!-- /////////////////左边 -->
 			<div id="main-content" class="col-lg-8">
